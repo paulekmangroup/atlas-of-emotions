@@ -4,6 +4,8 @@ var continentMaker = new p5(function (p) {
 	var STROKE_WIDTH_MIN = 0.2;
 	var STROKE_WIDTH_VAR = 0.6;
 	var SIZE_MOD = 1 / (1 + 0.5 * (STROKE_WIDTH_MIN + STROKE_WIDTH_VAR));
+	var BASE_ALPHA = 0.35;
+	var BASE_SPEED = 0.2;
 
 	var container = document.getElementById('continents');
 	var centerX, centerY;
@@ -164,9 +166,6 @@ var continentMaker = new p5(function (p) {
 	}
 
 	var Circle = function (p, colorPalette, size) {
-
-		var BASE_ALPHA = 0.3;
-		var BASE_SPEED = 0.2;
 
 		this.radius = 0;
 		this.rSpeed = Math.random() * 0.8;
