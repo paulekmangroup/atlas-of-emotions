@@ -54,8 +54,8 @@ h3 {
 	position: absolute;
 	text-align: center;
 	opacity: 0.0;
-	-webkit-transition: opacity 2s cubic-bezier(0.645, 0.045, 0.355, 1);
-	transition:         opacity 2s cubic-bezier(0.645, 0.045, 0.355, 1);
+	-webkit-transition: opacity 3s cubic-bezier(0.645, 0.045, 0.355, 1);
+	transition:         opacity 3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 #continent-labels div.visible {
 	opacity: 1.0;

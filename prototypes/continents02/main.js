@@ -163,7 +163,95 @@ var continentMaker = new p5(function (p) {
 				circles: [],										// mutable
 				isHighlighted: false								// mutable
 			}
-		];
+		],
+
+		continentTransforms = _.shuffle([
+			{
+				x: 0.03 * p.width,
+				y: -0.20 * p.height,
+				drift: {											// all mutable values
+					x: 0,
+					y: 0,
+					sinCtr: Math.random() * 2*Math.PI,
+					cosCtr: Math.random() * 2*Math.PI,
+					// dist: 0,
+					// ang: Math.random() * 2*Math.PI
+				},
+				label: {
+					x: 0.19 * p.width,
+					y: -0.13 * p.height
+				},
+				size: 0.48 * p.height
+			},
+			{
+				x: -0.22 * p.width,
+				y: -0.14 * p.height,
+				drift: {											// all mutable values
+					x: 0,
+					y: 0,
+					sinCtr: Math.random() * 2*Math.PI,
+					cosCtr: Math.random() * 2*Math.PI,
+					// dist: 0,
+					// ang: Math.random() * 2*Math.PI
+				},
+				label: {
+					x: -0.24 * p.width,
+					y: -0.01 * p.height
+				},
+				size: 0.45 * p.height
+			},
+			{
+				x: -0.06 * p.width,
+				y: 0.07 * p.height,
+				drift: {											// all mutable values
+					x: 0,
+					y: 0,
+					sinCtr: Math.random() * 2*Math.PI,
+					cosCtr: Math.random() * 2*Math.PI,
+					// dist: 0,
+					// ang: Math.random() * 2*Math.PI
+				},
+				label: {
+					x: -0.19 * p.width,
+					y: 0.10 * p.height
+				},
+				size: 0.35 * p.height
+			},
+			{
+				x: -0.03 * p.width,
+				y: 0.22 * p.height,
+				drift: {											// all mutable values
+					x: 0,
+					y: 0,
+					sinCtr: Math.random() * 2*Math.PI,
+					cosCtr: Math.random() * 2*Math.PI,
+					// dist: 0,
+					// ang: Math.random() * 2*Math.PI
+				},
+				label: {
+					x: -0.20 * p.width,
+					y: 0.15 * p.height
+				},
+				size: 0.44 * p.height
+			},
+			{
+				x: 0.19 * p.width,
+				y: 0.10 * p.height,
+				drift: {											// all mutable values
+					x: 0,
+					y: 0,
+					sinCtr: Math.random() * 2*Math.PI,
+					cosCtr: Math.random() * 2*Math.PI,
+					// dist: 0,
+					// ang: Math.random() * 2*Math.PI
+				},
+				label: {
+					x: 0.01 * p.width,
+					y: 0.27 * p.height
+				},
+				size: 0.48 * p.height
+			}
+		]);
 
 	}
 
@@ -174,6 +262,23 @@ var continentMaker = new p5(function (p) {
 			someContinentIsHighlighted = continents.some(function (continent) { return continent.isHighlighted; }),
 			alphaMod,
 			speedMod;
+
+		// Do this once.
+		if (firstDraw) {
+
+			// Put the canvas where it belongs
+			container.appendChild(p.canvas);
+
+			// Assign continents to positions
+			continents.forEach(function (continent, i) {
+				continent = Object.assign(continent, continentTransforms[i]);
+			});
+
+			// Draw the continent labels
+			addContinentLabels();
+
+			firstDraw = false;
+		}
 
 		p.clear();
 		p.ellipseMode(p.CENTER);
@@ -188,6 +293,7 @@ var continentMaker = new p5(function (p) {
 				continent.circles.push(newCircle);
 			}
 
+			// set alpha and speed based on interaction
 			if (!someContinentIsHighlighted) {
 				alphaMod = 1.0;
 				speedMod = 1.0;
@@ -195,6 +301,14 @@ var continentMaker = new p5(function (p) {
 				alphaMod = continent.isHighlighted ? CONTINENT_HIGHLIGHT_ALPHA_MOD : CONTINENT_UNHIGHLIGHT_ALPHA_MOD;
 				speedMod = continent.isHighlighted ? CONTINENT_HIGHLIGHT_SPEED_MOD : CONTINENT_UNHIGHLIGHT_SPEED_MOD;
 			}
+
+			// apply drift
+			/*
+			meander(continent.drift, 50);
+			p.translate(Math.cos(continent.drift.ang) * continent.drift.dist, Math.sin(continent.drift.ang) * continent.drift.dist);
+			*/
+			wander(continent.drift, 3);
+			p.translate(continent.drift.x, continent.drift.y);
 
 			for (var i=continent.circles.length-1; i>=0; i--) {
 				circle = continent.circles[i];
@@ -214,15 +328,6 @@ var continentMaker = new p5(function (p) {
 
 			p.pop();
 		});
-
-		// Put the canvas where it belongs,
-		// draw in the labels.
-		if (firstDraw) {
-			container.appendChild(p.canvas);
-			firstDraw = false;
-
-			addContinentLabels();
-		}
 
 	}
 
@@ -327,9 +432,43 @@ var continentMaker = new p5(function (p) {
 
 			setTimeout(function () {
 				label.classList.add('visible');
-			}, 100);
+			}, 1000);
 
 		});
+
+	}
+
+	// Random walk
+	function meander (drift, maxDist) {
+
+		var maxSpeed = 2 * 0.01 * maxDist;
+		var maxTurn = 2 * 0.002 * Math.PI;
+		var x = Math.cos(drift.ang) * drift.dist;
+		var y = Math.sin(drift.ang) * drift.dist;
+		var angToCenter = Math.atan2(y, x);
+
+		drift.dist += (-0.5 + Math.random()) * maxSpeed;
+		drift.ang +=  (-0.5 + Math.random()) * maxTurn;
+
+		// normalize angles
+		while (angToCenter < 0) { angToCenter += 2*Math.PI; }
+		while (drift.ang < 0) { drift.ang += 2*Math.PI; }
+		drift.ang %= 2*Math.PI;
+
+		// If getting too far away from center, turn back toward center
+		if (drift.dist > 0.5 * maxDist) {
+			drift.ang += 0.1 * (angToCenter - drift.ang);
+		}
+
+	}
+
+	// Randomized sinusoidal motion
+	function wander (drift, maxDist) {
+
+		drift.sinCtr += 0.01 + Math.random() * 0.03;
+		drift.cosCtr += 0.01 + Math.random() * 0.03;
+		drift.x = Math.cos(drift.cosCtr) * maxDist;
+		drift.y = Math.sin(drift.sinCtr) * maxDist;
 
 	}
 
