@@ -100,7 +100,6 @@ $states-graph-width: 70%;
 	}
 
 	.area {
-		fill: steelblue;
-		opacity: 0.7;
+		mix-blend-mode: multiply;
 	}
 }
