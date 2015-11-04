@@ -18,7 +18,7 @@ export default {
 		let margin = {
 			top: 20,
 			right: 20,
-			bottom: 20,
+			bottom: 50,
 			left: 20
 		};
 
@@ -49,6 +49,14 @@ export default {
 			.ticks(10)
 			.tickFormat(d => '')
 			.tickSize(10);
+
+		let labelsXScale = d3.scale.ordinal()
+			.domain(['LEAST INTENSE', 'MOST INTENSE'])
+			.range(xScale.range());
+		let xAxisLabels = d3.svg.axis()
+			.scale(labelsXScale)
+			.orient('bottom')
+			.tickSize(25);
 
 		let areaGenerator = d3.svg.area()
 			.x(d => xScale(d.x))
@@ -82,6 +90,15 @@ export default {
 			.attr('class', 'x axis')
 			.attr('transform', 'translate(0,' + innerHeight + ')')
 			.call(xAxis);
+
+		stateGraphContainer.append('g')
+			.attr('class', 'x axis labels')
+			.attr('transform', 'translate(0,' + innerHeight + ')')
+			.call(xAxisLabels)
+		// align labels
+		.selectAll('.tick text')
+			.attr('text-anchor', (d, i) => i ? 'end' : 'start')
+			.attr('style', null);
 
 		// transform state range into points for area chart
 		let transformedRanges = this.transformRanges(_.values(emotionsData.emotions.anger.states), 'anger');

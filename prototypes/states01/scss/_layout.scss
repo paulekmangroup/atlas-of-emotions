@@ -97,6 +97,13 @@ $states-graph-width: 70%;
 			stroke: $text-color;
 			shape-rendering: crispEdges;
 		}
+
+		&.labels {
+			line,
+			path {
+				display: none
+			}
+		}
 	}
 
 	.area {
