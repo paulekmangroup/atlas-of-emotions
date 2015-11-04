@@ -12,9 +12,18 @@ export default {
 		'enjoyment'
 	],
 
-	currentEmotion: 'anger',
+	currentEmotion: null,
+
+	areaGenerators: null,
+
+	transitions: null,
 	
-	init: function (containerNode) {
+	init: function (containerNode, currentEmotion) {
+
+		if (!~this.emotions.indexOf(currentEmotion)) {
+			currentEmotion = 'anger';
+		}
+		this.currentEmotion = currentEmotion;
 
 		this.onKeyDown = this.onKeyDown.bind(this);
 		document.addEventListener('keydown', this.onKeyDown);
@@ -71,12 +80,11 @@ export default {
 			.orient('bottom')
 			.tickSize(25);
 
-		let areaGenerator = d3.svg.area()
-			.x(d => xScale(d.x))
-			.y0(innerHeight)
-			.y1(d => yScale(d.y));
+		this.setUpDefs(svg.append('defs'), xScale, yScale);
 
-		this.setUpGradients(svg.append('defs'), xScale, yScale);
+		this.areaGenerators = this.setUpAreaGenerators(innerHeight, xScale, yScale);
+
+		this.transitions = this.setUpTransitions();
 
 		//
 		// Draw graph
@@ -110,8 +118,9 @@ export default {
 
 		let statePaths = stateElements.append('path')
 			.attr('class', 'area')
-			.attr('d', areaGenerator)
+			.attr('d', this.areaGenerators[this.currentEmotion])
 			.attr('fill', (d, i) => 'url(#' + emotionGradientName + '-' + i + ')')
+			.call(this.applyEffects.bind(this))
 			.on('mouseover', this.onStateMouseOver)
 			.on('mouseout', this.onStateMouseOut)
 			.on('click', this.onStateClick);
@@ -120,11 +129,7 @@ export default {
 		transformedRanges = this.transformRanges(_.values(emotionsData.emotions[this.currentEmotion].states), this.currentEmotion, 1.0);
 		stateGraphContainer.selectAll('path.area')
 			.data(transformedRanges)
-		.transition()
-			.ease(d3.ease('elastic-in', 1.5, 0.75))
-			.delay((d, i) => 500 + Math.random() * 100 * i)
-			.duration(1000)
-			.attr('d', areaGenerator);
+			.call(this.applyTransitions.bind(this));
 
 	},
 
@@ -214,19 +219,35 @@ export default {
 
 	},
 
-	setUpGradients (defs, xScale, yScale) {
+	setUpDefs (defs, xScale, yScale) {
 
-		// anger
+		// blur filter (sadness)
+		defs.append('filter')
+			.attr('id', 'sadness-blur')
+			.attr('x', -16)
+			.attr('y', -16)
+			.attr('width', 128)
+			.attr('height', 128)
+		.append('feGaussianBlur')
+			.attr('in', 'SourceGraphic')
+			.attr('stdDeviation', 4);
+
+		// base gradient
 		defs.append('linearGradient')
-			.attr('id', 'anger-gradient')
+			.attr('id', 'states-gradient')
 			.attr('gradientUnits', 'userSpaceOnUse')
 
-			// these will be set manually on each path's gradient
+			// these will be overridden on each path's gradient
 			.attr('x1', xScale(0))
 			.attr('x2', xScale(10))
 
 			.attr('y1', yScale(0))
-			.attr('y2', yScale(0))
+			.attr('y2', yScale(0));
+
+		// anger
+		defs.append('linearGradient')
+			.attr('id', 'anger-gradient')
+			.attr('xlink:href', '#states-gradient')
 		.selectAll('stop')
 			.data([
 				{ offset: '0%', color: 'rgba(228, 135, 102, 0.2)' },
@@ -237,7 +258,113 @@ export default {
 			.attr('stop-color', d => d.color);
 
 		// sadness
-		// TODO
+		defs.append('linearGradient')
+			.attr('id', 'sadness-gradient')
+			.attr('xlink:href', '#states-gradient')
+		.selectAll('stop')
+			.data([
+				{ offset: '0%', color: 'rgba(200, 220, 240, 1.0)' },
+				{ offset: '56%', color: 'rgba(30, 152, 211, 1.0)' },
+				{ offset: '100%', color: 'rgba(64, 70, 164, 1.0)' }
+			])
+		.enter().append('stop')
+			.attr('offset', d => d.offset)
+			.attr('stop-color', d => d.color);
+
+	},
+
+	setUpAreaGenerators: function (innerHeight, xScale, yScale) {
+
+		return {
+
+			anger: d3.svg.area()
+				.x(d => xScale(d.x))
+				.y0(innerHeight)
+				.y1(d => yScale(d.y)),
+			/*
+			fear: d3.svg.area()
+				.x(d => xScale(d.x))
+				.y0(innerHeight)
+				.y1(d => yScale(d.y)),
+
+			disgust: d3.svg.area()
+				.x(d => xScale(d.x))
+				.y0(innerHeight)
+				.y1(d => yScale(d.y)),
+			*/
+			sadness: d3.svg.area()
+				.x(d => xScale(d.x))
+				.y0(innerHeight)
+				.y1(d => yScale(d.y))
+				.interpolate('basis')
+			/*
+			enjoyment: d3.svg.area()
+				.x(d => xScale(d.x))
+				.y0(innerHeight)
+				.y1(d => yScale(d.y)),
+			*/
+		
+		};
+
+	},
+
+	setUpTransitions: function () {
+
+		return {
+
+			anger: {
+				ease: d3.ease('elastic-in', 1.5, 0.75),
+				delay: (d, i) => 500 + Math.random() * 100 * i,
+				duration: 1000
+			},
+			/*
+			fear: {
+				ease: d3.ease('linear'),
+				delay: (d, i) => 500 + Math.random() * 100 * i,
+				duration: 1000
+			},
+
+			disgust: {
+				ease: d3.ease('linear'),
+				delay: (d, i) => 500 + Math.random() * 100 * i,
+				duration: 1000
+			},
+			*/
+			sadness: {
+				ease: d3.ease('elastic-in', 2.5, 2),
+				delay: (d, i) => 250 + Math.random() * 1250,
+				duration: 5000
+			}
+			/*
+			enjoyment: {
+				ease: d3.ease('linear'),
+				delay: (d, i) => 500 + Math.random() * 100 * i,
+				duration: 1000
+			}
+			*/
+		
+		};
+
+	},
+
+	applyEffects: function (selection) {
+
+		if (this.currentEmotion === 'sadness') {
+			selection
+				.attr('filter', 'url(#sadness-blur)');
+		}
+
+	},
+
+	applyTransitions: function (selection) {
+
+		var transitionConfig = this.transitions[this.currentEmotion];
+
+		selection.transition()
+			.ease(transitionConfig.ease)
+			.delay(transitionConfig.delay)
+			.duration(transitionConfig.duration)
+			.attr('d', this.areaGenerators[this.currentEmotion]);
 
 	},
 
@@ -267,6 +394,8 @@ export default {
 	onKeyDown: function (keyCode) {
 
 		if (keyCode === 37 || keyCode === 39) {
+
+			console.log('TODO: scroll to next emotion. This functionality will ultimately be accessible via a dropdown.');
 
 		}
 
