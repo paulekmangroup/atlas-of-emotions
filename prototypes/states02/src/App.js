@@ -119,15 +119,11 @@ export default {
 
 		// grow the states upwards
 		transformedRanges = this.transformRanges(_.values(emotionsData.emotions.anger.states), 'anger', 1.0);
-		// statePaths.transition()
-		// 	.attr('class', 'area')
-		// 	.attr('d', areaGenerator)
-		// 	.attr('fill', (d, i) => 'url(#anger-gradient-' + i + ')');
 		stateGraphContainer.selectAll('path.area')
 			.data(transformedRanges)
 		.transition()
-			.ease(d3.ease('elastic-in'))
-			.delay(500)
+			.ease(d3.ease('elastic-in', 1.5, 0.75))
+			.delay((d, i) => 500 + Math.random() * 100 * i)
 			.duration(1000)
 			.attr('d', areaGenerator);
 
