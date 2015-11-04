@@ -115,7 +115,10 @@ export default {
 		let statePaths = stateElements.append('path')
 			.attr('class', 'area')
 			.attr('d', areaGenerator)
-			.attr('fill', (d, i) => 'url(#anger-gradient-' + i + ')');
+			.attr('fill', (d, i) => 'url(#anger-gradient-' + i + ')')
+			.on('mouseover', this.onStateMouseOver)
+			.on('mouseout', this.onStateMouseOut)
+			.on('click', this.onStateClick);
 
 		// grow the states upwards
 		transformedRanges = this.transformRanges(_.values(emotionsData.emotions.anger.states), 'anger', 1.0);
@@ -196,6 +199,29 @@ export default {
 		// 	{ x: a + (b-a)/2 + random offset, y: (b-a)/2 },
 		// 	{ x: b, y: 0 },
 		// ]
+
+	},
+
+	onStateMouseOver: function (data, index) {
+
+		d3.selectAll('path.area')
+			.style('opacity', (d, i) => i === index ? 1.0 : 0.2);
+
+		// .selectAll('linearGradient')
+		// TODO: set stops with higher/lower opacity on #anger-gradient-{i}
+
+	},
+
+	onStateMouseOut: function (d, i) {
+
+		d3.selectAll('path.area')
+			.style('opacity', null);
+
+	},
+
+	onStateClick: function (d, i) {
+
+		// d3.selectAll('path.area')
 
 	}
 
