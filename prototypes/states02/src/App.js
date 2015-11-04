@@ -3,8 +3,21 @@ import _ from 'lodash';
 import emotionsData from '../static/emotions-data.json';
 
 export default {
+
+	emotions: [
+		'anger',
+		'fear',
+		'disgust',
+		'sadness',
+		'enjoyment'
+	],
+
+	currentEmotion: 'anger',
 	
 	init: function (containerNode) {
+
+		this.onKeyDown = this.onKeyDown.bind(this);
+		document.addEventListener('keydown', this.onKeyDown);
 
 		// size main container to viewport
 		let headerHeight = 55;	// from _variables.scss
@@ -63,25 +76,7 @@ export default {
 			.y0(innerHeight)
 			.y1(d => yScale(d.y));
 
-		svg.append('defs')
-		.append('linearGradient')
-			.attr('id', 'anger-gradient')
-			.attr('gradientUnits', 'userSpaceOnUse')
-
-			// these will be set manually on each path's gradient
-			.attr('x1', xScale(0))
-			.attr('x2', xScale(10))
-
-			.attr('y1', yScale(0))
-			.attr('y2', yScale(0))
-		.selectAll('stop')
-			.data([
-				{ offset: '0%', color: 'rgba(228, 135, 102, 0.2)' },
-				{ offset: '100%', color: 'rgba(204, 28, 43, 1.0)' }
-			])
-		.enter().append('stop')
-			.attr('offset', d => d.offset)
-			.attr('stop-color', d => d.color);
+		this.setUpGradients(svg.append('defs'), xScale, yScale);
 
 		//
 		// Draw graph
@@ -101,27 +96,28 @@ export default {
 			.attr('style', null);
 
 		// transform state range into points for area chart
-		let transformedRanges = this.transformRanges(_.values(emotionsData.emotions.anger.states), 'anger', 0.0);
+		let transformedRanges = this.transformRanges(_.values(emotionsData.emotions[this.currentEmotion].states), this.currentEmotion, 0.0);
 
 		let stateElements = stateGraphContainer.selectAll('path.area')
 			.data(transformedRanges).enter();
+		let emotionGradientName = this.currentEmotion + '-gradient';
 
 		stateElements.append('linearGradient')
-			.attr('xlink:href', '#anger-gradient')
-			.attr('id', (d, i) => 'anger-gradient-' + i)
+			.attr('xlink:href', '#' + emotionGradientName)
+			.attr('id', (d, i) => emotionGradientName + '-' + i)
 			.attr('x1', d => xScale(d[0].x))
 			.attr('x2', d => xScale(d[2].x));
 
 		let statePaths = stateElements.append('path')
 			.attr('class', 'area')
 			.attr('d', areaGenerator)
-			.attr('fill', (d, i) => 'url(#anger-gradient-' + i + ')')
+			.attr('fill', (d, i) => 'url(#' + emotionGradientName + '-' + i + ')')
 			.on('mouseover', this.onStateMouseOver)
 			.on('mouseout', this.onStateMouseOut)
 			.on('click', this.onStateClick);
 
 		// grow the states upwards
-		transformedRanges = this.transformRanges(_.values(emotionsData.emotions.anger.states), 'anger', 1.0);
+		transformedRanges = this.transformRanges(_.values(emotionsData.emotions[this.currentEmotion].states), this.currentEmotion, 1.0);
 		stateGraphContainer.selectAll('path.area')
 			.data(transformedRanges)
 		.transition()
@@ -132,7 +128,7 @@ export default {
 
 	},
 
-	transformRanges: function (states, emotion, heightMod=1.0) {
+	transformRanges: function (states, emotion, strengthMod=1.0) {
 
 		// sort by state min value, then max value
 		states = states.sort((a, b) => {
@@ -150,55 +146,98 @@ export default {
 			return 0;
 		});
 
-		const transformers = {
-			'anger': this.transformAngerRanges,
-			'fear': this.transformFearRanges,
-			'disgust': this.transformDisgustRanges,
-			'sadness': this.transformSadnessRanges,
-			'enjoyment': this.transformEnjoymentRanges
-		};
-
-		return transformers[emotion](states, heightMod);
+		return this.stateRangeTransformers[emotion](states, strengthMod);
 
 	},
 
-	transformAngerRanges: function (states, heightMod) {
+	/**
+	 * Each transformer converts an emotion state range input
+	 * formatted as { min: a, max: b } into a set of points
+	 * used to render an area graph.
+	 * 
+	 * param states {Array} All states for an emotion that will be transformed.
+	 * param strengthMod {Number} A modifier used to animate the states.
+	 */
+	stateRangeTransformers: {
 
-		// in -> { min: a, max: b }
-		
-		let numStates = states.length;
-		return states.map((state, i) => {
+		/**
+		 * out -> [
+		 *	{ x: a, y: 0 },
+		 *	{ x: a + (b-a)/2 + random offset, y: (b-a)/2 },
+		 *	{ x: b, y: 0 },
+		 * ]
+		 */
+		anger: function (states, strengthMod) {
+			
+			let numStates = states.length;
+			return states.map((state, i) => {
 
-			let points = [],
-				min = state.range.min - 1,				// transform to 0-indexed, and allow
-														// states with same min and max to display
-				max = state.range.max,
-				spread = max - min,
-				offsetBase = 0.5 * (i / numStates);		// offsets skew left of center toward left edge
-														// of graph, right of center toward right
+				let points = [],
+					min = state.range.min - 1,				// transform to 0-indexed, and allow
+															// states with same min and max to display
+					max = state.range.max,
+					spread = max - min,
+					offsetBase = 0.5 * (i / numStates);		// offsets skew left of center toward left edge
+															// of graph, right of center toward right
 
-			points.push({
-				x: min,
-				y: 0
+				points.push({
+					x: min,
+					y: 0
+				});
+				points.push({
+					x: min + spread * (offsetBase + 0.5 * Math.random()),
+					y: strengthMod * (min + 0.5 * spread)
+				});
+				points.push({
+					x: max,
+					y: 0
+				});
+
+				return points;
+
 			});
-			points.push({
-				x: min + spread * (offsetBase + 0.5 * Math.random()),
-				y: heightMod * (min + 0.5 * spread)
-			});
-			points.push({
-				x: max,
-				y: 0
-			});
 
-			return points;
+		},
 
-		});
+		/**
+		 * out -> [
+		 *	{ x: a, y: 0 },
+		 *	{ x: a + (b-a)/2 + random offset, y: (b-a)/2 },
+		 *	{ x: b, y: 0 },
+		 * ]
+		 */
+		sadness: function (states, strengthMod) {
 
-		// out -> [
-		// 	{ x: a, y: 0 },
-		// 	{ x: a + (b-a)/2 + random offset, y: (b-a)/2 },
-		// 	{ x: b, y: 0 },
-		// ]
+			return this.anger(states, strengthMod);
+
+		}
+
+	},
+
+	setUpGradients (defs, xScale, yScale) {
+
+		// anger
+		defs.append('linearGradient')
+			.attr('id', 'anger-gradient')
+			.attr('gradientUnits', 'userSpaceOnUse')
+
+			// these will be set manually on each path's gradient
+			.attr('x1', xScale(0))
+			.attr('x2', xScale(10))
+
+			.attr('y1', yScale(0))
+			.attr('y2', yScale(0))
+		.selectAll('stop')
+			.data([
+				{ offset: '0%', color: 'rgba(228, 135, 102, 0.2)' },
+				{ offset: '100%', color: 'rgba(204, 28, 43, 1.0)' }
+			])
+		.enter().append('stop')
+			.attr('offset', d => d.offset)
+			.attr('stop-color', d => d.color);
+
+		// sadness
+		// TODO
 
 	},
 
@@ -222,6 +261,14 @@ export default {
 	onStateClick: function (d, i) {
 
 		// d3.selectAll('path.area')
+
+	},
+
+	onKeyDown: function (keyCode) {
+
+		if (keyCode === 37 || keyCode === 39) {
+
+		}
 
 	}
 
