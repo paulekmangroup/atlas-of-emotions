@@ -230,7 +230,7 @@ export default {
 			.attr('height', 128)
 		.append('feGaussianBlur')
 			.attr('in', 'SourceGraphic')
-			.attr('stdDeviation', 4);
+			.attr('stdDeviation', 3);
 
 		// base gradient
 		defs.append('linearGradient')
