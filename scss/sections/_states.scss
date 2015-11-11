@@ -1,0 +1,34 @@
+$states-graph-width: 70%;
+#states {
+	position: absolute;
+	width: $states-graph-width;
+	height: 60%;
+	bottom: 10%;
+	left: 50%;
+	margin-left: -$states-graph-width/2;
+	min-height: 400px;
+
+	.axis {
+		line,
+		path {
+			fill: none;
+			stroke: $text-color;
+			shape-rendering: crispEdges;
+		}
+
+		&.labels {
+			line,
+			path {
+				display: none
+			}
+			text {
+				font-weight: 200;
+				font-size: 0.8em;
+			}
+		}
+	}
+
+	.area {
+		mix-blend-mode: multiply;
+	}
+}

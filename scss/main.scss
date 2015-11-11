@@ -3,5 +3,8 @@
 
 // application-wide styles
 @import "variables";
-@import "layout";
 @import "typography";
+@import "layout";
+
+// site sections
+@import "sections/all";
