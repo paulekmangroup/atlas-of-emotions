@@ -26,6 +26,8 @@ export default function (...initArgs) {
 
 		hash = parseHash(hash);
 
+		initContainers();
+
 		if (~_.values(SECTIONS).indexOf(hash.section)) {
 			setSection(hash.section);
 		} else {
@@ -46,11 +48,30 @@ export default function (...initArgs) {
 
 	}
 
+	function initContainers () {
+
+		let mainEl = document.querySelector('#main'),
+			containerEl;
+
+		_.values(SECTIONS).forEach(section => {
+			containerEl = document.createElement('div');
+			containerEl.id = section;
+			mainEl.appendChild(containerEl);
+		});
+
+	}
+
 	function setSection (section) {
 
 		if (currentSection === section) { return; }
 
-		// TODO: implement animation
+		if (!currentSection) {
+			// initial section; do not animate
+
+		} else {
+			// change between sections
+			// TODO: implement animation
+		}
 
 		document.querySelector('#header h1').innerHTML = section.toUpperCase();
 
@@ -62,7 +83,13 @@ export default function (...initArgs) {
 
 		if (currentEmotion === emotion) { return; }
 
-		// TODO: implement animation
+		if (!currentEmotion) {
+			// initial emotion; do not animate
+
+		} else {
+			// change between emotions
+			// TODO: implement animation
+		}
 
 		currentEmotion = emotion;
 
