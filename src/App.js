@@ -1,4 +1,6 @@
 import _ from 'lodash';
+import continents from './continents.js';
+import states from './states.js';
 
 export default function (...initArgs) {
 
@@ -17,27 +19,31 @@ export default function (...initArgs) {
 			ENJOYMENT: 'enjoyment'
 		};
 
+	let containers = {},
+		sections = {};
+
 	let currentSection = null,
-		defaultSection = SECTIONS.CONTINENTS,
+		defaultSectionName = SECTIONS.CONTINENTS,
 		currentEmotion = null,
-		defaultEmotion = EMOTIONS.ANGER;
-	
+		defaultEmotionName = EMOTIONS.ANGER;
+
 	function init (containerNode, hash) {
 
 		hash = parseHash(hash);
 
 		initContainers();
-
-		if (~_.values(SECTIONS).indexOf(hash.section)) {
-			setSection(hash.section);
-		} else {
-			setSection(defaultSection);
-		}
+		initSections();
 
 		if (~_.values(EMOTIONS).indexOf(hash.emotion)) {
 			setEmotion(hash.emotion);
 		} else {
-			setEmotion(defaultEmotion);
+			setEmotion(defaultEmotionName);
+		}
+
+		if (~_.values(SECTIONS).indexOf(hash.section)) {
+			setSection(hash.section);
+		} else {
+			setSection(defaultSectionName);
 		}
 
 		document.addEventListener('keydown', onKeyDown);
@@ -57,13 +63,41 @@ export default function (...initArgs) {
 			containerEl = document.createElement('div');
 			containerEl.id = section;
 			mainEl.appendChild(containerEl);
+			containers[section] = containerEl;
 		});
 
 	}
 
-	function setSection (section) {
+	function initSections () {
 
+		function placeholderSection (sectionName) {
+
+			return {
+				isInited: false,
+				init: function (container) {
+					console.warn('Section [' + sectionName + '] not yet implemented.');
+				}
+			};
+
+		}
+
+		sections.continents = continents;
+		sections.states = states;
+
+		sections.actions = placeholderSection(SECTIONS.ACTIONS);
+		sections.triggers = placeholderSection(SECTIONS.TRIGGERS);
+		sections.moods = placeholderSection(SECTIONS.MOODS);
+
+	}
+
+	function setSection (sectionName) {
+
+		let section = sections[sectionName];
 		if (currentSection === section) { return; }
+
+		if (!section.isInited) {
+			section.init(containers[sectionName], currentEmotion);
+		}
 
 		if (!currentSection) {
 			// initial section; do not animate
@@ -73,7 +107,7 @@ export default function (...initArgs) {
 			// TODO: implement animation
 		}
 
-		document.querySelector('#header h1').innerHTML = section.toUpperCase();
+		document.querySelector('#header h1').innerHTML = sectionName.toUpperCase();
 
 		currentSection = section;
 
@@ -118,4 +152,4 @@ export default function (...initArgs) {
 
 	init(...initArgs);
 
-}
+};
