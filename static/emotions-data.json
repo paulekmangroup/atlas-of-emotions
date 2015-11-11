@@ -950,19 +950,6 @@
     },
     "enjoyment": {
       "states": {
-        "sensory pleasure": {
-          "range": {
-            "min": 1,
-            "max": 5
-          },
-          "actions": {
-            "seek more": {
-              "valences": [
-                "constructive"
-              ]
-            }
-          }
-        },
         "relief": {
           "range": {
             "min": 2,
