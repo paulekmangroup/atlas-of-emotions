@@ -101,6 +101,11 @@ export default function (...initArgs) {
 
 		if (!currentSection) {
 			// initial section; do not animate
+			
+			// for now (until transitions implemented), just hide all but the current section
+			for (let key in containers) {
+				containers[key].style.display = (key === sectionName) ? '' : 'none';
+			}
 
 		} else {
 			// change between sections
