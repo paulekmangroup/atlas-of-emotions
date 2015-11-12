@@ -19,7 +19,8 @@ let labelContainer,
 		minDelay: 1.35 * FRAMERATE,
 		freq: 0.015
 	},
-	frameCount = 0;
+	frameCount = 0,
+	highlightedContinent = null;
 
 const continentsSection = {
 
@@ -29,8 +30,6 @@ const continentsSection = {
 	init: function (container) {
 
 		this.update = this.update.bind(this);
-		// this.mouseMoved = this.mouseMoved.bind(this);
-		// this.mouseReleased = this.mouseReleased.bind(this);
 
 		labelContainer = document.createElement('div');
 		labelContainer.id = 'continent-labels';
@@ -284,7 +283,7 @@ const continentsSection = {
 
 		continents.forEach(function (continent) {
 
-			var label = document.createElement('div');
+			let label = document.createElement('div');
 			label.innerHTML = '<a href="#' + continent.id + '"><h3>' + continent.name.toUpperCase() + '</h3></a>';
 			label.style.left = Math.round(centerX + continent.x + continent.label.x) + 'px';
 			label.style.top = Math.round(centerY + continent.y + continent.label.y) + 'px';
@@ -303,28 +302,25 @@ const continentsSection = {
 		let section = this;
 		this.isActive = val;
 
-		// container.addEventListener('mousemove', this.mouseMoved);
-		
 		continents.forEach(function (continent, i) {
 			continent.d3Selection
-				.on('mouseenter', val ? section.continentMouseEnter : null);
+				.on('mouseenter', val ? section.onMouseEnter : null)
+				.on('mouseleave', val ? section.onMouseLeave : null)
+				.on('mouseup', val ? section.onMouseUp : null);
 		});
 
 	},
 
 	update: function () {
 
-		var newCircle,
+		let newCircle,
 			circle,
 			someContinentIsHighlighted = continents.some(function (continent) { return continent.isHighlighted; }),
 			alphaMod,
 			speedMod;
 
 		// Draw continents
-		continents.forEach(function (continent) {
-
-			continent.d3Selection
-				.attr('transform', d3Transform().translate([centerX + continent.x, centerY + continent.y]));
+		continents.forEach(continent => {
 
 			// probabilistically spawn new Circles
 			newCircle = Circle.spawn(continent);
@@ -332,7 +328,6 @@ const continentsSection = {
 				continent.circles.push(newCircle);
 			}
 
-			/*
 			// set alpha and speed based on interaction
 			if (!someContinentIsHighlighted) {
 				alphaMod = 1.0;
@@ -341,16 +336,15 @@ const continentsSection = {
 				alphaMod = continent.isHighlighted ? CONTINENT_HIGHLIGHT_ALPHA_MOD : CONTINENT_UNHIGHLIGHT_ALPHA_MOD;
 				speedMod = continent.isHighlighted ? CONTINENT_HIGHLIGHT_SPEED_MOD : CONTINENT_UNHIGHLIGHT_SPEED_MOD;
 			}
-			*/
-			alphaMod = speedMod = 1.0;
 
-			/*
 			// apply drift
-			wander(continent.drift, 3);
-			p.translate(continent.drift.x, continent.drift.y);
-			*/
+			this.wander(continent.drift, 3);
+			continent.d3Selection
+				.attr('transform', d3Transform().translate(
+					[centerX + continent.x + continent.drift.x,
+					centerY + continent.y + continent.drift.y]));
 
-			for (var i=continent.circles.length-1; i>=0; i--) {
+			for (let i=continent.circles.length-1; i>=0; i--) {
 				circle = continent.circles[i];
 				if (circle.isAlive()) {
 					circle.update(alphaMod, speedMod);
@@ -369,9 +363,6 @@ const continentsSection = {
 			}
 			*/
 
-			/*
-			p.pop();
-			*/
 		});
 		
 		frameCount++;
@@ -381,34 +372,27 @@ const continentsSection = {
 
 	},
 
-	continentMouseEnter: function () {
+	onMouseEnter: function () {
 
 		let continent = d3.select(this).datum();
 		if (continent) {
-			console.log(">>>>> CONTINUE HERE THURSDAY");
-			// highlight continents; finish porting from processing to SVG/d3 by uncommenting what's left above and below.
-			continent.isHighlighted = true;
+			continents.forEach(c => {
+				c.isHighlighted = (c === continent);
+			});
 		}
 
 	},
 
-	mouseMoved: function (event) {
+	onMouseLeave: function () {
 
-		var dX, dY;
+		let continent = d3.select(this).datum();
+		if (continent) {
+			continent.isHighlighted = false;
+		}
 
-		console.log(event);
-
-		/*
-		continents.forEach(function (continent) {
-			dX = centerX + continent.x - p.mouseX;
-			dY = centerY + continent.y - p.mouseY;
-			continent.isHighlighted = Math.sqrt(dX * dX + dY * dY) < 0.5 * continent.size;
-		});
-		*/
-		
 	},
 
-	mouseReleased: function (event) {
+	onMouseUp: function (event) {
 
 		continents.some(function (continent) {
 			if (continent.isHighlighted) {
@@ -426,11 +410,11 @@ const continentsSection = {
 	// Random walk
 	meander: function (drift, maxDist) {
 
-		var maxSpeed = 2 * 0.01 * maxDist;
-		var maxTurn = 2 * 0.002 * Math.PI;
-		var x = Math.cos(drift.ang) * drift.dist;
-		var y = Math.sin(drift.ang) * drift.dist;
-		var angToCenter = Math.atan2(y, x);
+		let maxSpeed = 2 * 0.01 * maxDist;
+		let maxTurn = 2 * 0.002 * Math.PI;
+		let x = Math.cos(drift.ang) * drift.dist;
+		let y = Math.sin(drift.ang) * drift.dist;
+		let angToCenter = Math.atan2(y, x);
 
 		drift.dist += (-0.5 + Math.random()) * maxSpeed;
 		drift.ang +=  (-0.5 + Math.random()) * maxTurn;
@@ -513,7 +497,7 @@ class Circle {
 	draw (alphaMod) {
 
 		// limit stroke to edge of circle
-		var sw = Math.min(this.weight, (this.size + 0.5*this.weight - this.radius));
+		let sw = Math.min(this.weight, (this.size + 0.5*this.weight - this.radius));
 
 		this.d3Selection
 			.attr('r', this.radius)
@@ -527,7 +511,7 @@ class Circle {
 	// Note: there is no "age", everything that changes is calculated off of this.radius.
 	grow (speedMod) {
 		// stroke is centered on this.radius
-		var maxRad = this.size + 0.5*this.weight;
+		let maxRad = this.size + 0.5*this.weight;
 
 		// taper off speed as radius approaches maxRad
 		this.rSpeed = BASE_SPEED + Math.pow((1 - this.radius / maxRad), 0.5) * this.initSpeed;
