@@ -16,7 +16,7 @@ let labelContainer,
 	continentTransforms,
 	baseSpawnConfig = {
 		lastSpawn: 0,
-		minDelay: 1.35 * FRAMERATE,
+		minDelay: 2 * FRAMERATE,
 		freq: 0.015
 	},
 	frameCount = 0,
@@ -445,11 +445,11 @@ const continentsSection = {
 
 
 
-const STROKE_WIDTH_MIN = 0.2,
-	STROKE_WIDTH_VAR = 0.6,
+const STROKE_WIDTH_MIN = 0.4,
+	STROKE_WIDTH_VAR = 1.2,
 	SIZE_MOD = 1 / (1 + 0.5 * (STROKE_WIDTH_MIN + STROKE_WIDTH_VAR)),
-	BASE_ALPHA = 0.45,
-	BASE_SPEED = 0.1;
+	BASE_ALPHA = 0.4,
+	BASE_SPEED = 0.05;
 
 class Circle {
 
@@ -474,9 +474,9 @@ class Circle {
 		this.size = size * SIZE_MOD;
 
 		this.radius = 0;
-		this.rSpeed = Math.random() * 0.4;
+		this.rSpeed = Math.random() * 0.2;
 		this.initSpeed = this.rSpeed;
-		this.weight = Math.round(0.2*size + Math.random() * 0.6*size);
+		this.weight = Math.round(0.4*size + Math.random() * 1.2*size);
 		this.alpha = BASE_ALPHA;
 
 		this.color = colorPalette[Math.floor(Math.random() * colorPalette.length)].join(',');
