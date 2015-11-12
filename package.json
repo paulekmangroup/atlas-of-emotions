@@ -15,6 +15,7 @@
   "author": "stamen",
   "dependencies": {
     "d3": "^3.5.6",
+    "d3-transform": "^1.0.4",
     "lodash": "^3.10.1"
   },
   "devDependencies": {

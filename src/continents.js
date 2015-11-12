@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import d3 from 'd3';
+import d3Transform from 'd3-transform';
 
 const FRAMERATE = 60,
 	CONTINENT_HIGHLIGHT_ALPHA_MOD = 1.5,
@@ -27,6 +28,10 @@ const continentsSection = {
 
 	init: function (container) {
 
+		this.update = this.update.bind(this);
+		// this.mouseMoved = this.mouseMoved.bind(this);
+		// this.mouseReleased = this.mouseReleased.bind(this);
+
 		labelContainer = document.createElement('div');
 		labelContainer.id = 'continent-labels';
 		container.appendChild(labelContainer);
@@ -34,8 +39,6 @@ const continentsSection = {
 			.attr('width', '100%')
 			.attr('height', '100%');
 
-		// p.blendMode(p.MULTIPLY);
-		
 		let w = container.offsetWidth,
 			h = container.offsetHeight;
 
@@ -46,14 +49,15 @@ const continentsSection = {
 		this.initContinentValues(w, h);
 		continents.forEach(function (continent, i) {
 			continent = Object.assign(continent, continentTransforms[i]);
-			continent.node = continentContainer.append('g')
-				.classed('continent ' + continent.name, true);
+			continent.d3Selection = continentContainer.append('g')
+				.classed('continent ' + continent.name, true)
+				.datum(continent);
 		});
 
 		this.initContinentLabels();
 
-		this.isActive = true;
-		this.update = this.update.bind(this);
+		this.setActive(true, container);
+
 		this.update();
 
 	},
@@ -81,9 +85,9 @@ const continentsSection = {
 					[224, 120, 92],
 					[228, 135, 102]
 				],
-				size: 0.48 * h,
 				circles: [],										// mutable
-				isHighlighted: false								// mutable
+				isHighlighted: false,								// mutable
+				d3Selection: null									// mutable
 			},
 			{
 				id: 'sadness',
@@ -106,9 +110,9 @@ const continentsSection = {
 					[174, 209, 234],
 					[195, 218, 238]
 				],
-				size: 0.45 * h,
 				circles: [],										// mutable
-				isHighlighted: false								// mutable
+				isHighlighted: false,								// mutable
+				d3Selection: null									// mutable
 			},
 			{
 				id: 'fear',
@@ -129,9 +133,9 @@ const continentsSection = {
 					[235, 56, 234],
 					[248, 58, 248]
 				],
-				size: 0.35 * h,
 				circles: [],										// mutable
-				isHighlighted: false								// mutable
+				isHighlighted: false,								// mutable
+				d3Selection: null									// mutable
 			},
 			{
 				id: 'enjoyment',
@@ -156,9 +160,9 @@ const continentsSection = {
 					[246, 166, 53],
 					[247, 172, 59]
 				],
-				size: 0.44 * h,
 				circles: [],										// mutable
-				isHighlighted: false								// mutable
+				isHighlighted: false,								// mutable
+				d3Selection: null									// mutable
 			},
 			{
 				id: 'disgust',
@@ -180,9 +184,9 @@ const continentsSection = {
 					[0, 136, 67],
 					[0, 142, 69]
 				],
-				size: 0.48 * h,
 				circles: [],										// mutable
-				isHighlighted: false								// mutable
+				isHighlighted: false,								// mutable
+				d3Selection: null									// mutable
 			}
 		],
 
@@ -202,7 +206,7 @@ const continentsSection = {
 					x: 0.19 * w,
 					y: -0.13 * h
 				},
-				size: 0.48 * h
+				size: 0.24 * h
 			},
 			{
 				x: -0.22 * w,
@@ -219,7 +223,7 @@ const continentsSection = {
 					x: -0.24 * w,
 					y: -0.01 * h
 				},
-				size: 0.45 * h
+				size: 0.23 * h
 			},
 			{
 				x: -0.06 * w,
@@ -236,7 +240,7 @@ const continentsSection = {
 					x: -0.19 * w,
 					y: 0.10 * h
 				},
-				size: 0.35 * h
+				size: 0.18 * h
 			},
 			{
 				x: -0.03 * w,
@@ -253,7 +257,7 @@ const continentsSection = {
 					x: -0.20 * w,
 					y: 0.15 * h
 				},
-				size: 0.44 * h
+				size: 0.22 * h
 			},
 			{
 				x: 0.19 * w,
@@ -270,7 +274,7 @@ const continentsSection = {
 					x: 0.01 * w,
 					y: 0.27 * h
 				},
-				size: 0.48 * h
+				size: 0.24 * h
 			}
 		]);
 
@@ -294,6 +298,20 @@ const continentsSection = {
 
 	},
 
+	setActive: function (val, container) {
+
+		let section = this;
+		this.isActive = val;
+
+		// container.addEventListener('mousemove', this.mouseMoved);
+		
+		continents.forEach(function (continent, i) {
+			continent.d3Selection
+				.on('mouseenter', val ? section.continentMouseEnter : null);
+		});
+
+	},
+
 	update: function () {
 
 		var newCircle,
@@ -304,10 +322,9 @@ const continentsSection = {
 
 		// Draw continents
 		continents.forEach(function (continent) {
-			/*
-			p.push();
-			p.translate(centerX + continent.x, centerY + continent.y);
-			*/
+
+			continent.d3Selection
+				.attr('transform', d3Transform().translate([centerX + continent.x, centerY + continent.y]));
 
 			// probabilistically spawn new Circles
 			newCircle = Circle.spawn(continent);
@@ -325,6 +342,7 @@ const continentsSection = {
 				speedMod = continent.isHighlighted ? CONTINENT_HIGHLIGHT_SPEED_MOD : CONTINENT_UNHIGHLIGHT_SPEED_MOD;
 			}
 			*/
+			alphaMod = speedMod = 1.0;
 
 			/*
 			// apply drift
@@ -338,6 +356,7 @@ const continentsSection = {
 					circle.update(alphaMod, speedMod);
 				} else {
 					continent.circles.splice(i, 1);
+					circle.d3Selection.remove();
 				}
 			};
 
@@ -362,31 +381,47 @@ const continentsSection = {
 
 	},
 
-	/*
+	continentMouseEnter: function () {
+
+		let continent = d3.select(this).datum();
+		if (continent) {
+			console.log(">>>>> CONTINUE HERE THURSDAY");
+			// highlight continents; finish porting from processing to SVG/d3 by uncommenting what's left above and below.
+			continent.isHighlighted = true;
+		}
+
+	},
+
 	mouseMoved: function (event) {
 
 		var dX, dY;
 
+		console.log(event);
+
+		/*
 		continents.forEach(function (continent) {
 			dX = centerX + continent.x - p.mouseX;
 			dY = centerY + continent.y - p.mouseY;
 			continent.isHighlighted = Math.sqrt(dX * dX + dY * dY) < 0.5 * continent.size;
 		});
+		*/
 		
-	};
+	},
 
-	mouseReleased: function () {
+	mouseReleased: function (event) {
 
 		continents.some(function (continent) {
 			if (continent.isHighlighted) {
-				document.location.hash = continent.id;
+
+				// TODO: emit event, let App.js handle setting hash/state.
+				console.log(">>>>> TODO: emit event, zoom into emotion:", continent.id);
+				// document.location.hash = continent.id;
+
 				return true;
 			}
 		});
 
-	};
-	*/
-
+	},
 
 	// Random walk
 	meander: function (drift, maxDist) {
@@ -429,8 +464,8 @@ const continentsSection = {
 const STROKE_WIDTH_MIN = 0.2,
 	STROKE_WIDTH_VAR = 0.6,
 	SIZE_MOD = 1 / (1 + 0.5 * (STROKE_WIDTH_MIN + STROKE_WIDTH_VAR)),
-	BASE_ALPHA = 0.35,
-	BASE_SPEED = 0.2;
+	BASE_ALPHA = 0.45,
+	BASE_SPEED = 0.1;
 
 class Circle {
 
@@ -439,14 +474,8 @@ class Circle {
 
 		if (frameCount - continent.spawnConfig.lastSpawn > continent.spawnConfig.minDelay) {
 			if (Math.random() < continent.spawnConfig.freq) {
-
 				continent.spawnConfig.lastSpawn = frameCount;
-
-				let circle = new Circle(continent.colorPalette, continent.size);
-				circle.node = continent.node.append('g');
-
-				return circle;
-
+				return new Circle(continent.d3Selection, continent.colorPalette, continent.size);
 			} else {
 				return null;
 			}
@@ -454,22 +483,25 @@ class Circle {
 
 	}
 
-	constructor (colorPalette, size) {
+	constructor (container, colorPalette, size) {
 
 		// Scale `size` down to account for stroke weight,
 		// to keep all stroked ellipses within `size`.
 		this.size = size * SIZE_MOD;
 
 		this.radius = 0;
-		this.rSpeed = Math.random() * 0.8;
+		this.rSpeed = Math.random() * 0.4;
 		this.initSpeed = this.rSpeed;
 		this.weight = Math.round(0.2*size + Math.random() * 0.6*size);
 		this.alpha = BASE_ALPHA;
 
-		this.color = colorPalette[Math.floor(Math.random() * colorPalette.length)];
+		this.color = colorPalette[Math.floor(Math.random() * colorPalette.length)].join(',');
 
-		// Assigned and appended in Circle.spawn()
-		this.node = null;
+		this.d3Selection = container.append('circle')
+			.attr('cx', 0)
+			.attr('cy', 0)
+			.attr('r', this.radius)
+			.style('stroke', 'rgba(' + this.color + ',' + this.alpha + ')');
 
 	}
 
@@ -479,15 +511,17 @@ class Circle {
 	};
 
 	draw (alphaMod) {
+
 		// limit stroke to edge of circle
 		var sw = Math.min(this.weight, (this.size + 0.5*this.weight - this.radius));
 
-		/*
-		p.noFill();
-		p.strokeWeight(sw);
-		p.stroke(this.color[0], this.color[1], this.color[2], this.alpha*255 * alphaMod);
-		p.ellipse(0, 0, this.radius, this.radius);
-		*/
+		this.d3Selection
+			.attr('r', this.radius)
+			.style({
+				'stroke-width': sw,
+				'stroke': 'rgba(' + this.color + ',' + this.alpha * alphaMod + ')'
+			});
+
 	};
 
 	// Note: there is no "age", everything that changes is calculated off of this.radius.

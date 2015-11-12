@@ -1,8 +1,22 @@
 #continents {
-	position: relative;
+	position: absolute;
 	width: 100%;
-	height: 720px;
+	height: 80%;
+	min-height: 600px;
+
+	bottom: 10%;
+	left: 50%;
+	margin-left: -50%;
+
 	text-align: center;
+
+	g.continent {
+		mix-blend-mode: multiply;
+	}
+
+	circle {
+		fill: none;
+	}
 }
 
 #continent-labels {
