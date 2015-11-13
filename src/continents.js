@@ -1,3 +1,4 @@
+import dispatcher from './dispatcher.js';
 import _ from 'lodash';
 import d3 from 'd3';
 import d3Transform from 'd3-transform';
@@ -21,6 +22,8 @@ let labelContainer,
 	},
 	frameCount = 0,
 	highlightedContinent = null;
+
+
 
 const continentsSection = {
 
@@ -49,7 +52,7 @@ const continentsSection = {
 		continents.forEach(function (continent, i) {
 			continent = Object.assign(continent, continentTransforms[i]);
 			continent.d3Selection = continentContainer.append('g')
-				.classed('continent ' + continent.name, true)
+				.classed('continent ' + continent.id, true)
 				.datum(continent);
 		});
 
@@ -66,7 +69,7 @@ const continentsSection = {
 		// TODO: `Continent` should be a class, or at least have an object factory, to maintain state.
 		continents = [
 			{
-				id: 'anger',
+				id: dispatcher.EMOTIONS.ANGER,
 				name: 'anger',
 				x: 0.03 * w,
 				y: -0.20 * h,
@@ -89,7 +92,7 @@ const continentsSection = {
 				d3Selection: null									// mutable
 			},
 			{
-				id: 'sadness',
+				id: dispatcher.EMOTIONS.SADNESS,
 				name: 'sadness',
 				x: -0.22 * w,
 				y: -0.14 * h,
@@ -114,7 +117,7 @@ const continentsSection = {
 				d3Selection: null									// mutable
 			},
 			{
-				id: 'fear',
+				id: dispatcher.EMOTIONS.FEAR,
 				name: 'fear',
 				x: -0.06 * w,
 				y: 0.07 * h,
@@ -137,7 +140,7 @@ const continentsSection = {
 				d3Selection: null									// mutable
 			},
 			{
-				id: 'enjoyment',
+				id: dispatcher.EMOTIONS.ENJOYMENT,
 				name: 'enjoyment',
 				x: -0.03 * w,
 				y: 0.22 * h,
@@ -164,7 +167,7 @@ const continentsSection = {
 				d3Selection: null									// mutable
 			},
 			{
-				id: 'disgust',
+				id: dispatcher.EMOTIONS.DISGUST,
 				name: 'disgust',
 				x: 0.19 * w,
 				y: 0.10 * h,
@@ -396,11 +399,7 @@ const continentsSection = {
 
 		continents.some(function (continent) {
 			if (continent.isHighlighted) {
-
-				// TODO: emit event, let App.js handle setting hash/state.
-				console.log(">>>>> TODO: emit event, zoom into emotion:", continent.id);
-				// document.location.hash = continent.id;
-
+				dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS, continent.id);
 				return true;
 			}
 		});

@@ -1,56 +1,33 @@
 import _ from 'lodash';
+import dispatcher from './dispatcher.js';
 import continents from './continents.js';
 import states from './states.js';
 
 export default function (...initArgs) {
 
-	const SECTIONS = {
-			CONTINENTS: 'continents',
-			STATES: 'states',
-			ACTIONS: 'actions',
-			TRIGGERS: 'triggers',
-			MOODS: 'moods'
-		},
-		EMOTIONS = {
-			ANGER: 'anger',
-			FEAR: 'fear',
-			DISGUST: 'disgust',
-			SADNESS: 'sadness',
-			ENJOYMENT: 'enjoyment'
-		};
-
 	let containers = {},
 		sections = {};
 
 	let currentSection = null,
-		defaultSectionName = SECTIONS.CONTINENTS,
-		currentEmotion = null,
-		defaultEmotionName = EMOTIONS.ANGER;
+		currentEmotion = null;
 
-	function init (containerNode, hash) {
-
-		hash = parseHash(hash);
+	function init (containerNode) {
 
 		initContainers();
 		initSections();
 
-		if (~_.values(EMOTIONS).indexOf(hash.emotion)) {
-			setEmotion(hash.emotion);
-		} else {
-			setEmotion(defaultEmotionName);
-		}
-
-		if (~_.values(SECTIONS).indexOf(hash.section)) {
-			setSection(hash.section);
-		} else {
-			setSection(defaultSectionName);
-		}
-
 		document.addEventListener('keydown', onKeyDown);
+		dispatcher.addListener(dispatcher.EVENTS.NAVIGATE, onNavigate);
+		window.addEventListener('hashchange', onHashChange);
 
 		// size main container to viewport
 		let headerHeight = 55;	// from _variables.scss
 		containerNode.style.height = (window.innerHeight - headerHeight) + 'px';
+
+		onHashChange(null, {
+			section: dispatcher.SECTIONS.CONTINENTS,
+			emotion: dispatcher.EMOTIONS.ANGER
+		});
 
 	}
 
@@ -59,7 +36,7 @@ export default function (...initArgs) {
 		let mainEl = document.querySelector('#main'),
 			containerEl;
 
-		_.values(SECTIONS).forEach(section => {
+		_.values(dispatcher.SECTIONS).forEach(section => {
 			containerEl = document.createElement('div');
 			containerEl.id = section;
 			mainEl.appendChild(containerEl);
@@ -84,9 +61,9 @@ export default function (...initArgs) {
 		sections.continents = continents;
 		sections.states = states;
 
-		sections.actions = placeholderSection(SECTIONS.ACTIONS);
-		sections.triggers = placeholderSection(SECTIONS.TRIGGERS);
-		sections.moods = placeholderSection(SECTIONS.MOODS);
+		sections.actions = placeholderSection(dispatcher.SECTIONS.ACTIONS);
+		sections.triggers = placeholderSection(dispatcher.SECTIONS.TRIGGERS);
+		sections.moods = placeholderSection(dispatcher.SECTIONS.MOODS);
 
 	}
 
@@ -134,6 +111,41 @@ export default function (...initArgs) {
 
 	}
 
+	function onKeyDown (keyCode) {
+
+		if (keyCode === 37 || keyCode === 39) {
+
+			console.log('TODO: scroll to next emotion. This functionality will ultimately be accessible via a dropdown.');
+
+		}
+
+	}
+
+	function onNavigate (section, emotion) {
+
+		document.location.hash = section + ':' + emotion;
+
+	}
+
+	function onHashChange (event, defaults) {
+
+		let hash = document.location.hash.replace(/^#/, '');
+		hash = parseHash(hash);
+
+		if (dispatcher.validateEmotion(hash.emotion)) {
+			setEmotion(hash.emotion);
+		} else if (defaults && defaults.emotion) {
+			setEmotion(defaults.emotion);
+		}
+
+		if (dispatcher.validateSection(hash.section)) {
+			setSection(hash.section);
+		} else if (defaults && defaults.section) {
+			setSection(defaults.section);
+		}
+
+	}
+
 	function parseHash (hash) {
 
 		if (!hash) { hash = ''; }
@@ -142,16 +154,6 @@ export default function (...initArgs) {
 			section: hashValues[0],
 			emotion: hashValues[1]
 		};
-
-	}
-
-	function onKeyDown (keyCode) {
-
-		if (keyCode === 37 || keyCode === 39) {
-
-			console.log('TODO: scroll to next emotion. This functionality will ultimately be accessible via a dropdown.');
-
-		}
 
 	}
 
