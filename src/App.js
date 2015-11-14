@@ -26,7 +26,7 @@ export default function (...initArgs) {
 
 		onHashChange(null, {
 			section: dispatcher.SECTIONS.CONTINENTS,
-			emotion: dispatcher.EMOTIONS.ANGER
+			emotion: null
 		});
 
 	}
@@ -70,23 +70,38 @@ export default function (...initArgs) {
 	function setSection (sectionName) {
 
 		let section = sections[sectionName];
-		if (currentSection === section) { return; }
 
 		if (!section.isInited) {
-			section.init(containers[sectionName], currentEmotion);
+			section.init(containers[sectionName]);
 		}
 
 		if (!currentSection) {
-			// initial section; do not animate
 			
 			// for now (until transitions implemented), just hide all but the current section
 			for (let key in containers) {
 				containers[key].style.display = (key === sectionName) ? '' : 'none';
 			}
 
+			// initial section; do not animate
+			if (currentEmotion) {
+				section.setEmotion(currentEmotion);
+			}
+
 		} else {
-			// change between sections
-			// TODO: implement animation
+
+			// section already open; perform transition
+			
+			if (currentSection === section) {
+				// change emotion within current section
+				if (currentEmotion) {
+					section.setEmotion(currentEmotion);
+				}
+			} else {
+				// navigate between sections
+				// TODO: implement animation
+				section.open(currentEmotion);
+			}
+
 		}
 
 		document.querySelector('#header h1').innerHTML = sectionName.toUpperCase();
@@ -99,13 +114,8 @@ export default function (...initArgs) {
 
 		if (currentEmotion === emotion) { return; }
 
-		if (!currentEmotion) {
-			// initial emotion; do not animate
-
-		} else {
-			// change between emotions
-			// TODO: implement animation
-		}
+		// setSection cues up emotion changes,
+		// making this function very simple.
 
 		currentEmotion = emotion;
 

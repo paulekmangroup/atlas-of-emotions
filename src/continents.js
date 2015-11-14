@@ -58,9 +58,17 @@ const continentsSection = {
 
 		this.initContinentLabels();
 
+		this.isInited = true;
+
 		this.setActive(true, container);
 
 		this.update();
+
+	},
+
+	setEmotion: function (emotion) {
+
+		console.log(">>>>> TODO: continents.setEmotion should zoom into an emotion if zoomed out, or just render already zoomed in.");
 
 	},
 
