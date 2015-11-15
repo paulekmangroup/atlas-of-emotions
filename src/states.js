@@ -12,18 +12,15 @@ export default {
 		'enjoyment'
 	],
 
-	currentEmotion: null,
+	stateGraphContainer: null,
+	xScale: null,
 
 	areaGenerators: null,
-
 	transitions: null,
-	
-	init: function (containerNode, currentEmotion) {
 
-		if (!~this.emotions.indexOf(currentEmotion)) {
-			currentEmotion = 'anger';
-		}
-		this.currentEmotion = currentEmotion;
+	currentEmotion: null,
+	
+	init: function (containerNode) {
 
 		this.onKeyDown = this.onKeyDown.bind(this);
 		document.addEventListener('keydown', this.onKeyDown);
@@ -51,13 +48,13 @@ export default {
 			.attr('width', statesContainer.offsetWidth)
 			.attr('height', statesContainer.offsetHeight);
 
-		let stateGraphContainer = svg.append('g')
+		this.stateGraphContainer = svg.append('g')
 			.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
 		// 
 		// d3/svg setup
 		// 
-		let xScale = d3.scale.linear()
+		this.xScale = d3.scale.linear()
 			.domain([0, 10])
 			.range([0, innerWidth]);
 
@@ -66,7 +63,7 @@ export default {
 			.range([innerHeight, 0]);
 
 		let xAxis = d3.svg.axis()
-			.scale(xScale)
+			.scale(this.xScale)
 			.orient('bottom')
 			.ticks(10)
 			.tickFormat(d => '')
@@ -74,27 +71,27 @@ export default {
 
 		let labelsXScale = d3.scale.ordinal()
 			.domain(['LEAST INTENSE', 'MOST INTENSE'])
-			.range(xScale.range());
+			.range(this.xScale.range());
 		let xAxisLabels = d3.svg.axis()
 			.scale(labelsXScale)
 			.orient('bottom')
 			.tickSize(25);
 
-		this.setUpDefs(svg.append('defs'), xScale, yScale);
+		this.setUpDefs(svg.append('defs'), this.xScale, yScale);
 
-		this.areaGenerators = this.setUpAreaGenerators(innerHeight, xScale, yScale);
+		this.areaGenerators = this.setUpAreaGenerators(innerHeight, this.xScale, yScale);
 
 		this.transitions = this.setUpTransitions();
 
 		//
 		// Draw graph
 		// 
-		stateGraphContainer.append('g')
+		this.stateGraphContainer.append('g')
 			.attr('class', 'x axis')
 			.attr('transform', 'translate(0,' + innerHeight + ')')
 			.call(xAxis);
 
-		stateGraphContainer.append('g')
+		this.stateGraphContainer.append('g')
 			.attr('class', 'x axis labels')
 			.attr('transform', 'translate(0,' + innerHeight + ')')
 			.call(xAxisLabels)
@@ -103,18 +100,31 @@ export default {
 			.attr('text-anchor', (d, i) => i ? 'end' : 'start')
 			.attr('style', null);
 
+	},
+
+	setEmotion: function (emotion) {
+
+		//
+		// TODO: implement transitions between emotions
+		//
+
+		if (!~this.emotions.indexOf(emotion)) {
+			emotion = 'anger';
+		}
+		this.currentEmotion = emotion;
+
 		// transform state range into points for area chart
 		let transformedRanges = this.transformRanges(_.values(emotionsData.emotions[this.currentEmotion].states), this.currentEmotion, 0.0);
 
-		let stateElements = stateGraphContainer.selectAll('path.area')
+		let stateElements = this.stateGraphContainer.selectAll('path.area')
 			.data(transformedRanges).enter();
 		let emotionGradientName = this.currentEmotion + '-gradient';
 
 		stateElements.append('linearGradient')
 			.attr('xlink:href', '#' + emotionGradientName)
 			.attr('id', (d, i) => emotionGradientName + '-' + i)
-			.attr('x1', d => xScale(d[0].x))
-			.attr('x2', d => xScale(d[2].x));
+			.attr('x1', d => this.xScale(d[0].x))
+			.attr('x2', d => this.xScale(d[2].x));
 
 		let statePaths = stateElements.append('path')
 			.attr('class', 'area')
@@ -127,7 +137,7 @@ export default {
 
 		// grow the states upwards
 		transformedRanges = this.transformRanges(_.values(emotionsData.emotions[this.currentEmotion].states), this.currentEmotion, 1.0);
-		stateGraphContainer.selectAll('path.area')
+		this.stateGraphContainer.selectAll('path.area')
 			.data(transformedRanges)
 			.call(this.applyTransitions.bind(this));
 
