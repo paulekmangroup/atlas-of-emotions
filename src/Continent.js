@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import d3 from 'd3';
 import d3Transform from 'd3-transform';
+import TWEEN from 'tween.js';
 
 import Circle from './Circle.js';
 
@@ -169,6 +170,9 @@ export default class Continent {
 		// copy transforms onto this Continent instance
 		Object.assign(this, Continent.transforms[emotionIndex]);
 
+		this.scaleX = 1.0;
+		this.scaleY = 1.0;
+
 		this.circles = [];
 		this.isHighlighted = false;
 
@@ -179,6 +183,12 @@ export default class Continent {
 	}
 
 	update (state, frameCount) {
+
+		if (this.tweens) {
+			_.values(this.tweens).forEach(tween => {
+				tween.update(state.time);
+			});
+		}
 
 		let newCircle,
 			circle,
@@ -203,14 +213,16 @@ export default class Continent {
 
 		// apply drift
 		this.wander(this.drift, 3);
-		scale = /scale\((.*)\)/.exec(this.d3Selection.attr('transform'));
-		scale = scale ? scale[1].split(',') : [1.0, 1.0];
 		this.d3Selection
 			.attr('transform', d3Transform()
 				.translate(
 					this.centerX + this.x + this.drift.x,
-					this.centerY + this.y + this.drift.y)
-				.scale(scale[0], scale[1])
+					this.centerY + this.y + this.drift.y
+				)
+				.scale(
+					this.scaleX,
+					this.scaleY
+				)
 			);
 
 		for (let i=this.circles.length-1; i>=0; i--) {
@@ -222,6 +234,25 @@ export default class Continent {
 				circle.d3Selection.remove();
 			}
 		};
+
+	}
+
+	addTween (props, time, func=TWEEN.Easing.Linear.None) {
+
+		if (!this.tweens) {
+			this.tweens = {};
+		}
+
+		let key = Object.keys(props).sort().join(',');
+		if (this.tweens[key]) {
+			this.tweens[key].stop();
+		}
+
+		this.tweens[key] = new TWEEN.Tween(this)
+			.to(props, time)
+			.onComplete(() => { delete this.tweens[key]; })
+			.easing(func)
+			.start();
 
 	}
 

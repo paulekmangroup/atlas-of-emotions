@@ -1,18 +1,13 @@
 import _ from 'lodash';
 import d3 from 'd3';
 import d3Transform from 'd3-transform';
-import penner from 'penner';
+import TWEEN from 'tween.js';
 
 import dispatcher from './dispatcher.js';
 import Circle from './Circle.js';
 import Continent from './Continent.js';
 
-let labelContainer,
-	continentContainer,
-	centerX,
-	centerY,
-	continents,
-	continentTransforms,
+let continents,
 	frameCount = 0,
 	currentEmotion = null;
 
@@ -25,30 +20,28 @@ const continentsSection = {
 
 		this.update = this.update.bind(this);
 
-		labelContainer = document.createElement('div');
+		let labelContainer = document.createElement('div');
 		labelContainer.id = 'continent-labels';
 		container.appendChild(labelContainer);
-		continentContainer = d3.select(container).append('svg')
+		let continentContainer = d3.select(container).append('svg')
 			.attr('width', '100%')
 			.attr('height', '100%');
 
 		let w = container.offsetWidth,
 			h = container.offsetHeight,
-			continentGeom;
-
-		centerX = 0.55 * w;
-		centerY = 0.5 * h;
-		continentGeom = {
-			w: w,
-			h: h,
-			centerX: centerX,
-			centerY: centerY
-		};
+			centerX = 0.55 * w,
+			centerY = 0.5 * h,
+			continentGeom = {
+				w: w,
+				h: h,
+				centerX: centerX,
+				centerY: centerY
+			};
 
 		// map each emotion to a Continent instance
 		continents = _.values(dispatcher.EMOTIONS).map(emotion => new Continent(emotion, continentContainer, continentGeom));
 
-		this.initContinentLabels();
+		this.initContinentLabels(labelContainer, centerX, centerY);
 
 		this.isInited = true;
 
@@ -66,24 +59,34 @@ const continentsSection = {
 
 			// -->> TODO: keep in mind what happens if setEmotion() is called during a transition! <<--
 
-			// TODO:
-			// transition from one emotion to another
-			// implement as Promise chain? steps will overlap.
+			if (emotion) {
 
-			// transitions.unfocusContinents(currentEmotion)
-			// 1a. fade out and shrink circles of current continent;
-			// 1b. pull circles together toward center along horizontal axis as they fade/shrink
+				// TODO:
+				// transition from one emotion to another
+				// implement as Promise chain? steps will overlap.
 
-			// transitions.panToContinent(currentEmotion)
-			// 1c. while 1a-b happens, pan toward continent location from current continent's location, according to all continents view layout.
+				// transitions.unfocusContinents(currentEmotion)
+				// 1a. fade out and shrink circles of current continent;
+				// 1b. pull circles together toward center along horizontal axis as they fade/shrink
 
-			// transitions.focusZoomedInContinent(currentEmotion)
-			// 2a. fade in and grow all circles for zoomed continent view from center of circle
-			//		random colors or picked from mocks?
+				// transitions.panToContinent(currentEmotion)
+				// 1c. while 1a-b happens, pan toward continent location from current continent's location, according to all continents view layout.
 
-			// transitions.spreadFocusedContinent(currentEmotion)
-			// 2b. spread circles along horizontal axis as they fade in + grow
-			// 2c. (later) allow circles to drift slightly along horizontal axis only. this motion can be reflected in the states view as well.
+				// transitions.focusZoomedInContinent(currentEmotion)
+				// 2a. fade in and grow all circles for zoomed continent view from center of circle
+				//		random colors or picked from mocks?
+
+				// transitions.spreadFocusedContinent(currentEmotion)
+				// 2b. spread circles along horizontal axis as they fade in + grow
+				// 2c. (later) allow circles to drift slightly along horizontal axis only. this motion can be reflected in the states view as well.
+
+			} else {
+
+				// TODO:
+				// transition back from zoomed continent to all continents
+
+
+			}
 
 		} else {
 
@@ -110,6 +113,54 @@ const continentsSection = {
 		}
 
 		currentEmotion = emotion;
+
+	},
+
+	initContinentLabels: function (labelContainer, centerX, centerY) {
+
+		continents.forEach(function (continent) {
+
+			let label = document.createElement('div');
+			label.innerHTML = '<a href="#' + continent.id + '"><h3>' + continent.name.toUpperCase() + '</h3></a>';
+			label.style.left = Math.round(centerX + continent.x + continent.label.x) + 'px';
+			label.style.top = Math.round(centerY + continent.y + continent.label.y) + 'px';
+			labelContainer.appendChild(label);
+
+			setTimeout(function () {
+				label.classList.add('visible');
+			}, 1000);
+
+		});
+
+	},
+
+	setActive: function (val, container) {
+
+		let section = this;
+		this.isActive = val;
+
+		continents.forEach(function (continent, i) {
+			continent.d3Selection
+				.on('mouseenter', val ? section.onContinentMouseEnter : null)
+				.on('mouseleave', val ? section.onContinentMouseLeave : null)
+				.on('mouseup', val ? section.onContinentMouseUp : null);
+		});
+
+	},
+
+	update: function (time) {
+
+		let updateState = {
+			time: time,
+			someContinentIsHighlighted: continents.some(function (continent) { return continent.isHighlighted; })
+		};
+
+		continents.forEach(continent => continent.update(updateState, frameCount));
+
+		frameCount++;
+		if (this.isActive) {
+			window.requestAnimationFrame(this.update);
+		}
 
 	},
 
@@ -169,66 +220,14 @@ const continentsSection = {
 				// then, set up RAF function that decreases continent.scale over time.
 
 				// scale down to nothing
-				// translate = /translate\((.*)\)/.exec(continent.d3Selection.attr('transform'));
-				translate = /translate\(([^\)]*)\)/.exec(continent.d3Selection.attr('transform'));
-				translate = translate ? translate[1].split(',') : [0, 0];
-				continent.d3Selection
-					.attr('transform', d3Transform()
-						.translate(translate[0], translate[1])
-						.scale(0, 0)
-					);
-
+				continent.addTween({
+					'scaleX': 0.0,
+					'scaleY': 0.0
+				}, 750, TWEEN.Easing.Quadratic.InOut);
 
 			});
 
 		},
-
-	},
-
-	initContinentLabels: function () {
-
-		continents.forEach(function (continent) {
-
-			let label = document.createElement('div');
-			label.innerHTML = '<a href="#' + continent.id + '"><h3>' + continent.name.toUpperCase() + '</h3></a>';
-			label.style.left = Math.round(centerX + continent.x + continent.label.x) + 'px';
-			label.style.top = Math.round(centerY + continent.y + continent.label.y) + 'px';
-			labelContainer.appendChild(label);
-
-			setTimeout(function () {
-				label.classList.add('visible');
-			}, 1000);
-
-		});
-
-	},
-
-	setActive: function (val, container) {
-
-		let section = this;
-		this.isActive = val;
-
-		continents.forEach(function (continent, i) {
-			continent.d3Selection
-				.on('mouseenter', val ? section.onContinentMouseEnter : null)
-				.on('mouseleave', val ? section.onContinentMouseLeave : null)
-				.on('mouseup', val ? section.onContinentMouseUp : null);
-		});
-
-	},
-
-	update: function () {
-
-		let updateState = {
-			someContinentIsHighlighted: continents.some(function (continent) { return continent.isHighlighted; })
-		};
-
-		continents.forEach(continent => continent.update(updateState, frameCount));
-
-		frameCount++;
-		if (this.isActive) {
-			window.requestAnimationFrame(this.update);
-		}
 
 	},
 
