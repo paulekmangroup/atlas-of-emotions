@@ -2,12 +2,7 @@ import dispatcher from './dispatcher.js';
 import _ from 'lodash';
 import d3 from 'd3';
 import d3Transform from 'd3-transform';
-
-const FRAMERATE = 60,
-	CONTINENT_HIGHLIGHT_ALPHA_MOD = 1.5,
-	CONTINENT_UNHIGHLIGHT_ALPHA_MOD = 0.3,
-	CONTINENT_HIGHLIGHT_SPEED_MOD = 2.0,
-	CONTINENT_UNHIGHLIGHT_SPEED_MOD = 0.5;
+import penner from 'penner';
 
 let labelContainer,
 	continentContainer,
@@ -15,11 +10,6 @@ let labelContainer,
 	centerY,
 	continents,
 	continentTransforms,
-	baseSpawnConfig = {
-		lastSpawn: 0,
-		minDelay: 2 * FRAMERATE,
-		freq: 0.015
-	},
 	frameCount = 0,
 	currentEmotion = null;
 
@@ -47,14 +37,8 @@ const continentsSection = {
 		centerX = 0.55 * w;
 		centerY = 0.5 * h;
 
-		// Assign continents to positions
-		this.initContinentValues(w, h);
-		continents.forEach(function (continent, i) {
-			continent = Object.assign(continent, continentTransforms[i]);
-			continent.d3Selection = continentContainer.append('g')
-				.classed('continent ' + continent.id, true)
-				.datum(continent);
-		});
+		// map each emotion to a Continent instance
+		continents = _.values(dispatcher.EMOTIONS).map(emotion => new Continent(emotion, w, h, continentContainer));
 
 		this.initContinentLabels();
 
@@ -110,7 +94,14 @@ const continentsSection = {
 
 			// transitions.spreadFocusedContinent()
 			// 2d. while 2a-c happens, execute (currentEmotion):2b-c above.
+
+			this.transitions.unfocusContinents(continents
+				.filter(continent => continent.id !== emotion)
+				.map(continent => continent.id)
+			);
 		}
+
+		currentEmotion = emotion;
 
 	},
 
@@ -149,225 +140,40 @@ const continentsSection = {
 		//		note: for zoomed-out continents, circles will already be centered, but that's ok.
 		unfocusContinents: function (emotions) {
 
+			let tgtContinents = continents.filter(continent => ~emotions.indexOf(continent.id));
+			let translate;
+			tgtContinents.forEach(continent => {
+
+				// TODO:
+				// 1. turn off spawning
+				// 2. shrink all circles down in a set amount of time...probably easiest to just shrink the container.
+				// 3. move circles toward center
+
+				// turn off spawning, in a way it can easily be turned back on
+				continent.spawnConfig.freq *= -1;
+
+
+				// TODO MONDAY
+				// continents should maintain position and scale as their own variable (state),
+				// and there should be only one place (within update())
+				// that sets the transform from those values.
+				// never even read from attr('transform'), just use those vals.
+				// then, set up RAF function that decreases continent.scale over time.
+
+				// scale down to nothing
+				// translate = /translate\((.*)\)/.exec(continent.d3Selection.attr('transform'));
+				translate = /translate\(([^\)]*)\)/.exec(continent.d3Selection.attr('transform'));
+				translate = translate ? translate[1].split(',') : [0, 0];
+				continent.d3Selection
+					.attr('transform', d3Transform()
+						.translate(translate[0], translate[1])
+						.scale(0, 0)
+					);
+
+
+			});
+
 		},
-
-	},
-
-	initContinentValues: function (w, h) {
-
-		// TODO: `Continent` should be a class, or at least have an object factory, to maintain state.
-		continents = [
-			{
-				id: dispatcher.EMOTIONS.ANGER,
-				name: 'anger',
-				x: 0.03 * w,
-				y: -0.20 * h,
-				label: {
-					x: 0.19 * w,
-					y: -0.13 * h
-				},
-				spawnConfig: Object.assign({}, baseSpawnConfig),	// mutable (lastSpawn)
-				colorPalette: [
-					[204, 28, 23],
-					[208, 46, 53],
-					[212, 65, 63],
-					[216, 83, 73],
-					[220, 102, 83],
-					[224, 120, 92],
-					[228, 135, 102]
-				],
-				circles: [],										// mutable
-				isHighlighted: false,								// mutable
-				d3Selection: null									// mutable
-			},
-			{
-				id: dispatcher.EMOTIONS.SADNESS,
-				name: 'sadness',
-				x: -0.22 * w,
-				y: -0.14 * h,
-				label: {
-					x: -0.24 * w,
-					y: -0.01 * h
-				},
-				spawnConfig: Object.assign({}, baseSpawnConfig),	// mutable (lastSpawn)
-				colorPalette: [
-					[65, 74, 161],
-					[54, 104, 178],
-					[49, 124, 189],
-					[44, 139, 200],
-					[51, 158, 211],
-					[85, 172, 217],
-					[146, 198, 229],
-					[174, 209, 234],
-					[195, 218, 238]
-				],
-				circles: [],										// mutable
-				isHighlighted: false,								// mutable
-				d3Selection: null									// mutable
-			},
-			{
-				id: dispatcher.EMOTIONS.FEAR,
-				name: 'fear',
-				x: -0.06 * w,
-				y: 0.07 * h,
-				label: {
-					x: -0.19 * w,
-					y: 0.10 * h
-				},
-				spawnConfig: Object.assign({}, baseSpawnConfig),	// mutable (lastSpawn)
-				colorPalette: [
-					[143, 39, 139],
-					[156, 41, 153],
-					[196, 49, 194],
-					[209, 51, 207],
-					[223, 53, 221],
-					[235, 56, 234],
-					[248, 58, 248]
-				],
-				circles: [],										// mutable
-				isHighlighted: false,								// mutable
-				d3Selection: null									// mutable
-			},
-			{
-				id: dispatcher.EMOTIONS.ENJOYMENT,
-				name: 'enjoyment',
-				x: -0.03 * w,
-				y: 0.22 * h,
-				label: {
-					x: -0.20 * w,
-					y: 0.15 * h
-				},
-				spawnConfig: Object.assign({}, baseSpawnConfig),	// mutable (lastSpawn)
-				colorPalette: [
-					[248, 136, 29],
-					[243, 143, 30],
-					[243, 136, 33],
-					[244, 149, 36],
-					[244, 153, 40],
-					[245, 156, 43],
-					[245, 159, 46],
-					[246, 162, 49],
-					[247, 169, 56],
-					[246, 166, 53],
-					[247, 172, 59]
-				],
-				circles: [],										// mutable
-				isHighlighted: false,								// mutable
-				d3Selection: null									// mutable
-			},
-			{
-				id: dispatcher.EMOTIONS.DISGUST,
-				name: 'disgust',
-				x: 0.19 * w,
-				y: 0.10 * h,
-				label: {
-					x: 0.01 * w,
-					y: 0.27 * h
-				},
-				spawnConfig: Object.assign({}, baseSpawnConfig),	// mutable (lastSpawn)
-				colorPalette: [
-					[0, 104, 55],
-					[0, 110, 57],
-					[0, 116, 59],
-					[0, 122, 61],
-					[0, 128, 63],
-					[0, 130, 65],
-					[0, 136, 67],
-					[0, 142, 69]
-				],
-				circles: [],										// mutable
-				isHighlighted: false,								// mutable
-				d3Selection: null									// mutable
-			}
-		],
-
-		continentTransforms = _.shuffle([
-			{
-				x: 0.03 * w,
-				y: -0.20 * h,
-				drift: {											// all mutable values
-					x: 0,
-					y: 0,
-					sinCtr: Math.random() * 2*Math.PI,
-					cosCtr: Math.random() * 2*Math.PI,
-					// dist: 0,
-					// ang: Math.random() * 2*Math.PI
-				},
-				label: {
-					x: 0.19 * w,
-					y: -0.13 * h
-				},
-				size: 0.24 * h
-			},
-			{
-				x: -0.22 * w,
-				y: -0.14 * h,
-				drift: {											// all mutable values
-					x: 0,
-					y: 0,
-					sinCtr: Math.random() * 2*Math.PI,
-					cosCtr: Math.random() * 2*Math.PI,
-					// dist: 0,
-					// ang: Math.random() * 2*Math.PI
-				},
-				label: {
-					x: -0.24 * w,
-					y: -0.01 * h
-				},
-				size: 0.23 * h
-			},
-			{
-				x: -0.06 * w,
-				y: 0.07 * h,
-				drift: {											// all mutable values
-					x: 0,
-					y: 0,
-					sinCtr: Math.random() * 2*Math.PI,
-					cosCtr: Math.random() * 2*Math.PI,
-					// dist: 0,
-					// ang: Math.random() * 2*Math.PI
-				},
-				label: {
-					x: -0.19 * w,
-					y: 0.10 * h
-				},
-				size: 0.18 * h
-			},
-			{
-				x: -0.03 * w,
-				y: 0.22 * h,
-				drift: {											// all mutable values
-					x: 0,
-					y: 0,
-					sinCtr: Math.random() * 2*Math.PI,
-					cosCtr: Math.random() * 2*Math.PI,
-					// dist: 0,
-					// ang: Math.random() * 2*Math.PI
-				},
-				label: {
-					x: -0.20 * w,
-					y: 0.15 * h
-				},
-				size: 0.22 * h
-			},
-			{
-				x: 0.19 * w,
-				y: 0.10 * h,
-				drift: {											// all mutable values
-					x: 0,
-					y: 0,
-					sinCtr: Math.random() * 2*Math.PI,
-					cosCtr: Math.random() * 2*Math.PI,
-					// dist: 0,
-					// ang: Math.random() * 2*Math.PI
-				},
-				label: {
-					x: 0.01 * w,
-					y: 0.27 * h
-				},
-				size: 0.24 * h
-			}
-		]);
 
 	},
 
@@ -396,67 +202,21 @@ const continentsSection = {
 
 		continents.forEach(function (continent, i) {
 			continent.d3Selection
-				.on('mouseenter', val ? section.onMouseEnter : null)
-				.on('mouseleave', val ? section.onMouseLeave : null)
-				.on('mouseup', val ? section.onMouseUp : null);
+				.on('mouseenter', val ? section.onContinentMouseEnter : null)
+				.on('mouseleave', val ? section.onContinentMouseLeave : null)
+				.on('mouseup', val ? section.onContinentMouseUp : null);
 		});
 
 	},
 
 	update: function () {
 
-		let newCircle,
-			circle,
-			someContinentIsHighlighted = continents.some(function (continent) { return continent.isHighlighted; }),
-			alphaMod,
-			speedMod;
+		let updateState = {
+			someContinentIsHighlighted: continents.some(function (continent) { return continent.isHighlighted; })
+		};
 
-		// Draw continents
-		continents.forEach(continent => {
+		continents.forEach(continent => continent.update(updateState));
 
-			// probabilistically spawn new Circles
-			newCircle = Circle.spawn(continent);
-			if (newCircle) {
-				continent.circles.push(newCircle);
-			}
-
-			// set alpha and speed based on interaction
-			if (!someContinentIsHighlighted) {
-				alphaMod = 1.0;
-				speedMod = 1.0;
-			} else {
-				alphaMod = continent.isHighlighted ? CONTINENT_HIGHLIGHT_ALPHA_MOD : CONTINENT_UNHIGHLIGHT_ALPHA_MOD;
-				speedMod = continent.isHighlighted ? CONTINENT_HIGHLIGHT_SPEED_MOD : CONTINENT_UNHIGHLIGHT_SPEED_MOD;
-			}
-
-			// apply drift
-			this.wander(continent.drift, 3);
-			continent.d3Selection
-				.attr('transform', d3Transform().translate(
-					[centerX + continent.x + continent.drift.x,
-					centerY + continent.y + continent.drift.y]));
-
-			for (let i=continent.circles.length-1; i>=0; i--) {
-				circle = continent.circles[i];
-				if (circle.isAlive()) {
-					circle.update(alphaMod, speedMod);
-				} else {
-					continent.circles.splice(i, 1);
-					circle.d3Selection.remove();
-				}
-			};
-
-			/*
-			if (continent.isHighlighted) {
-				p.stroke(255, 255, 255);
-				p.strokeWeight(2);
-				p.noFill();
-				p.ellipse(0, 0, continent.size, continent.size);
-			}
-			*/
-
-		});
-		
 		frameCount++;
 		if (this.isActive) {
 			window.requestAnimationFrame(this.update);
@@ -464,7 +224,7 @@ const continentsSection = {
 
 	},
 
-	onMouseEnter: function () {
+	onContinentMouseEnter: function () {
 
 		let continent = d3.select(this).datum();
 		if (continent) {
@@ -475,7 +235,7 @@ const continentsSection = {
 
 	},
 
-	onMouseLeave: function () {
+	onContinentMouseLeave: function () {
 
 		let continent = d3.select(this).datum();
 		if (continent) {
@@ -484,7 +244,7 @@ const continentsSection = {
 
 	},
 
-	onMouseUp: function (event) {
+	onContinentMouseUp: function (event) {
 
 		continents.some(function (continent) {
 			if (continent.isHighlighted) {
@@ -493,10 +253,241 @@ const continentsSection = {
 			}
 		});
 
-	},
+	}
+
+};
+
+
+class Continent {
+
+	static FRAMERATE = 60;
+	static HIGHLIGHT_ALPHA_MOD = 1.5;
+	static UNHIGHLIGHT_ALPHA_MOD = 0.3;
+	static HIGHLIGHT_SPEED_MOD = 2.0;
+	static UNHIGHLIGHT_SPEED_MOD = 0.5;
+
+	static configsByEmotion = {
+		'anger': {
+			colorPalette: [
+				[204, 28, 23],
+				[208, 46, 53],
+				[212, 65, 63],
+				[216, 83, 73],
+				[220, 102, 83],
+				[224, 120, 92],
+				[228, 135, 102]
+			]
+		},
+		'disgust': {
+			colorPalette: [
+				[0, 104, 55],
+				[0, 110, 57],
+				[0, 116, 59],
+				[0, 122, 61],
+				[0, 128, 63],
+				[0, 130, 65],
+				[0, 136, 67],
+				[0, 142, 69]
+			]
+		},
+		'enjoyment': {
+			colorPalette: [
+				[248, 136, 29],
+				[243, 143, 30],
+				[243, 136, 33],
+				[244, 149, 36],
+				[244, 153, 40],
+				[245, 156, 43],
+				[245, 159, 46],
+				[246, 162, 49],
+				[247, 169, 56],
+				[246, 166, 53],
+				[247, 172, 59]
+			]
+		},
+		'fear': {
+			colorPalette: [
+				[143, 39, 139],
+				[156, 41, 153],
+				[196, 49, 194],
+				[209, 51, 207],
+				[223, 53, 221],
+				[235, 56, 234],
+				[248, 58, 248]
+			]
+		},
+		'sadness': {
+			colorPalette: [
+				[65, 74, 161],
+				[54, 104, 178],
+				[49, 124, 189],
+				[44, 139, 200],
+				[51, 158, 211],
+				[85, 172, 217],
+				[146, 198, 229],
+				[174, 209, 234],
+				[195, 218, 238]
+			]
+		}
+	};
+
+	static transforms;
+	static initTransforms (w, h) {
+
+		Continent.transforms = _.shuffle([
+			{
+				x: 0.03 * w,
+				y: -0.20 * h,
+				label: {
+					x: 0.19 * w,
+					y: -0.13 * h
+				},
+				size: 0.24 * h
+			},
+			{
+				x: -0.22 * w,
+				y: -0.14 * h,
+				label: {
+					x: -0.24 * w,
+					y: -0.01 * h
+				},
+				size: 0.23 * h
+			},
+			{
+				x: -0.06 * w,
+				y: 0.07 * h,
+				label: {
+					x: -0.19 * w,
+					y: 0.10 * h
+				},
+				size: 0.18 * h
+			},
+			{
+				x: -0.03 * w,
+				y: 0.22 * h,
+				label: {
+					x: -0.20 * w,
+					y: 0.15 * h
+				},
+				size: 0.22 * h
+			},
+			{
+				x: 0.19 * w,
+				y: 0.10 * h,
+				label: {
+					x: 0.01 * w,
+					y: 0.27 * h
+				},
+				size: 0.24 * h
+			}
+		]);
+	}
+
+	constructor (emotion, w, h, container) {
+
+		if (!Continent.transforms) {
+			Continent.initTransforms(w, h);
+		}
+
+		this.initInstanceProperties(emotion, container);
+
+	}
+
+	initInstanceProperties (emotion, container) {
+
+		let emotionIndex = Object.keys(Continent.configsByEmotion).indexOf(emotion);
+		if (emotionIndex === -1) {
+			throw new Error('Invalid emotion "' + emotion + '" for continent.');
+		}
+
+		this.id = emotion,
+		this.name = emotion.toUpperCase(),
+		this.colorPalette = Continent.configsByEmotion[emotion].colorPalette.concat();
+
+		this.spawnConfig = {
+			lastSpawn: 0,
+			minDelay: 2 * Continent.FRAMERATE,
+			freq: 0.015
+		};
+
+		this.drift = {
+			x: 0,
+			y: 0,
+			sinCtr: Math.random() * 2*Math.PI,
+			cosCtr: Math.random() * 2*Math.PI
+		};
+
+		// copy transforms onto this Continent instance
+		Object.assign(this, Continent.transforms[emotionIndex]);
+
+		this.circles = [];
+		this.isHighlighted = false;
+
+		this.d3Selection = container.append('g')
+			.classed('continent ' + this.id, true)
+			.datum(this);
+
+	}
+
+	update (state) {
+
+		let newCircle,
+			circle,
+			alphaMod,
+			speedMod,
+			scale;
+
+		// probabilistically spawn new Circles
+		newCircle = Circle.spawn(this);
+		if (newCircle) {
+			this.circles.push(newCircle);
+		}
+
+		// set alpha and speed based on interaction
+		if (!state.someContinentIsHighlighted) {
+			alphaMod = 1.0;
+			speedMod = 1.0;
+		} else {
+			alphaMod = this.isHighlighted ? Continent.HIGHLIGHT_ALPHA_MOD : Continent.UNHIGHLIGHT_ALPHA_MOD;
+			speedMod = this.isHighlighted ? Continent.HIGHLIGHT_SPEED_MOD : Continent.UNHIGHLIGHT_SPEED_MOD;
+		}
+
+		// apply drift
+		this.wander(this.drift, 3);
+		scale = /scale\((.*)\)/.exec(this.d3Selection.attr('transform'));
+		scale = scale ? scale[1].split(',') : [1.0, 1.0];
+		this.d3Selection
+			.attr('transform', d3Transform()
+				.translate(
+					centerX + this.x + this.drift.x,
+					centerY + this.y + this.drift.y)
+				.scale(scale[0], scale[1])
+			);
+
+		for (let i=this.circles.length-1; i>=0; i--) {
+			circle = this.circles[i];
+			if (circle.isAlive()) {
+				circle.update(alphaMod, speedMod);
+			} else {
+				this.circles.splice(i, 1);
+				circle.d3Selection.remove();
+			}
+		};
+
+	}
+
+	// Randomized sinusoidal motion
+	wander (drift, maxDist) {
+
+		drift.sinCtr += 0.01 + Math.random() * 0.03;
+		drift.cosCtr += 0.01 + Math.random() * 0.03;
+		drift.x = Math.cos(drift.cosCtr) * maxDist;
+		drift.y = Math.sin(drift.sinCtr) * maxDist;
+
+	}
 
 	// Random walk
-	meander: function (drift, maxDist) {
+	meander (drift, maxDist) {
 
 		let maxSpeed = 2 * 0.01 * maxDist;
 		let maxTurn = 2 * 0.002 * Math.PI;
@@ -517,19 +508,10 @@ const continentsSection = {
 			drift.ang += 0.1 * (angToCenter - drift.ang);
 		}
 
-	},
-
-	// Randomized sinusoidal motion
-	wander: function (drift, maxDist) {
-
-		drift.sinCtr += 0.01 + Math.random() * 0.03;
-		drift.cosCtr += 0.01 + Math.random() * 0.03;
-		drift.x = Math.cos(drift.cosCtr) * maxDist;
-		drift.y = Math.sin(drift.sinCtr) * maxDist;
-
 	}
 
-};
+
+}
 
 
 
