@@ -1,0 +1,87 @@
+import d3 from 'd3';
+
+const STROKE_WIDTH_MIN = 0.4,
+	STROKE_WIDTH_VAR = 1.2,
+	SIZE_MOD = 1 / (1 + 0.5 * (STROKE_WIDTH_MIN + STROKE_WIDTH_VAR)),
+	BASE_ALPHA = 0.4,
+	BASE_SPEED = 0.05;
+
+export default class Circle {
+
+	// Note: continent.spawnConfig.lastSpawn is mutated by this function
+	static spawn (continent, frameCount) {
+
+		if (frameCount - continent.spawnConfig.lastSpawn > continent.spawnConfig.minDelay) {
+			if (Math.random() < continent.spawnConfig.freq) {
+				continent.spawnConfig.lastSpawn = frameCount;
+				return new Circle(continent.d3Selection, continent.colorPalette, continent.size);
+			} else {
+				return null;
+			}
+		}
+
+	}
+
+	constructor (container, colorPalette, size) {
+
+		// Scale `size` down to account for stroke weight,
+		// to keep all stroked ellipses within `size`.
+		this.size = size * SIZE_MOD;
+
+		this.radius = 0;
+		this.rSpeed = Math.random() * 0.2;
+		this.initSpeed = this.rSpeed;
+		this.weight = Math.round(0.4*size + Math.random() * 1.2*size);
+		this.alpha = BASE_ALPHA;
+
+		this.color = colorPalette[Math.floor(Math.random() * colorPalette.length)].join(',');
+
+		this.d3Selection = container.append('circle')
+			.attr('cx', 0)
+			.attr('cy', 0)
+			.attr('r', this.radius)
+			.style('stroke', 'rgba(' + this.color + ',' + this.alpha + ')');
+
+	}
+
+	update (alphaMod, speedMod) {
+		this.draw(alphaMod);
+		this.grow(speedMod);
+	};
+
+	draw (alphaMod) {
+
+		// limit stroke to edge of circle
+		let sw = Math.min(this.weight, (this.size + 0.5*this.weight - this.radius));
+
+		this.d3Selection
+			.attr('r', this.radius)
+			.style({
+				'stroke-width': sw,
+				'stroke': 'rgba(' + this.color + ',' + this.alpha * alphaMod + ')'
+			});
+
+	};
+
+	// Note: there is no "age", everything that changes is calculated off of this.radius.
+	grow (speedMod) {
+		// stroke is centered on this.radius
+		let maxRad = this.size + 0.5*this.weight;
+
+		// taper off speed as radius approaches maxRad
+		this.rSpeed = BASE_SPEED + Math.pow((1 - this.radius / maxRad), 0.5) * this.initSpeed;
+		this.rSpeed *= speedMod;
+
+		this.radius += this.rSpeed;
+
+		// fade out once radius hits outside edge
+		if (this.radius > this.size) {
+			this.alpha = Math.max(0, BASE_ALPHA * (maxRad - this.radius) / (0.5 * this.weight));
+		}
+	};
+
+	isAlive () {
+		return this.alpha > 0.01;
+	};
+
+};
