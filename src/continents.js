@@ -114,7 +114,7 @@ const continentsSection = {
 			// transitions.spreadFocusedContinent()
 			// 2d. while 2a-c happens, execute (currentEmotion):2b-c above.
 
-			let targetScale;
+			let targetScale = 1.0;
 
 			this.transitions.unfocusContinents(continents
 				.filter(continent => continent.id !== emotion)
@@ -233,7 +233,7 @@ const continentsSection = {
 			this.addTween(targetCenter, {
 				'x': targetX,
 				'y': targetY
-			}, 1500, TWEEN.Easing.Quadratic.InOut)
+			}, 1250, TWEEN.Easing.Quadratic.InOut)
 			.onUpdate(function () {
 				continents.forEach(continent => {
 					continent.centerX = this.x;

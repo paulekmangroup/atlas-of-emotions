@@ -1,10 +1,10 @@
 #continents {
 	position: absolute;
 	width: 100%;
-	height: 80%;
+	height: calc(90% - #{$header-height});
 	min-height: 600px;
 
-	bottom: 10%;
+	bottom: calc(10% - #{$header-height});
 	left: 50%;
 	margin-left: -50%;
 

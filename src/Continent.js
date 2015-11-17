@@ -198,36 +198,41 @@ export default class Continent {
 			speedMod,
 			scale;
 
-		// probabilistically spawn new Circles
-		newCircle = Circle.spawn(this, frameCount);
-		if (newCircle) {
-			this.circles.push(newCircle);
-		}
-
-		// set alpha and speed based on interaction
-		if (!state.someContinentIsHighlighted) {
-			alphaMod = 1.0;
-			speedMod = 1.0;
-		} else {
-			alphaMod = this.isHighlighted ? HIGHLIGHT_ALPHA_MOD : UNHIGHLIGHT_ALPHA_MOD;
-			speedMod = this.isHighlighted ? HIGHLIGHT_SPEED_MOD : UNHIGHLIGHT_SPEED_MOD;
-		}
-
 		if (!this.isFocused) {
+
+			// probabilistically spawn new Circles
+			newCircle = Circle.spawn(this, frameCount);
+			if (newCircle) {
+				this.circles.push(newCircle);
+			}
+
+			// set alpha and speed based on interaction
+			if (!state.someContinentIsHighlighted) {
+				alphaMod = 1.0;
+				speedMod = 1.0;
+			} else {
+				alphaMod = this.isHighlighted ? HIGHLIGHT_ALPHA_MOD : UNHIGHLIGHT_ALPHA_MOD;
+				speedMod = this.isHighlighted ? HIGHLIGHT_SPEED_MOD : UNHIGHLIGHT_SPEED_MOD;
+			}
 
 			// apply drift
 			this.wander(this.drift, 3);
-			this.d3Selection
-				.attr('transform', d3Transform()
-					.translate(
-						this.centerX + this.x + this.drift.x,
-						this.centerY + this.y + this.drift.y
-					)
-					.scale(
-						this.scaleX,
-						this.scaleY
-					)
-				);
+
+		}
+
+		this.d3Selection
+			.attr('transform', d3Transform()
+				.translate(
+					this.centerX + this.x + this.drift.x,
+					this.centerY + this.y + this.drift.y
+				)
+				.scale(
+					this.scaleX,
+					this.scaleY
+				)
+			);
+
+		if (!this.isFocused) {
 
 			// update circles
 			for (let i=this.circles.length-1; i>=0; i--) {
@@ -283,7 +288,7 @@ export default class Continent {
 			},
 			innerWidth = (container.offsetWidth - margin.left - margin.right) / containerScale,
 			innerHeight = (container.offsetHeight - margin.top - margin.bottom) / containerScale,
-			maxRange = Math.min(2 * innerHeight, innerWidth),
+			maxRange = Math.min(1.5 * innerHeight, 0.75 * innerWidth),
 			xScale = d3.scale.linear()
 				.domain([0, 10])
 				.range([-0.5 * maxRange, 0.5 * maxRange]),
@@ -291,8 +296,8 @@ export default class Continent {
 				.domain([0, 10])
 				.range([0, 0.5 * maxRange]);	// don't scale to entire width, because will probably exceed height.
 
-		const growTime = 1000,
-			shrinkTime = 600;
+		const growTime = 1500,
+			shrinkTime = 750;
 
 		let ranges = this.transformRanges(_.values(emotionsData.emotions[this.id].states)),
 			circles = this.d3Selection.selectAll('circle')
@@ -310,11 +315,6 @@ export default class Continent {
 			.attr('cy', 0)
 			.attr('r', 0)
 			.each(function () {
-				/*
-				let scale = /scale\((.*),/.exec(continent.d3Selection.attr('scale'));
-				scale = scale ? parseFloat(scale[1]) : 1.0;
-				let strokeProps = Circle.getStrokeProps(Continent.configsByEmotion[continent.id].colorPalette, continent.size * scale);
-				*/
 				let strokeProps = Circle.getStrokeProps(Continent.configsByEmotion[continent.id].colorPalette, continent.size);
 				let selection = d3.select(this);
 				selection.style('stroke', strokeProps.stroke);
