@@ -277,24 +277,22 @@ export default class Continent {
 		this.isFocused = true;
 		let continent = this;
 
-		// 
 		// d3 conventional margins
-		// 
 		let margin = {
 				top: 20,
 				right: 20,
 				bottom: 50,
 				left: 20
 			},
-			innerWidth = (container.offsetWidth - margin.left - margin.right) / containerScale,
+			statesGraphWidth = 0.7,		// from _variables.scss
+			innerWidth = statesGraphWidth * (container.offsetWidth - margin.left - margin.right) / containerScale,
 			innerHeight = (container.offsetHeight - margin.top - margin.bottom) / containerScale,
-			maxRange = Math.min(1.5 * innerHeight, 0.75 * innerWidth),
 			xScale = d3.scale.linear()
 				.domain([0, 10])
-				.range([-0.5 * maxRange, 0.5 * maxRange]),
+				.range([-0.5 * innerWidth, 0.5 * innerWidth]),
 			rScale = d3.scale.linear()
 				.domain([0, 10])
-				.range([0, 0.5 * maxRange]);	// don't scale to entire width, because will probably exceed height.
+				.range([0, 0.5 * innerWidth]);	// don't scale to entire width, because will probably exceed height.
 
 		const growTime = 1500,
 			shrinkTime = 750;
@@ -303,23 +301,47 @@ export default class Continent {
 			circles = this.d3Selection.selectAll('circle')
 				.data(ranges);
 
+		console.log(">>>>> ranges:", ranges);
+
+		let applyStrokeAsTransition = true;
+		let setStrokeProps = function (d, i) {
+			let strokeProps = Circle.getStrokeProps(Continent.configsByEmotion[continent.id].colorPalette, continent.size),
+				selection = d3.select(this),
+				sw = strokeProps.sw;
+
+			// clamp stroke width to avoid clipping at edges of svg container
+			if (rScale(d.r) + 0.5 * strokeProps.sw > innerHeight) {
+				sw = 0.5 * (innerHeight - rScale(d.r));
+			}
+
+			if (applyStrokeAsTransition) {
+				// used for update selection
+				selection.transition()
+					.duration(growTime)
+					.style('stroke', strokeProps.stroke)
+					.style('stroke-width', sw);
+			} else {
+				// used to init elements appended in enter selection
+				selection
+					.style('stroke', strokeProps.stroke)
+					.style('stroke-width', sw);
+			}
+		};
+
 		// Move existing circles to positions and sizes corresponding to states
 		circles.transition()
 			.duration(growTime)
 			.attr('cx', d => xScale(d.cx))
-			.attr('r', d => rScale(d.r));
+			.attr('r', d => rScale(d.r))
+			.each(setStrokeProps);
 
 		// Add new circles as needed, and fade/grow them in at positions and sizes corresponding to states
+		applyStrokeAsTransition = false;
 		circles.enter().append('circle')
 			.attr('cx', 0)
 			.attr('cy', 0)
 			.attr('r', 0)
-			.each(function () {
-				let strokeProps = Circle.getStrokeProps(Continent.configsByEmotion[continent.id].colorPalette, continent.size);
-				let selection = d3.select(this);
-				selection.style('stroke', strokeProps.stroke);
-				selection.style('stroke-width', strokeProps.sw);
-			})
+			.each(setStrokeProps)
 		.transition()
 			.duration(growTime)
 			.attr('cx', d => xScale(d.cx))
@@ -331,7 +353,7 @@ export default class Continent {
 			.attr('opacity', 0.0)
 			.attr('transform', d3Transform().scale(0, 0));
 
-		// TODO: hook into transition complete and:
+		// TODO: hook into transition complete (.each(.on('end', fn))) and:
 		// - update this.circles with newly-created circles, or don't?
 		// - allow circles to drift?
 		// - set this.isFocused = false?
