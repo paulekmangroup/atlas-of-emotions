@@ -89,6 +89,10 @@ export default {
 
 		this.transitions = this.setUpTransitions();
 
+		this.onStateMouseOver = this.onStateMouseOver.bind(this);
+		this.onStateMouseOut = this.onStateMouseOut.bind(this);
+		this.onStateClick = this.onStateClick.bind(this);
+
 		//
 		// Draw graph
 		// 
@@ -118,31 +122,22 @@ export default {
 
 	renderLabels: function (statesData, ranges) {
 
-		let labels = d3.select(this.labelContainer).selectAll('div')
+		let stateDisplay = this,
+			labels = d3.select(this.labelContainer).selectAll('div')
 			.data(ranges);
 
 		labels.enter().append('div')
+			.classed(this.currentEmotion + ' label', true)
 			.html((d, i) => '<h3>' + statesData[i].name.toUpperCase() + '</h3>')
-			.style(d => ({
-				left: this.xScale(d.x),
-				top: this.yScale(d.y)
-			}));
-
-		/*
-		for (let stateName in statesData) {
-
-			let label = document.createElement('div');
-			label.innerHTML = '<h3>' + stateName.toUpperCase() + '</h3>';
-			label.style.left = Math.round(centerX + continent.x + continent.label.x) + 'px';
-			label.style.top = Math.round(centerY + continent.y + continent.label.y) + 'px';
-			this.labelContainer.appendChild(label);
-
-				.x(d => xScale(d.x))
-				.y0(innerHeight)
-				.y1(d => yScale(d.y))
-
-		};
-		*/
+			.style({
+				left: d => (Math.round(stateDisplay.xScale(d[1].x) - 10) + 'px'),
+				top: d => (Math.round(stateDisplay.yScale(d[1].y) - 100) + 'px')
+			})
+			.each(function () {
+				setTimeout(() => {
+					this.classList.add('visible');
+				}, 1000);
+			});
 
 	},
 
@@ -237,13 +232,14 @@ export default {
 		/**
 		 * out -> [
 		 *	{ x: a, y: 0 },
-		 *	{ x: a + (b-a)/2 + random offset, y: (b-a)/2 },
+		 *	{ x: a + (b-a)/2 + offset, y: (b-a)/2 },
 		 *	{ x: b, y: 0 },
 		 * ]
 		 */
 		anger: function (states, strengthMod) {
 			
 			let numStates = states.length;
+			let lastX = -Number.INFINITY;
 			return states.map((state, i) => {
 
 				let points = [],
@@ -251,21 +247,34 @@ export default {
 															// states with same min and max to display
 					max = state.range.max,
 					spread = max - min,
-					offsetBase = 0.5 * (i / numStates);		// offsets skew left of center toward left edge
-															// of graph, right of center toward right
+					centerX = min + 0.5 * spread,
+					overlapsLast = Math.abs(centerX - lastX) < 0.05,
+					offsetBase,
+					yOverlapOffset = overlapsLast ? (i / numStates) : 0;
+
+				// Offsets skew left of center toward left edge
+				// of graph, right of center toward right.
+				// Also, if two states have the same peak, push them apart.
+				if (overlapsLast) {
+					offsetBase = 0.5 * ((i+2) / numStates);
+				} else {
+					offsetBase = 0.5 * (i / numStates);
+				}
 
 				points.push({
 					x: min,
 					y: 0
 				});
 				points.push({
-					x: min + spread * (offsetBase + 0.5 * Math.random()),
-					y: strengthMod * (min + 0.5 * spread)
+					x: min + spread * (offsetBase + 0.05),
+					y: strengthMod * (min + 0.5 * spread + yOverlapOffset)
 				});
 				points.push({
 					x: max,
 					y: 0
 				});
+
+				lastX = centerX;
 
 				return points;
 
@@ -282,7 +291,16 @@ export default {
 		 */
 		sadness: function (states, strengthMod) {
 
-			return this.anger(states, strengthMod);
+			// amplify height a bit to counter shortness caused by interpolation
+			let points = this.anger(states, strengthMod * 1.25);
+
+			// manual tweaks for overlapping values
+			points[3][1].x += 0.1;
+			points[3][1].y += 0.2;
+			points[8][1].x += 0.2;
+			points[8][1].y += 0.3;
+
+			return points;
 
 		}
 
@@ -442,6 +460,9 @@ export default {
 		d3.selectAll('path.area')
 			.style('opacity', (d, i) => i === index ? 1.0 : 0.2);
 
+		d3.select(this.labelContainer).selectAll('div h3')
+			.style('opacity', (d, i) => i === index ? 1.0 : 0.2);
+
 		// .selectAll('linearGradient')
 		// TODO: set stops with higher/lower opacity on #anger-gradient-{i}
 
@@ -450,6 +471,9 @@ export default {
 	onStateMouseOut: function (d, i) {
 
 		d3.selectAll('path.area')
+			.style('opacity', null);
+
+		d3.select(this.labelContainer).selectAll('div h3')
 			.style('opacity', null);
 
 	},

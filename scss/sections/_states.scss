@@ -11,15 +11,23 @@
 	text-align: center;
 }
 
-#state-graph-container {
+#state-graph-container,
+#state-labels {
 	position: absolute;
-	width: $states-graph-width;
-	height: 60%;
 	bottom: 10%;
 	left: 50%;
 	margin-left: -$states-graph-width/2;
 	min-height: 400px;
+}
+#state-graph-container {
+	width: $states-graph-width;
+	height: 60%;
+}
+#state-labels {
+	top: 30%;
+}
 
+#state-graph-container {
 	.axis {
 		line,
 		path {
@@ -46,12 +54,10 @@
 }
 
 #state-labels {
-	position: absolute;
-	top: 0px;
-
 	div {
 		position: absolute;
-		text-align: center;
+		width: 10em;
+		height: 3em;
 
 		opacity: 0.0;
 		-webkit-transition: opacity 2s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -60,5 +66,18 @@
 		&.visible {
 			opacity: 1.0;
 		}
+
+		h3 {
+			margin-left: -75%;
+		}
 	}
+
+	.label {
+		&.anger { color: $label-color-anger; }
+		&.disgust { color: $label-color-disgust; }
+		&.enjoyment { color: $label-color-enjoyment; }
+		&.fear { color: $label-color-fear; }
+		&.sadness { color: $label-color-sadness; }
+	}
+
 }
