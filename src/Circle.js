@@ -3,10 +3,11 @@ import d3 from 'd3';
 const STROKE_WIDTH_MIN = 0.4,
 	STROKE_WIDTH_VAR = 1.2,
 	SIZE_MOD = 1 / (1 + 0.5 * (STROKE_WIDTH_MIN + STROKE_WIDTH_VAR)),
-	BASE_ALPHA = 0.4,
 	BASE_SPEED = 0.05;
 
 export default class Circle {
+
+	static BASE_ALPHA = 0.4;
 
 	// Note: continent.spawnConfig.lastSpawn is mutated by this function
 	static spawn (continent, frameCount) {
@@ -29,7 +30,7 @@ export default class Circle {
 	static getStrokeProps (colorPalette, size) {
 
 		let color = colorPalette[Math.floor(Math.random() * colorPalette.length)].join(','),
-			alpha = BASE_ALPHA,
+			alpha = Circle.BASE_ALPHA,
 			weight = Math.round(0.4*size*SIZE_MOD + Math.random() * 1.2*size*SIZE_MOD);
 
 		return {
@@ -49,7 +50,7 @@ export default class Circle {
 		this.rSpeed = Math.random() * 0.2;
 		this.initSpeed = this.rSpeed;
 		this.weight = Math.round(0.4*size + Math.random() * 1.2*size);
-		this.alpha = BASE_ALPHA;
+		this.alpha = Circle.BASE_ALPHA;
 
 		this.color = colorPalette[Math.floor(Math.random() * colorPalette.length)].join(',');
 
@@ -57,14 +58,17 @@ export default class Circle {
 			.attr('cx', 0)
 			.attr('cy', 0)
 			.attr('r', this.radius)
-			.style('stroke', 'rgba(' + this.color + ',' + this.alpha + ')');
+			.attr('stroke', 'rgb(' + this.color + ')')
+			.attr('stroke-opacity', this.alpha);
+			// .attr('stroke', 'rgba(' + this.color + ',' + this.alpha + ')');
+			// .style('stroke', 'rgba(' + this.color + ',' + this.alpha + ')');
 
 	}
 
 	update (alphaMod, speedMod) {
 		this.draw(alphaMod);
 		this.grow(speedMod);
-	};
+	}
 
 	draw (alphaMod) {
 
@@ -73,12 +77,18 @@ export default class Circle {
 
 		this.d3Selection
 			.attr('r', this.radius)
+			.attr('stroke-width', sw)
+			.attr('stroke', 'rgb(' + this.color + ')')
+			.attr('stroke-opacity', this.alpha * alphaMod);
+			// .attr('stroke', 'rgba(' + this.color + ',' + this.alpha * alphaMod + ')');
+			/*
 			.style({
 				'stroke-width': sw,
 				'stroke': 'rgba(' + this.color + ',' + this.alpha * alphaMod + ')'
 			});
+			*/
 
-	};
+	}
 
 	// Note: there is no "age", everything that changes is calculated off of this.radius.
 	grow (speedMod) {
@@ -93,12 +103,12 @@ export default class Circle {
 
 		// fade out once radius hits outside edge
 		if (this.radius > this.size) {
-			this.alpha = Math.max(0, BASE_ALPHA * (maxRad - this.radius) / (0.5 * this.weight));
+			this.alpha = Math.max(0, Circle.BASE_ALPHA * (maxRad - this.radius) / (0.5 * this.weight));
 		}
-	};
+	}
 
 	isAlive () {
 		return this.alpha > 0.01;
-	};
+	}
 
 };

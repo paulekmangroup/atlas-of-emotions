@@ -292,7 +292,7 @@ export default class Continent {
 				.range([-0.5 * innerWidth, 0.5 * innerWidth]),
 			rScale = d3.scale.linear()
 				.domain([0, 10])
-				.range([0, 0.5 * innerWidth]);	// don't scale to entire width, because will probably exceed height.
+				.range([0, 0.5 * innerWidth]);
 
 		const growTime = 1500,
 			shrinkTime = 750;
@@ -301,31 +301,10 @@ export default class Continent {
 			circles = this.d3Selection.selectAll('circle')
 				.data(ranges);
 
-		console.log(">>>>> ranges:", ranges);
-
-		let applyStrokeAsTransition = true;
-		let setStrokeProps = function (d, i) {
-			let strokeProps = Circle.getStrokeProps(Continent.configsByEmotion[continent.id].colorPalette, continent.size),
-				selection = d3.select(this),
-				sw = strokeProps.sw;
-
-			// clamp stroke width to avoid clipping at edges of svg container
-			if (rScale(d.r) + 0.5 * strokeProps.sw > innerHeight) {
-				sw = 0.5 * (innerHeight - rScale(d.r));
-			}
-
-			if (applyStrokeAsTransition) {
-				// used for update selection
-				selection.transition()
-					.duration(growTime)
-					.style('stroke', strokeProps.stroke)
-					.style('stroke-width', sw);
-			} else {
-				// used to init elements appended in enter selection
-				selection
-					.style('stroke', strokeProps.stroke)
-					.style('stroke-width', sw);
-			}
+		let calcStrokeColor = function (d, i) {
+			let colorPalette = Continent.configsByEmotion[continent.id].colorPalette,
+				color = colorPalette[Math.floor(Math.random() * colorPalette.length)].join(',');
+			return 'rgb(' + color + ')';
 		};
 
 		// Move existing circles to positions and sizes corresponding to states
@@ -333,15 +312,18 @@ export default class Continent {
 			.duration(growTime)
 			.attr('cx', d => xScale(d.cx))
 			.attr('r', d => rScale(d.r))
-			.each(setStrokeProps);
+			.attr('stroke', calcStrokeColor)
+			.attr('stroke-opacity', Circle.BASE_ALPHA)
+			.attr('stroke-width', d => rScale(d.strokeWidth));
 
 		// Add new circles as needed, and fade/grow them in at positions and sizes corresponding to states
-		applyStrokeAsTransition = false;
 		circles.enter().append('circle')
 			.attr('cx', 0)
 			.attr('cy', 0)
 			.attr('r', 0)
-			.each(setStrokeProps)
+			.attr('stroke', calcStrokeColor)
+			.attr('stroke-opacity', Circle.BASE_ALPHA)
+			.attr('stroke-width', d => rScale(d.strokeWidth))
 		.transition()
 			.duration(growTime)
 			.attr('cx', d => xScale(d.cx))
@@ -363,12 +345,14 @@ export default class Continent {
 	}
 
 	/**
-	 * TODO: DRY this out. Copied from states.js.
-	 * Might be good to have a central place to parse and manipulate emotion data,
-	 * to generate ranges / points / etc.
+	 * Map emotion ranges into circles of varying stroke widths,
+	 * but with locations and sizes matching corresponding state graph.
 	 */
 	transformRanges (states, emotion, strengthMod=1.0) {
 
+		// TODO: DRY this out. Copied from states.js.
+		// Should have a central place to parse emotion data, rather than
+		// pulling straight from json and manipulating everywhere it's used.
 		// sort by state min value, then max value
 		states = states.sort((a, b) => {
 			if (a.range.min < b.range.min) {
@@ -384,17 +368,19 @@ export default class Continent {
 			}
 			return 0;
 		});
-			
+		
 		let numStates = states.length;
 		return states.map((state, i) => {
 
 			let max = state.range.max,
 				min = state.range.min - 1,
-				r = 0.5 * (max - min);
+				r = 0.5 * (max - min),
+				strokeWidth = (0.4 + 0.5 * Math.random()) * r;
 
 			return {
 				cx: min + r,
-				r: r
+				strokeWidth: strokeWidth,
+				r: r - 0.5 * strokeWidth
 			};
 
 		});
