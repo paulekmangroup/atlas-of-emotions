@@ -12,8 +12,10 @@ export default {
 		'enjoyment'
 	],
 
+	labelContainer: null,
 	stateGraphContainer: null,
 	xScale: null,
+	yScale: null,
 
 	areaGenerators: null,
 	transitions: null,
@@ -26,10 +28,14 @@ export default {
 		document.addEventListener('keydown', this.onKeyDown);
 
 		// size main container to viewport
-		let headerHeight = 55;	// from _variables.scss
-		containerNode.style.height = (window.innerHeight - headerHeight) + 'px';
+		// let headerHeight = 55;	// from _variables.scss
+		// containerNode.style.height = (window.innerHeight - headerHeight) + 'px';
 
-		let statesContainer = document.getElementById('states');
+		let graphContainer = document.createElement('div');
+		graphContainer.id = 'state-graph-container';
+		containerNode.appendChild(graphContainer);
+
+		this.initLabels(containerNode);
 
 		// 
 		// d3 conventional margins
@@ -41,12 +47,12 @@ export default {
 			left: 20
 		};
 
-		let innerWidth = statesContainer.offsetWidth - margin.left - margin.right;
-		let innerHeight = statesContainer.offsetHeight - margin.top - margin.bottom;
+		let innerWidth = graphContainer.offsetWidth - margin.left - margin.right;
+		let innerHeight = graphContainer.offsetHeight - margin.top - margin.bottom;
 
-		let svg = d3.select(statesContainer).append('svg')
-			.attr('width', statesContainer.offsetWidth)
-			.attr('height', statesContainer.offsetHeight);
+		let svg = d3.select(graphContainer).append('svg')
+			.attr('width', graphContainer.offsetWidth)
+			.attr('height', graphContainer.offsetHeight);
 
 		this.stateGraphContainer = svg.append('g')
 			.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
@@ -58,7 +64,7 @@ export default {
 			.domain([0, 10])
 			.range([0, innerWidth]);
 
-		let yScale = d3.scale.linear()
+		this.yScale = d3.scale.linear()
 			.domain([0, 10])
 			.range([innerHeight, 0]);
 
@@ -77,9 +83,9 @@ export default {
 			.orient('bottom')
 			.tickSize(25);
 
-		this.setUpDefs(svg.append('defs'), this.xScale, yScale);
+		this.setUpDefs(svg.append('defs'), this.xScale, this.yScale);
 
-		this.areaGenerators = this.setUpAreaGenerators(innerHeight, this.xScale, yScale);
+		this.areaGenerators = this.setUpAreaGenerators(innerHeight, this.xScale, this.yScale);
 
 		this.transitions = this.setUpTransitions();
 
@@ -102,6 +108,44 @@ export default {
 
 	},
 
+	initLabels: function (containerNode) {
+
+		this.labelContainer = document.createElement('div');
+		this.labelContainer.id = 'state-labels';
+		containerNode.appendChild(this.labelContainer);
+
+	},
+
+	renderLabels: function (statesData, ranges) {
+
+		let labels = d3.select(this.labelContainer).selectAll('div')
+			.data(ranges);
+
+		labels.enter().append('div')
+			.html((d, i) => '<h3>' + statesData[i].name.toUpperCase() + '</h3>')
+			.style(d => ({
+				left: this.xScale(d.x),
+				top: this.yScale(d.y)
+			}));
+
+		/*
+		for (let stateName in statesData) {
+
+			let label = document.createElement('div');
+			label.innerHTML = '<h3>' + stateName.toUpperCase() + '</h3>';
+			label.style.left = Math.round(centerX + continent.x + continent.label.x) + 'px';
+			label.style.top = Math.round(centerY + continent.y + continent.label.y) + 'px';
+			this.labelContainer.appendChild(label);
+
+				.x(d => xScale(d.x))
+				.y0(innerHeight)
+				.y1(d => yScale(d.y))
+
+		};
+		*/
+
+	},
+
 	setEmotion: function (emotion) {
 
 		//
@@ -112,9 +156,10 @@ export default {
 			emotion = 'anger';
 		}
 		this.currentEmotion = emotion;
+		let statesData = this.parseStates();
 
 		// transform state range into points for area chart
-		let transformedRanges = this.transformRanges(_.values(emotionsData.emotions[this.currentEmotion].states), this.currentEmotion, 0.0);
+		let transformedRanges = this.transformRanges(statesData, this.currentEmotion, 0.0);
 
 		let stateElements = this.stateGraphContainer.selectAll('path.area')
 			.data(transformedRanges).enter();
@@ -136,14 +181,22 @@ export default {
 			.on('click', this.onStateClick);
 
 		// grow the states upwards
-		transformedRanges = this.transformRanges(_.values(emotionsData.emotions[this.currentEmotion].states), this.currentEmotion, 1.0);
+		transformedRanges = this.transformRanges(statesData, this.currentEmotion, 1.0);
 		this.stateGraphContainer.selectAll('path.area')
 			.data(transformedRanges)
 			.call(this.applyTransitions.bind(this));
 
+		this.renderLabels(statesData, transformedRanges);
+
 	},
 
-	transformRanges: function (states, emotion, strengthMod=1.0) {
+	parseStates: function () {
+
+		// copy states of current emotion and add state name to each state object
+		let states = emotionsData.emotions[this.currentEmotion].states;
+		states = Object.keys(states).map(stateName => {
+			return Object.assign({}, states[stateName], { name: stateName });
+		});
 
 		// sort by state min value, then max value
 		states = states.sort((a, b) => {
@@ -160,6 +213,12 @@ export default {
 			}
 			return 0;
 		});
+
+		return states;
+
+	},
+
+	transformRanges: function (states, emotion, strengthMod=1.0) {
 
 		return this.stateRangeTransformers[emotion](states, strengthMod);
 

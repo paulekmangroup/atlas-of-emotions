@@ -1,5 +1,18 @@
 #states {
 	position: absolute;
+	width: 100%;
+	height: calc(100% - #{$header-height});
+	min-height: 600px;
+
+	bottom: 0;
+	left: 50%;
+	margin-left: -50%;
+
+	text-align: center;
+}
+
+#state-graph-container {
+	position: absolute;
 	width: $states-graph-width;
 	height: 60%;
 	bottom: 10%;
@@ -29,5 +42,23 @@
 
 	.area {
 		mix-blend-mode: multiply;
+	}
+}
+
+#state-labels {
+	position: absolute;
+	top: 0px;
+
+	div {
+		position: absolute;
+		text-align: center;
+
+		opacity: 0.0;
+		-webkit-transition: opacity 2s cubic-bezier(0.645, 0.045, 0.355, 1);
+		transition:         opacity 2s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+		&.visible {
+			opacity: 1.0;
+		}
 	}
 }
