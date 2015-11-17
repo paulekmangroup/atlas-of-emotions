@@ -18,19 +18,20 @@ const continentsSection = {
 	isInited: false,
 	isActive: false,
 
-	init: function (container) {
+	init: function (containerNode) {
 
 		this.update = this.update.bind(this);
 
 		let labelContainer = document.createElement('div');
 		labelContainer.id = 'continent-labels';
-		container.appendChild(labelContainer);
-		continentContainer = d3.select(container).append('svg')
+		containerNode.appendChild(labelContainer);
+
+		continentContainer = d3.select(containerNode).append('svg')
 			.attr('width', '100%')
 			.attr('height', '100%');
 
-		let w = container.offsetWidth,
-			h = container.offsetHeight,
+		let w = containerNode.offsetWidth,
+			h = containerNode.offsetHeight,
 			continentGeom;
 
 		centerX = 0.55 * w;
@@ -45,15 +46,16 @@ const continentsSection = {
 		// map each emotion to a Continent instance
 		continents = _.values(dispatcher.EMOTIONS).map(emotion => new Continent(emotion, continentContainer, continentGeom));
 
-		this.initContinentLabels(labelContainer);
+		this.initLabels(labelContainer);
 
+		// Bind transition namespace to current scope
 		Object.keys(this.transitions).forEach(transitionKey => {
 			this.transitions[transitionKey] = this.transitions[transitionKey].bind(this);
 		});
 
 		this.isInited = true;
 
-		this.setActive(true, container);
+		this.setActive(true, containerNode);
 
 		this.update();
 
@@ -136,7 +138,7 @@ const continentsSection = {
 
 	},
 
-	initContinentLabels: function (labelContainer) {
+	initLabels: function (labelContainer) {
 
 		continents.forEach(function (continent) {
 

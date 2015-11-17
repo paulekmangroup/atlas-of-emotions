@@ -374,13 +374,20 @@ export default class Continent {
 
 			let max = state.range.max,
 				min = state.range.min - 1,
-				r = 0.5 * (max - min),
-				strokeWidth = (0.4 + 0.5 * Math.random()) * r;
+				halfWidth = 0.5 * (max - min),
+
+				// This line allows strokeWidth to vary from a half-full circle to a nearly-full circle.
+				strokeWidth = (0.4 + 0.5 * Math.random()) * halfWidth;
 
 			return {
-				cx: min + r,
-				strokeWidth: strokeWidth,
-				r: r - 0.5 * strokeWidth
+				cx: min + halfWidth,
+
+				// Allow circles to occupy a bit more room than state graph xScale.
+				strokeWidth: strokeWidth * 1.2,
+
+				// To keep total width pegged to state graph xScale,
+				// r + 0.5 * strokeWidth must equal halfWidth.
+				r: halfWidth - 0.5 * strokeWidth
 			};
 
 		});
