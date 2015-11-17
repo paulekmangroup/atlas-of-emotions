@@ -8,8 +8,10 @@ import Circle from './Circle.js';
 import Continent from './Continent.js';
 
 let continents,
+	continentContainer,
+	centerX, centerY,
 	frameCount = 0,
-	currentEmotion = null;
+	currentEmotion;
 
 const continentsSection = {
 
@@ -23,25 +25,31 @@ const continentsSection = {
 		let labelContainer = document.createElement('div');
 		labelContainer.id = 'continent-labels';
 		container.appendChild(labelContainer);
-		let continentContainer = d3.select(container).append('svg')
+		continentContainer = d3.select(container).append('svg')
 			.attr('width', '100%')
 			.attr('height', '100%');
 
 		let w = container.offsetWidth,
 			h = container.offsetHeight,
-			centerX = 0.55 * w,
-			centerY = 0.5 * h,
-			continentGeom = {
-				w: w,
-				h: h,
-				centerX: centerX,
-				centerY: centerY
-			};
+			continentGeom;
+
+		centerX = 0.55 * w;
+		centerY = 0.5 * h;
+		continentGeom = {
+			w: w,
+			h: h,
+			centerX: centerX,
+			centerY: centerY
+		};
 
 		// map each emotion to a Continent instance
 		continents = _.values(dispatcher.EMOTIONS).map(emotion => new Continent(emotion, continentContainer, continentGeom));
 
-		this.initContinentLabels(labelContainer, centerX, centerY);
+		this.initContinentLabels(labelContainer);
+
+		Object.keys(this.transitions).forEach(transitionKey => {
+			this.transitions[transitionKey] = this.transitions[transitionKey].bind(this);
+		});
 
 		this.isInited = true;
 
@@ -106,17 +114,29 @@ const continentsSection = {
 			// transitions.spreadFocusedContinent()
 			// 2d. while 2a-c happens, execute (currentEmotion):2b-c above.
 
+			let targetScale;
+
 			this.transitions.unfocusContinents(continents
 				.filter(continent => continent.id !== emotion)
 				.map(continent => continent.id)
 			);
+			
+			this.transitions.panToContinent(emotion);
+
+			setTimeout(() => {
+				targetScale = this.transitions.focusZoomedOutContinent(emotion);
+			}, 500);
+
+			setTimeout(() => {
+				this.transitions.spreadFocusedContinent(emotion, targetScale);
+			}, 750);
 		}
 
 		currentEmotion = emotion;
 
 	},
 
-	initContinentLabels: function (labelContainer, centerX, centerY) {
+	initContinentLabels: function (labelContainer) {
 
 		continents.forEach(function (continent) {
 
@@ -150,6 +170,12 @@ const continentsSection = {
 
 	update: function (time) {
 
+		if (this.tweens) {
+			_.values(this.tweens).forEach(tween => {
+				tween.update(time);
+			});
+		}
+
 		let updateState = {
 			time: time,
 			someContinentIsHighlighted: continents.some(function (continent) { return continent.isHighlighted; })
@@ -165,7 +191,8 @@ const continentsSection = {
 	},
 
 	/**
-	 * Functions that perform transitions between continent views
+	 * Functions that perform transitions between continent views.
+	 * Bound to continents.js in init().
 	 */
 	transitions: {
 
@@ -173,6 +200,16 @@ const continentsSection = {
 		// 2b. while zooming, remove/add enough circles to match number of states
 		// 2c. while 2a-b happens, tween colors of circles to match mocks? or leave them randomized?
 		focusZoomedOutContinent: function (emotion) {
+
+			let targetContinent = continents.find(continent => continent.id === emotion),
+				targetScale = (0.45 * continentContainer.node().offsetHeight) / targetContinent.size;
+
+			targetContinent.addTween({
+				'scaleX': targetScale,
+				'scaleY': targetScale,
+			}, 1500, TWEEN.Easing.Quadratic.InOut);
+
+			return targetScale;
 
 		},
 
@@ -185,11 +222,38 @@ const continentsSection = {
 		// 1c. while 1a-b happens, pan toward continent location from current continent's location, according to all continents view layout.
 		panToContinent: function (emotion) {
 
+			let targetContinent = continents.find(continent => continent.id === emotion),
+				targetCenter = {
+					x: centerX,
+					y: centerY
+				},
+				targetX = centerX - targetContinent.x,
+				targetY = centerY - targetContinent.y;
+
+			this.addTween(targetCenter, {
+				'x': targetX,
+				'y': targetY
+			}, 1500, TWEEN.Easing.Quadratic.InOut)
+			.onUpdate(function () {
+				continents.forEach(continent => {
+					continent.centerX = this.x;
+					continent.centerY = this.y;
+				});
+			})
+			.start();
+
+			// fade out continent labels
+			d3.selectAll('#continent-labels div')
+				.style('opacity', 0.0);
+
 		},
 
 		// 2b. spread circles along horizontal axis as they fade in + grow
 		// 2c. (later) allow circles to drift slightly along horizontal axis only. this motion can be reflected in the states view as well.
-		spreadFocusedContinent: function (emotion) {
+		spreadFocusedContinent: function (emotion, targetScale) {
+
+			let targetContinent = continents.find(continent => continent.id === emotion);
+			targetContinent.spreadCircles(continentContainer.node(), targetScale);
 
 		},
 
@@ -199,35 +263,52 @@ const continentsSection = {
 		//		note: for zoomed-out continents, circles will already be centered, but that's ok.
 		unfocusContinents: function (emotions) {
 
-			let tgtContinents = continents.filter(continent => ~emotions.indexOf(continent.id));
+			let targetContinents = continents.filter(continent => ~emotions.indexOf(continent.id));
 			let translate;
-			tgtContinents.forEach(continent => {
-
-				// TODO:
-				// 1. turn off spawning
-				// 2. shrink all circles down in a set amount of time...probably easiest to just shrink the container.
-				// 3. move circles toward center
+			targetContinents.forEach(continent => {
 
 				// turn off spawning, in a way it can easily be turned back on
 				continent.spawnConfig.freq *= -1;
-
-
-				// TODO MONDAY
-				// continents should maintain position and scale as their own variable (state),
-				// and there should be only one place (within update())
-				// that sets the transform from those values.
-				// never even read from attr('transform'), just use those vals.
-				// then, set up RAF function that decreases continent.scale over time.
 
 				// scale down to nothing
 				continent.addTween({
 					'scaleX': 0.0,
 					'scaleY': 0.0
-				}, 750, TWEEN.Easing.Quadratic.InOut);
+				}, 1200, TWEEN.Easing.Quadratic.InOut);
+
+				// TODO: move each circle within continent toward continent center
+				// continent.spreadCircles(false);
+				// -- or --
+				// continent.gatherCircles()
 
 			});
 
 		},
+
+	},
+
+	/**
+	 * Add to currently-tweening queue.
+	 * Callers of this function are responsible for implementing onUpdate (if necessary)
+	 * and for `start()`ing the returned Tween.
+	 */
+	addTween: function (obj, props, time, func=TWEEN.Easing.Linear.None) {
+
+		if (!this.tweens) {
+			this.tweens = {};
+		}
+
+		let key = Object.keys(props).sort().join(',');
+		if (this.tweens[key]) {
+			this.tweens[key].stop();
+		}
+
+		this.tweens[key] = new TWEEN.Tween(obj)
+			.to(props, time)
+			.onComplete(() => { delete this.tweens[key]; })
+			.easing(func);
+
+		return this.tweens[key];
 
 	},
 

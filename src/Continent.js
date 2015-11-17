@@ -4,6 +4,7 @@ import d3Transform from 'd3-transform';
 import TWEEN from 'tween.js';
 
 import Circle from './Circle.js';
+import emotionsData from '../static/emotions-data.json';
 
 const FRAMERATE = 60;
 const HIGHLIGHT_ALPHA_MOD = 1.5;
@@ -175,6 +176,7 @@ export default class Continent {
 
 		this.circles = [];
 		this.isHighlighted = false;
+		this.isFocused = false;
 
 		this.d3Selection = container.append('g')
 			.classed('continent ' + this.id, true)
@@ -211,29 +213,34 @@ export default class Continent {
 			speedMod = this.isHighlighted ? HIGHLIGHT_SPEED_MOD : UNHIGHLIGHT_SPEED_MOD;
 		}
 
-		// apply drift
-		this.wander(this.drift, 3);
-		this.d3Selection
-			.attr('transform', d3Transform()
-				.translate(
-					this.centerX + this.x + this.drift.x,
-					this.centerY + this.y + this.drift.y
-				)
-				.scale(
-					this.scaleX,
-					this.scaleY
-				)
-			);
+		if (!this.isFocused) {
 
-		for (let i=this.circles.length-1; i>=0; i--) {
-			circle = this.circles[i];
-			if (circle.isAlive()) {
-				circle.update(alphaMod, speedMod);
-			} else {
-				this.circles.splice(i, 1);
-				circle.d3Selection.remove();
-			}
-		};
+			// apply drift
+			this.wander(this.drift, 3);
+			this.d3Selection
+				.attr('transform', d3Transform()
+					.translate(
+						this.centerX + this.x + this.drift.x,
+						this.centerY + this.y + this.drift.y
+					)
+					.scale(
+						this.scaleX,
+						this.scaleY
+					)
+				);
+
+			// update circles
+			for (let i=this.circles.length-1; i>=0; i--) {
+				circle = this.circles[i];
+				if (circle.isAlive()) {
+					circle.update(alphaMod, speedMod);
+				} else {
+					this.circles.splice(i, 1);
+					circle.d3Selection.remove();
+				}
+			};
+
+		}
 
 	}
 
@@ -253,6 +260,122 @@ export default class Continent {
 			.onComplete(() => { delete this.tweens[key]; })
 			.easing(func)
 			.start();
+
+	}
+
+	spreadCircles (container, containerScale) {
+
+		// TODO: set up range / margins in constructor
+		// TODO: DRY this out. Copied from states.js.
+		// TODO: creating + manipulating circles here, instead of using Circle.js, is going to cause problems.
+
+		this.isFocused = true;
+		let continent = this;
+
+		// 
+		// d3 conventional margins
+		// 
+		let margin = {
+				top: 20,
+				right: 20,
+				bottom: 50,
+				left: 20
+			},
+			innerWidth = (container.offsetWidth - margin.left - margin.right) / containerScale,
+			innerHeight = (container.offsetHeight - margin.top - margin.bottom) / containerScale,
+			maxRange = Math.min(2 * innerHeight, innerWidth),
+			xScale = d3.scale.linear()
+				.domain([0, 10])
+				.range([-0.5 * maxRange, 0.5 * maxRange]),
+			rScale = d3.scale.linear()
+				.domain([0, 10])
+				.range([0, 0.5 * maxRange]);	// don't scale to entire width, because will probably exceed height.
+
+		const growTime = 1000,
+			shrinkTime = 600;
+
+		let ranges = this.transformRanges(_.values(emotionsData.emotions[this.id].states)),
+			circles = this.d3Selection.selectAll('circle')
+				.data(ranges);
+
+		// Move existing circles to positions and sizes corresponding to states
+		circles.transition()
+			.duration(growTime)
+			.attr('cx', d => xScale(d.cx))
+			.attr('r', d => rScale(d.r));
+
+		// Add new circles as needed, and fade/grow them in at positions and sizes corresponding to states
+		circles.enter().append('circle')
+			.attr('cx', 0)
+			.attr('cy', 0)
+			.attr('r', 0)
+			.each(function () {
+				/*
+				let scale = /scale\((.*),/.exec(continent.d3Selection.attr('scale'));
+				scale = scale ? parseFloat(scale[1]) : 1.0;
+				let strokeProps = Circle.getStrokeProps(Continent.configsByEmotion[continent.id].colorPalette, continent.size * scale);
+				*/
+				let strokeProps = Circle.getStrokeProps(Continent.configsByEmotion[continent.id].colorPalette, continent.size);
+				let selection = d3.select(this);
+				selection.style('stroke', strokeProps.stroke);
+				selection.style('stroke-width', strokeProps.sw);
+			})
+		.transition()
+			.duration(growTime)
+			.attr('cx', d => xScale(d.cx))
+			.attr('r', d => rScale(d.r));
+
+		circles.exit().transition()
+			.duration(shrinkTime)
+			.ease('quad-out')
+			.attr('opacity', 0.0)
+			.attr('transform', d3Transform().scale(0, 0));
+
+		// TODO: hook into transition complete and:
+		// - update this.circles with newly-created circles, or don't?
+		// - allow circles to drift?
+		// - set this.isFocused = false?
+		// might instead just let circles made here exist outside of zoomed-out 'normal' animation,
+		// and let them go away when transitioning back to zoomed-out view.
+
+	}
+
+	/**
+	 * TODO: DRY this out. Copied from states.js.
+	 * Might be good to have a central place to parse and manipulate emotion data,
+	 * to generate ranges / points / etc.
+	 */
+	transformRanges (states, emotion, strengthMod=1.0) {
+
+		// sort by state min value, then max value
+		states = states.sort((a, b) => {
+			if (a.range.min < b.range.min) {
+				return -1;
+			} else if (a.range.min > b.range.min) {
+				return 1;
+			} else {
+				if (a.range.max < b.range.max) {
+					return -1;
+				} else if (a.range.max > b.range.max) {
+					return 1;
+				}
+			}
+			return 0;
+		});
+			
+		let numStates = states.length;
+		return states.map((state, i) => {
+
+			let max = state.range.max,
+				min = state.range.min - 1,
+				r = 0.5 * (max - min);
+
+			return {
+				cx: min + r,
+				r: r
+			};
+
+		});
 
 	}
 

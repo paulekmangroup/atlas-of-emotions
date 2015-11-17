@@ -22,6 +22,23 @@ export default class Circle {
 
 	}
 
+	/**
+	 * Called by Continent.js to get properties for Circle-like objects
+	 * that unfortunately exist outside of our happy OOP structure here.
+	 */
+	static getStrokeProps (colorPalette, size) {
+
+		let color = colorPalette[Math.floor(Math.random() * colorPalette.length)].join(','),
+			alpha = BASE_ALPHA,
+			weight = Math.round(0.4*size*SIZE_MOD + Math.random() * 1.2*size*SIZE_MOD);
+
+		return {
+			'stroke': 'rgba(' + color + ',' + alpha + ')',
+			'sw': weight
+		};
+
+	}
+
 	constructor (container, colorPalette, size) {
 
 		// Scale `size` down to account for stroke weight,
