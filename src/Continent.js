@@ -12,6 +12,10 @@ const UNHIGHLIGHT_ALPHA_MOD = 0.3;
 const HIGHLIGHT_SPEED_MOD = 2.0;
 const UNHIGHLIGHT_SPEED_MOD = 0.5;
 
+// zoomed-in continents (with spread circles) are
+// this much larger than their corresponding state graph.
+const SPREAD_SCALE = 1.2;
+
 export default class Continent {
 
 	static configsByEmotion = {
@@ -285,8 +289,8 @@ export default class Continent {
 				left: 20
 			},
 			statesGraphWidth = 0.7,		// from _variables.scss
-			innerWidth = statesGraphWidth * (container.offsetWidth - margin.left - margin.right) / containerScale,
-			innerHeight = (container.offsetHeight - margin.top - margin.bottom) / containerScale,
+			innerWidth = statesGraphWidth * (container.offsetWidth - margin.left - margin.right) / containerScale * SPREAD_SCALE,
+			innerHeight = (container.offsetHeight - margin.top - margin.bottom) / containerScale * SPREAD_SCALE,
 			xScale = d3.scale.linear()
 				.domain([0, 10])
 				.range([-0.5 * innerWidth, 0.5 * innerWidth]),
