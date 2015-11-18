@@ -1,6 +1,11 @@
 import d3 from 'd3';
 import _ from 'lodash';
-import emotionsData from '../static/emotions-data.json';
+
+import dispatcher from './dispatcher.js';
+import emotionsData from '../static/emotionsData.json';
+import appStrings from '../static/appStrings.json';
+
+const LABEL_APPEAR_DELAY = 1000;
 
 export default {
 
@@ -21,6 +26,9 @@ export default {
 	transitions: null,
 
 	currentEmotion: null,
+	currentStatesData: null,
+
+	calloutResetTimeout: null,
 	
 	init: function (containerNode) {
 
@@ -120,7 +128,7 @@ export default {
 
 	},
 
-	renderLabels: function (statesData, ranges) {
+	renderLabels: function (ranges) {
 
 		let stateDisplay = this,
 			labels = d3.select(this.labelContainer).selectAll('div')
@@ -128,15 +136,15 @@ export default {
 
 		labels.enter().append('div')
 			.classed(this.currentEmotion + ' label', true)
-			.html((d, i) => '<h3>' + statesData[i].name.toUpperCase() + '</h3>')
+			.html((d, i) => '<h3>' + this.currentStatesData[i].name.toUpperCase() + '</h3>')
 			.style({
 				left: d => (Math.round(stateDisplay.xScale(d[1].x) - 10) + 'px'),
-				top: d => (Math.round(stateDisplay.yScale(d[1].y) - 100) + 'px')
+				top: d => (Math.round(stateDisplay.yScale(d[1].y) - 80) + 'px')
 			})
 			.each(function () {
 				setTimeout(() => {
 					this.classList.add('visible');
-				}, 1000);
+				}, LABEL_APPEAR_DELAY);
 			});
 
 	},
@@ -151,10 +159,10 @@ export default {
 			emotion = 'anger';
 		}
 		this.currentEmotion = emotion;
-		let statesData = this.parseStates();
+		this.currentStatesData = this.parseStates();
 
 		// transform state range into points for area chart
-		let transformedRanges = this.transformRanges(statesData, this.currentEmotion, 0.0);
+		let transformedRanges = this.transformRanges(this.currentStatesData, this.currentEmotion, 0.0);
 
 		let stateElements = this.stateGraphContainer.selectAll('path.area')
 			.data(transformedRanges).enter();
@@ -176,12 +184,16 @@ export default {
 			.on('click', this.onStateClick);
 
 		// grow the states upwards
-		transformedRanges = this.transformRanges(statesData, this.currentEmotion, 1.0);
+		transformedRanges = this.transformRanges(this.currentStatesData, this.currentEmotion, 1.0);
 		this.stateGraphContainer.selectAll('path.area')
 			.data(transformedRanges)
 			.call(this.applyTransitions.bind(this));
 
-		this.renderLabels(statesData, transformedRanges);
+		this.renderLabels(transformedRanges);
+
+		setTimeout(() => {
+			this.resetCallout();
+		}, LABEL_APPEAR_DELAY);
 
 	},
 
@@ -455,16 +467,23 @@ export default {
 
 	},
 
-	onStateMouseOver: function (data, index) {
+	onStateMouseOver: function (d, i) {
 
 		d3.selectAll('path.area')
-			.style('opacity', (d, i) => i === index ? 1.0 : 0.2);
+			.style('opacity', (data, index) => index === i ? 1.0 : 0.2);
 
 		d3.select(this.labelContainer).selectAll('div h3')
-			.style('opacity', (d, i) => i === index ? 1.0 : 0.2);
+			.style('opacity', (data, index) => index === i ? 1.0 : 0.2);
 
 		// .selectAll('linearGradient')
 		// TODO: set stops with higher/lower opacity on #anger-gradient-{i}
+
+		dispatcher.changeCallout(this.currentEmotion, this.currentStatesData[i].name, this.currentStatesData[i].desc);
+		setTimeout(() => {
+			if (this.calloutResetTimeout) {
+				clearTimeout(this.calloutResetTimeout);
+			}
+		}, 1);
 
 	},
 
@@ -476,12 +495,23 @@ export default {
 		d3.select(this.labelContainer).selectAll('div h3')
 			.style('opacity', null);
 
+		if (this.calloutResetTimeout) {
+			clearTimeout(this.calloutResetTimeout);
+		}
+		this.calloutResetTimeout = setTimeout(() => {
+			this.resetCallout();
+		}, 1000);
+
 	},
 
 	onStateClick: function (d, i) {
 
 		// d3.selectAll('path.area')
 
+	},
+
+	resetCallout () {
+		dispatcher.changeCallout(this.currentEmotion, appStrings.emotionCalloutTitle, appStrings.emotionCalloutIntro + '<br><br>' + emotionsData.emotions[this.currentEmotion].desc);
 	},
 
 	onKeyDown: function (keyCode) {

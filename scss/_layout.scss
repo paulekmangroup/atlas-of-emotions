@@ -79,3 +79,36 @@ h6 { font-size: 0.333333em; }
 #main {
 	text-align: center;
 }
+
+#callout {
+	position: absolute;
+	width: 19em;
+	top: $header-height;
+	left: 0;
+
+	padding: 1.5em;
+	@extend %raleway-light;
+	color: $text-overlay-color;
+	text-align: left;
+	pointer-events: none;
+
+	opacity: 0.0;
+	-webkit-transition: opacity #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
+	transition:         opacity #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
+
+	&.visible {
+		opacity: 1.0;
+	}
+
+	@include emotion-background-color;
+
+	h3 {
+		margin-top: 0;
+		text-transform: uppercase;
+	}
+
+	p {
+		margin-bottom: 0;
+		font-size: 1.0em;
+	}
+}

@@ -1,5 +1,6 @@
 // colors
 $text-color: #4d4d4d;
+$text-overlay-color: #ffffff;
 $background-color: rgb(230, 215, 200);
 
 $label-color-anger: #af202a;
@@ -12,3 +13,26 @@ $label-color-sadness: #3668b2;
 // sizes and positions
 $header-height: 55px;
 $states-graph-width: 70%;
+
+
+// animation
+$label-fade-in-time: 2s;
+
+
+// mixins
+@mixin emotion-color () {
+	&.anger { color: $label-color-anger; }
+	&.disgust { color: $label-color-disgust; }
+	&.enjoyment { color: $label-color-enjoyment; }
+	&.fear { color: $label-color-fear; }
+	&.sadness { color: $label-color-sadness; }
+}
+
+@mixin emotion-background-color () {
+	&.anger { background-color: rgba($label-color-anger, 0.5); }
+	&.disgust { background-color: rgba($label-color-disgust, 0.5); }
+	&.enjoyment { background-color: rgba($label-color-enjoyment, 0.5); }
+	&.fear { background-color: rgba($label-color-fear, 0.5); }
+	&.sadness { background-color: rgba($label-color-sadness, 0.5); }
+	background-blend-mode: multiply;
+}

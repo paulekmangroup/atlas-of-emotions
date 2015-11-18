@@ -6,7 +6,8 @@ import states from './states.js';
 export default function (...initArgs) {
 
 	let containers = {},
-		sections = {};
+		sections = {},
+		callout;
 
 	let currentSection = null,
 		currentEmotion = null;
@@ -15,9 +16,11 @@ export default function (...initArgs) {
 
 		initContainers();
 		initSections();
+		initCallout();
 
 		document.addEventListener('keydown', onKeyDown);
 		dispatcher.addListener(dispatcher.EVENTS.NAVIGATE, onNavigate);
+		dispatcher.addListener(dispatcher.EVENTS.CHANGE_CALLOUT, onCalloutChange);
 		window.addEventListener('hashchange', onHashChange);
 
 		// size main container to viewport
@@ -64,6 +67,23 @@ export default function (...initArgs) {
 		sections.actions = placeholderSection(dispatcher.SECTIONS.ACTIONS);
 		sections.triggers = placeholderSection(dispatcher.SECTIONS.TRIGGERS);
 		sections.moods = placeholderSection(dispatcher.SECTIONS.MOODS);
+
+	}
+
+	function initCallout () {
+
+		let mainEl = document.querySelector('#main');
+		callout = document.createElement('div');
+		callout.id = 'callout';
+
+		let h3 = document.createElement('h3');
+		h3.classList.add('title');
+		callout.appendChild(h3);
+		let p = document.createElement('p');
+		p.classList.add('body');
+		callout.appendChild(p);
+
+		mainEl.appendChild(callout);
 
 	}
 
@@ -128,6 +148,22 @@ export default function (...initArgs) {
 			console.log('TODO: scroll to next emotion. This functionality will ultimately be accessible via a dropdown.');
 
 		}
+
+	}
+
+	function onCalloutChange (emotion, title, body) {
+
+		callout.removeAttribute('class');
+		if (!title) { return; }
+
+		// for (let i=0; i<callout.classList.length; i++) {
+		// 	if (callout.classList.item(i))
+		// }
+		callout.classList.add('visible');
+		callout.classList.add(emotion);
+
+		callout.querySelector('.title').innerHTML = title;
+		callout.querySelector('.body').innerHTML = body;
 
 	}
 

@@ -1,8 +1,10 @@
 {
   "emotions": {
     "sadness": {
+      "desc": "There is significant overlap in the states of sadness, which represents a broad range of intensities.",
       "states": {
         "disappointed": {
+          "desc": "disappointed description",
           "range": {
             "min": 1,
             "max": 5
@@ -21,6 +23,7 @@
           }
         },
         "distraught": {
+          "desc": "distraught description",
           "range": {
             "min": 2,
             "max": 8
@@ -39,6 +42,7 @@
           }
         },
         "discouraged": {
+          "desc": "discouraged description",
           "range": {
             "min": 2,
             "max": 8
@@ -57,6 +61,7 @@
           }
         },
         "resigned": {
+          "desc": "resigned description",
           "range": {
             "min": 1,
             "max": 10
@@ -85,6 +90,7 @@
           }
         },
         "helpless": {
+          "desc": "helpless description",
           "range": {
             "min": 5,
             "max": 10
@@ -103,6 +109,7 @@
           }
         },
         "miserable": {
+          "desc": "miserable description",
           "range": {
             "min": 6,
             "max": 10
@@ -121,6 +128,7 @@
           }
         },
         "grief": {
+          "desc": "grief description",
           "range": {
             "min": 7,
             "max": 10
@@ -139,6 +147,7 @@
           }
         },
         "despairing": {
+          "desc": "despairing description",
           "range": {
             "min": 7,
             "max": 10
@@ -157,6 +166,7 @@
           }
         },
         "sorrowful": {
+          "desc": "sorrowful description",
           "range": {
             "min": 7,
             "max": 10
@@ -175,6 +185,7 @@
           }
         },
         "anguish": {
+          "desc": "anguish description",
           "range": {
             "min": 10,
             "max": 10
@@ -195,6 +206,7 @@
       }
     },
     "disgust": {
+      "desc": "Disgust manifests generally as something fairly mild or very strong, with few states occupying the middle.",
       "states": {
         "aversion": {
           "range": {
@@ -413,8 +425,10 @@
       }
     },
     "anger": {
+      "desc": "The intensity of anger states tends to be on the strong side, although some states encompass a broader range.",
       "states": {
         "annoyance": {
+          "desc": "annoyance description",
           "range": {
             "min": 1,
             "max": 2
@@ -453,6 +467,7 @@
           }
         },
         "exasperation": {
+          "desc": "exasperation description",
           "range": {
             "min": 4,
             "max": 7
@@ -486,6 +501,7 @@
           }
         },
         "frustration": {
+          "desc": "frustration description",
           "range": {
             "min": 1,
             "max": 10
@@ -554,6 +570,7 @@
           }
         },
         "bitterness": {
+          "desc": "bitterness description",
           "range": {
             "min": 3,
             "max": 10
@@ -642,6 +659,7 @@
           }
         },
         "argumentative": {
+          "desc": "argumentative description",
           "range": {
             "min": 2,
             "max": 10
@@ -680,6 +698,7 @@
           }
         },
         "vengeful": {
+          "desc": "vengeful description",
           "range": {
             "min": 5,
             "max": 10
@@ -728,6 +747,7 @@
           }
         },
         "fury": {
+          "desc": "fury description",
           "range": {
             "min": 10,
             "max": 10
@@ -788,6 +808,7 @@
       }
     },
     "fear": {
+      "desc": "Many different states of fear fall into the most intense range.",
       "states": {
         "trepidation": {
           "range": {
@@ -949,6 +970,7 @@
       }
     },
     "enjoyment": {
+      "desc": "Enjoyment has more named states in the English language than any of the other emotions.",
       "states": {
         "relief": {
           "range": {

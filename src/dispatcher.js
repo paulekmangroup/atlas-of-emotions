@@ -3,7 +3,8 @@ import { EventEmitter } from 'events';
 const dispatcher = {
 
 	EVENTS: {
-		NAVIGATE: 'navigate'
+		NAVIGATE: 'navigate',
+		CHANGE_CALLOUT: 'changeCallout'
 	},
 
 	SECTIONS: {
@@ -33,6 +34,12 @@ const dispatcher = {
 		}
 
 		this.emit(this.EVENTS.NAVIGATE, section, emotion);
+
+	},
+
+	changeCallout: function (emotion, title, body) {
+
+		this.emit(this.EVENTS.CHANGE_CALLOUT, emotion, title, body);
 
 	},
 

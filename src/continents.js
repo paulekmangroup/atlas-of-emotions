@@ -7,6 +7,9 @@ import dispatcher from './dispatcher.js';
 import Circle from './Circle.js';
 import Continent from './Continent.js';
 
+import emotionsData from '../static/emotionsData.json';
+import appStrings from '../static/appStrings.json';
+
 let continents,
 	continentContainer,
 	centerX, centerY,
@@ -339,6 +342,7 @@ const continentsSection = {
 		continents.some(function (continent) {
 			if (continent.isHighlighted) {
 				dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS, continent.id);
+				dispatcher.changeCallout(continent.id, appStrings.emotionCalloutTitle, appStrings.emotionCalloutIntro + '<br><br>' + emotionsData.emotions[continent.id].desc);
 				return true;
 			}
 		});
