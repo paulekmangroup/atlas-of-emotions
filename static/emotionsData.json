@@ -3,8 +3,8 @@
     "sadness": {
       "desc": "We experience sadness with the actual or perceived loss of a person to whom we are attached, such as an offspring, a lover, close friend, or to a loss of our own health or social status or to the loss of an object that we value highly.",
       "states": {
-        "disappointment”: {
-          "desc": "disappointment description",
+        "disappointment": {
+          "desc": "Sadness, felt when expectations are not met, resulting in a loss. Moderate to high intensity.",
           "range": {
             "min": 1,
             "max": 5
@@ -22,8 +22,8 @@
             }
           }
         },
-        "distraughtness”: {
-          "desc": "distraughtness description",
+        "distraughtness": {
+          "desc": "Agitated sadness. Felt intensly and often for long periods. Also used as a mood.",
           "range": {
             "min": 2,
             "max": 8
@@ -41,8 +41,8 @@
             }
           }
         },
-        "discouragement”: {
-          "desc": "discouragement description",
+        "discouragement": {
+          "desc": "Sadness felt when no way to cope with an actual or potential loss is known.",
           "range": {
             "min": 2,
             "max": 8
@@ -60,8 +60,8 @@
             }
           }
         },
-        "resignation”: {
-          "desc": "resignation description",
+        "resignation": {
+          "desc": "Sad acceptance of an important loss. Moderate to extremely intense.",
           "range": {
             "min": 1,
             "max": 10
@@ -89,8 +89,8 @@
             }
           }
         },
-        "helplessness”: {
-          "desc": "helplessness description",
+        "helplessness": {
+          "desc": "There is nothing that can be done to cope with the loss or the threat. Very intense.",
           "range": {
             "min": 5,
             "max": 10
@@ -108,8 +108,8 @@
             }
           }
         },
-        "misery”: {
-          "desc": "misery description",
+        "misery": {
+          "desc": "Intense prolonged feelings of sadness and anguish, can be also a mood.",
           "range": {
             "min": 6,
             "max": 10
@@ -128,7 +128,7 @@
           }
         },
         "grief": {
-          "desc": "grief description",
+          "desc": "Sadness or anguish aroused by the death of a loved one. Varies over time from very intense at the time of the death to moderate as time goes on.",
           "range": {
             "min": 7,
             "max": 10
@@ -147,7 +147,7 @@
           }
         },
         "despair": {
-          "desc": "despair description",
+          "desc": "Resigned or anguished sadness. Very intense.",
           "range": {
             "min": 7,
             "max": 10
@@ -166,7 +166,7 @@
           }
         },
         "sorrow": {
-          "desc": "sorrow description",
+          "desc": "Feeling or showing grief.",
           "range": {
             "min": 7,
             "max": 10
@@ -185,7 +185,7 @@
           }
         },
         "anguish": {
-          "desc": "anguish description",
+          "desc": "Intense agitated, protesting form of despair over an actual or expected loss.",
           "range": {
             "min": 10,
             "max": 10
@@ -209,7 +209,7 @@
       "desc": "We experience disgust in reaction to toxic smells, tastes, unappealing appearances or repulsive behaviors. While usually unpleasant, in small doses disgust may sometimes be enjoyable.",
       "states": {
         "aversion": {
-          "desc": “aversion description",
+          "desc": "Wanting to avoid something noxious. Slight to extreme intensity.",
           "range": {
             "min": 2,
             "max": 7
@@ -233,7 +233,7 @@
           }
         },
         "dislike": {
-          "desc": “dislike description",
+          "desc": "An aversion to something, some person or some action. Very mild intensity.",
           "range": {
             "min": 1,
             "max": 5
@@ -262,7 +262,7 @@
           }
         },
         "distaste": {
-          "desc": “distaste description",
+          "desc": "Offended by taste, smell, sight or actions. Mild to moderate intensity.",
           "range": {
             "min": 2,
             "max": 7
@@ -291,7 +291,7 @@
           }
         },
         "repugnance": {
-          "desc": “repugnance description",
+          "desc": "Slight to extreme feeling of being repelled by something toxic, literally or figuratively.",
           "range": {
             "min": 2,
             "max": 9
@@ -309,8 +309,8 @@
             }
           }
         },
-        "nauseousness”: {
-          "desc": “nausousness description",
+        "nausea": {
+          "desc": "Used metaphorically to denote a very intense disgust reaction.",
           "range": {
             "min": 8,
             "max": 10
@@ -339,7 +339,7 @@
           }
         },
         "loathing": {
-          "desc": “loathing description",
+          "desc": "Very intense disgust.",
           "range": {
             "min": 9,
             "max": 10
@@ -378,7 +378,7 @@
           }
         },
         "revulsion": {
-          "desc": “revulsion description",
+          "desc": "Very strong disgust.",
           "range": {
             "min": 8,
             "max": 10
@@ -407,7 +407,7 @@
           }
         },
         "abhorrence": {
-          "desc": “abhorrence description",
+          "desc": "Extreme feeling of being repelled by toxic substances, look, smell, or taste; or by highly offensive actions.",
           "range": {
             "min": 8,
             "max": 10
@@ -436,7 +436,7 @@
       "desc": "We experience anger whenever our pursuit of an important goal is blocked, especially by a physical threat. In the grip of anger we may act in ways that we later regret.",
       "states": {
         "annoyance": {
-          "desc": "annoyance description",
+          "desc": "Mild anger.",
           "range": {
             "min": 1,
             "max": 2
@@ -475,7 +475,7 @@
           }
         },
         "exasperation": {
-          "desc": "exasperation description",
+          "desc": "Losing patience with a person or task that is generating an overload of frustration. Moderate to extreme intensity.",
           "range": {
             "min": 4,
             "max": 7
@@ -509,7 +509,7 @@
           }
         },
         "frustration": {
-          "desc": "frustration description",
+          "desc": "Feeling unable to achieve a goal you are seeking. Slight to moderate intensity.",
           "range": {
             "min": 1,
             "max": 10
@@ -578,7 +578,7 @@
           }
         },
         "bitterness": {
-          "desc": "bitterness description",
+          "desc": "The residue from having been angry repeatedly, because it seems that one is living in a world populated by people or events that block pursuit of what is important to you. moderate to high intensity.",
           "range": {
             "min": 3,
             "max": 10
@@ -666,8 +666,8 @@
             }
           }
         },
-        "argumentativeness”: {
-          "desc": "argumentativeness description",
+        "argumentativeness": {
+          "desc": "Unfriendly verbal disagreements. Moderate to high in intensity. Can also be a personality trait.",
           "range": {
             "min": 2,
             "max": 10
@@ -705,8 +705,8 @@
             }
           }
         },
-        "vengefulness”: {
-          "desc": "vengefulness description",
+        "vengefulness": {
+          "desc": "A desire to harm someone who has harmed you.",
           "range": {
             "min": 5,
             "max": 10
@@ -755,7 +755,7 @@
           }
         },
         "fury": {
-          "desc": "fury description",
+          "desc": "Fury or Rage is at the highest strength of anger. May result in violent actions",
           "range": {
             "min": 10,
             "max": 10
@@ -816,10 +816,10 @@
       }
     },
     "fear": {
-      "desc": "We experience fear when we perceive a threat of harm. Examples are threats to our health, wealth, social status (relationships), or identity/self-image.”,
+      "desc": "We experience fear when we perceive a threat of harm. Examples are threats to our health, wealth, social status (relationships), or identity/self-image.",
       "states": {
         "trepidation": {
-          "desc": “trepidation description",
+          "desc": "Mild fear, typically about something not immediate but pending.",
           "range": {
             "min": 1,
             "max": 2
@@ -833,7 +833,7 @@
           }
         },
         "nervousness": {
-          "desc": “nervousness description",
+          "desc": "Having or showing feelings of being worried and afraid about what might happen.",
           "range": {
             "min": 2,
             "max": 7
@@ -846,8 +846,8 @@
             }
           }
         },
-        "worry”: {
-          "desc": “worry description",
+        "worry": {
+          "desc": "Concern about something bad that might happen. Moderate to extremely intense.",
           "range": {
             "min": 2,
             "max": 7
@@ -861,7 +861,7 @@
           }
         },
         "anxiety": {
-          "desc": “anxiety description",
+          "desc": "Painful or apprehensive uneasiness usually over an impending or anticipated threat. Misused often to describe fear or eagerness. Can also be used to describe a mood or a psychopathological state.",
           "range": {
             "min": 1,
             "max": 10
@@ -885,7 +885,7 @@
           }
         },
         "dread": {
-          "desc": “dread description",
+          "desc": "Anticipating a severe threat from which there is no protection or avoidance. Fear is very intense.",
           "range": {
             "min": 6,
             "max": 10
@@ -904,7 +904,7 @@
           }
         },
         "desperation": {
-          "desc": “desperation description",
+          "desc": "Risky attempts to reduce the threat. Very intense.",
           "range": {
             "min": 9,
             "max": 10
@@ -928,7 +928,7 @@
           }
         },
         "panic": {
-          "desc": “panic description",
+          "desc": "Extreme fear with no way to reduce the threat anticipated.",
           "range": {
             "min": 9,
             "max": 10
@@ -947,7 +947,7 @@
           }
         },
         "horror": {
-          "desc": “horror description",
+          "desc": "Intense fear and disgust mixed together or alternating.",
           "range": {
             "min": 10,
             "max": 10
@@ -966,7 +966,7 @@
           }
         },
         "terror": {
-          "desc": “terror description",
+          "desc": "Extreme fear.",
           "range": {
             "min": 10,
             "max": 10
@@ -987,10 +987,10 @@
       }
     },
     "enjoyment": {
-      "desc": "We experience enjoyment when a good feeling is generated, which we often seek to continue or re-experience.”,
+      "desc": "We experience enjoyment when a good feeling is generated, which we often seek to continue or re-experience.",
       "states": {
         "relief": {
-          "desc": “relief description",
+          "desc": "Relief, when something unpleasant, especially the threat of harm, is relieved. Moderate to extreme intensity.",
           "range": {
             "min": 2,
             "max": 10
@@ -1004,7 +1004,7 @@
           }
         },
         "amusement": {
-          "desc": “amusement description",
+          "desc": "Light, playful, humorous feelings of enjoyment.",
           "range": {
             "min": 2,
             "max": 8
@@ -1028,7 +1028,7 @@
           }
         },
         "excitement": {
-          "desc": “excitement description",
+          "desc": "Energetic pursuit that, unlike other enjoyable emotions, is rarely felt slightly, but ranges from mid to high in intensity. May merge with any of the emotions to generate a very active form of that emotion.",
           "range": {
             "min": 6,
             "max": 10
@@ -1052,7 +1052,7 @@
           }
         },
         "ecstasy": {
-          "desc": “ecstasy description",
+          "desc": "Rapturous delight. A state of very great happiness, nearly overwhelming.",
           "range": {
             "min": 9,
             "max": 10
@@ -1071,7 +1071,7 @@
           }
         },
         "fiero": {
-          "desc": “fiero description",
+          "desc": "The Italian word that describes the enjoyment felt when you have met a challenge that challenged and stretched your capabilities. moderate to very intense.",
           "range": {
             "min": 3,
             "max": 10
@@ -1100,7 +1100,7 @@
           }
         },
         "naches": {
-          "desc": “naches description",
+          "desc": "The Yiddish word for the enjoyable feeling of pride in the accomplishments, or sometimes just the existence, of your actual offspring, or mentored offspring. Crucial for motivating the nurture of infants and children.",
           "range": {
             "min": 3,
             "max": 10
@@ -1119,7 +1119,7 @@
           }
         },
         "wonder": {
-          "desc": “wonder description",
+          "desc": "A feeling caused by seeing something that is very surprising, beautiful, amazing, or hard to believe. Moderate to extreme intensity.",
           "range": {
             "min": 5,
             "max": 10
@@ -1133,7 +1133,7 @@
           }
         },
         "schadenfreude": {
-          "desc": “schadenfreude description",
+          "desc": "Enjoying the misfortunes of another person, usually a rival. Moderate to extreme intensity.",
           "range": {
             "min": 3,
             "max": 8
@@ -1157,7 +1157,7 @@
           }
         },
         "rejoicing": {
-          "desc": “rejoicing description",
+          "desc": "A warm, uplifting feeling that people experience when they see unexpected acts of human goodness, kindness, and compassion. Mild to strongly felt. Also called elevation.",
           "range": {
             "min": 2,
             "max": 8
@@ -1171,7 +1171,7 @@
           }
         },
         "compassion-joy": {
-          "desc": “compassion-joy description",
+          "desc": "Enjoyment felt when you act compassionately, especially if your actions help to relieve another person's suffering.",
           "range": {
             "min": 3,
             "max": 6
@@ -1185,7 +1185,7 @@
           }
         },
         "pride": {
-          "desc": “pride description",
+          "desc": "Wanting others to know the pleasure you feel in your own accomplishment or the accomplishments of other who you either nurtured directly or identify with. Naches as defined above is a specific type of pride.",
           "range": {
             "min": 4,
             "max": 9
@@ -1202,41 +1202,13 @@
     }
   },
   "glossary": {
-    "abhorrence": {
-      "type": "state",
-      "text": "Extreme feeling of being repelled by toxic substances, look, smell, or taste; or by highly offensive actions."
-    },
-    "amusement": {
-      "type": "state",
-      "text": "Light, playful, humorous feelings of enjoyment."
-    },
     "anger": {
       "type": "emotion",
       "text": "Response when pursuit of an important goal is blocked, especially if it is by a physical threat. There are seven angry states: annoyance, exasperation, bitterness, frustation, argumentative, vengeful, and fury."
     },
-    "anguish": {
-      "type": "state",
-      "text": "Intense agitated, protesting form of despair over an actual or expected loss."
-    },
-    "annoyance": {
-      "type": "state",
-      "text": "Mild anger."
-    },
-    "anxiety": {
-      "type": "state",
-      "text": "Painful or apprehensive uneasiness usually over an impending or anticipated threat. Misused often to describe fear or eagerness. Can also be used to describe a mood or a psychopathological state."
-    },
     "apprehensive": {
       "type": "mood",
       "text": "Afraid that something bad or unpleasant is going to happen; fear about the future. Can be slight to extreme intensity."
-    },
-    "argumentative": {
-      "type": "state",
-      "text": "Unfriendly verbal disagreements. Moderate to high in intensity. Can also be a personality trait."
-    },
-    "aversion": {
-      "type": "state",
-      "text": "Wanting to avoid something noxious. Slight to extreme intensity."
     },
     "avoid": {
       "type": "action",
@@ -1250,10 +1222,6 @@
       "type": "action",
       "text": "Angry and aggressive; showing readiness to fight. Moderate to extreme intensity."
     },
-    "bitterness": {
-      "type": "state",
-      "text": "The residue from having been angry repeatedly, because it seems that one is living in a world populated by people or events that block pursuit of what is important to you. moderate to high intensity."
-    },
     "blissful\/high": {
       "type": "state",
       "text": "An indescribable wonderful, unique enjoyment experience, typically brief in duration. Extreme intensity."
@@ -1265,10 +1233,6 @@
     "calmness": {
       "type": "",
       "text": "A state of mind, not an emotion, in which you are best able to consider, reflect and use your intelligence."
-    },
-    "compassion-joy": {
-      "type": "state",
-      "text": "Enjoyment felt when you act compassionately, especially if your actions help to relieve another person\u2019s suffering. "
     },
     "constructive": {
       "type": "",
@@ -1285,14 +1249,6 @@
       "type": "action",
       "text": "To treat (someone) as though he or she is not a human being; to deprive of human qualities, personality, or spirit."
     },
-    "despairing": {
-      "type": "state",
-      "text": "resigned or anguished sadness. Very intense;"
-    },
-    "desperation": {
-      "type": "state",
-      "text": "Risky attempts to reduce the threat. Very intense."
-    },
     "destructive": {
       "type": "",
       "text": "Causing damage, destruction or harm; designed to hurt or destroy."
@@ -1301,41 +1257,9 @@
       "type": "action",
       "text": "Not pleasing; unpleasant or offensive in manner. Easily angered or annoyed."
     },
-    "disappointed": {
-      "type": "state",
-      "text": "Sadness, felt when expectations are not met, resulting in a loss. Moderate to high intensity"
-    },
-    "discouraged": {
-      "type": "state",
-      "text": "Sadness felt when no way to cope with an actual or potential loss is known."
-    },
     "disgust": {
       "type": "emotion",
       "text": " Reaction to toxic smells, tastes, appearance or repulsive actions. There are nine disgust states: Aversion, distaste, repugnance, nausea, loathing, revulsion, abhorrence."
-    },
-    "dislike": {
-      "type": "state",
-      "text": "An aversion to something, some person or some action. Very mild intensity"
-    },
-    "distaste": {
-      "type": "state",
-      "text": "Offended by taste, smell, sight or actions. Mild to moderate intensity."
-    },
-    "distraught": {
-      "type": "state",
-      "text": "Agitated sadness. Felt intensly and often for long periods. Also used as a mood"
-    },
-    "dread": {
-      "type": "state",
-      "text": "Anticipating a severe threat from which there is no protection or avoidance. Fear is very intense."
-    },
-    "ecstasy": {
-      "type": "state",
-      "text": "Rapturous delight. A state of very great happiness, nearly overwhelming."
-    },
-    "elevation": {
-      "type": "state",
-      "text": "A warm, uplifting feeling that people experience when they see unexpected acts of human goodness, kindness, and compassion Mild to strongly felt. Also called rejoicing."
     },
     "embarrassment": {
       "type": "",
@@ -1353,21 +1277,9 @@
       "type": "uncharted",
       "text": "Wishing for what another person has or does."
     },
-    "exasperation": {
-      "type": "state",
-      "text": "Losing patience with a person or task that is generating an overload of frustration. Moderate to extreme intensity"
-    },
-    "excitement": {
-      "type": "state",
-      "text": "Energetic pursuit that, unlike other enjoyable emotions, is rarely felt slightly, but ranges from mid to high in intensity. May merge with any of the emotions to generate a very active form of that emotion. "
-    },
     "fear": {
       "type": "emotion",
       "text": "Response to a perceived or actual threat of harm, physically or to achievement of your important goals. Fears vary in terms of timing (impending, or in the future; and whether there is any possibility of coping with the threat to reduce it. There are nine fearful states: trepidation, nervousness, worried, anxiety, dread, panic, desperation, horror, terror."
-    },
-    "fiero": {
-      "type": "state",
-      "text": "The Italian word that describes the enjoyment felt when you have met a challenge that challenged and stretched your capabilities. moderate to very intense."
     },
     "firm": {
       "type": "action"
@@ -1376,29 +1288,13 @@
       "type": "action",
       "text": "To become fixed or motionless; especially, to become incapable of acting or speaking."
     },
-    "frustration": {
-      "type": "state",
-      "text": "Feeling unable to achieve a goal you are seeking. Slight to moderate intensity"
-    },
-    "fury": {
-      "type": "state",
-      "text": "Fury or Rage is at the highest strength of anger. May result in violent actions"
-    },
     "gloating": {
       "type": "action",
       "text": "To feel or express great, often malicious, pleasure or self-satisfaction."
     },
-    "grief": {
-      "type": "state",
-      "text": "Sadness or anguish aroused by the death of a loved one. Varies over time from very intense at the time of the death to moderate as time goes on."
-    },
     "guilt": {
       "type": "uncharted",
       "text": "Regret about a past action, which although the person recognizes they have acted wrongly, the motivation is to confess, believing that they may be forgiven. In guilt the disapproval is focused on the wrongful act, while in shame the wrongful act spreads to encompass the person"
-    },
-    "helpless": {
-      "type": "state",
-      "text": "There is nothing that can be done to cope with the loss or the threat. very intense"
     },
     "hesitate": {
       "type": "action",
@@ -1406,10 +1302,6 @@
     },
     "hitting": {
       "type": "action"
-    },
-    "horror": {
-      "type": "state",
-      "text": "Intense fear and disgust mixed together or alternating."
     },
     "insulting": {
       "type": "action",
@@ -1423,10 +1315,6 @@
       "type": "uncharted",
       "text": "An emotional story line involving three people, a desired person, a rival, and the person feeling the jealousy. Jealous people may, depending on what they believe is occurring, may feel any of the emotions. For some people jealousy is very toxic. Envy is sometimes confused with jealousy, but it involves two not three people,, in which one person desires to have what another has, often believing the person envied is not deserving."
     },
-    "loathing": {
-      "type": "state",
-      "text": "Very intense disgust."
-    },
     "love": {
       "type": "uncharted",
       "text": "A strong attachment to another person, typically parent towards child and child towards parent, but also between those romantically committed. Commitment, although it can be broken by traumatic misbehavior of the loved one, is typically enduring. Within a loving relationship all of the emotions can at some point be felt."
@@ -1438,37 +1326,13 @@
     "maintain": {
       "type": "action"
     },
-    "miserable": {
-      "type": "state",
-      "text": "Intense prolonged feelings of sadness and anguish, can be also a mood."
-    },
     "mood": {
       "type": "",
       "text": "A slight but continuous emotion saturated state that makes someone less responsive to the changing nuances of his or her environment; rarely does one know why he or she is in a mood. Moods last for hours emotions endure for minutes. In emotions one usually knows what triggered it, at least afterwards, but the trigger for a mood often is unknown and unknowable."
     },
-    "naches": {
-      "type": "state",
-      "text": "The Yiddish word for the enjoyable feeling of pride in the accomplishments, or sometimes just the existence, of your actual offspring, or mentored offspring. Crucial for motivating the nurture of infants and children. "
-    },
-    "nauseous": {
-      "type": "state",
-      "text": "Used metaphorically to denote a very intense disgust reaction."
-    },
-    "nervousness": {
-      "type": "state",
-      "text": "Having or showing feelings of being worried and afraid about what might happen."
-    },
     "ornery": {
       "type": "action",
       "text": "Easily annoyed or angered. Can be an emotional state or a personality type"
-    },
-    "panic": {
-      "type": "state",
-      "text": "Extreme fear with no way to reduce the threat anticipated."
-    },
-    "pride": {
-      "type": "state",
-      "text": "Wanting others to know the pleasure you feel in your own accomplishment or the accomplishments of other who you either nurtured directly or identify with. Naches as defined above is a specific type of pride."
     },
     "pugnacious": {
       "type": "action",
@@ -1482,33 +1346,9 @@
       "type": "",
       "text": "These are actions or words that one regrets having engaged in. Rarely felt while those regrettable actions are occurring, but afterwards when consciousness\/awareness comes into play reflecting on what one has done and why. Often it is the response of the target that brings the regrettable behavior into the person\u2019s awareness. Characteristics of a regrettable episode: 1. Response is too weak, not sufficient to the situation. 2. Response is too strong, more intense than the situation demands. 3. There was no response at all, when the situation demanded some response. 4. The response is at the correct strength, but it is delivered in a hurtful way (if anger) or in an otherwise undesirable fashion. Any of these characteristics may combine. Usually a person is unaware of their intention, unaware of how they are acting, until afterwards. If awareness were to arise during the regrettable episode, the episode would be interrupted. Why do regrettable episodes occur? Because the person is unaware of the emotion that has been triggered and the destructive actions that have been activated. Regrettable episodes are typically manifest with the same characteristic, too strong or too weak etc., again and again. Remedies: To bring awareness to recognize the triggers, and if possible the impulses to actions before the action, or the type of action that is selected. "
     },
-    "rejoicing": {
-      "type": "state",
-      "text": "A warm, uplifting feeling that people experience when they see unexpected acts of human goodness, kindness, and compassion. Also called elevation."
-    },
-    "relief": {
-      "type": "state",
-      "text": "Relief, when something unpleasant, especially the threat of harm, is relieved. Moderate to extreme intensity"
-    },
-    "repugnance": {
-      "type": "state",
-      "text": "Slight to extreme feeling of being repelled by something toxic, literally or figuratively."
-    },
-    "resigned": {
-      "type": "state",
-      "text": " Sad acceptance of an important loss. Moderate to extremely intense"
-    },
-    "revulsion": {
-      "type": "state",
-      "text": "Very strong disgust."
-    },
     "sadness": {
       "type": "emotion",
       "text": "Mourning, figuratively or literally, the loss of something or someone important. There are ten states: disappointed, distraught, discouraged, helpless, miserable, grief, despair, sorrowful, resigned, anguish."
-    },
-    "schadenfreude": {
-      "type": "state",
-      "text": "Enjoying the misfortunes of another person, usually a rival. Moderate to extreme intensity"
     },
     "seek comfort": {
       "type": "action"
@@ -1524,10 +1364,6 @@
       "type": "uncharted",
       "text": "Often accompanies disgust with one self, and the expectation that if others knew the offensive thoughts or actions, they would be disgusted. The motivation in shame is to never reveal the offensive thought or actions. There is no distinctive brief facial expression for shame. Sadness appears on the face, sometimes with the head turned away or hand covering part of the face. Shame is often confused with guilt, but they differ in that in shame there is self-loathing and motivation to never relevel the misbehavior. It is not just a wrongful act, as it is in guilt, but the self itself which is at fault. Guilt is about a wrongful action, acknowledgment of that wrongful act may elicit forgiveness."
     },
-    "sorrowful": {
-      "type": "state",
-      "text": "Feeling or showing grief."
-    },
     "spiteful": {
       "type": "action",
       "text": "Having or showing a desire to harm, injure or defeat someone, especially because you feel that you have been treated wrongly in some way."
@@ -1540,17 +1376,9 @@
       "type": "uncharted",
       "text": "The briefest emotion, triggered by the sudden occurrence of an unexpected event. It can be a way station, leading, after more appraisal, to any of the emotions."
     },
-    "terror": {
-      "type": "state",
-      "text": "Extreme fear."
-    },
     "time out": {
       "type": "action",
       "text": "A short period of time when a child must sit quietly as punishment for behaving badly. In adult arguments a request for time-out can allow for reappraisal and reconsideration of the trigger and what action to choose."
-    },
-    "trepidation": {
-      "type": "state",
-      "text": "Mild fear, typically about something not immediate but pending"
     },
     "trigger": {
       "type": "",
@@ -1564,10 +1392,6 @@
       "type": "action",
       "text": "To make (someone or something) weaker or less effective, usually in a secret or gradual way."
     },
-    "vengeful": {
-      "type": "state",
-      "text": "A desire to harm someone who has harmed you."
-    },
     "vomit": {
       "type": "action",
       "text": "Literally to expel material from the mouth or stomach; metaphorically denotes very intense disgust."
@@ -1575,14 +1399,6 @@
     "withdrawal": {
       "type": "action",
       "text": "Social or emotional detachment from a situation. Also, a pathological retreat from objective reality (as in some schizophrenic states)."
-    },
-    "wonder": {
-      "type": "state",
-      "text": "A feeling caused by seeing something that is very surprising, beautiful, amazing, or hard to believe. Moderate to extreme intensity."
-    },
-    "worried": {
-      "type": "state",
-      "text": "Concern about something bad that might happen. Moderate to extremely intense."
     }
   },
   "other": {
@@ -1637,7 +1453,7 @@
       ]
     },
     "science": {
-      "title": “The Five Emotion Continents“,
+      "title": "The Five Emotion Continents",
       "columns": [
         {
           "sections": [
