@@ -1,10 +1,10 @@
 {
   "emotions": {
     "sadness": {
-      "desc": "There is significant overlap in the states of sadness, which represents a broad range of intensities.",
+      "desc": "We experience sadness with the actual or perceived loss of a person to whom we are attached, such as an offspring, a lover, close friend, or to a loss of our own health or social status or to the loss of an object that we value highly.",
       "states": {
-        "disappointed": {
-          "desc": "disappointed description",
+        "disappointment”: {
+          "desc": "disappointment description",
           "range": {
             "min": 1,
             "max": 5
@@ -22,8 +22,8 @@
             }
           }
         },
-        "distraught": {
-          "desc": "distraught description",
+        "distraughtness”: {
+          "desc": "distraughtness description",
           "range": {
             "min": 2,
             "max": 8
@@ -41,8 +41,8 @@
             }
           }
         },
-        "discouraged": {
-          "desc": "discouraged description",
+        "discouragement”: {
+          "desc": "discouragement description",
           "range": {
             "min": 2,
             "max": 8
@@ -60,8 +60,8 @@
             }
           }
         },
-        "resigned": {
-          "desc": "resigned description",
+        "resignation”: {
+          "desc": "resignation description",
           "range": {
             "min": 1,
             "max": 10
@@ -89,8 +89,8 @@
             }
           }
         },
-        "helpless": {
-          "desc": "helpless description",
+        "helplessness”: {
+          "desc": "helplessness description",
           "range": {
             "min": 5,
             "max": 10
@@ -108,8 +108,8 @@
             }
           }
         },
-        "miserable": {
-          "desc": "miserable description",
+        "misery”: {
+          "desc": "misery description",
           "range": {
             "min": 6,
             "max": 10
@@ -146,8 +146,8 @@
             }
           }
         },
-        "despairing": {
-          "desc": "despairing description",
+        "despair": {
+          "desc": "despair description",
           "range": {
             "min": 7,
             "max": 10
@@ -165,8 +165,8 @@
             }
           }
         },
-        "sorrowful": {
-          "desc": "sorrowful description",
+        "sorrow": {
+          "desc": "sorrow description",
           "range": {
             "min": 7,
             "max": 10
@@ -206,9 +206,10 @@
       }
     },
     "disgust": {
-      "desc": "Disgust manifests generally as something fairly mild or very strong, with few states occupying the middle.",
+      "desc": "We experience disgust in reaction to toxic smells, tastes, unappealing appearances or repulsive behaviors. While usually unpleasant, in small doses disgust may sometimes be enjoyable.",
       "states": {
         "aversion": {
+          "desc": “aversion description",
           "range": {
             "min": 2,
             "max": 7
@@ -232,6 +233,7 @@
           }
         },
         "dislike": {
+          "desc": “dislike description",
           "range": {
             "min": 1,
             "max": 5
@@ -260,6 +262,7 @@
           }
         },
         "distaste": {
+          "desc": “distaste description",
           "range": {
             "min": 2,
             "max": 7
@@ -288,6 +291,7 @@
           }
         },
         "repugnance": {
+          "desc": “repugnance description",
           "range": {
             "min": 2,
             "max": 9
@@ -305,7 +309,8 @@
             }
           }
         },
-        "nauseous": {
+        "nauseousness”: {
+          "desc": “nausousness description",
           "range": {
             "min": 8,
             "max": 10
@@ -334,6 +339,7 @@
           }
         },
         "loathing": {
+          "desc": “loathing description",
           "range": {
             "min": 9,
             "max": 10
@@ -372,6 +378,7 @@
           }
         },
         "revulsion": {
+          "desc": “revulsion description",
           "range": {
             "min": 8,
             "max": 10
@@ -400,6 +407,7 @@
           }
         },
         "abhorrence": {
+          "desc": “abhorrence description",
           "range": {
             "min": 8,
             "max": 10
@@ -425,7 +433,7 @@
       }
     },
     "anger": {
-      "desc": "The intensity of anger states tends to be on the strong side, although some states encompass a broader range.",
+      "desc": "We experience anger whenever our pursuit of an important goal is blocked, especially by a physical threat. In the grip of anger we may act in ways that we later regret.",
       "states": {
         "annoyance": {
           "desc": "annoyance description",
@@ -658,8 +666,8 @@
             }
           }
         },
-        "argumentative": {
-          "desc": "argumentative description",
+        "argumentativeness”: {
+          "desc": "argumentativeness description",
           "range": {
             "min": 2,
             "max": 10
@@ -697,8 +705,8 @@
             }
           }
         },
-        "vengeful": {
-          "desc": "vengeful description",
+        "vengefulness”: {
+          "desc": "vengefulness description",
           "range": {
             "min": 5,
             "max": 10
@@ -808,9 +816,10 @@
       }
     },
     "fear": {
-      "desc": "Many different states of fear fall into the most intense range.",
+      "desc": "We experience fear when we perceive a threat of harm. Examples are threats to our health, wealth, social status (relationships), or identity/self-image.”,
       "states": {
         "trepidation": {
+          "desc": “trepidation description",
           "range": {
             "min": 1,
             "max": 2
@@ -824,6 +833,7 @@
           }
         },
         "nervousness": {
+          "desc": “nervousness description",
           "range": {
             "min": 2,
             "max": 7
@@ -836,7 +846,8 @@
             }
           }
         },
-        "worried": {
+        "worry”: {
+          "desc": “worry description",
           "range": {
             "min": 2,
             "max": 7
@@ -850,6 +861,7 @@
           }
         },
         "anxiety": {
+          "desc": “anxiety description",
           "range": {
             "min": 1,
             "max": 10
@@ -873,6 +885,7 @@
           }
         },
         "dread": {
+          "desc": “dread description",
           "range": {
             "min": 6,
             "max": 10
@@ -891,6 +904,7 @@
           }
         },
         "desperation": {
+          "desc": “desperation description",
           "range": {
             "min": 9,
             "max": 10
@@ -914,6 +928,7 @@
           }
         },
         "panic": {
+          "desc": “panic description",
           "range": {
             "min": 9,
             "max": 10
@@ -932,6 +947,7 @@
           }
         },
         "horror": {
+          "desc": “horror description",
           "range": {
             "min": 10,
             "max": 10
@@ -950,6 +966,7 @@
           }
         },
         "terror": {
+          "desc": “terror description",
           "range": {
             "min": 10,
             "max": 10
@@ -970,9 +987,10 @@
       }
     },
     "enjoyment": {
-      "desc": "Enjoyment has more named states in the English language than any of the other emotions.",
+      "desc": "We experience enjoyment when a good feeling is generated, which we often seek to continue or re-experience.”,
       "states": {
         "relief": {
+          "desc": “relief description",
           "range": {
             "min": 2,
             "max": 10
@@ -986,6 +1004,7 @@
           }
         },
         "amusement": {
+          "desc": “amusement description",
           "range": {
             "min": 2,
             "max": 8
@@ -1009,6 +1028,7 @@
           }
         },
         "excitement": {
+          "desc": “excitement description",
           "range": {
             "min": 6,
             "max": 10
@@ -1032,6 +1052,7 @@
           }
         },
         "ecstasy": {
+          "desc": “ecstasy description",
           "range": {
             "min": 9,
             "max": 10
@@ -1050,6 +1071,7 @@
           }
         },
         "fiero": {
+          "desc": “fiero description",
           "range": {
             "min": 3,
             "max": 10
@@ -1078,6 +1100,7 @@
           }
         },
         "naches": {
+          "desc": “naches description",
           "range": {
             "min": 3,
             "max": 10
@@ -1096,6 +1119,7 @@
           }
         },
         "wonder": {
+          "desc": “wonder description",
           "range": {
             "min": 5,
             "max": 10
@@ -1109,6 +1133,7 @@
           }
         },
         "schadenfreude": {
+          "desc": “schadenfreude description",
           "range": {
             "min": 3,
             "max": 8
@@ -1132,6 +1157,7 @@
           }
         },
         "rejoicing": {
+          "desc": “rejoicing description",
           "range": {
             "min": 2,
             "max": 8
@@ -1145,6 +1171,7 @@
           }
         },
         "compassion-joy": {
+          "desc": “compassion-joy description",
           "range": {
             "min": 3,
             "max": 6
@@ -1158,6 +1185,7 @@
           }
         },
         "pride": {
+          "desc": “pride description",
           "range": {
             "min": 4,
             "max": 9
@@ -1609,13 +1637,13 @@
       ]
     },
     "science": {
-      "title": "Scientific Basis",
+      "title": “The Five Emotion Continents“,
       "columns": [
         {
           "sections": [
             {
               "title": "",
-              "content": "The Emotions Atlas is based on the consensus among scientists (in the choice of the five emotion continents and the relationship of emotions to moods, personality and psychopathology), the work of a few scientists who focused on the naming of states within emotions, dictionary definitions in the glossary, and theory or best guesses about the actions for each state and whether they are constructive or destructive. For more information, see \"What Emotion Scientists Agree About\", by Paul Ekman Perspectives in Psychological Science, in press."
+              "content": "Five emotions have been substantiated by scientific research: Anger, Fear, Enjoyment, Sadness and Disgust. Their relative importance in each person’s life varies, which is why the shapes move and change shape."
             }
           ]
         }
