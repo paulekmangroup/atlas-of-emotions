@@ -1,10 +1,10 @@
 #states {
 	position: absolute;
 	width: 100%;
-	height: calc(100% - #{$header-height});
+	height: 100%;
 	min-height: 600px;
 
-	bottom: 0;
+	top: 0;
 	left: 50%;
 	margin-left: -50%;
 

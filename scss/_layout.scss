@@ -78,12 +78,13 @@ h6 { font-size: 0.333333em; }
 
 #main {
 	text-align: center;
+	position: relative;
 }
 
 #callout {
 	position: absolute;
 	width: 19em;
-	top: $header-height;
+	top: 0;
 	left: 0;
 
 	padding: 1.5em;
