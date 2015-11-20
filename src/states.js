@@ -32,6 +32,8 @@ export default {
 	
 	init: function (containerNode) {
 
+		console.log(">>>>> STATES.INIT");
+
 		this.onKeyDown = this.onKeyDown.bind(this);
 		document.addEventListener('keydown', this.onKeyDown);
 
@@ -57,6 +59,8 @@ export default {
 
 		let innerWidth = graphContainer.offsetWidth - margin.left - margin.right;
 		let innerHeight = graphContainer.offsetHeight - margin.top - margin.bottom;
+
+		console.log(">>>>> innerWidth:", innerWidth, "innerHeight", innerHeight);
 
 		let svg = d3.select(graphContainer).append('svg')
 			.attr('width', graphContainer.offsetWidth)
@@ -194,6 +198,12 @@ export default {
 		setTimeout(() => {
 			this.resetCallout();
 		}, LABEL_APPEAR_DELAY);
+
+	},
+
+	open: function (emotion) {
+
+		this.setEmotion(emotion);
 
 	},
 

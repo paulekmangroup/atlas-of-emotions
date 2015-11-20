@@ -4,6 +4,7 @@ const dispatcher = {
 
 	EVENTS: {
 		NAVIGATE: 'navigate',
+		NAVIGATE_COMPLETE: 'navigateComplete',
 		CHANGE_CALLOUT: 'changeCallout'
 	},
 
@@ -23,6 +24,10 @@ const dispatcher = {
 		SADNESS: 'sadness'
 	},
 
+	/**
+	 * @param  {[type]} section Section navigating to
+	 * @param  {[type]} emotion Emotion navigating to
+	 */
 	navigate: function (section, emotion) {
 
 		if (!this.validateSection(section)) {
@@ -34,6 +39,24 @@ const dispatcher = {
 		}
 
 		this.emit(this.EVENTS.NAVIGATE, section, emotion);
+
+	},
+
+	/**
+	 * @param  {[type]} section Section navigated away from
+	 * @param  {[type]} emotion Emotion navigated away from
+	 */
+	navigateComplete: function (section, emotion) {
+
+		if (section && !this.validateSection(section)) {
+			throw new Error('Invalid section "' + section + '".');
+		}
+
+		if (emotion && !this.validateEmotion(emotion)) {
+			throw new Error('Invalid emotion "' + emotion + '".');
+		}
+
+		this.emit(this.EVENTS.NAVIGATE_COMPLETE, section, emotion);
 
 	},
 

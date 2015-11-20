@@ -56,6 +56,9 @@ const continentsSection = {
 			this.transitions[transitionKey] = this.transitions[transitionKey].bind(this);
 		});
 
+		// Bind event handlers to current scope
+		this.onContinentMouseUp = this.onContinentMouseUp.bind(this);
+
 		this.isInited = true;
 
 		this.setActive(true, containerNode);
@@ -119,6 +122,7 @@ const continentsSection = {
 			// transitions.spreadFocusedContinent()
 			// 2d. while 2a-c happens, execute (currentEmotion):2b-c above.
 
+
 			let targetScale = 1.0;
 
 			this.transitions.unfocusContinents(continents
@@ -135,6 +139,7 @@ const continentsSection = {
 			setTimeout(() => {
 				this.transitions.spreadFocusedContinent(emotion, targetScale);
 			}, 750);
+		
 		}
 
 		currentEmotion = emotion;
@@ -266,25 +271,39 @@ const continentsSection = {
 		// 1a. fade out and shrink circles of continent;
 		// 1b. pull circles together toward center along horizontal axis as they fade/shrink
 		//		note: for zoomed-out continents, circles will already be centered, but that's ok.
-		unfocusContinents: function (emotions) {
+		unfocusContinents: function (emotions, delays={}, time=1200) {
 
-			let targetContinents = continents.filter(continent => ~emotions.indexOf(continent.id));
-			let translate;
-			targetContinents.forEach(continent => {
+			let MAX_TIME;
 
-				// turn off spawning, in a way it can easily be turned back on
-				continent.spawnConfig.freq *= -1;
+			if (delays) {
+				MAX_TIME = time + (_.max(_.values(delays)) || 0);
+			}
 
-				// scale down to nothing
-				continent.addTween({
-					'scaleX': 0.0,
-					'scaleY': 0.0
-				}, 1200, TWEEN.Easing.Quadratic.InOut);
+			return new Promise((resolve, reject) => {
 
-				// TODO: move each circle within continent toward continent center
-				// continent.spreadCircles(false);
-				// -- or --
-				// continent.gatherCircles()
+				let targetContinents = continents.filter(continent => ~emotions.indexOf(continent.id)),
+					translate;
+				targetContinents.forEach(continent => {
+
+					// turn off spawning, in a way it can easily be turned back on
+					continent.spawnConfig.freq *= -1;
+
+					// scale down to nothing
+					continent.addTween({
+						'scaleX': 0.0,
+						'scaleY': 0.0
+					}, time + (delays[continent.id] || 0), TWEEN.Easing.Quadratic.InOut);
+
+					// TODO: move each circle within continent toward continent center
+					// continent.spreadCircles(false);
+					// -- or --
+					// continent.gatherCircles()
+
+				});
+
+				setTimeout(() => {
+					resolve();
+				}, MAX_TIME);
 
 			});
 
@@ -317,7 +336,9 @@ const continentsSection = {
 
 	},
 
-	onContinentMouseEnter: function () {
+	onContinentMouseEnter: function (event) {
+
+		var d33 = d3;
 
 		let continent = d3.select(this).datum();
 		if (continent) {
@@ -328,7 +349,7 @@ const continentsSection = {
 
 	},
 
-	onContinentMouseLeave: function () {
+	onContinentMouseLeave: function (event) {
 
 		let continent = d3.select(this).datum();
 		if (continent) {
@@ -339,10 +360,28 @@ const continentsSection = {
 
 	onContinentMouseUp: function (event) {
 
-		continents.some(function (continent) {
+		continents.some(continent => {
 			if (continent.isHighlighted) {
-				dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS, continent.id);
-				dispatcher.changeCallout(continent.id, appStrings.emotionCalloutTitle, appStrings.emotionCalloutIntro + '<br><br>' + emotionsData.emotions[continent.id].desc);
+
+				// TODO: [continents-to-states]
+				// commented out in order to transition directly from continents to states;
+				// uncomment to bring back intermediate zoomed continent view.
+				// 
+				// dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS, continent.id);
+				// dispatcher.changeCallout(continent.id, appStrings.emotionCalloutTitle, appStrings.emotionCalloutIntro + '<br><br>' + emotionsData.emotions[continent.id].desc);
+				
+
+				// fade out continent labels
+				d3.selectAll('#continent-labels div')
+					.style('opacity', 0.0);
+
+				let delays = {};
+				delays[continent.id] = 500;
+				this.transitions.unfocusContinents(continents.map(continent => continent.id), delays, 800)
+				.then(() => {
+					dispatcher.navigate(dispatcher.SECTIONS.STATES, continent.id);
+				});
+
 				return true;
 			}
 		});

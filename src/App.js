@@ -20,6 +20,7 @@ export default function (...initArgs) {
 
 		document.addEventListener('keydown', onKeyDown);
 		dispatcher.addListener(dispatcher.EVENTS.NAVIGATE, onNavigate);
+		dispatcher.addListener(dispatcher.EVENTS.NAVIGATE_COMPLETE, onNavigateComplete);
 		dispatcher.addListener(dispatcher.EVENTS.CHANGE_CALLOUT, onCalloutChange);
 		window.addEventListener('hashchange', onHashChange);
 
@@ -92,7 +93,16 @@ export default function (...initArgs) {
 		let section = sections[sectionName];
 
 		if (!section.isInited) {
+			// turn on display so width/height can be calculated
+			let currentDisplay = containers[sectionName].style.display;
+			containers[sectionName].removeAttribute('style');
+
 			section.init(containers[sectionName]);
+
+			// set display back to where it was
+			if (currentDisplay) {
+				containers[sectionName].style.display = currentDisplay;
+			}
 		}
 
 		if (!currentSection) {
@@ -119,6 +129,8 @@ export default function (...initArgs) {
 			} else {
 				// navigate between sections
 				// TODO: implement animation
+				
+				containers[sectionName].removeAttribute('style');
 				section.open(currentEmotion);
 			}
 
@@ -136,7 +148,6 @@ export default function (...initArgs) {
 
 		// setSection cues up emotion changes,
 		// making this function very simple.
-
 		currentEmotion = emotion;
 
 	}
@@ -170,6 +181,14 @@ export default function (...initArgs) {
 	function onNavigate (section, emotion) {
 
 		document.location.hash = section + ':' + emotion;
+
+	}
+
+	function onNavigateComplete (section, emotion) {
+
+		console.log(">>>>> onNavCompl; hide container:", section);
+
+		containers[section].style.display = 'none';
 
 	}
 
