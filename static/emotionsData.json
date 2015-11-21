@@ -1,7 +1,7 @@
 {
   "emotions": {
     "sadness": {
-      "desc": "There are three characteristics of emotion states: intensity, duration and frequency. This map represents examples of intensity and duration but frequency is unique for individuals, it depends on the personality and the situations of that individual.  There is significant overlap in the states of sadness compared to previous maps, but there is still a  broad range of intensities",
+      "desc": "There is significant overlap in the states of sadness compared to previous maps, but there is still a broad range of intensities.",
       "states": {
         "disappointment": {
           "desc": "Felt when expectations are not met, resulting in a loss.",
@@ -206,7 +206,7 @@
       }
     },
     "disgust": {
-      "desc": "There are three characteristics of emotion states: intensity, duration and frequency. This map represents examples of intensity and duration but frequency is unique for individuals, it depends on the personality and the situations of that individual. Disgust manifests generally as something fairly mild or very strong, with few states occupying the middle.",
+      "desc": "Disgust manifests generally as something fairly mild or very strong, with few states occupying the middle.",
       "states": {
         "aversion": {
           "desc": "Wanting to avoid something noxious.",
@@ -987,7 +987,7 @@
       }
     },
     "enjoyment": {
-      "desc": "There are three characteristics of emotion states: intensity, duration and frequency. This map represents examples of intensity and duration but frequency is unique for individuals, it depends on the personality and the situations of that individual. Enjoyment has more named states in the English language than any of the other emotions.",
+      "desc": "Enjoyment has more named states in the English language than any of the other emotions.",
       "states": {
         "relief": {
           "desc": "When something expected to be unpleasant, especially the threat of harm, is avoided or comes to an end.",
