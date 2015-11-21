@@ -204,6 +204,11 @@ export default {
 		this.renderLabels(transformedRanges);
 
 		setTimeout(() => {
+			this.stateGraphContainer.selectAll('.axis')
+				.classed('visible', true);
+		}, 1);
+
+		setTimeout(() => {
 			this.resetCallout();
 		}, LABEL_APPEAR_DELAY);
 
@@ -231,7 +236,8 @@ export default {
 				.style('opacity', null);
 
 			// fade out axes
-			// TODO
+			this.stateGraphContainer.selectAll('.axis')
+				.classed('visible', false);
 
 			// remove main callout
 			dispatcher.changeCallout();
