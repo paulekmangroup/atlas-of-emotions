@@ -61,7 +61,7 @@ const continentsSection = {
 
 		this.isInited = true;
 
-		this.setActive(true, containerNode);
+		this.setActive(true);
 
 		this.update();
 
@@ -159,7 +159,6 @@ const continentsSection = {
 			} else {
 
 				// display all continents
-				console.log(">>>>> open to:", previousEmotion);
 				let delays = {};
 				continents.forEach(continent => {
 					delays[continent.id] = continent.id === previousEmotion ? 0 : 800;
@@ -194,20 +193,30 @@ const continentsSection = {
 
 	open: function (emotion) {
 
-		// TODO: need to do anything to open states prior to setting emotion?
+		this.setActive(true);
+
+		// fade in continent labels
+		d3.selectAll('#continent-labels div')
+			.style('opacity', 1.0);
+
+		this.update();
 
 	},
 
 	close: function () {
 
 		return new Promise((resolve, reject) => {
-			// TODO: anything that needs to happen before close() can be considered complete
+
+			// tuen off updates and interaction
+			this.setActive(false);
+
 			resolve();
+
 		});
 
 	},
 
-	setActive: function (val, container) {
+	setActive: function (val) {
 
 		let section = this;
 		this.isActive = val;
@@ -413,11 +422,17 @@ const continentsSection = {
 				// dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS, continent.id);
 				// dispatcher.changeCallout(continent.id, appStrings.emotionCalloutTitle, appStrings.emotionCalloutIntro + '<br><br>' + emotionsData.emotions[continent.id].desc);
 				
+				// only anger and sadness are currently implemented in states.js
+				if (continent.id !== dispatcher.EMOTIONS.ANGER &&
+					continent.id !== dispatcher.EMOTIONS.SADNESS) {
+					return;
+				}
 
 				// fade out continent labels
 				d3.selectAll('#continent-labels div')
 					.style('opacity', 0.0);
 
+				// shrink down continents
 				let delays = {};
 				delays[continent.id] = 500;
 				this.transitions.scaleContinents(continents.map(continent => continent.id), 0.0, delays, 800)

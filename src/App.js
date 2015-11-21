@@ -42,11 +42,11 @@ export default function (...initArgs) {
 		let mainEl = document.querySelector('#main'),
 			containerEl;
 
-		_.values(dispatcher.SECTIONS).forEach(section => {
+		_.values(dispatcher.SECTIONS).forEach(sectionName => {
 			containerEl = document.createElement('div');
-			containerEl.id = section;
+			containerEl.id = sectionName;
 			mainEl.appendChild(containerEl);
-			containers[section] = containerEl;
+			containers[sectionName] = containerEl;
 		});
 
 	}
@@ -92,7 +92,16 @@ export default function (...initArgs) {
 
 	function setSection (sectionName, previousEmotion) {
 
-		let section = sections[sectionName];
+		let section = sections[sectionName],
+			previousSection = currentSection,
+			previousContainer;
+
+		for (let key in sections) {
+			if (sections[key] === previousSection) {
+				previousContainer = containers[key];
+				break;
+			}
+		}
 
 		if (!section.isInited) {
 			// turn on display so width/height can be calculated
@@ -107,11 +116,13 @@ export default function (...initArgs) {
 			}
 		}
 
-		if (!currentSection) {
+		if (!previousSection) {
 			
 			// for now (until transitions implemented), just hide all but the current section
 			for (let key in containers) {
-				containers[key].style.display = (key === sectionName) ? '' : 'none';
+				if (key !== sectionName) {
+					containers[key].style.display = 'none';
+				}
 			}
 
 			// initial section; do not animate
@@ -121,19 +132,24 @@ export default function (...initArgs) {
 
 		} else {
 
-			// section already open; perform transition
+			// some section is already open; perform transition
 			
-			if (currentSection === section) {
+			if (previousSection === section) {
 				// change emotion within current section
 				if (currentEmotion) {
 					section.setEmotion(currentEmotion);
 				}
 			} else {
 				// navigate between sections
-				// TODO: implement animation
-				
-				currentSection.close()
+				previousSection.close()
 				.then(() => {
+					// hide the previous section's container
+					if (previousContainer) {
+						previousContainer.style.display = 'none';
+					}
+
+					// reveal the new section's container,
+					// open the new section, and set its emotion
 					containers[sectionName].removeAttribute('style');
 					section.open(currentEmotion);
 					section.setEmotion(currentEmotion, previousEmotion);

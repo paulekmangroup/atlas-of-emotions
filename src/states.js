@@ -32,6 +32,7 @@ export default {
 	
 	init: function (containerNode) {
 
+		this.applyTransitions = this.applyTransitions.bind(this);
 		this.onKeyDown = this.onKeyDown.bind(this);
 		document.addEventListener('keydown', this.onKeyDown);
 
@@ -190,7 +191,7 @@ export default {
 		transformedRanges = this.transformRanges(this.currentStatesData, this.currentEmotion, 1.0);
 		this.stateGraphContainer.selectAll('path.area')
 			.data(transformedRanges)
-			.call(this.applyTransitions.bind(this));
+			.call(this.applyTransitions);
 
 		this.renderLabels(transformedRanges);
 
@@ -213,13 +214,25 @@ export default {
 			// and clean up to prepare for a different state graph
 			
 			// TODO: refactor per comment at top of setEmotion
+
+			// fade out labels
+			d3.select(this.labelContainer).selectAll('div')
+				.classed('visible', false)
+			.selectAll('h3')
+				.style('opacity', null);
+
+			// remove main callout
+			dispatcher.changeCallout();
 			
+			// recede graph down into baseline
+			// and resolve promise to continue transition when complete
 			let transformedRanges = this.transformRanges(this.currentStatesData, this.currentEmotion, 0.0);
 			this.stateGraphContainer.selectAll('path.area')
 				.data(transformedRanges)
-				.call(this.applyTransitions.bind(this), () => {
+				.call(this.applyTransitions, 'close', () => {
 					resolve();
 				});
+
 		});
 
 	},
@@ -460,7 +473,7 @@ export default {
 				ease: d3.ease('elastic-in', 2.5, 2),
 				delay: (d, i) => 250 + Math.random() * 1250,
 				duration: 5000
-			}
+			},
 			/*
 			enjoyment: {
 				ease: d3.ease('linear'),
@@ -468,6 +481,11 @@ export default {
 				duration: 1000
 			}
 			*/
+			close: {
+				ease: d3.ease('ease-out'),
+				delay: (d, i) => Math.random() * 20 * i,
+				duration: 650
+			}
 		
 		};
 
@@ -482,9 +500,9 @@ export default {
 
 	},
 
-	applyTransitions: function (selection, onEnd) {
+	applyTransitions: function (selection, transitionOverride=null, onEnd=null) {
 
-		let transitionConfig = this.transitions[this.currentEmotion],
+		let transitionConfig = this.transitions[transitionOverride || this.currentEmotion],
 			calledOnEnd = false;
 
 		selection.transition()
