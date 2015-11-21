@@ -9,6 +9,8 @@ const LABEL_APPEAR_DELAY = 1000;
 
 export default {
 
+	isInited: false,
+
 	emotions: [
 		'anger',
 		'fear',
@@ -119,6 +121,8 @@ export default {
 			.attr('text-anchor', (d, i) => i ? 'end' : 'start')
 			.attr('style', null);
 
+		this.isInited = true;
+
 	},
 
 	initLabels: function (containerNode) {
@@ -133,9 +137,11 @@ export default {
 
 		let stateDisplay = this,
 			labels = d3.select(this.labelContainer).selectAll('div')
-			.data(ranges);
+				.data(ranges);
 
-		labels.enter().append('div')
+		labels.enter().append('div');
+
+		labels
 			.classed(this.currentEmotion + ' label', true)
 			.html((d, i) => '<h3>' + this.currentStatesData[i].name.toUpperCase() + '</h3>')
 			.style({
@@ -147,6 +153,8 @@ export default {
 					this.classList.add('visible');
 				}, LABEL_APPEAR_DELAY);
 			});
+
+		labels.exit().remove();
 
 	},
 
@@ -210,10 +218,11 @@ export default {
 	close: function () {
 
 		return new Promise((resolve, reject) => {
-			// TODO: animate out states graph
-			// and clean up to prepare for a different state graph
-			
-			// TODO: refactor per comment at top of setEmotion
+
+			//
+			// TODO: the logic below should be reusable for transitioning between states.
+			// refactor as such, along with refactor noted at top of setEmotion().
+			//
 
 			// fade out labels
 			d3.select(this.labelContainer).selectAll('div')
@@ -221,16 +230,30 @@ export default {
 			.selectAll('h3')
 				.style('opacity', null);
 
+			// fade out axes
+			// TODO
+
 			// remove main callout
 			dispatcher.changeCallout();
 			
 			// recede graph down into baseline
-			// and resolve promise to continue transition when complete
 			let transformedRanges = this.transformRanges(this.currentStatesData, this.currentEmotion, 0.0);
 			this.stateGraphContainer.selectAll('path.area')
 				.data(transformedRanges)
 				.call(this.applyTransitions, 'close', () => {
-					resolve();
+					// d3 seems to call 'close' one frame too early;
+					// wait one frame to ensure animation is complete.
+					setTimeout(() => {
+						// on transition end, remove graph elements
+						this.stateGraphContainer.selectAll('path.area').remove();
+						this.stateGraphContainer.selectAll('linearGradient').remove();
+
+						// ...remove labels
+						d3.select(this.labelContainer).selectAll('div').remove();
+
+						// ...and resolve promise to continue transition when complete
+						resolve();
+					}, 1);
 				});
 
 		});
@@ -483,8 +506,8 @@ export default {
 			*/
 			close: {
 				ease: d3.ease('ease-out'),
-				delay: (d, i) => Math.random() * 20 * i,
-				duration: 650
+				delay: (d, i) => Math.random() * 50 * i,
+				duration: 800
 			}
 		
 		};
