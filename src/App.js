@@ -5,6 +5,11 @@ import states from './states.js';
 
 export default function (...initArgs) {
 
+	const navigationDefaults = {
+		section: dispatcher.SECTIONS.CONTINENTS,
+		emotion: null
+	};
+
 	let containers = {},
 		sections = {},
 		callout;
@@ -28,10 +33,7 @@ export default function (...initArgs) {
 		let headerHeight = 55;	// from _variables.scss
 		containerNode.style.height = (window.innerHeight - headerHeight) + 'px';
 
-		onHashChange(null, {
-			section: dispatcher.SECTIONS.CONTINENTS,
-			emotion: null
-		});
+		onHashChange();
 
 	}
 
@@ -88,7 +90,7 @@ export default function (...initArgs) {
 
 	}
 
-	function setSection (sectionName) {
+	function setSection (sectionName, previousEmotion) {
 
 		let section = sections[sectionName];
 
@@ -130,8 +132,12 @@ export default function (...initArgs) {
 				// navigate between sections
 				// TODO: implement animation
 				
-				containers[sectionName].removeAttribute('style');
-				section.open(currentEmotion);
+				currentSection.close()
+				.then(() => {
+					containers[sectionName].removeAttribute('style');
+					section.open(currentEmotion);
+					section.setEmotion(currentEmotion, previousEmotion);
+				});
 			}
 
 		}
@@ -192,21 +198,26 @@ export default function (...initArgs) {
 
 	}
 
-	function onHashChange (event, defaults) {
+	function onHashChange (event, defaults=navigationDefaults) {
 
 		let hash = document.location.hash.replace(/^#/, '');
 		hash = parseHash(hash);
+
+		let previousEmotion = currentEmotion;
 
 		if (dispatcher.validateEmotion(hash.emotion)) {
 			setEmotion(hash.emotion);
 		} else if (defaults && defaults.emotion) {
 			setEmotion(defaults.emotion);
+		} else {
+			// continents supports an utter lack of emotion.
+			setEmotion(null);
 		}
 
 		if (dispatcher.validateSection(hash.section)) {
-			setSection(hash.section);
+			setSection(hash.section, previousEmotion);
 		} else if (defaults && defaults.section) {
-			setSection(defaults.section);
+			setSection(defaults.section, previousEmotion);
 		}
 
 	}

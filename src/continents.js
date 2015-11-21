@@ -67,9 +67,23 @@ const continentsSection = {
 
 	},
 
-	setEmotion: function (emotion) {
+	setEmotion: function (emotion, previousEmotion) {
 
-		if (emotion === currentEmotion) { return; }
+		/*
+		// was in open(), before i neutered open()
+		if (currentEmotion) {
+			// TODO:
+			// zoomed-in continent view
+			// rotate back to flat / top-down view
+		} else {
+			// TODO:
+			// zoomed-out continents view
+			// fade in + grow continents
+			// fade in labels
+		}
+		*/
+
+		// if (emotion === currentEmotion) { return; }
 
 		if (currentEmotion) {
 
@@ -81,7 +95,7 @@ const continentsSection = {
 				// transition from one emotion to another
 				// implement as Promise chain? steps will overlap.
 
-				// transitions.unfocusContinents(currentEmotion)
+				// transitions.scaleContinents(currentEmotion)
 				// 1a. fade out and shrink circles of current continent;
 				// 1b. pull circles together toward center along horizontal axis as they fade/shrink
 
@@ -110,7 +124,7 @@ const continentsSection = {
 			// transition from all continents view into single continent view
 			// implement as Promise chain? steps will overlap.
 
-			// transitions.unfocusContinents(all other continents)
+			// transitions.scaleContinents(all other continents)
 			// 1. fade out and shrink all but focused continent
 
 			// transitions.panToContinent(currentEmotion)
@@ -122,23 +136,37 @@ const continentsSection = {
 			// transitions.spreadFocusedContinent()
 			// 2d. while 2a-c happens, execute (currentEmotion):2b-c above.
 
+			if (emotion) {
+				// zoom into specified emotion
+				let targetScale = 1.0;
 
-			let targetScale = 1.0;
+				this.transitions.scaleContinents(
+					continents
+						.filter(continent => continent.id !== emotion)
+						.map(continent => continent.id),
+					0.0
+				);
+				
+				this.transitions.panToContinent(emotion);
 
-			this.transitions.unfocusContinents(continents
-				.filter(continent => continent.id !== emotion)
-				.map(continent => continent.id)
-			);
-			
-			this.transitions.panToContinent(emotion);
+				setTimeout(() => {
+					targetScale = this.transitions.focusZoomedOutContinent(emotion);
+				}, 500);
 
-			setTimeout(() => {
-				targetScale = this.transitions.focusZoomedOutContinent(emotion);
-			}, 500);
+				setTimeout(() => {
+					this.transitions.spreadFocusedContinent(emotion, targetScale);
+				}, 750);
+			} else {
 
-			setTimeout(() => {
-				this.transitions.spreadFocusedContinent(emotion, targetScale);
-			}, 750);
+				// display all continents
+				console.log(">>>>> open to:", previousEmotion);
+				let delays = {};
+				continents.forEach(continent => {
+					delays[continent.id] = continent.id === previousEmotion ? 0 : 800;
+				});
+				this.transitions.scaleContinents(continents.map(continent => continent.id), 1.0, delays, 500);
+
+			}
 		
 		}
 
@@ -160,6 +188,21 @@ const continentsSection = {
 				label.classList.add('visible');
 			}, 1000);
 
+		});
+
+	},
+
+	open: function (emotion) {
+
+		// TODO: need to do anything to open states prior to setting emotion?
+
+	},
+
+	close: function () {
+
+		return new Promise((resolve, reject) => {
+			// TODO: anything that needs to happen before close() can be considered complete
+			resolve();
 		});
 
 	},
@@ -271,7 +314,7 @@ const continentsSection = {
 		// 1a. fade out and shrink circles of continent;
 		// 1b. pull circles together toward center along horizontal axis as they fade/shrink
 		//		note: for zoomed-out continents, circles will already be centered, but that's ok.
-		unfocusContinents: function (emotions, delays={}, time=1200) {
+		scaleContinents: function (emotions, scale, delays={}, time=1200) {
 
 			let MAX_TIME;
 
@@ -290,8 +333,8 @@ const continentsSection = {
 
 					// scale down to nothing
 					continent.addTween({
-						'scaleX': 0.0,
-						'scaleY': 0.0
+						'scaleX': scale,
+						'scaleY': scale
 					}, time + (delays[continent.id] || 0), TWEEN.Easing.Quadratic.InOut);
 
 					// TODO: move each circle within continent toward continent center
@@ -377,7 +420,7 @@ const continentsSection = {
 
 				let delays = {};
 				delays[continent.id] = 500;
-				this.transitions.unfocusContinents(continents.map(continent => continent.id), delays, 800)
+				this.transitions.scaleContinents(continents.map(continent => continent.id), 0.0, delays, 800)
 				.then(() => {
 					dispatcher.navigate(dispatcher.SECTIONS.STATES, continent.id);
 				});

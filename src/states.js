@@ -32,8 +32,6 @@ export default {
 	
 	init: function (containerNode) {
 
-		console.log(">>>>> STATES.INIT");
-
 		this.onKeyDown = this.onKeyDown.bind(this);
 		document.addEventListener('keydown', this.onKeyDown);
 
@@ -59,8 +57,6 @@ export default {
 
 		let innerWidth = graphContainer.offsetWidth - margin.left - margin.right;
 		let innerHeight = graphContainer.offsetHeight - margin.top - margin.bottom;
-
-		console.log(">>>>> innerWidth:", innerWidth, "innerHeight", innerHeight);
 
 		let svg = d3.select(graphContainer).append('svg')
 			.attr('width', graphContainer.offsetWidth)
@@ -157,6 +153,9 @@ export default {
 
 		//
 		// TODO: implement transitions between emotions
+		// TODO: set up all emotions beforehand
+		// 			(calculate all ranges, set up area generators, etc)
+		//			and just draw the graph here.
 		//
 
 		if (!~this.emotions.indexOf(emotion)) {
@@ -203,7 +202,25 @@ export default {
 
 	open: function (emotion) {
 
-		this.setEmotion(emotion);
+		// TODO: need to do anything to open states prior to setting emotion?
+
+	},
+
+	close: function () {
+
+		return new Promise((resolve, reject) => {
+			// TODO: animate out states graph
+			// and clean up to prepare for a different state graph
+			
+			// TODO: refactor per comment at top of setEmotion
+			
+			let transformedRanges = this.transformRanges(this.currentStatesData, this.currentEmotion, 0.0);
+			this.stateGraphContainer.selectAll('path.area')
+				.data(transformedRanges)
+				.call(this.applyTransitions.bind(this), () => {
+					resolve();
+				});
+		});
 
 	},
 
@@ -465,15 +482,22 @@ export default {
 
 	},
 
-	applyTransitions: function (selection) {
+	applyTransitions: function (selection, onEnd) {
 
-		var transitionConfig = this.transitions[this.currentEmotion];
+		let transitionConfig = this.transitions[this.currentEmotion],
+			calledOnEnd = false;
 
 		selection.transition()
 			.ease(transitionConfig.ease)
 			.delay(transitionConfig.delay)
 			.duration(transitionConfig.duration)
-			.attr('d', this.areaGenerators[this.currentEmotion]);
+			.attr('d', this.areaGenerators[this.currentEmotion])
+			.each('end', function (...args) {
+				if (onEnd && !calledOnEnd) {
+					onEnd(...args);
+					calledOnEnd = true;
+				}
+			});
 
 	},
 
