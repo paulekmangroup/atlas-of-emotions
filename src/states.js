@@ -389,13 +389,32 @@ export default {
 
 	setUpDefs (defs, xScale, yScale) {
 
-		// blur filter (sadness)
+		// blur filters (sadness)
+		// TODO: DRY this out 
 		defs.append('filter')
-			.attr('id', 'sadness-blur')
+			.attr('id', 'sadness-blur-0')
 			.attr('x', -16)
 			.attr('y', -16)
 			.attr('width', 128)
 			.attr('height', 128)
+		.append('feGaussianBlur')
+			.attr('in', 'SourceGraphic')
+			.attr('stdDeviation', 0);
+		defs.append('filter')
+			.attr('id', 'sadness-blur-1')
+			.attr('xlink:href', '#sadness-blur-0')
+		.append('feGaussianBlur')
+			.attr('in', 'SourceGraphic')
+			.attr('stdDeviation', 1);
+		defs.append('filter')
+			.attr('id', 'sadness-blur-2')
+			.attr('xlink:href', '#sadness-blur-0')
+		.append('feGaussianBlur')
+			.attr('in', 'SourceGraphic')
+			.attr('stdDeviation', 2);
+		defs.append('filter')
+			.attr('id', 'sadness-blur-3')
+			.attr('xlink:href', '#sadness-blur-0')
 		.append('feGaussianBlur')
 			.attr('in', 'SourceGraphic')
 			.attr('stdDeviation', 3);
@@ -523,8 +542,18 @@ export default {
 	applyEffects: function (selection) {
 
 		if (this.currentEmotion === 'sadness') {
-			selection
-				.attr('filter', 'url(#sadness-blur)');
+			setTimeout(() => {
+				selection.attr('filter', 'url(#sadness-blur-0)');
+			}, 0.5 * this.transitions.sadness.duration);
+			setTimeout(() => {
+				selection.attr('filter', 'url(#sadness-blur-1)');
+			}, 0.75 * this.transitions.sadness.duration);
+			setTimeout(() => {
+				selection.attr('filter', 'url(#sadness-blur-2)');
+			}, 0.9 * this.transitions.sadness.duration);
+			setTimeout(() => {
+				selection.attr('filter', 'url(#sadness-blur-3)');
+			}, 1.0 * this.transitions.sadness.duration);
 		}
 
 	},
