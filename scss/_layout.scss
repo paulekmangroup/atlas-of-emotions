@@ -101,6 +101,7 @@ h6 { font-size: 0.333333em; }
 		opacity: 1.0;
 	}
 
+	background-color: rgba(0, 0, 0, 0.5);
 	@include emotion-background-color;
 
 	h3 {

@@ -125,7 +125,8 @@ export default function (...initArgs) {
 				}
 			}
 
-			// initial section; do not animate
+			section.open(true);
+
 			if (currentEmotion) {
 				section.setEmotion(currentEmotion);
 			}
@@ -189,11 +190,10 @@ export default function (...initArgs) {
 		callout.removeAttribute('class');
 		if (!title) { return; }
 
-		// for (let i=0; i<callout.classList.length; i++) {
-		// 	if (callout.classList.item(i))
-		// }
 		callout.classList.add('visible');
-		callout.classList.add(emotion);
+		if (emotion) {
+			callout.classList.add(emotion);
+		}
 
 		callout.querySelector('.title').innerHTML = title;
 		callout.querySelector('.body').innerHTML = body;
@@ -207,8 +207,6 @@ export default function (...initArgs) {
 	}
 
 	function onNavigateComplete (section, emotion) {
-
-		console.log(">>>>> onNavCompl; hide container:", section);
 
 		containers[section].style.display = 'none';
 

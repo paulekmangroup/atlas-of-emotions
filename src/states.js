@@ -214,7 +214,7 @@ export default {
 
 	},
 
-	open: function (emotion) {
+	open: function () {
 
 		// TODO: need to do anything to open states prior to setting emotion?
 

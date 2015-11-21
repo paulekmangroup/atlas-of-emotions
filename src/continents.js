@@ -61,10 +61,6 @@ const continentsSection = {
 
 		this.isInited = true;
 
-		this.setActive(true);
-
-		this.update();
-
 	},
 
 	setEmotion: function (emotion, previousEmotion) {
@@ -183,21 +179,27 @@ const continentsSection = {
 			label.style.top = Math.round(centerY + continent.y + continent.label.y) + 'px';
 			labelContainer.appendChild(label);
 
-			setTimeout(function () {
-				label.classList.add('visible');
-			}, 1000);
-
 		});
 
 	},
 
-	open: function (emotion) {
+	open: function (firstSection) {
 
 		this.setActive(true);
 
-		// fade in continent labels
-		d3.selectAll('#continent-labels div')
-			.style('opacity', 1.0);
+		// fade in continent labels, with delay if this is the first opened section of the session
+		// display callout here if this is the first opened section of the session;
+		// otherwise, callout display is handled within setEmotion.
+		// this will probably have to change to support deeplinking to a zoomed-in emotion,
+		// we'll figure that out later.
+		setTimeout(function () {
+			if (firstSection) {
+				dispatcher.changeCallout(null, appStrings.continentsCalloutTitle, appStrings.continentsCalloutBody);
+			}
+			d3.selectAll('#continent-labels div')
+				.style('opacity', 1.0);
+		}, firstSection ? 1000 : 0);
+
 
 		this.update();
 
@@ -421,7 +423,7 @@ const continentsSection = {
 				// 
 				// dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS, continent.id);
 				// dispatcher.changeCallout(continent.id, appStrings.emotionCalloutTitle, appStrings.emotionCalloutIntro + '<br><br>' + emotionsData.emotions[continent.id].desc);
-				
+
 				// only anger and sadness are currently implemented in states.js
 				if (continent.id !== dispatcher.EMOTIONS.ANGER &&
 					continent.id !== dispatcher.EMOTIONS.SADNESS) {
