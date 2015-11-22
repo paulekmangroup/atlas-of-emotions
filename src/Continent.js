@@ -88,47 +88,58 @@ export default class Continent {
 
 		Continent.transforms = _.shuffle([
 			{
+				// top
 				x: 0.03 * w,
 				y: -0.20 * h,
 				label: {
-					x: 0.19 * w,
+					// x: 0.19 * w,
+					x: 0.13 * w,
 					y: -0.13 * h
 				},
 				size: 0.24 * h
 			},
 			{
+				// left
 				x: -0.22 * w,
 				y: -0.14 * h,
 				label: {
-					x: -0.24 * w,
+					// x: -0.24 * w,
+					x: -0.18 * w,
 					y: -0.01 * h
 				},
 				size: 0.23 * h
 			},
 			{
+				// center
 				x: -0.06 * w,
 				y: 0.07 * h,
 				label: {
-					x: -0.19 * w,
-					y: 0.10 * h
+					// x: -0.19 * w,
+					// y: 0.10 * h
+					x: -0.15 * w,
+					y: 0.07 * h
 				},
 				size: 0.18 * h
 			},
 			{
+				// bottom
 				x: -0.03 * w,
 				y: 0.22 * h,
 				label: {
-					x: -0.20 * w,
+					// x: -0.20 * w,
+					x: -0.10 * w,
 					y: 0.15 * h
 				},
 				size: 0.22 * h
 			},
 			{
+				// right
 				x: 0.19 * w,
 				y: 0.10 * h,
 				label: {
 					x: 0.01 * w,
-					y: 0.27 * h
+					// y: 0.27 * h
+					y: 0.20 * h
 				},
 				size: 0.24 * h
 			}
