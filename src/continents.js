@@ -161,6 +161,8 @@ const continentsSection = {
 				});
 				this.transitions.scaleContinents(continents.map(continent => continent.id), 1.0, delays, 500);
 
+				dispatcher.changeCallout(null, appStrings.continentsCalloutTitle, appStrings.continentsCalloutBody);
+
 			}
 		
 		}

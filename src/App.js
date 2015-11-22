@@ -187,8 +187,12 @@ export default function (...initArgs) {
 
 	function onCalloutChange (emotion, title, body) {
 
+		if (!title) {
+			callout.classList.remove('visible');
+			return;
+		}
+
 		callout.removeAttribute('class');
-		if (!title) { return; }
 
 		callout.classList.add('visible');
 		if (emotion) {

@@ -220,9 +220,9 @@ export default {
 				.classed('visible', true);
 		}, 1);
 
-		setTimeout(() => {
-			this.resetCallout();
-		}, LABEL_APPEAR_DELAY);
+		// setTimeout(() => {
+		this.resetCallout();
+		// }, LABEL_APPEAR_DELAY);
 
 	},
 
