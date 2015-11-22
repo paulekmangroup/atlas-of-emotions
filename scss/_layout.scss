@@ -74,6 +74,15 @@ h6 { font-size: 0.333333em; }
 		position: absolute;
 		left: 1em;
 	}
+
+	a,
+	a:link,
+	a:visited,
+	a:hover,
+	a:active {
+		text-decoration: none;
+		color: $text-color;
+	}
 }
 
 #main {

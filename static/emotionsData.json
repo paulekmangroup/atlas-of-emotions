@@ -1451,19 +1451,6 @@
           ]
         }
       ]
-    },
-    "science": {
-      "title": "The Five Emotion Continents",
-      "columns": [
-        {
-          "sections": [
-            {
-              "title": "",
-              "content": "Five emotions have been substantiated by scientific research: Anger, Fear, Enjoyment, Sadness and Disgust. Their relative importance in each person’s life varies, which is why the shapes move and change shape."
-            }
-          ]
-        }
-      ]
     }
   }
 }

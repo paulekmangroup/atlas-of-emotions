@@ -135,6 +135,13 @@ export default {
 
 	renderLabels: function (ranges) {
 
+		let yOffsets = {};
+		yOffsets[dispatcher.EMOTIONS.ANGER] = -80;
+		yOffsets[dispatcher.EMOTIONS.DISGUST] = 0;
+		yOffsets[dispatcher.EMOTIONS.ENJOYMENT] = 0;
+		yOffsets[dispatcher.EMOTIONS.FEAR] = 0;
+		yOffsets[dispatcher.EMOTIONS.SADNESS] = 20;
+
 		let stateDisplay = this,
 			labels = d3.select(this.labelContainer).selectAll('div')
 				.data(ranges);
@@ -146,7 +153,7 @@ export default {
 			.html((d, i) => '<h3>' + this.currentStatesData[i].name.toUpperCase() + '</h3>')
 			.style({
 				left: d => (Math.round(stateDisplay.xScale(d[1].x) - 10) + 'px'),
-				top: d => (Math.round(stateDisplay.yScale(d[1].y) - 80) + 'px')
+				top: d => (Math.round(stateDisplay.yScale(d[1].y) + yOffsets[this.currentEmotion]) + 'px')
 			})
 			.each(function () {
 				setTimeout(() => {
