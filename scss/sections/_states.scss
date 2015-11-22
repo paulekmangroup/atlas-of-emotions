@@ -46,7 +46,7 @@
 				font-size: 0.8em;
 			}
 		}
-		
+
 		opacity: 0.0;
 		-webkit-transition: opacity #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
 		transition:         opacity #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -64,8 +64,7 @@
 #state-labels {
 	div {
 		position: absolute;
-		width: 10em;
-		height: 3em;
+		pointer-events: none;
 
 		opacity: 0.0;
 		-webkit-transition: opacity #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -76,8 +75,9 @@
 		}
 
 		h3 {
-			// TODO: this is not the best way to center labels...
-			margin: 0 0 0 -75%;
+			// margin-left: -1em;
+			cursor: pointer;
+			pointer-events: auto;
 		}
 	}
 

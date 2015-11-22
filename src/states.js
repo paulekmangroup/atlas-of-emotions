@@ -163,6 +163,11 @@ export default {
 
 		labels.exit().remove();
 
+		labels.select('h3')
+			.on('mouseover', this.onStateMouseOver)
+			.on('mouseout', this.onStateMouseOut)
+			.on('click', this.onStateClick);
+
 	},
 
 	setEmotion: function (emotion) {
