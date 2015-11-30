@@ -60,8 +60,6 @@ export default class Circle {
 			.attr('r', this.radius)
 			.attr('stroke', 'rgb(' + this.color + ')')
 			.attr('stroke-opacity', this.alpha);
-			// .attr('stroke', 'rgba(' + this.color + ',' + this.alpha + ')');
-			// .style('stroke', 'rgba(' + this.color + ',' + this.alpha + ')');
 
 	}
 
@@ -73,20 +71,13 @@ export default class Circle {
 	draw (alphaMod) {
 
 		// limit stroke to edge of circle
-		let sw = Math.min(this.weight, (this.size + 0.5*this.weight - this.radius));
+		let sw = this.calcStrokeWidth();
 
 		this.d3Selection
 			.attr('r', this.radius)
 			.attr('stroke-width', sw)
 			.attr('stroke', 'rgb(' + this.color + ')')
 			.attr('stroke-opacity', this.alpha * alphaMod);
-			// .attr('stroke', 'rgba(' + this.color + ',' + this.alpha * alphaMod + ')');
-			/*
-			.style({
-				'stroke-width': sw,
-				'stroke': 'rgba(' + this.color + ',' + this.alpha * alphaMod + ')'
-			});
-			*/
 
 	}
 
@@ -105,6 +96,12 @@ export default class Circle {
 		if (this.radius > this.size) {
 			this.alpha = Math.max(0, Circle.BASE_ALPHA * (maxRad - this.radius) / (0.5 * this.weight));
 		}
+	}
+
+	calcStrokeWidth () {
+
+		return Math.min(this.weight, (this.size + 0.5*this.weight - this.radius));
+
 	}
 
 	isAlive () {

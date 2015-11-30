@@ -376,6 +376,7 @@ export default class Continent {
 			.attr('r', d => d.radius)
 			.attr('stroke', d => 'rgb(' + d.color + ')')
 			.attr('stroke-opacity', d => d.alpha)
+			.attr('stroke-width', d => d.calcStrokeWidth())
 			.each('end', (...args) => {
 				if (!calledOnEnd) {
 					this.isFocused = false;

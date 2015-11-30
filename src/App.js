@@ -126,7 +126,7 @@ export default function (...initArgs) {
 			}
 
 			section.open(true);
-			section.setEmotion(currentEmotion);
+			section.setEmotion(currentEmotion, previousEmotion);
 
 		} else {
 
@@ -134,7 +134,7 @@ export default function (...initArgs) {
 			
 			if (previousSection === section) {
 				// change emotion within current section
-				section.setEmotion(currentEmotion);
+				section.setEmotion(currentEmotion, previousEmotion);
 			} else {
 				// navigate between sections
 				previousSection.close()

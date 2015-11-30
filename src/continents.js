@@ -109,18 +109,22 @@ const continentsSection = {
 			} else {
 
 				// transition back from zoomed continent to all continents
-				
-				// scale all continents back up to full size
-				this.transitions.scaleContinents(continents.map(continent => continent.id), 1.0);
-
-				// pan to center
-				this.transitions.panToContinent(null, currentEmotion);
 
 				// gather circles of zoomed-in continent
-				this.transitions.gatherContinent(currentEmotion);
+				this.transitions.gatherContinent(previousEmotion);
+				
+				setTimeout(() => {
 
-				// display all-continents callout
-				dispatcher.changeCallout(null, appStrings.continentsCalloutTitle, appStrings.continentsCalloutBody);
+					// scale all continents back up to full size
+					this.transitions.scaleContinents(continents.map(continent => continent.id), 1.0);
+
+					// pan to center
+					this.transitions.panToContinent(null, previousEmotion);
+
+					// display all-continents callout
+					dispatcher.changeCallout(null, appStrings.continentsCalloutTitle, appStrings.continentsCalloutBody);
+
+				}, 750);
 
 			}
 
@@ -368,8 +372,11 @@ const continentsSection = {
 					translate;
 				targetContinents.forEach(continent => {
 
-					// turn off spawning, in a way it can easily be turned back on
-					continent.spawnConfig.freq *= -1;
+					// toggle spawning
+					if ((scale && continent.spawnConfig.freq < 0) ||
+						(!scale && continent.spawnConfig.freq > 0)) {
+						continent.spawnConfig.freq *= -1;
+					}
 
 					// scale down to nothing
 					continent.addTween({
