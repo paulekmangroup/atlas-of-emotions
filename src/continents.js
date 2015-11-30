@@ -108,9 +108,19 @@ const continentsSection = {
 
 			} else {
 
-				// TODO:
 				// transition back from zoomed continent to all continents
+				
+				// scale all continents back up to full size
+				this.transitions.scaleContinents(continents.map(continent => continent.id), 1.0);
 
+				// pan to center
+				this.transitions.panToContinent(null, currentEmotion);
+
+				// gather circles of zoomed-in continent
+				this.transitions.gatherContinent(currentEmotion);
+
+				// display all-continents callout
+				dispatcher.changeCallout(null, appStrings.continentsCalloutTitle, appStrings.continentsCalloutBody);
 
 			}
 
@@ -154,6 +164,9 @@ const continentsSection = {
 				}, 750);
 			} else {
 
+				// this was used when navigating from states view directly to all continents view,
+				// with no intermediate zoomed-in continent view.
+				/*
 				// display all continents
 				let delays = {};
 				continents.forEach(continent => {
@@ -162,6 +175,7 @@ const continentsSection = {
 				this.transitions.scaleContinents(continents.map(continent => continent.id), 1.0, delays, 500);
 
 				dispatcher.changeCallout(null, appStrings.continentsCalloutTitle, appStrings.continentsCalloutBody);
+				*/
 
 			}
 		
@@ -286,15 +300,21 @@ const continentsSection = {
 		},
 
 		// 1c. while 1a-b happens, pan toward continent location from current continent's location, according to all continents view layout.
-		panToContinent: function (emotion) {
+		panToContinent: function (emotion, previousEmotion) {
 
 			let targetContinent = continents.find(continent => continent.id === emotion),
+				previousContinent = continents.find(continent => continent.id === previousEmotion),
 				targetCenter = {
-					x: centerX,
-					y: centerY
+					x: centerX - (previousContinent ? previousContinent.x : 0),
+					y: centerY - (previousContinent ? previousContinent.y : 0)
 				},
-				targetX = centerX - targetContinent.x,
-				targetY = centerY - targetContinent.y;
+				targetX = centerX,
+				targetY = centerY;
+
+			if (targetContinent) {
+				targetX -= targetContinent.x;
+				targetY -= targetContinent.y;
+			}
 
 			this.addTween(targetCenter, {
 				'x': targetX,
@@ -308,9 +328,9 @@ const continentsSection = {
 			})
 			.start();
 
-			// fade out continent labels
+			// fade in/out continent labels
 			d3.selectAll('#continent-labels div')
-				.style('opacity', 0.0);
+				.style('opacity', targetContinent ? 0.0 : 1.0);
 
 		},
 
@@ -320,6 +340,13 @@ const continentsSection = {
 
 			let targetContinent = continents.find(continent => continent.id === emotion);
 			targetContinent.spreadCircles(continentContainer.node(), targetScale);
+
+		},
+
+		gatherContinent: function (emotion) {
+
+			let targetContinent = continents.find(continent => continent.id === emotion);
+			targetContinent.gatherCircles();
 
 		},
 
@@ -349,11 +376,6 @@ const continentsSection = {
 						'scaleX': scale,
 						'scaleY': scale
 					}, time + (delays[continent.id] || 0), TWEEN.Easing.Quadratic.InOut);
-
-					// TODO: move each circle within continent toward continent center
-					// continent.spreadCircles(false);
-					// -- or --
-					// continent.gatherCircles()
 
 				});
 
@@ -419,19 +441,29 @@ const continentsSection = {
 		continents.some(continent => {
 			if (continent.isHighlighted) {
 
-				// TODO: [continents-to-states]
-				// commented out in order to transition directly from continents to states;
-				// uncomment to bring back intermediate zoomed continent view.
-				// 
-				// dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS, continent.id);
-				// dispatcher.changeCallout(continent.id, appStrings.emotionCalloutTitle, appStrings.emotionCalloutIntro + '<br><br>' + emotionsData.emotions[continent.id].desc);
+				if (currentEmotion !== continent.id) {
 
+					// navigate from all continents view to zoomed-in continent view
+					dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS, continent.id);
+					dispatcher.changeCallout(continent.id, appStrings.emotionCalloutTitle, appStrings.emotionCalloutIntro + '<br><br>' + emotionsData.emotions[continent.id].desc);
+
+				} else {
+
+					// navigate from zoomed-in continent view to states view
+					// TODO: this will happen on scroll, not click
+					dispatcher.navigate(dispatcher.SECTIONS.STATES, continent.id); 
+
+				}
+
+				/*
 				// only anger and sadness are currently implemented in states.js
 				if (continent.id !== dispatcher.EMOTIONS.ANGER &&
 					continent.id !== dispatcher.EMOTIONS.SADNESS) {
 					return;
 				}
-
+				*/
+				
+				/*
 				// fade out continent labels
 				d3.selectAll('#continent-labels div')
 					.style('opacity', 0.0);
@@ -443,7 +475,8 @@ const continentsSection = {
 				.then(() => {
 					dispatcher.navigate(dispatcher.SECTIONS.STATES, continent.id);
 				});
-
+				*/
+				
 				return true;
 			}
 		});

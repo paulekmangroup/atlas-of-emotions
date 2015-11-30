@@ -359,6 +359,58 @@ export default class Continent {
 
 	}
 
+	gatherCircles () {
+
+		const growTime = 1500,
+			shrinkTime = 750;
+
+		let calledOnEnd = false,
+			circles = this.d3Selection.selectAll('circle')
+				.data(this.circles);
+
+		// transition circles that exist in this.circles back to their original settings
+		circles.transition()
+			.duration(growTime)
+			.attr('cx', 0)
+			.attr('cy', 0)
+			.attr('r', d => d.radius)
+			.attr('stroke', d => 'rgb(' + d.color + ')')
+			.attr('stroke-opacity', d => d.alpha)
+			.each('end', (...args) => {
+				if (!calledOnEnd) {
+					this.isFocused = false;
+					calledOnEnd = true;
+				}
+			});
+
+		// TODO: necessary to add circles back in?
+		// it's possible for there to be more circles in this.circles than there are states in the selected emotion.
+		// probably the simplest way to handle this is to remove from this.circles any circles transitioned out
+		// via the exit selection in spreadCircles, so they don't even come into play here.
+		/*
+		// Add new circles as needed, and fade/grow them in at positions and sizes corresponding to states
+		circles.enter().append('circle')
+			.attr('cx', 0)
+			.attr('cy', 0)
+			.attr('r', 0)
+			.attr('stroke', calcStrokeColor)
+			.attr('stroke-opacity', Circle.BASE_ALPHA)
+			.attr('stroke-width', d => rScale(d.strokeWidth))
+		.transition()
+			.duration(growTime)
+			.attr('cx', d => xScale(d.cx))
+			.attr('r', d => rScale(d.r));
+		*/
+
+		// remove all circles created within spreadCircles that are not present in this.circles
+		circles.exit().transition()
+			.duration(shrinkTime)
+			.ease('quad-out')
+			.attr('opacity', 0.0)
+			.attr('transform', d3Transform().scale(0, 0));
+		
+	}
+
 	/**
 	 * Map emotion ranges into circles of varying stroke widths,
 	 * but with locations and sizes matching corresponding state graph.
