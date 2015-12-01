@@ -585,10 +585,10 @@ export default {
 						bulbousness = xScale(1);
 
 					let path = points[0].join(' ') +							// first anchor point
-						'C' + points[0].join(' ') + ',' +						// repeat first anchor point
+						' C' + points[0].join(' ') + ',' +						// repeat first anchor point
 						(points[0][0] - bulbousness) + ' ' + y1 + ',' +			// first control point
 						points[1].join(' ') +									// middle anchor point
-						'C' + (points[2][0] + bulbousness) + ' ' + y1 + ',' +	// second control point
+						' C' + (points[2][0] + bulbousness) + ' ' + y1 + ',' +	// second control point
 						points[2].join(' ') + ',' +								// last anchor point
 						points[2].join(' ');									// repeat last anchor point
 
@@ -631,27 +631,25 @@ export default {
 			
 			// TODO: copying anger as placeholder; need to implement for this state
 			enjoyment: {
-				ease: d3.ease('bounce'),
-
-				// TUESDAY: customize bounce ease,
-				// maybe refine label placement,
-				// then move onto other emotions
-				/*
-				ease: function (h) {
-					// if (!arguments.length) { h = 0.25 };
-					h = 0.4;	// TODO: randomize this or make it a function of (d)
+				// ease: d3.ease('bounce'),
+				ease: (function (h) {
+					if (!arguments.length) { h = 0.25; };
 					let b0 = 1 - h,
 						b1 = b0 * (1 - b0) + b0,
 						b2 = b0 * (1 - b1) + b1,
+						b3 = b0 * (1 - b2) + b2,
 						x0 = 2 * Math.sqrt(h),
 						x1 = x0 * Math.sqrt(h),
 						x2 = x1 * Math.sqrt(h),
+						x3 = x2 * Math.sqrt(h),
 						t0 = 1 / (1 + x0 + x1 + x2),
 						t1 = t0 + t0 * x0,
 						t2 = t1 + t0 * x1,
+						t3 = t2 + t0 * x2,
 						m0 = t0 + t0 * x0 / 2,
 						m1 = t1 + t0 * x1 / 2,
 						m2 = t2 + t0 * x2 / 2,
+						m3 = t3 + t0 * x3 / 2,
 						a = 1 / (t0 * t0);
 
 					return function (t) {
@@ -659,12 +657,12 @@ export default {
 						: t < t0 ? a * t * t
 						: t < t1 ? a * (t -= m0) * t + b0
 						: t < t2 ? a * (t -= m1) * t + b1
-						: a * (t -= m2) * t + b2;
+						: t < t3 ? a * (t -= m2) * t + b2
+						: a * (t -= m3) * t + b3;
 					};
-				},
-				*/
-				delay: (d, i) => 500 + Math.random() * 100 * i,
-				duration: 1000
+				}(0.35)),
+				delay: (d, i) => 150 + Math.random() * 150 * i,
+				duration: 750
 			},
 
 			// TODO: copying anger as placeholder; need to implement for this state
