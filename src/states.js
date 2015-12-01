@@ -378,13 +378,11 @@ export default {
 
 		disgust: function (states, strengthMod) {
 
-			// TODO: copying anger as placeholder; need to implement for this state
-			return this.anger(states, strengthMod);
-
-		},
-
-		enjoyment: function (states, strengthMod) {
-
+			// isosceles triangles with:
+			// - first point on x axis, at left edge of range;
+			// - last point on x axis, at right edge of range;
+			// - middle point halfway in between horizontally,
+			//   and height equal to width
 			return states.map((state, i) => {
 
 				let points = [],
@@ -413,10 +411,15 @@ export default {
 
 		},
 
+		enjoyment: function (states, strengthMod) {
+
+			return this.disgust(states, strengthMod);
+
+		},
+
 		fear: function (states, strengthMod) {
 
-			// TODO: copying anger as placeholder; need to implement for this state
-			return this.anger(states, strengthMod);
+			return this.disgust(states, strengthMod);
 
 		},
 
@@ -568,12 +571,33 @@ export default {
 				.y0(innerHeight)
 				.y1(d => yScale(d.y)),
 
-			// TODO: copying anger as placeholder; need to implement for this state
-			// start with symmetrical concave arcs, then degenerate per "Roughen" Illustrator effect (or similar)
+			// TODO: degenerate per "Roughen" Illustrator effect (or similar)
 			disgust: d3.svg.area()
 				.x(d => xScale(d.x))
 				.y0(innerHeight)
-				.y1(d => yScale(d.y)),
+				.y1(d => yScale(d.y))
+				.interpolate((points) => {
+					// symmetrical concave beziers
+					let roundness = 0.8,
+						steepness = 0.5,
+						x0 = points[0][0],
+						y0 = points[0][1],
+						x1 = points[1][0],
+						y1 = points[1][1],
+						x2 = points[2][0],
+						y2 = points[2][1];
+						
+					let path = points[0].join(' ') +				// first anchor point
+						` C${x0 + steepness*(x1-x0)} ${y0},` +		// first control point, inside curve
+						`${x0 + roundness*(x1-x0)} ${y1},` + 		// second control point, outside curve
+						points[1].join(' ') +						// middle anchor point
+						` C${x1 + (1-roundness)*(x2-x1)} ${y1},` +	// third control point, outside curve
+						`${x1 + (1-steepness)*(x2-x1)} ${y2},` +	// fourth control point, inside curve
+						points[2].join(' ');						// last anchor point
+
+
+					return path;
+				}),
 			
 			enjoyment: d3.svg.area()
 				.x(d => xScale(d.x))
@@ -582,13 +606,13 @@ export default {
 				.interpolate((points) => {
 					// cubic bezier with control points to left and right of middle anchor point
 					let y1 = points[1][1],
-						bulbousness = xScale(1);
+						bulbousness = xScale(1);	// relative to overall graph, not to each shape
 
 					let path = points[0].join(' ') +							// first anchor point
 						' C' + points[0].join(' ') + ',' +						// repeat first anchor point
-						(points[0][0] - bulbousness) + ' ' + y1 + ',' +			// first control point
+						(points[0][0] - bulbousness) + ' ' + y1 + ',' +			// first control point, outside curve to left
 						points[1].join(' ') +									// middle anchor point
-						' C' + (points[2][0] + bulbousness) + ' ' + y1 + ',' +	// second control point
+						' C' + (points[2][0] + bulbousness) + ' ' + y1 + ',' +	// second control point, outside curve to right
 						points[2].join(' ') + ',' +								// last anchor point
 						points[2].join(' ');									// repeat last anchor point
 
@@ -600,7 +624,37 @@ export default {
 			fear: d3.svg.area()
 				.x(d => xScale(d.x))
 				.y0(innerHeight)
-				.y1(d => yScale(d.y)),
+				.y1(d => yScale(d.y))
+				.interpolate((points) => {
+					// concave bezier to left, convex to right
+					// M0 50 C40 50, 50 0, 50 0 C100 25, 100 50, 100 50
+					// M x0, y0
+					// C x0 + steepnessLeft*(x1-x0), y0
+					// 	x1, y1
+					// 	x1, y1
+					// C x2, y1 + (1-roundnessRight)*(y2-y1)
+					// 	x2, y2
+					// 	x2, y2
+					let steepnessLeft = 0.8,
+						roundnessRight = 0.5,
+						x0 = points[0][0],
+						y0 = points[0][1],
+						x1 = points[1][0],
+						y1 = points[1][1],
+						x2 = points[2][0],
+						y2 = points[2][1];
+						
+					let path = points[0].join(' ') +					// first anchor point
+						` C${x0 + steepnessLeft*(x1-x0)} ${y0},` +		// first control point, inside curve on left
+						`${points[1].join(' ')} ` + 					// middle anchor point
+						points[1].join(' ') +							// repeat middle anchor point
+						` C${x2} ${y1 + (1-roundnessRight)*(y2-y1)},` +	// second control point, outside curve on right
+						`${points[2].join(' ')} ` +						// last anchor point
+						points[2].join(' ');							// repeat last anchor point
+
+
+					return path;
+				}),
 			
 			sadness: d3.svg.area()
 				.x(d => xScale(d.x))
@@ -622,18 +676,16 @@ export default {
 				duration: 1000
 			},
 			
-			// TODO: copying anger as placeholder; need to implement for this state
+			// TODO: linear animation as placeholder; need to implement for this state
 			disgust: {
 				ease: d3.ease('linear'),
 				delay: (d, i) => 500 + Math.random() * 100 * i,
 				duration: 1000
 			},
 			
-			// TODO: copying anger as placeholder; need to implement for this state
 			enjoyment: {
 				// ease: d3.ease('bounce'),
-				ease: (function (h) {
-					if (!arguments.length) { h = 0.25; };
+				ease: ((h=0.25) => {
 					let b0 = 1 - h,
 						b1 = b0 * (1 - b0) + b0,
 						b2 = b0 * (1 - b1) + b1,
@@ -665,7 +717,7 @@ export default {
 				duration: 750
 			},
 
-			// TODO: copying anger as placeholder; need to implement for this state
+			// TODO: linear animation as placeholder; need to implement for this state
 			fear: {
 				ease: d3.ease('linear'),
 				delay: (d, i) => 500 + Math.random() * 100 * i,
