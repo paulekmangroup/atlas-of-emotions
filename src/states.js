@@ -324,6 +324,52 @@ export default {
 	stateRangeTransformers: {
 
 		/**
+		 * Base shape for all states. Isosceles triangles with:
+		 * - first point on x axis, at left edge of range;
+		 * - last point on x axis, at right edge of range;
+		 * - middle point halfway in between horizontally,
+		 *   and height equal to half width.
+		 *
+		 * Shapes may be further modified by an interpolator (see: setUpAreaGenerators).
+		 *
+		 * For input [a(x,y), b(x,y)]:
+		 * output: [
+		 *	{ x: a, y: 0 },
+		 *	{ x: a + (b-a)/2, y: (b-a)/2 },
+		 *	{ x: b, y: 0 },
+		 * ]
+		 */
+		isosceles: function (states, strengthMod) {
+
+			return states.map((state, i) => {
+
+				let points = [],
+					min = state.range.min - 1,				// transform to 0-indexed, and allow
+															// states with same min and max to display
+					max = state.range.max,
+					spread = max - min,
+					centerX = min + 0.5 * spread;
+
+				points.push({
+					x: min,
+					y: 0
+				});
+				points.push({
+					x: centerX,
+					y: strengthMod * centerX
+				});
+				points.push({
+					x: max,
+					y: 0
+				});
+
+				return points;
+
+			});
+
+		},
+
+		/**
 		 * out -> [
 		 *	{ x: a, y: 0 },
 		 *	{ x: a + (b-a)/2 + offset, y: (b-a)/2 },
@@ -378,48 +424,19 @@ export default {
 
 		disgust: function (states, strengthMod) {
 
-			// isosceles triangles with:
-			// - first point on x axis, at left edge of range;
-			// - last point on x axis, at right edge of range;
-			// - middle point halfway in between horizontally,
-			//   and height equal to width
-			return states.map((state, i) => {
-
-				let points = [],
-					min = state.range.min - 1,				// transform to 0-indexed, and allow
-															// states with same min and max to display
-					max = state.range.max,
-					spread = max - min,
-					centerX = min + 0.5 * spread;
-
-				points.push({
-					x: min,
-					y: 0
-				});
-				points.push({
-					x: centerX,
-					y: strengthMod * centerX
-				});
-				points.push({
-					x: max,
-					y: 0
-				});
-
-				return points;
-
-			});
+			return this.isosceles(states, strengthMod);
 
 		},
 
 		enjoyment: function (states, strengthMod) {
 
-			return this.disgust(states, strengthMod);
+			return this.isosceles(states, strengthMod);
 
 		},
 
 		fear: function (states, strengthMod) {
 
-			return this.disgust(states, strengthMod);
+			return this.isosceles(states, strengthMod);
 
 		},
 
@@ -433,7 +450,7 @@ export default {
 		sadness: function (states, strengthMod) {
 
 			// amplify height a bit to counter shortness caused by interpolation
-			let points = this.anger(states, strengthMod * 1.25);
+			let points = this.isosceles(states, strengthMod * 1.25);
 
 			// manual tweaks for overlapping values
 			points[3][1].x += 0.1;
@@ -627,14 +644,6 @@ export default {
 				.y1(d => yScale(d.y))
 				.interpolate((points) => {
 					// concave bezier to left, convex to right
-					// M0 50 C40 50, 50 0, 50 0 C100 25, 100 50, 100 50
-					// M x0, y0
-					// C x0 + steepnessLeft*(x1-x0), y0
-					// 	x1, y1
-					// 	x1, y1
-					// C x2, y1 + (1-roundnessRight)*(y2-y1)
-					// 	x2, y2
-					// 	x2, y2
 					let steepnessLeft = 0.8,
 						roundnessRight = 0.5,
 						x0 = points[0][0],
@@ -671,20 +680,19 @@ export default {
 		return {
 
 			anger: {
-				ease: d3.ease('elastic-in', 1.5, 0.75),
+				ease: d3.ease('back-out', 3.5),
 				delay: (d, i) => 500 + Math.random() * 100 * i,
-				duration: 1000
+				duration: 500
 			},
 			
-			// TODO: linear animation as placeholder; need to implement for this state
 			disgust: {
-				ease: d3.ease('linear'),
+				ease: d3.ease('poly-in', 4.0),
 				delay: (d, i) => 500 + Math.random() * 100 * i,
 				duration: 1000
 			},
 			
 			enjoyment: {
-				// ease: d3.ease('bounce'),
+				// custom bounce ease function, with one more bounce and a bit extra bounciness
 				ease: ((h=0.25) => {
 					let b0 = 1 - h,
 						b1 = b0 * (1 - b0) + b0,
@@ -717,17 +725,16 @@ export default {
 				duration: 750
 			},
 
-			// TODO: linear animation as placeholder; need to implement for this state
 			fear: {
-				ease: d3.ease('linear'),
+				ease: d3.ease('elastic-in', 1.5, 0.75),
 				delay: (d, i) => 500 + Math.random() * 100 * i,
-				duration: 1000
+				duration: 750
 			},
 
 			sadness: {
-				ease: d3.ease('elastic-in', 2.5, 2),
+				ease: d3.ease('back-out', 2.0),
 				delay: (d, i) => 250 + Math.random() * 1250,
-				duration: 5000
+				duration: 4000
 			},
 			
 			close: {
@@ -745,10 +752,10 @@ export default {
 		if (this.currentEmotion === 'sadness') {
 			setTimeout(() => {
 				selection.attr('filter', 'url(#sadness-blur-0)');
-			}, 0.5 * this.transitions.sadness.duration);
+			}, 0.6 * this.transitions.sadness.duration);
 			setTimeout(() => {
 				selection.attr('filter', 'url(#sadness-blur-1)');
-			}, 0.75 * this.transitions.sadness.duration);
+			}, 0.8 * this.transitions.sadness.duration);
 			setTimeout(() => {
 				selection.attr('filter', 'url(#sadness-blur-2)');
 			}, 0.9 * this.transitions.sadness.duration);
