@@ -135,11 +135,12 @@ export default {
 
 	renderLabels: function (ranges) {
 
+		// TODO: copying anger as placeholder; need to implement for disgust, enjoyment, fear
 		let yOffsets = {};
 		yOffsets[dispatcher.EMOTIONS.ANGER] = -80;
-		yOffsets[dispatcher.EMOTIONS.DISGUST] = 0;
-		yOffsets[dispatcher.EMOTIONS.ENJOYMENT] = 0;
-		yOffsets[dispatcher.EMOTIONS.FEAR] = 0;
+		yOffsets[dispatcher.EMOTIONS.DISGUST] = yOffsets[dispatcher.EMOTIONS.ANGER];
+		yOffsets[dispatcher.EMOTIONS.ENJOYMENT] = yOffsets[dispatcher.EMOTIONS.ANGER];
+		yOffsets[dispatcher.EMOTIONS.FEAR] = yOffsets[dispatcher.EMOTIONS.ANGER];
 		yOffsets[dispatcher.EMOTIONS.SADNESS] = 20;
 
 		let stateDisplay = this,
@@ -375,6 +376,50 @@ export default {
 
 		},
 
+		disgust: function (states, strengthMod) {
+
+			// TODO: copying anger as placeholder; need to implement for this state
+			return this.anger(states, strengthMod);
+
+		},
+
+		enjoyment: function (states, strengthMod) {
+
+			return states.map((state, i) => {
+
+				let points = [],
+					min = state.range.min - 1,				// transform to 0-indexed, and allow
+															// states with same min and max to display
+					max = state.range.max,
+					spread = max - min,
+					centerX = min + 0.5 * spread;
+
+				points.push({
+					x: min,
+					y: 0
+				});
+				points.push({
+					x: centerX,
+					y: strengthMod * centerX
+				});
+				points.push({
+					x: max,
+					y: 0
+				});
+
+				return points;
+
+			});
+
+		},
+
+		fear: function (states, strengthMod) {
+
+			// TODO: copying anger as placeholder; need to implement for this state
+			return this.anger(states, strengthMod);
+
+		},
+
 		/**
 		 * out -> [
 		 *	{ x: a, y: 0 },
@@ -395,7 +440,9 @@ export default {
 
 			return points;
 
-		}
+		},
+
+
 
 	},
 
@@ -456,6 +503,46 @@ export default {
 			.attr('offset', d => d.offset)
 			.attr('stop-color', d => d.color);
 
+		// disgust
+		defs.append('linearGradient')
+			.attr('id', 'disgust-gradient')
+			.attr('xlink:href', '#states-gradient')
+		.selectAll('stop')
+			.data([
+				{ offset: '0%', color: 'rgba(0, 142, 69, 0.3)' },
+				{ offset: '56%', color: 'rgba(0, 122, 61, 0.8)' },
+				{ offset: '100%', color: 'rgba(0, 104, 55, 1.0)' }
+			])
+		.enter().append('stop')
+			.attr('offset', d => d.offset)
+			.attr('stop-color', d => d.color);
+
+		// enjoyment
+		defs.append('linearGradient')
+			.attr('id', 'enjoyment-gradient')
+			.attr('xlink:href', '#states-gradient')
+		.selectAll('stop')
+			.data([
+				{ offset: '0%', color: 'rgba(241, 196, 83, 0.8)' },
+				{ offset: '100%', color: 'rgba(248, 136, 29, 1.0)' }
+			])
+		.enter().append('stop')
+			.attr('offset', d => d.offset)
+			.attr('stop-color', d => d.color);
+
+		// fear
+		defs.append('linearGradient')
+			.attr('id', 'fear-gradient')
+			.attr('xlink:href', '#states-gradient')
+		.selectAll('stop')
+			.data([
+				{ offset: '0%', color: 'rgba(248, 58, 248, 0.1)' },
+				{ offset: '100%', color: 'rgba(143, 39, 139, 1.0)' }
+			])
+		.enter().append('stop')
+			.attr('offset', d => d.offset)
+			.attr('stop-color', d => d.color);
+
 		// sadness
 		defs.append('linearGradient')
 			.attr('id', 'sadness-gradient')
@@ -480,28 +567,46 @@ export default {
 				.x(d => xScale(d.x))
 				.y0(innerHeight)
 				.y1(d => yScale(d.y)),
-			/*
-			fear: d3.svg.area()
-				.x(d => xScale(d.x))
-				.y0(innerHeight)
-				.y1(d => yScale(d.y)),
 
+			// TODO: copying anger as placeholder; need to implement for this state
+			// start with symmetrical concave arcs, then degenerate per "Roughen" Illustrator effect (or similar)
 			disgust: d3.svg.area()
 				.x(d => xScale(d.x))
 				.y0(innerHeight)
 				.y1(d => yScale(d.y)),
-			*/
+			
+			enjoyment: d3.svg.area()
+				.x(d => xScale(d.x))
+				.y0(innerHeight)
+				.y1(d => yScale(d.y))
+				.interpolate((points) => {
+					// cubic bezier with control points to left and right of middle anchor point
+					let y1 = points[1][1],
+						bulbousness = xScale(1);
+
+					let path = points[0].join(' ') +							// first anchor point
+						'C' + points[0].join(' ') + ',' +						// repeat first anchor point
+						(points[0][0] - bulbousness) + ' ' + y1 + ',' +			// first control point
+						points[1].join(' ') +									// middle anchor point
+						'C' + (points[2][0] + bulbousness) + ' ' + y1 + ',' +	// second control point
+						points[2].join(' ') + ',' +								// last anchor point
+						points[2].join(' ');									// repeat last anchor point
+
+					return path;
+				}),
+			
+			// TODO: copying anger as placeholder; need to implement for this state
+			// start with concave arcs at left, convex at right, then degenerate per "Zig Zag" Illustrator effect (or similar)
+			fear: d3.svg.area()
+				.x(d => xScale(d.x))
+				.y0(innerHeight)
+				.y1(d => yScale(d.y)),
+			
 			sadness: d3.svg.area()
 				.x(d => xScale(d.x))
 				.y0(innerHeight)
 				.y1(d => yScale(d.y))
 				.interpolate('basis')
-			/*
-			enjoyment: d3.svg.area()
-				.x(d => xScale(d.x))
-				.y0(innerHeight)
-				.y1(d => yScale(d.y)),
-			*/
 		
 		};
 
@@ -516,31 +621,65 @@ export default {
 				delay: (d, i) => 500 + Math.random() * 100 * i,
 				duration: 1000
 			},
-			/*
+			
+			// TODO: copying anger as placeholder; need to implement for this state
+			disgust: {
+				ease: d3.ease('linear'),
+				delay: (d, i) => 500 + Math.random() * 100 * i,
+				duration: 1000
+			},
+			
+			// TODO: copying anger as placeholder; need to implement for this state
+			enjoyment: {
+				ease: d3.ease('bounce'),
+
+				// TUESDAY: customize bounce ease,
+				// maybe refine label placement,
+				// then move onto other emotions
+				/*
+				ease: function (h) {
+					// if (!arguments.length) { h = 0.25 };
+					h = 0.4;	// TODO: randomize this or make it a function of (d)
+					let b0 = 1 - h,
+						b1 = b0 * (1 - b0) + b0,
+						b2 = b0 * (1 - b1) + b1,
+						x0 = 2 * Math.sqrt(h),
+						x1 = x0 * Math.sqrt(h),
+						x2 = x1 * Math.sqrt(h),
+						t0 = 1 / (1 + x0 + x1 + x2),
+						t1 = t0 + t0 * x0,
+						t2 = t1 + t0 * x1,
+						m0 = t0 + t0 * x0 / 2,
+						m1 = t1 + t0 * x1 / 2,
+						m2 = t2 + t0 * x2 / 2,
+						a = 1 / (t0 * t0);
+
+					return function (t) {
+						return t >= 1 ? 1
+						: t < t0 ? a * t * t
+						: t < t1 ? a * (t -= m0) * t + b0
+						: t < t2 ? a * (t -= m1) * t + b1
+						: a * (t -= m2) * t + b2;
+					};
+				},
+				*/
+				delay: (d, i) => 500 + Math.random() * 100 * i,
+				duration: 1000
+			},
+
+			// TODO: copying anger as placeholder; need to implement for this state
 			fear: {
 				ease: d3.ease('linear'),
 				delay: (d, i) => 500 + Math.random() * 100 * i,
 				duration: 1000
 			},
 
-			disgust: {
-				ease: d3.ease('linear'),
-				delay: (d, i) => 500 + Math.random() * 100 * i,
-				duration: 1000
-			},
-			*/
 			sadness: {
 				ease: d3.ease('elastic-in', 2.5, 2),
 				delay: (d, i) => 250 + Math.random() * 1250,
 				duration: 5000
 			},
-			/*
-			enjoyment: {
-				ease: d3.ease('linear'),
-				delay: (d, i) => 500 + Math.random() * 100 * i,
-				duration: 1000
-			}
-			*/
+			
 			close: {
 				ease: d3.ease('ease-out'),
 				delay: (d, i) => Math.random() * 50 * i,
