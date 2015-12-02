@@ -1,7 +1,8 @@
 {
   "emotions": {
     "sadness": {
-      "desc": "There is significant overlap in the states of sadness compared to previous maps, but there is still a broad range of intensities.",
+      "desc": "We experience sadness with the actual or perceived loss of a person to whom we are attached, such as an offspring, a lover, close friend, or to a loss of our own health or social status to the loss of an object that we value highly.",
+      "statesDesc": "There is significant overlap in the states of sadness compared to previous maps, but there is still a broad range of intensities.",
       "states": {
         "disappointment": {
           "desc": "Felt when expectations are not met, resulting in a loss.",
@@ -206,7 +207,8 @@
       }
     },
     "disgust": {
-      "desc": "Disgust manifests generally as something fairly mild or very strong, with few states occupying the middle.",
+      "desc": "We experience disgust in reaction to toxic smells, tastes, unappealing appearances or repulsive behaviors. While usually unpleasant, in small doses disgust may sometimes be enjoyable.",
+      "statesDesc": "Disgust manifests generally as something fairly mild or very strong, with few states occupying the middle.",
       "states": {
         "aversion": {
           "desc": "Wanting to avoid something noxious.",
@@ -433,7 +435,8 @@
       }
     },
     "anger": {
-      "desc": "Each continent names a group of related emotional states that vary in intensity or in other features. The anger continent includes states that respond to threats (real, imagined, or anticipated) or interference with pursuit of a goal.",
+      "desc": "We experience anger whenever our pursuit of an important goal is blocked, especially by a physical threat. In the grip of anger we may act in ways that we later regret.",
+      "statesDesc": "The anger continent includes states that respond to threats (real, imagined, or anticipated) or interference with pursuit of a goal.",
       "states": {
         "annoyance": {
           "desc": "The mildest state of anger never felt very strongly.",
@@ -816,7 +819,8 @@
       }
     },
     "fear": {
-      "desc": "The fear continent includes states that respond to danger (real, imagined, or anticipated).",
+      "desc": "We experience fear when we perceive a threat of harm. Examples are threats to our health, wealth, social status, relationships, or identity/self-image.",
+      "statesDesc": "The fear continent includes states that respond to danger (real, imagined, or anticipated).",
       "states": {
         "trepidation": {
           "desc": "Mild fear, typically about something not immediate but pending.",
@@ -987,7 +991,8 @@
       }
     },
     "enjoyment": {
-      "desc": "Enjoyment has more named states in the English language than any of the other emotions.",
+      "desc": "We experience enjoyment when a good feeling is generated, which we often seek to continue or re-experience.",
+      "statesDesc": "Enjoyment has more named states in the English language than any of the other emotions.",
       "states": {
         "relief": {
           "desc": "When something expected to be unpleasant, especially the threat of harm, is avoided or comes to an end.",
@@ -1202,10 +1207,6 @@
     }
   },
   "glossary": {
-    "anger": {
-      "type": "emotion",
-      "text": "Response when pursuit of an important goal is blocked, especially if it is by a physical threat. There are seven angry states: annoyance, exasperation, bitterness, frustation, argumentative, vengeful, and fury."
-    },
     "apprehensive": {
       "type": "mood",
       "text": "Afraid that something bad or unpleasant is going to happen; fear about the future. Can be slight to extreme intensity."
@@ -1257,10 +1258,6 @@
       "type": "action",
       "text": "Not pleasing; unpleasant or offensive in manner. Easily angered or annoyed."
     },
-    "disgust": {
-      "type": "emotion",
-      "text": " Reaction to toxic smells, tastes, appearance or repulsive actions. There are nine disgust states: Aversion, distaste, repugnance, nausea, loathing, revulsion, abhorrence."
-    },
     "embarrassment": {
       "type": "",
       "text": "Darwin theorized it was undue positive attention, but faux pas also are causes of embarrassment. There is no facial or vocal signal unique to embarrassment. Blushing is the sign. Darwin noted that some people blush more than others, women more than men, and within families it is common for many members to blush. Dark skinned Africans blush but it is not visible or barely visible. For these reasons we do not consider blushing to be a signal, but a sign. There is some evidence that by a sequence of facial expressions and bodily movements, embarrassment can be signaled, but it has not received the crucial test of obtaining open ended judgments of what emotion is recognized when this sequence is observed."
@@ -1269,17 +1266,9 @@
       "type": "",
       "text": " A mental state distinguished from other mental states by not one but a set of characteristics, chief among them are: universality, distinctive physiology, distinctive subjective experience, involuntarily experienced as a result of very fast, automatic appraisal of events, inescapable, requires skillful practices to become aware of the emotional impulses before any action."
     },
-    "enjoyment": {
-      "type": "emotion",
-      "text": "An intrinsically good feeling, often motivating us to seek to continue it or re-experience it. There are 16 enjoyable states"
-    },
     "envy": {
       "type": "uncharted",
       "text": "Wishing for what another person has or does."
-    },
-    "fear": {
-      "type": "emotion",
-      "text": "Response to a perceived or actual threat of harm, physically or to achievement of your important goals. Fears vary in terms of timing (impending, or in the future; and whether there is any possibility of coping with the threat to reduce it. There are nine fearful states: trepidation, nervousness, worried, anxiety, dread, panic, desperation, horror, terror."
     },
     "firm": {
       "type": "action"
@@ -1345,10 +1334,6 @@
     "regrettable emotional episodes (anger and fear)": {
       "type": "",
       "text": "These are actions or words that one regrets having engaged in. Rarely felt while those regrettable actions are occurring, but afterwards when consciousness\/awareness comes into play reflecting on what one has done and why. Often it is the response of the target that brings the regrettable behavior into the person\u2019s awareness. Characteristics of a regrettable episode: 1. Response is too weak, not sufficient to the situation. 2. Response is too strong, more intense than the situation demands. 3. There was no response at all, when the situation demanded some response. 4. The response is at the correct strength, but it is delivered in a hurtful way (if anger) or in an otherwise undesirable fashion. Any of these characteristics may combine. Usually a person is unaware of their intention, unaware of how they are acting, until afterwards. If awareness were to arise during the regrettable episode, the episode would be interrupted. Why do regrettable episodes occur? Because the person is unaware of the emotion that has been triggered and the destructive actions that have been activated. Regrettable episodes are typically manifest with the same characteristic, too strong or too weak etc., again and again. Remedies: To bring awareness to recognize the triggers, and if possible the impulses to actions before the action, or the type of action that is selected. "
-    },
-    "sadness": {
-      "type": "emotion",
-      "text": "Mourning, figuratively or literally, the loss of something or someone important. There are ten states: disappointed, distraught, discouraged, helpless, miserable, grief, despair, sorrowful, resigned, anguish."
     },
     "seek comfort": {
       "type": "action"

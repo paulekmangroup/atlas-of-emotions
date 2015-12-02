@@ -867,7 +867,7 @@ export default {
 	},
 
 	resetCallout () {
-		dispatcher.changeCallout(this.currentEmotion, appStrings.emotionCalloutTitle, appStrings.emotionCalloutIntro + '<br><br>' + emotionsData.emotions[this.currentEmotion].desc);
+		dispatcher.changeCallout(this.currentEmotion, appStrings.emotionCalloutTitle, appStrings.emotionCalloutIntro + '<br><br>' + emotionsData.emotions[this.currentEmotion].statesDesc);
 	},
 
 	onKeyDown: function (keyCode) {

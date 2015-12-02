@@ -452,7 +452,7 @@ const continentsSection = {
 
 					// navigate from all continents view to zoomed-in continent view
 					dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS, continent.id);
-					dispatcher.changeCallout(continent.id, appStrings.emotionCalloutTitle, appStrings.emotionCalloutIntro + '<br><br>' + emotionsData.emotions[continent.id].desc);
+					dispatcher.changeCallout(continent.id, continent.id, emotionsData.emotions[continent.id].desc);
 
 				} else {
 
