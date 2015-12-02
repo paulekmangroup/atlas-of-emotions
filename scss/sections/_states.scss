@@ -21,10 +21,10 @@
 }
 #state-graph-container {
 	width: $states-graph-width;
-	height: 60%;
+	height: 80%;
 }
 #state-labels {
-	top: 30%;
+	top: 15%;
 }
 
 #state-graph-container {
@@ -83,6 +83,7 @@
 
 	.label {
 		@include emotion-color;
+		white-space: nowrap;
 	}
 
 }

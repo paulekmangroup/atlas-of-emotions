@@ -369,6 +369,20 @@ export default {
 
 		},
 
+		// manual tweaks for overlapping values
+		offsetPoints: function (points, offsets, strengthMod) {
+
+			if (points.length !== offsets.length) {
+				throw new Error('`points` and `offsets` must be the same length.');
+			}
+
+			points.forEach((point, i) => {
+				point[1].x += offsets[i][0];
+				point[1].y += offsets[i][1] * strengthMod;
+			});
+
+		},
+
 		/**
 		 * out -> [
 		 *	{ x: a, y: 0 },
@@ -424,50 +438,94 @@ export default {
 
 		disgust: function (states, strengthMod) {
 
-			return this.isosceles(states, strengthMod);
+			let points = this.isosceles(states, strengthMod);
 
-		},
-
-		enjoyment: function (states, strengthMod) {
-
-			return this.isosceles(states, strengthMod);
-
-		},
-
-		fear: function (states, strengthMod) {
-
-			return this.isosceles(states, strengthMod);
-
-		},
-
-		/**
-		 * out -> [
-		 *	{ x: a, y: 0 },
-		 *	{ x: a + (b-a)/2 + random offset, y: (b-a)/2 },
-		 *	{ x: b, y: 0 },
-		 * ]
-		 */
-		sadness: function (states, strengthMod) {
-
-			// amplify height a bit to counter shortness caused by interpolation
-			let points = this.isosceles(states, strengthMod * 1.25);
-
-			// manual tweaks for overlapping values
-			points[0][1].x += -2;
-			points[3][1].x += 0.1;
-			points[3][1].y += 0.2 * strengthMod;
-			points[8][1].x += 0.2;
-			points[8][1].y += 0.3 * strengthMod;
+			let offsets = [
+				[0, 0],
+				[-0.25, 0],
+				[0.25, 0.25],
+				[0, 0],
+				[-0.5, -0.5],
+				[0, -0.25],
+				[0.5, 0],
+				[0, 0]
+			];
+			this.offsetPoints(points, offsets, strengthMod);
 
 			return points;
 
 		},
 
+		enjoyment: function (states, strengthMod) {
 
+			let points = this.isosceles(states, strengthMod);
+
+			let offsets = [
+				[0, 0],			// rejoicing
+				[-0.5, -0.5],	// amusement
+				[0.5, 0],		// relief
+				[0, -0.5],		// compassion-joy
+				[0, 0],			// schadenfreude
+				[-0.5, 0],		// naches
+				[0.5, 0.25],	// fiero
+				[-0.25, 0.5],	// pride
+				[0, 0],			// wonder
+				[0, 0],			// excitement
+				[0, 0]			// ecstasy
+			];
+			this.offsetPoints(points, offsets, strengthMod);
+
+			return points;
+
+		},
+
+		fear: function (states, strengthMod) {
+
+			let points = this.isosceles(states, strengthMod);
+
+			let offsets = [
+				[0, 0],				// trepidation
+				[-0.5, -0.25],		// anxiety
+				[0.5, 0.25],		// nervousness
+				[0, -0.25],			// worry
+				[0, 0],				// dread
+				[-0.5, -0.6],		// desperation
+				[0, -0.25],			// panic
+				[-0.25, -0.35],		// horror
+				[0, 0]				// terror
+			];
+			this.offsetPoints(points, offsets, strengthMod);
+
+			return points;
+
+		},
+
+		sadness: function (states, strengthMod) {
+
+			// amplify height to counter shortness caused by interpolation
+			let points = this.isosceles(states, strengthMod * 1.25);
+
+			let offsets = [
+				[-1, 0],
+				[-1, 0],
+				[0, 1],
+				[1, 0],
+				[0, 0],
+				[0, 0],
+				[-0.5, -0.25],
+				[0, 0],
+				[0.5, 0.25],
+				[0, 0]
+			];
+			this.offsetPoints(points, offsets, strengthMod);
+
+			return points;
+
+		}
 
 	},
 
-	setUpDefs (defs, xScale, yScale) {
+	setUpDefs: function (defs, xScale, yScale) {
 
 		// blur filters (sadness)
 		// TODO: DRY this out 
