@@ -453,10 +453,11 @@ export default {
 			let points = this.isosceles(states, strengthMod * 1.25);
 
 			// manual tweaks for overlapping values
+			points[0][1].x += -2;
 			points[3][1].x += 0.1;
-			points[3][1].y += 0.2;
+			points[3][1].y += 0.2 * strengthMod;
 			points[8][1].x += 0.2;
-			points[8][1].y += 0.3;
+			points[8][1].y += 0.3 * strengthMod;
 
 			return points;
 
