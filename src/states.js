@@ -31,12 +31,11 @@ export default {
 	currentStatesData: null,
 
 	calloutResetTimeout: null,
+	tempNav: null,
 	
 	init: function (containerNode) {
 
 		this.applyTransitions = this.applyTransitions.bind(this);
-		this.onKeyDown = this.onKeyDown.bind(this);
-		document.addEventListener('keydown', this.onKeyDown);
 
 		// size main container to viewport
 		// let headerHeight = 55;	// from _variables.scss
@@ -47,6 +46,8 @@ export default {
 		containerNode.appendChild(graphContainer);
 
 		this.initLabels(containerNode);
+
+		this.createTempNav(containerNode);
 
 		// 
 		// d3 conventional margins
@@ -180,7 +181,7 @@ export default {
 		//			and just draw the graph here.
 		//
 
-		if (!~this.emotions.indexOf(emotion)) {
+		if (!~_.values(dispatcher.EMOTIONS).indexOf(emotion)) {
 			emotion = 'anger';
 		}
 		this.currentEmotion = emotion;
@@ -224,6 +225,8 @@ export default {
 		// setTimeout(() => {
 		this.resetCallout();
 		// }, LABEL_APPEAR_DELAY);
+
+		this.tempNav.innerHTML = '<a href=#actions:' + emotion + '>ACTIONS</a>';
 
 	},
 
@@ -274,6 +277,21 @@ export default {
 						resolve();
 					}, 1);
 				});
+
+		});
+
+	},
+
+	/**
+	 * States view stays open, with limited interactivity,
+	 * in actions, triggers, and moods. `setBackgrounded()` toggles this state.
+	 */
+	setBackgrounded: function () {
+
+		return new Promise((resolve, reject) => {
+
+			// TODO: resolve on completion of animation
+			resolve();
 
 		});
 
@@ -929,13 +947,11 @@ export default {
 		dispatcher.changeCallout(this.currentEmotion, appStrings.emotionCalloutTitle, appStrings.emotionCalloutIntro + '<br><br>' + emotionsData.emotions[this.currentEmotion].statesDesc);
 	},
 
-	onKeyDown: function (keyCode) {
+	createTempNav (containerNode) {
 
-		if (keyCode === 37 || keyCode === 39) {
-
-			console.log('TODO: scroll to next emotion. This functionality will ultimately be accessible via a dropdown.');
-
-		}
+		this.tempNav = document.createElement('div');
+		this.tempNav.id = 'temp-states-nav';
+		containerNode.appendChild(this.tempNav);
 
 	}
 

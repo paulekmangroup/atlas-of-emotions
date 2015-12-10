@@ -2,6 +2,7 @@ import _ from 'lodash';
 import dispatcher from './dispatcher.js';
 import continents from './continents.js';
 import states from './states.js';
+import actions from './actions.js';
 
 export default function (...initArgs) {
 
@@ -66,8 +67,8 @@ export default function (...initArgs) {
 
 		sections.continents = continents;
 		sections.states = states;
+		sections.actions = actions;
 
-		sections.actions = placeholderSection(dispatcher.SECTIONS.ACTIONS);
 		sections.triggers = placeholderSection(dispatcher.SECTIONS.TRIGGERS);
 		sections.moods = placeholderSection(dispatcher.SECTIONS.MOODS);
 
@@ -137,8 +138,13 @@ export default function (...initArgs) {
 				section.setEmotion(currentEmotion, previousEmotion);
 			} else {
 				// navigate between sections
-				previousSection.close()
-				.then(() => {
+				let previousSectionPromise;
+				if (section.managePreviousSection) {
+					previousSectionPromise = section.managePreviousSection(previousSection);
+				} else {
+					previousSectionPromise = previousSection.close();
+				}
+				previousSectionPromise.then(() => {
 					// hide the previous section's container
 					if (previousContainer) {
 						previousContainer.style.display = 'none';
