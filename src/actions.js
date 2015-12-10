@@ -39,7 +39,7 @@ export default {
 
 	},
 
-	managePreviousSection: function (previousSection) {
+	managePreviousSection: function (previousSection, currentEmotion, previousEmotion) {
 
 		if (previousSection === states) {
 			return previousSection.setBackgrounded(true);

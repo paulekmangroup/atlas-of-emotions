@@ -19,6 +19,7 @@ export default {
 		'enjoyment'
 	],
 
+	sectionContainer: null,
 	labelContainer: null,
 	stateGraphContainer: null,
 	xScale: null,
@@ -34,6 +35,8 @@ export default {
 	tempNav: null,
 	
 	init: function (containerNode) {
+
+		this.sectionContainer = containerNode;
 
 		this.applyTransitions = this.applyTransitions.bind(this);
 
@@ -165,10 +168,14 @@ export default {
 
 		labels.exit().remove();
 
-		labels.select('h3')
-			.on('mouseover', this.onStateMouseOver)
-			.on('mouseout', this.onStateMouseOut)
-			.on('click', this.onStateClick);
+	},
+
+	setActive: function (val) {
+
+		d3.select(this.labelContainer).selectAll('div').select('h3')
+			.on('mouseover', val ? this.onStateMouseOver : null)
+			.on('mouseout', val ? this.onStateMouseOut : null)
+			.on('click', val ? this.onStateClick : null);
 
 	},
 
@@ -216,6 +223,7 @@ export default {
 			.call(this.applyTransitions);
 
 		this.renderLabels(transformedRanges);
+		this.setActive(true);
 
 		setTimeout(() => {
 			this.stateGraphContainer.selectAll('.axis')
@@ -227,12 +235,13 @@ export default {
 		// }, LABEL_APPEAR_DELAY);
 
 		this.tempNav.innerHTML = '<a href=#actions:' + emotion + '>ACTIONS</a>';
+		this.tempNav.removeAttribute('style');
 
 	},
 
 	open: function () {
 
-		// TODO: need to do anything to open states prior to setting emotion?
+		this.setBackgrounded(false);
 
 	},
 
@@ -245,18 +254,7 @@ export default {
 			// refactor as such, along with refactor noted at top of setEmotion().
 			//
 
-			// fade out labels
-			d3.select(this.labelContainer).selectAll('div')
-				.classed('visible', false)
-			.selectAll('h3')
-				.style('opacity', null);
-
-			// fade out axes
-			this.stateGraphContainer.selectAll('.axis')
-				.classed('visible', false);
-
-			// remove main callout
-			dispatcher.changeCallout();
+			this.hideChrome();
 			
 			// recede graph down into baseline
 			let transformedRanges = this.transformRanges(this.currentStatesData, this.currentEmotion, 0.0);
@@ -286,14 +284,44 @@ export default {
 	 * States view stays open, with limited interactivity,
 	 * in actions, triggers, and moods. `setBackgrounded()` toggles this state.
 	 */
-	setBackgrounded: function () {
+	setBackgrounded: function (val, options) {
 
 		return new Promise((resolve, reject) => {
 
-			// TODO: resolve on completion of animation
-			resolve();
+			this.sectionContainer.classList[(val ? 'add' : 'remove')]('backgrounded');
+			this.hideChrome();
+			this.setActive(false);
+
+			// resolve on completion of animation
+			resolve({
+				keepContainerVisible: true
+			});
 
 		});
+
+	},
+
+	hideChrome: function () {
+
+		// TODO: this code was in close, but is needed for setBackgrounded;
+		// close() removes labels and axis (stateGraphContainer) from DOM
+		// but this function does not. may need to remove labels and axes here,
+		// on transition end / after a timeout.
+
+		// fade out labels
+		d3.select(this.labelContainer).selectAll('div')
+			.classed('visible', false)
+		.selectAll('h3')
+			.style('opacity', null);
+
+		// fade out axes
+		this.stateGraphContainer.selectAll('.axis')
+			.classed('visible', false);
+
+		this.tempNav.style.display = 'none';
+
+		// remove main callout
+		dispatcher.changeCallout();
 
 	},
 

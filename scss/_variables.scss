@@ -19,7 +19,6 @@ $states-graph-width: 70%;
 $label-fade-in-time-init: 2s;
 $label-fade-in-time: 1s;
 
-
 // mixins
 @mixin emotion-color () {
 	&.anger { color: $label-color-anger; }

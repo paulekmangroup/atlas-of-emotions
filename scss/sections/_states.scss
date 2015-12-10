@@ -9,6 +9,18 @@
 	margin-left: -50%;
 
 	text-align: center;
+
+	transform: scale(1.0);
+	// transition: transform #{$states-scale-transition};
+	transition-property: transform, top;
+	transition-duration: 2s, 2s;
+	transition-timing-function: cubic-bezier(0.4, 0.4, 0.35, 1), cubic-bezier(.81,.34,.63,.85);
+
+	&.backgrounded {
+		transform: scale(0.6);
+		top: -10%;
+	}
+
 }
 
 #state-graph-container,
@@ -48,8 +60,7 @@
 		}
 
 		opacity: 0.0;
-		-webkit-transition: opacity #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
-		transition:         opacity #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
+		transition: opacity #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
 
 		&.visible {
 			opacity: 1.0;
@@ -67,8 +78,7 @@
 		pointer-events: none;
 
 		opacity: 0.0;
-		-webkit-transition: opacity #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
-		transition:         opacity #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
+		transition: opacity #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
 
 		&.visible {
 			opacity: 1.0;

@@ -144,10 +144,12 @@ export default function (...initArgs) {
 				} else {
 					previousSectionPromise = previousSection.close();
 				}
-				previousSectionPromise.then(() => {
-					// hide the previous section's container
-					if (previousContainer) {
-						previousContainer.style.display = 'none';
+				previousSectionPromise.then((options) => {
+					if (!options || !options.keepContainerVisible) {
+						// hide the previous section's container
+						if (previousContainer) {
+							previousContainer.style.display = 'none';
+						}
 					}
 
 					// reveal the new section's container,
