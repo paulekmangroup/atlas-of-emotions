@@ -27,6 +27,7 @@ export default function (...initArgs) {
 		document.addEventListener('keydown', onKeyDown);
 		dispatcher.addListener(dispatcher.EVENTS.NAVIGATE, onNavigate);
 		dispatcher.addListener(dispatcher.EVENTS.NAVIGATE_COMPLETE, onNavigateComplete);
+		dispatcher.addListener(dispatcher.EVENTS.CHANGE_EMOTION_STATE, onEmotionStateChange);
 		dispatcher.addListener(dispatcher.EVENTS.CHANGE_CALLOUT, onCalloutChange);
 		window.addEventListener('hashchange', onHashChange);
 
@@ -204,6 +205,14 @@ export default function (...initArgs) {
 
 		callout.querySelector('.title').innerHTML = title;
 		callout.querySelector('.body').innerHTML = body;
+
+	}
+
+	function onEmotionStateChange (state) {
+
+		if (currentSection === sections.actions) {
+			currentSection.setState(state);
+		}
 
 	}
 

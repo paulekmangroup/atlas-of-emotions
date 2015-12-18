@@ -1,4 +1,4 @@
-#states {
+#actions {
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -9,37 +9,45 @@
 	margin-left: -50%;
 
 	text-align: center;
-
-	transform: scale(1.0);
-	// transition: transform #{$states-scale-transition};
-	transition-property: transform, top;
-	transition-duration: 2s, 2s;
-	transition-timing-function: cubic-bezier(0.4, 0.4, 0.35, 1), cubic-bezier(.81,.34,.63,.85);
-
-	&.backgrounded {
-		transform: scale($states-backgrounded-scale);
-		top: $states-backgrounded-top;
-	}
-
+	pointer-events: none;
 }
 
-#state-graph-container,
-#state-labels {
+#action-graph-container,
+#action-labels {
 	position: absolute;
-	bottom: $states-containers-bottom;
+
+	// align top of actions containers with bottom of
+	// 'backgrounded' states graph, which is scaled and translated.
+	// this math is basically:
+	// (states position) - (scaled states offset) - scale * (states graph offset from parent + states graph bottom margin)
+	top: calc((100% + #{$states-backgrounded-top}) - 
+		(100% * (1 - #{$states-backgrounded-scale}) / 2) - 
+		#{$states-backgrounded-scale} * (#{$states-containers-bottom} + 50px));
+
 	left: 50%;
-	margin-left: -$states-graph-width/2;
+	margin-left: -$actions-graph-width/2;
 	min-height: 400px;
 }
-#state-graph-container {
-	width: $states-graph-width;
-	height: 80%;
-}
-#state-labels {
+#action-labels {
 	top: 15%;
 }
 
-#state-graph-container {
+.action-arrow {
+	fill: red;
+	fill-opacity: 0.5;
+	stroke: none;
+}
+
+#action-graph-container {
+	width: $actions-graph-width;
+	height: 40%;
+
+	transform-origin: top;
+	transform: rotateX(30deg);
+	
+	pointer-events: auto;
+	
+	/*
 	.axis {
 		line,
 		path {
@@ -70,9 +78,10 @@
 	.area {
 		mix-blend-mode: multiply;
 	}
+	*/
 }
-
-#state-labels {
+/*
+#action-labels {
 	div {
 		position: absolute;
 		pointer-events: none;
@@ -97,10 +106,4 @@
 	}
 
 }
-
-#temp-states-nav {
-	position: absolute;
-	bottom: 5%;
-	left: 50%;
-	text-align: center;
-}
+*/

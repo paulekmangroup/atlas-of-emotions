@@ -5,6 +5,7 @@ const dispatcher = {
 	EVENTS: {
 		NAVIGATE: 'navigate',
 		NAVIGATE_COMPLETE: 'navigateComplete',
+		CHANGE_EMOTION_STATE: 'changeEmotionState',
 		CHANGE_CALLOUT: 'changeCallout'
 	},
 
@@ -63,6 +64,12 @@ const dispatcher = {
 	changeCallout: function (emotion, title, body) {
 
 		this.emit(this.EVENTS.CHANGE_CALLOUT, emotion, title, body);
+
+	},
+
+	setEmotionState: function (state) {
+
+		this.emit(this.EVENTS.CHANGE_EMOTION_STATE, state);
 
 	},
 

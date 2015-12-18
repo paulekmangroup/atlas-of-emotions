@@ -946,6 +946,8 @@ export default {
 			}
 		}, 1);
 
+		dispatcher.setEmotionState(this.currentStatesData[i].name);
+
 	},
 
 	onStateMouseOut: function (d, i) {
@@ -961,6 +963,7 @@ export default {
 		}
 		this.calloutResetTimeout = setTimeout(() => {
 			this.resetCallout();
+			dispatcher.setEmotionState(null);
 		}, 1000);
 
 	},
