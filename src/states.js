@@ -30,6 +30,7 @@ export default {
 
 	currentEmotion: null,
 	currentStatesData: null,
+	isBackgrounded: false,
 
 	calloutResetTimeout: null,
 	tempNav: null,
@@ -291,6 +292,7 @@ export default {
 			this.sectionContainer.classList[(val ? 'add' : 'remove')]('backgrounded');
 			this.hideChrome();
 			this.setActive(false);
+			this.isBackgrounded = val;
 
 			// resolve on completion of animation
 			resolve({
@@ -933,20 +935,24 @@ export default {
 		d3.selectAll('path.area')
 			.style('opacity', (data, index) => index === i ? 1.0 : 0.2);
 
-		d3.select(this.labelContainer).selectAll('div h3')
-			.style('opacity', (data, index) => index === i ? 1.0 : 0.2);
-
-		// .selectAll('linearGradient')
-		// TODO: set stops with higher/lower opacity on #anger-gradient-{i}
-
-		dispatcher.changeCallout(this.currentEmotion, this.currentStatesData[i].name, this.currentStatesData[i].desc);
-		setTimeout(() => {
-			if (this.calloutResetTimeout) {
-				clearTimeout(this.calloutResetTimeout);
-			}
-		}, 1);
-
 		dispatcher.setEmotionState(this.currentStatesData[i].name);
+
+		if (!this.isBackgrounded) {
+
+			d3.select(this.labelContainer).selectAll('div h3')
+				.style('opacity', (data, index) => index === i ? 1.0 : 0.2);
+
+			// .selectAll('linearGradient')
+			// TODO: set stops with higher/lower opacity on #anger-gradient-{i}
+
+			dispatcher.changeCallout(this.currentEmotion, this.currentStatesData[i].name, this.currentStatesData[i].desc);
+			setTimeout(() => {
+				if (this.calloutResetTimeout) {
+					clearTimeout(this.calloutResetTimeout);
+				}
+			}, 1);
+
+		}
 
 	},
 
@@ -962,7 +968,9 @@ export default {
 			clearTimeout(this.calloutResetTimeout);
 		}
 		this.calloutResetTimeout = setTimeout(() => {
-			this.resetCallout();
+			if (!this.isBackgrounded) {
+				this.resetCallout();
+			}
 			dispatcher.setEmotionState(null);
 		}, 1000);
 
