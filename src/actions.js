@@ -57,17 +57,15 @@ export default {
 			.attr('height', h);
 
 		this.actionGraphContainer = svg.append('g')
-			// .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 			.attr('transform', 'translate(' + (margin.left + 0.5*innerWidth) + ',' + margin.top + ')');
 
 		// 
 		// d3/svg setup
 		// 
 		let section = this;
-		this.arrowScale = 0;
 		this.lineGenerator = d3.svg.line.radial()
-			.radius(function(d) { return d.x * section.arrowScale * innerWidth/2; })
-			.angle(function(d) { return 2*Math.PI - d.y * 2*Math.PI; })
+			.radius(d => d.x * 0.5*innerWidth)
+			.angle(d => 2*Math.PI * (1 - d.y))
 			.interpolate('cardinal');
 
 		/*
@@ -146,36 +144,76 @@ export default {
 				return;
 			}
 
-			let numArrows = stateActionsData.length;
+			let numActions = stateActionsData.length;
 			let data = [];
-			for (let i=0; i<numArrows; i++) {
-				let offset = 0.25 + i / (2 * (numArrows - 1));
-				data.push(ARROW_SHAPE.map(pt => ({
-					x: pt.x,
-					y: offset + pt.y
-				})));
+			for (let i=0; i<numActions; i++) {
+				let offset = 0.25 + i / (2 * (numActions - 1));
+				data.push(Object.assign({}, stateActionsData[i], {
+					paths: ARROW_SHAPE.map(pt => ({
+						x: pt.x,
+						y: offset + pt.y
+					}))
+					// rotation: (90 + (numActions-i-1) * 180/(numActions-1))
+				}));
 			}
 
-			this.arrowScale = 0;
-			this.actionGraphContainer.selectAll('path')
-				.data(data)
-			.enter().append('path')
-				.attr("class", "action-arrow")
-				.attr('d', this.lineGenerator);
+			// 
+			// TODO SAT:
+			// 
+			// instead of offsetting in data,
+			// just specify a callback for attr('transform', 'rotate').
+			// also, don't need to use line.radial(),
+			// should just use line(). this is not really a polar chart,
+			// it's just the same path rotated around a centerpoint.
+			// 
+			// figure out key function -- we want continuity of each action in arrow transitions,
+			// but the key function d => d.name was causing only one arrow to render.
+			// 
+			// since there can be many (15 in bitterness!) con- or destructive actions per state,
+			// con/des areas must be fluid. calculate total number of con/des/both,
+			// and divide up half-circle into those ratios.
+			// then, distribute arrows within those areas.
+			// 
 
-			this.arrowScale = 1;
-			this.actionGraphContainer.selectAll('path').transition()
+			console.log(">>>>> stateActionsData:", stateActionsData);
+			console.log(">>>>> data:", data);
+			let pathSelection = this.actionGraphContainer.selectAll('path')
+				// TODO: have to get this key function working...
+				// oh! problem is that there's no name left after converting stateActionsData -> data with arrow points.
+				// should just apply arrow points in the line generator,
+				// since i'm refactoring to draw the exact same path for each action
+				// and just scale/rotate it via .attr().
+				.data(data, d => d.name);
+			
+			// update
+			pathSelection.selectAll('path')
+			.transition()
 				.duration(1000)
-				.delay(function (d, i) { return i * 100; })
-				.attr('d', this.lineGenerator);
+				.attr('d', d => this.lineGenerator(d.paths));
+
+			// enter
+			pathSelection.enter().append('path')
+				.attr('class', 'action-arrow')
+				.attr('d', d => this.lineGenerator(d.paths))
+				.attr('transform', 'scale(0.0)')
+			.transition()
+				.duration(1000)
+				.delay(function (d, i) { return i * 50; })
+				.attr('transform', 'scale(1.0)');
+
+			// exit
+			pathSelection.exit().transition()
+				.duration(600)
+				.attr('transform', 'scale(0.0)')
+				.remove();
 
 		} else {
 
-			this.arrowScale = 0;
 			this.actionGraphContainer.selectAll('path').transition()
 				.duration(1000)
 				.delay(function (d, i) { return i * 100; })
-				.attr('d', this.lineGenerator);
+				.attr('transform', 'scale(0.0)')
+				.remove();
 
 		}
 

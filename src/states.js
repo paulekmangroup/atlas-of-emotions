@@ -32,7 +32,7 @@ export default {
 	currentStatesData: null,
 	isBackgrounded: false,
 
-	calloutResetTimeout: null,
+	mouseOutTimeout: null,
 	tempNav: null,
 	
 	init: function (containerNode) {
@@ -946,13 +946,15 @@ export default {
 			// TODO: set stops with higher/lower opacity on #anger-gradient-{i}
 
 			dispatcher.changeCallout(this.currentEmotion, this.currentStatesData[i].name, this.currentStatesData[i].desc);
-			setTimeout(() => {
-				if (this.calloutResetTimeout) {
-					clearTimeout(this.calloutResetTimeout);
-				}
-			}, 1);
 
 		}
+
+		// prevent unwanted mouseout behavior
+		setTimeout(() => {
+			if (this.mouseOutTimeout) {
+				clearTimeout(this.mouseOutTimeout);
+			}
+		}, 1);
 
 	},
 
@@ -964,10 +966,11 @@ export default {
 		d3.select(this.labelContainer).selectAll('div h3')
 			.style('opacity', null);
 
-		if (this.calloutResetTimeout) {
-			clearTimeout(this.calloutResetTimeout);
+		// execute some actions after a delay
+		if (this.mouseOutTimeout) {
+			clearTimeout(this.mouseOutTimeout);
 		}
-		this.calloutResetTimeout = setTimeout(() => {
+		this.mouseOutTimeout = setTimeout(() => {
 			if (!this.isBackgrounded) {
 				this.resetCallout();
 			}
