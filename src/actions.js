@@ -29,6 +29,8 @@ export default {
 	
 	init: function (containerNode) {
 
+		this.scaledLineGenerator = this.scaledLineGenerator.bind(this);
+
 		this.actionsData = this.parseActions();
 
 		let graphContainer = document.createElement('div');
@@ -82,6 +84,19 @@ export default {
 		*/
 
 		this.isInited = true;
+
+	},
+
+	scaledLineGenerator: function (selection, scale) {
+
+		return selection.attr('d', d =>
+			this.lineGenerator(d.paths.map(path =>
+				({
+					x: path.x * scale,
+					y: path.y * scale
+				})
+			))
+		);
 
 	},
 
@@ -144,30 +159,22 @@ export default {
 				return;
 			}
 
+			// TODO: memoize .paths, in parseActions().
 			let numActions = stateActionsData.length;
 			let data = [];
 			for (let i=0; i<numActions; i++) {
-				let offset = 0.25 + i / (2 * (numActions - 1));
+				// let offset = 0.25 + i / (2 * (numActions - 1));
 				data.push(Object.assign({}, stateActionsData[i], {
 					paths: ARROW_SHAPE.map(pt => ({
 						x: pt.x,
-						y: offset + pt.y
-					}))
-					// rotation: (90 + (numActions-i-1) * 180/(numActions-1))
+						y: /*offset*/ + pt.y
+					})),
+					rotation: (90 + (numActions-i-1) * 180/(numActions-1))
 				}));
 			}
 
 			// 
 			// TODO SAT:
-			// 
-			// instead of offsetting in data,
-			// just specify a callback for attr('transform', 'rotate').
-			// also, don't need to use line.radial(),
-			// should just use line(). this is not really a polar chart,
-			// it's just the same path rotated around a centerpoint.
-			// 
-			// figure out key function -- we want continuity of each action in arrow transitions,
-			// but the key function d => d.name was causing only one arrow to render.
 			// 
 			// since there can be many (15 in bitterness!) con- or destructive actions per state,
 			// con/des areas must be fluid. calculate total number of con/des/both,
@@ -175,36 +182,33 @@ export default {
 			// then, distribute arrows within those areas.
 			// 
 
-			console.log(">>>>> stateActionsData:", stateActionsData);
-			console.log(">>>>> data:", data);
 			let pathSelection = this.actionGraphContainer.selectAll('path')
-				// TODO: have to get this key function working...
-				// oh! problem is that there's no name left after converting stateActionsData -> data with arrow points.
-				// should just apply arrow points in the line generator,
-				// since i'm refactoring to draw the exact same path for each action
-				// and just scale/rotate it via .attr().
 				.data(data, d => d.name);
 			
 			// update
-			pathSelection.selectAll('path')
-			.transition()
+			pathSelection.transition()
 				.duration(1000)
-				.attr('d', d => this.lineGenerator(d.paths));
+				.attr('d', d => this.lineGenerator(d.paths))
+				.attr('transform', d => 'rotate(' + d.rotation + ')');
 
 			// enter
 			pathSelection.enter().append('path')
 				.attr('class', 'action-arrow')
-				.attr('d', d => this.lineGenerator(d.paths))
-				.attr('transform', 'scale(0.0)')
+				// .attr('d', d => this.lineGenerator(d.paths))
+				.call(this.scaledLineGenerator, 0.0)
+				.attr('transform', d => 'rotate(' + d.rotation + ')')
+				/*.attr('transform', 'scale(0.0)')*/
 			.transition()
 				.duration(1000)
 				.delay(function (d, i) { return i * 50; })
-				.attr('transform', 'scale(1.0)');
+				.call(this.scaledLineGenerator, 1.0)
+				/*.attr('transform', 'scale(1.0)')*/;
 
 			// exit
 			pathSelection.exit().transition()
 				.duration(600)
-				.attr('transform', 'scale(0.0)')
+				.call(this.scaledLineGenerator, 0.0)
+				/*.attr('transform', 'scale(0.0)')*/
 				.remove();
 
 		} else {
@@ -212,7 +216,8 @@ export default {
 			this.actionGraphContainer.selectAll('path').transition()
 				.duration(1000)
 				.delay(function (d, i) { return i * 100; })
-				.attr('transform', 'scale(0.0)')
+				.call(this.scaledLineGenerator, 0.0)
+				/*.attr('transform', 'scale(0.0)')*/
 				.remove();
 
 		}
