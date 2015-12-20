@@ -159,97 +159,57 @@ export default {
 				return;
 			}
 
-			// TODO: calculate and memoize .paths beforehand, in parseActions().
-			// let numActions = stateActionsData.actions.length;
-
-			/*
-			// count the number of each action of a given valence
-			let valenceCounts = {};
-			stateActionsData.forEach(action => {
-				if (!valenceCounts[action.valence]) {
-					valenceCounts[action.valence] = 1;
-				} else {
-					valenceCounts[action.valence]++;
-				}
-			});
-			console.log(">>>>> counts:", valenceCounts);
-			*/
-
-			/*
-			let valenceRatios = {},
-				valenceOffsets = {};
-			Object.keys(valenceCounts).forEach(valenceVal => {
-				valenceRatios[valenceVal] = valenceCounts[valenceVal] / numActions;
-				valenceOffsets = valenceRatios
-			});
-			console.log(">>>>> ratios:", valenceRatios);
-			*/
-
-			/*
-			baseYOffset = 0,
-			currentValenceRatio = VALENCES.CONSTRUCTIVE*/
-			/*
-			let data = stateActionsData.map((action, i) => {
-				// let yOffset = baseYOffset + 
-				// let offset = 0.25 + i / (2 * (numActions - 1));
-				return Object.assign({}, stateActionsData[i], {
-					paths: ARROW_SHAPE.map(pt => ({
-						x: pt.x,
-						y: pt.y
-						// y: offset + pt.y
-					})),
-					rotation: (90 + (numActions-i-1) * 180/(numActions-1))
-				});
-			});
-			*/
-
 			// 
-			// TODO SAT:
+			// TODO SUN:
+			// 
+			// labels on states
+			// constructive/both/destructive areas underneath, labeled
+			// color per emotion, if not gradient until later
 			// 
 			// since there can be many (15 in bitterness!) con- or destructive actions per state,
 			// con/des areas must be fluid. calculate total number of con/des/both,
 			// and divide up half-circle into those ratios.
 			// then, distribute arrows within those areas.
-			// 
+			// render as overlapping venn diagram, so just two shades,
+			// one for con, one for des, overlap at both.
 			// 
 
-			let pathSelection = this.actionGraphContainer.selectAll('path')
-				.data(stateActionsData.actions, d => d.name);
+			let arrowSelection = this.actionGraphContainer.selectAll('g.action-arrow')
+				.data(stateActionsData, d => d.name);
 			
 			// update
-			pathSelection.transition()
+			arrowSelection.transition()
 				.duration(1000)
-				.attr('d', d => this.lineGenerator(d.paths))
 				.attr('transform', d => 'rotate(' + d.rotation + ')');
 
 			// enter
-			pathSelection.enter().append('path')
+			let arrowEnterSelection = arrowSelection.enter().append('g')
 				.attr('class', 'action-arrow')
-				// .attr('d', d => this.lineGenerator(d.paths))
-				.call(this.scaledLineGenerator, 0.0)
-				.attr('transform', d => 'rotate(' + d.rotation + ')')
-				/*.attr('transform', 'scale(0.0)')*/
-			.transition()
+				.attr('transform', d => 'rotate(' + d.rotation + ')');
+			arrowEnterSelection.append('path')
+				.call(this.scaledLineGenerator, 0.0);
+				
+			arrowEnterSelection.transition()
 				.duration(1000)
 				.delay(function (d, i) { return i * 50; })
-				.call(this.scaledLineGenerator, 1.0)
-				/*.attr('transform', 'scale(1.0)')*/;
+			.select('path')
+				.call(this.scaledLineGenerator, 1.0);
 
 			// exit
-			pathSelection.exit().transition()
+			arrowSelection.exit().transition()
 				.duration(600)
-				.call(this.scaledLineGenerator, 0.0)
-				/*.attr('transform', 'scale(0.0)')*/
-				.remove();
+				.remove()
+			.select('path')
+				.call(this.scaledLineGenerator, 0.0);
 
 		} else {
 
-			this.actionGraphContainer.selectAll('path').transition()
+			this.actionGraphContainer.selectAll('g.action-arrow').transition()
 				.duration(1000)
 				.delay(function (d, i) { return i * 100; })
-				.call(this.scaledLineGenerator, 0.0)
-				/*.attr('transform', 'scale(0.0)')*/
-				.remove();
+				.remove()
+			.select('path')
+				.call(this.scaledLineGenerator, 0.0);
 
 		}
 
@@ -284,22 +244,14 @@ export default {
 
 	parseActions: function () {
 
-		// For each state in each emotion, create a hash of actions as:
-		// {
-		// 	actions: [actions ordered by valence]
-		// 	sortedActions: {
-		// 		VALENCE.CONSTRUCTIVE: [actions in alpha order]
-		// 		VALENCE.BOTH: [actions in alpha order]
-		// 		VALENCE.DESTRUCTIVE: [actions in alpha order]
-		// 		VALENCE.NONE: [actions in alpha order]
+		// For each state in each emotion, create an array of actions ordered alphabetically, by valence.
+		// Each action is a hash containing:
+		// 	{
+		// 		name: 'actionName',
+		// 		valence: 'NONE|CONSTRUCTIVE|DESTRUCTIVE|BOTH',
+		// 		paths: Array of points to draw the shape, copied from ARROW_PATHS
+		// 		rotation: value from 0<>1 at which to display action arrow along half-circle (only present in sortedActions)
 		// 	}
-		// 
-		// Each action is formatted as:
-		// {
-		// 	name: 'actionName',
-		// 	valence: 'NONE|CONSTRUCTIVE|DESTRUCTIVE|BOTH',
-		// 	rotation: value from 0<>1 at which to display action arrow along half-circle (only present in sortedActions)
-		// }
 		let actionsData = Object.keys(dispatcher.EMOTIONS).reduce((actionsOutput, emotionKey) => {
 
 			let emotionName = dispatcher.EMOTIONS[emotionKey],
@@ -340,21 +292,6 @@ export default {
 							else return 0;
 						});
 				});
-
-				/*
-				// don't think we need this after all...
-				// calculate rotation for each action
-				let offsetSum = 0,
-					totalNumActions = allActions.length;
-				_.values(VALENCES).forEach(valenceVal => {
-					let actionsByValence = sortedActions[valenceVal];
-					let numActionsByValence = actionsByValence.length;
-					actionsByValence.forEach((action, i) => {
-						action.rotation = offsetSum + (numActionsByValence/totalNumActions)
-					});
-					offsetSum += 
-				});
-				*/
 				
 				// compile paths and calculate rotation for each action,
 				// stepping through sortedActions.
@@ -376,9 +313,7 @@ export default {
 					return acc;
 				}, []);
 
-				statesOutput[stateName] = {
-					actions: allSortedActions
-				};
+				statesOutput[stateName] = allSortedActions;
 
 				return statesOutput;
 
