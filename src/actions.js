@@ -7,10 +7,10 @@ import appStrings from '../static/appStrings.json';
 import states from './states.js';
 
 const VALENCES = {
-	NONE: 0,
 	CONSTRUCTIVE: 1,
-	DESTRUCTIVE: 2,
-	BOTH: 3
+	BOTH: 2,
+	DESTRUCTIVE: 3,
+	NONE: 4
 };
 
 const ARROW_SHAPE = [
@@ -159,19 +159,49 @@ export default {
 				return;
 			}
 
-			// TODO: memoize .paths, in parseActions().
-			let numActions = stateActionsData.length;
-			let data = [];
-			for (let i=0; i<numActions; i++) {
+			// TODO: calculate and memoize .paths beforehand, in parseActions().
+			// let numActions = stateActionsData.actions.length;
+
+			/*
+			// count the number of each action of a given valence
+			let valenceCounts = {};
+			stateActionsData.forEach(action => {
+				if (!valenceCounts[action.valence]) {
+					valenceCounts[action.valence] = 1;
+				} else {
+					valenceCounts[action.valence]++;
+				}
+			});
+			console.log(">>>>> counts:", valenceCounts);
+			*/
+
+			/*
+			let valenceRatios = {},
+				valenceOffsets = {};
+			Object.keys(valenceCounts).forEach(valenceVal => {
+				valenceRatios[valenceVal] = valenceCounts[valenceVal] / numActions;
+				valenceOffsets = valenceRatios
+			});
+			console.log(">>>>> ratios:", valenceRatios);
+			*/
+
+			/*
+			baseYOffset = 0,
+			currentValenceRatio = VALENCES.CONSTRUCTIVE*/
+			/*
+			let data = stateActionsData.map((action, i) => {
+				// let yOffset = baseYOffset + 
 				// let offset = 0.25 + i / (2 * (numActions - 1));
-				data.push(Object.assign({}, stateActionsData[i], {
+				return Object.assign({}, stateActionsData[i], {
 					paths: ARROW_SHAPE.map(pt => ({
 						x: pt.x,
-						y: /*offset*/ + pt.y
+						y: pt.y
+						// y: offset + pt.y
 					})),
 					rotation: (90 + (numActions-i-1) * 180/(numActions-1))
-				}));
-			}
+				});
+			});
+			*/
 
 			// 
 			// TODO SAT:
@@ -181,9 +211,10 @@ export default {
 			// and divide up half-circle into those ratios.
 			// then, distribute arrows within those areas.
 			// 
+			// 
 
 			let pathSelection = this.actionGraphContainer.selectAll('path')
-				.data(data, d => d.name);
+				.data(stateActionsData.actions, d => d.name);
 			
 			// update
 			pathSelection.transition()
@@ -253,18 +284,34 @@ export default {
 
 	parseActions: function () {
 
-		// For each state in each emotion, create an unordered Array of actions formatted as:
-		// { name: 'actionName', valence: 'NONE|CONSTRUCTIVE|DESTRUCTIVE|BOTH' }
+		// For each state in each emotion, create a hash of actions as:
+		// {
+		// 	actions: [actions ordered by valence]
+		// 	sortedActions: {
+		// 		VALENCE.CONSTRUCTIVE: [actions in alpha order]
+		// 		VALENCE.BOTH: [actions in alpha order]
+		// 		VALENCE.DESTRUCTIVE: [actions in alpha order]
+		// 		VALENCE.NONE: [actions in alpha order]
+		// 	}
+		// 
+		// Each action is formatted as:
+		// {
+		// 	name: 'actionName',
+		// 	valence: 'NONE|CONSTRUCTIVE|DESTRUCTIVE|BOTH',
+		// 	rotation: value from 0<>1 at which to display action arrow along half-circle (only present in sortedActions)
+		// }
 		let actionsData = Object.keys(dispatcher.EMOTIONS).reduce((actionsOutput, emotionKey) => {
 
 			let emotionName = dispatcher.EMOTIONS[emotionKey],
 				statesData = emotionsData.emotions[emotionName].states;
 
+			// iterate over states for each emotion
 			actionsOutput[emotionName] = Object.keys(statesData).reduce((statesOutput, stateName) => {
 
 				let actionData = statesData[stateName].actions;
 
-				statesOutput[stateName] = Object.keys(actionData).map((actionName, i, actions) => {
+				// generate actions for each state
+				let allActions = Object.keys(actionData).map((actionName, i, actions) => {
 					let action = { name: actionName },
 						valencesData = actionData[actionName].valences;
 					if (valencesData.length === 2 || ~valencesData.indexOf('choice')) {
@@ -278,7 +325,60 @@ export default {
 						action.valence = VALENCES.NONE;
 					}
 					return action;
+
+				// sort in valence order
+				}).sort((a, b) => a.valence - b.valence);
+
+				// alpha sort by valence
+				let sortedActions = {};
+				_.values(VALENCES).forEach(valenceVal => {
+					sortedActions[valenceVal] = allActions
+						.filter(action => action.valence === valenceVal)
+						.sort((a, b) => {
+							if (a.name < b.name) return -1;
+							else if (a.name > b.name) return 1;
+							else return 0;
+						});
 				});
+
+				/*
+				// don't think we need this after all...
+				// calculate rotation for each action
+				let offsetSum = 0,
+					totalNumActions = allActions.length;
+				_.values(VALENCES).forEach(valenceVal => {
+					let actionsByValence = sortedActions[valenceVal];
+					let numActionsByValence = actionsByValence.length;
+					actionsByValence.forEach((action, i) => {
+						action.rotation = offsetSum + (numActionsByValence/totalNumActions)
+					});
+					offsetSum += 
+				});
+				*/
+				
+				// compile paths and calculate rotation for each action,
+				// stepping through sortedActions.
+				let i = 0,
+					totalNumActions = allActions.length;
+				_.values(VALENCES).forEach(valenceVal => {
+					sortedActions[valenceVal].forEach(action => {
+						action.paths = ARROW_SHAPE.map(pt => ({
+							x: pt.x,
+							y: pt.y
+						}));
+						action.rotation = (90 + (totalNumActions-i-1) * 180/(totalNumActions-1));
+						i++;
+					});
+				});
+
+				let allSortedActions = _.values(VALENCES).reduce((acc, valenceVal) => {
+					acc = acc.concat(sortedActions[valenceVal]);
+					return acc;
+				}, []);
+
+				statesOutput[stateName] = {
+					actions: allSortedActions
+				};
 
 				return statesOutput;
 
