@@ -203,7 +203,7 @@ const continentsSection = {
 
 	},
 
-	open: function (firstSection) {
+	open: function (options) {
 
 		this.setActive(true);
 
@@ -213,12 +213,12 @@ const continentsSection = {
 		// this will probably have to change to support deeplinking to a zoomed-in emotion,
 		// we'll figure that out later.
 		setTimeout(function () {
-			if (firstSection) {
+			if (options && options.firstSection) {
 				dispatcher.changeCallout(null, appStrings.continents.header, appStrings.continents.body);
 			}
 			d3.selectAll('#continent-labels div')
 				.style('opacity', 1.0);
-		}, firstSection ? 1000 : 0);
+		}, (options && options.firstSection) ? 1000 : 0);
 
 
 		this.update();

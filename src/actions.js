@@ -26,6 +26,7 @@ export default {
 	isInited: false,
 	currentEmotion: null,
 	actionsData: null,
+	backgroundSections: [ states ],
 	
 	init: function (containerNode) {
 
@@ -553,16 +554,6 @@ export default {
 				.style('opacity', 0.0)
 				.remove();
 
-		}
-
-	},
-
-	managePreviousSection: function (previousSection, currentEmotion, previousEmotion) {
-
-		if (previousSection === states) {
-			return previousSection.setBackgrounded(true);
-		} else {
-			return previousSection.close();
 		}
 
 	},

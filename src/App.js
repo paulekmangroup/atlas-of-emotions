@@ -127,7 +127,9 @@ export default function (...initArgs) {
 				}
 			}
 
-			section.open(true);
+			section.open({
+				firstSection: true
+			});
 			section.setEmotion(currentEmotion, previousEmotion);
 
 		} else {
@@ -139,26 +141,73 @@ export default function (...initArgs) {
 				section.setEmotion(currentEmotion, previousEmotion);
 			} else {
 				// navigate between sections
-				let previousSectionPromise;
-				if (section.managePreviousSection) {
-					previousSectionPromise = section.managePreviousSection(previousSection);
-				} else {
-					previousSectionPromise = previousSection.close();
+				// 
+				// sections can have background sections.
+				// when a section is opened, all its background sections must be opened and backgrounded.
+				// when a section is closed, for all of its background sections:
+				// 	if the section to which we're navigating is a background section, unbackground it
+				// 	else close the background section.
+				// 
+				
+				// open and background all backgroundSections for the current section
+				let backgroundSections = section.backgroundSections || [],
+					previousSectionBackgrounded = false,
+					promises = backgroundSections.map(backgroundSection => {
+						if (previousSection === backgroundSection) {
+							// already open; just background it
+							previousSectionBackgrounded = true;
+							return backgroundSection.setBackgrounded(true);
+						} else {
+							// open it in the background
+							return backgroundSection.open({
+								inBackground: true
+							});
+						}
+					});
+
+				let previousBackgroundSections = previousSection.backgroundSections || [];
+				if (!previousSectionBackgrounded) {
+					// don't mess with current backgroundSections or the current section
+					previousBackgroundSections = previousBackgroundSections.filter(prevBkgdSection => {
+						return prevBkgdSection !== section &&
+							!~backgroundSections.indexOf(prevBkgdSection);
+					});
+					if (previousBackgroundSections.length) {
+						// close previous background sections not needed for the current section
+						previousBackgroundSections.forEach(prevBkgdSection => {
+							prevBkgdSection.close();
+						});
+					}
+
+					// close the previous section
+					promises.push(previousSection.close());
 				}
-				previousSectionPromise.then((options) => {
-					if (!options || !options.keepContainerVisible) {
-						// hide the previous section's container
+
+				Promise.all(promises).then(values => {
+					if (!previousSectionBackgrounded) {
+						// hide the previous section's container if not backgrounded
 						if (previousContainer) {
 							previousContainer.style.display = 'none';
 						}
 					}
 
+					// hide the container of any closed previous background section 
+					if (previousBackgroundSections.length) {
+						for (let key in sections) {
+							if (~previousBackgroundSections.indexOf(sections[key])) {
+								containers[key].style.display = 'none';
+							}
+						}
+					};
+
 					// reveal the new section's container,
 					// open the new section, and set its emotion
 					containers[sectionName].removeAttribute('style');
-					section.open(currentEmotion);
+					section.open();
 					section.setEmotion(currentEmotion, previousEmotion);
+
 				});
+				
 			}
 
 		}

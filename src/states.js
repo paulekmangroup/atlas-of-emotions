@@ -244,9 +244,9 @@ export default {
 
 	},
 
-	open: function () {
+	open: function (options) {
 
-		this.setBackgrounded(false);
+		this.setBackgrounded(options && options.inBackground);
 
 	},
 
@@ -255,31 +255,43 @@ export default {
 		return new Promise((resolve, reject) => {
 
 			//
-			// TODO: the logic below should be reusable for transitioning between states.
+			// TODO: the logic below should be reusable for transitioning between emotions.
 			// refactor as such, along with refactor noted at top of setEmotion().
 			//
 
 			this.hideChrome();
 			
 			// recede graph down into baseline
-			let transformedRanges = this.transformRanges(this.currentStatesData, this.currentEmotion, 0.0);
-			this.stateGraphContainer.selectAll('path.area')
-				.data(transformedRanges)
-				.call(this.applyTransitions, 'close', () => {
-					// d3 seems to call 'close' one frame too early;
-					// wait one frame to ensure animation is complete.
-					setTimeout(() => {
-						// on transition end, remove graph elements
-						this.stateGraphContainer.selectAll('path.area').remove();
-						this.stateGraphContainer.selectAll('linearGradient').remove();
+			let transformedRanges = this.transformRanges(this.currentStatesData, this.currentEmotion, 0.0),
+				areaSelection = this.stateGraphContainer.selectAll('path.area');
 
-						// ...remove labels
-						d3.select(this.labelContainer).selectAll('div').remove();
+			if (areaSelection.size()) {
 
-						// ...and resolve promise to continue transition when complete
-						resolve();
-					}, 1);
-				});
+				areaSelection
+					.data(transformedRanges)
+					.call(this.applyTransitions, 'close', () => {
+						// d3 seems to call 'close' one frame too early;
+						// wait one frame to ensure animation is complete.
+						setTimeout(() => {
+							// on transition end, remove graph elements
+							this.stateGraphContainer.selectAll('path.area').remove();
+							this.stateGraphContainer.selectAll('linearGradient').remove();
+
+							// ...remove labels
+							d3.select(this.labelContainer).selectAll('div').remove();
+
+							// ...and resolve promise to continue transition when complete
+							resolve();
+						}, 1);
+					});
+
+			} else {
+
+				// If no paths present, resolve immediately.
+				// This is not an expected state; it's just gracefully handling possible bugs.
+				resolve();
+
+			}
 
 		});
 
