@@ -205,6 +205,15 @@
           }
         }
       },
+      "actions": {
+        "Seek Comfort": "need description",
+        "Withdraw": "To physically or mentally leave the scene.",
+        "Ruminate": "To compulsively rethink about one's experience.",
+        "Mourn": "need description",
+        "Despair": "To give up hope that there will be any recovery from the misery felt by the loss.",
+        "Protest": "To complain about the loss albeit knowing that the complaint will not recover what was lost.",
+        "Feel Ashamed": "To feel the need to hide how one feels about what or who is lost.",
+      },
       "triggers": [
         "loss of a treasured object",
         "loss of praise",
@@ -445,6 +454,12 @@
             }
           }
         }
+      },
+      "actions": {
+        "Withdraw": "To physically or mentally leave the scene of what is triggering the disgust.",
+        "Avoid": "To either phsyically stay away from (someone or something); or internally keep one's mind away from what is triggering the disgust.",
+        "Vomit": "Literally to expel material from the mouth or stomach; metaphorically denotes very intense disgust.",
+        "Dehumanize": "To treat someone as though he or she is not a human being' to deprive of human qualities, personality, or spirit."
       },
       "triggers": [
         "religious groups usually not ones you grew up as part of",
@@ -847,6 +862,22 @@
           }
         }
       },
+      "actions": {
+        "Dispute": "Disagree in a manner that may escalate the dispute.",
+        "Quarrel": "Verbally oppose in a manner intended to escalate the disagreement.",
+        "Insult": "Disparaging the other person in a offensive or hurtful way, which is likely to escalate the conflict in a way that interferes with resolving it.",
+        "Blame": "To hold the other person responsible for the disagreement, (or more broadly, the conflict) which has developed.",
+        "Undermine": "To make (someone or something) weaker or less effective, usually in a secret or gradual way.",
+        "Scream/yell": "Loss of control in how or what one says during a disagreement; speaking in a high volume, pitch and tone.",
+        "Use physical force": "Use of physical force to get one's way, which may be deliberately chosen or the result of a loss of control over how one acts.",
+        "Set limits": "Encapsulate the boundaries of disagreement, seeking to inhibit escalation.",
+        "Be firm": "Convey that one's position is strongly held, not likely to be abandoned.",
+        "Withdraw": "To physically or mentally leave the scene of the conflict or threat.  ",
+        "Breathe": "Focusing awareness on breating in order to diminish angry or fearful feelings.",
+        "Take a time out": "Announce intention to withdraw, to prevent escalation of the conflict.",
+        "Practice patience": "Regard the conflict as an opportunity to not lose one's temper.",
+        "Reframe": "To reconsider the trigger to the emotion to understand it in a different light, reducing or eliminating the perception that a threat is being triggered."
+      },
       "triggers": [
         "Interference with locomotion",
         "Interference with action",
@@ -1034,6 +1065,19 @@
             }
           }
         }
+      },
+      "actions": {
+        "Withdraw": "To physically or mentally leave the scene of the conflict or threat.",
+        "Avoid": "To either physically stay away from (someone or something); or internally keep one's mind away from what is triggering fear.",
+        "Hesitate": "To hold back in doubt or indecision; to delay momentarily.",
+        "Freeze": "To become fixed or motionless; especially, to become incapable of acting or speaking.",
+        "Suppress": "To actively try to avoid feeling the emotional experience.",
+        "Scream/yell": "Loss of control in how or what one says during a disagreement; speaking in a high volume, pitch and tone.",
+        "Reframe": "To reconsider the trigger to the emotion to understand it in a different light, reducing or eliminating the perception that a threat is being triggered.",
+        "Be mindful": "To notice and accept the feeling of the emotion and recognize the feeling as temporary.",
+        "Breathe": "Focusing awareness on breathing in order to diminish one's fearful feelings.",
+        "Ruminate": "To compulsively rethink of one's experience.",
+        "Worry": "Anticipate the likelihood of harm."
       },
       "triggers": [
         "threat of losing job",
@@ -1266,6 +1310,12 @@
             }
           }
         }
+      },
+      "actions": {
+        "Withdraw": "To physically or mentally leave the scene.",
+        "Seek more": "To increase the enjoyable feelings.",
+        "Maintain": "To continue to do what is necessary to continue the enjoyable feelings.",
+        "Gloat": "To enjoy others envying your enjoyable state."
       },
       "triggers": [
         "sensory pleasures",
