@@ -72,7 +72,8 @@ export default {
 		// d3/svg setup
 		// 
 		let section = this,
-			radius = 0.5*innerWidth;
+			transformedHeight = Math.sqrt(3) / 2 * innerHeight,	// from rotateX(60deg) applied to #action-graph-container
+			radius = Math.min(0.5 * innerWidth, transformedHeight * 0.75);	// TODO: revisit this magic number munging to keep everything on-screen
 		this.lineGenerator = d3.svg.line.radial()
 			.radius(d => d.x * radius)
 			.angle(d => 2*Math.PI * (1 - d.y))
