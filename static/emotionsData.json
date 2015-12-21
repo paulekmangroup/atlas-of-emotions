@@ -16,7 +16,7 @@
                 "constructive"
               ]
             },
-            "withdrawal": {
+            "withdraw": {
               "valences": [
                 "destructive"
               ]
@@ -35,7 +35,7 @@
                 "constructive"
               ]
             },
-            "withdrawal": {
+            "withdraw": {
               "valences": [
                 "destructive"
               ]
@@ -54,7 +54,7 @@
                 "constructive"
               ]
             },
-            "withdrawal": {
+            "withdraw": {
               "valences": [
                 "destructive"
               ]
@@ -68,22 +68,12 @@
             "max": 10
           },
           "actions": {
-            "withdrawal": {
+            "withdraw": {
               "valences": [
                 "choice"
               ]
             },
             "seek comfort": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "time out": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "decrease": {
               "valences": [
                 "constructive"
               ]
@@ -102,7 +92,7 @@
                 "constructive"
               ]
             },
-            "withdrawal": {
+            "withdraw": {
               "valences": [
                 "destructive"
               ]
@@ -116,14 +106,14 @@
             "max": 10
           },
           "actions": {
-            "withdrawal": {
-              "valences": [
-                "destructive"
-              ]
-            },
             "seek comfort": {
               "valences": [
                 "constructive"
+              ]
+            },
+            "withdraw": {
+              "valences": [
+                "destructive"
               ]
             }
           }
@@ -135,14 +125,14 @@
             "max": 10
           },
           "actions": {
-            "withdrawal": {
-              "valences": [
-                "destructive"
-              ]
-            },
             "seek comfort": {
               "valences": [
                 "constructive"
+              ]
+            },
+            "withdraw": {
+              "valences": [
+                "destructive"
               ]
             }
           }
@@ -154,14 +144,14 @@
             "max": 10
           },
           "actions": {
-            "withdrawal": {
-              "valences": [
-                "destructive"
-              ]
-            },
             "seek comfort": {
               "valences": [
                 "constructive"
+              ]
+            },
+            "withdraw": {
+              "valences": [
+                "destructive"
               ]
             }
           }
@@ -173,14 +163,14 @@
             "max": 10
           },
           "actions": {
-            "withdrawal": {
-              "valences": [
-                "destructive"
-              ]
-            },
             "seek comfort": {
               "valences": [
                 "constructive"
+              ]
+            },
+            "withdraw": {
+              "valences": [
+                "destructive"
               ]
             }
           }
@@ -192,14 +182,14 @@
             "max": 10
           },
           "actions": {
-            "withdrawal": {
-              "valences": [
-                "destructive"
-              ]
-            },
             "seek comfort": {
               "valences": [
                 "constructive"
+              ]
+            },
+            "withdraw": {
+              "valences": [
+                "destructive"
               ]
             }
           }
@@ -239,17 +229,12 @@
             "max": 7
           },
           "actions": {
-            "withdrawal": {
+            "withdraw": {
               "valences": [
                 "constructive"
               ]
             },
             "avoid": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "decrease": {
               "valences": [
                 "constructive"
               ]
@@ -273,12 +258,7 @@
                 "destructive"
               ]
             },
-            "withdrawal": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "decrease": {
+            "withdraw": {
               "valences": [
                 "constructive"
               ]
@@ -292,7 +272,7 @@
             "max": 7
           },
           "actions": {
-            "withdrawal": {
+            "withdraw": {
               "valences": [
                 "constructive"
               ]
@@ -303,11 +283,6 @@
               ]
             },
             "vomit": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "decrease": {
               "valences": [
                 "constructive"
               ]
@@ -321,12 +296,7 @@
             "max": 9
           },
           "actions": {
-            "withdrawal": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "decrease": {
+            "withdraw": {
               "valences": [
                 "constructive"
               ]
@@ -340,7 +310,7 @@
             "max": 10
           },
           "actions": {
-            "withdrawal": {
+            "withdraw": {
               "valences": [
                 "constructive"
               ]
@@ -351,11 +321,6 @@
               ]
             },
             "vomit": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "decrease": {
               "valences": [
                 "constructive"
               ]
@@ -371,15 +336,10 @@
           "actions": {
             "avoid": {
               "valences": [
-                "constructive"
-              ]
-            },
-            "dehumanize": {
-              "valences": [
                 "destructive"
               ]
             },
-            "undermining": {
+            "dehumanize": {
               "valences": [
                 "destructive"
               ]
@@ -389,12 +349,7 @@
                 "choice"
               ]
             },
-            "withdrawal": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "decrease": {
+            "withdraw": {
               "valences": [
                 "constructive"
               ]
@@ -408,7 +363,7 @@
             "max": 10
           },
           "actions": {
-            "withdrawal": {
+            "withdraw": {
               "valences": [
                 "constructive"
               ]
@@ -422,11 +377,6 @@
               "valences": [
                 "constructive"
               ]
-            },
-            "decrease": {
-              "valences": [
-                "constructive"
-              ]
             }
           }
         },
@@ -437,17 +387,12 @@
             "max": 10
           },
           "actions": {
-            "withdrawal": {
+            "withdraw": {
               "valences": [
                 "constructive"
               ]
             },
             "avoid": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "decrease": {
               "valences": [
                 "constructive"
               ]
@@ -490,34 +435,19 @@
             "max": 2
           },
           "actions": {
-            "uncooperative": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "withdrawal": {
+            "withdraw": {
               "valences": [
                 "constructive"
               ]
             },
-            "firm": {
+            "be firm": {
               "valences": [
                 "constructive"
               ]
             },
-            "setting limits": {
+            "set limits": {
               "valences": [
                 "constructive"
-              ]
-            },
-            "disagreeable": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "avoid": {
-              "valences": [
-                "choice"
               ]
             }
           }
@@ -534,22 +464,17 @@
                 "constructive"
               ]
             },
-            "quarrelsome": {
+            "quarrel": {
               "valences": [
                 "destructive"
               ]
             },
-            "insulting": {
+            "insult": {
               "valences": [
                 "destructive"
               ]
             },
-            "undermining": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "belittling": {
+            "undermine": {
               "valences": [
                 "destructive"
               ]
@@ -568,59 +493,29 @@
                 "constructive"
               ]
             },
-            "insulting": {
+            "insult": {
               "valences": [
                 "destructive"
               ]
             },
-            "spiteful": {
+            "quarrel": {
               "valences": [
                 "destructive"
               ]
             },
-            "belligerent": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "ornery": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "pugnacious": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "quarrelsome": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "uncooperative": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "withdrawal": {
+            "withdraw": {
               "valences": [
                 "constructive"
               ]
             },
-            "firm": {
+            "be firm": {
               "valences": [
                 "constructive"
               ]
             },
-            "setting limits": {
+            "set limits": {
               "valences": [
                 "constructive"
-              ]
-            },
-            "avoid": {
-              "valences": [
-                "choice"
               ]
             }
           }
@@ -632,57 +527,12 @@
             "max": 10
           },
           "actions": {
-            "avoid": {
+            "insult": {
               "valences": [
                 "destructive"
               ]
             },
-            "belittling": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "belligerent": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "dehumanize": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "disagreeable": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "insulting": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "ornery": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "pugnacious": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "quarrelsome": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "spiteful": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "uncooperative": {
+            "quarrel": {
               "valences": [
                 "destructive"
               ]
@@ -692,22 +542,12 @@
                 "destructive"
               ]
             },
-            "withdrawal": {
+            "withdraw": {
               "valences": [
                 "constructive"
               ]
             },
-            "seek more": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "maintain": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "hitting": {
+            "use physical force": {
               "valences": [
                 "destructive"
               ]
@@ -726,27 +566,17 @@
                 "constructive"
               ]
             },
-            "undermining": {
+            "undermine": {
               "valences": [
                 "destructive"
               ]
             },
-            "insulting": {
+            "insult": {
               "valences": [
                 "destructive"
               ]
             },
-            "ornery": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "quarrelsome": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "uncooperative": {
+            "quarrel": {
               "valences": [
                 "destructive"
               ]
@@ -765,37 +595,17 @@
                 "constructive"
               ]
             },
-            "belittling": {
+            "undermine": {
               "valences": [
                 "destructive"
               ]
             },
-            "undermining": {
+            "insult": {
               "valences": [
                 "destructive"
               ]
             },
-            "insulting": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "hitting": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "spiteful": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "pugnacious": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "uncooperative": {
+            "use physical force": {
               "valences": [
                 "destructive"
               ]
@@ -814,47 +624,22 @@
                 "constructive"
               ]
             },
-            "undermining": {
+            "undermine": {
               "valences": [
                 "destructive"
               ]
             },
-            "insulting": {
+            "insult": {
               "valences": [
                 "destructive"
               ]
             },
-            "hitting": {
+            "use physical force": {
               "valences": [
                 "destructive"
               ]
             },
-            "spiteful": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "belligerent": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "ornery": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "pugnacious": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "quarrelsome": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "uncooperative": {
+            "quarrel": {
               "valences": [
                 "destructive"
               ]
@@ -927,20 +712,6 @@
             }
           }
         },
-        "worry": {
-          "desc": "Concern that something bad or harmful might happen.",
-          "range": {
-            "min": 2,
-            "max": 7
-          },
-          "actions": {
-            "hesitate": {
-              "valences": [
-                "constructive"
-              ]
-            }
-          }
-        },
         "anxiety": {
           "desc": "Apprehensiveness about an impending or anticipated threat. It may also be used when a threat can be sensed but not specified in its nature.",
           "range": {
@@ -948,7 +719,7 @@
             "max": 10
           },
           "actions": {
-            "withdrawal": {
+            "withdraw": {
               "valences": [
                 "choice"
               ]
@@ -972,7 +743,7 @@
             "max": 10
           },
           "actions": {
-            "withdrawal": {
+            "withdraw": {
               "valences": [
                 "choice"
               ]
@@ -996,11 +767,6 @@
                 "choice"
               ]
             },
-            "freeze": {
-              "valences": [
-                "choice"
-              ]
-            },
             "hesitate": {
               "valences": [
                 "choice"
@@ -1015,7 +781,7 @@
             "max": 10
           },
           "actions": {
-            "withdrawal": {
+            "withdraw": {
               "valences": [
                 "choice"
               ]
@@ -1034,7 +800,7 @@
             "max": 10
           },
           "actions": {
-            "withdrawal": {
+            "withdraw": {
               "valences": [
                 "choice"
               ]
@@ -1053,7 +819,7 @@
             "max": 10
           },
           "actions": {
-            "withdrawal": {
+            "withdraw": {
               "valences": [
                 "choice"
               ]
@@ -1108,7 +874,7 @@
             "max": 10
           },
           "actions": {
-            "withdrawal": {
+            "withdraw": {
               "valences": [
                 "constructive"
               ]
@@ -1122,7 +888,7 @@
             "max": 8
           },
           "actions": {
-            "withdrawal": {
+            "withdraw": {
               "valences": [
                 "constructive"
               ]
@@ -1146,7 +912,7 @@
             "max": 10
           },
           "actions": {
-            "withdrawal": {
+            "withdraw": {
               "valences": [
                 "constructive"
               ]
@@ -1170,7 +936,7 @@
             "max": 10
           },
           "actions": {
-            "withdrawal": {
+            "withdraw": {
               "valences": [
                 "constructive"
               ]
@@ -1189,12 +955,12 @@
             "max": 10
           },
           "actions": {
-            "gloating": {
+            "gloat": {
               "valences": [
                 "destructive"
               ]
             },
-            "withdrawal": {
+            "withdraw": {
               "valences": [
                 "constructive"
               ]
@@ -1218,7 +984,7 @@
             "max": 10
           },
           "actions": {
-            "gloating": {
+            "gloat": {
               "valences": [
                 "destructive"
               ]
@@ -1251,7 +1017,7 @@
             "max": 8
           },
           "actions": {
-            "gloating": {
+            "gloat": {
               "valences": [
                 "destructive"
               ]
@@ -1333,186 +1099,6 @@
           "desc": "Generalized, non-specific feeling good not about any trigger; lasting hours"
         }
       ]
-    }
-  },
-  "glossary": {
-    "apprehensive": {
-      "type": "mood",
-      "text": "Afraid that something bad or unpleasant is going to happen; fear about the future. Can be slight to extreme intensity."
-    },
-    "avoid": {
-      "type": "action",
-      "text": "To stay away from (someone or something); to prevent the occurrence of (something bad, unpleasant, etc.); to keep oneself from doing (something) or participating in (something)."
-    },
-    "belittling": {
-      "type": "action",
-      "text": "To describe (someone or something) as little or unimportant. Experienced by the target as insulting."
-    },
-    "belligerent": {
-      "type": "action",
-      "text": "Angry and aggressive; showing readiness to fight. Moderate to extreme intensity."
-    },
-    "blissful\/high": {
-      "type": "state",
-      "text": "An indescribable wonderful, unique enjoyment experience, typically brief in duration. Extreme intensity."
-    },
-    "blue": {
-      "type": "mood",
-      "text": "Sad or unhappy; marked by low spirits. Slight to extreme intensity. Can also describe a mood."
-    },
-    "calmness": {
-      "type": "",
-      "text": "A state of mind, not an emotion, in which you are best able to consider, reflect and use your intelligence."
-    },
-    "constructive": {
-      "type": "",
-      "text": "Helping actions to develop or improve something or someone; "
-    },
-    "contempt": {
-      "type": "uncharted",
-      "text": "The last of the universal emotions to appear in child development, it is a feeling of moral superiority to the target. Often mixed with enjoyment. The evidence for the facial signal pan-culturally is very strong."
-    },
-    "decrease": {
-      "type": "action"
-    },
-    "dehumanize": {
-      "type": "action",
-      "text": "To treat (someone) as though he or she is not a human being; to deprive of human qualities, personality, or spirit."
-    },
-    "destructive": {
-      "type": "",
-      "text": "Causing damage, destruction or harm; designed to hurt or destroy."
-    },
-    "disagreeable": {
-      "type": "action",
-      "text": "Not pleasing; unpleasant or offensive in manner. Easily angered or annoyed."
-    },
-    "embarrassment": {
-      "type": "",
-      "text": "Darwin theorized it was undue positive attention, but faux pas also are causes of embarrassment. There is no facial or vocal signal unique to embarrassment. Blushing is the sign. Darwin noted that some people blush more than others, women more than men, and within families it is common for many members to blush. Dark skinned Africans blush but it is not visible or barely visible. For these reasons we do not consider blushing to be a signal, but a sign. There is some evidence that by a sequence of facial expressions and bodily movements, embarrassment can be signaled, but it has not received the crucial test of obtaining open ended judgments of what emotion is recognized when this sequence is observed."
-    },
-    "emotion": {
-      "type": "",
-      "text": " A mental state distinguished from other mental states by not one but a set of characteristics, chief among them are: universality, distinctive physiology, distinctive subjective experience, involuntarily experienced as a result of very fast, automatic appraisal of events, inescapable, requires skillful practices to become aware of the emotional impulses before any action."
-    },
-    "envy": {
-      "type": "uncharted",
-      "text": "Wishing for what another person has or does."
-    },
-    "firm": {
-      "type": "action"
-    },
-    "freeze": {
-      "type": "action",
-      "text": "To become fixed or motionless; especially, to become incapable of acting or speaking."
-    },
-    "gloating": {
-      "type": "action",
-      "text": "To feel or express great, often malicious, pleasure or self-satisfaction."
-    },
-    "guilt": {
-      "type": "uncharted",
-      "text": "Regret about a past action, which although the person recognizes they have acted wrongly, the motivation is to confess, believing that they may be forgiven. In guilt the disapproval is focused on the wrongful act, while in shame the wrongful act spreads to encompass the person"
-    },
-    "hesitate": {
-      "type": "action",
-      "text": "To hold back in doubt or indecision; to delay momentarily. An action that may occur in fear, at least initially. Slight to moderate intensity"
-    },
-    "hitting": {
-      "type": "action"
-    },
-    "insulting": {
-      "type": "action",
-      "text": "To do or say something that is offensive to (someone); to do or say something that shows a lack of respect for (someone). To treat with insolence, indignity, or contempt. Moderate to extremely intense"
-    },
-    "irritability": {
-      "type": "mood",
-      "text": "A mood saturated with anger. In which the trigger is often unknown."
-    },
-    "jealousy": {
-      "type": "uncharted",
-      "text": "An emotional story line involving three people, a desired person, a rival, and the person feeling the jealousy. Jealous people may, depending on what they believe is occurring, may feel any of the emotions. For some people jealousy is very toxic. Envy is sometimes confused with jealousy, but it involves two not three people,, in which one person desires to have what another has, often believing the person envied is not deserving."
-    },
-    "love": {
-      "type": "uncharted",
-      "text": "A strong attachment to another person, typically parent towards child and child towards parent, but also between those romantically committed. Commitment, although it can be broken by traumatic misbehavior of the loved one, is typically enduring. Within a loving relationship all of the emotions can at some point be felt."
-    },
-    "hate": {
-      "type": "uncharted",
-      "text": "Anger focused on a particular person or group of persons, wishing the target misfortune, sometimes including a wish to directly harm the target. Hatred endures over time, and is corrosive to development, often generating a personality trait of hostility, characterized by an overabundance of anger, easily aroused towards any interference with goal pursuit."
-    },
-    "maintain": {
-      "type": "action"
-    },
-    "mood": {
-      "type": "",
-      "text": "A slight but continuous emotion saturated state that makes someone less responsive to the changing nuances of his or her environment; rarely does one know why he or she is in a mood. Moods last for hours emotions endure for minutes. In emotions one usually knows what triggered it, at least afterwards, but the trigger for a mood often is unknown and unknowable."
-    },
-    "ornery": {
-      "type": "action",
-      "text": "Easily annoyed or angered. Can be an emotional state or a personality type"
-    },
-    "pugnacious": {
-      "type": "action",
-      "text": "Showing a readiness or desire to fight or argue."
-    },
-    "quarrelsome": {
-      "type": "action",
-      "text": "Ready or likely to argue or disagree."
-    },
-    "regrettable emotional episodes (anger and fear)": {
-      "type": "",
-      "text": "These are actions or words that one regrets having engaged in. Rarely felt while those regrettable actions are occurring, but afterwards when consciousness\/awareness comes into play reflecting on what one has done and why. Often it is the response of the target that brings the regrettable behavior into the person\u2019s awareness. Characteristics of a regrettable episode: 1. Response is too weak, not sufficient to the situation. 2. Response is too strong, more intense than the situation demands. 3. There was no response at all, when the situation demanded some response. 4. The response is at the correct strength, but it is delivered in a hurtful way (if anger) or in an otherwise undesirable fashion. Any of these characteristics may combine. Usually a person is unaware of their intention, unaware of how they are acting, until afterwards. If awareness were to arise during the regrettable episode, the episode would be interrupted. Why do regrettable episodes occur? Because the person is unaware of the emotion that has been triggered and the destructive actions that have been activated. Regrettable episodes are typically manifest with the same characteristic, too strong or too weak etc., again and again. Remedies: To bring awareness to recognize the triggers, and if possible the impulses to actions before the action, or the type of action that is selected. "
-    },
-    "seek comfort": {
-      "type": "action"
-    },
-    "seek more": {
-      "type": "action"
-    },
-    "setting limits": {
-      "type": "action",
-      "text": "Restraining the actions of another"
-    },
-    "shame": {
-      "type": "uncharted",
-      "text": "Often accompanies disgust with one self, and the expectation that if others knew the offensive thoughts or actions, they would be disgusted. The motivation in shame is to never reveal the offensive thought or actions. There is no distinctive brief facial expression for shame. Sadness appears on the face, sometimes with the head turned away or hand covering part of the face. Shame is often confused with guilt, but they differ in that in shame there is self-loathing and motivation to never relevel the misbehavior. It is not just a wrongful act, as it is in guilt, but the self itself which is at fault. Guilt is about a wrongful action, acknowledgment of that wrongful act may elicit forgiveness."
-    },
-    "spiteful": {
-      "type": "action",
-      "text": "Having or showing a desire to harm, injure or defeat someone, especially because you feel that you have been treated wrongly in some way."
-    },
-    "state": {
-      "type": "",
-      "text": "A condition of mind or temperament. We become emotional when something is perceived or anticipated which closely matches something that in the past has been important to our welfare. "
-    },
-    "surprise": {
-      "type": "uncharted",
-      "text": "The briefest emotion, triggered by the sudden occurrence of an unexpected event. It can be a way station, leading, after more appraisal, to any of the emotions."
-    },
-    "time out": {
-      "type": "action",
-      "text": "A short period of time when a child must sit quietly as punishment for behaving badly. In adult arguments a request for time-out can allow for reappraisal and reconsideration of the trigger and what action to choose."
-    },
-    "trigger": {
-      "type": "",
-      "text": "Something, an event, memory or the product of imagination, matches a previous trigger, and by automatic appraisal then is converted into a trigger for an emotional state, and action."
-    },
-    "uncooperative": {
-      "type": "action",
-      "text": "Not willing or able to work with others or to do what someone wants or asks for."
-    },
-    "undermining": {
-      "type": "action",
-      "text": "To make (someone or something) weaker or less effective, usually in a secret or gradual way."
-    },
-    "vomit": {
-      "type": "action",
-      "text": "Literally to expel material from the mouth or stomach; metaphorically denotes very intense disgust."
-    },
-    "withdrawal": {
-      "type": "action",
-      "text": "Social or emotional detachment from a situation. Also, a pathological retreat from objective reality (as in some schizophrenic states)."
     }
   },
   "other": {

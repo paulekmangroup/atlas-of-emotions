@@ -141,6 +141,7 @@ export default {
 		// Each action is a hash containing:
 		// 	{
 		// 		name: 'actionName',
+		// 		desc: 'description',
 		// 		valence: 'NONE|CONSTRUCTIVE|DESTRUCTIVE|BOTH',
 		// 		paths: Array of points to draw the shape, copied from ARROW_PATHS
 		// 		rotation: value from 0<>1 at which to display action arrow along half-circle (only present in sortedActions)
@@ -148,11 +149,16 @@ export default {
 		let actionsData = Object.keys(dispatcher.EMOTIONS).reduce((actionsOutput, emotionKey) => {
 
 			let emotionName = dispatcher.EMOTIONS[emotionKey],
-				statesData = emotionsData.emotions[emotionName].states;
+				statesData = emotionsData.emotions[emotionName].states,
+				allActionsData = emotionsData.emotions[emotionName].actions;
 
-			// iterate over states for each emotion,
-			// while collecting list of all actions for each emotion
-			let allActionsForEmotion = [];
+			// lowercase allActionsData keys
+			allActionsData = Object.keys(allActionsData).reduce((acc, actionName) => {
+				acc[actionName.toLowerCase()] = allActionsData[actionName];
+				return acc;
+			}, {});
+
+			// iterate over states for each emotion
 			let actionsByState = Object.keys(statesData).reduce((statesOutput, stateName) => {
 
 				let actionData = statesData[stateName].actions;
@@ -176,12 +182,24 @@ export default {
 				// sort in valence order
 				}).sort((a, b) => a.valence - b.valence);
 
+				// filter out any actions not present in list of
+				// all actions for this emotion (allActionsData)
+				allActions = allActions.filter(action => !!allActionsData[action.name]);
+
+				if (!allActions.length) {
+					console.warn('None of the actions for state "' + stateName + '" in emotion "' + emotionName + '" exist within the list of all actions for the emotion.');
+				}
+
+				/*
+				// this was used before we had a list of all actions per emotion;
+				// it can probably be removed but leaving here for now. 2015.12.21
 				// add to allActionsForEmotion any actions not already present
 				allActionsForEmotion = allActionsForEmotion.concat(allActions
 					.filter(action => !allActionsForEmotion
 						.find(allAction => action.name === allAction.name)
 					)
 				);
+				*/
 
 				// alpha sort by valence
 				let sortedActions = {};
@@ -248,6 +266,12 @@ export default {
 
 			}, {});
 			
+			// compile list of all actions for emotion
+			let allActionsForEmotion = Object.keys(allActionsData).map(actionName => ({
+				name: actionName,
+				desc: allActionsData[actionName]
+			}));
+
 			// alpha sort allActionsForEmotion
 			allActionsForEmotion = allActionsForEmotion.sort((a, b) => {
 				if (a.name < b.name) return -1;
@@ -255,21 +279,14 @@ export default {
 				else return 0;
 			});
 
-			// clone and clean up each action in allActionsForEmotion
+			// add additional data for each of allActionsForEmotion
 			let numAllActions = allActionsForEmotion.length;
-			allActionsForEmotion = allActionsForEmotion.map((action, i) => {
-				action = Object.assign({}, action);
-
-				// valences not relevant in allActionsForEmotion
-				delete action.valence;
-
-				// clone paths
-				action.paths = action.paths.map(path => Object.assign({}, path));
-
-				// recalculate rotation relative to *all* actions
+			allActionsForEmotion.forEach((action, i) => {
+				action.paths = ARROW_SHAPE.map(pt => ({
+					x: pt.x,
+					y: pt.y
+				}));
 				action.rotation = (90 + (numAllActions-i-1) * 180/(numAllActions-1));
-
-				return action;
 			});
 
 			actionsOutput[emotionName] = {
@@ -581,7 +598,7 @@ export default {
 
 	onActionMouseOver: function (d, i) {
 
-		dispatcher.changeCallout(this.currentEmotion, d.name, 'placeholder action description'/*action.desc*/);
+		dispatcher.changeCallout(this.currentEmotion, d.name, d.desc);
 
 	},
 

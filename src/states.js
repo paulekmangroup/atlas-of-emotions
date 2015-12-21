@@ -588,7 +588,6 @@ export default {
 				[0, 0],				// trepidation
 				[-0.5, -0.25],		// anxiety
 				[0.5, 0.25],		// nervousness
-				[0, -0.25],			// worry
 				[0, 0],				// dread
 				[-0.5, -0.6],		// desperation
 				[0, -0.25],			// panic
