@@ -136,6 +136,10 @@ export default {
 		this.labelContainer.id = 'state-labels';
 		containerNode.appendChild(this.labelContainer);
 
+		this.backgroundedLabel = d3.select(containerNode).append('div')
+			.attr('id', 'backgrounded-state-label');
+		this.backgroundedLabel.append('h3');
+
 	},
 
 	renderLabels: function (ranges) {
@@ -935,7 +939,7 @@ export default {
 		d3.selectAll('path.area')
 			.style('opacity', (data, index) => index === i ? 1.0 : 0.2);
 
-		dispatcher.setEmotionState(this.currentStatesData[i].name);
+		// dispatcher.setEmotionState(this.currentStatesData[i].name);
 
 		if (!this.isBackgrounded) {
 
@@ -946,6 +950,11 @@ export default {
 			// TODO: set stops with higher/lower opacity on #anger-gradient-{i}
 
 			dispatcher.changeCallout(this.currentEmotion, this.currentStatesData[i].name, this.currentStatesData[i].desc);
+
+		} else {
+
+			this.backgroundedLabel.select('h3').html(this.currentStatesData[i].name);
+			this.backgroundedLabel.classed('visible', true);
 
 		}
 
@@ -966,22 +975,26 @@ export default {
 		d3.select(this.labelContainer).selectAll('div h3')
 			.style('opacity', null);
 
-		// execute some actions after a delay
-		if (this.mouseOutTimeout) {
-			clearTimeout(this.mouseOutTimeout);
-		}
-		this.mouseOutTimeout = setTimeout(() => {
-			if (!this.isBackgrounded) {
-				this.resetCallout();
+		if (!this.isBackgrounded) {
+
+			if (this.mouseOutTimeout) {
+				clearTimeout(this.mouseOutTimeout);
 			}
-			dispatcher.setEmotionState(null);
-		}, 1000);
+			this.mouseOutTimeout = setTimeout(() => {
+				this.resetCallout();
+			}, 1000);
+
+		} else {
+
+			this.backgroundedLabel.classed('visible', false);
+
+		}
 
 	},
 
 	onStateClick: function (d, i) {
 
-		// d3.selectAll('path.area')
+		dispatcher.setEmotionState(this.currentStatesData[i].name);
 
 	},
 

@@ -69,6 +69,7 @@
 
 	.area {
 		mix-blend-mode: multiply;
+		cursor: pointer;
 	}
 }
 
@@ -96,6 +97,28 @@
 		white-space: nowrap;
 	}
 
+}
+
+#backgrounded-state-label {
+	position: absolute;
+	text-align: center;
+	left: 50%;
+	pointer-events: none;
+
+	// TODO: transition opacity
+	display: none;
+	opacity: 0.0;
+
+	&.visible {
+		display: block;
+		opacity: 1.0;
+	}
+
+	h3 {
+		margin-left: -50%;
+		font-size: calc(100% / #{$states-backgrounded-scale});
+		text-transform: uppercase;
+	}
 }
 
 #temp-states-nav {

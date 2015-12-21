@@ -29,7 +29,12 @@ export default {
 	
 	init: function (containerNode) {
 
+		this.sectionContainer = containerNode;
+
 		this.scaledLineGenerator = this.scaledLineGenerator.bind(this);
+		this.onActionMouseOver = this.onActionMouseOver.bind(this);
+		this.onActionMouseOut = this.onActionMouseOut.bind(this);
+		this.onBackgroundClick = this.onBackgroundClick.bind(this);
 
 		this.actionsData = this.parseActions();
 
@@ -104,188 +109,6 @@ export default {
 
 		this.labelContainer = d3.select(containerNode).append('div')
 			.attr('id', 'action-labels');
-
-	},
-
-	setEmotion: function (emotion) {
-
-		if (!~_.values(dispatcher.EMOTIONS).indexOf(emotion)) {
-			emotion = 'anger';
-		}
-		this.currentEmotion = emotion;
-
-		// TODO: transition between emotions:
-		// pull all action arrows back into the continent
-		// as the continent's shapes shrink back to the baseline,
-		// then grow the new continent (states) and arrows (actions)
-		
-
-		this.currentEmotion = emotion;
-
-		let emotionActionsData = this.actionsData[this.currentEmotion];
-
-		/*
-		// this stuff might be useful still for valence underlays
-		this.actionGraphContainer.selectAll('.action-arrow')
-			.data(this.pieLayout())
-
-		var path = svg.selectAll(".solidArc")
-		  .data(pie(data))
-		.enter().append("path")
-		  .attr("fill", function(d) { return d.data.color; })
-		  .attr("class", "solidArc")
-		  .attr("stroke", "gray")
-		  .attr("d", arc);
-
-		arc.outerRadius(radius);
-		svg.selectAll('.solidArc').transition()
-			.duration(1000)
-		  .attr("d", arc);
-		*/
-
-	},
-
-	setState: function (state) {
-
-		if (state) {
-
-			let stateActionsData = this.actionsData[this.currentEmotion][state];
-			if (!stateActionsData) {
-				console.warn('No actions found for state "' + state + '" in emotion "' + this.currentEmotion + '".');
-				return;
-			}
-
-			// 
-			// TODO SUN:
-			// 
-			// labels on states
-			// constructive/both/destructive areas underneath, labeled
-			// color per emotion, if not gradient until later
-			// 
-			// since there can be many (15 in bitterness!) con- or destructive actions per state,
-			// con/des areas must be fluid. calculate total number of con/des/both,
-			// and divide up half-circle into those ratios.
-			// then, distribute arrows within those areas.
-			// render as overlapping venn diagram, so just two shades,
-			// one for con, one for des, overlap at both.
-			// 
-
-			let arrowSelection = this.actionGraphContainer.selectAll('g.action-arrow')
-				.data(stateActionsData, d => d.name);
-			
-			// update
-			arrowSelection.transition()
-				.duration(1000)
-				.attr('transform', d => 'rotate(' + d.rotation + ')');
-
-			// enter
-			let arrowEnterSelection = arrowSelection.enter().append('g')
-				.attr('class', 'action-arrow')
-				.attr('transform', d => 'rotate(' + d.rotation + ')');
-			arrowEnterSelection.append('path')
-				.call(this.scaledLineGenerator, 0.0);
-				
-			arrowEnterSelection.transition()
-				.duration(1000)
-				.delay(function (d, i) { return i * 50; })
-			.select('path')
-				.call(this.scaledLineGenerator, 1.0);
-
-			// exit
-			arrowSelection.exit().transition()
-				.duration(600)
-				.remove()
-			.select('path')
-				.call(this.scaledLineGenerator, 0.0);
-
-			this.renderLabels(stateActionsData);
-
-		} else {
-
-			this.actionGraphContainer.selectAll('g.action-arrow').transition()
-				.duration(1000)
-				.delay(function (d, i) { return i * 100; })
-				.remove()
-			.select('path')
-				.call(this.scaledLineGenerator, 0.0);
-
-			this.renderLabels(null);
-
-		}
-
-	},
-
-	renderLabels: function (actionsData) {
-
-		if (actionsData) {
-
-			let labelSize = this.lineGenerator.radius()({x:1}) + 50,
-				labelSelection = this.labelContainer.selectAll('div.label')
-				.data(actionsData, d => d.name);
-			
-			// update
-			labelSelection.transition()
-				.duration(1000)
-				.style('transform', d => 'rotate(' + d.rotation + 'deg)');
-			labelSelection.select('h3').transition()
-				.duration(1000)
-				.style('transform', d => 'rotate(-' + d.rotation + 'deg) scaleY(1.73)');
-
-			// enter
-			let labelEnterSelection = labelSelection.enter().append('div')
-				.attr('class', 'label')
-				.style('transform', d => 'rotate(' + d.rotation + 'deg)')
-				.style('height', labelSize + 'px')
-				.style('opacity', 0.0);
-			labelEnterSelection.append('div').append('h3')
-				.html(d => d.name.toUpperCase())
-				.style('transform', d => 'rotate(-' + d.rotation + 'deg) scaleY(1.73)');
-					
-			labelEnterSelection.transition()
-				.duration(1000)
-				.style('opacity', 1.0);
-
-			// exit
-			labelSelection.exit().transition()
-				.duration(600)
-				.style('opacity', 0.0)
-				.remove();
-
-		} else {
-			
-			this.labelContainer.selectAll('div.label').transition()
-				.duration(1000)
-				.style('opacity', 0.0)
-				.remove();
-
-		}
-
-	},
-
-	managePreviousSection: function (previousSection, currentEmotion, previousEmotion) {
-
-		if (previousSection === states) {
-			return previousSection.setBackgrounded(true);
-		} else {
-			return previousSection.close();
-		}
-
-	},
-
-	open: function () {
-
-		// TODO: implement if useful
-
-	},
-
-	close: function () {
-
-		return new Promise((resolve, reject) => {
-
-			// TODO: resolve on completion of animation
-			resolve();
-
-		});
 
 	},
 
@@ -372,6 +195,231 @@ export default {
 	
 		return actionsData;
 
-	}
+	},
+
+	setEmotion: function (emotion) {
+
+		if (!~_.values(dispatcher.EMOTIONS).indexOf(emotion)) {
+			emotion = 'anger';
+		}
+		this.currentEmotion = emotion;
+
+		// TODO: transition between emotions:
+		// pull all action arrows back into the continent
+		// as the continent's shapes shrink back to the baseline,
+		// then grow the new continent (states) and arrows (actions)
+		
+
+		this.currentEmotion = emotion;
+
+		let emotionActionsData = this.actionsData[this.currentEmotion];
+
+		/*
+		// this stuff might be useful still for valence underlays
+		this.actionGraphContainer.selectAll('.action-arrow')
+			.data(this.pieLayout())
+
+		var path = svg.selectAll(".solidArc")
+		  .data(pie(data))
+		.enter().append("path")
+		  .attr("fill", function(d) { return d.data.color; })
+		  .attr("class", "solidArc")
+		  .attr("stroke", "gray")
+		  .attr("d", arc);
+
+		arc.outerRadius(radius);
+		svg.selectAll('.solidArc').transition()
+			.duration(1000)
+		  .attr("d", arc);
+		*/
+
+	},
+
+	setState: function (state) {
+
+		this.currentState = state;
+
+		if (state) {
+
+			let stateActionsData = this.actionsData[this.currentEmotion][this.currentState];
+			if (!stateActionsData) {
+				console.warn('No actions found for state "' + this.currentState + '" in emotion "' + this.currentEmotion + '".');
+				return;
+			}
+
+			// 
+			// TODO SUN:
+			// 
+			// labels on states
+			// constructive/both/destructive areas underneath, labeled
+			// color per emotion, if not gradient until later
+			// 
+			// since there can be many (15 in bitterness!) con- or destructive actions per state,
+			// con/des areas must be fluid. calculate total number of con/des/both,
+			// and divide up half-circle into those ratios.
+			// then, distribute arrows within those areas.
+			// render as overlapping venn diagram, so just two shades,
+			// one for con, one for des, overlap at both.
+			// 
+
+			let arrowSelection = this.actionGraphContainer.selectAll('g.action-arrow')
+				.data(stateActionsData, d => d.name);
+			
+			// update
+			arrowSelection.transition()
+				.duration(1000)
+				.attr('transform', d => 'rotate(' + d.rotation + ')');
+
+			// enter
+			let arrowEnterSelection = arrowSelection.enter().append('g')
+				.attr('class', 'action-arrow')
+				.attr('transform', d => 'rotate(' + d.rotation + ')')
+				.on('mouseover', this.onActionMouseOver)
+				.on('mouseout', this.onActionMouseOut);
+			arrowEnterSelection.append('path')
+				.call(this.scaledLineGenerator, 0.0);
+				
+			arrowEnterSelection.transition()
+				.duration(1000)
+				.delay(function (d, i) { return i * 50; })
+			.select('path')
+				.call(this.scaledLineGenerator, 1.0);
+
+			// exit
+			arrowSelection.exit().transition()
+				.duration(600)
+				.remove()
+			.select('path')
+				.call(this.scaledLineGenerator, 0.0);
+
+			this.renderLabels(stateActionsData);
+
+		} else {
+
+			this.actionGraphContainer.selectAll('g.action-arrow')
+				.on('mouseover', null)
+				.on('mouseout', null)
+			.transition()
+				.duration(1000)
+				.delay(function (d, i) { return i * 100; })
+				.remove()
+			.select('path')
+				.call(this.scaledLineGenerator, 0.0);
+
+			this.renderLabels(null);
+			this.resetCallout();
+
+		}
+
+	},
+
+	renderLabels: function (actionsData) {
+
+		if (actionsData) {
+
+			let labelSize = this.lineGenerator.radius()({x:1}) + 50,
+				labelSelection = this.labelContainer.selectAll('div.label')
+				.data(actionsData, d => d.name);
+			
+			// update
+			labelSelection.transition()
+				.duration(1000)
+				.style('transform', d => 'rotate(' + d.rotation + 'deg)');
+			labelSelection.select('h3').transition()
+				.duration(1000)
+				.style('transform', d => 'rotate(-' + d.rotation + 'deg) scaleY(1.73)');
+
+			// enter
+			let labelEnterSelection = labelSelection.enter().append('div')
+				.attr('class', 'label')
+				.style('transform', d => 'rotate(' + d.rotation + 'deg)')
+				.style('height', labelSize + 'px')
+				.style('opacity', 0.0)
+				.on('mouseover', this.onActionMouseOver)
+				.on('mouseout', this.onActionMouseOut);
+			labelEnterSelection.append('div').append('h3')
+				.html(d => d.name.toUpperCase())
+				.style('transform', d => 'rotate(-' + d.rotation + 'deg) scaleY(1.73)');
+					
+			labelEnterSelection.transition()
+				.duration(1000)
+				.style('opacity', 1.0);
+
+			// exit
+			labelSelection.exit().transition()
+				.duration(600)
+				.style('opacity', 0.0)
+				.remove();
+
+		} else {
+			
+			this.labelContainer.selectAll('div.label')
+				.on('mouseover', null)
+				.on('mouseout', null)
+			.transition()
+				.duration(1000)
+				.style('opacity', 0.0)
+				.remove();
+
+		}
+
+	},
+
+	managePreviousSection: function (previousSection, currentEmotion, previousEmotion) {
+
+		if (previousSection === states) {
+			return previousSection.setBackgrounded(true);
+		} else {
+			return previousSection.close();
+		}
+
+	},
+
+	open: function () {
+
+		d3.select(this.sectionContainer)
+			.on('click', this.onBackgroundClick);
+
+		this.resetCallout();
+
+	},
+
+	close: function () {
+
+		return new Promise((resolve, reject) => {
+
+			d3.select(this.sectionContainer)
+				.on('click', null);
+
+			// TODO: resolve on completion of animation
+			resolve();
+
+		});
+
+	},
+
+	onActionMouseOver: function (d, i) {
+
+		let action = this.actionsData[this.currentEmotion][this.currentState][i];
+
+		dispatcher.changeCallout(this.currentEmotion, action.name, 'placeholder action description'/*action.desc*/);
+
+	},
+
+	onActionMouseOut: function (d, i) {
+
+		this.resetCallout();
+
+	},
+
+	onBackgroundClick: function (d, i) {
+
+		this.setState(null);
+
+	},
+
+	resetCallout () {
+		dispatcher.changeCallout(this.currentEmotion, appStrings.actionsCalloutTitle, appStrings.actionsCalloutIntro);
+	},
 
 };
