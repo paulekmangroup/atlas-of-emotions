@@ -132,7 +132,12 @@ export default {
 
 	parseActions: function () {
 
-		// For each state in each emotion, create an array of actions ordered alphabetically, by valence.
+		// For each state in each emotion:
+		// 	{
+		// 		allActions: all the actions for all states in this emotion, with no valence values
+		// 		actions: array of actions sorted alphabetically, by valence
+		// 	}
+		// 
 		// Each action is a hash containing:
 		// 	{
 		// 		name: 'actionName',
@@ -145,8 +150,10 @@ export default {
 			let emotionName = dispatcher.EMOTIONS[emotionKey],
 				statesData = emotionsData.emotions[emotionName].states;
 
-			// iterate over states for each emotion
-			actionsOutput[emotionName] = Object.keys(statesData).reduce((statesOutput, stateName) => {
+			// iterate over states for each emotion,
+			// while collecting list of all actions for each emotion
+			let allActionsForEmotion = [];
+			let actionsByState = Object.keys(statesData).reduce((statesOutput, stateName) => {
 
 				let actionData = statesData[stateName].actions;
 
@@ -168,6 +175,13 @@ export default {
 
 				// sort in valence order
 				}).sort((a, b) => a.valence - b.valence);
+
+				// add to allActionsForEmotion any actions not already present
+				allActionsForEmotion = allActionsForEmotion.concat(allActions
+					.filter(action => !allActionsForEmotion
+						.find(allAction => action.name === allAction.name)
+					)
+				);
 
 				// alpha sort by valence
 				let sortedActions = {};
@@ -233,6 +247,35 @@ export default {
 				return statesOutput;
 
 			}, {});
+			
+			// alpha sort allActionsForEmotion
+			allActionsForEmotion = allActionsForEmotion.sort((a, b) => {
+				if (a.name < b.name) return -1;
+				else if (a.name > b.name) return 1;
+				else return 0;
+			});
+
+			// clone and clean up each action in allActionsForEmotion
+			let numAllActions = allActionsForEmotion.length;
+			allActionsForEmotion = allActionsForEmotion.map((action, i) => {
+				action = Object.assign({}, action);
+
+				// valences not relevant in allActionsForEmotion
+				delete action.valence;
+
+				// clone paths
+				action.paths = action.paths.map(path => Object.assign({}, path));
+
+				// recalculate rotation relative to *all* actions
+				action.rotation = (90 + (numAllActions-i-1) * 180/(numAllActions-1));
+
+				return action;
+			});
+
+			actionsOutput[emotionName] = {
+				allActions: allActionsForEmotion,
+				actions: actionsByState
+			};
 
 			return actionsOutput;
 
@@ -336,59 +379,66 @@ export default {
 		// as the continent's shapes shrink back to the baseline,
 		// then grow the new continent (states) and arrows (actions)
 		
-
-		this.currentEmotion = emotion;
-
-		let emotionActionsData = this.actionsData[this.currentEmotion];
-
 	},
 
 	setState: function (state) {
 
 		this.currentState = state;
+		let stateActionsData,
+			currentActionsData;
 
 		if (state) {
 
-			let stateActionsData = this.actionsData[this.currentEmotion][this.currentState];
+			stateActionsData = this.actionsData[this.currentEmotion].actions[this.currentState];
 			if (!stateActionsData) {
 				console.warn('No actions found for state "' + this.currentState + '" in emotion "' + this.currentEmotion + '".');
 				return;
 			}
+			currentActionsData = stateActionsData.actions;
 
-			let emotionGradientName = 'actions-' + this.currentEmotion + '-gradient';
+		} else {
 
-			let arrowSelection = this.actionGraphContainer.selectAll('g.action-arrow')
-				.data(stateActionsData.actions, d => d.name);
+			stateActionsData = this.actionsData[this.currentEmotion].allActions;
+			currentActionsData = stateActionsData;
 
-			// update
-			arrowSelection.transition()
-				.duration(1000)
-				.attr('transform', d => 'rotate(' + d.rotation + ')');
+		}
 
-			// enter
-			let arrowEnterSelection = arrowSelection.enter().append('g')
-				.attr('class', 'action-arrow')
-				.attr('transform', d => 'rotate(' + d.rotation + ')')
-				.on('mouseover', this.onActionMouseOver)
-				.on('mouseout', this.onActionMouseOut);
-			arrowEnterSelection.append('path')
-				.attr('fill', (d, i) => 'url(#' + emotionGradientName + ')')
-				.call(this.scaledLineGenerator, 0.0);
-				
-			arrowEnterSelection.transition()
-				.duration(1000)
-				.delay(function (d, i) { return i * 50; })
-			.select('path')
-				.call(this.scaledLineGenerator, 1.0);
+		let emotionGradientName = 'actions-' + this.currentEmotion + '-gradient';
 
-			// exit
-			arrowSelection.exit().transition()
-				.duration(600)
-				.remove()
-			.select('path')
-				.call(this.scaledLineGenerator, 0.0);
+		let arrowSelection = this.actionGraphContainer.selectAll('g.action-arrow')
+			.data(currentActionsData, d => d.name);
 
-			this.renderLabels(stateActionsData);
+		// update
+		arrowSelection.transition()
+			.duration(1000)
+			.attr('transform', d => 'rotate(' + d.rotation + ')');
+
+		// enter
+		let arrowEnterSelection = arrowSelection.enter().append('g')
+			.attr('class', 'action-arrow')
+			.attr('transform', d => 'rotate(' + d.rotation + ')')
+			.on('mouseover', this.onActionMouseOver)
+			.on('mouseout', this.onActionMouseOut);
+		arrowEnterSelection.append('path')
+			.attr('fill', (d, i) => 'url(#' + emotionGradientName + ')')
+			.call(this.scaledLineGenerator, 0.0);
+			
+		arrowEnterSelection.transition()
+			.duration(1000)
+			.delay(function (d, i) { return i * 50; })
+		.select('path')
+			.call(this.scaledLineGenerator, 1.0);
+
+		// exit
+		arrowSelection.exit().transition()
+			.duration(600)
+			.remove()
+		.select('path')
+			.call(this.scaledLineGenerator, 0.0);
+
+		this.renderLabels(currentActionsData);
+
+		if (state) {
 
 			// valences underlay
 			let valenceSelection = this.actionGraphContainer.select('g.valences').selectAll('path.valence')
@@ -412,6 +462,8 @@ export default {
 
 		} else {
 
+
+			/*
 			this.actionGraphContainer.selectAll('g.action-arrow')
 				.on('mouseover', null)
 				.on('mouseout', null)
@@ -423,6 +475,8 @@ export default {
 				.call(this.scaledLineGenerator, 0.0);
 
 			this.renderLabels(null);
+			*/
+			
 			this.resetCallout();
 
 			this.actionGraphContainer.select('g.valences').selectAll('path.valence')
@@ -440,7 +494,7 @@ export default {
 
 			let labelSize = this.lineGenerator.radius()({x:1}) + 50,
 				labelSelection = this.labelContainer.selectAll('div.label')
-				.data(actionsData.actions, d => d.name);
+				.data(actionsData, d => d.name);
 			
 			// update
 			labelSelection.transition()
@@ -498,10 +552,17 @@ export default {
 
 	open: function () {
 
-		d3.select(this.sectionContainer)
-			.on('click', this.onBackgroundClick);
+		// transition time from _states.scss::#states
+		let openDelay = 1500;
 
-		this.resetCallout();
+		this.openTimeout = setTimeout(() => {
+			d3.select(this.sectionContainer)
+				.on('click', this.onBackgroundClick);
+
+			this.resetCallout();
+
+			dispatcher.setEmotionState(null);
+		}, openDelay);
 
 	},
 
@@ -509,8 +570,14 @@ export default {
 
 		return new Promise((resolve, reject) => {
 
+			clearTimeout(this.openTimeout);
+
 			d3.select(this.sectionContainer)
 				.on('click', null);
+
+			this.actionGraphContainer.selectAll('g.action-arrow')
+				.on('mouseover', null)
+				.on('mouseout', null);
 
 			// TODO: resolve on completion of animation
 			resolve();

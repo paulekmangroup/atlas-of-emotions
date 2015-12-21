@@ -13,7 +13,7 @@
 	transform: scale(1.0);
 	// transition: transform #{$states-scale-transition};
 	transition-property: transform, top;
-	transition-duration: 2s, 2s;
+	transition-duration: 1.5s, 1.5s;
 	transition-timing-function: cubic-bezier(0.4, 0.4, 0.35, 1), cubic-bezier(.81,.34,.63,.85);
 
 	&.backgrounded {
