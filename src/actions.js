@@ -592,7 +592,7 @@ export default {
 	},
 
 	resetCallout () {
-		dispatcher.changeCallout(this.currentEmotion, appStrings.actionsCalloutTitle, appStrings.actionsCalloutIntro);
+		dispatcher.changeCallout(this.currentEmotion, appStrings.actions.header, appStrings.actions.body);
 	},
 
 };

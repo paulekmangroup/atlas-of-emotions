@@ -1,8 +1,36 @@
 {
-	"continentsCalloutTitle": "The Five Emotion Continents",
-	"continentsCalloutBody": "Five emotions have been substantiated by scientific research: Anger, Fear, Enjoyment, Sadness and Disgust. Their relative importance in each person’s life varies, which is why the shapes move and change shape.",
-	"emotionCalloutTitle": "The varied states of an emotion",
-	"emotionCalloutIntro": "Each continent names a group of related emotional states that vary in intensity or in other features.",
-	"actionsCalloutTitle": "The Actions of a State",
-	"actionsCalloutIntro": "Each emotional state typically leads to a number of actions some of which may be constructive or destructive or both.",
+	"continents": {
+		"header": "The Emotion Continents",
+		"body": "Each continent names a different set of emotions."
+	},
+	"states": {
+		"header": "The States of an Emotion",
+		"body": "The states within each emotion continent vary in their nature and in their strength."
+	},
+	"actions": {
+		"header": "The Actions of a State",
+		"body": "Each emotional state typically leads to a number of actions some of which may be constructive or destructive or both."
+	},
+	"triggers": {
+		"header": "The Triggers of an Emotion",
+		"body": "What triggers an emotion may be an external event, a remembered event, or something that is imagined.",
+		"steps": [
+			{
+				"header": "Appraisal",
+				"body": "We automatically appraise what is happening in our world, scanning to see if any of the events are similar to past experiences."
+			},
+			{
+				"header": "Emotional Alert Database",
+				"body": "When a match occurs the event is converted into an emotional trigger. Some of these triggers are universal, and some are learned through experience."
+			},
+			{
+				"header": "Impulse",
+				"body": "Triggers generate impulses to action. Recognizing the impulse produced by a trigger before action is taken is very difficult but attainable with prolonged and consistent contemplative practice."
+			}
+		]
+	},
+	"moods": {
+		"header": "The Mood Cousin of an Emotion",
+		"body": "When someone experiences a mood related to an emotion, they are likely to feel heightened versions of the related emotion."
+	}
 }

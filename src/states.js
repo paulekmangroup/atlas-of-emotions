@@ -1047,7 +1047,7 @@ export default {
 
 	resetCallout () {
 
-		dispatcher.changeCallout(this.currentEmotion, appStrings.emotionCalloutTitle, appStrings.emotionCalloutIntro + '<br><br>' + emotionsData.emotions[this.currentEmotion].statesDesc);
+		dispatcher.changeCallout(this.currentEmotion, appStrings.states.header, appStrings.states.body + '<br><br>' + emotionsData.emotions[this.currentEmotion].statesDesc);
 
 	},
 

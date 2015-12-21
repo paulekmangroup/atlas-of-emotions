@@ -204,7 +204,10 @@
             }
           }
         }
-      }
+      },
+      "triggers": [
+        
+      ]
     },
     "disgust": {
       "desc": "We experience disgust in reaction to toxic smells, tastes, unappealing appearances or repulsive behaviors. While usually unpleasant, in small doses disgust may sometimes be enjoyable.",
