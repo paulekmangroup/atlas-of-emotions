@@ -35,6 +35,24 @@
 	margin-left: -$actions-graph-width/2;
 	transform-origin: top;
 	transform: rotateX(60deg);
+
+	.valence {
+		stroke: rgba(77, 77, 77, 0.25);
+		stroke-width: 1;
+		&.constructive {
+			fill: rgba(255, 255, 255, 0.25);
+		}
+		&.both {
+			fill: none;
+		}
+		&.destructive {
+			fill: rgba(77, 77, 77, 0.1);
+		}
+		&.none {
+			display: none;
+		}
+		
+	}
 }
 
 #action-labels {

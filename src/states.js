@@ -108,6 +108,7 @@ export default {
 		this.onStateMouseOver = this.onStateMouseOver.bind(this);
 		this.onStateMouseOut = this.onStateMouseOut.bind(this);
 		this.onStateClick = this.onStateClick.bind(this);
+		this.clearSelectedState = this.clearSelectedState.bind(this);
 
 		//
 		// Draw graph
@@ -298,12 +299,25 @@ export default {
 			this.setActive(false);
 			this.isBackgrounded = val;
 
+			// TODO: handle background clicks by clearing selected state,
+			// but do not do the same when clicking a state.
+			// this code catches both clicks.
+			// can maybe use capture phase on state clicks and stopImmediatePropagation?
+			// d3.select(this.sectionContainer).on('click', val ? this.clearSelectedState : null);
+
 			// resolve on completion of animation
 			resolve({
 				keepContainerVisible: true
 			});
 
 		});
+
+	},
+
+	clearSelectedState: function () {
+
+		// dispatcher.setEmotionState(null);
+		this.backgroundedLabel.classed('visible', false);
 
 	},
 
@@ -986,7 +1000,7 @@ export default {
 
 		} else {
 
-			this.backgroundedLabel.classed('visible', false);
+			this.clearSelectedState();
 
 		}
 
@@ -999,7 +1013,9 @@ export default {
 	},
 
 	resetCallout () {
+
 		dispatcher.changeCallout(this.currentEmotion, appStrings.emotionCalloutTitle, appStrings.emotionCalloutIntro + '<br><br>' + emotionsData.emotions[this.currentEmotion].statesDesc);
+
 	},
 
 	createTempNav (containerNode) {

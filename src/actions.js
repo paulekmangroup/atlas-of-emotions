@@ -66,6 +66,9 @@ export default {
 		this.actionGraphContainer = svg.append('g')
 			.attr('transform', 'translate(' + (margin.left + 0.5*innerWidth) + ',' + margin.top + ')');
 
+		this.actionGraphContainer.append('g')
+			.classed('valences', true);
+
 		// 
 		// d3/svg setup
 		// 
@@ -75,18 +78,15 @@ export default {
 			.angle(d => 2*Math.PI * (1 - d.y))
 			.interpolate('cardinal');
 
-		/*
 		this.pieLayout = d3.layout.pie()
 			.sort(null)
-			.value(d => 1)
-			.padAngle(0.05 * Math.PI)
+			.value(d => d.size)
 			.startAngle(0.5 * Math.PI)
 			.endAngle(1.5 * Math.PI);
 
 		this.arcGenerator = d3.svg.arc()
 			.innerRadius(0)
-			.outerRadius(0.01);
-		*/
+			.outerRadius(0.5*innerWidth);
 
 		this.isInited = true;
 
@@ -103,6 +103,18 @@ export default {
 			))
 		);
 
+	},
+
+	// from: http://bl.ocks.org/mbostock/1346410
+	arcTween: function (a) {
+		let i = d3.interpolate(this._current, a);
+		this._current = i(0);
+		return function (t) {
+			// return this.arcGenerator(i(t));
+			return d3.svg.arc()
+				.innerRadius(0)
+				.outerRadius(0.5*689)(i(t));
+		};
 	},
 
 	initLabels: function (containerNode) {
@@ -183,7 +195,34 @@ export default {
 					return acc;
 				}, []);
 
-				statesOutput[stateName] = allSortedActions;
+				let valenceWeights = Object.keys(VALENCES).map(valenceName => ({
+					name: valenceName,
+					size: sortedActions[VALENCES[valenceName]].length
+				})).reverse();
+				// subtract 0.5 from the first and last size,
+				// to place the drawn boundary halfway between adjacent action arrows
+				let firstNonEmptyWeight,
+					lastNonEmptyWeight;
+				valenceWeights.forEach(weight => {
+					if (weight.size) {
+						if (!firstNonEmptyWeight) {
+							firstNonEmptyWeight = weight;
+						} else {
+							lastNonEmptyWeight = weight;
+						}
+					}
+				});
+				if (firstNonEmptyWeight) {
+					firstNonEmptyWeight.size -= 0.5;
+				}
+				if (lastNonEmptyWeight) {
+					lastNonEmptyWeight.size -= 0.5;
+				}
+
+				statesOutput[stateName] = {
+					actions: allSortedActions,
+					valenceWeights: valenceWeights
+				};
 
 				return statesOutput;
 
@@ -213,25 +252,6 @@ export default {
 		this.currentEmotion = emotion;
 
 		let emotionActionsData = this.actionsData[this.currentEmotion];
-
-		/*
-		// this stuff might be useful still for valence underlays
-		this.actionGraphContainer.selectAll('.action-arrow')
-			.data(this.pieLayout())
-
-		var path = svg.selectAll(".solidArc")
-		  .data(pie(data))
-		.enter().append("path")
-		  .attr("fill", function(d) { return d.data.color; })
-		  .attr("class", "solidArc")
-		  .attr("stroke", "gray")
-		  .attr("d", arc);
-
-		arc.outerRadius(radius);
-		svg.selectAll('.solidArc').transition()
-			.duration(1000)
-		  .attr("d", arc);
-		*/
 
 	},
 
@@ -263,7 +283,7 @@ export default {
 			// 
 
 			let arrowSelection = this.actionGraphContainer.selectAll('g.action-arrow')
-				.data(stateActionsData, d => d.name);
+				.data(stateActionsData.actions, d => d.name);
 			
 			// update
 			arrowSelection.transition()
@@ -294,6 +314,26 @@ export default {
 
 			this.renderLabels(stateActionsData);
 
+			// valences underlay
+			let valenceSelection = this.actionGraphContainer.select('g.valences').selectAll('path.valence')
+				.data(this.pieLayout(stateActionsData.valenceWeights), d => d.data.name);
+
+			// update
+			valenceSelection.transition()
+				.duration(1000)
+				.attrTween('d', this.arcTween);
+
+			// enter
+			valenceSelection.enter().append('path')
+				.attr('class', d => 'valence ' + d.data.name.toLowerCase())
+				.attr('d', this.arcGenerator)
+				.each(function(d) { this._current = d; }) // store the initial angles for arcTween
+				.style('opacity', 0.0)
+			.transition()
+				.duration(1000)
+				.delay(500)
+				.style('opacity', 1.0);
+
 		} else {
 
 			this.actionGraphContainer.selectAll('g.action-arrow')
@@ -309,6 +349,11 @@ export default {
 			this.renderLabels(null);
 			this.resetCallout();
 
+			this.actionGraphContainer.select('g.valences').selectAll('path.valence')
+			.transition()
+				.duration(1000)
+				.style('opacity', 0.0)
+				.remove();
 		}
 
 	},
@@ -319,7 +364,7 @@ export default {
 
 			let labelSize = this.lineGenerator.radius()({x:1}) + 50,
 				labelSelection = this.labelContainer.selectAll('div.label')
-				.data(actionsData, d => d.name);
+				.data(actionsData.actions, d => d.name);
 			
 			// update
 			labelSelection.transition()
@@ -400,9 +445,7 @@ export default {
 
 	onActionMouseOver: function (d, i) {
 
-		let action = this.actionsData[this.currentEmotion][this.currentState][i];
-
-		dispatcher.changeCallout(this.currentEmotion, action.name, 'placeholder action description'/*action.desc*/);
+		dispatcher.changeCallout(this.currentEmotion, d.name, 'placeholder action description'/*action.desc*/);
 
 	},
 
@@ -414,7 +457,7 @@ export default {
 
 	onBackgroundClick: function (d, i) {
 
-		this.setState(null);
+		dispatcher.setEmotionState(null);
 
 	},
 

@@ -210,9 +210,8 @@ export default function (...initArgs) {
 
 	function onEmotionStateChange (state) {
 
-		if (currentSection === sections.actions) {
-			currentSection.setState(state);
-		}
+		sections.actions.setState(state);
+		sections.states.clearSelectedState();
 
 	}
 
