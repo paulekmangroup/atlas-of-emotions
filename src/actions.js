@@ -32,6 +32,7 @@ export default {
 		this.sectionContainer = containerNode;
 
 		this.scaledLineGenerator = this.scaledLineGenerator.bind(this);
+		this.arcTween = this.arcTween.bind(this);
 		this.onActionMouseOver = this.onActionMouseOver.bind(this);
 		this.onActionMouseOut = this.onActionMouseOut.bind(this);
 		this.onBackgroundClick = this.onBackgroundClick.bind(this);
@@ -106,15 +107,18 @@ export default {
 	},
 
 	// from: http://bl.ocks.org/mbostock/1346410
-	arcTween: function (a) {
-		let i = d3.interpolate(this._current, a);
-		this._current = i(0);
-		return function (t) {
-			// return this.arcGenerator(i(t));
-			return d3.svg.arc()
-				.innerRadius(0)
-				.outerRadius(0.5*689)(i(t));
-		};
+	arcTween: function (selection) {
+		let arc = this.arcGenerator;
+		selection.attrTween('d', function (a) {
+			let i = d3.interpolate(this._current, a);
+			this._current = i(0);
+			return function (t) {
+				return arc(i(t));
+				// return d3.svg.arc()
+				// 	.innerRadius(0)
+				// 	.outerRadius(0.5*689)(i(t));
+			};
+		});
 	},
 
 	initLabels: function (containerNode) {
@@ -294,6 +298,7 @@ export default {
 			let arrowEnterSelection = arrowSelection.enter().append('g')
 				.attr('class', 'action-arrow')
 				.attr('transform', d => 'rotate(' + d.rotation + ')')
+				.attr()
 				.on('mouseover', this.onActionMouseOver)
 				.on('mouseout', this.onActionMouseOut);
 			arrowEnterSelection.append('path')
@@ -321,7 +326,7 @@ export default {
 			// update
 			valenceSelection.transition()
 				.duration(1000)
-				.attrTween('d', this.arcTween);
+				.call(this.arcTween);
 
 			// enter
 			valenceSelection.enter().append('path')
