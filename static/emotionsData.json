@@ -206,7 +206,17 @@
         }
       },
       "triggers": [
-        
+        "loss of a treasured object",
+        "loss of praise",
+        "loss of status",
+        "loss of health of a friend, lover or family member",
+        "rejection from anyone with whom one has a strong attachment"
+      ],
+      "moods": [
+        {
+          "name": "blue",
+          "desc": "need description"
+        }
       ]
     },
     "disgust": {
@@ -435,7 +445,24 @@
             }
           }
         }
-      }
+      },
+      "triggers": [
+        "religious groups usually not ones you grew up as part of",
+        "specific foods",
+        "differences in appearance",
+        "ethnic groups other than one's own",
+        "actions not typical of your own cultural group",
+        "something rotting",
+        "anything coming out of the body",
+        "blood",
+        "mucus"
+      ],
+      "moods": [
+        {
+          "name": "sour",
+          "desc": "Not commonly a mood, it can occur as a mood when there is a generalized feeling of repugnance or revulsion - usually of low intensity."
+        }
+      ]
     },
     "anger": {
       "desc": "We experience anger whenever our pursuit of an important goal is blocked, especially by a physical threat. In the grip of anger we may act in ways that we later regret.",
@@ -819,7 +846,23 @@
             }
           }
         }
-      }
+      },
+      "triggers": [
+        "Interference with locomotion",
+        "Interference with action",
+        "Self-righteous or unjustified behavior",
+        "Frustration with anything",
+        "Offensive beliefs",
+        "Feeling insulted or denigrated",
+        "Disappointment in another's actions",
+        "Rejection by a loved one"
+      ],
+      "moods": [
+        {
+          "name": "Irritability",
+          "desc": "Irritability is a an angry mood. It is characterized by a readiness, a need to become angry, filtering perceptions to see provocations not noticed when not irritable. The cause is usually not known to the irritable person, but they may know that they are in such a mood. Frequent bouts of anger occur when irritable, which are more intense and last longer than they would when not irritable."
+        }
+      ]
     },
     "fear": {
       "desc": "We experience fear when we perceive a threat of harm. Examples are threats to our health, wealth, social status, relationships, or identity/self-image.",
@@ -991,7 +1034,24 @@
             }
           }
         }
-      }
+      },
+      "triggers": [
+        "threat of losing job",
+        "threat of losing health",
+        "threat of losing friendship",
+        "threat of losing status",
+        "public speaking",
+        "threat to safety",
+        "sudden loss of gravity",
+        "a moving object about to impact us if we don't duck",
+        "snakes"
+      ],
+      "moods": [
+        {
+          "name": "apprehensive",
+          "desc": "Expecting harm but not knowing how to avoid it. Perceive threats when they are not there, or magnify the seriousness of a threat."
+        }
+      ]
     },
     "enjoyment": {
       "desc": "We experience enjoyment when a good feeling is generated, which we often seek to continue or re-experience.",
@@ -1206,7 +1266,23 @@
             }
           }
         }
-      }
+      },
+      "triggers": [
+        "sensory pleasures",
+        "helping others",
+        "places associated with enjoyable memories",
+        "favored activities",
+        "specific learned sensory pleasures such as a favorite food or song",
+        "favorite people",
+        "some social interactions",
+        "comedy"
+      ],
+      "moods": [
+        {
+          "name": "high",
+          "desc": "Generalized, non-specific feeling good not about any trigger; lasting hours"
+        }
+      ]
     }
   },
   "glossary": {
