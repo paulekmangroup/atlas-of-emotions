@@ -104,6 +104,9 @@
 	text-align: center;
 	left: 50%;
 	pointer-events: none;
+	
+	@include emotion-color;
+	white-space: nowrap;
 
 	// TODO: transition opacity
 	display: none;

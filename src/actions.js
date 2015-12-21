@@ -35,7 +35,6 @@ export default {
 		this.arcTween = this.arcTween.bind(this);
 		this.onActionMouseOver = this.onActionMouseOver.bind(this);
 		this.onActionMouseOut = this.onActionMouseOut.bind(this);
-		this.onBackgroundClick = this.onBackgroundClick.bind(this);
 
 		this.actionsData = this.parseActions();
 
@@ -556,11 +555,7 @@ export default {
 		let openDelay = 1500;
 
 		this.openTimeout = setTimeout(() => {
-			d3.select(this.sectionContainer)
-				.on('click', this.onBackgroundClick);
-
 			this.resetCallout();
-
 			dispatcher.setEmotionState(null);
 		}, openDelay);
 
@@ -571,9 +566,6 @@ export default {
 		return new Promise((resolve, reject) => {
 
 			clearTimeout(this.openTimeout);
-
-			d3.select(this.sectionContainer)
-				.on('click', null);
 
 			this.actionGraphContainer.selectAll('g.action-arrow')
 				.on('mouseover', null)
@@ -595,12 +587,6 @@ export default {
 	onActionMouseOut: function (d, i) {
 
 		this.resetCallout();
-
-	},
-
-	onBackgroundClick: function (d, i) {
-
-		dispatcher.setEmotionState(null);
 
 	},
 

@@ -108,7 +108,6 @@ export default {
 		this.onStateMouseOver = this.onStateMouseOver.bind(this);
 		this.onStateMouseOut = this.onStateMouseOut.bind(this);
 		this.onStateClick = this.onStateClick.bind(this);
-		this.clearSelectedState = this.clearSelectedState.bind(this);
 
 		//
 		// Draw graph
@@ -181,7 +180,7 @@ export default {
 		d3.select(this.labelContainer).selectAll('div').select('h3')
 			.on('mouseover', val ? this.onStateMouseOver : null)
 			.on('mouseout', val ? this.onStateMouseOut : null)
-			.on('click', val ? this.onStateClick : null);
+			.on('click', val ? this.onStateClick : null, true);
 
 	},
 
@@ -299,11 +298,10 @@ export default {
 			this.setActive(false);
 			this.isBackgrounded = val;
 
-			// TODO: handle background clicks by clearing selected state,
-			// but do not do the same when clicking a state.
-			// this code catches both clicks.
-			// can maybe use capture phase on state clicks and stopImmediatePropagation?
-			// d3.select(this.sectionContainer).on('click', val ? this.clearSelectedState : null);
+			// handle background click to deselect current state
+			d3.select('#main').on('click', val ? () => {
+				dispatcher.setEmotionState(null);
+			} : null, false);
 
 			// resolve on completion of animation
 			resolve({
@@ -314,10 +312,47 @@ export default {
 
 	},
 
-	clearSelectedState: function () {
+	setBackgroundedState: function (state) {
 
-		// dispatcher.setEmotionState(null);
-		this.backgroundedLabel.classed('visible', false);
+		this.backgroundedState = state;
+		this.displayBackgroundedState();
+
+	},
+
+	// does not set any state, just displays.
+	displayBackgroundedState: function (state) {
+
+		let stateName = state || this.backgroundedState || '',
+			classes = {
+				'visible': !!stateName
+			};
+		classes[this.currentEmotion] = true;
+
+		this.backgroundedLabel.select('h3').html(stateName);
+		this.backgroundedLabel.classed(classes);
+
+		this.setStateHighlight(stateName);
+
+	},
+
+	setStateHighlight: function (state) {
+
+		if (state) {
+
+			let stateIndex = this.currentStatesData.findIndex(d => d.name === state);
+
+			d3.selectAll('path.area')
+				.style('opacity', (data, index) => index === stateIndex ? 1.0 : 0.2);
+
+		} else {
+
+			d3.selectAll('path.area')
+				.style('opacity', null);
+
+			d3.select(this.labelContainer).selectAll('div h3')
+				.style('opacity', null);
+
+		}
 
 	},
 
@@ -950,12 +985,9 @@ export default {
 
 	onStateMouseOver: function (d, i) {
 
-		d3.selectAll('path.area')
-			.style('opacity', (data, index) => index === i ? 1.0 : 0.2);
-
-		// dispatcher.setEmotionState(this.currentStatesData[i].name);
-
 		if (!this.isBackgrounded) {
+
+			this.setStateHighlight(this.currentStatesData[i].name);
 
 			d3.select(this.labelContainer).selectAll('div h3')
 				.style('opacity', (data, index) => index === i ? 1.0 : 0.2);
@@ -967,8 +999,7 @@ export default {
 
 		} else {
 
-			this.backgroundedLabel.select('h3').html(this.currentStatesData[i].name);
-			this.backgroundedLabel.classed('visible', true);
+			this.displayBackgroundedState(this.currentStatesData[i].name);
 
 		}
 
@@ -983,13 +1014,9 @@ export default {
 
 	onStateMouseOut: function (d, i) {
 
-		d3.selectAll('path.area')
-			.style('opacity', null);
-
-		d3.select(this.labelContainer).selectAll('div h3')
-			.style('opacity', null);
-
 		if (!this.isBackgrounded) {
+
+			this.setStateHighlight(null);
 
 			if (this.mouseOutTimeout) {
 				clearTimeout(this.mouseOutTimeout);
@@ -1000,13 +1027,19 @@ export default {
 
 		} else {
 
-			this.clearSelectedState();
+			this.displayBackgroundedState(null);
 
 		}
 
 	},
 
+	// this handler fires in the capture phase,
+	// in order to stop events bubbling to the background.
 	onStateClick: function (d, i) {
+
+		if (d3.event) {
+			d3.event.stopImmediatePropagation();
+		}
 
 		dispatcher.setEmotionState(this.currentStatesData[i].name);
 

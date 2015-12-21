@@ -211,7 +211,7 @@ export default function (...initArgs) {
 	function onEmotionStateChange (state) {
 
 		sections.actions.setState(state);
-		sections.states.clearSelectedState();
+		sections.states.setBackgroundedState(state);
 
 	}
 
