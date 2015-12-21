@@ -25,25 +25,55 @@
 		#{$states-backgrounded-scale} * (#{$states-containers-bottom} + 50px));
 
 	left: 50%;
-	margin-left: -$actions-graph-width/2;
-	min-height: 400px;
+	// min-height: 400px;
+
+	// transform-origin: top;
+	// transform: rotateX(60deg);
 }
+
+#action-graph-container {
+	margin-left: -$actions-graph-width/2;
+	transform-origin: top;
+	transform: rotateX(60deg);
+}
+
 #action-labels {
-	top: 15%;
+	pointer-events: none;
+	transform: scaleY(0.578);	// 1/sqrt(3), using scale to equate to rotateX(60deg)
+
+	.label {
+		position: absolute;
+		bottom: 0;
+		transform-origin: bottom;
+
+		cursor: pointer;
+		pointer-events: auto;
+		white-space: nowrap;
+
+		div {
+			position: absolute;
+			margin-left: -60px;		// TODO: where does this magic number come from?
+									// needed to align with arrow points.
+			h3 {
+				// transform: rotateX(-60deg);
+				// transform: scaleY(1.73);	// sqrt(3), using scale to equate to rotateX(60deg)
+											// set by d3 instead, since d3 is applying another transform already
+			}
+		}
+	}
 }
 
 .action-arrow {
 	fill: red;
 	fill-opacity: 0.5;
 	stroke: none;
+
+	cursor: pointer;
 }
 
 #action-graph-container {
 	width: $actions-graph-width;
 	height: 40%;
-
-	transform-origin: top;
-	transform: rotateX(60deg);
 	
 	pointer-events: auto;
 	

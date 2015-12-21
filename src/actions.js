@@ -38,7 +38,7 @@ export default {
 		containerNode.appendChild(graphContainer);
 
 		// TODO: 
-		// this.initLabels(containerNode);
+		this.initLabels(containerNode);
 
 		// 
 		// d3 conventional margins
@@ -102,13 +102,8 @@ export default {
 
 	initLabels: function (containerNode) {
 
-		// TODO: implement if useful
-
-	},
-
-	renderLabels: function (ranges) {
-
-		// TODO: implement if useful
+		this.labelContainer = d3.select(containerNode).append('div')
+			.attr('id', 'action-labels');
 
 	},
 
@@ -130,6 +125,7 @@ export default {
 		let emotionActionsData = this.actionsData[this.currentEmotion];
 
 		/*
+		// this stuff might be useful still for valence underlays
 		this.actionGraphContainer.selectAll('.action-arrow')
 			.data(this.pieLayout())
 
@@ -202,6 +198,8 @@ export default {
 			.select('path')
 				.call(this.scaledLineGenerator, 0.0);
 
+			this.renderLabels(stateActionsData);
+
 		} else {
 
 			this.actionGraphContainer.selectAll('g.action-arrow').transition()
@@ -210,6 +208,55 @@ export default {
 				.remove()
 			.select('path')
 				.call(this.scaledLineGenerator, 0.0);
+
+			this.renderLabels(null);
+
+		}
+
+	},
+
+	renderLabels: function (actionsData) {
+
+		if (actionsData) {
+
+			let labelSize = this.lineGenerator.radius()({x:1}) + 50,
+				labelSelection = this.labelContainer.selectAll('div.label')
+				.data(actionsData, d => d.name);
+			
+			// update
+			labelSelection.transition()
+				.duration(1000)
+				.style('transform', d => 'rotate(' + d.rotation + 'deg)');
+			labelSelection.select('h3').transition()
+				.duration(1000)
+				.style('transform', d => 'rotate(-' + d.rotation + 'deg) scaleY(1.73)');
+
+			// enter
+			let labelEnterSelection = labelSelection.enter().append('div')
+				.attr('class', 'label')
+				.style('transform', d => 'rotate(' + d.rotation + 'deg)')
+				.style('height', labelSize + 'px')
+				.style('opacity', 0.0);
+			labelEnterSelection.append('div').append('h3')
+				.html(d => d.name.toUpperCase())
+				.style('transform', d => 'rotate(-' + d.rotation + 'deg) scaleY(1.73)');
+					
+			labelEnterSelection.transition()
+				.duration(1000)
+				.style('opacity', 1.0);
+
+			// exit
+			labelSelection.exit().transition()
+				.duration(600)
+				.style('opacity', 0.0)
+				.remove();
+
+		} else {
+			
+			this.labelContainer.selectAll('div.label').transition()
+				.duration(1000)
+				.style('opacity', 0.0)
+				.remove();
 
 		}
 
