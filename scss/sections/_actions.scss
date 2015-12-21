@@ -63,10 +63,12 @@
 		position: absolute;
 		bottom: 0;
 		transform-origin: bottom;
+		
+		@include emotion-color;
+		white-space: nowrap;
 
 		cursor: pointer;
 		pointer-events: auto;
-		white-space: nowrap;
 
 		div {
 			position: absolute;
@@ -82,11 +84,11 @@
 }
 
 .action-arrow {
-	fill: red;
-	fill-opacity: 0.5;
 	stroke: none;
-
 	cursor: pointer;
+	path {
+		mix-blend-mode: multiply;
+	}
 }
 
 #action-graph-container {

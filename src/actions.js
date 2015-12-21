@@ -43,7 +43,6 @@ export default {
 		graphContainer.id = 'action-graph-container';
 		containerNode.appendChild(graphContainer);
 
-		// TODO: 
 		this.initLabels(containerNode);
 
 		// 
@@ -73,9 +72,10 @@ export default {
 		// 
 		// d3/svg setup
 		// 
-		let section = this;
+		let section = this,
+			radius = 0.5*innerWidth;
 		this.lineGenerator = d3.svg.line.radial()
-			.radius(d => d.x * 0.5*innerWidth)
+			.radius(d => d.x * radius)
 			.angle(d => 2*Math.PI * (1 - d.y))
 			.interpolate('cardinal');
 
@@ -87,7 +87,9 @@ export default {
 
 		this.arcGenerator = d3.svg.arc()
 			.innerRadius(0)
-			.outerRadius(0.5*innerWidth);
+			.outerRadius(radius);
+
+		this.setUpDefs(svg.append('defs'), radius);
 
 		this.isInited = true;
 
@@ -240,6 +242,88 @@ export default {
 
 	},
 
+	// TODO: DRY this out, copied almost exactly from states.js
+	// set up global gradients and xlink:href to them from here and states.js
+	setUpDefs: function (defs, radius) {
+
+		// base gradient
+		defs.append('linearGradient')
+			.attr('id', 'actions-gradient')
+			.attr('gradientUnits', 'userSpaceOnUse')
+			.attr('x1', 0)
+			.attr('x2', 0)
+			.attr('y1', 0)
+			.attr('y2', -radius);
+
+		// anger
+		defs.append('linearGradient')
+			.attr('id', 'actions-anger-gradient')
+			.attr('xlink:href', '#actions-gradient')
+		.selectAll('stop')
+			.data([
+				{ offset: '20%', color: 'rgba(228, 135, 102, 0.2)' },
+				{ offset: '100%', color: 'rgba(204, 28, 43, 1.0)' }
+			])
+		.enter().append('stop')
+			.attr('offset', d => d.offset)
+			.attr('stop-color', d => d.color);
+
+		// disgust
+		defs.append('linearGradient')
+			.attr('id', 'actions-disgust-gradient')
+			.attr('xlink:href', '#actions-gradient')
+		.selectAll('stop')
+			.data([
+				{ offset: '20%', color: 'rgba(0, 142, 69, 0.3)' },
+				{ offset: '66%', color: 'rgba(0, 122, 61, 0.8)' },
+				{ offset: '100%', color: 'rgba(0, 104, 55, 1.0)' }
+			])
+		.enter().append('stop')
+			.attr('offset', d => d.offset)
+			.attr('stop-color', d => d.color);
+
+		// enjoyment
+		defs.append('linearGradient')
+			.attr('id', 'actions-enjoyment-gradient')
+			.attr('xlink:href', '#actions-gradient')
+		.selectAll('stop')
+			.data([
+				{ offset: '20%', color: 'rgba(241, 196, 83, 0.8)' },
+				{ offset: '100%', color: 'rgba(248, 136, 29, 1.0)' }
+			])
+		.enter().append('stop')
+			.attr('offset', d => d.offset)
+			.attr('stop-color', d => d.color);
+
+		// fear
+		defs.append('linearGradient')
+			.attr('id', 'actions-fear-gradient')
+			.attr('xlink:href', '#actions-gradient')
+		.selectAll('stop')
+			.data([
+				{ offset: '20%', color: 'rgba(248, 58, 248, 0.1)' },
+				{ offset: '100%', color: 'rgba(143, 39, 139, 1.0)' }
+			])
+		.enter().append('stop')
+			.attr('offset', d => d.offset)
+			.attr('stop-color', d => d.color);
+
+		// sadness
+		defs.append('linearGradient')
+			.attr('id', 'actions-sadness-gradient')
+			.attr('xlink:href', '#actions-gradient')
+		.selectAll('stop')
+			.data([
+				{ offset: '20%', color: 'rgba(200, 220, 240, 1.0)' },
+				{ offset: '66%', color: 'rgba(30, 152, 211, 1.0)' },
+				{ offset: '100%', color: 'rgba(64, 70, 164, 1.0)' }
+			])
+		.enter().append('stop')
+			.attr('offset', d => d.offset)
+			.attr('stop-color', d => d.color);		
+
+	},
+
 	setEmotion: function (emotion) {
 
 		if (!~_.values(dispatcher.EMOTIONS).indexOf(emotion)) {
@@ -271,24 +355,11 @@ export default {
 				return;
 			}
 
-			// 
-			// TODO SUN:
-			// 
-			// labels on states
-			// constructive/both/destructive areas underneath, labeled
-			// color per emotion, if not gradient until later
-			// 
-			// since there can be many (15 in bitterness!) con- or destructive actions per state,
-			// con/des areas must be fluid. calculate total number of con/des/both,
-			// and divide up half-circle into those ratios.
-			// then, distribute arrows within those areas.
-			// render as overlapping venn diagram, so just two shades,
-			// one for con, one for des, overlap at both.
-			// 
+			let emotionGradientName = 'actions-' + this.currentEmotion + '-gradient';
 
 			let arrowSelection = this.actionGraphContainer.selectAll('g.action-arrow')
 				.data(stateActionsData.actions, d => d.name);
-			
+
 			// update
 			arrowSelection.transition()
 				.duration(1000)
@@ -298,10 +369,10 @@ export default {
 			let arrowEnterSelection = arrowSelection.enter().append('g')
 				.attr('class', 'action-arrow')
 				.attr('transform', d => 'rotate(' + d.rotation + ')')
-				.attr()
 				.on('mouseover', this.onActionMouseOver)
 				.on('mouseout', this.onActionMouseOut);
 			arrowEnterSelection.append('path')
+				.attr('fill', (d, i) => 'url(#' + emotionGradientName + ')')
 				.call(this.scaledLineGenerator, 0.0);
 				
 			arrowEnterSelection.transition()
@@ -381,7 +452,7 @@ export default {
 
 			// enter
 			let labelEnterSelection = labelSelection.enter().append('div')
-				.attr('class', 'label')
+				.classed('label ' + this.currentEmotion, true)
 				.style('transform', d => 'rotate(' + d.rotation + 'deg)')
 				.style('height', labelSize + 'px')
 				.style('opacity', 0.0)
