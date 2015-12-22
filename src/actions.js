@@ -410,9 +410,11 @@ export default {
 
 	setState: function (state) {
 
-		this.setHighlightedAction(null);
+		if (!this.isBackgrounded) {
+			this.setHighlightedAction(null);
+		}
 
-		if (state === this.currentState) { return; }
+		if (state && state === this.currentState) { return; }
 		this.currentState = state;
 
 		let stateActionsData,
@@ -446,10 +448,13 @@ export default {
 		// enter
 		let arrowEnterSelection = arrowSelection.enter().append('g')
 			.attr('class', 'action-arrow')
-			.attr('transform', d => 'rotate(' + d.rotation + ')')
-			.on('mouseover', this.onActionMouseOver)
-			.on('mouseout', this.onActionMouseOut)
-			.on('click', this.onActionMouseClick);
+			.attr('transform', d => 'rotate(' + d.rotation + ')');
+		if (!this.isBackgrounded) {
+			arrowEnterSelection
+				.on('mouseover', this.onActionMouseOver)
+				.on('mouseout', this.onActionMouseOut)
+				.on('click', this.onActionMouseClick);
+		}
 		arrowEnterSelection.append('path')
 			.attr('fill', (d, i) => 'url(#' + emotionGradientName + ')')
 			.call(this.scaledLineGenerator, 0.0);
@@ -467,39 +472,44 @@ export default {
 		.select('path')
 			.call(this.scaledLineGenerator, 0.0);
 
-		this.renderLabels(currentActionsData);
 
-		if (state) {
+		if (!this.isBackgrounded) {
 
-			// valences underlay
-			let valenceSelection = this.actionGraphContainer.select('g.valences').selectAll('path.valence')
-				.data(this.pieLayout(stateActionsData.valenceWeights), d => d.data.name);
+			this.renderLabels(currentActionsData);
 
-			// update
-			valenceSelection.transition()
-				.duration(1000)
-				.call(this.arcTween);
+			if (state) {
 
-			// enter
-			valenceSelection.enter().append('path')
-				.attr('class', d => 'valence ' + d.data.name.toLowerCase())
-				.attr('d', this.arcGenerator)
-				.each(function(d) { this._current = d; }) // store the initial angles for arcTween
-				.style('opacity', 0.0)
-			.transition()
-				.duration(1000)
-				.delay(500)
-				.style('opacity', 1.0);
+				// valences underlay
+				let valenceSelection = this.actionGraphContainer.select('g.valences').selectAll('path.valence')
+					.data(this.pieLayout(stateActionsData.valenceWeights), d => d.data.name);
 
-		} else {
+				// update
+				valenceSelection.transition()
+					.duration(1000)
+					.call(this.arcTween);
 
-			this.resetCallout();
+				// enter
+				valenceSelection.enter().append('path')
+					.attr('class', d => 'valence ' + d.data.name.toLowerCase())
+					.attr('d', this.arcGenerator)
+					.each(function(d) { this._current = d; }) // store the initial angles for arcTween
+					.style('opacity', 0.0)
+				.transition()
+					.duration(1000)
+					.delay(500)
+					.style('opacity', 1.0);
 
-			this.actionGraphContainer.select('g.valences').selectAll('path.valence')
-			.transition()
-				.duration(1000)
-				.style('opacity', 0.0)
-				.remove();
+			} else {
+
+				this.resetCallout();
+
+				this.actionGraphContainer.select('g.valences').selectAll('path.valence')
+				.transition()
+					.duration(1000)
+					.style('opacity', 0.0)
+					.remove();
+			}
+
 		}
 
 	},
@@ -517,7 +527,9 @@ export default {
 
 		this.renderLabels(null);
 
-		this.resetCallout();
+		if (!this.isBackgrounded) {
+			this.resetCallout();
+		}
 
 		this.actionGraphContainer.select('g.valences').selectAll('path.valence')
 		.transition()
@@ -580,13 +592,20 @@ export default {
 
 	},
 
-	open: function () {
+	open: function (options) {
 
-		// transition time from _states.scss::#states
+		console.log(">>>>> actions.open; options:", options);
+
+		this.setBackgrounded(options && options.inBackground, options);
+
+		// clear selected state to display all actions for emotion,
+		// after a delay (transition time from _states.scss::#states)
 		let openDelay = 1500;
 
 		this.openTimeout = setTimeout(() => {
-			this.resetCallout();
+			if (!options || !options.inBackground) {
+				this.resetCallout();
+			}
 			dispatcher.setEmotionState(null);
 		}, openDelay);
 
@@ -607,6 +626,28 @@ export default {
 			setTimeout(() => {
 				resolve();
 			}, closeDuration);
+
+		});
+
+	},
+
+	/**
+	 * Actions section stays open in moods, with limited interactivity.
+	 * `setBackgrounded()` toggles this state.
+	 */
+	setBackgrounded: function (val, options) {
+
+		console.log(">>>>> actions.setBackgrounded; val:", val, "options:", options);
+
+		return new Promise((resolve, reject) => {
+
+			this.isBackgrounded = val;
+			if (val) {
+				this.tempNav.classList.remove('visible');
+			}
+
+			// TODO: resolve on completion of animation
+			resolve();
 
 		});
 

@@ -272,10 +272,6 @@ export default {
 		// fade out and scale down triggers,
 		// tween color of dome (? - or just fade out and redraw?)
 
-		this.tempNav.querySelector('.prev').innerHTML = '<a href="#actions:' + emotion + '">ACTIONS ▲</a>';
-		// this.tempNav.querySelector('.next').innerHTML = '<a href="#moods:' + emotion + '">MOODS ▼</a>';
-		this.tempNav.classList.add('visible');
-
 		let haloSelection = this.triggerGraphContainer.selectAll('path.halo')
 			.data(this.haloPieLayout([{}]));
 		// .transition()
@@ -292,6 +288,10 @@ export default {
 
 		let currentTriggersData = this.triggersData[this.currentEmotion];
 		this.renderLabels(currentTriggersData);
+
+		this.tempNav.querySelector('.prev').innerHTML = '<a href="#actions:' + emotion + '">ACTIONS ▲</a>';
+		this.tempNav.querySelector('.next').innerHTML = '<a href="#moods:' + emotion + '">MOODS ▼</a>';
+		this.tempNav.classList.add('visible');
 
 	},
 

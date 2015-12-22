@@ -1,3 +1,59 @@
 #moods {
-	//
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	min-height: 600px;
+
+	top: 0;
+	left: 50%;
+	margin-left: -50%;
+
+	text-align: center;
+	pointer-events: none;
+}
+
+#moods-overlay-container {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+
+	@include emotion-background-color-light;
+
+	// TODO: translate up from bottom, also?
+	opacity: 0.0;
+	transition: opacity #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
+
+	&.visible {
+		opacity: 1.0;
+	}
+}
+
+#temp-moods-nav {
+	position: absolute;
+	height: 100%;
+	right: 3%;
+	pointer-events: none;
+
+	.prev {
+		position: absolute;
+		top: 3%;
+		right: 0;
+		pointer-events: auto;
+		white-space: nowrap;
+	}
+
+	.next {
+		position: absolute;
+		bottom: 3%;
+		right: 0;
+		pointer-events: auto;
+		white-space: nowrap;
+	}
+
+	opacity: 0.0;
+	-webkit-transition: opacity 1s;
+	transition:         opacity 1s;
+	&.visible {
+		opacity: 1.0;
+	}
 }

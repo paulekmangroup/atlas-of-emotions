@@ -250,8 +250,10 @@ export default {
 
 		this.setBackgrounded(options && options.inBackground, options);
 
-		// handle background click for deselection
-		d3.select('#main').on('click', this.onBackgroundClick, false);
+		if (options && (options.sectionName === dispatcher.SECTIONS.STATES || options.sectionName === dispatcher.SECTIONS.ACTIONS)) {
+			// handle background click for deselection
+			d3.select('#main').on('click', this.onBackgroundClick, false);
+		}
 
 	},
 
@@ -305,7 +307,7 @@ export default {
 	},
 
 	/**
-	 * States view stays open, with limited interactivity,
+	 * States section stays open, with limited interactivity,
 	 * in actions, triggers, and moods. `setBackgrounded()` toggles this state.
 	 */
 	setBackgrounded: function (val, options) {
@@ -313,7 +315,7 @@ export default {
 		return new Promise((resolve, reject) => {
 
 			this.sectionContainer.classList[(val ? 'add' : 'remove')]('backgrounded');
-			this.sectionContainer.classList[(options && options.sectionIsTriggers ? 'add' : 'remove')]('triggers');
+			this.sectionContainer.classList[(options && (options.sectionName === dispatcher.SECTIONS.TRIGGERS) ? 'add' : 'remove')]('triggers');
 			this.hideChrome();
 			this.setActive(!val);
 			this.isBackgrounded = val;

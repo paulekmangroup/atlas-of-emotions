@@ -4,6 +4,7 @@ import continents from './continents.js';
 import states from './states.js';
 import actions from './actions.js';
 import triggers from './triggers.js';
+import moods from './moods.js';
 
 export default function (...initArgs) {
 
@@ -56,23 +57,11 @@ export default function (...initArgs) {
 
 	function initSections () {
 
-		function placeholderSection (sectionName) {
-
-			return {
-				isInited: false,
-				init: function (container) {
-					console.warn('Section [' + sectionName + '] not yet implemented.');
-				}
-			};
-
-		}
-
 		sections.continents = continents;
 		sections.states = states;
 		sections.actions = actions;
 		sections.triggers = triggers;
-
-		sections.moods = placeholderSection(dispatcher.SECTIONS.MOODS);
+		sections.moods = moods;
 
 	}
 
@@ -137,7 +126,7 @@ export default function (...initArgs) {
 				backgroundSection.setEmotion(currentEmotion, previousEmotion);
 				backgroundSection.open({
 					inBackground: true,
-					sectionIsTriggers: section === triggers
+					sectionName: sectionName
 				});
 			});
 
@@ -167,18 +156,25 @@ export default function (...initArgs) {
 				let backgroundSections = section.backgroundSections || [],
 					previousSectionBackgrounded = false,
 					promises = backgroundSections.map(backgroundSection => {
+						// display all background sections
+						for (let key in sections) {
+							if (~backgroundSections.indexOf(sections[key])) {
+								containers[key].removeAttribute('style');
+							}
+						}
+
 						if (previousSection === backgroundSection) {
 							// already open; just background it
 							previousSectionBackgrounded = true;
 							return backgroundSection.setBackgrounded(true, {
-								sectionIsTriggers: section === triggers
+								sectionName: sectionName
 							});
 						} else {
 							// open it in the background
 							backgroundSection.setEmotion(currentEmotion, previousEmotion);
 							return backgroundSection.open({
 								inBackground: true,
-								sectionIsTriggers: section === triggers
+								sectionName: sectionName
 							});
 						}
 					});
