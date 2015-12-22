@@ -3,11 +3,18 @@ $text-color: #4d4d4d;
 $text-overlay-color: #ffffff;
 $background-color: rgb(230, 215, 200);
 
-$label-color-anger: #af202a;
-$label-color-disgust: #006837;
-$label-color-enjoyment: #f8881d;
-$label-color-fear: #8f278b;
-$label-color-sadness: #3668b2;
+$color-anger: #af202a;
+$color-disgust: #006837;
+$color-enjoyment: #f8881d;
+$color-fear: #8f278b;
+$color-sadness: #3668b2;
+
+$gradient-anger: radial-gradient(ellipse at center, rgba(228,135,102,0.2) 0%, rgba(204,28,43,1) 100%);
+$gradient-disgust: radial-gradient(ellipse at center, rgba(0,142,69,0.3) 0%, rgba(0,122,61,0.8) 56%, rgba(0,104,55,1) 100%);
+$gradient-enjoyment: radial-gradient(ellipse at center, rgba(241,196,83,0.8) 0%, rgba(248,136,29,1) 100%);
+$gradient-fear: radial-gradient(ellipse at center, rgba(248,58,248,0.1) 0%, rgba(143,39,139,1) 100%);
+$gradient-sadness: radial-gradient(ellipse at center, rgba(200,220,240,1) 0%, rgba(30,152,211,1) 56%, rgba(64,70,164,1) 100%);
+
 
 
 // sizes and positions
@@ -25,26 +32,26 @@ $label-fade-in-time: 1s;
 
 // mixins
 @mixin emotion-color () {
-	&.anger { color: $label-color-anger; }
-	&.disgust { color: $label-color-disgust; }
-	&.enjoyment { color: $label-color-enjoyment; }
-	&.fear { color: $label-color-fear; }
-	&.sadness { color: $label-color-sadness; }
+	&.anger { color: $color-anger; }
+	&.disgust { color: $color-disgust; }
+	&.enjoyment { color: $color-enjoyment; }
+	&.fear { color: $color-fear; }
+	&.sadness { color: $color-sadness; }
 }
 
 @mixin emotion-background-color () {
-	&.anger { background-color: rgba($label-color-anger, 0.5); }
-	&.disgust { background-color: rgba($label-color-disgust, 0.5); }
-	&.enjoyment { background-color: rgba($label-color-enjoyment, 0.5); }
-	&.fear { background-color: rgba($label-color-fear, 0.5); }
-	&.sadness { background-color: rgba($label-color-sadness, 0.5); }
+	&.anger { background-color: rgba($color-anger, 0.5); }
+	&.disgust { background-color: rgba($color-disgust, 0.5); }
+	&.enjoyment { background-color: rgba($color-enjoyment, 0.5); }
+	&.fear { background-color: rgba($color-fear, 0.5); }
+	&.sadness { background-color: rgba($color-sadness, 0.5); }
 	background-blend-mode: multiply;
 }
 
-@mixin emotion-gradient-fill () {
-	&.anger { fill: $label-color-anger; }
-	&.disgust { fill: $label-color-disgust; }
-	&.enjoyment { fill: $label-color-enjoyment; }
-	&.fear { fill: $label-color-fear; }
-	&.sadness { fill: $label-color-sadness; }
+@mixin emotion-triggers-gradient-fill () {
+	&.anger { fill: url(#triggers-anger-gradient); }
+	&.disgust { fill: url(#triggers-disgust-gradient); }
+	&.enjoyment { fill: url(#triggers-enjoyment-gradient); }
+	&.fear { fill: url(#triggers-fear-gradient); }
+	&.sadness { fill: url(#triggers-sadness-gradient); }
 }

@@ -17,24 +17,35 @@
 	position: absolute;
 	bottom: 0;
 	left: 50%;
-	margin-left: -$triggers-graph-width/2;
-	min-height: 400px;
 }
 
 #trigger-graph-container {
+	margin-left: -$triggers-graph-width/2;
 	width: $triggers-graph-width;
 	height: 100%;
 
 	path.halo {
-		// TODO: replace with gradients,
-		// and look into refactoring gradients out of SVG and into CSS for actions
-		@include emotion-gradient-fill;
+		// TODO: well, this didn't work out.
+		// remove from here and _variables,
+		// and just implement in triggers.js.
+		@include emotion-triggers-gradient-fill;
 		fill-opacity: 0.75;
 	}
 }
 
 #trigger-labels {
-	//
+	.label {
+		position: absolute;
+		width: 10em;
+
+		@include emotion-color;
+	}
+
+	h3 {
+		position: absolute;
+		left: -50%;
+		top: -50%;
+	}
 }
 
 
