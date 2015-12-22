@@ -5,7 +5,7 @@
       "statesDesc": "There is significant overlap in the states of sadness compared to previous maps, but there is still a broad range of intensities.",
       "states": {
         "disappointment": {
-          "desc": "Felt when expectations are not met, resulting in a loss.",
+          "desc": "Felt when expectations are not met.",
           "range": {
             "min": 1,
             "max": 5
@@ -138,7 +138,7 @@
           }
         },
         "despair": {
-          "desc": "Resigned or anguished sadness.",
+          "desc": "Resigned anguished sadness.",
           "range": {
             "min": 7,
             "max": 10
@@ -266,7 +266,7 @@
           }
         },
         "distaste": {
-          "desc": "Offended by taste, smell, sight or actions.",
+          "desc": "Offended by taste or smell and metaphorically used to describe offensive sights or actions.",
           "range": {
             "min": 2,
             "max": 7
@@ -425,7 +425,7 @@
       ]
     },
     "anger": {
-      "desc": "We experience anger whenever our pursuit of an important goal is blocked, especially by a physical threat. In the grip of anger we may act in ways that we later regret.",
+      "desc": "We experience anger whenever our pursuit of an important goal is blocked, especially by a physical threat. Anger is one of the easiest emotions to provoke in a laboratory, which means we have a lot of information about it.",
       "statesDesc": "The anger continent includes states that respond to threats (real, imagined, or anticipated) or interference with pursuit of a goal.",
       "states": {
         "annoyance": {
@@ -453,7 +453,7 @@
           }
         },
         "exasperation": {
-          "desc": "Losing patience with a person or task that is generating an overload of frustration.",
+          "desc": "The feeling of losing patience with a person or task that is generating an overload of frustration.",
           "range": {
             "min": 4,
             "max": 7
@@ -482,7 +482,7 @@
           }
         },
         "frustration": {
-          "desc": "Feeling unable to achieve a goal you are seeking. Slight to moderate intensity.",
+          "desc": "Losing patience with a person or task that is generating an overload of frustration.",
           "range": {
             "min": 1,
             "max": 10
@@ -555,7 +555,7 @@
           }
         },
         "argumentativeness": {
-          "desc": "More likely to partake in unfriendly verbal disagreements.",
+          "desc": "Inclined to partake in unfriendly verbal disagreements.",
           "range": {
             "min": 2,
             "max": 10
@@ -756,7 +756,7 @@
           }
         },
         "desperation": {
-          "desc": "Driven to partake in risky attempts to reduce a perceived threat.",
+          "desc": "Inclined to risk attempts to reduce a perceived threat.",
           "range": {
             "min": 9,
             "max": 10
