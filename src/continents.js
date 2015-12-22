@@ -171,7 +171,7 @@ const continentsSection = {
 					this.transitions.spreadFocusedContinent(emotion, targetScale);
 				}, 750);
 
-				this.displayTempNav(true);
+				this.displayTempNav(true, emotion);
 			} else {
 
 				// this was used when navigating from states view directly to all continents view,
@@ -296,10 +296,10 @@ const continentsSection = {
 
 	},
 
-	displayTempNav: function (visible) {
+	displayTempNav: function (visible, emotion) {
 
 		this.tempNav.querySelector('.prev').innerHTML = '<a href="#">HOME ▲</a>';
-		this.tempNav.querySelector('.next').innerHTML = '<a href="#states:' + currentEmotion + '">STATES ▼</a>';
+		this.tempNav.querySelector('.next').innerHTML = '<a href="#states:' + emotion + '">STATES ▼</a>';
 		this.tempNav.classList[visible ? 'add' : 'remove']('visible');
 
 	},
