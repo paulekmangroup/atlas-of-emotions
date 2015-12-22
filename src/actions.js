@@ -167,7 +167,10 @@ export default {
 
 				// generate actions for each state
 				let allActions = Object.keys(actionData).map((actionName, i, actions) => {
-					let action = { name: actionName },
+					let action = {
+							name: actionName,
+							desc: allActionsData[actionName]
+						},
 						valencesData = actionData[actionName].valences;
 					if (valencesData.length === 2 || ~valencesData.indexOf('choice')) {
 						action.valence = VALENCES.BOTH;
@@ -411,7 +414,7 @@ export default {
 
 		if (state === this.currentState) { return; }
 		this.currentState = state;
-		
+
 		let stateActionsData,
 			currentActionsData;
 
@@ -634,13 +637,11 @@ export default {
 				stateActionsData = this.actionsData[this.currentEmotion].allActions;
 			}
 
-			let actionIndex = stateActionsData.findIndex(d => d.name === highlightedAction.name);
-
 			d3.selectAll('g.action-arrow')
-				.style('opacity', (data, index) => index === actionIndex ? 1.0 : 0.2);
+				.style('opacity', (data, index) => data.name === highlightedAction.name ? 1.0 : 0.2);
 
 			this.labelContainer.selectAll('div.label')
-				.style('opacity', (data, index) => index === actionIndex ? 1.0 : 0.2);
+				.style('opacity', (data, index) => data.name === highlightedAction.name ? 1.0 : 0.2);
 
 			// .selectAll('linearGradient')
 			// TODO: set stops with higher/lower opacity on #anger-gradient-{i}
