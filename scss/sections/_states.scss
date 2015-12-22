@@ -151,4 +151,11 @@
 		pointer-events: auto;
 		white-space: nowrap;
 	}
+
+	opacity: 0.0;
+	-webkit-transition: opacity 1s;
+	transition:         opacity 1s;
+	&.visible {
+		opacity: 1.0;
+	}
 }

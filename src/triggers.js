@@ -179,9 +179,9 @@ export default {
 		// fade out and scale down triggers,
 		// tween color of dome (? - or just fade out and redraw?)
 
-		this.tempNav.querySelector('.prev').innerHTML = '<a href=#actions:' + emotion + '>ACTIONS ▲</a>';
-		// this.tempNav.querySelector('.next').innerHTML = '<a href=#moods:' + emotion + '>MOODS ▼</a>';
-		this.tempNav.removeAttribute('style');
+		this.tempNav.querySelector('.prev').innerHTML = '<a href="#actions:' + emotion + '">ACTIONS ▲</a>';
+		// this.tempNav.querySelector('.next').innerHTML = '<a href="#moods:' + emotion + '">MOODS ▼</a>';
+		this.tempNav.classList.add('visible');
 
 		let haloSelection = this.triggerGraphContainer.selectAll('path.halo')
 			.data(this.pieLayout([{}]));
@@ -215,6 +215,8 @@ export default {
 		return new Promise((resolve, reject) => {
 
 			clearTimeout(this.openTimeout);
+
+			this.tempNav.classList.remove('visible');
 
 			// TODO: resolve on completion of animation
 			resolve();

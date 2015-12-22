@@ -240,9 +240,9 @@ export default {
 		this.resetCallout();
 		// }, LABEL_APPEAR_DELAY);
 
-		this.tempNav.querySelector('.prev').innerHTML = '<a href=#continents:' + emotion + '>CONTINENTS ▲</a>';
-		this.tempNav.querySelector('.next').innerHTML = '<a href=#actions:' + emotion + '>ACTIONS ▼</a>';
-		this.tempNav.removeAttribute('style');
+		this.tempNav.querySelector('.prev').innerHTML = '<a href="#continents:' + emotion + '">CONTINENTS ▲</a>';
+		this.tempNav.querySelector('.next').innerHTML = '<a href="#actions:' + emotion + '">ACTIONS ▼</a>';
+		this.tempNav.classList.add('visible');
 
 	},
 
@@ -342,7 +342,7 @@ export default {
 		this.stateGraphContainer.selectAll('.axis')
 			.classed('visible', false);
 
-		this.tempNav.style.display = 'none';
+		this.tempNav.classList.remove('visible');
 
 		// remove main callout
 		dispatcher.changeCallout();

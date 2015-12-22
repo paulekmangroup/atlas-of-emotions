@@ -59,6 +59,8 @@ const continentsSection = {
 		// Bind event handlers to current scope
 		this.onContinentMouseUp = this.onContinentMouseUp.bind(this);
 
+		this.createTempNav(containerNode);
+
 		this.isInited = true;
 
 	},
@@ -126,6 +128,8 @@ const continentsSection = {
 
 				}, 750);
 
+				this.displayTempNav(false);
+
 			}
 
 		} else {
@@ -166,6 +170,8 @@ const continentsSection = {
 				setTimeout(() => {
 					this.transitions.spreadFocusedContinent(emotion, targetScale);
 				}, 750);
+
+				this.displayTempNav(true);
 			} else {
 
 				// this was used when navigating from states view directly to all continents view,
@@ -271,6 +277,30 @@ const continentsSection = {
 		if (this.isActive) {
 			window.requestAnimationFrame(this.update);
 		}
+
+	},
+
+	createTempNav: function (containerNode) {
+
+		this.tempNav = document.createElement('div');
+		this.tempNav.id = 'temp-continents-nav';
+		containerNode.appendChild(this.tempNav);
+
+		let prev = document.createElement('div');
+		prev.classList.add('prev');
+		this.tempNav.appendChild(prev);
+
+		let next = document.createElement('div');
+		next.classList.add('next');
+		this.tempNav.appendChild(next);
+
+	},
+
+	displayTempNav: function (visible) {
+
+		this.tempNav.querySelector('.prev').innerHTML = '<a href="#">HOME ▲</a>';
+		this.tempNav.querySelector('.next').innerHTML = '<a href="#states:' + currentEmotion + '">STATES ▼</a>';
+		this.tempNav.classList[visible ? 'add' : 'remove']('visible');
 
 	},
 
@@ -462,14 +492,6 @@ const continentsSection = {
 
 				}
 
-				/*
-				// only anger and sadness are currently implemented in states.js
-				if (continent.id !== dispatcher.EMOTIONS.ANGER &&
-					continent.id !== dispatcher.EMOTIONS.SADNESS) {
-					return;
-				}
-				*/
-				
 				/*
 				// fade out continent labels
 				d3.selectAll('#continent-labels div')

@@ -402,9 +402,9 @@ export default {
 		// then grow the new continent (states) and arrows (actions)
 		
 
-		this.tempNav.querySelector('.prev').innerHTML = '<a href=#states:' + emotion + '>STATES ▲</a>';
-		this.tempNav.querySelector('.next').innerHTML = '<a href=#triggers:' + emotion + '>TRIGGERS ▼</a>';
-		this.tempNav.removeAttribute('style');
+		this.tempNav.querySelector('.prev').innerHTML = '<a href="#states:' + emotion + '">STATES ▲</a>';
+		this.tempNav.querySelector('.next').innerHTML = '<a href="#triggers:' + emotion + '">TRIGGERS ▼</a>';
+		this.tempNav.classList.add('visible');
 		
 	},
 
@@ -597,6 +597,8 @@ export default {
 		return new Promise((resolve, reject) => {
 
 			clearTimeout(this.openTimeout);
+
+			this.tempNav.classList.remove('visible');
 
 			let closeDuration = 600;
 
