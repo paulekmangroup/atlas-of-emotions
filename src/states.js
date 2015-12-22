@@ -108,6 +108,7 @@ export default {
 		this.onStateMouseOver = this.onStateMouseOver.bind(this);
 		this.onStateMouseOut = this.onStateMouseOut.bind(this);
 		this.onStateClick = this.onStateClick.bind(this);
+		this.onBackgroundClick = this.onBackgroundClick.bind(this);
 
 		//
 		// Draw graph
@@ -249,6 +250,9 @@ export default {
 
 		this.setBackgrounded(options && options.inBackground, options);
 
+		// handle background click for deselection
+		d3.select('#main').on('click', this.onBackgroundClick, false);
+
 	},
 
 	close: function () {
@@ -262,6 +266,7 @@ export default {
 
 			this.hideChrome();
 			this.setActive(false);
+			d3.select('#main').on('click', null, false);
 			
 			// recede graph down into baseline
 			let transformedRanges = this.transformRanges(this.currentStatesData, this.currentEmotion, 0.0),
@@ -313,11 +318,6 @@ export default {
 			this.setActive(!val);
 			this.isBackgrounded = val;
 
-			// handle background click to deselect current state
-			d3.select('#main').on('click', val ? () => {
-				dispatcher.setEmotionState(null);
-			} : null, false);
-
 			// TODO: resolve on completion of animation
 			resolve();
 
@@ -344,18 +344,33 @@ export default {
 		this.backgroundedLabel.select('h3').html(stateName);
 		this.backgroundedLabel.classed(classes);
 
-		this.setStateHighlight(stateName);
+		this.setHighlightedState(stateName);
 
 	},
 
-	setStateHighlight: function (state) {
+	setHighlightedState: function (state) {
 
-		if (state) {
+		this.highlightedState = state;
+		this.displayHighlightedState();
 
-			let stateIndex = this.currentStatesData.findIndex(d => d.name === state);
+	},
+
+	// does not set any state, just displays.
+	displayHighlightedState: function (state) {
+
+		let stateName = state || this.highlightedState || '';
+		if (stateName) {
+
+			let stateIndex = this.currentStatesData.findIndex(d => d.name === stateName);
 
 			d3.selectAll('path.area')
 				.style('opacity', (data, index) => index === stateIndex ? 1.0 : 0.2);
+
+			d3.select(this.labelContainer).selectAll('div h3')
+				.style('opacity', (data, index) => index === stateIndex ? 1.0 : 0.2);
+
+			// .selectAll('linearGradient')
+			// TODO: set stops with higher/lower opacity on #anger-gradient-{i}
 
 		} else {
 
@@ -997,50 +1012,20 @@ export default {
 
 	onStateMouseOver: function (d, i) {
 
-		if (!this.isBackgrounded) {
-
-			this.setStateHighlight(this.currentStatesData[i].name);
-
-			d3.select(this.labelContainer).selectAll('div h3')
-				.style('opacity', (data, index) => index === i ? 1.0 : 0.2);
-
-			// .selectAll('linearGradient')
-			// TODO: set stops with higher/lower opacity on #anger-gradient-{i}
-
-			dispatcher.changeCallout(this.currentEmotion, this.currentStatesData[i].name, this.currentStatesData[i].desc);
-
-		} else {
-
+		if (this.isBackgrounded) {
 			this.displayBackgroundedState(this.currentStatesData[i].name);
-
+		} else {
+			this.displayHighlightedState(this.currentStatesData[i].name);
 		}
-
-		// prevent unwanted mouseout behavior
-		setTimeout(() => {
-			if (this.mouseOutTimeout) {
-				clearTimeout(this.mouseOutTimeout);
-			}
-		}, 1);
 
 	},
 
 	onStateMouseOut: function (d, i) {
 
-		if (!this.isBackgrounded) {
-
-			this.setStateHighlight(null);
-
-			if (this.mouseOutTimeout) {
-				clearTimeout(this.mouseOutTimeout);
-			}
-			this.mouseOutTimeout = setTimeout(() => {
-				this.resetCallout();
-			}, 1000);
-
-		} else {
-
+		if (this.isBackgrounded) {
 			this.displayBackgroundedState(null);
-
+		} else {
+			this.displayHighlightedState(null);
 		}
 
 	},
@@ -1055,6 +1040,20 @@ export default {
 
 		if (this.isBackgrounded) {
 			dispatcher.setEmotionState(this.currentStatesData[i].name);
+		} else {
+			this.setHighlightedState(this.currentStatesData[i].name);
+			dispatcher.changeCallout(this.currentEmotion, this.currentStatesData[i].name, this.currentStatesData[i].desc);
+		}
+
+	},
+
+	onBackgroundClick: function () {
+
+		if (this.isBackgrounded) {
+			dispatcher.setEmotionState(null);
+		} else {
+			this.setHighlightedState(null);
+			this.resetCallout();
 		}
 
 	},
