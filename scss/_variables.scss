@@ -40,3 +40,11 @@ $label-fade-in-time: 1s;
 	&.sadness { background-color: rgba($label-color-sadness, 0.5); }
 	background-blend-mode: multiply;
 }
+
+@mixin emotion-gradient-fill () {
+	&.anger { fill: $label-color-anger; }
+	&.disgust { fill: $label-color-disgust; }
+	&.enjoyment { fill: $label-color-enjoyment; }
+	&.fear { fill: $label-color-fear; }
+	&.sadness { fill: $label-color-sadness; }
+}

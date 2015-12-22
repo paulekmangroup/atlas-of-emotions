@@ -11,7 +11,6 @@
 	text-align: center;
 
 	transform: scale(1.0);
-	// transition: transform #{$states-scale-transition};
 	transition-property: transform, top;
 	transition-duration: 1.5s, 1.5s;
 	transition-timing-function: cubic-bezier(0.4, 0.4, 0.35, 1), cubic-bezier(.81,.34,.63,.85);
@@ -19,6 +18,13 @@
 	&.backgrounded {
 		transform: scale($states-backgrounded-scale);
 		top: $states-backgrounded-top;
+		&.triggers {
+			// align bottom of states graph, which is scaled and translated,
+			// with bottom of screen. this math is basically:
+			// (scaled states offset) + scale * (states graph offset from parent + states graph bottom margin)
+			top: calc((100% * (1 - #{$states-backgrounded-scale}) / 2) +
+				#{$states-backgrounded-scale} * (#{$states-containers-bottom} + 50px));
+		}
 	}
 
 }

@@ -120,9 +120,6 @@ export default {
 			this._current = i(0);
 			return function (t) {
 				return arc(i(t));
-				// return d3.svg.arc()
-				// 	.innerRadius(0)
-				// 	.outerRadius(0.5*689)(i(t));
 			};
 		});
 	},

@@ -20,13 +20,23 @@
 	margin-left: -$triggers-graph-width/2;
 	min-height: 400px;
 }
+
 #trigger-graph-container {
 	width: $triggers-graph-width;
-	height: 60%;
+	height: 100%;
+
+	path.halo {
+		// TODO: replace with gradients,
+		// and look into refactoring gradients out of SVG and into CSS for actions
+		@include emotion-gradient-fill;
+		fill-opacity: 0.75;
+	}
 }
+
 #trigger-labels {
 	//
 }
+
 
 
 /*

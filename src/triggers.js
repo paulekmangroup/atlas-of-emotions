@@ -46,9 +46,22 @@ export default {
 			.attr('height', graphContainer.offsetHeight);
 
 		this.triggerGraphContainer = svg.append('g')
-			.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+			.attr('transform', 'translate(' + (margin.left + 0.5*innerWidth) + ',' + (margin.top + innerHeight) + ')');
 
-		this.setUpDefs(svg.append('defs'), 0.5*innerWidth);
+		// 
+		// d3/svg setup
+		// 
+		let radius = 0.5 * innerWidth;
+		this.pieLayout = d3.layout.pie()
+			.value(d => 1)
+			.startAngle(-0.5 * Math.PI)
+			.endAngle(0.5 * Math.PI);
+
+		this.arcGenerator = d3.svg.arc()
+			.innerRadius(0.9 * radius)
+			.outerRadius(radius);
+
+		this.setUpDefs(svg.append('defs'), radius);
 
 		this.isInited = true;
 
@@ -168,8 +181,21 @@ export default {
 
 		this.tempNav.querySelector('.prev').innerHTML = '<a href=#actions:' + emotion + '>ACTIONS ▲</a>';
 		// this.tempNav.querySelector('.next').innerHTML = '<a href=#moods:' + emotion + '>MOODS ▼</a>';
-		this.tempNav.querySelector('.next').innerHTML = '<a href=#>MOODS ▼</a>';
 		this.tempNav.removeAttribute('style');
+
+		let haloSelection = this.triggerGraphContainer.selectAll('path.halo')
+			.data(this.pieLayout([{}]));
+		// .transition()
+		// 	.duration(1000)
+		// 	.fill();
+
+		haloSelection.enter().append('path')
+			.classed('halo ' + this.currentEmotion, true)
+			.attr('d', this.arcGenerator)
+			.style('opacity', 0.0)
+		.transition()
+			.duration(1000)
+			.style('opacity', 1.0);
 
 	},
 

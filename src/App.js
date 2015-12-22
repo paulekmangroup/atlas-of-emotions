@@ -136,7 +136,8 @@ export default function (...initArgs) {
 			backgroundSections.forEach(backgroundSection => {
 				backgroundSection.setEmotion(currentEmotion, previousEmotion);
 				backgroundSection.open({
-					inBackground: true
+					inBackground: true,
+					sectionIsTriggers: section === triggers
 				});
 			});
 
@@ -169,12 +170,15 @@ export default function (...initArgs) {
 						if (previousSection === backgroundSection) {
 							// already open; just background it
 							previousSectionBackgrounded = true;
-							return backgroundSection.setBackgrounded(true);
+							return backgroundSection.setBackgrounded(true, {
+								sectionIsTriggers: section === triggers
+							});
 						} else {
 							// open it in the background
 							backgroundSection.setEmotion(currentEmotion, previousEmotion);
 							return backgroundSection.open({
-								inBackground: true
+								inBackground: true,
+								sectionIsTriggers: section === triggers
 							});
 						}
 					});
