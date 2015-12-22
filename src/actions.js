@@ -37,6 +37,7 @@ export default {
 		this.arcTween = this.arcTween.bind(this);
 		this.onActionMouseOver = this.onActionMouseOver.bind(this);
 		this.onActionMouseOut = this.onActionMouseOut.bind(this);
+		this.onActionMouseClick = this.onActionMouseClick.bind(this);
 
 		this.actionsData = this.parseActions();
 
@@ -406,7 +407,11 @@ export default {
 
 	setState: function (state) {
 
+		this.setHighlightedAction(null);
+
+		if (state === this.currentState) { return; }
 		this.currentState = state;
+		
 		let stateActionsData,
 			currentActionsData;
 
@@ -440,7 +445,8 @@ export default {
 			.attr('class', 'action-arrow')
 			.attr('transform', d => 'rotate(' + d.rotation + ')')
 			.on('mouseover', this.onActionMouseOver)
-			.on('mouseout', this.onActionMouseOut);
+			.on('mouseout', this.onActionMouseOut)
+			.on('click', this.onActionMouseClick);
 		arrowEnterSelection.append('path')
 			.attr('fill', (d, i) => 'url(#' + emotionGradientName + ')')
 			.call(this.scaledLineGenerator, 0.0);
@@ -541,7 +547,8 @@ export default {
 				.style('height', labelSize + 'px')
 				.style('opacity', 0.0)
 				.on('mouseover', this.onActionMouseOver)
-				.on('mouseout', this.onActionMouseOut);
+				.on('mouseout', this.onActionMouseOut)
+				.on('click', this.onActionMouseClick);
 			labelEnterSelection.append('div').append('h3')
 				.html(d => d.name.toUpperCase())
 				.style('transform', d => 'rotate(-' + d.rotation + 'deg) scaleY(1.73)');
@@ -600,15 +607,75 @@ export default {
 
 	},
 
+	setHighlightedAction: function (action) {
+
+		this.highlightedAction = action;
+
+		if (action) {
+			dispatcher.changeCallout(this.currentEmotion, action.name, action.desc);
+		} else {
+			this.resetCallout();
+		}
+
+		this.displayHighlightedAction(action);
+
+	},
+
+	displayHighlightedAction: function (action) {
+
+		let highlightedAction = action || this.highlightedAction || null;
+
+		if (highlightedAction) {
+
+			let stateActionsData;
+			if (this.currentState) {
+				stateActionsData = this.actionsData[this.currentEmotion].actions[this.currentState].actions;
+			} else {
+				stateActionsData = this.actionsData[this.currentEmotion].allActions;
+			}
+
+			let actionIndex = stateActionsData.findIndex(d => d.name === highlightedAction.name);
+
+			d3.selectAll('g.action-arrow')
+				.style('opacity', (data, index) => index === actionIndex ? 1.0 : 0.2);
+
+			this.labelContainer.selectAll('div.label')
+				.style('opacity', (data, index) => index === actionIndex ? 1.0 : 0.2);
+
+			// .selectAll('linearGradient')
+			// TODO: set stops with higher/lower opacity on #anger-gradient-{i}
+
+		} else {
+
+			d3.selectAll('g.action-arrow')
+				.style('opacity', null);
+
+			this.labelContainer.selectAll('div.label')
+				.style('opacity', null);
+
+		}
+
+	},
+
 	onActionMouseOver: function (d, i) {
 
-		dispatcher.changeCallout(this.currentEmotion, d.name, d.desc);
+		this.displayHighlightedAction(d);
 
 	},
 
 	onActionMouseOut: function (d, i) {
 
-		this.resetCallout();
+		this.displayHighlightedAction(null);
+
+	},
+
+	onActionMouseClick: function (d, i) {
+
+		if (d3.event) {
+			d3.event.stopImmediatePropagation();
+		}
+
+		this.setHighlightedAction(d);
 
 	},
 

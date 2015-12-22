@@ -325,65 +325,6 @@ export default {
 
 	},
 
-	setBackgroundedState: function (state) {
-
-		this.backgroundedState = state;
-		this.displayBackgroundedState();
-
-	},
-
-	// does not set any state, just displays.
-	displayBackgroundedState: function (state) {
-
-		let stateName = state || this.backgroundedState || '',
-			classes = {
-				'visible': !!stateName
-			};
-		classes[this.currentEmotion] = true;
-
-		this.backgroundedLabel.select('h3').html(stateName);
-		this.backgroundedLabel.classed(classes);
-
-		this.setHighlightedState(stateName);
-
-	},
-
-	setHighlightedState: function (state) {
-
-		this.highlightedState = state;
-		this.displayHighlightedState();
-
-	},
-
-	// does not set any state, just displays.
-	displayHighlightedState: function (state) {
-
-		let stateName = state || this.highlightedState || '';
-		if (stateName) {
-
-			let stateIndex = this.currentStatesData.findIndex(d => d.name === stateName);
-
-			d3.selectAll('path.area')
-				.style('opacity', (data, index) => index === stateIndex ? 1.0 : 0.2);
-
-			d3.select(this.labelContainer).selectAll('div h3')
-				.style('opacity', (data, index) => index === stateIndex ? 1.0 : 0.2);
-
-			// .selectAll('linearGradient')
-			// TODO: set stops with higher/lower opacity on #anger-gradient-{i}
-
-		} else {
-
-			d3.selectAll('path.area')
-				.style('opacity', null);
-
-			d3.select(this.labelContainer).selectAll('div h3')
-				.style('opacity', null);
-
-		}
-
-	},
-
 	hideChrome: function () {
 
 		// TODO: this code was in close, but is needed for setBackgrounded;
@@ -1054,6 +995,65 @@ export default {
 		} else {
 			this.setHighlightedState(null);
 			this.resetCallout();
+		}
+
+	},
+
+	setBackgroundedState: function (state) {
+
+		this.backgroundedState = state;
+		this.displayBackgroundedState();
+
+	},
+
+	// does not set any state, just displays.
+	displayBackgroundedState: function (state) {
+
+		let stateName = state || this.backgroundedState || '',
+			classes = {
+				'visible': !!stateName
+			};
+		classes[this.currentEmotion] = true;
+
+		this.backgroundedLabel.select('h3').html(stateName);
+		this.backgroundedLabel.classed(classes);
+
+		this.setHighlightedState(stateName);
+
+	},
+
+	setHighlightedState: function (state) {
+
+		this.highlightedState = state;
+		this.displayHighlightedState();
+
+	},
+
+	// does not set any state, just displays.
+	displayHighlightedState: function (state) {
+
+		let stateName = state || this.highlightedState || '';
+		if (stateName) {
+
+			let stateIndex = this.currentStatesData.findIndex(d => d.name === stateName);
+
+			d3.selectAll('path.area')
+				.style('opacity', (data, index) => index === stateIndex ? 1.0 : 0.2);
+
+			d3.select(this.labelContainer).selectAll('div h3')
+				.style('opacity', (data, index) => index === stateIndex ? 1.0 : 0.2);
+
+			// .selectAll('linearGradient')
+			// TODO: set stops with higher/lower opacity on #anger-gradient-{i}
+
+		} else {
+
+			d3.selectAll('path.area')
+				.style('opacity', null);
+
+			d3.select(this.labelContainer).selectAll('div h3')
+				.style('opacity', null);
+
 		}
 
 	},
