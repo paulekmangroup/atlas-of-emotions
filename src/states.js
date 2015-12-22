@@ -260,6 +260,7 @@ export default {
 			//
 
 			this.hideChrome();
+			this.setActive(false);
 			
 			// recede graph down into baseline
 			let transformedRanges = this.transformRanges(this.currentStatesData, this.currentEmotion, 0.0),
@@ -307,7 +308,7 @@ export default {
 
 			this.sectionContainer.classList[(val ? 'add' : 'remove')]('backgrounded');
 			this.hideChrome();
-			this.setActive(false);
+			this.setActive(!val);
 			this.isBackgrounded = val;
 
 			// handle background click to deselect current state
@@ -315,10 +316,8 @@ export default {
 				dispatcher.setEmotionState(null);
 			} : null, false);
 
-			// resolve on completion of animation
-			resolve({
-				keepContainerVisible: true
-			});
+			// TODO: resolve on completion of animation
+			resolve();
 
 		});
 
@@ -1052,7 +1051,9 @@ export default {
 			d3.event.stopImmediatePropagation();
 		}
 
-		dispatcher.setEmotionState(this.currentStatesData[i].name);
+		if (this.isBackgrounded) {
+			dispatcher.setEmotionState(this.currentStatesData[i].name);
+		}
 
 	},
 

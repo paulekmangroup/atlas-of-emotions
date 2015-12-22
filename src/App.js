@@ -106,26 +106,38 @@ export default function (...initArgs) {
 		}
 
 		if (!section.isInited) {
-			// turn on display so width/height can be calculated
-			let currentDisplay = containers[sectionName].style.display;
-			containers[sectionName].removeAttribute('style');
-
-			section.init(containers[sectionName]);
-
-			// set display back to where it was
-			if (currentDisplay) {
-				containers[sectionName].style.display = currentDisplay;
+			// init any uninited background sections
+			if (section.backgroundSections) {
+				section.backgroundSections.forEach(backgroundSection => {
+					if (!backgroundSection.isInited) {
+						initSection(backgroundSection);
+					}
+				});
 			}
+
+			// init current section
+			initSection(section);
 		}
 
 		if (!previousSection) {
+
+			let backgroundSections = section.backgroundSections || [];
 			
 			// for now (until transitions implemented), just hide all but the current section
+			// and any background sections
 			for (let key in containers) {
-				if (key !== sectionName) {
+				if (key !== sectionName && !~backgroundSections.indexOf(sections[key])) {
 					containers[key].style.display = 'none';
 				}
 			}
+
+			// open and background all backgroundSections for the current section
+			backgroundSections.forEach(backgroundSection => {
+				backgroundSection.setEmotion(currentEmotion, previousEmotion);
+				backgroundSection.open({
+					inBackground: true
+				});
+			});
 
 			section.open({
 				firstSection: true
@@ -159,6 +171,7 @@ export default function (...initArgs) {
 							return backgroundSection.setBackgrounded(true);
 						} else {
 							// open it in the background
+							backgroundSection.setEmotion(currentEmotion, previousEmotion);
 							return backgroundSection.open({
 								inBackground: true
 							});
@@ -175,6 +188,7 @@ export default function (...initArgs) {
 					if (previousBackgroundSections.length) {
 						// close previous background sections not needed for the current section
 						previousBackgroundSections.forEach(prevBkgdSection => {
+							prevBkgdSection.setBackgrounded(false);
 							prevBkgdSection.close();
 						});
 					}
@@ -207,7 +221,7 @@ export default function (...initArgs) {
 					section.setEmotion(currentEmotion, previousEmotion);
 
 				});
-				
+
 			}
 
 		}
@@ -225,6 +239,29 @@ export default function (...initArgs) {
 		// setSection cues up emotion changes,
 		// making this function very simple.
 		currentEmotion = emotion;
+
+	}
+
+	function initSection (section) {
+
+		let sectionName;
+		for (let key in sections) {
+			if (sections[key] === section) {
+				sectionName = key;
+				break;
+			}
+		}
+
+		// turn on display so width/height can be calculated
+		let currentDisplay = containers[sectionName].style.display;
+		containers[sectionName].removeAttribute('style');
+
+		section.init(containers[sectionName]);
+
+		// set display back to where it was
+		if (currentDisplay) {
+			containers[sectionName].style.display = currentDisplay;
+		}
 
 	}
 

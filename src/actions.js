@@ -416,8 +416,7 @@ export default {
 
 		} else {
 
-			stateActionsData = this.actionsData[this.currentEmotion].allActions;
-			currentActionsData = stateActionsData;
+			currentActionsData = this.actionsData[this.currentEmotion].allActions;
 
 		}
 
@@ -480,21 +479,6 @@ export default {
 
 		} else {
 
-
-			/*
-			this.actionGraphContainer.selectAll('g.action-arrow')
-				.on('mouseover', null)
-				.on('mouseout', null)
-			.transition()
-				.duration(1000)
-				.delay(function (d, i) { return i * 100; })
-				.remove()
-			.select('path')
-				.call(this.scaledLineGenerator, 0.0);
-
-			this.renderLabels(null);
-			*/
-			
 			this.resetCallout();
 
 			this.actionGraphContainer.select('g.valences').selectAll('path.valence')
@@ -503,6 +487,29 @@ export default {
 				.style('opacity', 0.0)
 				.remove();
 		}
+
+	},
+
+	clearStates: function (duration) {
+
+		this.actionGraphContainer.selectAll('g.action-arrow')
+			.on('mouseover', null)
+			.on('mouseout', null)
+		.data([]).exit().transition()
+			.duration(duration)
+			.remove()
+		.select('path')
+			.call(this.scaledLineGenerator, 0.0);
+
+		this.renderLabels(null);
+
+		this.resetCallout();
+
+		this.actionGraphContainer.select('g.valences').selectAll('path.valence')
+		.transition()
+			.duration(duration)
+			.style('opacity', 0.0)
+			.remove();
 
 	},
 
@@ -576,12 +583,13 @@ export default {
 
 			clearTimeout(this.openTimeout);
 
-			this.actionGraphContainer.selectAll('g.action-arrow')
-				.on('mouseover', null)
-				.on('mouseout', null);
+			let closeDuration = 600;
 
-			// TODO: resolve on completion of animation
-			resolve();
+			this.clearStates(closeDuration);
+
+			setTimeout(() => {
+				resolve();
+			}, closeDuration);
 
 		});
 
