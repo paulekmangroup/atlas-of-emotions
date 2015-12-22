@@ -56,7 +56,6 @@ export default {
 		// 
 		// d3/svg setup
 		// 
-
 		let haloRadius = 0.5 * innerWidth,
 			triggerInnerRadius = haloRadius * 1.125,
 			triggerAreaWidth = haloRadius * 1.375 - triggerInnerRadius;
@@ -72,8 +71,10 @@ export default {
 
 		this.setUpDefs(svg.append('defs'), haloRadius);
 
-		// need radius to parse data, so this comes last.
+		// need radius to parse data, so this comes after d3 setup.
 		this.triggersData = this.parseTriggers(haloRadius);
+
+		this.setUpHitAreas(containerNode);
 
 		this.isInited = true;
 
@@ -210,6 +211,50 @@ export default {
 
 	},
 
+	setUpHitAreas: function (containerNode) {
+
+		const cw = containerNode.offsetWidth,
+			ch = containerNode.offsetHeight,
+			innerRadius = this.haloArcGenerator.innerRadius();
+
+		let hitAreaContainer = document.createElement('div');
+		hitAreaContainer.id = 'trigger-hit-area-container';
+		containerNode.appendChild(hitAreaContainer);
+
+		let svg = d3.select(hitAreaContainer).append('svg')
+			.attr('width', hitAreaContainer.offsetWidth)
+			.attr('height', hitAreaContainer.offsetHeight);
+		let container = svg.append('g')
+			.attr('transform', 'translate(' + (0.5 * cw) + ',' + ch + ')');
+
+		container.append('rect')
+			.attr('class', 'hit-area')
+			.attr('x', -cw/2)
+			.attr('y', -ch)
+			.attr('width', cw)
+			.attr('height', ch)
+			.on('mouseover', () => { this.onMouseOver(1); })
+			.on('mouseout', () => { this.onMouseOut(1); });
+
+		container.append('path')
+			.data(this.haloPieLayout([{}]))
+			.attr('class', 'hit-area')
+			.attr('d', this.haloArcGenerator)
+			.on('mouseover', () => { this.onMouseOver(2); })
+			.on('mouseout', () => { this.onMouseOut(2); });
+
+		let innerArcGenerator = d3.svg.arc()
+			.innerRadius(0)
+			.outerRadius(innerRadius);
+		container.append('path')
+			.data(this.haloPieLayout([{}]))
+			.attr('class', 'hit-area')
+			.attr('d', innerArcGenerator)
+			.on('mouseover', () => { this.onMouseOver(3); })
+			.on('mouseout', () => { this.onMouseOut(3); });
+
+	},
+
 	setEmotion: function (emotion) {
 
 		if (!~_.values(dispatcher.EMOTIONS).indexOf(emotion)) {
@@ -325,6 +370,18 @@ export default {
 			resolve();
 
 		});
+
+	},
+
+	onMouseOver: function (hitAreaId) {
+
+		console.log(">>>>> over:", hitAreaId);
+
+	},
+
+	onMouseOut: function (hitAreaId) {
+
+		console.log(">>>>> out:", hitAreaId);
 
 	},
 
