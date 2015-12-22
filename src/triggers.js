@@ -10,6 +10,12 @@ import states from './states.js';
 // number of concentric rings in which trigger labels are arranged
 const NUM_RINGS = 3;
 
+const HIT_AREAS = {
+	APPRAISAL: 1,
+	DATABASE: 2,
+	IMPULSE: 3
+};
+
 // path for arrowhead shape
 const ARROWHEAD = "M0,0.1C3.1-3,9.3-4.5,13.6-4.6C7.9-0.3,2.8,5.2,0,12C-2.7,5.2-8-0.1-13.6-4.6C-9-4.3-3.4-3.1,0,0.1z";
 
@@ -28,8 +34,6 @@ export default {
 		let graphContainer = document.createElement('div');
 		graphContainer.id = 'trigger-graph-container';
 		containerNode.appendChild(graphContainer);
-
-		this.initLabels(containerNode);
 
 		this.createTempNav(containerNode);
 
@@ -71,7 +75,9 @@ export default {
 
 		this.setUpDefs(svg.append('defs'), haloRadius);
 
-		// need radius to parse data, so this comes after d3 setup.
+		// need radius to set up labels and to parse data,
+		// so these come after d3 setup.
+		this.initLabels(containerNode, haloRadius);
 		this.triggersData = this.parseTriggers(haloRadius);
 
 		this.setUpHitAreas(containerNode);
@@ -80,10 +86,16 @@ export default {
 
 	},
 
-	initLabels: function (containerNode) {
+	initLabels: function (containerNode, haloRadius) {
 
 		this.labelContainer = d3.select(containerNode).append('div')
 			.attr('id', 'trigger-labels');
+
+		this.databaseLabel = d3.select(containerNode).append('div')
+			.attr('id', 'database-label');
+		this.databaseLabel.append('h3')
+			.text('EMOTIONS ALERT DATABASE')
+			.style('top', -haloRadius + 'px');
 
 	},
 
@@ -123,12 +135,6 @@ export default {
 		});
 
 		return triggersData;
-
-	},
-
-	renderLabels: function (ranges) {
-
-		// TODO: implement if useful
 
 	},
 
@@ -233,15 +239,15 @@ export default {
 			.attr('y', -ch)
 			.attr('width', cw)
 			.attr('height', ch)
-			.on('mouseover', () => { this.onMouseOver(1); })
-			.on('mouseout', () => { this.onMouseOut(1); });
+			.on('mouseover', () => { this.onMouseOver(HIT_AREAS.APPRAISAL); })
+			.on('mouseout', () => { this.onMouseOut(HIT_AREAS.APPRAISAL); });
 
 		container.append('path')
 			.data(this.haloPieLayout([{}]))
 			.attr('class', 'hit-area')
 			.attr('d', this.haloArcGenerator)
-			.on('mouseover', () => { this.onMouseOver(2); })
-			.on('mouseout', () => { this.onMouseOut(2); });
+			.on('mouseover', () => { this.onMouseOver(HIT_AREAS.DATABASE); })
+			.on('mouseout', () => { this.onMouseOut(HIT_AREAS.DATABASE); });
 
 		let innerArcGenerator = d3.svg.arc()
 			.innerRadius(0)
@@ -250,8 +256,8 @@ export default {
 			.data(this.haloPieLayout([{}]))
 			.attr('class', 'hit-area')
 			.attr('d', innerArcGenerator)
-			.on('mouseover', () => { this.onMouseOver(3); })
-			.on('mouseout', () => { this.onMouseOut(3); });
+			.on('mouseover', () => { this.onMouseOver(HIT_AREAS.IMPULSE); })
+			.on('mouseout', () => { this.onMouseOut(HIT_AREAS.IMPULSE); });
 
 	},
 
@@ -344,6 +350,8 @@ export default {
 			.style('opacity', 0.0)
 			.remove();
 		*/
+	
+		this.databaseLabel.attr('class', this.currentEmotion);
 
 	},
 
@@ -353,7 +361,7 @@ export default {
 		let openDelay = 1500;
 
 		this.openTimeout = setTimeout(() => {
-			this.resetCallout();
+			this.setCallout(null);
 		}, openDelay);
 
 	},
@@ -363,6 +371,8 @@ export default {
 		return new Promise((resolve, reject) => {
 
 			clearTimeout(this.openTimeout);
+
+			document.querySelector('#states').classList.remove('faded');
 
 			this.tempNav.classList.remove('visible');
 
@@ -375,18 +385,68 @@ export default {
 
 	onMouseOver: function (hitAreaId) {
 
-		console.log(">>>>> over:", hitAreaId);
+		switch (hitAreaId) {
+			case HIT_AREAS.APPRAISAL:
+				document.querySelector('#trigger-graph-container').classList.add('muted');
+				this.databaseLabel.classed('visible', false);
+				document.querySelector('#states').classList.add('faded');
+				break;
+			case HIT_AREAS.DATABASE:
+				document.querySelector('#trigger-graph-container').classList.remove('muted');
+				this.databaseLabel.classed('visible', true);
+				document.querySelector('#states').classList.add('faded');
+				break;
+			case HIT_AREAS.IMPULSE:
+				document.querySelector('#trigger-graph-container').classList.add('muted');
+				this.databaseLabel.classed('visible', false);
+				document.querySelector('#states').classList.remove('faded');
+				break;
+			default:
+				return;
+		}
+
+		this.setCallout(hitAreaId);
+
+		// don't execute mouseOut behavior when rolling from one hit area into another
+		clearTimeout(this.mouseOutTimeout);
 
 	},
 
 	onMouseOut: function (hitAreaId) {
 
-		console.log(">>>>> out:", hitAreaId);
+		this.mouseOutTimeout = setTimeout(() => {
+
+			switch (hitAreaId) {
+				case HIT_AREAS.APPRAISAL:
+					//
+					break;
+				case HIT_AREAS.DATABASE:
+					//
+					break;
+				case HIT_AREAS.IMPULSE:
+					break;
+				default:
+					return;
+			}
+
+			document.querySelector('#trigger-graph-container').classList.remove('muted');
+			this.databaseLabel.classed('visible', false);
+			document.querySelector('#states').classList.remove('faded');
+
+			this.setCallout(null);
+
+		}, 1);
 
 	},
 
-	resetCallout () {
-		dispatcher.changeCallout(this.currentEmotion, appStrings.triggers.header, appStrings.triggers.body);
+	setCallout (hitAreaId) {
+
+		if (hitAreaId) {
+			dispatcher.changeCallout(this.currentEmotion, appStrings.triggers.steps[hitAreaId-1].header, appStrings.triggers.steps[hitAreaId-1].body);
+		} else {
+			dispatcher.changeCallout(this.currentEmotion, appStrings.triggers.header, appStrings.triggers.body);
+		}
+
 	},
 
 	createTempNav (containerNode) {

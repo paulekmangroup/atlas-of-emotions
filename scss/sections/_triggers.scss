@@ -35,6 +35,13 @@
 		@include emotion-triggers-gradient-fill;
 		fill-opacity: 0.75;
 	}
+
+	opacity: 1.0;
+	-webkit-transition: opacity 0.5s;
+	transition:         opacity 0.5s;
+	&.muted {
+		opacity: 0.3;
+	}
 }
 
 #trigger-labels {
@@ -43,12 +50,33 @@
 		width: 10em;
 
 		@include emotion-color;
+
+		h3 {
+			position: absolute;
+			left: -50%;
+			top: -50%;
+		}
 	}
+}
+
+#database-label {
+	position: absolute;
+	left: 50%;
+	bottom: 0;
+	width: 7em;
+	@include emotion-color;
 
 	h3 {
 		position: absolute;
 		left: -50%;
-		top: -50%;
+		margin: 1.25em 0 0 -50%;
+	}
+
+	opacity: 0.0;
+	-webkit-transition: opacity 0.5s;
+	transition:         opacity 0.5s;
+	&.visible {
+		opacity: 1.0;
 	}
 }
 
