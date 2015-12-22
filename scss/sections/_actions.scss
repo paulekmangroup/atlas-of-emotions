@@ -25,10 +25,6 @@
 		#{$states-backgrounded-scale} * (#{$states-containers-bottom} + 50px));
 
 	left: 50%;
-	// min-height: 400px;
-
-	// transform-origin: top;
-	// transform: rotateX(60deg);
 }
 
 #action-graph-container {
@@ -63,7 +59,7 @@
 		position: absolute;
 		bottom: 0;
 		transform-origin: bottom;
-		
+
 		@include emotion-color;
 		white-space: nowrap;
 
@@ -96,64 +92,27 @@
 	height: 40%;
 	
 	pointer-events: auto;
-	
-	/*
-	.axis {
-		line,
-		path {
-			fill: none;
-			stroke: $text-color;
-			shape-rendering: crispEdges;
-		}
-
-		&.labels {
-			line,
-			path {
-				display: none
-			}
-			text {
-				@extend %raleway-light;
-				font-size: 0.8em;
-			}
-		}
-
-		opacity: 0.0;
-		transition: opacity #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
-
-		&.visible {
-			opacity: 1.0;
-		}
-	}
-
-	.area {
-		mix-blend-mode: multiply;
-	}
-	*/
 }
-/*
-#action-labels {
-	div {
+
+#temp-actions-nav {
+	position: absolute;
+	height: 100%;
+	right: 3%;
+	pointer-events: none;
+
+	.prev {
 		position: absolute;
-		pointer-events: none;
-
-		opacity: 0.0;
-		transition: opacity #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
-
-		&.visible {
-			opacity: 1.0;
-		}
-
-		h3 {
-			// margin-left: -1em;
-			cursor: pointer;
-			pointer-events: auto;
-		}
-	}
-
-	.label {
-		@include emotion-color;
+		top: 3%;
+		right: 0;
+		pointer-events: auto;
 		white-space: nowrap;
 	}
 
+	.next {
+		position: absolute;
+		bottom: 3%;
+		right: 0;
+		pointer-events: auto;
+		white-space: nowrap;
+	}
 }
-*/

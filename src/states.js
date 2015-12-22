@@ -239,7 +239,8 @@ export default {
 		this.resetCallout();
 		// }, LABEL_APPEAR_DELAY);
 
-		this.tempNav.innerHTML = '<a href=#actions:' + emotion + '>ACTIONS</a>';
+		this.tempNav.querySelector('.prev').innerHTML = '<a href=#continents:' + emotion + '>CONTINENTS ▲</a>';
+		this.tempNav.querySelector('.next').innerHTML = '<a href=#actions:' + emotion + '>ACTIONS ▼</a>';
 		this.tempNav.removeAttribute('style');
 
 	},
@@ -1068,6 +1069,14 @@ export default {
 		this.tempNav = document.createElement('div');
 		this.tempNav.id = 'temp-states-nav';
 		containerNode.appendChild(this.tempNav);
+
+		let prev = document.createElement('div');
+		prev.classList.add('prev');
+		this.tempNav.appendChild(prev);
+
+		let next = document.createElement('div');
+		next.classList.add('next');
+		this.tempNav.appendChild(next);
 
 	}
 

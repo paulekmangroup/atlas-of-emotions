@@ -27,6 +27,7 @@ export default {
 	currentEmotion: null,
 	actionsData: null,
 	backgroundSections: [ states ],
+	tempNav: null,
 	
 	init: function (containerNode) {
 
@@ -44,6 +45,8 @@ export default {
 		containerNode.appendChild(graphContainer);
 
 		this.initLabels(containerNode);
+
+		this.createTempNav(containerNode);
 
 		// 
 		// d3 conventional margins
@@ -397,6 +400,11 @@ export default {
 		// as the continent's shapes shrink back to the baseline,
 		// then grow the new continent (states) and arrows (actions)
 		
+
+		this.tempNav.querySelector('.prev').innerHTML = '<a href=#actions:' + emotion + '>ACTIONS ▲</a>';
+		this.tempNav.querySelector('.next').innerHTML = '<a href=#triggers:' + emotion + '>TRIGGERS ▼</a>';
+		this.tempNav.removeAttribute('style');
+		
 	},
 
 	setState: function (state) {
@@ -610,5 +618,21 @@ export default {
 	resetCallout () {
 		dispatcher.changeCallout(this.currentEmotion, appStrings.actions.header, appStrings.actions.body);
 	},
+
+	createTempNav (containerNode) {
+
+		this.tempNav = document.createElement('div');
+		this.tempNav.id = 'temp-actions-nav';
+		containerNode.appendChild(this.tempNav);
+
+		let prev = document.createElement('div');
+		prev.classList.add('prev');
+		this.tempNav.appendChild(prev);
+
+		let next = document.createElement('div');
+		next.classList.add('next');
+		this.tempNav.appendChild(next);
+
+	}
 
 };
