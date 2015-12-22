@@ -3,6 +3,7 @@ import dispatcher from './dispatcher.js';
 import continents from './continents.js';
 import states from './states.js';
 import actions from './actions.js';
+import triggers from './triggers.js';
 
 export default function (...initArgs) {
 
@@ -69,8 +70,8 @@ export default function (...initArgs) {
 		sections.continents = continents;
 		sections.states = states;
 		sections.actions = actions;
+		sections.triggers = triggers;
 
-		sections.triggers = placeholderSection(dispatcher.SECTIONS.TRIGGERS);
 		sections.moods = placeholderSection(dispatcher.SECTIONS.MOODS);
 
 	}

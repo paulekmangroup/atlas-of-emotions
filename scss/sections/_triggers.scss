@@ -1,0 +1,137 @@
+#triggers {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	min-height: 600px;
+
+	top: 0;
+	left: 50%;
+	margin-left: -50%;
+
+	text-align: center;
+	pointer-events: none;
+}
+
+#trigger-graph-container,
+#trigger-labels {
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	margin-left: -$triggers-graph-width/2;
+	min-height: 400px;
+}
+#trigger-graph-container {
+	width: $triggers-graph-width;
+	height: 60%;
+}
+#trigger-labels {
+	//
+}
+
+
+/*
+#action-graph-container,
+#action-labels {
+	position: absolute;
+
+	// align top of actions containers with bottom of
+	// 'backgrounded' states graph, which is scaled and translated.
+	// this math is basically:
+	// (states position) - (scaled states offset) - scale * (states graph offset from parent + states graph bottom margin)
+	top: calc((100% + #{$states-backgrounded-top}) - 
+		(100% * (1 - #{$states-backgrounded-scale}) / 2) - 
+		#{$states-backgrounded-scale} * (#{$states-containers-bottom} + 50px));
+
+	left: 50%;
+}
+
+#action-graph-container {
+	margin-left: -$actions-graph-width/2;
+	transform-origin: top;
+	transform: rotateX(60deg);
+
+	.valence {
+		stroke: rgba(77, 77, 77, 0.25);
+		stroke-width: 1;
+		&.constructive {
+			fill: rgba(255, 255, 255, 0.25);
+		}
+		&.both {
+			fill: none;
+		}
+		&.destructive {
+			fill: rgba(77, 77, 77, 0.1);
+		}
+		&.none {
+			display: none;
+		}
+		
+	}
+}
+
+#action-labels {
+	pointer-events: none;
+	transform: scaleY(0.578);	// 1/sqrt(3), using scale to equate to rotateX(60deg)
+
+	.label {
+		position: absolute;
+		bottom: 0;
+		transform-origin: bottom;
+
+		@include emotion-color;
+		white-space: nowrap;
+
+		cursor: pointer;
+		pointer-events: auto;
+
+		div {
+			position: absolute;
+			margin-left: -60px;		// TODO: where does this magic number come from?
+									// needed to align with arrow points.
+			h3 {
+				// transform: rotateX(-60deg);
+				// transform: scaleY(1.73);	// sqrt(3), using scale to equate to rotateX(60deg)
+											// set by d3 instead, since d3 is applying another transform already
+			}
+		}
+	}
+}
+
+.action-arrow {
+	stroke: none;
+	cursor: pointer;
+	path {
+		mix-blend-mode: multiply;
+	}
+}
+
+#action-graph-container {
+	width: $actions-graph-width;
+	height: 40%;
+	
+	pointer-events: auto;
+}
+*/
+
+#temp-triggers-nav {
+	position: absolute;
+	height: 100%;
+	right: 3%;
+	pointer-events: none;
+
+	.prev {
+		position: absolute;
+		top: 3%;
+		right: 0;
+		pointer-events: auto;
+		white-space: nowrap;
+	}
+
+	.next {
+		position: absolute;
+		bottom: 3%;
+		right: 0;
+		pointer-events: auto;
+		white-space: nowrap;
+	}
+}

@@ -384,7 +384,7 @@ export default {
 			])
 		.enter().append('stop')
 			.attr('offset', d => d.offset)
-			.attr('stop-color', d => d.color);		
+			.attr('stop-color', d => d.color);
 
 	},
 
@@ -401,7 +401,7 @@ export default {
 		// then grow the new continent (states) and arrows (actions)
 		
 
-		this.tempNav.querySelector('.prev').innerHTML = '<a href=#actions:' + emotion + '>ACTIONS ▲</a>';
+		this.tempNav.querySelector('.prev').innerHTML = '<a href=#states:' + emotion + '>ACTIONS ▲</a>';
 		this.tempNav.querySelector('.next').innerHTML = '<a href=#triggers:' + emotion + '>TRIGGERS ▼</a>';
 		this.tempNav.removeAttribute('style');
 		
