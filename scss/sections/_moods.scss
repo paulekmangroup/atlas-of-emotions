@@ -19,7 +19,9 @@
 
 	@include emotion-background-color-light;
 
-	// TODO: translate up from bottom, also?
+	// TODO: translate a gradient up from bottom
+	// instead of a solid fill over whole container?
+	// (could do this perhaps by animating gradient stops...)
 	opacity: 0.0;
 	transition: opacity #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
 

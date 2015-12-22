@@ -594,8 +594,6 @@ export default {
 
 	open: function (options) {
 
-		console.log(">>>>> actions.open; options:", options);
-
 		this.setBackgrounded(options && options.inBackground, options);
 
 		// clear selected state to display all actions for emotion,
@@ -636,8 +634,6 @@ export default {
 	 * `setBackgrounded()` toggles this state.
 	 */
 	setBackgrounded: function (val, options) {
-
-		console.log(">>>>> actions.setBackgrounded; val:", val, "options:", options);
 
 		return new Promise((resolve, reject) => {
 

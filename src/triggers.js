@@ -407,7 +407,7 @@ export default {
 
 		this.setCallout(hitAreaId);
 
-		// don't execute mouseOut behavior when rolling from one hit area into another
+		// don't execute mouseout behavior when rolling from one hit area into another
 		clearTimeout(this.mouseOutTimeout);
 
 	},
