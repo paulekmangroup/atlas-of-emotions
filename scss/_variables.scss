@@ -39,6 +39,22 @@ $label-fade-in-time: 1s;
 	&.sadness { color: $color-sadness; }
 }
 
+@mixin emotion-stroke-color () {
+	&.anger { stroke: $color-anger; }
+	&.disgust { stroke: $color-disgust; }
+	&.enjoyment { stroke: $color-enjoyment; }
+	&.fear { stroke: $color-fear; }
+	&.sadness { stroke: $color-sadness; }
+}
+
+@mixin emotion-fill-color () {
+	&.anger { fill: $color-anger; }
+	&.disgust { fill: $color-disgust; }
+	&.enjoyment { fill: $color-enjoyment; }
+	&.fear { fill: $color-fear; }
+	&.sadness { fill: $color-sadness; }
+}
+
 @mixin emotion-background-color () {
 	&.anger { background-color: rgba($color-anger, 0.5); }
 	&.disgust { background-color: rgba($color-disgust, 0.5); }
@@ -46,14 +62,6 @@ $label-fade-in-time: 1s;
 	&.fear { background-color: rgba($color-fear, 0.5); }
 	&.sadness { background-color: rgba($color-sadness, 0.5); }
 	background-blend-mode: multiply;
-}
-
-@mixin emotion-triggers-gradient-fill () {
-	&.anger { fill: url(#triggers-anger-gradient); }
-	&.disgust { fill: url(#triggers-disgust-gradient); }
-	&.enjoyment { fill: url(#triggers-enjoyment-gradient); }
-	&.fear { fill: url(#triggers-fear-gradient); }
-	&.sadness { fill: url(#triggers-sadness-gradient); }
 }
 
 @mixin emotion-background-color-light () {

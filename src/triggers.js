@@ -90,6 +90,14 @@ export default {
 
 		this.labelContainer = d3.select(containerNode).append('div')
 			.attr('id', 'trigger-labels');
+		
+		this.labelArrowsContainer = this.labelContainer.append('div')
+			.attr('class', 'arrows-container')
+		.append('svg')
+			.attr('width', containerNode.offsetWidth)
+			.attr('height', containerNode.offsetHeight)
+		.append('g')
+			.attr('transform', 'translate(' + 0.5 * containerNode.offsetWidth + ',' + containerNode.offsetHeight + ')');
 
 		this.databaseLabel = d3.select(containerNode).append('div')
 			.attr('id', 'database-label');
@@ -154,8 +162,9 @@ export default {
 				// starting at the second ring and cycling between rings
 				radius: innerRadius + radiusSpread * ((i + 1) % NUM_RINGS) / (NUM_RINGS - 1),
 
+				// fraction of radius.
 				// TODO: vary arrow width based on some data
-				arrowLength: 1
+				arrowLength: 0.4
 			}));
 
 		});
@@ -168,9 +177,13 @@ export default {
 	// set up global gradients and xlink:href to them from here and states.js
 	setUpDefs: function (defs, radius) {
 
+		//
+		// halo gradients
+		// 
+
 		// base gradient
 		defs.append('radialGradient')
-			.attr('id', 'triggers-gradient')
+			.attr('id', 'triggers-radial-gradient')
 			.attr('gradientUnits', 'userSpaceOnUse')
 			.attr('cx', 0)
 			.attr('cy', 0)
@@ -178,8 +191,8 @@ export default {
 
 		// anger
 		defs.append('radialGradient')
-			.attr('id', 'triggers-anger-gradient')
-			.attr('xlink:href', '#triggers-gradient')
+			.attr('id', 'triggers-anger-radial-gradient')
+			.attr('xlink:href', '#triggers-radial-gradient')
 		.selectAll('stop')
 			.data([
 				{ offset: '84%', color: 'rgba(228, 135, 102, 0.2)' },
@@ -191,8 +204,8 @@ export default {
 
 		// disgust
 		defs.append('radialGradient')
-			.attr('id', 'triggers-disgust-gradient')
-			.attr('xlink:href', '#triggers-gradient')
+			.attr('id', 'triggers-disgust-radial-gradient')
+			.attr('xlink:href', '#triggers-radial-gradient')
 		.selectAll('stop')
 			.data([
 				{ offset: '84%', color: 'rgba(0, 142, 69, 0.3)' },
@@ -204,8 +217,8 @@ export default {
 
 		// enjoyment
 		defs.append('radialGradient')
-			.attr('id', 'triggers-enjoyment-gradient')
-			.attr('xlink:href', '#triggers-gradient')
+			.attr('id', 'triggers-enjoyment-radial-gradient')
+			.attr('xlink:href', '#triggers-radial-gradient')
 		.selectAll('stop')
 			.data([
 				{ offset: '84%', color: 'rgba(241, 196, 83, 0.8)' },
@@ -217,8 +230,8 @@ export default {
 
 		// fear
 		defs.append('radialGradient')
-			.attr('id', 'triggers-fear-gradient')
-			.attr('xlink:href', '#triggers-gradient')
+			.attr('id', 'triggers-fear-radial-gradient')
+			.attr('xlink:href', '#triggers-radial-gradient')
 		.selectAll('stop')
 			.data([
 				{ offset: '84%', color: 'rgba(248, 58, 248, 0.1)' },
@@ -230,8 +243,8 @@ export default {
 
 		// sadness
 		defs.append('radialGradient')
-			.attr('id', 'triggers-sadness-gradient')
-			.attr('xlink:href', '#triggers-gradient')
+			.attr('id', 'triggers-sadness-radial-gradient')
+			.attr('xlink:href', '#triggers-radial-gradient')
 		.selectAll('stop')
 			.data([
 				{ offset: '84%', color: 'rgba(200, 220, 240, 1.0)' },
@@ -239,8 +252,90 @@ export default {
 			])
 		.enter().append('stop')
 			.attr('offset', d => d.offset)
-			.attr('stop-color', d => d.color);		
+			.attr('stop-color', d => d.color);
 
+
+		//
+		// arrow gradients
+		// 
+		
+		// base gradient
+		defs.append('linearGradient')
+			.attr('id', 'triggers-linear-gradient')
+			.attr('gradientUnits', 'userSpaceOnUse')
+
+			// these will be overridden on each path's gradient
+			.attr('x1', 0)
+			.attr('x2', 0)
+			.attr('y1', 0)
+			.attr('y2', 0);
+
+		// anger
+		defs.append('linearGradient')
+			.attr('id', 'triggers-anger-linear-gradient')
+			.attr('xlink:href', '#triggers-linear-gradient')
+		.selectAll('stop')
+			.data([
+				{ offset: '0%', color: 'rgba(228, 135, 102, 0.2)' },
+				{ offset: '100%', color: 'rgba(204, 28, 43, 1.0)' }
+			])
+		.enter().append('stop')
+			.attr('offset', d => d.offset)
+			.attr('stop-color', d => d.color);
+
+		// disgust
+		defs.append('linearGradient')
+			.attr('id', 'triggers-disgust-linear-gradient')
+			.attr('xlink:href', '#triggers-linear-gradient')
+		.selectAll('stop')
+			.data([
+				{ offset: '0%', color: 'rgba(0, 142, 69, 0.3)' },
+				{ offset: '56%', color: 'rgba(0, 122, 61, 0.8)' },
+				{ offset: '100%', color: 'rgba(0, 104, 55, 1.0)' }
+			])
+		.enter().append('stop')
+			.attr('offset', d => d.offset)
+			.attr('stop-color', d => d.color);
+
+		// enjoyment
+		defs.append('linearGradient')
+			.attr('id', 'triggers-enjoyment-linear-gradient')
+			.attr('xlink:href', '#triggers-linear-gradient')
+		.selectAll('stop')
+			.data([
+				{ offset: '0%', color: 'rgba(241, 196, 83, 0.8)' },
+				{ offset: '100%', color: 'rgba(248, 136, 29, 1.0)' }
+			])
+		.enter().append('stop')
+			.attr('offset', d => d.offset)
+			.attr('stop-color', d => d.color);
+
+		// fear
+		defs.append('linearGradient')
+			.attr('id', 'triggers-fear-linear-gradient')
+			.attr('xlink:href', '#triggers-linear-gradient')
+		.selectAll('stop')
+			.data([
+				{ offset: '0%', color: 'rgba(248, 58, 248, 0.1)' },
+				{ offset: '100%', color: 'rgba(143, 39, 139, 1.0)' }
+			])
+		.enter().append('stop')
+			.attr('offset', d => d.offset)
+			.attr('stop-color', d => d.color);
+
+		// sadness
+		defs.append('linearGradient')
+			.attr('id', 'triggers-sadness-linear-gradient')
+			.attr('xlink:href', '#triggers-linear-gradient')
+		.selectAll('stop')
+			.data([
+				{ offset: '0%', color: 'rgba(200, 220, 240, 1.0)' },
+				{ offset: '56%', color: 'rgba(30, 152, 211, 1.0)' },
+				{ offset: '100%', color: 'rgba(64, 70, 164, 1.0)' }
+			])
+		.enter().append('stop')
+			.attr('offset', d => d.offset)
+			.attr('stop-color', d => d.color);
 	},
 
 	setUpHitAreas: function (containerNode) {
@@ -303,10 +398,17 @@ export default {
 		// .transition()
 		// 	.duration(1000)
 		// 	.fill();
+		
+		let emotionGradientName = 'triggers-' + this.currentEmotion + '-radial-gradient';
+		let haloEnterSelection = haloSelection.enter();
+		haloEnterSelection.append('radialGradient')
+			.attr('xlink:href', '#' + emotionGradientName)
+			.attr('id', emotionGradientName + '-halo');
 
-		haloSelection.enter().append('path')
+		haloEnterSelection.append('path')
 			.classed('halo ' + this.currentEmotion, true)
 			.attr('d', this.haloArcGenerator)
+			.attr('fill', 'url(#' + emotionGradientName + '-halo)')
 			.style('opacity', 0.0)
 		.transition()
 			.duration(1000)
@@ -344,8 +446,8 @@ export default {
 			.classed('label ' + this.currentEmotion, true)
 			.style('opacity', 1.0)
 			.style('transform', d => {
-				let x = Math.cos(d.angle) * d.radius,
-					y = Math.sin(d.angle) * d.radius;
+				let x = 0.5 * this.sectionContainer.offsetWidth + Math.cos(d.angle) * d.radius,
+					y = this.sectionContainer.offsetHeight + Math.sin(d.angle) * d.radius;
 				return 'translate(' + x + 'px,' + y + 'px)';
 			});
 		labelEnterSelection.append('h3')
@@ -356,6 +458,42 @@ export default {
 			.duration(600)
 			.style('opacity', 0.0)
 			.remove();
+
+
+		//
+		// label arrows
+		// 
+		let labelArrowSelection = this.labelArrowsContainer.selectAll('g.arrow')
+			.data(triggersData);
+
+		// update
+		
+		// enter
+		let emotionGradientName = 'triggers-' + this.currentEmotion + '-linear-gradient';
+		let arrowsEnterSelection = labelArrowSelection.enter();
+		arrowsEnterSelection.append('linearGradient')
+			.attr('xlink:href', '#' + emotionGradientName)
+			.attr('id', (d, i) => emotionGradientName + '-arrow-' + i)
+			.attr('x1', d => Math.cos(d.angle) * d.radius * 0.9)
+			.attr('x2', d => Math.cos(d.angle) * d.radius * (1 - d.arrowLength))
+			.attr('y1', d => Math.sin(d.angle) * d.radius * 0.9)
+			.attr('y2', d => Math.sin(d.angle) * d.radius * (1 - d.arrowLength));
+
+		let arrowsContainerEnterSelection = arrowsEnterSelection.append('g')
+			.classed('arrow ' + this.currentEmotion, true)
+			.style('opacity', 1.0);
+		arrowsContainerEnterSelection.append('line')
+			.attr('x1', d => Math.cos(d.angle) * d.radius * 0.9)
+			.attr('x2', d => Math.cos(d.angle) * d.radius * (1 - d.arrowLength))
+			.attr('y1', d => Math.sin(d.angle) * d.radius * 0.9)
+			.attr('y2', d => Math.sin(d.angle) * d.radius * (1 - d.arrowLength))
+			.attr('stroke', (d, i) => 'url(#' + emotionGradientName + '-arrow-' + i + ')');
+		arrowsContainerEnterSelection.append('path')
+			.attr('d', ARROWHEAD)
+			.attr('transform', d => {
+				return 'translate(' + Math.cos(d.angle) * d.radius * (1 - d.arrowLength) + ',' + Math.sin(d.angle) * d.radius * (1 - d.arrowLength) + ') ' +
+					'rotate(' + (180 * d.angle / Math.PI + 90) + ')';
+			});
 
 		this.databaseLabel.attr('class', this.currentEmotion);
 
