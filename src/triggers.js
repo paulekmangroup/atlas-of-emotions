@@ -474,18 +474,18 @@ export default {
 		arrowsEnterSelection.append('linearGradient')
 			.attr('xlink:href', '#' + emotionGradientName)
 			.attr('id', (d, i) => emotionGradientName + '-arrow-' + i)
-			.attr('x1', d => Math.cos(d.angle) * d.radius * 0.9)
+			.attr('x1', d => Math.cos(d.angle) * d.radius * 0.925)
 			.attr('x2', d => Math.cos(d.angle) * d.radius * (1 - d.arrowLength))
-			.attr('y1', d => Math.sin(d.angle) * d.radius * 0.9)
+			.attr('y1', d => Math.sin(d.angle) * d.radius * 0.925)
 			.attr('y2', d => Math.sin(d.angle) * d.radius * (1 - d.arrowLength));
 
 		let arrowsContainerEnterSelection = arrowsEnterSelection.append('g')
 			.classed('arrow ' + this.currentEmotion, true)
 			.style('opacity', 1.0);
 		arrowsContainerEnterSelection.append('line')
-			.attr('x1', d => Math.cos(d.angle) * d.radius * 0.9)
+			.attr('x1', d => Math.cos(d.angle) * d.radius * 0.925)
 			.attr('x2', d => Math.cos(d.angle) * d.radius * (1 - d.arrowLength))
-			.attr('y1', d => Math.sin(d.angle) * d.radius * 0.9)
+			.attr('y1', d => Math.sin(d.angle) * d.radius * 0.925)
 			.attr('y2', d => Math.sin(d.angle) * d.radius * (1 - d.arrowLength))
 			.attr('stroke', (d, i) => 'url(#' + emotionGradientName + '-arrow-' + i + ')');
 		arrowsContainerEnterSelection.append('path')
