@@ -65,10 +65,10 @@ $label-fade-in-time: 1s;
 }
 
 @mixin emotion-background-color-light () {
-	&.anger { background-color: rgba($color-anger, 0.25); }
-	&.disgust { background-color: rgba($color-disgust, 0.25); }
-	&.enjoyment { background-color: rgba($color-enjoyment, 0.25); }
-	&.fear { background-color: rgba($color-fear, 0.25); }
-	&.sadness { background-color: rgba($color-sadness, 0.25); }
+	&.anger { background-color: rgba($color-anger, 0.4); }
+	&.disgust { background-color: rgba($color-disgust, 0.4); }
+	&.enjoyment { background-color: rgba($color-enjoyment, 0.4); }
+	&.fear { background-color: rgba($color-fear, 0.4); }
+	&.sadness { background-color: rgba($color-sadness, 0.4); }
 	background-blend-mode: multiply;
 }
