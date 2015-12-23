@@ -101,10 +101,36 @@ export default {
 
 	parseTriggers: function (haloRadius) {
 
-		const startAngle = -0.7 * Math.PI,
-			angleSpread = 0.4 * Math.PI,
-			innerRadius = haloRadius * 1.25,
+		let startAngle,
+			angleSpread,
+			innerRadius,
+			radiusSpread;
+
+		// TODO: this is all temporary, until we switch to a force-directed layout.
+		// until then, it's necessary to fit all the labels on screen.
+		let aspectRatio = this.sectionContainer.offsetWidth / this.sectionContainer.offsetHeight;
+		if (aspectRatio > 1.75) {
+			startAngle = -0.9 * Math.PI;
+			angleSpread = 0.8 * Math.PI;
+			innerRadius = haloRadius * 1.05;
+			radiusSpread = haloRadius * 0.2;
+		} else if (aspectRatio > 1.4) {
+			startAngle = -0.8 * Math.PI;
+			angleSpread = 0.6 * Math.PI;
+			innerRadius = haloRadius * 1.15;
+			radiusSpread = haloRadius * 0.3;
+		} else if (aspectRatio > 1) {
+			startAngle = -0.7 * Math.PI;
+			angleSpread = 0.4 * Math.PI;
+			innerRadius = haloRadius * 1.25;
 			radiusSpread = haloRadius * 0.5;
+		} else {
+			startAngle = -0.6 * Math.PI;
+			angleSpread = 0.2 * Math.PI;
+			innerRadius = haloRadius * 1.35;
+			radiusSpread = haloRadius * 0.65;
+		}
+
 
 		let triggersData = {};
 		_.values(dispatcher.EMOTIONS).forEach(emotion => {
