@@ -495,6 +495,12 @@ export default {
 					'rotate(' + (180 * d.angle / Math.PI + 90) + ')';
 			});
 
+		// exit
+		labelArrowSelection.exit().transition()
+			.duration(600)
+			.style('opacity', 0.0)
+			.remove();
+
 		this.databaseLabel.attr('class', this.currentEmotion);
 
 	},
