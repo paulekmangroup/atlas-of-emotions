@@ -20,6 +20,8 @@ export default {
 
 		this.onElementOver = this.onElementOver.bind(this);
 		this.onElementOut = this.onElementOut.bind(this);
+		this.onElementClick = this.onElementClick.bind(this);
+		this.onBackgroundClick = this.onBackgroundClick.bind(this);
 
 		this.overlayContainer = document.createElement('div');
 		this.overlayContainer.id = 'moods-overlay-container';
@@ -52,6 +54,8 @@ export default {
 		document.querySelector('#action-graph-container g').addEventListener('mouseover', this.onElementOver, true);
 		document.querySelector('#state-graph-container').addEventListener('mouseout', this.onElementOut, true);
 		document.querySelector('#action-graph-container g').addEventListener('mouseout', this.onElementOut, true);
+		document.querySelector('#state-graph-container').addEventListener('click', this.onElementClick, true);
+		document.querySelector('#action-graph-container g').addEventListener('click', this.onElementClick, true);
 
 		// transition time from _states.scss::#states
 		let openDelay = 1500;
@@ -69,6 +73,9 @@ export default {
 		document.querySelector('#action-graph-container g').removeEventListener('mouseover', this.onElementOver, true);
 		document.querySelector('#state-graph-container').removeEventListener('mouseout', this.onElementOut, true);
 		document.querySelector('#action-graph-container g').removeEventListener('mouseout', this.onElementOut, true);
+		document.querySelector('#state-graph-container').removeEventListener('click', this.onElementClick, true);
+		document.querySelector('#action-graph-container g').removeEventListener('click', this.onElementClick, true);
+		document.querySelector('#main').removeEventListener('click', this.onBackgroundClick, true);
 
 		return new Promise((resolve, reject) => {
 
@@ -89,8 +96,8 @@ export default {
 
 		event.stopImmediatePropagation();
 
-		this.setCallout(true);
 		this.overlayContainer.classList.add('visible');
+		document.querySelector('#main').removeEventListener('click', this.onBackgroundClick, true);
 
 		// don't execute mouseout behavior when rolling from one hit area into another
 		clearTimeout(this.mouseOutTimeout);
@@ -103,10 +110,26 @@ export default {
 
 		this.mouseOutTimeout = setTimeout(() => {
 
-			this.setCallout(false);
 			this.overlayContainer.classList.remove('visible');
+			document.querySelector('#main').addEventListener('click', this.onBackgroundClick, true);
 
 		}, 100);
+	},
+
+	onElementClick: function (event) {
+
+		event.stopImmediatePropagation();
+
+		this.setCallout(true);
+
+	},
+
+	onBackgroundClick: function (event) {
+
+		event.stopImmediatePropagation();
+
+		this.setCallout(false);
+
 	},
 
 	setCallout (active) {
