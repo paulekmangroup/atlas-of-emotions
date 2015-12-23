@@ -151,7 +151,7 @@ export default {
 		yOffsets[dispatcher.EMOTIONS.DISGUST] = yOffsets[dispatcher.EMOTIONS.ANGER];
 		yOffsets[dispatcher.EMOTIONS.ENJOYMENT] = yOffsets[dispatcher.EMOTIONS.ANGER];
 		yOffsets[dispatcher.EMOTIONS.FEAR] = yOffsets[dispatcher.EMOTIONS.ANGER];
-		yOffsets[dispatcher.EMOTIONS.SADNESS] = 0;
+		yOffsets[dispatcher.EMOTIONS.SADNESS] = 40;
 
 		let stateDisplay = this,
 			labels = d3.select(this.labelContainer).selectAll('div')
@@ -163,7 +163,7 @@ export default {
 			.classed(this.currentEmotion + ' label', true)
 			.html((d, i) => '<h3>' + this.currentStatesData[i].name.toUpperCase() + '</h3>')
 			.style({
-				left: d => (Math.round(stateDisplay.xScale(d[1].x)) + 'px'),
+				left: d => (Math.round(stateDisplay.xScale(d[1].x) + 20) + 'px'),	// not sure why this 20px magic number is necessary...?
 				top: d => (Math.round(stateDisplay.yScale(d[1].y) + yOffsets[this.currentEmotion]) + 'px')
 			})
 			.each(function () {
