@@ -228,21 +228,25 @@ export default {
 			.data(transformedRanges)
 			.call(this.applyTransitions);
 
-		this.renderLabels(transformedRanges);
-		this.setActive(true);
+		if (!this.isBackgrounded) {
 
-		setTimeout(() => {
-			this.stateGraphContainer.selectAll('.axis')
-				.classed('visible', true);
-		}, 1);
+			this.renderLabels(transformedRanges);
+			this.setActive(true);
 
-		// setTimeout(() => {
-		this.resetCallout();
-		// }, LABEL_APPEAR_DELAY);
+			setTimeout(() => {
+				this.stateGraphContainer.selectAll('.axis')
+					.classed('visible', true);
+			}, 1);
 
-		this.tempNav.querySelector('.prev').innerHTML = '<a href="#continents:' + emotion + '">CONTINENTS ▲</a>';
-		this.tempNav.querySelector('.next').innerHTML = '<a href="#actions:' + emotion + '">ACTIONS ▼</a>';
-		this.tempNav.classList.add('visible');
+			// setTimeout(() => {
+			this.resetCallout();
+			// }, LABEL_APPEAR_DELAY);
+
+			this.tempNav.querySelector('.prev').innerHTML = '<a href="#continents:' + emotion + '">CONTINENTS ▲</a>';
+			this.tempNav.querySelector('.next').innerHTML = '<a href="#actions:' + emotion + '">ACTIONS ▼</a>';
+			this.tempNav.classList.add('visible');
+
+		}
 
 	},
 
@@ -1044,9 +1048,6 @@ export default {
 
 			d3.select(this.labelContainer).selectAll('div h3')
 				.style('opacity', (data, index) => index === stateIndex ? 1.0 : 0.2);
-
-			// .selectAll('linearGradient')
-			// TODO: set stops with higher/lower opacity on #anger-gradient-{i}
 
 		} else {
 

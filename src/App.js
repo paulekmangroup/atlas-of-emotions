@@ -123,11 +123,11 @@ export default function (...initArgs) {
 
 			// open and background all backgroundSections for the current section
 			backgroundSections.forEach(backgroundSection => {
-				backgroundSection.setEmotion(currentEmotion, previousEmotion);
 				backgroundSection.open({
 					inBackground: true,
 					sectionName: sectionName
 				});
+				backgroundSection.setEmotion(currentEmotion, previousEmotion);
 			});
 
 			section.open({
@@ -171,11 +171,12 @@ export default function (...initArgs) {
 							});
 						} else {
 							// open it in the background
-							backgroundSection.setEmotion(currentEmotion, previousEmotion);
-							return backgroundSection.open({
+							let openPromise = backgroundSection.open({
 								inBackground: true,
 								sectionName: sectionName
 							});
+							backgroundSection.setEmotion(currentEmotion, previousEmotion);
+							return openPromise;
 						}
 					});
 

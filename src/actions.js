@@ -401,10 +401,11 @@ export default {
 		// as the continent's shapes shrink back to the baseline,
 		// then grow the new continent (states) and arrows (actions)
 		
-
-		this.tempNav.querySelector('.prev').innerHTML = '<a href="#states:' + emotion + '">STATES ▲</a>';
-		this.tempNav.querySelector('.next').innerHTML = '<a href="#triggers:' + emotion + '">TRIGGERS ▼</a>';
-		this.tempNav.classList.add('visible');
+		if (!this.isBackgrounded) {
+			this.tempNav.querySelector('.prev').innerHTML = '<a href="#states:' + emotion + '">STATES ▲</a>';
+			this.tempNav.querySelector('.next').innerHTML = '<a href="#triggers:' + emotion + '">TRIGGERS ▼</a>';
+			this.tempNav.classList.add('visible');
+		}
 		
 	},
 
@@ -641,6 +642,8 @@ export default {
 			if (val) {
 				this.tempNav.classList.remove('visible');
 			}
+
+			this.renderLabels(null);
 
 			// TODO: resolve on completion of animation
 			resolve();
