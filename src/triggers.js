@@ -286,6 +286,11 @@ export default {
 			.duration(1000)
 			.style('opacity', 1.0);
 
+		haloSelection.exit().transition()
+			.duration(600)
+			.style('opacity', 0.0)
+			.remove();
+
 		let currentTriggersData = this.triggersData[this.currentEmotion];
 		this.renderLabels(currentTriggersData);
 
@@ -297,15 +302,21 @@ export default {
 
 	renderLabels: function (triggersData) {
 
+		if (!triggersData) {
+			triggersData = [];
+		}
+
+		// TODO: use a force-directed layout instead,
+		// to ensure every label finds a good, non-overlapping place
 		let labelSelection = this.labelContainer.selectAll('div.label')
-			.data(triggersData/*, d => d.name*/);
+			.data(triggersData);
 
 		// update
 		
 		// enter
 		let labelEnterSelection = labelSelection.enter().append('div')
 			.classed('label ' + this.currentEmotion, true)
-			// .style('opacity', 0.0)
+			.style('opacity', 1.0)
 			.style('transform', d => {
 				let x = Math.cos(d.angle) * d.radius,
 					y = Math.sin(d.angle) * d.radius;
@@ -314,43 +325,12 @@ export default {
 		labelEnterSelection.append('h3')
 			.html(d => d.name.toUpperCase());
 
-		/*
-		let labelSize = this.lineGenerator.radius()({x:1}) + 50,
-			labelSelection = this.labelContainer.selectAll('div.label')
-			.data(actionsData, d => d.name);
-		
-		// update
-		labelSelection.transition()
-			.duration(1000)
-			.style('transform', d => 'rotate(' + d.rotation + 'deg)');
-		labelSelection.select('h3').transition()
-			.duration(1000)
-			.style('transform', d => 'rotate(-' + d.rotation + 'deg) scaleY(1.73)');
-
-		// enter
-		let labelEnterSelection = labelSelection.enter().append('div')
-			.classed('label ' + this.currentEmotion, true)
-			.style('transform', d => 'rotate(' + d.rotation + 'deg)')
-			.style('height', labelSize + 'px')
-			.style('opacity', 0.0)
-			.on('mouseover', this.onActionMouseOver)
-			.on('mouseout', this.onActionMouseOut)
-			.on('click', this.onActionMouseClick);
-		labelEnterSelection.append('div').append('h3')
-			.html(d => d.name.toUpperCase())
-			.style('transform', d => 'rotate(-' + d.rotation + 'deg) scaleY(1.73)');
-				
-		labelEnterSelection.transition()
-			.duration(1000)
-			.style('opacity', 1.0);
-
 		// exit
 		labelSelection.exit().transition()
 			.duration(600)
 			.style('opacity', 0.0)
 			.remove();
-		*/
-	
+
 		this.databaseLabel.attr('class', this.currentEmotion);
 
 	},
@@ -373,6 +353,10 @@ export default {
 			clearTimeout(this.openTimeout);
 
 			document.querySelector('#states').classList.remove('faded');
+
+			// clear out stuff...
+			this.renderLabels(null);
+			this.triggerGraphContainer.selectAll('path.halo').remove();
 
 			this.tempNav.classList.remove('visible');
 
