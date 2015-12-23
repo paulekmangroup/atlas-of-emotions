@@ -147,11 +147,11 @@ export default {
 
 		// TODO: copying anger as placeholder; need to implement for disgust, enjoyment, fear
 		let yOffsets = {};
-		yOffsets[dispatcher.EMOTIONS.ANGER] = -80;
+		yOffsets[dispatcher.EMOTIONS.ANGER] = -60;
 		yOffsets[dispatcher.EMOTIONS.DISGUST] = yOffsets[dispatcher.EMOTIONS.ANGER];
 		yOffsets[dispatcher.EMOTIONS.ENJOYMENT] = yOffsets[dispatcher.EMOTIONS.ANGER];
 		yOffsets[dispatcher.EMOTIONS.FEAR] = yOffsets[dispatcher.EMOTIONS.ANGER];
-		yOffsets[dispatcher.EMOTIONS.SADNESS] = 20;
+		yOffsets[dispatcher.EMOTIONS.SADNESS] = 0;
 
 		let stateDisplay = this,
 			labels = d3.select(this.labelContainer).selectAll('div')
@@ -163,7 +163,7 @@ export default {
 			.classed(this.currentEmotion + ' label', true)
 			.html((d, i) => '<h3>' + this.currentStatesData[i].name.toUpperCase() + '</h3>')
 			.style({
-				left: d => (Math.round(stateDisplay.xScale(d[1].x) - 10) + 'px'),
+				left: d => (Math.round(stateDisplay.xScale(d[1].x)) + 'px'),
 				top: d => (Math.round(stateDisplay.yScale(d[1].y) + yOffsets[this.currentEmotion]) + 'px')
 			})
 			.each(function () {
