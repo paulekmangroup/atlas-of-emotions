@@ -196,13 +196,14 @@
         }
       },
       "actions": {
-        "Seek Comfort": "need description",
+        "Seek Comfort": "To seek help or support from others",
         "Withdraw": "To physically or mentally leave the scene.",
-        "Ruminate": "To compulsively rethink about one's experience.",
-        "Mourn": "need description",
-        "Despair": "To give up hope that there will be any recovery from the misery felt by the loss.",
-        "Protest": "To complain about the loss albeit knowing that the complaint will not recover what was lost.",
-        "Feel Ashamed": "To feel the need to hide how one feels about what or who is lost.",
+        "Ruminate": "To compulsively,repetitively, rethink about one's experience.",
+        "Mourn": "To focus on the loss",
+        "Despairing": "To give up hope that there will be any recovery from the misery felt by the loss.",
+        "Protesting": "To complain about the loss albeit knowing that the complaint will not recover what was lost.",
+        "Ashamed": "To feel the need to hide how one feels about what or who is lost.",
+        "Distract": "Engaging in other activities in an attempt to avoid feeling this emotion."
       },
       "triggers": [
         "loss of a treasured object",
@@ -404,7 +405,8 @@
         "Withdraw": "To physically or mentally leave the scene of what is triggering the disgust.",
         "Avoid": "To either phsyically stay away from (someone or something); or internally keep one's mind away from what is triggering the disgust.",
         "Vomit": "Literally to expel material from the mouth or stomach; metaphorically denotes very intense disgust.",
-        "Dehumanize": "To treat someone as though he or she is not a human being' to deprive of human qualities, personality, or spirit."
+        "Dehumanize": "To treat someone as though he or she is not a human being' to deprive of human qualities, personality, or spirit.",
+        "Distract": "Engaging in other activities in an attempt to avoid feeling this emotion."
       },
       "triggers": [
         "religious groups usually not ones you grew up as part of",
@@ -1154,7 +1156,8 @@
         "Be mindful": "To notice and accept the feeling of the emotion and recognize the feeling as temporary.",
         "Breathe": "Focusing awareness on breathing in order to diminish one's fearful feelings.",
         "Ruminate": "To compulsively rethink of one's experience.",
-        "Worry": "Anticipate the likelihood of harm."
+        "Worry": "Anticipate the likelihood of harm.",
+        "Distract": "Engaging in other activities in an attempt to avoid feeling this emotion."
       },
       "triggers": [
         "threat of losing job",
@@ -1300,7 +1303,7 @@
                 "destructive"
               ]
             },
-            "seek more": {
+            "withdraw": {
               "valences": [
                 "constructive"
               ]
@@ -1392,7 +1395,14 @@
         "Withdraw": "To physically or mentally leave the scene.",
         "Seek more": "To increase the enjoyable feelings.",
         "Maintain": "To continue to do what is necessary to continue the enjoyable feelings.",
-        "Gloat": "To enjoy others envying your enjoyable state."
+        "Gloat": "To enjoy others envying your enjoyable state.",
+        "Laugh": "To have spontaneous expression of enjoyment through laughther",
+        "Exclaim": "To vocally expression enjoyment with others",
+        "Cry": "To feel overwhelmed by a meaningful, enjoyable experience with tears of joy.",
+        "Engage/Connect": "To desire connection and engagement with others to share in feelings of enjoyment.",
+        "Savor": "To relish in the experience good feelings about the felt and psychological experiences.",
+        "Indulge": "Excessively engaging in the enjoyable feelings",
+        "Debauchery": "excessive indulgence in sensual pleasures"
       },
       "triggers": [
         "sensory pleasures",
