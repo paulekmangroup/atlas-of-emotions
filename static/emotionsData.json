@@ -449,6 +449,61 @@
               "valences": [
                 "constructive"
               ]
+            },
+            "breathe": {
+              "valences": [
+                "constructive"
+              ]
+            },
+            "practice patience": {
+              "valences": [
+                "constructive"
+              ]
+            },
+            "reframe": {
+              "valences": [
+                "constructive"
+              ]
+            },
+            "suppress": {
+              "valences": [
+                "constructive"
+              ]
+            },
+            "distract": {
+              "valences": [
+                "constructive"
+              ]
+            },
+            "avoid": {
+              "valences": [
+                "constructive"
+              ]
+            },
+            "remove the interference": {
+              "valences": [
+                "constructive"
+              ]
+            },
+            "suppress": {
+              "valences": [
+                "choice"
+              ]
+            },
+            "distract": {
+              "valences": [
+                "choice"
+              ]
+            },
+            "avoid": {
+              "valences": [
+                "choice"
+              ]
+            },
+            "passive aggressiveness": {
+              "valences": [
+                "destructive"
+              ]
             }
           }
         },
@@ -459,7 +514,42 @@
             "max": 7
           },
           "actions": {
-            "time out": {
+            "take a time out": {
+              "valences": [
+                "constructive"
+              ]
+            },
+            "breathe": {
+              "valences": [
+                "constructive"
+              ]
+            },
+            "practice patience": {
+              "valences": [
+                "constructive"
+              ]
+            },
+            "reframe": {
+              "valences": [
+                "constructive"
+              ]
+            },
+            "suppress": {
+              "valences": [
+                "choice"
+              ]
+            },
+            "distract": {
+              "valences": [
+                "choice"
+              ]
+            },
+            "avoid": {
+              "valences": [
+                "choice"
+              ]
+            },
+            "remove the interferrence": {
               "valences": [
                 "constructive"
               ]
@@ -475,6 +565,26 @@
               ]
             },
             "undermine": {
+              "valences": [
+                "destructive"
+              ]
+            },
+            "suppress": {
+              "valences": [
+                "destructive"
+              ]
+            },
+            "distract": {
+              "valences": [
+                "destructive"
+              ]
+            },
+            "avoid": {
+              "valences": [
+                "destructive"
+              ]
+            },
+            "passive agressiveness": {
               "valences": [
                 "destructive"
               ]
@@ -488,22 +598,12 @@
             "max": 10
           },
           "actions": {
-            "time out": {
+            "withdraw": {
               "valences": [
                 "constructive"
               ]
             },
-            "insult": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "quarrel": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "withdraw": {
+            "take a time out": {
               "valences": [
                 "constructive"
               ]
@@ -517,6 +617,61 @@
               "valences": [
                 "constructive"
               ]
+            },
+            "breathe": {
+              "valences": [
+                "constructive"
+              ]
+            },
+            "practice patience": {
+              "valences": [
+                "constructive"
+              ]
+            },
+            "reframe": {
+              "valences": [
+                "constructive"
+              ]
+            },
+            "suppress": {
+              "valences": [
+                "choice"
+              ]
+            },
+            "distract": {
+              "valences": [
+                "choice"
+              ]
+            },
+            "avoid": {
+              "valences": [
+                "choice"
+              ]
+            },
+            "remove the interferrence": {
+              "valences": [
+                "constructive"
+              ]
+            },
+            "quarrel": {
+              "valences": [
+                "destructive"
+              ]
+            },
+            "insult": {
+              "valences": [
+                "destructive"
+              ]
+            },
+            "simmer/brood": {
+              "valences": [
+                "destructive"
+              ]
+            },
+            "passive agressiveness": {
+              "valences": [
+                "destructive"
+              ]
             }
           }
         },
@@ -527,12 +682,37 @@
             "max": 10
           },
           "actions": {
-            "insult": {
+            "withdraw": {
               "valences": [
-                "destructive"
+                "constructive"
               ]
             },
-            "quarrel": {
+            "breathe": {
+              "valences": [
+                "constructive"
+              ]
+            },
+            "practice patience": {
+              "valences": [
+                "constructive"
+              ]
+            },
+            "reframe": {
+              "valences": [
+                "constructive"
+              ]
+            },
+            "distract": {
+              "valences": [
+                "choice"
+              ]
+            },
+            "avoid": {
+              "valences": [
+                "choice"
+              ]
+            },
+            "insult": {
               "valences": [
                 "destructive"
               ]
@@ -542,12 +722,32 @@
                 "destructive"
               ]
             },
-            "withdraw": {
+            "use physical force": {
               "valences": [
-                "constructive"
+                "destructive"
               ]
             },
-            "use physical force": {
+            "suppress": {
+              "valences": [
+                "destructive"
+              ]
+            },
+            "distract": {
+              "valences": [
+                "destructive"
+              ]
+            },
+            "avoid": {
+              "valences": [
+                "destructive"
+              ]
+            },
+            "simmer/brood": {
+              "valences": [
+                "destructive"
+              ]
+            },
+            "passive agressiveness": {
               "valences": [
                 "destructive"
               ]
@@ -561,12 +761,42 @@
             "max": 10
           },
           "actions": {
-            "time out": {
+            "take a time out": {
               "valences": [
                 "constructive"
               ]
             },
-            "undermine": {
+            "breathe": {
+              "valences": [
+                "constructive"
+              ]
+            },
+            "practice patience": {
+              "valences": [
+                "constructive"
+              ]
+            },
+            "reframe": {
+              "valences": [
+                "constructive"
+              ]
+            },
+            "suppress": {
+              "valences": [
+                "choice"
+              ]
+            },
+            "distract": {
+              "valences": [
+                "choice"
+              ]
+            },
+            "avoid": {
+              "valences": [
+                "choice"
+              ]
+            },
+            "quarrel": {
               "valences": [
                 "destructive"
               ]
@@ -576,7 +806,12 @@
                 "destructive"
               ]
             },
-            "quarrel": {
+            "undermine": {
+              "valences": [
+                "destructive"
+              ]
+            },
+            "simmer/brood": {
               "valences": [
                 "destructive"
               ]
@@ -590,14 +825,34 @@
             "max": 10
           },
           "actions": {
-            "time out": {
+            "take a time out": {
               "valences": [
                 "constructive"
               ]
             },
-            "undermine": {
+            "breathe": {
               "valences": [
-                "destructive"
+                "constructive"
+              ]
+            },
+            "practice patience": {
+              "valences": [
+                "constructive"
+              ]
+            },
+            "reframe": {
+              "valences": [
+                "constructive"
+              ]
+            },
+            "distract": {
+              "valences": [
+                "choice"
+              ]
+            },
+            "avoid": {
+              "valences": [
+                "choice"
               ]
             },
             "insult": {
@@ -605,7 +860,22 @@
                 "destructive"
               ]
             },
+            "undermine": {
+              "valences": [
+                "destructive"
+              ]
+            },
             "use physical force": {
+              "valences": [
+                "destructive"
+              ]
+            },
+            "suppress": {
+              "valences": [
+                "destructive"
+              ]
+            },
+            "simmer/brood ": {
               "valences": [
                 "destructive"
               ]
@@ -619,12 +889,37 @@
             "max": 10
           },
           "actions": {
-            "time out": {
+            "take a time out": {
               "valences": [
                 "constructive"
               ]
             },
-            "undermine": {
+            "constructive": {
+              "valences": [
+                "constructive"
+              ]
+            },
+            "practice patience": {
+              "valences": [
+                "constructive"
+              ]
+            },
+            "reframe": {
+              "valences": [
+                "constructive"
+              ]
+            },
+            "distract": {
+              "valences": [
+                "choice"
+              ]
+            },
+            "avoid": {
+              "valences": [
+                "choice"
+              ]
+            },
+            "quarrel": {
               "valences": [
                 "destructive"
               ]
@@ -634,12 +929,22 @@
                 "destructive"
               ]
             },
+            "undermine": {
+              "valences": [
+                "destructive"
+              ]
+            },
             "use physical force": {
               "valences": [
                 "destructive"
               ]
             },
-            "quarrel": {
+            "suppress": {
+              "valences": [
+                "destructive"
+              ]
+            },
+            "simmer/brood": {
               "valences": [
                 "destructive"
               ]
@@ -661,7 +966,13 @@
         "Breathe": "Focusing awareness on breating in order to diminish angry or fearful feelings.",
         "Take a time out": "Announce intention to withdraw, to prevent escalation of the conflict.",
         "Practice patience": "Regard the conflict as an opportunity to not lose one's temper.",
-        "Reframe": "To reconsider the trigger to the emotion to understand it in a different light, reducing or eliminating the perception that a threat is being triggered."
+        "Reframe": "To reconsider the trigger to the emotion to understand it in a different light, reducing or eliminating the perception that a threat is being triggered.",
+        "Suppress": "Trying to avoid feeling or acting upon the emotion that is being experienced.",
+        "Distract": "Engaging in other activities in an attempt to avoid feeling this emotion.",
+        "Avoid": "To either physically stay away from (someone or something); or internally keep one’s mind away from what is triggering the anger.",
+        "Simmer/Brood": "Acting in a way that makes clear that angry actions are building or being contemplated.",
+        "Passive Aggressiveness": "Indirect actions that have an angry undercurrent",
+        "Remove the Interferrence": "Attempting to eliminate whatever is blocking the pursuit of a goal."
       },
       "triggers": [
         "Interference with locomotion",
