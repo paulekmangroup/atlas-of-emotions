@@ -2,8 +2,7 @@ import d3 from 'd3';
 import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
-import emotionsData from '../static/emotionsData-OLD.json';
-import appStrings from '../static/emotionsData.json';
+import emotionsData from '../static/emotionsData.json';
 
 const LABEL_APPEAR_DELAY = 1000;
 
@@ -357,10 +356,9 @@ export default {
 
 	parseStates: function () {
 
-		// copy states of current emotion and add state name to each state object
-		let states = emotionsData.emotions[this.currentEmotion].states;
-		states = Object.keys(states).map(stateName => {
-			return Object.assign({}, states[stateName], { name: stateName });
+		// copy states of current emotion
+		let states = emotionsData.emotions[this.currentEmotion].states.map(state => {
+			return Object.assign({}, state);
 		});
 
 		// sort by state min value, then max value
@@ -1063,7 +1061,7 @@ export default {
 
 	resetCallout () {
 
-		dispatcher.changeCallout(this.currentEmotion, appStrings.metadata.states.header, appStrings.metadata.states.body + '<br><br>' + emotionsData.emotions[this.currentEmotion].statesDesc);
+		dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.states.header, emotionsData.metadata.states.body/* + '<br><br>' + emotionsData.emotions[this.currentEmotion].statesDesc*/);
 
 	},
 
