@@ -1,4 +1,24 @@
 /**
+ * Parse Atlas of Emotions spreadsheet into JSON for consumption by Atlas application.
+ * This script is currently installed alongside the spreadsheet, but instructions for use are as follows:
+ * 1. Open Google spreadsheet.
+ * 2. Click Tools > Script Editor.
+ * 3. Paste this code into a new file in the Script Editor and save it.
+ * 4. An "Export to JSON" menu item should now be available on the spreadsheet (refresh the page if not).
+ * 5. Click Export to JSON > Export all sheets to JSON.
+ * 6. Copy + paste the resulting JSON into emotionsData.json and rebuild the project.
+ */
+
+
+
+// TODO:
+// - finish verifying output
+// - state ranges
+
+
+
+
+/**
  * Atlas Of Emotions-specific constants.
  */
 var LABELS = {
@@ -67,7 +87,7 @@ function parseMetadataSheet (sheet) {
 	// walk down the section labels column,
 	// aggregate all rows in each section, and parse.
 	var labelsColumn = sheet.getSheetValues(DATA_START_ROW, DATA_START_COL, -1, 1);
-	Logger.log("metadata labelsColumn:" + labelsColumn);
+	// Logger.log("metadata labelsColumn:" + labelsColumn);
 	var labelValue,
 		currentLabel,
 		metadata = {},
@@ -77,16 +97,17 @@ function parseMetadataSheet (sheet) {
 
 		labelValue = labelsColumn[j][0];
 		if (labelValue) { labelValue = labelValue.toLowerCase(); }
-		Logger.log("metadata labelValue:" + labelValue);
+		// Logger.log("metadata labelValue:" + labelValue);
 
 		if (labelValue && labelValue !== currentLabel) {
 			if (currentLabel) {
 				// parse everything aggregated up to this next label
-				Logger.log("sectionData:" + sectionData);
+				// Logger.log("sectionData:" + sectionData);
 				metadata[currentLabel] = metadataSectionParsers[currentLabel](sectionData);
 			}
-			Logger.log("set currentLabel to:" + labelValue);
+			// Logger.log("set currentLabel to:" + labelValue);
 			currentLabel = labelValue;
+			sectionData = [];
 		}
 
 		// aggregate this row's data into sectionData
@@ -109,8 +130,8 @@ var metadataSectionParsers = (function () {
 	var standard = function (data) {
 		return data.map(function (row) {
 			return {
-				name: row[0],
-				desc: row[1]
+				header: row[0],
+				body: row[1]
 			};
 		});
 	};
@@ -126,7 +147,6 @@ var metadataSectionParsers = (function () {
 		actions: standard,
 
 		triggers: function (data) {
-			Logger.log("triggers data:" + data);
 			var obj = {
 				header: data[0][0],
 				body: data[0][1]
@@ -137,9 +157,15 @@ var metadataSectionParsers = (function () {
 					body: row[3]
 				};
 			});
+
+			return obj;
 		},
 
-		moods: standard
+		moods: function (data) {
+			// explicitly limit list length to allow adding notes at the bottom of the spreadsheet
+			var NUM_MOOD_DATA = 1;
+			return standard(data).slice(0, NUM_MOOD_DATA);
+		}
 
 	};
 
@@ -157,7 +183,7 @@ function parseEmotionSheet (sheet) {
 	// walk down the emotion section labels column,
 	// aggregate all rows in each section, and parse.
 	var labelsColumn = sheet.getSheetValues(DATA_START_ROW, DATA_START_COL, -1, 1);
-	Logger.log("emotion labelsColumn:" + labelsColumn);
+	// Logger.log("emotion labelsColumn:" + labelsColumn);
 	var labelValue,
 		currentLabel,
 		emotionData = {},
@@ -167,7 +193,7 @@ function parseEmotionSheet (sheet) {
 
 		labelValue = labelsColumn[j][0];
 		if (labelValue) { labelValue = labelValue.toLowerCase(); }
-		Logger.log("emotion labelValue:" + labelValue);
+		// Logger.log("emotion labelValue:" + labelValue + "; currentLabel:" + currentLabel);
 
 		if (labelValue && labelValue !== currentLabel) {
 			// parse everything aggregated up to this next label
@@ -175,6 +201,7 @@ function parseEmotionSheet (sheet) {
 				emotionData[currentLabel] = emotionSectionParsers[currentLabel](sectionData);
 			}
 			currentLabel = labelValue;
+			sectionData = [];
 		}
 
 		// aggregate this row's data into sectionData
@@ -209,12 +236,15 @@ var emotionSectionParsers = (function () {
 
 		states: function (data) {
 			return data.map(function (row) {
-				var con = (row[2] || []).map(function (val) { return val.toLowerCase(); }),
-					des = (row[3] || []).map(function (val) { return val.toLowerCase(); }),
+				var con = (row[2].split(',') || []).map(function (val) { return val.trim().toLowerCase(); }),
+					des = (row[3].split(',') || []).map(function (val) { return val.trim().toLowerCase(); }),
+					both = [],
 					all = con.concat();
 
 				des.forEach(function (val) {
-					if (!~all.indexOf(val)) {
+					if (~all.indexOf(val)) {
+						both.push(val);
+					} else {
 						all.push(val);
 					}
 				});
@@ -225,7 +255,8 @@ var emotionSectionParsers = (function () {
 					actions: {
 						all: all,
 						con: con,
-						des: des
+						des: des,
+						both: both
 					}
 				};
 			});
@@ -239,7 +270,11 @@ var emotionSectionParsers = (function () {
 			});
 		},
 
-		moods: standard
+		moods: function (data) {
+			// explicitly limit list length to allow adding notes at the bottom of the spreadsheet
+			var NUM_MOOD_DATA = 1;
+			return standard(data).slice(0, NUM_MOOD_DATA);
+		}
 
 	};
 
