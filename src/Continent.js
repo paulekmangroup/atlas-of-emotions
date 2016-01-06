@@ -4,7 +4,7 @@ import d3Transform from 'd3-transform';
 import TWEEN from 'tween.js';
 
 import Circle from './Circle.js';
-import emotionsData from '../static/emotionsData-OLD.json';
+import emotionsData from '../static/emotionsData.json';
 
 const FRAMERATE = 60;
 const HIGHLIGHT_ALPHA_MOD = 1.5;
@@ -312,7 +312,7 @@ export default class Continent {
 		const growTime = 1500,
 			shrinkTime = 750;
 
-		let ranges = this.transformRanges(_.values(emotionsData.emotions[this.id].states)),
+		let ranges = this.transformRanges(emotionsData.emotions[this.id].states),
 			circles = this.d3Selection.selectAll('circle')
 				.data(ranges);
 
