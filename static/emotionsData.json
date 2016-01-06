@@ -75,7 +75,7 @@
               "suppress",
               "distract",
               "avoid",
-              "remove the interferrence",
+              "remove the interference",
               "quarrel",
               "insult",
               "undermine",
@@ -94,7 +94,7 @@
               "suppress",
               "distract",
               "avoid",
-              "remove the interferrence"
+              "remove the interference"
             ],
             "des": [
               "quarrel",
@@ -226,7 +226,7 @@
               "suppress",
               "distract",
               "avoid",
-              "remove the interferrence",
+              "remove the interference",
               "set limits",
               "be firm",
               "withdraw",
@@ -246,7 +246,7 @@
               "suppress",
               "distract",
               "avoid",
-              "remove the interferrence",
+              "remove the interference",
               "set limits",
               "be firm",
               "withdraw"
@@ -443,7 +443,7 @@
           "desc": "Indirect actions that have an angry undercurrent."
         },
         {
-          "name": "Remove the Interferrence",
+          "name": "Remove the Interference",
           "desc": "Attempting to eliminate whatever is blocking the pursuit of a goal."
         }
       ],

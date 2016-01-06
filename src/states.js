@@ -358,7 +358,9 @@ export default {
 
 		// copy states of current emotion
 		let states = emotionsData.emotions[this.currentEmotion].states.map(state => {
-			return Object.assign({}, state);
+			return Object.assign({}, state, {
+				name: state.name.toLowerCase()
+			});
 		});
 
 		// filter out states with invalid ranges

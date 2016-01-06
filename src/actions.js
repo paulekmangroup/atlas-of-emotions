@@ -2,8 +2,7 @@ import d3 from 'd3';
 import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
-import emotionsDataOld from '../static/emotionsData-OLD.json';
-import emotionsDataNew from '../static/emotionsData.json';
+import emotionsData from '../static/emotionsData.json';
 import states from './states.js';
 
 const VALENCES = {
@@ -39,9 +38,7 @@ export default {
 		this.onActionMouseOut = this.onActionMouseOut.bind(this);
 		this.onActionMouseClick = this.onActionMouseClick.bind(this);
 
-		this.actionsData = this.parseActions(emotionsDataNew);
-		this.actionsData = this.parseActionsOld(emotionsDataOld);
-		console.log('actionsData:', this.actionsData);
+		this.actionsData = this.parseActions();
 
 		let graphContainer = document.createElement('div');
 		graphContainer.id = 'action-graph-container';
@@ -134,153 +131,104 @@ export default {
 
 	},
 
-	parseActions: function (emotionsData) {
+	parseActions: function () {
+
+		let lowercase = str => { return str.toLowerCase(); };
 
 		let actionsData = Object.keys(dispatcher.EMOTIONS).reduce((actionsOutput, emotionKey) => {
 
-			let emotionName = dispatcher.EMOTIONS[emotionKey];
+			let emotionName = dispatcher.EMOTIONS[emotionKey],
+				statesData = emotionsData.emotions[emotionName].states;
 
-			let actionsByState;
-
-			// copy list of actions and alpha sort
-			let allActionsForEmotion = emotionsData.emotions[emotionName].actions.concat().sort((a, b) => {
+			// copy list of all actions for emotion with lowercased names, and alpha sort
+			let allActionsForEmotion = emotionsData.emotions[emotionName].actions.map(action => {
+				return Object.assign({}, action, {
+					name: action.name.toLowerCase()
+				});
+			}).sort((a, b) => {
 				if (a.name < b.name) return -1;
 				else if (a.name > b.name) return 1;
 				else return 0;
 			});
 
-			// add additional data for each of allActionsForEmotion
-			let numAllActions = allActionsForEmotion.length;
+			// add additional data for each of allActionsForEmotion,
+			// and compile hash keyed by name for lookup below
+			let allActionsForEmotionByName = {},
+				numAllActions = allActionsForEmotion.length;
 			allActionsForEmotion.forEach((action, i) => {
 				action.paths = ARROW_SHAPE.map(pt => ({
 					x: pt.x,
 					y: pt.y
 				}));
 				action.rotation = (90 + (numAllActions-i-1) * 180/(numAllActions-1));
+				allActionsForEmotionByName[action.name] = action;
 			});
 
-			actionsOutput[emotionName] = {
-				allActions: allActionsForEmotion,
-				actions: actionsByState
-			};
+			// iterate over states for each emotion and compile actions for each state.
+			let actionsByState = statesData.reduce((statesOutput, state) => {
 
-			return actionsOutput;
+				// copy actions from source data and lowercase,
+				// dedupe across valences and filter out any that do not have prototypical definitions,
+				// alpha sort within valence
+				let actionsBoth = state.actions.both.map(lowercase).filter(action => {
+						return !!allActionsForEmotionByName[action];
+					}).sort(),
+					actionsCon = state.actions.con.map(lowercase).filter(action => {
+						return !!allActionsForEmotionByName[action] &&
+							!~state.actions.both.indexOf(action);
+					}).sort(),
+					actionsDes = state.actions.des.map(lowercase).filter(action => {
+						return !!allActionsForEmotionByName[action] &&
+							!~state.actions.both.indexOf(action);
+					}).sort(),
 
-		}, {});
-	
-		return actionsData;
+					// count number of actions within each valence
+					numActionsCon = actionsCon.length,
+					numActionsBoth = actionsBoth.length,
+					numActionsDes = actionsDes.length,
 
-	},
+					// concatenate deduped and sorted actions into a single list
+					// (in order of left-to-right display on-screen)
+					allActionsForState = actionsCon.concat(actionsBoth).concat(actionsDes),
+					numAllActionsForState = allActionsForState.length;
 
-	parseActionsOld: function (emotionsData) {
+				let actionByName,
+					action;
+				allActionsForState = allActionsForState.map((actionName, i) => {
 
-		// For each state in each emotion:
-		// 	{
-		// 		allActions: all the actions for all states in this emotion, with no valence values
-		// 		actions: array of actions sorted alphabetically, by valence
-		// 	}
-		// 
-		// Each action is a hash containing:
-		// 	{
-		// 		name: 'actionName',
-		// 		desc: 'description',
-		// 		valence: 'NONE|CONSTRUCTIVE|DESTRUCTIVE|BOTH',
-		// 		paths: Array of points to draw the shape, copied from ARROW_PATHS
-		// 		rotation: value from 0<>1 at which to display action arrow along half-circle (only present in sortedActions)
-		// 	}
-		let actionsData = Object.keys(dispatcher.EMOTIONS).reduce((actionsOutput, emotionKey) => {
+					// copy prototypical action name/description
+					actionByName = allActionsForEmotionByName[actionName];
+					action = {
+						name: actionByName.name,
+						desc: actionByName.desc
+					};
 
-			let emotionName = dispatcher.EMOTIONS[emotionKey],
-				statesData = emotionsData.emotions[emotionName].states,
-				allActionsData = emotionsData.emotions[emotionName].actions;
+					// calculate paths and rotation
+					action.paths = ARROW_SHAPE.map(pt => ({
+						x: pt.x,
+						y: pt.y
+					}));
+					action.rotation = (90 + (numAllActionsForState-i-1) * 180/(numAllActionsForState-1));
 
-			// lowercase allActionsData keys
-			allActionsData = Object.keys(allActionsData).reduce((acc, actionName) => {
-				acc[actionName.toLowerCase()] = allActionsData[actionName];
-				return acc;
-			}, {});
-
-			// iterate over states for each emotion
-			let actionsByState = Object.keys(statesData).reduce((statesOutput, stateName) => {
-
-				let actionData = statesData[stateName].actions;
-
-				// generate actions for each state
-				let allActions = Object.keys(actionData).map((actionName, i, actions) => {
-					let action = {
-							name: actionName,
-							desc: allActionsData[actionName]
-						},
-						valencesData = actionData[actionName].valences;
-					if (valencesData.length === 2 || ~valencesData.indexOf('choice')) {
-						action.valence = VALENCES.BOTH;
-					} else if (~valencesData.indexOf('constructive')) {
+					// determine valence based on earlier sorting
+					if (i < numActionsCon) {
 						action.valence = VALENCES.CONSTRUCTIVE;
-					} else if (~valencesData.indexOf('destructive')) {
+					} else if (i < numActionsCon + numActionsBoth) {
+						action.valence = VALENCES.BOTH;
+					} else if (i < numActionsCon + numActionsBoth + numActionsDes) {
 						action.valence = VALENCES.DESTRUCTIVE;
-					} else {
-						console.warn('Invalid valence data for action "' + actionName + '" in state "' + stateName + '" of emotion "' + emotionName + '"');
-						action.valence = VALENCES.NONE;
 					}
+
 					return action;
 
-				// sort in valence order
-				}).sort((a, b) => a.valence - b.valence);
-
-				// filter out any actions not present in list of
-				// all actions for this emotion (allActionsData)
-				allActions = allActions.filter(action => !!allActionsData[action.name]);
-
-				if (!allActions.length) {
-					console.warn('None of the actions for state "' + stateName + '" in emotion "' + emotionName + '" exist within the list of all actions for the emotion.');
-				}
-
-				/*
-				// this was used before we had a list of all actions per emotion;
-				// it can probably be removed but leaving here for now. 2015.12.21
-				// add to allActionsForEmotion any actions not already present
-				allActionsForEmotion = allActionsForEmotion.concat(allActions
-					.filter(action => !allActionsForEmotion
-						.find(allAction => action.name === allAction.name)
-					)
-				);
-				*/
-
-				// alpha sort by valence
-				let sortedActions = {};
-				_.values(VALENCES).forEach(valenceVal => {
-					sortedActions[valenceVal] = allActions
-						.filter(action => action.valence === valenceVal)
-						.sort((a, b) => {
-							if (a.name < b.name) return -1;
-							else if (a.name > b.name) return 1;
-							else return 0;
-						});
-				});
-				
-				// compile paths and calculate rotation for each action,
-				// stepping through sortedActions.
-				let i = 0,
-					totalNumActions = allActions.length;
-				_.values(VALENCES).forEach(valenceVal => {
-					sortedActions[valenceVal].forEach(action => {
-						action.paths = ARROW_SHAPE.map(pt => ({
-							x: pt.x,
-							y: pt.y
-						}));
-						action.rotation = (90 + (totalNumActions-i-1) * 180/(totalNumActions-1));
-						i++;
-					});
 				});
 
-				let allSortedActions = _.values(VALENCES).reduce((acc, valenceVal) => {
-					acc = acc.concat(sortedActions[valenceVal]);
-					return acc;
-				}, []);
-
+				// calculate weight for each valence for this state's action
 				let valenceWeights = Object.keys(VALENCES).map(valenceName => ({
 					name: valenceName,
-					size: sortedActions[VALENCES[valenceName]].length
+					size: valenceName === 'CONSTRUCTIVE' ? numActionsCon :
+							valenceName === 'BOTH' ? numActionsBoth : 
+							valenceName === 'DESTRUCTIVE' ? numActionsDes : 0
 				})).reverse();
 				// subtract 0.5 from the first and last size,
 				// to place the drawn boundary halfway between adjacent action arrows
@@ -302,37 +250,15 @@ export default {
 					lastNonEmptyWeight.size -= 0.5;
 				}
 
-				statesOutput[stateName] = {
-					actions: allSortedActions,
+				statesOutput[state.name.toLowerCase()] = {
+					actions: allActionsForState,
 					valenceWeights: valenceWeights
 				};
 
 				return statesOutput;
 
 			}, {});
-			
-			// compile list of all actions for emotion
-			let allActionsForEmotion = Object.keys(allActionsData).map(actionName => ({
-				name: actionName,
-				desc: allActionsData[actionName]
-			}));
 
-			// alpha sort allActionsForEmotion
-			allActionsForEmotion = allActionsForEmotion.sort((a, b) => {
-				if (a.name < b.name) return -1;
-				else if (a.name > b.name) return 1;
-				else return 0;
-			});
-
-			// add additional data for each of allActionsForEmotion
-			let numAllActions = allActionsForEmotion.length;
-			allActionsForEmotion.forEach((action, i) => {
-				action.paths = ARROW_SHAPE.map(pt => ({
-					x: pt.x,
-					y: pt.y
-				}));
-				action.rotation = (90 + (numAllActions-i-1) * 180/(numAllActions-1));
-			});
 
 			actionsOutput[emotionName] = {
 				allActions: allActionsForEmotion,
@@ -763,7 +689,7 @@ export default {
 	},
 
 	resetCallout: function () {
-		dispatcher.changeCallout(this.currentEmotion, emotionsDataNew.metadata.actions.header, emotionsDataNew.metadata.actions.body);
+		dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.actions.header, emotionsData.metadata.actions.body);
 	},
 
 	createTempNav (containerNode) {
