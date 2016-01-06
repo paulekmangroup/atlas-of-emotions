@@ -2,8 +2,8 @@ import d3 from 'd3';
 import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
-import emotionsData from '../static/emotionsData.json';
-import appStrings from '../static/appStrings.json';
+import emotionsData from '../static/emotionsData-OLD.json';
+import appStrings from '../static/emotionsData.json';
 import states from './states.js';
 
 const VALENCES = {
@@ -723,7 +723,7 @@ export default {
 	},
 
 	resetCallout () {
-		dispatcher.changeCallout(this.currentEmotion, appStrings.actions.header, appStrings.actions.body);
+		dispatcher.changeCallout(this.currentEmotion, appStrings.metadata.actions.header, appStrings.metadata.actions.body);
 	},
 
 	createTempNav (containerNode) {

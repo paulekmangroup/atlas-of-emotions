@@ -118,12 +118,10 @@ function parseMetadataSheet (sheet) {
 var metadataSectionParsers = (function () {
 
 	var standard = function (data) {
-		return data.map(function (row) {
-			return {
-				header: row[0],
-				body: row[1]
-			};
-		});
+		return {
+			header: data[0][0],
+			body: data[0][1]
+		};
 	};
 
 	return {
@@ -151,11 +149,7 @@ var metadataSectionParsers = (function () {
 			return obj;
 		},
 
-		moods: function (data) {
-			// explicitly limit list length to allow adding notes at the bottom of the spreadsheet
-			var NUM_MOOD_DATA = 1;
-			return standard(data).slice(0, NUM_MOOD_DATA);
-		}
+		moods: standard
 
 	};
 
@@ -223,7 +217,9 @@ var emotionSectionParsers = (function () {
 
 	return {
 
-		continent: standard,
+		continent: function (data) {
+			return standard(data)[0]
+		},
 
 		states: function (data) {
 			return data.map(function (row) {

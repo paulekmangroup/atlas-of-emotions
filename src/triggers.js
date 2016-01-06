@@ -2,8 +2,8 @@ import d3 from 'd3';
 import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
-import emotionsData from '../static/emotionsData.json';
-import appStrings from '../static/appStrings.json';
+import emotionsData from '../static/emotionsData-OLD.json';
+import appStrings from '../static/emotionsData.json';
 import states from './states.js';
 
 
@@ -596,9 +596,9 @@ export default {
 	setCallout (hitAreaId) {
 
 		if (hitAreaId) {
-			dispatcher.changeCallout(this.currentEmotion, appStrings.triggers.steps[hitAreaId-1].header, appStrings.triggers.steps[hitAreaId-1].body);
+			dispatcher.changeCallout(this.currentEmotion, appStrings.metadata.triggers.steps[hitAreaId-1].header, appStrings.metadata.triggers.steps[hitAreaId-1].body);
 		} else {
-			dispatcher.changeCallout(this.currentEmotion, appStrings.triggers.header, appStrings.triggers.body);
+			dispatcher.changeCallout(this.currentEmotion, appStrings.metadata.triggers.header, appStrings.metadata.triggers.body);
 		}
 
 	},

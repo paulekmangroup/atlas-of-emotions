@@ -4,7 +4,7 @@ import d3Transform from 'd3-transform';
 import TWEEN from 'tween.js';
 
 import Circle from './Circle.js';
-import emotionsData from '../static/emotionsData.json';
+import emotionsData from '../static/emotionsData-OLD.json';
 
 const FRAMERATE = 60;
 const HIGHLIGHT_ALPHA_MOD = 1.5;

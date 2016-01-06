@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
-import emotionsData from '../static/emotionsData.json';
-import appStrings from '../static/appStrings.json';
+import emotionsData from '../static/emotionsData-OLD.json';
+import appStrings from '../static/emotionsData.json';
 import states from './states.js';
 import actions from './actions.js';
 
@@ -138,7 +138,7 @@ export default {
 			let moodsCopy = emotionsData.emotions[this.currentEmotion].moods[0];
 			dispatcher.changeCallout(this.currentEmotion, moodsCopy.name, moodsCopy.desc);
 		} else {
-			dispatcher.changeCallout(this.currentEmotion, appStrings.moods.header, appStrings.moods.body);
+			dispatcher.changeCallout(this.currentEmotion, appStrings.metadata.moods.header, appStrings.metadata.moods.body);
 		}
 
 	},

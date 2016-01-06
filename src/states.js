@@ -2,8 +2,8 @@ import d3 from 'd3';
 import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
-import emotionsData from '../static/emotionsData.json';
-import appStrings from '../static/appStrings.json';
+import emotionsData from '../static/emotionsData-OLD.json';
+import appStrings from '../static/emotionsData.json';
 
 const LABEL_APPEAR_DELAY = 1000;
 
@@ -1063,7 +1063,7 @@ export default {
 
 	resetCallout () {
 
-		dispatcher.changeCallout(this.currentEmotion, appStrings.states.header, appStrings.states.body + '<br><br>' + emotionsData.emotions[this.currentEmotion].statesDesc);
+		dispatcher.changeCallout(this.currentEmotion, appStrings.metadata.states.header, appStrings.metadata.states.body + '<br><br>' + emotionsData.emotions[this.currentEmotion].statesDesc);
 
 	},
 

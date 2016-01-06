@@ -7,8 +7,8 @@ import dispatcher from './dispatcher.js';
 import Circle from './Circle.js';
 import Continent from './Continent.js';
 
-import emotionsData from '../static/emotionsData.json';
-import appStrings from '../static/appStrings.json';
+import emotionsData from '../static/emotionsData-OLD.json';
+import appStrings from '../static/emotionsData.json';
 
 let continents,
 	continentContainer,
@@ -124,7 +124,7 @@ const continentsSection = {
 					this.transitions.panToContinent(null, previousEmotion);
 
 					// display all-continents callout
-					dispatcher.changeCallout(null, appStrings.continents.header, appStrings.continents.body);
+					dispatcher.changeCallout(null, appStrings.metadata.continents.header, appStrings.metadata.continents.body);
 
 				}, 750);
 
@@ -184,7 +184,7 @@ const continentsSection = {
 				});
 				this.transitions.scaleContinents(continents.map(continent => continent.id), 1.0, delays, 500);
 
-				dispatcher.changeCallout(null, appStrings.continents.header, appStrings.continents.body);
+				dispatcher.changeCallout(null, appStrings.metadata.continents.header, appStrings.metadata.continents.body);
 				*/
 
 			}
@@ -220,7 +220,7 @@ const continentsSection = {
 		// we'll figure that out later.
 		setTimeout(function () {
 			if (options && options.firstSection) {
-				dispatcher.changeCallout(null, appStrings.continents.header, appStrings.continents.body);
+				dispatcher.changeCallout(null, appStrings.metadata.continents.header, appStrings.metadata.continents.body);
 			}
 			d3.selectAll('#continent-labels div')
 				.style('opacity', 1.0);
