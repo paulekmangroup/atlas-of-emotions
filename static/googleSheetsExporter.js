@@ -1,5 +1,5 @@
 /**
- * Parse Atlas of Emotions spreadsheet into JSON for consumption by Atlas application.
+ * Parse Final Atlas Content spreadsheet into JSON for consumption by Atlas application.
  * This script is currently installed alongside the spreadsheet, but instructions for use are as follows:
  * 1. Open Google spreadsheet.
  * 2. Click Tools > Script Editor.
@@ -8,15 +8,6 @@
  * 5. Click Export to JSON > Export all sheets to JSON.
  * 6. Copy + paste the resulting JSON into emotionsData.json and rebuild the project.
  */
-
-
-
-// TODO:
-// - finish verifying output
-// - state ranges
-
-
-
 
 /**
  * Atlas Of Emotions-specific constants.
@@ -87,7 +78,6 @@ function parseMetadataSheet (sheet) {
 	// walk down the section labels column,
 	// aggregate all rows in each section, and parse.
 	var labelsColumn = sheet.getSheetValues(DATA_START_ROW, DATA_START_COL, -1, 1);
-	// Logger.log("metadata labelsColumn:" + labelsColumn);
 	var labelValue,
 		currentLabel,
 		metadata = {},
@@ -97,15 +87,12 @@ function parseMetadataSheet (sheet) {
 
 		labelValue = labelsColumn[j][0];
 		if (labelValue) { labelValue = labelValue.toLowerCase(); }
-		// Logger.log("metadata labelValue:" + labelValue);
 
 		if (labelValue && labelValue !== currentLabel) {
 			if (currentLabel) {
 				// parse everything aggregated up to this next label
-				// Logger.log("sectionData:" + sectionData);
 				metadata[currentLabel] = metadataSectionParsers[currentLabel](sectionData);
 			}
-			// Logger.log("set currentLabel to:" + labelValue);
 			currentLabel = labelValue;
 			sectionData = [];
 		}
@@ -183,7 +170,6 @@ function parseEmotionSheet (sheet) {
 	// walk down the emotion section labels column,
 	// aggregate all rows in each section, and parse.
 	var labelsColumn = sheet.getSheetValues(DATA_START_ROW, DATA_START_COL, -1, 1);
-	// Logger.log("emotion labelsColumn:" + labelsColumn);
 	var labelValue,
 		currentLabel,
 		emotionData = {},
@@ -193,7 +179,6 @@ function parseEmotionSheet (sheet) {
 
 		labelValue = labelsColumn[j][0];
 		if (labelValue) { labelValue = labelValue.toLowerCase(); }
-		// Logger.log("emotion labelValue:" + labelValue + "; currentLabel:" + currentLabel);
 
 		if (labelValue && labelValue !== currentLabel) {
 			// parse everything aggregated up to this next label
@@ -239,7 +224,8 @@ var emotionSectionParsers = (function () {
 				var con = (row[2].split(',') || []).map(function (val) { return val.trim().toLowerCase(); }),
 					des = (row[3].split(',') || []).map(function (val) { return val.trim().toLowerCase(); }),
 					both = [],
-					all = con.concat();
+					all = con.concat(),
+					range = row[4].replace(/\s+/g, '').split('-');
 
 				des.forEach(function (val) {
 					if (~all.indexOf(val)) {
@@ -252,6 +238,10 @@ var emotionSectionParsers = (function () {
 				return {
 					name: row[0],
 					desc: row[1],
+					range: {
+						min: parseInt(range[0]),
+						max: parseInt(range[1])
+					},
 					actions: {
 						all: all,
 						con: con,
