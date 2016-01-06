@@ -361,6 +361,11 @@ export default {
 			return Object.assign({}, state);
 		});
 
+		// filter out states with invalid ranges
+		states = states.filter(state => {
+			return !!(state.range.min && state.range.max);
+		});
+
 		// sort by state min value, then max value
 		states = states.sort((a, b) => {
 			if (a.range.min < b.range.min) {
@@ -519,7 +524,7 @@ export default {
 				[-0.25, 0],
 				[0.25, 0.25],
 				[0, 0],
-				[-0.5, -0.5],
+				// [-0.5, -0.5],	// nauseousness
 				[0, -0.25],
 				[0.5, 0],
 				[0, 0]
@@ -545,7 +550,8 @@ export default {
 				[-0.25, 0.5],	// pride
 				[0, 0],			// wonder
 				[0, 0],			// excitement
-				[0, 0]			// ecstasy
+				[0, 0]/*,			// ecstasy
+				[0, 0]			// debauchery*/
 			];
 			this.offsetPoints(points, offsets, strengthMod);
 
@@ -588,7 +594,8 @@ export default {
 				[-0.5, -0.25],
 				[0, 0],
 				[0.5, 0.25],
-				[0, 0]
+				[0, 0]/*,
+				[0, 0]				// hopelessness*/
 			];
 			this.offsetPoints(points, offsets, strengthMod);
 

@@ -421,6 +421,12 @@ export default class Continent {
 		// TODO: DRY this out. Copied from states.js.
 		// Should have a central place to parse emotion data, rather than
 		// pulling straight from json and manipulating everywhere it's used.
+
+		// filter out states with invalid ranges
+		states = states.filter(state => {
+			return !!(state.range.min && state.range.max);
+		});
+
 		// sort by state min value, then max value
 		states = states.sort((a, b) => {
 			if (a.range.min < b.range.min) {

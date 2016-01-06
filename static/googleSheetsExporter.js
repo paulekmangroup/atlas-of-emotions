@@ -218,11 +218,14 @@ var emotionSectionParsers = (function () {
 	return {
 
 		continent: function (data) {
-			return standard(data)[0]
+			return standard(data)[0];
 		},
 
 		states: function (data) {
-			return data.map(function (row) {
+			return data.filter(function (row) {
+				return !!row[0];
+			}).map(function (row) {
+				Logger.log("row len:" + row.length + "; row[0]:" + row[0]);
 				var con = (row[2].split(',') || []).map(function (val) { return val.trim().toLowerCase(); }),
 					des = (row[3].split(',') || []).map(function (val) { return val.trim().toLowerCase(); }),
 					both = [],

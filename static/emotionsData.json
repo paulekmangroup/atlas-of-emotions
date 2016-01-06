@@ -922,28 +922,6 @@
           }
         },
         {
-          "name": "",
-          "desc": "",
-          "range": {
-            "min": null,
-            "max": null
-          },
-          "actions": {
-            "all": [
-              ""
-            ],
-            "con": [
-              ""
-            ],
-            "des": [
-              ""
-            ],
-            "both": [
-              ""
-            ]
-          }
-        },
-        {
           "name": "Loathing",
           "desc": "Very intense disgust. Very objectionable to be the target of loathing.",
           "range": {
