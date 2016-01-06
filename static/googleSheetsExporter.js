@@ -90,8 +90,11 @@ function parseMetadataSheet (sheet) {
 
 		if (labelValue && labelValue !== currentLabel) {
 			if (currentLabel) {
-				// parse everything aggregated up to this next label
-				metadata[currentLabel] = metadataSectionParsers[currentLabel](sectionData);
+				// parse everything aggregated up to this next label,
+				// if a parser exists; else, discard aggregated data.
+				if (metadataSectionParsers[currentLabel]) {
+					metadata[currentLabel] = metadataSectionParsers[currentLabel](sectionData);
+				}
 			}
 			currentLabel = labelValue;
 			sectionData = [];
@@ -181,9 +184,12 @@ function parseEmotionSheet (sheet) {
 		if (labelValue) { labelValue = labelValue.toLowerCase(); }
 
 		if (labelValue && labelValue !== currentLabel) {
-			// parse everything aggregated up to this next label
 			if (currentLabel) {
-				emotionData[currentLabel] = emotionSectionParsers[currentLabel](sectionData);
+				// parse everything aggregated up to this next label,
+				// if a parser exists; else, discard aggregated data.
+				if (emotionSectionParsers[currentLabel]) {
+					emotionData[currentLabel] = emotionSectionParsers[currentLabel](sectionData);
+				}
 			}
 			currentLabel = labelValue;
 			sectionData = [];
