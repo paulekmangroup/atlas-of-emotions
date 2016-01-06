@@ -2,8 +2,8 @@ import d3 from 'd3';
 import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
-import emotionsData from '../static/emotionsData-OLD.json';
-import appStrings from '../static/emotionsData.json';
+import emotionsDataOld from '../static/emotionsData-OLD.json';
+import emotionsDataNew from '../static/emotionsData.json';
 import states from './states.js';
 
 const VALENCES = {
@@ -39,7 +39,9 @@ export default {
 		this.onActionMouseOut = this.onActionMouseOut.bind(this);
 		this.onActionMouseClick = this.onActionMouseClick.bind(this);
 
-		this.actionsData = this.parseActions();
+		this.actionsData = this.parseActions(emotionsDataNew);
+		this.actionsData = this.parseActionsOld(emotionsDataOld);
+		console.log('actionsData:', this.actionsData);
 
 		let graphContainer = document.createElement('div');
 		graphContainer.id = 'action-graph-container';
@@ -132,7 +134,45 @@ export default {
 
 	},
 
-	parseActions: function () {
+	parseActions: function (emotionsData) {
+
+		let actionsData = Object.keys(dispatcher.EMOTIONS).reduce((actionsOutput, emotionKey) => {
+
+			let emotionName = dispatcher.EMOTIONS[emotionKey];
+
+			let actionsByState;
+
+			// copy list of actions and alpha sort
+			let allActionsForEmotion = emotionsData.emotions[emotionName].actions.concat().sort((a, b) => {
+				if (a.name < b.name) return -1;
+				else if (a.name > b.name) return 1;
+				else return 0;
+			});
+
+			// add additional data for each of allActionsForEmotion
+			let numAllActions = allActionsForEmotion.length;
+			allActionsForEmotion.forEach((action, i) => {
+				action.paths = ARROW_SHAPE.map(pt => ({
+					x: pt.x,
+					y: pt.y
+				}));
+				action.rotation = (90 + (numAllActions-i-1) * 180/(numAllActions-1));
+			});
+
+			actionsOutput[emotionName] = {
+				allActions: allActionsForEmotion,
+				actions: actionsByState
+			};
+
+			return actionsOutput;
+
+		}, {});
+	
+		return actionsData;
+
+	},
+
+	parseActionsOld: function (emotionsData) {
 
 		// For each state in each emotion:
 		// 	{
@@ -722,8 +762,8 @@ export default {
 
 	},
 
-	resetCallout () {
-		dispatcher.changeCallout(this.currentEmotion, appStrings.metadata.actions.header, appStrings.metadata.actions.body);
+	resetCallout: function () {
+		dispatcher.changeCallout(this.currentEmotion, emotionsDataNew.metadata.actions.header, emotionsDataNew.metadata.actions.body);
 	},
 
 	createTempNav (containerNode) {
