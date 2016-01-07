@@ -24,6 +24,7 @@ export default function (...initArgs) {
 
 		initContainers();
 		initSections();
+		initHeader();
 		initCallout();
 
 		document.addEventListener('keydown', onKeyDown);
@@ -228,7 +229,9 @@ export default function (...initArgs) {
 
 		}
 
-		document.querySelector('#header h1').innerHTML = sectionName.toUpperCase();
+		updateHeader({
+			section: sectionName
+		});
 
 		currentSection = section;
 
@@ -237,6 +240,10 @@ export default function (...initArgs) {
 	function setEmotion (emotion) {
 
 		if (currentEmotion === emotion) { return; }
+
+		updateHeader({
+			emotion: emotion
+		});
 
 		// setSection cues up emotion changes,
 		// making this function very simple.
@@ -267,6 +274,33 @@ export default function (...initArgs) {
 
 	}
 
+	function initHeader () {
+
+		// TODO: populate dropdown with emotions
+		let dropdown = document.querySelector('#header .dropdown'),
+			menu = dropdown.querySelector('ul');
+		dropdown.querySelector('.dd-title').innerHTML = 'CHOOSE AN EMOTION';
+		Object.keys(dispatcher.EMOTIONS).forEach(emotionKey => {
+			let li = document.createElement('li');
+			li.innerHTML = dispatcher.EMOTIONS[emotionKey].toUpperCase();
+			menu.appendChild(li);
+		});
+		
+		dropdown.querySelector('.dropdown-toggle').addEventListener('click', onDropdownClick);
+
+	}
+
+	function updateHeader (config) {
+
+		if (config.section) {
+			document.querySelector('#header h1').innerHTML = config.section.toUpperCase();
+		}
+
+		if (config.emotion) {
+			// document.querySelector('#header h1').innerHTML = sectionName.toUpperCase();
+		}
+	}
+
 	function onKeyDown (keyCode) {
 
 		if (keyCode === 37 || keyCode === 39) {
@@ -275,6 +309,13 @@ export default function (...initArgs) {
 
 		}
 
+	}
+
+	function onDropdownClick (event) {
+
+		let classList = document.querySelector('#header .dropdown').classList;
+		classList.toggle('open');
+		
 	}
 
 	function onCalloutChange (emotion, title, body) {

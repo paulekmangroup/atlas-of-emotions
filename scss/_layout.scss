@@ -83,6 +83,67 @@ h6 { font-size: 0.333333em; }
 		text-decoration: none;
 		color: $text-color;
 	}
+
+	.dropdown {
+		display: inline-block;
+		position: absolute;
+		right: 1em;
+
+		outline: none;
+		// line-height: normal;
+
+		& button {
+			border: none;
+			padding: 0 1.5em 0 0;
+			background: none;
+
+			.caret {
+				border: none;
+				margin-left: 0.5em;
+				vertical-align: top;
+				&:after {
+					content: '▼';
+					display: inline-block;
+					position: relative;
+					font-size: 0.75em;
+					font-family: 'sans-serif';
+				}
+			}
+		}
+
+	}
+
+	.dropdown-menu {
+	    max-height: 20em;
+		margin: 0;
+		padding: 3px 1em 0 0;
+	    overflow-y: auto;
+	    overflow-x: hidden;
+
+	    font-size: 1em;
+
+		background-color: $background-color;
+		box-shadow: none;
+		border-color: $text-color;
+		border-radius: 0;
+		outline: none;
+
+		li {
+			margin-bottom: 0;
+			a[role='menuitem'] {
+				padding: 0 5px;
+				color: $text-color;
+				@extend %lato-light;
+
+				&:hover,
+				&:active {
+					background-color: rgba($text-color, 0.25);
+					outline: none;
+				}
+			}
+		}
+	}
+
 }
 
 #main {
