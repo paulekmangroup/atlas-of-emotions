@@ -114,32 +114,37 @@ h6 { font-size: 0.333333em; }
 	}
 
 	.dropdown-menu {
-	    max-height: 20em;
+		width: calc(100% + 2em);
+		left: -1em;
 		margin: 0;
-		padding: 3px 1em 0 0;
-	    overflow-y: auto;
-	    overflow-x: hidden;
-
+		padding: 0;
 	    font-size: 1em;
 
-		background-color: $background-color;
+		background-color: rgba($callout-background-color, 0.5);
 		box-shadow: none;
-		border-color: $text-color;
+		border: none;
 		border-radius: 0;
 		outline: none;
 
 		li {
+			box-sizing: border-box;
 			margin-bottom: 0;
-			a[role='menuitem'] {
-				padding: 0 5px;
-				color: $text-color;
-				@extend %lato-light;
+			padding: 0 0 0 1em;
+			line-height: 2em;
 
-				&:hover,
-				&:active {
-					background-color: rgba($text-color, 0.25);
-					outline: none;
-				}
+			color: $text-overlay-color;
+
+			&:first-of-type {
+				padding-top: 0.5em;
+			}
+			&:last-of-type {
+				padding-bottom: 0.5em;
+			}
+
+			&:hover,
+			&:active {
+				background-color: rgba($callout-highlight-color, 0.5);
+				outline: none;
 			}
 		}
 	}
@@ -171,7 +176,7 @@ h6 { font-size: 0.333333em; }
 		opacity: 1.0;
 	}
 
-	background-color: rgba(0, 0, 0, 0.5);
+	background-color: rgba($callout-background-color, 0.5);
 	@include emotion-background-color;
 
 	h3 {

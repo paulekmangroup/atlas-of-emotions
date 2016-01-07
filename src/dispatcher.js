@@ -26,16 +26,16 @@ const dispatcher = {
 	},
 
 	/**
-	 * @param  {[type]} section Section navigating to
-	 * @param  {[type]} emotion Emotion navigating to
+	 * @param  {[String]} section Section navigating to
+	 * @param  {[String]} emotion Emotion navigating to
 	 */
 	navigate: function (section, emotion) {
 
-		if (!this.validateSection(section)) {
+		if (section && !this.validateSection(section)) {
 			throw new Error('Invalid section "' + section + '".');
 		}
 
-		if (!this.validateEmotion(emotion)) {
+		if (emotion && !this.validateEmotion(emotion)) {
 			throw new Error('Invalid emotion "' + emotion + '".');
 		}
 
@@ -44,8 +44,8 @@ const dispatcher = {
 	},
 
 	/**
-	 * @param  {[type]} section Section navigated away from
-	 * @param  {[type]} emotion Emotion navigated away from
+	 * @param  {[String]} section Section navigated away from
+	 * @param  {[String]} emotion Emotion navigated away from
 	 */
 	navigateComplete: function (section, emotion) {
 

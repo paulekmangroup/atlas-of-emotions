@@ -276,13 +276,17 @@ export default function (...initArgs) {
 
 	function initHeader () {
 
-		// TODO: populate dropdown with emotions
 		let dropdown = document.querySelector('#header .dropdown'),
 			menu = dropdown.querySelector('ul');
+
 		dropdown.querySelector('.dd-title').innerHTML = 'CHOOSE AN EMOTION';
+
 		Object.keys(dispatcher.EMOTIONS).forEach(emotionKey => {
+			let emotionName = dispatcher.EMOTIONS[emotionKey].toLowerCase();
 			let li = document.createElement('li');
-			li.innerHTML = dispatcher.EMOTIONS[emotionKey].toUpperCase();
+			li.setAttribute('role', 'menuitem');
+			li.setAttribute('data-emotion', emotionName);
+			li.innerHTML = emotionName.toUpperCase();
 			menu.appendChild(li);
 		});
 		
@@ -313,9 +317,28 @@ export default function (...initArgs) {
 
 	function onDropdownClick (event) {
 
-		let classList = document.querySelector('#header .dropdown').classList;
+		let dropdown = document.querySelector('#header .dropdown'),
+			classList = dropdown.classList;
+
 		classList.toggle('open');
+
+		if (classList.contains('open')) {
+			dropdown.addEventListener('click', onDropdownItemClick);
+		} else {
+			dropdown.removeEventListener('click', onDropdownItemClick);
+		}
+
+		event.stopPropagation();
 		
+	}
+
+	function onDropdownItemClick (event) {
+
+		if (!event.target || event.target.nodeName.toLowerCase() !== 'li') { return; }
+
+		event.stopImmediatePropagation();
+		dispatcher.navigate(null, event.target.dataset.emotion);
+
 	}
 
 	function onCalloutChange (emotion, title, body) {
@@ -345,6 +368,19 @@ export default function (...initArgs) {
 	}
 
 	function onNavigate (section, emotion) {
+
+		if (!section) {
+			for (let key in sections) {
+				if (sections[key] === currentSection) {
+					section = key;
+					break;
+				}
+			}
+		}
+
+		if (!emotion) {
+			emotion = currentEmotion;
+		}
 
 		document.location.hash = section + ':' + emotion;
 
