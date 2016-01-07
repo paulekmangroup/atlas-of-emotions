@@ -197,6 +197,9 @@ export default class Continent {
 			.classed('continent ' + this.id, true)
 			.datum(this);
 
+		this.circleWrapper = this.d3Selection.append('g')
+			.classed('circle-wrapper', true);
+
 	}
 
 	update (state, frameCount) {
@@ -256,7 +259,7 @@ export default class Continent {
 					circle.update(alphaMod, speedMod);
 				} else {
 					this.circles.splice(i, 1);
-					circle.d3Selection.remove();
+					circle.d3Wrapper.remove();
 				}
 			};
 
@@ -313,7 +316,7 @@ export default class Continent {
 			shrinkTime = 750;
 
 		let ranges = this.transformRanges(emotionsData.emotions[this.id].states),
-			circles = this.d3Selection.selectAll('circle')
+			circles = this.circleWrapper.selectAll('circle')
 				.data(ranges);
 
 		let calcStrokeColor = function (d, i) {
@@ -365,7 +368,7 @@ export default class Continent {
 			shrinkTime = 750;
 
 		let calledOnEnd = false,
-			circles = this.d3Selection.selectAll('circle')
+			circles = this.circleWrapper.selectAll('circle')
 				.data(this.circles);
 
 		// transition circles that exist in this.circles back to their original settings

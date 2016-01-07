@@ -150,6 +150,15 @@ const continentsSection = {
 			// 2d. while 2a-c happens, execute (currentEmotion):2b-c above.
 
 			if (emotion) {
+
+
+				// TODO:
+				// flatten out spread continent as it spreads.
+				// need to add container node within g.continent to hold <circles>,
+				// and apply rotateX to that (since there's already a transform on g.continent).
+
+
+
 				// zoom into specified emotion
 				let targetScale = 1.0;
 

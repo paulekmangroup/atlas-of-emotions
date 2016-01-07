@@ -15,7 +15,7 @@ export default class Circle {
 		if (frameCount - continent.spawnConfig.lastSpawn > continent.spawnConfig.minDelay) {
 			if (Math.random() < continent.spawnConfig.freq) {
 				continent.spawnConfig.lastSpawn = frameCount;
-				return new Circle(continent.d3Selection, continent.colorPalette, continent.size);
+				return new Circle(continent.circleWrapper, continent.colorPalette, continent.size);
 			} else {
 				return null;
 			}
@@ -54,7 +54,7 @@ export default class Circle {
 
 		this.color = colorPalette[Math.floor(Math.random() * colorPalette.length)].join(',');
 
-		this.d3Selection = container.append('circle')
+		this.d3Wrapper = container.append('circle')
 			.attr('cx', 0)
 			.attr('cy', 0)
 			.attr('r', this.radius)
@@ -73,7 +73,7 @@ export default class Circle {
 		// limit stroke to edge of circle
 		let sw = this.calcStrokeWidth();
 
-		this.d3Selection
+		this.d3Wrapper
 			.attr('r', this.radius)
 			.attr('stroke-width', sw)
 			.attr('stroke', 'rgb(' + this.color + ')')
