@@ -5,6 +5,7 @@ import TWEEN from 'tween.js';
 
 import Circle from './Circle.js';
 import emotionsData from '../static/emotionsData.json';
+import sassVars from '../scss/variables.json';
 
 const FRAMERATE = 60;
 const HIGHLIGHT_ALPHA_MOD = 1.5;
@@ -312,8 +313,8 @@ export default class Continent {
 				.domain([0, 10])
 				.range([0, 0.5 * innerWidth]);
 
-		const growTime = 1500,
-			shrinkTime = 750;
+		const growTime = sassVars.continents.spread.duration.in * 1000,
+			shrinkTime = sassVars.continents.spread.duration.out * 1000;
 
 		let ranges = this.transformRanges(emotionsData.emotions[this.id].states),
 			circles = this.circleWrapper.selectAll('circle')
@@ -353,6 +354,10 @@ export default class Continent {
 			.attr('opacity', 0.0)
 			.attr('transform', d3Transform().scale(0, 0));
 
+		// flatten out the circles wrapper as well,
+		// in preparation for displaying states (elevation/profile of continent)
+		this.circleWrapper.classed('flat', true);
+
 		// TODO: hook into transition complete (.each(.on('end', fn))) and:
 		// - update this.circles with newly-created circles, or don't?
 		// - allow circles to drift?
@@ -364,8 +369,8 @@ export default class Continent {
 
 	gatherCircles () {
 
-		const growTime = 1500,
-			shrinkTime = 750;
+		const growTime = sassVars.continents.spread.duration.in * 1000,
+			shrinkTime = sassVars.continents.spread.duration.out * 1000;
 
 		let calledOnEnd = false,
 			circles = this.circleWrapper.selectAll('circle')
@@ -412,6 +417,9 @@ export default class Continent {
 			.ease('quad-out')
 			.attr('opacity', 0.0)
 			.attr('transform', d3Transform().scale(0, 0));
+
+		// unflatten the circles wrapper
+		this.circleWrapper.classed('flat', false);
 		
 	}
 

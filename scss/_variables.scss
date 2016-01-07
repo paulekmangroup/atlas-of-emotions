@@ -1,3 +1,7 @@
+// exported from variables.json
+// by gulp-json-sass in gulpfile.babel.js
+@import 'variables-derived.scss';
+
 // colors
 $text-color: #4d4d4d;
 $text-overlay-color: #ffffff;

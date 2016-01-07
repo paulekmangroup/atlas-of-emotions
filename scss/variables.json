@@ -1,0 +1,10 @@
+{
+	"continents": {
+		"spread": {
+			"duration": {
+				"in": 1.5,
+				"out": 0.75
+			}
+		}
+	}
+}

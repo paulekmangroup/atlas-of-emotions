@@ -108,6 +108,22 @@ function browserifyTask (options) {
 
 }
 
+function sassVariablesTask (options) {
+	let run = function () {
+		let start = new Date();
+		console.log('Building Sass variables');
+		gulp.src(options.src)
+			.pipe($.jsonSass())
+			.pipe($.concat('./variables-derived.scss'))
+			.pipe(gulp.dest(options.dest));
+	};
+	run();
+
+	if (options.development && options.watchfiles) {
+		gulp.watch(options.watchfiles, run);
+	}
+}
+
 function cssTask (options) {
 	if (options.development) {
 		let run = function () {
@@ -155,7 +171,7 @@ function lintTask (options) {
 }
 
 function webserverTask (options) {
-	options = options || {}
+	options = options || {};
 	const port = options.port || WEB_SERVER_PORT;
 
 	return $.connect.server({
@@ -194,6 +210,14 @@ gulp.task('default', () => {
 			lintsrc: './src/**/*.js*',
 			src: './src/main.js',
 			dest: dest
+		});
+
+		// transpile variables.json into .scss
+		sassVariablesTask({
+			development: true,
+			src: './scss/*.json',
+			watchfiles: './scss/**/*.json',
+			dest: './scss/'
 		});
 
 		// Compile Sass and watch for changes
@@ -238,6 +262,13 @@ gulp.task('deploy', () => {
 			development: false,
 			src: './src/main.js',
 			dest: dest
+		});
+
+		// transpile variables.json into .scss
+		sassVariablesTask({
+			development: false,
+			src: './scss/*.json',
+			dest: './scss/'
 		});
 
 		// Compile Sass
