@@ -71,20 +71,6 @@ const continentsSection = {
 
 	setEmotion: function (emotion, previousEmotion) {
 
-		/*
-		// was in open(), before i neutered open()
-		if (currentEmotion) {
-			// TODO:
-			// zoomed-in continent view
-			// rotate back to flat / top-down view
-		} else {
-			// TODO:
-			// zoomed-out continents view
-			// fade in + grow continents
-			// fade in labels
-		}
-		*/
-
 		// if (emotion === currentEmotion) { return; }
 
 		if (currentEmotion) {
@@ -114,16 +100,8 @@ const continentsSection = {
 				// 2b. spread circles along horizontal axis as they fade in + grow
 				// 2c. (later) allow circles to drift slightly along horizontal axis only. this motion can be reflected in the states view as well.
 
-				let comingBackIntoContinents;
-				if (comingBackIntoContinents) {
+				if (this.continentIsZoomed) {
 
-					// TODO: need to find a way to indicate we ended up in this block
-					// when not navigating from all continents view, but from somewhere else.
-					// can't rely on checking if continents are all scaled out, because they may not have been made yet
-					// (can check if inited or something...?)
-
-					// TODO: only do this when navigating back to selected continent from states section
-					/*
 					// transition back from zoomed continent to all continents
 
 					// gather circles of zoomed-in continent
@@ -141,42 +119,22 @@ const continentsSection = {
 						dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
 
 					}, sassVars.continents.spread.delay.out * 1000);
-					*/
+
+				} else {
+
+					// new continent selected with a continent previously selected
+					currentContinent.highlightLevel = Continent.HIGHLIGHT_LEVELS.UNSELECTED;
+
+					let continent = continents.find(c => c.id === emotion);
+					this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.SELECTED);
+
+					this.displayTempNav(true, continent.id);
+
+					dispatcher.changeCallout(emotion, emotion, emotionsData.emotions[emotion].continent.desc);
 
 				}
 
-				// new continent selected with a continent previously selected
-				currentContinent.highlightLevel = Continent.HIGHLIGHT_LEVELS.UNSELECTED;
-
-				let continent = continents.find(c => c.id === emotion);
-				this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.SELECTED);
-
-				this.displayTempNav(true, continent.id);
-
-				dispatcher.changeCallout(emotion, emotion, emotionsData.emotions[emotion].continent.desc);
-
 			} else {
-
-				// TODO: only do this when navigating back to selected continent from states section
-				/*
-				// transition back from zoomed continent to all continents
-
-				// gather circles of zoomed-in continent
-				this.transitions.gatherContinent(previousEmotion);
-				
-				setTimeout(() => {
-
-					// scale all continents back up to full size
-					this.transitions.scaleContinents(continents.map(continent => continent.id), 1.0);
-
-					// pan to center
-					this.transitions.panToContinent(null, previousEmotion);
-
-					// display all-continents callout
-					dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
-
-				}, sassVars.continents.spread.delay.out * 1000);
-				*/
 
 				continents.forEach(c => c.highlightLevel = Continent.HIGHLIGHT_LEVELS.NONE);
 				this.displayTempNav(false);
@@ -204,13 +162,47 @@ const continentsSection = {
 
 			if (emotion) {
 
-				// new continent selected with nothing previously selected
-				let continent = continents.find(c => c.id === emotion);
-				this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.SELECTED);
+				if (this.continentIsZoomed) {
 
-				this.displayTempNav(true, continent.id);
+					// TODO: never currently hit this block because continentIsZoomed is not set
+					// until the first continent zoom (transition into states) happens.
+					// intent is for this block to be triggered when navigating from outside continents
+					// into a focused continent, regardless of whether or not continents
+					// has yet been visited this session.
+					// 
+					// TODO: in the above scenario, we'll also have to enable this transition
+					// by pre-zooming/flattening the continent, in order to animate
+					// away from that state back to the SELECTED, zoomed-out state.
 
-				dispatcher.changeCallout(emotion, emotion, emotionsData.emotions[emotion].continent.desc);
+					// transition back from zoomed continent to all continents
+
+					// gather circles of zoomed-in continent
+					this.transitions.gatherContinent(previousEmotion);
+					
+					setTimeout(() => {
+
+						// scale all continents back up to full size
+						this.transitions.scaleContinents(continents.map(continent => continent.id), 1.0);
+
+						// pan to center
+						this.transitions.panToContinent(null, previousEmotion);
+
+						// display all-continents callout
+						dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+
+					}, sassVars.continents.spread.delay.out * 1000);
+
+				} else {
+
+					// new continent selected with nothing previously selected
+					let continent = continents.find(c => c.id === emotion);
+					this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.SELECTED);
+
+					this.displayTempNav(true, continent.id);
+
+					dispatcher.changeCallout(emotion, emotion, emotionsData.emotions[emotion].continent.desc);
+
+				}
 
 			} else {
 
@@ -232,6 +224,7 @@ const continentsSection = {
 		}
 
 		currentEmotion = emotion;
+		this.continentIsZoomed = false;
 
 	},
 
@@ -617,6 +610,7 @@ const continentsSection = {
 
 			setTimeout(() => {
 				// navigate to states automatically once continent zoom transition completes
+				this.continentIsZoomed = true;
 				dispatcher.navigate(dispatcher.SECTIONS.STATES, currentEmotion);
 			}, (sassVars.continents.spread.delay.in + sassVars.continents.spread.duration.in) * 1000);
 
