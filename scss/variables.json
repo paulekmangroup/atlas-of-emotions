@@ -1,10 +1,35 @@
 {
 	"continents": {
-		"spread": {
+		"panX": {
+			"duration": {
+				"in": 0.75,
+				"out": 0.75
+			}
+		},
+		"panY": {
 			"duration": {
 				"in": 1.5,
 				"out": 0.75
 			}
+		},
+		"spread": {
+			"delay": {
+				"in": 0.5,
+				"out": 0.25
+			},
+			"duration": {
+				"in": 1.5,
+				"out": 0.75
+			}
+		}
+	},
+	"states": {
+		"backgrounded": {
+			"scale": 0.6,
+			"top": "-10%"
+		},
+		"containers": {
+			"bottom": "10%"
 		}
 	}
 }

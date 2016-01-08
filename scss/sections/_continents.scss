@@ -14,15 +14,14 @@
 		cursor: pointer;
 		mix-blend-mode: multiply;
 
-		// TODO: quad-out to match JS
 		.circle-wrapper {
-			-webkit-transition: transform #{$continents-spread-duration-out}s cubic-bezier(0.645, 0.045, 0.355, 1);
-			transition:         transform #{$continents-spread-duration-out}s cubic-bezier(0.645, 0.045, 0.355, 1);
+			-webkit-transition: transform #{$continents-spread-duration-out}s #{$func-ease-out-quad};
+			transition:         transform #{$continents-spread-duration-out}s #{$func-ease-out-quad};
 			transform: rotateX(0);
 			&.flat {
-				transform: rotateX(80deg);
-				-webkit-transition: transform #{$continents-spread-duration-in}s cubic-bezier(0.645, 0.045, 0.355, 1);
-				transition:         transform #{$continents-spread-duration-in}s cubic-bezier(0.645, 0.045, 0.355, 1);
+				transform: rotateX(90deg);
+				-webkit-transition: transform #{$continents-spread-duration-in}s #{$func-ease-out-quad};
+				transition:         transform #{$continents-spread-duration-in}s #{$func-ease-out-quad};
 			}
 		}
 	}

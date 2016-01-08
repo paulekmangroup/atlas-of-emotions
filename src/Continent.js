@@ -314,7 +314,7 @@ export default class Continent {
 				.range([0, 0.5 * innerWidth]);
 
 		const growTime = sassVars.continents.spread.duration.in * 1000,
-			shrinkTime = sassVars.continents.spread.duration.out * 1000;
+			shrinkTime = 0.5 * growTime;
 
 		let ranges = this.transformRanges(emotionsData.emotions[this.id].states),
 			circles = this.circleWrapper.selectAll('circle')
@@ -369,8 +369,8 @@ export default class Continent {
 
 	gatherCircles () {
 
-		const growTime = sassVars.continents.spread.duration.in * 1000,
-			shrinkTime = sassVars.continents.spread.duration.out * 1000;
+		const growTime = sassVars.continents.spread.duration.out * 1000,
+			shrinkTime = 0.5 * growTime;
 
 		let calledOnEnd = false,
 			circles = this.circleWrapper.selectAll('circle')

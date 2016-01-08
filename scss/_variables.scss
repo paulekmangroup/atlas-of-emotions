@@ -21,18 +21,17 @@ $gradient-enjoyment: radial-gradient(ellipse at center, rgba(241,196,83,0.8) 0%,
 $gradient-fear: radial-gradient(ellipse at center, rgba(248,58,248,0.1) 0%, rgba(143,39,139,1) 100%);
 $gradient-sadness: radial-gradient(ellipse at center, rgba(200,220,240,1) 0%, rgba(30,152,211,1) 56%, rgba(64,70,164,1) 100%);
 
-
-
 // sizes and positions
 $header-height: 55px;
 $states-graph-width: 70%;
-$states-containers-bottom: 10%;
-$states-backgrounded-top: -10%;
-$states-backgrounded-scale: 0.6;
+// $states-containers-bottom: 10%;
+// $states-backgrounded-top: -10%;
+// $states-backgrounded-scale: 0.6;
 $actions-graph-width: 95%;
 $triggers-graph-width: 80%;
 
 // animation
+$func-ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 $label-fade-in-time-init: 2s;
 $label-fade-in-time: 1s;
 

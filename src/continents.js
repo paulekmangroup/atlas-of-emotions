@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import d3 from 'd3';
-import d3Transform from 'd3-transform';
 import TWEEN from 'tween.js';
 
 import dispatcher from './dispatcher.js';
@@ -8,6 +7,7 @@ import Circle from './Circle.js';
 import Continent from './Continent.js';
 
 import emotionsData from '../static/emotionsData.json';
+import sassVars from '../scss/variables.json';
 
 let continents,
 	continentContainer,
@@ -21,6 +21,8 @@ const continentsSection = {
 	isActive: false,
 
 	init: function (containerNode) {
+
+		this.sectionContainer = containerNode;
 
 		this.update = this.update.bind(this);
 
@@ -125,7 +127,7 @@ const continentsSection = {
 					// display all-continents callout
 					dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
 
-				}, 750);
+				}, sassVars.continents.spread.delay.out * 1000);
 
 				this.displayTempNav(false);
 
@@ -151,14 +153,6 @@ const continentsSection = {
 
 			if (emotion) {
 
-
-				// TODO:
-				// flatten out spread continent as it spreads.
-				// need to add container node within g.continent to hold <circles>,
-				// and apply rotateX to that (since there's already a transform on g.continent).
-
-
-
 				// zoom into specified emotion
 				let targetScale = 1.0;
 
@@ -173,13 +167,18 @@ const continentsSection = {
 
 				setTimeout(() => {
 					targetScale = this.transitions.focusZoomedOutContinent(emotion);
-				}, 500);
+				}, sassVars.continents.spread.delay.in * 1000);
 
 				setTimeout(() => {
 					this.transitions.spreadFocusedContinent(emotion, targetScale);
-				}, 750);
+				}, sassVars.continents.spread.delay.in * 1000);
 
 				this.displayTempNav(true, emotion);
+
+				setTimeout(() => {
+					// navigate to states automatically once continent zoom transition completes
+					dispatcher.navigate(dispatcher.SECTIONS.STATES, currentEmotion);
+				}, (sassVars.continents.spread.delay.in + sassVars.continents.spread.duration.in) * 1000);
 			} else {
 
 				// this was used when navigating from states view directly to all continents view,
@@ -329,7 +328,7 @@ const continentsSection = {
 			targetContinent.addTween({
 				'scaleX': targetScale,
 				'scaleY': targetScale,
-			}, 1500, TWEEN.Easing.Quadratic.InOut);
+			}, sassVars.continents.spread.duration.in * 1000, TWEEN.Easing.Quadratic.InOut);
 
 			return targetScale;
 
@@ -344,27 +343,62 @@ const continentsSection = {
 		// 1c. while 1a-b happens, pan toward continent location from current continent's location, according to all continents view layout.
 		panToContinent: function (emotion, previousEmotion) {
 
+			if (this.panTweenTimeout) {
+				clearTimeout(this.panTweenTimeout);
+			}
+
+			// calculate bottom of states graph
+			// TODO: 50 (graph margin) should be a var in variables.json
+			let statesBaselineOffset = centerY - (this.sectionContainer.offsetHeight * (parseInt(sassVars.states.containers.bottom.replace('%', '')) / 100) + 50);
+
 			let targetContinent = continents.find(continent => continent.id === emotion),
 				previousContinent = continents.find(continent => continent.id === previousEmotion),
 				targetCenter = {
 					x: centerX - (previousContinent ? previousContinent.x : 0),
-					y: centerY - (previousContinent ? previousContinent.y : 0)
+					y: centerY - (previousContinent ? previousContinent.y - statesBaselineOffset : 0)
 				},
 				targetX = centerX,
 				targetY = centerY;
 
 			if (targetContinent) {
 				targetX -= targetContinent.x;
-				targetY -= targetContinent.y;
+				targetY -= targetContinent.y - statesBaselineOffset;
+			}
+
+			let durationX,
+				durationY,
+				funcX,
+				funcY;
+
+			if (!!emotion) {
+				// panning to
+				durationX = sassVars.continents.panX.duration.in * 1000;
+				durationY = sassVars.continents.panY.duration.in * 1000;
+				funcX = TWEEN.Easing.Quadratic.InOut,
+				funcY = TWEEN.Easing.Quadratic.InOut;
+			} else {
+				// panning from
+				durationX = sassVars.continents.panX.duration.out * 1000;
+				durationY = sassVars.continents.panY.duration.out * 1000;
+				funcX = TWEEN.Easing.Quadratic.In,
+				funcY = TWEEN.Easing.Quadratic.Out;
 			}
 
 			this.addTween(targetCenter, {
-				'x': targetX,
-				'y': targetY
-			}, 1250, TWEEN.Easing.Quadratic.InOut)
+				'x': targetX
+			}, durationX, funcX)
 			.onUpdate(function () {
 				continents.forEach(continent => {
 					continent.centerX = this.x;
+				});
+			})
+			.start();
+
+			this.addTween(targetCenter, {
+				'y': targetY
+			}, durationY, funcY)
+			.onUpdate(function () {
+				continents.forEach(continent => {
 					continent.centerY = this.y;
 				});
 			})
