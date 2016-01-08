@@ -61,6 +61,7 @@ const continentsSection = {
 		this.onContinentMouseEnter = this.onContinentMouseEnter.bind(this);
 		this.onContinentMouseLeave = this.onContinentMouseLeave.bind(this);
 		this.onContinentMouseUp = this.onContinentMouseUp.bind(this);
+		this.onTempNavStatesClick = this.onTempNavStatesClick.bind(this);
 
 		this.createTempNav(containerNode);
 
@@ -89,6 +90,8 @@ const continentsSection = {
 		if (currentEmotion) {
 
 			// -->> TODO: keep in mind what happens if setEmotion() is called during a transition! <<--
+			
+			let currentContinent = continents.find(c => c.id === currentEmotion);
 
 			if (emotion) {
 
@@ -111,14 +114,51 @@ const continentsSection = {
 				// 2b. spread circles along horizontal axis as they fade in + grow
 				// 2c. (later) allow circles to drift slightly along horizontal axis only. this motion can be reflected in the states view as well.
 
-				let currentContinent = continents.find(c => c.id === currentEmotion);
+				let comingBackIntoContinents;
+				if (comingBackIntoContinents) {
+
+					// TODO: need to find a way to indicate we ended up in this block
+					// when not navigating from all continents view, but from somewhere else.
+					// can't rely on checking if continents are all scaled out, because they may not have been made yet
+					// (can check if inited or something...?)
+
+					// TODO: only do this when navigating back to selected continent from states section
+					/*
+					// transition back from zoomed continent to all continents
+
+					// gather circles of zoomed-in continent
+					this.transitions.gatherContinent(previousEmotion);
+					
+					setTimeout(() => {
+
+						// scale all continents back up to full size
+						this.transitions.scaleContinents(continents.map(continent => continent.id), 1.0);
+
+						// pan to center
+						this.transitions.panToContinent(null, previousEmotion);
+
+						// display all-continents callout
+						dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+
+					}, sassVars.continents.spread.delay.out * 1000);
+					*/
+
+				}
+
+				// new continent selected with a continent previously selected
 				currentContinent.highlightLevel = Continent.HIGHLIGHT_LEVELS.UNSELECTED;
 
 				let continent = continents.find(c => c.id === emotion);
 				this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.SELECTED);
 
+				this.displayTempNav(true, continent.id);
+
+				dispatcher.changeCallout(emotion, emotion, emotionsData.emotions[emotion].continent.desc);
+
 			} else {
 
+				// TODO: only do this when navigating back to selected continent from states section
+				/*
 				// transition back from zoomed continent to all continents
 
 				// gather circles of zoomed-in continent
@@ -136,8 +176,11 @@ const continentsSection = {
 					dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
 
 				}, sassVars.continents.spread.delay.out * 1000);
+				*/
 
+				continents.forEach(c => c.highlightLevel = Continent.HIGHLIGHT_LEVELS.NONE);
 				this.displayTempNav(false);
+				dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
 
 			}
 
@@ -161,8 +204,13 @@ const continentsSection = {
 
 			if (emotion) {
 
+				// new continent selected with nothing previously selected
 				let continent = continents.find(c => c.id === emotion);
 				this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.SELECTED);
+
+				this.displayTempNav(true, continent.id);
+
+				dispatcher.changeCallout(emotion, emotion, emotionsData.emotions[emotion].continent.desc);
 
 			} else {
 
@@ -291,8 +339,18 @@ const continentsSection = {
 	displayTempNav: function (visible, emotion) {
 
 		this.tempNav.querySelector('.prev').innerHTML = '<a href="#">HOME ▲</a>';
-		this.tempNav.querySelector('.next').innerHTML = '<a href="#states:' + emotion + '">STATES ▼</a>';
+		this.tempNav.querySelector('.next').innerHTML = '<a href="#">STATES ▼</a>';
 		this.tempNav.classList[visible ? 'add' : 'remove']('visible');
+
+		this.tempNav.querySelector('.next')[visible ? 'addEventListener' : 'removeEventListener']('click', this.onTempNavStatesClick);
+
+	},
+
+	onTempNavStatesClick: function (event) {
+
+		event.preventDefault();
+		event.stopImmediatePropagation();
+		this.onContinentMouseUp(continents.find(c => c.id === currentEmotion));
 
 	},
 
@@ -495,6 +553,10 @@ const continentsSection = {
 
 	onContinentMouseLeave: function (continent) {
 
+		// enough time to smoothly roll across a gap from one continent
+		// to another without selections flashing on/off
+		let mouseLeaveDelay = 80;
+
 		this.mouseLeaveTimeout = setTimeout(() => {
 
 			let otherHighlightedContinent;
@@ -524,7 +586,7 @@ const continentsSection = {
 				});
 			}
 			
-		}, 1);
+		}, mouseLeaveDelay);
 
 	},
 
@@ -553,8 +615,6 @@ const continentsSection = {
 				this.transitions.spreadFocusedContinent(continent.id, targetScale);
 			}, sassVars.continents.spread.delay.in * 1000);
 
-			this.displayTempNav(true, continent.id);
-
 			setTimeout(() => {
 				// navigate to states automatically once continent zoom transition completes
 				dispatcher.navigate(dispatcher.SECTIONS.STATES, currentEmotion);
@@ -563,7 +623,6 @@ const continentsSection = {
 		} else {
 
 			dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS, continent.id);
-			dispatcher.changeCallout(continent.id, continent.id, emotionsData.emotions[continent.id].continent.desc);
 
 		}
 

@@ -239,14 +239,12 @@ export default function (...initArgs) {
 
 	function setEmotion (emotion) {
 
-		if (currentEmotion === emotion) { return; }
-
 		updateHeader({
 			emotion: emotion
 		});
 
 		// setSection cues up emotion changes,
-		// making this function very simple.
+		// leaving this function very simple.
 		currentEmotion = emotion;
 
 	}
@@ -279,8 +277,6 @@ export default function (...initArgs) {
 		let dropdown = document.querySelector('#header .dropdown'),
 			menu = dropdown.querySelector('ul');
 
-		dropdown.querySelector('.dd-title').innerHTML = 'CHOOSE AN EMOTION';
-
 		Object.keys(dispatcher.EMOTIONS).forEach(emotionKey => {
 			let emotionName = dispatcher.EMOTIONS[emotionKey].toLowerCase();
 			let li = document.createElement('li');
@@ -300,8 +296,11 @@ export default function (...initArgs) {
 			document.querySelector('#header h1').innerHTML = config.section.toUpperCase();
 		}
 
+		let dropdownTitle = document.querySelector('#header .dd-title');
 		if (config.emotion) {
-			// document.querySelector('#header h1').innerHTML = sectionName.toUpperCase();
+			dropdownTitle.innerHTML = config.emotion.toUpperCase();
+		} else if (config.emotion === null) {
+			dropdownTitle.innerHTML = 'CHOOSE AN EMOTION';
 		}
 	}
 
@@ -335,8 +334,10 @@ export default function (...initArgs) {
 	function onDropdownItemClick (event) {
 
 		if (!event.target || event.target.nodeName.toLowerCase() !== 'li') { return; }
-
 		event.stopImmediatePropagation();
+
+		document.querySelector('#header .dropdown').classList.remove('open');
+
 		dispatcher.navigate(null, event.target.dataset.emotion);
 
 	}
@@ -404,7 +405,7 @@ export default function (...initArgs) {
 		} else if (defaults && defaults.emotion) {
 			setEmotion(defaults.emotion);
 		} else {
-			// continents supports an utter lack of emotion.
+			// continents section supports an utter lack of emotion.
 			setEmotion(null);
 		}
 
