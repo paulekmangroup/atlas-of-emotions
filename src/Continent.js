@@ -8,16 +8,34 @@ import emotionsData from '../static/emotionsData.json';
 import sassVars from '../scss/variables.json';
 
 const FRAMERATE = 60;
-const HIGHLIGHT_ALPHA_MOD = 1.5;
-const UNHIGHLIGHT_ALPHA_MOD = 0.3;
-const HIGHLIGHT_SPEED_MOD = 2.0;
-const UNHIGHLIGHT_SPEED_MOD = 0.5;
 
 // zoomed-in continents (with spread circles) are
 // this much larger than their corresponding state graph.
 const SPREAD_SCALE = 1.2;
 
 export default class Continent {
+
+	static HIGHLIGHT_LEVELS = {
+		NONE: 0,
+		UNSELECTED: 1,
+		UNHIGHLIGHTED: 2,
+		HIGHLIGHTED: 3,
+		SELECTED: 4
+	};
+	static HIGHLIGHT_ALPHA_MODS = [
+		1.0,
+		0.25,
+		0.5,
+		1.5,
+		2.0
+	];
+	static HIGHLIGHT_SPEED_MODS = [
+		1.0,
+		0.25,
+		0.5,
+		1.5,
+		2.0
+	];
 
 	static configsByEmotion = {
 		'anger': {
@@ -191,7 +209,7 @@ export default class Continent {
 		this.scaleY = 1.0;
 
 		this.circles = [];
-		this.isHighlighted = false;
+		this.highlightLevel = Continent.HIGHLIGHT_LEVELS.NONE;
 		this.isFocused = false;
 
 		this.d3Selection = container.append('g')
@@ -226,13 +244,17 @@ export default class Continent {
 			}
 
 			// set alpha and speed based on interaction
+			alphaMod = Continent.HIGHLIGHT_ALPHA_MODS[this.highlightLevel];
+			speedMod = Continent.HIGHLIGHT_SPEED_MODS[this.highlightLevel];
+			/*
 			if (!state.someContinentIsHighlighted) {
 				alphaMod = 1.0;
 				speedMod = 1.0;
 			} else {
-				alphaMod = this.isHighlighted ? HIGHLIGHT_ALPHA_MOD : UNHIGHLIGHT_ALPHA_MOD;
-				speedMod = this.isHighlighted ? HIGHLIGHT_SPEED_MOD : UNHIGHLIGHT_SPEED_MOD;
+				alphaMod = this.highlightLevel ? HIGHLIGHT_ALPHA_MOD : UNHIGHLIGHT_ALPHA_MOD;
+				speedMod = this.highlightLevel ? HIGHLIGHT_SPEED_MOD : UNHIGHLIGHT_SPEED_MOD;
 			}
+			*/
 
 			// apply drift
 			this.wander(this.drift, 3);

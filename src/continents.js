@@ -58,6 +58,8 @@ const continentsSection = {
 		});
 
 		// Bind event handlers to current scope
+		this.onContinentMouseEnter = this.onContinentMouseEnter.bind(this);
+		this.onContinentMouseLeave = this.onContinentMouseLeave.bind(this);
 		this.onContinentMouseUp = this.onContinentMouseUp.bind(this);
 
 		this.createTempNav(containerNode);
@@ -109,6 +111,12 @@ const continentsSection = {
 				// 2b. spread circles along horizontal axis as they fade in + grow
 				// 2c. (later) allow circles to drift slightly along horizontal axis only. this motion can be reflected in the states view as well.
 
+				let currentContinent = continents.find(c => c.id === currentEmotion);
+				currentContinent.highlightLevel = Continent.HIGHLIGHT_LEVELS.UNSELECTED;
+
+				let continent = continents.find(c => c.id === emotion);
+				this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.SELECTED);
+
 			} else {
 
 				// transition back from zoomed continent to all continents
@@ -153,32 +161,9 @@ const continentsSection = {
 
 			if (emotion) {
 
-				// zoom into specified emotion
-				let targetScale = 1.0;
+				let continent = continents.find(c => c.id === emotion);
+				this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.SELECTED);
 
-				this.transitions.scaleContinents(
-					continents
-						.filter(continent => continent.id !== emotion)
-						.map(continent => continent.id),
-					0.0
-				);
-				
-				this.transitions.panToContinent(emotion);
-
-				setTimeout(() => {
-					targetScale = this.transitions.focusZoomedOutContinent(emotion);
-				}, sassVars.continents.spread.delay.in * 1000);
-
-				setTimeout(() => {
-					this.transitions.spreadFocusedContinent(emotion, targetScale);
-				}, sassVars.continents.spread.delay.in * 1000);
-
-				this.displayTempNav(true, emotion);
-
-				setTimeout(() => {
-					// navigate to states automatically once continent zoom transition completes
-					dispatcher.navigate(dispatcher.SECTIONS.STATES, currentEmotion);
-				}, (sassVars.continents.spread.delay.in + sassVars.continents.spread.duration.in) * 1000);
 			} else {
 
 				// this was used when navigating from states view directly to all continents view,
@@ -493,66 +478,158 @@ const continentsSection = {
 
 	},
 
-	onContinentMouseEnter: function (event) {
+	onContinentMouseEnter: function (continent) {
 
-		var d33 = d3;
+		// if already selected, leave as-is
+		if (continent.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED) { return; }
 
-		let continent = d3.select(this).datum();
+		this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.HIGHLIGHTED);
+
+		// If mouseenter fires after mouseleave,
+		// prevent mouseleave behavior (maintain highlight)
+		if (this.mouseLeaveTimeout) {
+			clearTimeout(this.mouseLeaveTimeout);
+		}
+
+	},
+
+	onContinentMouseLeave: function (continent) {
+
+		this.mouseLeaveTimeout = setTimeout(() => {
+
+			let otherHighlightedContinent;
+			continents.some((c => {
+				if (c !== continent &&
+					(c.highlightLevel === Continent.HIGHLIGHT_LEVELS.HIGHLIGHTED ||
+					c.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED)) {
+					otherHighlightedContinent = c;
+					return true;
+				}
+			}));
+
+			if (otherHighlightedContinent) {
+				// If there is a highlighted continent other than the event target continent,
+				// just unhiglight the event target continent (unless it's selected, then leave as-is)
+				let unhighlightLevel = otherHighlightedContinent.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED ? Continent.HIGHLIGHT_LEVELS.UNSELECTED : Continent.HIGHLIGHT_LEVELS.UNHIGHLIGHTED;
+				if (continent && continent.highlightLevel !== Continent.HIGHLIGHT_LEVELS.SELECTED) {
+					continent.highlightLevel = unhighlightLevel;
+				}
+			} else {
+				// Else, turn off all highlights except selected.
+				let unhighlightLevel = continent.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED ? Continent.HIGHLIGHT_LEVELS.UNSELECTED : Continent.HIGHLIGHT_LEVELS.NONE;
+				continents.forEach(c => {
+					if (c.highlightLevel !== Continent.HIGHLIGHT_LEVELS.SELECTED) {
+						c.highlightLevel = unhighlightLevel;
+					}
+				});
+			}
+			
+		}, 1);
+
+	},
+
+	onContinentMouseUp: function (continent) {
+
+		if (continent.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED) {
+
+			// click on selected continent to zoom into continent and navigate to states
+			// TODO: might not want this, might want to adhere to only the scroll / down button interaction
+			let targetScale = 1.0;
+
+			this.transitions.scaleContinents(
+				continents
+					.filter(c => c !== continent)
+					.map(c => c.id),
+				0.0
+			);
+			
+			this.transitions.panToContinent(continent.id);
+
+			setTimeout(() => {
+				targetScale = this.transitions.focusZoomedOutContinent(continent.id);
+			}, sassVars.continents.spread.delay.in * 1000);
+
+			setTimeout(() => {
+				this.transitions.spreadFocusedContinent(continent.id, targetScale);
+			}, sassVars.continents.spread.delay.in * 1000);
+
+			this.displayTempNav(true, continent.id);
+
+			setTimeout(() => {
+				// navigate to states automatically once continent zoom transition completes
+				dispatcher.navigate(dispatcher.SECTIONS.STATES, currentEmotion);
+			}, (sassVars.continents.spread.delay.in + sassVars.continents.spread.duration.in) * 1000);
+
+		} else {
+
+			dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS, continent.id);
+			dispatcher.changeCallout(continent.id, continent.id, emotionsData.emotions[continent.id].continent.desc);
+
+		}
+
+		// continents.some(continent => {
+		// 	if (continent.isHighlighted) {
+
+		// 		if (currentEmotion !== continent.id) {
+
+		// 			// navigate from all continents view to zoomed-in continent view
+		// 			dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS, continent.id);
+		// 			dispatcher.changeCallout(continent.id, continent.id, emotionsData.emotions[continent.id].continent.desc);
+
+		// 		} else {
+
+		// 			// navigate from zoomed-in continent view to states view
+		// 			// TODO: this will happen on scroll, not click
+		// 			dispatcher.navigate(dispatcher.SECTIONS.STATES, continent.id); 
+
+		// 		}
+
+		// 		/*
+		// 		// fade out continent labels
+		// 		d3.selectAll('#continent-labels div')
+		// 			.style('opacity', 0.0);
+
+		// 		// shrink down continents
+		// 		let delays = {};
+		// 		delays[continent.id] = 500;
+		// 		this.transitions.scaleContinents(continents.map(continent => continent.id), 0.0, delays, 800)
+		// 		.then(() => {
+		// 			dispatcher.navigate(dispatcher.SECTIONS.STATES, continent.id);
+		// 		});
+		// 		*/
+				
+		// 		return true;
+		// 	}
+		// });
+
+	},
+
+	setContinentHighlight (continent, highlightLevel) {
+
+		// Set unhighlightLevel based on if any continent highlighted
+		let unhighlightLevel;
+		if (highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED || continents.some(c => c.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED)) {
+			unhighlightLevel = Continent.HIGHLIGHT_LEVELS.UNSELECTED;
+		} else {
+			unhighlightLevel = Continent.HIGHLIGHT_LEVELS.UNHIGHLIGHTED;
+		}
+
 		if (continent) {
 			continents.forEach(c => {
-				c.isHighlighted = (c === continent);
+				if (c === continent) {
+					c.highlightLevel = highlightLevel;
+				} else {
+					// unhighlight all but selected
+					if (c.highlightLevel !== Continent.HIGHLIGHT_LEVELS.SELECTED) {
+						c.highlightLevel = unhighlightLevel;
+					}
+				}
 			});
 		}
-
-	},
-
-	onContinentMouseLeave: function (event) {
-
-		let continent = d3.select(this).datum();
-		if (continent) {
-			continent.isHighlighted = false;
-		}
-
-	},
-
-	onContinentMouseUp: function (event) {
-
-		continents.some(continent => {
-			if (continent.isHighlighted) {
-
-				if (currentEmotion !== continent.id) {
-
-					// navigate from all continents view to zoomed-in continent view
-					dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS, continent.id);
-					dispatcher.changeCallout(continent.id, continent.id, emotionsData.emotions[continent.id].continent.desc);
-
-				} else {
-
-					// navigate from zoomed-in continent view to states view
-					// TODO: this will happen on scroll, not click
-					dispatcher.navigate(dispatcher.SECTIONS.STATES, continent.id); 
-
-				}
-
-				/*
-				// fade out continent labels
-				d3.selectAll('#continent-labels div')
-					.style('opacity', 0.0);
-
-				// shrink down continents
-				let delays = {};
-				delays[continent.id] = 500;
-				this.transitions.scaleContinents(continents.map(continent => continent.id), 0.0, delays, 800)
-				.then(() => {
-					dispatcher.navigate(dispatcher.SECTIONS.STATES, continent.id);
-				});
-				*/
-				
-				return true;
-			}
-		});
+		console.log(">>>>> TODO: apply highlight levels to continent labels as well");
 
 	}
+
 
 };
 
