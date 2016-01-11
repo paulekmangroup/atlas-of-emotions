@@ -87,10 +87,11 @@ h6 { font-size: 0.333333em; }
 	.dropdown {
 		display: inline-block;
 		position: absolute;
-		right: 1em;
+		width: 13em;
+		right: 0;
+		text-align: right;
 
 		outline: none;
-		// line-height: normal;
 
 		& button {
 			border: none;
@@ -114,8 +115,9 @@ h6 { font-size: 0.333333em; }
 	}
 
 	.dropdown-menu {
-		width: calc(100% + 2em);
-		left: -1em;
+		position: relative;
+		right: 0;
+		width: 100%;
 		margin: 0;
 		padding: 0;
 	    font-size: 1em;
