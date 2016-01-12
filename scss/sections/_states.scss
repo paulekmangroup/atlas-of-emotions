@@ -32,9 +32,9 @@
 			opacity: 0.3;
 		}
 	}
-	
+
 	.graph-container,
-	.state-labels {
+	.label-container {
 		position: absolute;
 		bottom: $states-containers-bottom;
 		left: 50%;
@@ -79,7 +79,7 @@
 		}
 	}
 
-	.state-labels {
+	.label-container {
 		top: 15%;
 
 		div {

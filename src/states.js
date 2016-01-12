@@ -153,7 +153,7 @@ export default {
 			let container = document.querySelector('.' + emotion + '.states-container'),
 				labelContainer = document.createElement('div');
 
-			labelContainer.classList.add('state-labels');
+			labelContainer.classList.add('label-container');
 			container.appendChild(labelContainer);
 			this.labelContainers[emotion] = labelContainer;
 
