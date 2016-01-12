@@ -35,23 +35,19 @@
 
 }
 
-#state-graph-container,
-#state-labels {
+.state-graph-container,
+.state-labels {
 	position: absolute;
 	bottom: $states-containers-bottom;
 	left: 50%;
 	margin-left: -$states-graph-width/2;
 	min-height: 400px;
 }
-#state-graph-container {
+
+.state-graph-container {
 	width: $states-graph-width;
 	height: 80%;
-}
-#state-labels {
-	top: 15%;
-}
 
-#state-graph-container {
 	.axis {
 		line,
 		path {
@@ -85,7 +81,9 @@
 	}
 }
 
-#state-labels {
+.state-labels {
+	top: 15%;
+
 	div {
 		position: absolute;
 		pointer-events: none;
