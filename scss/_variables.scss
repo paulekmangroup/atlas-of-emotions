@@ -24,9 +24,6 @@ $gradient-sadness: radial-gradient(ellipse at center, rgba(200,220,240,1) 0%, rg
 // sizes and positions
 $header-height: 55px;
 $states-graph-width: 70%;
-// $states-containers-bottom: 10%;
-// $states-backgrounded-top: -10%;
-// $states-backgrounded-scale: 0.6;
 $actions-graph-width: 95%;
 $triggers-graph-width: 80%;
 
@@ -34,6 +31,7 @@ $triggers-graph-width: 80%;
 $func-ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 $label-fade-in-time-init: 2s;
 $label-fade-in-time: 1s;
+$state-emotion-pan-func: ease;
 
 // mixins
 @mixin emotion-color () {
