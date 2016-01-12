@@ -19,8 +19,8 @@ export default {
 	],
 
 	sectionContainer: null,
-	labelContainer: null,
-	stateGraphContainer: null,
+	labelContainers: null,
+	graphContainers: null,
 	xScale: null,
 	yScale: null,
 
@@ -137,7 +137,7 @@ export default {
 			statesContainer.classList.add(emotion);
 
 			let graphContainer = document.createElement('div');
-			graphContainer.classList.add('state-graph-container');
+			graphContainer.classList.add('graph-container');
 			statesContainer.appendChild(graphContainer);
 			
 			containerNode.appendChild(statesContainer);
@@ -147,9 +147,17 @@ export default {
 
 	initLabels: function (containerNode) {
 
-		this.labelContainer = document.createElement('div');
-		this.labelContainer.classList.add('state-labels');
-		containerNode.appendChild(this.labelContainer);
+		this.labelContainers = {};
+		_.values(dispatcher.EMOTIONS).forEach(emotion => {
+
+			let container = document.querySelector('.' + emotion + '.states-container'),
+				labelContainer = document.createElement('div');
+
+			labelContainer.classList.add('state-labels');
+			container.appendChild(labelContainer);
+			this.labelContainers[emotion] = labelContainer;
+
+		});
 
 		this.backgroundedLabel = d3.select(containerNode).append('div')
 			.attr('id', 'backgrounded-state-label');
@@ -170,7 +178,7 @@ export default {
 		};
 
 		// All the same size, just grab the first one
-		let graphContainer = document.querySelector('.state-graph-container'),
+		let graphContainer = document.querySelector('#states .graph-container'),
 			innerWidth = graphContainer.offsetWidth - margin.left - margin.right,
 			innerHeight = graphContainer.offsetHeight - margin.top - margin.bottom;
 
@@ -203,9 +211,9 @@ export default {
 		//
 		// Set up each graph and draw axes
 		// 
-		this.stateGraphContainers = {};
+		this.graphContainers = {};
 		_.values(dispatcher.EMOTIONS).forEach(emotion => {
-			let graphContainer = document.querySelector('.' + emotion + ' .state-graph-container');
+			let graphContainer = document.querySelector('.' + emotion + ' .graph-container');
 
 			let svg = d3.select(graphContainer).append('svg')
 				.attr('width', graphContainer.offsetWidth)
@@ -228,7 +236,7 @@ export default {
 				.attr('text-anchor', (d, i) => i ? 'end' : 'start')
 				.attr('style', null);
 
-			this.stateGraphContainers[emotion] = graph;
+			this.graphContainers[emotion] = graph;
 
 		});
 
@@ -252,7 +260,7 @@ export default {
 		yOffsets[dispatcher.EMOTIONS.SADNESS] = 40;
 
 		let stateDisplay = this,
-			labels = d3.select(this.labelContainer).selectAll('div')
+			labels = d3.select(this.labelContainers[this.currentEmotion]).selectAll('div')
 				.data(ranges);
 
 		labels.enter().append('div');
@@ -276,7 +284,7 @@ export default {
 
 	setActive: function (val) {
 
-		d3.select(this.labelContainer).selectAll('div').select('h3')
+		d3.select(this.labelContainers[this.currentEmotion]).selectAll('div').select('h3')
 			.on('mouseover', val ? this.onStateMouseOver : null)
 			.on('mouseout', val ? this.onStateMouseOut : null)
 			.on('click', val ? this.onStateClick : null, true);
@@ -300,7 +308,7 @@ export default {
 
 		// transform state range into points for area chart
 		let transformedRanges = this.transformRanges(this.currentStatesData, this.currentEmotion, 0.0);
-		let graph = this.stateGraphContainers[emotion];
+		let graph = this.graphContainers[emotion];
 
 		let stateElements = graph.selectAll('path.area')
 			.data(transformedRanges).enter();
@@ -375,7 +383,8 @@ export default {
 			
 			// recede graph down into baseline
 			let transformedRanges = this.transformRanges(this.currentStatesData, this.currentEmotion, 0.0),
-				graph = this.stateGraphContainers[this.currentEmotion],
+				graph = this.graphContainers[this.currentEmotion],
+				labelContainer = this.labelContainers[this.currentEmotion],
 				areaSelection = graph.selectAll('path.area');
 
 			if (areaSelection.size()) {
@@ -391,7 +400,7 @@ export default {
 							graph.selectAll('linearGradient').remove();
 
 							// ...remove labels
-							d3.select(this.labelContainer).selectAll('div').remove();
+							d3.select(labelContainer).selectAll('div').remove();
 
 							// ...and resolve promise to continue transition when complete
 							resolve();
@@ -438,16 +447,18 @@ export default {
 		// but this function does not. may need to remove labels and axes here,
 		// on transition end / after a timeout.
 
-		// fade out labels
-		d3.select(this.labelContainer).selectAll('div')
-			.classed('visible', false)
-		.selectAll('h3')
-			.style('opacity', null);
-
-		// fade out axes
 		if (this.currentEmotion) {
-			this.stateGraphContainers[this.currentEmotion].selectAll('.axis')
+
+			// fade out labels
+			d3.select(this.labelContainers[this.currentEmotion]).selectAll('div')
+				.classed('visible', false)
+			.selectAll('h3')
+				.style('opacity', null);
+
+			// fade out axes
+			this.graphContainers[this.currentEmotion].selectAll('.axis')
 				.classed('visible', false);
+
 		}
 
 		this.tempNav.classList.remove('visible');
@@ -1148,7 +1159,8 @@ export default {
 	// does not set any state, just displays.
 	displayHighlightedState: function (state) {
 
-		let stateName = state || this.highlightedState || '';
+		let stateName = state || this.highlightedState || '',
+			labelContainer = this.labelContainers[this.currentEmotion];
 		if (stateName) {
 
 			let stateIndex = this.currentStatesData.findIndex(d => d.name === stateName);
@@ -1156,7 +1168,7 @@ export default {
 			d3.selectAll('path.area')
 				.style('opacity', (data, index) => index === stateIndex ? 1.0 : 0.2);
 
-			d3.select(this.labelContainer).selectAll('div h3')
+			d3.select(labelContainer).selectAll('div h3')
 				.style('opacity', (data, index) => index === stateIndex ? 1.0 : 0.2);
 
 		} else {
@@ -1164,7 +1176,7 @@ export default {
 			d3.selectAll('path.area')
 				.style('opacity', null);
 
-			d3.select(this.labelContainer).selectAll('div h3')
+			d3.select(labelContainer).selectAll('div h3')
 				.style('opacity', null);
 
 		}

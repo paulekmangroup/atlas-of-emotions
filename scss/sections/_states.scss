@@ -32,82 +32,81 @@
 			opacity: 0.3;
 		}
 	}
+	
+	.graph-container,
+	.state-labels {
+		position: absolute;
+		bottom: $states-containers-bottom;
+		left: 50%;
+		margin-left: -$states-graph-width/2;
+		min-height: 400px;
+	}
 
-}
+	.graph-container {
+		width: $states-graph-width;
+		height: 80%;
 
-.state-graph-container,
-.state-labels {
-	position: absolute;
-	bottom: $states-containers-bottom;
-	left: 50%;
-	margin-left: -$states-graph-width/2;
-	min-height: 400px;
-}
-
-.state-graph-container {
-	width: $states-graph-width;
-	height: 80%;
-
-	.axis {
-		line,
-		path {
-			fill: none;
-			stroke: $text-color;
-			shape-rendering: crispEdges;
-		}
-
-		&.labels {
+		.axis {
 			line,
 			path {
-				display: none
+				fill: none;
+				stroke: $text-color;
+				shape-rendering: crispEdges;
 			}
-			text {
-				@extend %raleway-light;
-				font-size: 0.8em;
+
+			&.labels {
+				line,
+				path {
+					display: none
+				}
+				text {
+					@extend %raleway-light;
+					font-size: 0.8em;
+				}
+			}
+
+			opacity: 0.0;
+			transition: opacity #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
+
+			&.visible {
+				opacity: 1.0;
 			}
 		}
 
-		opacity: 0.0;
-		transition: opacity #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
-
-		&.visible {
-			opacity: 1.0;
-		}
-	}
-
-	.area {
-		mix-blend-mode: multiply;
-		cursor: pointer;
-	}
-}
-
-.state-labels {
-	top: 15%;
-
-	div {
-		position: absolute;
-		pointer-events: none;
-
-		opacity: 0.0;
-		transition: opacity #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
-
-		&.visible {
-			opacity: 1.0;
-		}
-
-		h3 {
-			transform: translate(-50%, -50%);
-			margin: 0;
+		.area {
+			mix-blend-mode: multiply;
 			cursor: pointer;
-			pointer-events: auto;
 		}
 	}
 
-	.label {
-		@include emotion-color;
-		white-space: nowrap;
-	}
+	.state-labels {
+		top: 15%;
 
+		div {
+			position: absolute;
+			pointer-events: none;
+
+			opacity: 0.0;
+			transition: opacity #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
+
+			&.visible {
+				opacity: 1.0;
+			}
+
+			h3 {
+				transform: translate(-50%, -50%);
+				margin: 0;
+				cursor: pointer;
+				pointer-events: auto;
+			}
+		}
+
+		.label {
+			@include emotion-color;
+			white-space: nowrap;
+		}
+
+	}
 }
 
 #backgrounded-state-label {
