@@ -35,6 +35,11 @@
 			"panX": {
 				"duration": 0.75,
 				"delay": 0.25
+			},
+			"scale": {
+				"in": {
+					"delay": 0.65
+				}
 			}
 		}
 	}

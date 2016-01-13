@@ -290,12 +290,14 @@ export default {
 			currentGraph.style('transform', 'translateX(0)');
 			currentLabels.classed('transitioning active', true);
 			currentLabels.style('transform', 'translateX(0)');
+		}, sassVars.states.emotions.panX.delay * 1000);
 
+		setTimeout(() => {
 			// animate in emotion graph if first time viewing
 			if (emotionState.scale !== 1.0) {
 				this.setEmotionScale(emotion, 1.0);
 			}
-		}, sassVars.states.emotions.panX.delay * 1000);
+		}, sassVars.states.emotions.scale.in.delay * 1000);
 
 		if (!this.isBackgrounded) {
 
@@ -1042,7 +1044,7 @@ export default {
 			
 			disgust: {
 				ease: d3.ease('poly-in', 4.0),
-				delay: (d, i) => 500 + Math.random() * 100 * i,
+				delay: (d, i) => 150 + Math.random() * 100 * i,
 				duration: 1000
 			},
 			
@@ -1076,7 +1078,7 @@ export default {
 						: a * (t -= m3) * t + b3;
 					};
 				}(0.35)),
-				delay: (d, i) => 150 + Math.random() * 150 * i,
+				delay: (d, i) => 500 + Math.random() * 150 * i,
 				duration: 750
 			},
 
@@ -1088,7 +1090,7 @@ export default {
 
 			sadness: {
 				ease: d3.ease('back-out', 2.0),
-				delay: (d, i) => 250 + Math.random() * 1250,
+				delay: (d, i) => 150 + Math.random() * 1250,
 				duration: 4000
 			},
 			
