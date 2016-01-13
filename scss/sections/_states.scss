@@ -133,8 +133,10 @@
 
 #backgrounded-state-label {
 	position: absolute;
-	text-align: center;
+	top: 5em;
 	left: 50%;
+	
+	text-align: center;
 	pointer-events: none;
 	
 	@include emotion-color;

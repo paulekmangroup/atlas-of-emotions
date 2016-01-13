@@ -224,17 +224,6 @@ export default {
 
 	},
 
-	setActive: function (val) {
-
-		if (this.currentEmotion) {
-			this.labelContainers[this.currentEmotion].selectAll('div').select('h3')
-				.on('mouseover', val ? this.onStateMouseOver : null)
-				.on('mouseout', val ? this.onStateMouseOut : null)
-				.on('click', val ? this.onStateClick : null, true);
-		}
-
-	},
-
 	setEmotion: function (emotion) {
 
 		if (!~_.values(dispatcher.EMOTIONS).indexOf(emotion)) {
@@ -287,7 +276,6 @@ export default {
 		if (currentGraph.classed('transitioning')) {
 			// if new emotion is still transitioning, remove transitionend handler
 			currentGraph.on('transitionend', null);
-			currentLabels.on('transitionend', null);
 		} else {
 			// else, move into position immediately to prepare for transition
 			currentGraph.classed('transitioning', false);
@@ -312,7 +300,6 @@ export default {
 		if (!this.isBackgrounded) {
 
 			this.renderLabels(emotionState.ranges[1]);
-			this.setActive(true);
 
 			setTimeout(() => {
 				this.graphContainers[emotion].selectAll('.axis')
@@ -328,6 +315,8 @@ export default {
 			this.tempNav.classList.add('visible');
 
 		}
+
+		this.setActive(!this.isBackgrounded);
 
 	},
 
@@ -359,10 +348,7 @@ export default {
 			.attr('class', 'area')
 			.attr('d', this.areaGenerators[this.currentEmotion])
 			.attr('fill', (d, i) => 'url(#' + emotionGradientName + '-' + i + ')')
-			.call(this.applyEffects.bind(this))
-			.on('mouseover', this.onStateMouseOver)
-			.on('mouseout', this.onStateMouseOut)
-			.on('click', this.onStateClick);
+			.call(this.applyEffects.bind(this));
 
 		emotionState.rendered = true;
 
@@ -456,6 +442,38 @@ export default {
 
 	},
 
+	setActive: function (val) {
+
+		if (this.currentEmotion) {
+
+			// clear out any existing handlers
+			this.graphContainers[this.currentEmotion].selectAll('path.area')
+				.on('mouseover', null)
+				.on('mouseout', null)
+				.on('click', null, true);
+
+			this.labelContainers[this.currentEmotion].selectAll('div').select('h3')
+				.on('mouseover', null)
+				.on('mouseout', null)
+				.on('click', null, true);
+
+			// add new handlers if active
+			if (val) {
+				this.graphContainers[this.currentEmotion].selectAll('path.area')
+					.on('mouseover', this.onStateMouseOver)
+					.on('mouseout', this.onStateMouseOut)
+					.on('click', this.onStateClick, true);
+
+				this.labelContainers[this.currentEmotion].selectAll('div').select('h3')
+					.on('mouseover', this.onStateMouseOver)
+					.on('mouseout', this.onStateMouseOut)
+					.on('click', this.onStateClick, true);
+			}
+
+		}
+
+	},
+
 	/**
 	 * States section stays open, with limited interactivity,
 	 * in actions, triggers, and moods. `setBackgrounded()` toggles this state.
@@ -473,6 +491,14 @@ export default {
 			// TODO: resolve on completion of animation
 			resolve();
 
+		});
+
+	},
+
+	applyEventListenersToEmotion: function (emotion, handlersByEvent) {
+
+		Object.keys(handlersByEvent).forEach(event => {
+			this.graphContainers[emotion].on(event, handlersByEvent[event]);
 		});
 
 	},

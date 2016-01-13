@@ -1,3 +1,4 @@
+import d3 from 'd3';
 import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
@@ -40,6 +41,16 @@ export default {
 		this.overlayContainer.removeAttribute('style');
 		this.overlayContainer.classList.add(this.currentEmotion);
 
+		states.applyEventListenersToEmotion(emotion, {
+			mouseover: this.onElementOver,
+			mouseout: this.onElementOut,
+			click: this.onElementClick
+		});
+
+		// TODO: delegate this responsibility to actions.js
+		document.querySelector('#action-graph-container g').addEventListener('mouseover', this.onElementOver, true);
+		document.querySelector('#action-graph-container g').addEventListener('mouseout', this.onElementOut, true);
+		document.querySelector('#action-graph-container g').addEventListener('click', this.onElementClick, true);
 		
 		this.tempNav.querySelector('.prev').innerHTML = '<a href="#triggers:' + emotion + '">TRIGGERS ▲</a>';
 		this.tempNav.classList.add('visible');
@@ -47,14 +58,6 @@ export default {
 	},
 
 	open: function () {
-
-		// TODO: delegate this responsibility to states.js and actions.js
-		document.querySelector('#state-graph-container').addEventListener('mouseover', this.onElementOver, true);
-		document.querySelector('#action-graph-container g').addEventListener('mouseover', this.onElementOver, true);
-		document.querySelector('#state-graph-container').addEventListener('mouseout', this.onElementOut, true);
-		document.querySelector('#action-graph-container g').addEventListener('mouseout', this.onElementOut, true);
-		document.querySelector('#state-graph-container').addEventListener('click', this.onElementClick, true);
-		document.querySelector('#action-graph-container g').addEventListener('click', this.onElementClick, true);
 
 		// transition time from _states.scss::#states
 		let openDelay = 1500;
@@ -67,12 +70,15 @@ export default {
 
 	close: function () {
 
-		// TODO: delegate this responsibility to states.js and actions.js
-		document.querySelector('#state-graph-container').removeEventListener('mouseover', this.onElementOver, true);
+		states.applyEventListenersToEmotion(this.currentEmotion, {
+			mouseover: null,
+			mouseout: null,
+			click: null
+		});
+
+		// TODO: delegate this responsibility to actions.js
 		document.querySelector('#action-graph-container g').removeEventListener('mouseover', this.onElementOver, true);
-		document.querySelector('#state-graph-container').removeEventListener('mouseout', this.onElementOut, true);
 		document.querySelector('#action-graph-container g').removeEventListener('mouseout', this.onElementOut, true);
-		document.querySelector('#state-graph-container').removeEventListener('click', this.onElementClick, true);
 		document.querySelector('#action-graph-container g').removeEventListener('click', this.onElementClick, true);
 		document.querySelector('#main').removeEventListener('click', this.onBackgroundClick, true);
 
@@ -93,6 +99,7 @@ export default {
 
 	onElementOver: function (event) {
 
+		if (!event) { event = d3.event; }
 		event.stopImmediatePropagation();
 
 		this.overlayContainer.classList.add('visible');
@@ -105,6 +112,7 @@ export default {
 
 	onElementOut: function (event) {
 
+		if (!event) { event = d3.event; }
 		event.stopImmediatePropagation();
 
 		this.mouseOutTimeout = setTimeout(() => {
@@ -117,6 +125,7 @@ export default {
 
 	onElementClick: function (event) {
 
+		if (!event) { event = d3.event; }
 		event.stopImmediatePropagation();
 
 		this.setCallout(true);
