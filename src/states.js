@@ -3,6 +3,7 @@ import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
 import emotionsData from '../static/emotionsData.json';
+import sassVars from '../scss/variables.json';
 
 const LABEL_APPEAR_DELAY = 1000;
 
@@ -170,17 +171,6 @@ export default {
 
 			this.graphContainers[emotion] = d3.select(graphContainer);
 
-			// plan for transitions:
-			// apply translate/opacity only to emotions that are part of transition, for performance
-			// each emotion should act as though it's static, with a moving window onto it
-			// but in reality, the window is staying still and the emotions are moving.
-			// therefore, the fake location of the window is applied as a negative offset to each emotion.
-			// so, we'll have to move all emotions on each transition,
-			// but those not participating in the transition are updated immediately,
-			// and those in the transition will be css-transitioned.
-			// so, transition rules exist within a class ruleset,
-			// and that class is added/removed for emotions during a transition.
-			// and `transform: translateX()` is set via JS.
 			this.emotionStates[emotion] = {
 				index: i,
 				rendered: false,
@@ -247,13 +237,6 @@ export default {
 
 	setEmotion: function (emotion) {
 
-		//
-		// TODO: implement transitions between emotions
-		// TODO: set up all emotions beforehand
-		// 			(calculate all ranges, set up area generators, etc)
-		//			and just draw the graph here.
-		//
-
 		if (!~_.values(dispatcher.EMOTIONS).indexOf(emotion)) {
 			emotion = 'anger';
 		}
@@ -266,22 +249,53 @@ export default {
 		}
 
 		// transition graphs and labels
+		let dx = 0;
 		if (previousEmotion) {
 			let previousGraph = this.graphContainers[previousEmotion],
 				previousLabels = this.labelContainers[previousEmotion];
 			previousGraph.classed('active', false);
 			previousLabels.classed('active', false);
 			previousGraph.on('transitionend', event => {
-				console.log(">>>>> transitionend");
 				previousGraph.on('transitionend', null);
+				previousGraph.style('transform', null);
 				previousGraph.classed('transitioning', false);
 				previousLabels.classed('transitioning', false);
 			});
-		}
-		this.graphContainers[emotion].classed('transitioning active', true);
-		this.labelContainers[emotion].classed('transitioning active', true);
 
-		console.log(">>>>> TODO: transition to index:", emotionState.index);
+			let containerWidth = document.querySelector('#states .graph-container').offsetWidth;
+			dx = (this.emotionStates[emotion].index - this.emotionStates[previousEmotion].index) * 1.25*containerWidth;
+
+			// delay to allow a little time for opacity to come up before translating
+			setTimeout(() => {
+				previousGraph.style('transform', 'translateX(' + -dx + 'px)');
+			}, sassVars.states.emotions.panX.delay * 1000);
+		}
+
+		let currentGraph = this.graphContainers[emotion];
+		if (currentGraph.classed('transitioning')) {
+			// if new emotion is still transitioning, remove transitionend handler
+			currentGraph.on('transitionend', null);
+		} else {
+			// else, move into position immediately to prepare for transition
+			currentGraph.classed('transitioning', false);
+			currentGraph.style('transform', 'translateX(' + dx + 'px)');
+		}
+
+		//
+		// TODO weds: problem is that we want to transition in opacity before transitioning position.
+		// need to set position immediately, with no transition, then begin fade in, then transition translateX.
+		// 
+
+		// delay to allow a little time for opacity to come up before translating
+		setTimeout(() => {
+			currentGraph.classed('transitioning active', true);
+			//
+			// TODO: probably have to do similar transitioning/active dance with labels
+			// 
+			this.labelContainers[emotion].classed('transitioning active', true);
+
+			currentGraph.style('transform', 'translateX(0)');
+		}, sassVars.states.emotions.panX.delay * 1000);
 
 		if (!this.isBackgrounded) {
 

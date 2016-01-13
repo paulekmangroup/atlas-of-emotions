@@ -33,7 +33,8 @@
 		},
 		"emotions": {
 			"panX": {
-				"duration": 0.75
+				"duration": 0.75,
+				"delay": 0.25
 			}
 		}
 	}
