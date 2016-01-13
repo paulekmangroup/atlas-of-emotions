@@ -173,9 +173,9 @@ export default {
 
 			this.emotionStates[emotion] = {
 				index: i,
-				rendered: false,
 				data: null,
-				ranges: null
+				ranges: null,
+				scale: 0.0
 			};
 
 		});
@@ -244,7 +244,7 @@ export default {
 		this.currentEmotion = emotion;
 
 		let emotionState = this.emotionStates[emotion];
-		if (!emotionState.rendered) {
+		if (!emotionState.data) {
 			this.renderEmotion(emotion);
 		}
 
@@ -258,48 +258,60 @@ export default {
 			previousGraph.on('transitionend', event => {
 				previousGraph.on('transitionend', null);
 				previousGraph.style('transform', null);
+				previousLabels.style('transform', null);
 				previousGraph.classed('transitioning', false);
 				previousLabels.classed('transitioning', false);
 			});
 
 			let containerWidth = document.querySelector('#states .graph-container').offsetWidth;
-			dx = (this.emotionStates[emotion].index - this.emotionStates[previousEmotion].index) * 1.25*containerWidth;
+
+			// position according to distance between emotion columns
+			// dx = (emotionState.index - this.emotionStates[previousEmotion].index) * 1.25*containerWidth;
+			
+			// just place left or right one viewport, instead of adhering to column positions,
+			// to avoid animations that are unnecessarily fast'n'flashy.
+			dx = 1.25 * containerWidth;
+			if (emotionState.index < this.emotionStates[previousEmotion].index) {
+				dx *= -1;
+			}
 
 			// delay to allow a little time for opacity to come up before translating
 			setTimeout(() => {
 				previousGraph.style('transform', 'translateX(' + -dx + 'px)');
+				previousLabels.style('transform', 'translateX(' + -dx + 'px)');
 			}, sassVars.states.emotions.panX.delay * 1000);
 		}
 
-		let currentGraph = this.graphContainers[emotion];
+		let currentGraph = this.graphContainers[emotion],
+			currentLabels = this.labelContainers[emotion];
 		if (currentGraph.classed('transitioning')) {
 			// if new emotion is still transitioning, remove transitionend handler
 			currentGraph.on('transitionend', null);
+			currentLabels.on('transitionend', null);
 		} else {
 			// else, move into position immediately to prepare for transition
 			currentGraph.classed('transitioning', false);
 			currentGraph.style('transform', 'translateX(' + dx + 'px)');
+			currentLabels.classed('transitioning', false);
+			currentLabels.style('transform', 'translateX(' + dx + 'px)');
 		}
-
-		//
-		// TODO weds: problem is that we want to transition in opacity before transitioning position.
-		// need to set position immediately, with no transition, then begin fade in, then transition translateX.
-		// 
 
 		// delay to allow a little time for opacity to come up before translating
 		setTimeout(() => {
 			currentGraph.classed('transitioning active', true);
-			//
-			// TODO: probably have to do similar transitioning/active dance with labels
-			// 
-			this.labelContainers[emotion].classed('transitioning active', true);
-
 			currentGraph.style('transform', 'translateX(0)');
+			currentLabels.classed('transitioning active', true);
+			currentLabels.style('transform', 'translateX(0)');
+
+			// animate in emotion graph if first time viewing
+			if (emotionState.scale !== 1.0) {
+				this.setEmotionScale(emotion, 1.0);
+			}
 		}, sassVars.states.emotions.panX.delay * 1000);
 
 		if (!this.isBackgrounded) {
 
-			this.renderLabels(this.emotionStates[emotion].ranges);
+			this.renderLabels(emotionState.ranges[1]);
 			this.setActive(true);
 
 			setTimeout(() => {
@@ -321,16 +333,20 @@ export default {
 
 	renderEmotion: function (emotion) {
 
-		let statesData = this.parseStates();
-		this.emotionStates[emotion].data = statesData;
+		let statesData = this.parseStates(),
+			emotionState = this.emotionStates[emotion];
+		emotionState.data = statesData;
 
 		// transform state range into points for area chart
-		let transformedRanges = this.transformRanges(statesData, this.currentEmotion, 0.0);
+		emotionState.ranges = {
+			'0': this.transformRanges(statesData, emotion, 0.0),
+			'1': this.transformRanges(statesData, emotion, 1.0)
+		};
 
 		let graph = this.graphContainers[emotion].select('g');
 
 		let stateElements = graph.selectAll('path.area')
-			.data(transformedRanges).enter();
+			.data(this.emotionStates[emotion].ranges[0]).enter();
 		let emotionGradientName = this.currentEmotion + '-gradient';
 
 		stateElements.append('linearGradient')
@@ -348,14 +364,24 @@ export default {
 			.on('mouseout', this.onStateMouseOut)
 			.on('click', this.onStateClick);
 
-		// grow the states upwards
-		transformedRanges = this.transformRanges(statesData, this.currentEmotion, 1.0);
+		emotionState.rendered = true;
+
+	},
+
+	setEmotionScale: function (emotion, scale) {
+
+		let graph = this.graphContainers[emotion].select('g'),
+			ranges = this.emotionStates[emotion].ranges[scale];
+
+		if (!ranges) {
+			ranges = this.emotionStates[emotion].ranges[scale.toString()] = this.transformRanges(this.emotionStates[emotion].data, emotion, scale);
+		}
+
 		graph.selectAll('path.area')
-			.data(transformedRanges)
+			.data(ranges)
 			.call(this.applyTransitions);
 
-		// store ranges only after they're scaled back to 1.0
-		this.emotionStates[emotion].ranges = transformedRanges;
+		this.emotionStates[emotion].scale = scale;
 
 	},
 
@@ -1092,6 +1118,10 @@ export default {
 	onStateMouseOver: function (d, i) {
 
 		let statesData = this.emotionStates[this.currentEmotion].data[i];
+		if (!statesData) {
+			throw new Error('statesData not found for onStateMouseOver at index ' + i);
+		}
+
 		if (this.isBackgrounded) {
 			this.displayBackgroundedState(statesData.name);
 		} else {
