@@ -43,18 +43,17 @@
 		margin-left: -$states-graph-width/2;
 		min-height: 400px;
 
-		// display: none;
 		opacity: 0.0;
+		pointer-events: none;
 
 		&.transitioning {
-			// display: block;
 			transition-property: transform, opacity;
 			transition-duration: #{$states-emotions-panX-duration}s;
 			transition-timing-function: ease-in-out, cubic-bezier(0.9, 0.0, 0.5, 1.0);
 		}
 
 		&.active {
-			// display: block;
+			pointer-events: auto;
 			opacity: 1.0;
 		}
 	}
@@ -114,8 +113,10 @@
 				transform: translate(-50%, -50%);
 				margin: 0;
 				cursor: pointer;
-				pointer-events: auto;
 			}
+		}
+		&.active h3 {
+			pointer-events: auto;
 		}
 
 		.label {
@@ -123,6 +124,10 @@
 			white-space: nowrap;
 		}
 
+	}
+
+	.states-defs {
+		pointer-events: none;
 	}
 }
 

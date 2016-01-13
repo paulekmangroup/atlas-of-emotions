@@ -1205,12 +1205,13 @@ export default {
 		if (!this.currentEmotion) { return; }
 
 		let stateName = state || this.highlightedState || '',
+			graphContainer = this.graphContainers[this.currentEmotion],
 			labelContainer = this.labelContainers[this.currentEmotion];
 		if (stateName) {
 
 			let stateIndex = this.emotionStates[this.currentEmotion].data.findIndex(d => d.name === stateName);
 
-			d3.selectAll('path.area')
+			graphContainer.selectAll('path.area')
 				.style('opacity', (data, index) => index === stateIndex ? 1.0 : 0.2);
 
 			labelContainer.selectAll('div h3')
@@ -1218,7 +1219,7 @@ export default {
 
 		} else {
 
-			d3.selectAll('path.area')
+			graphContainer.selectAll('path.area')
 				.style('opacity', null);
 
 			labelContainer.selectAll('div h3')
