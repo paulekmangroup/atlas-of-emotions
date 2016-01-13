@@ -47,10 +47,11 @@ export default {
 			click: this.onElementClick
 		});
 
-		// TODO: delegate this responsibility to actions.js
-		document.querySelector('#action-graph-container g').addEventListener('mouseover', this.onElementOver, true);
-		document.querySelector('#action-graph-container g').addEventListener('mouseout', this.onElementOut, true);
-		document.querySelector('#action-graph-container g').addEventListener('click', this.onElementClick, true);
+		actions.applyEventListenersToEmotion(emotion, {
+			mouseover: this.onElementOver,
+			mouseout: this.onElementOut,
+			click: this.onElementClick
+		});
 		
 		this.tempNav.querySelector('.prev').innerHTML = '<a href="#triggers:' + emotion + '">TRIGGERS ▲</a>';
 		this.tempNav.classList.add('visible');
@@ -76,10 +77,12 @@ export default {
 			click: null
 		});
 
-		// TODO: delegate this responsibility to actions.js
-		document.querySelector('#action-graph-container g').removeEventListener('mouseover', this.onElementOver, true);
-		document.querySelector('#action-graph-container g').removeEventListener('mouseout', this.onElementOut, true);
-		document.querySelector('#action-graph-container g').removeEventListener('click', this.onElementClick, true);
+		actions.applyEventListenersToEmotion(this.currentEmotion, {
+			mouseover: null,
+			mouseout: null,
+			click: null
+		});
+
 		document.querySelector('#main').removeEventListener('click', this.onBackgroundClick, true);
 
 		return new Promise((resolve, reject) => {

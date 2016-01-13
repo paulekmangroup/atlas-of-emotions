@@ -620,6 +620,14 @@ export default {
 
 	},
 
+	applyEventListenersToEmotion: function (emotion, handlersByEvent) {
+
+		Object.keys(handlersByEvent).forEach(event => {
+			this.actionGraphContainer.on(event, handlersByEvent[event]);
+		});
+
+	},
+
 	setHighlightedAction: function (action) {
 
 		this.highlightedAction = action;
