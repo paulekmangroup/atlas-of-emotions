@@ -369,7 +369,7 @@ export default {
 		
 		if (!this.isBackgrounded) {
 			states.setActive(true);
-			
+
 			this.tempNav.querySelector('.prev').innerHTML = '<a href="#states:' + emotion + '">STATES ▲</a>';
 			this.tempNav.querySelector('.next').innerHTML = '<a href="#triggers:' + emotion + '">TRIGGERS ▼</a>';
 			this.tempNav.classList.add('visible');
@@ -508,6 +508,25 @@ export default {
 
 	},
 
+	setHighlightedState: function (state) {
+
+		if (!state) {
+
+			this.displayHighlightedAction(null);
+
+		} else {
+
+			let stateActions = this.actionsData[this.currentEmotion].actions[state].actions.map(action => action.name);
+			d3.selectAll('g.action-arrow')
+				.style('opacity', (data, index) => ~stateActions.indexOf(data.name) ? 1.0 : 0.2);
+
+			this.labelContainer.selectAll('div.label')
+				.style('opacity', (data, index) => ~stateActions.indexOf(data.name) ? 1.0 : 0.2);
+
+		}
+		
+	},
+
 	renderLabels: function (actionsData) {
 
 		if (actionsData) {
@@ -573,7 +592,7 @@ export default {
 			if (!options || !options.inBackground) {
 				this.resetCallout();
 			}
-			dispatcher.setEmotionState(null);
+			dispatcher.setEmotionState(null, true);
 		}, openDelay);
 
 	},

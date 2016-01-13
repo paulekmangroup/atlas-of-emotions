@@ -369,10 +369,14 @@ export default function (...initArgs) {
 
 	}
 
-	function onEmotionStateChange (state) {
+	function onEmotionStateChange (state, selected) {
 
-		sections.actions.setState(state);
-		sections.states.setBackgroundedState(state);
+		if (selected) {
+			sections.actions.setState(state);
+			sections.states.setBackgroundedState(state);
+		} else {
+			sections.actions.setHighlightedState(state);
+		}
 
 	}
 

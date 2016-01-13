@@ -1152,6 +1152,7 @@ export default {
 
 		if (this.isBackgrounded) {
 			this.displayBackgroundedState(statesData.name);
+			dispatcher.setEmotionState(statesData.name, false);
 		} else {
 			this.displayHighlightedState(statesData.name);
 		}
@@ -1162,6 +1163,7 @@ export default {
 
 		if (this.isBackgrounded) {
 			this.displayBackgroundedState(null);
+			dispatcher.setEmotionState(null, false);
 		} else {
 			this.displayHighlightedState(null);
 		}
@@ -1178,7 +1180,7 @@ export default {
 
 		let statesData = this.emotionStates[this.currentEmotion].data[i];
 		if (this.isBackgrounded) {
-			dispatcher.setEmotionState(statesData.name);
+			dispatcher.setEmotionState(statesData.name, true);
 		} else {
 			this.setHighlightedState(statesData.name);
 			dispatcher.changeCallout(this.currentEmotion, statesData.name, statesData.desc);
@@ -1189,7 +1191,7 @@ export default {
 	onBackgroundClick: function () {
 
 		if (this.isBackgrounded) {
-			dispatcher.setEmotionState(null);
+			dispatcher.setEmotionState(null, true);
 		} else {
 			this.setHighlightedState(null);
 			this.resetCallout();

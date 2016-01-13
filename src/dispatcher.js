@@ -67,9 +67,9 @@ const dispatcher = {
 
 	},
 
-	setEmotionState: function (state) {
+	setEmotionState: function (state, selected) {
 
-		this.emit(this.EVENTS.CHANGE_EMOTION_STATE, state);
+		this.emit(this.EVENTS.CHANGE_EMOTION_STATE, state, selected);
 
 	},
 
