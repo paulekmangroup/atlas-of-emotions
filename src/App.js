@@ -125,13 +125,16 @@ export default function (...initArgs) {
 			// open and background all backgroundSections for the current section
 			backgroundSections.forEach(backgroundSection => {
 				backgroundSection.open({
+					sectionName: sectionName,
 					inBackground: true,
-					sectionName: sectionName
+					firstSection: false
 				});
 				backgroundSection.setEmotion(currentEmotion, previousEmotion);
 			});
 
 			section.open({
+				sectionName: sectionName,
+				inBackground: false,
 				firstSection: true
 			});
 			section.setEmotion(currentEmotion, previousEmotion);
@@ -173,8 +176,9 @@ export default function (...initArgs) {
 						} else {
 							// open it in the background
 							let openPromise = backgroundSection.open({
+								sectionName: sectionName,
 								inBackground: true,
-								sectionName: sectionName
+								firstSection: false
 							});
 							backgroundSection.setEmotion(currentEmotion, previousEmotion);
 							return openPromise;
@@ -220,7 +224,11 @@ export default function (...initArgs) {
 					// reveal the new section's container,
 					// open the new section, and set its emotion
 					containers[sectionName].removeAttribute('style');
-					section.open();
+					section.open({
+						sectionName: sectionName,
+						inBackground: false,
+						firstSection: false
+					});
 					section.setEmotion(currentEmotion, previousEmotion);
 
 				});

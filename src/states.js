@@ -3,6 +3,7 @@ import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
 import emotionsData from '../static/emotionsData.json';
+import sassVars from '../scss/variables.json';
 
 const LABEL_APPEAR_DELAY = 1000;
 
@@ -19,16 +20,16 @@ export default {
 	],
 
 	sectionContainer: null,
-	labelContainer: null,
-	stateGraphContainer: null,
+	labelContainers: null,
+	graphContainers: null,
 	xScale: null,
 	yScale: null,
 
 	areaGenerators: null,
 	transitions: null,
 
+	emotionStates: null,
 	currentEmotion: null,
-	currentStatesData: null,
 	isBackgrounded: false,
 
 	mouseOutTimeout: null,
@@ -40,17 +41,62 @@ export default {
 
 		this.applyTransitions = this.applyTransitions.bind(this);
 
-		// size main container to viewport
-		// let headerHeight = 55;	// from _variables.scss
-		// containerNode.style.height = (window.innerHeight - headerHeight) + 'px';
-
-		let graphContainer = document.createElement('div');
-		graphContainer.id = 'state-graph-container';
-		containerNode.appendChild(graphContainer);
+		this.initContainers(containerNode);
 
 		this.initLabels(containerNode);
 
 		this.createTempNav(containerNode);
+
+		this.setUpGraphs(containerNode);
+
+		this.transitions = this.setUpTransitions();
+
+		this.onStateMouseOver = this.onStateMouseOver.bind(this);
+		this.onStateMouseOut = this.onStateMouseOut.bind(this);
+		this.onStateClick = this.onStateClick.bind(this);
+		this.onBackgroundClick = this.onBackgroundClick.bind(this);
+
+		this.isInited = true;
+
+	},
+
+	initContainers: function (containerNode) {
+
+		_.values(dispatcher.EMOTIONS).forEach(emotion => {
+
+			let statesContainer = document.createElement('div');
+			statesContainer.classList.add('states-container');
+			statesContainer.classList.add(emotion);
+
+			let graphContainer = document.createElement('div');
+			graphContainer.classList.add('graph-container');
+			statesContainer.appendChild(graphContainer);
+			
+			containerNode.appendChild(statesContainer);
+		});
+
+	},
+
+	initLabels: function (containerNode) {
+
+		this.labelContainers = {};
+		_.values(dispatcher.EMOTIONS).forEach(emotion => {
+
+			let container = d3.select('.' + emotion + '.states-container'),
+				labelContainer = container.append('div')
+					.classed('label-container', true);
+			
+			this.labelContainers[emotion] = labelContainer;
+
+		});
+
+		this.backgroundedLabel = d3.select(containerNode).append('div')
+			.attr('id', 'backgrounded-state-label');
+		this.backgroundedLabel.append('h3');
+
+	},
+
+	setUpGraphs: function (containerNode) {
 
 		// 
 		// d3 conventional margins
@@ -62,15 +108,10 @@ export default {
 			left: 20
 		};
 
-		let innerWidth = graphContainer.offsetWidth - margin.left - margin.right;
-		let innerHeight = graphContainer.offsetHeight - margin.top - margin.bottom;
-
-		let svg = d3.select(graphContainer).append('svg')
-			.attr('width', graphContainer.offsetWidth)
-			.attr('height', graphContainer.offsetHeight);
-
-		this.stateGraphContainer = svg.append('g')
-			.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+		// All the same size, just grab the first one
+		let graphContainer = document.querySelector('#states .graph-container'),
+			innerWidth = graphContainer.offsetWidth - margin.left - margin.right,
+			innerHeight = graphContainer.offsetHeight - margin.top - margin.bottom;
 
 		// 
 		// d3/svg setup
@@ -98,47 +139,54 @@ export default {
 			.orient('bottom')
 			.tickSize(25);
 
-		this.setUpDefs(svg.append('defs'), this.xScale, this.yScale);
-
-		this.areaGenerators = this.setUpAreaGenerators(innerHeight, this.xScale, this.yScale);
-
-		this.transitions = this.setUpTransitions();
-
-		this.onStateMouseOver = this.onStateMouseOver.bind(this);
-		this.onStateMouseOut = this.onStateMouseOut.bind(this);
-		this.onStateClick = this.onStateClick.bind(this);
-		this.onBackgroundClick = this.onBackgroundClick.bind(this);
-
 		//
-		// Draw graph
+		// Set up each graph and draw axes
 		// 
-		this.stateGraphContainer.append('g')
-			.attr('class', 'x axis')
-			.attr('transform', 'translate(0,' + innerHeight + ')')
-			.call(xAxis);
+		this.graphContainers = {};
+		this.emotionStates = {};
+		_.values(dispatcher.EMOTIONS).forEach((emotion, i) => {
 
-		this.stateGraphContainer.append('g')
-			.attr('class', 'x axis labels')
-			.attr('transform', 'translate(0,' + innerHeight + ')')
-			.call(xAxisLabels)
-		// align labels
-		.selectAll('.tick text')
-			.attr('text-anchor', (d, i) => i ? 'end' : 'start')
-			.attr('style', null);
+			let graphContainer = document.querySelector('.' + emotion + ' .graph-container');
 
-		this.isInited = true;
+			let svg = d3.select(graphContainer).append('svg')
+				.attr('width', graphContainer.offsetWidth)
+				.attr('height', graphContainer.offsetHeight);
 
-	},
+			let graph = svg.append('g')
+				.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-	initLabels: function (containerNode) {
+			graph.append('g')
+				.attr('class', 'x axis')
+				.attr('transform', 'translate(0,' + innerHeight + ')')
+				.call(xAxis);
 
-		this.labelContainer = document.createElement('div');
-		this.labelContainer.id = 'state-labels';
-		containerNode.appendChild(this.labelContainer);
+			graph.append('g')
+				.attr('class', 'x axis labels')
+				.attr('transform', 'translate(0,' + innerHeight + ')')
+				.call(xAxisLabels)
+			// align labels
+			.selectAll('.tick text')
+				.attr('text-anchor', (d, i) => i ? 'end' : 'start')
+				.attr('style', null);
 
-		this.backgroundedLabel = d3.select(containerNode).append('div')
-			.attr('id', 'backgrounded-state-label');
-		this.backgroundedLabel.append('h3');
+			this.graphContainers[emotion] = d3.select(graphContainer);
+
+			this.emotionStates[emotion] = {
+				index: i,
+				data: null,
+				ranges: null,
+				scale: 0.0
+			};
+
+		});
+
+		// create an <svg> solely for <defs> shared across all emotion states via xlink:href
+		let defsSvg = d3.select(containerNode).append('svg')
+			.classed('states-defs', true);
+		this.setUpDefs(defsSvg.append('defs'), this.xScale, this.yScale);
+
+		// set up area generators for each emotion graph
+		this.areaGenerators = this.setUpAreaGenerators(innerHeight, this.xScale, this.yScale);
 
 	},
 
@@ -152,18 +200,19 @@ export default {
 		yOffsets[dispatcher.EMOTIONS.FEAR] = yOffsets[dispatcher.EMOTIONS.ANGER];
 		yOffsets[dispatcher.EMOTIONS.SADNESS] = 40;
 
-		let stateDisplay = this,
-			labels = d3.select(this.labelContainer).selectAll('div')
+		let stateSection = this,
+			statesData = this.emotionStates[this.currentEmotion].data,
+			labels = this.labelContainers[this.currentEmotion].selectAll('div')
 				.data(ranges);
 
 		labels.enter().append('div');
 
 		labels
 			.classed(this.currentEmotion + ' label', true)
-			.html((d, i) => '<h3>' + this.currentStatesData[i].name.toUpperCase() + '</h3>')
+			.html((d, i) => '<h3>' + statesData[i].name.toUpperCase() + '</h3>')
 			.style({
-				left: d => (Math.round(stateDisplay.xScale(d[1].x) + 20) + 'px'),	// not sure why this 20px magic number is necessary...?
-				top: d => (Math.round(stateDisplay.yScale(d[1].y) + yOffsets[this.currentEmotion]) + 'px')
+				left: d => (Math.round(stateSection.xScale(d[1].x) + 20) + 'px'),	// not sure why this 20px magic number is necessary...?
+				top: d => (Math.round(stateSection.yScale(d[1].y) + yOffsets[this.currentEmotion]) + 'px')
 			})
 			.each(function () {
 				setTimeout(() => {
@@ -177,33 +226,127 @@ export default {
 
 	setActive: function (val) {
 
-		d3.select(this.labelContainer).selectAll('div').select('h3')
-			.on('mouseover', val ? this.onStateMouseOver : null)
-			.on('mouseout', val ? this.onStateMouseOut : null)
-			.on('click', val ? this.onStateClick : null, true);
+		if (this.currentEmotion) {
+			this.labelContainers[this.currentEmotion].selectAll('div').select('h3')
+				.on('mouseover', val ? this.onStateMouseOver : null)
+				.on('mouseout', val ? this.onStateMouseOut : null)
+				.on('click', val ? this.onStateClick : null, true);
+		}
 
 	},
 
 	setEmotion: function (emotion) {
 
-		//
-		// TODO: implement transitions between emotions
-		// TODO: set up all emotions beforehand
-		// 			(calculate all ranges, set up area generators, etc)
-		//			and just draw the graph here.
-		//
-
 		if (!~_.values(dispatcher.EMOTIONS).indexOf(emotion)) {
 			emotion = 'anger';
 		}
+		let previousEmotion = this.currentEmotion;
 		this.currentEmotion = emotion;
-		this.currentStatesData = this.parseStates();
+
+		let emotionState = this.emotionStates[emotion];
+		if (!emotionState.data) {
+			this.renderEmotion(emotion);
+		}
+
+		// transition graphs and labels
+		let dx = 0;
+		if (previousEmotion) {
+			let previousGraph = this.graphContainers[previousEmotion],
+				previousLabels = this.labelContainers[previousEmotion];
+			previousGraph.classed('active', false);
+			previousLabels.classed('active', false);
+			previousGraph.on('transitionend', event => {
+				previousGraph.on('transitionend', null);
+				previousGraph.style('transform', null);
+				previousLabels.style('transform', null);
+				previousGraph.classed('transitioning', false);
+				previousLabels.classed('transitioning', false);
+			});
+
+			let containerWidth = document.querySelector('#states .graph-container').offsetWidth;
+
+			// position according to distance between emotion columns
+			// dx = (emotionState.index - this.emotionStates[previousEmotion].index) * 1.25*containerWidth;
+			
+			// just place left or right one viewport, instead of adhering to column positions,
+			// to avoid animations that are unnecessarily fast'n'flashy.
+			dx = 1.25 * containerWidth;
+			if (emotionState.index < this.emotionStates[previousEmotion].index) {
+				dx *= -1;
+			}
+
+			// delay to allow a little time for opacity to come up before translating
+			setTimeout(() => {
+				previousGraph.style('transform', 'translateX(' + -dx + 'px)');
+				previousLabels.style('transform', 'translateX(' + -dx + 'px)');
+			}, sassVars.states.emotions.panX.delay * 1000);
+		}
+
+		let currentGraph = this.graphContainers[emotion],
+			currentLabels = this.labelContainers[emotion];
+		if (currentGraph.classed('transitioning')) {
+			// if new emotion is still transitioning, remove transitionend handler
+			currentGraph.on('transitionend', null);
+			currentLabels.on('transitionend', null);
+		} else {
+			// else, move into position immediately to prepare for transition
+			currentGraph.classed('transitioning', false);
+			currentGraph.style('transform', 'translateX(' + dx + 'px)');
+			currentLabels.classed('transitioning', false);
+			currentLabels.style('transform', 'translateX(' + dx + 'px)');
+		}
+
+		// delay to allow a little time for opacity to come up before translating
+		setTimeout(() => {
+			currentGraph.classed('transitioning active', true);
+			currentGraph.style('transform', 'translateX(0)');
+			currentLabels.classed('transitioning active', true);
+			currentLabels.style('transform', 'translateX(0)');
+
+			// animate in emotion graph if first time viewing
+			if (emotionState.scale !== 1.0) {
+				this.setEmotionScale(emotion, 1.0);
+			}
+		}, sassVars.states.emotions.panX.delay * 1000);
+
+		if (!this.isBackgrounded) {
+
+			this.renderLabels(emotionState.ranges[1]);
+			this.setActive(true);
+
+			setTimeout(() => {
+				this.graphContainers[emotion].selectAll('.axis')
+					.classed('visible', true);
+			}, 1);
+
+			// setTimeout(() => {
+			this.resetCallout();
+			// }, LABEL_APPEAR_DELAY);
+
+			this.tempNav.querySelector('.prev').innerHTML = '<a href="#continents:' + emotion + '">CONTINENTS ▲</a>';
+			this.tempNav.querySelector('.next').innerHTML = '<a href="#actions:' + emotion + '">ACTIONS ▼</a>';
+			this.tempNav.classList.add('visible');
+
+		}
+
+	},
+
+	renderEmotion: function (emotion) {
+
+		let statesData = this.parseStates(),
+			emotionState = this.emotionStates[emotion];
+		emotionState.data = statesData;
 
 		// transform state range into points for area chart
-		let transformedRanges = this.transformRanges(this.currentStatesData, this.currentEmotion, 0.0);
+		emotionState.ranges = {
+			'0': this.transformRanges(statesData, emotion, 0.0),
+			'1': this.transformRanges(statesData, emotion, 1.0)
+		};
 
-		let stateElements = this.stateGraphContainer.selectAll('path.area')
-			.data(transformedRanges).enter();
+		let graph = this.graphContainers[emotion].select('g');
+
+		let stateElements = graph.selectAll('path.area')
+			.data(this.emotionStates[emotion].ranges[0]).enter();
 		let emotionGradientName = this.currentEmotion + '-gradient';
 
 		stateElements.append('linearGradient')
@@ -221,31 +364,24 @@ export default {
 			.on('mouseout', this.onStateMouseOut)
 			.on('click', this.onStateClick);
 
-		// grow the states upwards
-		transformedRanges = this.transformRanges(this.currentStatesData, this.currentEmotion, 1.0);
-		this.stateGraphContainer.selectAll('path.area')
-			.data(transformedRanges)
+		emotionState.rendered = true;
+
+	},
+
+	setEmotionScale: function (emotion, scale) {
+
+		let graph = this.graphContainers[emotion].select('g'),
+			ranges = this.emotionStates[emotion].ranges[scale];
+
+		if (!ranges) {
+			ranges = this.emotionStates[emotion].ranges[scale.toString()] = this.transformRanges(this.emotionStates[emotion].data, emotion, scale);
+		}
+
+		graph.selectAll('path.area')
+			.data(ranges)
 			.call(this.applyTransitions);
 
-		if (!this.isBackgrounded) {
-
-			this.renderLabels(transformedRanges);
-			this.setActive(true);
-
-			setTimeout(() => {
-				this.stateGraphContainer.selectAll('.axis')
-					.classed('visible', true);
-			}, 1);
-
-			// setTimeout(() => {
-			this.resetCallout();
-			// }, LABEL_APPEAR_DELAY);
-
-			this.tempNav.querySelector('.prev').innerHTML = '<a href="#continents:' + emotion + '">CONTINENTS ▲</a>';
-			this.tempNav.querySelector('.next').innerHTML = '<a href="#actions:' + emotion + '">ACTIONS ▼</a>';
-			this.tempNav.classList.add('visible');
-
-		}
+		this.emotionStates[emotion].scale = scale;
 
 	},
 
@@ -273,9 +409,20 @@ export default {
 			this.setActive(false);
 			d3.select('#main').on('click', null, false);
 			
+			if (!this.currentEmotion) {
+
+				// If no current emotion, resolve immediately.
+				// This is not an expected state; it's just gracefully handling possible bugs.
+				resolve();
+				return;
+
+			}
+
 			// recede graph down into baseline
-			let transformedRanges = this.transformRanges(this.currentStatesData, this.currentEmotion, 0.0),
-				areaSelection = this.stateGraphContainer.selectAll('path.area');
+			let transformedRanges = this.transformRanges(this.emotionStates[this.currentEmotion].data, this.currentEmotion, 0.0),
+				graph = this.graphContainers[this.currentEmotion],
+				labelContainer = this.labelContainers[this.currentEmotion],
+				areaSelection = graph.selectAll('path.area');
 
 			if (areaSelection.size()) {
 
@@ -286,11 +433,11 @@ export default {
 						// wait one frame to ensure animation is complete.
 						setTimeout(() => {
 							// on transition end, remove graph elements
-							this.stateGraphContainer.selectAll('path.area').remove();
-							this.stateGraphContainer.selectAll('linearGradient').remove();
+							graph.selectAll('path.area').remove();
+							graph.selectAll('linearGradient').remove();
 
 							// ...remove labels
-							d3.select(this.labelContainer).selectAll('div').remove();
+							labelContainer.selectAll('div').remove();
 
 							// ...and resolve promise to continue transition when complete
 							resolve();
@@ -337,15 +484,19 @@ export default {
 		// but this function does not. may need to remove labels and axes here,
 		// on transition end / after a timeout.
 
-		// fade out labels
-		d3.select(this.labelContainer).selectAll('div')
-			.classed('visible', false)
-		.selectAll('h3')
-			.style('opacity', null);
+		if (this.currentEmotion) {
 
-		// fade out axes
-		this.stateGraphContainer.selectAll('.axis')
-			.classed('visible', false);
+			// fade out labels
+			this.labelContainers[this.currentEmotion].selectAll('div')
+				.classed('visible', false)
+			.selectAll('h3')
+				.style('opacity', null);
+
+			// fade out axes
+			this.graphContainers[this.currentEmotion].selectAll('.axis')
+				.classed('visible', false);
+
+		}
 
 		this.tempNav.classList.remove('visible');
 
@@ -966,10 +1117,15 @@ export default {
 
 	onStateMouseOver: function (d, i) {
 
+		let statesData = this.emotionStates[this.currentEmotion].data[i];
+		if (!statesData) {
+			throw new Error('statesData not found for onStateMouseOver at index ' + i);
+		}
+
 		if (this.isBackgrounded) {
-			this.displayBackgroundedState(this.currentStatesData[i].name);
+			this.displayBackgroundedState(statesData.name);
 		} else {
-			this.displayHighlightedState(this.currentStatesData[i].name);
+			this.displayHighlightedState(statesData.name);
 		}
 
 	},
@@ -992,11 +1148,12 @@ export default {
 			d3.event.stopImmediatePropagation();
 		}
 
+		let statesData = this.emotionStates[this.currentEmotion].data[i];
 		if (this.isBackgrounded) {
-			dispatcher.setEmotionState(this.currentStatesData[i].name);
+			dispatcher.setEmotionState(statesData.name);
 		} else {
-			this.setHighlightedState(this.currentStatesData[i].name);
-			dispatcher.changeCallout(this.currentEmotion, this.currentStatesData[i].name, this.currentStatesData[i].desc);
+			this.setHighlightedState(statesData.name);
+			dispatcher.changeCallout(this.currentEmotion, statesData.name, statesData.desc);
 		}
 
 	},
@@ -1045,23 +1202,27 @@ export default {
 	// does not set any state, just displays.
 	displayHighlightedState: function (state) {
 
-		let stateName = state || this.highlightedState || '';
+		if (!this.currentEmotion) { return; }
+
+		let stateName = state || this.highlightedState || '',
+			graphContainer = this.graphContainers[this.currentEmotion],
+			labelContainer = this.labelContainers[this.currentEmotion];
 		if (stateName) {
 
-			let stateIndex = this.currentStatesData.findIndex(d => d.name === stateName);
+			let stateIndex = this.emotionStates[this.currentEmotion].data.findIndex(d => d.name === stateName);
 
-			d3.selectAll('path.area')
+			graphContainer.selectAll('path.area')
 				.style('opacity', (data, index) => index === stateIndex ? 1.0 : 0.2);
 
-			d3.select(this.labelContainer).selectAll('div h3')
+			labelContainer.selectAll('div h3')
 				.style('opacity', (data, index) => index === stateIndex ? 1.0 : 0.2);
 
 		} else {
 
-			d3.selectAll('path.area')
+			graphContainer.selectAll('path.area')
 				.style('opacity', null);
 
-			d3.select(this.labelContainer).selectAll('div h3')
+			labelContainer.selectAll('div h3')
 				.style('opacity', null);
 
 		}

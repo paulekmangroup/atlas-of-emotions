@@ -3,6 +3,8 @@
 	width: 100%;
 	height: 100%;
 	min-height: 600px;
+	overflow-x: hidden;
+	overflow-y: hidden;
 
 	top: 0;
 	left: 50%;
@@ -33,83 +35,100 @@
 		}
 	}
 
-}
-
-#state-graph-container,
-#state-labels {
-	position: absolute;
-	bottom: $states-containers-bottom;
-	left: 50%;
-	margin-left: -$states-graph-width/2;
-	min-height: 400px;
-}
-#state-graph-container {
-	width: $states-graph-width;
-	height: 80%;
-}
-#state-labels {
-	top: 15%;
-}
-
-#state-graph-container {
-	.axis {
-		line,
-		path {
-			fill: none;
-			stroke: $text-color;
-			shape-rendering: crispEdges;
-		}
-
-		&.labels {
-			line,
-			path {
-				display: none
-			}
-			text {
-				@extend %raleway-light;
-				font-size: 0.8em;
-			}
-		}
+	.graph-container,
+	.label-container {
+		position: absolute;
+		bottom: $states-containers-bottom;
+		left: 50%;
+		margin-left: -$states-graph-width/2;
+		min-height: 400px;
 
 		opacity: 0.0;
-		transition: opacity #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
-
-		&.visible {
-			opacity: 1.0;
-		}
-	}
-
-	.area {
-		mix-blend-mode: multiply;
-		cursor: pointer;
-	}
-}
-
-#state-labels {
-	div {
-		position: absolute;
 		pointer-events: none;
 
-		opacity: 0.0;
-		transition: opacity #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
+		&.transitioning {
+			transition-property: transform, opacity;
+			transition-duration: #{$states-emotions-panX-duration}s;
+			transition-timing-function: ease-in-out, cubic-bezier(0.9, 0.0, 0.5, 1.0);
+		}
 
-		&.visible {
+		&.active {
+			pointer-events: auto;
 			opacity: 1.0;
 		}
+	}
 
-		h3 {
-			transform: translate(-50%, -50%);
-			margin: 0;
+	.graph-container {
+		width: $states-graph-width;
+		height: 80%;
+
+		.axis {
+			line,
+			path {
+				fill: none;
+				stroke: $text-color;
+				shape-rendering: crispEdges;
+			}
+
+			&.labels {
+				line,
+				path {
+					display: none
+				}
+				text {
+					@extend %raleway-light;
+					font-size: 0.8em;
+				}
+			}
+
+			opacity: 0.0;
+			transition: opacity #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
+
+			&.visible {
+				opacity: 1.0;
+			}
+		}
+
+		.area {
+			mix-blend-mode: multiply;
 			cursor: pointer;
-			pointer-events: auto;
 		}
 	}
 
-	.label {
-		@include emotion-color;
-		white-space: nowrap;
+	.label-container {
+		top: 15%;
+
+		div {
+			position: absolute;
+			pointer-events: none;
+
+			opacity: 0.0;
+			transition: opacity #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
+
+			&.visible {
+				opacity: 1.0;
+			}
+
+			h3 {
+				transform: translate(-50%, -50%);
+				margin: 0;
+				cursor: pointer;
+			}
+		}
+		&.active h3 {
+			pointer-events: auto;
+		}
+
+		.label {
+			@include emotion-color;
+			white-space: nowrap;
+		}
+
 	}
 
+	.states-defs {
+		pointer-events: none;
+	}
 }
 
 #backgrounded-state-label {

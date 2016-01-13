@@ -30,6 +30,12 @@
 		},
 		"containers": {
 			"bottom": "10%"
+		},
+		"emotions": {
+			"panX": {
+				"duration": 0.75,
+				"delay": 0.25
+			}
 		}
 	}
 }
