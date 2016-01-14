@@ -1151,10 +1151,10 @@ export default {
 		}
 
 		if (this.isBackgrounded) {
-			this.displayBackgroundedState(statesData.name);
+			this.displayBackgroundedStates([statesData.name]);
 			dispatcher.setEmotionState(statesData.name, false);
 		} else {
-			this.displayHighlightedState(statesData.name);
+			this.displayHighlightedStates([statesData.name]);
 		}
 
 	},
@@ -1162,10 +1162,10 @@ export default {
 	onStateMouseOut: function (d, i) {
 
 		if (this.isBackgrounded) {
-			this.displayBackgroundedState(null);
+			this.displayBackgroundedStates(null);
 			dispatcher.setEmotionState(null, false);
 		} else {
-			this.displayHighlightedState(null);
+			this.displayHighlightedStates(null);
 		}
 
 	},
@@ -1202,51 +1202,66 @@ export default {
 	setBackgroundedState: function (state) {
 
 		this.backgroundedState = state;
-		this.displayBackgroundedState();
+		this.displayBackgroundedStates(null);
 		this.setHighlightedState(state);
 
 	},
 
 	// does not set any state, just displays.
-	displayBackgroundedState: function (state) {
+	displayBackgroundedStates: function (states) {
 
-		let stateName = state || this.backgroundedState || '',
-			classes = {
-				'visible': !!stateName
-			};
+		let singleStateName = '',
+			classes;
+
+		if (!states) {
+			singleStateName = this.backgroundedState;
+		} else if (states.length === 1) {
+			singleStateName = states[0];
+		}
+		classes = {
+			'visible': !!singleStateName
+		};
+
 		classes[this.currentEmotion] = true;
 
-		this.backgroundedLabel.select('h3').html(stateName);
+		this.backgroundedLabel.select('h3').html(singleStateName);
 		this.backgroundedLabel.classed(classes);
 
-		this.displayHighlightedState(state);
+		this.displayHighlightedStates(states);
 
 	},
 
 	setHighlightedState: function (state) {
 
 		this.highlightedState = state;
-		this.displayHighlightedState();
+		this.displayHighlightedStates(null);
 
 	},
 
 	// does not set any state, just displays.
-	displayHighlightedState: function (state) {
+	displayHighlightedStates: function (states) {
 
 		if (!this.currentEmotion) { return; }
 
-		let stateName = state || this.highlightedState || '',
-			graphContainer = this.graphContainers[this.currentEmotion],
-			labelContainer = this.labelContainers[this.currentEmotion];
-		if (stateName) {
+		if (!states && this.highlightedState) {
+			states = [this.highlightedState];
+		}
 
-			let stateIndex = this.emotionStates[this.currentEmotion].data.findIndex(d => d.name === stateName);
+		let graphContainer = this.graphContainers[this.currentEmotion],
+			labelContainer = this.labelContainers[this.currentEmotion];
+
+		if (states && states.length) {
+
+			// create map of highlighted state indices (list of booleans)
+			let stateIndexes = this.emotionStates[this.currentEmotion].data.map(d => {
+				return !!~states.indexOf(d.name);
+			});
 
 			graphContainer.selectAll('path.area')
-				.style('opacity', (data, index) => index === stateIndex ? 1.0 : 0.2);
+				.style('opacity', (data, index) => stateIndexes[index] ? 1.0 : 0.2);
 
 			labelContainer.selectAll('div h3')
-				.style('opacity', (data, index) => index === stateIndex ? 1.0 : 0.2);
+				.style('opacity', (data, index) => stateIndexes[index] ? 1.0 : 0.2);
 
 		} else {
 

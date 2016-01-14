@@ -161,11 +161,14 @@ export default {
 					y: pt.y
 				}));
 				action.rotation = (90 + (numAllActions-i-1) * 180/(numAllActions-1));
+				action.states = [];
 				allActionsForEmotionByName[action.name] = action;
 			});
 
 			// iterate over states for each emotion and compile actions for each state.
 			let actionsByState = statesData.reduce((statesOutput, state) => {
+
+				let stateName = state.name.toLowerCase();
 
 				// copy actions from source data and lowercase,
 				// dedupe across valences and filter out any that do not have prototypical definitions,
@@ -217,6 +220,11 @@ export default {
 						action.valence = VALENCES.BOTH;
 					} else if (i < numActionsCon + numActionsBoth + numActionsDes) {
 						action.valence = VALENCES.DESTRUCTIVE;
+					}
+
+					// cross-reference states to action
+					if (!~actionByName.states.indexOf(stateName)) {
+						actionByName.states.push(stateName);
 					}
 
 					return action;
@@ -653,8 +661,10 @@ export default {
 
 		if (action) {
 			dispatcher.changeCallout(this.currentEmotion, action.name, action.desc);
+			states.displayHighlightedStates(action.states);
 		} else {
 			this.resetCallout();
+			states.displayHighlightedStates(null);
 		}
 
 		this.displayHighlightedAction(action);
