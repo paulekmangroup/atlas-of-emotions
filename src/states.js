@@ -1203,6 +1203,7 @@ export default {
 
 		this.backgroundedState = state;
 		this.displayBackgroundedState();
+		this.setHighlightedState(state);
 
 	},
 
@@ -1218,7 +1219,7 @@ export default {
 		this.backgroundedLabel.select('h3').html(stateName);
 		this.backgroundedLabel.classed(classes);
 
-		this.setHighlightedState(stateName);
+		this.displayHighlightedState(state);
 
 	},
 
