@@ -192,18 +192,24 @@ export default {
 
 	renderLabels: function (ranges) {
 
-		// TODO: copying anger as placeholder; need to implement for disgust, enjoyment, fear
-		let yOffsets = {};
-		yOffsets[dispatcher.EMOTIONS.ANGER] = -60;
-		yOffsets[dispatcher.EMOTIONS.DISGUST] = yOffsets[dispatcher.EMOTIONS.ANGER];
-		yOffsets[dispatcher.EMOTIONS.ENJOYMENT] = yOffsets[dispatcher.EMOTIONS.ANGER];
-		yOffsets[dispatcher.EMOTIONS.FEAR] = yOffsets[dispatcher.EMOTIONS.ANGER];
-		yOffsets[dispatcher.EMOTIONS.SADNESS] = 40;
-
 		let stateSection = this,
 			statesData = this.emotionStates[this.currentEmotion].data,
 			labels = this.labelContainers[this.currentEmotion].selectAll('div')
 				.data(ranges);
+
+		// TODO: copying anger as placeholder; need to implement for disgust, enjoyment, fear
+		let yOffsets = {};
+		yOffsets[dispatcher.EMOTIONS.ANGER] = y => y - 60;
+		yOffsets[dispatcher.EMOTIONS.DISGUST] = yOffsets[dispatcher.EMOTIONS.ANGER];
+		yOffsets[dispatcher.EMOTIONS.ENJOYMENT] = yOffsets[dispatcher.EMOTIONS.ANGER];
+		yOffsets[dispatcher.EMOTIONS.FEAR] = yOffsets[dispatcher.EMOTIONS.ANGER];
+		yOffsets[dispatcher.EMOTIONS.SADNESS] = (y, i) => {
+			// attempt to algorithmically bring labels closer to peaks,
+			// which are truncated due to interpolation.
+			// the steeper the peak, the further the distance from the peak and the end of the curve.
+			// might end up manually positioning by index, instead of algorithmically.
+			return y + Math.abs(y * 0.75 * Math.pow(i/statesData.length, 3));
+		};
 
 		labels.enter().append('div');
 
@@ -212,7 +218,7 @@ export default {
 			.html((d, i) => '<h3>' + statesData[i].name.toUpperCase() + '</h3>')
 			.style({
 				left: d => (Math.round(stateSection.xScale(d[1].x) + 20) + 'px'),	// not sure why this 20px magic number is necessary...?
-				top: d => (Math.round(stateSection.yScale(d[1].y) + yOffsets[this.currentEmotion]) + 'px')
+				top: (d, i) => (Math.round(yOffsets[this.currentEmotion](stateSection.yScale(d[1].y), i)) + 'px')
 			})
 			.each(function () {
 				setTimeout(() => {
@@ -221,6 +227,7 @@ export default {
 			});
 
 		labels.exit().remove();
+
 
 	},
 
@@ -590,6 +597,8 @@ export default {
 		 * - middle point halfway in between horizontally,
 		 *   and height equal to half width.
 		 *
+		 * Manual offsets per state applied for legibility.
+		 * 
 		 * Shapes may be further modified by an interpolator (see: setUpAreaGenerators).
 		 *
 		 * For input [a(x,y), b(x,y)]:
@@ -643,56 +652,25 @@ export default {
 
 		},
 
-		/**
-		 * out -> [
-		 *	{ x: a, y: 0 },
-		 *	{ x: a + (b-a)/2 + offset, y: (b-a)/2 },
-		 *	{ x: b, y: 0 },
-		 * ]
-		 */
 		anger: function (states, strengthMod) {
 			
-			let numStates = states.length;
-			let lastX = -Number.INFINITY;
-			return states.map((state, i) => {
+			let points = this.isosceles(states, strengthMod);
 
-				let points = [],
-					min = state.range.min - 1,				// transform to 0-indexed, and allow
-															// states with same min and max to display
-					max = state.range.max,
-					spread = max - min,
-					centerX = min + 0.5 * spread,
-					overlapsLast = Math.abs(centerX - lastX) < 0.05,
-					offsetBase,
-					yOverlapOffset = overlapsLast ? (i / numStates) : 0;
+			// manually offset each state
+			let keyedOffsets = {
+					'annoyance': [0.5, 0],
+					'frustration': [-1.5, -0.5],
+					'argumentativeness': [0, 0],
+					'bitterness': [0.5, 0],
+					'exasperation': [-0.5, 0],
+					'vengefulness': [0.5, 0],
+					'fury': [0, 0]
+				},
+				offsets = states.map(s => s.name).map(name => keyedOffsets[name] || [0, 0]);
 
-				// Offsets skew left of center toward left edge
-				// of graph, right of center toward right.
-				// Also, if two states have the same peak, push them apart.
-				if (overlapsLast) {
-					offsetBase = 0.5 * ((i+2) / numStates);
-				} else {
-					offsetBase = 0.5 * (i / numStates);
-				}
+			this.offsetPoints(points, offsets, strengthMod);
 
-				points.push({
-					x: min,
-					y: 0
-				});
-				points.push({
-					x: min + spread * (offsetBase + 0.05),
-					y: strengthMod * (min + 0.5 * spread + yOverlapOffset)
-				});
-				points.push({
-					x: max,
-					y: 0
-				});
-
-				lastX = centerX;
-
-				return points;
-
-			});
+			return points;
 
 		},
 
@@ -700,16 +678,18 @@ export default {
 
 			let points = this.isosceles(states, strengthMod);
 
-			let offsets = [
-				[0, 0],
-				[-0.25, 0],
-				[0.25, 0.25],
-				[0, 0],
-				// [-0.5, -0.5],	// nauseousness
-				[0, -0.25],
-				[0.5, 0],
-				[0, 0]
-			];
+			// manually offset each state
+			let keyedOffsets = {
+					'dislike': [0, 0],
+					'aversion': [-0.25, -0.15],
+					'distaste': [0.25, 0.15],
+					'repugnance': [0, 0],
+					'revulsion': [-0.25, -0.3],
+					'abhorrence': [0, 0],
+					'loathing': [0, 0]
+				},
+				offsets = states.map(s => s.name).map(name => keyedOffsets[name] || [0, 0]);
+
 			this.offsetPoints(points, offsets, strengthMod);
 
 			return points;
@@ -720,20 +700,24 @@ export default {
 
 			let points = this.isosceles(states, strengthMod);
 
-			let offsets = [
-				[0, 0],			// rejoicing
-				[-0.5, -0.5],	// amusement
-				[0.5, 0],		// relief
-				[0, -0.5],		// compassion-joy
-				[0, 0],			// schadenfreude
-				[-0.5, 0],		// naches
-				[0.5, 0.25],	// fiero
-				[-0.25, 0.5],	// pride
-				[0, 0],			// wonder
-				[0, 0],			// excitement
-				[0, 0]/*,			// ecstasy
-				[0, 0]			// debauchery*/
-			];
+			// manually offset each state
+			let keyedOffsets = {
+					'sensory pleasures': [0, 0],
+					'compassion-joy': [-0.25, -0.25],
+					'rejoicing': [-0.15, -0.15],
+					'amusement': [0.15, 0.15],
+					'schadenfreude': [0, 0],
+					'relief': [0, 0],
+					'naches': [-0.15, -0.15],
+					'pride': [0.1, 0.1],
+					'fiero': [0.4, 0.4],
+					'wonder': [0, 0],
+					'excitement': [-0.15, -0.15],
+					'debauchery': [0.15, 0.15],
+					'ecstasy': [0, 0]
+				},
+				offsets = states.map(s => s.name).map(name => keyedOffsets[name] || [0, 0]);
+
 			this.offsetPoints(points, offsets, strengthMod);
 
 			return points;
@@ -744,16 +728,19 @@ export default {
 
 			let points = this.isosceles(states, strengthMod);
 
-			let offsets = [
-				[0, 0],				// trepidation
-				[-0.5, -0.25],		// anxiety
-				[0.5, 0.25],		// nervousness
-				[0, 0],				// dread
-				[-0.5, -0.6],		// desperation
-				[0, -0.25],			// panic
-				[-0.25, -0.35],		// horror
-				[0, 0]				// terror
-			];
+			// manually offset each state
+			let keyedOffsets = {
+					'trepidation': [0, 0],
+					'nervousness': [-0.5, 0],
+					'anxiety': [0, 0],
+					'dread': [-0.5, -0.5],
+					'desperation': [-1.0, -1.0],
+					'horror': [-0.7, -0.8],
+					'panic': [-0.35, -0.4],
+					'terror': [0, 0]
+				},
+				offsets = states.map(s => s.name).map(name => keyedOffsets[name] || [0, 0]);
+
 			this.offsetPoints(points, offsets, strengthMod);
 
 			return points;
@@ -765,19 +752,22 @@ export default {
 			// amplify height to counter shortness caused by interpolation
 			let points = this.isosceles(states, strengthMod * 1.25);
 
-			let offsets = [
-				[-1, 0],
-				[-1, 0],
-				[0, 1],
-				[1, 0],
-				[0, 0],
-				[0, 0],
-				[-0.5, -0.25],
-				[0, 0],
-				[0.5, 0.25],
-				[0, 0]/*,
-				[0, 0]				// hopelessness*/
-			];
+			// manually offset each state
+			let keyedOffsets = {
+					'disappointment': [0, 0],
+					'discouragement': [-0.75, -0.25],
+					'distraughtness': [0.5, 0.1],
+					'resignation': [0.75, 0],
+					'helplessness': [-0.5, -0.5],
+					'misery': [-0.5, -0.5],
+					'hopelessness': [0, 0],
+					'sorrow': [-0.1, 0],
+					'grief': [0.3, 0.5],
+					'despair': [0.7, 1.0],
+					'anguish': [0, 0.5]
+				},
+				offsets = states.map(s => s.name).map(name => keyedOffsets[name] || [0, 0]);
+
 			this.offsetPoints(points, offsets, strengthMod);
 
 			return points;
