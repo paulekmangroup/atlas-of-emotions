@@ -132,7 +132,20 @@ var metadataSectionParsers = (function () {
 
 		states: standard,
 
-		actions: standard,
+		actions: function (data) {
+			var obj = {
+				header: data[0][0],
+				body: data[0][1]
+			};
+			obj.qualities = data.map(function (row) {
+				return {
+					header: row[2],
+					body: row[3]
+				};
+			});
+
+			return obj;
+		},
 
 		triggers: function (data) {
 			var obj = {

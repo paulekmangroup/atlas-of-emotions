@@ -467,7 +467,7 @@
     "fear": {
       "continent": {
         "name": "Fear",
-        "desc": "The actions likely when experiencing fear vary not only in strength, but how they deal with the source of the fear."
+        "desc": "We are afraid of danger."
       },
       "states": [
         {
@@ -818,7 +818,7 @@
     "disgust": {
       "continent": {
         "name": "Disgust",
-        "desc": "Most of the actions taken when feeling disgust aim to get away from whatever is triggering the disgust. "
+        "desc": "We are disgusted by anything that is literally or physically toxic. "
       },
       "states": [
         {
@@ -1367,8 +1367,8 @@
           "name": "Hopelessness",
           "desc": "NEED DESCRIPTION",
           "range": {
-            "min": null,
-            "max": null
+            "min": 6,
+            "max": 10
           },
           "actions": {
             "all": [
@@ -1445,9 +1445,30 @@
     "enjoyment": {
       "continent": {
         "name": "Enjoyment",
-        "desc": "We experience enjoyment when a good feeling is generated, which we often seek to continue or re-experience."
+        "desc": "The pursuit of what feels good is a primary motive in our lives. "
       },
       "states": [
+        {
+          "name": "Sensory Pleasures",
+          "desc": "NEED DESCRIPTION",
+          "range": {
+            "min": 1,
+            "max": 5
+          },
+          "actions": {
+            "all": [
+              "seek more",
+              ""
+            ],
+            "con": [
+              "seek more"
+            ],
+            "des": [
+              ""
+            ],
+            "both": []
+          }
+        },
         {
           "name": "Relief",
           "desc": "When something expected to be unplesant, especialy the threat of harm, is avoided or comes to an end.",
@@ -1786,8 +1807,8 @@
           "name": "Debauchery",
           "desc": "NEED DESCRIPTION",
           "range": {
-            "min": null,
-            "max": null
+            "min": 6,
+            "max": 10
           },
           "actions": {
             "all": [
@@ -1878,26 +1899,40 @@
     },
     "states": {
       "header": "The States of an Emotion",
-      "body": "The states within each emotion continent vary in their nature and in their strength."
+      "body": "The emotional states vary in their nature and strength."
     },
     "actions": {
       "header": "The Actions of a State",
-      "body": "Each emotional state typically leads to a number of actions some of which may be constructive or destructive or both."
+      "body": "Each emotional state typically leads to a number of actions some of which may be constructive or destructive or both.",
+      "qualities": [
+        {
+          "header": "Constructive Actions",
+          "body": "Depending on the context in which it appears, an action can be constructive--leading to positive outcomes."
+        },
+        {
+          "header": "Destructive Actions",
+          "body": "Destructive actions tend to pull you down, leading to negative outcomes for yourself and others."
+        },
+        {
+          "header": "Context Dependent Actions",
+          "body": "Sometimes an action can be both constructive and desctructive in different contexts."
+        }
+      ]
     },
     "triggers": {
       "header": "The Triggers of an Emotion",
       "body": "What triggers an emotion may be an external event, a remembered event, or something that is imagined. ",
       "steps": [
         {
-          "header": "Appraisal",
+          "header": "Event",
           "body": "We automatically appraise what is happening in our world, scanning to see if any of the events are similar to past experiences. "
         },
         {
-          "header": "Emotional Alert Database",
+          "header": "Assessment",
           "body": "When a match occurs the event is converted into an emotional trigger. Some of these triggers are universal, and some are learned through experience."
         },
         {
-          "header": "Impulse",
+          "header": "Response",
           "body": "Triggers generate impulses to action. Recognizing the impulse produced by a trigger before action is taken is very difficult but attainable with prolonged and consistent contemplative practice."
         }
       ]
