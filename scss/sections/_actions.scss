@@ -10,6 +10,32 @@
 
 	text-align: center;
 	pointer-events: none;
+
+	.label-valence {
+		display: inline-block;
+		position: relative;
+		top: 0.1em;
+		// right: 0.1em;
+		padding-right: 0.2em;
+
+		font-family: 'Raleway', sans-serif;
+		font-weight: 700;
+		font-size: 150%;
+		letter-spacing: -0.15em;
+
+		&.plus,
+		&.minus {
+			font-size: 180%;
+		}
+		&.plus {
+			top: 0.15em;
+		}
+	}
+	.short-slash {
+		display: inline-block;
+		margin: 0 0.1em;
+		font-size: 75%;
+	}
 }
 
 #action-graph-container,
@@ -63,8 +89,8 @@
 		@include emotion-color;
 		white-space: nowrap;
 
-		cursor: pointer;
-		pointer-events: auto;
+		// cursor: pointer;
+		// pointer-events: auto;
 
 		div {
 			position: absolute;
@@ -74,6 +100,10 @@
 				// transform: rotateX(-60deg);
 				// transform: scaleY(1.73);	// sqrt(3), using scale to equate to rotateX(60deg)
 											// set by d3 instead, since d3 is applying another transform already
+				margin: 0;
+				line-height: 1em;
+				cursor: pointer;
+				pointer-events: auto;
 			}
 		}
 	}

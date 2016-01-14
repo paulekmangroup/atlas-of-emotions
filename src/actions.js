@@ -537,6 +537,22 @@ export default {
 
 	renderLabels: function (actionsData) {
 
+		let labelText = d => {
+			let prefix = '';
+			switch (d.valence) {
+				case VALENCES.CONSTRUCTIVE:
+					prefix = '<span class="label-valence plus">+</span> ';
+					break;
+				case VALENCES.BOTH:
+					prefix = '<span class="label-valence">+<span class="short-slash">/</span>-</span>';
+					break;
+				case VALENCES.DESTRUCTIVE:
+					prefix = '<span class="label-valence minus">-</span> ';
+					break;
+			}
+			return prefix + '<span class="label-name">' + d.name.toUpperCase() + '</span>';
+		};
+
 		if (actionsData) {
 
 			let labelSize = this.lineGenerator.radius()({x:1}) + 50,
@@ -547,23 +563,40 @@ export default {
 			labelSelection.transition()
 				.duration(1000)
 				.style('transform', d => 'rotate(' + d.rotation + 'deg)');
-			labelSelection.select('h3').transition()
+			labelSelection.select('h3')
+				.html(labelText)
+			.transition()
 				.duration(1000)
 				.style('transform', d => 'rotate(-' + d.rotation + 'deg) scaleY(1.73)');
+			// labelSelection.select('.label-valence')
+			// 	.on('mouseover', this.onActionMouseOver)
+			// 	.on('mouseout', this.onActionMouseOut)
+			// 	.on('click', this.onActionMouseClick);
+			// labelSelection.select('.label-name')
+			// 	.on('mouseover', this.onActionMouseOver)
+			// 	.on('mouseout', this.onActionMouseOut)
+			// 	.on('click', this.onActionMouseClick);
 
 			// enter
 			let labelEnterSelection = labelSelection.enter().append('div')
 				.classed('label ' + this.currentEmotion, true)
 				.style('transform', d => 'rotate(' + d.rotation + 'deg)')
 				.style('height', labelSize + 'px')
-				.style('opacity', 0.0)
+				.style('opacity', 0.0);
+				// .on('mouseover', this.onActionMouseOver)
+				// .on('mouseout', this.onActionMouseOut)
+				// .on('click', this.onActionMouseClick);
+			labelEnterSelection.append('div').append('h3')
+				.html(labelText)
+				.style('transform', d => 'rotate(-' + d.rotation + 'deg) scaleY(1.73)')
 				.on('mouseover', this.onActionMouseOver)
 				.on('mouseout', this.onActionMouseOut)
 				.on('click', this.onActionMouseClick);
-			labelEnterSelection.append('div').append('h3')
-				.html(d => d.name.toUpperCase())
-				.style('transform', d => 'rotate(-' + d.rotation + 'deg) scaleY(1.73)');
-					
+			// .select('span')
+			// 	.on('mouseover', this.onActionMouseOver)
+			// 	.on('mouseout', this.onActionMouseOut)
+			// 	.on('click', this.onActionMouseClick);
+			
 			labelEnterSelection.transition()
 				.duration(1000)
 				.style('opacity', 1.0);
@@ -705,15 +738,31 @@ export default {
 
 	},
 
+	displayHighlightedValence: function (valence) {
+
+		console.log(">>>>> display highlighted valence:", valence);
+
+	},
+
 	onActionMouseOver: function (d, i) {
 
-		this.displayHighlightedAction(d);
+		let event = d3.event;
+		if (event && event.target.classList.contains('label-valence')) {
+			this.displayHighlightedValence(d.valence);
+		} else {
+			this.displayHighlightedAction(d);
+		}
 
 	},
 
 	onActionMouseOut: function (d, i) {
 
-		this.displayHighlightedAction(null);
+		let event = d3.event;
+		if (event && event.target.classList.contains('label-valence')) {
+			this.displayHighlightedValence(null);
+		} else {
+			this.displayHighlightedAction(null);
+		}
 
 	},
 
