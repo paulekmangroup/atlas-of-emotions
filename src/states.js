@@ -554,20 +554,22 @@ export default {
 			return !!(state.range.min && state.range.max);
 		});
 
-		// sort by state min value, then max value
+		// sort by peak height (desc), so shorter states appear in front
+		// to improve 'pickability' / interaction
 		states = states.sort((a, b) => {
-			if (a.range.min < b.range.min) {
-				return -1;
-			} else if (a.range.min > b.range.min) {
-				return 1;
-			} else {
-				if (a.range.max < b.range.max) {
-					return -1;
-				} else if (a.range.max > b.range.max) {
-					return 1;
-				}
+			let dy = (b.range.min + b.range.max) - (a.range.min + a.range.max);
+			if (!dy) {
+				// use range.min as tiebreaker:
+				// higher min goes in front
+				dy = a.range.min - b.range.min;
 			}
-			return 0;
+			if (!dy) {
+				// use name as secondary tiebreaker
+				// to ensure deterministic behavior
+				if (a.name > b.name) { dy = -1; }
+				else if (a.name < b.name) { dy = 1; }
+			}
+			return dy;
 		});
 
 		return states;
@@ -684,8 +686,8 @@ export default {
 					'aversion': [-0.25, -0.15],
 					'distaste': [0.25, 0.15],
 					'repugnance': [0, 0],
-					'revulsion': [-0.25, -0.3],
-					'abhorrence': [0, 0],
+					'abhorrence': [-0.25, -0.3],
+					'revulsion': [0, 0],
 					'loathing': [0, 0]
 				},
 				offsets = states.map(s => s.name).map(name => keyedOffsets[name] || [0, 0]);
@@ -704,16 +706,16 @@ export default {
 			let keyedOffsets = {
 					'sensory pleasures': [0, 0],
 					'compassion-joy': [-0.25, -0.25],
-					'rejoicing': [-0.15, -0.15],
-					'amusement': [0.15, 0.15],
+					'amusement': [-0.15, -0.15],
+					'rejoicing': [0.15, 0.15],
 					'schadenfreude': [0, 0],
 					'relief': [0, 0],
-					'naches': [-0.15, -0.15],
-					'pride': [0.1, 0.1],
-					'fiero': [0.4, 0.4],
+					'pride': [-0.15, -0.15],
+					'fiero': [0.1, 0.1],
+					'naches': [0.4, 0.4],
 					'wonder': [0, 0],
-					'excitement': [-0.15, -0.15],
-					'debauchery': [0.15, 0.15],
+					'debauchery': [-0.15, -0.15],
+					'excitement': [0.15, 0.15],
 					'ecstasy': [0, 0]
 				},
 				offsets = states.map(s => s.name).map(name => keyedOffsets[name] || [0, 0]);
@@ -759,11 +761,11 @@ export default {
 					'distraughtness': [0.5, 0.1],
 					'resignation': [0.75, 0],
 					'helplessness': [-0.5, -0.5],
-					'misery': [-0.5, -0.5],
-					'hopelessness': [0, 0],
-					'sorrow': [-0.1, 0],
+					'hopelessness': [-0.5, -0.5],
+					'misery': [0, 0],
+					'despair': [-0.1, 0],
 					'grief': [0.3, 0.5],
-					'despair': [0.7, 1.0],
+					'sorrow': [0.7, 1.0],
 					'anguish': [0, 0.5]
 				},
 				offsets = states.map(s => s.name).map(name => keyedOffsets[name] || [0, 0]);
@@ -983,8 +985,7 @@ export default {
 					return path;
 				}),
 			
-			// TODO: copying anger as placeholder; need to implement for this state
-			// start with concave arcs at left, convex at right, then degenerate per "Zig Zag" Illustrator effect (or similar)
+			// TODO: degenerate per "Zig Zag" Illustrator effect (or similar)
 			fear: d3.svg.area()
 				.x(d => xScale(d.x))
 				.y0(innerHeight)
