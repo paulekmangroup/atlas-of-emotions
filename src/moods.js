@@ -131,6 +131,7 @@ export default {
 		if (!event) { event = d3.event; }
 		event.stopImmediatePropagation();
 
+		this.overlayContainer.classList.add('visible');
 		this.setCallout(true);
 
 	},

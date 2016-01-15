@@ -80,6 +80,9 @@ export default {
 		this.triggersData = this.parseTriggers(haloRadius);
 
 		this.setUpHitAreas(containerNode);
+		this.onHitAreaMouseOver = this.onHitAreaMouseOver.bind(this);
+		this.onHitAreaMouseOut = this.onHitAreaMouseOut.bind(this);
+		this.onHitAreaClick = this.onHitAreaClick.bind(this);
 
 		this.isInited = true;
 
@@ -98,11 +101,13 @@ export default {
 		.append('g')
 			.attr('transform', 'translate(' + 0.5 * containerNode.offsetWidth + ',' + containerNode.offsetHeight + ')');
 
+		/*
 		this.databaseLabel = d3.select(containerNode).append('div')
 			.attr('id', 'database-label');
 		this.databaseLabel.append('h3')
 			.text('EMOTIONS ALERT DATABASE')
 			.style('top', -haloRadius + 'px');
+		*/
 
 	},
 
@@ -113,8 +118,6 @@ export default {
 			innerRadius,
 			radiusSpread;
 
-		// TODO: this is all temporary, until we switch to a force-directed layout.
-		// until then, it's necessary to fit all the labels on screen.
 		let aspectRatio = this.sectionContainer.offsetWidth / this.sectionContainer.offsetHeight;
 		if (aspectRatio > 1.75) {
 			startAngle = -0.9 * Math.PI;
@@ -125,17 +128,17 @@ export default {
 			startAngle = -0.8 * Math.PI;
 			angleSpread = 0.6 * Math.PI;
 			innerRadius = haloRadius * 1.15;
-			radiusSpread = haloRadius * 0.3;
+			radiusSpread = haloRadius * 0.2;
 		} else if (aspectRatio > 1) {
 			startAngle = -0.7 * Math.PI;
 			angleSpread = 0.4 * Math.PI;
 			innerRadius = haloRadius * 1.25;
-			radiusSpread = haloRadius * 0.5;
+			radiusSpread = haloRadius * 0.25;
 		} else {
 			startAngle = -0.6 * Math.PI;
 			angleSpread = 0.2 * Math.PI;
 			innerRadius = haloRadius * 1.35;
-			radiusSpread = haloRadius * 0.65;
+			radiusSpread = haloRadius * 0.3;
 		}
 
 
@@ -359,15 +362,17 @@ export default {
 			.attr('y', -ch)
 			.attr('width', cw)
 			.attr('height', ch)
-			.on('mouseover', () => { this.onMouseOver(HIT_AREAS.APPRAISAL); })
-			.on('mouseout', () => { this.onMouseOut(HIT_AREAS.APPRAISAL); });
+			.on('mouseover', () => { this.onHitAreaMouseOver(HIT_AREAS.APPRAISAL); })
+			.on('mouseout', () => { this.onHitAreaMouseOut(HIT_AREAS.APPRAISAL); })
+			.on('click', () => { this.onHitAreaClick(HIT_AREAS.APPRAISAL); });
 
 		container.append('path')
 			.data(this.haloPieLayout([{}]))
 			.attr('class', 'hit-area')
 			.attr('d', this.haloArcGenerator)
-			.on('mouseover', () => { this.onMouseOver(HIT_AREAS.DATABASE); })
-			.on('mouseout', () => { this.onMouseOut(HIT_AREAS.DATABASE); });
+			.on('mouseover', () => { this.onHitAreaMouseOver(HIT_AREAS.DATABASE); })
+			.on('mouseout', () => { this.onHitAreaMouseOut(HIT_AREAS.DATABASE); })
+			.on('click', () => { this.onHitAreaClick(HIT_AREAS.DATABASE); });
 
 		let innerArcGenerator = d3.svg.arc()
 			.innerRadius(0)
@@ -376,8 +381,11 @@ export default {
 			.data(this.haloPieLayout([{}]))
 			.attr('class', 'hit-area')
 			.attr('d', innerArcGenerator)
-			.on('mouseover', () => { this.onMouseOver(HIT_AREAS.IMPULSE); })
-			.on('mouseout', () => { this.onMouseOut(HIT_AREAS.IMPULSE); });
+			.on('mouseover', () => { this.onHitAreaMouseOver(HIT_AREAS.IMPULSE); })
+			.on('mouseout', () => { this.onHitAreaMouseOut(HIT_AREAS.IMPULSE); })
+			.on('click', () => { this.onHitAreaClick(HIT_AREAS.IMPULSE); });
+
+		d3.select('#header').on('click', () => { this.onHitAreaClick(null); });
 
 	},
 
@@ -450,7 +458,7 @@ export default {
 				return 'translate(' + x + 'px,' + y + 'px)';
 			});
 		labelEnterSelection.append('h3')
-			.html(d => d.name.toUpperCase());
+			.html(d => d.name);
 
 		// exit
 		labelSelection.exit().transition()
@@ -500,7 +508,7 @@ export default {
 			.style('opacity', 0.0)
 			.remove();
 
-		this.databaseLabel.attr('class', this.currentEmotion);
+		// this.databaseLabel.attr('class', this.currentEmotion);
 
 	},
 
@@ -536,59 +544,55 @@ export default {
 
 	},
 
-	onMouseOver: function (hitAreaId) {
+	onHitAreaMouseOver: function (hitAreaId) {
+
+		this.displayHighlightedHitArea(hitAreaId);
+
+	},
+
+	onHitAreaMouseOut: function (hitAreaId) {
+
+		this.displayHighlightedHitArea(null);
+	},
+
+	onHitAreaClick: function (hitAreaId) {
+
+		if (d3.event) {
+			d3.event.stopImmediatePropagation();
+		}
+
+		this.setHighlightedHitArea(hitAreaId);
+	},
+
+	setHighlightedHitArea: function (hitAreaId) {
+
+		this.highlightedHitArea = hitAreaId;
+		this.displayHighlightedHitArea();
+		this.setCallout(hitAreaId);
+
+	},
+
+	displayHighlightedHitArea: function (hitAreaId) {
+
+		hitAreaId = hitAreaId || this.highlightedHitArea || null;
 
 		switch (hitAreaId) {
 			case HIT_AREAS.APPRAISAL:
 				document.querySelector('#trigger-graph-container').classList.add('muted');
-				this.databaseLabel.classed('visible', false);
 				document.querySelector('#states').classList.add('faded');
 				break;
 			case HIT_AREAS.DATABASE:
 				document.querySelector('#trigger-graph-container').classList.remove('muted');
-				this.databaseLabel.classed('visible', true);
 				document.querySelector('#states').classList.add('faded');
 				break;
 			case HIT_AREAS.IMPULSE:
 				document.querySelector('#trigger-graph-container').classList.add('muted');
-				this.databaseLabel.classed('visible', false);
 				document.querySelector('#states').classList.remove('faded');
 				break;
 			default:
-				return;
+				document.querySelector('#trigger-graph-container').classList.remove('muted');
+				document.querySelector('#states').classList.remove('faded');
 		}
-
-		this.setCallout(hitAreaId);
-
-		// don't execute mouseout behavior when rolling from one hit area into another
-		clearTimeout(this.mouseOutTimeout);
-
-	},
-
-	onMouseOut: function (hitAreaId) {
-
-		this.mouseOutTimeout = setTimeout(() => {
-
-			switch (hitAreaId) {
-				case HIT_AREAS.APPRAISAL:
-					//
-					break;
-				case HIT_AREAS.DATABASE:
-					//
-					break;
-				case HIT_AREAS.IMPULSE:
-					break;
-				default:
-					return;
-			}
-
-			document.querySelector('#trigger-graph-container').classList.remove('muted');
-			this.databaseLabel.classed('visible', false);
-			document.querySelector('#states').classList.remove('faded');
-
-			this.setCallout(null);
-
-		}, 1);
 
 	},
 
