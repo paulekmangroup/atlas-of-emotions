@@ -732,6 +732,10 @@ export default {
 
 		}
 
+		if (!action && this.highlightedValence) {
+			this.displayHighlightedValence();
+		}
+
 	},
 
 	setHighlightedValence: function (valence, preventRecursion) {
@@ -809,23 +813,29 @@ export default {
 
 	onActionMouseOver: function (d, i) {
 
+		this.displayHighlightedAction(d);
+		/*
 		let event = d3.event;
 		if (event && event.target.classList.contains('label-valence')) {
 			this.displayHighlightedValence(d.valence);
 		} else {
 			this.displayHighlightedAction(d);
 		}
+		*/
 
 	},
 
 	onActionMouseOut: function (d, i) {
 
+		this.displayHighlightedAction(null);
+		/*
 		let event = d3.event;
 		if (event && event.target.classList.contains('label-valence')) {
 			this.displayHighlightedValence(null);
 		} else {
 			this.displayHighlightedAction(null);
 		}
+		*/
 
 	},
 
@@ -835,11 +845,14 @@ export default {
 			d3.event.stopImmediatePropagation();
 		}
 
+		this.setHighlightedAction(d);
+		/*
 		if (event && event.target.classList.contains('label-valence')) {
 			this.setHighlightedValence(d.valence);
 		} else {
 			this.setHighlightedAction(d);
 		}
+		*/
 
 	},
 
