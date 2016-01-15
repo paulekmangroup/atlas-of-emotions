@@ -73,7 +73,12 @@
 		&.none {
 			display: none;
 		}
-		
+
+		&.highlighted {
+			stroke: rgba(33, 33, 33, 0.25);
+			stroke-width: 2;
+		}
+
 	}
 }
 

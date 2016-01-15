@@ -521,6 +521,7 @@ export default {
 		if (!state) {
 
 			this.displayHighlightedAction(null);
+			this.displayHighlightedValence(null);
 
 		} else {
 
@@ -688,9 +689,13 @@ export default {
 
 	},
 
-	setHighlightedAction: function (action) {
+	setHighlightedAction: function (action, preventRecursion) {
 
 		this.highlightedAction = action;
+
+		if (!preventRecursion) {
+			this.setHighlightedValence(null, true);
+		}
 
 		if (action) {
 			dispatcher.changeCallout(this.currentEmotion, action.name, action.desc);
@@ -738,9 +743,76 @@ export default {
 
 	},
 
+	setHighlightedValence: function (valence, preventRecursion) {
+
+		this.highlightedValence = valence;
+
+		if (!preventRecursion) {
+			this.setHighlightedAction(null, true);
+		}
+
+		if (valence) {
+			let valenceKey;
+			switch (valence) {
+				case VALENCES.CONSTRUCTIVE:
+					valenceKey = 0;
+					break;
+				case VALENCES.BOTH:
+					valenceKey = 2;
+					break;
+				case VALENCES.DESTRUCTIVE:
+					valenceKey = 1;
+					break;
+			}
+			dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.actions.qualities[valenceKey].header, emotionsData.metadata.actions.qualities[valenceKey].body);
+		} else {
+			this.resetCallout();
+		}
+
+		this.displayHighlightedValence(valence);
+
+	},
+
 	displayHighlightedValence: function (valence) {
 
-		console.log(">>>>> display highlighted valence:", valence);
+		valence = valence || this.highlightedValence || null;
+
+		let valenceClass = Object.keys(VALENCES).find(key => VALENCES[key] === valence);
+		if (valenceClass) {
+			valenceClass = valenceClass.toLowerCase();
+		}
+
+		d3.selectAll('path.valence')
+			/*
+			.call(function () {
+				let highlighted = this.classed(valenceClass);
+				console.log("classes:", this.node().classList);
+				this.style('opacity', highlighted ? 1.0 : 0.5);
+				this.classed('highlighted', highlighted);
+			});*/
+			.style('opacity', function () {
+				if (valenceClass) {
+					return this.classList.contains(valenceClass) ? 1.0 : 0.5;
+				} else {
+					return null;
+				}
+			})
+			.classed('highlighted', function () {
+				if (valenceClass) {
+					return this.classList.contains(valenceClass);
+				} else {
+					return null;
+				}
+			});
+
+		d3.selectAll('g.action-arrow')
+			.style('opacity', d => {
+				if (valence) {
+					return d.valence === valence ? 1.0 : 0.2;
+				} else {
+					return null;
+				}
+			});
 
 	},
 
@@ -772,7 +844,11 @@ export default {
 			d3.event.stopImmediatePropagation();
 		}
 
-		this.setHighlightedAction(d);
+		if (event && event.target.classList.contains('label-valence')) {
+			this.setHighlightedValence(d.valence);
+		} else {
+			this.setHighlightedAction(d);
+		}
 
 	},
 
