@@ -61,11 +61,13 @@
 	.valence {
 		stroke: rgba(77, 77, 77, 0.25);
 		stroke-width: 1;
+		cursor: pointer;
+
 		&.constructive {
 			fill: rgba(255, 255, 255, 0.25);
 		}
 		&.both {
-			fill: none;
+			fill: rgba(255, 255, 255, 0.0);
 		}
 		&.destructive {
 			fill: rgba(77, 77, 77, 0.1);

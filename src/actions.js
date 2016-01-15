@@ -37,6 +37,9 @@ export default {
 		this.onActionMouseOver = this.onActionMouseOver.bind(this);
 		this.onActionMouseOut = this.onActionMouseOut.bind(this);
 		this.onActionMouseClick = this.onActionMouseClick.bind(this);
+		this.onValenceMouseOver = this.onValenceMouseOver.bind(this);
+		this.onValenceMouseOut = this.onValenceMouseOut.bind(this);
+		this.onValenceMouseClick = this.onValenceMouseClick.bind(this);
 
 		this.actionsData = this.parseActions();
 
@@ -471,6 +474,9 @@ export default {
 					.attr('d', this.arcGenerator)
 					.each(function(d) { this._current = d; }) // store the initial angles for arcTween
 					.style('opacity', 0.0)
+					.on('mouseover', this.onValenceMouseOver)
+					.on('mouseout', this.onValenceMouseOut)
+					.on('click', this.onValenceMouseClick)
 				.transition()
 					.duration(1000)
 					.delay(500)
@@ -569,14 +575,6 @@ export default {
 			.transition()
 				.duration(1000)
 				.style('transform', d => 'rotate(-' + d.rotation + 'deg) scaleY(1.73)');
-			// labelSelection.select('.label-valence')
-			// 	.on('mouseover', this.onActionMouseOver)
-			// 	.on('mouseout', this.onActionMouseOut)
-			// 	.on('click', this.onActionMouseClick);
-			// labelSelection.select('.label-name')
-			// 	.on('mouseover', this.onActionMouseOver)
-			// 	.on('mouseout', this.onActionMouseOut)
-			// 	.on('click', this.onActionMouseClick);
 
 			// enter
 			let labelEnterSelection = labelSelection.enter().append('div')
@@ -584,19 +582,12 @@ export default {
 				.style('transform', d => 'rotate(' + d.rotation + 'deg)')
 				.style('height', labelSize + 'px')
 				.style('opacity', 0.0);
-				// .on('mouseover', this.onActionMouseOver)
-				// .on('mouseout', this.onActionMouseOut)
-				// .on('click', this.onActionMouseClick);
 			labelEnterSelection.append('div').append('h3')
 				.html(labelText)
 				.style('transform', d => 'rotate(-' + d.rotation + 'deg) scaleY(1.73)')
 				.on('mouseover', this.onActionMouseOver)
 				.on('mouseout', this.onActionMouseOut)
 				.on('click', this.onActionMouseClick);
-			// .select('span')
-			// 	.on('mouseover', this.onActionMouseOver)
-			// 	.on('mouseout', this.onActionMouseOut)
-			// 	.on('click', this.onActionMouseClick);
 			
 			labelEnterSelection.transition()
 				.duration(1000)
@@ -848,6 +839,37 @@ export default {
 			this.setHighlightedValence(d.valence);
 		} else {
 			this.setHighlightedAction(d);
+		}
+
+	},
+
+	onValenceMouseOver: function (d, i) {
+
+		let valence = VALENCES[d.data.name];
+		if (valence) {
+			this.displayHighlightedValence(valence);
+		}
+
+	},
+
+	onValenceMouseOut: function (d, i) {
+
+		let valence = VALENCES[d.data.name];
+		if (valence) {
+			this.displayHighlightedValence(null);
+		}
+
+	},
+
+	onValenceMouseClick: function (d, i) {
+
+		if (d3.event) {
+			d3.event.stopImmediatePropagation();
+		}
+
+		let valence = VALENCES[d.data.name];
+		if (valence) {
+			this.setHighlightedValence(valence);
 		}
 
 	},
