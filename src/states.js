@@ -199,7 +199,7 @@ export default {
 
 		// TODO: copying anger as placeholder; need to implement for disgust, enjoyment, fear
 		let yOffsets = {};
-		yOffsets[dispatcher.EMOTIONS.ANGER] = y => y - 60;
+		yOffsets[dispatcher.EMOTIONS.ANGER] = y => y - 100;
 		yOffsets[dispatcher.EMOTIONS.DISGUST] = yOffsets[dispatcher.EMOTIONS.ANGER];
 		yOffsets[dispatcher.EMOTIONS.ENJOYMENT] = yOffsets[dispatcher.EMOTIONS.ANGER];
 		yOffsets[dispatcher.EMOTIONS.FEAR] = yOffsets[dispatcher.EMOTIONS.ANGER];
@@ -658,7 +658,7 @@ export default {
 
 			// manually offset each state
 			let keyedOffsets = {
-					'annoyance': [0.5, 0],
+					'annoyance': [-0.5, 0],
 					'frustration': [-1.5, -0.5],
 					'argumentativeness': [0, 0],
 					'bitterness': [0.5, 0],
@@ -1248,18 +1248,22 @@ export default {
 			});
 
 			graphContainer.selectAll('path.area')
-				.style('opacity', (data, index) => stateIndexes[index] ? 1.0 : 0.2);
+				.classed('unhighlighted', (data, index) => !stateIndexes[index]);
+				// .style('opacity', (data, index) => stateIndexes[index] ? 1.0 : 0.2);
 
 			labelContainer.selectAll('div h3')
-				.style('opacity', (data, index) => stateIndexes[index] ? 1.0 : 0.2);
+				.classed('highlighted', (data, index) => stateIndexes[index]);
+				// .style('opacity', (data, index) => stateIndexes[index] ? 1.0 : 0.2);
 
 		} else {
 
 			graphContainer.selectAll('path.area')
-				.style('opacity', null);
+				.classed('unhighlighted', false);
+				// .style('opacity', null);
 
 			labelContainer.selectAll('div h3')
-				.style('opacity', null);
+				.classed('highlighted', false);
+				// .style('opacity', null);
 
 		}
 

@@ -31,6 +31,8 @@ $triggers-graph-width: 80%;
 $func-ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 $label-fade-in-time-init: 2s;
 $label-fade-in-time: 1s;
+$state-highlight-in-time: 0.1s;
+$state-highlight-out-time: 0.25s;
 
 // mixins
 @mixin emotion-color () {
