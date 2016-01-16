@@ -77,28 +77,27 @@
 	}
 }
 
-/*
-#database-label {
+#trigger-phase-labels {
 	position: absolute;
 	left: 50%;
 	bottom: 0;
-	width: 7em;
+
+	text-align: center;
 	@include emotion-color;
 
-	h3 {
+	.label {
 		position: absolute;
-		left: -50%;
-		margin: 1.25em 0 0 -50%;
-	}
+		transform: translate(-50%, -50%);
+		margin: 0;
 
-	opacity: 0.0;
-	-webkit-transition: opacity 0.5s;
-	transition:         opacity 0.5s;
-	&.visible {
-		opacity: 1.0;
+		opacity: 0.0;
+		-webkit-transition: opacity 0.5s;
+		transition:         opacity 0.5s;
+		&.visible {
+			opacity: 1.0;
+		}
 	}
 }
-*/
 
 #trigger-hit-area-container {
 	width: 100%;

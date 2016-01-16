@@ -59,7 +59,7 @@ export default {
 		// 
 		// d3/svg setup
 		// 
-		let haloRadius = 0.5 * innerWidth,
+		let haloRadius = Math.min(0.6 * innerHeight, 0.5 * innerWidth),
 			triggerInnerRadius = haloRadius * 1.125,
 			triggerAreaWidth = haloRadius * 1.375 - triggerInnerRadius;
 
@@ -101,14 +101,24 @@ export default {
 		.append('g')
 			.attr('transform', 'translate(' + 0.5 * containerNode.offsetWidth + ',' + containerNode.offsetHeight + ')');
 
-		/*
-		this.databaseLabel = d3.select(containerNode).append('div')
-			.attr('id', 'database-label');
-		this.databaseLabel.append('h3')
-			.text('EMOTIONS ALERT DATABASE')
-			.style('top', -haloRadius + 'px');
-		*/
-
+		this.phaseLabelContainer = d3.select(containerNode).append('div')
+			.attr('id', 'trigger-phase-labels');
+		this.phaseLabelContainer.selectAll('h3.label')
+			.data(emotionsData.metadata.triggers.steps)
+		.enter().append('h3')
+			.classed('label', true)
+			.text(d => d.header.toUpperCase())
+			.style('top', (d, i) => {
+				switch (i) {
+					case 0:
+						return (-1.4 * haloRadius) + 'px';
+					case 1:
+						return (-0.9 * haloRadius) + 'px';
+					case 2:
+						return (-0.65 * haloRadius) + 'px';
+				}
+			});
+		
 	},
 
 	parseTriggers: function (haloRadius) {
@@ -128,17 +138,17 @@ export default {
 			startAngle = -0.8 * Math.PI;
 			angleSpread = 0.6 * Math.PI;
 			innerRadius = haloRadius * 1.15;
-			radiusSpread = haloRadius * 0.2;
+			radiusSpread = haloRadius * 0.225;
 		} else if (aspectRatio > 1) {
 			startAngle = -0.7 * Math.PI;
 			angleSpread = 0.4 * Math.PI;
 			innerRadius = haloRadius * 1.25;
-			radiusSpread = haloRadius * 0.25;
+			radiusSpread = haloRadius * 0.3;
 		} else {
 			startAngle = -0.6 * Math.PI;
 			angleSpread = 0.2 * Math.PI;
 			innerRadius = haloRadius * 1.35;
-			radiusSpread = haloRadius * 0.3;
+			radiusSpread = haloRadius * 0.375;
 		}
 
 
@@ -508,7 +518,7 @@ export default {
 			.style('opacity', 0.0)
 			.remove();
 
-		// this.databaseLabel.attr('class', this.currentEmotion);
+		this.phaseLabelContainer.attr('class', this.currentEmotion);
 
 	},
 
@@ -593,6 +603,9 @@ export default {
 				document.querySelector('#trigger-graph-container').classList.remove('muted');
 				document.querySelector('#states').classList.remove('faded');
 		}
+
+		this.phaseLabelContainer.selectAll('h3.label')
+			.classed('visible', (d, i) => i + 1 === hitAreaId);
 
 	},
 
