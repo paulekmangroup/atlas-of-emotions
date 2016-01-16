@@ -198,17 +198,17 @@ export default {
 				.data(ranges);
 
 		// TODO: copying anger as placeholder; need to implement for disgust, enjoyment, fear
-		let yOffsets = {};
+		let yOffsets = {},
+			innerHeight = this.yScale.range()[0];
 		yOffsets[dispatcher.EMOTIONS.ANGER] = y => y - 100;
 		yOffsets[dispatcher.EMOTIONS.DISGUST] = yOffsets[dispatcher.EMOTIONS.ANGER];
 		yOffsets[dispatcher.EMOTIONS.ENJOYMENT] = yOffsets[dispatcher.EMOTIONS.ANGER];
 		yOffsets[dispatcher.EMOTIONS.FEAR] = yOffsets[dispatcher.EMOTIONS.ANGER];
-		yOffsets[dispatcher.EMOTIONS.SADNESS] = (y, i) => {
-			// attempt to algorithmically bring labels closer to peaks,
-			// which are truncated due to interpolation.
-			// the steeper the peak, the further the distance from the peak and the end of the curve.
-			// might end up manually positioning by index, instead of algorithmically.
-			return y + Math.abs(y * 0.75 * Math.pow(i/statesData.length, 3));
+		yOffsets[dispatcher.EMOTIONS.SADNESS] = (y, d) => {
+			// due to interpolation, steeper peaks result in 
+			// further distance to the label.
+			// compensate here with manual offsets.
+			return y + Math.pow(d[1].x/10, 2) * .3 * innerHeight;
 		};
 
 		labels.enter().append('div');
@@ -218,7 +218,7 @@ export default {
 			.html((d, i) => '<h3>' + statesData[i].name.toUpperCase() + '</h3>')
 			.style({
 				left: d => (Math.round(stateSection.xScale(d[1].x) + 20) + 'px'),	// not sure why this 20px magic number is necessary...?
-				top: (d, i) => (Math.round(yOffsets[this.currentEmotion](stateSection.yScale(d[1].y), i)) + 'px')
+				top: d => (Math.round(yOffsets[this.currentEmotion](stateSection.yScale(d[1].y), d)) + 'px')
 			})
 			.each(function () {
 				setTimeout(() => {
@@ -757,9 +757,9 @@ export default {
 			// manually offset each state
 			let keyedOffsets = {
 					'disappointment': [0, 0],
-					'discouragement': [-0.75, -0.25],
-					'distraughtness': [0.5, 0.1],
-					'resignation': [0.75, 0],
+					'discouragement': [-0.5, -0.25],
+					'distraughtness': [0.25, 0.25],
+					'resignation': [0.75, 0.5],
 					'helplessness': [-0.5, -0.5],
 					'hopelessness': [-0.5, -0.5],
 					'misery': [0, 0],
