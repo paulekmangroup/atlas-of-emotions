@@ -572,6 +572,15 @@ export default {
 			return dy;
 		});
 
+		// manual sort overrides
+		if (this.currentEmotion === dispatcher.EMOTIONS.FEAR) {
+			// move panic one index forward, after horror
+			let panicIndex = states.findIndex(state => state.name === 'panic');
+			if (panicIndex > -1) {
+				states.splice(panicIndex + 1, 0, states.splice(panicIndex, 1)[0]);
+			}
+		}
+
 		return states;
 
 	},
@@ -737,8 +746,8 @@ export default {
 					'anxiety': [0, 0],
 					'dread': [-0.5, -0.5],
 					'desperation': [-1.0, -1.0],
-					'horror': [-0.7, -0.8],
-					'panic': [-0.35, -0.4],
+					'panic': [-0.7, -0.8],
+					'horror': [-0.35, -0.4],
 					'terror': [0, 0]
 				},
 				offsets = states.map(s => s.name).map(name => keyedOffsets[name] || [0, 0]);
