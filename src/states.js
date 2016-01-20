@@ -275,7 +275,7 @@ export default {
 			setTimeout(() => {
 				previousGraph.style('transform', 'translateX(' + -dx + 'px)');
 				previousLabels.style('transform', 'translateX(' + -dx + 'px)');
-			}, sassVars.states.emotions.panX.delay * 1000);
+			}, sassVars.emotions.panX.delay * 1000);
 		}
 
 		let currentGraph = this.graphContainers[emotion],
@@ -297,14 +297,14 @@ export default {
 			currentGraph.style('transform', 'translateX(0)');
 			currentLabels.classed('transitioning active', true);
 			currentLabels.style('transform', 'translateX(0)');
-		}, sassVars.states.emotions.panX.delay * 1000);
+		}, sassVars.emotions.panX.delay * 1000);
 
 		setTimeout(() => {
 			// animate in emotion graph if first time viewing
 			if (emotionState.scale !== 1.0) {
 				this.setEmotionScale(emotion, 1.0);
 			}
-		}, sassVars.states.emotions.scale.in.delay * 1000);
+		}, sassVars.emotions.scale.in.delay * 1000);
 
 		if (!this.isBackgrounded) {
 

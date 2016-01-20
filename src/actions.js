@@ -3,6 +3,7 @@ import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
 import emotionsData from '../static/emotionsData.json';
+import sassVars from '../scss/variables.json';
 import states from './states.js';
 
 const VALENCES = {
@@ -424,12 +425,85 @@ export default {
 		if (!~_.values(dispatcher.EMOTIONS).indexOf(emotion)) {
 			emotion = 'anger';
 		}
+		let previousEmotion = this.currentEmotion;
 		this.currentEmotion = emotion;
 
-		// TODO: transition between emotions:
-		// pull all action arrows back into the continent
-		// as the continent's shapes shrink back to the baseline,
-		// then grow the new continent (states) and arrows (actions)
+		// transition graphs and labels
+		let dx = 0;
+		if (previousEmotion) {
+			let previousAction = d3.select('.actions-container.' + previousEmotion);
+			previousAction.classed('active', false);
+			previousAction.on('transitionend', event => {
+				previousAction.on('transitionend', null);
+				previousAction.style('transform', null);
+				previousAction.classed('transitioning', false);
+			});
+
+			let containerWidth = document.querySelector('#actions .graph-container').offsetWidth,
+				emotions = _.values(dispatcher.EMOTIONS);
+
+			// just place left or right one viewport, instead of adhering to column positions,
+			// to avoid animations that are unnecessarily fast'n'flashy.
+			dx = 1.25 * containerWidth;
+			if (emotions.indexOf(emotion) < emotions.indexOf(previousEmotion)) {
+				dx *= -1;
+			}
+
+			// delay to allow a little time for opacity to come up before translating
+			setTimeout(() => {
+				previousAction.style('transform', 'translateX(' + -dx + 'px)');
+			}, sassVars.emotions.panX.delay * 1000);
+		}
+
+		let currentAction = d3.select('.actions-container.' + emotion);
+		if (currentAction.classed('transitioning')) {
+			// if new emotion is still transitioning, remove transitionend handler
+			currentAction.on('transitionend', null);
+		} else {
+			// else, move into position immediately to prepare for transition
+			currentAction.classed('transitioning', false);
+			currentAction.style('transform', 'translateX(' + dx + 'px)');
+		}
+
+		// delay to allow a little time for opacity to come up before translating
+		setTimeout(() => {
+			currentAction.classed('transitioning active', true);
+			currentAction.style('transform', 'translateX(0)');
+		}, sassVars.emotions.panX.delay * 1000);
+
+
+		
+
+		/*
+		setTimeout(() => {
+			// animate in emotion graph if first time viewing
+			if (emotionState.scale !== 1.0) {
+				this.setEmotionScale(emotion, 1.0);
+			}
+		}, sassVars.emotions.scale.in.delay * 1000);
+
+		if (!this.isBackgrounded) {
+
+			this.renderLabels(emotionState.ranges[1]);
+
+			setTimeout(() => {
+				this.graphContainers[emotion].selectAll('.axis')
+					.classed('visible', true);
+			}, 1);
+
+			// setTimeout(() => {
+			this.resetCallout();
+			// }, LABEL_APPEAR_DELAY);
+
+			this.tempNav.querySelector('.prev').innerHTML = '<a href="#continents:' + emotion + '">CONTINENTS ▲</a>';
+			this.tempNav.querySelector('.next').innerHTML = '<a href="#actions:' + emotion + '">ACTIONS ▼</a>';
+			this.tempNav.classList.add('visible');
+
+		}
+		*/
+
+
+
 		
 		if (!this.isBackgrounded) {
 			states.setActive(true);
@@ -438,7 +512,12 @@ export default {
 			this.tempNav.querySelector('.next').innerHTML = '<a href="#triggers:' + emotion + '">TRIGGERS ▼</a>';
 			this.tempNav.classList.add('visible');
 		}
-		
+
+		let openDelay = 1500;
+		this.setStateTimeout = setTimeout(() => {
+			dispatcher.setEmotionState(null, true);
+		}, openDelay);
+
 	},
 
 	setState: function (state) {
@@ -689,7 +768,7 @@ export default {
 			if (!options || !options.inBackground) {
 				this.resetCallout();
 			}
-			dispatcher.setEmotionState(null, true);
+			// dispatcher.setEmotionState(null, true);
 		}, openDelay);
 
 	},
@@ -699,6 +778,7 @@ export default {
 		return new Promise((resolve, reject) => {
 
 			clearTimeout(this.openTimeout);
+			clearTimeout(this.setStateTimeout);
 
 			this.tempNav.classList.remove('visible');
 
