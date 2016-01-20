@@ -27,10 +27,24 @@ export default {
 	actionsData: null,
 	backgroundSections: [ states ],
 	tempNav: null,
+
+	labelContainers: null,
+	graphContainers: null,
+
 	
 	init: function (containerNode) {
 
 		this.sectionContainer = containerNode;
+
+		this.actionsData = this.parseActions();
+
+		this.initContainers(containerNode);
+
+		this.initLabels(containerNode);
+
+		this.createTempNav(containerNode);
+
+		this.setUpGraphs(containerNode);
 
 		this.scaledLineGenerator = this.scaledLineGenerator.bind(this);
 		this.arcTween = this.arcTween.bind(this);
@@ -41,15 +55,44 @@ export default {
 		this.onValenceMouseOut = this.onValenceMouseOut.bind(this);
 		this.onValenceMouseClick = this.onValenceMouseClick.bind(this);
 
-		this.actionsData = this.parseActions();
+		this.isInited = true;
 
-		let graphContainer = document.createElement('div');
-		graphContainer.id = 'action-graph-container';
-		containerNode.appendChild(graphContainer);
+	},
 
-		this.initLabels(containerNode);
+	initContainers: function (containerNode) {
 
-		this.createTempNav(containerNode);
+		_.values(dispatcher.EMOTIONS).forEach(emotion => {
+
+			let actionsContainer = document.createElement('div');
+			actionsContainer.classList.add('actions-container');
+			actionsContainer.classList.add(emotion);
+
+			let graphContainer = document.createElement('div');
+			graphContainer.classList.add('graph-container');
+			actionsContainer.appendChild(graphContainer);
+
+			containerNode.appendChild(actionsContainer);
+
+		});
+
+	},
+
+	initLabels: function (containerNode) {
+
+		this.labelContainers = {};
+		_.values(dispatcher.EMOTIONS).forEach(emotion => {
+
+			let container = d3.select('.' + emotion + '.actions-container'),
+				labelContainer = container.append('div')
+					.classed('label-container', true);
+			
+			this.labelContainers[emotion] = labelContainer;
+
+		});
+
+	},
+
+	setUpGraphs: function (containerNode) {
 
 		// 
 		// d3 conventional margins
@@ -61,19 +104,11 @@ export default {
 			left: 100
 		};
 
-		let innerWidth = graphContainer.offsetWidth - margin.left - margin.right,
+		// All the same size, just grab the first one
+		let graphContainer = document.querySelector('#actions .graph-container'),
+			innerWidth = graphContainer.offsetWidth - margin.left - margin.right,
 			h = Math.max(graphContainer.offsetHeight, 0.5 * graphContainer.offsetWidth),
 			innerHeight = h - margin.top - margin.bottom;
-
-		let svg = d3.select(graphContainer).append('svg')
-			.attr('width', graphContainer.offsetWidth)
-			.attr('height', h);
-
-		this.actionGraphContainer = svg.append('g')
-			.attr('transform', 'translate(' + (margin.left + 0.5*innerWidth) + ',' + margin.top + ')');
-
-		this.actionGraphContainer.append('g')
-			.classed('valences', true);
 
 		// 
 		// d3/svg setup
@@ -81,6 +116,7 @@ export default {
 		let section = this,
 			transformedHeight = Math.sqrt(3) / 2 * innerHeight,	// from rotateX(60deg) applied to #action-graph-container
 			radius = Math.min(0.5 * innerWidth, transformedHeight * 0.75);	// TODO: revisit this magic number munging to keep everything on-screen
+
 		this.lineGenerator = d3.svg.line.radial()
 			.radius(d => d.x * radius)
 			.angle(d => 2*Math.PI * (1 - d.y))
@@ -96,9 +132,33 @@ export default {
 			.innerRadius(0)
 			.outerRadius(radius);
 
-		this.setUpDefs(svg.append('defs'), radius);
+		//
+		// Set up each graph and draw axes
+		// 
+		this.graphContainers = {};
+		this.emotionStates = {};
+		_.values(dispatcher.EMOTIONS).forEach((emotion, i) => {
 
-		this.isInited = true;
+			let graphContainer = document.querySelector('#actions .' + emotion + ' .graph-container');
+
+			let svg = d3.select(graphContainer).append('svg')
+				.attr('width', graphContainer.offsetWidth)
+				.attr('height', h);
+
+			let graph = svg.append('g')
+				.attr('transform', 'translate(' + (margin.left + 0.5*innerWidth) + ',' + margin.top + ')');
+
+			graph.append('g')
+				.classed('valences', true);
+
+			this.graphContainers[emotion] = graph;
+
+		});
+
+		// create an <svg> solely for <defs> shared across all emotion states via xlink:href
+		let defsSvg = d3.select(containerNode).append('svg')
+			.classed('actions-defs', true);
+		this.setUpDefs(defsSvg.append('defs'), radius);
 
 	},
 
@@ -125,13 +185,6 @@ export default {
 				return arc(i(t));
 			};
 		});
-	},
-
-	initLabels: function (containerNode) {
-
-		this.labelContainer = d3.select(containerNode).append('div')
-			.attr('id', 'action-labels');
-
 	},
 
 	parseActions: function () {
@@ -415,9 +468,10 @@ export default {
 
 		}
 
-		let emotionGradientName = 'actions-' + this.currentEmotion + '-gradient';
+		let emotionGradientName = 'actions-' + this.currentEmotion + '-gradient',
+			graphContainer = this.graphContainers[this.currentEmotion];
 
-		let arrowSelection = this.actionGraphContainer.selectAll('g.action-arrow')
+		let arrowSelection = graphContainer.selectAll('g.action-arrow')
 			.data(currentActionsData, d => d.name);
 
 		// update
@@ -460,7 +514,7 @@ export default {
 			if (state) {
 
 				// valences underlay
-				let valenceSelection = this.actionGraphContainer.select('g.valences').selectAll('path.valence')
+				let valenceSelection = graphContainer.select('g.valences').selectAll('path.valence')
 					.data(this.pieLayout(stateActionsData.valenceWeights), d => d.data.name);
 
 				// update
@@ -486,7 +540,7 @@ export default {
 
 				this.resetCallout();
 
-				this.actionGraphContainer.select('g.valences').selectAll('path.valence')
+				graphContainer.select('g.valences').selectAll('path.valence')
 				.transition()
 					.duration(1000)
 					.style('opacity', 0.0)
@@ -499,14 +553,16 @@ export default {
 
 	clearStates: function (duration) {
 
-		this.actionGraphContainer.selectAll('g.action-arrow')
-			.on('mouseover', null)
-			.on('mouseout', null)
-		.data([]).exit().transition()
-			.duration(duration)
-			.remove()
-		.select('path')
-			.call(this.scaledLineGenerator, 0.0);
+		if (this.currentEmotion) {
+			this.graphContainers[this.currentEmotion].selectAll('g.action-arrow')
+				.on('mouseover', null)
+				.on('mouseout', null)
+			.data([]).exit().transition()
+				.duration(duration)
+				.remove()
+			.select('path')
+				.call(this.scaledLineGenerator, 0.0);
+		}
 
 		this.renderLabels(null);
 
@@ -514,11 +570,13 @@ export default {
 			this.resetCallout();
 		}
 
-		this.actionGraphContainer.select('g.valences').selectAll('path.valence')
-		.transition()
-			.duration(duration)
-			.style('opacity', 0.0)
-			.remove();
+		if (this.currentEmotion) {
+			this.graphContainers[this.currentEmotion].select('g.valences').selectAll('path.valence')
+			.transition()
+				.duration(duration)
+				.style('opacity', 0.0)
+				.remove();
+		}
 
 	},
 
@@ -531,11 +589,14 @@ export default {
 
 		} else {
 
-			let stateActions = this.actionsData[this.currentEmotion].actions[state].actions.map(action => action.name);
-			d3.selectAll('g.action-arrow')
+			let stateActions = this.actionsData[this.currentEmotion].actions[state].actions.map(action => action.name),
+				graphContainer = this.graphContainers[this.currentEmotion],
+				labelContainer = this.labelContainers[this.currentEmotion];
+
+			graphContainer.selectAll('g.action-arrow')
 				.style('opacity', (data, index) => ~stateActions.indexOf(data.name) ? 1.0 : 0.2);
 
-			this.labelContainer.selectAll('div.label')
+			labelContainer.selectAll('div.label')
 				.style('opacity', (data, index) => ~stateActions.indexOf(data.name) ? 1.0 : 0.2);
 
 		}
@@ -543,6 +604,8 @@ export default {
 	},
 
 	renderLabels: function (actionsData) {
+
+		if (!this.currentEmotion) { return; }
 
 		let labelText = d => {
 			let prefix = '';
@@ -560,10 +623,11 @@ export default {
 			return prefix + '<span class="label-name">' + d.name.toUpperCase() + '</span>';
 		};
 
+		let labelContainer = this.labelContainers[this.currentEmotion];
 		if (actionsData) {
 
 			let labelSize = this.lineGenerator.radius()({x:1}) + 50,
-				labelSelection = this.labelContainer.selectAll('div.label')
+				labelSelection = labelContainer.selectAll('div.label')
 				.data(actionsData, d => d.name);
 			
 			// update
@@ -601,7 +665,7 @@ export default {
 
 		} else {
 			
-			this.labelContainer.selectAll('div.label')
+			labelContainer.selectAll('div.label')
 				.on('mouseover', null)
 				.on('mouseout', null)
 			.transition()
@@ -674,8 +738,9 @@ export default {
 
 	applyEventListenersToEmotion: function (emotion, handlersByEvent) {
 
+		let graphContainer = this.graphContainers[emotion];
 		Object.keys(handlersByEvent).forEach(event => {
-			this.actionGraphContainer.on(event, handlersByEvent[event]);
+			graphContainer.on(event, handlersByEvent[event]);
 		});
 
 	},
@@ -702,7 +767,9 @@ export default {
 
 	displayHighlightedAction: function (action) {
 
-		let highlightedAction = action || this.highlightedAction || null;
+		let highlightedAction = action || this.highlightedAction || null,
+			arrowSelection = this.graphContainers[this.currentEmotion].selectAll('g.action-arrow'),
+			labelSelection = this.labelContainers[this.currentEmotion].selectAll('div.label');
 
 		if (highlightedAction) {
 
@@ -713,21 +780,18 @@ export default {
 				stateActionsData = this.actionsData[this.currentEmotion].allActions;
 			}
 
-			d3.selectAll('g.action-arrow')
+			arrowSelection
 				.style('opacity', (data, index) => data.name === highlightedAction.name ? 1.0 : 0.2);
 
-			this.labelContainer.selectAll('div.label')
+			labelSelection
 				.style('opacity', (data, index) => data.name === highlightedAction.name ? 1.0 : 0.2);
-
-			// .selectAll('linearGradient')
-			// TODO: set stops with higher/lower opacity on #anger-gradient-{i}
 
 		} else {
 
-			d3.selectAll('g.action-arrow')
+			arrowSelection
 				.style('opacity', null);
 
-			this.labelContainer.selectAll('div.label')
+			labelSelection
 				.style('opacity', null);
 
 		}
@@ -770,6 +834,8 @@ export default {
 
 	displayHighlightedValence: function (valence) {
 
+		if (!this.currentEmotion) { return; }
+
 		valence = valence || this.highlightedValence || null;
 
 		let valenceClass = Object.keys(VALENCES).find(key => VALENCES[key] === valence);
@@ -777,7 +843,8 @@ export default {
 			valenceClass = valenceClass.toLowerCase();
 		}
 
-		d3.selectAll('path.valence')
+		let graphContainer = this.graphContainers[this.currentEmotion];
+		graphContainer.selectAll('path.valence')
 			/*
 			.call(function () {
 				let highlighted = this.classed(valenceClass);
@@ -800,7 +867,7 @@ export default {
 				}
 			});
 
-		d3.selectAll('g.action-arrow')
+		graphContainer.selectAll('g.action-arrow')
 			.style('opacity', d => {
 				if (valence) {
 					return d.valence === valence ? 1.0 : 0.2;
@@ -814,28 +881,12 @@ export default {
 	onActionMouseOver: function (d, i) {
 
 		this.displayHighlightedAction(d);
-		/*
-		let event = d3.event;
-		if (event && event.target.classList.contains('label-valence')) {
-			this.displayHighlightedValence(d.valence);
-		} else {
-			this.displayHighlightedAction(d);
-		}
-		*/
 
 	},
 
 	onActionMouseOut: function (d, i) {
 
 		this.displayHighlightedAction(null);
-		/*
-		let event = d3.event;
-		if (event && event.target.classList.contains('label-valence')) {
-			this.displayHighlightedValence(null);
-		} else {
-			this.displayHighlightedAction(null);
-		}
-		*/
 
 	},
 
@@ -846,13 +897,6 @@ export default {
 		}
 
 		this.setHighlightedAction(d);
-		/*
-		if (event && event.target.classList.contains('label-valence')) {
-			this.setHighlightedValence(d.valence);
-		} else {
-			this.setHighlightedAction(d);
-		}
-		*/
 
 	},
 

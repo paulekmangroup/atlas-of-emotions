@@ -36,81 +36,86 @@
 		margin: 0 0.1em;
 		font-size: 75%;
 	}
-}
 
-#action-graph-container,
-#action-labels {
-	position: absolute;
 
-	// align top of actions containers with bottom of
-	// 'backgrounded' states graph, which is scaled and translated.
-	// this math is basically:
-	// (states position) - (scaled states offset) - scale * (states graph offset from parent + states graph bottom margin)
-	top: calc((100% + #{$states-backgrounded-top}) - 
-		(100% * (1 - #{$states-backgrounded-scale}) / 2) - 
-		#{$states-backgrounded-scale} * (#{$states-containers-bottom} + 50px));
-
-	left: 50%;
-}
-
-#action-graph-container {
-	margin-left: -$actions-graph-width/2;
-	transform-origin: top;
-	transform: rotateX(60deg);
-
-	.valence {
-		stroke: rgba(77, 77, 77, 0.25);
-		stroke-width: 1;
-		cursor: pointer;
-
-		&.constructive {
-			fill: rgba(255, 255, 255, 0.25);
-		}
-		&.both {
-			fill: rgba(255, 255, 255, 0.0);
-		}
-		&.destructive {
-			fill: rgba(77, 77, 77, 0.1);
-		}
-		&.none {
-			display: none;
-		}
-
-		&.highlighted {
-			stroke: rgba(33, 33, 33, 0.25);
-			stroke-width: 2;
-		}
-
-	}
-}
-
-#action-labels {
-	pointer-events: none;
-	transform: scaleY(0.578);	// 1/sqrt(3), using scale to equate to rotateX(60deg)
-
-	.label {
+	.graph-container,
+	.label-container {
 		position: absolute;
-		bottom: 0;
-		transform-origin: bottom;
 
-		@include emotion-color;
-		white-space: nowrap;
+		// align top of actions containers with bottom of
+		// 'backgrounded' states graph, which is scaled and translated.
+		// this math is basically:
+		// (states position) - (scaled states offset) - scale * (states graph offset from parent + states graph bottom margin)
+		top: calc((100% + #{$states-backgrounded-top}) - 
+			(100% * (1 - #{$states-backgrounded-scale}) / 2) - 
+			#{$states-backgrounded-scale} * (#{$states-containers-bottom} + 50px));
 
-		// cursor: pointer;
-		// pointer-events: auto;
+		left: 50%;
+	}
 
-		div {
+	.graph-container {
+		width: $actions-graph-width;
+		height: 40%;
+		margin-left: -$actions-graph-width/2;
+		transform-origin: top;
+		transform: rotateX(60deg);
+
+		pointer-events: auto;
+
+		.valence {
+			stroke: rgba(77, 77, 77, 0.25);
+			stroke-width: 1;
+			cursor: pointer;
+
+			&.constructive {
+				fill: rgba(255, 255, 255, 0.25);
+			}
+			&.both {
+				fill: rgba(255, 255, 255, 0.0);
+			}
+			&.destructive {
+				fill: rgba(77, 77, 77, 0.1);
+			}
+			&.none {
+				display: none;
+			}
+
+			&.highlighted {
+				stroke: rgba(33, 33, 33, 0.25);
+				stroke-width: 2;
+			}
+
+		}
+	}
+
+	.label-container {
+		pointer-events: none;
+		transform: scaleY(0.578);	// 1/sqrt(3), using scale to equate to rotateX(60deg)
+
+		.label {
 			position: absolute;
-			margin-left: -60px;		// TODO: where does this magic number come from?
-									// needed to align with arrow points.
-			h3 {
-				// transform: rotateX(-60deg);
-				// transform: scaleY(1.73);	// sqrt(3), using scale to equate to rotateX(60deg)
-											// set by d3 instead, since d3 is applying another transform already
-				margin: 0;
-				line-height: 1em;
-				cursor: pointer;
-				pointer-events: auto;
+			bottom: 0;
+			transform-origin: bottom;
+
+			@include emotion-color;
+			white-space: nowrap;
+
+			// cursor: pointer;
+			// pointer-events: auto;
+
+			div {
+				position: absolute;
+				margin-left: -60px;		// TODO: where does this magic number come from?
+										// needed to align with arrow points.
+				h3 {
+					// transform: rotateX(-60deg);
+					// transform: scaleY(1.73);	// sqrt(3), using scale to equate to rotateX(60deg)
+												// set by d3 instead, since d3 is applying another transform already
+					margin: 0;
+					line-height: 1em;
+					cursor: pointer;
+					pointer-events: auto;
+				}
 			}
 		}
 	}
@@ -122,13 +127,6 @@
 	path {
 		mix-blend-mode: multiply;
 	}
-}
-
-#action-graph-container {
-	width: $actions-graph-width;
-	height: 40%;
-	
-	pointer-events: auto;
 }
 
 #temp-actions-nav {

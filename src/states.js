@@ -146,7 +146,7 @@ export default {
 		this.emotionStates = {};
 		_.values(dispatcher.EMOTIONS).forEach((emotion, i) => {
 
-			let graphContainer = document.querySelector('.' + emotion + ' .graph-container');
+			let graphContainer = document.querySelector('#states .' + emotion + ' .graph-container');
 
 			let svg = d3.select(graphContainer).append('svg')
 				.attr('width', graphContainer.offsetWidth)
