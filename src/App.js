@@ -110,10 +110,10 @@ export default function (...initArgs) {
 			initSection(section);
 		}
 
+		let backgroundSections = section.backgroundSections || [];
+
 		if (!previousSection) {
 
-			let backgroundSections = section.backgroundSections || [];
-			
 			// for now (until transitions implemented), just hide all but the current section
 			// and any background sections
 			for (let key in containers) {
@@ -146,6 +146,11 @@ export default function (...initArgs) {
 			if (previousSection === section) {
 				// change emotion within current section
 				section.setEmotion(currentEmotion, previousEmotion);
+				// and for all background sections
+				backgroundSections.forEach(backgroundSection => {
+					backgroundSection.setEmotion(currentEmotion, previousEmotion);
+				});
+
 			} else {
 				// navigate between sections
 				// 
@@ -157,8 +162,7 @@ export default function (...initArgs) {
 				// 
 				
 				// open and background all backgroundSections for the current section
-				let backgroundSections = section.backgroundSections || [],
-					previousSectionBackgrounded = false,
+				let previousSectionBackgrounded = false,
 					promises = backgroundSections.map(backgroundSection => {
 						// display all background sections
 						for (let key in sections) {

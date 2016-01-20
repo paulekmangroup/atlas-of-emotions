@@ -22,6 +22,13 @@
 		transform: scale($states-backgrounded-scale);
 		top: $states-backgrounded-top;
 
+		/*
+		// TODO: prevent visible edge to states transitions when backgrounded
+		width: calc(100% / #{$states-backgrounded-scale});
+		left: calc(50% / #{$states-backgrounded-scale});
+		margin-left: calc(-50% / #{$states-backgrounded-scale});
+		*/
+
 		&.triggers {
 			// align bottom of states graph, which is scaled and translated,
 			// with bottom of screen. this math is basically:

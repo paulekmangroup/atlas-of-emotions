@@ -471,40 +471,6 @@ export default {
 			currentAction.style('transform', 'translateX(0)');
 		}, sassVars.emotions.panX.delay * 1000);
 
-
-		
-
-		/*
-		setTimeout(() => {
-			// animate in emotion graph if first time viewing
-			if (emotionState.scale !== 1.0) {
-				this.setEmotionScale(emotion, 1.0);
-			}
-		}, sassVars.emotions.scale.in.delay * 1000);
-
-		if (!this.isBackgrounded) {
-
-			this.renderLabels(emotionState.ranges[1]);
-
-			setTimeout(() => {
-				this.graphContainers[emotion].selectAll('.axis')
-					.classed('visible', true);
-			}, 1);
-
-			// setTimeout(() => {
-			this.resetCallout();
-			// }, LABEL_APPEAR_DELAY);
-
-			this.tempNav.querySelector('.prev').innerHTML = '<a href="#continents:' + emotion + '">CONTINENTS ▲</a>';
-			this.tempNav.querySelector('.next').innerHTML = '<a href="#actions:' + emotion + '">ACTIONS ▼</a>';
-			this.tempNav.classList.add('visible');
-
-		}
-		*/
-
-
-
-		
 		if (!this.isBackgrounded) {
 			states.setActive(true);
 
