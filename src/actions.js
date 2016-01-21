@@ -106,7 +106,7 @@ export default {
 		};
 
 		// All the same size, just grab the first one
-		let graphContainer = document.querySelector('#actions .graph-container'),
+		let graphContainer = containerNode.querySelector('.graph-container'),
 			innerWidth = graphContainer.offsetWidth - margin.left - margin.right,
 			h = Math.max(graphContainer.offsetHeight, 0.5 * graphContainer.offsetWidth),
 			innerHeight = h - margin.top - margin.bottom;
@@ -134,10 +134,9 @@ export default {
 			.outerRadius(radius);
 
 		//
-		// Set up each graph and draw axes
+		// Set up each graph
 		// 
 		this.graphContainers = {};
-		this.emotionStates = {};
 		_.values(dispatcher.EMOTIONS).forEach((emotion, i) => {
 
 			let graphContainer = document.querySelector('#actions .' + emotion + ' .graph-container');
@@ -156,7 +155,7 @@ export default {
 
 		});
 
-		// create an <svg> solely for <defs> shared across all emotion states via xlink:href
+		// create an <svg> solely for <defs> shared across all emotions via xlink:href
 		let defsSvg = d3.select(containerNode).append('svg')
 			.classed('actions-defs', true);
 		this.setUpDefs(defsSvg.append('defs'), radius);

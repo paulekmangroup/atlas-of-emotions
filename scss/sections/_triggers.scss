@@ -14,69 +14,69 @@
 	.hit-area {
 		pointer-events: auto;
 	}
-}
 
-#trigger-graph-container {
-	position: absolute;
-	bottom: 0;
-	left: 50%;
-
-	width: $triggers-graph-width;
-	height: 100%;
-	margin-left: -$triggers-graph-width/2;
-
-	path.halo {
-		fill-opacity: 0.75;
-	}
-
-	opacity: 1.0;
-	-webkit-transition: opacity 0.5s;
-	transition:         opacity 0.5s;
-	&.muted {
-		opacity: 0.3;
-	}
-}
-
-#trigger-labels {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-
-	.label {
+	.graph-container {
 		position: absolute;
-		width: 10em;
+		bottom: 0;
+		left: 50%;
 
-		@include emotion-color;
+		width: $triggers-graph-width;
+		height: 100%;
+		margin-left: -$triggers-graph-width/2;
 
-		h3 {
-			transform: translate(-50%, -50%);
-			margin: 0;
-			font-size: 0.8em;
-			text-transform: lowercase;
-			&:first-letter {
-				text-transform: uppercase;
+		path.halo {
+			fill-opacity: 0.75;
+		}
+
+		opacity: 1.0;
+		-webkit-transition: opacity 0.5s;
+		transition:         opacity 0.5s;
+		&.muted {
+			opacity: 0.3;
+		}
+	}
+
+	.label-container {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+
+		.label {
+			position: absolute;
+			width: 10em;
+
+			@include emotion-color;
+
+			h3 {
+				transform: translate(-50%, -50%);
+				margin: 0;
+				font-size: 0.8em;
+				text-transform: lowercase;
+				&:first-letter {
+					text-transform: uppercase;
+				}
+			}
+		}
+
+		.arrows-container {
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+
+		.arrow {
+			@include emotion-stroke-color;
+			@include emotion-fill-color;
+			line {
+				stroke-width: 3;
+			}
+			path {
+				stroke: none;
 			}
 		}
 	}
-
-	.arrows-container {
-		position: absolute;
-		left: 0;
-		top: 0;
-	}
-
-	.arrow {
-		@include emotion-stroke-color;
-		@include emotion-fill-color;
-		line {
-			stroke-width: 3;
-		}
-		path {
-			stroke: none;
-		}
-	}
 }
-
+	
 #trigger-phase-labels {
 	position: absolute;
 	left: 50%;
