@@ -43,9 +43,9 @@ export default {
 		this.initLabels(containerNode, haloRadius);
 		this.triggersData = this.parseTriggers(haloRadius);
 
-		this.createTempNav(containerNode);
-
 		this.setUpHitAreas(containerNode);
+
+		this.createTempNav(containerNode);
 
 		this.onHitAreaMouseOver = this.onHitAreaMouseOver.bind(this);
 		this.onHitAreaMouseOut = this.onHitAreaMouseOut.bind(this);
@@ -508,8 +508,13 @@ export default {
 		this.renderGraph(this.currentEmotion);
 		this.renderLabels(this.currentEmotion);
 
-		// leave a bit of time for other transitions to happen
+		// leave a bit of time for other transitions to happen,
 		this.openCallout(500);
+
+		// hide phase labels until the next interaction
+		// (mostly a thing when back/fwd navigating with the trackpad)
+		this.phaseLabelContainer.selectAll('h3.label')
+			.classed('visible', false);
 
 		this.tempNav.querySelector('.prev').innerHTML = '<a href="#actions:' + emotion + '">ACTIONS ▲</a>';
 		this.tempNav.querySelector('.next').innerHTML = '<a href="#moods:' + emotion + '">MOODS ▼</a>';
@@ -552,6 +557,7 @@ export default {
 	renderLabels: function (emotion) {
 
 		let triggersData = emotion ? this.triggersData[emotion] : [];
+		emotion = emotion || this.currentEmotion;
 
 		// TODO: use a force-directed layout instead,
 		// to ensure every label finds a good, non-overlapping place
