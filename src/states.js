@@ -1279,13 +1279,13 @@ export default {
 
 	},
 
-	resetCallout () {
+	resetCallout: function () {
 
 		dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.states.header, emotionsData.metadata.states.body/* + '<br><br>' + emotionsData.emotions[this.currentEmotion].statesDesc*/);
 
 	},
 
-	createTempNav (containerNode) {
+	createTempNav: function (containerNode) {
 
 		this.tempNav = document.createElement('div');
 		this.tempNav.id = 'temp-states-nav';

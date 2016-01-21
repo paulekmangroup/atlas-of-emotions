@@ -657,7 +657,7 @@ const continentsSection = {
 
 	},
 
-	setContinentHighlight (continent, highlightLevel) {
+	setContinentHighlight: function (continent, highlightLevel) {
 
 		// Set unhighlightLevel based on if any continent highlighted
 		let unhighlightLevel;

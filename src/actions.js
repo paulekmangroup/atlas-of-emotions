@@ -430,12 +430,12 @@ export default {
 		// transition graphs and labels
 		let dx = 0;
 		if (previousEmotion) {
-			let previousAction = d3.select('.actions-container.' + previousEmotion);
-			previousAction.classed('active', false);
-			previousAction.on('transitionend', event => {
-				previousAction.on('transitionend', null);
-				previousAction.style('transform', null);
-				previousAction.classed('transitioning', false);
+			let previousContainer = d3.select('.actions-container.' + previousEmotion);
+			previousContainer.classed('active', false);
+			previousContainer.on('transitionend', event => {
+				previousContainer.on('transitionend', null);
+				previousContainer.style('transform', null);
+				previousContainer.classed('transitioning', false);
 			});
 
 			let containerWidth = document.querySelector('#actions .graph-container').offsetWidth,
@@ -450,24 +450,24 @@ export default {
 
 			// delay to allow a little time for opacity to come up before translating
 			setTimeout(() => {
-				previousAction.style('transform', 'translateX(' + -dx + 'px)');
+				previousContainer.style('transform', 'translateX(' + -dx + 'px)');
 			}, sassVars.emotions.panX.delay * 1000);
 		}
 
-		let currentAction = d3.select('.actions-container.' + emotion);
-		if (currentAction.classed('transitioning')) {
+		let currentContainer = d3.select('.actions-container.' + emotion);
+		if (currentContainer.classed('transitioning')) {
 			// if new emotion is still transitioning, remove transitionend handler
-			currentAction.on('transitionend', null);
+			currentContainer.on('transitionend', null);
 		} else {
 			// else, move into position immediately to prepare for transition
-			currentAction.classed('transitioning', false);
-			currentAction.style('transform', 'translateX(' + dx + 'px)');
+			currentContainer.classed('transitioning', false);
+			currentContainer.style('transform', 'translateX(' + dx + 'px)');
 		}
 
 		// delay to allow a little time for opacity to come up before translating
 		setTimeout(() => {
-			currentAction.classed('transitioning active', true);
-			currentAction.style('transform', 'translateX(0)');
+			currentContainer.classed('transitioning active', true);
+			currentContainer.style('transform', 'translateX(0)');
 		}, sassVars.emotions.panX.delay * 1000);
 
 		if (!this.isBackgrounded) {
@@ -980,7 +980,7 @@ export default {
 		dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.actions.header, emotionsData.metadata.actions.body);
 	},
 
-	createTempNav (containerNode) {
+	createTempNav: function (containerNode) {
 
 		this.tempNav = document.createElement('div');
 		this.tempNav.id = 'temp-actions-nav';

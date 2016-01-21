@@ -3,6 +3,7 @@ import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
 import emotionsData from '../static/emotionsData.json';
+import sassVars from '../scss/variables.json';
 import states from './states.js';
 
 
@@ -458,23 +459,82 @@ export default {
 		if (!~_.values(dispatcher.EMOTIONS).indexOf(emotion)) {
 			emotion = 'anger';
 		}
+		let previousEmotion = this.currentEmotion;
 		this.currentEmotion = emotion;
 
-		let graphContainer = this.graphContainers[this.currentEmotion],
-			haloSelection = graphContainer.selectAll('path.halo')
-				.data(this.haloPieLayout([{}]));
-			// .transition()
-			// 	.duration(1000)
-			// 	.fill();
+		// transition graphs and labels
+		let dx = 0;
+		if (previousEmotion) {
+			let previousContainer = d3.select('.triggers-container.' + previousEmotion);
+			previousContainer.classed('active', false);
+			previousContainer.on('transitionend', event => {
+				previousContainer.on('transitionend', null);
+				previousContainer.style('transform', null);
+				previousContainer.classed('transitioning', false);
+			});
+
+			let containerWidth = document.querySelector('#triggers .graph-container').offsetWidth,
+				emotions = _.values(dispatcher.EMOTIONS);
+
+			// just place left or right one viewport, instead of adhering to column positions,
+			// to avoid animations that are unnecessarily fast'n'flashy.
+			dx = 1.25 * containerWidth;
+			if (emotions.indexOf(emotion) < emotions.indexOf(previousEmotion)) {
+				dx *= -1;
+			}
+
+			// delay to allow a little time for opacity to come up before translating
+			setTimeout(() => {
+				previousContainer.style('transform', 'translateX(' + -dx + 'px)');
+			}, sassVars.emotions.panX.delay * 1000);
+		}
+
+		let currentContainer = d3.select('.triggers-container.' + emotion);
+		if (currentContainer.classed('transitioning')) {
+			// if new emotion is still transitioning, remove transitionend handler
+			currentContainer.on('transitionend', null);
+		} else {
+			// else, move into position immediately to prepare for transition
+			currentContainer.classed('transitioning', false);
+			currentContainer.style('transform', 'translateX(' + dx + 'px)');
+		}
+
+		// delay to allow a little time for opacity to come up before translating
+		setTimeout(() => {
+			currentContainer.classed('transitioning active', true);
+			currentContainer.style('transform', 'translateX(0)');
+		}, sassVars.emotions.panX.delay * 1000);
+
+		this.renderGraph(this.currentEmotion);
+		this.renderLabels(this.currentEmotion);
+
+		// leave a bit of time for other transitions to happen
+		this.openCallout(500);
+
+		this.tempNav.querySelector('.prev').innerHTML = '<a href="#actions:' + emotion + '">ACTIONS ▲</a>';
+		this.tempNav.querySelector('.next').innerHTML = '<a href="#moods:' + emotion + '">MOODS ▼</a>';
+		this.tempNav.classList.add('visible');
+
+	},
+
+	renderGraph: function (emotion) {
+
+		let graphContainer = this.graphContainers[emotion],
+			haloSelection = graphContainer.selectAll('path.halo');
+
+		// bail if already rendered
+		if (haloSelection.size()) { return; }
+
+		haloSelection = haloSelection.data(this.haloPieLayout([{}]));
 		
-		let emotionGradientName = 'triggers-' + this.currentEmotion + '-radial-gradient';
+		let emotionGradientName = 'triggers-' + emotion + '-radial-gradient';
 		let haloEnterSelection = haloSelection.enter();
 		haloEnterSelection.append('radialGradient')
 			.attr('xlink:href', '#' + emotionGradientName)
 			.attr('id', emotionGradientName + '-halo');
 
 		haloEnterSelection.append('path')
-			.classed('halo ' + this.currentEmotion, true)
+			.classed('halo ' + emotion, true)
 			.attr('d', this.haloArcGenerator)
 			.attr('fill', 'url(#' + emotionGradientName + '-halo)')
 			.style('opacity', 0.0)
@@ -487,26 +547,15 @@ export default {
 			.style('opacity', 0.0)
 			.remove();
 
-		let currentTriggersData = this.triggersData[this.currentEmotion];
-		this.renderLabels(currentTriggersData);
-
-		this.tempNav.querySelector('.prev').innerHTML = '<a href="#actions:' + emotion + '">ACTIONS ▲</a>';
-		this.tempNav.querySelector('.next').innerHTML = '<a href="#moods:' + emotion + '">MOODS ▼</a>';
-		this.tempNav.classList.add('visible');
-
 	},
 
-	renderLabels: function (triggersData) {
+	renderLabels: function (emotion) {
 
-		if (!this.currentEmotion) { return; }
-
-		if (!triggersData) {
-			triggersData = [];
-		}
+		let triggersData = emotion ? this.triggersData[emotion] : [];
 
 		// TODO: use a force-directed layout instead,
 		// to ensure every label finds a good, non-overlapping place
-		let labelContainer = this.labelContainers[this.currentEmotion],
+		let labelContainer = this.labelContainers[emotion],
 			labelSelection = labelContainer.selectAll('div.label')
 			.data(triggersData);
 
@@ -514,7 +563,7 @@ export default {
 		
 		// enter
 		let labelEnterSelection = labelSelection.enter().append('div')
-			.classed('label ' + this.currentEmotion, true)
+			.classed('label ' + emotion, true)
 			.style('opacity', 1.0)
 			.style('transform', d => {
 				let x = 0.5 * this.sectionContainer.offsetWidth + Math.cos(d.angle) * d.radius,
@@ -540,7 +589,7 @@ export default {
 		// update
 		
 		// enter
-		let emotionGradientName = 'triggers-' + this.currentEmotion + '-linear-gradient';
+		let emotionGradientName = 'triggers-' + emotion + '-linear-gradient';
 		let arrowsEnterSelection = labelArrowSelection.enter();
 		arrowsEnterSelection.append('linearGradient')
 			.attr('xlink:href', '#' + emotionGradientName)
@@ -551,7 +600,7 @@ export default {
 			.attr('y2', d => Math.sin(d.angle) * d.radius * (1 - d.arrowLength));
 
 		let arrowsContainerEnterSelection = arrowsEnterSelection.append('g')
-			.classed('arrow ' + this.currentEmotion, true)
+			.classed('arrow ' + emotion, true)
 			.style('opacity', 1.0);
 		arrowsContainerEnterSelection.append('line')
 			.attr('x1', d => Math.cos(d.angle) * d.radius * 0.95)
@@ -572,18 +621,14 @@ export default {
 			.style('opacity', 0.0)
 			.remove();
 
-		this.phaseLabelContainer.attr('class', this.currentEmotion);
+		this.phaseLabelContainer.attr('class', emotion);
 
 	},
 
 	open: function () {
 
 		// transition time from _states.scss::#states
-		let openDelay = 1500;
-
-		this.openTimeout = setTimeout(() => {
-			this.setCallout(null);
-		}, openDelay);
+		this.openCallout(1500);
 
 	},
 
@@ -591,7 +636,7 @@ export default {
 
 		return new Promise((resolve, reject) => {
 
-			clearTimeout(this.openTimeout);
+			clearTimeout(this.calloutTimeout);
 
 			document.querySelector('#states').classList.remove('faded');
 
@@ -669,7 +714,18 @@ export default {
 
 	},
 
-	setCallout (hitAreaId) {
+	openCallout: function (delay) {
+
+		if (!this.calloutTimeout) {
+			this.calloutTimeout = setTimeout(() => {
+				this.setCallout(false);
+				this.calloutTimeout = null;
+			}, delay);
+		}
+
+	},
+
+	setCallout: function (hitAreaId) {
 
 		if (hitAreaId) {
 			dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.triggers.steps[hitAreaId-1].header, emotionsData.metadata.triggers.steps[hitAreaId-1].body);
@@ -679,7 +735,7 @@ export default {
 
 	},
 
-	createTempNav (containerNode) {
+	createTempNav: function (containerNode) {
 
 		this.tempNav = document.createElement('div');
 		this.tempNav.id = 'temp-triggers-nav';

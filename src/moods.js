@@ -149,7 +149,6 @@ export default {
 
 	},
 
-
 	openCallout: function (delay) {
 
 		if (!this.calloutTimeout) {
@@ -161,7 +160,7 @@ export default {
 
 	},
 
-	setCallout (active) {
+	setCallout: function (active) {
 
 		if (active) {
 			let moodsCopy = emotionsData.emotions[this.currentEmotion].moods[0];
@@ -172,7 +171,7 @@ export default {
 
 	},
 
-	createTempNav (containerNode) {
+	createTempNav: function (containerNode) {
 
 		this.tempNav = document.createElement('div');
 		this.tempNav.id = 'temp-moods-nav';
