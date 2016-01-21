@@ -467,12 +467,12 @@
     "fear": {
       "continent": {
         "name": "Fear",
-        "desc": "We are afraid of danger."
+        "desc": "Fear is the response to perceived danger."
       },
       "states": [
         {
           "name": "Trepidation",
-          "desc": "Mild fear, typically about something not immediate but pending.",
+          "desc": "Sensing slight danger, often pending but not immediate.",
           "range": {
             "min": 1,
             "max": 3
@@ -506,7 +506,7 @@
         },
         {
           "name": "Nervousness",
-          "desc": "Having or showing feelings of worry or unease about what might happen next.",
+          "desc": "Perceiving a danger that you do not know how to respond to.",
           "range": {
             "min": 2,
             "max": 7
@@ -540,7 +540,7 @@
         },
         {
           "name": "Anxiety",
-          "desc": "Apprehensiveness about an impending or anticipated threat. It may also be used when a threat can be sensed but not specified in its nature.",
+          "desc": "Apprehensiveness about an anticipated or unspecified threat.",
           "range": {
             "min": 1,
             "max": 10
@@ -582,7 +582,7 @@
         },
         {
           "name": "Dread",
-          "desc": "Anticipating a severe threat from which there is no protection or avoidance.",
+          "desc": "Anticipating severe danger from which there is no protection or escape.",
           "range": {
             "min": 6,
             "max": 10
@@ -624,7 +624,7 @@
         },
         {
           "name": "Desperation",
-          "desc": "Inclined to risk attempts to reduce a perceived threat.",
+          "desc": "Realizing the futility of our attempts to reduce danger.",
           "range": {
             "min": 9,
             "max": 10
@@ -658,7 +658,7 @@
         },
         {
           "name": "Panic",
-          "desc": "Extreme fear when no way to reduce the threat is apparent.",
+          "desc": "A consequence of desperation.",
           "range": {
             "min": 10,
             "max": 10
@@ -722,7 +722,7 @@
         },
         {
           "name": "Terror",
-          "desc": "The most extreme fear felt.",
+          "desc": "The most extreme fear that can be felt.",
           "range": {
             "min": 10,
             "max": 10
@@ -754,39 +754,39 @@
       "actions": [
         {
           "name": "Withdraw",
-          "desc": "To physically or mentally leave the scene of the conflict or threat."
+          "desc": "To physically or mentally leave the scene of the threat."
         },
         {
           "name": "Avoid",
-          "desc": "To either physically stay away from (someone or something); or internally keep one's mind away from what is triggering fear."
+          "desc": "To physically stay away from someone or something or deliberately not think about it."
         },
         {
           "name": "Hesitate",
-          "desc": "To hold back in doubt or indecision; to delay momentarily."
+          "desc": "To hold back in doubt or indecision, often momentarily."
         },
         {
           "name": "Freeze",
-          "desc": "To become fixed or motionless; especially, to become incapable of acting or speaking."
+          "desc": "To become incapable of acting or speaking."
         },
         {
           "name": "Scream/yell",
-          "desc": "Loss of control in how or what one says; speaking in a loud volume, pitch and tone."
+          "desc": "Losing control of how or what one says."
         },
         {
           "name": "Reframe",
-          "desc": "Reconsidering the emotional trigger in an attempt to reduce or eliminate it."
+          "desc": "Reconsidering the emotional trigger as an attempt to reduce or eliminate it."
         },
         {
           "name": "Be Mindful",
-          "desc": "Accepting the emotional feelings, recognizing that they are temporary. "
+          "desc": "Accepting how you feel and recognizing that it's temporary. "
         },
         {
           "name": "Breathe",
-          "desc": "Focusing awareness on breathing in order to diminish the fearful feelings. "
+          "desc": "Focusing awareness on breathing in order to diminish fearful feelings. "
         },
         {
           "name": "Ruminate",
-          "desc": "To compulsively, repetitively, rethink about the emotional experience."
+          "desc": "To repetitively rethink about the emotional experience."
         },
         {
           "name": "Worry",
@@ -810,7 +810,7 @@
       ],
       "moods": [
         {
-          "name": "apprehensive",
+          "name": "Apprehensiveness",
           "desc": "Expecting harm but not knowing how to avoid it. Perceive threats when they are not there, or magnify the seriousness of a threat."
         }
       ]
@@ -1024,7 +1024,7 @@
       ],
       "moods": [
         {
-          "name": "sour",
+          "name": "Sour",
           "desc": "Not commonly a mood, it can occur as a mood when there is a generalized feeling of repugnance or revulsion - usually of low intensity."
         }
       ]
@@ -1437,8 +1437,8 @@
       ],
       "moods": [
         {
-          "name": "blue",
-          "desc": "need description"
+          "name": "Dysphoria (or feeling blue)",
+          "desc": "Feelings of resignation, discouragement, or disappointment that endure for a long time period. The anguished side of sadness does not transform into a mood."
         }
       ]
     },
@@ -1882,8 +1882,8 @@
       ],
       "moods": [
         {
-          "name": "high",
-          "desc": "Generalized, non-specific feeling good not about any trigger; lasting hours"
+          "name": "High",
+          "desc": "Generalized, non-specific feeling good not about any trigger; lasting hours."
         }
       ]
     }
@@ -1895,26 +1895,26 @@
     },
     "continents": {
       "header": "The Emotion Continents",
-      "body": "In this first, Continent map the shapes are moving, reflecting how these emotions vary in their relative strength and frequency in people’s lives."
+      "body": "Each emotion is represented as a continent. The movement of the shapes reflects how our emotions vary in strength and frequency in peoples lives."
     },
     "states": {
       "header": "The States of an Emotion",
-      "body": "The emotional states vary in their nature and strength."
+      "body": "Each emotion names a number of related but different states. These states vary not only in their nature, but in their intensity."
     },
     "actions": {
       "header": "The Actions of a State",
-      "body": "Each emotional state typically leads to a number of actions some of which may be constructive or destructive or both.",
+      "body": "Each emotional state typically results in a number of actions.",
       "qualities": [
         {
           "header": "Constructive Actions",
-          "body": "Depending on the context in which it appears, an action can be constructive--leading to positive outcomes."
+          "body": "Actions that further future collaboration with others."
         },
         {
           "header": "Destructive Actions",
-          "body": "Destructive actions tend to pull you down, leading to negative outcomes for yourself and others."
+          "body": "Actions that decrease the likelihood of being able to collaborate with others."
         },
         {
-          "header": "Context Dependent Actions",
+          "header": "Ambiguous Actions",
           "body": "Sometimes an action can be both constructive and desctructive in different contexts."
         }
       ]
