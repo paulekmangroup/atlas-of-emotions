@@ -29,6 +29,8 @@ export default {
 
 		this.createTempNav(containerNode);
 
+		this.isInited = true;
+
 	},
 
 	setEmotion: function (emotion) {
@@ -36,9 +38,13 @@ export default {
 		if (!~_.values(dispatcher.EMOTIONS).indexOf(emotion)) {
 			emotion = 'anger';
 		}
+		let previousEmotion = this.currentEmotion;
 		this.currentEmotion = emotion;
 
 		this.overlayContainer.removeAttribute('style');
+		if (previousEmotion) {
+			this.overlayContainer.classList.remove(previousEmotion);
+		}
 		this.overlayContainer.classList.add(this.currentEmotion);
 
 		states.applyEventListenersToEmotion(emotion, {
@@ -52,6 +58,9 @@ export default {
 			mouseout: this.onElementOut,
 			click: this.onElementClick
 		});
+
+		// leave a bit of time for other transitions to happen
+		this.openCallout(500);
 		
 		this.tempNav.querySelector('.prev').innerHTML = '<a href="#triggers:' + emotion + '">TRIGGERS ▲</a>';
 		this.tempNav.classList.add('visible');
@@ -61,11 +70,7 @@ export default {
 	open: function () {
 
 		// transition time from _states.scss::#states
-		let openDelay = 1500;
-
-		this.openTimeout = setTimeout(() => {
-			this.setCallout(false);
-		}, openDelay);
+		this.openCallout(1500);
 
 	},
 
@@ -87,7 +92,7 @@ export default {
 
 		return new Promise((resolve, reject) => {
 
-			clearTimeout(this.openTimeout);
+			clearTimeout(this.calloutTimeout);
 
 			this.overlayContainer.classList.remove('visible');
 
@@ -141,6 +146,18 @@ export default {
 		event.stopImmediatePropagation();
 
 		this.setCallout(false);
+
+	},
+
+
+	openCallout: function (delay) {
+
+		if (!this.calloutTimeout) {
+			this.calloutTimeout = setTimeout(() => {
+				this.setCallout(false);
+				this.calloutTimeout = null;
+			}, delay);
+		}
 
 	},
 

@@ -171,8 +171,10 @@ h6 { font-size: 0.333333em; }
 	pointer-events: none;
 
 	opacity: 0.0;
-	-webkit-transition: opacity #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
-	transition:         opacity #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
+
+	transition-property: opacity, background-color;
+	transition-duration: $label-fade-in-time;
+	transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
 
 	&.visible {
 		opacity: 1.0;
