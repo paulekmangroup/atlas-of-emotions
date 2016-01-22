@@ -144,14 +144,17 @@ export default function (...initArgs) {
 			// some section is already open; perform transition
 			
 			if (previousSection === section) {
-				// change emotion within current section
-				section.setEmotion(currentEmotion, previousEmotion);
-				// and for all background sections
+
+				// change emotion for all background sections
 				backgroundSections.forEach(backgroundSection => {
 					backgroundSection.setEmotion(currentEmotion, previousEmotion);
 				});
 
+				// and within current section
+				section.setEmotion(currentEmotion, previousEmotion);
+
 			} else {
+				
 				// navigate between sections
 				// 
 				// sections can have background sections.
