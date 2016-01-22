@@ -156,6 +156,10 @@ h6 { font-size: 0.333333em; }
 #main {
 	text-align: center;
 	position: relative;
+
+	// prevent scrollbars across the site.
+	// might be better to fix each offender individually, but this works well for now.
+	overflow: hidden;
 }
 
 #callout {
