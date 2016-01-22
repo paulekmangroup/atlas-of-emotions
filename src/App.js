@@ -5,6 +5,7 @@ import states from './states.js';
 import actions from './actions.js';
 import triggers from './triggers.js';
 import moods from './moods.js';
+import sassVars from '../scss/variables.json';
 
 export default function (...initArgs) {
 
@@ -15,16 +16,21 @@ export default function (...initArgs) {
 
 	let containers = {},
 		sections = {},
-		callout;
+		callout,
 
-	let currentSection = null,
-		currentEmotion = null;
+		currentSection = null,
+		currentEmotion = null,
+
+		scrollbarSegments = {},
+		scrollbarCloseTimeout = null,
+		highlightedScrollbarSection = null;
 
 	function init (containerNode) {
 
 		initContainers();
 		initSections();
 		initHeader();
+		initScrollbar();
 		initCallout();
 
 		document.addEventListener('keydown', onKeyDown);
@@ -63,6 +69,48 @@ export default function (...initArgs) {
 		sections.actions = actions;
 		sections.triggers = triggers;
 		sections.moods = moods;
+
+	}
+
+	function initHeader () {
+
+		let dropdown = document.querySelector('#header .dropdown'),
+			menu = dropdown.querySelector('ul');
+
+		Object.keys(dispatcher.EMOTIONS).forEach(emotionKey => {
+			let emotionName = dispatcher.EMOTIONS[emotionKey].toLowerCase();
+			let li = document.createElement('li');
+			li.setAttribute('role', 'menuitem');
+			li.setAttribute('data-emotion', emotionName);
+			li.innerHTML = emotionName.toUpperCase();
+			menu.appendChild(li);
+		});
+		
+		dropdown.querySelector('.dropdown-toggle').addEventListener('click', onDropdownClick);
+
+	}
+
+	function initScrollbar () {
+
+		let scrollbar = document.querySelector('#scrollbar'),
+			segmentContainer = document.createElement('div');
+
+		segmentContainer.classList.add('segment-container');
+		scrollbar.appendChild(segmentContainer);
+
+		_.values(dispatcher.SECTIONS).forEach(section => {
+			let segment = document.createElement('div');
+			segment.setAttribute('data-section', section);
+			let label = document.createElement('h3');
+			label.innerHTML = section.toUpperCase();
+			segment.appendChild(label);
+			segmentContainer.appendChild(segment);
+			scrollbarSegments[section] = segment;
+		});
+
+		scrollbar.addEventListener('mouseover', onScrollbarOver);
+		scrollbar.addEventListener('mouseout', onScrollbarOut);
+		scrollbar.addEventListener('click', onScrollbarClick);
 
 	}
 
@@ -248,6 +296,8 @@ export default function (...initArgs) {
 			section: sectionName
 		});
 
+		setScrollbarHighlight(sectionName);
+
 		currentSection = section;
 
 	}
@@ -284,24 +334,6 @@ export default function (...initArgs) {
 		if (currentDisplay) {
 			containers[sectionName].style.display = currentDisplay;
 		}
-
-	}
-
-	function initHeader () {
-
-		let dropdown = document.querySelector('#header .dropdown'),
-			menu = dropdown.querySelector('ul');
-
-		Object.keys(dispatcher.EMOTIONS).forEach(emotionKey => {
-			let emotionName = dispatcher.EMOTIONS[emotionKey].toLowerCase();
-			let li = document.createElement('li');
-			li.setAttribute('role', 'menuitem');
-			li.setAttribute('data-emotion', emotionName);
-			li.innerHTML = emotionName.toUpperCase();
-			menu.appendChild(li);
-		});
-		
-		dropdown.querySelector('.dropdown-toggle').addEventListener('click', onDropdownClick);
 
 	}
 
@@ -354,6 +386,58 @@ export default function (...initArgs) {
 		document.querySelector('#header .dropdown').classList.remove('open');
 
 		dispatcher.navigate(null, event.target.dataset.emotion);
+
+	}
+
+	function onScrollbarOver (event) {
+
+		let scrollbar = document.querySelector('#scrollbar');
+		scrollbar.classList.add('open');
+		clearTimeout(scrollbarCloseTimeout);
+
+		let section = event.target.dataset.section;
+		if (section) {
+			displayScrollbarHighlight(section);
+		}
+
+	}
+
+	function onScrollbarOut (event) {
+
+		clearTimeout(scrollbarCloseTimeout);
+		scrollbarCloseTimeout = setTimeout(() => {
+			let scrollbar = document.querySelector('#scrollbar');
+			scrollbar.classList.remove('open');
+		}, sassVars.scrollbar.toggle.delay.close * 1000);
+
+		displayScrollbarHighlight(null);
+		
+	}
+
+	function onScrollbarClick (event) {
+
+		let section = event.target.dataset.section;
+		if (section) {
+			dispatcher.navigate(section);
+		}
+
+	}
+
+	function setScrollbarHighlight (section) {
+
+		highlightedScrollbarSection = section;
+		displayScrollbarHighlight(null);
+
+	}
+
+	function displayScrollbarHighlight (section) {
+
+		section = section || highlightedScrollbarSection;
+
+		Object.keys(scrollbarSegments).forEach(key => {
+			let isHighlighted = key === section || key === highlightedScrollbarSection;
+			scrollbarSegments[key].classList[isHighlighted ? 'add' : 'remove']('highlighted');
+		});
 
 	}
 

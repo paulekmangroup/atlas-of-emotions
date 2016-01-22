@@ -87,7 +87,7 @@ h6 { font-size: 0.333333em; }
 	.dropdown {
 		display: inline-block;
 		position: absolute;
-		width: 13em;
+		width: $emotions-dropdown-width;
 		right: 0;
 		text-align: right;
 
@@ -160,6 +160,71 @@ h6 { font-size: 0.333333em; }
 	// prevent scrollbars across the site.
 	// might be better to fix each offender individually, but this works well for now.
 	overflow: hidden;
+}
+
+#scrollbar {
+	position: absolute;
+	width: $emotions-dropdown-width;
+	height: calc(100% - #{$header-height});
+	top: $header-height;
+	right: 0;
+	overflow: hidden;
+
+	.segment-container {
+		position: absolute;
+		width: $emotions-dropdown-width;
+		height: 100%;
+		right: 0.75em - $emotions-dropdown-width;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+
+		cursor: pointer;
+
+		transition-property: right;
+		transition-duration: #{$scrollbar-toggle-duration-close}s;
+		transition-timing-function: ease;
+
+		div {
+			width: 100%;
+			flex-grow: 1;
+			margin: auto;
+
+			text-align: center;
+			
+			color: $text-color;
+			background-color: rgba(77, 77, 77, 0.5);
+
+			transition-property: background-color, color;
+			transition-duration: #{$states-highlighted-out}s;
+			transition-timing-function: ease-out;
+
+			box-sizing: border-box;
+			&:not(:last-child) {
+				margin-bottom: 1px;
+			}
+
+			&.highlighted {
+				color: $text-overlay-color;
+				background-color: rgba(77, 77, 77, 0.9);
+				transition: background-color #{$states-highlighted-in}s ease-out;
+			}
+
+			h3 {
+				line-height: 1em;
+				margin-top: calc(50% - 1em);
+				margin-bottom: 0;
+				pointer-events: none;
+			}
+		}
+	}
+
+	&.open .segment-container {
+		right: 0;
+		transition-duration: #{$scrollbar-toggle-duration-open}s;
+	}
+
 }
 
 #callout {

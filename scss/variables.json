@@ -1,4 +1,15 @@
 {
+	"scrollbar": {
+		"toggle": {
+			"duration": {
+				"open": 0.25,
+				"close": 0.5
+			},
+			"delay": {
+				"close": 0.5
+			}
+		}
+	},
 	"continents": {
 		"panX": {
 			"duration": {
@@ -30,6 +41,10 @@
 		},
 		"containers": {
 			"bottom": "10%"
+		},
+		"highlighted": {
+			"in": 0,
+			"out": 0.2
 		}
 	},
 	"emotions": {
