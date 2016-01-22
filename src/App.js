@@ -108,9 +108,9 @@ export default function (...initArgs) {
 			scrollbarSegments[section] = segment;
 		});
 
-		scrollbar.addEventListener('mouseover', onScrollbarOver);
-		scrollbar.addEventListener('mouseout', onScrollbarOut);
-		scrollbar.addEventListener('click', onScrollbarClick);
+		segmentContainer.addEventListener('mouseover', onScrollbarOver);
+		segmentContainer.addEventListener('mouseout', onScrollbarOut);
+		segmentContainer.addEventListener('click', onScrollbarClick);
 
 	}
 

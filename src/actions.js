@@ -27,7 +27,6 @@ export default {
 	currentEmotion: null,
 	actionsData: null,
 	backgroundSections: [ states ],
-	tempNav: null,
 
 	labelContainers: null,
 	graphContainers: null,
@@ -42,8 +41,6 @@ export default {
 		this.initContainers(containerNode);
 
 		this.initLabels(containerNode);
-
-		this.createTempNav(containerNode);
 
 		this.setUpGraphs(containerNode);
 
@@ -472,10 +469,6 @@ export default {
 
 		if (!this.isBackgrounded) {
 			states.setActive(true);
-
-			this.tempNav.querySelector('.prev').innerHTML = '<a href="#states:' + emotion + '">STATES ▲</a>';
-			this.tempNav.querySelector('.next').innerHTML = '<a href="#triggers:' + emotion + '">TRIGGERS ▼</a>';
-			this.tempNav.classList.add('visible');
 		}
 
 		let openDelay = 1500;
@@ -745,8 +738,6 @@ export default {
 			clearTimeout(this.openTimeout);
 			clearTimeout(this.setStateTimeout);
 
-			this.tempNav.classList.remove('visible');
-
 			let closeDuration = 600;
 
 			this.clearStates(closeDuration);
@@ -768,9 +759,6 @@ export default {
 		return new Promise((resolve, reject) => {
 
 			this.isBackgrounded = val;
-			if (val) {
-				this.tempNav.classList.remove('visible');
-			}
 
 			this.renderLabels(null);
 
@@ -978,22 +966,6 @@ export default {
 
 	resetCallout: function () {
 		dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.actions.header, emotionsData.metadata.actions.body);
-	},
-
-	createTempNav: function (containerNode) {
-
-		this.tempNav = document.createElement('div');
-		this.tempNav.id = 'temp-actions-nav';
-		containerNode.appendChild(this.tempNav);
-
-		let prev = document.createElement('div');
-		prev.classList.add('prev');
-		this.tempNav.appendChild(prev);
-
-		let next = document.createElement('div');
-		next.classList.add('next');
-		this.tempNav.appendChild(next);
-
 	}
 
 };

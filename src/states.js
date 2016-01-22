@@ -33,7 +33,6 @@ export default {
 	isBackgrounded: false,
 
 	mouseOutTimeout: null,
-	tempNav: null,
 	
 	init: function (containerNode) {
 
@@ -44,8 +43,6 @@ export default {
 		this.initContainers(containerNode);
 
 		this.initLabels(containerNode);
-
-		this.createTempNav(containerNode);
 
 		this.setUpGraphs(containerNode);
 
@@ -315,13 +312,7 @@ export default {
 					.classed('visible', true);
 			}, 1);
 
-			// setTimeout(() => {
 			this.resetCallout();
-			// }, LABEL_APPEAR_DELAY);
-
-			this.tempNav.querySelector('.prev').innerHTML = '<a href="#continents:' + emotion + '">CONTINENTS ▲</a>';
-			this.tempNav.querySelector('.next').innerHTML = '<a href="#actions:' + emotion + '">ACTIONS ▼</a>';
-			this.tempNav.classList.add('visible');
 
 		}
 
@@ -532,8 +523,6 @@ export default {
 				.classed('visible', false);
 
 		}
-
-		this.tempNav.classList.remove('visible');
 
 		// remove main callout
 		dispatcher.changeCallout();
@@ -1282,22 +1271,6 @@ export default {
 	resetCallout: function () {
 
 		dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.states.header, emotionsData.metadata.states.body/* + '<br><br>' + emotionsData.emotions[this.currentEmotion].statesDesc*/);
-
-	},
-
-	createTempNav: function (containerNode) {
-
-		this.tempNav = document.createElement('div');
-		this.tempNav.id = 'temp-states-nav';
-		containerNode.appendChild(this.tempNav);
-
-		let prev = document.createElement('div');
-		prev.classList.add('prev');
-		this.tempNav.appendChild(prev);
-
-		let next = document.createElement('div');
-		next.classList.add('next');
-		this.tempNav.appendChild(next);
 
 	}
 

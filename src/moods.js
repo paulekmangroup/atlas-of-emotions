@@ -12,7 +12,6 @@ export default {
 	currentEmotion: null,
 	moodsData: null,
 	backgroundSections: [ states, actions ],
-	tempNav: null,
 	
 	init: function (containerNode) {
 
@@ -26,8 +25,6 @@ export default {
 		this.overlayContainer = document.createElement('div');
 		this.overlayContainer.id = 'moods-overlay-container';
 		containerNode.appendChild(this.overlayContainer);
-
-		this.createTempNav(containerNode);
 
 		this.isInited = true;
 
@@ -61,9 +58,6 @@ export default {
 
 		// leave a bit of time for other transitions to happen
 		this.openCallout(500);
-		
-		this.tempNav.querySelector('.prev').innerHTML = '<a href="#triggers:' + emotion + '">TRIGGERS ▲</a>';
-		this.tempNav.classList.add('visible');
 
 	},
 
@@ -95,8 +89,6 @@ export default {
 			clearTimeout(this.calloutTimeout);
 
 			this.overlayContainer.classList.remove('visible');
-
-			this.tempNav.classList.remove('visible');
 
 			// TODO: resolve on completion of animation
 			resolve();
@@ -168,18 +160,6 @@ export default {
 		} else {
 			dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.moods.header, emotionsData.metadata.moods.body);
 		}
-
-	},
-
-	createTempNav: function (containerNode) {
-
-		this.tempNav = document.createElement('div');
-		this.tempNav.id = 'temp-moods-nav';
-		containerNode.appendChild(this.tempNav);
-
-		let prev = document.createElement('div');
-		prev.classList.add('prev');
-		this.tempNav.appendChild(prev);
 
 	}
 

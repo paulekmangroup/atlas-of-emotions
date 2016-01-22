@@ -25,7 +25,6 @@ export default {
 	currentEmotion: null,
 	triggersData: null,
 	backgroundSections: [ states ],
-	tempNav: null,
 
 	labelContainers: null,
 	graphContainers: null,
@@ -44,8 +43,6 @@ export default {
 		this.triggersData = this.parseTriggers(haloRadius);
 
 		this.setUpHitAreas(containerNode);
-
-		this.createTempNav(containerNode);
 
 		this.onHitAreaMouseOver = this.onHitAreaMouseOver.bind(this);
 		this.onHitAreaMouseOut = this.onHitAreaMouseOut.bind(this);
@@ -516,10 +513,6 @@ export default {
 		this.phaseLabelContainer.selectAll('h3.label')
 			.classed('visible', false);
 
-		this.tempNav.querySelector('.prev').innerHTML = '<a href="#actions:' + emotion + '">ACTIONS ▲</a>';
-		this.tempNav.querySelector('.next').innerHTML = '<a href="#moods:' + emotion + '">MOODS ▼</a>';
-		this.tempNav.classList.add('visible');
-
 	},
 
 	renderGraph: function (emotion) {
@@ -653,8 +646,6 @@ export default {
 				this.graphContainers[this.currentEmotion].selectAll('path.halo').remove();
 			}
 
-			this.tempNav.classList.remove('visible');
-
 			// TODO: resolve on completion of animation
 			resolve();
 
@@ -738,22 +729,6 @@ export default {
 		} else {
 			dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.triggers.header, emotionsData.metadata.triggers.body);
 		}
-
-	},
-
-	createTempNav: function (containerNode) {
-
-		this.tempNav = document.createElement('div');
-		this.tempNav.id = 'temp-triggers-nav';
-		containerNode.appendChild(this.tempNav);
-
-		let prev = document.createElement('div');
-		prev.classList.add('prev');
-		this.tempNav.appendChild(prev);
-
-		let next = document.createElement('div');
-		next.classList.add('next');
-		this.tempNav.appendChild(next);
 
 	}
 

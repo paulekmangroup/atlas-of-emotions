@@ -61,9 +61,6 @@ const continentsSection = {
 		this.onContinentMouseEnter = this.onContinentMouseEnter.bind(this);
 		this.onContinentMouseLeave = this.onContinentMouseLeave.bind(this);
 		this.onContinentMouseUp = this.onContinentMouseUp.bind(this);
-		this.onTempNavStatesClick = this.onTempNavStatesClick.bind(this);
-
-		this.createTempNav(containerNode);
 
 		this.isInited = true;
 
@@ -128,8 +125,6 @@ const continentsSection = {
 					let continent = continents.find(c => c.id === emotion);
 					this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.SELECTED);
 
-					this.displayTempNav(true, continent.id);
-
 					dispatcher.changeCallout(emotion, emotion, emotionsData.emotions[emotion].continent.desc);
 
 				}
@@ -137,7 +132,6 @@ const continentsSection = {
 			} else {
 
 				continents.forEach(c => c.highlightLevel = Continent.HIGHLIGHT_LEVELS.NONE);
-				this.displayTempNav(false);
 				dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
 
 			}
@@ -197,8 +191,6 @@ const continentsSection = {
 					// new continent selected with nothing previously selected
 					let continent = continents.find(c => c.id === emotion);
 					this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.SELECTED);
-
-					this.displayTempNav(true, continent.id);
 
 					dispatcher.changeCallout(emotion, emotion, emotionsData.emotions[emotion].continent.desc);
 
@@ -310,40 +302,6 @@ const continentsSection = {
 		if (this.isActive) {
 			window.requestAnimationFrame(this.update);
 		}
-
-	},
-
-	createTempNav: function (containerNode) {
-
-		this.tempNav = document.createElement('div');
-		this.tempNav.id = 'temp-continents-nav';
-		containerNode.appendChild(this.tempNav);
-
-		let prev = document.createElement('div');
-		prev.classList.add('prev');
-		this.tempNav.appendChild(prev);
-
-		let next = document.createElement('div');
-		next.classList.add('next');
-		this.tempNav.appendChild(next);
-
-	},
-
-	displayTempNav: function (visible, emotion) {
-
-		this.tempNav.querySelector('.prev').innerHTML = '<a href="#">HOME ▲</a>';
-		this.tempNav.querySelector('.next').innerHTML = '<a href="#">STATES ▼</a>';
-		this.tempNav.classList[visible ? 'add' : 'remove']('visible');
-
-		this.tempNav.querySelector('.next')[visible ? 'addEventListener' : 'removeEventListener']('click', this.onTempNavStatesClick);
-
-	},
-
-	onTempNavStatesClick: function (event) {
-
-		event.preventDefault();
-		event.stopImmediatePropagation();
-		this.onContinentMouseUp(continents.find(c => c.id === currentEmotion));
 
 	},
 
