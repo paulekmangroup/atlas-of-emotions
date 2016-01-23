@@ -513,7 +513,7 @@ export default {
 
 		// update
 		arrowSelection.transition()
-			.duration(1000)
+			.duration(sassVars.actions.update.time)
 			.attr('transform', d => 'rotate(' + d.rotation + ')');
 
 		// enter
@@ -531,14 +531,14 @@ export default {
 			.call(this.scaledLineGenerator, 0.0);
 			
 		arrowEnterSelection.transition()
-			.duration(1000)
+			.duration(sassVars.actions.add.time)
 			.delay(function (d, i) { return i * 50; })
 		.select('path')
 			.call(this.scaledLineGenerator, 1.0);
 
 		// exit
 		arrowSelection.exit().transition()
-			.duration(600)
+			.duration(sassVars.actions.remove.time)
 			.remove()
 		.select('path')
 			.call(this.scaledLineGenerator, 0.0);
@@ -556,7 +556,7 @@ export default {
 
 				// update
 				valenceSelection.transition()
-					.duration(1000)
+					.duration(sassVars.actions.update.time)
 					.call(this.arcTween);
 
 				// enter
@@ -569,7 +569,7 @@ export default {
 					.on('mouseout', this.onValenceMouseOut)
 					.on('click', this.onValenceMouseClick)
 				.transition()
-					.duration(1000)
+					.duration(sassVars.actions.add.time)
 					.delay(500)
 					.style('opacity', 1.0);
 
@@ -579,7 +579,7 @@ export default {
 
 				graphContainer.select('g.valences').selectAll('path.valence')
 				.transition()
-					.duration(1000)
+					.duration(sassVars.actions.remove.time)
 					.style('opacity', 0.0)
 					.remove();
 			}
@@ -663,42 +663,54 @@ export default {
 		let labelContainer = this.labelContainers[this.currentEmotion];
 		if (actionsData) {
 
+			const sqrt3 = Math.sqrt(3);
 			let labelSize = this.lineGenerator.radius()({x:1}) + 50,
 				labelSelection = labelContainer.selectAll('div.label')
-				.data(actionsData, d => d.name);
-			
+					.data(actionsData, d => d.name);
+
 			// update
 			labelSelection.transition()
-				.duration(1000)
-				.style('transform', d => 'rotate(' + d.rotation + 'deg)');
+				.duration(sassVars.actions.update.time)
+				.styleTween('transform', (() => (d, i, a) => {
+
+					// `a` is the previous value for the 'transform' style;
+					// d3 stores this internally as a matrix string.
+					// d3.transform() turns this string into a matrix object.
+					let previousTranslate = d3.transform(a).translate;
+					let previousRotation = Math.atan2(previousTranslate[1], previousTranslate[0]);
+					let targetRotation = Math.PI * (d.rotation-90) / 180;
+					let rot;
+
+					return (t) => {
+						rot = previousRotation + t * (targetRotation - previousRotation);
+						return 'translate(' +
+							labelSize * Math.cos(rot) + 'px,' +
+							labelSize / sqrt3 * Math.sin(rot) + 'px)';
+					};
+
+				})());
 			labelSelection.select('h3')
-				.html(labelText)
-			.transition()
-				.duration(1000)
-				// .style('transform', d => 'rotate(-' + d.rotation + 'deg)');//' scaleY(1.73)');
-				.style('transform', d => 'rotate(-' + d.rotation + 'deg) translateY(' + (-Math.sin(Math.PI * (d.rotation-90)/180) / 1.73) * labelSize + 'px)');
+				.html(labelText);
 
 			// enter
 			let labelEnterSelection = labelSelection.enter().append('div')
 				.classed('label ' + this.currentEmotion, true)
-				.style('transform', d => 'rotate(' + d.rotation + 'deg)')
-				.style('height', labelSize + 'px')
+				.style('transform', d => 'translate(' + labelSize * Math.cos(Math.PI*(d.rotation-90)/180) + 'px,' + labelSize * Math.sin(Math.PI*(d.rotation-90)/180) / sqrt3 + 'px')
 				.style('opacity', 0.0);
 			labelEnterSelection.append('div').append('h3')
 				.html(labelText)
-				// .style('transform', d => 'rotate(-' + d.rotation + 'deg')// scaleY(1.73)')
-				.style('transform', d => 'rotate(-' + d.rotation + 'deg) translateY(' + (-Math.sin(Math.PI * (d.rotation-90)/180) / 1.73) * labelSize + 'px)')
 				.on('mouseover', this.onActionMouseOver)
 				.on('mouseout', this.onActionMouseOut)
 				.on('click', this.onActionMouseClick);
-			
+
 			labelEnterSelection.transition()
-				.duration(1000)
+				.duration(sassVars.actions.add.time)
+				.delay(sassVars.actions.add.delay)
 				.style('opacity', 1.0);
 
 			// exit
 			labelSelection.exit().transition()
-				.duration(600)
+				.duration(sassVars.actions.remove.time)
 				.style('opacity', 0.0)
 				.remove();
 
@@ -740,13 +752,11 @@ export default {
 			clearTimeout(this.openTimeout);
 			clearTimeout(this.setStateTimeout);
 
-			let closeDuration = 600;
-
-			this.clearStates(closeDuration);
+			this.clearStates(sassVars.actions.remove.time);
 
 			setTimeout(() => {
 				resolve();
-			}, closeDuration);
+			}, sassVars.actions.remove.time);
 
 		});
 

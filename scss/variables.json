@@ -47,6 +47,20 @@
 			"out": 0.2
 		}
 	},
+	"actions": {
+		"add": {
+			"time": 1000,
+			"delay": 250
+		},
+		"update": {
+			"time": 750,
+			"delay": 0
+		},
+		"remove": {
+			"time": 600,
+			"delay": 0
+		}
+	},
 	"emotions": {
 		"panX": {
 			"duration": 0.75,
