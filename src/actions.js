@@ -673,6 +673,11 @@ export default {
 				.duration(sassVars.actions.update.time)
 				.styleTween('transform', (() => (d, i, a) => {
 
+					// BUG: `a` can refer to the value of an element that was removed from the selection.
+					// in this case, the element being transitioned jumps to the removed element's position
+					// at the start of the transition.
+					// need to figure out how to skip elements that are no longer in the transition.
+
 					// `a` is the previous value for the 'transform' style;
 					// d3 stores this internally as a matrix string.
 					// d3.transform() turns this string into a matrix object.
