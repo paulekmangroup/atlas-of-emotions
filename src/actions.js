@@ -675,7 +675,8 @@ export default {
 				.html(labelText)
 			.transition()
 				.duration(1000)
-				.style('transform', d => 'rotate(-' + d.rotation + 'deg) scaleY(1.73)');
+				// .style('transform', d => 'rotate(-' + d.rotation + 'deg)');//' scaleY(1.73)');
+				.style('transform', d => 'rotate(-' + d.rotation + 'deg) translateY(' + (-Math.sin(Math.PI * (d.rotation-90)/180) / 1.73) * labelSize + 'px)');
 
 			// enter
 			let labelEnterSelection = labelSelection.enter().append('div')
@@ -685,7 +686,8 @@ export default {
 				.style('opacity', 0.0);
 			labelEnterSelection.append('div').append('h3')
 				.html(labelText)
-				.style('transform', d => 'rotate(-' + d.rotation + 'deg) scaleY(1.73)')
+				// .style('transform', d => 'rotate(-' + d.rotation + 'deg')// scaleY(1.73)')
+				.style('transform', d => 'rotate(-' + d.rotation + 'deg) translateY(' + (-Math.sin(Math.PI * (d.rotation-90)/180) / 1.73) * labelSize + 'px)')
 				.on('mouseover', this.onActionMouseOver)
 				.on('mouseout', this.onActionMouseOut)
 				.on('click', this.onActionMouseClick);
