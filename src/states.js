@@ -1248,21 +1248,20 @@ export default {
 
 			graphContainer.selectAll('path.area')
 				.classed('unhighlighted', (data, index) => !stateIndexes[index]);
-				// .style('opacity', (data, index) => stateIndexes[index] ? 1.0 : 0.2);
 
+			// labelContainer.selectAll('div h3')
+			// 	.classed('highlighted', (data, index) => stateIndexes[index]);
 			labelContainer.selectAll('div h3')
-				.classed('highlighted', (data, index) => stateIndexes[index]);
-				// .style('opacity', (data, index) => stateIndexes[index] ? 1.0 : 0.2);
+				.classed('unhighlighted', (data, index) => !stateIndexes[index]);
 
 		} else {
 
 			graphContainer.selectAll('path.area')
 				.classed('unhighlighted', false);
-				// .style('opacity', null);
-
+			// labelContainer.selectAll('div h3')
+			// 	.classed('highlighted', false);
 			labelContainer.selectAll('div h3')
-				.classed('highlighted', false);
-				// .style('opacity', null);
+				.classed('unhighlighted', false);
 
 		}
 
