@@ -10,11 +10,13 @@ export default class Circle {
 	static BASE_ALPHA = 0.4;
 
 	// Note: continent.spawnConfig.lastSpawn is mutated by this function
-	static spawn (continent, frameCount) {
+	static spawn (continent, frameCount, forceSpawn) {
 
-		if (frameCount - continent.spawnConfig.lastSpawn > continent.spawnConfig.minDelay) {
-			if (Math.random() < continent.spawnConfig.freq) {
-				continent.spawnConfig.lastSpawn = frameCount;
+		if (forceSpawn || frameCount - continent.spawnConfig.lastSpawn > continent.spawnConfig.minDelay) {
+			if (forceSpawn || Math.random() < continent.spawnConfig.freq) {
+				if (!forceSpawn) {
+					continent.spawnConfig.lastSpawn = frameCount;
+				}
 				return new Circle(continent.circleWrapper, continent.colorPalette, continent.size);
 			} else {
 				return null;

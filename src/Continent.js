@@ -173,6 +173,8 @@ export default class Continent {
 
 		this.initInstanceProperties(emotion, container, continentGeom);
 
+		this.prepopulate();
+
 	}
 
 	initInstanceProperties (emotion, container, continentGeom) {
@@ -214,10 +216,28 @@ export default class Continent {
 
 		this.d3Selection = container.append('g')
 			.classed('continent ' + this.id, true)
+			.style('opacity', 0.0)
 			.datum(this);
+		this.d3Selection.transition()
+			.duration(2000)
+			.style('opacity', 1.0);
 
 		this.circleWrapper = this.d3Selection.append('g')
 			.classed('circle-wrapper', true);
+
+	}
+
+	prepopulate () {
+
+		let numCircles = 3 + Math.floor(Math.random() * 3);
+		for (let i=0; i<numCircles; i++) {
+			let newCircle = Circle.spawn(this, 1, true);
+			newCircle.radius = 0.25 + (0.75 * Math.random()) * newCircle.size;
+			newCircle.update(
+				Continent.HIGHLIGHT_ALPHA_MODS[this.highlightLevel],
+				Continent.HIGHLIGHT_SPEED_MODS[this.highlightLevel]);
+			this.circles.push(newCircle);
+		}
 
 	}
 
@@ -246,15 +266,6 @@ export default class Continent {
 			// set alpha and speed based on interaction
 			alphaMod = Continent.HIGHLIGHT_ALPHA_MODS[this.highlightLevel];
 			speedMod = Continent.HIGHLIGHT_SPEED_MODS[this.highlightLevel];
-			/*
-			if (!state.someContinentIsHighlighted) {
-				alphaMod = 1.0;
-				speedMod = 1.0;
-			} else {
-				alphaMod = this.highlightLevel ? HIGHLIGHT_ALPHA_MOD : UNHIGHLIGHT_ALPHA_MOD;
-				speedMod = this.highlightLevel ? HIGHLIGHT_SPEED_MOD : UNHIGHLIGHT_SPEED_MOD;
-			}
-			*/
 
 			// apply drift
 			this.wander(this.drift, 3);
