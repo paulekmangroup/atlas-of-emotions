@@ -194,7 +194,7 @@ h6 { font-size: 0.333333em; }
 			text-align: center;
 			
 			color: $text-color;
-			background-color: rgba(77, 77, 77, 0.5);
+			background-color: rgba($scrollbar-background-color, 0.5);
 
 			transition-property: background-color, color;
 			transition-duration: #{$states-highlighted-out}s;
@@ -207,7 +207,7 @@ h6 { font-size: 0.333333em; }
 
 			&.highlighted {
 				color: $text-overlay-color;
-				background-color: rgba(77, 77, 77, 0.9);
+				background-color: rgba($scrollbar-background-color, 0.9);
 				transition: background-color #{$states-highlighted-in}s ease-out;
 			}
 
@@ -242,10 +242,11 @@ h6 { font-size: 0.333333em; }
 	opacity: 0.0;
 
 	transition-property: opacity, background-color;
-	transition-duration: $label-fade-in-time;
-	transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+	transition-duration: $label-fade-out-time;
+	transition-timing-function: ease-in-out;
 
 	&.visible {
+		transition-duration: $label-fade-in-time;
 		opacity: 1.0;
 	}
 
@@ -260,5 +261,64 @@ h6 { font-size: 0.333333em; }
 	p {
 		margin-bottom: 0;
 		font-size: 1.0em;
+	}
+}
+
+#modal {
+	$modal-width: 25em;
+	$modal-height: 15em;
+
+	position: absolute;
+	width: $modal-width;
+	max-height: $modal-height;
+	top: 50%;
+	margin-top: -0.5 * $modal-height;
+	left: 50%;
+	margin-left: -0.5 * $modal-width;
+	padding: 1.5em;
+
+	background-color: rgba($callout-background-color, 0.5);
+	color: $text-overlay-color;
+	@extend %raleway-light;
+
+	opacity: 0.0;
+	display: none;
+
+	transition-property: opacity;
+	transition-duration: $label-fade-out-time;
+	transition-timing-function: ease-in-out;
+
+	&.visible {
+		transition-duration: $label-fade-in-time;
+		opacity: 1.0;
+	}
+
+	h3 {
+		margin-top: 0;
+		text-transform: uppercase;
+	}
+
+	p {
+		margin-bottom: 0;
+		font-size: 1.0em;
+	}
+
+	.close-button {
+		position: absolute;
+		top: 0.5em;
+		right: 0.5em;
+		line-height: 1em;
+
+		cursor: pointer;
+
+		&::before {
+			display: inline-block;
+			margin: 0;
+			padding: 0;
+
+			font-size: 3em;
+			font-weight: 200;
+			content: '×';
+		}
 	}
 }

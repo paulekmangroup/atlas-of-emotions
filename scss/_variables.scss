@@ -8,6 +8,7 @@ $text-overlay-color: #ffffff;
 $background-color: rgb(230, 215, 200);
 $callout-background-color: #000000;
 $callout-highlight-color: #999999;
+$scrollbar-background-color: #4d4d4d;
 
 $color-anger: #af202a;
 $color-disgust: #006837;
@@ -30,8 +31,8 @@ $emotions-dropdown-width: 13em;
 
 // animation
 $func-ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-$label-fade-in-time-init: 2s;
 $label-fade-in-time: 1s;
+$label-fade-out-time: 0.5s;
 
 // mixins
 @mixin emotion-color () {

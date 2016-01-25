@@ -5,6 +5,7 @@ import states from './states.js';
 import actions from './actions.js';
 import triggers from './triggers.js';
 import moods from './moods.js';
+import emotionsData from '../static/emotionsData.json';
 import sassVars from '../scss/variables.json';
 
 export default function (...initArgs) {
@@ -32,6 +33,7 @@ export default function (...initArgs) {
 		initHeader();
 		initScrollbar();
 		initCallout();
+		initModal();
 
 		document.addEventListener('keydown', onKeyDown);
 		dispatcher.addListener(dispatcher.EVENTS.NAVIGATE, onNavigate);
@@ -45,6 +47,11 @@ export default function (...initArgs) {
 		containerNode.style.height = (window.innerHeight - headerHeight) + 'px';
 
 		onHashChange();
+
+		// TODO: determine logic/timing for displaying modal regardless of entry point
+		setTimeout(() => {
+			setModalVisibility(true);
+		}, 2000);
 
 	}
 
@@ -121,13 +128,38 @@ export default function (...initArgs) {
 		callout.id = 'callout';
 
 		let h3 = document.createElement('h3');
-		h3.classList.add('title');
+		h3.classList.add('headline');
 		callout.appendChild(h3);
 		let p = document.createElement('p');
 		p.classList.add('body');
 		callout.appendChild(p);
 
 		mainEl.appendChild(callout);
+
+	}
+
+	function initModal () {
+
+		let modal = document.querySelector('#modal');
+
+		let modalHeadline = document.createElement('h3');
+		modalHeadline.classList.add('headline');
+		modalHeadline.textContent = emotionsData.metadata.intro.header;
+
+		let modalCopy = document.createElement('p');
+		modalCopy.classList.add('body');
+		modalCopy.textContent = emotionsData.metadata.intro.body;
+
+		let closeButton = document.createElement('div');
+		closeButton.classList.add('close-button');
+
+		modal.appendChild(modalHeadline);
+		modal.appendChild(modalCopy);
+		modal.appendChild(closeButton);
+
+		closeButton.addEventListener('click', (event) => {
+			setModalVisibility(false);
+		});
 
 	}
 
@@ -441,6 +473,27 @@ export default function (...initArgs) {
 
 	}
 
+	function setModalVisibility (val) {
+
+		let modal = document.querySelector('#modal');
+
+		if (val) {
+			modal.style.display = 'block';
+			setTimeout(() => {
+				// wait until after reflow to prevent `display: none` from killing transition
+				modal.classList.add('visible');
+			}, 100);
+		} else {
+			let onTransitionEnd = (event) => {
+				modal.removeEventListener('transitionend', onTransitionEnd);
+				modal.style.display = 'none';
+			};
+			modal.addEventListener('transitionend', onTransitionEnd);
+			modal.classList.remove('visible');
+		}
+
+	}
+
 	function onCalloutChange (emotion, title, body) {
 
 		if (!title) {
@@ -455,7 +508,7 @@ export default function (...initArgs) {
 			callout.classList.add(emotion);
 		}
 
-		callout.querySelector('.title').innerHTML = title;
+		callout.querySelector('.headline').innerHTML = title;
 		callout.querySelector('.body').innerHTML = body;
 
 	}
