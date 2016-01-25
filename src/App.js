@@ -158,6 +158,7 @@ export default function (...initArgs) {
 		modal.appendChild(closeButton);
 
 		closeButton.addEventListener('click', (event) => {
+			event.stopImmediatePropagation();
 			setModalVisibility(false);
 		});
 
@@ -475,21 +476,39 @@ export default function (...initArgs) {
 
 	function setModalVisibility (val) {
 
-		let modal = document.querySelector('#modal');
+		let modal = document.querySelector('#modal'),
+			modalOverlay = document.querySelector('#modal-overlay');
 
 		if (val) {
 			modal.style.display = 'block';
+			modalOverlay.style.display = 'block';
 			setTimeout(() => {
 				// wait until after reflow to prevent `display: none` from killing transition
 				modal.classList.add('visible');
+				modalOverlay.classList.add('visible');
+
+				// hide overlay on CONTINENTS,
+				// but keep it in DOM to block interaction until modal dismissed
+				if (currentSection === sections[dispatcher.SECTIONS.CONTINENTS]) {
+					modalOverlay.style.opacity = 0.0;
+				}
+
+				let onOverlayClick = (event) => {
+					event.stopImmediatePropagation();
+					modalOverlay.removeEventListener('click', onOverlayClick);
+					setModalVisibility(false);
+				};
+				modalOverlay.addEventListener('click', onOverlayClick);
 			}, 100);
 		} else {
 			let onTransitionEnd = (event) => {
 				modal.removeEventListener('transitionend', onTransitionEnd);
 				modal.style.display = 'none';
+				modalOverlay.style.display = 'none';
 			};
 			modal.addEventListener('transitionend', onTransitionEnd);
 			modal.classList.remove('visible');
+			modalOverlay.classList.remove('visible');
 		}
 
 	}
