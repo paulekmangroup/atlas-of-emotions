@@ -219,7 +219,7 @@ export default class Continent {
 			.style('opacity', 0.0)
 			.datum(this);
 		this.d3Selection.transition()
-			.duration(2000)
+			.duration(sassVars.ui.overlays.duration.in * 1000)	// match initial appearance of dialogs
 			.style('opacity', 1.0);
 
 		this.circleWrapper = this.d3Selection.append('g')

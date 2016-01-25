@@ -249,7 +249,7 @@ const continentsSection = {
 			}
 			d3.selectAll('#continent-labels div')
 				.style('opacity', 1.0);
-		}, (options && options.firstSection) ? 1000 : 0);
+		}, (options && options.firstSection) ? 0 : 0);
 
 
 		this.update();

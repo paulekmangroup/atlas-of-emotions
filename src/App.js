@@ -440,7 +440,7 @@ export default function (...initArgs) {
 		scrollbarCloseTimeout = setTimeout(() => {
 			let scrollbar = document.querySelector('#scrollbar');
 			scrollbar.classList.remove('open');
-		}, sassVars.scrollbar.toggle.delay.close * 1000);
+		}, sassVars.ui.scrollbar.toggle.delay.close * 1000);
 
 		displayScrollbarHighlight(null);
 		
@@ -507,6 +507,7 @@ export default function (...initArgs) {
 		if (emotion) {
 			callout.classList.add(emotion);
 		}
+		console.log(">>>>> callout visible");
 
 		callout.querySelector('.headline').innerHTML = title;
 		callout.querySelector('.body').innerHTML = body;

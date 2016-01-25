@@ -183,7 +183,7 @@ h6 { font-size: 0.333333em; }
 		cursor: pointer;
 
 		transition-property: right;
-		transition-duration: #{$scrollbar-toggle-duration-close}s;
+		transition-duration: #{$ui-scrollbar-toggle-duration-close}s;
 		transition-timing-function: ease;
 
 		div {
@@ -222,7 +222,7 @@ h6 { font-size: 0.333333em; }
 
 	&.open .segment-container {
 		right: 0;
-		transition-duration: #{$scrollbar-toggle-duration-open}s;
+		transition-duration: #{$ui-scrollbar-toggle-duration-open}s;
 	}
 
 }
@@ -242,11 +242,11 @@ h6 { font-size: 0.333333em; }
 	opacity: 0.0;
 
 	transition-property: opacity, background-color;
-	transition-duration: $label-fade-out-time;
+	transition-duration: #{$ui-overlays-duration-out}s;
 	transition-timing-function: ease-in-out;
 
 	&.visible {
-		transition-duration: $label-fade-in-time;
+		transition-duration: #{$ui-overlays-duration-in}s;
 		opacity: 1.0;
 	}
 
@@ -285,11 +285,11 @@ h6 { font-size: 0.333333em; }
 	display: none;
 
 	transition-property: opacity;
-	transition-duration: $label-fade-out-time;
+	transition-duration: #{$ui-overlays-duration-out}s;
 	transition-timing-function: ease-in-out;
 
 	&.visible {
-		transition-duration: $label-fade-in-time;
+		transition-duration: #{$ui-overlays-duration-in}s;
 		opacity: 1.0;
 	}
 
