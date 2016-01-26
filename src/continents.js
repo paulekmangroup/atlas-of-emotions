@@ -243,14 +243,14 @@ const continentsSection = {
 		// otherwise, callout display is handled within setEmotion.
 		// this will probably have to change to support deeplinking to a zoomed-in emotion,
 		// we'll figure that out later.
-		setTimeout(function () {
-			if (options && options.firstSection) {
-				dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
-			}
+		if (options && options.firstSection) {
+			// if first section in session, move continents out of the way of the intro modal
+			this.setContinentIntroPositions(true);
+		} else {
+			// else, fade in continent labels
 			d3.selectAll('#continent-labels div')
 				.style('opacity', 1.0);
-		}, (options && options.firstSection) ? 0 : 0);
-
+		}
 
 		this.update();
 
@@ -279,6 +279,47 @@ const continentsSection = {
 				.on('mouseenter', val ? section.onContinentMouseEnter : null)
 				.on('mouseleave', val ? section.onContinentMouseLeave : null)
 				.on('mouseup', val ? section.onContinentMouseUp : null);
+		});
+
+	},
+
+	/**
+	 * Position continents for site intro or to normal positioning.
+	 * @param {Boolean} val If true, continents tween away from center; false, back to normal positions.
+	 */
+	setContinentIntroPositions (val) {
+
+		continents.forEach(continent => {
+			if (val) {
+				continent.addTween(
+					{
+						'introSpreadRad': 150	// TODO: this needs to be a scalar not a const
+					},
+					sassVars.continents.introSpread.duration.out * 1000,
+					sassVars.continents.introSpread.delay.out * 1000,
+					TWEEN.Easing.Cubic.InOut
+				);
+			} else {
+				continent.addTween(
+					{
+						'introSpreadRad': 0
+					},
+					sassVars.continents.introSpread.duration.in * 1000,
+					sassVars.continents.introSpread.delay.in * 1000,
+					TWEEN.Easing.Cubic.InOut);
+
+				// NOTE: this code is specific to displaying/activating continents for the first time in the session
+				// (when the intro modal is dismissed and the continents brought back to the screen center),
+				// but doesn't really have anything to do with bringing the continents back to the screen center.
+				// So, this code should probably belong elsewhere, but for now, here it stays.
+				
+				// display the default continents callout and continent labels.
+				dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+				d3.selectAll('#continent-labels div')
+					.style('opacity', 1.0);
+
+			}
+
 		});
 
 	},
@@ -322,7 +363,7 @@ const continentsSection = {
 			targetContinent.addTween({
 				'scaleX': targetScale,
 				'scaleY': targetScale,
-			}, sassVars.continents.spread.duration.in * 1000, TWEEN.Easing.Quadratic.InOut);
+			}, sassVars.continents.spread.duration.in * 1000, 0, TWEEN.Easing.Quadratic.InOut);
 
 			return targetScale;
 
@@ -448,7 +489,7 @@ const continentsSection = {
 					continent.addTween({
 						'scaleX': scale,
 						'scaleY': scale
-					}, time + (delays[continent.id] || 0), TWEEN.Easing.Quadratic.InOut);
+					}, time + (delays[continent.id] || 0), 0, TWEEN.Easing.Quadratic.InOut);
 
 				});
 

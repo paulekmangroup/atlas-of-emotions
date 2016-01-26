@@ -195,8 +195,9 @@ export default function (...initArgs) {
 
 		if (!previousSection) {
 
-			// for now (until transitions implemented), just hide all but the current section
-			// and any background sections
+			// first section opened in this session
+
+			// hide all but the current section and any background sections
 			for (let key in containers) {
 				if (key !== sectionName && !~backgroundSections.indexOf(sections[key])) {
 					containers[key].style.display = 'none';
@@ -480,9 +481,16 @@ export default function (...initArgs) {
 			modalOverlay = document.querySelector('#modal-overlay');
 
 		if (currentSection === sections[dispatcher.SECTIONS.CONTINENTS]) {
-			let homeLink = modal.querySelector('.home-link');
-			if (homeLink) {
-				homeLink.remove();
+			// current section is Continents
+			if (val) {
+				// remove homeLink when opening modal
+				let homeLink = modal.querySelector('.home-link');
+				if (homeLink) {
+					homeLink.remove();
+				}
+			} else {
+				// bring continents back to center when closing modal
+				currentSection.setContinentIntroPositions(false);
 			}
 		}
 
@@ -582,7 +590,7 @@ export default function (...initArgs) {
 		} else {
 			setTimeout(() => {
 				setModalVisibility(true);
-			}, sassVars.ui.intro.delay);
+			}, sassVars.ui.intro.delay * 1000);
 		}
 
 		let hash = document.location.hash.replace(/^#/, '');
