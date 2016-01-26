@@ -143,11 +143,11 @@ export default function (...initArgs) {
 
 		let modalCopy = document.createElement('p');
 		modalCopy.classList.add('body');
-		modalCopy.textContent = emotionsData.metadata.intro.body;
+		modalCopy.innerHTML = emotionsData.metadata.intro.body;
 
 		let homeLink = document.createElement('p');
 		homeLink.classList.add('home-link');
-		homeLink.innerHTML = '<a href="#">ENTER</a>';
+		homeLink.innerHTML = '<a href="#">ENTER THE ATLAS</a>';
 
 		let closeButton = document.createElement('div');
 		closeButton.classList.add('close-button');
