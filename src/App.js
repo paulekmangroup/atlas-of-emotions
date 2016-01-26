@@ -147,7 +147,7 @@ export default function (...initArgs) {
 
 		let homeLink = document.createElement('p');
 		homeLink.classList.add('home-link');
-		homeLink.innerHTML = '<a href="#">ENTER THE ATLAS</a>';
+		homeLink.innerHTML = '<a href="#">Start at the beginning</a>';
 
 		let closeButton = document.createElement('div');
 		closeButton.classList.add('close-button');

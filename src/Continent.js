@@ -8,6 +8,7 @@ import emotionsData from '../static/emotionsData.json';
 import sassVars from '../scss/variables.json';
 
 const FRAMERATE = 60;
+const MAX_NUM_CIRCLES = 8;
 
 // zoomed-in continents (with spread circles) are
 // this much larger than their corresponding state graph.
@@ -190,8 +191,8 @@ export default class Continent {
 
 		this.spawnConfig = {
 			lastSpawn: 0,
-			minDelay: 2 * FRAMERATE,
-			freq: 0.015
+			minDelay: 3 * FRAMERATE,
+			freq: 0.010
 		};
 
 		this.drift = {
@@ -258,9 +259,12 @@ export default class Continent {
 		if (!this.isFocused) {
 
 			// probabilistically spawn new Circles
-			newCircle = Circle.spawn(this, frameCount);
-			if (newCircle) {
-				this.circles.push(newCircle);
+			if (this.circles.length < MAX_NUM_CIRCLES) {
+				newCircle = Circle.spawn(this, frameCount);
+				if (newCircle) {
+					this.circles.push(newCircle);
+					console.log(">>>>> [" + this.id +"] num circles:", this.circles.length);
+				}
 			}
 
 			// set alpha and speed based on interaction

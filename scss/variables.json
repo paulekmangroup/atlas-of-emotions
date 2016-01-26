@@ -76,7 +76,7 @@
 		"overlays": {
 			"duration": {
 				"in": 1.0,
-				"out": 1.0
+				"out": 0.5
 			}
 		},
 		"intro": {
