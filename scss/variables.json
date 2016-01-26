@@ -21,6 +21,16 @@
 				"in": 1.5,
 				"out": 0.75
 			}
+		},
+		"introSpread": {
+			"duration": {
+				"in": 1.5,
+				"out": 2.5
+			},
+			"delay": {
+				"in": 0.0,
+				"out": 1.0
+			}
 		}
 	},
 	"states": {
@@ -80,7 +90,7 @@
 			}
 		},
 		"intro": {
-			"delay": 2.0
+			"delay": 1.0
 		}
 	}
 }

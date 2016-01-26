@@ -208,6 +208,9 @@ export default class Continent {
 		// copy transforms onto this Continent instance
 		Object.assign(this, Continent.transforms[emotionIndex]);
 
+		this.introSpreadAng = Math.atan2(this.y, this.x);
+		this.introSpreadRad = 0;
+
 		this.scaleX = 1.0;
 		this.scaleY = 1.0;
 
@@ -275,11 +278,19 @@ export default class Continent {
 
 		}
 
+		let transX = this.centerX + this.x + this.drift.x,
+			transY = this.centerY + this.y + this.drift.y;
+
+		if (this.introSpreadRad) {
+			transX += this.introSpreadRad * Math.cos(this.introSpreadAng);
+			transY += this.introSpreadRad * Math.sin(this.introSpreadAng);
+		}
+
 		this.d3Selection
 			.attr('transform', d3Transform()
 				.translate(
-					this.centerX + this.x + this.drift.x,
-					this.centerY + this.y + this.drift.y
+					transX,
+					transY
 				)
 				.scale(
 					this.scaleX,
@@ -304,7 +315,7 @@ export default class Continent {
 
 	}
 
-	addTween (props, time, func=TWEEN.Easing.Linear.None) {
+	addTween (props, time, delay, func=TWEEN.Easing.Linear.None) {
 
 		if (!this.tweens) {
 			this.tweens = {};
@@ -317,6 +328,7 @@ export default class Continent {
 
 		this.tweens[key] = new TWEEN.Tween(this)
 			.to(props, time)
+			.delay(delay)
 			.onComplete(() => { delete this.tweens[key]; })
 			.easing(func)
 			.start();
