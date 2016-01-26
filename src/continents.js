@@ -289,11 +289,15 @@ const continentsSection = {
 	 */
 	setContinentIntroPositions (val) {
 
+		let w = this.sectionContainer.offsetWidth,
+			h = this.sectionContainer.offsetHeight,
+			diag = Math.sqrt(w * w + h * h) / 2;
+
 		continents.forEach(continent => {
 			if (val) {
 				continent.addTween(
 					{
-						'introSpreadRad': 150	// TODO: this needs to be a scalar not a const
+						'introSpreadRad': continent.introSpreadMaxRad * diag
 					},
 					sassVars.continents.introSpread.duration.out * 1000,
 					sassVars.continents.introSpread.delay.out * 1000,

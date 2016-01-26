@@ -113,10 +113,10 @@ export default class Continent {
 				y: -0.20 * h,
 				label: {
 					x: 0.19 * w,
-					// x: 0.13 * w,
 					y: -0.13 * h
 				},
-				size: 0.24 * h
+				size: 0.24 * h,
+				introSpreadMaxRad: 0.13
 			},
 			{
 				// left
@@ -124,10 +124,10 @@ export default class Continent {
 				y: -0.14 * h,
 				label: {
 					x: -0.25 * w,
-					// x: -0.18 * w,
 					y: -0.01 * h
 				},
-				size: 0.23 * h
+				size: 0.23 * h,
+				introSpreadMaxRad: 0.2
 			},
 			{
 				// center
@@ -136,10 +136,10 @@ export default class Continent {
 				label: {
 					x: -0.22 * w,
 					y: 0.07 * h
-					// x: -0.15 * w,
-					// y: 0.07 * h
 				},
-				size: 0.18 * h
+				size: 0.18 * h,
+				introSpreadMaxRad: 0.35,
+				isCenterContinent: true
 			},
 			{
 				// bottom
@@ -147,10 +147,10 @@ export default class Continent {
 				y: 0.22 * h,
 				label: {
 					x: -0.17 * w,
-					// x: -0.10 * w,
 					y: 0.17 * h
 				},
-				size: 0.22 * h
+				size: 0.22 * h,
+				introSpreadMaxRad: 0.15
 			},
 			{
 				// right
@@ -159,9 +159,9 @@ export default class Continent {
 				label: {
 					x: 0.01 * w,
 					y: 0.25 * h
-					// y: 0.20 * h
 				},
-				size: 0.24 * h
+				size: 0.24 * h,
+				introSpreadMaxRad: 0.15
 			}
 		]);
 	}
@@ -208,8 +208,12 @@ export default class Continent {
 		// copy transforms onto this Continent instance
 		Object.assign(this, Continent.transforms[emotionIndex]);
 
-		this.introSpreadAng = Math.atan2(this.y, this.x);
 		this.introSpreadRad = 0;
+		this.introSpreadAng = Math.atan2(this.y, this.x);
+		if (this.isCenterContinent) {
+			// move center continent a little off-angle.
+			this.introSpreadAng += 0.4;
+		}
 
 		this.scaleX = 1.0;
 		this.scaleY = 1.0;
