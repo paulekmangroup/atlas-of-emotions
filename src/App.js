@@ -48,11 +48,6 @@ export default function (...initArgs) {
 
 		onHashChange();
 
-		// TODO: determine logic/timing for displaying modal regardless of entry point
-		setTimeout(() => {
-			setModalVisibility(true);
-		}, 2000);
-
 	}
 
 	function initContainers () {
@@ -150,11 +145,16 @@ export default function (...initArgs) {
 		modalCopy.classList.add('body');
 		modalCopy.textContent = emotionsData.metadata.intro.body;
 
+		let homeLink = document.createElement('p');
+		homeLink.classList.add('home-link');
+		homeLink.innerHTML = '<a href="#">ENTER</a>';
+
 		let closeButton = document.createElement('div');
 		closeButton.classList.add('close-button');
 
 		modal.appendChild(modalHeadline);
 		modal.appendChild(modalCopy);
+		modal.appendChild(homeLink);
 		modal.appendChild(closeButton);
 
 		closeButton.addEventListener('click', (event) => {
@@ -479,6 +479,13 @@ export default function (...initArgs) {
 		let modal = document.querySelector('#modal'),
 			modalOverlay = document.querySelector('#modal-overlay');
 
+		if (currentSection === sections[dispatcher.SECTIONS.CONTINENTS]) {
+			let homeLink = modal.querySelector('.home-link');
+			if (homeLink) {
+				homeLink.remove();
+			}
+		}
+
 		if (val) {
 			modal.style.display = 'block';
 			modalOverlay.style.display = 'block';
@@ -526,7 +533,6 @@ export default function (...initArgs) {
 		if (emotion) {
 			callout.classList.add(emotion);
 		}
-		console.log(">>>>> callout visible");
 
 		callout.querySelector('.headline').innerHTML = title;
 		callout.querySelector('.body').innerHTML = body;
@@ -570,6 +576,14 @@ export default function (...initArgs) {
 	}
 
 	function onHashChange (event, defaults=navigationDefaults) {
+
+		if (currentSection) {
+			setModalVisibility(false);
+		} else {
+			setTimeout(() => {
+				setModalVisibility(true);
+			}, sassVars.ui.intro.delay);
+		}
 
 		let hash = document.location.hash.replace(/^#/, '');
 		hash = parseHash(hash);

@@ -51,6 +51,15 @@ h4 { font-size: 0.666667em; }
 h5 { font-size: 0.5em; }
 h6 { font-size: 0.333333em; }
 
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+	text-decoration: none;
+	color: $text-color;
+}
+
 #header {
 	position: relative;
 	width: 100%;
@@ -73,15 +82,6 @@ h6 { font-size: 0.333333em; }
 	h3 {
 		position: absolute;
 		left: 1em;
-	}
-
-	a,
-	a:link,
-	a:visited,
-	a:hover,
-	a:active {
-		text-decoration: none;
-		color: $text-color;
 	}
 
 	.dropdown {
@@ -291,7 +291,7 @@ h6 { font-size: 0.333333em; }
 
 	position: absolute;
 	width: $modal-width;
-	max-height: $modal-height;
+	min-height: $modal-height;
 	top: 50%;
 	margin-top: -0.5 * $modal-height;
 	left: 50%;
@@ -322,6 +322,22 @@ h6 { font-size: 0.333333em; }
 	p {
 		margin-bottom: 0;
 		font-size: 1.0em;
+	}
+
+	a,
+	a:link,
+	a:visited,
+	a:hover,
+	a:active {
+		@extend %raleway-regular;
+		text-decoration: none;
+		color: $text-overlay-color;
+	}
+
+	.home-link {
+		width: 100%;
+		margin: 2em 0 1.5em 0;
+		text-align: center;
 	}
 
 	.close-button {
