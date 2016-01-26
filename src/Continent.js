@@ -112,8 +112,8 @@ export default class Continent {
 				x: 0.03 * w,
 				y: -0.20 * h,
 				label: {
-					// x: 0.19 * w,
-					x: 0.13 * w,
+					x: 0.19 * w,
+					// x: 0.13 * w,
 					y: -0.13 * h
 				},
 				size: 0.24 * h
@@ -123,8 +123,8 @@ export default class Continent {
 				x: -0.22 * w,
 				y: -0.14 * h,
 				label: {
-					// x: -0.24 * w,
-					x: -0.18 * w,
+					x: -0.25 * w,
+					// x: -0.18 * w,
 					y: -0.01 * h
 				},
 				size: 0.23 * h
@@ -134,10 +134,10 @@ export default class Continent {
 				x: -0.06 * w,
 				y: 0.07 * h,
 				label: {
-					// x: -0.19 * w,
-					// y: 0.10 * h
-					x: -0.15 * w,
+					x: -0.22 * w,
 					y: 0.07 * h
+					// x: -0.15 * w,
+					// y: 0.07 * h
 				},
 				size: 0.18 * h
 			},
@@ -146,9 +146,9 @@ export default class Continent {
 				x: -0.03 * w,
 				y: 0.22 * h,
 				label: {
-					// x: -0.20 * w,
-					x: -0.10 * w,
-					y: 0.15 * h
+					x: -0.17 * w,
+					// x: -0.10 * w,
+					y: 0.17 * h
 				},
 				size: 0.22 * h
 			},
@@ -158,8 +158,8 @@ export default class Continent {
 				y: 0.10 * h,
 				label: {
 					x: 0.01 * w,
-					// y: 0.27 * h
-					y: 0.20 * h
+					y: 0.25 * h
+					// y: 0.20 * h
 				},
 				size: 0.24 * h
 			}
@@ -263,7 +263,6 @@ export default class Continent {
 				newCircle = Circle.spawn(this, frameCount);
 				if (newCircle) {
 					this.circles.push(newCircle);
-					console.log(">>>>> [" + this.id +"] num circles:", this.circles.length);
 				}
 			}
 
