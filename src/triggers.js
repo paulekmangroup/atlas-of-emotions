@@ -5,7 +5,7 @@ import dispatcher from './dispatcher.js';
 import emotionsData from '../static/emotionsData.json';
 import sassVars from '../scss/variables.json';
 import states from './states.js';
-
+import actions from './actions.js';
 
 // number of concentric rings in which trigger labels are arranged
 const NUM_RINGS = 3;
@@ -24,7 +24,7 @@ export default {
 	isInited: false,
 	currentEmotion: null,
 	triggersData: null,
-	backgroundSections: [ states ],
+	backgroundSections: [ states, actions ],
 
 	labelContainers: null,
 	graphContainers: null,

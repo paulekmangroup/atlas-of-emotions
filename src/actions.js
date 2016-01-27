@@ -770,7 +770,7 @@ export default {
 	},
 
 	/**
-	 * Actions section stays open in moods, with limited interactivity.
+	 * Actions section stays open in triggers and moods, with limited interactivity.
 	 * `setBackgrounded()` toggles this state.
 	 */
 	setBackgrounded: function (val, options) {
@@ -778,6 +778,11 @@ export default {
 		return new Promise((resolve, reject) => {
 
 			this.isBackgrounded = val;
+
+			this.sectionContainer.classList[(val ? 'add' : 'remove')]('backgrounded');
+			this.sectionContainer.classList[(options && (options.sectionName === dispatcher.SECTIONS.TRIGGERS) ? 'add' : 'remove')]('triggers');
+			// this.hideChrome();
+			// this.setActive(!val);
 
 			this.renderLabels(null);
 

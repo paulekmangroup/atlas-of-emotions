@@ -11,6 +11,21 @@
 	text-align: center;
 	pointer-events: none;
 
+	transition-property: top;
+	transition-duration: 1.5s;
+	transition-timing-function: cubic-bezier(.81,.34,.63,.85);
+
+	&.backgrounded.triggers {
+		// same math as in .actions-container below,
+		// but subtracted from total viewport height
+		// to push .actions-containers to bottom.
+		top: calc((100% - (
+				(100% + #{$states-backgrounded-top}) - 
+				(100% * (1 - #{$states-backgrounded-scale}) / 2) - 
+				#{$states-backgrounded-scale} * (#{$states-containers-bottom} + 50px)
+			));
+	}
+
 	.label-valence {
 		display: inline-block;
 		position: relative;

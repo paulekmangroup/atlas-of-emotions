@@ -302,9 +302,11 @@ export default function (...initArgs) {
 					}
 
 					// hide the container of any closed previous background section 
+					// that is not a background section for this section
 					if (previousBackgroundSections.length) {
 						for (let key in sections) {
-							if (~previousBackgroundSections.indexOf(sections[key])) {
+							if (~previousBackgroundSections.indexOf(sections[key]) &&
+								!~section.backgroundSections.indexOf(sections[key])) {
 								containers[key].style.display = 'none';
 							}
 						}
