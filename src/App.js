@@ -10,10 +10,18 @@ import sassVars from '../scss/variables.json';
 
 export default function (...initArgs) {
 
-	const navigationDefaults = {
-		section: dispatcher.SECTIONS.CONTINENTS,
-		emotion: null
-	};
+	const NAVIGATION_DEFAULTS = {
+			section: dispatcher.SECTIONS.CONTINENTS,
+			emotion: null
+		},
+
+		// at least this many consecutive (throttled to once/frame) events
+		// must fire before scroll happens
+		MIN_NUM_SCROLL_EVENTS = 3,
+
+		// and the total distance scrolled must exceed this value
+		MIN_SCROLL_CUMULATIVE_DIST = 15;
+
 
 	let containers = {},
 		sections = {},
@@ -24,20 +32,22 @@ export default function (...initArgs) {
 
 		scrollbarSegments = {},
 		scrollbarCloseTimeout = null,
-		highlightedScrollbarSection = null;
+		highlightedScrollbarSection = null,		
+		recentScrollDeltas = [],				// cache recent scroll delta values to check intentionality of scroll
+		isNavigating = false;					// currently navigating between emotions or sections
+
 
 	function init (containerNode) {
 
 		initContainers();
 		initSections();
 		initHeader();
-		initScrollbar();
+		initScrollInterface();
 		initCallout();
 		initModal();
 
-		document.addEventListener('keydown', onKeyDown);
+		// navigation events
 		dispatcher.addListener(dispatcher.EVENTS.NAVIGATE, onNavigate);
-		dispatcher.addListener(dispatcher.EVENTS.NAVIGATE_COMPLETE, onNavigateComplete);
 		dispatcher.addListener(dispatcher.EVENTS.CHANGE_EMOTION_STATE, onEmotionStateChange);
 		dispatcher.addListener(dispatcher.EVENTS.CHANGE_CALLOUT, onCalloutChange);
 		window.addEventListener('hashchange', onHashChange);
@@ -92,7 +102,7 @@ export default function (...initArgs) {
 
 	}
 
-	function initScrollbar () {
+	function initScrollInterface () {
 
 		let scrollbar = document.querySelector('#scrollbar'),
 			segmentContainer = document.createElement('div');
@@ -113,6 +123,28 @@ export default function (...initArgs) {
 		segmentContainer.addEventListener('mouseover', onScrollbarOver);
 		segmentContainer.addEventListener('mouseout', onScrollbarOut);
 		segmentContainer.addEventListener('click', onScrollbarClick);
+
+		// throttle wheel events, and
+		// prune cached scroll events every frame
+		recentScrollDeltas = [];
+		let queuedWheelEvent;
+		let onRAF = () => {
+			if (queuedWheelEvent) {
+				onWheel(queuedWheelEvent.deltaX, queuedWheelEvent.deltaY);
+			} else {
+				if (recentScrollDeltas.length) {
+					recentScrollDeltas.shift();
+				}
+			}
+			queuedWheelEvent = null;
+			window.requestAnimationFrame(onRAF);
+		};
+		window.addEventListener('wheel', (event) => {
+			queuedWheelEvent = event;
+		});
+		window.requestAnimationFrame(onRAF);
+		
+		document.addEventListener('keydown', onKeyDown);
 
 	}
 
@@ -219,7 +251,13 @@ export default function (...initArgs) {
 				inBackground: false,
 				firstSection: true
 			});
-			section.setEmotion(currentEmotion, previousEmotion);
+			section.setEmotion(currentEmotion, previousEmotion)
+			.then(() => {
+				console.log(">>>>> isNavigating -> false");
+				isNavigating = false;
+			});
+
+
 
 		} else {
 
@@ -233,7 +271,11 @@ export default function (...initArgs) {
 				});
 
 				// and within current section
-				section.setEmotion(currentEmotion, previousEmotion);
+				section.setEmotion(currentEmotion, previousEmotion)
+				.then(() => {
+					console.log(">>>>> isNavigating -> false");
+					isNavigating = false;
+				});
 
 			} else {
 				
@@ -320,7 +362,12 @@ export default function (...initArgs) {
 						inBackground: false,
 						firstSection: false
 					});
-					section.setEmotion(currentEmotion, previousEmotion);
+
+					section.setEmotion(currentEmotion, previousEmotion)
+					.then(() => {
+						console.log(">>>>> isNavigating -> false");
+						isNavigating = false;
+					});
 
 				});
 
@@ -387,12 +434,106 @@ export default function (...initArgs) {
 		}
 	}
 
-	function onKeyDown (keyCode) {
+	function scrollSection (dir) {
 
-		if (keyCode === 37 || keyCode === 39) {
+		if (isNavigating) { return; }
+		if (!currentSection) { return; }
 
-			console.log('TODO: scroll to next emotion. This functionality will ultimately be accessible via a dropdown.');
+		let sectionNames = _.values(dispatcher.SECTIONS),
+			currentSectionIndex,
+			targetSectionIndex;
 
+		sectionNames.some((sectionName, i) => {
+			if (sections[sectionName] === currentSection) {
+				currentSectionIndex = i;
+				return true;
+			}
+		});
+		console.log(">>>>> scroll from currentSectionIndex:", currentSectionIndex);
+
+		if (dir < 0) {
+			targetSectionIndex = Math.max(0, currentSectionIndex - 1);
+		} else {
+			targetSectionIndex = Math.min(currentSectionIndex + 1, sectionNames.length - 1);
+		}
+
+		console.log(">>>>> scroll to targetSectionIndex:", targetSectionIndex);
+
+		if (currentSectionIndex !== targetSectionIndex) {
+			dispatcher.navigate(sectionNames[targetSectionIndex]);
+		}
+		
+	}
+
+	function scrollEmotion (dir) {
+
+		if (isNavigating) { return; }
+
+		let emotionNames = _.values(dispatcher.EMOTIONS),
+			currentEmotionIndex = emotionNames.indexOf(currentEmotion),
+			targetEmotionIndex;
+
+		if (currentEmotionIndex === -1) {
+			// default to Anger
+			currentEmotionIndex = 0;
+		}
+		console.log(">>>>> scroll from currentEmotionIndex:", currentEmotionIndex);
+
+		if (dir < 0) {
+			targetEmotionIndex = Math.max(0, currentEmotionIndex - 1);
+		} else {
+			targetEmotionIndex = Math.min(currentEmotionIndex + 1, emotionNames.length - 1);
+		}
+
+		console.log(">>>>> scroll to targetEmotionIndex:", targetEmotionIndex);
+
+		if (currentEmotionIndex !== targetEmotionIndex) {
+			dispatcher.navigate(null, emotionNames[targetEmotionIndex]);
+		}
+		
+
+	}
+
+	function onKeyDown (event) {
+
+		switch (event.keyCode) {
+			case 37:
+				// left
+				scrollEmotion(-1);
+				break;
+			case 38:
+				// top
+				scrollSection(-1);
+				break;
+			case 39:
+				// right
+				scrollEmotion(1);
+				break;
+			case 40:
+				// bottom
+				scrollSection(1);
+				break;
+		}
+
+	}
+
+	function onWheel (deltaX, deltaY) {
+
+		// TODO: enable horizontal scrolling with mouse (trackpad) for emotions?
+		// might interfere with two-finger-swipe browser back/fwd.
+
+		if (deltaY) {
+
+			recentScrollDeltas.push(deltaY);
+			console.log(">>>>> recentScrollDeltas:", recentScrollDeltas);
+			if (recentScrollDeltas.length >= MIN_NUM_SCROLL_EVENTS) {
+				let totalDelta = recentScrollDeltas.reduce((t, d) => t + d, 0);
+
+				if (Math.abs(totalDelta) >= MIN_SCROLL_CUMULATIVE_DIST) {
+					recentScrollDeltas = [];
+					scrollSection(totalDelta < 0 ? -1 : 1);
+				}
+			}
 		}
 
 	}
@@ -499,6 +640,10 @@ export default function (...initArgs) {
 		if (val) {
 			modal.style.display = 'block';
 			modalOverlay.style.display = 'block';
+
+			// prevent scrolling while modal is open
+			isNavigating = true;
+
 			setTimeout(() => {
 				// wait until after reflow to prevent `display: none` from killing transition
 				modal.classList.add('visible');
@@ -518,6 +663,10 @@ export default function (...initArgs) {
 				modalOverlay.addEventListener('click', onOverlayClick);
 			}, 100);
 		} else {
+
+			// re-enable scrolling when modal closes
+			isNavigating = false;
+
 			let onTransitionEnd = (event) => {
 				modal.removeEventListener('transitionend', onTransitionEnd);
 				modal.style.display = 'none';
@@ -562,6 +711,8 @@ export default function (...initArgs) {
 
 	function onNavigate (section, emotion) {
 
+		isNavigating = true;
+
 		if (!section) {
 			for (let key in sections) {
 				if (sections[key] === currentSection) {
@@ -579,13 +730,7 @@ export default function (...initArgs) {
 
 	}
 
-	function onNavigateComplete (section, emotion) {
-
-		containers[section].style.display = 'none';
-
-	}
-
-	function onHashChange (event, defaults=navigationDefaults) {
+	function onHashChange (event, defaults=NAVIGATION_DEFAULTS) {
 
 		if (currentSection) {
 			setModalVisibility(false);
