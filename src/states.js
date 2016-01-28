@@ -340,7 +340,7 @@ export default {
 					resolveDelay = sassVars.states.backgrounded.duration.in;
 				}
 			}
-			console.log(">>>>> resolveDelay:", resolveDelay);
+			
 			setTimeout(() => {
 				resolve();
 			}, resolveDelay);

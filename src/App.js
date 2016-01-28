@@ -20,7 +20,11 @@ export default function (...initArgs) {
 		MIN_NUM_SCROLL_EVENTS = 3,
 
 		// and the total distance scrolled must exceed this value
-		MIN_SCROLL_CUMULATIVE_DIST = 15;
+		MIN_SCROLL_CUMULATIVE_DIST = 15,
+
+		// if no `wheel` events received in this time,
+		// consider an inertia scroll (swipe) complete.
+		INERTIA_SCROLL_TIMEOUT = 100;
 
 
 	let containers = {},
@@ -34,6 +38,8 @@ export default function (...initArgs) {
 		scrollbarCloseTimeout = null,
 		highlightedScrollbarSection = null,		
 		recentScrollDeltas = [],				// cache recent scroll delta values to check intentionality of scroll
+		lastScroll = 0,							// timestamp of most recent scroll event
+		hasNavigatedThisScroll = false,			// has already navigated during the current inertia/continuous scroll
 		isNavigating = false;					// currently navigating between emotions or sections
 
 
@@ -434,7 +440,7 @@ export default function (...initArgs) {
 		}
 	}
 
-	function scrollSection (dir) {
+	function scrollSection (dir, fromScroll) {
 
 		console.log(">>>>> scrollSection(); isNavigating:", isNavigating);
 
@@ -463,6 +469,10 @@ export default function (...initArgs) {
 
 		if (currentSectionIndex !== targetSectionIndex) {
 			dispatcher.navigate(sectionNames[targetSectionIndex]);
+
+			if (fromScroll) {
+				hasNavigatedThisScroll = true;
+			}
 		}
 		
 	}
@@ -525,18 +535,45 @@ export default function (...initArgs) {
 		// TODO: enable horizontal scrolling with mouse (trackpad) for emotions?
 		// might interfere with two-finger-swipe browser back/fwd.
 
+		//
+		// TODO NEXT THURS: don't just block wheel events when they're continuous;
+		// block them when they're continuously <= the last value.
+		// need to be able to support sequential, yet discrete, swipes.
+		//
+		
 		if (deltaY) {
 
-			recentScrollDeltas.push(deltaY);
-			console.log(">>>>> recentScrollDeltas:", recentScrollDeltas);
-			if (recentScrollDeltas.length >= MIN_NUM_SCROLL_EVENTS) {
-				let totalDelta = recentScrollDeltas.reduce((t, d) => t + d, 0);
-
-				if (Math.abs(totalDelta) >= MIN_SCROLL_CUMULATIVE_DIST) {
-					recentScrollDeltas = [];
-					scrollSection(totalDelta < 0 ? -1 : 1);
-				}
+			let now = Date.now();
+			if (now - lastScroll > INERTIA_SCROLL_TIMEOUT) {
+				// enough time has elapsed between wheel events
+				// to resume letting wheel events through.
+				hasNavigatedThisScroll = false;
 			}
+			// console.log(">>>>> now - lastScroll:", now - lastScroll);
+			lastScroll = now;
+
+			if (hasNavigatedThisScroll) {
+
+				// ignore wheel events until current inertia/continuous scroll comes to a stop.
+				console.log(">>>>> hasNavigatedThisScroll; blocked");
+				recentScrollDeltas = [];
+
+			} else {
+
+				// process wheel events as normal
+				recentScrollDeltas.push(deltaY);
+				console.log(">>>>> recentScrollDeltas:", recentScrollDeltas);
+				if (recentScrollDeltas.length >= MIN_NUM_SCROLL_EVENTS) {
+					let totalDelta = recentScrollDeltas.reduce((t, d) => t + d, 0);
+
+					if (Math.abs(totalDelta) >= MIN_SCROLL_CUMULATIVE_DIST) {
+						recentScrollDeltas = [];
+						scrollSection(totalDelta < 0 ? -1 : 1, true);
+					}
+				}
+
+			}
+
 		}
 
 	}
@@ -641,6 +678,10 @@ export default function (...initArgs) {
 		}
 
 		if (val) {
+
+			// already open
+			if (modal.style.display === 'block') { return; }
+
 			modal.style.display = 'block';
 			modalOverlay.style.display = 'block';
 
@@ -666,7 +707,11 @@ export default function (...initArgs) {
 				};
 				modalOverlay.addEventListener('click', onOverlayClick);
 			}, 100);
+
 		} else {
+
+			// already closed
+			if (!modalOverlay.classList.contains('visible')) { return; }
 
 			// re-enable scrolling when modal closes
 			console.log(">>>>> isNavigating -> false (setModalVisibility close modal)");
@@ -680,6 +725,7 @@ export default function (...initArgs) {
 			modal.addEventListener('transitionend', onTransitionEnd);
 			modal.classList.remove('visible');
 			modalOverlay.classList.remove('visible');
+
 		}
 
 	}
