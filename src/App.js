@@ -253,7 +253,7 @@ export default function (...initArgs) {
 			});
 			section.setEmotion(currentEmotion, previousEmotion)
 			.then(() => {
-				console.log(">>>>> isNavigating -> false");
+				console.log(">>>>> isNavigating -> false (setEmotion promise resolution 1)");
 				isNavigating = false;
 			});
 
@@ -273,7 +273,7 @@ export default function (...initArgs) {
 				// and within current section
 				section.setEmotion(currentEmotion, previousEmotion)
 				.then(() => {
-					console.log(">>>>> isNavigating -> false");
+					console.log(">>>>> isNavigating -> false (setEmotion promise resolution 2)");
 					isNavigating = false;
 				});
 
@@ -348,7 +348,7 @@ export default function (...initArgs) {
 					if (previousBackgroundSections.length) {
 						for (let key in sections) {
 							if (~previousBackgroundSections.indexOf(sections[key]) &&
-								!~section.backgroundSections.indexOf(sections[key])) {
+								(!section.backgroundSections || !~section.backgroundSections.indexOf(sections[key]))) {
 								containers[key].style.display = 'none';
 							}
 						}
@@ -365,7 +365,7 @@ export default function (...initArgs) {
 
 					section.setEmotion(currentEmotion, previousEmotion)
 					.then(() => {
-						console.log(">>>>> isNavigating -> false");
+						console.log(">>>>> isNavigating -> false (setEmotion promise resolution 3)");
 						isNavigating = false;
 					});
 
@@ -436,6 +436,8 @@ export default function (...initArgs) {
 
 	function scrollSection (dir) {
 
+		console.log(">>>>> scrollSection(); isNavigating:", isNavigating);
+
 		if (isNavigating) { return; }
 		if (!currentSection) { return; }
 
@@ -467,6 +469,7 @@ export default function (...initArgs) {
 
 	function scrollEmotion (dir) {
 
+		console.log(">>>>> scrollEmotion(); isNavigating:", isNavigating);
 		if (isNavigating) { return; }
 
 		let emotionNames = _.values(dispatcher.EMOTIONS),
@@ -642,6 +645,7 @@ export default function (...initArgs) {
 			modalOverlay.style.display = 'block';
 
 			// prevent scrolling while modal is open
+			console.log(">>>>> isNavigating -> true (setModalVisibility open modal)");
 			isNavigating = true;
 
 			setTimeout(() => {
@@ -665,6 +669,7 @@ export default function (...initArgs) {
 		} else {
 
 			// re-enable scrolling when modal closes
+			console.log(">>>>> isNavigating -> false (setModalVisibility close modal)");
 			isNavigating = false;
 
 			let onTransitionEnd = (event) => {
@@ -711,8 +716,6 @@ export default function (...initArgs) {
 
 	function onNavigate (section, emotion) {
 
-		isNavigating = true;
-
 		if (!section) {
 			for (let key in sections) {
 				if (sections[key] === currentSection) {
@@ -742,6 +745,10 @@ export default function (...initArgs) {
 
 		let hash = document.location.hash.replace(/^#/, '');
 		hash = parseHash(hash);
+
+		// set flag after setting modal visibility,
+		// prior to setting emotion and section
+		isNavigating = true;
 
 		let previousEmotion = currentEmotion;
 

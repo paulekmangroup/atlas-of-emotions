@@ -12,7 +12,7 @@
 	pointer-events: none;
 
 	transition-property: top;
-	transition-duration: 1.5s;
+	transition-duration: #{$states-backgrounded-duration-in}s;
 	transition-timing-function: cubic-bezier(.81,.34,.63,.85);
 
 	&.backgrounded.triggers {

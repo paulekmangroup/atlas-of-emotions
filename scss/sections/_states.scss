@@ -15,7 +15,7 @@
 
 	transform: scale(1.0);
 	transition-property: transform, top, opacity;
-	transition-duration: 1.5s, 1.5s, 0.5s;
+	transition-duration: #{$states-backgrounded-duration-in}s, #{$states-backgrounded-duration-in}s, 0.5s;
 	transition-timing-function: cubic-bezier(0.4, 0.4, 0.35, 1), cubic-bezier(.81,.34,.63,.85), ease;
 
 	&.backgrounded {

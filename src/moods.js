@@ -3,6 +3,7 @@ import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
 import emotionsData from '../static/emotionsData.json';
+import sassVars from '../scss/variables.json';
 import states from './states.js';
 import actions from './actions.js';
 
@@ -32,32 +33,41 @@ export default {
 
 	setEmotion: function (emotion) {
 
-		if (!~_.values(dispatcher.EMOTIONS).indexOf(emotion)) {
-			emotion = 'anger';
-		}
-		let previousEmotion = this.currentEmotion;
-		this.currentEmotion = emotion;
+		return new Promise((resolve, reject) => {
 
-		this.overlayContainer.removeAttribute('style');
-		if (previousEmotion) {
-			this.overlayContainer.classList.remove(previousEmotion);
-		}
-		this.overlayContainer.classList.add(this.currentEmotion);
+			if (!~_.values(dispatcher.EMOTIONS).indexOf(emotion)) {
+				emotion = 'anger';
+			}
+			let previousEmotion = this.currentEmotion;
+			this.currentEmotion = emotion;
 
-		states.applyEventListenersToEmotion(emotion, {
-			mouseover: this.onElementOver,
-			mouseout: this.onElementOut,
-			click: this.onElementClick
+			this.overlayContainer.removeAttribute('style');
+			if (previousEmotion) {
+				this.overlayContainer.classList.remove(previousEmotion);
+			}
+			this.overlayContainer.classList.add(this.currentEmotion);
+
+			states.applyEventListenersToEmotion(emotion, {
+				mouseover: this.onElementOver,
+				mouseout: this.onElementOut,
+				click: this.onElementClick
+			});
+
+			actions.applyEventListenersToEmotion(emotion, {
+				mouseover: this.onElementOver,
+				mouseout: this.onElementOut,
+				click: this.onElementClick
+			});
+
+			// leave a bit of time for other transitions to happen
+			this.openCallout(500);
+
+			// resolve after backgrounded elements complete their transitions
+			setTimeout(() => {
+				resolve();
+			}, sassVars.states.backgrounded.duration.in);
+
 		});
-
-		actions.applyEventListenersToEmotion(emotion, {
-			mouseover: this.onElementOver,
-			mouseout: this.onElementOut,
-			click: this.onElementClick
-		});
-
-		// leave a bit of time for other transitions to happen
-		this.openCallout(500);
 
 	},
 

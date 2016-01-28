@@ -43,24 +43,6 @@ const dispatcher = {
 
 	},
 
-	/**
-	 * @param  {[String]} section Section navigated away from
-	 * @param  {[String]} emotion Emotion navigated away from
-	 */
-	navigateComplete: function (section, emotion) {
-
-		if (section && !this.validateSection(section)) {
-			throw new Error('Invalid section "' + section + '".');
-		}
-
-		if (emotion && !this.validateEmotion(emotion)) {
-			throw new Error('Invalid emotion "' + emotion + '".');
-		}
-
-		this.emit(this.EVENTS.NAVIGATE_COMPLETE, section, emotion);
-
-	},
-
 	changeCallout: function (emotion, title, body) {
 
 		this.emit(this.EVENTS.CHANGE_CALLOUT, emotion, title, body);

@@ -68,155 +68,169 @@ const continentsSection = {
 
 	setEmotion: function (emotion, previousEmotion) {
 
-		// if (emotion === currentEmotion) { return; }
+		return new Promise((resolve, reject) => {
 
-		if (currentEmotion) {
+			if (currentEmotion) {
 
-			// -->> TODO: keep in mind what happens if setEmotion() is called during a transition! <<--
-			
-			let currentContinent = continents.find(c => c.id === currentEmotion);
+				// -->> TODO: keep in mind what happens if setEmotion() is called during a transition! <<--
+				
+				let currentContinent = continents.find(c => c.id === currentEmotion);
 
-			if (emotion) {
+				if (emotion) {
+
+					// TODO:
+					// transition from one emotion to another
+					// implement as Promise chain? steps will overlap.
+
+					// transitions.scaleContinents(currentEmotion)
+					// 1a. fade out and shrink circles of current continent;
+					// 1b. pull circles together toward center along horizontal axis as they fade/shrink
+
+					// transitions.panToContinent(currentEmotion)
+					// 1c. while 1a-b happens, pan toward continent location from current continent's location, according to all continents view layout.
+
+					// transitions.focusZoomedInContinent(currentEmotion)
+					// 2a. fade in and grow all circles for zoomed continent view from center of circle
+					//		random colors or picked from mocks?
+
+					// transitions.spreadFocusedContinent(currentEmotion)
+					// 2b. spread circles along horizontal axis as they fade in + grow
+					// 2c. (later) allow circles to drift slightly along horizontal axis only. this motion can be reflected in the states view as well.
+
+					if (this.continentIsZoomed) {
+
+						// transition back from zoomed continent to all continents
+
+						// gather circles of zoomed-in continent
+						this.transitions.gatherContinent(previousEmotion);
+						
+						setTimeout(() => {
+
+							// scale all continents back up to full size
+							this.transitions.scaleContinents(continents.map(continent => continent.id), 1.0);
+
+							// pan to center
+							this.transitions.panToContinent(null, previousEmotion);
+
+							// display all-continents callout
+							dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+
+							resolve();
+
+						}, sassVars.continents.spread.delay.out * 1000);
+
+					} else {
+
+						// new continent selected with a continent previously selected
+						currentContinent.highlightLevel = Continent.HIGHLIGHT_LEVELS.UNSELECTED;
+
+						let continent = continents.find(c => c.id === emotion);
+						this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.SELECTED);
+
+						dispatcher.changeCallout(emotion, emotion, emotionsData.emotions[emotion].continent.desc);
+
+						resolve();
+
+					}
+
+				} else {
+
+					continents.forEach(c => c.highlightLevel = Continent.HIGHLIGHT_LEVELS.NONE);
+					dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+
+					resolve();
+
+				}
+
+			} else {
 
 				// TODO:
-				// transition from one emotion to another
+				// transition from all continents view into single continent view
 				// implement as Promise chain? steps will overlap.
 
-				// transitions.scaleContinents(currentEmotion)
-				// 1a. fade out and shrink circles of current continent;
-				// 1b. pull circles together toward center along horizontal axis as they fade/shrink
+				// transitions.scaleContinents(all other continents)
+				// 1. fade out and shrink all but focused continent
 
 				// transitions.panToContinent(currentEmotion)
-				// 1c. while 1a-b happens, pan toward continent location from current continent's location, according to all continents view layout.
+				// transitions.focusZoomedOutContinent(currentEmotion)
+				// 2a. zoom in on focused continent and pan to center
+				// 2b. while zooming, remove/add enough circles to match number of states
+				// 2c. while 2a-b happens, tween colors of circles to match mocks? or leave them randomized?
 
-				// transitions.focusZoomedInContinent(currentEmotion)
-				// 2a. fade in and grow all circles for zoomed continent view from center of circle
-				//		random colors or picked from mocks?
+				// transitions.spreadFocusedContinent()
+				// 2d. while 2a-c happens, execute (currentEmotion):2b-c above.
 
-				// transitions.spreadFocusedContinent(currentEmotion)
-				// 2b. spread circles along horizontal axis as they fade in + grow
-				// 2c. (later) allow circles to drift slightly along horizontal axis only. this motion can be reflected in the states view as well.
+				if (emotion) {
 
-				if (this.continentIsZoomed) {
+					if (this.continentIsZoomed) {
 
-					// transition back from zoomed continent to all continents
+						// TODO: never currently hit this block because continentIsZoomed is not set
+						// until the first continent zoom (transition into states) happens.
+						// intent is for this block to be triggered when navigating from outside continents
+						// into a focused continent, regardless of whether or not continents
+						// has yet been visited this session.
+						// 
+						// TODO: in the above scenario, we'll also have to enable this transition
+						// by pre-zooming/flattening the continent, in order to animate
+						// away from that state back to the SELECTED, zoomed-out state.
 
-					// gather circles of zoomed-in continent
-					this.transitions.gatherContinent(previousEmotion);
-					
-					setTimeout(() => {
+						// transition back from zoomed continent to all continents
 
-						// scale all continents back up to full size
-						this.transitions.scaleContinents(continents.map(continent => continent.id), 1.0);
+						// gather circles of zoomed-in continent
+						this.transitions.gatherContinent(previousEmotion);
+						
+						setTimeout(() => {
 
-						// pan to center
-						this.transitions.panToContinent(null, previousEmotion);
+							// scale all continents back up to full size
+							this.transitions.scaleContinents(continents.map(continent => continent.id), 1.0);
 
-						// display all-continents callout
-						dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+							// pan to center
+							this.transitions.panToContinent(null, previousEmotion);
 
-					}, sassVars.continents.spread.delay.out * 1000);
+							// display all-continents callout
+							dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
 
-				} else {
+							resolve();
 
-					// new continent selected with a continent previously selected
-					currentContinent.highlightLevel = Continent.HIGHLIGHT_LEVELS.UNSELECTED;
+						}, sassVars.continents.spread.delay.out * 1000);
 
-					let continent = continents.find(c => c.id === emotion);
-					this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.SELECTED);
+					} else {
 
-					dispatcher.changeCallout(emotion, emotion, emotionsData.emotions[emotion].continent.desc);
+						// new continent selected with nothing previously selected
+						let continent = continents.find(c => c.id === emotion);
+						this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.SELECTED);
 
-				}
+						dispatcher.changeCallout(emotion, emotion, emotionsData.emotions[emotion].continent.desc);
 
-			} else {
+						resolve();
 
-				continents.forEach(c => c.highlightLevel = Continent.HIGHLIGHT_LEVELS.NONE);
-				dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
-
-			}
-
-		} else {
-
-			// TODO:
-			// transition from all continents view into single continent view
-			// implement as Promise chain? steps will overlap.
-
-			// transitions.scaleContinents(all other continents)
-			// 1. fade out and shrink all but focused continent
-
-			// transitions.panToContinent(currentEmotion)
-			// transitions.focusZoomedOutContinent(currentEmotion)
-			// 2a. zoom in on focused continent and pan to center
-			// 2b. while zooming, remove/add enough circles to match number of states
-			// 2c. while 2a-b happens, tween colors of circles to match mocks? or leave them randomized?
-
-			// transitions.spreadFocusedContinent()
-			// 2d. while 2a-c happens, execute (currentEmotion):2b-c above.
-
-			if (emotion) {
-
-				if (this.continentIsZoomed) {
-
-					// TODO: never currently hit this block because continentIsZoomed is not set
-					// until the first continent zoom (transition into states) happens.
-					// intent is for this block to be triggered when navigating from outside continents
-					// into a focused continent, regardless of whether or not continents
-					// has yet been visited this session.
-					// 
-					// TODO: in the above scenario, we'll also have to enable this transition
-					// by pre-zooming/flattening the continent, in order to animate
-					// away from that state back to the SELECTED, zoomed-out state.
-
-					// transition back from zoomed continent to all continents
-
-					// gather circles of zoomed-in continent
-					this.transitions.gatherContinent(previousEmotion);
-					
-					setTimeout(() => {
-
-						// scale all continents back up to full size
-						this.transitions.scaleContinents(continents.map(continent => continent.id), 1.0);
-
-						// pan to center
-						this.transitions.panToContinent(null, previousEmotion);
-
-						// display all-continents callout
-						dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
-
-					}, sassVars.continents.spread.delay.out * 1000);
+					}
 
 				} else {
 
-					// new continent selected with nothing previously selected
-					let continent = continents.find(c => c.id === emotion);
-					this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.SELECTED);
+					// this was used when navigating from states view directly to all continents view,
+					// with no intermediate zoomed-in continent view.
+					/*
+					// display all continents
+					let delays = {};
+					continents.forEach(continent => {
+						delays[continent.id] = continent.id === previousEmotion ? 0 : 800;
+					});
+					this.transitions.scaleContinents(continents.map(continent => continent.id), 1.0, delays, 500);
 
-					dispatcher.changeCallout(emotion, emotion, emotionsData.emotions[emotion].continent.desc);
+					dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+					*/
+				
+					resolve();
 
 				}
-
-			} else {
-
-				// this was used when navigating from states view directly to all continents view,
-				// with no intermediate zoomed-in continent view.
-				/*
-				// display all continents
-				let delays = {};
-				continents.forEach(continent => {
-					delays[continent.id] = continent.id === previousEmotion ? 0 : 800;
-				});
-				this.transitions.scaleContinents(continents.map(continent => continent.id), 1.0, delays, 500);
-
-				dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
-				*/
-
+			
 			}
-		
-		}
 
-		currentEmotion = emotion;
-		this.continentIsZoomed = false;
+			currentEmotion = emotion;
+			this.continentIsZoomed = false;
+
+		});
 
 	},
 

@@ -230,93 +230,122 @@ export default {
 
 	setEmotion: function (emotion) {
 
-		if (!~_.values(dispatcher.EMOTIONS).indexOf(emotion)) {
-			emotion = 'anger';
-		}
-		let previousEmotion = this.currentEmotion;
-		this.currentEmotion = emotion;
+		return new Promise((resolve, reject) => {
 
-		let emotionState = this.emotionStates[emotion];
-		if (!emotionState.data) {
-			this.renderEmotion(emotion);
-		}
+			if (!~_.values(dispatcher.EMOTIONS).indexOf(emotion)) {
+				emotion = 'anger';
+			}
+			let previousEmotion = this.currentEmotion;
+			this.currentEmotion = emotion;
 
-		// transition graphs and labels
-		let dx = 0;
-		if (previousEmotion) {
-			let previousGraph = this.graphContainers[previousEmotion],
-				previousLabels = this.labelContainers[previousEmotion];
-			previousGraph.classed('active', false);
-			previousLabels.classed('active', false);
-			previousGraph.on('transitionend', event => {
-				previousGraph.on('transitionend', null);
-				previousGraph.style('transform', null);
-				previousLabels.style('transform', null);
-				previousGraph.classed('transitioning', false);
-				previousLabels.classed('transitioning', false);
-			});
+			let emotionState = this.emotionStates[emotion];
+			if (!emotionState.data) {
+				this.renderEmotion(emotion);
+			}
 
-			let containerWidth = document.querySelector('#states .graph-container').offsetWidth;
+			let isFirstView = emotionState.scale !== 1.0;
 
-			// position according to distance between emotion columns
-			// dx = (emotionState.index - this.emotionStates[previousEmotion].index) * 1.25*containerWidth;
-			
-			// just place left or right one viewport, instead of adhering to column positions,
-			// to avoid animations that are unnecessarily fast'n'flashy.
-			dx = 1.25 * containerWidth;
-			if (emotionState.index < this.emotionStates[previousEmotion].index) {
-				dx *= -1;
+			// transition graphs and labels
+			let dx = 0;
+			if (previousEmotion) {
+				let previousGraph = this.graphContainers[previousEmotion],
+					previousLabels = this.labelContainers[previousEmotion];
+				previousGraph.classed('active', false);
+				previousLabels.classed('active', false);
+				previousGraph.on('transitionend', event => {
+					previousGraph.on('transitionend', null);
+					previousGraph.style('transform', null);
+					previousLabels.style('transform', null);
+					previousGraph.classed('transitioning', false);
+					previousLabels.classed('transitioning', false);
+				});
+
+				let containerWidth = document.querySelector('#states .graph-container').offsetWidth;
+
+				// position according to distance between emotion columns
+				// dx = (emotionState.index - this.emotionStates[previousEmotion].index) * 1.25*containerWidth;
+				
+				// just place left or right one viewport, instead of adhering to column positions,
+				// to avoid animations that are unnecessarily fast'n'flashy.
+				dx = 1.25 * containerWidth;
+				if (emotionState.index < this.emotionStates[previousEmotion].index) {
+					dx *= -1;
+				}
+
+				// delay to allow a little time for opacity to come up before translating
+				setTimeout(() => {
+					previousGraph.style('transform', 'translateX(' + -dx + 'px)');
+					previousLabels.style('transform', 'translateX(' + -dx + 'px)');
+				}, sassVars.emotions.panX.delay * 1000);
+			}
+
+			let currentGraph = this.graphContainers[emotion],
+				currentLabels = this.labelContainers[emotion];
+			if (currentGraph.classed('transitioning')) {
+				// if new emotion is still transitioning, remove transitionend handler
+				currentGraph.on('transitionend', null);
+			} else {
+				// else, move into position immediately to prepare for transition
+				currentGraph.classed('transitioning', false);
+				currentGraph.style('transform', 'translateX(' + dx + 'px)');
+				currentLabels.classed('transitioning', false);
+				currentLabels.style('transform', 'translateX(' + dx + 'px)');
 			}
 
 			// delay to allow a little time for opacity to come up before translating
 			setTimeout(() => {
-				previousGraph.style('transform', 'translateX(' + -dx + 'px)');
-				previousLabels.style('transform', 'translateX(' + -dx + 'px)');
+				currentGraph.classed('transitioning active', true);
+				currentGraph.style('transform', 'translateX(0)');
+				currentLabels.classed('transitioning active', true);
+				currentLabels.style('transform', 'translateX(0)');
 			}, sassVars.emotions.panX.delay * 1000);
-		}
-
-		let currentGraph = this.graphContainers[emotion],
-			currentLabels = this.labelContainers[emotion];
-		if (currentGraph.classed('transitioning')) {
-			// if new emotion is still transitioning, remove transitionend handler
-			currentGraph.on('transitionend', null);
-		} else {
-			// else, move into position immediately to prepare for transition
-			currentGraph.classed('transitioning', false);
-			currentGraph.style('transform', 'translateX(' + dx + 'px)');
-			currentLabels.classed('transitioning', false);
-			currentLabels.style('transform', 'translateX(' + dx + 'px)');
-		}
-
-		// delay to allow a little time for opacity to come up before translating
-		setTimeout(() => {
-			currentGraph.classed('transitioning active', true);
-			currentGraph.style('transform', 'translateX(0)');
-			currentLabels.classed('transitioning active', true);
-			currentLabels.style('transform', 'translateX(0)');
-		}, sassVars.emotions.panX.delay * 1000);
-
-		setTimeout(() => {
-			// animate in emotion graph if first time viewing
-			if (emotionState.scale !== 1.0) {
-				this.setEmotionScale(emotion, 1.0);
-			}
-		}, sassVars.emotions.scale.in.delay * 1000);
-
-		if (!this.isBackgrounded) {
-
-			this.renderLabels(emotionState.ranges[1]);
 
 			setTimeout(() => {
-				this.graphContainers[emotion].selectAll('.axis')
-					.classed('visible', true);
-			}, 1);
+				// animate in emotion graph if first time viewing
+				if (isFirstView) {
+					this.setEmotionScale(emotion, 1.0);
+				}
+			}, sassVars.emotions.scale.in.delay * 1000);
 
-			this.resetCallout();
+			if (!this.isBackgrounded) {
 
-		}
+				this.renderLabels(emotionState.ranges[1]);
 
-		this.setActive(!this.isBackgrounded);
+				setTimeout(() => {
+					this.graphContainers[emotion].selectAll('.axis')
+						.classed('visible', true);
+				}, 1);
+
+				this.resetCallout();
+
+			}
+
+			this.setActive(!this.isBackgrounded);
+
+			// resolve on completion of primary transitions
+			let resolveDelay;
+			if (previousEmotion) {
+				// resolve after horizontal transition completes
+				resolveDelay = (sassVars.emotions.panX.delay + sassVars.emotions.panX.duration) * 1000;
+			} else {
+				if (isFirstView) {
+
+					let d = this.emotionStates[this.currentEmotion].data;
+					let delay = this.transitions[this.currentEmotion].delay;
+
+					// resolve after emotion graph animates in
+					resolveDelay = delay(null, d.length - 1) + this.transitions[this.currentEmotion].duration;
+				} else {
+					// resolve after backgrounded elements complete their transitions
+					resolveDelay = sassVars.states.backgrounded.duration.in;
+				}
+			}
+			console.log(">>>>> resolveDelay:", resolveDelay);
+			setTimeout(() => {
+				resolve();
+			}, resolveDelay);
+
+		});
 
 	},
 
