@@ -450,12 +450,11 @@
       "triggers": [
         "Interference with locomotion",
         "Interference with action",
-        "Self-righteous or unjustified behavior",
-        "Frustration with anything",
+        "Rejection by a loved one",
         "Offensive beliefs",
-        "Feeling insulted or denigrated",
-        "Disappointment in another's actions",
-        "Rejection by a loved one"
+        "Being put down by an authority figure",
+        "Inefficiency or bureaucracy",
+        "Being wrongfully accused"
       ],
       "moods": [
         {
@@ -798,15 +797,13 @@
         }
       ],
       "triggers": [
-        "threat of losing job",
-        "threat of losing health",
-        "threat of losing friendship",
-        "threat of losing status",
-        "public speaking",
-        "threat to safety",
-        "sudden loss of gravity",
-        "a moving object about to impact us if we don't duck",
-        "snakes"
+        "Threat of losing status",
+        "Threat to safety",
+        "Sudden loss of gravity",
+        "Snake-like shapes",
+        "Threat of losing job",
+        "Thunder",
+        "Public speaking"
       ],
       "moods": [
         {
@@ -1012,15 +1009,11 @@
         }
       ],
       "triggers": [
-        "religious groups usually not ones you grew up as part of",
-        "specific foods",
-        "differences in appearance",
-        "ethnic groups other than one's own",
-        "actions not typical of your own cultural group",
-        "something rotting",
-        "anything coming out of the body",
-        "blood",
-        "mucus"
+        "Rotting or decay",
+        "Anything coming out of the body",
+        "Unfamiliar religious customs",
+        "Eating insects or raw meat",
+        "Fan's of an opposing sport's team"
       ],
       "moods": [
         {
@@ -1429,11 +1422,11 @@
         }
       ],
       "triggers": [
-        "loss of a treasured object",
-        "loss of praise",
-        "loss of status",
-        "loss of health of a friend, lover or family member",
-        "rejection from anyone with whom one has a strong attachment"
+        "Losing a loved one",
+        "Being rejected by someone important",
+        "Perceived loss of status",
+        "Not being invited to a party",
+        "Losing a treasured belonging"
       ],
       "moods": [
         {
@@ -1855,7 +1848,7 @@
         },
         {
           "name": "Exclaim",
-          "desc": "To vocally expression enjoyment with others."
+          "desc": "To vocally express enjoyment to others."
         },
         {
           "name": "Engage/Connect",
@@ -1863,7 +1856,7 @@
         },
         {
           "name": "Savor",
-          "desc": "To relish in the experience good feelings about the felt and psychological experiences."
+          "desc": "To relish in the experience of good feelings about the felt and psychological experiences."
         },
         {
           "name": "Indulge",
@@ -1871,14 +1864,13 @@
         }
       ],
       "triggers": [
-        "sensory pleasures",
-        "helping others",
-        "places associated with enjoyable memories",
-        "favored activities",
-        "specific learned sensory pleasures such as a favorite food or song",
-        "favorite people",
-        "some social interactions",
-        "comedy"
+        "Sensory experience of nature",
+        "Helping others",
+        "Social interaction",
+        "Playing badminton",
+        "The taste of chocolate cake",
+        "Spending time with family",
+        "Places associated with enjoyable memories"
       ],
       "moods": [
         {
@@ -1890,8 +1882,8 @@
   },
   "metadata": {
     "intro": {
-      "header": "Welcome to The Atlas of Emotion ",
-      "body": "The Atlas provides a novel way of understanding how we experience emotions.  Different features of each emotion are illustrated in a series of maps.<br><br>The emotions shown in the Atlas are the five that have been substantiated in scientific research."
+      "header": "Welcome to The Ekman Atlas of Emotion ",
+      "body": "This collection of maps was created to help you better understand your emotions, where they come from and the effect they have on your life.<br><br>Navigate the atlas by scrolling between sections, and by clicking elements to dig deeper.<br><br>This is an opportunity for you to explore the vast world of emotions. The atlas begins with what scholars agree on and gradually introduces our working hypotheses of more complex subject matter."
     },
     "continents": {
       "header": "The Emotion Continents",
@@ -1921,7 +1913,7 @@
     },
     "triggers": {
       "header": "The Triggers of an Emotion",
-      "body": "What triggers an emotion may be an external event, a remembered event, or something that is imagined. ",
+      "body": "The nature of a trigger coupled with past personal experiences determines whether or not we feel an emotional response.",
       "steps": [
         {
           "header": "Event",
@@ -1929,17 +1921,25 @@
         },
         {
           "header": "Assessment",
-          "body": "When a match occurs the event is converted into an emotional trigger. Some of these triggers are universal, and some are learned through experience."
+          "body": "If an event matches to something we have experienced in the past, it will trigger an emotional response. Universal triggers affect everyone, but learned triggers vary from person to person."
         },
         {
           "header": "Response",
-          "body": "Triggers generate impulses to action. Recognizing the impulse produced by a trigger before action is taken is very difficult but attainable with prolonged and consistent contemplative practice."
+          "body": "Once an emotional response has been triggered it is very difficult to modify our instinctive actions. However, recognizing the impulse is the first step toward awareness."
+        },
+        {
+          "header": "Universal Triggers",
+          "body": "Universal triggers are innate, common to everyone. They affect us more intensely than learned triggers."
+        },
+        {
+          "header": "Learned Triggers",
+          "body": "Learned triggers are either cultural, stemming from widely shared experiences, or personal, arising from more individual experiences."
         }
       ]
     },
     "moods": {
-      "header": "The Mood Cousin of an Emotion",
-      "body": "When someone experiences a mood related to an emotion, they are likely to feel heightened versions of the related emotion."
+      "header": "The Mood of an Emotion",
+      "body": "Moods are longer-lasting cousins of an emotion that cause the related emotion to be felt more frequently and intensely."
     }
   }
 }
