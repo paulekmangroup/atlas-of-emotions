@@ -4,7 +4,7 @@ html {
 	height: 100%;
 	width: 100%;
 	overflow: hidden;
-	
+
 	background-color: $background-color;
 	font-family: 'Raleway', sans-serif;
 	color: $text-color;
@@ -171,6 +171,7 @@ a:active {
 	top: $header-height;
 	right: 0;
 	overflow: hidden;
+	pointer-events: none;
 
 	.segment-container {
 		position: absolute;
@@ -183,6 +184,7 @@ a:active {
 		justify-content: space-between;
 
 		cursor: pointer;
+		pointer-events: auto;
 
 		transition-property: right;
 		transition-duration: #{$ui-scrollbar-toggle-duration-close}s;

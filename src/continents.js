@@ -239,7 +239,7 @@ const continentsSection = {
 		continents.forEach(function (continent) {
 
 			let label = document.createElement('div');
-			label.innerHTML = '<a href="#' + continent.id + '"><h3>' + continent.name.toUpperCase() + '</h3></a>';
+			label.innerHTML = '<a href="#continents:' + continent.id + '"><h3>' + continent.name.toUpperCase() + '</h3></a>';
 			label.style.left = Math.round(centerX + continent.x + continent.label.x) + 'px';
 			label.style.top = Math.round(centerY + continent.y + continent.label.y) + 'px';
 			labelContainer.appendChild(label);
