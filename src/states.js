@@ -28,6 +28,7 @@ export default {
 	areaGenerators: null,
 	transitions: null,
 
+	statesData: null,
 	emotionStates: null,
 	currentEmotion: null,
 	isBackgrounded: false,
@@ -239,11 +240,10 @@ export default {
 			this.currentEmotion = emotion;
 
 			let emotionState = this.emotionStates[emotion];
-			if (!emotionState.data) {
+			let isClosed = !emotionState.data;
+			if (isClosed) {
 				this.renderEmotion(emotion);
 			}
-
-			let isFirstView = emotionState.scale !== 1.0;
 
 			// transition graphs and labels
 			let dx = 0;
@@ -301,8 +301,8 @@ export default {
 			}, sassVars.emotions.panX.delay * 1000);
 
 			setTimeout(() => {
-				// animate in emotion graph if first time viewing
-				if (isFirstView) {
+				// animate in emotion graph if first time viewing or was previously closed
+				if (isClosed) {
 					this.setEmotionScale(emotion, 1.0);
 				}
 			}, sassVars.emotions.scale.in.delay * 1000);
@@ -328,7 +328,7 @@ export default {
 				// resolve after horizontal transition completes
 				resolveDelay = (sassVars.emotions.panX.delay + sassVars.emotions.panX.duration) * 1000;
 			} else {
-				if (isFirstView) {
+				if (isClosed) {
 
 					let d = this.emotionStates[this.currentEmotion].data;
 					let delay = this.transitions[this.currentEmotion].delay;
@@ -351,7 +351,7 @@ export default {
 
 	renderEmotion: function (emotion) {
 
-		let statesData = this.parseStates(),
+		let statesData = this.parseStates(emotion),
 			emotionState = this.emotionStates[emotion];
 		emotionState.data = statesData;
 
@@ -434,7 +434,8 @@ export default {
 			}
 
 			// recede graph down into baseline
-			let transformedRanges = this.transformRanges(this.emotionStates[this.currentEmotion].data, this.currentEmotion, 0.0),
+			let emotionState = this.emotionStates[this.currentEmotion],
+				transformedRanges = this.transformRanges(emotionState.data, this.currentEmotion, 0.0),
 				graph = this.graphContainers[this.currentEmotion],
 				labelContainer = this.labelContainers[this.currentEmotion],
 				areaSelection = graph.selectAll('path.area');
@@ -453,6 +454,10 @@ export default {
 
 							// ...remove labels
 							labelContainer.selectAll('div').remove();
+
+							// ...remove the transformed data, to ensure a clean starting point next time this emotion's state graph is viewed
+							emotionState.data = null;
+							areaSelection.data([]);
 
 							// ...and resolve promise to continue transition when complete
 							resolve();
@@ -558,10 +563,14 @@ export default {
 
 	},
 
-	parseStates: function () {
+	parseStates: function (emotion) {
+
+		if (this.statesData && this.statesData[emotion]) {
+			return this.statesData[emotion];
+		}
 
 		// copy states of current emotion
-		let states = emotionsData.emotions[this.currentEmotion].states.map(state => {
+		let states = emotionsData.emotions[emotion].states.map(state => {
 			return Object.assign({}, state, {
 				name: state.name.toLowerCase()
 			});
@@ -591,7 +600,7 @@ export default {
 		});
 
 		// manual sort overrides
-		if (this.currentEmotion === dispatcher.EMOTIONS.FEAR) {
+		if (emotion === dispatcher.EMOTIONS.FEAR) {
 			// move panic one index forward, after horror
 			let panicIndex = states.findIndex(state => state.name === 'panic');
 			if (panicIndex > -1) {
@@ -599,6 +608,8 @@ export default {
 			}
 		}
 
+		this.statesData = this.statesData || {};
+		this.statesData[emotion] = states;
 		return states;
 
 	},
