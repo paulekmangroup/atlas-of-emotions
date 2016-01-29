@@ -20,7 +20,7 @@ export default function (...initArgs) {
 		MIN_NUM_SCROLL_EVENTS = 3,
 
 		// and the total distance scrolled must exceed this value
-		MIN_SCROLL_CUMULATIVE_DIST = 15,
+		MIN_SCROLL_CUMULATIVE_DIST = 20,
 
 		// if no `wheel` events received in this time,
 		// consider an inertia scroll (swipe) complete.
@@ -539,6 +539,9 @@ export default function (...initArgs) {
 		// TODO NEXT THURS: don't just block wheel events when they're continuous;
 		// block them when they're continuously <= the last value.
 		// need to be able to support sequential, yet discrete, swipes.
+		// 
+		// also, can't raise MIN_NUM_SCROLL_EVENTS too high because that doesn't work well with scroll wheel mouse.
+		// might want to instead focus on MIN_SCROLL_CUMULATIVE_DIST
 		//
 		
 		if (deltaY) {
