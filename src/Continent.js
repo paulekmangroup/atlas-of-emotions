@@ -419,10 +419,10 @@ export default class Continent {
 
 	}
 
-	gatherCircles () {
+	gatherCircles (immediate) {
 
-		const growTime = sassVars.continents.spread.duration.out * 1000,
-			shrinkTime = 0.5 * growTime;
+		const growTime = immediate ? 0 : sassVars.continents.spread.duration.out * 1000,
+			shrinkTime = immediate ? 0 : 0.5 * growTime;
 
 		let calledOnEnd = false,
 			circles = this.circleWrapper.selectAll('circle')

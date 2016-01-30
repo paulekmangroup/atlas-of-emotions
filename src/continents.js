@@ -97,20 +97,35 @@ const continentsSection = {
 					// 2b. spread circles along horizontal axis as they fade in + grow
 					// 2c. (later) allow circles to drift slightly along horizontal axis only. this motion can be reflected in the states view as well.
 
-					if (this.continentIsZoomed) {
+					if (this.zoomedInContinent) {
 
 						// transition back from zoomed continent to all continents
+						
+						if (this.zoomedInContinent !== previousEmotion) {
+							// if zoomed into a different continent than we're returning to
+							// (i.e. left continents, changed emotions, returned to continents),
+							// immediately gather the previous and spread the current,
+							// then gather the current with an animation.
+							this.transitions.gatherContinent(this.zoomedInContinent, true);
+
+							//
+							// TODO: have to complete this block by
+							// immediately to panning to location of current emotion
+							// and spreading circles of that continent.
+							//
+							
+						}
 
 						// gather circles of zoomed-in continent
-						this.transitions.gatherContinent(previousEmotion);
-						
+						this.transitions.gatherContinent(currentEmotion);
+
 						setTimeout(() => {
 
 							// scale all continents back up to full size
 							this.transitions.scaleContinents(continents.map(continent => continent.id), 1.0);
 
 							// pan to center
-							this.transitions.panToContinent(null, previousEmotion);
+							this.transitions.panToContinent(null, currentEmotion);
 
 							// display all-continents callout
 							dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
@@ -162,9 +177,9 @@ const continentsSection = {
 
 				if (emotion) {
 
-					if (this.continentIsZoomed) {
+					if (this.zoomedInContinent) {
 
-						// TODO: never currently hit this block because continentIsZoomed is not set
+						// TODO: never currently hit this block because zoomedInContinent is not set
 						// until the first continent zoom (transition into states) happens.
 						// intent is for this block to be triggered when navigating from outside continents
 						// into a focused continent, regardless of whether or not continents
@@ -228,7 +243,7 @@ const continentsSection = {
 			}
 
 			currentEmotion = emotion;
-			this.continentIsZoomed = false;
+			this.zoomedInContinent = null;
 
 		});
 
@@ -472,10 +487,10 @@ const continentsSection = {
 
 		},
 
-		gatherContinent: function (emotion) {
+		gatherContinent: function (emotion, immediate) {
 
 			let targetContinent = continents.find(continent => continent.id === emotion);
-			targetContinent.gatherCircles();
+			targetContinent.gatherCircles(immediate);
 
 		},
 
@@ -627,7 +642,7 @@ const continentsSection = {
 
 			setTimeout(() => {
 				// navigate to states automatically once continent zoom transition completes
-				this.continentIsZoomed = true;
+				this.zoomedInContinent = continent.id;
 				dispatcher.navigate(dispatcher.SECTIONS.STATES, currentEmotion);
 			}, (sassVars.continents.spread.delay.in + sassVars.continents.spread.duration.in) * 1000);
 
