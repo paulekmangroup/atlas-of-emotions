@@ -391,7 +391,7 @@ const continentsSection = {
 		focusZoomedOutContinent: function (emotion) {
 
 			let targetContinent = continents.find(continent => continent.id === emotion),
-				targetScale = (0.45 * continentContainer.node().offsetHeight) / targetContinent.size;
+				targetScale = (0.45 * continentContainer.node().getBoundingClientRect().height) / targetContinent.size;
 
 			targetContinent.addTween({
 				'scaleX': targetScale,

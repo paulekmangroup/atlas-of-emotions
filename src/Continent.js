@@ -356,8 +356,9 @@ export default class Continent {
 				left: 20
 			},
 			statesGraphWidth = 0.7,		// from _variables.scss
-			innerWidth = statesGraphWidth * (container.offsetWidth - margin.left - margin.right) / containerScale * SPREAD_SCALE,
-			innerHeight = (container.offsetHeight - margin.top - margin.bottom) / containerScale * SPREAD_SCALE,
+			containerBounds = container.getBoundingClientRect(),
+			innerWidth = statesGraphWidth * (containerBounds.width - margin.left - margin.right) / containerScale * SPREAD_SCALE,
+			innerHeight = (containerBounds.height - margin.top - margin.bottom) / containerScale * SPREAD_SCALE,
 			xScale = d3.scale.linear()
 				.domain([0, 10])
 				.range([-0.5 * innerWidth, 0.5 * innerWidth]),
