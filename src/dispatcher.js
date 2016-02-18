@@ -21,10 +21,10 @@ const dispatcher = {
 
 	EMOTIONS: {
 		ANGER: 'anger',
-		DISGUST: 'disgust',
-		ENJOYMENT: 'enjoyment',
 		FEAR: 'fear',
-		SADNESS: 'sadness'
+		DISGUST: 'disgust',
+		SADNESS: 'sadness',
+		ENJOYMENT: 'enjoyment'
 	},
 
 	/**
