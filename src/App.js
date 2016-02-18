@@ -130,6 +130,11 @@ export default function (...initArgs) {
 		segmentContainer.addEventListener('mouseout', onScrollbarOut);
 		segmentContainer.addEventListener('click', onScrollbarClick);
 
+		let moreInfo = document.createElement('div');
+		moreInfo.classList.add('more-info');
+		moreInfo.innerHTML = 'MORE INFORMATION';
+		scrollbar.appendChild(moreInfo);
+
 		// throttle wheel events, and
 		// prune cached scroll events every frame
 		recentScrollDeltas = [];
@@ -259,7 +264,7 @@ export default function (...initArgs) {
 			});
 			section.setEmotion(currentEmotion, previousEmotion)
 			.then(() => {
-				console.log(">>>>> isNavigating -> false (setEmotion promise resolution 1)");
+				// console.log(">>>>> isNavigating -> false (setEmotion promise resolution 1)");
 				isNavigating = false;
 			});
 
@@ -279,7 +284,7 @@ export default function (...initArgs) {
 				// and within current section
 				section.setEmotion(currentEmotion, previousEmotion)
 				.then(() => {
-					console.log(">>>>> isNavigating -> false (setEmotion promise resolution 2)");
+					// console.log(">>>>> isNavigating -> false (setEmotion promise resolution 2)");
 					isNavigating = false;
 				});
 
@@ -371,7 +376,7 @@ export default function (...initArgs) {
 
 					section.setEmotion(currentEmotion, previousEmotion)
 					.then(() => {
-						console.log(">>>>> isNavigating -> false (setEmotion promise resolution 3)");
+						// console.log(">>>>> isNavigating -> false (setEmotion promise resolution 3)");
 						isNavigating = false;
 					});
 
@@ -442,7 +447,7 @@ export default function (...initArgs) {
 
 	function scrollSection (dir, fromScroll) {
 
-		console.log(">>>>> scrollSection(); isNavigating:", isNavigating);
+		// console.log(">>>>> scrollSection(); isNavigating:", isNavigating);
 
 		if (isNavigating) { return; }
 		if (!currentSection) { return; }
@@ -457,7 +462,7 @@ export default function (...initArgs) {
 				return true;
 			}
 		});
-		console.log(">>>>> scroll from currentSectionIndex:", currentSectionIndex);
+		// console.log(">>>>> scroll from currentSectionIndex:", currentSectionIndex);
 
 		if (dir < 0) {
 			targetSectionIndex = Math.max(0, currentSectionIndex - 1);
@@ -465,7 +470,7 @@ export default function (...initArgs) {
 			targetSectionIndex = Math.min(currentSectionIndex + 1, sectionNames.length - 1);
 		}
 
-		console.log(">>>>> scroll to targetSectionIndex:", targetSectionIndex);
+		// console.log(">>>>> scroll to targetSectionIndex:", targetSectionIndex);
 
 		if (currentSectionIndex !== targetSectionIndex) {
 			dispatcher.navigate(sectionNames[targetSectionIndex]);
@@ -479,7 +484,7 @@ export default function (...initArgs) {
 
 	function scrollEmotion (dir) {
 
-		console.log(">>>>> scrollEmotion(); isNavigating:", isNavigating);
+		// console.log(">>>>> scrollEmotion(); isNavigating:", isNavigating);
 		if (isNavigating) { return; }
 
 		let emotionNames = _.values(dispatcher.EMOTIONS),
@@ -490,7 +495,7 @@ export default function (...initArgs) {
 			// default to Anger
 			currentEmotionIndex = 0;
 		}
-		console.log(">>>>> scroll from currentEmotionIndex:", currentEmotionIndex);
+		// console.log(">>>>> scroll from currentEmotionIndex:", currentEmotionIndex);
 
 		if (dir < 0) {
 			targetEmotionIndex = Math.max(0, currentEmotionIndex - 1);
@@ -498,7 +503,7 @@ export default function (...initArgs) {
 			targetEmotionIndex = Math.min(currentEmotionIndex + 1, emotionNames.length - 1);
 		}
 
-		console.log(">>>>> scroll to targetEmotionIndex:", targetEmotionIndex);
+		// console.log(">>>>> scroll to targetEmotionIndex:", targetEmotionIndex);
 
 		if (currentEmotionIndex !== targetEmotionIndex) {
 			dispatcher.navigate(null, emotionNames[targetEmotionIndex]);
@@ -558,14 +563,14 @@ export default function (...initArgs) {
 			if (hasNavigatedThisScroll) {
 
 				// ignore wheel events until current inertia/continuous scroll comes to a stop.
-				console.log(">>>>> hasNavigatedThisScroll; blocked");
+				// console.log(">>>>> hasNavigatedThisScroll; blocked");
 				recentScrollDeltas = [];
 
 			} else {
 
 				// process wheel events as normal
 				recentScrollDeltas.push(deltaY);
-				console.log(">>>>> recentScrollDeltas:", recentScrollDeltas);
+				// console.log(">>>>> recentScrollDeltas:", recentScrollDeltas);
 				if (recentScrollDeltas.length >= MIN_NUM_SCROLL_EVENTS) {
 					let totalDelta = recentScrollDeltas.reduce((t, d) => t + d, 0);
 
@@ -689,7 +694,6 @@ export default function (...initArgs) {
 			modalOverlay.style.display = 'block';
 
 			// prevent scrolling while modal is open
-			console.log(">>>>> isNavigating -> true (setModalVisibility open modal)");
 			isNavigating = true;
 
 			setTimeout(() => {
@@ -717,7 +721,6 @@ export default function (...initArgs) {
 			if (!modalOverlay.classList.contains('visible')) { return; }
 
 			// re-enable scrolling when modal closes
-			console.log(">>>>> isNavigating -> false (setModalVisibility close modal)");
 			isNavigating = false;
 
 			let onTransitionEnd = (event) => {

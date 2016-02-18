@@ -173,10 +173,17 @@ a:active {
 	overflow: hidden;
 	pointer-events: none;
 
+	div {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
 	.segment-container {
 		position: absolute;
 		width: $emotions-dropdown-width;
-		height: 100%;
+		height: calc(100% - #{$more-info-height});
+		top: 0;
 		right: 0.75em - $emotions-dropdown-width;
 
 		display: flex;
@@ -205,9 +212,7 @@ a:active {
 			transition-timing-function: ease-out;
 
 			box-sizing: border-box;
-			&:not(:last-child) {
-				margin-bottom: 1px;
-			}
+			margin-bottom: 1px;
 
 			&.highlighted {
 				color: $text-overlay-color;
@@ -216,9 +221,6 @@ a:active {
 			}
 
 			h3 {
-				line-height: 1em;
-				margin-top: calc(50% - 1em);
-				margin-bottom: 0;
 				pointer-events: none;
 			}
 		}
@@ -227,6 +229,17 @@ a:active {
 	&.open .segment-container {
 		right: 0;
 		transition-duration: #{$ui-scrollbar-toggle-duration-open}s;
+	}
+
+	.more-info {
+		position: absolute;
+		width: $emotions-dropdown-width;
+		height: $more-info-height;
+		bottom: 0;
+		right: 0;
+
+		color: $text-color;
+		background-color: rgba($scrollbar-background-color, 0.5);
 	}
 
 }
