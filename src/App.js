@@ -5,6 +5,7 @@ import states from './states.js';
 import actions from './actions.js';
 import triggers from './triggers.js';
 import moods from './moods.js';
+import calm from './calm.js';
 import moreInfo from './moreInfo.js';
 import emotionsData from '../static/emotionsData.json';
 import sassVars from '../scss/variables.json';
@@ -88,6 +89,7 @@ export default function (...initArgs) {
 		sections.actions = actions;
 		sections.triggers = triggers;
 		sections.moods = moods;
+		sections.calm = calm;
 
 		// TODO: implement URL scheme for more info:
 		// #more:about
@@ -131,6 +133,10 @@ export default function (...initArgs) {
 		scrollbar.appendChild(segmentContainer);
 
 		_.values(dispatcher.SECTIONS).forEach(section => {
+
+			// more info does not appear in scrollbar
+			if (section === dispatcher.SECTIONS.MORE) { return; }
+
 			let segment = document.createElement('div');
 			segment.setAttribute('data-section', section);
 			let label = document.createElement('h3');
@@ -138,6 +144,7 @@ export default function (...initArgs) {
 			segment.appendChild(label);
 			segmentContainer.appendChild(segment);
 			scrollbarSegments[section] = segment;
+
 		});
 
 		segmentContainer.addEventListener('mouseover', onScrollbarOver);
