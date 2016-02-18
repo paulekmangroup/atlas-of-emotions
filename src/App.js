@@ -5,6 +5,7 @@ import states from './states.js';
 import actions from './actions.js';
 import triggers from './triggers.js';
 import moods from './moods.js';
+import moreInfo from './moreInfo.js';
 import emotionsData from '../static/emotionsData.json';
 import sassVars from '../scss/variables.json';
 
@@ -88,6 +89,19 @@ export default function (...initArgs) {
 		sections.triggers = triggers;
 		sections.moods = moods;
 
+		// TODO: implement URL scheme for more info:
+		// #more:about
+		// #more:donate
+		// #more:further
+		// #more:annex-index
+		// #more:annex-episode-timeline
+		// #more:annex-partially-charted
+		// #more:annex-traits
+		// #more:annex-pathologies
+		// #more:annex-signals
+		// #more:annex-science
+		sections.more = moreInfo;
+
 	}
 
 	function initHeader () {
@@ -134,6 +148,7 @@ export default function (...initArgs) {
 		moreInfo.classList.add('more-info');
 		moreInfo.innerHTML = 'MORE INFORMATION';
 		scrollbar.appendChild(moreInfo);
+		moreInfo.addEventListener('click', onMoreInfoClick);
 
 		// throttle wheel events, and
 		// prune cached scroll events every frame
@@ -663,6 +678,18 @@ export default function (...initArgs) {
 			let isHighlighted = key === section || key === highlightedScrollbarSection;
 			scrollbarSegments[key].classList[isHighlighted ? 'add' : 'remove']('highlighted');
 		});
+
+	}
+
+	function onMoreInfoClick (event) {
+
+		// TODO: open more info menu on hover/click, sim. to scrollbar
+		// TODO: on menu click, navigate to moreInfo with selected page (about/donate/further/annex-index)
+		
+		/*
+		let moreInfoPage = event.target.dataset.page;
+		dispatcher.navigate(dispatcher.SECTIONS.MORE, moreInfoPage);
+		*/
 
 	}
 

@@ -14,7 +14,8 @@ const dispatcher = {
 		STATES: 'states',
 		ACTIONS: 'actions',
 		TRIGGERS: 'triggers',
-		MOODS: 'moods'
+		MOODS: 'moods',
+		MORE: 'more'
 	},
 
 	EMOTIONS: {
