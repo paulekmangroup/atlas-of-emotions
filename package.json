@@ -5,7 +5,7 @@
   "main": "deploy/index.js",
   "scripts": {
     "start": "gulp",
-    "deploy": "gulp deploy",
+    "dist": "gulp dist",
     "lint": "eslint ./src"
   },
   "repository": {

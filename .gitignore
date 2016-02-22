@@ -8,6 +8,7 @@ node_modules
 # built stuff
 build
 deploy
+dist
 
 # OSX, pleeze.
 .DS_Store

@@ -239,11 +239,11 @@ gulp.task('default', () => {
 /**
  * Build package for deployment
  */
-gulp.task('deploy', () => {
+gulp.task('dist', () => {
 
-	rimraf('./deploy/**', () => {
+	rimraf('./dist/**', () => {
 
-		const dest = './deploy';
+		const dest = './dist';
 
 		// Copy static html files
 		copyTask({
