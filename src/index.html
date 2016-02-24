@@ -16,13 +16,22 @@
 			<div id="header">
 				<h3><a href="#">ATLAS OF EMOTIONS</a></h3>
 				<h1></h1>
-				<div class="dropdown">
+				<div class="dropdown emotion-menu hide-on-more">
 					<button class="btn btn-default dropdown-toggle" type="button" id="emotion-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="dd-title"></span><span class="caret"></span></button>
 					<ul class="dropdown-menu" aria-labelledby="emotion-dropdown"></ul>
 				</div>
+				<div id="more-close" class="close-button show-on-more"></div>
 			</div>
 			<div id="main"></div>
 			<div id="scrollbar"></div>
+			<div id="more-info">
+				<div class="dropup emotion-menu">
+				  <button class="btn btn-default dropdown-toggle" type="button" id="emotion-more-info" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				  	<span class="dup-title"></span><span class="caret"></span>
+				  </button>
+				  <ul class="dropdown-menu" aria-labelledby="emotion-more-info"></ul>
+				</div>
+			</div>
 		</div>
 		<div id="modal-overlay"></div>
 		<div id="modal"></div>

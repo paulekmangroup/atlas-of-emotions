@@ -27,11 +27,35 @@ const dispatcher = {
 		ENJOYMENT: 'enjoyment'
 	},
 
+	MORE_INFO: {
+		title: 'More Information',
+		items: [
+			{
+				label: 'The Annex',
+				page: 'annex',
+				pageName: 'Annex'
+			},
+			{
+				label: 'About',
+				page: 'about'
+			},
+			{
+				label: 'Donate',
+				page: 'donate'
+			},
+			{
+				label: 'Further Reading',
+				page: 'further'
+			}
+		]
+	},
+
 	/**
 	 * @param  {[String]} section Section navigating to
 	 * @param  {[String]} emotion Emotion navigating to
 	 */
-	navigate: function (section, emotion) {
+	navigate: function (section, emotion, more) {
+		let page = emotion || more;
 
 		if (section && !this.validateSection(section)) {
 			throw new Error('Invalid section "' + section + '".');
@@ -41,7 +65,7 @@ const dispatcher = {
 			throw new Error('Invalid emotion "' + emotion + '".');
 		}
 
-		this.emit(this.EVENTS.NAVIGATE, section, emotion);
+		this.emit(this.EVENTS.NAVIGATE, section, page);
 
 	},
 
@@ -67,6 +91,18 @@ const dispatcher = {
 
 		return Object.keys(this.EMOTIONS).some(key => this.EMOTIONS[key] === emotion);
 
+	},
+
+	validateMorePage: function(page) {
+		return this.MORE_INFO.items.some(item => item.page === page);
+	},
+
+	getMorePageName: function (page) {
+		const pageObject = this.MORE_INFO.items.filter((item) => item.page === page);
+
+		if (!pageObject.length) return '';
+
+		return pageObject[0].pageName || pageObject[0].label;
 	}
 
 };

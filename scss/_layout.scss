@@ -25,21 +25,21 @@ body {
 
 	/* ----------- Tablets ----------- */
 	@media screen
-		and (min-width: 750px) 
+		and (min-width: 750px)
 		and (max-width: 1280px) {
 			font-size: 18px;
 	}
 
 	/* ----------- Non-Retina Screens ----------- */
 	@media screen
-		and (min-width: 1280px) 
+		and (min-width: 1280px)
 		and (-webkit-min-device-pixel-ratio: 1) {
 			font-size: 22px;
 	}
 
 	/* ----------- Retina Screens ----------- */
 	@media screen
-		and (min-width: 1280px) 
+		and (min-width: 1280px)
 		and (-webkit-min-device-pixel-ratio: 2)
 		and (min-resolution: 192dpi) {
 			font-size: 22px;
@@ -85,35 +85,34 @@ a:active {
 		position: absolute;
 		left: 1em;
 	}
+}
 
-	.dropdown {
-		display: inline-block;
-		position: absolute;
-		width: $emotions-dropdown-width;
-		right: 0;
-		text-align: right;
+#header .dropdown,
+#more-info .dropup {
+	display: inline-block;
+	position: absolute;
+	width: $emotions-dropdown-width;
+	right: 0;
+	text-align: right;
+	outline: none;
 
-		outline: none;
+	& button {
+		border: none;
+		padding: 0 1.5em 0 0;
+		background: none;
 
-		& button {
+		.caret {
 			border: none;
-			padding: 0 1.5em 0 0;
-			background: none;
-
-			.caret {
-				border: none;
-				margin-left: 0.5em;
-				vertical-align: top;
-				&:after {
-					content: '▼';
-					display: inline-block;
-					position: relative;
-					font-size: 0.75em;
-					font-family: 'sans-serif';
-				}
+			margin-left: 0.5em;
+			vertical-align: top;
+			&:after {
+				content: '▼';
+				display: inline-block;
+				position: relative;
+				font-size: 0.75em;
+				font-family: 'sans-serif';
 			}
 		}
-
 	}
 
 	.dropdown-menu {
@@ -122,8 +121,7 @@ a:active {
 		width: 100%;
 		margin: 0;
 		padding: 0;
-	    font-size: 1em;
-
+	  font-size: 1em;
 		background-color: rgba($callout-background-color, 0.5);
 		box-shadow: none;
 		border: none;
@@ -152,7 +150,12 @@ a:active {
 			}
 		}
 	}
+}
 
+#header .dropdown {
+	.more-on &.hide-on-more {
+		display: none;
+	}
 }
 
 #main {
@@ -203,7 +206,7 @@ a:active {
 			margin: auto;
 
 			text-align: center;
-			
+
 			color: $text-color;
 			background-color: rgba($scrollbar-background-color, 0.5);
 
@@ -230,18 +233,62 @@ a:active {
 		right: 0;
 		transition-duration: #{$ui-scrollbar-toggle-duration-open}s;
 	}
+}
 
-	.more-info {
-		position: absolute;
-		width: $emotions-dropdown-width;
-		height: $more-info-height;
-		bottom: 0;
-		right: 0;
+#more-info {
+	position: absolute;
+	width: $emotions-dropdown-width;
+	height: $more-info-height;
+	bottom: 0;
+	right: 0;
+	color: $text-color;
+	background-color: rgba($scrollbar-background-color, 0.5);
+	pointer-events: auto;
+	user-select: none;
+	cursor: pointer;
+	z-index: 10;
+}
 
-		color: $text-color;
-		background-color: rgba($scrollbar-background-color, 0.5);
+#more-info .dropup {
+	position: relative;
+	display: block;
+	width: 100%;
+	text-align: center;
+
+	& button {
+		width: 100%;
+		height: 100%;
+		padding: 0;
+		text-transform: uppercase;
+		line-height: $more-info-height;
+
+		.caret {
+			display: none;
+		}
 	}
 
+	.dropdown-menu {
+		position: absolute;
+		top: auto;
+		bottom: 100%;
+		margin-bottom: 2px;
+		background-color: rgba($scrollbar-background-color, 0.5);
+
+		li {
+			text-transform: uppercase;
+			color: $text-color;
+			text-align: left;
+
+			&:first-of-type {
+				margin-top: 0.5em;
+				padding-top: 0;
+			}
+			&:last-of-type {
+				padding-bottom: 0;
+				margin-bottom: 0.5em;
+			}
+		}
+	}
 }
 
 #callout {
@@ -278,6 +325,24 @@ a:active {
 	p {
 		margin-bottom: 0;
 		font-size: 1.0em;
+	}
+}
+
+.close-button {
+	position: absolute;
+	top: 0.5em;
+	right: 0.5em;
+	line-height: 1em;
+	cursor: pointer;
+
+	&::before {
+		display: inline-block;
+		margin: 0;
+		padding: 0;
+
+		font-size: 3em;
+		font-weight: 200;
+		content: '×';
 	}
 }
 
@@ -355,24 +420,5 @@ a:active {
 		width: 100%;
 		margin: 1em 0 1.5em 0;
 		text-align: center;
-	}
-
-	.close-button {
-		position: absolute;
-		top: 0.5em;
-		right: 0.5em;
-		line-height: 1em;
-
-		cursor: pointer;
-
-		&::before {
-			display: inline-block;
-			margin: 0;
-			padding: 0;
-
-			font-size: 3em;
-			font-weight: 200;
-			content: '×';
-		}
 	}
 }

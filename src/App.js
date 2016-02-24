@@ -35,10 +35,12 @@ export default function (...initArgs) {
 
 		currentSection = null,
 		currentEmotion = null,
+		currentMorePage = null,
+		previousSectionNotNamedMore = null,
 
 		scrollbarSegments = {},
 		scrollbarCloseTimeout = null,
-		highlightedScrollbarSection = null,		
+		highlightedScrollbarSection = null,
 		recentScrollDeltas = [],				// cache recent scroll delta values to check intentionality of scroll
 		lastScroll = 0,							// timestamp of most recent scroll event
 		hasNavigatedThisScroll = false,			// has already navigated during the current inertia/continuous scroll
@@ -51,6 +53,7 @@ export default function (...initArgs) {
 		initSections();
 		initHeader();
 		initScrollInterface();
+		initMoreInfoDropdown();
 		initCallout();
 		initModal();
 
@@ -119,9 +122,27 @@ export default function (...initArgs) {
 			li.innerHTML = emotionName.toUpperCase();
 			menu.appendChild(li);
 		});
-		
+
 		dropdown.querySelector('.dropdown-toggle').addEventListener('click', onDropdownClick);
 
+	}
+
+	function initMoreInfoDropdown() {
+		let dropdown = document.querySelector('#more-info .dropup'),
+			title = dropdown.querySelector('.dup-title'),
+			menu = dropdown.querySelector('ul');
+
+		title.innerHTML = dispatcher.MORE_INFO.title;
+
+		dispatcher.MORE_INFO.items.forEach((item) => {
+			let li = document.createElement('li');
+			li.setAttribute('role', 'menuitem');
+			li.setAttribute('data-page', item.page);
+			li.innerHTML = item.label;
+			menu.appendChild(li);
+		});
+
+		dropdown.querySelector('.dropdown-toggle').addEventListener('click', onMoreInfoMenuClick);
 	}
 
 	function initScrollInterface () {
@@ -151,12 +172,6 @@ export default function (...initArgs) {
 		segmentContainer.addEventListener('mouseout', onScrollbarOut);
 		segmentContainer.addEventListener('click', onScrollbarClick);
 
-		let moreInfo = document.createElement('div');
-		moreInfo.classList.add('more-info');
-		moreInfo.innerHTML = 'MORE INFORMATION';
-		scrollbar.appendChild(moreInfo);
-		moreInfo.addEventListener('click', onMoreInfoClick);
-
 		// throttle wheel events, and
 		// prune cached scroll events every frame
 		recentScrollDeltas = [];
@@ -176,7 +191,7 @@ export default function (...initArgs) {
 			queuedWheelEvent = event;
 		});
 		window.requestAnimationFrame(onRAF);
-		
+
 		document.addEventListener('keydown', onKeyDown);
 
 	}
@@ -229,7 +244,17 @@ export default function (...initArgs) {
 
 	}
 
-	function setSection (sectionName, previousEmotion) {
+	function setSectionEmotion (section, previousEmotion, previousMorePage) {
+		section.setEmotion(currentEmotion, previousEmotion, currentMorePage, previousMorePage)
+		.then(() => {
+			// console.log(">>>>> isNavigating -> false (setEmotion promise resolution 1)");
+			isNavigating = false;
+		});
+
+		if (section.setPreviousSection) section.setPreviousSection(previousSectionNotNamedMore);
+	}
+
+	function setSection (sectionName, previousEmotion, previousMorePage) {
 
 		let section = sections[sectionName],
 			previousSection = currentSection,
@@ -284,18 +309,13 @@ export default function (...initArgs) {
 				inBackground: false,
 				firstSection: true
 			});
-			section.setEmotion(currentEmotion, previousEmotion)
-			.then(() => {
-				// console.log(">>>>> isNavigating -> false (setEmotion promise resolution 1)");
-				isNavigating = false;
-			});
 
-
+			setSectionEmotion(section, previousEmotion, previousMorePage);
 
 		} else {
 
 			// some section is already open; perform transition
-			
+
 			if (previousSection === section) {
 
 				// change emotion for all background sections
@@ -304,23 +324,19 @@ export default function (...initArgs) {
 				});
 
 				// and within current section
-				section.setEmotion(currentEmotion, previousEmotion)
-				.then(() => {
-					// console.log(">>>>> isNavigating -> false (setEmotion promise resolution 2)");
-					isNavigating = false;
-				});
+				setSectionEmotion(section, previousEmotion, previousMorePage);
 
 			} else {
-				
+
 				// navigate between sections
-				// 
+				//
 				// sections can have background sections.
 				// when a section is opened, all its background sections must be opened and backgrounded.
 				// when a section is closed, for all of its background sections:
 				// 	if the section to which we're navigating is a background section, unbackground it
 				// 	else close the background section.
-				// 
-				
+				//
+
 				// open and background all backgroundSections for the current section
 				let previousSectionBackgrounded = false,
 					promises = backgroundSections.map(backgroundSection => {
@@ -376,7 +392,7 @@ export default function (...initArgs) {
 						}
 					}
 
-					// hide the container of any closed previous background section 
+					// hide the container of any closed previous background section
 					// that is not a background section for this section
 					if (previousBackgroundSections.length) {
 						for (let key in sections) {
@@ -396,11 +412,7 @@ export default function (...initArgs) {
 						firstSection: false
 					});
 
-					section.setEmotion(currentEmotion, previousEmotion)
-					.then(() => {
-						// console.log(">>>>> isNavigating -> false (setEmotion promise resolution 3)");
-						isNavigating = false;
-					});
+					setSectionEmotion(section, previousEmotion, previousMorePage);
 
 				});
 
@@ -408,14 +420,24 @@ export default function (...initArgs) {
 
 		}
 
-		updateHeader({
-			section: sectionName
-		});
+		if (!currentMorePage) {
+			updateHeader({
+				section: sectionName
+			});
+		}
 
 		setScrollbarHighlight(sectionName);
 
 		currentSection = section;
 
+	}
+
+	function setMore (page) {
+		updateHeader({
+			more: page
+		});
+
+		currentMorePage = page;
 	}
 
 	function setEmotion (emotion) {
@@ -455,8 +477,9 @@ export default function (...initArgs) {
 
 	function updateHeader (config) {
 
-		if (config.section) {
-			document.querySelector('#header h1').innerHTML = config.section.toUpperCase();
+		if (config.section || config.more) {
+			const title = config.section || dispatcher.getMorePageName(config.more);
+			document.querySelector('#header h1').innerHTML = title.toUpperCase();
 		}
 
 		let dropdownTitle = document.querySelector('#header .dd-title');
@@ -501,7 +524,7 @@ export default function (...initArgs) {
 				hasNavigatedThisScroll = true;
 			}
 		}
-		
+
 	}
 
 	function scrollEmotion (dir) {
@@ -530,7 +553,7 @@ export default function (...initArgs) {
 		if (currentEmotionIndex !== targetEmotionIndex) {
 			dispatcher.navigate(null, emotionNames[targetEmotionIndex]);
 		}
-		
+
 
 	}
 
@@ -566,11 +589,11 @@ export default function (...initArgs) {
 		// TODO NEXT THURS: don't just block wheel events when they're continuous;
 		// block them when they're continuously <= the last value.
 		// need to be able to support sequential, yet discrete, swipes.
-		// 
+		//
 		// also, can't raise MIN_NUM_SCROLL_EVENTS too high because that doesn't work well with scroll wheel mouse.
 		// might want to instead focus on MIN_SCROLL_CUMULATIVE_DIST
 		//
-		
+
 		if (deltaY) {
 
 			let now = Date.now();
@@ -608,6 +631,49 @@ export default function (...initArgs) {
 
 	}
 
+	function closeMenus(target) {
+		document.querySelector('body').removeEventListener('click', closeMenus);
+		const menus = document.querySelectorAll('.emotion-menu');
+		[...menus].forEach((menu) => {
+			if (menu !== target) menu.classList.remove('open');
+		});
+	}
+
+	function menuBackgroundClick() {
+		document.querySelector('body').addEventListener('click', closeMenus);
+	}
+
+	function onMoreInfoMenuClick (event) {
+
+		let dropdown = document.querySelector('#more-info .dropup'),
+			classList = dropdown.classList;
+
+		closeMenus(dropdown);
+		classList.toggle('open');
+
+		if (classList.contains('open')) {
+			dropdown.addEventListener('click', onMoreInfoMenuItemClick);
+		} else {
+			dropdown.removeEventListener('click', onMoreInfoMenuItemClick);
+		}
+
+		menuBackgroundClick();
+		event.stopPropagation();
+	}
+
+	function onMoreInfoMenuItemClick (event) {
+		event.stopImmediatePropagation();
+
+		if (!event.target || event.target.nodeName.toLowerCase() !== 'li') { return; }
+
+		document.querySelector('#more-info .dropup').classList.remove('open');
+
+		let page = event.target.dataset.page;
+		if (!page) return;
+
+		dispatcher.navigate(dispatcher.SECTIONS.MORE, null, page);
+	}
+
 	function onDropdownClick (event) {
 
 		let dropdown = document.querySelector('#header .dropdown'),
@@ -622,7 +688,7 @@ export default function (...initArgs) {
 		}
 
 		event.stopPropagation();
-		
+
 	}
 
 	function onDropdownItemClick (event) {
@@ -658,7 +724,7 @@ export default function (...initArgs) {
 		}, sassVars.ui.scrollbar.toggle.delay.close * 1000);
 
 		displayScrollbarHighlight(null);
-		
+
 	}
 
 	function onScrollbarClick (event) {
@@ -692,7 +758,7 @@ export default function (...initArgs) {
 
 		// TODO: open more info menu on hover/click, sim. to scrollbar
 		// TODO: on menu click, navigate to moreInfo with selected page (about/donate/further/annex-index)
-		
+
 		/*
 		let moreInfoPage = event.target.dataset.page;
 		dispatcher.navigate(dispatcher.SECTIONS.MORE, moreInfoPage);
@@ -837,9 +903,13 @@ export default function (...initArgs) {
 		isNavigating = true;
 
 		let previousEmotion = currentEmotion;
+		let previousMorePage = currentMorePage;
+		currentMorePage = null;
 
 		if (dispatcher.validateEmotion(hash.emotion)) {
 			setEmotion(hash.emotion);
+		} else if(dispatcher.validateMorePage(hash.emotion)) {
+			setMore(hash.emotion);
 		} else if (defaults && defaults.emotion) {
 			setEmotion(defaults.emotion);
 		} else {
@@ -847,12 +917,17 @@ export default function (...initArgs) {
 			setEmotion(null);
 		}
 
+
+		let section;
 		if (dispatcher.validateSection(hash.section)) {
-			setSection(hash.section, previousEmotion);
+			section = hash.section;
 		} else if (defaults && defaults.section) {
-			setSection(defaults.section, previousEmotion);
+			section = defaults.section;
 		}
 
+		if (section !== 'more') previousSectionNotNamedMore = section;
+
+		setSection(section, previousEmotion, previousMorePage);
 	}
 
 	function parseHash (hash) {
