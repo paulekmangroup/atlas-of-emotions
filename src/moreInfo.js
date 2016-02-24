@@ -50,6 +50,7 @@ export default {
 
 	// Emotion in this context is the more-info page
 	setEmotion: function (currentEmotion, previousEmotion, currentMorePage, previousMorePage) {
+		console.log('Set');
 		this.previousPage = this.currentPage;
 		this.currentPage = currentMorePage;
 		this.currentEmotion = currentEmotion;
@@ -64,7 +65,7 @@ export default {
 				if (!this.pages[this.currentPage].isInited) {
 					this.pages[this.currentPage].init(this.containers[this.currentPage]);
 				}
-
+				this.pages[this.currentPage].open();
 				this.pages[this.currentPage].setEmotion();
 			}
 
@@ -99,6 +100,7 @@ export default {
 	},
 
 	onCloseButtonClicked: function() {
+		console.log('Closed click: ', this.previousSection);
 		dispatcher.navigate(this.previousSection, this.currentEmotion, null);
 	},
 
@@ -109,6 +111,7 @@ export default {
 			containerEl = document.createElement('div');
 			const id = `more-${item.page}`;
 			containerEl.id = `more-${item.page}`;
+			containerEl.classList.add('more-child');
 			this.sectionContainer.appendChild(containerEl);
 			this.containers[item.page] = containerEl;
 		});

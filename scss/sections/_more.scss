@@ -15,5 +15,113 @@
 }
 
 #more-close {
+	top: 50%;
+	margin-top: -14px;
+}
 
+#more-info {
+	position: absolute;
+	width: $emotions-dropdown-width;
+	height: $more-info-height;
+	bottom: 0;
+	right: 0;
+	color: $text-color;
+	background-color: rgba($scrollbar-background-color, 0.5);
+	pointer-events: auto;
+	user-select: none;
+	cursor: pointer;
+	z-index: $depth-5;
+}
+
+#more-info .dropup {
+	position: relative;
+	display: block;
+	width: 100%;
+	text-align: center;
+
+	& button {
+		width: 100%;
+		height: 100%;
+		padding: 0;
+		text-transform: uppercase;
+		line-height: $more-info-height;
+
+		.caret {
+			display: none;
+		}
+	}
+
+	.dropdown-menu {
+		position: absolute;
+		top: auto;
+		bottom: 100%;
+		margin-bottom: 2px;
+		background-color: rgba($scrollbar-background-color, 0.5);
+
+		li {
+			text-transform: uppercase;
+			color: $text-color;
+			text-align: left;
+
+			&:first-of-type {
+				margin-top: 0.5em;
+				padding-top: 0;
+			}
+			&:last-of-type {
+				padding-bottom: 0;
+				margin-bottom: 0.5em;
+			}
+		}
+	}
+}
+
+
+#more {
+	height: 100%;
+	position: relative;
+
+	.more-child {
+		left: -100%;
+		transition: left 0.5s linear;
+
+		&.active {
+			left: 0;
+		}
+	}
+}
+
+#more-about {
+	position: absolute;
+	top: 2.75em;
+	bottom: $more-info-height;
+	width: 55%;
+	overflow: hidden;
+
+	#more &.active {
+		left: 23.5%;
+	}
+
+	.wrapper {
+		height: 100%;
+		padding-right: 20px;
+		overflow: auto;
+	}
+
+	p {
+		margin-top: 0;
+	}
+
+	.title {
+		margin-bottom: 2em;
+	}
+
+	.block {
+		margin-bottom: 0.55em;
+		padding: 1.125em;
+		background: rgba(#fff, 0.5);
+
+		p:last-child {
+			margin-bottom: 0;
+		}
+	}
 }

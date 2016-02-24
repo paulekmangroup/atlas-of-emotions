@@ -530,7 +530,7 @@ export default function (...initArgs) {
 	function scrollEmotion (dir) {
 
 		// console.log(">>>>> scrollEmotion(); isNavigating:", isNavigating);
-		if (isNavigating) { return; }
+		if (isNavigating || currentMorePage) { return; }
 
 		let emotionNames = _.values(dispatcher.EMOTIONS),
 			currentEmotionIndex = emotionNames.indexOf(currentEmotion),
@@ -593,6 +593,8 @@ export default function (...initArgs) {
 		// also, can't raise MIN_NUM_SCROLL_EVENTS too high because that doesn't work well with scroll wheel mouse.
 		// might want to instead focus on MIN_SCROLL_CUMULATIVE_DIST
 		//
+
+		if (currentMorePage) return;
 
 		if (deltaY) {
 
@@ -867,6 +869,7 @@ export default function (...initArgs) {
 	}
 
 	function onNavigate (section, emotion) {
+		const parts = [];
 
 		if (!section) {
 			for (let key in sections) {
@@ -881,8 +884,10 @@ export default function (...initArgs) {
 			emotion = currentEmotion;
 		}
 
-		document.location.hash = section + ':' + emotion;
+		if (section) parts.push(section);
+		if (emotion) parts.push(emotion);
 
+		document.location.hash = parts.join(':');
 	}
 
 	function onHashChange (event, defaults=NAVIGATION_DEFAULTS) {
@@ -925,9 +930,19 @@ export default function (...initArgs) {
 			section = defaults.section;
 		}
 
-		if (section !== 'more') previousSectionNotNamedMore = section;
+		setPreviousSectionNotNamedMore(section, defaults);
 
 		setSection(section, previousEmotion, previousMorePage);
+	}
+
+	function setPreviousSectionNotNamedMore(section, defaults) {
+
+		if (section && section !== 'more') {
+			previousSectionNotNamedMore = section;
+		} else if (defaults && defaults.section) {
+			previousSectionNotNamedMore = defaults.section;
+		}
+
 	}
 
 	function parseHash (hash) {

@@ -235,62 +235,6 @@ a:active {
 	}
 }
 
-#more-info {
-	position: absolute;
-	width: $emotions-dropdown-width;
-	height: $more-info-height;
-	bottom: 0;
-	right: 0;
-	color: $text-color;
-	background-color: rgba($scrollbar-background-color, 0.5);
-	pointer-events: auto;
-	user-select: none;
-	cursor: pointer;
-	z-index: 10;
-}
-
-#more-info .dropup {
-	position: relative;
-	display: block;
-	width: 100%;
-	text-align: center;
-
-	& button {
-		width: 100%;
-		height: 100%;
-		padding: 0;
-		text-transform: uppercase;
-		line-height: $more-info-height;
-
-		.caret {
-			display: none;
-		}
-	}
-
-	.dropdown-menu {
-		position: absolute;
-		top: auto;
-		bottom: 100%;
-		margin-bottom: 2px;
-		background-color: rgba($scrollbar-background-color, 0.5);
-
-		li {
-			text-transform: uppercase;
-			color: $text-color;
-			text-align: left;
-
-			&:first-of-type {
-				margin-top: 0.5em;
-				padding-top: 0;
-			}
-			&:last-of-type {
-				padding-bottom: 0;
-				margin-bottom: 0.5em;
-			}
-		}
-	}
-}
-
 #callout {
 	position: absolute;
 	width: 19em;
@@ -326,6 +270,10 @@ a:active {
 		margin-bottom: 0;
 		font-size: 1.0em;
 	}
+
+	.more-on & {
+		display: none;
+	}
 }
 
 .close-button {
@@ -360,6 +308,7 @@ a:active {
 	transition-property: opacity;
 	transition-duration: #{$ui-overlays-duration-out}s;
 	transition-timing-function: ease-in-out;
+	z-index: $depth-10;
 
 	&.visible {
 		transition-duration: #{$ui-overlays-duration-in}s;
@@ -382,6 +331,8 @@ a:active {
 
 	background-color: rgba($callout-background-color, 0.5);
 	color: $text-overlay-color;
+
+	z-index: $depth-100;
 	@extend %raleway-light;
 
 	opacity: 0.0;
