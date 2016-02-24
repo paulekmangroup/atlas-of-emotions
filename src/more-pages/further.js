@@ -2,7 +2,6 @@ import d3 from 'd3';
 import _ from 'lodash';
 
 import dispatcher from '../dispatcher.js';
-import contentJSON from '../../static/more-about.json';
 import sassVars from '../../scss/variables.json';
 
 export default {
