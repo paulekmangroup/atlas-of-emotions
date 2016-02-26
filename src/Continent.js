@@ -166,19 +166,19 @@ export default class Continent {
 		]);
 	}
 
-	constructor (emotion, container, continentGeom) {
+	constructor (emotion, container, continentGeom, transforms={}) {
 
 		if (!Continent.transforms) {
 			Continent.initTransforms(continentGeom.w, continentGeom.h);
 		}
 
-		this.initInstanceProperties(emotion, container, continentGeom);
+		this.initInstanceProperties(emotion, container, continentGeom, transforms);
 
 		this.prepopulate();
 
 	}
 
-	initInstanceProperties (emotion, container, continentGeom) {
+	initInstanceProperties (emotion, container, continentGeom, transforms) {
 
 		let emotionIndex = Object.keys(Continent.configsByEmotion).indexOf(emotion);
 		if (emotionIndex === -1) {
@@ -206,7 +206,7 @@ export default class Continent {
 		this.centerY = continentGeom.centerY;
 
 		// copy transforms onto this Continent instance
-		Object.assign(this, Continent.transforms[emotionIndex]);
+		Object.assign(this, Continent.transforms[emotionIndex], transforms[emotionIndex]);
 
 		this.introSpreadRad = 0;
 		this.introSpreadAng = Math.atan2(this.y, this.x);
@@ -473,7 +473,7 @@ export default class Continent {
 
 		// unflatten the circles wrapper
 		this.circleWrapper.classed('flat', false);
-		
+
 	}
 
 	/**
@@ -506,7 +506,7 @@ export default class Continent {
 			}
 			return 0;
 		});
-		
+
 		let numStates = states.length;
 		return states.map((state, i) => {
 
