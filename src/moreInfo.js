@@ -2,7 +2,7 @@ import d3 from 'd3';
 import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
-import emotionsData from '../static/emotionsData.json';
+import secondaryData from '../static/secondaryData.json';
 import sassVars from '../scss/variables.json';
 
 // Pages
@@ -39,7 +39,8 @@ export default {
 		this.initContainers();
 		this.initialPages();
 
-		document.querySelector('#more-close').addEventListener('click', this.onCloseButtonClicked.bind(this));
+		document.querySelector('#more-close')
+			.addEventListener('click', this.onCloseButtonClicked.bind(this));
 
 		this.isInited = true;
 	},
@@ -50,7 +51,6 @@ export default {
 
 	// Emotion in this context is the more-info page
 	setEmotion: function (currentEmotion, previousEmotion, currentMorePage, previousMorePage) {
-		console.log('Set');
 		this.previousPage = this.currentPage;
 		this.currentPage = currentMorePage;
 		this.currentEmotion = currentEmotion;
@@ -63,7 +63,7 @@ export default {
 
 			if (this.currentPage && this.pages[this.currentPage]) {
 				if (!this.pages[this.currentPage].isInited) {
-					this.pages[this.currentPage].init(this.containers[this.currentPage]);
+					this.pages[this.currentPage].init(this.containers[this.currentPage], secondaryData);
 				}
 				this.pages[this.currentPage].open();
 				this.pages[this.currentPage].setEmotion();
@@ -100,7 +100,6 @@ export default {
 	},
 
 	onCloseButtonClicked: function() {
-		console.log('Closed click: ', this.previousSection);
 		dispatcher.navigate(this.previousSection, this.currentEmotion, null);
 	},
 

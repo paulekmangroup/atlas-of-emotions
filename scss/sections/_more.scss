@@ -77,51 +77,94 @@
 
 
 #more {
-	height: 100%;
 	position: relative;
-
-	.more-child {
-		left: -100%;
-		transition: left 0.5s linear;
-
-		&.active {
-			left: 0;
-		}
-	}
+	height: 100%;
 }
 
-#more-about {
+.more-child {
 	position: absolute;
-	top: 2.75em;
-	bottom: $more-info-height;
-	width: 55%;
-	overflow: hidden;
+	left: -100%;
+	height: 100%;
+	width: 100%;
+	transition: left 0.5s linear;
 
-	#more &.active {
-		left: 23.5%;
+	&.active {
+		left: 0;
 	}
 
 	.wrapper {
+		display: table;
 		height: 100%;
-		padding-right: 20px;
-		overflow: auto;
+		width: 35em;
+		margin: 0 auto;
+		padding-top: 2.75em;
+		padding-bottom: $more-info-height;
+		overflow: hidden;
+
+		.tb-row {
+			display: table-row;
+			height: auto;
+
+			&:last-child {
+				height: 100%;
+			}
+		}
 	}
 
-	p {
-		margin-top: 0;
-	}
+	.sub-blocks {
+		position: relative;
+		height: 100%;
+    	overflow: auto;
 
-	.title {
-		margin-bottom: 2em;
+		.sub-blocks-wrapper {
+		}
+
+		.block {
+			background: rgba(#fff, 0.5);
+			padding: 1.125em;
+			margin-bottom: 0.55em;
+			font-weight: 400;
+		}
 	}
 
 	.block {
-		margin-bottom: 0.55em;
-		padding: 1.125em;
-		background: rgba(#fff, 0.5);
+		position: relative;
+		text-align: left;
+		margin-bottom: 1em;
+		font-weight: 700;
+
+		&.link-list {
+			list-style: none;
+		}
+
+		li {
+			margin-bottom: 0.5em;
+		}
+
+		p {
+			margin-top: 0;
+		}
 
 		p:last-child {
 			margin-bottom: 0;
 		}
+
+		.title {
+			margin: 0 0 0.5em;
+		    text-transform: uppercase;
+		    font-size: 1em;
+		}
+
+		&.link .title {
+			line-height: 1;
+			margin: 0;
+
+		}
+
+		a:hover {
+			text-decoration: underline;
+		}
 	}
 }
+
+#more-about {}

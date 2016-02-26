@@ -1,17 +1,9 @@
 import d3 from 'd3';
 import _ from 'lodash';
 
+import * as utils from './utils.js';
 import dispatcher from '../dispatcher.js';
 import sassVars from '../../scss/variables.json';
-
-const CONTENT = {
-	title: "Paul and Eve Ekman created this atlas to aid people in understanding their emotions. In 2009 they presented their research to the Dalai Lama and he requested that it be made available to the general public. They enlisted the help of Stamen Design to realize their vision in a visual fashion.",
-	blocks: [
-		"<p>Paul Ekman is an American psychologist who is a pioneer in the study of emotions and their relation to facial expressions. He has created an \"atlas of emotions\" with more than ten thousand facial expressions, and has gained a reputation as \"the best human lie detector in the world\".</p><p>He was ranked 59th out of the 100 most cited psychologists of the twentieth century. Ekman conducted seminal research on the specific biological correlates of specific emotions, demonstrating the universality and discreteness of emotions in a Darwinian approach.</p>",
-		"<p>Eve Ekman is currently a Post Doctoral Scholar at UCSF’s Osher Center for Integrative Medicine. Ekman’s research interests were inspired by her experience as a medical social worker in the emergency department of San Francisco General Hospital coupled with her training in the applied emotion regulation and mindfulness intervention: Cultivating Emotional Balance, CEB. At the Osher Center for Integrative medicine Eve continues to refine the conceptual framework, research and training in the areas of meaning, empathy and burnout. In addition to research Eve provides training based in Cultivating Emotional Balance to a wide array of clients in technology, health care, criminal justice, law and education both...</p>"
-	]
-
-};
 
 export default {
 
@@ -19,7 +11,8 @@ export default {
 	currentEmotion: null,
 	wrapper: null,
 
-	init: function (containerNode) {
+	init: function (containerNode, data) {
+		this.data = data.moreinfo.about;
 
 		this.sectionContainer = containerNode;
 
@@ -35,19 +28,25 @@ export default {
 	setContent: function() {
 		if (!this.wrapper) return;
 
-		// title
-		const title = document.createElement('div');
-		title.classList.add('title');
-		title.innerHTML = CONTENT.title;
-		this.wrapper.appendChild(title);
+		const introRow = document.createElement('div');
+		const subRow = document.createElement('div');
 
-		// blocks
-		CONTENT.blocks.forEach(block => {
-			const el = document.createElement('div');
-			el.classList.add('block');
-			el.innerHTML = block;
-			this.wrapper.appendChild(el);
+		introRow.classList.add('tb-row');
+		subRow.classList.add('tb-row');
+
+		introRow.appendChild(utils.makeBlock(this.data.title, this.data.desc));
+
+		const subBlocks = document.createElement('div');
+		subBlocks.classList.add('sub-blocks');
+
+		this.data.subsections.forEach(section => {
+			subBlocks.appendChild(utils.makeBlock(section.title, section.desc));
 		});
+
+		subRow.appendChild(subBlocks);
+
+		this.wrapper.appendChild(introRow);
+		this.wrapper.appendChild(subRow);
 	},
 
 	setEmotion: function (emotion) {
@@ -64,11 +63,10 @@ export default {
 	},
 
 	open: function () {
-		console.log('About open');
 		this.sectionContainer.classList.add('active');
 
 		if (this.wrapper) {
-			this.wrapper.scrollTo(0, 0);
+			document.querySelector('.sub-blocks').scrollTo(0, 0);
 		}
 		// any section-wide opening animations not specific to a particular page go here.
 		// probably won't be anything here for the more info section.
@@ -76,7 +74,6 @@ export default {
 	},
 
 	close: function () {
-		console.log('About close');
 		this.sectionContainer.classList.remove('active');
 		return new Promise((resolve, reject) => {
 
