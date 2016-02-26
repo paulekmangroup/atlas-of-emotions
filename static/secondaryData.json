@@ -1,0 +1,532 @@
+{
+	"moreinfo": {
+		"about": {
+			"subsections": [
+				{
+					"title": "About the Ekmans",
+					"desc": "Paul Ekman is an American psychologist who is a pioneer in the study of emotions and their relation to facial expressions. He has gained a reputation as \"the best human lie detector in the world\". Eve Ekman is currently a Post Doctoral Scholar at UCSF’s Osher Center for Integrative Medicine. Ekman’s research interests were inspired by her experience as a medical social worker in the emergency department of San Francisco General Hospital coupled with her training in the applied emotion regulation and mindfulness intervention: Cultivating Emotional Balance, CEB."
+				},
+				{
+					"title": "Why Use This Atlas?",
+					"desc": "A world without the pull of our emotions would be impossibly bland and dangerous. Anger, fear and disgust can save our lives. We need to understand and develop the skills to have choice about (1) when we become emotional or what brings forth an emotional response and (2) how we respond when we are emotional and what we say and do. These skills are not given to us by nature but we can learn them. Exploring this Atlas can help us to achieve a more balanced emotional life, involving choice (at least some of the time). The Atlas of Emotions will increase your understanding of what emotions are: how they happen, what occurs, what you need to know to gain heightened awareness of your emotions."
+				},
+				{
+					"title": "What is Emotional Awareness?",
+					"desc": "Why does emotional awareness help us to manage our emotional lives? The simple answer is: we live most of our days completely unaware of what emotions we are feeling and the words and actions that they motivate. Typically we are aware of our emotions after an emotional episode, especially if we then regret how we acted. The goal is to become aware of the impulse to act before acting, choosing whether to engage, and if so how to engage. This means understanding what triggers emotions, which triggers most people share, which triggers we are especially sensitive to, and which triggers usually result in a regrettable emotional episode. This isn’t easy to achieve, but exploring this Atlas provides the vital, necessary first step. In the Annex of the Atlas you will find suggestions about other practices you may want to adopt to heighten your awareness of your own emotions."
+				},
+				{
+					"title": "What is the link Between Emotion and Stress?",
+					"desc": "Our uncontrolled emotions make us susceptible to stress, in fact the definition of stress is an emotional over-arousal (too strong of an emotional experience that lasts too long and interferes with the rest of our life). The consequences of stress, especially prolonged stress, include poor sleep, negative moods, diminished cognitive functioning such as memory and focus, strain on our personal and professional relationships and a variety of poor physical health outcomes."
+				},
+				{
+					"title": "What is an Emotion?",
+					"desc": "An episode of emotion is actually a brief and succinct experience, one which does not always fit our expectations. Most emotions arise in under a twenty fifth of a second and last no longer than a few minutes. We often feel as though our emotions last much longer, however what we are remembering is likely a series of emotion episodes. The definition is as follows: \n\nEmotion is a process, a particular kind of very fast automatic appraisal influenced by our evolutionary and personal past, in which we sense that something important to our welfare is occurring, and a set of physiological changes and behaviors begin to deal with the situation. In particular, emotions efficiently coordinate diverse response systems, thereby helping us respond to important challenges or opportunities.\n\nLets unpack this definition. Emotion is a process, meaning there are a series of small stages that make up an emotion episode. This begins with our automatic appraisal, or perspective of the world as influenced by our personal experiences (our learned responses from prior life experiences) and evolutionary past (our hardwired responses which have been passed down genetically). Our appraisal helps us filter what is ‘an important event to our welfare’. Typically appraisal is so fast that we are totally unaware of it. Because our appraisal is influenced by our personal pasts we can have quite distinct responses to the world. Consider this example: you are walking down the street with a close friend and an approach car with its windows down is loudly playing a song. For you this song elicits a feeling of great sadness, it is the favorite song of a friend who died from cancer that was played at her or his eulogy. However for your friend, who did not know this person and has no association with the song there is no emotional response or perhaps annoyance about the loud noise. You are on the same street, with the same song but for you this is a learned and personal response. However, if that same car had to avoid a cat running through the road and suddenly veered on to the sidewalk behind, both you and your friend, irrespective of personal past, would jump backwards in fear. This is a universal response to an imminent threat. Emotions help us respond before we even have time to think “what is that car doing?”. This is the brilliance and burden of emotions, they can rally our physiological responses and behaviors for immediate behaviors to save our lives, but they arise without our choosing them and can feel quite out of our control. We will begin mapping our own emotion episodes as explorers immersed in this Atlas.\n\nThe end of this definition points to the evolutionary perspective of emotions, this means looking at emotions the way we look at our thumbs or eyelashes for their functional properties. While emotions do not serve the critical functions of allowing us to grasp or keeping dust from our eyes, they were just as critical for our survival in the environment of our evolutionary adaptedness. In addition to helping us respond to immediate threats (running from a saber tooth tiger in fear or standing up to a less threatening beast with anger) they also helped us in the social cohesion of a tribe through shared enjoyment. Importantly for our early survival, our emotion system includes our rapid internal response as well as a nonverbal signaling through our face."
+				}
+			],
+			"title": "About this Atlas",
+			"desc": "Paul and Eve Ekman created this atlas to aid people in understanding their emotions. In 2009 they presented their research to the Dalai Lama and he requested that it be made available to the general public. They enlisted the help of Stamen Design to realize their vision in a visual fashion. "
+		},
+		"personality-trait": {
+			"emotions": [
+				{
+					"name": "Anger",
+					"desc": "Hostile - a hostile person is often angry, known to others by the frequency of anger responses to the world. Often anger occurs with any frustration, the threshold for frustration is low. Hostile people may regret afterwards and apologize for their anger, but nevertheless continue to respond angrily. Sometimes hostile people express their anger in a nasty way, using words to demean and cause psychological pain to the recipients."
+				},
+				{
+					"name": "Fear",
+					"desc": "A shy or timid person, avoids people, hyper-cautious about risks."
+				},
+				{
+					"name": "Disgust",
+					"desc": "none"
+				},
+				{
+					"name": "Sadness",
+					"desc": "Blue, depressed"
+				},
+				{
+					"name": "Enjoyment",
+					"desc": "Cheerful, optimistic."
+				}
+			],
+			"title": "Personality Trait",
+			"desc": "Each emotion has a corresponding personality trait that represents a longer term manifestation of an emotion."
+		},
+		"psychopathology": {
+			"emotions": [
+				{
+					"name": "Anger",
+					"desc": "Causing physical or verbal harm within inappropriate contexts, anger that is out of control, anger that is passive but persistently preoccupying.",
+					"diagnoses": [
+						{
+							"name": "Intermittent Explosive Disorder",
+							"desc": "Characterized by impulsive aggressive and assaultive behaviors out of proportion to stressors."
+						},
+						{
+							"name": "Oppositional Defiance Disorder",
+							"desc": "Operationally distinct from conduct disorder which is characterized by behaviorally aggressive acts."
+						},
+						{
+							"name": "Antisocial Personality Disorder",
+							"desc": "Characterized by a pervasive pattern of disregard for the rights of other people that often manifests as hostility and/or aggression. Deceit and manipulation are also central features."
+						},
+						{
+							"name": "Disruptive Mood Dysregulation Disorder",
+							"desc": "Severe recurrent temper outbursts manifested verbally (e.g., verbal rages) and/or behaviorally (e.g., physical aggression toward people or property) that are grossly out of proportion in intensity or duration to the situation or provocation."
+						}
+					]
+				},
+				{
+					"name": "Fear",
+					"desc": "Anxiety states, involve prolonged fear without knowing the source of the threat as well as indcidents of panic (episodic attacks of severe anxiety).",
+					"diagnoses": [
+						{
+							"name": "Social Anxiety Disorder",
+							"desc": "A persistent fear of one or more social or performance situations in which the person is exposed to unfamiliar people or to possible scrutiny by others. The individual fears that he or she will act in a way (or show anxietysymptoms) that will be embarrassing and humiliating."
+						},
+						{
+							"name": "Post-Traumatic Stress Disorder (PTSD)",
+							"desc": "A mental health condition that's triggered by an often overwhelming terrifying event — either experiencing it or witnessing it. Symptoms may include flashbacks, nightmares and severe anxiety, as well as uncontrollable thoughts about the event."
+						},
+						{
+							"name": "Avoidant Personality Disorder",
+							"desc": "Characterized by a pervasive pattern of social inhibition, feelings of inadequacy, and a hypersensitivity to negative evaluation. People with this disorder are intensely afraid that others will ridicule them, reject them, or criticize them."
+						},
+						{
+							"name": "Generalized Anxiety Disorder",
+							"desc": "An anxiety disorder that is characterized by excessive, uncontrollable and often irrational worry, that is, apprehensive expectation about events or activities."
+						},
+						{
+							"name": "Obsessive-Compulsive Disorder (OCD)",
+							"desc": "An anxiety disorder characterized by intrusive thoughts that produce uneasiness, apprehension, fear or worry (obsessions), repetitive behaviors aimed at reducing the associated anxiety (compulsions), or a combination of such obsessions and compulsions."
+						}
+					]
+				},
+				{
+					"name": "Disgust",
+					"desc": "The psychopathology of disgust includes feelings of disgust that prevent everyday interaction with the world, the self or others. The disgust can be a paralyzing feeling making simple interactions (such as eating) extremely painful if not impossible. Disgust and fear are both thought to contribute to various phobias, such as of small animals.",
+					"diagnoses": [
+						{
+							"name": "Anorexia nervosa",
+							"desc": "Often coupled with a distorted self imagethat  may be maintained by various cognitive biases that alter how the affected individuals evaluates and thinks about their body, food, and eating. People with anorexia nervosa often view themselves as disgusting, overweight or \"big\" even when they are already underweight."
+						},
+						{
+							"name": "Body Dysmorphic Disorder",
+							"desc": "A body-image disorder characterized by persistent and intrusive preoccupations with an imagined or slight defect in one's appearance, feeling disgusted by one’s appearance."
+						},
+						{
+							"name": "Bulimia",
+							"desc": "Need description."
+						},
+						{
+							"name": "Sexual Aversion Disorder",
+							"desc": "Characterized by disgust, fear, revulsion, or lack of desire in consensual relationships involving genital contact."
+						}
+					]
+				},
+				{
+					"name": "Sadness",
+					"desc": "Depression is a well known psychopathology, reported to effect over 25% of the population. When you have depression, it interferes with daily life and causes pain for both you and those who care about you. Depression is a common but serious illness.\n",
+					"diagnoses": [
+						{
+							"name": "Major Depressive Disorder",
+							"desc": "Also known as clinical depression, major depression, or unipolar depression, is a mental disorder characterized by a pervasive and persistent low mood that is accompanied by low self-esteem and by a loss of interest or pleasure in normally enjoyable activities."
+						},
+						{
+							"name": "Dysthymia",
+							"desc": "Sometimes also called neurotic depression, dysthymic disorder, or chronic depression, is a mood disorder consisting of the same cognitive and physical problems as in depression, with less severe but longer-lasting symptoms."
+						},
+						{
+							"name": "Bipolar Disorder",
+							"desc": "Also known as bipolar affective disorder (and originally called manic-depressive illness), is a mental disorder characterized by periods of elevated mood and periods of depression."
+						}
+					]
+				},
+				{
+					"name": "Enjoyment",
+					"desc": "It is harder to imagine the drawbacks of enjoyable emotions contributing to challenges in managing our everyday relationships, work and getting our basic needs in comparison to other emotions. However pathological enjoyment is quite serious, the hyper elevated states of enjoyment can be quite delusional as well as an addition to feeling good which can lead to destructive behaviors.\n",
+					"diagnoses": [
+						{
+							"name": "Mania/Manic Episode",
+							"desc": "Manic episode at its extreme is commonly characterized by frenzied, ungovernable exuberance — essentially elation not grounded in reality. Frequently, confidence and self-esteem are excessively enlarged, and grand, extravagant ideas are expressed, this is called ‘grandiosity’. Mania is often part of bipolar disorder."
+						},
+						{
+							"name": "Cyclothemia",
+							"desc": "The experience when moods noticeably shifts up and down from baseline. It may feel on top of the world for a time, followed by a low period when the feeling is somewhat blue. Between these cyclothymic highs and lows, the person may feel stable and fine."
+						}
+					]
+				}
+			],
+			"title": "Psychopathology",
+			"desc": "Each emotion relates to distinct psychopathologies, which describe a persistent behavior that interferes with one's ability to function."
+		},
+		"signals": {
+			"emotions": [
+				{
+					"name": "Anger",
+					"desc": "The message of anger is to let the target know to “Get out of my way.”  Anger can carry a message ranging from threat to dissatisfaction.",
+					"signal": "In the voice, anger generates a roar if not controlled; when controlled may have sharp edge that is very detectable. In the face, it includes glaring eyes, lowered brows and narrowed, tightened lips. When people hear or see an angry signal they are typically hurt just by the perception of the signal, and are likely to retaliate with angry actions."
+				},
+				{
+					"name": "Fear",
+					"desc": "The message of fear is “help me”, it can range from showing panic to low level concern.",
+					"signal": "Common signals are movement backwards, eyes very wide open lips stretched horizontally, eyebrows raised and drawn together. Screams will also accompany intense fear. Lesser fear signals can include heavy breathing, head position slightly backwards and away, and horizontally stretched lower lip including tightened neck muscles."
+				},
+				{
+					"name": "Disgust",
+					"desc": "The message of disgust is “get away from me”, this can show others that the target of disgust is to be kept away from or that it is unclean, dirty or socially/morally reprehensible.",
+					"signal": "There are three facial expressions associated with disgust. The first is sticking the tongue out as if you are getting something out of your mouth. The second is raising the upper lip but it is relaxed and not tense, this can display gums and teeth depending on the shape of the mouth. The third is the wrinkling of the nose and the raising of the nostrils. All three can occur in unison or separately."
+				},
+				{
+					"name": "Sadness",
+					"desc": "The message of sadness is “comfort me”. Witnessing tears is a powerful example of a signal that can even be seen by strangers.",
+					"signal": "The signal of sadness includes a frown (lower lip pushed up and lip corners pulled slightly down), inner corners of the eyebrows drawn up and together in the center of the forehead, cheeks raised and can include tears. The vocalization of sadness can include sobs, heaving and quavering of voice."
+				},
+				{
+					"name": "Enjoyment",
+					"desc": "The message of enjoyment is “this feels good”, and is encouraging and engaging of social interaction.",
+					"signal": "The enjoyment signal includes the Duchenne (authentic) smile, activation of a smile (lip corners facing up), and activation of the orbital eye muscles that tighten the lower eyelid and create wrinkling around the outer eye corners (especially with age). Enjoyment also includes vocal signals, for example the sound of relief (a sigh or exhalation) and the sound of amusement such as laughter and giggling."
+				}
+			],
+			"title": "Signal and Message",
+			"desc": "Description of what signals are"
+		},
+		"partially-charted": {
+			"emotions": [
+				{
+					"name": "Love",
+					"desc": "A strong attachment to another person, typically parent towards child and child towards parennt, but also between those romantically committed. Within loving relationships, anger, fear, sadness, disgust and enjoyment all can be experienced."
+				},
+				{
+					"name": "Envy",
+					"desc": "Although often misused as a synonym for jealousy, envy involves resenting and wanting what another person posseses. When feeling envy, anger, contempt, or sadness may also be felt."
+				},
+				{
+					"name": "Hate",
+					"desc": "Enduring anger focused on a particular person or group of persons. Over time hatred may generate the personality trait of hostility."
+				},
+				{
+					"name": "Embarrassment",
+					"desc": "Activated often by praise from another, also by a faux pas. No facial or vocal signal, but a blush which is only visible in light-skinned people."
+				},
+				{
+					"name": "Surprise",
+					"desc": "The briefest emotion, triggered by the sudden occurrence of an unexpected event. It often is a way station, leading, after more appraisal, to any of the other emotions."
+				},
+				{
+					"name": "Shame",
+					"desc": "Expecting others would be disgusted with you if they knew what you were thinking of or had done. It motivates a strong wish to prevent others from learning what you have done or thought."
+				},
+				{
+					"name": "Contempt",
+					"desc": "The last to appear in child declopment, it is a feeling of moral superiorit to the target. Often mixed with enjoyment."
+				},
+				{
+					"name": "Guilt",
+					"desc": "Regret about a past action, which motivates the wish to confess the wrongful action, hoping for forgiveness."
+				},
+				{
+					"name": "Jealousy",
+					"desc": "An emotional storyline involving three people: a desired person, a rival, and the person afraid of losing the commitmet of the desired person. During jealousy, anger, fear, disgust, sadness or surprise may be felt by any of the three people."
+				}
+			],
+			"title": "Partially-Charted Emotions",
+			"desc": "Half or less than half of emotion scientists believe there is convincing evidence that each of the following is an emotion."
+		},
+		"scientific-basis": {
+			"title": "The Scientific Basis For This Work",
+			"desc": "The Emotions Atlas is based on the consensus among scientists (in the choice of the five emotion continents and the relationship of emotions to moods, personality and psychopathology), the work of a few scientists who focused on the naming of states within emotions, dictionary definitions in the glossary, and theory or best guesses about the actions for each state and whether they are constructive or destructive. For more information, see \"What Emotion Scientists Agree About\", by Paul Ekman Perspectives in Psychological Science, in press."
+		},
+		"triggers-timeline": [
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null
+		],
+		"impediment-antidote": {
+			"emotions": [
+				{
+					"name": "Anger",
+					"states": [
+						{
+							"state": "Annoyance",
+							"antidote": "Patience, open-mindedness, concern for others.",
+							"impediment": ""
+						},
+						{
+							"state": "Exasperation",
+							"antidote": "Letting go of grasping. Patience, inner calm. Trying to understand the causes and conditions that brought about the undesirable situation.",
+							"impediment": ""
+						},
+						{
+							"state": "Frustration",
+							"antidote": "Letting go, letting go of grasping, putting things in a larger perspective.",
+							"impediment": ""
+						},
+						{
+							"state": "Argumentativeness",
+							"antidote": "Making effort to understand the other’s perspective, cognitive empathy, benevolence, wishing to solve the problem through a mutually agreeable solution.",
+							"impediment": ""
+						},
+						{
+							"state": "Vengefulness",
+							"antidote": "In case of vengefulness, contemplating the negative effects of taking revenge, in the short and in the long term; forgiveness not as condoning harmful behavior but as breaking the cycle of resentment and hatred.",
+							"impediment": ""
+						},
+						{
+							"state": "Fury",
+							"antidote": "Take a break, physically and mentally, from the circumstances that brought fury about. Look at fury itself with the eye of awareness as if gazing to a raging fire and slowly let it calm down.",
+							"impediment": ""
+						}
+					]
+				},
+				{
+					"name": "Fear",
+					"states": [
+						{
+							"state": "Trepidation",
+							"antidote": "Try to ponder what could be done. Calming the mind gives the best chance to find the appropriate solution to what caused the trepidation in the first place.",
+							"impediment": ""
+						},
+						{
+							"state": "Nervousness",
+							"antidote": "Try to ponder what could be done. Calming the mind gives the best chance to find the appropriate solution to what caused the trepidation in the first place.",
+							"impediment": ""
+						},
+						{
+							"state": "Anxiety",
+							"antidote": "Make a special effort of letting go of ruminations about the past and anticipations about the future.",
+							"impediment": ""
+						},
+						{
+							"state": "Dread",
+							"antidote": "Remain as calm as as possible. See what could be done for yourself and  for others as well.",
+							"impediment": ""
+						},
+						{
+							"state": "Panic",
+							"antidote": "Make the effort to see if anything could at least act as a mitigating factor (depending on the causes involved). ",
+							"impediment": ""
+						},
+						{
+							"state": "Horror",
+							"antidote": "Try to see if anything can be done. If that is not the case, take your distance to see if something can be done from afar. Respond with firmness and compassion, never with hatred. ",
+							"impediment": ""
+						},
+						{
+							"state": "Terror",
+							"antidote": "Instilling some calmness in the mind in order to take most appropriate decision.",
+							"impediment": ""
+						}
+					]
+				},
+				{
+					"name": "Disgust",
+					"states": [
+						{
+							"state": "Dislike",
+							"antidote": "While evaluating impartially the ethical issues, generate compassion so as to find the best way to remedy to the causes and conditions that triggered your dislike.",
+							"impediment": ""
+						},
+						{
+							"state": "Aversion",
+							"antidote": "Evaluate impartially the degree of harmfulness, take the appropriate measures, and then let aversion dissolve in the space of mindful awareness.",
+							"impediment": ""
+						},
+						{
+							"state": "Distaste",
+							"antidote": "Evaluate impartially the degree of harmfulness, take the appropriate measures, and then let aversion dissolve in the space of mindful awareness.",
+							"impediment": ""
+						},
+						{
+							"state": "Repugnance",
+							"antidote": "Evaluate impartially the degree of harmfulness, take the appropriate measures, and then let aversion dissolve in the space of mindful awareness.",
+							"impediment": ""
+						},
+						{
+							"state": "Loathing - Self",
+							"antidote": "Use healthy regret to generate the determination to improve yourself; whenever possible, repair the harm caused to others. \nDo not fall into pessimistic guilt, thinking that you are fundamentally bad and that’s the way you are bound to remain. \nDo not underestimate the potential for change.",
+							"impediment": ""
+						},
+						{
+							"state": "Loathing - Others",
+							"antidote": "Adopt the outlook of a caring physician, who might deeply disapprove certain behaviors, but will focus on doing all that is possible to cure the person from her afflictions.",
+							"impediment": ""
+						},
+						{
+							"state": "Revulsion",
+							"antidote": "Adopt the outlook of a caring physician, who might deeply disapprove certain behaviors, but will focus on doing all that is possible to cure the person from her afflictions.",
+							"impediment": ""
+						},
+						{
+							"state": "Abhorrence",
+							"antidote": "In case of toxic substances or situations, do the best you can to calmly avoid them. In the case of actions, Adopt the outlook of a caring physician, who might deeply disapprove certain behaviors, but will focus on doing all that is possible to cure the person from her afflictions.",
+							"impediment": ""
+						}
+					]
+				},
+				{
+					"name": "Sadness",
+					"states": [
+						{
+							"state": "Disappointment",
+							"antidote": "Understand that sadness is natural in appropriate circumstances, but also that experiencing loss is part of life and that one should not let oneself be overwhelmed. Try to find a place of peace within oneself and think of constructive things that could be done instead.",
+							"impediment": ""
+						},
+						{
+							"state": "Distraughtness",
+							"antidote": "Understand that a permanent state of sadness will not bring any real benefit. \nIn the case of mourning someone, to fall in long-term sadness and despair should to be seen as an homage paid to that person. \nIt is better to pay homage by doing meaningful and altruistic acts.",
+							"impediment": ""
+						},
+						{
+							"state": "Discouragement",
+							"antidote": "Understand that a permanent state of sadness will not bring any real benefit. \nIn the case of mourning someone, to fall in long-term sadness and despair should to be seen as an homage paid to that person. \nIt is better to pay homage by doing meaningful and altruistic acts.",
+							"impediment": ""
+						},
+						{
+							"state": "Helplessness",
+							"antidote": "Understand that a permanent state of sadness will not bring any real benefit. \nIn the case of mourning someone, to fall in long-term sadness and despair should to be seen as an homage paid to that person. \nIt is better to pay homage by doing meaningful and altruistic acts.",
+							"impediment": ""
+						},
+						{
+							"state": "Misery",
+							"antidote": "Understand that a permanent state of sadness will not bring any real benefit. \nIn the case of mourning someone, to fall in long-term sadness and despair should to be seen as an homage paid to that person. \nIt is better to pay homage by doing meaningful and altruistic acts.",
+							"impediment": ""
+						},
+						{
+							"state": "Grief",
+							"antidote": "Understand that a permanent state of sadness will not bring any real benefit. \nIn the case of mourning someone, to fall in long-term sadness and despair should to be seen as an homage paid to that person. \nIt is better to pay homage by doing meaningful and altruistic acts.",
+							"impediment": ""
+						},
+						{
+							"state": "Despair",
+							"antidote": "Understand that a permanent state of sadness will not bring any real benefit. \nIn the case of mourning someone, to fall in long-term sadness and despair should to be seen as an homage paid to that person. \nIt is better to pay homage by doing meaningful and altruistic acts. Think also well that nothing is engraved in stone: there is always a potential for change.",
+							"impediment": ""
+						},
+						{
+							"state": "Anguish",
+							"antidote": "Realize that things and people are impermanent by nature. Revolting against this cannot lead to a fulfilled life.",
+							"impediment": ""
+						}
+					]
+				},
+				{
+					"name": "Enjoyment",
+					"states": [
+						{
+							"state": "Sensory Pleasures",
+							"antidote": "",
+							"impediment": "Being unable to appreciate the quality of the present moment."
+						},
+						{
+							"state": "Relief",
+							"antidote": "",
+							"impediment": "To persist in worrying unnecessarily."
+						},
+						{
+							"state": "Amusement",
+							"antidote": "",
+							"impediment": "Tendency to see things in negative ways."
+						},
+						{
+							"state": "Excitement",
+							"antidote": "",
+							"impediment": "Pessimism and negative affects."
+						},
+						{
+							"state": "Ecstasy",
+							"antidote": "",
+							"impediment": "Grasping, attachment, and any other afflictive mental state (animosity, envy, arrogance, etc)."
+						},
+						{
+							"state": "Fiero",
+							"antidote": "",
+							"impediment": "Vanity, narcissism, failing to acknowledge with gratitude all those who contributed to make that achievement possible."
+						},
+						{
+							"state": "Naches",
+							"antidote": "",
+							"impediment": "Pride mixed with arrogance and with partiality that makes you feel contemptuous about others’ achievements."
+						},
+						{
+							"state": "Wonder",
+							"antidote": "",
+							"impediment": "Grasping. Unease."
+						},
+						{
+							"state": "Schadenfreude",
+							"antidote": "Perceive the destructive aspect of it and rather try to generate benevolence towards that person.",
+							"impediment": ""
+						},
+						{
+							"state": "Rejoicing",
+							"antidote": "",
+							"impediment": "Envy, jealousy, pride."
+						},
+						{
+							"state": "Compassion-Joy",
+							"antidote": "",
+							"impediment": "Regret of having done something good at the cost of some personal efforts. \nNarrow mindedness when caring only for a limited number of people who are close to you."
+						},
+						{
+							"state": "Pride",
+							"antidote": "Humility. Putting things into perspective and realizing that there are many other people with similar or even better qualities than yours. Understanding that you could do all this not just thanks to the fact that you are so special, but see it as being the result of many interdepend causes and conditions in which others have taken part.",
+							"impediment": ""
+						}
+					]
+				}
+			],
+			"title": "Impediments and Antidotes",
+			"desc": "Here are some ways to counteract emotional states. Impediments apply to blocking a positive emotion, antidotes apply to reversing negative ones."
+		},
+		"intrinsic-or-intentional": {
+			"emotions": [
+				{
+					"name": "Anger",
+					"intrinsic": "Quarrel, Insult, Undermine, Dispute, Scream/yell, Use physical force, Simmer/brood, Passive agressiveness",
+					"intentional": "Set limits, Be firm, Withdraw, Take a time out, Breathe, Practice patience, Reframe, Distract, Avoid, Remove the interference"
+				},
+				{
+					"name": "Fear",
+					"intrinsic": "Withdraw, Avoid, Hesitate, Freeze, Scream/yell, Ruminate, Worry",
+					"intentional": "Reframe, Be mindful, Breathe, Distract"
+				},
+				{
+					"name": "Disgust",
+					"intrinsic": "Withdraw, Avoid, Vomit, Dehumanize",
+					"intentional": "Withdraw, Avoid"
+				},
+				{
+					"name": "Sadness",
+					"intrinsic": "Seek comfort, Withdraw, Mourn, Protest, Feel ashamed",
+					"intentional": "Withdraw, Distract"
+				},
+				{
+					"name": "Enjoyment",
+					"intrinsic": "Seek more, Maintain, Exclaim, Engage/connect, Savor, Indulge",
+					"intentional": ""
+				}
+			],
+			"title": "Intrinsic or Intentional?",
+			"desc": "Actions can be intrinsic (take place without intent) or intentional (active attempt to enact change) or both."
+		},
+		"donate": {
+			"title": "Support our Cause",
+			"desc": "This project was generously supported by the Dalia Lama Trust. To give back, and to help bring more emotion awareness to the world, consider donating here: ",
+			"link": "http://www.dalailamatrust.org/donate",
+			"imgs": []
+		},
+		"further-reading": {
+			"links": [],
+			"title": "Further Reading",
+			"desc": "Here are some of the publications that guided us, or that you might be interested in seeking out to learn more. "
+		}
+	}
+}
