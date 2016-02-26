@@ -9,21 +9,6 @@
  * 6. Copy + paste the resulting JSON into emotionsData.json and rebuild the project.
  */
 
-/**
- * Atlas Of Emotions-specific constants.
- */
-var LABELS = {
-	METADATA: {
-
-	},
-	EMOTIONS: {
-		CONTINENT: 'continent',
-		STATES: 'states',
-		ACTIONS: 'actions',
-		TRIGGERS: 'triggers',
-		MOODS: 'moods'
-	}
-};
 
 /**
  * Add toolbar menu to export to JSON.
@@ -162,7 +147,9 @@ var metadataSectionParsers = (function () {
 			return obj;
 		},
 
-		moods: standard
+		moods: standard,
+
+		calm: standard
 
 	};
 
@@ -307,16 +294,16 @@ function displayText (text) {
 	app.add(makeTextBox(app, 'json'));
 	app.getElementById('json').setText(text);
 
-	var ss = SpreadsheetApp.getActiveSpreadsheet(); 
+	var ss = SpreadsheetApp.getActiveSpreadsheet();
 	ss.show(app);
-	return app; 
+	return app;
 
 }
 
 /**
  * Generate textfield.
  */
-function makeTextBox (app, name) { 
+function makeTextBox (app, name) {
 
 	// var textArea = app.createTextArea().setWidth('100%').setHeight('200px').setId(name).setName(name);
 	var textArea = app.createTextArea().setWidth('100%').setHeight('100%').setId(name).setName(name);

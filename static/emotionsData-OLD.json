@@ -1,1477 +1,1945 @@
 {
   "emotions": {
-    "sadness": {
-      "desc": "We experience sadness with the actual or perceived loss of a person to whom we are attached, such as an offspring, a lover, close friend, or to a loss of our own health or social status to the loss of an object that we value highly.",
-      "statesDesc": "There is significant overlap in the states of sadness compared to previous maps, but there is still a broad range of intensities.",
-      "states": {
-        "disappointment": {
-          "desc": "Felt when expectations are not met.",
-          "range": {
-            "min": 1,
-            "max": 5
-          },
-          "actions": {
-            "seek comfort": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "withdraw": {
-              "valences": [
-                "destructive"
-              ]
-            }
-          }
-        },
-        "distraughtness": {
-          "desc": "Agitated sadness. Felt intensly and often for long periods.",
-          "range": {
-            "min": 2,
-            "max": 8
-          },
-          "actions": {
-            "seek comfort": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "withdraw": {
-              "valences": [
-                "destructive"
-              ]
-            }
-          }
-        },
-        "discouragement": {
-          "desc": "Felt when no way to cope with an actual or potential loss is known.",
-          "range": {
-            "min": 2,
-            "max": 8
-          },
-          "actions": {
-            "seek comfort": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "withdraw": {
-              "valences": [
-                "destructive"
-              ]
-            }
-          }
-        },
-        "resignation": {
-          "desc": "Accepting that nothing can be done to prevent an important loss.",
-          "range": {
-            "min": 1,
-            "max": 10
-          },
-          "actions": {
-            "withdraw": {
-              "valences": [
-                "choice"
-              ]
-            },
-            "seek comfort": {
-              "valences": [
-                "constructive"
-              ]
-            }
-          }
-        },
-        "helplessness": {
-          "desc": "Realization of the inability to prevent or cope with loss.",
-          "range": {
-            "min": 5,
-            "max": 10
-          },
-          "actions": {
-            "seek comfort": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "withdraw": {
-              "valences": [
-                "destructive"
-              ]
-            }
-          }
-        },
-        "misery": {
-          "desc": "Intense prolonged feelings of anguished sadness.",
-          "range": {
-            "min": 6,
-            "max": 10
-          },
-          "actions": {
-            "seek comfort": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "withdraw": {
-              "valences": [
-                "destructive"
-              ]
-            }
-          }
-        },
-        "grief": {
-          "desc": "Anguished sadness aroused by the death of a loved one. Varies over time, from very intense at the time of the death to intermittent moderate as time goes on.",
-          "range": {
-            "min": 7,
-            "max": 10
-          },
-          "actions": {
-            "seek comfort": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "withdraw": {
-              "valences": [
-                "destructive"
-              ]
-            }
-          }
-        },
-        "despair": {
-          "desc": "Resigned anguished sadness.",
-          "range": {
-            "min": 7,
-            "max": 10
-          },
-          "actions": {
-            "seek comfort": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "withdraw": {
-              "valences": [
-                "destructive"
-              ]
-            }
-          }
-        },
-        "sorrow": {
-          "desc": "Feeling an important loss.",
-          "range": {
-            "min": 7,
-            "max": 10
-          },
-          "actions": {
-            "seek comfort": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "withdraw": {
-              "valences": [
-                "destructive"
-              ]
-            }
-          }
-        },
-        "anguish": {
-          "desc": "Intense agitation. Protesting form of despair over an actual or expected loss.",
-          "range": {
-            "min": 10,
-            "max": 10
-          },
-          "actions": {
-            "seek comfort": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "withdraw": {
-              "valences": [
-                "destructive"
-              ]
-            }
-          }
-        }
-      },
-      "actions": {
-        "Seek Comfort": "To seek help or support from others",
-        "Withdraw": "To physically or mentally leave the scene.",
-        "Ruminate": "To compulsively,repetitively, rethink about one's experience.",
-        "Mourn": "To focus on the loss",
-        "Despairing": "To give up hope that there will be any recovery from the misery felt by the loss.",
-        "Protesting": "To complain about the loss albeit knowing that the complaint will not recover what was lost.",
-        "Ashamed": "To feel the need to hide how one feels about what or who is lost.",
-        "Distract": "Engaging in other activities in an attempt to avoid feeling this emotion."
-      },
-      "triggers": [
-        "loss of a treasured object",
-        "loss of praise",
-        "loss of status",
-        "loss of health of a friend, lover or family member",
-        "rejection from anyone with whom one has a strong attachment"
-      ],
-      "moods": [
-        {
-          "name": "blue",
-          "desc": "need description"
-        }
-      ]
-    },
-    "disgust": {
-      "desc": "We experience disgust in reaction to toxic smells, tastes, unappealing appearances or repulsive behaviors. While usually unpleasant, in small doses disgust may sometimes be enjoyable.",
-      "statesDesc": "Disgust manifests generally as something fairly mild or very strong, with few states occupying the middle.",
-      "states": {
-        "aversion": {
-          "desc": "Wanting to avoid something noxious.",
-          "range": {
-            "min": 2,
-            "max": 7
-          },
-          "actions": {
-            "withdraw": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "avoid": {
-              "valences": [
-                "constructive"
-              ]
-            }
-          }
-        },
-        "dislike": {
-          "desc": "An aversion to something, some person or some action.",
-          "range": {
-            "min": 1,
-            "max": 5
-          },
-          "actions": {
-            "avoid": {
-              "valences": [
-                "choice"
-              ]
-            },
-            "dehumanize": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "withdraw": {
-              "valences": [
-                "constructive"
-              ]
-            }
-          }
-        },
-        "distaste": {
-          "desc": "Offended by taste or smell and metaphorically used to describe offensive sights or actions.",
-          "range": {
-            "min": 2,
-            "max": 7
-          },
-          "actions": {
-            "withdraw": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "avoid": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "vomit": {
-              "valences": [
-                "constructive"
-              ]
-            }
-          }
-        },
-        "repugnance": {
-          "desc": "Repelled by something toxic, literally or figuratively.",
-          "range": {
-            "min": 2,
-            "max": 9
-          },
-          "actions": {
-            "withdraw": {
-              "valences": [
-                "constructive"
-              ]
-            }
-          }
-        },
-        "nauseousness": {
-          "desc": "Metaphorically denotes a very intense disgust reaction.",
-          "range": {
-            "min": 8,
-            "max": 10
-          },
-          "actions": {
-            "withdraw": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "avoid": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "vomit": {
-              "valences": [
-                "constructive"
-              ]
-            }
-          }
-        },
-        "loathing": {
-          "desc": "Very intense disgust. Very objectionable to be the target of loathing.",
-          "range": {
-            "min": 9,
-            "max": 10
-          },
-          "actions": {
-            "avoid": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "dehumanize": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "vomit": {
-              "valences": [
-                "choice"
-              ]
-            },
-            "withdraw": {
-              "valences": [
-                "constructive"
-              ]
-            }
-          }
-        },
-        "revulsion": {
-          "desc": "Very strong disgust which usually implies a movement away from the source.",
-          "range": {
-            "min": 8,
-            "max": 10
-          },
-          "actions": {
-            "withdraw": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "avoid": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "vomit": {
-              "valences": [
-                "constructive"
-              ]
-            }
-          }
-        },
-        "abhorrence": {
-          "desc": "Extremely repelled by look, smell, or taste of toxic substances, or by highly offensive actions.",
-          "range": {
-            "min": 8,
-            "max": 10
-          },
-          "actions": {
-            "withdraw": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "avoid": {
-              "valences": [
-                "constructive"
-              ]
-            }
-          }
-        }
-      },
-      "actions": {
-        "Withdraw": "To physically or mentally leave the scene of what is triggering the disgust.",
-        "Avoid": "To either phsyically stay away from (someone or something); or internally keep one's mind away from what is triggering the disgust.",
-        "Vomit": "Literally to expel material from the mouth or stomach; metaphorically denotes very intense disgust.",
-        "Dehumanize": "To treat someone as though he or she is not a human being' to deprive of human qualities, personality, or spirit.",
-        "Distract": "Engaging in other activities in an attempt to avoid feeling this emotion."
-      },
-      "triggers": [
-        "religious groups usually not ones you grew up as part of",
-        "specific foods",
-        "differences in appearance",
-        "ethnic groups other than one's own",
-        "actions not typical of your own cultural group",
-        "something rotting",
-        "anything coming out of the body",
-        "blood",
-        "mucus"
-      ],
-      "moods": [
-        {
-          "name": "sour",
-          "desc": "Not commonly a mood, it can occur as a mood when there is a generalized feeling of repugnance or revulsion - usually of low intensity."
-        }
-      ]
-    },
     "anger": {
-      "desc": "We experience anger whenever our pursuit of an important goal is blocked, especially by a physical threat. Anger is one of the easiest emotions to provoke in a laboratory, which means we have a lot of information about it.",
-      "statesDesc": "The anger continent includes states that respond to threats (real, imagined, or anticipated) or interference with pursuit of a goal.",
-      "states": {
-        "annoyance": {
-          "desc": "The mildest state of anger never felt very strongly.",
+      "continent": {
+        "name": "Anger",
+        "desc": "The angry actions vary not only in their strength, but also in how they deal with what triggered the anger. "
+      },
+      "states": [
+        {
+          "name": "Annoyance",
+          "desc": "The mildest state of anger, never felt very strongly.",
           "range": {
             "min": 1,
             "max": 2
           },
           "actions": {
-            "withdraw": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "be firm": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "set limits": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "breathe": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "practice patience": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "reframe": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "suppress": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "distract": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "avoid": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "remove the interference": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "suppress": {
-              "valences": [
-                "choice"
-              ]
-            },
-            "distract": {
-              "valences": [
-                "choice"
-              ]
-            },
-            "avoid": {
-              "valences": [
-                "choice"
-              ]
-            },
-            "passive aggressiveness": {
-              "valences": [
-                "destructive"
-              ]
-            }
+            "all": [
+              "withdraw",
+              "be firm",
+              "set limits",
+              "breathe",
+              "practice patience",
+              "reframe",
+              "suppress",
+              "distract",
+              "avoid",
+              "remove the interference",
+              "take a time out",
+              "passive aggressiveness",
+              "simmer/brood"
+            ],
+            "con": [
+              "withdraw",
+              "be firm",
+              "set limits",
+              "breathe",
+              "practice patience",
+              "reframe",
+              "suppress",
+              "distract",
+              "avoid",
+              "remove the interference",
+              "take a time out"
+            ],
+            "des": [
+              "suppress",
+              "distract",
+              "avoid",
+              "passive aggressiveness",
+              "simmer/brood"
+            ],
+            "both": [
+              "suppress",
+              "distract",
+              "avoid"
+            ]
           }
         },
-        "exasperation": {
-          "desc": "The feeling of losing patience with a person or task that is generating an overload of frustration.",
-          "range": {
-            "min": 4,
-            "max": 7
-          },
-          "actions": {
-            "take a time out": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "breathe": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "practice patience": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "reframe": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "suppress": {
-              "valences": [
-                "choice"
-              ]
-            },
-            "distract": {
-              "valences": [
-                "choice"
-              ]
-            },
-            "avoid": {
-              "valences": [
-                "choice"
-              ]
-            },
-            "remove the interferrence": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "quarrel": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "insult": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "undermine": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "suppress": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "distract": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "avoid": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "passive agressiveness": {
-              "valences": [
-                "destructive"
-              ]
-            }
-          }
-        },
-        "frustration": {
+        {
+          "name": "Frustration",
           "desc": "Losing patience with a person or task that is generating an overload of frustration.",
           "range": {
             "min": 1,
             "max": 10
           },
           "actions": {
-            "withdraw": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "take a time out": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "be firm": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "set limits": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "breathe": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "practice patience": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "reframe": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "suppress": {
-              "valences": [
-                "choice"
-              ]
-            },
-            "distract": {
-              "valences": [
-                "choice"
-              ]
-            },
-            "avoid": {
-              "valences": [
-                "choice"
-              ]
-            },
-            "remove the interferrence": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "quarrel": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "insult": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "simmer/brood": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "passive agressiveness": {
-              "valences": [
-                "destructive"
-              ]
-            }
+            "all": [
+              "withdraw",
+              "take a time out",
+              "be firm",
+              "set limits",
+              "breathe",
+              "practice patience",
+              "reframe",
+              "suppress",
+              "distract",
+              "avoid",
+              "remove the interference",
+              "quarrel",
+              "insult",
+              "undermine",
+              "scream/yell",
+              "simmer/brood",
+              "passive agressiveness"
+            ],
+            "con": [
+              "withdraw",
+              "take a time out",
+              "be firm",
+              "set limits",
+              "breathe",
+              "practice patience",
+              "reframe",
+              "suppress",
+              "distract",
+              "avoid",
+              "remove the interference"
+            ],
+            "des": [
+              "quarrel",
+              "insult",
+              "undermine",
+              "scream/yell",
+              "suppress",
+              "distract",
+              "avoid",
+              "simmer/brood",
+              "passive agressiveness"
+            ],
+            "both": [
+              "suppress",
+              "distract",
+              "avoid"
+            ]
           }
         },
-        "bitterness": {
-          "desc": "The residue from having been angry repeatedly, because it seems that one is living in a world populated by people or events that block pursuit of what is important to you.",
-          "range": {
-            "min": 3,
-            "max": 10
-          },
-          "actions": {
-            "withdraw": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "breathe": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "practice patience": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "reframe": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "distract": {
-              "valences": [
-                "choice"
-              ]
-            },
-            "avoid": {
-              "valences": [
-                "choice"
-              ]
-            },
-            "insult": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "undermine": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "use physical force": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "suppress": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "distract": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "avoid": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "simmer/brood": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "passive agressiveness": {
-              "valences": [
-                "destructive"
-              ]
-            }
-          }
-        },
-        "argumentativeness": {
+        {
+          "name": "Argumentativeness",
           "desc": "Inclined to partake in unfriendly verbal disagreements.",
           "range": {
             "min": 2,
             "max": 10
           },
           "actions": {
-            "take a time out": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "breathe": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "practice patience": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "reframe": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "suppress": {
-              "valences": [
-                "choice"
-              ]
-            },
-            "distract": {
-              "valences": [
-                "choice"
-              ]
-            },
-            "avoid": {
-              "valences": [
-                "choice"
-              ]
-            },
-            "quarrel": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "insult": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "undermine": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "simmer/brood": {
-              "valences": [
-                "destructive"
-              ]
-            }
+            "all": [
+              "take a time out",
+              "breathe",
+              "practice patience",
+              "reframe",
+              "suppress",
+              "distract",
+              "avoid",
+              "quarrel",
+              "insult",
+              "undermine",
+              "simmer/brood"
+            ],
+            "con": [
+              "take a time out",
+              "breathe",
+              "practice patience",
+              "reframe",
+              "suppress",
+              "distract",
+              "avoid"
+            ],
+            "des": [
+              "quarrel",
+              "insult",
+              "undermine",
+              "suppress",
+              "distract",
+              "avoid",
+              "simmer/brood"
+            ],
+            "both": [
+              "suppress",
+              "distract",
+              "avoid"
+            ]
           }
         },
-        "vengefulness": {
-          "desc": "A  strong desire to harm someone who has harmed you.",
+        {
+          "name": "Bitterness",
+          "desc": "The residue from having been repeatedly angry, usually due to feeling that the world is populated by people or events that block pursuit of what is important to you.",
+          "range": {
+            "min": 3,
+            "max": 10
+          },
+          "actions": {
+            "all": [
+              "take a time out",
+              "withdraw",
+              "breathe",
+              "practice patience",
+              "reframe",
+              "distract",
+              "avoid",
+              "insult",
+              "undermine",
+              "dispute",
+              "scream/yell",
+              "suppress",
+              "simmer/brood",
+              "passive agressiveness"
+            ],
+            "con": [
+              "take a time out",
+              "withdraw",
+              "breathe",
+              "practice patience",
+              "reframe",
+              "distract",
+              "avoid"
+            ],
+            "des": [
+              "insult",
+              "undermine",
+              "dispute",
+              "scream/yell",
+              "suppress",
+              "distract",
+              "avoid",
+              "simmer/brood",
+              "passive agressiveness"
+            ],
+            "both": [
+              "distract",
+              "avoid"
+            ]
+          }
+        },
+        {
+          "name": "Exasperation",
+          "desc": "The feeling of losing patience with a person or task that is generating an overload of frustration.",
+          "range": {
+            "min": 4,
+            "max": 7
+          },
+          "actions": {
+            "all": [
+              "take a time out",
+              "breathe",
+              "practice patience",
+              "reframe",
+              "suppress",
+              "distract",
+              "avoid",
+              "remove the interference",
+              "set limits",
+              "be firm",
+              "withdraw",
+              "quarrel",
+              "insult",
+              "undermine",
+              "passive agressiveness",
+              "dispute",
+              "scream/yell",
+              "simmer/brood"
+            ],
+            "con": [
+              "take a time out",
+              "breathe",
+              "practice patience",
+              "reframe",
+              "suppress",
+              "distract",
+              "avoid",
+              "remove the interference",
+              "set limits",
+              "be firm",
+              "withdraw"
+            ],
+            "des": [
+              "quarrel",
+              "insult",
+              "undermine",
+              "suppress",
+              "distract",
+              "avoid",
+              "passive agressiveness",
+              "dispute",
+              "scream/yell",
+              "simmer/brood"
+            ],
+            "both": [
+              "suppress",
+              "distract",
+              "avoid"
+            ]
+          }
+        },
+        {
+          "name": "Vengefulness",
+          "desc": "A strong desire to harm someone who has harmed you.",
           "range": {
             "min": 5,
             "max": 10
           },
           "actions": {
-            "take a time out": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "breathe": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "practice patience": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "reframe": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "distract": {
-              "valences": [
-                "choice"
-              ]
-            },
-            "avoid": {
-              "valences": [
-                "choice"
-              ]
-            },
-            "insult": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "undermine": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "use physical force": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "suppress": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "simmer/brood ": {
-              "valences": [
-                "destructive"
-              ]
-            }
+            "all": [
+              "take a time out",
+              "breathe",
+              "practice patience",
+              "reframe",
+              "distract",
+              "avoid",
+              "quarrel",
+              "insult",
+              "undermine",
+              "dispute",
+              "scream/yell",
+              "use physical force",
+              "suppress",
+              "simmer/brood"
+            ],
+            "con": [
+              "take a time out",
+              "breathe",
+              "practice patience",
+              "reframe",
+              "distract",
+              "avoid"
+            ],
+            "des": [
+              "quarrel",
+              "insult",
+              "undermine",
+              "dispute",
+              "scream/yell",
+              "use physical force",
+              "suppress",
+              "distract",
+              "avoid",
+              "simmer/brood"
+            ],
+            "both": [
+              "distract",
+              "avoid"
+            ]
           }
         },
-        "fury": {
-          "desc": "Fury or rage names the highest most intense state of anger, often resulting in a loss of control. May result in violent actions.",
+        {
+          "name": "Fury",
+          "desc": "Fury or rage names the highest, most intense state of anger, often resulting in a loss of control. May also result in violent actions.",
           "range": {
             "min": 10,
             "max": 10
           },
           "actions": {
-            "take a time out": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "constructive": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "practice patience": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "reframe": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "distract": {
-              "valences": [
-                "choice"
-              ]
-            },
-            "avoid": {
-              "valences": [
-                "choice"
-              ]
-            },
-            "quarrel": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "insult": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "undermine": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "use physical force": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "suppress": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "simmer/brood": {
-              "valences": [
-                "destructive"
-              ]
-            }
+            "all": [
+              "take a time out",
+              "breathe",
+              "practice patience",
+              "reframe",
+              "distract",
+              "avoid",
+              "quarrel",
+              "insult",
+              "undermine",
+              "scream/yell",
+              "use physical force",
+              "suppress",
+              "simmer/brood"
+            ],
+            "con": [
+              "take a time out",
+              "breathe",
+              "practice patience",
+              "reframe",
+              "distract",
+              "avoid"
+            ],
+            "des": [
+              "quarrel",
+              "insult",
+              "undermine",
+              "scream/yell",
+              "use physical force",
+              "suppress",
+              "distract",
+              "avoid",
+              "simmer/brood"
+            ],
+            "both": [
+              "distract",
+              "avoid"
+            ]
           }
         }
-      },
-      "actions": {
-        "Dispute": "Disagree in a manner that may escalate the dispute.",
-        "Quarrel": "Verbally oppose in a manner intended to escalate the disagreement.",
-        "Insult": "Disparaging the other person in a offensive or hurtful way, which is likely to escalate the conflict in a way that interferes with resolving it.",
-        "Blame": "To hold the other person responsible for the disagreement, (or more broadly, the conflict) which has developed.",
-        "Undermine": "To make (someone or something) weaker or less effective, usually in a secret or gradual way.",
-        "Scream/yell": "Loss of control in how or what one says during a disagreement; speaking in a high volume, pitch and tone.",
-        "Use physical force": "Use of physical force to get one's way, which may be deliberately chosen or the result of a loss of control over how one acts.",
-        "Set limits": "Encapsulate the boundaries of disagreement, seeking to inhibit escalation.",
-        "Be firm": "Convey that one's position is strongly held, not likely to be abandoned.",
-        "Withdraw": "To physically or mentally leave the scene of the conflict or threat.  ",
-        "Breathe": "Focusing awareness on breating in order to diminish angry or fearful feelings.",
-        "Take a time out": "Announce intention to withdraw, to prevent escalation of the conflict.",
-        "Practice patience": "Regard the conflict as an opportunity to not lose one's temper.",
-        "Reframe": "To reconsider the trigger to the emotion to understand it in a different light, reducing or eliminating the perception that a threat is being triggered.",
-        "Suppress": "Trying to avoid feeling or acting upon the emotion that is being experienced.",
-        "Distract": "Engaging in other activities in an attempt to avoid feeling this emotion.",
-        "Avoid": "To either physically stay away from (someone or something); or internally keep one’s mind away from what is triggering the anger.",
-        "Simmer/Brood": "Acting in a way that makes clear that angry actions are building or being contemplated.",
-        "Passive Aggressiveness": "Indirect actions that have an angry undercurrent",
-        "Remove the Interferrence": "Attempting to eliminate whatever is blocking the pursuit of a goal."
-      },
+      ],
+      "actions": [
+        {
+          "name": "Quarrel",
+          "desc": "Verbally oppose in a manner intended to escalate the disagreement."
+        },
+        {
+          "name": "Insult",
+          "desc": "Disparaging the other person in a offensive or hurtful way, which is likely to escalate the conflict in a way that interferes with resolving the conflict."
+        },
+        {
+          "name": "Undermine",
+          "desc": "To make (someone or something) weaker or less effective, usually in a secret or gradual way."
+        },
+        {
+          "name": "Dispute",
+          "desc": "Disagree in a manner that may escalate the dispute."
+        },
+        {
+          "name": "Scream/yell",
+          "desc": "Loss of control in how or what one says during a disagreement; speaking in a loud volume, pitch and tone."
+        },
+        {
+          "name": "Use physical force",
+          "desc": "Use of physical force to get one's way, which may be deliberately chosen or the result of a loss of control over how one acts."
+        },
+        {
+          "name": "Set limits",
+          "desc": "Encapsulate the boundaries of disagreement, seeking to inhibit escalation."
+        },
+        {
+          "name": "Be firm",
+          "desc": "Convey that one's position is strongly held, not likely to be abandoned."
+        },
+        {
+          "name": "Withdraw",
+          "desc": "To physically or mentally leave the scene of the conflict or threat."
+        },
+        {
+          "name": "Take a time out",
+          "desc": "Announce intention to withdraw, to prevent escalation of the conflict."
+        },
+        {
+          "name": "Breathe",
+          "desc": "Focusing awareness on breathing in order to diminish angry or fearful feelings."
+        },
+        {
+          "name": "Practice patience",
+          "desc": "Regard the conflict as an opportunity to not lose one's temper."
+        },
+        {
+          "name": "Reframe",
+          "desc": "Reconsidering the emotional trigger in an attempt to reduce or eliminate it."
+        },
+        {
+          "name": "Suppress",
+          "desc": "Trying to avoid feeling or acting upon the emotion that is being experienced."
+        },
+        {
+          "name": "Distract",
+          "desc": "Engaging in other activities in an attempt to avoid feeling this emotion."
+        },
+        {
+          "name": "Avoid",
+          "desc": "To either physically stay away from (someone or something); or internally keep one’s mind away from what is triggering the anger."
+        },
+        {
+          "name": "Simmer/Brood",
+          "desc": "Acting in a way that makes clear that angry actions are building or being contemplated."
+        },
+        {
+          "name": "Passive Aggressiveness",
+          "desc": "Indirect actions that have an angry undercurrent."
+        },
+        {
+          "name": "Remove the Interference",
+          "desc": "Attempting to eliminate whatever is blocking the pursuit of a goal."
+        }
+      ],
       "triggers": [
         "Interference with locomotion",
         "Interference with action",
-        "Self-righteous or unjustified behavior",
-        "Frustration with anything",
+        "Rejection by a loved one",
         "Offensive beliefs",
-        "Feeling insulted or denigrated",
-        "Disappointment in another's actions",
-        "Rejection by a loved one"
+        "Being put down by an authority figure",
+        "Inefficiency or bureaucracy",
+        "Being wrongfully accused"
       ],
       "moods": [
         {
           "name": "Irritability",
-          "desc": "Irritability is a an angry mood. It is characterized by a readiness, a need to become angry, filtering perceptions to see provocations not noticed when not irritable. The cause is usually not known to the irritable person, but they may know that they are in such a mood. Frequent bouts of anger occur when irritable, which are more intense and last longer than they would when not irritable."
+          "desc": "Irritability is a an angry mood. It is characterized by a readiness, a need to become angry, filtering perceptions to see provocations not noticed when not irritable. The cause is usually not known to the irritable person, but they may know that they are in  such a mood. Frequent bouts of anger occur when irritable, which are more intense and last longer than they would when not irritable."
         }
       ]
     },
     "fear": {
-      "desc": "We experience fear when we perceive a threat of harm. Examples are threats to our health, wealth, social status, relationships, or identity/self-image.",
-      "statesDesc": "The fear continent includes states that respond to danger (real, imagined, or anticipated).",
-      "states": {
-        "trepidation": {
-          "desc": "Mild fear, typically about something not immediate but pending.",
+      "continent": {
+        "name": "Fear",
+        "desc": "Fear is the response to perceived danger."
+      },
+      "states": [
+        {
+          "name": "Trepidation",
+          "desc": "Sensing slight danger, often pending but not immediate.",
           "range": {
             "min": 1,
             "max": 3
           },
           "actions": {
-            "hesitate": {
-              "valences": [
-                "constructive"
-              ]
-            }
+            "all": [
+              "hesitate",
+              "reframe",
+              "be mindful",
+              "breathe",
+              "distract",
+              "ruminate",
+              "worry"
+            ],
+            "con": [
+              "hesitate",
+              "reframe",
+              "be mindful",
+              "breathe",
+              "distract"
+            ],
+            "des": [
+              "ruminate",
+              "worry",
+              "distract"
+            ],
+            "both": [
+              "distract"
+            ]
           }
         },
-        "nervousness": {
-          "desc": "Having or showing feelings of being worried and afraid about what might happen next.",
+        {
+          "name": "Nervousness",
+          "desc": "Perceiving a danger that you do not know how to respond to.",
           "range": {
             "min": 2,
             "max": 7
           },
           "actions": {
-            "hesitate": {
-              "valences": [
-                "constructive"
-              ]
-            }
+            "all": [
+              "hesitate",
+              "reframe",
+              "be mindful",
+              "breathe",
+              "distract",
+              "ruminate",
+              "worry"
+            ],
+            "con": [
+              "hesitate",
+              "reframe",
+              "be mindful",
+              "breathe",
+              "distract"
+            ],
+            "des": [
+              "ruminate",
+              "worry",
+              "distract"
+            ],
+            "both": [
+              "distract"
+            ]
           }
         },
-        "anxiety": {
-          "desc": "Apprehensiveness about an impending or anticipated threat. It may also be used when a threat can be sensed but not specified in its nature.",
+        {
+          "name": "Anxiety",
+          "desc": "Apprehensiveness about an anticipated or unspecified threat.",
           "range": {
             "min": 1,
             "max": 10
           },
           "actions": {
-            "withdraw": {
-              "valences": [
-                "choice"
-              ]
-            },
-            "hesitate": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "freeze": {
-              "valences": [
-                "choice"
-              ]
-            }
+            "all": [
+              "hesitate",
+              "withdraw",
+              "freeze",
+              "reframe",
+              "be mindful",
+              "breathe",
+              "distract",
+              "ruminate",
+              "worry"
+            ],
+            "con": [
+              "hesitate",
+              "withdraw",
+              "freeze",
+              "reframe",
+              "be mindful",
+              "breathe",
+              "distract"
+            ],
+            "des": [
+              "withdraw",
+              "freeze",
+              "ruminate",
+              "worry",
+              "distract"
+            ],
+            "both": [
+              "withdraw",
+              "freeze",
+              "distract"
+            ]
           }
         },
-        "dread": {
-          "desc": "Anticipating a severe threat from which there is no protection or avoidance.",
+        {
+          "name": "Dread",
+          "desc": "Anticipating severe danger from which there is no protection or escape.",
           "range": {
             "min": 6,
             "max": 10
           },
           "actions": {
-            "withdraw": {
-              "valences": [
-                "choice"
-              ]
-            },
-            "freeze": {
-              "valences": [
-                "choice"
-              ]
-            }
+            "all": [
+              "withdraw",
+              "freeze",
+              "reframe",
+              "be mindful",
+              "breathe",
+              "distract",
+              "scream/yell",
+              "ruminate",
+              "worry"
+            ],
+            "con": [
+              "withdraw",
+              "freeze",
+              "reframe",
+              "be mindful",
+              "breathe",
+              "distract"
+            ],
+            "des": [
+              "withdraw",
+              "freeze",
+              "scream/yell",
+              "ruminate",
+              "worry",
+              "distract"
+            ],
+            "both": [
+              "withdraw",
+              "freeze",
+              "distract"
+            ]
           }
         },
-        "desperation": {
-          "desc": "Inclined to risk attempts to reduce a perceived threat.",
+        {
+          "name": "Desperation",
+          "desc": "Realizing the futility of our attempts to reduce danger.",
           "range": {
             "min": 9,
             "max": 10
           },
           "actions": {
-            "avoid": {
-              "valences": [
-                "choice"
-              ]
-            },
-            "hesitate": {
-              "valences": [
-                "choice"
-              ]
-            }
+            "all": [
+              "avoid",
+              "hesitate",
+              "freeze",
+              "scream/yell",
+              "ruminate"
+            ],
+            "con": [
+              "avoid",
+              "hesitate",
+              "freeze"
+            ],
+            "des": [
+              "avoid",
+              "hesitate",
+              "freeze",
+              "scream/yell",
+              "ruminate"
+            ],
+            "both": [
+              "avoid",
+              "hesitate",
+              "freeze"
+            ]
           }
         },
-        "panic": {
-          "desc": "Extreme fear when no way to reduce the threat is apparent.",
+        {
+          "name": "Panic",
+          "desc": "A consequence of desperation.",
           "range": {
-            "min": 9,
+            "min": 10,
             "max": 10
           },
           "actions": {
-            "withdraw": {
-              "valences": [
-                "choice"
-              ]
-            },
-            "freeze": {
-              "valences": [
-                "choice"
-              ]
-            }
+            "all": [
+              "withdraw",
+              "freeze",
+              "scream/yell",
+              "ruminate",
+              "worry"
+            ],
+            "con": [
+              "withdraw",
+              "freeze",
+              "scream/yell"
+            ],
+            "des": [
+              "withdraw",
+              "freeze",
+              "scream/yell",
+              "ruminate",
+              "worry"
+            ],
+            "both": [
+              "withdraw",
+              "freeze",
+              "scream/yell"
+            ]
           }
         },
-        "horror": {
+        {
+          "name": "Horror",
           "desc": "A mixture of fear and disgust which probably alternate quickly rather than merge together.",
           "range": {
             "min": 10,
             "max": 10
           },
           "actions": {
-            "withdraw": {
-              "valences": [
-                "choice"
-              ]
-            },
-            "freeze": {
-              "valences": [
-                "choice"
-              ]
-            }
+            "all": [
+              "withdraw",
+              "freeze",
+              "scream/yell"
+            ],
+            "con": [
+              "withdraw",
+              "freeze",
+              "scream/yell"
+            ],
+            "des": [
+              "withdraw",
+              "freeze",
+              "scream/yell"
+            ],
+            "both": [
+              "withdraw",
+              "freeze",
+              "scream/yell"
+            ]
           }
         },
-        "terror": {
-          "desc": "The most extreme fear felt.",
+        {
+          "name": "Terror",
+          "desc": "The most extreme fear that can be felt.",
           "range": {
             "min": 10,
             "max": 10
           },
           "actions": {
-            "withdraw": {
-              "valences": [
-                "choice"
-              ]
-            },
-            "freeze": {
-              "valences": [
-                "choice"
-              ]
-            }
+            "all": [
+              "withdraw",
+              "freeze",
+              "scream/yell"
+            ],
+            "con": [
+              "withdraw",
+              "freeze",
+              "scream/yell"
+            ],
+            "des": [
+              "withdraw",
+              "freeze",
+              "scream/yell"
+            ],
+            "both": [
+              "withdraw",
+              "freeze",
+              "scream/yell"
+            ]
           }
         }
-      },
-      "actions": {
-        "Withdraw": "To physically or mentally leave the scene of the conflict or threat.",
-        "Avoid": "To either physically stay away from (someone or something); or internally keep one's mind away from what is triggering fear.",
-        "Hesitate": "To hold back in doubt or indecision; to delay momentarily.",
-        "Freeze": "To become fixed or motionless; especially, to become incapable of acting or speaking.",
-        "Suppress": "To actively try to avoid feeling the emotional experience.",
-        "Scream/yell": "Loss of control in how or what one says during a disagreement; speaking in a high volume, pitch and tone.",
-        "Reframe": "To reconsider the trigger to the emotion to understand it in a different light, reducing or eliminating the perception that a threat is being triggered.",
-        "Be mindful": "To notice and accept the feeling of the emotion and recognize the feeling as temporary.",
-        "Breathe": "Focusing awareness on breathing in order to diminish one's fearful feelings.",
-        "Ruminate": "To compulsively rethink of one's experience.",
-        "Worry": "Anticipate the likelihood of harm.",
-        "Distract": "Engaging in other activities in an attempt to avoid feeling this emotion."
-      },
+      ],
+      "actions": [
+        {
+          "name": "Withdraw",
+          "desc": "To physically or mentally leave the scene of the threat."
+        },
+        {
+          "name": "Avoid",
+          "desc": "To physically stay away from someone or something or deliberately not think about it."
+        },
+        {
+          "name": "Hesitate",
+          "desc": "To hold back in doubt or indecision, often momentarily."
+        },
+        {
+          "name": "Freeze",
+          "desc": "To become incapable of acting or speaking."
+        },
+        {
+          "name": "Scream/yell",
+          "desc": "Losing control of how or what one says."
+        },
+        {
+          "name": "Reframe",
+          "desc": "Reconsidering the emotional trigger as an attempt to reduce or eliminate it."
+        },
+        {
+          "name": "Be Mindful",
+          "desc": "Accepting how you feel and recognizing that it's temporary. "
+        },
+        {
+          "name": "Breathe",
+          "desc": "Focusing awareness on breathing in order to diminish fearful feelings. "
+        },
+        {
+          "name": "Ruminate",
+          "desc": "To repetitively rethink about the emotional experience."
+        },
+        {
+          "name": "Worry",
+          "desc": "Anticipating the possibility of harm."
+        },
+        {
+          "name": "Distract",
+          "desc": "Engaging in other activities in an attempt to avoid feeling this emotion."
+        }
+      ],
       "triggers": [
-        "threat of losing job",
-        "threat of losing health",
-        "threat of losing friendship",
-        "threat of losing status",
-        "public speaking",
-        "threat to safety",
-        "sudden loss of gravity",
-        "a moving object about to impact us if we don't duck",
-        "snakes"
+        "Threat of losing status",
+        "Threat to safety",
+        "Sudden loss of gravity",
+        "Snake-like shapes",
+        "Threat of losing job",
+        "Thunder",
+        "Public speaking"
       ],
       "moods": [
         {
-          "name": "apprehensive",
+          "name": "Apprehensiveness",
           "desc": "Expecting harm but not knowing how to avoid it. Perceive threats when they are not there, or magnify the seriousness of a threat."
         }
       ]
     },
+    "disgust": {
+      "continent": {
+        "name": "Disgust",
+        "desc": "We are disgusted by anything that is literally or physically toxic. "
+      },
+      "states": [
+        {
+          "name": "Aversion",
+          "desc": "Wanting to avoid something noxious.",
+          "range": {
+            "min": 2,
+            "max": 7
+          },
+          "actions": {
+            "all": [
+              "withdraw",
+              "avoid",
+              "dehumanize"
+            ],
+            "con": [
+              "withdraw",
+              "avoid"
+            ],
+            "des": [
+              "dehumanize"
+            ],
+            "both": []
+          }
+        },
+        {
+          "name": "Dislike",
+          "desc": "An aversion to something, some person or some action.",
+          "range": {
+            "min": 1,
+            "max": 5
+          },
+          "actions": {
+            "all": [
+              "withdraw",
+              "avoid",
+              "dehumanize"
+            ],
+            "con": [
+              "withdraw",
+              "avoid"
+            ],
+            "des": [
+              "avoid",
+              "dehumanize"
+            ],
+            "both": [
+              "avoid"
+            ]
+          }
+        },
+        {
+          "name": "Distaste",
+          "desc": "Offended by taste or smell and metaphorically used to descrive offensive sights or actions.",
+          "range": {
+            "min": 2,
+            "max": 7
+          },
+          "actions": {
+            "all": [
+              "withdraw",
+              "avoid",
+              "vomit",
+              ""
+            ],
+            "con": [
+              "withdraw",
+              "avoid",
+              "vomit"
+            ],
+            "des": [
+              ""
+            ],
+            "both": []
+          }
+        },
+        {
+          "name": "Repugnance",
+          "desc": "Repelled by something toxic, literally or figuratively.",
+          "range": {
+            "min": 2,
+            "max": 9
+          },
+          "actions": {
+            "all": [
+              "withdraw",
+              "avoid",
+              "dehumanize"
+            ],
+            "con": [
+              "withdraw",
+              "avoid"
+            ],
+            "des": [
+              "dehumanize",
+              "avoid"
+            ],
+            "both": [
+              "avoid"
+            ]
+          }
+        },
+        {
+          "name": "Loathing",
+          "desc": "Very intense disgust. Very objectionable to be the target of loathing.",
+          "range": {
+            "min": 9,
+            "max": 10
+          },
+          "actions": {
+            "all": [
+              "withdraw",
+              "avoid",
+              "dehumanize"
+            ],
+            "con": [
+              "withdraw"
+            ],
+            "des": [
+              "avoid",
+              "dehumanize"
+            ],
+            "both": []
+          }
+        },
+        {
+          "name": "Revulsion",
+          "desc": "Very strong disgust which usually implies a movement away from the source.",
+          "range": {
+            "min": 8,
+            "max": 10
+          },
+          "actions": {
+            "all": [
+              "withdraw",
+              "avoid",
+              "vomit",
+              "dehumanize"
+            ],
+            "con": [
+              "withdraw",
+              "avoid",
+              "vomit"
+            ],
+            "des": [
+              "dehumanize"
+            ],
+            "both": []
+          }
+        },
+        {
+          "name": "Abhorrence",
+          "desc": "Extremely repelled by look, smell, or taste of toxic sustances, or by highly offensive actions.",
+          "range": {
+            "min": 8,
+            "max": 10
+          },
+          "actions": {
+            "all": [
+              "withdraw",
+              "avoid",
+              "dehumanize"
+            ],
+            "con": [
+              "withdraw",
+              "avoid"
+            ],
+            "des": [
+              "dehumanize"
+            ],
+            "both": []
+          }
+        }
+      ],
+      "actions": [
+        {
+          "name": "Withdraw",
+          "desc": "To physically or mentally leave the scene of what is triggering the disgust."
+        },
+        {
+          "name": "Avoid",
+          "desc": "To either phsyically stay away from (someone or something); or internally keep one's mind away from what is triggering the disgust."
+        },
+        {
+          "name": "Vomit",
+          "desc": "Literally to expel material from the mouth or stomach; metaphorically denotes very intense disgust."
+        },
+        {
+          "name": "Dehumanize",
+          "desc": "To treat someone as though he or she is not a human being; to deprive of human qualities, personality, or spirit."
+        }
+      ],
+      "triggers": [
+        "Rotting or decay",
+        "Anything coming out of the body",
+        "Unfamiliar religious customs",
+        "Eating insects or raw meat",
+        "Fan's of an opposing sport's team"
+      ],
+      "moods": [
+        {
+          "name": "Sour",
+          "desc": "Not commonly a mood, it can occur as a mood when there is a generalized feeling of repugnance or revulsion - usually of low intensity."
+        }
+      ]
+    },
+    "sadness": {
+      "continent": {
+        "name": "Sadness",
+        "desc": "We experience sadness with the actual or perceived loss of a person to whom we are attached, such as an offspring, a lover, close friend, or to a loss of our own health or social status or to the loss of an object that we value highly."
+      },
+      "states": [
+        {
+          "name": "Disappointment",
+          "desc": "Felt when expectations are not met.",
+          "range": {
+            "min": 1,
+            "max": 5
+          },
+          "actions": {
+            "all": [
+              "seek comfort",
+              "mourn",
+              "distract",
+              "withdraw",
+              "ruminate",
+              "feel ashamed"
+            ],
+            "con": [
+              "seek comfort",
+              "mourn",
+              "distract"
+            ],
+            "des": [
+              "withdraw",
+              "ruminate",
+              "mourn",
+              "distract",
+              "feel ashamed"
+            ],
+            "both": [
+              "mourn",
+              "distract"
+            ]
+          }
+        },
+        {
+          "name": "Distraughtness",
+          "desc": "Agitated sadness. Felt intensely and often for long periods.",
+          "range": {
+            "min": 2,
+            "max": 8
+          },
+          "actions": {
+            "all": [
+              "seek comfort",
+              "protest",
+              "withdraw",
+              "feel ashamed"
+            ],
+            "con": [
+              "seek comfort",
+              "protest"
+            ],
+            "des": [
+              "withdraw",
+              "protest",
+              "feel ashamed"
+            ],
+            "both": [
+              "protest"
+            ]
+          }
+        },
+        {
+          "name": "Discouragement",
+          "desc": "Felt when no way to cope with an acutal or potential loss is known.",
+          "range": {
+            "min": 2,
+            "max": 8
+          },
+          "actions": {
+            "all": [
+              "seek comfort",
+              "mourn",
+              "protest",
+              "distract",
+              "withdraw",
+              "ruminate"
+            ],
+            "con": [
+              "seek comfort",
+              "mourn",
+              "protest",
+              "distract"
+            ],
+            "des": [
+              "withdraw",
+              "ruminate",
+              "mourn",
+              "distract"
+            ],
+            "both": [
+              "mourn",
+              "distract"
+            ]
+          }
+        },
+        {
+          "name": "Resignation",
+          "desc": "Accepting that nothing can be done to prevent an important loss.",
+          "range": {
+            "min": 1,
+            "max": 10
+          },
+          "actions": {
+            "all": [
+              "seek comfort",
+              "withdraw",
+              "protest",
+              "ruminate",
+              "mourn",
+              "protect",
+              "feel ashamed"
+            ],
+            "con": [
+              "seek comfort",
+              "withdraw",
+              "protest"
+            ],
+            "des": [
+              "withdraw",
+              "ruminate",
+              "mourn",
+              "protect",
+              "feel ashamed"
+            ],
+            "both": [
+              "withdraw"
+            ]
+          }
+        },
+        {
+          "name": "Helplessness",
+          "desc": "Realization of the inability to prevent or cope with loss.",
+          "range": {
+            "min": 5,
+            "max": 10
+          },
+          "actions": {
+            "all": [
+              "seek comfort",
+              "protest",
+              "withdraw",
+              "ruminate",
+              "feel ashamed"
+            ],
+            "con": [
+              "seek comfort",
+              "protest"
+            ],
+            "des": [
+              "withdraw",
+              "ruminate",
+              "protest",
+              "feel ashamed"
+            ],
+            "both": [
+              "protest"
+            ]
+          }
+        },
+        {
+          "name": "Misery",
+          "desc": "Intense prolonged feelings of anguished sadness.",
+          "range": {
+            "min": 6,
+            "max": 10
+          },
+          "actions": {
+            "all": [
+              "seek comfort",
+              "mourn",
+              "protest",
+              "distract",
+              "withdraw",
+              "ruminate"
+            ],
+            "con": [
+              "seek comfort",
+              "mourn",
+              "protest",
+              "distract"
+            ],
+            "des": [
+              "withdraw",
+              "ruminate",
+              "mourn",
+              "protest",
+              "distract"
+            ],
+            "both": [
+              "mourn",
+              "protest",
+              "distract"
+            ]
+          }
+        },
+        {
+          "name": "Grief",
+          "desc": "Anguished sadness aroused by the death of a loved one. Varies over time, from very intense at the time of the death to intermittent moderate as time goes on.",
+          "range": {
+            "min": 7,
+            "max": 10
+          },
+          "actions": {
+            "all": [
+              "seek comfort",
+              "mourn",
+              "protest",
+              "distract",
+              "withdraw",
+              "ruminate",
+              "feel ashamed"
+            ],
+            "con": [
+              "seek comfort",
+              "mourn",
+              "protest",
+              "distract"
+            ],
+            "des": [
+              "withdraw",
+              "ruminate",
+              "mourn",
+              "protest",
+              "distract",
+              "feel ashamed"
+            ],
+            "both": [
+              "mourn",
+              "protest",
+              "distract"
+            ]
+          }
+        },
+        {
+          "name": "Despair",
+          "desc": "Resigned anguished sadness.",
+          "range": {
+            "min": 7,
+            "max": 10
+          },
+          "actions": {
+            "all": [
+              "seek comfort",
+              "mourn",
+              "withdraw",
+              "ruminate"
+            ],
+            "con": [
+              "seek comfort",
+              "mourn"
+            ],
+            "des": [
+              "withdraw",
+              "ruminate",
+              "mourn"
+            ],
+            "both": [
+              "mourn"
+            ]
+          }
+        },
+        {
+          "name": "Sorrow",
+          "desc": "Feeling an important loss.",
+          "range": {
+            "min": 7,
+            "max": 10
+          },
+          "actions": {
+            "all": [
+              "seek comfort",
+              "mourn",
+              "distract",
+              "withdraw",
+              "ruminate",
+              "feel ashamed"
+            ],
+            "con": [
+              "seek comfort",
+              "mourn",
+              "distract"
+            ],
+            "des": [
+              "withdraw",
+              "ruminate",
+              "mourn",
+              "distract",
+              "feel ashamed"
+            ],
+            "both": [
+              "mourn",
+              "distract"
+            ]
+          }
+        },
+        {
+          "name": "Anguish",
+          "desc": "Intense agitation. Protesting form of despair over an actual or expected loss.",
+          "range": {
+            "min": 10,
+            "max": 10
+          },
+          "actions": {
+            "all": [
+              "seek comfort",
+              "mourn",
+              "protest",
+              "withdraw",
+              "ruminate"
+            ],
+            "con": [
+              "seek comfort",
+              "mourn",
+              "protest"
+            ],
+            "des": [
+              "withdraw",
+              "ruminate",
+              "mourn",
+              "protest"
+            ],
+            "both": [
+              "mourn",
+              "protest"
+            ]
+          }
+        },
+        {
+          "name": "Hopelessness",
+          "desc": "NEED DESCRIPTION",
+          "range": {
+            "min": 6,
+            "max": 10
+          },
+          "actions": {
+            "all": [
+              "seek comfort",
+              "mourn",
+              "distract",
+              "withdraw",
+              "ruminate",
+              "feel ashamed"
+            ],
+            "con": [
+              "seek comfort",
+              "mourn",
+              "distract"
+            ],
+            "des": [
+              "withdraw",
+              "ruminate",
+              "mourn",
+              "distract",
+              "feel ashamed"
+            ],
+            "both": [
+              "mourn",
+              "distract"
+            ]
+          }
+        }
+      ],
+      "actions": [
+        {
+          "name": "Seek Comfort",
+          "desc": "To seek help or support from others"
+        },
+        {
+          "name": "Withdraw",
+          "desc": "To physically or mentally leave the scene."
+        },
+        {
+          "name": "Ruminate",
+          "desc": "To compulsively, repetitively, rethink about the emotional experience."
+        },
+        {
+          "name": "Mourn",
+          "desc": "To focus on the loss."
+        },
+        {
+          "name": "Protest",
+          "desc": "To complain about the loss albeit knowing that the complaint will not recover what was lost."
+        },
+        {
+          "name": "Feel Ashamed",
+          "desc": "To feel the need to hide how one feels about what or who is lost."
+        },
+        {
+          "name": "Distract",
+          "desc": "Engaging in other activities in an attempt to avoid feeling this emotion."
+        }
+      ],
+      "triggers": [
+        "Losing a loved one",
+        "Being rejected by someone important",
+        "Perceived loss of status",
+        "Not being invited to a party",
+        "Losing a treasured belonging"
+      ],
+      "moods": [
+        {
+          "name": "Dysphoria (or feeling blue)",
+          "desc": "Feelings of resignation, discouragement, or disappointment that endure for a long time period. The anguished side of sadness does not transform into a mood."
+        }
+      ]
+    },
     "enjoyment": {
-      "desc": "We experience enjoyment when a good feeling is generated, which we often seek to continue or re-experience.",
-      "statesDesc": "Enjoyment has more named states in the English language than any of the other emotions.",
-      "states": {
-        "relief": {
-          "desc": "When something expected to be unpleasant, especially the threat of harm, is avoided or comes to an end.",
+      "continent": {
+        "name": "Enjoyment",
+        "desc": "The pursuit of what feels good is a primary motive in our lives. "
+      },
+      "states": [
+        {
+          "name": "Sensory Pleasures",
+          "desc": "NEED DESCRIPTION",
+          "range": {
+            "min": 1,
+            "max": 5
+          },
+          "actions": {
+            "all": [
+              "seek more",
+              ""
+            ],
+            "con": [
+              "seek more"
+            ],
+            "des": [
+              ""
+            ],
+            "both": []
+          }
+        },
+        {
+          "name": "Relief",
+          "desc": "When something expected to be unplesant, especialy the threat of harm, is avoided or comes to an end.",
           "range": {
             "min": 2,
             "max": 10
           },
           "actions": {
-            "withdraw": {
-              "valences": [
-                "constructive"
-              ]
-            }
+            "all": [
+              "exclaim",
+              "engage/connect",
+              "savor",
+              "indulge"
+            ],
+            "con": [
+              "exclaim",
+              "engage/connect",
+              "savor",
+              "indulge"
+            ],
+            "des": [
+              "indulge"
+            ],
+            "both": [
+              "indulge"
+            ]
           }
         },
-        "amusement": {
+        {
+          "name": "Amusement",
           "desc": "Light, playful, humorous feelings of enjoyment.",
           "range": {
             "min": 2,
             "max": 8
           },
           "actions": {
-            "withdraw": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "seek more": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "maintain": {
-              "valences": [
-                "constructive"
-              ]
-            }
+            "all": [
+              "seek more",
+              "maintain",
+              "exclaim",
+              "engage/connect",
+              "indulge"
+            ],
+            "con": [
+              "seek more",
+              "maintain",
+              "exclaim",
+              "engage/connect",
+              "indulge"
+            ],
+            "des": [
+              "indulge"
+            ],
+            "both": [
+              "indulge"
+            ]
           }
         },
-        "excitement": {
-          "desc": "Energetic pursuit that, unlike other enjoyable emotions, is rarely felt slightly, but ranges from mid to high in intensity. May merge with any of the emotions to generate a very active form of that emotion.",
+        {
+          "name": "Excitement",
+          "desc": "Energetic pursuit that, unlike other enjoyable emotions, is rarely felt slightly, but ranges from mid to high in intesnity. May merge with any of the emotions generate a very active form of that emotion.",
           "range": {
             "min": 6,
             "max": 10
           },
           "actions": {
-            "withdraw": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "seek more": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "maintain": {
-              "valences": [
-                "constructive"
-              ]
-            }
+            "all": [
+              "seek more",
+              "maintain",
+              "exclaim",
+              "engage/connect",
+              "indulge"
+            ],
+            "con": [
+              "seek more",
+              "maintain",
+              "exclaim",
+              "engage/connect",
+              "indulge"
+            ],
+            "des": [
+              "indulge"
+            ],
+            "both": [
+              "indulge"
+            ]
           }
         },
-        "ecstasy": {
+        {
+          "name": "Ecstasy",
           "desc": "Rapturous delight. A state of very great happiness, nearly overwhelming.",
           "range": {
             "min": 9,
             "max": 10
           },
           "actions": {
-            "withdraw": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "maintain": {
-              "valences": [
-                "constructive"
-              ]
-            }
+            "all": [
+              "maintain",
+              "savor",
+              "indulge"
+            ],
+            "con": [
+              "maintain",
+              "savor",
+              "indulge"
+            ],
+            "des": [
+              "indulge"
+            ],
+            "both": [
+              "indulge"
+            ]
           }
         },
-        "fiero": {
-          "desc": "An Italian word that describes the enjoyment felt when you have met a challenge that stretched your capabilities.",
+        {
+          "name": "Fiero",
+          "desc": "An Italian word that descrives the enjoyment felt when you have met a challenge that stretched your capabilities.",
           "range": {
             "min": 3,
             "max": 10
           },
           "actions": {
-            "gloat": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "withdraw": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "seek more": {
-              "valences": [
-                "constructive"
-              ]
-            },
-            "maintain": {
-              "valences": [
-                "constructive"
-              ]
-            }
+            "all": [
+              "seek more",
+              "maintain",
+              "engage/connect",
+              "savor",
+              "indulge",
+              "gloat"
+            ],
+            "con": [
+              "seek more",
+              "maintain",
+              "engage/connect",
+              "savor",
+              "indulge"
+            ],
+            "des": [
+              "gloat",
+              "engage/connect",
+              "savor",
+              "indulge"
+            ],
+            "both": [
+              "engage/connect",
+              "savor",
+              "indulge"
+            ]
           }
         },
-        "naches": {
-          "desc": "The Yiddish word for the enjoyable feeling of pride in the accomplishments, or sometimes just the existence, of your actual offspring, or mentored offspring. Crucial for motivating the nurture of infants and children.",
+        {
+          "name": "Naches",
+          "desc": "The Yiddish word for feelings of pride in the accomplishments, or sometimes just the existence, of your actual offspring, or mentored offspring. Crucial for motivating the nurture of infants and children.",
           "range": {
             "min": 3,
             "max": 10
           },
           "actions": {
-            "gloat": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "withdraw": {
-              "valences": [
-                "constructive"
-              ]
-            }
+            "all": [
+              "exclaim",
+              "engage/connect",
+              "savor",
+              "gloat"
+            ],
+            "con": [
+              "exclaim",
+              "engage/connect",
+              "savor"
+            ],
+            "des": [
+              "gloat",
+              "exclaim",
+              "engage/connect",
+              "savor"
+            ],
+            "both": [
+              "exclaim",
+              "engage/connect",
+              "savor"
+            ]
           }
         },
-        "wonder": {
+        {
+          "name": "Wonder",
           "desc": "Experiencing something that is very surprising, beautiful, amazing, or hard to believe.",
           "range": {
             "min": 5,
             "max": 10
           },
           "actions": {
-            "seek more": {
-              "valences": [
-                "constructive"
-              ]
-            }
+            "all": [
+              "seek more",
+              "exclaim",
+              "engage/connect",
+              "savor",
+              "indulge"
+            ],
+            "con": [
+              "seek more",
+              "exclaim",
+              "engage/connect",
+              "savor",
+              "indulge"
+            ],
+            "des": [
+              "indulge"
+            ],
+            "both": [
+              "indulge"
+            ]
           }
         },
-        "schadenfreude": {
+        {
+          "name": "Schadenfreude",
           "desc": "Enjoying the misfortunes of another person, usually a rival.",
           "range": {
             "min": 3,
             "max": 8
           },
           "actions": {
-            "gloat": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "seek more": {
-              "valences": [
-                "destructive"
-              ]
-            },
-            "maintain": {
-              "valences": [
-                "destructive"
-              ]
-            }
+            "all": [
+              "",
+              "seek more",
+              "maintain",
+              "gloat",
+              "exclaim",
+              "engage/connect"
+            ],
+            "con": [
+              ""
+            ],
+            "des": [
+              "seek more",
+              "maintain",
+              "gloat",
+              "exclaim",
+              "engage/connect"
+            ],
+            "both": []
           }
         },
-        "rejoicing": {
-          "desc": "A warm, uplifting feeling that people experience when they see unexpected acts of human goodness, kindness, and compassion. Mild to strongly felt. Also called elevation.",
+        {
+          "name": "Rejoicing",
+          "desc": "A warm, uplifting feeling that people experience when they see acts of human goodness, kindness, and compassion. Also called elevation.",
           "range": {
             "min": 2,
             "max": 8
           },
           "actions": {
-            "seek more": {
-              "valences": [
-                "constructive"
-              ]
-            }
+            "all": [
+              "seek more",
+              "exclaim",
+              "engage/connect",
+              "savor",
+              "indulge"
+            ],
+            "con": [
+              "seek more",
+              "exclaim",
+              "engage/connect",
+              "savor",
+              "indulge"
+            ],
+            "des": [
+              "indulge"
+            ],
+            "both": [
+              "indulge"
+            ]
           }
         },
-        "compassion-joy": {
-          "desc": "Enjoyment felt when you act compassionately, especially if your actions help to relieve another person's suffering.",
+        {
+          "name": "Compassion-joy",
+          "desc": "Enjoyment felt when you act compassionately, especially if your actions helpf to relieve another person's suffering.",
           "range": {
             "min": 3,
             "max": 6
           },
           "actions": {
-            "seek more": {
-              "valences": [
-                "constructive"
-              ]
-            }
+            "all": [
+              "seek more",
+              "exclaim",
+              "engage/connect",
+              "savor",
+              ""
+            ],
+            "con": [
+              "seek more",
+              "exclaim",
+              "engage/connect",
+              "savor"
+            ],
+            "des": [
+              ""
+            ],
+            "both": []
           }
         },
-        "pride": {
-          "desc": "Wanting others to know the pleasure you feel in your own accomplishment or the accomplishments of another whom you either nurtured directly or identify with.",
+        {
+          "name": "Pride",
+          "desc": "Wanting others to know the pleasure you feel in your own accomplishments or the accomplishments of another who you either nurtured directly or identified with.",
           "range": {
             "min": 4,
             "max": 9
           },
           "actions": {
-            "seek more": {
-              "valences": [
-                "constructive"
-              ]
-            }
+            "all": [
+              "seek more",
+              "exclaim",
+              "engage/connect",
+              "savor",
+              "indulge"
+            ],
+            "con": [
+              "seek more",
+              "exclaim",
+              "engage/connect",
+              "savor",
+              "indulge"
+            ],
+            "des": [
+              "exclaim",
+              "engage/connect",
+              "savor",
+              "indulge"
+            ],
+            "both": [
+              "exclaim",
+              "engage/connect",
+              "savor",
+              "indulge"
+            ]
+          }
+        },
+        {
+          "name": "Debauchery",
+          "desc": "NEED DESCRIPTION",
+          "range": {
+            "min": 6,
+            "max": 10
+          },
+          "actions": {
+            "all": [
+              "withdraw",
+              "engage/connect",
+              "seek more",
+              "maintain",
+              "savor",
+              "indulge"
+            ],
+            "con": [
+              "withdraw",
+              "engage/connect"
+            ],
+            "des": [
+              "seek more",
+              "maintain",
+              "engage/connect",
+              "savor",
+              "indulge"
+            ],
+            "both": [
+              "engage/connect"
+            ]
           }
         }
-      },
-      "actions": {
-        "Withdraw": "To physically or mentally leave the scene.",
-        "Seek more": "To increase the enjoyable feelings.",
-        "Maintain": "To continue to do what is necessary to continue the enjoyable feelings.",
-        "Gloat": "To enjoy others envying your enjoyable state.",
-        "Laugh": "To have spontaneous expression of enjoyment through laughther",
-        "Exclaim": "To vocally expression enjoyment with others",
-        "Cry": "To feel overwhelmed by a meaningful, enjoyable experience with tears of joy.",
-        "Engage/Connect": "To desire connection and engagement with others to share in feelings of enjoyment.",
-        "Savor": "To relish in the experience good feelings about the felt and psychological experiences.",
-        "Indulge": "Excessively engaging in the enjoyable feelings",
-        "Debauchery": "excessive indulgence in sensual pleasures"
-      },
+      ],
+      "actions": [
+        {
+          "name": "Withdraw",
+          "desc": "To physically or mentally leave the scene."
+        },
+        {
+          "name": "Seek more",
+          "desc": "To increase the enjoyable feelings."
+        },
+        {
+          "name": "Maintain",
+          "desc": "To continue to do what is necessary to continue the enjoyable feelings."
+        },
+        {
+          "name": "Gloat",
+          "desc": "To enjoy others envying your enjoyable state."
+        },
+        {
+          "name": "Exclaim",
+          "desc": "To vocally express enjoyment to others."
+        },
+        {
+          "name": "Engage/Connect",
+          "desc": "To desire connection and engagement with others to share in feelings of enjoyment."
+        },
+        {
+          "name": "Savor",
+          "desc": "To relish in the experience of good feelings about the felt and psychological experiences."
+        },
+        {
+          "name": "Indulge",
+          "desc": "Excessively engaging in the enjoyable feelings"
+        }
+      ],
       "triggers": [
-        "sensory pleasures",
-        "helping others",
-        "places associated with enjoyable memories",
-        "favored activities",
-        "specific learned sensory pleasures such as a favorite food or song",
-        "favorite people",
-        "some social interactions",
-        "comedy"
+        "Sensory experience of nature",
+        "Helping others",
+        "Social interaction",
+        "Playing badminton",
+        "The taste of chocolate cake",
+        "Spending time with family",
+        "Places associated with enjoyable memories"
       ],
       "moods": [
         {
-          "name": "high",
-          "desc": "Generalized, non-specific feeling good not about any trigger; lasting hours"
+          "name": "High",
+          "desc": "Generalized, non-specific feeling good not about any trigger; lasting hours."
         }
       ]
     }
   },
-  "other": {
-    "uncharted": {
-      "title": "Uncharted Emotions",
-      "description": "Half or less than half of emotion scientists believe there is convincing evidence that each of the following is an emotion.",
-      "columns": [
+  "metadata": {
+    "intro": {
+      "header": "Welcome to The Ekman Atlas of Emotion ",
+      "body": "This collection of maps was created to help you better understand your emotions, where they come from and the effect they have on your life.<br><br>Navigate the atlas by scrolling between sections, and by clicking elements to dig deeper.<br><br>This is an opportunity for you to explore the vast world of emotions. The atlas begins with what scholars agree on and gradually introduces our working hypotheses of more complex subject matter."
+    },
+    "continents": {
+      "header": "The Emotion Continents",
+      "body": "Each emotion is represented as a continent. The movement of the shapes reflects how our emotions vary in strength and frequency in peoples lives."
+    },
+    "states": {
+      "header": "The States of an Emotion",
+      "body": "Each emotion names a number of related but different states. These states vary not only in their nature, but in their intensity."
+    },
+    "actions": {
+      "header": "The Actions of a State",
+      "body": "Each emotional state typically results in a number of actions.",
+      "qualities": [
         {
-          "sections": [
-            {
-              "title": "love",
-              "content": "A strong attachment to another person, typically parent towards child and child towards parent, but also between those romantically committed. Within loving relationships, anger, fear, sadness, disgust and enjoyment all can be experienced."
-            },
-            {
-              "title": "hate",
-              "content": "Enduring anger focused on a particular person or group of persons. Over time hatred may generate the personality trait of hostility."
-            },
-            {
-              "title": "surprise",
-              "content": "The briefest emotion, triggered by the sudden occurrence of an unexpected event. It often is a way station, leading, after more appraisal, to any of the other emotions."
-            },
-            {
-              "title": "contempt",
-              "content": "The last to appear in child development, it is a feeling of moral superiority to the target. Often mixed with enjoyment."
-            },
-            {
-              "title": "jealousy",
-              "content": "An emotional story-line involving three people: a desired person, a rival, and the person afraid of losing the commitment of the desired person. During jealousy, anger, fear, disgust, sadness or surprise may be felt by any of the three people."
-            }
-          ]
+          "header": "Constructive Actions",
+          "body": "Actions that further future collaboration with others."
         },
         {
-          "sections": [
-            {
-              "title": "envy",
-              "content": "Although often misused as a synonym for jealousy, envy involves resenting and wanting what another person possesses. When feeling envy, anger, contempt, or sadness may also be felt."
-            },
-            {
-              "title": "embarrassment",
-              "content": "Activated often by praise from another, also by a faux pas. No facial or vocal signal, but a blush which is only visible in light-skinned people."
-            },
-            {
-              "title": "shame",
-              "content": "Expecting others would be disgusted with you if they knew what you were thinking of or had done. It motivates a strong wish to prevent others from learning what you have done or thought."
-            },
-            {
-              "title": "guilt",
-              "content": "Regret about a past action, which motivates the wish to confess the wrongful action, hoping for forgiveness."
-            }
-          ]
+          "header": "Destructive Actions",
+          "body": "Actions that decrease the likelihood of being able to collaborate with others."
+        },
+        {
+          "header": "Ambiguous Actions",
+          "body": "Sometimes an action can be both constructive and desctructive in different contexts."
         }
       ]
+    },
+    "triggers": {
+      "header": "The Triggers of an Emotion",
+      "body": "Triggers automatically bring forth an emotion without consideration.",
+      "steps": [
+        {
+          "header": "Event",
+          "body": "Some triggers are universal, some are cultural, and some are individual."
+        },
+        {
+          "header": "Assessment",
+          "body": "We can become emotional about anything: the world around us, both novel and familiar, our expectations and memories."
+        },
+        {
+          "header": "Response",
+          "body": "It is very difficult to modify our emotional actions once triggered. Identifying what triggers our emotions may enable us to lead a more balanced emotional life."
+        },
+        {
+          "header": "Universal Triggers",
+          "body": "Universal triggers are innate, common to everyone. They affect us more intensely than learned triggers."
+        },
+        {
+          "header": "Learned Triggers",
+          "body": "Learned triggers are either cultural, stemming from widely shared experiences, or personal, arising from more individual experiences."
+        }
+      ]
+    },
+    "moods": {
+      "header": "The Mood of an Emotion",
+      "body": "Moods are longer-lasting cousins of an emotion that cause the related emotion to be felt more frequently and intensely."
     }
   }
 }
