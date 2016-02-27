@@ -107,6 +107,11 @@ export default {
 			.classed('calm-paths', true)
 			.attr('transform', 'scale(' + w/PATH_SOURCE_WIDTH + ',' + h/PATH_SOURCE_HEIGHT + ')');
 
+		// Bind event handlers to current scope
+		this.onContinentMouseEnter = this.onContinentMouseEnter.bind(this);
+		this.onContinentMouseLeave = this.onContinentMouseLeave.bind(this);
+		this.onContinentMouseUp = this.onContinentMouseUp.bind(this);
+
 		this.isInited = true;
 
 	},
@@ -153,7 +158,15 @@ export default {
 
 	setActive: function (val) {
 
+		let section = this;
 		this.isActive = val;
+
+		continents.forEach(function (continent, i) {
+			continent.d3Selection
+				.on('mouseenter', val ? section.onContinentMouseEnter : null)
+				.on('mouseleave', val ? section.onContinentMouseLeave : null)
+				.on('mouseup', val ? section.onContinentMouseUp : null);
+		});
 
 	},
 
@@ -253,6 +266,91 @@ export default {
 			interpolator = d3.interpolateString('0 0 '+ pl * l, '0 '+ l +' 0');
 
 		return t => interpolator(t);
+
+	},
+
+	onContinentMouseEnter: function (continent) {
+
+		// if already selected, leave as-is
+		if (continent.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED) { return; }
+
+		this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.HIGHLIGHTED);
+
+		// If mouseenter fires after mouseleave,
+		// prevent mouseleave behavior (maintain highlight)
+		if (this.mouseLeaveTimeout) {
+			clearTimeout(this.mouseLeaveTimeout);
+		}
+
+	},
+
+	onContinentMouseLeave: function (continent) {
+
+		// enough time to smoothly roll across a gap from one continent
+		// to another without selections flashing on/off
+		let mouseLeaveDelay = 80;
+
+		this.mouseLeaveTimeout = setTimeout(() => {
+
+			let otherHighlightedContinent;
+			continents.some((c => {
+				if (c !== continent &&
+					(c.highlightLevel === Continent.HIGHLIGHT_LEVELS.HIGHLIGHTED ||
+					c.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED)) {
+					otherHighlightedContinent = c;
+					return true;
+				}
+			}));
+
+			if (otherHighlightedContinent) {
+				// If there is a highlighted continent other than the event target continent,
+				// just unhiglight the event target continent (unless it's selected, then leave as-is)
+				let unhighlightLevel = otherHighlightedContinent.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED ? Continent.HIGHLIGHT_LEVELS.UNSELECTED : Continent.HIGHLIGHT_LEVELS.UNHIGHLIGHTED;
+				if (continent && continent.highlightLevel !== Continent.HIGHLIGHT_LEVELS.SELECTED) {
+					continent.highlightLevel = unhighlightLevel;
+				}
+			} else {
+				// Else, turn off all highlights except selected.
+				let unhighlightLevel = continent.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED ? Continent.HIGHLIGHT_LEVELS.UNSELECTED : Continent.HIGHLIGHT_LEVELS.NONE;
+				continents.forEach(c => {
+					if (c.highlightLevel !== Continent.HIGHLIGHT_LEVELS.SELECTED) {
+						c.highlightLevel = unhighlightLevel;
+					}
+				});
+			}
+
+		}, mouseLeaveDelay);
+
+	},
+
+	onContinentMouseUp: function (continent) {
+
+		console.log('TODO: implement "START AGAIN" popup when popups are implemented');
+
+	},
+
+	setContinentHighlight: function (continent, highlightLevel) {
+
+		// Set unhighlightLevel based on if any continent highlighted
+		let unhighlightLevel;
+		if (highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED || continents.some(c => c.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED)) {
+			unhighlightLevel = Continent.HIGHLIGHT_LEVELS.UNSELECTED;
+		} else {
+			unhighlightLevel = Continent.HIGHLIGHT_LEVELS.UNHIGHLIGHTED;
+		}
+
+		if (continent) {
+			continents.forEach(c => {
+				if (c === continent) {
+					c.highlightLevel = highlightLevel;
+				} else {
+					// unhighlight all but selected
+					if (c.highlightLevel !== Continent.HIGHLIGHT_LEVELS.SELECTED) {
+						c.highlightLevel = unhighlightLevel;
+					}
+				}
+			});
+		}
 
 	},
 
