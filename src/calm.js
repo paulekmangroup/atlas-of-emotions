@@ -25,14 +25,14 @@ const PATH_STRINGS = [
 	PATH_SOURCE_HEIGHT = 1157,
 	MIN_PATH_SPAWN_DELAY = 120,
 	PATH_SPAWN_FREQ = 0.01,
-	PATH_LIFETIME_BASE = 2000,
-	PATH_LIFETIME_SPREAD = 5000,
-	PATH_LENGTH_BASE = 0.5,
+	PATH_LIFETIME_BASE = 8000,
+	PATH_LIFETIME_SPREAD = 4000,
+	PATH_LENGTH_BASE = 0.25,
 	PATH_LENGTH_SPREAD = 0.5,
 	PATH_WIDTH_BASE = 10,
 	PATH_WIDTH_SPREAD = 20,
-	PATH_OPACITY_BASE = 0.4,
-	PATH_OPACITY_SPREAD = 0.5;
+	PATH_OPACITY_BASE = 0.25,
+	PATH_OPACITY_SPREAD = 0.3;
 
 export default {
 
@@ -47,7 +47,8 @@ export default {
 
 		continentContainer = d3.select(containerNode).append('svg')
 			.attr('width', '100%')
-			.attr('height', '100%');
+			.attr('height', '100%')
+			.attr('xmlns:atlas', 'http://www.atlasofemotion.org');
 
 		let w = containerNode.offsetWidth,
 			h = containerNode.offsetHeight,
@@ -191,23 +192,38 @@ export default {
 	spawnPath: function (pathIndex) {
 
 		let pathState = paths[pathIndex],
-			strokeColor = 'blue',	// TODO: randomize
-			strokeWidth = PATH_WIDTH_BASE + Math.random() * PATH_WIDTH_SPREAD,		// TODO: if possible vary along length of path
+			strokeColor = '#191919',
+			strokeWidth = PATH_WIDTH_BASE + Math.random() * PATH_WIDTH_SPREAD,
 			strokeOpacity = PATH_OPACITY_BASE + Math.random() * PATH_OPACITY_SPREAD,
+			pathLength = PATH_LENGTH_BASE + Math.random() * PATH_LENGTH_SPREAD,
 			path = pathsContainer.append('path')
 				.attr('d', pathState.pathStr)
 				.attr('stroke', strokeColor)
 				.attr('stroke-width', strokeWidth)
 				.attr('stroke-opacity', strokeOpacity)
 				.attr('stroke-linecap', 'round')
-				.attr('stroke-dasharray', '0%,100%');
+				.attr('atlas:pathlen', pathLength);
+
+		// start as all gap, no dash
+		path.attr('stroke-dasharray', '0 '+ path.node().getTotalLength());
 
 		// animate path by interpolating stroke-dasharray
 		// from http://bl.ocks.org/mbostock/5649592
 		let duration = PATH_LIFETIME_BASE + Math.random() * PATH_LIFETIME_SPREAD;
 		path.transition()
-			.duration(duration)
+			.duration(pathLength / (1 + pathLength) * duration)
+			// .duration(duration)
+			.ease('linear')
 			.attrTween('stroke-dasharray', this.tweenPathIn)
+			.each('end', function () {
+				let l = this.getTotalLength();
+				d3.select(this)
+					.attr('stroke-dasharray', '0 0 '+ pathLength * l, '0 '+ l +' '+ pathLength * l);
+			})
+		.transition()
+			.duration((1 - pathLength / (1 + pathLength)) * duration)
+			.ease('linear')
+			.attrTween('stroke-dasharray', this.tweenPathOut)
 			.each('end', function () {
 				d3.select(this).remove();
 				pathState.elements.splice(pathState.elements.indexOf(this), 1);
@@ -222,7 +238,8 @@ export default {
 
 		// `this` is the SVG path being tweened in spawnPath()
 		let l = this.getTotalLength(),
-			interpolator = d3.interpolateString('0,' + l, l + ',' + l);
+			pl = parseFloat(this.getAttribute('pathlen')),
+			interpolator = d3.interpolateString('0 '+ l, pl * l +' '+ l);
 
 		return t => interpolator(t);
 
@@ -230,11 +247,10 @@ export default {
 
 	tweenPathOut: function () {
 
-		// TODO: finish this path tweening stuff
-
 		// `this` is the SVG path being tweened in spawnPath()
-		let l = this.getTotalLength() * PATH_LENGTH_BASE + Math.random() * PATH_LENGTH_SPREAD,
-			interpolator = d3.interpolateString('0,' + l, l + ',' + l);
+		let l = this.getTotalLength(),
+			pl = parseFloat(this.getAttribute('pathlen')),
+			interpolator = d3.interpolateString('0 0 '+ pl * l, '0 '+ l +' 0');
 
 		return t => interpolator(t);
 
