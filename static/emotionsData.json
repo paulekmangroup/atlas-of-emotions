@@ -1943,7 +1943,11 @@
     },
     "calm": {
       "header": "Achieving Calm",
-      "body": "Calm is a state of mind that is actively engaged in using intelligence and wisdom to evaulate the changing world."
+      "body": "Calm is a state of mind that is actively engaged in using intelligence and wisdom to evaulate the changing world.",
+      "secondary": {
+        "header": "Visit the Annex",
+        "body": "To learn more about emotions, click on \"more information\" to the right."
+      }
     }
   }
 }

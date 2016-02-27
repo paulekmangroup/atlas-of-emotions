@@ -107,6 +107,19 @@ export default {
 			.classed('calm-paths', true)
 			.attr('transform', 'scale(' + w/PATH_SOURCE_WIDTH + ',' + h/PATH_SOURCE_HEIGHT + ')');
 
+		let visitAnnex = d3.select(this.sectionContainer).append('div')
+			.classed('visit-annex', true);
+		visitAnnex.append('h3')
+			.text(emotionsData.metadata.calm.secondary.header.toUpperCase());
+		visitAnnex.append('p')
+			.text(emotionsData.metadata.calm.secondary.body);
+		visitAnnex.on('click', event => {
+			let moreInfoMenu = document.querySelector('#more-info .dropup');
+			if (moreInfoMenu) {
+				moreInfoMenu.classList.add('open');
+			}
+		});
+
 		// Bind event handlers to current scope
 		this.onContinentMouseEnter = this.onContinentMouseEnter.bind(this);
 		this.onContinentMouseLeave = this.onContinentMouseLeave.bind(this);
