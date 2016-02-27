@@ -28,7 +28,7 @@ export default {
 
 	labelContainers: null,
 	graphContainers: null,
-	
+
 	init: function (containerNode) {
 
 		this.sectionContainer = containerNode;
@@ -87,7 +87,7 @@ export default {
 				.attr('height', containerNode.offsetHeight)
 			.append('g')
 				.attr('transform', 'translate(' + 0.5 * containerNode.offsetWidth + ',' + containerNode.offsetHeight + ')');
-			
+
 			this.labelContainers[emotion] = labelContainer;
 
 		});
@@ -110,29 +110,31 @@ export default {
 						return (-0.65 * haloRadius) + 'px';
 				}
 			});
-		
+
 	},
 
 	setUpGraphs: function (containerNode) {
 
-		// 
-		// d3 conventional margins
-		// 
-		let margin = {
-			top: 0,
-			right: 0,
-			bottom: 0,
-			left: 0
-		};
-
 		// All the same size, just grab the first one
 		let graphContainer = containerNode.querySelector('.graph-container'),
-			innerWidth = graphContainer.offsetWidth - margin.left - margin.right,
-			innerHeight = graphContainer.offsetHeight - margin.top - margin.bottom;
+			w = graphContainer.offsetWidth,
+			h = graphContainer.offsetHeight;
 
-		// 
+		//
+		// d3 conventional margins
+		//
+		let margin = {
+				top: 0 * h,
+				right: 0 * w,
+				bottom: 0 * h,
+				left: 0 * w
+			},
+			innerWidth = w - margin.left - margin.right,
+			innerHeight = h - margin.top - margin.bottom;
+
+		//
 		// d3/svg setup
-		// 
+		//
 		let haloRadius = Math.min(0.6 * innerHeight, 0.5 * innerWidth),
 			triggerInnerRadius = haloRadius * 1.125,
 			triggerAreaWidth = haloRadius * 1.375 - triggerInnerRadius;
@@ -148,7 +150,7 @@ export default {
 
 		//
 		// Set up each graph
-		// 
+		//
 		this.graphContainers = {};
 		_.values(dispatcher.EMOTIONS).forEach((emotion, i) => {
 
@@ -243,7 +245,7 @@ export default {
 
 		//
 		// halo gradients
-		// 
+		//
 
 		// base gradient
 		defs.append('radialGradient')
@@ -321,8 +323,8 @@ export default {
 
 		//
 		// arrow gradients
-		// 
-		
+		//
+
 		// base gradient
 		defs.append('linearGradient')
 			.attr('id', 'triggers-linear-gradient')
@@ -541,7 +543,7 @@ export default {
 		if (haloSelection.size()) { return; }
 
 		haloSelection = haloSelection.data(this.haloPieLayout([{}]));
-		
+
 		let emotionGradientName = 'triggers-' + emotion + '-radial-gradient';
 		let haloEnterSelection = haloSelection.enter();
 		haloEnterSelection.append('radialGradient')
@@ -576,7 +578,7 @@ export default {
 			.data(triggersData);
 
 		// update
-		
+
 		// enter
 		let labelEnterSelection = labelSelection.enter().append('div')
 			.classed('label ' + emotion, true)
@@ -598,12 +600,12 @@ export default {
 
 		//
 		// label arrows
-		// 
+		//
 		let labelArrowSelection = labelContainer.select('.arrows-container g').selectAll('g.arrow')
 			.data(triggersData);
 
 		// update
-		
+
 		// enter
 		let emotionGradientName = 'triggers-' + emotion + '-linear-gradient';
 		let arrowsEnterSelection = labelArrowSelection.enter();

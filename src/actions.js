@@ -31,7 +31,7 @@ export default {
 	labelContainers: null,
 	graphContainers: null,
 
-	
+
 	init: function (containerNode) {
 
 		this.sectionContainer = containerNode;
@@ -83,7 +83,7 @@ export default {
 			let container = d3.select('.' + emotion + '.actions-container'),
 				labelContainer = container.append('div')
 					.classed('label-container', true);
-			
+
 			this.labelContainers[emotion] = labelContainer;
 
 		});
@@ -92,9 +92,28 @@ export default {
 
 	setUpGraphs: function (containerNode) {
 
-		// 
+		/*
+		// All the same size, just grab the first one
+		let graphContainer = containerNode.querySelector('.graph-container'),
+			w = graphContainer.offsetWidth,
+			h = Math.max(graphContainer.offsetHeight, 0.5 * graphContainer.offsetWidth);
+
+		//
 		// d3 conventional margins
-		// 
+		//
+		let margin = {
+				top: 0.06 * h,		// actions graph is upside down, so 'top' means bottom of the screen
+				right: 0.15 * w,
+				bottom: 10,			// fixed distance from bottom of states
+				left: 0.15 * w
+			},
+			innerWidth = w - margin.left - margin.right,
+			innerHeight = h - margin.top - margin.bottom;
+		*/
+
+		//
+		// d3 conventional margins
+		//
 		let margin = {
 			top: 25,		// actions graph is upside down, so 'top' means bottom of the screen
 			right: 100,
@@ -108,9 +127,10 @@ export default {
 			h = Math.max(graphContainer.offsetHeight, 0.5 * graphContainer.offsetWidth),
 			innerHeight = h - margin.top - margin.bottom;
 
-		// 
+
+		//
 		// d3/svg setup
-		// 
+		//
 		let section = this,
 			transformedHeight = Math.sqrt(3) / 2 * innerHeight,	// from rotateX(60deg) applied to #action-graph-container
 			radius = Math.min(0.5 * innerWidth, transformedHeight * 0.75);	// TODO: revisit this magic number munging to keep everything on-screen
@@ -132,7 +152,7 @@ export default {
 
 		//
 		// Set up each graph
-		// 
+		//
 		this.graphContainers = {};
 		_.values(dispatcher.EMOTIONS).forEach((emotion, i) => {
 
@@ -288,7 +308,7 @@ export default {
 				let valenceWeights = Object.keys(VALENCES).map(valenceName => ({
 					name: valenceName,
 					size: valenceName === 'CONSTRUCTIVE' ? numActionsCon :
-							valenceName === 'BOTH' ? numActionsBoth : 
+							valenceName === 'BOTH' ? numActionsBoth :
 							valenceName === 'DESTRUCTIVE' ? numActionsDes : 0
 				})).reverse();
 				// subtract 0.5 from the first and last size,
@@ -329,7 +349,7 @@ export default {
 			return actionsOutput;
 
 		}, {});
-	
+
 		return actionsData;
 
 	},
@@ -546,7 +566,7 @@ export default {
 		arrowEnterSelection.append('path')
 			.attr('fill', (d, i) => 'url(#' + emotionGradientName + ')')
 			.call(this.scaledLineGenerator, 0.0);
-			
+
 		arrowEnterSelection.transition()
 			.duration(sassVars.actions.add.time)
 			.delay(function (d, i) { return i * 50; })
@@ -654,7 +674,7 @@ export default {
 				.style('opacity', (data, index) => ~stateActions.indexOf(data.name) ? 1.0 : 0.2);
 
 		}
-		
+
 	},
 
 	renderLabels: function (actionsData) {
@@ -739,7 +759,7 @@ export default {
 				.remove();
 
 		} else {
-			
+
 			labelContainer.selectAll('div.label')
 				.on('mouseover', null)
 				.on('mouseout', null)
