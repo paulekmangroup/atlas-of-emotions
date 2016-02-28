@@ -37,9 +37,9 @@
 		"backgrounded": {
 			"actions": {
 				"scale": 0.6,
-				"top": "-14%"
+				"top": "-17%"
 			},
-			"scale": 0.5,
+			"scale": 0.4,
 			"top": "-10%",
 			"duration": {
 				"in": 1.5,
@@ -56,7 +56,7 @@
 	},
 	"actions": {
 		"backgrounded": {
-			"scale": 0.8
+			"scale": 0.7
 		},
 		"margins": {
 			"bottom": 10

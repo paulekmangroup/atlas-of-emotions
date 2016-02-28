@@ -26,7 +26,7 @@
 			top: calc((100% - (
 					(100% + #{$states-backgrounded-top}) -
 					(100% * (1 - #{$states-backgrounded-scale}) / 2) -
-					#{$states-backgrounded-scale} * (#{$states-containers-bottom} + 50px + #{$actions-margins-bottom}px)
+					#{$states-backgrounded-scale} * (#{$states-containers-bottom} + 50px/* + #{$actions-margins-bottom}px*/)
 				) - #{$triggers-bottom});
 		}
 	}
