@@ -95,8 +95,23 @@
 			}
 		}
 	}
+
+	.horizon {
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		height: $triggers-bottom;
+		background: linear-gradient(to bottom, rgba(245,245,245,1.0) 0%,rgba(255,255,255,1.0) 100%);
+
+		opacity: 0.0;
+		transition: opacity 0.5s;
+		&.visible {
+			opacity: 1.0;
+			transition: opacity 2.0s;
+		}
+	}
 }
-	
+
 #trigger-phase-labels {
 	position: absolute;
 	left: 50%;

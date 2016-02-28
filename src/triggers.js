@@ -42,6 +42,8 @@ export default {
 		this.initLabels(containerNode, haloRadius);
 		this.triggersData = this.parseTriggers(haloRadius);
 
+		this.drawHorizon(containerNode);
+
 		this.setUpHitAreas(containerNode);
 
 		this.onHitAreaMouseOver = this.onHitAreaMouseOver.bind(this);
@@ -126,7 +128,7 @@ export default {
 		let margin = {
 				top: 0 * h,
 				right: 0 * w,
-				bottom: 0 * h,
+				bottom: (sassVars.triggers.bottom.replace('%', '')/100) * h,
 				left: 0 * w
 			},
 			innerWidth = w - margin.left - margin.right,
@@ -404,6 +406,14 @@ export default {
 			.attr('stop-color', d => d.color);
 	},
 
+	drawHorizon: function (containerNode) {
+
+		let horizon = document.createElement('div');
+		horizon.classList.add('horizon');
+		containerNode.insertBefore(horizon, containerNode.childNodes[0]);
+
+	},
+
 	setUpHitAreas: function (containerNode) {
 
 		const cw = containerNode.offsetWidth,
@@ -509,8 +519,11 @@ export default {
 			this.renderGraph(this.currentEmotion);
 			this.renderLabels(this.currentEmotion);
 
-			// leave a bit of time for other transitions to happen,
+			// leave a bit of time for other transitions to happen
 			this.openCallout(500);
+
+			// fade in horizon
+			document.querySelector('#triggers .horizon').classList.add('visible');
 
 			// hide phase labels until the next interaction
 			// (mostly a thing when back/fwd navigating with the trackpad)
@@ -664,6 +677,8 @@ export default {
 			if (this.currentEmotion) {
 				this.graphContainers[this.currentEmotion].selectAll('path.halo').remove();
 			}
+
+			document.querySelector('#triggers .horizon').classList.remove('visible');
 
 			// TODO: resolve on completion of animation
 			resolve();

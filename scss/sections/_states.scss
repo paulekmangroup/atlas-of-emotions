@@ -50,9 +50,9 @@
 		&.triggers {
 			// align bottom of states graph, which is scaled and translated,
 			// with bottom of screen - 20%. this math is basically:
-			// (scaled states offset) + scale * (states graph offset from parent + states graph bottom margin) + 20%
+			// (scaled states offset) + scale * (states graph offset from parent + states graph bottom margin) + triggers bottom
 			top: calc((100% * (1 - #{$states-backgrounded-scale}) / 2) +
-				#{$states-backgrounded-scale} * (#{$states-containers-bottom} + 50px) - 20%);
+				#{$states-backgrounded-scale} * (#{$states-containers-bottom} + 50px) - #{$triggers-bottom});
 		}
 
 		&.faded {

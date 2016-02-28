@@ -74,6 +74,9 @@
 			"delay": 0
 		}
 	},
+	"triggers": {
+		"bottom": "25%"
+	},
 	"emotions": {
 		"panX": {
 			"duration": 0.75,
