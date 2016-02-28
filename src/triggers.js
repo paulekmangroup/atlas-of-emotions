@@ -603,7 +603,7 @@ export default {
 					y = h + Math.sin(d.angle) * d.radius;
 				return 'translate(' + x + 'px,' + y + 'px)';
 			});
-		labelEnterSelection.append('h3')
+		labelEnterSelection.append('h4')
 			.html(d => d.name);
 
 		// exit

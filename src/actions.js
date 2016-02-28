@@ -733,7 +733,7 @@ export default {
 					};
 
 				})());
-			labelSelection.select('h3')
+			labelSelection.select('h4')
 				.html(labelText);
 
 			// enter
@@ -741,7 +741,7 @@ export default {
 				.classed('label ' + this.currentEmotion, true)
 				.style('transform', d => 'translate(' + labelSize * Math.cos(Math.PI*(d.rotation-90)/180) + 'px,' + labelSize * Math.sin(Math.PI*(d.rotation-90)/180) / sqrt3 + 'px')
 				.style('opacity', 0.0);
-			labelEnterSelection.append('div').append('h3')
+			labelEnterSelection.append('div').append('h4')
 				.html(labelText)
 				.on('mouseover', this.onActionMouseOver)
 				.on('mouseout', this.onActionMouseOut)

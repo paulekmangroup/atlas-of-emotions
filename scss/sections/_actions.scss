@@ -130,7 +130,6 @@
 
 	.label-container {
 		// pointer-events: none;
-		// transform: scaleY(0.578);	// 1/sqrt(3), using scale to equate to rotateX(60deg)
 
 		.label {
 			position: absolute;
@@ -147,10 +146,7 @@
 				position: absolute;
 				margin-left: -60px;		// TODO: where does this magic number come from?
 										// needed to align with arrow points.
-				h3 {
-					// transform: rotateX(-60deg);
-					// transform: scaleY(1.73);	// sqrt(3), using scale to equate to rotateX(60deg)
-												// set by d3 instead, since d3 is applying another transform already
+				h4 {
 					margin: 0;
 					line-height: 1em;
 					cursor: pointer;
@@ -158,7 +154,7 @@
 			}
 		}
 
-		&.active h3 {
+		&.active h4 {
 			pointer-events: auto;
 		}
 

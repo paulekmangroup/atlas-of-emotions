@@ -201,7 +201,7 @@
 	h3 {
 		transform: translate(-50%, -50%);
 		margin: 0;
-		font-size: calc(100% / #{$states-backgrounded-scale});
+		font-size: calc(0.66667em / #{$states-backgrounded-scale});
 		text-transform: uppercase;
 	}
 }
