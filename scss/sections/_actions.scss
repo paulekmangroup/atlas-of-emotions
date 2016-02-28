@@ -172,33 +172,3 @@
 		mix-blend-mode: multiply;
 	}
 }
-
-#temp-actions-nav {
-	position: absolute;
-	height: 100%;
-	right: 3%;
-	pointer-events: none;
-
-	.prev {
-		position: absolute;
-		top: 3%;
-		right: 0;
-		pointer-events: auto;
-		white-space: nowrap;
-	}
-
-	.next {
-		position: absolute;
-		bottom: 3%;
-		right: 0;
-		pointer-events: auto;
-		white-space: nowrap;
-	}
-
-	opacity: 0.0;
-	-webkit-transition: opacity 1s;
-	transition:         opacity 1s;
-	&.visible {
-		opacity: 1.0;
-	}
-}
