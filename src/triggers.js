@@ -78,7 +78,8 @@ export default {
 		this.labelContainers = {};
 		_.values(dispatcher.EMOTIONS).forEach(emotion => {
 
-			let container = d3.select('.triggers-container.' + emotion),
+			let h = (1 - sassVars.triggers.bottom.replace('%', '')/100) * containerNode.offsetHeight,
+				container = d3.select('.triggers-container.' + emotion),
 				labelContainer = container.append('div')
 					.classed('label-container', true);
 
@@ -86,9 +87,9 @@ export default {
 				.attr('class', 'arrows-container')
 			.append('svg')
 				.attr('width', containerNode.offsetWidth)
-				.attr('height', containerNode.offsetHeight)
+				.attr('height', h)
 			.append('g')
-				.attr('transform', 'translate(' + 0.5 * containerNode.offsetWidth + ',' + containerNode.offsetHeight + ')');
+				.attr('transform', 'translate(' + 0.5 * containerNode.offsetWidth + ',' + h + ')');
 
 			this.labelContainers[emotion] = labelContainer;
 
@@ -417,7 +418,7 @@ export default {
 	setUpHitAreas: function (containerNode) {
 
 		const cw = containerNode.offsetWidth,
-			ch = containerNode.offsetHeight,
+			ch = (1 - sassVars.triggers.bottom.replace('%', '')/100) * containerNode.offsetHeight,
 			innerRadius = this.haloArcGenerator.innerRadius();
 
 		let hitAreaContainer = document.createElement('div');
@@ -586,7 +587,8 @@ export default {
 
 		// TODO: use a force-directed layout instead,
 		// to ensure every label finds a good, non-overlapping place
-		let labelContainer = this.labelContainers[emotion],
+		let h = (1 - sassVars.triggers.bottom.replace('%', '')/100) * this.sectionContainer.offsetHeight,
+			labelContainer = this.labelContainers[emotion],
 			labelSelection = labelContainer.selectAll('div.label')
 			.data(triggersData);
 
@@ -598,7 +600,7 @@ export default {
 			.style('opacity', 1.0)
 			.style('transform', d => {
 				let x = 0.5 * this.sectionContainer.offsetWidth + Math.cos(d.angle) * d.radius,
-					y = this.sectionContainer.offsetHeight + Math.sin(d.angle) * d.radius;
+					y = h + Math.sin(d.angle) * d.radius;
 				return 'translate(' + x + 'px,' + y + 'px)';
 			});
 		labelEnterSelection.append('h3')

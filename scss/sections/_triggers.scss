@@ -59,7 +59,8 @@
 	.label-container {
 		position: absolute;
 		width: 100%;
-		height: 100%;
+		height: calc(100% - #{$triggers-bottom});
+		bottom: $triggers-bottom;
 
 		.label {
 			position: absolute;
@@ -115,7 +116,7 @@
 #trigger-phase-labels {
 	position: absolute;
 	left: 50%;
-	bottom: 0;
+	bottom: $triggers-bottom;
 
 	text-align: center;
 	@include emotion-color;
@@ -140,8 +141,8 @@
 #trigger-hit-area-container {
 	position: absolute;
 	width: 100%;
-	height: 100%;
-	top: 0;
+	height: calc(100% - #{$triggers-bottom});
+	bottom: $triggers-bottom;
 
 	svg {
 		stroke: none;
