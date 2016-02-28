@@ -117,7 +117,7 @@ export default {
 		let margin = {
 			top: 25,		// actions graph is upside down, so 'top' means bottom of the screen
 			right: 100,
-			bottom: 10,
+			bottom: sassVars.actions.margins.bottom,
 			left: 100
 		};
 
@@ -818,6 +818,8 @@ export default {
 
 			this.sectionContainer.classList[(val ? 'add' : 'remove')]('backgrounded');
 			this.sectionContainer.classList[(options && (options.sectionName === dispatcher.SECTIONS.TRIGGERS) ? 'add' : 'remove')]('triggers');
+			this.sectionContainer.classList[(options && (options.sectionName === dispatcher.SECTIONS.MOODS) ? 'add' : 'remove')]('moods');
+
 			// this.hideChrome();
 			// this.setActive(!val);
 

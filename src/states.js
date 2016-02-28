@@ -535,8 +535,19 @@ export default {
 
 		return new Promise((resolve, reject) => {
 
+			// apply `states-in-out` class any time animating into or out of states section
+			if (!val && this.sectionContainer.classList.contains('backgrounded') ||
+				val && !this.sectionContainer.classList.contains('backgrounded')) {
+				this.sectionContainer.classList.add('states-in-out');
+			} else {
+				this.sectionContainer.classList.remove('states-in-out');
+			}
+
 			this.sectionContainer.classList[(val ? 'add' : 'remove')]('backgrounded');
+			this.sectionContainer.classList[(options && (options.sectionName === dispatcher.SECTIONS.ACTIONS) ? 'add' : 'remove')]('actions');
 			this.sectionContainer.classList[(options && (options.sectionName === dispatcher.SECTIONS.TRIGGERS) ? 'add' : 'remove')]('triggers');
+			this.sectionContainer.classList[(options && (options.sectionName === dispatcher.SECTIONS.MOODS) ? 'add' : 'remove')]('moods');
+
 			this.hideChrome();
 			this.setActive(!val);
 			this.isBackgrounded = val;

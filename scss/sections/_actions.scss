@@ -11,19 +11,24 @@
 	text-align: center;
 	pointer-events: none;
 
-	transition-property: top;
+	transition-property: top, transform;
 	transition-duration: #{$states-backgrounded-duration-in}s;
 	transition-timing-function: cubic-bezier(.81,.34,.63,.85);
 
-	&.backgrounded.triggers {
-		// same math as in .actions-container below,
-		// but subtracted from total viewport height
-		// to push .actions-containers to bottom.
-		top: calc((100% - (
-				(100% + #{$states-backgrounded-top}) - 
-				(100% * (1 - #{$states-backgrounded-scale}) / 2) - 
-				#{$states-backgrounded-scale} * (#{$states-containers-bottom} + 50px)
-			));
+	&.backgrounded {
+		transform: translateY(#{$actions-margins-bottom}px) scale($actions-backgrounded-scale);
+
+		&.triggers {
+
+			// same math as in .actions-container below,
+			// but subtracted from total viewport height
+			// to push .actions-containers to bottom.
+			top: calc((100% - (
+					(100% + #{$states-backgrounded-top}) -
+					(100% * (1 - #{$states-backgrounded-scale}) / 2) -
+					#{$states-backgrounded-scale} * (#{$states-containers-bottom} + 50px)
+				) - 20%);
+		}
 	}
 
 	.label-valence {
@@ -61,8 +66,8 @@
 		// 'backgrounded' states graph, which is scaled and translated.
 		// this math is basically:
 		// (states position) - (scaled states offset) - scale * (states graph offset from parent + states graph bottom margin)
-		top: calc((100% + #{$states-backgrounded-top}) - 
-			(100% * (1 - #{$states-backgrounded-scale}) / 2) - 
+		top: calc((100% + #{$states-backgrounded-top}) -
+			(100% * (1 - #{$states-backgrounded-scale}) / 2) -
 			#{$states-backgrounded-scale} * (#{$states-containers-bottom} + 50px));
 		left: 50%;
 

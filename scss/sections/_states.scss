@@ -22,6 +22,24 @@
 		transform: scale($states-backgrounded-scale);
 		top: $states-backgrounded-top;
 
+		// tie `transform` and `top` transitions when animating between any non-states sections,
+		// to prevent the two transitions from drifting apart from each other,
+		// but use a different transition for `transform` when animating between states and any other section.
+		transition-timing-function: cubic-bezier(.81,.34,.63,.85), cubic-bezier(.81,.34,.63,.85), ease;
+		&.states-in-out {
+			transition-timing-function: cubic-bezier(0.4, 0.4, 0.35, 1), cubic-bezier(.81,.34,.63,.85), ease;
+		}
+
+		&.actions {
+			// TODO: trying to make states appear a bit larger in actions
+			// than in triggers and moods. but it's causing a misalignment
+			// of states + actions. probably need to make a states-backgrounded-actions-top --
+			// it was probably coincidence that scale(0.6) works well with top: 10%.
+
+			transform: scale($states-backgrounded-actions-scale);
+			top: $states-backgrounded-actions-top;
+		}
+
 		/*
 		// TODO: prevent visible edge to states transitions when backgrounded
 		width: calc(100% / #{$states-backgrounded-scale});
@@ -31,10 +49,10 @@
 
 		&.triggers {
 			// align bottom of states graph, which is scaled and translated,
-			// with bottom of screen. this math is basically:
-			// (scaled states offset) + scale * (states graph offset from parent + states graph bottom margin)
+			// with bottom of screen - 20%. this math is basically:
+			// (scaled states offset) + scale * (states graph offset from parent + states graph bottom margin) + 20%
 			top: calc((100% * (1 - #{$states-backgrounded-scale}) / 2) +
-				#{$states-backgrounded-scale} * (#{$states-containers-bottom} + 50px));
+				#{$states-backgrounded-scale} * (#{$states-containers-bottom} + 50px) - 20%);
 		}
 
 		&.faded {
@@ -167,7 +185,7 @@
 
 	text-align: center;
 	pointer-events: none;
-	
+
 	@include emotion-color;
 	white-space: nowrap;
 
