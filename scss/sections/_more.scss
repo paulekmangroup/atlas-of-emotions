@@ -55,7 +55,8 @@
 		position: absolute;
 		top: auto;
 		bottom: 100%;
-		margin-bottom: 2px;
+		margin-bottom: 1px;
+		padding-top: 1px;
 		background-color: rgba($scrollbar-background-color, 0.5);
 
 		li {
