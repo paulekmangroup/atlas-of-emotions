@@ -11,19 +11,24 @@
 	text-align: center;
 	pointer-events: none;
 
-	transition-property: top;
+	transition-property: top, transform;
 	transition-duration: #{$states-backgrounded-duration-in}s;
 	transition-timing-function: cubic-bezier(.81,.34,.63,.85);
 
-	&.backgrounded.triggers {
-		// same math as in .actions-container below,
-		// but subtracted from total viewport height
-		// to push .actions-containers to bottom.
-		top: calc((100% - (
-				(100% + #{$states-backgrounded-top}) - 
-				(100% * (1 - #{$states-backgrounded-scale}) / 2) - 
-				#{$states-backgrounded-scale} * (#{$states-containers-bottom} + 50px)
-			));
+	&.backgrounded {
+		transform: translateY(#{$actions-margins-bottom}px) scale($actions-backgrounded-scale);
+
+		&.triggers {
+
+			// same math as in .actions-container below,
+			// but subtracted from total viewport height
+			// to push .actions-containers to bottom.
+			top: calc((100% - (
+					(100% + #{$states-backgrounded-top}) -
+					(100% * (1 - #{$states-backgrounded-scale}) / 2) -
+					#{$states-backgrounded-scale} * (#{$states-containers-bottom} + 50px/* + #{$actions-margins-bottom}px*/)
+				) - #{$triggers-bottom});
+		}
 	}
 
 	.label-valence {
@@ -61,8 +66,8 @@
 		// 'backgrounded' states graph, which is scaled and translated.
 		// this math is basically:
 		// (states position) - (scaled states offset) - scale * (states graph offset from parent + states graph bottom margin)
-		top: calc((100% + #{$states-backgrounded-top}) - 
-			(100% * (1 - #{$states-backgrounded-scale}) / 2) - 
+		top: calc((100% + #{$states-backgrounded-top}) -
+			(100% * (1 - #{$states-backgrounded-scale}) / 2) -
 			#{$states-backgrounded-scale} * (#{$states-containers-bottom} + 50px));
 		left: 50%;
 
@@ -125,7 +130,6 @@
 
 	.label-container {
 		// pointer-events: none;
-		// transform: scaleY(0.578);	// 1/sqrt(3), using scale to equate to rotateX(60deg)
 
 		.label {
 			position: absolute;
@@ -142,18 +146,22 @@
 				position: absolute;
 				margin-left: -60px;		// TODO: where does this magic number come from?
 										// needed to align with arrow points.
-				h3 {
-					// transform: rotateX(-60deg);
-					// transform: scaleY(1.73);	// sqrt(3), using scale to equate to rotateX(60deg)
-												// set by d3 instead, since d3 is applying another transform already
+				h4 {
 					margin: 0;
 					line-height: 1em;
 					cursor: pointer;
 				}
 			}
+
+			transition: opacity #{$states-highlighted-out}s ease-in;
+			opacity: 1.0;
+			&.muted {
+				transition: opacity #{$states-highlighted-out}s ease-out;
+				opacity: 0.2;
+			}
 		}
 
-		&.active h3 {
+		&.active h4 {
 			pointer-events: auto;
 		}
 
@@ -166,34 +174,11 @@
 	path {
 		mix-blend-mode: multiply;
 	}
-}
 
-#temp-actions-nav {
-	position: absolute;
-	height: 100%;
-	right: 3%;
-	pointer-events: none;
-
-	.prev {
-		position: absolute;
-		top: 3%;
-		right: 0;
-		pointer-events: auto;
-		white-space: nowrap;
-	}
-
-	.next {
-		position: absolute;
-		bottom: 3%;
-		right: 0;
-		pointer-events: auto;
-		white-space: nowrap;
-	}
-
-	opacity: 0.0;
-	-webkit-transition: opacity 1s;
-	transition:         opacity 1s;
-	&.visible {
-		opacity: 1.0;
+	transition: opacity #{$states-highlighted-out}s ease-in;
+	opacity: 1.0;
+	&.muted {
+		transition: opacity #{$states-highlighted-out}s ease-out;
+		opacity: 0.2;
 	}
 }

@@ -83,6 +83,10 @@ export default function (...initArgs) {
 			containers[sectionName] = containerEl;
 		});
 
+		// position actions in front of triggers
+		// so that triggers horizon element appears behind actions rays
+		mainEl.insertBefore(containers[dispatcher.SECTIONS.TRIGGERS], containers[dispatcher.SECTIONS.ACTIONS]);
+
 	}
 
 	function initSections () {

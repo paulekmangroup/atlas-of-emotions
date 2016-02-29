@@ -28,7 +28,7 @@ export default {
 
 	labelContainers: null,
 	graphContainers: null,
-	
+
 	init: function (containerNode) {
 
 		this.sectionContainer = containerNode;
@@ -41,6 +41,8 @@ export default {
 		// so these come after d3 setup.
 		this.initLabels(containerNode, haloRadius);
 		this.triggersData = this.parseTriggers(haloRadius);
+
+		this.drawHorizon(containerNode);
 
 		this.setUpHitAreas(containerNode);
 
@@ -76,7 +78,8 @@ export default {
 		this.labelContainers = {};
 		_.values(dispatcher.EMOTIONS).forEach(emotion => {
 
-			let container = d3.select('.triggers-container.' + emotion),
+			let h = (1 - sassVars.triggers.bottom.replace('%', '')/100) * containerNode.offsetHeight,
+				container = d3.select('.triggers-container.' + emotion),
 				labelContainer = container.append('div')
 					.classed('label-container', true);
 
@@ -84,10 +87,10 @@ export default {
 				.attr('class', 'arrows-container')
 			.append('svg')
 				.attr('width', containerNode.offsetWidth)
-				.attr('height', containerNode.offsetHeight)
+				.attr('height', h)
 			.append('g')
-				.attr('transform', 'translate(' + 0.5 * containerNode.offsetWidth + ',' + containerNode.offsetHeight + ')');
-			
+				.attr('transform', 'translate(' + 0.5 * containerNode.offsetWidth + ',' + h + ')');
+
 			this.labelContainers[emotion] = labelContainer;
 
 		});
@@ -110,29 +113,31 @@ export default {
 						return (-0.65 * haloRadius) + 'px';
 				}
 			});
-		
+
 	},
 
 	setUpGraphs: function (containerNode) {
 
-		// 
-		// d3 conventional margins
-		// 
-		let margin = {
-			top: 0,
-			right: 0,
-			bottom: 0,
-			left: 0
-		};
-
 		// All the same size, just grab the first one
 		let graphContainer = containerNode.querySelector('.graph-container'),
-			innerWidth = graphContainer.offsetWidth - margin.left - margin.right,
-			innerHeight = graphContainer.offsetHeight - margin.top - margin.bottom;
+			w = graphContainer.offsetWidth,
+			h = graphContainer.offsetHeight;
 
-		// 
+		//
+		// d3 conventional margins
+		//
+		let margin = {
+				top: 0 * h,
+				right: 0 * w,
+				bottom: (sassVars.triggers.bottom.replace('%', '')/100) * h,
+				left: 0 * w
+			},
+			innerWidth = w - margin.left - margin.right,
+			innerHeight = h - margin.top - margin.bottom;
+
+		//
 		// d3/svg setup
-		// 
+		//
 		let haloRadius = Math.min(0.6 * innerHeight, 0.5 * innerWidth),
 			triggerInnerRadius = haloRadius * 1.125,
 			triggerAreaWidth = haloRadius * 1.375 - triggerInnerRadius;
@@ -148,7 +153,7 @@ export default {
 
 		//
 		// Set up each graph
-		// 
+		//
 		this.graphContainers = {};
 		_.values(dispatcher.EMOTIONS).forEach((emotion, i) => {
 
@@ -243,7 +248,7 @@ export default {
 
 		//
 		// halo gradients
-		// 
+		//
 
 		// base gradient
 		defs.append('radialGradient')
@@ -321,8 +326,8 @@ export default {
 
 		//
 		// arrow gradients
-		// 
-		
+		//
+
 		// base gradient
 		defs.append('linearGradient')
 			.attr('id', 'triggers-linear-gradient')
@@ -402,10 +407,18 @@ export default {
 			.attr('stop-color', d => d.color);
 	},
 
+	drawHorizon: function (containerNode) {
+
+		let horizon = document.createElement('div');
+		horizon.classList.add('horizon');
+		containerNode.insertBefore(horizon, containerNode.childNodes[0]);
+
+	},
+
 	setUpHitAreas: function (containerNode) {
 
 		const cw = containerNode.offsetWidth,
-			ch = containerNode.offsetHeight,
+			ch = (1 - sassVars.triggers.bottom.replace('%', '')/100) * containerNode.offsetHeight,
 			innerRadius = this.haloArcGenerator.innerRadius();
 
 		let hitAreaContainer = document.createElement('div');
@@ -507,8 +520,11 @@ export default {
 			this.renderGraph(this.currentEmotion);
 			this.renderLabels(this.currentEmotion);
 
-			// leave a bit of time for other transitions to happen,
+			// leave a bit of time for other transitions to happen
 			this.openCallout(500);
+
+			// fade in horizon
+			document.querySelector('#triggers .horizon').classList.add('visible');
 
 			// hide phase labels until the next interaction
 			// (mostly a thing when back/fwd navigating with the trackpad)
@@ -541,7 +557,7 @@ export default {
 		if (haloSelection.size()) { return; }
 
 		haloSelection = haloSelection.data(this.haloPieLayout([{}]));
-		
+
 		let emotionGradientName = 'triggers-' + emotion + '-radial-gradient';
 		let haloEnterSelection = haloSelection.enter();
 		haloEnterSelection.append('radialGradient')
@@ -571,22 +587,23 @@ export default {
 
 		// TODO: use a force-directed layout instead,
 		// to ensure every label finds a good, non-overlapping place
-		let labelContainer = this.labelContainers[emotion],
+		let h = (1 - sassVars.triggers.bottom.replace('%', '')/100) * this.sectionContainer.offsetHeight,
+			labelContainer = this.labelContainers[emotion],
 			labelSelection = labelContainer.selectAll('div.label')
 			.data(triggersData);
 
 		// update
-		
+
 		// enter
 		let labelEnterSelection = labelSelection.enter().append('div')
 			.classed('label ' + emotion, true)
 			.style('opacity', 1.0)
 			.style('transform', d => {
 				let x = 0.5 * this.sectionContainer.offsetWidth + Math.cos(d.angle) * d.radius,
-					y = this.sectionContainer.offsetHeight + Math.sin(d.angle) * d.radius;
+					y = h + Math.sin(d.angle) * d.radius;
 				return 'translate(' + x + 'px,' + y + 'px)';
 			});
-		labelEnterSelection.append('h3')
+		labelEnterSelection.append('h4')
 			.html(d => d.name);
 
 		// exit
@@ -598,12 +615,12 @@ export default {
 
 		//
 		// label arrows
-		// 
+		//
 		let labelArrowSelection = labelContainer.select('.arrows-container g').selectAll('g.arrow')
 			.data(triggersData);
 
 		// update
-		
+
 		// enter
 		let emotionGradientName = 'triggers-' + emotion + '-linear-gradient';
 		let arrowsEnterSelection = labelArrowSelection.enter();
@@ -662,6 +679,8 @@ export default {
 			if (this.currentEmotion) {
 				this.graphContainers[this.currentEmotion].selectAll('path.halo').remove();
 			}
+
+			document.querySelector('#triggers .horizon').classList.remove('visible');
 
 			// TODO: resolve on completion of animation
 			resolve();

@@ -35,7 +35,11 @@
 	},
 	"states": {
 		"backgrounded": {
-			"scale": 0.6,
+			"actions": {
+				"scale": 0.6,
+				"top": "-17%"
+			},
+			"scale": 0.4,
 			"top": "-10%",
 			"duration": {
 				"in": 1.5,
@@ -51,6 +55,12 @@
 		}
 	},
 	"actions": {
+		"backgrounded": {
+			"scale": 0.7
+		},
+		"margins": {
+			"bottom": 10
+		},
 		"add": {
 			"time": 1000,
 			"delay": 250
@@ -63,6 +73,9 @@
 			"time": 600,
 			"delay": 0
 		}
+	},
+	"triggers": {
+		"bottom": "25%"
 	},
 	"emotions": {
 		"panX": {

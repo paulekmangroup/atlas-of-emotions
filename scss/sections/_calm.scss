@@ -17,4 +17,33 @@
 	circle {
 		fill: none;
 	}
+
+	.calm-paths {
+		fill: none;
+	}
+
+	.visit-annex {
+		position: absolute;
+		bottom: 1em;
+		left: 50%;
+		width: 14em;
+		margin-left: -6em;
+
+		border: 1px solid;
+		text-align: left;
+		padding: 1em;
+
+		color: $text-color;
+		background-color: rgba($background-color, 0.5);
+		cursor: pointer;
+
+		h3 {
+			margin: 0;
+			padding-bottom: 0.5em;
+		}
+
+		p {
+			margin: 0;
+		}
+	}
 }

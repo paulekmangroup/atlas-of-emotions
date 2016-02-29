@@ -34,7 +34,7 @@ export default {
 	isBackgrounded: false,
 
 	mouseOutTimeout: null,
-	
+
 	init: function (containerNode) {
 
 		this.sectionContainer = containerNode;
@@ -69,7 +69,7 @@ export default {
 			let graphContainer = document.createElement('div');
 			graphContainer.classList.add('graph-container');
 			statesContainer.appendChild(graphContainer);
-			
+
 			containerNode.appendChild(statesContainer);
 		});
 
@@ -83,7 +83,7 @@ export default {
 			let container = d3.select('.' + emotion + '.states-container'),
 				labelContainer = container.append('div')
 					.classed('label-container', true);
-			
+
 			this.labelContainers[emotion] = labelContainer;
 
 		});
@@ -96,9 +96,9 @@ export default {
 
 	setUpGraphs: function (containerNode) {
 
-		// 
+		//
 		// d3 conventional margins
-		// 
+		//
 		let margin = {
 			top: 20,
 			right: 20,
@@ -111,9 +111,9 @@ export default {
 			innerWidth = graphContainer.offsetWidth - margin.left - margin.right,
 			innerHeight = graphContainer.offsetHeight - margin.top - margin.bottom;
 
-		// 
+		//
 		// d3/svg setup
-		// 
+		//
 		this.xScale = d3.scale.linear()
 			.domain([0, 10])
 			.range([0, innerWidth]);
@@ -139,7 +139,7 @@ export default {
 
 		//
 		// Set up each graph and draw axes
-		// 
+		//
 		this.graphContainers = {};
 		this.emotionStates = {};
 		_.values(dispatcher.EMOTIONS).forEach((emotion, i) => {
@@ -203,7 +203,7 @@ export default {
 		yOffsets[dispatcher.EMOTIONS.ENJOYMENT] = yOffsets[dispatcher.EMOTIONS.ANGER];
 		yOffsets[dispatcher.EMOTIONS.FEAR] = yOffsets[dispatcher.EMOTIONS.ANGER];
 		yOffsets[dispatcher.EMOTIONS.SADNESS] = (y, d) => {
-			// due to interpolation, steeper peaks result in 
+			// due to interpolation, steeper peaks result in
 			// further distance to the label.
 			// compensate here with manual offsets.
 			return y + Math.pow(d[1].x/10, 2) * .3 * innerHeight;
@@ -264,7 +264,7 @@ export default {
 
 				// position according to distance between emotion columns
 				// dx = (emotionState.index - this.emotionStates[previousEmotion].index) * 1.25*containerWidth;
-				
+
 				// just place left or right one viewport, instead of adhering to column positions,
 				// to avoid animations that are unnecessarily fast'n'flashy.
 				dx = 1.25 * containerWidth;
@@ -340,7 +340,7 @@ export default {
 					resolveDelay = sassVars.states.backgrounded.duration.in;
 				}
 			}
-			
+
 			setTimeout(() => {
 				resolve();
 			}, resolveDelay);
@@ -423,7 +423,7 @@ export default {
 			this.hideChrome();
 			this.setActive(false);
 			d3.select('#main').on('click', null, false);
-			
+
 			if (!this.currentEmotion) {
 
 				// If no current emotion, resolve immediately.
@@ -516,8 +516,19 @@ export default {
 
 		return new Promise((resolve, reject) => {
 
+			// apply `states-in-out` class any time animating into or out of states section
+			if (!val && this.sectionContainer.classList.contains('backgrounded') ||
+				val && !this.sectionContainer.classList.contains('backgrounded')) {
+				this.sectionContainer.classList.add('states-in-out');
+			} else {
+				this.sectionContainer.classList.remove('states-in-out');
+			}
+
 			this.sectionContainer.classList[(val ? 'add' : 'remove')]('backgrounded');
+			this.sectionContainer.classList[(options && (options.sectionName === dispatcher.SECTIONS.ACTIONS) ? 'add' : 'remove')]('actions');
 			this.sectionContainer.classList[(options && (options.sectionName === dispatcher.SECTIONS.TRIGGERS) ? 'add' : 'remove')]('triggers');
+			this.sectionContainer.classList[(options && (options.sectionName === dispatcher.SECTIONS.MOODS) ? 'add' : 'remove')]('moods');
+
 			this.hideChrome();
 			this.setActive(!val);
 			this.isBackgrounded = val;
@@ -624,7 +635,7 @@ export default {
 	 * Each transformer converts an emotion state range input
 	 * formatted as { min: a, max: b } into a set of points
 	 * used to render an area graph.
-	 * 
+	 *
 	 * param states {Array} All states for an emotion that will be transformed.
 	 * param strengthMod {Number} A modifier used to animate the states.
 	 */
@@ -638,7 +649,7 @@ export default {
 		 *   and height equal to half width.
 		 *
 		 * Manual offsets per state applied for legibility.
-		 * 
+		 *
 		 * Shapes may be further modified by an interpolator (see: setUpAreaGenerators).
 		 *
 		 * For input [a(x,y), b(x,y)]:
@@ -693,7 +704,7 @@ export default {
 		},
 
 		anger: function (states, strengthMod) {
-			
+
 			let points = this.isosceles(states, strengthMod);
 
 			// manually offset each state
@@ -819,7 +830,7 @@ export default {
 	setUpDefs: function (defs, xScale, yScale) {
 
 		// blur filters (sadness)
-		// TODO: DRY this out 
+		// TODO: DRY this out
 		defs.append('filter')
 			.attr('id', 'sadness-blur-0')
 			.attr('x', -16)
@@ -958,7 +969,7 @@ export default {
 							y1 = points[1][1],
 							x2 = points[2][0],
 							y2 = points[2][1];
-							
+
 						let path = points[0].join(' ') +				// first anchor point
 							` C${x0 + steepness*(x1-x0)} ${y0},` +		// first control point, inside curve
 							`${x0 + roundness*(x1-x0)} ${y1},` + 		// second control point, outside curve
@@ -990,7 +1001,7 @@ export default {
 						y1 = points[1][1],
 						x2 = points[2][0],
 						y2 = points[2][1];
-						
+
 					let path = points[0].join(' ') +				// first anchor point
 						` C${x0 + steepness*(x1-x0)} ${y0},` +		// first control point, inside curve
 						`${x0 + roundness*(x1-x0)} ${y1},` + 		// second control point, outside curve
@@ -1002,7 +1013,7 @@ export default {
 
 					return path;
 				}),
-			
+
 			enjoyment: d3.svg.area()
 				.x(d => xScale(d.x))
 				.y0(innerHeight)
@@ -1022,7 +1033,7 @@ export default {
 
 					return path;
 				}),
-			
+
 			// TODO: degenerate per "Zig Zag" Illustrator effect (or similar)
 			fear: d3.svg.area()
 				.x(d => xScale(d.x))
@@ -1038,7 +1049,7 @@ export default {
 						y1 = points[1][1],
 						x2 = points[2][0],
 						y2 = points[2][1];
-						
+
 					let path = points[0].join(' ') +					// first anchor point
 						` C${x0 + steepnessLeft*(x1-x0)} ${y0},` +		// first control point, inside curve on left
 						`${points[1].join(' ')} ` + 					// middle anchor point
@@ -1050,13 +1061,13 @@ export default {
 
 					return path;
 				}),
-			
+
 			sadness: d3.svg.area()
 				.x(d => xScale(d.x))
 				.y0(innerHeight)
 				.y1(d => yScale(d.y))
 				.interpolate('basis')
-		
+
 		};
 
 	},
@@ -1070,13 +1081,13 @@ export default {
 				delay: (d, i) => 500 + Math.random() * 100 * i,
 				duration: 500
 			},
-			
+
 			disgust: {
 				ease: d3.ease('poly-in', 4.0),
 				delay: (d, i) => 150 + Math.random() * 100 * i,
 				duration: 1000
 			},
-			
+
 			enjoyment: {
 				// custom bounce ease function, with one more bounce and a bit extra bounciness
 				ease: ((h=0.25) => {
@@ -1122,13 +1133,13 @@ export default {
 				delay: (d, i) => 150 + Math.random() * 1250,
 				duration: 4000
 			},
-			
+
 			close: {
 				ease: d3.ease('ease-out'),
 				delay: (d, i) => Math.random() * 50 * i,
 				duration: 800
 			}
-		
+
 		};
 
 	},
@@ -1253,7 +1264,9 @@ export default {
 
 		classes[this.currentEmotion] = true;
 
-		this.backgroundedLabel.select('h3').html(singleStateName);
+		if (singleStateName) {
+			this.backgroundedLabel.select('h3').html(singleStateName);
+		}
 		this.backgroundedLabel.classed(classes);
 
 		this.displayHighlightedStates(states);

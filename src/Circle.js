@@ -2,12 +2,12 @@ import d3 from 'd3';
 
 const STROKE_WIDTH_MIN = 0.4,
 	STROKE_WIDTH_VAR = 1.2,
-	SIZE_MOD = 1 / (1 + 0.5 * (STROKE_WIDTH_MIN + STROKE_WIDTH_VAR)),
 	BASE_SPEED = 0.05;
 
 export default class Circle {
 
 	static BASE_ALPHA = 0.5;
+	static SIZE_MOD = 1 / (1 + 0.5 * (STROKE_WIDTH_MIN + STROKE_WIDTH_VAR));
 
 	// Note: continent.spawnConfig.lastSpawn is mutated by this function
 	static spawn (continent, frameCount, forceSpawn) {
@@ -33,7 +33,7 @@ export default class Circle {
 
 		let color = colorPalette[Math.floor(Math.random() * colorPalette.length)].join(','),
 			alpha = Circle.BASE_ALPHA,
-			weight = Math.round(0.4*size*SIZE_MOD + Math.random() * 1.2*size*SIZE_MOD);
+			weight = Math.round(0.4*size*Circle.SIZE_MOD + Math.random() * 1.2*size*Circle.SIZE_MOD);
 
 		return {
 			'stroke': 'rgba(' + color + ',' + alpha + ')',
@@ -46,7 +46,7 @@ export default class Circle {
 
 		// Scale `size` down to account for stroke weight,
 		// to keep all stroked ellipses within `size`.
-		this.size = size * SIZE_MOD;
+		this.size = size * Circle.SIZE_MOD;
 
 		this.radius = 0;
 		this.rSpeed = Math.random() * 0.2;

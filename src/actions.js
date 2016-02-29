@@ -31,7 +31,9 @@ export default {
 	labelContainers: null,
 	graphContainers: null,
 
-	
+	mouseOutTimeout: null,
+
+
 	init: function (containerNode) {
 
 		this.sectionContainer = containerNode;
@@ -83,7 +85,7 @@ export default {
 			let container = d3.select('.' + emotion + '.actions-container'),
 				labelContainer = container.append('div')
 					.classed('label-container', true);
-			
+
 			this.labelContainers[emotion] = labelContainer;
 
 		});
@@ -92,13 +94,13 @@ export default {
 
 	setUpGraphs: function (containerNode) {
 
-		// 
+		//
 		// d3 conventional margins
-		// 
+		//
 		let margin = {
 			top: 25,		// actions graph is upside down, so 'top' means bottom of the screen
 			right: 100,
-			bottom: 10,
+			bottom: sassVars.actions.margins.bottom,
 			left: 100
 		};
 
@@ -108,9 +110,10 @@ export default {
 			h = Math.max(graphContainer.offsetHeight, 0.5 * graphContainer.offsetWidth),
 			innerHeight = h - margin.top - margin.bottom;
 
-		// 
+
+		//
 		// d3/svg setup
-		// 
+		//
 		let section = this,
 			transformedHeight = Math.sqrt(3) / 2 * innerHeight,	// from rotateX(60deg) applied to #action-graph-container
 			radius = Math.min(0.5 * innerWidth, transformedHeight * 0.75);	// TODO: revisit this magic number munging to keep everything on-screen
@@ -132,7 +135,7 @@ export default {
 
 		//
 		// Set up each graph
-		// 
+		//
 		this.graphContainers = {};
 		_.values(dispatcher.EMOTIONS).forEach((emotion, i) => {
 
@@ -288,7 +291,7 @@ export default {
 				let valenceWeights = Object.keys(VALENCES).map(valenceName => ({
 					name: valenceName,
 					size: valenceName === 'CONSTRUCTIVE' ? numActionsCon :
-							valenceName === 'BOTH' ? numActionsBoth : 
+							valenceName === 'BOTH' ? numActionsBoth :
 							valenceName === 'DESTRUCTIVE' ? numActionsDes : 0
 				})).reverse();
 				// subtract 0.5 from the first and last size,
@@ -329,7 +332,7 @@ export default {
 			return actionsOutput;
 
 		}, {});
-	
+
 		return actionsData;
 
 	},
@@ -546,7 +549,7 @@ export default {
 		arrowEnterSelection.append('path')
 			.attr('fill', (d, i) => 'url(#' + emotionGradientName + ')')
 			.call(this.scaledLineGenerator, 0.0);
-			
+
 		arrowEnterSelection.transition()
 			.duration(sassVars.actions.add.time)
 			.delay(function (d, i) { return i * 50; })
@@ -648,13 +651,13 @@ export default {
 				labelContainer = this.labelContainers[this.currentEmotion];
 
 			graphContainer.selectAll('g.action-arrow')
-				.style('opacity', (data, index) => ~stateActions.indexOf(data.name) ? 1.0 : 0.2);
+				.classed('muted', (data, index) => !~stateActions.indexOf(data.name));
 
 			labelContainer.selectAll('div.label')
-				.style('opacity', (data, index) => ~stateActions.indexOf(data.name) ? 1.0 : 0.2);
+				.classed('muted', (data, index) => !~stateActions.indexOf(data.name));
 
 		}
-		
+
 	},
 
 	renderLabels: function (actionsData) {
@@ -708,20 +711,20 @@ export default {
 					return (t) => {
 						rot = previousRotation + t * (targetRotation - previousRotation);
 						return 'translate(' +
-							labelSize * Math.cos(rot) + 'px,' +
-							labelSize / sqrt3 * Math.sin(rot) + 'px)';
+							Math.round(labelSize * Math.cos(rot)) + 'px,' +
+							Math.round(labelSize / sqrt3 * Math.sin(rot)) + 'px)';
 					};
 
 				})());
-			labelSelection.select('h3')
+			labelSelection.select('h4')
 				.html(labelText);
 
 			// enter
 			let labelEnterSelection = labelSelection.enter().append('div')
 				.classed('label ' + this.currentEmotion, true)
-				.style('transform', d => 'translate(' + labelSize * Math.cos(Math.PI*(d.rotation-90)/180) + 'px,' + labelSize * Math.sin(Math.PI*(d.rotation-90)/180) / sqrt3 + 'px')
+				.style('transform', d => 'translate(' + Math.round(labelSize * Math.cos(Math.PI*(d.rotation-90)/180)) + 'px,' + Math.round(labelSize * Math.sin(Math.PI*(d.rotation-90)/180) / sqrt3) + 'px')
 				.style('opacity', 0.0);
-			labelEnterSelection.append('div').append('h3')
+			labelEnterSelection.append('div').append('h4')
 				.html(labelText)
 				.on('mouseover', this.onActionMouseOver)
 				.on('mouseout', this.onActionMouseOut)
@@ -730,7 +733,10 @@ export default {
 			labelEnterSelection.transition()
 				.duration(sassVars.actions.add.time)
 				.delay(sassVars.actions.add.delay)
-				.style('opacity', 1.0);
+				.style('opacity', 1.0)
+				.each('end', function () {
+					d3.select(this).style('opacity', null);
+				});
 
 			// exit
 			labelSelection.exit().transition()
@@ -739,7 +745,7 @@ export default {
 				.remove();
 
 		} else {
-			
+
 			labelContainer.selectAll('div.label')
 				.on('mouseover', null)
 				.on('mouseout', null)
@@ -798,6 +804,8 @@ export default {
 
 			this.sectionContainer.classList[(val ? 'add' : 'remove')]('backgrounded');
 			this.sectionContainer.classList[(options && (options.sectionName === dispatcher.SECTIONS.TRIGGERS) ? 'add' : 'remove')]('triggers');
+			this.sectionContainer.classList[(options && (options.sectionName === dispatcher.SECTIONS.MOODS) ? 'add' : 'remove')]('moods');
+
 			// this.hideChrome();
 			// this.setActive(!val);
 
@@ -855,18 +863,18 @@ export default {
 			}
 
 			arrowSelection
-				.style('opacity', (data, index) => data.name === highlightedAction.name ? 1.0 : 0.2);
+				.classed('muted', (data, index) => data.name !== highlightedAction.name);
 
 			labelSelection
-				.style('opacity', (data, index) => data.name === highlightedAction.name ? 1.0 : 0.2);
+				.classed('muted', (data, index) => data.name !== highlightedAction.name);
 
 		} else {
 
 			arrowSelection
-				.style('opacity', null);
+				.classed('muted', false);
 
 			labelSelection
-				.style('opacity', null);
+				.classed('muted', false);
 
 		}
 
@@ -942,11 +950,11 @@ export default {
 			});
 
 		graphContainer.selectAll('g.action-arrow')
-			.style('opacity', d => {
+			.classed('muted', d => {
 				if (valence) {
-					return d.valence === valence ? 1.0 : 0.2;
+					return d.valence !== valence;
 				} else {
-					return null;
+					return false;
 				}
 			});
 
@@ -954,13 +962,18 @@ export default {
 
 	onActionMouseOver: function (d, i) {
 
+		if (this.mouseOutTimeout) {
+			clearTimeout(this.mouseOutTimeout);
+		}
 		this.displayHighlightedAction(d);
 
 	},
 
 	onActionMouseOut: function (d, i) {
 
-		this.displayHighlightedAction(null);
+		this.mouseOutTimeout = setTimeout(() => {
+			this.displayHighlightedAction(null);
+		}, 350);
 
 	},
 
@@ -970,6 +983,9 @@ export default {
 			d3.event.stopImmediatePropagation();
 		}
 
+		if (this.mouseOutTimeout) {
+			clearTimeout(this.mouseOutTimeout);
+		}
 		this.setHighlightedAction(d);
 
 	},

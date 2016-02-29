@@ -73,7 +73,7 @@ const continentsSection = {
 			if (currentEmotion) {
 
 				// -->> TODO: keep in mind what happens if setEmotion() is called during a transition! <<--
-				
+
 				let currentContinent = continents.find(c => c.id === currentEmotion);
 
 				if (emotion) {
@@ -100,7 +100,7 @@ const continentsSection = {
 					if (this.zoomedInContinent) {
 
 						// transition back from zoomed continent to all continents
-						
+
 						if (this.zoomedInContinent !== previousEmotion) {
 							// if zoomed into a different continent than we're returning to
 							// (i.e. left continents, changed emotions, returned to continents),
@@ -113,7 +113,7 @@ const continentsSection = {
 							// immediately to panning to location of current emotion
 							// and spreading circles of that continent.
 							//
-							
+
 						}
 
 						// gather circles of zoomed-in continent
@@ -184,7 +184,7 @@ const continentsSection = {
 						// intent is for this block to be triggered when navigating from outside continents
 						// into a focused continent, regardless of whether or not continents
 						// has yet been visited this session.
-						// 
+						//
 						// TODO: in the above scenario, we'll also have to enable this transition
 						// by pre-zooming/flattening the continent, in order to animate
 						// away from that state back to the SELECTED, zoomed-out state.
@@ -193,7 +193,7 @@ const continentsSection = {
 
 						// gather circles of zoomed-in continent
 						this.transitions.gatherContinent(previousEmotion);
-						
+
 						setTimeout(() => {
 
 							// scale all continents back up to full size
@@ -235,11 +235,11 @@ const continentsSection = {
 
 					dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
 					*/
-				
+
 					resolve();
 
 				}
-			
+
 			}
 
 			currentEmotion = emotion;
@@ -345,7 +345,7 @@ const continentsSection = {
 				// (when the intro modal is dismissed and the continents brought back to the screen center),
 				// but doesn't really have anything to do with bringing the continents back to the screen center.
 				// So, this code should probably belong elsewhere, but for now, here it stays.
-				
+
 				// display the default continents callout and continent labels.
 				dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
 				d3.selectAll('#continent-labels div')
@@ -494,7 +494,7 @@ const continentsSection = {
 
 		},
 
-		// 1. fade out and shrink all but focused continent / 
+		// 1. fade out and shrink all but focused continent /
 		// 1a. fade out and shrink circles of continent;
 		// 1b. pull circles together toward center along horizontal axis as they fade/shrink
 		//		note: for zoomed-out continents, circles will already be centered, but that's ok.
@@ -610,7 +610,7 @@ const continentsSection = {
 					}
 				});
 			}
-			
+
 		}, mouseLeaveDelay);
 
 	},
@@ -629,7 +629,7 @@ const continentsSection = {
 					.map(c => c.id),
 				0.0
 			);
-			
+
 			this.transitions.panToContinent(continent.id);
 
 			setTimeout(() => {
@@ -665,7 +665,7 @@ const continentsSection = {
 
 		// 			// navigate from zoomed-in continent view to states view
 		// 			// TODO: this will happen on scroll, not click
-		// 			dispatcher.navigate(dispatcher.SECTIONS.STATES, continent.id); 
+		// 			dispatcher.navigate(dispatcher.SECTIONS.STATES, continent.id);
 
 		// 		}
 
@@ -682,7 +682,7 @@ const continentsSection = {
 		// 			dispatcher.navigate(dispatcher.SECTIONS.STATES, continent.id);
 		// 		});
 		// 		*/
-				
+
 		// 		return true;
 		// 	}
 		// });
@@ -714,7 +714,6 @@ const continentsSection = {
 		console.log(">>>>> TODO: apply highlight levels to continent labels as well");
 
 	}
-
 
 };
 

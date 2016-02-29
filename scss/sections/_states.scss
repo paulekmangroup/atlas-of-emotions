@@ -22,6 +22,20 @@
 		transform: scale($states-backgrounded-scale);
 		top: $states-backgrounded-top;
 
+		// tie `transform` and `top` transitions when animating between any non-states sections,
+		// to prevent the two transitions from drifting apart from each other,
+		// but use a different transition for `transform` when animating between states and any other section.
+		transition-timing-function: cubic-bezier(.81,.34,.63,.85), cubic-bezier(.81,.34,.63,.85), ease;
+		&.states-in-out {
+			transition-timing-function: cubic-bezier(0.4, 0.4, 0.35, 1), cubic-bezier(.81,.34,.63,.85), ease;
+		}
+
+		&.actions {
+			// states appear a bit larger in actions than in triggers and moods
+			transform: scale($states-backgrounded-actions-scale);
+			top: $states-backgrounded-actions-top;
+		}
+
 		/*
 		// TODO: prevent visible edge to states transitions when backgrounded
 		width: calc(100% / #{$states-backgrounded-scale});
@@ -31,10 +45,10 @@
 
 		&.triggers {
 			// align bottom of states graph, which is scaled and translated,
-			// with bottom of screen. this math is basically:
-			// (scaled states offset) + scale * (states graph offset from parent + states graph bottom margin)
+			// with bottom of screen - 20%. this math is basically:
+			// (scaled states offset) + scale * (states graph offset from parent + states graph bottom margin) + triggers bottom
 			top: calc((100% * (1 - #{$states-backgrounded-scale}) / 2) +
-				#{$states-backgrounded-scale} * (#{$states-containers-bottom} + 50px));
+				#{$states-backgrounded-scale} * (#{$states-containers-bottom} + 50px) - #{$triggers-bottom});
 		}
 
 		&.faded {
@@ -67,7 +81,7 @@
 
 	.graph-container {
 		width: $states-graph-width;
-		height: 80%;
+		height: 70%;
 
 		.axis {
 			line,
@@ -134,14 +148,6 @@
 					opacity: 0.2;
 					transition: opacity #{$states-highlighted-in}s ease-in;
 				}
-				/*
-				opacity: 0.2;
-				transition: opacity #{$states-highlighted-out}s ease-out;
-				&.highlighted {
-					opacity: 1.0;
-					transition: opacity #{$states-highlighted-in}s ease-in;
-				}
-				*/
 			}
 		}
 		&.active h3 {
@@ -167,53 +173,22 @@
 
 	text-align: center;
 	pointer-events: none;
-	
+
 	@include emotion-color;
 	white-space: nowrap;
 
-	// TODO: transition opacity
-	display: none;
+	transition: opacity #{$states-highlighted-out}s ease-out;
 	opacity: 0.0;
 
 	&.visible {
-		display: block;
+		transition: opacity #{$states-highlighted-in}s ease-in;
 		opacity: 1.0;
 	}
 
 	h3 {
 		transform: translate(-50%, -50%);
 		margin: 0;
-		font-size: calc(100% / #{$states-backgrounded-scale});
+		font-size: calc(0.66667em / #{$states-backgrounded-scale});
 		text-transform: uppercase;
-	}
-}
-
-#temp-states-nav {
-	position: absolute;
-	height: 100%;
-	right: 3%;
-	pointer-events: none;
-
-	.prev {
-		position: absolute;
-		top: 3%;
-		right: 0;
-		pointer-events: auto;
-		white-space: nowrap;
-	}
-
-	.next {
-		position: absolute;
-		bottom: 3%;
-		right: 0;
-		pointer-events: auto;
-		white-space: nowrap;
-	}
-
-	opacity: 0.0;
-	-webkit-transition: opacity 1s;
-	transition:         opacity 1s;
-	&.visible {
-		opacity: 1.0;
 	}
 }

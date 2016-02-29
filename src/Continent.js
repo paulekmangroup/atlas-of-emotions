@@ -237,10 +237,10 @@ export default class Continent {
 
 	prepopulate () {
 
-		let numCircles = 3 + Math.floor(Math.random() * 3);
+		let numCircles = 2 + Math.floor(Math.random() * 2);
 		for (let i=0; i<numCircles; i++) {
 			let newCircle = Circle.spawn(this, 1, true);
-			newCircle.radius = 0.25 + (0.75 * Math.random()) * newCircle.size;
+			newCircle.radius = 0.75 + (0.25 * Math.random()) * newCircle.size;
 			newCircle.update(
 				Continent.HIGHLIGHT_ALPHA_MODS[this.highlightLevel],
 				Continent.HIGHLIGHT_SPEED_MODS[this.highlightLevel]);

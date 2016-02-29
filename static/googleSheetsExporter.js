@@ -149,7 +149,16 @@ var metadataSectionParsers = (function () {
 
 		moods: standard,
 
-		calm: standard
+		calm: function (data) {
+			return {
+				header: data[0][0],
+				body: data[0][1],
+				secondary: {
+					header: data[0][2],
+					body: data[0][3]
+				}
+			};
+		}
 
 	};
 

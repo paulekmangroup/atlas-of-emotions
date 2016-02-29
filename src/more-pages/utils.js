@@ -6,7 +6,7 @@ import dispatcher from '../dispatcher.js';
 
 export function makeBlock(titleStr, descStr) {
 	const block = document.createElement('div');
-	const title = document.createElement('h4');
+	const title = document.createElement('h3');
 	const desc = document.createElement('p');
 
 	block.classList.add('block');
@@ -24,7 +24,7 @@ export function makeBlock(titleStr, descStr) {
 
 export function makeLinkBlock(linkStr) {
 	const block = document.createElement('div');
-	const title = document.createElement('h4');
+	const title = document.createElement('h3');
 	const link = document.createElement('a');
 
 	block.classList.add('block', 'link');
