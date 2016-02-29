@@ -31,6 +31,8 @@ export default {
 	labelContainers: null,
 	graphContainers: null,
 
+	mouseOutTimeout: null,
+
 
 	init: function (containerNode) {
 
@@ -979,13 +981,18 @@ export default {
 
 	onActionMouseOver: function (d, i) {
 
+		if (this.mouseOutTimeout) {
+			clearTimeout(this.mouseOutTimeout);
+		}
 		this.displayHighlightedAction(d);
 
 	},
 
 	onActionMouseOut: function (d, i) {
 
-		this.displayHighlightedAction(null);
+		this.mouseOutTimeout = setTimeout(() => {
+			this.displayHighlightedAction(null);
+		}, 350);
 
 	},
 
@@ -995,6 +1002,9 @@ export default {
 			d3.event.stopImmediatePropagation();
 		}
 
+		if (this.mouseOutTimeout) {
+			clearTimeout(this.mouseOutTimeout);
+		}
 		this.setHighlightedAction(d);
 
 	},
