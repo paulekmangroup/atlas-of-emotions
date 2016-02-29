@@ -75,7 +75,7 @@
 		}
 	},
 	"triggers": {
-		"bottom": "25%"
+		"bottom": "20%"
 	},
 	"emotions": {
 		"panX": {
