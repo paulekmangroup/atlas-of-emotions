@@ -9,6 +9,17 @@
  * 6. Copy + paste the resulting JSON into emotionsData.json and rebuild the project.
  */
 
+var ANNEX_SECTIONS = [
+	'scientific basis',
+	'signals',
+	'psychopathology',
+	'personality trait',
+	'partially charted',
+	'triggers timeline',
+	'impediment-antidote',
+	'intrinsic or intentional',
+];
+
 var PARSER_CONFIG = {
 	'scientific basis': {
 		start: [1, 3], // col, row
@@ -70,7 +81,7 @@ var PARSER_CONFIG = {
 		}
 	},
 
-	'intrinsic or intentional ': {
+	'intrinsic or intentional': {
 		start: [[1, 3], [1, 6]], // col, row
 		parse: function(data) {
 			var rsp = {};
@@ -277,7 +288,9 @@ function onOpen () {
 
 function slugify(text)
 {
-  return text.toString().toLowerCase()
+  return text.toString()
+  	.toLowerCase()
+  	.trim()
     .replace(/\s+/g, '-')           // Replace spaces with -
     .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
     .replace(/\-\-+/g, '-')         // Replace multiple - with single -
@@ -294,14 +307,19 @@ function exportAll (e) {
 	var ss = SpreadsheetApp.getActiveSpreadsheet(),
 		sheetName,
 		parsedSheets = ss.getSheets().reduce(function (acc, sheet) {
-			sheetName = sheet.getName().toLowerCase();
+			sheetName = sheet.getName().toLowerCase().trim();
 			if (PARSER_CONFIG[sheetName]) {
-				acc.moreinfo[slugify(sheetName)] = parse(sheetName, sheet);
+				var parsedObj = parse(sheetName, sheet);
+				if (ANNEX_SECTIONS.indexOf(sheetName) > -1) {
+					acc.annex[slugify(sheetName)] = parsedObj;
+				} else {
+					acc[slugify(sheetName)] = parsedObj;
+				}
 			}
 
 			return acc;
 		}, {
-			moreinfo: {}
+			annex: {}
 		});
 
 	var json = JSON.stringify(parsedSheets, null, 2);

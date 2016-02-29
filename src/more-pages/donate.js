@@ -12,7 +12,7 @@ export default {
 	wrapper: null,
 
 	init: function (containerNode, data) {
-		this.data = data.moreinfo.donate;
+		this.data = data.donate;
 
 		this.sectionContainer = containerNode;
 

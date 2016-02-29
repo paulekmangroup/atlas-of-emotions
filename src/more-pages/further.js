@@ -12,7 +12,7 @@ export default {
 	wrapper: null,
 
 	init: function (containerNode, data) {
-		this.data = data.moreinfo['further-reading'];
+		this.data = data['further-reading'];
 
 		this.sectionContainer = containerNode;
 

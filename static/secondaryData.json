@@ -1,31 +1,5 @@
 {
-	"moreinfo": {
-		"about": {
-			"subsections": [
-				{
-					"title": "About the Ekmans",
-					"desc": "Paul Ekman is an American psychologist who is a pioneer in the study of emotions and their relation to facial expressions. He has gained a reputation as \"the best human lie detector in the world\". Eve Ekman is currently a Post Doctoral Scholar at UCSF’s Osher Center for Integrative Medicine. Ekman’s research interests were inspired by her experience as a medical social worker in the emergency department of San Francisco General Hospital coupled with her training in the applied emotion regulation and mindfulness intervention: Cultivating Emotional Balance, CEB."
-				},
-				{
-					"title": "Why Use This Atlas?",
-					"desc": "A world without the pull of our emotions would be impossibly bland and dangerous. Anger, fear and disgust can save our lives. We need to understand and develop the skills to have choice about (1) when we become emotional or what brings forth an emotional response and (2) how we respond when we are emotional and what we say and do. These skills are not given to us by nature but we can learn them. Exploring this Atlas can help us to achieve a more balanced emotional life, involving choice (at least some of the time). The Atlas of Emotions will increase your understanding of what emotions are: how they happen, what occurs, what you need to know to gain heightened awareness of your emotions."
-				},
-				{
-					"title": "What is Emotional Awareness?",
-					"desc": "Why does emotional awareness help us to manage our emotional lives? The simple answer is: we live most of our days completely unaware of what emotions we are feeling and the words and actions that they motivate. Typically we are aware of our emotions after an emotional episode, especially if we then regret how we acted. The goal is to become aware of the impulse to act before acting, choosing whether to engage, and if so how to engage. This means understanding what triggers emotions, which triggers most people share, which triggers we are especially sensitive to, and which triggers usually result in a regrettable emotional episode. This isn’t easy to achieve, but exploring this Atlas provides the vital, necessary first step. In the Annex of the Atlas you will find suggestions about other practices you may want to adopt to heighten your awareness of your own emotions."
-				},
-				{
-					"title": "What is the link Between Emotion and Stress?",
-					"desc": "Our uncontrolled emotions make us susceptible to stress, in fact the definition of stress is an emotional over-arousal (too strong of an emotional experience that lasts too long and interferes with the rest of our life). The consequences of stress, especially prolonged stress, include poor sleep, negative moods, diminished cognitive functioning such as memory and focus, strain on our personal and professional relationships and a variety of poor physical health outcomes."
-				},
-				{
-					"title": "What is an Emotion?",
-					"desc": "An episode of emotion is actually a brief and succinct experience, one which does not always fit our expectations. Most emotions arise in under a twenty fifth of a second and last no longer than a few minutes. We often feel as though our emotions last much longer, however what we are remembering is likely a series of emotion episodes. The definition is as follows: \n\nEmotion is a process, a particular kind of very fast automatic appraisal influenced by our evolutionary and personal past, in which we sense that something important to our welfare is occurring, and a set of physiological changes and behaviors begin to deal with the situation. In particular, emotions efficiently coordinate diverse response systems, thereby helping us respond to important challenges or opportunities.\n\nLets unpack this definition. Emotion is a process, meaning there are a series of small stages that make up an emotion episode. This begins with our automatic appraisal, or perspective of the world as influenced by our personal experiences (our learned responses from prior life experiences) and evolutionary past (our hardwired responses which have been passed down genetically). Our appraisal helps us filter what is ‘an important event to our welfare’. Typically appraisal is so fast that we are totally unaware of it. Because our appraisal is influenced by our personal pasts we can have quite distinct responses to the world. Consider this example: you are walking down the street with a close friend and an approach car with its windows down is loudly playing a song. For you this song elicits a feeling of great sadness, it is the favorite song of a friend who died from cancer that was played at her or his eulogy. However for your friend, who did not know this person and has no association with the song there is no emotional response or perhaps annoyance about the loud noise. You are on the same street, with the same song but for you this is a learned and personal response. However, if that same car had to avoid a cat running through the road and suddenly veered on to the sidewalk behind, both you and your friend, irrespective of personal past, would jump backwards in fear. This is a universal response to an imminent threat. Emotions help us respond before we even have time to think “what is that car doing?”. This is the brilliance and burden of emotions, they can rally our physiological responses and behaviors for immediate behaviors to save our lives, but they arise without our choosing them and can feel quite out of our control. We will begin mapping our own emotion episodes as explorers immersed in this Atlas.\n\nThe end of this definition points to the evolutionary perspective of emotions, this means looking at emotions the way we look at our thumbs or eyelashes for their functional properties. While emotions do not serve the critical functions of allowing us to grasp or keeping dust from our eyes, they were just as critical for our survival in the environment of our evolutionary adaptedness. In addition to helping us respond to immediate threats (running from a saber tooth tiger in fear or standing up to a less threatening beast with anger) they also helped us in the social cohesion of a tribe through shared enjoyment. Importantly for our early survival, our emotion system includes our rapid internal response as well as a nonverbal signaling through our face."
-				}
-			],
-			"title": "About this Atlas",
-			"desc": "Paul and Eve Ekman created this atlas to aid people in understanding their emotions. In 2009 they presented their research to the Dalai Lama and he requested that it be made available to the general public. They enlisted the help of Stamen Design to realize their vision in a visual fashion. "
-		},
+	"annex": {
 		"personality-trait": {
 			"emotions": [
 				{
@@ -516,17 +490,43 @@
 			],
 			"title": "Intrinsic or Intentional?",
 			"desc": "Actions can be intrinsic (take place without intent) or intentional (active attempt to enact change) or both."
-		},
-		"donate": {
-			"title": "Support our Cause",
-			"desc": "This project was generously supported by the Dalia Lama Trust. To give back, and to help bring more emotion awareness to the world, consider donating here: ",
-			"link": "http://www.dalailamatrust.org/donate",
-			"imgs": []
-		},
-		"further-reading": {
-			"links": [],
-			"title": "Further Reading",
-			"desc": "Here are some of the publications that guided us, or that you might be interested in seeking out to learn more. "
 		}
+	},
+	"about": {
+		"subsections": [
+			{
+				"title": "About the Ekmans",
+				"desc": "Paul Ekman is an American psychologist who is a pioneer in the study of emotions and their relation to facial expressions. He has gained a reputation as \"the best human lie detector in the world\". Eve Ekman is currently a Post Doctoral Scholar at UCSF’s Osher Center for Integrative Medicine. Ekman’s research interests were inspired by her experience as a medical social worker in the emergency department of San Francisco General Hospital coupled with her training in the applied emotion regulation and mindfulness intervention: Cultivating Emotional Balance, CEB."
+			},
+			{
+				"title": "Why Use This Atlas?",
+				"desc": "A world without the pull of our emotions would be impossibly bland and dangerous. Anger, fear and disgust can save our lives. We need to understand and develop the skills to have choice about (1) when we become emotional or what brings forth an emotional response and (2) how we respond when we are emotional and what we say and do. These skills are not given to us by nature but we can learn them. Exploring this Atlas can help us to achieve a more balanced emotional life, involving choice (at least some of the time). The Atlas of Emotions will increase your understanding of what emotions are: how they happen, what occurs, what you need to know to gain heightened awareness of your emotions."
+			},
+			{
+				"title": "What is Emotional Awareness?",
+				"desc": "Why does emotional awareness help us to manage our emotional lives? The simple answer is: we live most of our days completely unaware of what emotions we are feeling and the words and actions that they motivate. Typically we are aware of our emotions after an emotional episode, especially if we then regret how we acted. The goal is to become aware of the impulse to act before acting, choosing whether to engage, and if so how to engage. This means understanding what triggers emotions, which triggers most people share, which triggers we are especially sensitive to, and which triggers usually result in a regrettable emotional episode. This isn’t easy to achieve, but exploring this Atlas provides the vital, necessary first step. In the Annex of the Atlas you will find suggestions about other practices you may want to adopt to heighten your awareness of your own emotions."
+			},
+			{
+				"title": "What is the link Between Emotion and Stress?",
+				"desc": "Our uncontrolled emotions make us susceptible to stress, in fact the definition of stress is an emotional over-arousal (too strong of an emotional experience that lasts too long and interferes with the rest of our life). The consequences of stress, especially prolonged stress, include poor sleep, negative moods, diminished cognitive functioning such as memory and focus, strain on our personal and professional relationships and a variety of poor physical health outcomes."
+			},
+			{
+				"title": "What is an Emotion?",
+				"desc": "An episode of emotion is actually a brief and succinct experience, one which does not always fit our expectations. Most emotions arise in under a twenty fifth of a second and last no longer than a few minutes. We often feel as though our emotions last much longer, however what we are remembering is likely a series of emotion episodes. The definition is as follows: \n\nEmotion is a process, a particular kind of very fast automatic appraisal influenced by our evolutionary and personal past, in which we sense that something important to our welfare is occurring, and a set of physiological changes and behaviors begin to deal with the situation. In particular, emotions efficiently coordinate diverse response systems, thereby helping us respond to important challenges or opportunities.\n\nLets unpack this definition. Emotion is a process, meaning there are a series of small stages that make up an emotion episode. This begins with our automatic appraisal, or perspective of the world as influenced by our personal experiences (our learned responses from prior life experiences) and evolutionary past (our hardwired responses which have been passed down genetically). Our appraisal helps us filter what is ‘an important event to our welfare’. Typically appraisal is so fast that we are totally unaware of it. Because our appraisal is influenced by our personal pasts we can have quite distinct responses to the world. Consider this example: you are walking down the street with a close friend and an approach car with its windows down is loudly playing a song. For you this song elicits a feeling of great sadness, it is the favorite song of a friend who died from cancer that was played at her or his eulogy. However for your friend, who did not know this person and has no association with the song there is no emotional response or perhaps annoyance about the loud noise. You are on the same street, with the same song but for you this is a learned and personal response. However, if that same car had to avoid a cat running through the road and suddenly veered on to the sidewalk behind, both you and your friend, irrespective of personal past, would jump backwards in fear. This is a universal response to an imminent threat. Emotions help us respond before we even have time to think “what is that car doing?”. This is the brilliance and burden of emotions, they can rally our physiological responses and behaviors for immediate behaviors to save our lives, but they arise without our choosing them and can feel quite out of our control. We will begin mapping our own emotion episodes as explorers immersed in this Atlas.\n\nThe end of this definition points to the evolutionary perspective of emotions, this means looking at emotions the way we look at our thumbs or eyelashes for their functional properties. While emotions do not serve the critical functions of allowing us to grasp or keeping dust from our eyes, they were just as critical for our survival in the environment of our evolutionary adaptedness. In addition to helping us respond to immediate threats (running from a saber tooth tiger in fear or standing up to a less threatening beast with anger) they also helped us in the social cohesion of a tribe through shared enjoyment. Importantly for our early survival, our emotion system includes our rapid internal response as well as a nonverbal signaling through our face."
+			}
+		],
+		"title": "About this Atlas",
+		"desc": "Paul and Eve Ekman created this atlas to aid people in understanding their emotions. In 2009 they presented their research to the Dalai Lama and he requested that it be made available to the general public. They enlisted the help of Stamen Design to realize their vision in a visual fashion. "
+	},
+	"donate": {
+		"title": "Support our Cause",
+		"desc": "This project was generously supported by the Dalia Lama Trust. To give back, and to help bring more emotion awareness to the world, consider donating here: ",
+		"link": "http://www.dalailamatrust.org/donate",
+		"imgs": []
+	},
+	"further-reading": {
+		"links": [],
+		"title": "Further Reading",
+		"desc": "Here are some of the publications that guided us, or that you might be interested in seeking out to learn more. "
 	}
 }

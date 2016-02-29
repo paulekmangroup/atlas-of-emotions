@@ -167,4 +167,61 @@
 	}
 }
 
-#more-about {}
+#more-annex {
+	text-align: left;
+}
+
+.annex-title {
+	margin: 0 0 1em;
+	font-size: 0.85em;
+	font-weight: 700;
+}
+
+.annex-helper {
+	margin: 0 0 0.5em;
+	padding: 0;
+	font-size: 0.75em;
+	font-style: italic;
+}
+
+.annex-btn-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+
+	li {
+		background-color: rgba($callout-background-color, 0.5);
+	}
+
+	li + li {
+		margin-top: 2px;
+	}
+
+	button {
+		display: block;
+		position: relative;
+		width: 100%;
+		padding: 0 1.2em;
+		margin: 0;
+		background: transparent;
+		color: #fff;
+		font-weight: 400;
+		text-transform: uppercase;
+		line-height: 2.25em;
+		text-align: left;
+		border: 0;
+		outline: none;
+	}
+
+	button:hover {
+		text-decoration: underline;
+	}
+
+	button:after {
+		content: '>';
+		position: absolute;
+		top: 0;
+		right: 1em;
+		color: #fff;
+	}
+}
