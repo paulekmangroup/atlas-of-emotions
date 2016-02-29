@@ -96,25 +96,6 @@ export default {
 
 	setUpGraphs: function (containerNode) {
 
-		/*
-		// All the same size, just grab the first one
-		let graphContainer = containerNode.querySelector('.graph-container'),
-			w = graphContainer.offsetWidth,
-			h = graphContainer.offsetHeight;
-
-		//
-		// d3 conventional margins
-		//
-		let margin = {
-				top: 0.06 * h,
-				right: 0.06 * w,
-				bottom: 0.15 * h,
-				left: 0.06 * w
-			},
-			innerWidth = w - margin.left - margin.right,
-			innerHeight = h - margin.top - margin.bottom;
-		*/
-
 		//
 		// d3 conventional margins
 		//

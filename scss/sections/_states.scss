@@ -31,11 +31,7 @@
 		}
 
 		&.actions {
-			// TODO: trying to make states appear a bit larger in actions
-			// than in triggers and moods. but it's causing a misalignment
-			// of states + actions. probably need to make a states-backgrounded-actions-top --
-			// it was probably coincidence that scale(0.6) works well with top: 10%.
-
+			// states appear a bit larger in actions than in triggers and moods
 			transform: scale($states-backgrounded-actions-scale);
 			top: $states-backgrounded-actions-top;
 		}
@@ -85,7 +81,7 @@
 
 	.graph-container {
 		width: $states-graph-width;
-		height: 80%;
+		height: 70%;
 
 		.axis {
 			line,
@@ -152,14 +148,6 @@
 					opacity: 0.2;
 					transition: opacity #{$states-highlighted-in}s ease-in;
 				}
-				/*
-				opacity: 0.2;
-				transition: opacity #{$states-highlighted-out}s ease-out;
-				&.highlighted {
-					opacity: 1.0;
-					transition: opacity #{$states-highlighted-in}s ease-in;
-				}
-				*/
 			}
 		}
 		&.active h3 {
