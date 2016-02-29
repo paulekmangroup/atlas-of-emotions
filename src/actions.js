@@ -94,25 +94,6 @@ export default {
 
 	setUpGraphs: function (containerNode) {
 
-		/*
-		// All the same size, just grab the first one
-		let graphContainer = containerNode.querySelector('.graph-container'),
-			w = graphContainer.offsetWidth,
-			h = Math.max(graphContainer.offsetHeight, 0.5 * graphContainer.offsetWidth);
-
-		//
-		// d3 conventional margins
-		//
-		let margin = {
-				top: 0.06 * h,		// actions graph is upside down, so 'top' means bottom of the screen
-				right: 0.15 * w,
-				bottom: 10,			// fixed distance from bottom of states
-				left: 0.15 * w
-			},
-			innerWidth = w - margin.left - margin.right,
-			innerHeight = h - margin.top - margin.bottom;
-		*/
-
 		//
 		// d3 conventional margins
 		//
