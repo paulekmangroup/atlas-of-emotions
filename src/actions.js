@@ -728,8 +728,8 @@ export default {
 					return (t) => {
 						rot = previousRotation + t * (targetRotation - previousRotation);
 						return 'translate(' +
-							labelSize * Math.cos(rot) + 'px,' +
-							labelSize / sqrt3 * Math.sin(rot) + 'px)';
+							Math.round(labelSize * Math.cos(rot)) + 'px,' +
+							Math.round(labelSize / sqrt3 * Math.sin(rot)) + 'px)';
 					};
 
 				})());
