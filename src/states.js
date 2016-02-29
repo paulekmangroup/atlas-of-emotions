@@ -213,7 +213,6 @@ export default {
 
 		labels
 			.classed(this.currentEmotion + ' label', true)
-			// .classed('backgrounded', () => this.isBackgrounded)
 			.html((d, i) => '<h3>' + statesData[i].name.toUpperCase() + '</h3>')
 			.style({
 				left: d => (Math.round(stateSection.xScale(d[1].x) + 20) + 'px'),	// not sure why this 20px magic number is necessary...?
@@ -308,9 +307,9 @@ export default {
 				}
 			}, sassVars.emotions.scale.in.delay * 1000);
 
-			this.renderLabels(emotionState.ranges[1]);
-
 			if (!this.isBackgrounded) {
+
+				this.renderLabels(emotionState.ranges[1]);
 
 				setTimeout(() => {
 					this.graphContainers[emotion].selectAll('.axis')
@@ -415,8 +414,6 @@ export default {
 	close: function () {
 
 		return new Promise((resolve, reject) => {
-
-			console.log(">>>>> states.close()");
 
 			//
 			// TODO: the logic below should be reusable for transitioning between emotions.
