@@ -93,18 +93,6 @@ export default function (...initArgs) {
 		sections.triggers = triggers;
 		sections.moods = moods;
 		sections.calm = calm;
-
-		// TODO: implement URL scheme for more info:
-		// #more:about
-		// #more:donate
-		// #more:further
-		// #more:annex-index
-		// #more:annex-episode-timeline
-		// #more:annex-partially-charted
-		// #more:annex-traits
-		// #more:annex-pathologies
-		// #more:annex-signals
-		// #more:annex-science
 		sections.more = moreInfo;
 
 	}
@@ -921,7 +909,6 @@ export default function (...initArgs) {
 			// continents section supports an utter lack of emotion.
 			setEmotion(null);
 		}
-
 
 		let section;
 		if (dispatcher.validateSection(hash.section)) {

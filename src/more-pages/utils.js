@@ -1,3 +1,5 @@
+import dispatcher from '../dispatcher.js';
+
 /**
  * Utility functions for More Info sections...
  */
@@ -34,6 +36,21 @@ export function makeLinkBlock(linkStr) {
 
 	title.appendChild(link);
 	block.appendChild(title);
+
+	return block;
+};
+
+export function makeAnnexBackNav(titleStr) {
+	const block = document.createElement('div');
+	const btn = document.createElement('button');
+
+	block.classList.add('annex-back-nav');
+	btn.textContent = titleStr;
+	block.appendChild(btn);
+
+	btn.addEventListener('click', function(e) {
+		dispatcher.navigate('more', null, 'annex');
+	});
 
 	return block;
 };

@@ -7,21 +7,17 @@ import sassVars from '../scss/variables.json';
 
 // Pages
 import About from './more-pages/about.js';
-import Annex from './more-pages/annex.js';
 import Donate from './more-pages/donate.js';
 import Further from './more-pages/further.js';
-
-// TODO: implement URL scheme for more info:
-// #more:about
-// #more:donate
-// #more:further
-// #more:annex-index
-// #more:annex-episode-timeline
-// #more:annex-partially-charted
-// #more:annex-traits
-// #more:annex-pathologies
-// #more:annex-signals
-// #more:annex-science
+import Annex from './more-pages/annex.js';
+import AnnexEpisodeTimeline from './more-pages/annex-episode-timeline.js';
+import AnnexImpedimentAntidote from './more-pages/annex-impediment-antidote.js';
+import AnnexIntrinsicRemedial from './more-pages/annex-intrinsic-remedial.js';
+import AnnexPartiallyCharted from './more-pages/annex-partially-charted.js';
+import AnnexPsychopathologies from './more-pages/annex-psychopathologies.js';
+import AnnexScientificBasis from './more-pages/annex-scientific-basis.js';
+import AnnexSignals from './more-pages/annex-signals.js';
+import AnnexTraits from './more-pages/annex-traits.js';
 
 export default {
 
@@ -114,13 +110,30 @@ export default {
 			this.sectionContainer.appendChild(containerEl);
 			this.containers[item.page] = containerEl;
 		});
+
+		dispatcher.ANNEX_SECTIONS.forEach(item => {
+			containerEl = document.createElement('div');
+			const id = `more-${item}`;
+			containerEl.id = `more-${item}`;
+			containerEl.classList.add('more-child');
+			this.sectionContainer.appendChild(containerEl);
+			this.containers[item] = containerEl;
+		});
 	},
 
 	initialPages: function () {
 		this.pages.about = About;
-		this.pages.annex = Annex;
 		this.pages.donate = Donate;
 		this.pages.further = Further;
+		this.pages.annex = Annex;
+		this.pages['annex-episode-timeline'] = AnnexEpisodeTimeline;
+		this.pages['annex-partially-charted'] = AnnexPartiallyCharted;
+		this.pages['annex-traits'] = AnnexTraits;
+		this.pages['annex-signals'] = AnnexSignals;
+		this.pages['annex-psychopathologies'] = AnnexPsychopathologies;
+		this.pages['annex-scientific-basis'] = AnnexScientificBasis;
+		this.pages['annex-impediment-antidote'] = AnnexImpedimentAntidote;
+		this.pages['annex-intrinsic-remedial'] = AnnexIntrinsicRemedial;
 	},
 
 	toggleMoreClass: function (val) {

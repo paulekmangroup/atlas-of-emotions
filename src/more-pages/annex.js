@@ -28,13 +28,14 @@ export default {
 		const btn = document.createElement('button');
 		btn.textContent = section.title;
 		btn.setAttribute('data-annexkey', section.key);
-
+		btn.addEventListener('click', function(e) {
+			dispatcher.navigate(dispatcher.SECTIONS.MORE, null, dispatcher.ANNEX_DATA_2_PAGE[section.key]);
+		});
 		return btn;
 	},
 
 	setContent: function() {
 		if (!this.wrapper) return;
-
 		const sections = Object.keys(this.data).map(key => {
 			return {
 				key,
@@ -62,7 +63,6 @@ export default {
 		list.classList.add('annex-btn-list');
 
 		sections.forEach(section => {
-			console.log(section.key, section.title);
 			if (section.key && section.title) {
 				const li = document.createElement('li');
 				li.appendChild(this.makeButton(section));

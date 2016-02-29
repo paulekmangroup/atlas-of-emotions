@@ -50,6 +50,28 @@ const dispatcher = {
 		]
 	},
 
+	ANNEX_SECTIONS: [
+		'annex-episode-timeline',
+		'annex-partially-charted',
+		'annex-traits',
+		'annex-signals',
+		'annex-psychopathologies',
+		'annex-scientific-basis',
+		'annex-impediment-antidote',
+		'annex-intrinsic-remedial'
+	],
+
+	ANNEX_DATA_2_PAGE: {
+		'psychopathology': 'annex-psychopathologies',
+		'personality-trait': 'annex-traits',
+		'signals': 'annex-signals',
+		'partially-charted': 'annex-partially-charted',
+		'scientific-basis': 'annex-scientific-basis',
+		'triggers-timeline': 'annex-episode-timeline',
+		'impediment-antidote': 'annex-impediment-antidote',
+		'intrinsic-or-intentional': 'annex-intrinsic-remedial'
+	},
+
 	/**
 	 * @param  {[String]} section Section navigating to
 	 * @param  {[String]} emotion Emotion navigating to
@@ -94,12 +116,18 @@ const dispatcher = {
 	},
 
 	validateMorePage: function(page) {
-		return this.MORE_INFO.items.some(item => item.page === page);
+
+		return this.MORE_INFO.items.some(item => {
+			if (item.page === page) return true;
+			if (page.indexOf('annex') === 0 && this.ANNEX_SECTIONS.indexOf(page) > -1) return true;
+			return false;
+		});
 	},
 
 	getMorePageName: function (page) {
-		const pageObject = this.MORE_INFO.items.filter((item) => item.page === page);
+		if (page.indexOf('annex') === 0 && this.ANNEX_SECTIONS.indexOf(page) > -1) return 'Annex';
 
+		const pageObject = this.MORE_INFO.items.filter((item) => item.page === page);
 		if (!pageObject.length) return '';
 
 		return pageObject[0].pageName || pageObject[0].label;

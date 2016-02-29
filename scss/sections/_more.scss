@@ -225,3 +225,35 @@
 		color: #fff;
 	}
 }
+
+.annex-back-nav {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: rgba($callout-background-color, 0.5);
+	width: 100%;
+
+	button {
+		display: block;
+		position: relative;
+		width: 100%;
+		padding: 0 0 0 2em;
+		margin: 0;
+		background: transparent;
+		color: #fff;
+		font-weight: 400;
+		text-transform: uppercase;
+		line-height: 2.25em;
+		text-align: left;
+		border: 0;
+		outline: none;
+	}
+
+	button:after {
+		content: '<';
+		position: absolute;
+		top: 0;
+		left: 1em;
+		color: #fff;
+	}
+}
