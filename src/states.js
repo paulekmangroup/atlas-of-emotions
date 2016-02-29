@@ -1283,7 +1283,9 @@ export default {
 
 		classes[this.currentEmotion] = true;
 
-		this.backgroundedLabel.select('h3').html(singleStateName);
+		if (singleStateName) {
+			this.backgroundedLabel.select('h3').html(singleStateName);
+		}
 		this.backgroundedLabel.classed(classes);
 
 		this.displayHighlightedStates(states);

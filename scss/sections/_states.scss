@@ -189,12 +189,11 @@
 	@include emotion-color;
 	white-space: nowrap;
 
-	// TODO: transition opacity
-	display: none;
+	transition: opacity #{$states-highlighted-out}s ease-out;
 	opacity: 0.0;
 
 	&.visible {
-		display: block;
+		transition: opacity #{$states-highlighted-in}s ease-in;
 		opacity: 1.0;
 	}
 

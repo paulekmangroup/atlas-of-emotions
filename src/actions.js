@@ -668,10 +668,10 @@ export default {
 				labelContainer = this.labelContainers[this.currentEmotion];
 
 			graphContainer.selectAll('g.action-arrow')
-				.style('opacity', (data, index) => ~stateActions.indexOf(data.name) ? 1.0 : 0.2);
+				.classed('muted', (data, index) => !~stateActions.indexOf(data.name));
 
 			labelContainer.selectAll('div.label')
-				.style('opacity', (data, index) => ~stateActions.indexOf(data.name) ? 1.0 : 0.2);
+				.classed('muted', (data, index) => !~stateActions.indexOf(data.name));
 
 		}
 
@@ -739,7 +739,7 @@ export default {
 			// enter
 			let labelEnterSelection = labelSelection.enter().append('div')
 				.classed('label ' + this.currentEmotion, true)
-				.style('transform', d => 'translate(' + labelSize * Math.cos(Math.PI*(d.rotation-90)/180) + 'px,' + labelSize * Math.sin(Math.PI*(d.rotation-90)/180) / sqrt3 + 'px')
+				.style('transform', d => 'translate(' + Math.round(labelSize * Math.cos(Math.PI*(d.rotation-90)/180)) + 'px,' + Math.round(labelSize * Math.sin(Math.PI*(d.rotation-90)/180) / sqrt3) + 'px')
 				.style('opacity', 0.0);
 			labelEnterSelection.append('div').append('h4')
 				.html(labelText)
@@ -750,7 +750,10 @@ export default {
 			labelEnterSelection.transition()
 				.duration(sassVars.actions.add.time)
 				.delay(sassVars.actions.add.delay)
-				.style('opacity', 1.0);
+				.style('opacity', 1.0)
+				.each('end', function () {
+					d3.select(this).style('opacity', null);
+				});
 
 			// exit
 			labelSelection.exit().transition()
@@ -877,18 +880,18 @@ export default {
 			}
 
 			arrowSelection
-				.style('opacity', (data, index) => data.name === highlightedAction.name ? 1.0 : 0.2);
+				.classed('muted', (data, index) => data.name !== highlightedAction.name);
 
 			labelSelection
-				.style('opacity', (data, index) => data.name === highlightedAction.name ? 1.0 : 0.2);
+				.classed('muted', (data, index) => data.name !== highlightedAction.name);
 
 		} else {
 
 			arrowSelection
-				.style('opacity', null);
+				.classed('muted', false);
 
 			labelSelection
-				.style('opacity', null);
+				.classed('muted', false);
 
 		}
 
@@ -964,11 +967,11 @@ export default {
 			});
 
 		graphContainer.selectAll('g.action-arrow')
-			.style('opacity', d => {
+			.classed('muted', d => {
 				if (valence) {
-					return d.valence === valence ? 1.0 : 0.2;
+					return d.valence !== valence;
 				} else {
-					return null;
+					return false;
 				}
 			});
 

@@ -152,6 +152,13 @@
 					cursor: pointer;
 				}
 			}
+
+			transition: opacity #{$states-highlighted-out}s ease-in;
+			opacity: 1.0;
+			&.muted {
+				transition: opacity #{$states-highlighted-out}s ease-out;
+				opacity: 0.2;
+			}
 		}
 
 		&.active h4 {
@@ -166,5 +173,12 @@
 	cursor: pointer;
 	path {
 		mix-blend-mode: multiply;
+	}
+
+	transition: opacity #{$states-highlighted-out}s ease-in;
+	opacity: 1.0;
+	&.muted {
+		transition: opacity #{$states-highlighted-out}s ease-out;
+		opacity: 0.2;
 	}
 }
