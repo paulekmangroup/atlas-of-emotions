@@ -27,6 +27,7 @@ export default {
 	setContent: function() {
 		if (!this.wrapper) return;
 		this.sectionContainer.appendChild(utils.makeAnnexBackNav(this.data.title));
+		this.wrapper.appendChild(utils.makeTable(this.data.desc, []));
 	},
 
 	setEmotion: function (emotion) {

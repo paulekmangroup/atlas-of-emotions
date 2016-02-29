@@ -52,7 +52,7 @@ var PARSER_CONFIG = {
 			var rsp = {};
 			rsp.emotions = [];
 
-			var currentEmotion, obj;
+			var currentEmotion, antidotes, impediments;
 			data.forEach(function(row) {
 				if (row.title && row.introduction) {
 					rsp.title = row.title;
@@ -61,17 +61,27 @@ var PARSER_CONFIG = {
 				} else if (row['state name']) {
 					if (row.emotion && currentEmotion !== row.emotion) {
 						currentEmotion = row.emotion;
-						obj = {};
-						obj.name = row.emotion;
-						obj.states = [];
-						rsp.emotions.push(obj);
+						antidotes = {};
+						impediments = {};
+						antidotes.name = row.emotion + ' Antidotes';
+						impediments.name = row.emotion + ' Impediments';
+						antidotes.children = [];
+						impediments.children = [];
+						rsp.emotions.push(antidotes);
+						rsp.emotions.push(impediments);
 					}
 
-					if (obj) {
-						obj.states.push({
-							state: row['state name'],
-							antidote: row.antidote,
-							impediment: row.impediment
+					if (antidotes && row.antidote) {
+						antidotes.children.push({
+							name: row['state name'],
+							desc: row.antidote
+						});
+					}
+
+					if (impediments && row.impediment) {
+						impediments.children.push({
+							name: row['state name'],
+							desc: row.impediment
 						});
 					}
 				}
@@ -87,16 +97,27 @@ var PARSER_CONFIG = {
 			var rsp = {};
 			rsp.emotions = [];
 
+			var obj;
 			data.forEach(function(row) {
 				if (row.title && row.introduction) {
 					rsp.title = row.title;
 					rsp.desc = row.introduction;
 				} else if (row.name) {
-					rsp.emotions.push({
-						name: row.name,
-						intrinsic: row.intrinsic,
+					obj = {}
+					obj.name = row.name;
+					obj.children = [];
+
+					obj.children.push({
+						name: 'Intrinsic',
+						desc: row.intrinsic
+					});
+
+					obj.children.push({
+						name: 'Intentional',
 						intentional: row.intentional
 					});
+
+					rsp.emotions.push(obj);
 				}
 			});
 
@@ -132,16 +153,32 @@ var PARSER_CONFIG = {
 			var rsp = {};
 			rsp.emotions = [];
 
+			var currentName, obj;
 			data.forEach(function(row) {
 				if (row.title && row.introduction) {
 					rsp.title = row.title;
 					rsp.desc = row.introduction;
-				} else if (row.name && row.message && row.signal) {
-					rsp.emotions.push({
-						name: row.name,
-						desc: row.message,
-						signal: row.signal
-					});
+				} else if (row.message && row.signal) {
+					if (row.name && (!currentName || currentName !== row.name)) {
+						currentName = row.name;
+						obj = {};
+						obj.name = row.name;
+						obj.desc = null;
+						obj.children = [];
+						rsp.emotions.push(obj);
+					}
+
+					if (obj) {
+						obj.children.push({
+							name: 'Signal',
+							desc: row.signal
+						});
+
+						obj.children.push({
+							name: 'Message',
+							desc: row.message
+						});
+					}
 				}
 			});
 
@@ -166,11 +203,11 @@ var PARSER_CONFIG = {
 						obj = {};
 						obj.name = row.name;
 						obj.desc = row.description;
-						obj.diagnoses = [];
+						obj.children = [];
 						rsp.emotions.push(obj);
 					}
 					if (obj) {
-						obj.diagnoses.push({
+						obj.children.push({
 							name: row['associated diagnoses'],
 							desc: row['diagnoses description']
 						});

@@ -31,7 +31,7 @@
 				{
 					"name": "Anger",
 					"desc": "Causing physical or verbal harm within inappropriate contexts, anger that is out of control, anger that is passive but persistently preoccupying.",
-					"diagnoses": [
+					"children": [
 						{
 							"name": "Intermittent Explosive Disorder",
 							"desc": "Characterized by impulsive aggressive and assaultive behaviors out of proportion to stressors."
@@ -53,7 +53,7 @@
 				{
 					"name": "Fear",
 					"desc": "Anxiety states, involve prolonged fear without knowing the source of the threat as well as indcidents of panic (episodic attacks of severe anxiety).",
-					"diagnoses": [
+					"children": [
 						{
 							"name": "Social Anxiety Disorder",
 							"desc": "A persistent fear of one or more social or performance situations in which the person is exposed to unfamiliar people or to possible scrutiny by others. The individual fears that he or she will act in a way (or show anxietysymptoms) that will be embarrassing and humiliating."
@@ -79,7 +79,7 @@
 				{
 					"name": "Disgust",
 					"desc": "The psychopathology of disgust includes feelings of disgust that prevent everyday interaction with the world, the self or others. The disgust can be a paralyzing feeling making simple interactions (such as eating) extremely painful if not impossible. Disgust and fear are both thought to contribute to various phobias, such as of small animals.",
-					"diagnoses": [
+					"children": [
 						{
 							"name": "Anorexia nervosa",
 							"desc": "Often coupled with a distorted self imagethat  may be maintained by various cognitive biases that alter how the affected individuals evaluates and thinks about their body, food, and eating. People with anorexia nervosa often view themselves as disgusting, overweight or \"big\" even when they are already underweight."
@@ -101,7 +101,7 @@
 				{
 					"name": "Sadness",
 					"desc": "Depression is a well known psychopathology, reported to effect over 25% of the population. When you have depression, it interferes with daily life and causes pain for both you and those who care about you. Depression is a common but serious illness.\n",
-					"diagnoses": [
+					"children": [
 						{
 							"name": "Major Depressive Disorder",
 							"desc": "Also known as clinical depression, major depression, or unipolar depression, is a mental disorder characterized by a pervasive and persistent low mood that is accompanied by low self-esteem and by a loss of interest or pleasure in normally enjoyable activities."
@@ -119,7 +119,7 @@
 				{
 					"name": "Enjoyment",
 					"desc": "It is harder to imagine the drawbacks of enjoyable emotions contributing to challenges in managing our everyday relationships, work and getting our basic needs in comparison to other emotions. However pathological enjoyment is quite serious, the hyper elevated states of enjoyment can be quite delusional as well as an addition to feeling good which can lead to destructive behaviors.\n",
-					"diagnoses": [
+					"children": [
 						{
 							"name": "Mania/Manic Episode",
 							"desc": "Manic episode at its extreme is commonly characterized by frenzied, ungovernable exuberance — essentially elation not grounded in reality. Frequently, confidence and self-esteem are excessively enlarged, and grand, extravagant ideas are expressed, this is called ‘grandiosity’. Mania is often part of bipolar disorder."
@@ -138,28 +138,73 @@
 			"emotions": [
 				{
 					"name": "Anger",
-					"desc": "The message of anger is to let the target know to “Get out of my way.”  Anger can carry a message ranging from threat to dissatisfaction.",
-					"signal": "In the voice, anger generates a roar if not controlled; when controlled may have sharp edge that is very detectable. In the face, it includes glaring eyes, lowered brows and narrowed, tightened lips. When people hear or see an angry signal they are typically hurt just by the perception of the signal, and are likely to retaliate with angry actions."
+					"desc": null,
+					"children": [
+						{
+							"name": "Signal",
+							"desc": "In the voice, anger generates a roar if not controlled; when controlled may have sharp edge that is very detectable. In the face, it includes glaring eyes, lowered brows and narrowed, tightened lips. When people hear or see an angry signal they are typically hurt just by the perception of the signal, and are likely to retaliate with angry actions."
+						},
+						{
+							"name": "Message",
+							"desc": "The message of anger is to let the target know to “Get out of my way.”  Anger can carry a message ranging from threat to dissatisfaction."
+						}
+					]
 				},
 				{
 					"name": "Fear",
-					"desc": "The message of fear is “help me”, it can range from showing panic to low level concern.",
-					"signal": "Common signals are movement backwards, eyes very wide open lips stretched horizontally, eyebrows raised and drawn together. Screams will also accompany intense fear. Lesser fear signals can include heavy breathing, head position slightly backwards and away, and horizontally stretched lower lip including tightened neck muscles."
+					"desc": null,
+					"children": [
+						{
+							"name": "Signal",
+							"desc": "Common signals are movement backwards, eyes very wide open lips stretched horizontally, eyebrows raised and drawn together. Screams will also accompany intense fear. Lesser fear signals can include heavy breathing, head position slightly backwards and away, and horizontally stretched lower lip including tightened neck muscles."
+						},
+						{
+							"name": "Message",
+							"desc": "The message of fear is “help me”, it can range from showing panic to low level concern."
+						}
+					]
 				},
 				{
 					"name": "Disgust",
-					"desc": "The message of disgust is “get away from me”, this can show others that the target of disgust is to be kept away from or that it is unclean, dirty or socially/morally reprehensible.",
-					"signal": "There are three facial expressions associated with disgust. The first is sticking the tongue out as if you are getting something out of your mouth. The second is raising the upper lip but it is relaxed and not tense, this can display gums and teeth depending on the shape of the mouth. The third is the wrinkling of the nose and the raising of the nostrils. All three can occur in unison or separately."
+					"desc": null,
+					"children": [
+						{
+							"name": "Signal",
+							"desc": "There are three facial expressions associated with disgust. The first is sticking the tongue out as if you are getting something out of your mouth. The second is raising the upper lip but it is relaxed and not tense, this can display gums and teeth depending on the shape of the mouth. The third is the wrinkling of the nose and the raising of the nostrils. All three can occur in unison or separately."
+						},
+						{
+							"name": "Message",
+							"desc": "The message of disgust is “get away from me”, this can show others that the target of disgust is to be kept away from or that it is unclean, dirty or socially/morally reprehensible."
+						}
+					]
 				},
 				{
 					"name": "Sadness",
-					"desc": "The message of sadness is “comfort me”. Witnessing tears is a powerful example of a signal that can even be seen by strangers.",
-					"signal": "The signal of sadness includes a frown (lower lip pushed up and lip corners pulled slightly down), inner corners of the eyebrows drawn up and together in the center of the forehead, cheeks raised and can include tears. The vocalization of sadness can include sobs, heaving and quavering of voice."
+					"desc": null,
+					"children": [
+						{
+							"name": "Signal",
+							"desc": "The signal of sadness includes a frown (lower lip pushed up and lip corners pulled slightly down), inner corners of the eyebrows drawn up and together in the center of the forehead, cheeks raised and can include tears. The vocalization of sadness can include sobs, heaving and quavering of voice."
+						},
+						{
+							"name": "Message",
+							"desc": "The message of sadness is “comfort me”. Witnessing tears is a powerful example of a signal that can even be seen by strangers."
+						}
+					]
 				},
 				{
 					"name": "Enjoyment",
-					"desc": "The message of enjoyment is “this feels good”, and is encouraging and engaging of social interaction.",
-					"signal": "The enjoyment signal includes the Duchenne (authentic) smile, activation of a smile (lip corners facing up), and activation of the orbital eye muscles that tighten the lower eyelid and create wrinkling around the outer eye corners (especially with age). Enjoyment also includes vocal signals, for example the sound of relief (a sigh or exhalation) and the sound of amusement such as laughter and giggling."
+					"desc": null,
+					"children": [
+						{
+							"name": "Signal",
+							"desc": "The enjoyment signal includes the Duchenne (authentic) smile, activation of a smile (lip corners facing up), and activation of the orbital eye muscles that tighten the lower eyelid and create wrinkling around the outer eye corners (especially with age). Enjoyment also includes vocal signals, for example the sound of relief (a sigh or exhalation) and the sound of amusement such as laughter and giggling."
+						},
+						{
+							"name": "Message",
+							"desc": "The message of enjoyment is “this feels good”, and is encouraging and engaging of social interaction."
+						}
+					]
 				}
 			],
 			"title": "Signal and Message",
@@ -227,232 +272,212 @@
 		"impediment-antidote": {
 			"emotions": [
 				{
-					"name": "Anger",
-					"states": [
+					"name": "Anger Antidotes",
+					"children": [
 						{
-							"state": "Annoyance",
-							"antidote": "Patience, open-mindedness, concern for others.",
-							"impediment": ""
+							"name": "Annoyance",
+							"desc": "Patience, open-mindedness, concern for others."
 						},
 						{
-							"state": "Exasperation",
-							"antidote": "Letting go of grasping. Patience, inner calm. Trying to understand the causes and conditions that brought about the undesirable situation.",
-							"impediment": ""
+							"name": "Exasperation",
+							"desc": "Letting go of grasping. Patience, inner calm. Trying to understand the causes and conditions that brought about the undesirable situation."
 						},
 						{
-							"state": "Frustration",
-							"antidote": "Letting go, letting go of grasping, putting things in a larger perspective.",
-							"impediment": ""
+							"name": "Frustration",
+							"desc": "Letting go, letting go of grasping, putting things in a larger perspective."
 						},
 						{
-							"state": "Argumentativeness",
-							"antidote": "Making effort to understand the other’s perspective, cognitive empathy, benevolence, wishing to solve the problem through a mutually agreeable solution.",
-							"impediment": ""
+							"name": "Argumentativeness",
+							"desc": "Making effort to understand the other’s perspective, cognitive empathy, benevolence, wishing to solve the problem through a mutually agreeable solution."
 						},
 						{
-							"state": "Vengefulness",
-							"antidote": "In case of vengefulness, contemplating the negative effects of taking revenge, in the short and in the long term; forgiveness not as condoning harmful behavior but as breaking the cycle of resentment and hatred.",
-							"impediment": ""
+							"name": "Vengefulness",
+							"desc": "In case of vengefulness, contemplating the negative effects of taking revenge, in the short and in the long term; forgiveness not as condoning harmful behavior but as breaking the cycle of resentment and hatred."
 						},
 						{
-							"state": "Fury",
-							"antidote": "Take a break, physically and mentally, from the circumstances that brought fury about. Look at fury itself with the eye of awareness as if gazing to a raging fire and slowly let it calm down.",
-							"impediment": ""
+							"name": "Fury",
+							"desc": "Take a break, physically and mentally, from the circumstances that brought fury about. Look at fury itself with the eye of awareness as if gazing to a raging fire and slowly let it calm down."
 						}
 					]
 				},
 				{
-					"name": "Fear",
-					"states": [
+					"name": "Anger Impediments",
+					"children": []
+				},
+				{
+					"name": "Fear Antidotes",
+					"children": [
 						{
-							"state": "Trepidation",
-							"antidote": "Try to ponder what could be done. Calming the mind gives the best chance to find the appropriate solution to what caused the trepidation in the first place.",
-							"impediment": ""
+							"name": "Trepidation",
+							"desc": "Try to ponder what could be done. Calming the mind gives the best chance to find the appropriate solution to what caused the trepidation in the first place."
 						},
 						{
-							"state": "Nervousness",
-							"antidote": "Try to ponder what could be done. Calming the mind gives the best chance to find the appropriate solution to what caused the trepidation in the first place.",
-							"impediment": ""
+							"name": "Nervousness",
+							"desc": "Try to ponder what could be done. Calming the mind gives the best chance to find the appropriate solution to what caused the trepidation in the first place."
 						},
 						{
-							"state": "Anxiety",
-							"antidote": "Make a special effort of letting go of ruminations about the past and anticipations about the future.",
-							"impediment": ""
+							"name": "Anxiety",
+							"desc": "Make a special effort of letting go of ruminations about the past and anticipations about the future."
 						},
 						{
-							"state": "Dread",
-							"antidote": "Remain as calm as as possible. See what could be done for yourself and  for others as well.",
-							"impediment": ""
+							"name": "Dread",
+							"desc": "Remain as calm as as possible. See what could be done for yourself and  for others as well."
 						},
 						{
-							"state": "Panic",
-							"antidote": "Make the effort to see if anything could at least act as a mitigating factor (depending on the causes involved). ",
-							"impediment": ""
+							"name": "Panic",
+							"desc": "Make the effort to see if anything could at least act as a mitigating factor (depending on the causes involved). "
 						},
 						{
-							"state": "Horror",
-							"antidote": "Try to see if anything can be done. If that is not the case, take your distance to see if something can be done from afar. Respond with firmness and compassion, never with hatred. ",
-							"impediment": ""
+							"name": "Horror",
+							"desc": "Try to see if anything can be done. If that is not the case, take your distance to see if something can be done from afar. Respond with firmness and compassion, never with hatred. "
 						},
 						{
-							"state": "Terror",
-							"antidote": "Instilling some calmness in the mind in order to take most appropriate decision.",
-							"impediment": ""
+							"name": "Terror",
+							"desc": "Instilling some calmness in the mind in order to take most appropriate decision."
 						}
 					]
 				},
 				{
-					"name": "Disgust",
-					"states": [
+					"name": "Fear Impediments",
+					"children": []
+				},
+				{
+					"name": "Disgust Antidotes",
+					"children": [
 						{
-							"state": "Dislike",
-							"antidote": "While evaluating impartially the ethical issues, generate compassion so as to find the best way to remedy to the causes and conditions that triggered your dislike.",
-							"impediment": ""
+							"name": "Dislike",
+							"desc": "While evaluating impartially the ethical issues, generate compassion so as to find the best way to remedy to the causes and conditions that triggered your dislike."
 						},
 						{
-							"state": "Aversion",
-							"antidote": "Evaluate impartially the degree of harmfulness, take the appropriate measures, and then let aversion dissolve in the space of mindful awareness.",
-							"impediment": ""
+							"name": "Aversion",
+							"desc": "Evaluate impartially the degree of harmfulness, take the appropriate measures, and then let aversion dissolve in the space of mindful awareness."
 						},
 						{
-							"state": "Distaste",
-							"antidote": "Evaluate impartially the degree of harmfulness, take the appropriate measures, and then let aversion dissolve in the space of mindful awareness.",
-							"impediment": ""
+							"name": "Distaste",
+							"desc": "Evaluate impartially the degree of harmfulness, take the appropriate measures, and then let aversion dissolve in the space of mindful awareness."
 						},
 						{
-							"state": "Repugnance",
-							"antidote": "Evaluate impartially the degree of harmfulness, take the appropriate measures, and then let aversion dissolve in the space of mindful awareness.",
-							"impediment": ""
+							"name": "Repugnance",
+							"desc": "Evaluate impartially the degree of harmfulness, take the appropriate measures, and then let aversion dissolve in the space of mindful awareness."
 						},
 						{
-							"state": "Loathing - Self",
-							"antidote": "Use healthy regret to generate the determination to improve yourself; whenever possible, repair the harm caused to others. \nDo not fall into pessimistic guilt, thinking that you are fundamentally bad and that’s the way you are bound to remain. \nDo not underestimate the potential for change.",
-							"impediment": ""
+							"name": "Loathing - Self",
+							"desc": "Use healthy regret to generate the determination to improve yourself; whenever possible, repair the harm caused to others. \nDo not fall into pessimistic guilt, thinking that you are fundamentally bad and that’s the way you are bound to remain. \nDo not underestimate the potential for change."
 						},
 						{
-							"state": "Loathing - Others",
-							"antidote": "Adopt the outlook of a caring physician, who might deeply disapprove certain behaviors, but will focus on doing all that is possible to cure the person from her afflictions.",
-							"impediment": ""
+							"name": "Loathing - Others",
+							"desc": "Adopt the outlook of a caring physician, who might deeply disapprove certain behaviors, but will focus on doing all that is possible to cure the person from her afflictions."
 						},
 						{
-							"state": "Revulsion",
-							"antidote": "Adopt the outlook of a caring physician, who might deeply disapprove certain behaviors, but will focus on doing all that is possible to cure the person from her afflictions.",
-							"impediment": ""
+							"name": "Revulsion",
+							"desc": "Adopt the outlook of a caring physician, who might deeply disapprove certain behaviors, but will focus on doing all that is possible to cure the person from her afflictions."
 						},
 						{
-							"state": "Abhorrence",
-							"antidote": "In case of toxic substances or situations, do the best you can to calmly avoid them. In the case of actions, Adopt the outlook of a caring physician, who might deeply disapprove certain behaviors, but will focus on doing all that is possible to cure the person from her afflictions.",
-							"impediment": ""
+							"name": "Abhorrence",
+							"desc": "In case of toxic substances or situations, do the best you can to calmly avoid them. In the case of actions, Adopt the outlook of a caring physician, who might deeply disapprove certain behaviors, but will focus on doing all that is possible to cure the person from her afflictions."
 						}
 					]
 				},
 				{
-					"name": "Sadness",
-					"states": [
+					"name": "Disgust Impediments",
+					"children": []
+				},
+				{
+					"name": "Sadness Antidotes",
+					"children": [
 						{
-							"state": "Disappointment",
-							"antidote": "Understand that sadness is natural in appropriate circumstances, but also that experiencing loss is part of life and that one should not let oneself be overwhelmed. Try to find a place of peace within oneself and think of constructive things that could be done instead.",
-							"impediment": ""
+							"name": "Disappointment",
+							"desc": "Understand that sadness is natural in appropriate circumstances, but also that experiencing loss is part of life and that one should not let oneself be overwhelmed. Try to find a place of peace within oneself and think of constructive things that could be done instead."
 						},
 						{
-							"state": "Distraughtness",
-							"antidote": "Understand that a permanent state of sadness will not bring any real benefit. \nIn the case of mourning someone, to fall in long-term sadness and despair should to be seen as an homage paid to that person. \nIt is better to pay homage by doing meaningful and altruistic acts.",
-							"impediment": ""
+							"name": "Distraughtness",
+							"desc": "Understand that a permanent state of sadness will not bring any real benefit. \nIn the case of mourning someone, to fall in long-term sadness and despair should to be seen as an homage paid to that person. \nIt is better to pay homage by doing meaningful and altruistic acts."
 						},
 						{
-							"state": "Discouragement",
-							"antidote": "Understand that a permanent state of sadness will not bring any real benefit. \nIn the case of mourning someone, to fall in long-term sadness and despair should to be seen as an homage paid to that person. \nIt is better to pay homage by doing meaningful and altruistic acts.",
-							"impediment": ""
+							"name": "Discouragement",
+							"desc": "Understand that a permanent state of sadness will not bring any real benefit. \nIn the case of mourning someone, to fall in long-term sadness and despair should to be seen as an homage paid to that person. \nIt is better to pay homage by doing meaningful and altruistic acts."
 						},
 						{
-							"state": "Helplessness",
-							"antidote": "Understand that a permanent state of sadness will not bring any real benefit. \nIn the case of mourning someone, to fall in long-term sadness and despair should to be seen as an homage paid to that person. \nIt is better to pay homage by doing meaningful and altruistic acts.",
-							"impediment": ""
+							"name": "Helplessness",
+							"desc": "Understand that a permanent state of sadness will not bring any real benefit. \nIn the case of mourning someone, to fall in long-term sadness and despair should to be seen as an homage paid to that person. \nIt is better to pay homage by doing meaningful and altruistic acts."
 						},
 						{
-							"state": "Misery",
-							"antidote": "Understand that a permanent state of sadness will not bring any real benefit. \nIn the case of mourning someone, to fall in long-term sadness and despair should to be seen as an homage paid to that person. \nIt is better to pay homage by doing meaningful and altruistic acts.",
-							"impediment": ""
+							"name": "Misery",
+							"desc": "Understand that a permanent state of sadness will not bring any real benefit. \nIn the case of mourning someone, to fall in long-term sadness and despair should to be seen as an homage paid to that person. \nIt is better to pay homage by doing meaningful and altruistic acts."
 						},
 						{
-							"state": "Grief",
-							"antidote": "Understand that a permanent state of sadness will not bring any real benefit. \nIn the case of mourning someone, to fall in long-term sadness and despair should to be seen as an homage paid to that person. \nIt is better to pay homage by doing meaningful and altruistic acts.",
-							"impediment": ""
+							"name": "Grief",
+							"desc": "Understand that a permanent state of sadness will not bring any real benefit. \nIn the case of mourning someone, to fall in long-term sadness and despair should to be seen as an homage paid to that person. \nIt is better to pay homage by doing meaningful and altruistic acts."
 						},
 						{
-							"state": "Despair",
-							"antidote": "Understand that a permanent state of sadness will not bring any real benefit. \nIn the case of mourning someone, to fall in long-term sadness and despair should to be seen as an homage paid to that person. \nIt is better to pay homage by doing meaningful and altruistic acts. Think also well that nothing is engraved in stone: there is always a potential for change.",
-							"impediment": ""
+							"name": "Despair",
+							"desc": "Understand that a permanent state of sadness will not bring any real benefit. \nIn the case of mourning someone, to fall in long-term sadness and despair should to be seen as an homage paid to that person. \nIt is better to pay homage by doing meaningful and altruistic acts. Think also well that nothing is engraved in stone: there is always a potential for change."
 						},
 						{
-							"state": "Anguish",
-							"antidote": "Realize that things and people are impermanent by nature. Revolting against this cannot lead to a fulfilled life.",
-							"impediment": ""
+							"name": "Anguish",
+							"desc": "Realize that things and people are impermanent by nature. Revolting against this cannot lead to a fulfilled life."
 						}
 					]
 				},
 				{
-					"name": "Enjoyment",
-					"states": [
+					"name": "Sadness Impediments",
+					"children": []
+				},
+				{
+					"name": "Enjoyment Antidotes",
+					"children": [
 						{
-							"state": "Sensory Pleasures",
-							"antidote": "",
-							"impediment": "Being unable to appreciate the quality of the present moment."
+							"name": "Schadenfreude",
+							"desc": "Perceive the destructive aspect of it and rather try to generate benevolence towards that person."
 						},
 						{
-							"state": "Relief",
-							"antidote": "",
-							"impediment": "To persist in worrying unnecessarily."
+							"name": "Pride",
+							"desc": "Humility. Putting things into perspective and realizing that there are many other people with similar or even better qualities than yours. Understanding that you could do all this not just thanks to the fact that you are so special, but see it as being the result of many interdepend causes and conditions in which others have taken part."
+						}
+					]
+				},
+				{
+					"name": "Enjoyment Impediments",
+					"children": [
+						{
+							"name": "Sensory Pleasures",
+							"desc": "Being unable to appreciate the quality of the present moment."
 						},
 						{
-							"state": "Amusement",
-							"antidote": "",
-							"impediment": "Tendency to see things in negative ways."
+							"name": "Relief",
+							"desc": "To persist in worrying unnecessarily."
 						},
 						{
-							"state": "Excitement",
-							"antidote": "",
-							"impediment": "Pessimism and negative affects."
+							"name": "Amusement",
+							"desc": "Tendency to see things in negative ways."
 						},
 						{
-							"state": "Ecstasy",
-							"antidote": "",
-							"impediment": "Grasping, attachment, and any other afflictive mental state (animosity, envy, arrogance, etc)."
+							"name": "Excitement",
+							"desc": "Pessimism and negative affects."
 						},
 						{
-							"state": "Fiero",
-							"antidote": "",
-							"impediment": "Vanity, narcissism, failing to acknowledge with gratitude all those who contributed to make that achievement possible."
+							"name": "Ecstasy",
+							"desc": "Grasping, attachment, and any other afflictive mental state (animosity, envy, arrogance, etc)."
 						},
 						{
-							"state": "Naches",
-							"antidote": "",
-							"impediment": "Pride mixed with arrogance and with partiality that makes you feel contemptuous about others’ achievements."
+							"name": "Fiero",
+							"desc": "Vanity, narcissism, failing to acknowledge with gratitude all those who contributed to make that achievement possible."
 						},
 						{
-							"state": "Wonder",
-							"antidote": "",
-							"impediment": "Grasping. Unease."
+							"name": "Naches",
+							"desc": "Pride mixed with arrogance and with partiality that makes you feel contemptuous about others’ achievements."
 						},
 						{
-							"state": "Schadenfreude",
-							"antidote": "Perceive the destructive aspect of it and rather try to generate benevolence towards that person.",
-							"impediment": ""
+							"name": "Wonder",
+							"desc": "Grasping. Unease."
 						},
 						{
-							"state": "Rejoicing",
-							"antidote": "",
-							"impediment": "Envy, jealousy, pride."
+							"name": "Rejoicing",
+							"desc": "Envy, jealousy, pride."
 						},
 						{
-							"state": "Compassion-Joy",
-							"antidote": "",
-							"impediment": "Regret of having done something good at the cost of some personal efforts. \nNarrow mindedness when caring only for a limited number of people who are close to you."
-						},
-						{
-							"state": "Pride",
-							"antidote": "Humility. Putting things into perspective and realizing that there are many other people with similar or even better qualities than yours. Understanding that you could do all this not just thanks to the fact that you are so special, but see it as being the result of many interdepend causes and conditions in which others have taken part.",
-							"impediment": ""
+							"name": "Compassion-Joy",
+							"desc": "Regret of having done something good at the cost of some personal efforts. \nNarrow mindedness when caring only for a limited number of people who are close to you."
 						}
 					]
 				}
@@ -464,28 +489,68 @@
 			"emotions": [
 				{
 					"name": "Anger",
-					"intrinsic": "Quarrel, Insult, Undermine, Dispute, Scream/yell, Use physical force, Simmer/brood, Passive agressiveness",
-					"intentional": "Set limits, Be firm, Withdraw, Take a time out, Breathe, Practice patience, Reframe, Distract, Avoid, Remove the interference"
+					"children": [
+						{
+							"name": "Intrinsic",
+							"desc": "Quarrel, Insult, Undermine, Dispute, Scream/yell, Use physical force, Simmer/brood, Passive agressiveness"
+						},
+						{
+							"name": "Intentional",
+							"intentional": "Set limits, Be firm, Withdraw, Take a time out, Breathe, Practice patience, Reframe, Distract, Avoid, Remove the interference"
+						}
+					]
 				},
 				{
 					"name": "Fear",
-					"intrinsic": "Withdraw, Avoid, Hesitate, Freeze, Scream/yell, Ruminate, Worry",
-					"intentional": "Reframe, Be mindful, Breathe, Distract"
+					"children": [
+						{
+							"name": "Intrinsic",
+							"desc": "Withdraw, Avoid, Hesitate, Freeze, Scream/yell, Ruminate, Worry"
+						},
+						{
+							"name": "Intentional",
+							"intentional": "Reframe, Be mindful, Breathe, Distract"
+						}
+					]
 				},
 				{
 					"name": "Disgust",
-					"intrinsic": "Withdraw, Avoid, Vomit, Dehumanize",
-					"intentional": "Withdraw, Avoid"
+					"children": [
+						{
+							"name": "Intrinsic",
+							"desc": "Withdraw, Avoid, Vomit, Dehumanize"
+						},
+						{
+							"name": "Intentional",
+							"intentional": "Withdraw, Avoid"
+						}
+					]
 				},
 				{
 					"name": "Sadness",
-					"intrinsic": "Seek comfort, Withdraw, Mourn, Protest, Feel ashamed",
-					"intentional": "Withdraw, Distract"
+					"children": [
+						{
+							"name": "Intrinsic",
+							"desc": "Seek comfort, Withdraw, Mourn, Protest, Feel ashamed"
+						},
+						{
+							"name": "Intentional",
+							"intentional": "Withdraw, Distract"
+						}
+					]
 				},
 				{
 					"name": "Enjoyment",
-					"intrinsic": "Seek more, Maintain, Exclaim, Engage/connect, Savor, Indulge",
-					"intentional": ""
+					"children": [
+						{
+							"name": "Intrinsic",
+							"desc": "Seek more, Maintain, Exclaim, Engage/connect, Savor, Indulge"
+						},
+						{
+							"name": "Intentional",
+							"intentional": ""
+						}
+					]
 				}
 			],
 			"title": "Intrinsic or Intentional?",

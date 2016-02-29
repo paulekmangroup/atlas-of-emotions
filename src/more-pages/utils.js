@@ -54,3 +54,55 @@ export function makeAnnexBackNav(titleStr) {
 
 	return block;
 };
+
+export function makeTable(title, rows, subTable) {
+	const wrapper = document.createElement('div');
+	wrapper.classList.add('annex-table-wrapper');
+
+	const table = document.createElement('table');
+	if (!subTable) table.classList.add('annex-table');
+
+	// title
+	if (title) {
+		const titleRow = document.createElement('tr');
+		titleRow.classList.add('title');
+
+		const titleCell = document.createElement('td');
+		titleCell.setAttribute('colspan', 2);
+		titleCell.textContent = title;
+
+		titleRow.appendChild(titleCell);
+		table.appendChild(titleRow);
+	}
+
+	rows.forEach(row => {
+		const tr = document.createElement('tr');
+		if (!subTable) tr.classList.add('content');
+
+		const td0 = document.createElement('td');
+		const td1 = document.createElement('td');
+
+		if (!subTable) td0.classList.add('upper');
+
+		td0.textContent = row.name;
+		if (row.children) {
+			const child = makeTable(row.desc, row.children, true);
+			td1.classList.add('has-sub-table');
+			td1.appendChild(child);
+		} else {
+			td1.textContent = row.desc;
+		}
+
+
+		tr.appendChild(td0);
+		tr.appendChild(td1);
+
+		table.appendChild(tr);
+	});
+
+	if (subTable) return table;
+
+	wrapper.appendChild(table);
+
+	return wrapper;
+}

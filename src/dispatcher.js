@@ -116,6 +116,7 @@ const dispatcher = {
 	},
 
 	validateMorePage: function(page) {
+		if (!page) return false;
 
 		return this.MORE_INFO.items.some(item => {
 			if (item.page === page) return true;
