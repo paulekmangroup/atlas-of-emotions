@@ -29,6 +29,10 @@
 					#{$states-backgrounded-scale} * (#{$states-containers-bottom} + 50px/* + #{$actions-margins-bottom}px*/)
 				) - #{$triggers-bottom});
 		}
+
+		.graph-container {
+			transform: rotateX(75deg);
+		}
 	}
 
 	.label-valence {
@@ -98,7 +102,10 @@
 		height: 40%;
 		margin-left: -$actions-graph-width/2;
 		transform-origin: top;
+
+		// NOTE: overridden by .backgrounded rule above
 		transform: rotateX(60deg);
+		transition: transform #{$states-backgrounded-duration-in}s cubic-bezier(.81,.34,.63,.85);
 
 		// pointer-events: auto;
 
