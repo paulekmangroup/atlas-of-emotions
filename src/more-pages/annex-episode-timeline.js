@@ -1,5 +1,6 @@
 import d3 from 'd3';
 import _ from 'lodash';
+import smoothScroll from 'smoothscroll';
 
 import * as utils from './utils.js';
 import dispatcher from '../dispatcher.js';
@@ -14,22 +15,26 @@ const FAKE = [
 	{
 		header: 'Step 2',
 		name: 'Trigger',
+		scrollTo: 'trigger',
 		nodes: [
 			{
 				name: 'Event',
 				outward: true,
-				above: true
+				above: true,
+				scrollTo: 'event'
 			},
 			{
 				name: 'Assessment',
 				outward: true,
-				above: false
+				above: false,
+				scrollTo: 'assessment'
 			}
 		]
 	},
 	{
 		header: 'Step 3',
 		name: 'State',
+		scrollTo: 'state',
 		nodes: [
 			{
 				name: 'Physical Changes',
@@ -74,10 +79,42 @@ export default {
 		this.isInited = true;
 	},
 
-	setContent: function() {
+	setContent() {
 		if (!this.wrapper) return;
 		this.sectionContainer.appendChild(utils.makeAnnexBackNav(this.data.title));
 
+		this.makeChart();
+
+		const contentElm = document.createElement('div');
+		contentElm.classList.add('timeline-content');
+
+		this.data.content.forEach(item => {
+			const p = document.createElement('p');
+			p.textContent = item.txt;
+			if (item.id) {
+				p.id = `tl-content-${item.id}`;
+			}
+			contentElm.appendChild(p);
+		});
+
+		this.wrapper.appendChild(contentElm);
+	},
+
+	handleChartClick: function(d) {
+		if (d.scrollTo) {
+			const target = d3.select(`#tl-content-${d.scrollTo}`);
+			if (!target) return;
+			// const wrapperHeight = this.wrapper.scrollHeight;
+			// const wrapperTop = this.wrapper.getBoundingClientRect().top + window.pageYOffset;
+
+			const sectionHeight = this.sectionContainer.offsetHeight;
+			const offset = target.node().getBoundingClientRect().top + this.wrapper.scrollTop;
+			smoothScroll(offset - sectionHeight / 2, 500, null, this.wrapper);
+		}
+	},
+
+	makeChart: function() {
+		const that = this;
 		const brown = '#D4B49B';
 		const grey = '#CBC2BB';
 		const dkGrey = '#B4ABA4';
@@ -116,6 +153,8 @@ export default {
 		svg
 			.attr('width', FAKE.length * SECTION_WIDTH)
 			.attr('height', SECTION_HEIGHT);
+
+		this.wrapper.style.width = (FAKE.length * SECTION_WIDTH) + 'px';
 
 		// arrow marker
 		const def = svg.append('defs');
@@ -194,6 +233,16 @@ export default {
 
 			});
 
+		enter
+			.filter(d => d.scrollTo)
+			.append('circle')
+			.attr('class', 'eventable')
+			.attr('cx', SECTION_WIDTH / 2)
+			.attr('cy', SECTION_HEIGHT / 2)
+			.attr('r', RADIUS)
+			.style('opacity', 0)
+			.on('click', that.handleChartClick.bind(that));
+
 		// main circle text
 		// not inside group because
 		// we rotate the group
@@ -265,7 +314,10 @@ export default {
 			.attr('fill', (d,i) => {
 				if (d.above) return brown;
 				return grey;
-			});
+			})
+			.filter(d => d.scrollTo)
+			.classed('eventable', true)
+			.on('click', that.handleChartClick.bind(that));
 
 		subEnter.append('text')
 			.attr('dy', 3)

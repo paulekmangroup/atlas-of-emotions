@@ -39,10 +39,14 @@ export default {
 	setContent: function() {
 		if (!this.wrapper) return;
 
+		const table = document.createElement('div');
 		const introRow = document.createElement('div');
+
+		table.classList.add('tb');
 		introRow.classList.add('tb-row');
+
 		introRow.appendChild(utils.makeBlock(this.data.title, this.data.desc));
-		this.wrapper.appendChild(introRow);
+		table.appendChild(introRow);
 
 		if (this.data.links && this.data.links.length) {
 			const subRow = document.createElement('div');
@@ -61,8 +65,10 @@ export default {
 
 			subBlocks.appendChild(linkBlock);
 			subRow.appendChild(subBlocks);
-			this.wrapper.appendChild(subRow);
+			table.appendChild(subRow);
 		}
+
+		this.wrapper.appendChild(table);
 	},
 
 	setEmotion: function (emotion) {

@@ -28,9 +28,11 @@ export default {
 	setContent: function() {
 		if (!this.wrapper) return;
 
+		const table = document.createElement('div');
 		const introRow = document.createElement('div');
 		const subRow = document.createElement('div');
 
+		table.classList.add('tb');
 		introRow.classList.add('tb-row');
 		subRow.classList.add('tb-row');
 
@@ -45,8 +47,9 @@ export default {
 		// Images?
 
 		subRow.appendChild(subBlocks);
-		this.wrapper.appendChild(introRow);
-		this.wrapper.appendChild(subRow);
+		table.appendChild(introRow);
+		table.appendChild(subRow);
+		this.wrapper.appendChild(table);
 	},
 
 	setEmotion: function (emotion) {

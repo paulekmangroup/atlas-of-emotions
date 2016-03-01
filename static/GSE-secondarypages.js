@@ -44,7 +44,10 @@ var PARSER_CONFIG = {
 					rsp.title = row.title;
 					rsp.desc = row.introduction || '';
 				} else if (row.text) {
-					rsp.content.push(row.text);
+					rsp.content.push({
+						txt: row.text,
+						id: row.id || null
+					});
 				}
 			});
 
