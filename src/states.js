@@ -262,9 +262,6 @@ export default {
 
 				let containerWidth = document.querySelector('#states .graph-container').offsetWidth;
 
-				// position according to distance between emotion columns
-				// dx = (emotionState.index - this.emotionStates[previousEmotion].index) * 1.25*containerWidth;
-
 				// just place left or right one viewport, instead of adhering to column positions,
 				// to avoid animations that are unnecessarily fast'n'flashy.
 				dx = 1.25 * containerWidth;
@@ -300,14 +297,14 @@ export default {
 				currentLabels.style('transform', 'translateX(0)');
 			}, sassVars.emotions.panX.delay * 1000);
 
-			setTimeout(() => {
-				// animate in emotion graph if first time viewing or was previously closed
-				if (isClosed) {
-					this.setEmotionScale(emotion, 1.0);
-				}
-			}, sassVars.emotions.scale.in.delay * 1000);
-
 			if (!this.isBackgrounded) {
+
+				setTimeout(() => {
+					// animate in emotion graph if first time viewing or was previously closed
+					if (isClosed) {
+						this.setEmotionScale(emotion, 1.0, false);
+					}
+				}, sassVars.emotions.scale.in.delay * 1000);
 
 				this.renderLabels(emotionState.ranges[1]);
 
@@ -317,6 +314,13 @@ export default {
 				}, 1);
 
 				this.resetCallout();
+
+			} else {
+
+				// immediately display emotion graph if first time viewing, and backgrounded
+				if (isClosed) {
+					this.setEmotionScale(emotion, 1.0, true);
+				}
 
 			}
 
@@ -383,7 +387,7 @@ export default {
 
 	},
 
-	setEmotionScale: function (emotion, scale) {
+	setEmotionScale: function (emotion, scale, immediate) {
 
 		let graph = this.graphContainers[emotion].select('g'),
 			ranges = this.emotionStates[emotion].ranges[scale];
@@ -394,7 +398,7 @@ export default {
 
 		graph.selectAll('path.area')
 			.data(ranges)
-			.call(this.applyTransitions);
+			.call(this.applyTransitions, immediate ? 'immediate' : null);
 
 		this.emotionStates[emotion].scale = scale;
 
@@ -1138,6 +1142,12 @@ export default {
 				ease: d3.ease('ease-out'),
 				delay: (d, i) => Math.random() * 50 * i,
 				duration: 800
+			},
+
+			immediate: {
+				ease: d3.ease('linear'),
+				delay: 0,
+				duration: 0
 			}
 
 		};
