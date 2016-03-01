@@ -473,13 +473,17 @@ export default {
 			}, sassVars.emotions.panX.delay * 1000);
 
 			if (!this.isBackgrounded) {
+				// activate states if not backgrounded
 				states.setActive(true);
+			} else {
+				// remove labels if backgrounded
+				this.renderLabels(null, true);
 			}
 
 			let openDelay = 1500;
 			this.setStateTimeout = setTimeout(() => {
 				dispatcher.setEmotionState(null, true);
-			}, openDelay);
+			}, this.isBackgrounded ? 0 : openDelay);
 
 			// resolve on completion of primary transitions
 			let resolveDelay;
@@ -551,8 +555,8 @@ export default {
 			.call(this.scaledLineGenerator, 0.0);
 
 		arrowEnterSelection.transition()
-			.duration(sassVars.actions.add.time)
-			.delay(function (d, i) { return i * 50; })
+			.duration(this.isBackgrounded ? 0 : sassVars.actions.add.time)
+			.delay(this.isBackgrounded ? 0 : function (d, i) { return i * 50; })
 		.select('path')
 			.call(this.scaledLineGenerator, 1.0);
 
@@ -660,7 +664,7 @@ export default {
 
 	},
 
-	renderLabels: function (actionsData) {
+	renderLabels: function (actionsData, immediate) {
 
 		if (!this.currentEmotion) { return; }
 
@@ -750,7 +754,7 @@ export default {
 				.on('mouseover', null)
 				.on('mouseout', null)
 			.transition()
-				.duration(1000)
+				.duration(immediate ? 0 : 1000)
 				.style('opacity', 0.0)
 				.remove();
 

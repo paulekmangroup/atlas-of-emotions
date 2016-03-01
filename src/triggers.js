@@ -672,6 +672,7 @@ export default {
 			clearTimeout(this.calloutTimeout);
 
 			document.querySelector('#states').classList.remove('faded');
+			document.querySelector('#actions').classList.remove('faded');
 
 			// clear out stuff...
 			this.renderLabels(null);
@@ -722,24 +723,29 @@ export default {
 		hitAreaId = hitAreaId || this.highlightedHitArea || null;
 
 		let graphContainer = this.graphContainers[this.currentEmotion],
-			statesContainer = d3.select('#states');
+			statesContainer = d3.select('#states'),
+			actionsContainer = d3.select('#actions');
 
 		switch (hitAreaId) {
 			case HIT_AREAS.APPRAISAL:
 				graphContainer.classed('muted', true);
 				statesContainer.classed('faded', true);
+				actionsContainer.classed('faded', true);
 				break;
 			case HIT_AREAS.DATABASE:
 				graphContainer.classed('muted', false);
 				statesContainer.classed('faded', true);
+				actionsContainer.classed('faded', true);
 				break;
 			case HIT_AREAS.IMPULSE:
 				graphContainer.classed('muted', true);
 				statesContainer.classed('faded', false);
+				actionsContainer.classed('faded', false);
 				break;
 			default:
 				graphContainer.classed('muted', false);
 				statesContainer.classed('faded', false);
+				actionsContainer.classed('faded', false);
 		}
 
 		this.phaseLabelContainer.selectAll('h3.label')

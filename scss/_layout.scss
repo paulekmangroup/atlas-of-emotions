@@ -96,6 +96,11 @@ a:active {
 	text-align: right;
 	outline: none;
 
+	h4 {
+		margin: 0;
+		pointer-events: none;
+	}
+
 	& button {
 		border: none;
 		padding: 0 1.5em 0 0;
@@ -132,7 +137,7 @@ a:active {
 			box-sizing: border-box;
 			margin-bottom: 0;
 			padding: 0 0 0 1em;
-			line-height: 2em;
+			line-height: 1.5em;
 
 			color: $text-overlay-color;
 
@@ -223,7 +228,7 @@ a:active {
 				transition: background-color #{$states-highlighted-in}s ease-out;
 			}
 
-			h3 {
+			h4 {
 				pointer-events: none;
 			}
 		}

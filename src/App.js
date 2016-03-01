@@ -124,13 +124,13 @@ export default function (...initArgs) {
 			title = dropdown.querySelector('.dup-title'),
 			menu = dropdown.querySelector('ul');
 
-		title.innerHTML = dispatcher.MORE_INFO.title;
+		title.innerHTML = '<h4>' + dispatcher.MORE_INFO.title + '</h4>';
 
 		dispatcher.MORE_INFO.items.forEach((item) => {
 			let li = document.createElement('li');
 			li.setAttribute('role', 'menuitem');
 			li.setAttribute('data-page', item.page);
-			li.innerHTML = item.label;
+			li.innerHTML = '<h4>' + item.label + '</h4>';
 			menu.appendChild(li);
 		});
 
@@ -152,7 +152,7 @@ export default function (...initArgs) {
 
 			let segment = document.createElement('div');
 			segment.setAttribute('data-section', section);
-			let label = document.createElement('h3');
+			let label = document.createElement('h4');
 			label.innerHTML = section.toUpperCase();
 			segment.appendChild(label);
 			segmentContainer.appendChild(segment);

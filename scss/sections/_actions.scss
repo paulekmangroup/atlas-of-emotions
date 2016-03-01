@@ -29,6 +29,18 @@
 					#{$states-backgrounded-scale} * (#{$states-containers-bottom} + 50px/* + #{$actions-margins-bottom}px*/)
 				) - #{$triggers-bottom});
 		}
+
+		.actions-container.active {
+			pointer-events: none;
+		}
+
+		.graph-container {
+			transform: rotateX(70deg);
+		}
+
+		&.faded {
+			opacity: 0.3;
+		}
 	}
 
 	.label-valence {
@@ -80,6 +92,7 @@
 			transition-timing-function: ease-in-out, cubic-bezier(0.9, 0.0, 0.5, 1.0);
 		}
 
+		// NOTE: overridden in #actions.backgrounded above
 		&.active {
 			pointer-events: auto;
 			opacity: 1.0;
@@ -98,7 +111,10 @@
 		height: 40%;
 		margin-left: -$actions-graph-width/2;
 		transform-origin: top;
+
+		// NOTE: overridden by .backgrounded rule above
 		transform: rotateX(60deg);
+		transition: transform #{$states-backgrounded-duration-in}s cubic-bezier(.81,.34,.63,.85);
 
 		// pointer-events: auto;
 
