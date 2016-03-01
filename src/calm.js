@@ -243,8 +243,10 @@ export default {
 			.attrTween('stroke-dasharray', this.tweenPathIn)
 			.each('end', function () {
 				let l = this.getTotalLength();
+				// this string matches the first one given in tweenPathOut
+				// needs six parameters so as not to overlap when pathLength < .5 and show a dot for 0
 				d3.select(this)
-					.attr('stroke-dasharray', '0 0 '+ pathLength * l, '0 '+ l +' '+ pathLength * l);
+					.attr('stroke-dasharray', '0 0 '+ pathLength * l + ' 0 0 ' + l);
 			})
 		.transition()
 			.duration((1 - pathLength / (1 + pathLength)) * duration)
@@ -266,17 +268,16 @@ export default {
 		let l = this.getTotalLength(),
 			pl = parseFloat(this.getAttribute('pathlen')),
 			interpolator = d3.interpolateString('0 '+ l, pl * l +' '+ l);
-
 		return t => interpolator(t);
 
 	},
 
 	tweenPathOut: function () {
 
-		// `this` is the SVG path being tweened in spawnPath()
+		// `this` is the SVG path being tweened in spawnPath(), pl is % of total length
 		let l = this.getTotalLength(),
 			pl = parseFloat(this.getAttribute('pathlen')),
-			interpolator = d3.interpolateString('0 0 '+ pl * l, '0 '+ l +' 0');
+			interpolator = d3.interpolateString('0 0 '+ pl * l + ' 0 0 ' + l, '0 ' + l + ' ' + pl * l + ' 0 0 ' + l);
 
 		return t => interpolator(t);
 
