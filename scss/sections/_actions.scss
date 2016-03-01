@@ -30,8 +30,16 @@
 				) - #{$triggers-bottom});
 		}
 
+		.actions-container.active {
+			pointer-events: none;
+		}
+
 		.graph-container {
 			transform: rotateX(70deg);
+		}
+
+		&.faded {
+			opacity: 0.3;
 		}
 	}
 
@@ -84,6 +92,7 @@
 			transition-timing-function: ease-in-out, cubic-bezier(0.9, 0.0, 0.5, 1.0);
 		}
 
+		// NOTE: overridden in #actions.backgrounded above
 		&.active {
 			pointer-events: auto;
 			opacity: 1.0;
