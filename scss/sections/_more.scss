@@ -344,9 +344,21 @@
 		text-transform: uppercase;
 	}
 
+	.selective-text {
+		text-anchor: start;
+		fill: #B4ABA4;
+	}
+
 	line {
-		stroke: #CBC2BB;
+		stroke: #B4ABA4;
 		stroke-width: 2;
 		fill: none;
+	}
+
+	.reset-path {
+		fill: none;
+		stroke: #CBC2BB;
+		stroke-width: 2;
+		stroke-dasharray: 15,10;
 	}
 }

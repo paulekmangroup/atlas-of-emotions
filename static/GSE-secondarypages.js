@@ -34,12 +34,18 @@ var PARSER_CONFIG = {
 	},
 
 	'triggers timeline': {
-		start: [1, 3], // col, row
+		start: [[1, 3], [1, 6]], // col, row
 		parse: function(data) {
-			var rsp = [];
+			var rsp = {};
+			rsp.content = [];
 
 			data.forEach(function(row) {
-				rsp.push(row.text);
+				if (row.title) {
+					rsp.title = row.title;
+					rsp.desc = row.introduction || '';
+				} else if (row.text) {
+					rsp.content.push(row.text);
+				}
 			});
 
 			return rsp;
