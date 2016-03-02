@@ -90,6 +90,7 @@
 	},
 	"ui": {
 		"scrollbar": {
+			"introOpenDelay": 1.5,
 			"closeDelay": 0.2
 		},
 		"overlays": {

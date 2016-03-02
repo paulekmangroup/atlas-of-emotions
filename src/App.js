@@ -732,7 +732,7 @@ export default function (...initArgs) {
 
 		window.removeEventListener('mousemove', onScrollbarAreaMove);
 		scrollbarCloseTimeout = window.setTimeout(() => {
-			setScrollbarRelativePosition(0);
+			setScrollbarFractionalOpen(0);
 		}, sassVars.ui.scrollbar.closeDelay * 1000);
 
 	}
@@ -744,11 +744,15 @@ export default function (...initArgs) {
 
 		// distance from left edge to center, curved to open fast
 		let mouseXRatio = Math.pow(Math.max(0, Math.min(1, (event.pageX - scrollbarBounds.left) / (0.5*scrollbarBounds.width))), 0.5);
-		setScrollbarRelativePosition(mouseXRatio);
+		setScrollbarFractionalOpen(mouseXRatio);
 
 	}
 
-	function setScrollbarRelativePosition (val) {
+	/**
+	 * Open the scrollbar to a value between
+	 * 0.0 (totally closed) and 1.0 (totally open).
+	 */
+	function setScrollbarFractionalOpen (val) {
 
 		if (scrollbarAnimUpdate) {
 			window.cancelAnimationFrame(scrollbarAnimUpdate);
@@ -852,11 +856,13 @@ export default function (...initArgs) {
 				modal.classList.add('visible');
 				modalOverlay.classList.add('visible');
 
+				/*
 				// hide overlay on CONTINENTS,
 				// but keep it in DOM to block interaction until modal dismissed
 				if (currentSection === sections[dispatcher.SECTIONS.CONTINENTS]) {
 					modalOverlay.style.opacity = 0.0;
 				}
+				*/
 
 				let onOverlayClick = (event) => {
 					event.stopImmediatePropagation();
@@ -884,6 +890,9 @@ export default function (...initArgs) {
 			modalOverlay.classList.remove('visible');
 
 		}
+
+		// close the scrollbar, if it was opened along with the intro modal
+		setScrollbarFractionalOpen(0.0);
 
 	}
 
@@ -949,11 +958,23 @@ export default function (...initArgs) {
 	function onHashChange (event, defaults=NAVIGATION_DEFAULTS) {
 
 		if (currentSection) {
+
+			// if a section has already been selected this session, close the intro modal
 			setModalVisibility(false);
+
 		} else {
+
+			// if a section has not yet been selected this session
+			// (i.e. this is the start of the session),
+			// open the intro modal and the scrollbar
 			setTimeout(() => {
 				setModalVisibility(true);
 			}, sassVars.ui.intro.delay * 1000);
+
+			setTimeout(() => {
+				setScrollbarFractionalOpen(1.0);
+			}, sassVars.ui.scrollbar.introOpenDelay * 1000);
+
 		}
 
 		let hash = document.location.hash.replace(/^#/, '');
