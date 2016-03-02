@@ -41,6 +41,10 @@ export default function (...initArgs) {
 		scrollbarSegments = {},
 		scrollbarCloseTimeout = null,
 		highlightedScrollbarSection = null,
+		scrollbarBounds,
+		scrollbarClosedPos,
+		scrollbarAnimUpdate,
+
 		recentScrollDeltas = [],				// cache recent scroll delta values to check intentionality of scroll
 		lastScroll = 0,							// timestamp of most recent scroll event
 		hasNavigatedThisScroll = false,			// has already navigated during the current inertia/continuous scroll
@@ -160,9 +164,21 @@ export default function (...initArgs) {
 
 		});
 
+		onScrollbarAreaMove = _.throttle(onScrollbarAreaMove, 50);
+		scrollbar.addEventListener('mouseenter', onScrollbarAreaEnter);
+		scrollbar.addEventListener('mouseleave', onScrollbarAreaLeave);
+
 		segmentContainer.addEventListener('mouseover', onScrollbarOver);
 		segmentContainer.addEventListener('mouseout', onScrollbarOut);
 		segmentContainer.addEventListener('click', onScrollbarClick);
+
+		scrollbarBounds = scrollbar.getBoundingClientRect();
+		scrollbarBounds = {
+			top: scrollbarBounds.top,
+			left: scrollbarBounds.left,
+			width: scrollbarBounds.width - (scrollbarBounds.right - segmentContainer.getBoundingClientRect().left)
+		};
+		scrollbarClosedPos = parseInt(window.getComputedStyle(segmentContainer).left.replace('px', ''));
 
 		// throttle wheel events, and
 		// prune cached scroll events every frame
@@ -696,11 +712,70 @@ export default function (...initArgs) {
 
 	}
 
-	function onScrollbarOver (event) {
+	function onScrollbarAreaEnter (event) {
 
 		let scrollbar = document.querySelector('#scrollbar');
-		scrollbar.classList.add('open');
-		clearTimeout(scrollbarCloseTimeout);
+		window.addEventListener('mousemove', onScrollbarAreaMove);
+		onScrollbarAreaMove(event);
+
+	}
+
+	function onScrollbarAreaLeave (event) {
+
+		if (scrollbarCloseTimeout) {
+			window.clearTimeout(scrollbarCloseTimeout);
+		}
+
+		window.removeEventListener('mousemove', onScrollbarAreaMove);
+		scrollbarCloseTimeout = window.setTimeout(() => {
+			setScrollbarRelativePosition(0);
+		}, sassVars.ui.scrollbar.closeDelay * 1000);
+
+	}
+
+	/**
+	 * Note: this function is _.throttle()d in initScrollInterface.
+	 */
+	function onScrollbarAreaMove (event) {
+
+		if (scrollbarCloseTimeout) {
+			window.clearTimeout(scrollbarCloseTimeout);
+		}
+
+		// distance from left edge to center, curved to open fast
+		let mouseXRatio = Math.pow(Math.max(0, Math.min(1, (event.pageX - scrollbarBounds.left) / (0.5*scrollbarBounds.width))), 0.25);
+		setScrollbarRelativePosition(mouseXRatio);
+
+	}
+
+	function setScrollbarRelativePosition (val) {
+
+		if (scrollbarAnimUpdate) {
+			window.cancelAnimationFrame(scrollbarAnimUpdate);
+		}
+
+		let segmentContainer = document.querySelector('#scrollbar .segment-container'),
+			scrollbarTgtPos = Math.round((1 - val) * scrollbarClosedPos),
+			scrollbarPos = parseFloat(window.getComputedStyle(segmentContainer).left.replace('px', ''));
+
+		let updatePos = function () {
+
+			let dPos = 0.25 * (scrollbarTgtPos - scrollbarPos);
+			if (Math.abs(dPos) < 1) {
+				segmentContainer.style.left = scrollbarTgtPos + 'px';
+				scrollbarAnimUpdate = null;
+			} else {
+				scrollbarPos += dPos;
+				segmentContainer.style.left = scrollbarPos + 'px';
+				scrollbarAnimUpdate = window.requestAnimationFrame(updatePos);
+			}
+
+		};
+		window.requestAnimationFrame(updatePos);
+
+	}
+
+	function onScrollbarOver (event) {
 
 		let section = event.target.dataset.section;
 		if (section) {
@@ -710,12 +785,6 @@ export default function (...initArgs) {
 	}
 
 	function onScrollbarOut (event) {
-
-		clearTimeout(scrollbarCloseTimeout);
-		scrollbarCloseTimeout = setTimeout(() => {
-			let scrollbar = document.querySelector('#scrollbar');
-			scrollbar.classList.remove('open');
-		}, sassVars.ui.scrollbar.toggle.delay.close * 1000);
 
 		displayScrollbarHighlight(null);
 
@@ -745,18 +814,6 @@ export default function (...initArgs) {
 			let isHighlighted = key === section || key === highlightedScrollbarSection;
 			scrollbarSegments[key].classList[isHighlighted ? 'add' : 'remove']('highlighted');
 		});
-
-	}
-
-	function onMoreInfoClick (event) {
-
-		// TODO: open more info menu on hover/click, sim. to scrollbar
-		// TODO: on menu click, navigate to moreInfo with selected page (about/donate/further/annex-index)
-
-		/*
-		let moreInfoPage = event.target.dataset.page;
-		dispatcher.navigate(dispatcher.SECTIONS.MORE, moreInfoPage);
-		*/
 
 	}
 

@@ -90,15 +90,7 @@
 	},
 	"ui": {
 		"scrollbar": {
-			"toggle": {
-				"duration": {
-					"open": 0.25,
-					"close": 0.5
-				},
-				"delay": {
-					"close": 0.5
-				}
-			}
+			"closeDelay": 1.0
 		},
 		"overlays": {
 			"duration": {

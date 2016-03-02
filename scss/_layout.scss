@@ -179,7 +179,6 @@ a:active {
 	top: $header-height;
 	right: 0;
 	overflow: hidden;
-	pointer-events: none;
 
 	div {
 		display: flex;
@@ -192,7 +191,7 @@ a:active {
 		width: $emotions-dropdown-width;
 		height: calc(100% - #{$more-info-height});
 		top: 0;
-		right: 0.75em - $emotions-dropdown-width;
+		left: $emotions-dropdown-width - 0.75em;
 
 		display: flex;
 		flex-direction: column;
@@ -200,10 +199,6 @@ a:active {
 
 		cursor: pointer;
 		pointer-events: auto;
-
-		transition-property: right;
-		transition-duration: #{$ui-scrollbar-toggle-duration-close}s;
-		transition-timing-function: ease;
 
 		div {
 			width: 100%;
@@ -232,11 +227,6 @@ a:active {
 				pointer-events: none;
 			}
 		}
-	}
-
-	&.open .segment-container {
-		right: 0;
-		transition-duration: #{$ui-scrollbar-toggle-duration-open}s;
 	}
 }
 
