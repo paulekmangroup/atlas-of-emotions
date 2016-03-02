@@ -60,7 +60,7 @@ const continentsSection = {
 		// Bind event handlers to current scope
 		this.onContinentMouseEnter = this.onContinentMouseEnter.bind(this);
 		this.onContinentMouseLeave = this.onContinentMouseLeave.bind(this);
-		this.onContinentMouseUp = this.onContinentMouseUp.bind(this);
+		this.onContinentClick = this.onContinentClick.bind(this);
 
 		this.isInited = true;
 
@@ -341,8 +341,11 @@ const continentsSection = {
 			continent.d3Selection
 				.on('mouseenter', val ? section.onContinentMouseEnter : null)
 				.on('mouseleave', val ? section.onContinentMouseLeave : null)
-				.on('mouseup', val ? section.onContinentMouseUp : null);
+				.on('click', val ? section.onContinentClick : null, true);
 		});
+
+		// handle background click for deselection
+		d3.select('#main').on('click', val ? this.onBackgroundClick : null, false);
 
 	},
 
@@ -649,9 +652,19 @@ const continentsSection = {
 
 	},
 
-	onContinentMouseUp: function (continent) {
+	onContinentClick: function (continent) {
+
+		if (d3.event) {
+			d3.event.stopImmediatePropagation();
+		}
 
 		dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS, continent.id);
+
+	},
+
+	onBackgroundClick: function () {
+
+		dispatcher.navigate(dispatcher.HOME);
 
 	},
 

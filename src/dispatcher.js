@@ -19,6 +19,7 @@ const dispatcher = {
 		MORE: 'more'
 	},
 
+
 	EMOTIONS: {
 		ANGER: 'anger',
 		FEAR: 'fear',
@@ -26,6 +27,8 @@ const dispatcher = {
 		SADNESS: 'sadness',
 		ENJOYMENT: 'enjoyment'
 	},
+
+	HOME: 'home',
 
 	MORE_INFO: {
 		title: 'More Information',
@@ -75,11 +78,12 @@ const dispatcher = {
 	/**
 	 * @param  {[String]} section Section navigating to
 	 * @param  {[String]} emotion Emotion navigating to
+	 * @param  {[String]} morePage Secondary page (within More Information) navigating to
 	 */
-	navigate: function (section, emotion, more) {
-		let page = emotion || more;
+	navigate: function (section, emotion, morePage) {
+		let subsection = emotion || more;
 
-		if (section && !this.validateSection(section)) {
+		if (section && !this.validateSection(section) && section !== this.HOME) {
 			throw new Error('Invalid section "' + section + '".');
 		}
 
@@ -87,7 +91,7 @@ const dispatcher = {
 			throw new Error('Invalid emotion "' + emotion + '".');
 		}
 
-		this.emit(this.EVENTS.NAVIGATE, section, page);
+		this.emit(this.EVENTS.NAVIGATE, section, subsection);
 
 	},
 

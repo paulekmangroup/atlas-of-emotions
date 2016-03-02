@@ -861,7 +861,13 @@ export default function (...initArgs) {
 	}
 
 	function onNavigate (section, emotion) {
-		const parts = [];
+
+		if (section === dispatcher.HOME) {
+			document.location.hash = '';
+			return;
+		}
+
+		let parts = [];
 
 		if (!section) {
 			for (let key in sections) {
@@ -880,6 +886,7 @@ export default function (...initArgs) {
 		if (emotion) parts.push(emotion);
 
 		document.location.hash = parts.join(':');
+
 	}
 
 	function onHashChange (event, defaults=NAVIGATION_DEFAULTS) {
