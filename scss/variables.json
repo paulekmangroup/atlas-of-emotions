@@ -1,0 +1,113 @@
+{
+	"continents": {
+		"panX": {
+			"duration": {
+				"in": 0.75,
+				"out": 0.75
+			}
+		},
+		"panY": {
+			"duration": {
+				"in": 1.5,
+				"out": 0.75
+			}
+		},
+		"spread": {
+			"delay": {
+				"in": 0.5,
+				"out": 0.25
+			},
+			"duration": {
+				"in": 1.5,
+				"out": 0.75
+			}
+		},
+		"introSpread": {
+			"duration": {
+				"in": 1.5,
+				"out": 2.5
+			},
+			"delay": {
+				"in": 0.0,
+				"out": 1.0
+			}
+		}
+	},
+	"states": {
+		"backgrounded": {
+			"actions": {
+				"scale": 0.6,
+				"top": "-17%"
+			},
+			"scale": 0.4,
+			"top": "-10%",
+			"duration": {
+				"in": 1.5,
+				"out": 1.5
+			}
+		},
+		"containers": {
+			"bottom": "10%"
+		},
+		"highlighted": {
+			"in": 0,
+			"out": 0.2
+		}
+	},
+	"actions": {
+		"backgrounded": {
+			"scale": 0.7
+		},
+		"margins": {
+			"bottom": 10
+		},
+		"add": {
+			"time": 1000,
+			"delay": 250
+		},
+		"update": {
+			"time": 750,
+			"delay": 0
+		},
+		"remove": {
+			"time": 600,
+			"delay": 0
+		}
+	},
+	"triggers": {
+		"bottom": "20%"
+	},
+	"emotions": {
+		"panX": {
+			"duration": 0.75,
+			"delay": 0.25
+		},
+		"scale": {
+			"in": {
+				"delay": 0.65
+			}
+		}
+	},
+	"ui": {
+		"scrollbar": {
+			"toggle": {
+				"duration": {
+					"open": 0.25,
+					"close": 0.5
+				},
+				"delay": {
+					"close": 0.5
+				}
+			}
+		},
+		"overlays": {
+			"duration": {
+				"in": 1.0,
+				"out": 0.5
+			}
+		},
+		"intro": {
+			"delay": 1.0
+		}
+	}
+}

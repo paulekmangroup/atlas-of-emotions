@@ -1,0 +1,87 @@
+// exported from variables.json
+// by gulp-json-sass in gulpfile.babel.js
+@import 'variables-derived.scss';
+
+// colors
+$text-color: #4d4d4d;
+$text-overlay-color: #ffffff;
+$background-color: rgb(255, 255, 255);
+$callout-background-color: #000000;
+$callout-highlight-color: #999999;
+$scrollbar-background-color: #4d4d4d;
+
+$color-anger: #af202a;
+$color-disgust: #006837;
+$color-enjoyment: #f8881d;
+$color-fear: #8f278b;
+$color-sadness: #3668b2;
+
+$depth-1: 1;
+$depth-2: 2;
+$depth-3: 3;
+$depth-5: 5;
+$depth-10: 10;
+$depth-100: 100;
+$depth-max: 10000;
+
+$gradient-anger: radial-gradient(ellipse at center, rgba(228,135,102,0.2) 0%, rgba(204,28,43,1) 100%);
+$gradient-disgust: radial-gradient(ellipse at center, rgba(0,142,69,0.3) 0%, rgba(0,122,61,0.8) 56%, rgba(0,104,55,1) 100%);
+$gradient-enjoyment: radial-gradient(ellipse at center, rgba(241,196,83,0.8) 0%, rgba(248,136,29,1) 100%);
+$gradient-fear: radial-gradient(ellipse at center, rgba(248,58,248,0.1) 0%, rgba(143,39,139,1) 100%);
+$gradient-sadness: radial-gradient(ellipse at center, rgba(200,220,240,1) 0%, rgba(30,152,211,1) 56%, rgba(64,70,164,1) 100%);
+
+// sizes and positions
+$header-height: 55px;
+$states-graph-width: 60%;
+$actions-graph-width: 95%;
+$triggers-graph-width: 80%;
+$emotions-dropdown-width: 13em;
+$more-info-height: 2.0em;
+
+// animation
+$func-ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+$label-fade-in-time: 1s;
+$label-fade-out-time: 0.5s;
+
+// mixins
+@mixin emotion-color () {
+	&.anger { color: $color-anger; }
+	&.disgust { color: $color-disgust; }
+	&.enjoyment { color: $color-enjoyment; }
+	&.fear { color: $color-fear; }
+	&.sadness { color: $color-sadness; }
+}
+
+@mixin emotion-stroke-color () {
+	&.anger { stroke: $color-anger; }
+	&.disgust { stroke: $color-disgust; }
+	&.enjoyment { stroke: $color-enjoyment; }
+	&.fear { stroke: $color-fear; }
+	&.sadness { stroke: $color-sadness; }
+}
+
+@mixin emotion-fill-color () {
+	&.anger { fill: $color-anger; }
+	&.disgust { fill: $color-disgust; }
+	&.enjoyment { fill: $color-enjoyment; }
+	&.fear { fill: $color-fear; }
+	&.sadness { fill: $color-sadness; }
+}
+
+@mixin emotion-background-color () {
+	&.anger { background-color: rgba($color-anger, 0.5); }
+	&.disgust { background-color: rgba($color-disgust, 0.5); }
+	&.enjoyment { background-color: rgba($color-enjoyment, 0.5); }
+	&.fear { background-color: rgba($color-fear, 0.5); }
+	&.sadness { background-color: rgba($color-sadness, 0.5); }
+	background-blend-mode: multiply;
+}
+
+@mixin emotion-background-color-light () {
+	&.anger { background-color: rgba($color-anger, 0.4); }
+	&.disgust { background-color: rgba($color-disgust, 0.4); }
+	&.enjoyment { background-color: rgba($color-enjoyment, 0.4); }
+	&.fear { background-color: rgba($color-fear, 0.4); }
+	&.sadness { background-color: rgba($color-sadness, 0.4); }
+	background-blend-mode: multiply;
+}
