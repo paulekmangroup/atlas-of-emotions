@@ -289,10 +289,44 @@ const continentsSection = {
 
 		return new Promise((resolve, reject) => {
 
-			// tuen off updates and interaction
-			this.setActive(false);
+			let continent = continents.find(c => c.id === currentEmotion);
+			if (continent.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED) {
 
-			resolve();
+				let targetScale = 1.0;
+
+				this.transitions.scaleContinents(
+					continents
+						.filter(c => c !== continent)
+						.map(c => c.id),
+					0.0
+				);
+
+				this.transitions.panToContinent(continent.id);
+
+				setTimeout(() => {
+					targetScale = this.transitions.focusZoomedOutContinent(continent.id);
+				}, sassVars.continents.spread.delay.in * 1000);
+
+				setTimeout(() => {
+					this.transitions.spreadFocusedContinent(continent.id, targetScale);
+				}, sassVars.continents.spread.delay.in * 1000);
+
+				setTimeout(() => {
+
+					// turn off updates and interaction
+					this.setActive(false);
+
+					// resolve once continent zoom transition completes
+					this.zoomedInContinent = continent.id;
+					resolve();
+
+				}, (sassVars.continents.spread.delay.in + sassVars.continents.spread.duration.in) * 1000);
+
+			} else {
+
+				resolve();
+
+			}
 
 		});
 
@@ -617,75 +651,7 @@ const continentsSection = {
 
 	onContinentMouseUp: function (continent) {
 
-		if (continent.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED) {
-
-			// click on selected continent to zoom into continent and navigate to states
-			// TODO: might not want this, might want to adhere to only the scroll / down button interaction
-			let targetScale = 1.0;
-
-			this.transitions.scaleContinents(
-				continents
-					.filter(c => c !== continent)
-					.map(c => c.id),
-				0.0
-			);
-
-			this.transitions.panToContinent(continent.id);
-
-			setTimeout(() => {
-				targetScale = this.transitions.focusZoomedOutContinent(continent.id);
-			}, sassVars.continents.spread.delay.in * 1000);
-
-			setTimeout(() => {
-				this.transitions.spreadFocusedContinent(continent.id, targetScale);
-			}, sassVars.continents.spread.delay.in * 1000);
-
-			setTimeout(() => {
-				// navigate to states automatically once continent zoom transition completes
-				this.zoomedInContinent = continent.id;
-				dispatcher.navigate(dispatcher.SECTIONS.STATES, currentEmotion);
-			}, (sassVars.continents.spread.delay.in + sassVars.continents.spread.duration.in) * 1000);
-
-		} else {
-
-			dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS, continent.id);
-
-		}
-
-		// continents.some(continent => {
-		// 	if (continent.isHighlighted) {
-
-		// 		if (currentEmotion !== continent.id) {
-
-		// 			// navigate from all continents view to zoomed-in continent view
-		// 			dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS, continent.id);
-		// 			dispatcher.changeCallout(continent.id, continent.id, emotionsData.emotions[continent.id].continent.desc);
-
-		// 		} else {
-
-		// 			// navigate from zoomed-in continent view to states view
-		// 			// TODO: this will happen on scroll, not click
-		// 			dispatcher.navigate(dispatcher.SECTIONS.STATES, continent.id);
-
-		// 		}
-
-		// 		/*
-		// 		// fade out continent labels
-		// 		d3.selectAll('#continent-labels div')
-		// 			.style('opacity', 0.0);
-
-		// 		// shrink down continents
-		// 		let delays = {};
-		// 		delays[continent.id] = 500;
-		// 		this.transitions.scaleContinents(continents.map(continent => continent.id), 0.0, delays, 800)
-		// 		.then(() => {
-		// 			dispatcher.navigate(dispatcher.SECTIONS.STATES, continent.id);
-		// 		});
-		// 		*/
-
-		// 		return true;
-		// 	}
-		// });
+		dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS, continent.id);
 
 	},
 
@@ -711,7 +677,6 @@ const continentsSection = {
 				}
 			});
 		}
-		console.log(">>>>> TODO: apply highlight levels to continent labels as well");
 
 	}
 
