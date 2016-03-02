@@ -714,6 +714,10 @@ export default function (...initArgs) {
 
 	function onScrollbarAreaEnter (event) {
 
+		if (scrollbarCloseTimeout) {
+			window.clearTimeout(scrollbarCloseTimeout);
+		}
+
 		let scrollbar = document.querySelector('#scrollbar');
 		window.addEventListener('mousemove', onScrollbarAreaMove);
 		onScrollbarAreaMove(event);
@@ -738,12 +742,8 @@ export default function (...initArgs) {
 	 */
 	function onScrollbarAreaMove (event) {
 
-		if (scrollbarCloseTimeout) {
-			window.clearTimeout(scrollbarCloseTimeout);
-		}
-
 		// distance from left edge to center, curved to open fast
-		let mouseXRatio = Math.pow(Math.max(0, Math.min(1, (event.pageX - scrollbarBounds.left) / (0.5*scrollbarBounds.width))), 0.25);
+		let mouseXRatio = Math.pow(Math.max(0, Math.min(1, (event.pageX - scrollbarBounds.left) / (0.5*scrollbarBounds.width))), 0.5);
 		setScrollbarRelativePosition(mouseXRatio);
 
 	}
