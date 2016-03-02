@@ -28,16 +28,22 @@ const PATH_STRINGS = [
 	],
 	PATH_SOURCE_WIDTH = 1540,
 	PATH_SOURCE_HEIGHT = 1157,
+	MAX_NUM_PER_PATH = 3,
 	MIN_PATH_SPAWN_DELAY = 180,
 	PATH_SPAWN_FREQ = 0.0018,
 	PATH_LIFETIME_BASE = 14000,
 	PATH_LIFETIME_SPREAD = 6000,
 	PATH_LENGTH_BASE = 0.25,
 	PATH_LENGTH_SPREAD = 0.5,
-	PATH_WIDTH_BASE = 10,
+	PATH_WIDTH_BASE = 20,
 	PATH_WIDTH_SPREAD = 20,
-	PATH_OPACITY_BASE = 0.15,
-	PATH_OPACITY_SPREAD = 0.3;
+	PATH_GREY_BASE = 30,
+	PATH_GREY_SPREAD = 120,
+	PATH_GRADIENTS_ENABLED = true,
+	PATH_OPACITY_BASE = PATH_GRADIENTS_ENABLED ? 0.5 : 0.3,
+	PATH_OPACITY_SPREAD = 0.3,
+	PATH_MAX_ROTATE_OFFSET = 0.5,
+	PATH_MAX_TRANSLATE_OFFSET = 5;
 
 export default {
 
@@ -104,7 +110,7 @@ export default {
 			lastSpawnTime: -MIN_PATH_SPAWN_DELAY,
 			spawnFreq: PATH_SPAWN_FREQ,
 			pathStr: PATH_STRINGS[i],
-			maxCount: 3,
+			maxCount: MAX_NUM_PER_PATH,
 			elements: []
 		}));
 
@@ -197,7 +203,7 @@ export default {
 
 		continents.forEach(continent => continent.update(updateState, frameCount));
 
-		this.spawnPaths();
+		this.spawnPaths(time);
 
 		frameCount++;
 		if (this.isActive) {
@@ -206,7 +212,7 @@ export default {
 
 	},
 
-	spawnPaths: function () {
+	spawnPaths: function (time) {
 
 		paths.forEach((p, i) => {
 
@@ -214,56 +220,128 @@ export default {
 			if (p.elements.length >= p.maxCount) { return; }
 			if (Math.random() > p.spawnFreq) { return; }
 
-			this.spawnPath(i);
+			this.spawnPath(i, time);
 
 		});
 
 	},
 
-	spawnPath: function (pathIndex) {
+	spawnPath: function (pathIndex, time) {
 
+		//
+		// path setup
+		//
 		let pathState = paths[pathIndex],
-			strokeColor = '#191919',
+			id = 'calm-'+ pathIndex +'-'+ Math.floor(time),
+			strokeColor = Math.floor(PATH_GREY_BASE + Math.random() * PATH_GREY_SPREAD),
 			strokeWidth = PATH_WIDTH_BASE + Math.random() * PATH_WIDTH_SPREAD,
 			strokeOpacity = PATH_OPACITY_BASE + Math.random() * PATH_OPACITY_SPREAD,
-			pathLength = PATH_LENGTH_BASE + Math.random() * PATH_LENGTH_SPREAD,
+			dashLength = PATH_LENGTH_BASE + Math.random() * PATH_LENGTH_SPREAD,
+			rotateOffset = -PATH_MAX_ROTATE_OFFSET + 2*Math.random() * PATH_MAX_ROTATE_OFFSET,
+			translateOffsetX = -PATH_MAX_TRANSLATE_OFFSET + 2*Math.random() * PATH_MAX_TRANSLATE_OFFSET,
+			translateOffsetY = -PATH_MAX_TRANSLATE_OFFSET + 2*Math.random() * PATH_MAX_TRANSLATE_OFFSET,
+			pathGradient,
 			path = pathsContainer.append('path')
+				.attr('id', id)
 				.attr('d', pathState.pathStr)
-				.attr('stroke', strokeColor)
+				.attr('stroke', 'rgb('+ strokeColor +','+ strokeColor +','+ strokeColor +')')
 				.attr('stroke-width', strokeWidth)
 				.attr('stroke-opacity', strokeOpacity)
 				.attr('stroke-linecap', 'round')
-				.attr('atlas:pathlen', pathLength);
+				.attr('transform', 'rotate('+ rotateOffset +','+ centerX +','+ centerY +'), translate('+ translateOffsetX +','+ translateOffsetY + ')')
+				.attr('atlas:dashlen', dashLength);
+
+		if (PATH_GRADIENTS_ENABLED) {
+			pathGradient = pathsContainer.append('linearGradient')
+				.attr('id', id + '-g')
+				.attr('gradientUnits', 'userSpaceOnUse')
+				.attr('x1', 0.0)
+				.attr('x2', 0.0)
+				.attr('y1', 0.0)
+				.attr('y2', 0.0);
+
+			pathGradient.selectAll('stop')
+				.data([
+					{ offset: '0%', color: 'rgba('+ strokeColor +','+ strokeColor +','+ strokeColor +',0.0)' },
+					{ offset: '20%', color: 'rgba('+ strokeColor +','+ strokeColor +','+ strokeColor +','+ 0.6*strokeOpacity +')' },
+					{ offset: '80%', color: 'rgba('+ strokeColor +','+ strokeColor +','+ strokeColor +','+ 0.95*strokeOpacity +')' },
+					{ offset: '100%', color: 'rgba('+ strokeColor +','+ strokeColor +','+ strokeColor +','+ strokeOpacity +')' }
+				])
+			.enter().append('stop')
+				.attr('offset', d => d.offset)
+				.attr('stop-color', d => d.color);
+
+			// apply the gradient to the path
+			path.attr('stroke', 'url(#'+ id + '-g)');
+		}
+
+		//
+		// path animation
+		//
+		let duration = PATH_LIFETIME_BASE + Math.random() * PATH_LIFETIME_SPREAD,
+			pathNode = path.node(),
+			pathTotalLength = pathNode.getTotalLength();
 
 		// start as all gap, no dash
-		path.attr('stroke-dasharray', '0 '+ path.node().getTotalLength());
+		path.attr('stroke-dasharray', '0 '+ pathTotalLength);
 
 		// animate path by interpolating stroke-dasharray
 		// from http://bl.ocks.org/mbostock/5649592
-		let duration = PATH_LIFETIME_BASE + Math.random() * PATH_LIFETIME_SPREAD;
 		path.transition()
-			.duration(pathLength / (1 + pathLength) * duration)
-			// .duration(duration)
+			.duration(dashLength / (1 + dashLength) * duration)
 			.ease('linear')
 			.attrTween('stroke-dasharray', this.tweenPathIn)
 			.each('end', function () {
-				let l = this.getTotalLength();
 				// this string matches the first one given in tweenPathOut
-				// needs six parameters so as not to overlap when pathLength < .5 and show a dot for 0
+				// needs six parameters so as not to overlap when dashLength < .5 and show a dot for 0
 				d3.select(this)
-					.attr('stroke-dasharray', '0 0 '+ pathLength * l + ' 0 0 ' + l);
+					.attr('stroke-dasharray', '0 0 '+ dashLength * pathTotalLength + ' 0 0 ' + pathTotalLength);
 			})
 		.transition()
-			.duration((1 - pathLength / (1 + pathLength)) * duration)
+			.duration((1 - dashLength / (1 + dashLength)) * duration)
 			.ease('linear')
 			.attrTween('stroke-dasharray', this.tweenPathOut)
 			.each('end', function () {
-				d3.select(this).remove();
-				pathState.elements.splice(pathState.elements.indexOf(this), 1);
+				// remove after a short delay, to ensure gradient transition has finished
+				setTimeout(() => {
+					d3.select(this).remove();
+					pathState.elements.splice(pathState.elements.indexOf(this), 1);
+				}, 1);
 			});
 
+		if (PATH_GRADIENTS_ENABLED) {
+			// animate gradient bounding box along with path
+			pathGradient.transition()
+				// from 0 dash length at start of path to full dash visible
+				.duration(dashLength / (1 + dashLength) * duration)
+				.ease('linear')
+				.attrTween('x1', () => t => pathNode.getPointAtLength(0).x)
+				.attrTween('y1', () => t => pathNode.getPointAtLength(0).y)
+				.attrTween('x2', () => t => pathNode.getPointAtLength(t * dashLength*pathTotalLength).x)
+				.attrTween('y2', () => t => pathNode.getPointAtLength(t * dashLength*pathTotalLength).y)
+			.transition()
+				// from full dash visible at start of path to full dash visible at end of path
+				.duration((1 - dashLength) / (1 + dashLength) * duration)
+				.ease('linear')
+				.attrTween('x1', () => t => pathNode.getPointAtLength(t * (1-dashLength)*pathTotalLength).x)
+				.attrTween('y1', () => t => pathNode.getPointAtLength(t * (1-dashLength)*pathTotalLength).y)
+				.attrTween('x2', () => t => pathNode.getPointAtLength(dashLength*pathTotalLength + t * (1-dashLength)*pathTotalLength).x)
+				.attrTween('y2', () => t => pathNode.getPointAtLength(dashLength*pathTotalLength + t * (1-dashLength)*pathTotalLength).y)
+			.transition()
+				// from full dash visible at end of path to 0 dash length
+				.duration(dashLength / (1 + dashLength) * duration)
+				.ease('linear')
+				.attrTween('x1', () => t => pathNode.getPointAtLength((1-dashLength)*pathTotalLength + t * dashLength*pathTotalLength).x)
+				.attrTween('y1', () => t => pathNode.getPointAtLength((1-dashLength)*pathTotalLength + t * dashLength*pathTotalLength).y)
+				.attrTween('x2', () => t => pathNode.getPointAtLength(1).x)
+				.attrTween('y2', () => t => pathNode.getPointAtLength(1).y)
+				.each('end', function () {
+					d3.select(this).remove();
+				});
+		}
+
 		pathState.lastSpawnTime = frameCount;
-		pathState.elements.push(path.node());
+		pathState.elements.push(pathNode);
 
 	},
 
@@ -271,7 +349,7 @@ export default {
 
 		// `this` is the SVG path being tweened in spawnPath()
 		let l = this.getTotalLength(),
-			pl = parseFloat(this.getAttribute('pathlen')),
+			pl = parseFloat(this.getAttribute('dashlen')),
 			interpolator = d3.interpolateString('0 '+ l, pl * l +' '+ l);
 		return t => interpolator(t);
 
@@ -281,7 +359,7 @@ export default {
 
 		// `this` is the SVG path being tweened in spawnPath(), pl is % of total length
 		let l = this.getTotalLength(),
-			pl = parseFloat(this.getAttribute('pathlen')),
+			pl = parseFloat(this.getAttribute('dashlen')),
 			interpolator = d3.interpolateString('0 0 '+ pl * l + ' 0 0 ' + l, '0 ' + l + ' ' + pl * l + ' 0 0 ' + l);
 
 		return t => interpolator(t);
