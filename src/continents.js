@@ -290,7 +290,7 @@ const continentsSection = {
 		return new Promise((resolve, reject) => {
 
 			let continent = continents.find(c => c.id === currentEmotion);
-			if (continent.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED) {
+			if (continent && continent.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED) {
 
 				let targetScale = 1.0;
 

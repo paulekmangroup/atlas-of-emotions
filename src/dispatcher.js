@@ -81,7 +81,7 @@ const dispatcher = {
 	 * @param  {[String]} morePage Secondary page (within More Information) navigating to
 	 */
 	navigate: function (section, emotion, morePage) {
-		let subsection = emotion || more;
+		let subsection = emotion || morePage;
 
 		if (section && !this.validateSection(section) && section !== this.HOME) {
 			throw new Error('Invalid section "' + section + '".');
