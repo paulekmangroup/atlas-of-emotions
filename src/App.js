@@ -164,9 +164,7 @@ export default function (...initArgs) {
 
 		});
 
-		onScrollbarAreaMove = _.throttle(onScrollbarAreaMove, 50);
-		scrollbar.addEventListener('mouseenter', onScrollbarAreaEnter);
-		scrollbar.addEventListener('mouseleave', onScrollbarAreaLeave);
+		onWindowMouseMove = _.throttle(onWindowMouseMove, 50);
 
 		segmentContainer.addEventListener('mouseover', onScrollbarOver);
 		segmentContainer.addEventListener('mouseout', onScrollbarOut);
@@ -712,38 +710,13 @@ export default function (...initArgs) {
 
 	}
 
-	function onScrollbarAreaEnter (event) {
-
-		if (scrollbarCloseTimeout) {
-			window.clearTimeout(scrollbarCloseTimeout);
-		}
-
-		let scrollbar = document.querySelector('#scrollbar');
-		window.addEventListener('mousemove', onScrollbarAreaMove);
-		onScrollbarAreaMove(event);
-
-	}
-
-	function onScrollbarAreaLeave (event) {
-
-		if (scrollbarCloseTimeout) {
-			window.clearTimeout(scrollbarCloseTimeout);
-		}
-
-		window.removeEventListener('mousemove', onScrollbarAreaMove);
-		scrollbarCloseTimeout = window.setTimeout(() => {
-			setScrollbarFractionalOpen(0);
-		}, sassVars.ui.scrollbar.closeDelay * 1000);
-
-	}
-
 	/**
 	 * Note: this function is _.throttle()d in initScrollInterface.
 	 */
-	function onScrollbarAreaMove (event) {
+	function onWindowMouseMove (event) {
 
-		// distance from left edge to center, curved to open fast
-		let mouseXRatio = Math.pow(Math.max(0, Math.min(1, (event.pageX - scrollbarBounds.left) / (0.5*scrollbarBounds.width))), 0.5);
+		// distance from left edge + 0.25*width to center, curved to open fast
+		let mouseXRatio = Math.pow(Math.max(0, Math.min(1, (event.pageX - scrollbarBounds.left - 0.25*scrollbarBounds.width) / (0.25*scrollbarBounds.width))), 0.5);
 		setScrollbarFractionalOpen(mouseXRatio);
 
 	}
@@ -872,6 +845,9 @@ export default function (...initArgs) {
 				modalOverlay.addEventListener('click', onOverlayClick);
 			}, 100);
 
+			// disable scrollbar interaction
+			window.removeEventListener('mousemove', onWindowMouseMove);
+
 		} else {
 
 			// already closed
@@ -889,10 +865,12 @@ export default function (...initArgs) {
 			modal.classList.remove('visible');
 			modalOverlay.classList.remove('visible');
 
-		}
+			// close the scrollbar, if it was opened along with the intro modal,
+			// and enable scrollbar interaction
+			setScrollbarFractionalOpen(0.0);
+			window.addEventListener('mousemove', onWindowMouseMove);
 
-		// close the scrollbar, if it was opened along with the intro modal
-		setScrollbarFractionalOpen(0.0);
+		}
 
 	}
 
