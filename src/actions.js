@@ -151,18 +151,33 @@ export default {
 			let graph = svg.append('g')
 				.attr('transform', 'translate(' + (margin.left + 0.5*innerWidth) + ',' + margin.top + ')');
 
+			// TODO: remove if we end up not using textures
 			let valenceTextures = {};
+			/*
+			valenceTextures[VALENCES.CONSTRUCTIVE] = textures.circles()
+				.complement()
+				.heavier(0.85)
+				.stroke('black');
+			valenceTextures[VALENCES.BOTH] = textures.circles()
+				.complement()
+				.stroke('black');
+			valenceTextures[VALENCES.DESTRUCTIVE] = textures.circles()
+				.complement()
+				.lighter(0.85)
+				.stroke('black');
+			*/
 			valenceTextures[VALENCES.CONSTRUCTIVE] = textures.lines()
-				.thicker(0.75)
+				.thinner(0.85)
 				.orientation('6/8')
 				.stroke('black');
 			valenceTextures[VALENCES.BOTH] = textures.lines()
 				.orientation('4/8')
 				.stroke('black');
 			valenceTextures[VALENCES.DESTRUCTIVE] = textures.lines()
-				.thinner(0.75)
+				.thicker(0.85)
 				.orientation('2/8')
 				.stroke('black');
+
 			_.values(valenceTextures).forEach(t => {
 				svg.call(t);
 			});
@@ -565,10 +580,12 @@ export default {
 				'constructive': d => d.valence === VALENCES.CONSTRUCTIVE,
 				'both': d => d.valence === VALENCES.BOTH,
 				'destructive': d => d.valence === VALENCES.DESTRUCTIVE
-			})
+			});
+		/*
 		.select('path.texture-fill')
 			.attr('opacity', d => d.valence ? 0.10 : 0.0)
 			.attr('fill', d => d.valence ? valenceTextureSet[d.valence].url() : null);
+		*/
 		arrowSelection.transition()
 			.duration(sassVars.actions.update.time)
 			.attr('transform', d => 'rotate(' + d.rotation + ')');
@@ -592,11 +609,13 @@ export default {
 			.classed('gradient-fill', true)
 			.attr('fill', (d, i) => 'url(#' + emotionGradientName + ')')
 			.call(this.scaledLineGenerator, 0.0);
+		/*
 		arrowEnterSelection.append('path')
 			.classed('texture-fill', true)
 			.attr('opacity', d => d.valence ? 0.5 : 0.0)
 			.attr('fill', d => d.valence ? valenceTextureSet[d.valence].url() : null)
 			.call(this.scaledLineGenerator, 0.0);
+		*/
 
 		arrowEnterSelection.transition()
 			.duration(this.isBackgrounded ? 0 : sassVars.actions.add.time)
