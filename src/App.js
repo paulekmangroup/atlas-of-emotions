@@ -945,7 +945,18 @@ export default function (...initArgs) {
 		}
 
 		if (!emotion) {
+			// default to the currently-selected emotion
 			emotion = currentEmotion;
+
+			// fallback to ANGER for sections that require a selected emotion
+			if (!emotion && (
+					section === dispatcher.SECTIONS.STATES ||
+					section === dispatcher.SECTIONS.ACTIONS ||
+					section === dispatcher.SECTIONS.TRIGGERS ||
+					section === dispatcher.SECTIONS.MOODS
+				)) {
+				emotion = dispatcher.DEFAULT_EMOTION;
+			}
 		}
 
 		if (section) parts.push(section);

@@ -18,7 +18,7 @@ const dispatcher = {
 		CALM: 'calm',
 		MORE: 'more'
 	},
-
+	HOME: 'home',
 
 	EMOTIONS: {
 		ANGER: 'anger',
@@ -27,8 +27,7 @@ const dispatcher = {
 		SADNESS: 'sadness',
 		ENJOYMENT: 'enjoyment'
 	},
-
-	HOME: 'home',
+	DEFAULT_EMOTION: 'anger',
 
 	MORE_INFO: {
 		title: 'More Information',
