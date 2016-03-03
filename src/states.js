@@ -322,6 +322,11 @@ export default {
 					this.setEmotionScale(emotion, 1.0, true);
 				}
 
+				// remove backgrounded state once pan begins
+				setTimeout(() => {
+					this.setBackgroundedState(null);
+				}, sassVars.emotions.panX.delay * 1000);
+
 			}
 
 			this.setActive(!this.isBackgrounded);
@@ -1261,23 +1266,29 @@ export default {
 	displayBackgroundedStates: function (states) {
 
 		let singleStateName = '',
-			classes;
+			classes = {};
 
 		if (!states) {
 			singleStateName = this.backgroundedState;
 		} else if (states.length === 1) {
 			singleStateName = states[0];
 		}
-		classes = {
-			'visible': !!singleStateName
-		};
 
-		classes[this.currentEmotion] = true;
+		_.values(dispatcher.EMOTIONS).forEach(emotion => {
+			classes[emotion] = emotion === this.currentEmotion;
+		});
 
 		if (singleStateName) {
 			this.backgroundedLabel.select('h3').html(singleStateName);
+			this.backgroundedLabel.classed('visible', true);
+			this.backgroundedLabel.classed(classes);
+		} else {
+			// finish fading out before changing emotion class (and color)
+			this.backgroundedLabel.classed('visible', false);
+			setTimeout(() => {
+				this.backgroundedLabel.classed(classes);
+			}, sassVars.states.highlighted.out * 1000);
 		}
-		this.backgroundedLabel.classed(classes);
 
 		this.displayHighlightedStates(states);
 
