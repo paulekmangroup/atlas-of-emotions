@@ -51,9 +51,9 @@ export default {
 		this.onActionMouseOver = this.onActionMouseOver.bind(this);
 		this.onActionMouseOut = this.onActionMouseOut.bind(this);
 		this.onActionMouseClick = this.onActionMouseClick.bind(this);
-		this.onValenceMouseOver = this.onValenceMouseOver.bind(this);
-		this.onValenceMouseOut = this.onValenceMouseOut.bind(this);
-		this.onValenceMouseClick = this.onValenceMouseClick.bind(this);
+		// this.onValenceMouseOver = this.onValenceMouseOver.bind(this);
+		// this.onValenceMouseOut = this.onValenceMouseOut.bind(this);
+		// this.onValenceMouseClick = this.onValenceMouseClick.bind(this);
 
 		this.isInited = true;
 
@@ -148,8 +148,10 @@ export default {
 			let graph = svg.append('g')
 				.attr('transform', 'translate(' + (margin.left + 0.5*innerWidth) + ',' + margin.top + ')');
 
+			/*
 			graph.append('g')
 				.classed('valences', true);
+			*/
 
 			this.graphContainers[emotion] = graph;
 
@@ -574,6 +576,7 @@ export default {
 
 			if (state) {
 
+				/*
 				// valences underlay
 				let valenceSelection = graphContainer.select('g.valences').selectAll('path.valence')
 					.data(this.pieLayout(stateActionsData.valenceWeights), d => d.data.name);
@@ -596,16 +599,18 @@ export default {
 					.duration(sassVars.actions.add.time)
 					.delay(500)
 					.style('opacity', 1.0);
+				*/
 
 			} else {
 
 				this.resetCallout();
-
+				/*
 				graphContainer.select('g.valences').selectAll('path.valence')
 				.transition()
 					.duration(sassVars.actions.remove.time)
 					.style('opacity', 0.0)
 					.remove();
+				*/
 			}
 
 		}
@@ -631,6 +636,7 @@ export default {
 			this.resetCallout();
 		}
 
+		/*
 		if (this.currentEmotion) {
 			this.graphContainers[this.currentEmotion].select('g.valences').selectAll('path.valence')
 			.transition()
@@ -638,6 +644,7 @@ export default {
 				.style('opacity', 0.0)
 				.remove();
 		}
+		*/
 
 	},
 
@@ -646,7 +653,7 @@ export default {
 		if (!state) {
 
 			this.displayHighlightedAction(null);
-			this.displayHighlightedValence(null);
+			// this.displayHighlightedValence(null);
 
 		} else {
 
@@ -669,6 +676,7 @@ export default {
 		if (!this.currentEmotion) { return; }
 
 		let labelText = d => {
+			/*
 			let prefix = '';
 			switch (d.valence) {
 				case VALENCES.CONSTRUCTIVE:
@@ -682,6 +690,8 @@ export default {
 					break;
 			}
 			return prefix + '<span class="label-name">' + d.name.toUpperCase() + '</span>';
+			*/
+			return '<span class="label-name">' + d.name.toUpperCase() + '</span>';
 		};
 
 		let labelContainer = this.labelContainers[this.currentEmotion];
@@ -834,11 +844,11 @@ export default {
 	setHighlightedAction: function (action, preventRecursion) {
 
 		this.highlightedAction = action;
-
+		/*
 		if (!preventRecursion) {
 			this.setHighlightedValence(null, true);
 		}
-
+		*/
 		if (action) {
 			dispatcher.changeCallout(this.currentEmotion, action.name, action.desc);
 			states.displayHighlightedStates(action.states);
@@ -881,13 +891,14 @@ export default {
 				.classed('muted', false);
 
 		}
-
+		/*
 		if (!action && this.highlightedValence) {
 			this.displayHighlightedValence();
 		}
+		*/
 
 	},
-
+	/*
 	setHighlightedValence: function (valence, preventRecursion) {
 
 		this.highlightedValence = valence;
@@ -931,13 +942,6 @@ export default {
 
 		let graphContainer = this.graphContainers[this.currentEmotion];
 		graphContainer.selectAll('path.valence')
-			/*
-			.call(function () {
-				let highlighted = this.classed(valenceClass);
-				console.log("classes:", this.node().classList);
-				this.style('opacity', highlighted ? 1.0 : 0.5);
-				this.classed('highlighted', highlighted);
-			});*/
 			.style('opacity', function () {
 				if (valenceClass) {
 					return this.classList.contains(valenceClass) ? 1.0 : 0.5;
@@ -963,6 +967,7 @@ export default {
 			});
 
 	},
+	*/
 
 	onActionMouseOver: function (d, i) {
 
@@ -993,7 +998,7 @@ export default {
 		this.setHighlightedAction(d);
 
 	},
-
+	/*
 	onValenceMouseOver: function (d, i) {
 
 		let valence = VALENCES[d.data.name];
@@ -1024,7 +1029,7 @@ export default {
 		}
 
 	},
-
+	*/
 	resetCallout: function () {
 		dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.actions.header, emotionsData.metadata.actions.body);
 	}
