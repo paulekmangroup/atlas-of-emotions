@@ -1059,14 +1059,35 @@ export default {
 						x2 = points[2][0],
 						y2 = points[2][1];
 
-					let path = points[0].join(' ') +					// first anchor point
-						` C${x0 + steepnessLeft*(x1-x0)} ${y0},` +		// first control point, inside curve on left
-						`${points[1].join(' ')} ` + 					// middle anchor point
-						points[1].join(' ') +							// repeat middle anchor point
-						` C${x2} ${y1 + (1-roundnessRight)*(y2-y1)},` +	// second control point, outside curve on right
-						`${points[2].join(' ')} ` +						// last anchor point
-						points[2].join(' ');							// repeat last anchor point
+					// define triplets of points: start, control, and end
+					var bezPointsLeft = [points[0],[x0 + steepnessLeft*(x1-x0), y0],points[1]];
+					var bezPointsRight = [points[1],[x2, y1 + (1-roundnessRight)*(y2-y1)],points[2]];
 
+					// bezier function over TIME (not distance) - but close enough approximation for us
+					function bezPointAtT(points, t){
+						function bezCalc(a,b,c,t){
+							return Math.pow((1-t),2) * a + 2*(1-t)*t*b + Math.pow(t,2)*c;
+						}
+						function callBez(points, i, t){
+							return bezCalc(points[0][i], points[1][i], points[2][i], t);
+						}
+						return [callBez(points, 0, t), callBez(points, 1, t)];
+					}
+
+					// call bez function with poitns
+					var left = [bezPointAtT(bezPointsLeft, .4),bezPointAtT(bezPointsLeft, .76)];
+					var right = [bezPointAtT(bezPointsRight, .1),bezPointAtT(bezPointsRight, .6)];
+
+					// construct path
+					var path = x0 + "," + y0;
+					left.forEach(function(coord){
+						path += ("L" + coord[0] + "," + coord[1]);
+					});
+					path += ("L" + points[1][0] + "," + points[1][1]);
+					right.forEach(function(coord){
+						path += ("L" + coord[0] + "," + coord[1]);
+					});
+					path += ("L" + points[2][0] + "," + points[2][1] + "L" + points[0][0] + "," + points[0][1]);
 
 					return path;
 				}),
