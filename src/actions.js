@@ -538,13 +538,24 @@ export default {
 			.data(currentActionsData, d => d.name);
 
 		// update
-		arrowSelection.transition()
+		arrowSelection
+			.classed({
+				'constructive': d => d.valence === 1,
+				'both': d => d.valence === 2,
+				'destructive': d => d.valence === 3
+			})
+		.transition()
 			.duration(sassVars.actions.update.time)
 			.attr('transform', d => 'rotate(' + d.rotation + ')');
 
 		// enter
 		let arrowEnterSelection = arrowSelection.enter().append('g')
 			.attr('class', 'action-arrow')
+			.classed({
+				'constructive': d => d.valence === 1,
+				'both': d => d.valence === 2,
+				'destructive': d => d.valence === 3
+			})
 			.attr('transform', d => 'rotate(' + d.rotation + ')');
 		if (!this.isBackgrounded) {
 			arrowEnterSelection

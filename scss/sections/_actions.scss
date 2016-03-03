@@ -193,6 +193,15 @@
 
 	transition: opacity #{$states-highlighted-out}s ease-in;
 	opacity: 1.0;
+	&.constructive {
+		opacity: 1.0;
+	}
+	&.both {
+		opacity: 0.5;
+	}
+	&.destructive {
+		opacity: 0.25;
+	}
 	&.muted {
 		transition: opacity #{$states-highlighted-out}s ease-out;
 		opacity: 0.2;
