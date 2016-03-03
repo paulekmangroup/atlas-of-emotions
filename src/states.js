@@ -1050,8 +1050,8 @@ export default {
 				.y1(d => yScale(d.y))
 				.interpolate((points) => {
 					// concave bezier to left, convex to right
-					let steepnessLeft = 0.8,
-						roundnessRight = 0.5,
+					let steepnessLeft = 1,
+						roundnessRight = 0.7,
 						x0 = points[0][0],
 						y0 = points[0][1],
 						x1 = points[1][0],
@@ -1059,7 +1059,7 @@ export default {
 						x2 = points[2][0],
 						y2 = points[2][1];
 
-					// define triplets of points: start, control, and end
+					// define triplets of points: start, control, and end for left and right edges
 					var bezPointsLeft = [points[0],[x0 + steepnessLeft*(x1-x0), y0],points[1]];
 					var bezPointsRight = [points[1],[x2, y1 + (1-roundnessRight)*(y2-y1)],points[2]];
 
@@ -1074,19 +1074,27 @@ export default {
 						return [callBez(points, 0, t), callBez(points, 1, t)];
 					}
 
-					// call bez function with poitns
-					var left = [bezPointAtT(bezPointsLeft, .4),bezPointAtT(bezPointsLeft, .76)];
-					var right = [bezPointAtT(bezPointsRight, .1),bezPointAtT(bezPointsRight, .6)];
+					// call bez function with t values
+					var facetAtT = {
+						left: [.3, .5, .76],
+						right: [.14, .4, .75]
+					};
 
-					// construct path
+					// start path with bottom left point
 					var path = x0 + "," + y0;
-					left.forEach(function(coord){
+					// for each facet on left edge, calculate new coordinate point and add to path
+					facetAtT.left.forEach(function(facetPoint){
+						var coord = bezPointAtT(bezPointsLeft, facetPoint);
 						path += ("L" + coord[0] + "," + coord[1]);
 					});
+					// top point
 					path += ("L" + points[1][0] + "," + points[1][1]);
-					right.forEach(function(coord){
+					// for each facet on right edge, calculate new coordinate point and add to path
+					facetAtT.right.forEach(function(facetPoint){
+						var coord = bezPointAtT(bezPointsRight, facetPoint);
 						path += ("L" + coord[0] + "," + coord[1]);
 					});
+					// finish with bottom right, then bottom left to close the shape
 					path += ("L" + points[2][0] + "," + points[2][1] + "L" + points[0][0] + "," + points[0][1]);
 
 					return path;
