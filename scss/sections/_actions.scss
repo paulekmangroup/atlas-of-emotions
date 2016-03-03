@@ -193,13 +193,13 @@
 
 	transition: opacity #{$states-highlighted-out}s ease-in;
 	opacity: 1.0;
-	&.constructive {
+	&.constructive path.gradient-fill {
 		opacity: 1.0;
 	}
-	&.both {
+	&.both path.gradient-fill {
 		opacity: 0.5;
 	}
-	&.destructive {
+	&.destructive path.gradient-fill {
 		opacity: 0.25;
 	}
 	&.muted {

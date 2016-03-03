@@ -1,4 +1,5 @@
 import d3 from 'd3';
+import textures from 'textures';
 import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
@@ -30,6 +31,7 @@ export default {
 
 	labelContainers: null,
 	graphContainers: null,
+	valenceTextures: null,
 
 	mouseOutTimeout: null,
 
@@ -136,6 +138,7 @@ export default {
 		//
 		// Set up each graph
 		//
+		this.valenceTextures = {};
 		this.graphContainers = {};
 		_.values(dispatcher.EMOTIONS).forEach((emotion, i) => {
 
@@ -148,10 +151,28 @@ export default {
 			let graph = svg.append('g')
 				.attr('transform', 'translate(' + (margin.left + 0.5*innerWidth) + ',' + margin.top + ')');
 
+			let valenceTextures = {};
+			valenceTextures[VALENCES.CONSTRUCTIVE] = textures.lines()
+				.thicker(0.75)
+				.orientation('6/8')
+				.stroke('black');
+			valenceTextures[VALENCES.BOTH] = textures.lines()
+				.orientation('4/8')
+				.stroke('black');
+			valenceTextures[VALENCES.DESTRUCTIVE] = textures.lines()
+				.thinner(0.75)
+				.orientation('2/8')
+				.stroke('black');
+			_.values(valenceTextures).forEach(t => {
+				svg.call(t);
+			});
+
 			/*
 			graph.append('g')
 				.classed('valences', true);
 			*/
+
+			this.valenceTextures[emotion] = valenceTextures;
 
 			this.graphContainers[emotion] = graph;
 
@@ -532,6 +553,7 @@ export default {
 		}
 
 		let emotionGradientName = 'actions-' + this.currentEmotion + '-gradient',
+			valenceTextureSet = this.valenceTextures[this.currentEmotion],
 			graphContainer = this.graphContainers[this.currentEmotion];
 
 		let arrowSelection = graphContainer.selectAll('g.action-arrow')
@@ -540,11 +562,14 @@ export default {
 		// update
 		arrowSelection
 			.classed({
-				'constructive': d => d.valence === 1,
-				'both': d => d.valence === 2,
-				'destructive': d => d.valence === 3
+				'constructive': d => d.valence === VALENCES.CONSTRUCTIVE,
+				'both': d => d.valence === VALENCES.BOTH,
+				'destructive': d => d.valence === VALENCES.DESTRUCTIVE
 			})
-		.transition()
+		.select('path.texture-fill')
+			.attr('opacity', d => d.valence ? 0.10 : 0.0)
+			.attr('fill', d => d.valence ? valenceTextureSet[d.valence].url() : null);
+		arrowSelection.transition()
 			.duration(sassVars.actions.update.time)
 			.attr('transform', d => 'rotate(' + d.rotation + ')');
 
@@ -552,9 +577,9 @@ export default {
 		let arrowEnterSelection = arrowSelection.enter().append('g')
 			.attr('class', 'action-arrow')
 			.classed({
-				'constructive': d => d.valence === 1,
-				'both': d => d.valence === 2,
-				'destructive': d => d.valence === 3
+				'constructive': d => d.valence === VALENCES.CONSTRUCTIVE,
+				'both': d => d.valence === VALENCES.BOTH,
+				'destructive': d => d.valence === VALENCES.DESTRUCTIVE
 			})
 			.attr('transform', d => 'rotate(' + d.rotation + ')');
 		if (!this.isBackgrounded) {
@@ -564,20 +589,26 @@ export default {
 				.on('click', this.onActionMouseClick);
 		}
 		arrowEnterSelection.append('path')
+			.classed('gradient-fill', true)
 			.attr('fill', (d, i) => 'url(#' + emotionGradientName + ')')
+			.call(this.scaledLineGenerator, 0.0);
+		arrowEnterSelection.append('path')
+			.classed('texture-fill', true)
+			.attr('opacity', d => d.valence ? 0.5 : 0.0)
+			.attr('fill', d => d.valence ? valenceTextureSet[d.valence].url() : null)
 			.call(this.scaledLineGenerator, 0.0);
 
 		arrowEnterSelection.transition()
 			.duration(this.isBackgrounded ? 0 : sassVars.actions.add.time)
 			.delay(this.isBackgrounded ? 0 : function (d, i) { return i * 50; })
-		.select('path')
+		.selectAll('path')
 			.call(this.scaledLineGenerator, 1.0);
 
 		// exit
 		arrowSelection.exit().transition()
 			.duration(sassVars.actions.remove.time)
 			.remove()
-		.select('path')
+		.selectAll('path')
 			.call(this.scaledLineGenerator, 0.0);
 
 
@@ -637,7 +668,7 @@ export default {
 			.data([]).exit().transition()
 				.duration(duration)
 				.remove()
-			.select('path')
+			.selectAll('path')
 				.call(this.scaledLineGenerator, 0.0);
 		}
 
