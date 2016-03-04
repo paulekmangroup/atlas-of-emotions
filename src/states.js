@@ -538,6 +538,10 @@ export default {
 			this.sectionContainer.classList[(options && (options.sectionName === dispatcher.SECTIONS.TRIGGERS) ? 'add' : 'remove')]('triggers');
 			this.sectionContainer.classList[(options && (options.sectionName === dispatcher.SECTIONS.MOODS) ? 'add' : 'remove')]('moods');
 
+			if (!val) {
+				this.backgroundedLabel.classed('visible', false);
+			}
+
 			this.hideChrome();
 			this.setActive(!val);
 			this.isBackgrounded = val;
@@ -1011,6 +1015,58 @@ export default {
 						x2 = points[2][0],
 						y2 = points[2][1];
 
+					// for the left and right edge, break into number of shorter pieces, and add some random variation to each
+					var numFacets = 20;
+					var distFromLineFactor = 10;
+
+					// lots of brute force algebra to find the new point (newX, newY) along the line, and move it some distance perpendicularly
+					// ideally would clean this up
+					var getInBetweenValue = function(z1, z2, percentOfEdge, variation){
+						return (z2 - z1) * percentOfEdge * variation + z1;
+					};
+
+					var transformPoint = function(a0, b0, a1, b1, percentOfEdge){
+						// factor to vary percentOfEdge value
+						var randomVariation = 1 + (Math.random()-.05) * 1/numFacets;
+
+						// calculate length from point (a0,b0) to (a1,b1)
+						var totalLineDistance = Math.pow(Math.pow(a1-a0,2) + Math.pow(b1-b0,2), .5);
+
+						// find x and y coords for point along line
+						var newPoint = {
+							'x': getInBetweenValue(a0, a1, percentOfEdge, randomVariation),
+							'y': getInBetweenValue(b0, b1, percentOfEdge, randomVariation)
+						};
+
+						// based on total distance, dist from line factor, and randomness, figure out how far to offset
+						var distanceFromLine = (Math.random()-.5) * totalLineDistance / distFromLineFactor;
+
+						var shiftToPerpendicular = {
+							'x': (a1-a0) / totalLineDistance * distanceFromLine,
+							'y': (b1-b0) / totalLineDistance * distanceFromLine
+						};
+
+						// return new point, shifted off line
+						return {'x': newPoint.x + shiftToPerpendicular.x, 'y': newPoint.y - shiftToPerpendicular.y};
+					};
+
+					// construct array of points to include in line
+					var leftPoints = [{'x': x0, 'y': y0}];
+					var rightPoints = [{'x': x1, 'y': y1}];
+					d3.range(1,numFacets - 2).forEach(function(facet){
+						leftPoints.push(transformPoint(x0,y0,x1,y1,facet / numFacets));
+						rightPoints.push(transformPoint(x1, y1, x2, y2, facet / numFacets));
+					});
+					leftPoints.push({'x': x1, 'y': y1});
+					rightPoints.push({'x': x2, 'y': y2});
+
+					// construct path
+					var line = d3.svg.line().x(function(d){return d.x;}).y(function(d){return d.y;}).interpolate('basis');
+					var left = line(leftPoints).replace("M", "");
+					var right = line(rightPoints).replace("M", "");
+
+					/*
+					// code for parabolas
 					let path = points[0].join(' ') +				// first anchor point
 						` C${x0 + steepness*(x1-x0)} ${y0},` +		// first control point, inside curve
 						`${x0 + roundness*(x1-x0)} ${y1},` + 		// second control point, outside curve
@@ -1018,9 +1074,10 @@ export default {
 						` C${x1 + (1-roundness)*(x2-x1)} ${y1},` +	// third control point, outside curve
 						`${x1 + (1-steepness)*(x2-x1)} ${y2},` +	// fourth control point, inside curve
 						points[2].join(' ');						// last anchor point
+						*/
 
 
-					return path;
+					return left + "L" + right;
 				}),
 
 			enjoyment: d3.svg.area()
@@ -1050,8 +1107,8 @@ export default {
 				.y1(d => yScale(d.y))
 				.interpolate((points) => {
 					// concave bezier to left, convex to right
-					let steepnessLeft = 0.8,
-						roundnessRight = 0.5,
+					let steepnessLeft = 1,
+						roundnessRight = 0.7,
 						x0 = points[0][0],
 						y0 = points[0][1],
 						x1 = points[1][0],
@@ -1059,14 +1116,43 @@ export default {
 						x2 = points[2][0],
 						y2 = points[2][1];
 
-					let path = points[0].join(' ') +					// first anchor point
-						` C${x0 + steepnessLeft*(x1-x0)} ${y0},` +		// first control point, inside curve on left
-						`${points[1].join(' ')} ` + 					// middle anchor point
-						points[1].join(' ') +							// repeat middle anchor point
-						` C${x2} ${y1 + (1-roundnessRight)*(y2-y1)},` +	// second control point, outside curve on right
-						`${points[2].join(' ')} ` +						// last anchor point
-						points[2].join(' ');							// repeat last anchor point
+					// define triplets of points: start, control, and end for left and right edges
+					var bezPointsLeft = [points[0],[x0 + steepnessLeft*(x1-x0), y0],points[1]];
+					var bezPointsRight = [points[1],[x2, y1 + (1-roundnessRight)*(y2-y1)],points[2]];
 
+					// bezier function over TIME (not distance) - but close enough approximation for us
+					function bezPointAtT(points, t){
+						function bezCalc(a,b,c,t){
+							return Math.pow((1-t),2) * a + 2*(1-t)*t*b + Math.pow(t,2)*c;
+						}
+						function callBez(points, i, t){
+							return bezCalc(points[0][i], points[1][i], points[2][i], t);
+						}
+						return [callBez(points, 0, t), callBez(points, 1, t)];
+					}
+
+					// call bez function with t values
+					var facetAtT = {
+						left: [.3, .5, .76],
+						right: [.14, .4, .75]
+					};
+
+					// start path with bottom left point
+					var path = x0 + "," + y0;
+					// for each facet on left edge, calculate new coordinate point and add to path
+					facetAtT.left.forEach(function(facetPoint){
+						var coord = bezPointAtT(bezPointsLeft, facetPoint);
+						path += ("L" + coord[0] + "," + coord[1]);
+					});
+					// top point
+					path += ("L" + points[1][0] + "," + points[1][1]);
+					// for each facet on right edge, calculate new coordinate point and add to path
+					facetAtT.right.forEach(function(facetPoint){
+						var coord = bezPointAtT(bezPointsRight, facetPoint);
+						path += ("L" + coord[0] + "," + coord[1]);
+					});
+					// finish with bottom right, then bottom left to close the shape
+					path += ("L" + points[2][0] + "," + points[2][1] + "L" + points[0][0] + "," + points[0][1]);
 
 					return path;
 				}),
