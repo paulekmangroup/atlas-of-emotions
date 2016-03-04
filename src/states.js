@@ -1011,6 +1011,58 @@ export default {
 						x2 = points[2][0],
 						y2 = points[2][1];
 
+					// for the left and right edge, break into number of shorter pieces, and add some random variation to each
+					var numFacets = 20;
+					var distFromLineFactor = 10;
+
+					// lots of brute force algebra to find the new point (newX, newY) along the line, and move it some distance perpendicularly
+					// ideally would clean this up
+					var getInBetweenValue = function(z1, z2, percentOfEdge, variation){
+						return (z2 - z1) * percentOfEdge * variation + z1;
+					};
+
+					var transformPoint = function(a0, b0, a1, b1, percentOfEdge){
+						// factor to vary percentOfEdge value
+						var randomVariation = 1 + (Math.random()-.05) * 1/numFacets;
+
+						// calculate length from point (a0,b0) to (a1,b1)
+						var totalLineDistance = Math.pow(Math.pow(a1-a0,2) + Math.pow(b1-b0,2), .5);
+
+						// find x and y coords for point along line
+						var newPoint = {
+							'x': getInBetweenValue(a0, a1, percentOfEdge, randomVariation),
+							'y': getInBetweenValue(b0, b1, percentOfEdge, randomVariation)
+						};
+
+						// based on total distance, dist from line factor, and randomness, figure out how far to offset
+						var distanceFromLine = (Math.random()-.5) * totalLineDistance / distFromLineFactor;
+
+						var shiftToPerpendicular = {
+							'x': (a1-a0) / totalLineDistance * distanceFromLine,
+							'y': (b1-b0) / totalLineDistance * distanceFromLine
+						};
+
+						// return new point, shifted off line
+						return {'x': newPoint.x + shiftToPerpendicular.x, 'y': newPoint.y - shiftToPerpendicular.y};
+					};
+
+					// construct array of points to include in line
+					var leftPoints = [{'x': x0, 'y': y0}];
+					var rightPoints = [{'x': x1, 'y': y1}];
+					d3.range(1,numFacets - 2).forEach(function(facet){
+						leftPoints.push(transformPoint(x0,y0,x1,y1,facet / numFacets));
+						rightPoints.push(transformPoint(x1, y1, x2, y2, facet / numFacets));
+					});
+					leftPoints.push({'x': x1, 'y': y1});
+					rightPoints.push({'x': x2, 'y': y2});
+
+					// construct path
+					var line = d3.svg.line().x(function(d){return d.x;}).y(function(d){return d.y;}).interpolate('basis');
+					var left = line(leftPoints).replace("M", "");
+					var right = line(rightPoints).replace("M", "");
+
+					/*
+					// code for parabolas
 					let path = points[0].join(' ') +				// first anchor point
 						` C${x0 + steepness*(x1-x0)} ${y0},` +		// first control point, inside curve
 						`${x0 + roundness*(x1-x0)} ${y1},` + 		// second control point, outside curve
@@ -1018,9 +1070,10 @@ export default {
 						` C${x1 + (1-roundness)*(x2-x1)} ${y1},` +	// third control point, outside curve
 						`${x1 + (1-steepness)*(x2-x1)} ${y2},` +	// fourth control point, inside curve
 						points[2].join(' ');						// last anchor point
+						*/
 
 
-					return path;
+					return left + "L" + right;
 				}),
 
 			enjoyment: d3.svg.area()
