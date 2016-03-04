@@ -538,6 +538,10 @@ export default {
 			this.sectionContainer.classList[(options && (options.sectionName === dispatcher.SECTIONS.TRIGGERS) ? 'add' : 'remove')]('triggers');
 			this.sectionContainer.classList[(options && (options.sectionName === dispatcher.SECTIONS.MOODS) ? 'add' : 'remove')]('moods');
 
+			if (!val) {
+				this.backgroundedLabel.classed('visible', false);
+			}
+
 			this.hideChrome();
 			this.setActive(!val);
 			this.isBackgrounded = val;
