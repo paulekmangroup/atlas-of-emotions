@@ -8,6 +8,7 @@ import Continent from './Continent.js';
 
 import emotionsData from '../static/emotionsData.json';
 import sassVars from '../scss/variables.json';
+import popupManager from './popupManager.js';
 
 let continents,
 	continentContainer,
@@ -65,7 +66,8 @@ const continentsSection = {
 		this.isInited = true;
 
 	},
-
+	// Popup routine
+	// popupManager.manage(currentSectionName, emotion, title, body);
 	setEmotion: function (emotion, previousEmotion) {
 
 		return new Promise((resolve, reject) => {
@@ -242,6 +244,13 @@ const continentsSection = {
 
 			}
 
+			// check to see if we have an actual change
+			if (emotion !== previousEmotion ||
+				(emotion && !popupManager.exists('continents', emotion))) {
+				const desc = (emotion) ? emotionsData.emotions[emotion].continent.desc : null;
+				popupManager.manage('continents', emotion, desc);
+			}
+
 			currentEmotion = emotion;
 			this.zoomedInContinent = null;
 
@@ -257,6 +266,7 @@ const continentsSection = {
 			label.innerHTML = '<a href="#continents:' + continent.id + '"><h3>' + continent.name.toUpperCase() + '</h3></a>';
 			label.style.left = Math.round(centerX + continent.x + continent.label.x) + 'px';
 			label.style.top = Math.round(centerY + continent.y + continent.label.y) + 'px';
+			label.setAttribute('data-popuptarget', 'continents:' + continent.id);
 			labelContainer.appendChild(label);
 
 		});
@@ -289,6 +299,7 @@ const continentsSection = {
 
 		return new Promise((resolve, reject) => {
 
+			popupManager.closeAll();
 			let continent = continents.find(c => c.id === currentEmotion);
 			if (continent && continent.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED) {
 
@@ -669,7 +680,6 @@ const continentsSection = {
 	},
 
 	setContinentHighlight: function (continent, highlightLevel) {
-
 		// Set unhighlightLevel based on if any continent highlighted
 		let unhighlightLevel;
 		if (highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED || continents.some(c => c.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED)) {

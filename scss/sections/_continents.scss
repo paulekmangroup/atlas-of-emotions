@@ -35,7 +35,7 @@
 	position: absolute;
 	top: 0px;
 
-	div {
+	> div {
 		position: absolute;
 		text-align: center;
 
@@ -46,6 +46,12 @@
 		&.visible {
 			opacity: 1.0;
 		}
+	}
+
+	a {
+		position: relative;
+		display: inline-block;
+		z-index: 1;
 	}
 
 	a,

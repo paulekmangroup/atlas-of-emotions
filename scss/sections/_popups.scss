@@ -1,0 +1,65 @@
+.popped {
+	z-index: 9999;
+}
+
+.popup-template {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: -10px;
+	width: auto;
+	height: auto;
+    padding: 10px;
+    background: rgba(255,255,255,0.8);
+	border: 1px solid #666;
+	text-align: left;
+	z-index: 0;
+	opacity: 0;
+	transition: opacity 2s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+	.popped &,
+	&.transition-out {
+		display: block;
+	}
+
+	#continent-labels & {
+		top: 1em;
+	}
+
+	/* Children */
+	.close {
+		position: absolute;
+		right: 0;
+		top: 0;
+		margin: 0;
+		padding: 0;
+		background: 0;
+		border: 0;
+		outline: none;
+		font-weight: 200;
+		font-size: 48px;
+		line-height: 20px;
+		vertical-align: middle;
+		white-space: nowrap;
+		user-select: none;
+		touch-action: manipulation;
+		-webkit-appearance: none;
+	}
+
+	.title {
+		display: none;
+	}
+
+	.body {
+		margin: 1em 0 0;
+		font-size: 0.8em;
+	}
+}
+
+.popped {
+	z-index: 9999;
+
+	.popup-template {
+		display: block;
+	}
+}

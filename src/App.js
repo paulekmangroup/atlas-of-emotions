@@ -36,6 +36,7 @@ export default function (...initArgs) {
 		currentSection = null,
 		currentEmotion = null,
 		currentMorePage = null,
+		currentSectionName = null,
 		previousSectionNotNamedMore = null,
 
 		scrollbarSegments = {},
@@ -59,6 +60,7 @@ export default function (...initArgs) {
 		initScrollInterface();
 		initMoreInfoDropdown();
 		initCallout();
+		// popupManager.init();
 		initModal();
 
 		// navigation events
@@ -875,22 +877,17 @@ export default function (...initArgs) {
 	}
 
 	function onCalloutChange (emotion, title, body) {
-
 		if (!title) {
 			callout.classList.remove('visible');
 			return;
 		}
 
-		callout.removeAttribute('class');
-
-		callout.classList.add('visible');
-		if (emotion) {
-			callout.classList.add(emotion);
+		if (!emotion) {
+			callout.removeAttribute('class');
+			callout.classList.add('visible');
+			callout.querySelector('.headline').innerHTML = title;
+			callout.querySelector('.body').innerHTML = body;
 		}
-
-		callout.querySelector('.headline').innerHTML = title;
-		callout.querySelector('.body').innerHTML = body;
-
 	}
 
 	function onEmotionStateChange (state, selected) {
@@ -945,7 +942,6 @@ export default function (...initArgs) {
 	}
 
 	function onHashChange (event, defaults=NAVIGATION_DEFAULTS) {
-
 		if (currentSection) {
 
 			// if a section has already been selected this session, close the intro modal
@@ -994,6 +990,8 @@ export default function (...initArgs) {
 		} else if (defaults && defaults.section) {
 			section = defaults.section;
 		}
+
+		currentSectionName = section;
 
 		setPreviousSectionNotNamedMore(section, defaults);
 
