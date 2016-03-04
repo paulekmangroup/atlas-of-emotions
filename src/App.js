@@ -526,7 +526,12 @@ export default function (...initArgs) {
 		// console.log(">>>>> scroll to targetSectionIndex:", targetSectionIndex);
 
 		if (currentSectionIndex !== targetSectionIndex) {
-			dispatcher.navigate(sectionNames[targetSectionIndex]);
+
+			if(sectionNames[targetSectionIndex] == 'more'){
+				dispatcher.navigate('more', null , 'annex');
+			} else {
+				dispatcher.navigate(sectionNames[targetSectionIndex]);
+			}
 
 			if (fromScroll) {
 				hasNavigatedThisScroll = true;
