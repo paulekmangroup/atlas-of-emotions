@@ -333,8 +333,8 @@ export default {
 				.ease('linear')
 				.attrTween('x1', () => t => pathNode.getPointAtLength((1-dashLength)*pathTotalLength + t * dashLength*pathTotalLength).x)
 				.attrTween('y1', () => t => pathNode.getPointAtLength((1-dashLength)*pathTotalLength + t * dashLength*pathTotalLength).y)
-				.attrTween('x2', () => t => pathNode.getPointAtLength(1).x)
-				.attrTween('y2', () => t => pathNode.getPointAtLength(1).y)
+				.attrTween('x2', () => t => pathNode.getPointAtLength(pathTotalLength).x)
+				.attrTween('y2', () => t => pathNode.getPointAtLength(pathTotalLength).y)
 				.each('end', function () {
 					d3.select(this).remove();
 				});
