@@ -150,10 +150,40 @@ const continentsSection = {
 
 				} else {
 
+					// deselect all continents
 					continents.forEach(c => c.highlightLevel = Continent.HIGHLIGHT_LEVELS.NONE);
 					dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
 
-					resolve();
+					if (this.zoomedInContinent) {
+
+						// navigate straight to root, ignoring any previously-selected emotion continent
+						// (e.g. clicked on ATLAS OF EMOTIONS home button)
+
+						// immediately gather continent that was
+						// zoomed into last time we left continents
+						this.transitions.gatherContinent(this.zoomedInContinent, true);
+
+						// pan to center immediately
+						this.transitions.panToContinent(null, currentEmotion, true);
+
+						// scale all continents to 0 immediately (after other transforms above),
+						// and then back up to full size
+						setTimeout(() => {
+							let allEmotions = continents.map(continent => continent.id);
+							this.transitions.scaleContinents(allEmotions, 0.0, undefined, 1)
+							.then(() => {
+								return this.transitions.scaleContinents(allEmotions, 1.0);
+							})
+							.then(() => {
+								resolve();
+							});
+						}, 1);
+
+					} else {
+
+						resolve();
+
+					}
 
 				}
 
@@ -446,7 +476,7 @@ const continentsSection = {
 		},
 
 		// 1c. while 1a-b happens, pan toward continent location from current continent's location, according to all continents view layout.
-		panToContinent: function (emotion, previousEmotion) {
+		panToContinent: function (emotion, previousEmotion, immediate) {
 
 			if (this.panTweenTimeout) {
 				clearTimeout(this.panTweenTimeout);
@@ -475,7 +505,12 @@ const continentsSection = {
 				funcX,
 				funcY;
 
-			if (!!emotion) {
+			if (immediate) {
+				durationX = 0;
+				durationY = 0;
+				funcX = TWEEN.Easing.Linear.None,
+				funcY = TWEEN.Easing.Linear.None;
+			} else if (!!emotion) {
 				// panning to
 				durationX = sassVars.continents.panX.duration.in * 1000;
 				durationY = sassVars.continents.panY.duration.in * 1000;
@@ -539,7 +574,7 @@ const continentsSection = {
 
 			let MAX_TIME;
 
-			if (delays) {
+			if (delays && Object.keys(delays).length) {
 				MAX_TIME = time + (_.max(_.values(delays)) || 0);
 			}
 
