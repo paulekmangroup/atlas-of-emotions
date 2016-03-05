@@ -29,8 +29,7 @@ class PopupManager {
 		props.popup = clone;
 		this.popups[props.id] = props;
 
-		// TODO: Figure out a css only
-		// way
+		// TODO: Figure out a css only way
 		setTimeout(() => {
 			clone.style.opacity = 1;
 		}, 1);
@@ -42,18 +41,46 @@ class PopupManager {
 		clone.style.width = w + 'px';
 	}
 
+	resetPopup(key) {
+		if (!this.popups[key]) return;
 
+		const target = this.popups[key].target;
+		const popup = this.popups[key].popup;
+
+		popup.removeEventListener('transitionend', this.onTransitionOut, false);
+
+		popup.classList.remove('transition-out');
+		target.classList.add('popped');
+
+		popup.style.opacity = 1;
+	}
+
+	onTransitionOut(key, e) {
+		if (this.popups[key].abortTransition) return;
+
+		const target = this.popups[key].target;
+		const popup = this.popups[key].popup;
+
+		popup.removeEventListener('transitionend', this.onTransitionOut, false);
+		popup.querySelector('.close')
+			.removeEventListener('click', this.onPopupCloseButtonClick, false);
+
+		target.removeChild(popup);
+		delete this.popups[key];
+	}
 
 	close(key) {
 		if (this.popups[key].state === 'active') return;
 
 		const target = this.popups[key].target;
 		const popup = this.popups[key].popup;
-		popup.querySelector('.close')
-			.removeEventListener('click', this.onPopupCloseButtonClick, false);
+
+		popup.classList.add('transition-out');
 		target.classList.remove('popped');
-		target.removeChild(popup);
-		delete this.popups[key];
+
+		popup.addEventListener('transitionend', this.onTransitionOut.bind(this, key), false);
+
+		popup.style.opacity = 0;
 	}
 
 	closeAll() {
@@ -104,7 +131,13 @@ class PopupManager {
 		const id = this.makeID(section, name);
 		const keys = Object.keys(this.popups);
 		if (name && section) {
-			if (this.popups[id]) return;
+			if (this.popups[id]) {
+				if (this.popups[id].state === 'active') return;
+				this.abortTransition = true;
+				this.resetPopup(id);
+			};
+
+			if (this.popups[id] && this.popups[id].state === 'active') return;
 
 			const target = this.getTarget(id);
 			if (!target) return;

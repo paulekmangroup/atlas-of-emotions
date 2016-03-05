@@ -36,7 +36,6 @@ export default function (...initArgs) {
 		currentSection = null,
 		currentEmotion = null,
 		currentMorePage = null,
-		currentSectionName = null,
 		previousSectionNotNamedMore = null,
 
 		scrollbarSegments = {},
@@ -995,8 +994,6 @@ export default function (...initArgs) {
 		} else if (defaults && defaults.section) {
 			section = defaults.section;
 		}
-
-		currentSectionName = section;
 
 		setPreviousSectionNotNamedMore(section, defaults);
 
