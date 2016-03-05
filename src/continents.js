@@ -22,10 +22,11 @@ const continentsSection = {
 	isActive: false,
 
 	init: function (containerNode) {
-
 		this.sectionContainer = containerNode;
 
 		this.update = this.update.bind(this);
+
+		this.defaultEmotionHelper = this.getDefaultEmotionHelper();
 
 		let labelContainer = document.createElement('div');
 		labelContainer.id = 'continent-labels';
@@ -288,15 +289,27 @@ const continentsSection = {
 
 	},
 
-	initLabels: function (labelContainer) {
+	getDefaultEmotionHelper: function() {
+		const keys = Object.keys(dispatcher.EMOTIONS);
+		const randomeKey = keys[Math.floor(Math.random() * keys.length)];
 
-		continents.forEach(function (continent) {
+		return dispatcher.EMOTIONS[randomeKey];
+	},
+
+	initLabels: function (labelContainer) {
+		console.log(this.defaultEmotionHelper);
+		continents.forEach((continent) => {
 
 			let label = document.createElement('div');
 			label.innerHTML = '<a href="#continents:' + continent.id + '"><h3>' + continent.name.toUpperCase() + '</h3></a>';
 			label.style.left = Math.round(centerX + continent.x + continent.label.x) + 'px';
 			label.style.top = Math.round(centerY + continent.y + continent.label.y) + 'px';
 			label.setAttribute('data-popuptarget', 'continents:' + continent.id);
+
+			if (continent.name.toLowerCase() === this.defaultEmotionHelper.toLowerCase()) {
+				label.classList.add('default-interactive-helper');
+			}
+
 			labelContainer.appendChild(label);
 
 		});

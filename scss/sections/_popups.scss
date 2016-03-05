@@ -1,17 +1,30 @@
 .popped {
 	z-index: 9999;
+	border: 1px solid #666;
+}
+
+[data-popuptarget] {
+	border: 1px solid rgba(102, 102, 102, 0);
+	background: rgba(255,255,255,0.8);
+}
+
+.popped[data-popuptarget] {
+	border-color: rgba(102, 102, 102, 1.0);
+}
+
+.default-interactive-helper[data-popuptarget] {
+	border: 1px solid #666;
 }
 
 .popup-template {
 	display: none;
-	position: absolute;
+	position: initial;
 	top: 0;
-	left: -10px;
+	left: 0;
 	width: auto;
 	height: auto;
-    padding: 10px;
-    background: rgba(255,255,255,0.8);
-	border: 1px solid #666;
+    padding: 0;
+	border: 0;
 	text-align: left;
 	z-index: 0;
 	opacity: 0;
@@ -20,10 +33,6 @@
 	.popped &,
 	&.transition-out {
 		display: block;
-	}
-
-	#continent-labels & {
-		top: 1em;
 	}
 
 	/* Children */
@@ -51,8 +60,9 @@
 	}
 
 	.body {
-		margin: 1em 0 0;
+		margin: 0.5em 0 0;
 		font-size: 0.8em;
+		line-height: 1.25;
 	}
 }
 
