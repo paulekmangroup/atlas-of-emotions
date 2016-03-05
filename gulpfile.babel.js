@@ -6,6 +6,8 @@ import watchify from 'watchify';
 import babelify from 'babelify';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import rimraf from 'rimraf';
+import connect from 'gulp-connect';
+import gulpif from 'gulp-if';
 
 // Automatically load any gulp plugins in your package.json
 const $ = gulpLoadPlugins();
@@ -45,6 +47,7 @@ function browserifyTask (options) {
 				.on('error', $.util.log)
 				.pipe(source('main.js'))
 				.pipe(gulp.dest(options.dest))
+				.pipe(gulpif(options.reload, connect.reload()))
 				.pipe($.notify({
 					'onLast': true,
 					'message': function () { return 'APP bundle built in ' + (Date.now() - start) + 'ms'; }
@@ -115,7 +118,8 @@ function sassVariablesTask (options) {
 		gulp.src(options.src)
 			.pipe($.jsonSass())
 			.pipe($.concat('./variables-derived.scss'))
-			.pipe(gulp.dest(options.dest));
+			.pipe(gulp.dest(options.dest))
+			.pipe(gulpif(options.reload, connect.reload()));
 	};
 	run();
 
@@ -132,6 +136,7 @@ function cssTask (options) {
 			gulp.src(options.src)
 				.pipe($.sass())
 				.pipe(gulp.dest(options.dest))
+				.pipe(gulpif(options.reload, connect.reload()))
 				.pipe($.notify({
 					'onLast': true,
 					'title': 'CSS bundle',
@@ -174,10 +179,14 @@ function webserverTask (options) {
 	options = options || {};
 	const port = options.port || WEB_SERVER_PORT;
 
-	return $.connect.server({
+	const opts = {
 		root: './build/',
 		port: port
-	});
+	};
+
+	if (options.reload) opts.livereload = true;
+
+	return connect.server(opts);
 }
 
 
@@ -187,10 +196,13 @@ function webserverTask (options) {
  * with watcher to pick up changes and rebuild
  */
 gulp.task('default', () => {
+	const reload = (process.argv.indexOf('--reload') > -1) ? true : false;
 
 	rimraf('./build/**', () => {
 
 		const dest = './build';
+		const development = true;
+		// const reload = true;
 
 		// Copy static html files
 		copyTask({
@@ -206,7 +218,8 @@ gulp.task('default', () => {
 
 		// Lint and bundle and watch for changes
 		browserifyTask({
-			development: true,
+			development,
+			reload,
 			lintsrc: './src/**/*.js*',
 			src: './src/main.js',
 			dest: dest
@@ -214,7 +227,8 @@ gulp.task('default', () => {
 
 		// transpile variables.json into .scss
 		sassVariablesTask({
-			development: true,
+			development,
+			reload,
 			src: './scss/*.json',
 			watchfiles: './scss/**/*.json',
 			dest: './scss/'
@@ -222,14 +236,17 @@ gulp.task('default', () => {
 
 		// Compile Sass and watch for changes
 		cssTask({
-			development: true,
+			development,
+			reload,
 			src: './scss/*.scss',
 			watchfiles: './scss/**/*.scss',
 			dest: dest
 		});
 
 		// Fire up local server
-		webserverTask();
+		webserverTask({
+			reload
+		});
 
 	});
 

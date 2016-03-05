@@ -6,6 +6,7 @@
   "scripts": {
     "start": "gulp",
     "dist": "gulp dist",
+    "live": "gulp --reload",
     "lint": "eslint ./src"
   },
   "repository": {
@@ -33,6 +34,7 @@
     "gulp-copy": "0.0.2",
     "gulp-cssmin": "^0.1.7",
     "gulp-eslint": "^1.0.0",
+    "gulp-if": "^2.0.0",
     "gulp-json-sass": "0.0.2",
     "gulp-load-plugins": "^1.0.0",
     "gulp-notify": "^2.2.0",
