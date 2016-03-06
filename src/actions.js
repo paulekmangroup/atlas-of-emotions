@@ -609,6 +609,12 @@ export default {
 			.classed('gradient-fill', true)
 			.attr('fill', (d, i) => 'url(#' + emotionGradientName + ')')
 			.call(this.scaledLineGenerator, 0.0);
+
+		// `mix-blend-mode: multiply` does not work correctly with gradients in Firefox/Gecko.
+		if (window.navigator.userAgent && ~window.navigator.userAgent.toLowerCase().indexOf('gecko') && ~window.navigator.userAgent.toLowerCase().indexOf('firefox')) {
+			arrowEnterSelection.selectAll('path').style('mix-blend-mode', 'normal');
+		}
+
 		/*
 		arrowEnterSelection.append('path')
 			.classed('texture-fill', true)

@@ -388,6 +388,11 @@ export default {
 			.attr('fill', (d, i) => 'url(#' + emotionGradientName + '-' + i + ')')
 			.call(this.applyEffects.bind(this));
 
+		// `mix-blend-mode: multiply` does not work correctly with gradients in Firefox/Gecko.
+		if (window.navigator.userAgent && ~window.navigator.userAgent.toLowerCase().indexOf('gecko') && ~window.navigator.userAgent.toLowerCase().indexOf('firefox')) {
+			statePaths.style('mix-blend-mode', 'normal');
+		}
+
 		emotionState.rendered = true;
 
 	},
