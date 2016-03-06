@@ -62,6 +62,7 @@ a:active {
 	line-height: $header-height;
 	text-align: center;
 	border-bottom: 1px solid $text-color;
+	white-space: nowrap;
 
 	h1,
 	h3 {
