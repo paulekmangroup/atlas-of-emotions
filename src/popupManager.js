@@ -56,6 +56,7 @@ class PopupManager {
 	}
 
 	onTransitionOut(key, e) {
+		if (!this.popups[key]) return;
 		if (this.popups[key].abortTransition) return;
 
 		const target = this.popups[key].target;
