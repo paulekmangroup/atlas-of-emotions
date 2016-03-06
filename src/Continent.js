@@ -290,17 +290,20 @@ export default class Continent {
 			transY += this.introSpreadRad * Math.sin(this.introSpreadAng);
 		}
 
-		this.d3Selection
-			.attr('transform', d3Transform()
-				.translate(
-					transX,
-					transY
-				)
-				.scale(
-					this.scaleX,
-					this.scaleY
-				)
-			);
+		// work around occasional bug in tween math
+		if (!isNaN(this.scaleX)) {
+			this.d3Selection
+				.attr('transform', d3Transform()
+					.translate(
+						transX,
+						transY
+					)
+					.scale(
+						this.scaleX,
+						this.scaleY
+					)
+				);
+		}
 
 		if (!this.isFocused) {
 
@@ -320,6 +323,13 @@ export default class Continent {
 	}
 
 	addTween (props, time, delay, func=TWEEN.Easing.Linear.None) {
+
+		if (!time && !delay) {
+			for (let key in props) {
+				this[key] = props[key];
+			}
+			return;
+		}
 
 		if (!this.tweens) {
 			this.tweens = {};

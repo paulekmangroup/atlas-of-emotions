@@ -173,7 +173,7 @@ const continentsSection = {
 						// and then back up to full size
 						setTimeout(() => {
 							let allEmotions = continents.map(continent => continent.id);
-							this.transitions.scaleContinents(allEmotions, 0.0, undefined, 1)
+							this.transitions.scaleContinents(allEmotions, 0.0, undefined, 0)
 							.then(() => {
 								return this.transitions.scaleContinents(allEmotions, 1.0);
 							})
@@ -297,7 +297,6 @@ const continentsSection = {
 	},
 
 	initLabels: function (labelContainer) {
-		console.log(this.defaultEmotionHelper);
 		continents.forEach((continent) => {
 
 			let label = document.createElement('div');
@@ -596,7 +595,7 @@ const continentsSection = {
 		//		note: for zoomed-out continents, circles will already be centered, but that's ok.
 		scaleContinents: function (emotions, scale, delays={}, time=1200) {
 
-			let MAX_TIME;
+			let MAX_TIME = time;
 
 			if (delays && Object.keys(delays).length) {
 				MAX_TIME = time + (_.max(_.values(delays)) || 0);
