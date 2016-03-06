@@ -30,18 +30,9 @@ body {
 			font-size: 18px;
 	}
 
-	/* ----------- Non-Retina Screens ----------- */
+	/* ----------- Desktop Screens ----------- */
 	@media screen
-		and (min-width: 1280px)
-		and (min-resolution: 1dppx) {
-			font-size: 22px;
-	}
-
-	/* ----------- Retina Screens ----------- */
-	@media screen
-		and (min-width: 1280px)
-		and (min-resolution: 2dppx)
-		and (min-resolution: 192dpi) {
+		and (min-width: 1280px) {
 			font-size: 22px;
 	}
 }
