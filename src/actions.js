@@ -928,7 +928,7 @@ export default {
 
 	},
 
-	displayHighlightedAction: function (action) {
+	displayHighlightedAction: function (action, valence) {
 
 		let highlightedAction = action || this.highlightedAction || null,
 			arrowSelection = this.graphContainers[this.currentEmotion].selectAll('g.action-arrow'),
@@ -936,16 +936,27 @@ export default {
 
 		if (highlightedAction) {
 
-			let stateActionsData;
-			if (this.currentState) {
-				stateActionsData = this.actionsData[this.currentEmotion].actions[this.currentState].actions;
+			if (valence) {
+
+				// if valence specified, highlight all actions of that valence
+				arrowSelection
+					.classed('muted', d => {
+						if (valence) {
+							return d.valence !== valence;
+						} else {
+							return false;
+						}
+					});
+
 			} else {
-				stateActionsData = this.actionsData[this.currentEmotion].allActions;
+
+				// if no valence specified, highlight only the specified action
+				arrowSelection
+					.classed('muted', (data, index) => data.name !== highlightedAction.name);
+
 			}
 
-			arrowSelection
-				.classed('muted', (data, index) => data.name !== highlightedAction.name);
-
+			// highlight the action's name regardless of valence
 			labelSelection
 				.classed('muted', (data, index) => data.name !== highlightedAction.name);
 
@@ -1041,7 +1052,7 @@ export default {
 		if (this.mouseOutTimeout) {
 			clearTimeout(this.mouseOutTimeout);
 		}
-		this.displayHighlightedAction(d);
+		this.displayHighlightedAction(d, d.valence);
 
 	},
 
