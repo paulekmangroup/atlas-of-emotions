@@ -17,18 +17,12 @@ Clone the project.
 ## Deploying to studio.stamen.com
 
 `npm run dist`
-`scp -prq ./dist/. studio.stamen.com:www/emotionmap/show/v2/latest/` (or `/2016-mm-dd/`)
+`scp -prq ./dist/. studio.stamen.com:www/emotionmap/show/v2/latest/` (or `/yyyy-mm-dd/`)
 
 ## Updating text content
 
-Primary content lives here:
-https://docs.google.com/spreadsheets/d/1d9_u-7heRc1VHHOJQpvLqXOMXfSgmNBT9olpWk2cdvE/edit#gid=0
+Primary content lives in a [spreadsheet on Drive](https://docs.google.com/spreadsheets/d/1d9_u-7heRc1VHHOJQpvLqXOMXfSgmNBT9olpWk2cdvE/edit#gid=0), and in the project, in [`emotionsData.json`](https://github.com/stamen/atlas-of-emotions/blob/master/static/emotionsData.json).
 
-And in the project is emotionsData.json
+Secondary content lives in a [spreadsheet on Drive](https://docs.google.com/a/stamen.com/spreadsheets/d/1eNeWj8q3geMb8HZsSR9ZT7vmFzXSR7nzd9nKNrvE1Ko/edit?usp=drive_web), and in the project in [`secondaryData.json`](https://github.com/stamen/atlas-of-emotions/blob/master/static/secondaryData.json).
 
-Secondary content lives here:
-https://docs.google.com/a/stamen.com/spreadsheets/d/1eNeWj8q3geMb8HZsSR9ZT7vmFzXSR7nzd9nKNrvE1Ko/edit?usp=drive_web
-
-And in the project is secondaryData.json
-
-To update either, click the Export to JSON button in the top menu on the google sheet, cut+paste into the corresponding json file, and rebuild.
+To update either, click the "Export to JSON" button in the top menu on the google sheet, cut+paste into the corresponding json file, and rebuild.
