@@ -889,12 +889,15 @@ export default function (...initArgs) {
 			return;
 		}
 
-		if (!emotion) {
-			callout.removeAttribute('class');
-			callout.classList.add('visible');
-			callout.querySelector('.headline').innerHTML = title;
-			callout.querySelector('.body').innerHTML = body;
+		callout.removeAttribute('class');
+		callout.classList.add('visible');
+
+		if (emotion) {
+			callout.classList.add(emotion);
 		}
+
+		callout.querySelector('.headline').innerHTML = title;
+		callout.querySelector('.body').innerHTML = body;
 	}
 
 	function onEmotionStateChange (state, selected) {
