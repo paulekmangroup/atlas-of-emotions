@@ -823,9 +823,12 @@ export default function (...initArgs) {
 		}
 
 		if (val) {
-
 			// already open
 			if (modal.style.display === 'block') { return; }
+
+			// set body class for intro open
+			document.body.classList.add('intro-open');
+			document.body.classList.remove('intro-closing', 'intro-opening');
 
 			modal.style.display = 'block';
 			modalOverlay.style.display = 'block';
@@ -862,6 +865,10 @@ export default function (...initArgs) {
 			// already closed
 			if (!modalOverlay.classList.contains('visible')) { return; }
 
+			// set body class for intro closing
+			document.body.classList.add('intro-closing');
+			document.body.classList.remove('intro-open', 'intro-opening');
+
 			// re-enable scrolling when modal closes
 			isNavigating = false;
 
@@ -869,6 +876,9 @@ export default function (...initArgs) {
 				modal.removeEventListener('transitionend', onTransitionEnd);
 				modal.style.display = 'none';
 				modalOverlay.style.display = 'none';
+
+				// set body class for intro closed
+				document.body.classList.remove('intro-closing', 'intro-open', 'intro-opening');
 			};
 			modal.addEventListener('transitionend', onTransitionEnd);
 			modal.classList.remove('visible');
@@ -878,9 +888,7 @@ export default function (...initArgs) {
 			// and enable scrollbar interaction
 			setScrollbarFractionalOpen(0.0);
 			window.addEventListener('mousemove', onWindowMouseMove);
-
 		}
-
 	}
 
 	function onCalloutChange (emotion, title, body) {
@@ -951,6 +959,32 @@ export default function (...initArgs) {
 
 	}
 
+	function coerceEmotionFromHash(hash, defaults=NAVIGATION_DEFAULTS) {
+		if (dispatcher.validateEmotion(hash.emotion)) {
+			return hash.emotion;
+		} else if (defaults && defaults.emotion) {
+			return defaults.emotion;
+		}
+
+		// continents section supports an utter lack of emotion.
+		return null;
+	}
+
+	function coerceMoreFromHash(hash) {
+		return dispatcher.validateMorePage(hash.emotion) ? hash.emotion : null;
+	}
+
+	function coerceSectionFromHash(hash, defaults=NAVIGATION_DEFAULTS) {
+		if (dispatcher.validateSection(hash.section)) {
+			return hash.section;
+		} else if (defaults && defaults.section) {
+			return  defaults.section;
+		}
+
+		return null;
+	}
+
+	let prevHash;
 	function onHashChange (event, defaults=NAVIGATION_DEFAULTS) {
 		if (currentSection) {
 
@@ -958,6 +992,9 @@ export default function (...initArgs) {
 			setModalVisibility(false);
 
 		} else {
+			// set a class on body so other sections can react
+			document.body.classList.remove('intro-closing', 'intro-open');
+			document.body.classList.add('intro-opening');
 
 			// if a section has not yet been selected this session
 			// (i.e. this is the start of the session),
@@ -973,7 +1010,15 @@ export default function (...initArgs) {
 		}
 
 		let hash = document.location.hash.replace(/^#/, '');
+		// if (hash === prevHash) return;
+
+		prevHash = hash;
+
 		hash = parseHash(hash);
+
+		const section = coerceSectionFromHash(hash);
+		const moreName = coerceMoreFromHash(hash);
+		const emotion = (moreName) ? null : coerceEmotionFromHash(hash);
 
 		// set flag after setting modal visibility,
 		// prior to setting emotion and section
@@ -983,22 +1028,10 @@ export default function (...initArgs) {
 		let previousMorePage = currentMorePage;
 		currentMorePage = null;
 
-		if (dispatcher.validateEmotion(hash.emotion)) {
-			setEmotion(hash.emotion);
-		} else if(dispatcher.validateMorePage(hash.emotion)) {
-			setMore(hash.emotion);
-		} else if (defaults && defaults.emotion) {
-			setEmotion(defaults.emotion);
+		if (moreName) {
+			setMore(moreName);
 		} else {
-			// continents section supports an utter lack of emotion.
-			setEmotion(null);
-		}
-
-		let section;
-		if (dispatcher.validateSection(hash.section)) {
-			section = hash.section;
-		} else if (defaults && defaults.section) {
-			section = defaults.section;
+			setEmotion(emotion);
 		}
 
 		setPreviousSectionNotNamedMore(section, defaults);

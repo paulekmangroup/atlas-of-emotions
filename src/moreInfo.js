@@ -47,6 +47,7 @@ export default {
 
 	// Emotion in this context is the more-info page
 	setEmotion: function (currentEmotion, previousEmotion, currentMorePage, previousMorePage) {
+		console.log('Set Emotion: ', currentEmotion, previousEmotion);
 		this.previousPage = this.currentPage;
 		this.currentPage = currentMorePage;
 		this.currentEmotion = currentEmotion;

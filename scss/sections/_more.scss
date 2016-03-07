@@ -83,6 +83,19 @@
 	background: $background-color;
 	z-index: $depth-100;
 	text-align: left;
+	opacity: 0;
+	transition-property: opacity;
+	transition-duration: #{$ui-overlays-duration-out}s;
+	transition-timing-function: ease-in-out;
+}
+
+.more-on #more {
+	opacity: 1;
+}
+
+.intro-open #more,
+.intro-opening #more  {
+	opacity: 0.1;
 }
 
 .more-child {

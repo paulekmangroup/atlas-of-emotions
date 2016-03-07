@@ -67,8 +67,7 @@ const continentsSection = {
 		this.isInited = true;
 
 	},
-	// Popup routine
-	// popupManager.manage(currentSectionName, emotion, title, body);
+
 	setEmotion: function (emotion, previousEmotion) {
 
 		return new Promise((resolve, reject) => {
@@ -145,7 +144,7 @@ const continentsSection = {
 						let continent = continents.find(c => c.id === emotion);
 						this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.SELECTED);
 
-						dispatcher.changeCallout(emotion, emotion, emotionsData.emotions[emotion].continent.desc);
+						// dispatcher.changeCallout(emotion, emotion, emotionsData.emotions[emotion].continent.desc);
 
 						resolve();
 
@@ -248,7 +247,7 @@ const continentsSection = {
 						let continent = continents.find(c => c.id === emotion);
 						this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.SELECTED);
 
-						dispatcher.changeCallout(emotion, emotion, emotionsData.emotions[emotion].continent.desc);
+						// dispatcher.changeCallout(emotion, emotion, emotionsData.emotions[emotion].continent.desc);
 
 						resolve();
 
@@ -274,6 +273,7 @@ const continentsSection = {
 				}
 
 			}
+
 
 			// check to see if we have an actual change
 			if (emotion !== previousEmotion ||

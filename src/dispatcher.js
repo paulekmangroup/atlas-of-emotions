@@ -6,7 +6,8 @@ const dispatcher = {
 		NAVIGATE: 'navigate',
 		NAVIGATE_COMPLETE: 'navigateComplete',
 		CHANGE_EMOTION_STATE: 'changeEmotionState',
-		CHANGE_CALLOUT: 'changeCallout'
+		CHANGE_CALLOUT: 'changeCallout',
+		MODAL_CHANGE: 'modalChange',
 	},
 
 	SECTIONS: {
