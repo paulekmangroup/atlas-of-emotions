@@ -7,7 +7,9 @@
     "start": "gulp",
     "dist": "gulp dist",
     "live": "gulp --reload",
-    "lint": "eslint ./src"
+    "lint": "eslint ./src",
+    "start-heroku": "serve -p ${PORT:-3000} dist/ -a ${AUTH_USERNAME}:${AUTH_PASSWORD}",
+    "postinstall": "npm run dist"
   },
   "repository": {
     "type": "git",
@@ -18,6 +20,7 @@
     "d3": "^3.5.6",
     "d3-transform": "^1.0.4",
     "lodash": "^3.10.1",
+    "serve": "^1.4.0",
     "smoothscroll": "jedwards1211/smoothScroll#context-fix",
     "textures": "^1.0.3",
     "tween.js": "^16.3.1"
