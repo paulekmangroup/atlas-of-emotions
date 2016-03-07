@@ -81,6 +81,9 @@ export default function (...initArgs) {
 		let mainEl = document.querySelector('#main'),
 			containerEl;
 
+		// clear out existing content, hardcoded for bots
+		mainEl.innerHTML = '';
+
 		_.values(dispatcher.SECTIONS).forEach(sectionName => {
 			containerEl = document.createElement('div');
 			containerEl.id = sectionName;
