@@ -24,10 +24,10 @@ const FAKE = [
 				scrollTo: 'event'
 			},
 			{
-				name: 'Assessment',
+				name: 'Perception',
 				outward: true,
 				above: false,
-				scrollTo: 'assessment'
+				scrollTo: 'perception'
 			}
 		]
 	},
