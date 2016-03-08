@@ -716,8 +716,6 @@ const continentsSection = {
 			d3.event.stopImmediatePropagation();
 		}
 
-		dispatcher.recordSectionInteraction('continents');
-
 		dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS, continent.id);
 
 	},

@@ -1386,10 +1386,7 @@ export default {
 	},
 
 	setHighlightedState: function (state) {
-		// if state is not null, record section interaction for 'actions' or 'states' depending on isBackgrounded value
-		if(state !== null){
-			dispatcher.recordSectionInteraction(this.isBackgrounded ? 'actions' : 'states');
-		}
+
 		this.highlightedState = state;
 		this.displayHighlightedStates(null);
 
