@@ -138,6 +138,8 @@ export default {
 		if (!event) { event = d3.event; }
 		event.stopImmediatePropagation();
 
+		dispatcher.recordSectionInteraction('moods');
+
 		this.overlayContainer.classList.add('visible');
 		this.setCallout(true);
 
