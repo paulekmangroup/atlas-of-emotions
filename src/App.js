@@ -298,7 +298,7 @@ export default function (...initArgs) {
 			document.querySelector('.attentionArrow').classList.remove("fadeOutIn");
 		}
 		document.querySelector('.attentionArrow').classList.add("fadeOutIn");
-		setTimeout(endFade, 5000);
+		setTimeout(endFade, 4000);
 		updateArrowVisibility(sectionName);
 
 		if (!section.isInited) {
