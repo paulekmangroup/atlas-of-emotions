@@ -52,6 +52,8 @@ export default {
 
 		this.isInited = true;
 
+		this.recordedHitAreasClicked = [0,0,0,0];
+
 	},
 
 	initContainers: function (containerNode) {
@@ -707,10 +709,18 @@ export default {
 			d3.event.stopImmediatePropagation();
 		}
 
+		// record that area has been clicked, so can record interaction when all three have been clicked
+		this.recordedHitAreasClicked[hitAreaId] = 1;
+
 		this.setHighlightedHitArea(hitAreaId);
 	},
 
 	setHighlightedHitArea: function (hitAreaId) {
+
+		// check for all three, if so then update arrow, note that it's not 0 indexed
+		if (this.recordedHitAreasClicked[1] && this.recordedHitAreasClicked[2] && this.recordedHitAreasClicked[3]){
+			dispatcher.recordSectionInteraction('triggers');
+		}
 
 		this.highlightedHitArea = hitAreaId;
 		this.displayHighlightedHitArea();
