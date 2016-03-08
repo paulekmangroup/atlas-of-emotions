@@ -439,8 +439,8 @@
           "desc": "Acting in a way that makes clear that angry actions are building or being contemplated."
         },
         {
-          "name": "Passive Aggressiveness",
-          "desc": "Indirect actions that have an angry undercurrent."
+          "name": "Be Passive Aggressive",
+          "desc": "Taking indirect actions that have an angry undercurrent."
         },
         {
           "name": "Remove the Interference",
@@ -458,8 +458,8 @@
       ],
       "moods": [
         {
-          "name": "Irritability",
-          "desc": "Irritability is a an angry mood. It is characterized by a readiness, a need to become angry, filtering perceptions to see provocations not noticed when not irritable. The cause is usually not known to the irritable person, but they may know that they are in  such a mood. Frequent bouts of anger occur when irritable, which are more intense and last longer than they would when not irritable."
+          "name": "Irritable",
+          "desc": "A readiness, a need to become angry, filtering perceptions to see provocations not noticed when not irritable."
         }
       ]
     },
@@ -807,7 +807,7 @@
       ],
       "moods": [
         {
-          "name": "Apprehensiveness",
+          "name": "Apprehensive",
           "desc": "Expecting harm but not knowing how to avoid it. Perceive threats when they are not there, or magnify the seriousness of a threat."
         }
       ]
@@ -869,7 +869,7 @@
         },
         {
           "name": "Distaste",
-          "desc": "Offended by taste or smell and metaphorically used to descrive offensive sights or actions.",
+          "desc": "Offended by taste or smell and metaphorically used to describe offensive sights or actions.",
           "range": {
             "min": 2,
             "max": 7
@@ -1394,7 +1394,7 @@
       "actions": [
         {
           "name": "Seek Comfort",
-          "desc": "To seek help or support from others"
+          "desc": "To seek help or support from others."
         },
         {
           "name": "Withdraw",
@@ -1735,7 +1735,7 @@
         },
         {
           "name": "Compassion-joy",
-          "desc": "Enjoyment felt when you act compassionately, especially if your actions helpf to relieve another person's suffering.",
+          "desc": "Enjoyment felt when you act compassionately, especially if your actions help to relieve another person's suffering.",
           "range": {
             "min": 3,
             "max": 6
@@ -1882,7 +1882,7 @@
   },
   "metadata": {
     "intro": {
-      "header": "Welcome to The Ekman Atlas of Emotion ",
+      "header": "Welcome to The Ekmans' Atlas of Emotion ",
       "body": "This collection of maps was created to help you better understand your emotions, where they come from and the effect they have on your life.<br><br>Navigate the atlas by scrolling between sections, and by clicking elements to dig deeper.<br><br>This is an opportunity for you to explore the vast world of emotions. The atlas begins with what scholars agree on and gradually introduces our working hypotheses of more complex subject matter."
     },
     "continents": {
@@ -1895,7 +1895,7 @@
     },
     "actions": {
       "header": "The Actions of a State",
-      "body": "Each emotional state typically results in a number of actions.",
+      "body": "Each emotional state typically results in a number of actions. Click on a state to see the constructive and destructive actions that can result.",
       "qualities": [
         {
           "header": "Constructive Actions",
@@ -1907,7 +1907,7 @@
         },
         {
           "header": "Ambiguous Actions",
-          "body": "Sometimes an action can be both constructive and desctructive in different contexts."
+          "body": "Sometimes an action can be both constructive and destructive in different contexts."
         }
       ]
     },
@@ -1939,7 +1939,15 @@
     },
     "moods": {
       "header": "The Mood of an Emotion",
-      "body": "Moods are longer-lasting cousins of an emotion that cause the related emotion to be felt more frequently and intensely."
+      "body": "Moods are longer-lasting cousins of an emotion that cause the related emotion to be felt more frequently and intensely. It is not always apparent what triggers a mood."
+    },
+    "calm": {
+      "header": "Achieving Calm",
+      "body": "Calm is a state of mind that is actively engaged in using intelligence and wisdom to evaulate the changing world.",
+      "secondary": {
+        "header": "Visit the Annex",
+        "body": "To learn more about emotions, click on \"more information\" to the right."
+      }
     }
   }
 }
