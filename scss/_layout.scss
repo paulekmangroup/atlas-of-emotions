@@ -119,7 +119,7 @@ a:active {
 		margin: 0;
 		padding: 0;
 	  	font-size: 1em;
-		background-color: rgba($callout-background-color, 0.5);
+		background-color: rgba($scrollbar-background-color, 1);
 		box-shadow: none;
 		border: none;
 		border-radius: 0;
@@ -142,7 +142,7 @@ a:active {
 
 			&:hover,
 			&:active {
-				background-color: rgba($callout-highlight-color, 0.5);
+				background-color: rgba($menu-highlight-color, 1);
 				outline: none;
 			}
 		}

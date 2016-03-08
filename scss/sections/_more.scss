@@ -57,7 +57,9 @@
 		bottom: 100%;
 		margin-bottom: 1px;
 		padding-top: 1px;
-		background-color: rgba($scrollbar-background-color, 0.5);
+		background-color: rgba($callout-highlight-color, 1);
+
+
 
 		li {
 			text-transform: uppercase;
