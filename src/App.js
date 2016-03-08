@@ -133,23 +133,17 @@ export default function (...initArgs) {
 
 	function initDownArrow() {
 		let downArrows = document.querySelector('#down-arrow'),
-			quietArrow = document.createElement('img'),
 			attentionArrow = document.createElement('img');
 
 		attentionArrow.addEventListener('click', onDownArrowClick);
-		// do we want listener on quiet arrow too?
-		quietArrow.addEventListener('click', onDownArrowClick);
 
 		// add both images here
 		attentionArrow.src = './img/attentionArrow.png';
-		quietArrow.src = './img/quietArrow.png';
 
 		// set classes
 		attentionArrow.classList.add('attentionArrow');
-		quietArrow.classList.add("quietArrow");
 
 		downArrows.appendChild(attentionArrow);
-		downArrows.appendChild(quietArrow);
 		updateArrowVisibility();
 	}
 
@@ -927,8 +921,14 @@ export default function (...initArgs) {
 
 	function recordSectionInteraction (sectionName) {
 
+		function stopAnimate(){
+			document.querySelector('.attentionArrow').classList.remove("animate");
+		};
+
 		if(arrowChangeHistory.indexOf(sectionName) == -1){
 			arrowChangeHistory.push(sectionName);
+			document.querySelector('.attentionArrow').classList.add("animate");
+			window.setTimeout(stopAnimate, 3000);
 		}
 
 		updateArrowVisibility(sectionName);
@@ -937,18 +937,13 @@ export default function (...initArgs) {
 	function updateArrowVisibility (sectionName) {
 
 		if (sectionName == 'calm'){
-			// both arrows not visible
+			// arrow not visible
 			document.querySelector('.attentionArrow').classList.remove("visible");
-			document.querySelector('.quietArrow').classList.remove("visible");
-		} else if (arrowChangeHistory.indexOf(sectionName) == -1){
-			// has not been triggered
-			document.querySelector('.attentionArrow').classList.remove("visible");
-			document.querySelector('.quietArrow').classList.add("visible");
 		} else {
-			// has been triggered already
+			// arrow visible
 			document.querySelector('.attentionArrow').classList.add("visible");
-			document.querySelector('.quietArrow').classList.remove("visible");
 		}
+
 	}
 
 	function onCalloutChange (emotion, title, body) {
