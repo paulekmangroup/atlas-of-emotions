@@ -265,32 +265,8 @@
           "desc": "Harm or constrain someone, an action that may be deliberately chosen or the result of a loss of control over how one acts."
         },
         {
-          "name": "Be firm",
-          "desc": "Convey that one's position is strongly held, not likely to be abandoned."
-        },
-        {
-          "name": "Withdraw",
-          "desc": "Physically or mentally leave the scene of the conflict."
-        },
-        {
-          "name": "Take a time out",
-          "desc": "Announce intention to withdraw to prevent escalation of the conflict."
-        },
-        {
-          "name": "Practice patience",
-          "desc": "Regard the conflict as an opportunity to not lose one's temper."
-        },
-        {
           "name": "Suppress",
           "desc": "Try to avoid feeling or acting upon the emotion that is being experienced."
-        },
-        {
-          "name": "Distract",
-          "desc": "Engage in other activities in an attempt to avoid feeling this emotion."
-        },
-        {
-          "name": "Avoid",
-          "desc": "Either physically stay away from someone or something, or internally keep one’s mind away from what is triggering the anger."
         },
         {
           "name": "Simmer/brood",
@@ -299,10 +275,6 @@
         {
           "name": "Be passive-aggressive",
           "desc": "Take indirect actions that have an angry undercurrent."
-        },
-        {
-          "name": "Remove the interference",
-          "desc": "Attempt to eliminate whatever is blocking the pursuit of a goal."
         }
       ],
       "triggers": [
@@ -588,28 +560,12 @@
           "desc": "Lose control of how one speaks; speak in a loud volume and, when screaming, in a higher pitch."
         },
         {
-          "name": "Reframe",
-          "desc": "Reconsider the emotional trigger in an attempt to reduce or eliminate it."
-        },
-        {
-          "name": "Be mindful",
-          "desc": "Accept how you feel and recognize that it's temporary. "
-        },
-        {
-          "name": "Breathe",
-          "desc": "Focus awareness on breathing in order to diminish fearful feelings. "
-        },
-        {
           "name": "Ruminate",
           "desc": "Repetitively think about the emotional experience."
         },
         {
           "name": "Worry",
           "desc": "Anticipate the possibility of harm."
-        },
-        {
-          "name": "Distract",
-          "desc": "Engage in other activities in an attempt to avoid feeling this emotion."
         }
       ],
       "triggers": [
@@ -1207,10 +1163,6 @@
         {
           "name": "Feel ashamed",
           "desc": "Feel the need to hide how one feels about what or who is lost."
-        },
-        {
-          "name": "Distract",
-          "desc": "Engage in other activities in an attempt to avoid feeling this emotion."
         }
       ],
       "triggers": [
