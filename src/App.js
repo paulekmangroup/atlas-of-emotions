@@ -48,7 +48,9 @@ export default function (...initArgs) {
 		recentScrollDeltas = [],				// cache recent scroll delta values to check intentionality of scroll
 		lastScroll = 0,							// timestamp of most recent scroll event
 		hasNavigatedThisScroll = false,			// has already navigated during the current inertia/continuous scroll
-		isNavigating = false;					// currently navigating between emotions or sections
+		isNavigating = false,					// currently navigating between emotions or sections
+
+		arrowChangeHistory = []; // keep track of which sections have visible arrow
 
 
 	function init (containerNode) {
@@ -67,6 +69,7 @@ export default function (...initArgs) {
 		dispatcher.addListener(dispatcher.EVENTS.NAVIGATE, onNavigate);
 		dispatcher.addListener(dispatcher.EVENTS.CHANGE_EMOTION_STATE, onEmotionStateChange);
 		dispatcher.addListener(dispatcher.EVENTS.CHANGE_CALLOUT, onCalloutChange);
+		dispatcher.addListener(dispatcher.EVENTS.RECORD_SECTION_INTERACTION, recordSectionInteraction);
 		window.addEventListener('hashchange', onHashChange);
 
 		// size main container to viewport
@@ -129,12 +132,25 @@ export default function (...initArgs) {
 	}
 
 	function initDownArrow() {
-		let downArrow = document.querySelector('#down-arrow'),
-			img = document.createElement('img');
-		img.addEventListener('click', onDownArrowClick);
+		let downArrows = document.querySelector('#down-arrow'),
+			quietArrow = document.createElement('img'),
+			attentionArrow = document.createElement('img');
 
-		img.src = './img/attentionArrow.png';
-		downArrow.appendChild(img);
+		attentionArrow.addEventListener('click', onDownArrowClick);
+		// do we want listener on quiet arrow too?
+		quietArrow.addEventListener('click', onDownArrowClick);
+
+		// add both images here
+		attentionArrow.src = './img/attentionArrow.png';
+		quietArrow.src = './img/quietArrow.png';
+
+		// set classes
+		attentionArrow.classList.add('attentionArrow');
+		quietArrow.classList.add("quietArrow");
+
+		downArrows.appendChild(attentionArrow);
+		downArrows.appendChild(quietArrow);
+		updateArrowVisibility();
 	}
 
 	function initMoreInfoDropdown() {
@@ -286,6 +302,8 @@ export default function (...initArgs) {
 				break;
 			}
 		}
+
+		updateArrowVisibility(sectionName);
 
 		if (!section.isInited) {
 			// init any uninited background sections
@@ -904,6 +922,32 @@ export default function (...initArgs) {
 			// and enable scrollbar interaction
 			setScrollbarFractionalOpen(0.0);
 			window.addEventListener('mousemove', onWindowMouseMove);
+		}
+	}
+
+	function recordSectionInteraction (sectionName) {
+
+		if(arrowChangeHistory.indexOf(sectionName) == -1){
+			arrowChangeHistory.push(sectionName);
+		}
+
+		updateArrowVisibility(sectionName);
+	}
+
+	function updateArrowVisibility (sectionName) {
+
+		if (sectionName == 'calm'){
+			// both arrows not visible
+			document.querySelector('.attentionArrow').classList.remove("visible");
+			document.querySelector('.quietArrow').classList.remove("visible");
+		} else if (arrowChangeHistory.indexOf(sectionName) == -1){
+			// has not been triggered
+			document.querySelector('.attentionArrow').classList.remove("visible");
+			document.querySelector('.quietArrow').classList.add("visible");
+		} else {
+			// has been triggered already
+			document.querySelector('.attentionArrow').classList.add("visible");
+			document.querySelector('.quietArrow').classList.remove("visible");
 		}
 	}
 

@@ -8,6 +8,7 @@ const dispatcher = {
 		CHANGE_EMOTION_STATE: 'changeEmotionState',
 		CHANGE_CALLOUT: 'changeCallout',
 		MODAL_CHANGE: 'modalChange',
+		RECORD_SECTION_INTERACTION: 'recordSectionInteraction'
 	},
 
 	SECTIONS: {
@@ -98,6 +99,12 @@ const dispatcher = {
 	changeCallout: function (emotion, title, body) {
 
 		this.emit(this.EVENTS.CHANGE_CALLOUT, emotion, title, body);
+
+	},
+
+	recordSectionInteraction: function (sectionName) {
+
+		this.emit(this.EVENTS.RECORD_SECTION_INTERACTION, sectionName);
 
 	},
 
