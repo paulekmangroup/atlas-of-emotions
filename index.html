@@ -15,7 +15,7 @@
 			html {
 				height: 100%;
 				width: 100%;
-				overflow: hidden;
+				margin: 0;
 
 				background-color: #ffffff;
 				font-family: 'Raleway', sans-serif;
@@ -23,27 +23,26 @@
 				font-size: 14px;
 				color: #ffffff;
 
-				text-align: center;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				overflow-x: hidden;
 			}
 
 			#banner {
-				position: relative;
-				top: 10%;
-				left: -15em;
-				width: 30em;
-				margin-left: 50%;
-
+				margin-top: 8%;
 				padding: 2em;
+				min-width: 30em;
+				width: 40%;
 				background-color: rgb(149, 149, 149);
-				text-align: left;
+			}
+
+			#poster {
+				padding: 5%;
 			}
 
 			img {
-				position: relative;
-				max-width: 80%;
-				max-height: 50%;
-				padding-top: 10%;
-				pointer-events: none;
+				width: 100%;
 			}
 
 			h1 {
@@ -69,7 +68,9 @@
 			<h1>THE ATLAS OF EMOTION</h1>
 			<p>Learn more about emotion at <a href="http://paulekman.com/">www.paulekman.com</a></p>
 		</div>
-		<img src="./continents.png">
+		<div id="poster">
+			<img src="./continents.png">
+		</div>
 	</body>
 
 </html>
