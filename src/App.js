@@ -57,6 +57,7 @@ export default function (...initArgs) {
 		initSections();
 		initHeader();
 		initScrollInterface();
+		initDownArrow();
 		initMoreInfoDropdown();
 		initCallout();
 		// popupManager.init();
@@ -125,6 +126,15 @@ export default function (...initArgs) {
 
 		dropdown.querySelector('.dropdown-toggle').addEventListener('click', onDropdownClick);
 
+	}
+
+	function initDownArrow() {
+		let downArrow = document.querySelector('#down-arrow'),
+			img = document.createElement('img');
+		img.addEventListener('click', onDownArrowClick);
+
+		img.src = './img/attentionArrow.png';
+		downArrow.appendChild(img);
 	}
 
 	function initMoreInfoDropdown() {
@@ -773,6 +783,12 @@ export default function (...initArgs) {
 	function onScrollbarOut (event) {
 
 		displayScrollbarHighlight(null);
+
+	}
+
+	function onDownArrowClick (event) {
+
+		scrollSection(1);
 
 	}
 
