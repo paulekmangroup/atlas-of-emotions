@@ -48,9 +48,7 @@ export default function (...initArgs) {
 		recentScrollDeltas = [],				// cache recent scroll delta values to check intentionality of scroll
 		lastScroll = 0,							// timestamp of most recent scroll event
 		hasNavigatedThisScroll = false,			// has already navigated during the current inertia/continuous scroll
-		isNavigating = false,					// currently navigating between emotions or sections
-
-		arrowChangeHistory = []; // keep track of which sections have visible arrow
+		isNavigating = false;				// currently navigating between emotions or sections
 
 
 	function init (containerNode) {
@@ -69,7 +67,6 @@ export default function (...initArgs) {
 		dispatcher.addListener(dispatcher.EVENTS.NAVIGATE, onNavigate);
 		dispatcher.addListener(dispatcher.EVENTS.CHANGE_EMOTION_STATE, onEmotionStateChange);
 		dispatcher.addListener(dispatcher.EVENTS.CHANGE_CALLOUT, onCalloutChange);
-		dispatcher.addListener(dispatcher.EVENTS.RECORD_SECTION_INTERACTION, recordSectionInteraction);
 		window.addEventListener('hashchange', onHashChange);
 
 		// size main container to viewport
@@ -297,6 +294,11 @@ export default function (...initArgs) {
 			}
 		}
 
+		function endFade(){
+			document.querySelector('.attentionArrow').classList.remove("fadeOutIn");
+		}
+		document.querySelector('.attentionArrow').classList.add("fadeOutIn");
+		setTimeout(endFade, 4000);
 		updateArrowVisibility(sectionName);
 
 		if (!section.isInited) {
@@ -917,21 +919,6 @@ export default function (...initArgs) {
 			setScrollbarFractionalOpen(0.0);
 			window.addEventListener('mousemove', onWindowMouseMove);
 		}
-	}
-
-	function recordSectionInteraction (sectionName) {
-
-		function stopAnimate(){
-			document.querySelector('.attentionArrow').classList.remove("animate");
-		};
-
-		if(arrowChangeHistory.indexOf(sectionName) == -1){
-			arrowChangeHistory.push(sectionName);
-			document.querySelector('.attentionArrow').classList.add("animate");
-			window.setTimeout(stopAnimate, 3000);
-		}
-
-		updateArrowVisibility(sectionName);
 	}
 
 	function updateArrowVisibility (sectionName) {

@@ -151,11 +151,12 @@ a:active {
 
 @keyframes stretch {
   0% {
-    transform: scale(.5);
-		opacity: .3;
+		opacity: 0;
   }
+	70% {
+		opacity: 0;
+	}
   100% {
-    transform: scale(1);
 		opacity: 1;
   }
 }
@@ -174,23 +175,16 @@ a:active {
 
 		display: none;
 
-		&.animate {
-			transition-property: opacity, background-color;
-			transition-duration: #{$ui-overlays-duration-out}s;
-			transition-timing-function: ease-in-out;
-
+		&.fadeOutIn {
 			animation-name: stretch;
-			animation-duration: 1s;
-			animation-timing-function: ease-out;
+			animation-duration: 5s;
+			animation-timing-function: ease-in;
 			animation-delay: 0;
-			animation-direction: alternate;
+			animation-direction: normal;
 			animation-iteration-count: infinite;
 			animation-fill-mode: none;
 			animation-play-state: running;
 
-			&.pause {
-				animation-play-state: paused;
-			}
 		}
 
 		&.visible {
