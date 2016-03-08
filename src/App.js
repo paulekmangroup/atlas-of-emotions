@@ -410,12 +410,12 @@ export default function (...initArgs) {
 						// close previous background sections not needed for the current section
 						previousBackgroundSections.forEach(prevBkgdSection => {
 							prevBkgdSection.setBackgrounded(false);
-							prevBkgdSection.close();
+							prevBkgdSection.close(sectionName);
 						});
 					}
 
 					// close the previous section
-					promises.push(previousSection.close());
+					promises.push(previousSection.close(sectionName));
 				}
 
 				Promise.all(promises).then(values => {

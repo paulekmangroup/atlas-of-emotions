@@ -337,13 +337,17 @@ const continentsSection = {
 
 	},
 
-	close: function () {
+	close: function (nextSection) {
 
 		return new Promise((resolve, reject) => {
 
 			popupManager.closeAll();
+
 			let continent = continents.find(c => c.id === currentEmotion);
-			if (continent && continent.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED) {
+			if (nextSection === dispatcher.SECTIONS.STATES && continent && continent.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED) {
+
+				// if there is a selected continent, and we're transitioning into States,
+				// animate the continent down into the floor of the States graph.
 
 				let targetScale = 1.0;
 
