@@ -9,7 +9,8 @@
     "live": "gulp --reload",
     "lint": "eslint ./src",
     "start-heroku": "serve -p ${PORT:-3000} dist/ -a ${AUTH_USERNAME}:${AUTH_PASSWORD}",
-    "postinstall": "npm run dist"
+    "postinstall": "npm run dist",
+    "gh-deploy": "npm run dist && git-directory-deploy --directory dist/"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,7 @@
     "babelify": "^6.3.0",
     "browserify": "^11.1.0",
     "eslint": "^1.7.0",
+    "git-directory-deploy": "^1.5.0",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
     "gulp-connect": "^2.2.0",

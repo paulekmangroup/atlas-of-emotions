@@ -6,23 +6,23 @@ Clone the project.
 `npm install`
 `npm start`
 
-## Deploying to heroku
+## Deploying to GitHub pages (production)
+
+`npm run gh-deploy`
+
+### GitHub Pages setup
+
+The CDN-backed production version of the site is running on GitHub Pages, directed to http://atlasofemotions.org/ via a [`CNAME` file](https://github.com/stamen/atlas-of-emotions/blob/gh-pages/CNAME). The deploy script uses [`git-directory-deploy`](https://www.npmjs.com/package/git-directory-deploy) to push only `dist/` to the `gh-pages` branch.
+
+## Deploying to Heroku (staging)
 
 `git push heroku master`
 
 ### Heroku setup
 
-A staging version of the site is [running on heroku](http://stamen-atlas-of-emotions.herokuapp.com), aliased at http://staging.atlasofemotions.org/. Password is the same as on the blog.
+A staging version of the site is [running on heroku](http://stamen-atlas-of-emotions.herokuapp.com), aliased at http://staging.atlasofemotions.org/. Username/password is the same as on the blog.
 
 The heroku web process is `npm run start-heroku`, specified in [`Procfile`](https://github.com/stamen/atlas-of-emotions/blob/master/Procfile). This serves up the static `dist/` folder via [`serve`](https://www.npmjs.com/package/serve).
-
-## Deploying to GitHub pages
-
-TODO: set up script to push only `dist/` to `gh-pages`?
-
-### GitHub Pages setup
-
-The CDN-backed production version of the site is running on GitHub Pages, directed to http://atlasofemotions.org/ via a [`CNAME` file](https://github.com/stamen/atlas-of-emotions/blob/gh-pages/CNAME).
 
 ## Deploying to studio.stamen.com
 
