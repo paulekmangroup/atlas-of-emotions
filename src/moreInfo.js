@@ -76,14 +76,15 @@ export default {
 	},
 
 	open: function () {
+
 		this.toggleMoreClass(true);
 
 		// any section-wide opening animations not specific to a particular page go here.
-		// probably won't be anything here for the more info section.
 
 	},
 
 	close: function () {
+		
 		this.toggleMoreClass(false);
 
 		return new Promise((resolve, reject) => {
@@ -94,6 +95,12 @@ export default {
 
 		});
 
+	},
+
+	onResize: function () {
+
+		//
+		
 	},
 
 	onCloseButtonClicked: function() {

@@ -180,6 +180,12 @@ export default {
 
 	},
 
+	onResize: function () {
+
+		//
+		
+	},
+
 	setActive: function (val) {
 
 		let section = this;

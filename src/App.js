@@ -69,10 +69,12 @@ export default function (...initArgs) {
 		dispatcher.addListener(dispatcher.EVENTS.CHANGE_CALLOUT, onCalloutChange);
 		window.addEventListener('hashchange', onHashChange);
 
-		window.addEventListener('resize', onResize);
-
 		onResize();
 		onHashChange();
+
+		// debounce after initial call
+		onResize = _.debounce(onResize, 250);
+		window.addEventListener('resize', onResize);
 
 	}
 
@@ -599,17 +601,26 @@ export default function (...initArgs) {
 
 	}
 
+	/**
+	 * Note: this function is _.debounce()d in init().
+	 */
 	function onResize () {
-
-		let containerNode = document.getElementById('main'),
-			segmentContainer = document.querySelector('.segment-container');
 
 		// size main container to viewport
 		let headerHeight = 55;	// from _variables.scss
-		containerNode.style.height = (window.innerHeight - headerHeight) + 'px';
+		document.getElementById('main').style.height = (window.innerHeight - headerHeight) + 'px';
 
 		// update scrollbar values
 		scrollbarBounds.left = scrollbar.getBoundingClientRect().left;
+
+		// update all sections
+		let section;
+		for (let sectionKey in sections) {
+			section = sections[sectionKey];
+			if (section.isInited) {
+				section.onResize();
+			}
+		}
 
 	}
 
@@ -761,7 +772,7 @@ export default function (...initArgs) {
 	}
 
 	/**
-	 * Note: this function is _.throttle()d in initScrollInterface.
+	 * Note: this function is _.throttle()d in initScrollInterface().
 	 */
 	function onWindowMouseMove (event) {
 

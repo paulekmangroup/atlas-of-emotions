@@ -490,6 +490,12 @@ export default {
 
 	},
 
+	onResize: function () {
+
+		//
+		
+	},
+
 	setActive: function (val) {
 
 		if (this.currentEmotion) {
