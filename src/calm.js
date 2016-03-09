@@ -75,36 +75,36 @@ export default {
 		};
 
 		// left-to-right
-		let transforms = [
+		let continentTransforms = [
 			{
-				x: -0.37 * w,
-				y: 0.27 * h,
-				size: 0.12 * h
+				x: -0.37,
+				y: 0.27,
+				size: 0.12
 			},
 			{
-				x: -0.19 * w,
-				y: -0.02 * h,
-				size: 0.12 * h
+				x: -0.19,
+				y: -0.02,
+				size: 0.12
 			},
 			{
-				x: 0.04 * w,
-				y: -0.26 * h,
-				size: 0.12 * h
+				x: 0.04,
+				y: -0.26,
+				size: 0.12
 			},
 			{
-				x: 0.08 * w,
-				y: 0.15 * h,
-				size: 0.12 * h
+				x: 0.08,
+				y: 0.15,
+				size: 0.12
 			},
 			{
-				x: 0.32 * w,
-				y: -0.11 * h,
-				size: 0.12 * h
+				x: 0.32,
+				y: -0.11,
+				size: 0.12
 			}
 		];
 
 		// map each emotion to a Continent instance
-		continents = _.values(dispatcher.EMOTIONS).map(emotion => new Continent(emotion, continentContainer, continentGeom, transforms));
+		continents = _.values(dispatcher.EMOTIONS).map(emotion => new Continent(emotion, continentContainer, continentGeom, continentTransforms));
 
 		paths = PATH_STRINGS.map((p, i) => ({
 			lastSpawnTime: -MIN_PATH_SPAWN_DELAY,
@@ -180,10 +180,34 @@ export default {
 
 	},
 
+	/**
+	 * Update continent sizes and positions.
+	 * note that Continent size is used to determine constituent Circle sizes,
+	 * but Continent.onResize() does not update existing Circle sizes
+	 * so size changes take a bit of time to propagate.
+	 */
 	onResize: function () {
+			
+		// update continents
+		let w = this.sectionContainer.offsetWidth,
+			h = this.sectionContainer.offsetHeight,
+			continentGeom;
 
-		//
-		
+		centerX = 0.55 * w;
+		centerY = 0.5 * h;
+		continentGeom = {
+			w: w,
+			h: h,
+			centerX: centerX,
+			centerY: centerY
+		};
+
+		continents.forEach((c) => c.onResize(continentGeom));
+
+		// update paths
+		d3.select('.calm-paths')
+			.attr('transform', 'scale(' + w/PATH_SOURCE_WIDTH + ',' + h/PATH_SOURCE_HEIGHT + ')');
+
 	},
 
 	setActive: function (val) {

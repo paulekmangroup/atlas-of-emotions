@@ -38,6 +38,60 @@ export default class Continent {
 		2.0
 	];
 
+	static BASE_TRANSFORMS = [
+		{
+			x: 0.03,
+			y: -0.20,
+			label: {
+				x: 0.19,
+				y: -0.13
+			},
+			size: 0.24,
+			introSpreadMaxRad: 0.13
+		},
+		{
+			x: -0.22,
+			y: -0.14,
+			label: {
+				x: -0.25,
+				y: -0.01
+			},
+			size: 0.23,
+			introSpreadMaxRad: 0.2
+		},
+		{
+			x: -0.06,
+			y: 0.07,
+			label: {
+				x: -0.22,
+				y: 0.07
+			},
+			size: 0.18,
+			introSpreadMaxRad: 0.35,
+			isCenterContinent: true
+		},
+		{
+			x: -0.03,
+			y: 0.22,
+			label: {
+				x: -0.17,
+				y: 0.17
+			},
+			size: 0.22,
+			introSpreadMaxRad: 0.15
+		},
+		{
+			x: 0.19,
+			y: 0.10,
+			label: {
+				x: 0.01,
+				y: 0.25
+			},
+			size: 0.24,
+			introSpreadMaxRad: 0.15
+		}
+	];
+
 	static configsByEmotion = {
 		'anger': {
 			colorPalette: [
@@ -104,76 +158,15 @@ export default class Continent {
 	};
 
 	static transforms;
-	static initTransforms (w, h) {
-
-		Continent.transforms = _.shuffle([
-			{
-				// top
-				x: 0.03 * w,
-				y: -0.20 * h,
-				label: {
-					x: 0.19 * w,
-					y: -0.13 * h
-				},
-				size: 0.24 * h,
-				introSpreadMaxRad: 0.13
-			},
-			{
-				// left
-				x: -0.22 * w,
-				y: -0.14 * h,
-				label: {
-					x: -0.25 * w,
-					y: -0.01 * h
-				},
-				size: 0.23 * h,
-				introSpreadMaxRad: 0.2
-			},
-			{
-				// center
-				x: -0.06 * w,
-				y: 0.07 * h,
-				label: {
-					x: -0.22 * w,
-					y: 0.07 * h
-				},
-				size: 0.18 * h,
-				introSpreadMaxRad: 0.35,
-				isCenterContinent: true
-			},
-			{
-				// bottom
-				x: -0.03 * w,
-				y: 0.22 * h,
-				label: {
-					x: -0.17 * w,
-					y: 0.17 * h
-				},
-				size: 0.22 * h,
-				introSpreadMaxRad: 0.15
-			},
-			{
-				// right
-				x: 0.19 * w,
-				y: 0.10 * h,
-				label: {
-					x: 0.01 * w,
-					y: 0.25 * h
-				},
-				size: 0.24 * h,
-				introSpreadMaxRad: 0.15
-			}
-		]);
-	}
 
 	constructor (emotion, container, continentGeom, transforms={}) {
 
 		if (!Continent.transforms) {
-			Continent.initTransforms(continentGeom.w, continentGeom.h);
+			Continent.transforms = _.shuffle(Continent.BASE_TRANSFORMS);
 		}
 
 		this.initInstanceProperties(emotion, container, continentGeom, transforms);
-
+		this.onResize(continentGeom);
 		this.prepopulate();
 
 	}
@@ -202,18 +195,9 @@ export default class Continent {
 			cosCtr: Math.random() * 2*Math.PI
 		};
 
-		this.centerX = continentGeom.centerX;
-		this.centerY = continentGeom.centerY;
-
-		// copy transforms onto this Continent instance
-		Object.assign(this, Continent.transforms[emotionIndex], transforms[emotionIndex]);
+		this.baseTransforms = Object.assign({}, Continent.transforms[emotionIndex], transforms[emotionIndex]);
 
 		this.introSpreadRad = 0;
-		this.introSpreadAng = Math.atan2(this.y, this.x);
-		if (this.isCenterContinent) {
-			// move center continent a little off-angle.
-			this.introSpreadAng += 0.4;
-		}
 
 		this.scaleX = 1.0;
 		this.scaleY = 1.0;
@@ -319,6 +303,30 @@ export default class Continent {
 			};
 
 		}
+
+	}
+
+	onResize (continentGeom) {
+
+		// scale base transforms per continentGeom
+		let transform = _.cloneDeep(this.baseTransforms);
+		transform.x *= continentGeom.w;
+		transform.y *= continentGeom.h;
+		transform.label.x *= continentGeom.w;
+		transform.label.y *= continentGeom.h;
+		transform.size *= continentGeom.h;
+
+		// and copy onto this Continent instance
+		Object.assign(this, transform);
+
+		this.introSpreadAng = Math.atan2(this.y, this.x);
+		if (this.isCenterContinent) {
+			// move center continent a little off-angle.
+			this.introSpreadAng += 0.4;
+		}
+
+		this.centerX = continentGeom.centerX;
+		this.centerY = continentGeom.centerY;
 
 	}
 

@@ -290,13 +290,16 @@ const continentsSection = {
 	},
 
 	getDefaultEmotionHelper: function() {
+
 		const keys = Object.keys(dispatcher.EMOTIONS);
 		const randomeKey = keys[Math.floor(Math.random() * keys.length)];
 
 		return dispatcher.EMOTIONS[randomeKey];
+
 	},
 
 	initLabels: function (labelContainer) {
+
 		continents.forEach((continent) => {
 
 			let label = document.createElement('div');
@@ -389,9 +392,37 @@ const continentsSection = {
 
 	},
 
+	/**
+	 * Update continent sizes and positions.
+	 * note that Continent size is used to determine constituent Circle sizes,
+	 * but Continent.onResize() does not update existing Circle sizes
+	 * so size changes take a bit of time to propagate.
+	 */
 	onResize: function () {
 
-		//
+		let w = this.sectionContainer.offsetWidth,
+			h = this.sectionContainer.offsetHeight,
+			continentGeom;
+
+		centerX = 0.55 * w;
+		centerY = 0.5 * h;
+		continentGeom = {
+			w: w,
+			h: h,
+			centerX: centerX,
+			centerY: centerY
+		};
+
+		continents.forEach((c) => c.onResize(continentGeom));
+
+		// update label positions
+		continents.forEach((continent) => {
+			let label = document.querySelector('#continent-labels [data-popuptarget="continents:'+ continent.id +'"]');
+			if (label) {
+				label.style.left = Math.round(centerX + continent.x + continent.label.x) + 'px';
+				label.style.top = Math.round(centerY + continent.y + continent.label.y) + 'px';
+			}
+		});
 
 	},
 
