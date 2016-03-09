@@ -185,6 +185,8 @@ export default function (...initArgs) {
 		});
 
 		onWindowMouseMove = _.throttle(onWindowMouseMove, 50);
+		scrollbar.addEventListener('mouseenter', onScrollbarHitAreaEnter);
+		scrollbar.addEventListener('mouseleave', onScrollbarHitAreaLeave);
 
 		segmentContainer.addEventListener('mouseover', onScrollbarOver);
 		segmentContainer.addEventListener('mouseout', onScrollbarOut);
@@ -773,7 +775,7 @@ export default function (...initArgs) {
 	 * Open the scrollbar to a value between
 	 * 0.0 (totally closed) and 1.0 (totally open).
 	 */
-	function setScrollbarFractionalOpen (val) {
+	function setScrollbarFractionalOpen (val, speed) {
 
 		if (scrollbarAnimUpdate) {
 			window.cancelAnimationFrame(scrollbarAnimUpdate);
@@ -785,7 +787,7 @@ export default function (...initArgs) {
 
 		let updatePos = function () {
 
-			let dPos = 0.25 * (scrollbarTgtPos - scrollbarPos);
+			let dPos = (speed || 0.25) * (scrollbarTgtPos - scrollbarPos);
 			if (Math.abs(dPos) < 1) {
 				segmentContainer.style.left = scrollbarTgtPos + 'px';
 				scrollbarAnimUpdate = null;
@@ -798,6 +800,14 @@ export default function (...initArgs) {
 		};
 		window.requestAnimationFrame(updatePos);
 
+	}
+
+	function onScrollbarHitAreaEnter (event) {
+		setScrollbarFractionalOpen(1.0, 0.15);
+	}
+
+	function onScrollbarHitAreaLeave (event) {
+		setScrollbarFractionalOpen(0.0, 0.08);
 	}
 
 	function onScrollbarOver (event) {
@@ -903,7 +913,7 @@ export default function (...initArgs) {
 			}, 100);
 
 			// disable scrollbar interaction
-			window.removeEventListener('mousemove', onWindowMouseMove);
+			// window.removeEventListener('mousemove', onWindowMouseMove);
 
 		} else {
 
@@ -932,7 +942,7 @@ export default function (...initArgs) {
 			// close the scrollbar, if it was opened along with the intro modal,
 			// and enable scrollbar interaction
 			setScrollbarFractionalOpen(0.0);
-			window.addEventListener('mousemove', onWindowMouseMove);
+			// window.addEventListener('mousemove', onWindowMouseMove);
 		}
 	}
 
