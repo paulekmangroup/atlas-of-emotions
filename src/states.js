@@ -138,64 +138,98 @@ export default {
 			.tickSize(25);
 
 		//
-		// Set up each graph and draw axes
+		// Set up each graph and draw axes,
+		// or update if already set up (on resize)
 		//
-		this.graphContainers = {};
-		this.emotionStates = {};
-		_.values(dispatcher.EMOTIONS).forEach((emotion, i) => {
+		if (!this.graphContainers) {
 
-			let graphContainer = document.querySelector('#states .' + emotion + ' .graph-container');
+			this.graphContainers = {};
+			this.emotionStates = {};
+			_.values(dispatcher.EMOTIONS).forEach((emotion, i) => {
 
-			let svg = d3.select(graphContainer).append('svg')
-				.attr('width', graphContainer.offsetWidth)
-				.attr('height', graphContainer.offsetHeight);
+				let graphContainer = document.querySelector('#states .' + emotion + ' .graph-container');
 
-			let graph = svg.append('g')
-				.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+				let svg = d3.select(graphContainer).append('svg')
+					.attr('width', graphContainer.offsetWidth)
+					.attr('height', graphContainer.offsetHeight);
 
-			graph.append('g')
-				.attr('class', 'x axis')
-				.attr('transform', 'translate(0,' + innerHeight + ')')
-				.call(xAxis);
+				let graph = svg.append('g')
+					.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-			graph.append('g')
-				.attr('class', 'x axis labels')
-				.attr('transform', 'translate(0,' + innerHeight + ')')
-				.call(xAxisLabels)
-			// align labels
-			.selectAll('.tick text')
-				.attr('text-anchor', (d, i) => i ? 'end' : 'start')
-				.attr('style', null);
+				graph.append('g')
+					.attr('class', 'x axis')
+					.attr('transform', 'translate(0,' + innerHeight + ')')
+					.call(xAxis);
 
-			this.graphContainers[emotion] = d3.select(graphContainer);
+				graph.append('g')
+					.attr('class', 'x axis labels')
+					.attr('transform', 'translate(0,' + innerHeight + ')')
+					.call(xAxisLabels)
+				// align labels
+				.selectAll('.tick text')
+					.attr('text-anchor', (d, i) => i ? 'end' : 'start')
+					.attr('style', null);
 
-			this.emotionStates[emotion] = {
-				index: i,
-				data: null,
-				ranges: null,
-				scale: 0.0
-			};
+				this.graphContainers[emotion] = d3.select(graphContainer);
 
-		});
+				this.emotionStates[emotion] = {
+					index: i,
+					data: null,
+					ranges: null,
+					scale: 0.0
+				};
 
-		// create an <svg> solely for <defs> shared across all emotions via xlink:href
-		let defsSvg = d3.select(containerNode).append('svg')
-			.classed('states-defs', true);
-		this.setUpDefs(defsSvg.append('defs'), this.xScale, this.yScale);
+			});
+
+			// create an <svg> solely for <defs> shared across all emotions via xlink:href
+			let defsSvg = d3.select(containerNode).append('svg')
+				.classed('states-defs', true);
+			this.setUpDefs(defsSvg.append('defs'), this.xScale, this.yScale);
+
+		} else {
+
+			_.values(dispatcher.EMOTIONS).forEach((emotion, i) => {
+
+				let svg = d3.select('#states .' + emotion + ' .graph-container svg')
+					.attr('width', graphContainer.offsetWidth)
+					.attr('height', graphContainer.offsetHeight);
+
+				let graph = svg.select('g')
+					.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+				graph.select('g.x.axis:not(.labels)')
+					.html('')
+					.attr('transform', 'translate(0,' + innerHeight + ')')
+					.call(xAxis);
+
+				graph.select('g.x.axis.labels')
+					.html('')
+					.attr('transform', 'translate(0,' + innerHeight + ')')
+					.call(xAxisLabels)
+				// align labels
+				.selectAll('.tick text')
+					.attr('text-anchor', (d, i) => i ? 'end' : 'start')
+					.attr('style', null);
+
+			});
+
+		}
 
 		// set up area generators for each emotion graph
 		this.areaGenerators = this.setUpAreaGenerators(innerHeight, this.xScale, this.yScale);
 
 	},
 
-	renderLabels: function (ranges) {
+	renderLabels: function (emotion) {
 
-		let stateSection = this,
-			statesData = this.emotionStates[this.currentEmotion].data,
-			labels = this.labelContainers[this.currentEmotion].selectAll('div')
+		let ranges = this.emotionStates[emotion].ranges[1],
+			stateSection = this,
+			statesData = this.emotionStates[emotion].data,
+			labels = this.labelContainers[emotion].selectAll('div')
 				.data(ranges);
 
-		// TODO: copying anger as placeholder; need to implement for disgust, enjoyment, fear
+		// TODO: copying anger as placeholder;
+		// implement for disgust, enjoyment, fear as necessary
 		let yOffsets = {},
 			innerHeight = this.yScale.range()[0];
 		yOffsets[dispatcher.EMOTIONS.ANGER] = y => y - 100;
@@ -209,23 +243,34 @@ export default {
 			return y + Math.pow(d[1].x/10, 2) * .3 * innerHeight;
 		};
 
-		labels.enter().append('div');
+		if (!labels.size()) {
 
+			// if labels have not yet been rendered, create them
+			labels.enter().append('div');
+
+			labels
+				.classed(emotion + ' label', true)
+				.html((d, i) => '<h3>' + statesData[i].name.toUpperCase() + '</h3>')
+				.style({
+					left: d => (Math.round(stateSection.xScale(d[1].x) + 20) + 'px'),	// not sure why this 20px magic number is necessary...?
+					top: d => (Math.round(yOffsets[emotion](stateSection.yScale(d[1].y), d)) + 'px')
+				})
+				.each(function () {
+					setTimeout(() => {
+						this.classList.add('visible');
+					}, LABEL_APPEAR_DELAY);
+				});
+
+			labels.exit().remove();
+
+		}
+
+		// set label positions whether new or existing
 		labels
-			.classed(this.currentEmotion + ' label', true)
-			.html((d, i) => '<h3>' + statesData[i].name.toUpperCase() + '</h3>')
 			.style({
 				left: d => (Math.round(stateSection.xScale(d[1].x) + 20) + 'px'),	// not sure why this 20px magic number is necessary...?
-				top: d => (Math.round(yOffsets[this.currentEmotion](stateSection.yScale(d[1].y), d)) + 'px')
-			})
-			.each(function () {
-				setTimeout(() => {
-					this.classList.add('visible');
-				}, LABEL_APPEAR_DELAY);
+				top: d => (Math.round(yOffsets[emotion](stateSection.yScale(d[1].y), d)) + 'px')
 			});
-
-		labels.exit().remove();
-
 
 	},
 
@@ -306,7 +351,7 @@ export default {
 					}
 				}, sassVars.emotions.scale.in.delay * 1000);
 
-				this.renderLabels(emotionState.ranges[1]);
+				this.renderLabels(this.currentEmotion);
 
 				setTimeout(() => {
 					this.graphContainers[emotion].selectAll('.axis')
@@ -492,7 +537,29 @@ export default {
 
 	onResize: function () {
 
-		//
+		// recalculate containers, scales, axes
+		this.setUpGraphs(this.sectionContainer);
+
+		for (let emotion in this.emotionStates) {
+
+			// update each emotion state that has already been rendered
+			let emotionState = this.emotionStates[emotion];
+			if (emotionState.data) {
+				let graph = this.graphContainers[emotion].select('g')
+					.data(this.emotionStates[emotion].ranges[0]);
+				graph.selectAll('linearGradient')
+					.attr('x1', d => this.xScale(d[0].x))
+					.attr('x2', d => this.xScale(d[2].x));
+				graph.selectAll('path.area')
+					.attr('d', this.areaGenerators[emotion]);
+
+				// reposition labels
+				if (!this.isBackgrounded) {
+					this.renderLabels(emotion);
+				}
+			}
+
+		}
 		
 	},
 
@@ -1285,7 +1352,6 @@ export default {
 			.delay(transitionConfig.delay)
 			.duration(transitionConfig.duration)
 			.attr('d', this.areaGenerators[this.currentEmotion])
-			// .attrTween('d', this.areaGenerators[this.currentEmotion])
 			.each('end', function (...args) {
 				if (onEnd && !calledOnEnd) {
 					onEnd(...args);

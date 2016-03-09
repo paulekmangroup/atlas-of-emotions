@@ -413,10 +413,10 @@ const continentsSection = {
 			centerY: centerY
 		};
 
-		continents.forEach((c) => c.onResize(continentGeom));
+		continents.forEach(c => c.onResize(continentGeom));
 
 		// update label positions
-		continents.forEach((continent) => {
+		continents.forEach(continent => {
 			let label = document.querySelector('#continent-labels [data-popuptarget="continents:'+ continent.id +'"]');
 			if (label) {
 				label.style.left = Math.round(centerX + continent.x + continent.label.x) + 'px';
