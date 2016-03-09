@@ -330,6 +330,9 @@ export default function (...initArgs) {
 
 			// first section opened in this session
 
+			// update down arrow
+			fadeArrowOutAndIn(sectionName);
+
 			// hide all but the current section and any background sections
 			for (let key in containers) {
 				if (key !== sectionName && !~backgroundSections.indexOf(sections[key])) {
@@ -380,7 +383,7 @@ export default function (...initArgs) {
 				// 	else close the background section.
 				//
 
-				// update arrow
+				// update down arrow
 				fadeArrowOutAndIn(sectionName);
 
 				// open and background all backgroundSections for the current section
@@ -966,7 +969,7 @@ export default function (...initArgs) {
 
 	function updateArrowVisibility (sectionName) {
 
-		if (sectionName == 'calm'){
+		if (sectionName == 'calm' || sectionName == 'more'){
 			// arrow not visible
 			document.querySelector('.attentionArrow').classList.remove("visible");
 		} else {
