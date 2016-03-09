@@ -281,6 +281,19 @@ export default function (...initArgs) {
 		if (section.setPreviousSection) section.setPreviousSection(previousSectionNotNamedMore);
 	}
 
+	function fadeArrowOutAndIn (sectionName) {
+
+		function endFade(){
+			document.querySelector('.attentionArrow').classList.remove("fadeOutIn");
+		}
+
+		document.querySelector('.attentionArrow').classList.add("fadeOutIn");
+		setTimeout(endFade, 4000);
+
+		updateArrowVisibility(sectionName);
+		
+	}
+
 	function setSection (sectionName, previousEmotion, previousMorePage) {
 
 		let section = sections[sectionName],
@@ -294,12 +307,6 @@ export default function (...initArgs) {
 			}
 		}
 
-		function endFade(){
-			document.querySelector('.attentionArrow').classList.remove("fadeOutIn");
-		}
-		document.querySelector('.attentionArrow').classList.add("fadeOutIn");
-		setTimeout(endFade, 4000);
-		updateArrowVisibility(sectionName);
 
 		if (!section.isInited) {
 			// init any uninited background sections
@@ -370,6 +377,9 @@ export default function (...initArgs) {
 				// 	if the section to which we're navigating is a background section, unbackground it
 				// 	else close the background section.
 				//
+
+				// update arrow
+				fadeArrowOutAndIn(sectionName);
 
 				// open and background all backgroundSections for the current section
 				let previousSectionBackgrounded = false,
