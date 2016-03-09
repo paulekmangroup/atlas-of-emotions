@@ -69,10 +69,9 @@ export default function (...initArgs) {
 		dispatcher.addListener(dispatcher.EVENTS.CHANGE_CALLOUT, onCalloutChange);
 		window.addEventListener('hashchange', onHashChange);
 
-		// size main container to viewport
-		let headerHeight = 55;	// from _variables.scss
-		containerNode.style.height = (window.innerHeight - headerHeight) + 'px';
+		window.addEventListener('resize', onResize);
 
+		onResize();
 		onHashChange();
 
 	}
@@ -191,6 +190,8 @@ export default function (...initArgs) {
 		segmentContainer.addEventListener('mouseout', onScrollbarOut);
 		segmentContainer.addEventListener('click', onScrollbarClick);
 
+		// precalculate values used for scrollbar interaction;
+		// these values are updated in onResize()
 		scrollbarBounds = scrollbar.getBoundingClientRect();
 		scrollbarBounds = {
 			top: scrollbarBounds.top,
@@ -593,6 +594,20 @@ export default function (...initArgs) {
 			dispatcher.navigate(null, emotionNames[targetEmotionIndex]);
 		}
 
+
+	}
+
+	function onResize () {
+
+		let containerNode = document.getElementById('main'),
+			segmentContainer = document.querySelector('.segment-container');
+
+		// size main container to viewport
+		let headerHeight = 55;	// from _variables.scss
+		containerNode.style.height = (window.innerHeight - headerHeight) + 'px';
+
+		// update scrollbar values
+		scrollbarBounds.left = scrollbar.getBoundingClientRect().left;
 
 	}
 
