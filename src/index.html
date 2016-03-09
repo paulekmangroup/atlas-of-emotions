@@ -10,9 +10,71 @@
 
 		<link href="https://fonts.googleapis.com/css?family=Raleway:400,200" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" type="text/css" href="main.css">
+
+		<style>
+			html.placeholder,
+			body.placeholder {
+				overflow: auto;
+				padding: 1em;
+				box-sizing: border-box;
+			}
+			#continents.placeholder {
+				position: relative;
+				height: auto;
+				min-height: auto;
+			}
+			#states.placeholder {
+				position: relative;
+				height: auto;
+				min-height: auto;
+			}
+			#actions.placeholder {
+				position: relative;
+				height: auto;
+				min-height: auto;
+			}
+			#triggers.placeholder {
+				position: relative;
+				height: auto;
+				min-height: auto;
+			}
+			#moods.placeholder {
+				position: relative;
+				height: auto;
+				min-height: auto;
+			}
+			#calm.placeholder {
+				position: relative;
+				height: auto;
+				min-height: auto;
+			}
+			#more.placeholder {
+				position: relative;
+				height: auto;
+				min-height: auto;
+				opacity: 1.0;
+			}
+			.placeholder #header h3 {
+				position: relative;
+				left: 0;
+				font-size: 1.5em;
+			}
+			.placeholder h3 {
+				font-size: 1.5em;
+				text-align: left;
+			}
+			.placeholder p {
+				font-size: 1em;
+				text-align: left;
+			}
+			.placeholder #header .dropdown,
+			.placeholder #more-info {
+				display: none;
+			}
+		</style>
 	</head>
 
-	<body>
+	<body class="placeholder">
 		<div id="app-container">
 			<div id="header">
 				<h3><a href="#">ATLAS OF EMOTIONS</a></h3>
@@ -25,26 +87,31 @@
 			</div>
 			<div id="main">
 				<!-- This content is all replaced at runtime. -->
-				<div id="continents">
+				<div id="continents" class="placeholder">
 					<h3>The Emotion Continents</h3>
 					<p>Each emotion is represented as a continent. The movement of the shapes reflects how our emotions vary in strength and frequency in peoples lives.</p>
 				</div>
-				<div id="states"></div>
+				<div id="states" class="placeholder">
 					<h3>The States of an Emotion</h3>
 					<p>Each emotion names a number of related but different states. These states vary not only in their nature, but in their intensity.</p>
-				<div id="triggers"></div>
+				</div>
+				<div id="triggers" class="placeholder">
 					<h3>The Triggers of an Emotion</h3>
 					<p>Triggers automatically bring forth an emotion without consideration.</p>
-				<div id="actions"></div>
+				</div>
+				<div id="actions" class="placeholder">
 					<h3>The Actions of a State</h3>
 					<p>Each emotional state typically results in a number of actions. Click on a state to see the constructive and destructive actions that can result.</p>
-				<div id="moods"></div>
+				</div>
+				<div id="moods" class="placeholder">
 					<h3>The Mood of an Emotion</h3>
 					<p>Moods are longer-lasting cousins of an emotion that cause the related emotion to be felt more frequently and intensely. It is not always apparent what triggers a mood.</p>
-				<div id="calm"></div>
+				</div>
+				<div id="calm" class="placeholder">
 					<h3>Achieving Calm</h3>
 					<p>Calm is a state of mind that is actively engaged in using intelligence and wisdom to evaulate the changing world.</p>
-				<div id="more">
+				</div>
+				<div id="more" class="placeholder">
 					<h3>About</h3>
 					<p>Paul Ekman is an American psychologist who is a pioneer in the study of emotions and their relation to facial expressions. He has gained a reputation as "the best human lie detector in the world". Eve Ekman is currently a Post Doctoral Scholar at UCSF’s Osher Center for Integrative Medicine. Ekman’s research interests were inspired by her experience as a medical social worker in the emergency department of San Francisco General Hospital coupled with her training in the applied emotion regulation and mindfulness intervention: Cultivating Emotional Balance, CEB.</p>
 					<h3>Donate</h3>
@@ -85,6 +152,13 @@
 		<div id="modal-overlay"></div>
 		<div id="modal"></div>
 	</body>
+
+	<script>
+		// clear out existing content, hardcoded for bots,
+		// in preparation for main script to repopulate.
+		document.querySelector('body').classList.remove('placeholder');
+		document.querySelector('#main').innerHTML = '';
+	</script>
 
 	<script src="vendors.js"></script>
 	<script src="main.js"></script>

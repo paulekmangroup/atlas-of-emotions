@@ -83,9 +83,6 @@ export default function (...initArgs) {
 		let mainEl = document.querySelector('#main'),
 			containerEl;
 
-		// clear out existing content, hardcoded for bots
-		mainEl.innerHTML = '';
-
 		_.values(dispatcher.SECTIONS).forEach(sectionName => {
 			containerEl = document.createElement('div');
 			containerEl.id = sectionName;
@@ -296,7 +293,7 @@ export default function (...initArgs) {
 		setTimeout(endFade, 4000);
 
 		updateArrowVisibility(sectionName);
-		
+
 	}
 
 	function setSection (sectionName, previousEmotion, previousMorePage) {
