@@ -69,11 +69,12 @@ export default function (...initArgs) {
 		dispatcher.addListener(dispatcher.EVENTS.CHANGE_CALLOUT, onCalloutChange);
 		window.addEventListener('hashchange', onHashChange);
 
-		// size main container to viewport
-		let headerHeight = 55;	// from _variables.scss
-		containerNode.style.height = (window.innerHeight - headerHeight) + 'px';
-
+		onResize();
 		onHashChange();
+
+		// debounce after initial call
+		onResize = _.debounce(onResize, 250);
+		window.addEventListener('resize', onResize);
 
 	}
 
@@ -186,11 +187,15 @@ export default function (...initArgs) {
 		});
 
 		onWindowMouseMove = _.throttle(onWindowMouseMove, 50);
+		scrollbar.addEventListener('mouseenter', onScrollbarHitAreaEnter);
+		scrollbar.addEventListener('mouseleave', onScrollbarHitAreaLeave);
 
 		segmentContainer.addEventListener('mouseover', onScrollbarOver);
 		segmentContainer.addEventListener('mouseout', onScrollbarOut);
 		segmentContainer.addEventListener('click', onScrollbarClick);
 
+		// precalculate values used for scrollbar interaction;
+		// these values are updated in onResize()
 		scrollbarBounds = scrollbar.getBoundingClientRect();
 		scrollbarBounds = {
 			top: scrollbarBounds.top,
@@ -420,12 +425,12 @@ export default function (...initArgs) {
 						// close previous background sections not needed for the current section
 						previousBackgroundSections.forEach(prevBkgdSection => {
 							prevBkgdSection.setBackgrounded(false);
-							prevBkgdSection.close();
+							prevBkgdSection.close(sectionName);
 						});
 					}
 
 					// close the previous section
-					promises.push(previousSection.close());
+					promises.push(previousSection.close(sectionName));
 				}
 
 				Promise.all(promises).then(values => {
@@ -606,6 +611,29 @@ export default function (...initArgs) {
 
 	}
 
+	/**
+	 * Note: this function is _.debounce()d in init().
+	 */
+	function onResize () {
+
+		// size main container to viewport
+		let headerHeight = 55;	// from _variables.scss
+		document.getElementById('main').style.height = (window.innerHeight - headerHeight) + 'px';
+
+		// update scrollbar values
+		scrollbarBounds.left = scrollbar.getBoundingClientRect().left;
+
+		// update all sections
+		let section;
+		for (let sectionKey in sections) {
+			section = sections[sectionKey];
+			if (section.isInited) {
+				section.onResize();
+			}
+		}
+
+	}
+
 	function onKeyDown (event) {
 
 		switch (event.keyCode) {
@@ -754,7 +782,7 @@ export default function (...initArgs) {
 	}
 
 	/**
-	 * Note: this function is _.throttle()d in initScrollInterface.
+	 * Note: this function is _.throttle()d in initScrollInterface().
 	 */
 	function onWindowMouseMove (event) {
 
@@ -768,7 +796,7 @@ export default function (...initArgs) {
 	 * Open the scrollbar to a value between
 	 * 0.0 (totally closed) and 1.0 (totally open).
 	 */
-	function setScrollbarFractionalOpen (val) {
+	function setScrollbarFractionalOpen (val, speed) {
 
 		if (scrollbarAnimUpdate) {
 			window.cancelAnimationFrame(scrollbarAnimUpdate);
@@ -780,7 +808,7 @@ export default function (...initArgs) {
 
 		let updatePos = function () {
 
-			let dPos = 0.25 * (scrollbarTgtPos - scrollbarPos);
+			let dPos = (speed || 0.25) * (scrollbarTgtPos - scrollbarPos);
 			if (Math.abs(dPos) < 1) {
 				segmentContainer.style.left = scrollbarTgtPos + 'px';
 				scrollbarAnimUpdate = null;
@@ -793,6 +821,14 @@ export default function (...initArgs) {
 		};
 		window.requestAnimationFrame(updatePos);
 
+	}
+
+	function onScrollbarHitAreaEnter (event) {
+		setScrollbarFractionalOpen(1.0, 0.15);
+	}
+
+	function onScrollbarHitAreaLeave (event) {
+		setScrollbarFractionalOpen(0.0, 0.08);
 	}
 
 	function onScrollbarOver (event) {
@@ -898,7 +934,7 @@ export default function (...initArgs) {
 			}, 100);
 
 			// disable scrollbar interaction
-			window.removeEventListener('mousemove', onWindowMouseMove);
+			// window.removeEventListener('mousemove', onWindowMouseMove);
 
 		} else {
 
@@ -927,7 +963,7 @@ export default function (...initArgs) {
 			// close the scrollbar, if it was opened along with the intro modal,
 			// and enable scrollbar interaction
 			setScrollbarFractionalOpen(0.0);
-			window.addEventListener('mousemove', onWindowMouseMove);
+			// window.addEventListener('mousemove', onWindowMouseMove);
 		}
 	}
 

@@ -690,6 +690,12 @@ export default {
 
 	},
 
+	onResize: function () {
+
+		//
+		
+	},
+
 	onHitAreaMouseOver: function (hitAreaId) {
 
 		this.displayHighlightedHitArea(hitAreaId);

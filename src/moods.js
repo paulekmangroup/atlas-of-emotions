@@ -107,6 +107,12 @@ export default {
 
 	},
 
+	onResize: function () {
+
+		//
+		
+	},
+
 	onElementOver: function (event) {
 
 		if (!event) { event = d3.event; }

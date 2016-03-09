@@ -873,6 +873,12 @@ export default {
 
 	},
 
+	onResize: function () {
+
+		//
+		
+	},
+
 	/**
 	 * Actions section stays open in triggers and moods, with limited interactivity.
 	 * `setBackgrounded()` toggles this state.
