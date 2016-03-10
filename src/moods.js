@@ -13,7 +13,7 @@ export default {
 	currentEmotion: null,
 	moodsData: null,
 	backgroundSections: [ states, actions ],
-	
+
 	init: function (containerNode) {
 
 		this.sectionContainer = containerNode;
@@ -23,17 +23,56 @@ export default {
 		this.onElementClick = this.onElementClick.bind(this);
 		this.onBackgroundClick = this.onBackgroundClick.bind(this);
 
-		this.overlayContainer = document.createElement('div');
-		this.overlayContainer.id = 'moods-overlay-container';
-		containerNode.appendChild(this.overlayContainer);
+		//this.overlayContainer = document.createElement('div');
+		//this.overlayContainer.id = 'moods-overlay-container';
+		//containerNode.appendChild(this.overlayContainer);
+
+		this.initMoodIntensifiers();
 
 		this.isInited = true;
 
 	},
 
+	initMoodIntensifiers: function() {
+
+		this.moodCircles = d3.select(this.sectionContainer).append('svg').attr("class", "moods-overlay-container");
+		let radius = d3.min([window.innerHeight, window.innerWidth]) / 2;
+
+		this.moodCircles.attr('width', window.innerWidth)
+			.attr('height', window.innerHeight);
+
+		this.moodCircles.selectAll(".moodCircle")
+			// values are % of radius to edge for each circle
+			.data([1.15, .95, .75])
+			.enter()
+			.append("circle")
+			.attr({
+				'cx': window.innerWidth / 2,
+				'cy': window.innerHeight / 2,
+				'r': function(d){return radius * d;},
+				'class': function(d,i){return 'moodCircle circle' + i;},
+			})
+			.on('mouseover', function(d, i){d3.selectAll(".moodCircle").classed("highlight" + i, true);})
+			.on('mouseout', function(d, i){d3.selectAll(".moodCircle").classed("highlight" + i, false);})
+			.on('click', function(d){console.log('circle clicked');});
+
+	},
+
 	setEmotion: function (emotion) {
 
+		console.log('set emotion satrt');
 		return new Promise((resolve, reject) => {
+			// fade out circles
+			function endFade(){
+				d3.selectAll('.moodCircle').classed("fadeOutIn", false);
+			}
+			d3.selectAll('.moodCircle').classed("fadeOutIn", false);
+			d3.selectAll('.moodCircle').classed("fadeOutIn", true);
+			this.circleTimeout = setTimeout(() => {
+				endFade();
+			}, 2400);
+
+			// enter circles here (?)
 
 			if (!~_.values(dispatcher.EMOTIONS).indexOf(emotion)) {
 				emotion = 'anger';
@@ -41,11 +80,11 @@ export default {
 			let previousEmotion = this.currentEmotion;
 			this.currentEmotion = emotion;
 
-			this.overlayContainer.removeAttribute('style');
 			if (previousEmotion) {
-				this.overlayContainer.classList.remove(previousEmotion);
+				this.moodCircles.selectAll("circle").classed(previousEmotion, false);
 			}
-			this.overlayContainer.classList.add(this.currentEmotion);
+
+			this.moodCircles.selectAll("circle").classed(this.currentEmotion, true);
 
 			states.applyEventListenersToEmotion(emotion, {
 				mouseover: this.onElementOver,
@@ -98,7 +137,7 @@ export default {
 
 			clearTimeout(this.calloutTimeout);
 
-			this.overlayContainer.classList.remove('visible');
+			//this.overlayContainer.classList.remove('visible');
 
 			// TODO: resolve on completion of animation
 			resolve();
@@ -110,7 +149,7 @@ export default {
 	onResize: function () {
 
 		//
-		
+
 	},
 
 	onElementOver: function (event) {
@@ -118,10 +157,8 @@ export default {
 		if (!event) { event = d3.event; }
 		event.stopImmediatePropagation();
 
-		this.overlayContainer.classList.add('visible');
-		document.querySelector('#main').removeEventListener('click', this.onBackgroundClick, true);
-
 		// don't execute mouseout behavior when rolling from one hit area into another
+		document.querySelector('#main').removeEventListener('click', this.onBackgroundClick, true);
 		clearTimeout(this.mouseOutTimeout);
 
 	},
@@ -132,10 +169,7 @@ export default {
 		event.stopImmediatePropagation();
 
 		this.mouseOutTimeout = setTimeout(() => {
-
-			this.overlayContainer.classList.remove('visible');
 			document.querySelector('#main').addEventListener('click', this.onBackgroundClick, true);
-
 		}, 100);
 	},
 
@@ -144,7 +178,6 @@ export default {
 		if (!event) { event = d3.event; }
 		event.stopImmediatePropagation();
 
-		this.overlayContainer.classList.add('visible');
 		this.setCallout(true);
 
 	},
