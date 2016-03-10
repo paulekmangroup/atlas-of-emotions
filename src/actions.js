@@ -803,7 +803,7 @@ export default {
 			// enter
 			let labelEnterSelection = labelSelection.enter().append('div')
 				.classed('label ' + this.currentEmotion, true)
-				.style('transform', d => 'translate(' + Math.round(labelSize * Math.cos(Math.PI*(d.rotation-90)/180)) + 'px,' + Math.round(labelSize * Math.sin(Math.PI*(d.rotation-90)/180) / sqrt3) + 'px')
+				.style('transform', d => 'translate(' + Math.round(labelSize * Math.cos(Math.PI*(d.rotation-90)/180)) + 'px,' + Math.round(labelSize * Math.sin(Math.PI*(d.rotation-90)/180) / sqrt3) + 'px)')
 				.style('opacity', 0.0);
 			labelEnterSelection.append('div').append('h4')
 				.html(labelText)
