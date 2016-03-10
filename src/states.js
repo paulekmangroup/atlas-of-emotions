@@ -1290,7 +1290,7 @@ export default {
 						: t < t3 ? a * (t -= m2) * t + b2
 						: a * (t -= m3) * t + b3;
 					};
-				}(0.35)),
+				})(0.35),
 				delay: (d, i) => 500 + Math.random() * 150 * i,
 				duration: 750
 			},
