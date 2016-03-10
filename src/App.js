@@ -890,7 +890,7 @@ export default function (...initArgs) {
 				// remove homeLink when opening modal
 				let homeLink = modal.querySelector('.home-link');
 				if (homeLink) {
-					homeLink.remove();
+					modal.removeChild(homeLink);
 				}
 			} else {
 				// bring continents back to center when closing modal
