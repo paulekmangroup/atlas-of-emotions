@@ -1040,44 +1040,6 @@ export default {
 				.y0(innerHeight)
 				.y1(d => yScale(d.y)),
 
-			/*
-			// TODO: degenerate per "Roughen" Illustrator effect (or similar)
-			disgust: function (d, i, a) {
-				// let interpolate = d3.interpolate(a, String(value.call(this, d, i)));
-				return function (t) {
-					return d3.svg.area()
-					.x(d => xScale(d.x))
-					.y0(innerHeight)
-					.y1(d => yScale(d.y))
-					.interpolate((points) => {
-						console.log(">>>>> t:", t);
-						// symmetrical concave beziers
-						let roundness = 0.8,
-							steepness = 0.5,
-							x0 = points[0][0],
-							y0 = points[0][1],
-							x1 = points[1][0],
-							y1 = points[1][1],
-							x2 = points[2][0],
-							y2 = points[2][1];
-
-						let path = points[0].join(' ') +				// first anchor point
-							` C${x0 + steepness*(x1-x0)} ${y0},` +		// first control point, inside curve
-							`${x0 + roundness*(x1-x0)} ${y1},` + 		// second control point, outside curve
-							points[1].join(' ') +						// middle anchor point
-							` C${x1 + (1-roundness)*(x2-x1)} ${y1},` +	// third control point, outside curve
-							`${x1 + (1-steepness)*(x2-x1)} ${y2},` +	// fourth control point, inside curve
-							points[2].join(' ');						// last anchor point
-
-
-						return path;
-					})
-					(d);
-				};
-			},
-			*/
-
-			// TODO: degenerate per "Roughen" Illustrator effect (or similar)
 			disgust: d3.svg.area()
 				.x(d => xScale(d.x))
 				.y0(innerHeight)
@@ -1178,7 +1140,6 @@ export default {
 					return path;
 				}),
 
-			// TODO: degenerate per "Zig Zag" Illustrator effect (or similar)
 			fear: d3.svg.area()
 				.x(d => xScale(d.x))
 				.y0(innerHeight)
