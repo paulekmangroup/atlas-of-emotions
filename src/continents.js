@@ -273,7 +273,8 @@ const continentsSection = {
 
 			}
 
-			dispatcher.popupChange('continents', emotion);
+			const desc = (emotion) ? emotionsData.emotions[emotion].continent.desc : null;
+			dispatcher.popupChange('continents', emotion, desc);
 
 			currentEmotion = emotion;
 			this.zoomedInContinent = null;
@@ -337,7 +338,7 @@ const continentsSection = {
 	close: function (nextSection) {
 
 		return new Promise((resolve, reject) => {
-
+			// close all label popups
 			dispatcher.popupChange();
 
 			let continent = continents.find(c => c.id === currentEmotion);

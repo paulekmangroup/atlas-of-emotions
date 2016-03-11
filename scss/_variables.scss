@@ -86,3 +86,12 @@ $label-fade-out-time: 0.5s;
 	&.sadness { background-color: rgba($color-sadness, 0.4); }
 	background-blend-mode: multiply;
 }
+
+@mixin emotion-border-color ($val:1) {
+	border-color: rgba($text-color, $val);
+	&.anger { border-color: rgba($color-anger, $val); }
+	&.disgust { border-color: rgba($color-disgust, $val); }
+	&.enjoyment { border-color: rgba($color-enjoyment, $val); }
+	&.fear { border-color: rgba($color-fear, $val); }
+	&.sadness { border-color: rgba($color-sadness, $val); }
+}

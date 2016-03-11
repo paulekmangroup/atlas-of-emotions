@@ -8,7 +8,8 @@ const dispatcher = {
 		CHANGE_EMOTION_STATE: 'changeEmotionState',
 		CHANGE_CALLOUT: 'changeCallout',
 		MODAL_CHANGE: 'modalChange',
-		POPUP_CHANGE: 'popupChange'
+		POPUP_CHANGE: 'popupChange',
+		POPUP_CLOSE_BUTTON_CLICKED: 'popupCloseButtonClicked'
 	},
 
 	SECTIONS: {
@@ -102,9 +103,15 @@ const dispatcher = {
 
 	},
 
-	popupChange: function (section, emotion) {
+	popupChange: function (section, emotion, desc) {
 
-		this.emit(this.EVENTS.POPUP_CHANGE, section, emotion);
+		this.emit(this.EVENTS.POPUP_CHANGE, section, emotion, desc);
+
+	},
+
+	popupCloseButtonClicked: function() {
+
+		this.emit(this.EVENTS.POPUP_CLOSE_BUTTON_CLICKED);
 
 	},
 

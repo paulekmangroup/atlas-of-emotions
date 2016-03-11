@@ -2,20 +2,23 @@
 	z-index: 9999;
 	border: 1px solid #666;
 }
-// padding: 18px 20px;
+
 [data-popuptarget] {
-	border: 1px solid rgba(102, 102, 102, 0);
-	background: rgba(255,255,255,0.8);
-	transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+	border-width: 1px;
+	border-style: solid;
+	@include emotion-border-color(0.0);
+	background: rgba(255,255,255,0.0);
+	transition: all #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
 .popped[data-popuptarget] {
-	border-color: rgba(102, 102, 102, 1.0);
+	@include emotion-border-color();
+	background: rgba(255,255,255,0.8);
 	padding: 18px 20px;
 }
 
 .default-interactive-helper[data-popuptarget] {
-	border: 1px solid #666;
+	@include emotion-border-color();
 }
 
 .popup-template {
@@ -33,7 +36,7 @@
 	overflow: hidden;
 
 	&.transition {
-		transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+		transition: all #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
 	}
 
 	&.fade-out {

@@ -1,3 +1,5 @@
+import dispatcher from './dispatcher.js';
+
 class PopupManager {
 	constructor() {
 		this.selected = null;
@@ -103,6 +105,7 @@ class PopupManager {
 		e.stopPropagation();
 		this.popups[id].state = '';
 		this.closeAll();
+		dispatcher.popupCloseButtonClicked();
 	}
 
 	initTemplate() {
@@ -136,7 +139,6 @@ class PopupManager {
 	}
 
 	manage(section, name, desc) {
-		console.log('manage');
 		const id = this.makeID(section, name);
 		const keys = Object.keys(this.popups);
 		if (name && section) {

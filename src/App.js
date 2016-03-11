@@ -981,14 +981,12 @@ export default function (...initArgs) {
 
 	}
 
-	function onPopupChange (section, emotion) {
+	function onPopupChange (section, emotion, desc) {
 		if (!section){
 			popupManager.manage();
 		} else {
 			if (emotion !== popupManager.currentName ||
 				(emotion && !popupManager.exists(section, emotion))) {
-
-				const desc = (emotion) ? emotionsData.emotions[emotion].continent.desc : null;
 				popupManager.manage(section, emotion, desc);
 			}
 		}

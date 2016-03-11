@@ -54,6 +54,8 @@ export default {
 		this.onStateClick = this.onStateClick.bind(this);
 		this.onBackgroundClick = this.onBackgroundClick.bind(this);
 
+		dispatcher.addListener(dispatcher.EVENTS.POPUP_CLOSE_BUTTON_CLICKED, this.onPopupCloseButtonClicked.bind(this));
+
 		this.isInited = true;
 
 	},
@@ -244,12 +246,16 @@ export default {
 		};
 
 		if (!labels.size()) {
+			// get a random label to set a box around it
+			const randomeLabelIndex = Math.floor(Math.random() * ranges.length);
 
 			// if labels have not yet been rendered, create them
 			labels.enter().append('div');
 
 			labels
-				.classed(emotion + ' label', true)
+				.classed(`${emotion} label emotion-label`, true)
+				.classed('default-interactive-helper', (d, i) => i === randomeLabelIndex)
+				.attr('data-popuptarget', (d,i) => `states:${statesData[i].name}`)
 				.html((d, i) => '<h3>' + statesData[i].name.toUpperCase() + '</h3>')
 				.style({
 					left: d => (Math.round(stateSection.xScale(d[1].x) + 20) + 'px'),	// not sure why this 20px magic number is necessary...?
@@ -400,7 +406,6 @@ export default {
 			}, resolveDelay);
 
 		});
-
 	},
 
 	renderEmotion: function (emotion) {
@@ -473,6 +478,8 @@ export default {
 	close: function () {
 
 		return new Promise((resolve, reject) => {
+			// close all label popups
+			dispatcher.popupChange();
 
 			//
 			// TODO: the logic below should be reusable for transitioning between emotions.
@@ -1362,13 +1369,18 @@ export default {
 			dispatcher.setEmotionState(statesData.name, true);
 		} else {
 			this.setHighlightedState(statesData.name);
-			dispatcher.changeCallout(this.currentEmotion, statesData.name, statesData.desc);
+			dispatcher.popupChange('states', statesData.name, statesData.desc);
+			// dispatcher.changeCallout(this.currentEmotion, statesData.name, statesData.desc);
 		}
 
 	},
 
-	onBackgroundClick: function () {
+	onPopupCloseButtonClicked: function () {
+		this.setHighlightedState(null);
+		this.resetCallout();
+	},
 
+	onBackgroundClick: function () {
 		if (this.isBackgrounded) {
 			dispatcher.setEmotionState(null, true);
 		} else {
@@ -1466,7 +1478,7 @@ export default {
 	},
 
 	resetCallout: function () {
-
+		dispatcher.popupChange();
 		dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.states.header, emotionsData.metadata.states.body/* + '<br><br>' + emotionsData.emotions[this.currentEmotion].statesDesc*/);
 
 	}
