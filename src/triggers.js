@@ -54,131 +54,6 @@ export default {
 
 	},
 
-	initContainers: function (containerNode) {
-
-		_.values(dispatcher.EMOTIONS).forEach(emotion => {
-
-			let triggersContainer = document.createElement('div');
-			triggersContainer.classList.add('triggers-container');
-			triggersContainer.classList.add(emotion);
-
-			let graphContainer = document.createElement('div');
-			graphContainer.classList.add('graph-container');
-			triggersContainer.appendChild(graphContainer);
-
-			containerNode.appendChild(triggersContainer);
-
-		});
-
-	},
-
-	initLabels: function (containerNode, haloRadius) {
-
-		// label container for each emotion
-		this.labelContainers = {};
-		_.values(dispatcher.EMOTIONS).forEach(emotion => {
-
-			let h = (1 - sassVars.triggers.bottom.replace('%', '')/100) * containerNode.offsetHeight,
-				container = d3.select('.triggers-container.' + emotion),
-				labelContainer = container.append('div')
-					.classed('label-container', true);
-
-			let arrowsContainer = labelContainer.append('div')
-				.attr('class', 'arrows-container')
-			.append('svg')
-				.attr('width', containerNode.offsetWidth)
-				.attr('height', h)
-			.append('g')
-				.attr('transform', 'translate(' + 0.5 * containerNode.offsetWidth + ',' + h + ')');
-
-			this.labelContainers[emotion] = labelContainer;
-
-		});
-
-		// only one phase label container for all emotions
-		this.phaseLabelContainer = d3.select(containerNode).append('div')
-			.attr('id', 'trigger-phase-labels');
-		this.phaseLabelContainer.selectAll('h3.label')
-			.data(emotionsData.metadata.triggers.steps)
-		.enter().append('h3')
-			.classed('label', true)
-			.text(d => d.header.toUpperCase())
-			.style('top', (d, i) => {
-				switch (i) {
-					case 0:
-						return (-1.4 * haloRadius) + 'px';
-					case 1:
-						return (-0.9 * haloRadius) + 'px';
-					case 2:
-						return (-0.65 * haloRadius) + 'px';
-				}
-			});
-
-	},
-
-	setUpGraphs: function (containerNode) {
-
-		// All the same size, just grab the first one
-		let graphContainer = containerNode.querySelector('.graph-container'),
-			w = graphContainer.offsetWidth,
-			h = graphContainer.offsetHeight;
-
-		//
-		// d3 conventional margins
-		//
-		let margin = {
-				top: 0 * h,
-				right: 0 * w,
-				bottom: (sassVars.triggers.bottom.replace('%', '')/100) * h,
-				left: 0 * w
-			},
-			innerWidth = w - margin.left - margin.right,
-			innerHeight = h - margin.top - margin.bottom;
-
-		//
-		// d3/svg setup
-		//
-		let haloRadius = Math.min(0.6 * innerHeight, 0.5 * innerWidth),
-			triggerInnerRadius = haloRadius * 1.125,
-			triggerAreaWidth = haloRadius * 1.375 - triggerInnerRadius;
-
-		this.haloPieLayout = d3.layout.pie()
-			.value(d => 1)
-			.startAngle(-0.5 * Math.PI)
-			.endAngle(0.5 * Math.PI);
-
-		this.haloArcGenerator = d3.svg.arc()
-			.innerRadius(0.8 * haloRadius)
-			.outerRadius(haloRadius);
-
-		//
-		// Set up each graph
-		//
-		this.graphContainers = {};
-		_.values(dispatcher.EMOTIONS).forEach((emotion, i) => {
-
-			let graphContainer = containerNode.querySelector('.' + emotion + ' .graph-container');
-
-			let svg = d3.select(graphContainer).append('svg')
-				.attr('width', graphContainer.offsetWidth)
-				.attr('height', graphContainer.offsetHeight);
-
-			let graph = svg.append('g')
-				.attr('transform', 'translate(' + (margin.left + 0.5*innerWidth) + ',' + (margin.top + innerHeight) + ')');
-
-			this.graphContainers[emotion] = graph;
-
-		});
-
-		// create an <svg> solely for <defs> shared across all emotions via xlink:href
-		let defsSvg = d3.select(containerNode).append('svg')
-			.classed('triggers-defs', true);
-		this.setUpDefs(defsSvg.append('defs'), haloRadius);
-
-		return haloRadius;
-
-	},
-
 	parseTriggers: function (haloRadius) {
 
 		let startAngle,
@@ -239,6 +114,107 @@ export default {
 		});
 
 		return triggersData;
+
+	},
+
+	initContainers: function (containerNode) {
+
+		_.values(dispatcher.EMOTIONS).forEach(emotion => {
+
+			let triggersContainer = document.createElement('div');
+			triggersContainer.classList.add('triggers-container');
+			triggersContainer.classList.add(emotion);
+
+			let graphContainer = document.createElement('div');
+			graphContainer.classList.add('graph-container');
+			triggersContainer.appendChild(graphContainer);
+
+			containerNode.appendChild(triggersContainer);
+
+		});
+
+	},
+
+	setUpGraphs: function (containerNode) {
+
+		// All the same size, just grab the first one
+		let graphContainer = containerNode.querySelector('.graph-container'),
+			w = graphContainer.offsetWidth,
+			h = graphContainer.offsetHeight;
+
+		//
+		// d3 conventional margins
+		//
+		let margin = {
+				top: 0 * h,
+				right: 0 * w,
+				bottom: (sassVars.triggers.bottom.replace('%', '')/100) * h,
+				left: 0 * w
+			},
+			innerWidth = w - margin.left - margin.right,
+			innerHeight = h - margin.top - margin.bottom;
+
+		//
+		// d3/svg setup
+		//
+		let haloRadius = Math.min(0.6 * innerHeight, 0.5 * innerWidth),
+			triggerInnerRadius = haloRadius * 1.125,
+			triggerAreaWidth = haloRadius * 1.375 - triggerInnerRadius;
+
+		this.haloPieLayout = d3.layout.pie()
+			.value(d => 1)
+			.startAngle(-0.5 * Math.PI)
+			.endAngle(0.5 * Math.PI);
+
+		this.haloArcGenerator = d3.svg.arc()
+			.innerRadius(0.8 * haloRadius)
+			.outerRadius(haloRadius);
+
+		//
+		// Set up each graph,
+		// or update if already set up (on resize)
+		//
+		if (!this.graphContainers) {
+
+			this.graphContainers = {};
+			_.values(dispatcher.EMOTIONS).forEach((emotion, i) => {
+
+				let graphContainer = containerNode.querySelector('.' + emotion + ' .graph-container');
+
+				let svg = d3.select(graphContainer).append('svg')
+					.attr('width', graphContainer.offsetWidth)
+					.attr('height', graphContainer.offsetHeight);
+
+				let graph = svg.append('g')
+					.attr('transform', 'translate(' + (margin.left + 0.5*innerWidth) + ',' + (margin.top + innerHeight) + ')');
+
+				this.graphContainers[emotion] = graph;
+
+			});
+
+			// create an <svg> solely for <defs> shared across all emotions via xlink:href
+			let defsSvg = d3.select(containerNode).append('svg')
+				.classed('triggers-defs', true);
+			this.setUpDefs(defsSvg.append('defs'), haloRadius);
+
+		} else {
+
+			_.values(dispatcher.EMOTIONS).forEach((emotion, i) => {
+
+				let graphContainer = containerNode.querySelector('.' + emotion + ' .graph-container');
+
+				let svg = d3.select(graphContainer).select('svg')
+					.attr('width', graphContainer.offsetWidth)
+					.attr('height', graphContainer.offsetHeight);
+
+				let graph = svg.select('g')
+					.attr('transform', 'translate(' + (margin.left + 0.5*innerWidth) + ',' + (margin.top + innerHeight) + ')');
+
+			});
+
+		}
+
+		return haloRadius;
 
 	},
 
@@ -405,6 +381,50 @@ export default {
 		.enter().append('stop')
 			.attr('offset', d => d.offset)
 			.attr('stop-color', d => d.color);
+	},
+
+	initLabels: function (containerNode, haloRadius) {
+
+		// label container for each emotion
+		this.labelContainers = {};
+		_.values(dispatcher.EMOTIONS).forEach(emotion => {
+
+			let h = (1 - sassVars.triggers.bottom.replace('%', '')/100) * containerNode.offsetHeight,
+				container = d3.select('.triggers-container.' + emotion),
+				labelContainer = container.append('div')
+					.classed('label-container', true);
+
+			let arrowsContainer = labelContainer.append('div')
+				.attr('class', 'arrows-container')
+			.append('svg')
+				.attr('width', containerNode.offsetWidth)
+				.attr('height', h)
+			.append('g')
+				.attr('transform', 'translate(' + 0.5 * containerNode.offsetWidth + ',' + h + ')');
+
+			this.labelContainers[emotion] = labelContainer;
+
+		});
+
+		// only one phase label container for all emotions
+		this.phaseLabelContainer = d3.select(containerNode).append('div')
+			.attr('id', 'trigger-phase-labels');
+		this.phaseLabelContainer.selectAll('h3.label')
+			.data(emotionsData.metadata.triggers.steps)
+		.enter().append('h3')
+			.classed('label', true)
+			.text(d => d.header.toUpperCase())
+			.style('top', (d, i) => {
+				switch (i) {
+					case 0:
+						return (-1.4 * haloRadius) + 'px';
+					case 1:
+						return (-0.9 * haloRadius) + 'px';
+					case 2:
+						return (-0.65 * haloRadius) + 'px';
+				}
+			});
+
 	},
 
 	drawHorizon: function (containerNode) {
@@ -692,8 +712,100 @@ export default {
 
 	onResize: function () {
 
-		//
-		
+		// update halo
+		let haloRadius = this.setUpGraphs(this.sectionContainer);
+
+		// update labels, and halos that have already been rendered
+		let h = (1 - sassVars.triggers.bottom.replace('%', '')/100) * this.sectionContainer.offsetHeight;
+		_.values(dispatcher.EMOTIONS).forEach(emotion => {
+
+			// update halo if already rendered
+			let graphContainer = this.graphContainers[emotion],
+				haloSelection = graphContainer.selectAll('path.halo');
+
+			if (haloSelection.size()) {
+				haloSelection.select('path.halo ' + emotion)
+					.attr('d', this.haloArcGenerator);
+			}
+
+			// update label container
+			let labelContainer = this.labelContainers[emotion];
+			labelContainer.select('.arrows-container g')
+				.attr('width', this.sectionContainer.offsetWidth)
+				.attr('height', h)
+			.select('g')
+				.attr('transform', 'translate(' + 0.5 * this.sectionContainer.offsetWidth + ',' + h + ')');
+
+			// update the labels
+			labelContainer.selectAll('div.label')
+				.style('transform', d => {
+					let x = 0.5 * this.sectionContainer.offsetWidth + Math.cos(d.angle) * d.radius,
+						y = h + Math.sin(d.angle) * d.radius;
+					return 'translate(' + x + 'px,' + y + 'px)';
+				});
+
+			// TODO: have to update trigger data, which contains
+			// knowledge of viewport aspect ratio...
+			// parseTriggers()
+			// and then bind that to labelArrowSelection in order to recalulate x1/x2/y1/y2.
+			/*
+			// update label arrows and gradients
+			let labelArrowSelection = labelContainer.select('.arrows-container g').selectAll('g.arrow');
+			labelArrowSelection.select('linearGradient')
+				.attr('x1', d => Math.cos(d.angle) * d.radius * 0.95)
+				.attr('x2', d => Math.cos(d.angle) * d.radius * (1 - d.arrowLength))
+				.attr('y1', d => Math.sin(d.angle) * d.radius * 0.95)
+				.attr('y2', d => Math.sin(d.angle) * d.radius * (1 - d.arrowLength));
+
+			let arrowsContainerEnterSelection = arrowsEnterSelection.append('g')
+				.classed('arrow ' + emotion, true)
+				.style('opacity', 1.0);
+			arrowsContainerEnterSelection.append('line')
+				.attr('x1', d => Math.cos(d.angle) * d.radius * 0.95)
+				.attr('x2', d => Math.cos(d.angle) * d.radius * (1 - d.arrowLength))
+				.attr('y1', d => Math.sin(d.angle) * d.radius * 0.95)
+				.attr('y2', d => Math.sin(d.angle) * d.radius * (1 - d.arrowLength))
+				.attr('stroke', (d, i) => 'url(#' + emotionGradientName + '-arrow-' + i + ')');
+			arrowsContainerEnterSelection.append('path')
+				.attr('d', ARROWHEAD)
+				.attr('transform', d => {
+					return 'translate(' + Math.cos(d.angle) * d.radius * (1 - d.arrowLength) + ',' + Math.sin(d.angle) * d.radius * (1 - d.arrowLength) + ') ' +
+						'rotate(' + (180 * d.angle / Math.PI + 90) + ')';
+				});
+			*/
+
+
+		});
+
+		/*
+		// TODO: handle phase label container
+		// only one phase label container for all emotions
+		this.phaseLabelContainer = d3.select(this.sectionContainer).append('div')
+			.attr('id', 'trigger-phase-labels');
+		this.phaseLabelContainer.selectAll('h3.label')
+			.data(emotionsData.metadata.triggers.steps)
+		.enter().append('h3')
+			.classed('label', true)
+			.text(d => d.header.toUpperCase())
+			.style('top', (d, i) => {
+				switch (i) {
+					case 0:
+						return (-1.4 * haloRadius) + 'px';
+					case 1:
+						return (-0.9 * haloRadius) + 'px';
+					case 2:
+						return (-0.65 * haloRadius) + 'px';
+				}
+			});
+		*/
+
+
+
+
+		/*
+		this.setUpHitAreas(this.sectionContainer);
+		*/
+
 	},
 
 	onHitAreaMouseOver: function (hitAreaId) {
