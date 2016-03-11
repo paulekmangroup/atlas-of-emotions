@@ -307,6 +307,7 @@ const continentsSection = {
 			label.style.left = Math.round(centerX + continent.x + continent.label.x) + 'px';
 			label.style.top = Math.round(centerY + continent.y + continent.label.y) + 'px';
 			label.setAttribute('data-popuptarget', 'continents:' + continent.id);
+			label.classList.add('emotion-label');
 
 			if (continent.name.toLowerCase() === this.defaultEmotionHelper.toLowerCase()) {
 				label.classList.add('default-interactive-helper');
@@ -332,7 +333,7 @@ const continentsSection = {
 			this.setContinentIntroPositions(true);
 		} else {
 			// else, fade in continent labels
-			d3.selectAll('#continent-labels div')
+			d3.selectAll('#continent-labels .emotion-label')
 				.style('opacity', 1.0);
 		}
 
@@ -479,7 +480,7 @@ const continentsSection = {
 
 				// display the default continents callout and continent labels.
 				dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
-				d3.selectAll('#continent-labels div')
+				d3.selectAll('#continent-labels .emotion-label')
 					.style('opacity', 1.0);
 
 			}
@@ -609,7 +610,7 @@ const continentsSection = {
 			.start();
 
 			// fade in/out continent labels
-			d3.selectAll('#continent-labels div')
+			d3.selectAll('#continent-labels .emotion-label')
 				.style('opacity', targetContinent ? 0.0 : 1.0);
 
 		},
