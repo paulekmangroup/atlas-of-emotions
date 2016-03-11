@@ -136,67 +136,87 @@ export default {
 			.outerRadius(radius);
 
 		//
-		// Set up each graph
+		// Set up each graph,
+		// or update if already set up (on resize)
 		//
-		this.valenceTextures = {};
-		this.graphContainers = {};
-		_.values(dispatcher.EMOTIONS).forEach((emotion, i) => {
+		if (!this.graphContainers) {
 
-			let graphContainer = document.querySelector('#actions .' + emotion + ' .graph-container');
+			this.graphContainers = {};
+			this.valenceTextures = {};
+			_.values(dispatcher.EMOTIONS).forEach((emotion, i) => {
 
-			let svg = d3.select(graphContainer).append('svg')
-				.attr('width', graphContainer.offsetWidth)
-				.attr('height', h);
+				let graphContainer = document.querySelector('#actions .' + emotion + ' .graph-container');
 
-			let graph = svg.append('g')
-				.attr('transform', 'translate(' + (margin.left + 0.5*innerWidth) + ',' + margin.top + ')');
+				let svg = d3.select(graphContainer).append('svg')
+					.attr('width', graphContainer.offsetWidth)
+					.attr('height', h);
 
-			// TODO: remove if we end up not using textures
-			let valenceTextures = {};
-			/*
-			valenceTextures[VALENCES.CONSTRUCTIVE] = textures.circles()
-				.complement()
-				.heavier(0.85)
-				.stroke('black');
-			valenceTextures[VALENCES.BOTH] = textures.circles()
-				.complement()
-				.stroke('black');
-			valenceTextures[VALENCES.DESTRUCTIVE] = textures.circles()
-				.complement()
-				.lighter(0.85)
-				.stroke('black');
-			*/
-			valenceTextures[VALENCES.CONSTRUCTIVE] = textures.lines()
-				.thinner(0.85)
-				.orientation('6/8')
-				.stroke('black');
-			valenceTextures[VALENCES.BOTH] = textures.lines()
-				.orientation('4/8')
-				.stroke('black');
-			valenceTextures[VALENCES.DESTRUCTIVE] = textures.lines()
-				.thicker(0.85)
-				.orientation('2/8')
-				.stroke('black');
+				let graph = svg.append('g')
+					.attr('transform', 'translate(' + (margin.left + 0.5*innerWidth) + ',' + margin.top + ')');
 
-			_.values(valenceTextures).forEach(t => {
-				svg.call(t);
+				// TODO: remove if we end up not using textures
+				let valenceTextures = {};
+				/*
+				valenceTextures[VALENCES.CONSTRUCTIVE] = textures.circles()
+					.complement()
+					.heavier(0.85)
+					.stroke('black');
+				valenceTextures[VALENCES.BOTH] = textures.circles()
+					.complement()
+					.stroke('black');
+				valenceTextures[VALENCES.DESTRUCTIVE] = textures.circles()
+					.complement()
+					.lighter(0.85)
+					.stroke('black');
+				*/
+				valenceTextures[VALENCES.CONSTRUCTIVE] = textures.lines()
+					.thinner(0.85)
+					.orientation('6/8')
+					.stroke('black');
+				valenceTextures[VALENCES.BOTH] = textures.lines()
+					.orientation('4/8')
+					.stroke('black');
+				valenceTextures[VALENCES.DESTRUCTIVE] = textures.lines()
+					.thicker(0.85)
+					.orientation('2/8')
+					.stroke('black');
+
+				_.values(valenceTextures).forEach(t => {
+					svg.call(t);
+				});
+
+				/*
+				graph.append('g')
+					.classed('valences', true);
+				*/
+
+				this.valenceTextures[emotion] = valenceTextures;
+
+				this.graphContainers[emotion] = graph;
+
 			});
 
-			/*
-			graph.append('g')
-				.classed('valences', true);
-			*/
+			// create an <svg> solely for <defs> shared across all emotions via xlink:href
+			let defsSvg = d3.select(containerNode).append('svg')
+				.classed('actions-defs', true);
+			this.setUpDefs(defsSvg.append('defs'), radius);
 
-			this.valenceTextures[emotion] = valenceTextures;
+		} else {
 
-			this.graphContainers[emotion] = graph;
+			_.values(dispatcher.EMOTIONS).forEach((emotion, i) => {
 
-		});
+				let graphContainer = document.querySelector('#actions .' + emotion + ' .graph-container');
 
-		// create an <svg> solely for <defs> shared across all emotions via xlink:href
-		let defsSvg = d3.select(containerNode).append('svg')
-			.classed('actions-defs', true);
-		this.setUpDefs(defsSvg.append('defs'), radius);
+				let svg = d3.select(graphContainer).select('svg')
+					.attr('width', graphContainer.offsetWidth)
+					.attr('height', h);
+
+				let graph = svg.select('g')
+					.attr('transform', 'translate(' + (margin.left + 0.5*innerWidth) + ',' + margin.top + ')');
+
+			});
+
+		}
 
 	},
 
@@ -875,8 +895,39 @@ export default {
 
 	onResize: function () {
 
-		//
-		
+		// recalculate containers, scales, etc
+		this.setUpGraphs(this.sectionContainer);
+
+		for (let emotion in this.graphContainers) {
+
+			let graphContainer = this.graphContainers[emotion],
+				arrowSelection = graphContainer.selectAll('g.action-arrow');
+
+			// update all action rays and labels that have already been rendered
+			if (arrowSelection.size()) {
+				arrowSelection.selectAll('path')
+					.call(this.scaledLineGenerator, 1.0);
+
+				if (!this.isBackgrounded) {
+					let currentActionsData;
+
+					if (this.currentState) {
+						let stateActionsData = this.actionsData[this.currentEmotion].actions[this.currentState];
+						if (!stateActionsData) {
+							continue.warn('No actions found for state "' + this.currentState + '" in emotion "' + this.currentEmotion + '".');
+							return;
+						}
+						currentActionsData = stateActionsData.actions;
+					} else {
+						currentActionsData = this.actionsData[this.currentEmotion].allActions;
+					}
+
+					this.renderLabels(currentActionsData);
+				}
+			}
+
+		}
+
 	},
 
 	/**
