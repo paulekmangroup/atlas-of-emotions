@@ -560,7 +560,7 @@ export default {
 			}
 
 		}
-		
+
 	},
 
 	setActive: function (val) {

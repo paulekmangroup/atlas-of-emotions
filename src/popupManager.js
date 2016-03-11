@@ -2,6 +2,7 @@ class PopupManager {
 	constructor() {
 		this.selected = null;
 		this.template = null;
+		this.currentName = null;
 		this.popups = {};
 		this.init();
 	}
@@ -91,6 +92,12 @@ class PopupManager {
 		});
 	}
 
+	reset() {
+		this.selected = null;
+		this.currentName = null;
+		this.closeAll();
+	}
+
 	onPopupCloseButtonClick(id, e) {
 		e.preventDefault();
 		e.stopPropagation();
@@ -129,6 +136,7 @@ class PopupManager {
 	}
 
 	manage(section, name, desc) {
+		console.log('manage');
 		const id = this.makeID(section, name);
 		const keys = Object.keys(this.popups);
 		if (name && section) {
@@ -144,6 +152,7 @@ class PopupManager {
 			if (!target) return;
 
 			this.selected = id;
+			this.currentName = name;
 
 			this.open({
 				target,
@@ -153,8 +162,7 @@ class PopupManager {
 			});
 
 		} else if (!name) {
-			this.selected = null;
-			this.closeAll();
+			this.reset();
 		}
 	}
 

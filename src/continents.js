@@ -8,7 +8,6 @@ import Continent from './Continent.js';
 
 import emotionsData from '../static/emotionsData.json';
 import sassVars from '../scss/variables.json';
-import popupManager from './popupManager.js';
 
 let continents,
 	continentContainer,
@@ -274,13 +273,7 @@ const continentsSection = {
 
 			}
 
-
-			// check to see if we have an actual change
-			if (emotion !== previousEmotion ||
-				(emotion && !popupManager.exists('continents', emotion))) {
-				const desc = (emotion) ? emotionsData.emotions[emotion].continent.desc : null;
-				popupManager.manage('continents', emotion, desc);
-			}
+			dispatcher.popupChange('continents', emotion);
 
 			currentEmotion = emotion;
 			this.zoomedInContinent = null;
@@ -345,7 +338,7 @@ const continentsSection = {
 
 		return new Promise((resolve, reject) => {
 
-			popupManager.closeAll();
+			dispatcher.popupChange();
 
 			let continent = continents.find(c => c.id === currentEmotion);
 			if (nextSection === dispatcher.SECTIONS.STATES && continent && continent.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED) {

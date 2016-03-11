@@ -9,6 +9,7 @@ import calm from './calm.js';
 import moreInfo from './moreInfo.js';
 import emotionsData from '../static/emotionsData.json';
 import sassVars from '../scss/variables.json';
+import popupManager from './popupManager.js';
 
 export default function (...initArgs) {
 
@@ -67,6 +68,7 @@ export default function (...initArgs) {
 		dispatcher.addListener(dispatcher.EVENTS.NAVIGATE, onNavigate);
 		dispatcher.addListener(dispatcher.EVENTS.CHANGE_EMOTION_STATE, onEmotionStateChange);
 		dispatcher.addListener(dispatcher.EVENTS.CHANGE_CALLOUT, onCalloutChange);
+		dispatcher.addListener(dispatcher.EVENTS.POPUP_CHANGE, onPopupChange);
 		window.addEventListener('hashchange', onHashChange);
 
 		onResize();
@@ -977,6 +979,19 @@ export default function (...initArgs) {
 			document.querySelector('.attentionArrow').classList.add("visible");
 		}
 
+	}
+
+	function onPopupChange (section, emotion) {
+		if (!section){
+			popupManager.manage();
+		} else {
+			if (emotion !== popupManager.currentName ||
+				(emotion && !popupManager.exists(section, emotion))) {
+
+				const desc = (emotion) ? emotionsData.emotions[emotion].continent.desc : null;
+				popupManager.manage(section, emotion, desc);
+			}
+		}
 	}
 
 	function onCalloutChange (emotion, title, body) {
