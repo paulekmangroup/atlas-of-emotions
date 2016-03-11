@@ -612,19 +612,20 @@ export default {
 			labelSelection = labelContainer.selectAll('div.label')
 			.data(triggersData);
 
-		// update
-
 		// enter
-		let labelEnterSelection = labelSelection.enter().append('div')
+		labelSelection.enter().append('div')
 			.classed('label ' + emotion, true)
 			.style('opacity', 1.0)
+		.append('h4')
+			.html(d => d.name);
+
+		// merge
+		labelSelection
 			.style('transform', d => {
 				let x = 0.5 * this.sectionContainer.offsetWidth + Math.cos(d.angle) * d.radius,
 					y = h + Math.sin(d.angle) * d.radius;
 				return 'translate(' + x + 'px,' + y + 'px)';
 			});
-		labelEnterSelection.append('h4')
-			.html(d => d.name);
 
 		// exit
 		labelSelection.exit().transition()
@@ -634,34 +635,39 @@ export default {
 
 
 		//
-		// label arrows
+		// label arrows (lines + arrowheads) and gradients
 		//
-		let labelArrowSelection = labelContainer.select('.arrows-container g').selectAll('g.arrow')
-			.data(triggersData);
-
-		// update
+		let emotionGradientName = 'triggers-' + emotion + '-linear-gradient',
+			arrowsContainer = labelContainer.select('.arrows-container g'),
+			gradientsSelection = arrowsContainer.selectAll('linearGradient')
+				.data(triggersData),
+			arrowsSelection = arrowsContainer.selectAll('g.arrow')
+				.data(triggersData);
 
 		// enter
-		let emotionGradientName = 'triggers-' + emotion + '-linear-gradient';
-		let arrowsEnterSelection = labelArrowSelection.enter();
-		arrowsEnterSelection.append('linearGradient')
+		gradientsSelection.enter().append('linearGradient')
 			.attr('xlink:href', '#' + emotionGradientName)
-			.attr('id', (d, i) => emotionGradientName + '-arrow-' + i)
+			.attr('id', (d, i) => emotionGradientName + '-arrow-' + i);
+
+		let arrowsEnterSelection = arrowsSelection.enter().append('g')
+			.classed('arrow ' + emotion, true)
+			.style('opacity', 1.0);
+		arrowsEnterSelection.append('line')
+			.attr('stroke', (d, i) => 'url(#' + emotionGradientName + '-arrow-' + i + ')');
+		arrowsEnterSelection.append('path');
+
+		// merge
+		gradientsSelection
 			.attr('x1', d => Math.cos(d.angle) * d.radius * 0.95)
 			.attr('x2', d => Math.cos(d.angle) * d.radius * (1 - d.arrowLength))
 			.attr('y1', d => Math.sin(d.angle) * d.radius * 0.95)
 			.attr('y2', d => Math.sin(d.angle) * d.radius * (1 - d.arrowLength));
-
-		let arrowsContainerEnterSelection = arrowsEnterSelection.append('g')
-			.classed('arrow ' + emotion, true)
-			.style('opacity', 1.0);
-		arrowsContainerEnterSelection.append('line')
+		arrowsSelection.selectAll('g.arrow line')
 			.attr('x1', d => Math.cos(d.angle) * d.radius * 0.95)
 			.attr('x2', d => Math.cos(d.angle) * d.radius * (1 - d.arrowLength))
 			.attr('y1', d => Math.sin(d.angle) * d.radius * 0.95)
-			.attr('y2', d => Math.sin(d.angle) * d.radius * (1 - d.arrowLength))
-			.attr('stroke', (d, i) => 'url(#' + emotionGradientName + '-arrow-' + i + ')');
-		arrowsContainerEnterSelection.append('path')
+			.attr('y2', d => Math.sin(d.angle) * d.radius * (1 - d.arrowLength));
+		arrowsSelection.selectAll('g.arrow path')
 			.attr('d', ARROWHEAD)
 			.attr('transform', d => {
 				return 'translate(' + Math.cos(d.angle) * d.radius * (1 - d.arrowLength) + ',' + Math.sin(d.angle) * d.radius * (1 - d.arrowLength) + ') ' +
@@ -669,7 +675,8 @@ export default {
 			});
 
 		// exit
-		labelArrowSelection.exit().transition()
+		gradientsSelection.exit().remove();
+		arrowsSelection.exit().transition()
 			.duration(600)
 			.style('opacity', 0.0)
 			.remove();
@@ -715,17 +722,21 @@ export default {
 		// update halo
 		let haloRadius = this.setUpGraphs(this.sectionContainer);
 
+		// update gradients
+		d3.select('#triggers-radial-gradient')
+			.attr('r', haloRadius);
+
 		// update labels, and halos that have already been rendered
 		let h = (1 - sassVars.triggers.bottom.replace('%', '')/100) * this.sectionContainer.offsetHeight;
 		_.values(dispatcher.EMOTIONS).forEach(emotion => {
 
 			// update halo if already rendered
 			let graphContainer = this.graphContainers[emotion],
-				haloSelection = graphContainer.selectAll('path.halo');
+				haloSelection = graphContainer.selectAll('path.halo')
+					.data(this.haloPieLayout([{}]));
 
 			if (haloSelection.size()) {
-				haloSelection.select('path.halo ' + emotion)
-					.attr('d', this.haloArcGenerator);
+				haloSelection.attr('d', this.haloArcGenerator);
 			}
 
 			// update label container
@@ -733,16 +744,18 @@ export default {
 			labelContainer.select('.arrows-container g')
 				.attr('width', this.sectionContainer.offsetWidth)
 				.attr('height', h)
-			.select('g')
 				.attr('transform', 'translate(' + 0.5 * this.sectionContainer.offsetWidth + ',' + h + ')');
 
+			this.renderLabels(emotion);
+			/*
 			// update the labels
-			labelContainer.selectAll('div.label')
+			labelContainer.selectAll('div.label').data(this.triggersData[emotion])
 				.style('transform', d => {
 					let x = 0.5 * this.sectionContainer.offsetWidth + Math.cos(d.angle) * d.radius,
 						y = h + Math.sin(d.angle) * d.radius;
 					return 'translate(' + x + 'px,' + y + 'px)';
 				});
+				*/
 
 			// TODO: have to update trigger data, which contains
 			// knowledge of viewport aspect ratio...
