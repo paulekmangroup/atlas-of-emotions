@@ -130,7 +130,6 @@
 		.label {
 			position: absolute;
 			@include emotion-color;
-			//white-space: nowrap;
 			pointer-events: auto; // enable pointer events for label
 			transform: translate(-50%, -50%);
 
@@ -138,12 +137,11 @@
 				margin: 0;
 				cursor: pointer;
 				opacity: 1.0;
-				transition: opacity #{$states-highlighted-out}s ease-out;
+				white-space: nowrap;
+			}
 
-				&.unhighlighted {
-					opacity: 0.2;
-					transition: opacity #{$states-highlighted-in}s ease-in;
-				}
+			&.unhighlighted {
+				opacity: 0.2;
 			}
 		}
 	}

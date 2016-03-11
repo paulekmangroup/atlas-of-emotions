@@ -1461,7 +1461,7 @@ export default {
 
 			// labelContainer.selectAll('div h3')
 			// 	.classed('highlighted', (data, index) => stateIndexes[index]);
-			labelContainer.selectAll('div h3')
+			labelContainer.selectAll('div .label')
 				.classed('unhighlighted', (data, index) => !stateIndexes[index]);
 
 		} else {
@@ -1470,7 +1470,7 @@ export default {
 				.classed('unhighlighted', false);
 			// labelContainer.selectAll('div h3')
 			// 	.classed('highlighted', false);
-			labelContainer.selectAll('div h3')
+			labelContainer.selectAll('div .label')
 				.classed('unhighlighted', false);
 
 		}
