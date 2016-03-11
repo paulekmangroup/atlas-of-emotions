@@ -914,8 +914,8 @@ export default {
 					if (this.currentState) {
 						let stateActionsData = this.actionsData[this.currentEmotion].actions[this.currentState];
 						if (!stateActionsData) {
-							continue.warn('No actions found for state "' + this.currentState + '" in emotion "' + this.currentEmotion + '".');
-							return;
+							console.warn('No actions found for state "' + this.currentState + '" in emotion "' + this.currentEmotion + '".');
+							continue;
 						}
 						currentActionsData = stateActionsData.actions;
 					} else {
