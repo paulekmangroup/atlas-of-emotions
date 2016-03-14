@@ -1,7 +1,10 @@
+import dispatcher from './dispatcher.js';
+
 class PopupManager {
 	constructor() {
 		this.selected = null;
 		this.template = null;
+		this.currentName = null;
 		this.popups = {};
 		this.init();
 	}
@@ -23,22 +26,26 @@ class PopupManager {
 		clone.querySelector('.close')
 			.addEventListener('click', this.onPopupCloseButtonClick.bind(this, props.id), false);
 
-		props.target.appendChild(clone);
-		props.target.classList.add('popped');
-
 		props.popup = clone;
 		this.popups[props.id] = props;
 
-		// TODO: Figure out a css only way
-		setTimeout(() => {
-			clone.style.opacity = 1;
-		}, 1);
+		props.target.appendChild(clone);
+		props.target.classList.add('popped');
+
 
 		// set w/h
 		let w = clone.offsetWidth + 100;
 		w = Math.min(w, 250);
 
-		clone.style.width = w + 'px';
+		clone.style.cssText = `width: ${w}px;`;
+		clone.offsetWidth; // force repaint
+
+		let h = clone.offsetHeight;
+		clone.style.cssText = 'width: 0px; height: 0px;';
+		clone.offsetWidth; // force repaint
+
+		clone.classList.add('transition');
+		clone.style.cssText = `width: ${w}px; height: ${h}px; opacity: 1;`;
 	}
 
 	resetPopup(key) {
@@ -48,11 +55,8 @@ class PopupManager {
 		const popup = this.popups[key].popup;
 
 		popup.removeEventListener('transitionend', this.onTransitionOut, false);
-
-		popup.classList.remove('transition-out');
+		popup.classList.remove('fade-out');
 		target.classList.add('popped');
-
-		popup.style.opacity = 1;
 	}
 
 	onTransitionOut(key, e) {
@@ -63,6 +67,7 @@ class PopupManager {
 		const popup = this.popups[key].popup;
 
 		popup.removeEventListener('transitionend', this.onTransitionOut, false);
+
 		popup.querySelector('.close')
 			.removeEventListener('click', this.onPopupCloseButtonClick, false);
 
@@ -76,12 +81,10 @@ class PopupManager {
 		const target = this.popups[key].target;
 		const popup = this.popups[key].popup;
 
-		popup.classList.add('transition-out');
-		target.classList.remove('popped');
-
 		popup.addEventListener('transitionend', this.onTransitionOut.bind(this, key), false);
 
-		popup.style.opacity = 0;
+		target.classList.remove('popped');
+		popup.classList.add('fade-out');
 	}
 
 	closeAll() {
@@ -91,10 +94,17 @@ class PopupManager {
 		});
 	}
 
+	reset() {
+		this.selected = null;
+		this.currentName = null;
+		this.closeAll();
+	}
+
 	onPopupCloseButtonClick(id, e) {
 		e.preventDefault();
 		e.stopPropagation();
 		this.popups[id].state = '';
+		dispatcher.popupCloseButtonClicked(this.popups[id].section, this.popups[id].name);
 		this.closeAll();
 	}
 
@@ -103,7 +113,7 @@ class PopupManager {
 
 		const close = document.createElement('button');
 		close.classList.add('close');
-		close.innerHTML = '&times;';
+		// close.innerHTML = '&times;';
 
 		// Probably won't need this but
 		// leaving it for now...
@@ -144,17 +154,19 @@ class PopupManager {
 			if (!target) return;
 
 			this.selected = id;
+			this.currentName = name;
 
 			this.open({
 				target,
 				desc,
+				section,
+				name,
 				id,
 				state: 'active'
 			});
 
 		} else if (!name) {
-			this.selected = null;
-			this.closeAll();
+			this.reset();
 		}
 	}
 

@@ -57,6 +57,8 @@ export default {
 		// this.onValenceMouseOut = this.onValenceMouseOut.bind(this);
 		// this.onValenceMouseClick = this.onValenceMouseClick.bind(this);
 
+		// dispatcher.addListener(dispatcher.EVENTS.POPUP_CLOSE_BUTTON_CLICKED, this.onPopupCloseButtonClicked.bind(this));
+
 		this.isInited = true;
 
 	},
@@ -820,12 +822,19 @@ export default {
 			labelSelection.select('h4')
 				.html(labelText);
 
+			// get a random label to set a box around it
+			const randomLabelIndex = Math.floor(Math.random() * actionsData.length);
+
 			// enter
 			let labelEnterSelection = labelSelection.enter().append('div')
-				.classed('label ' + this.currentEmotion, true)
+				.classed(`${this.currentEmotion} label emotion-label`, true)
+				.classed('default-interactive-helper', (d, i) => i === randomLabelIndex)
+				.attr('data-popuptarget', (d,i) => `actions:${d.name}`)
 				.style('transform', d => 'translate(' + Math.round(labelSize * Math.cos(Math.PI*(d.rotation-90)/180)) + 'px,' + Math.round(labelSize * Math.sin(Math.PI*(d.rotation-90)/180) / sqrt3) + 'px)')
 				.style('opacity', 0.0);
-			labelEnterSelection.append('div').append('h4')
+			labelEnterSelection.append('div')
+				.attr('class', 'label-text-wrapper')
+				.append('h4')
 				.html(labelText)
 				.on('mouseover', this.onActionMouseOver)
 				.on('mouseout', this.onActionMouseOut)
@@ -877,6 +886,7 @@ export default {
 	},
 
 	close: function () {
+		dispatcher.popupChange();
 
 		return new Promise((resolve, reject) => {
 
@@ -935,7 +945,6 @@ export default {
 	 * `setBackgrounded()` toggles this state.
 	 */
 	setBackgrounded: function (val, options) {
-
 		return new Promise((resolve, reject) => {
 
 			this.isBackgrounded = val;
@@ -974,7 +983,8 @@ export default {
 		}
 		*/
 		if (action) {
-			dispatcher.changeCallout(this.currentEmotion, action.name, action.desc);
+			dispatcher.popupChange('actions', action.name, action.desc);
+			// dispatcher.changeCallout(this.currentEmotion, action.name, action.desc);
 			states.displayHighlightedStates(action.states);
 		} else {
 			this.resetCallout();
@@ -1166,6 +1176,7 @@ export default {
 	},
 	*/
 	resetCallout: function () {
+		dispatcher.popupChange();
 		dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.actions.header, emotionsData.metadata.actions.body);
 	}
 

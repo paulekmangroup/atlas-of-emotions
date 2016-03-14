@@ -1,0 +1,39 @@
+.label-container {
+	position: absolute;
+	top: 0px;
+}
+
+.emotion-label {
+	position: absolute;
+	padding: 5px 10px;
+	text-align: left;
+	line-height: 1;
+	opacity: 0.0;
+	transition: opacity #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
+
+	&.visible {
+		opacity: 1.0;
+	}
+
+	h3, h4 {
+		margin: 0;
+		line-height: 1;
+		white-space: nowrap;
+		cursor: pointer;
+	}
+
+	a {
+		position: relative;
+		display: inline-block;
+		z-index: 1;
+	}
+
+	a,
+	a:link,
+	a:visited,
+	a:hover,
+	a:active {
+		text-decoration: none;
+		color: inherit;
+	}
+}

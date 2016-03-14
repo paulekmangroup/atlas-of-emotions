@@ -8,7 +8,6 @@ import Continent from './Continent.js';
 
 import emotionsData from '../static/emotionsData.json';
 import sassVars from '../scss/variables.json';
-import popupManager from './popupManager.js';
 
 let continents,
 	continentContainer,
@@ -28,9 +27,9 @@ const continentsSection = {
 
 		this.defaultEmotionHelper = this.getDefaultEmotionHelper();
 
-		let labelContainer = document.createElement('div');
-		labelContainer.id = 'continent-labels';
-		containerNode.appendChild(labelContainer);
+		this.labelContainer = d3.select(containerNode)
+			.append('div')
+			.attr('class', 'label-container');
 
 		continentContainer = d3.select(containerNode).append('svg')
 			.attr('width', '100%')
@@ -52,7 +51,7 @@ const continentsSection = {
 		// map each emotion to a Continent instance
 		continents = _.values(dispatcher.EMOTIONS).map(emotion => new Continent(emotion, continentContainer, continentGeom));
 
-		this.initLabels(labelContainer);
+		this.initLabels(this.labelContainer);
 
 		// Bind transition namespace to current scope
 		Object.keys(this.transitions).forEach(transitionKey => {
@@ -274,13 +273,8 @@ const continentsSection = {
 
 			}
 
-
-			// check to see if we have an actual change
-			if (emotion !== previousEmotion ||
-				(emotion && !popupManager.exists('continents', emotion))) {
-				const desc = (emotion) ? emotionsData.emotions[emotion].continent.desc : null;
-				popupManager.manage('continents', emotion, desc);
-			}
+			const desc = (emotion) ? emotionsData.emotions[emotion].continent.desc : null;
+			dispatcher.popupChange('continents', emotion, desc);
 
 			currentEmotion = emotion;
 			this.zoomedInContinent = null;
@@ -299,23 +293,21 @@ const continentsSection = {
 	},
 
 	initLabels: function (labelContainer) {
+		let labels = labelContainer.selectAll('.emotion-label')
+			.data(continents, d => d.id);
 
-		continents.forEach((continent) => {
+		let labelsEnter = labels.enter()
+			.append('div')
+			.attr('class', 'emotion-label')
+			.attr('data-popuptarget', d => `continents:${d.id}`)
+			.classed('default-interactive-helper', d => d.name.toLowerCase() === this.defaultEmotionHelper.toLowerCase())
+			.style('left', d => Math.round(centerX + d.x + d.label.x) + 'px')
+			.style('top', d => Math.round(centerY + d.y + d.label.y) + 'px');
 
-			let label = document.createElement('div');
-			label.innerHTML = '<a href="#continents:' + continent.id + '"><h3>' + continent.name.toUpperCase() + '</h3></a>';
-			label.style.left = Math.round(centerX + continent.x + continent.label.x) + 'px';
-			label.style.top = Math.round(centerY + continent.y + continent.label.y) + 'px';
-			label.setAttribute('data-popuptarget', 'continents:' + continent.id);
-
-			if (continent.name.toLowerCase() === this.defaultEmotionHelper.toLowerCase()) {
-				label.classList.add('default-interactive-helper');
-			}
-
-			labelContainer.appendChild(label);
-
-		});
-
+		labelsEnter.append('a')
+			.attr('href', d => `#continents:${d.id}`)
+			.append('h3')
+				.text(d => d.name.toUpperCase());
 	},
 
 	open: function (options) {
@@ -332,7 +324,7 @@ const continentsSection = {
 			this.setContinentIntroPositions(true);
 		} else {
 			// else, fade in continent labels
-			d3.selectAll('#continent-labels div')
+			this.labelContainer.selectAll('.emotion-label')
 				.style('opacity', 1.0);
 		}
 
@@ -343,8 +335,6 @@ const continentsSection = {
 	close: function (nextSection) {
 
 		return new Promise((resolve, reject) => {
-
-			popupManager.closeAll();
 
 			let continent = continents.find(c => c.id === currentEmotion);
 			if (nextSection === dispatcher.SECTIONS.STATES && continent && continent.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED) {
@@ -383,7 +373,7 @@ const continentsSection = {
 				}, (sassVars.continents.spread.delay.in + sassVars.continents.spread.duration.in) * 1000);
 
 			} else {
-
+				this.setActive(false);
 				resolve();
 
 			}
@@ -416,14 +406,13 @@ const continentsSection = {
 		continents.forEach(c => c.onResize(continentGeom));
 
 		// update label positions
-		continents.forEach(continent => {
-			let label = document.querySelector('#continent-labels [data-popuptarget="continents:'+ continent.id +'"]');
-			if (label) {
-				label.style.left = Math.round(centerX + continent.x + continent.label.x) + 'px';
-				label.style.top = Math.round(centerY + continent.y + continent.label.y) + 'px';
-			}
-		});
+		let labels = this.labelContainer.selectAll('.emotion-label')
+			.data(continents, d => d.id);
 
+		// we're not adding anything, so skip right to update
+		labels
+			.style('left', d => Math.round(centerX + d.x + d.label.x) + 'px')
+			.style('top', d => Math.round(centerY + d.y + d.label.y) + 'px');
 	},
 
 	setActive: function (val) {
@@ -479,7 +468,7 @@ const continentsSection = {
 
 				// display the default continents callout and continent labels.
 				dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
-				d3.selectAll('#continent-labels div')
+				this.labelContainer.selectAll('.emotion-label')
 					.style('opacity', 1.0);
 
 			}
@@ -609,7 +598,7 @@ const continentsSection = {
 			.start();
 
 			// fade in/out continent labels
-			d3.selectAll('#continent-labels div')
+			this.labelContainer.selectAll('.emotion-label')
 				.style('opacity', targetContinent ? 0.0 : 1.0);
 
 		},

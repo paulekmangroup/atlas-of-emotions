@@ -148,31 +148,17 @@
 		// pointer-events: none;
 
 		.label {
-			position: absolute;
 			bottom: 0;
 			transform-origin: bottom;
-
 			@include emotion-color;
-			white-space: nowrap;
+			margin-left: -60px; // TODO: where does this magic number come from?
+								// needed to align with arrow points.
 
-			// cursor: pointer;
-			// pointer-events: auto;
-
-			div {
-				position: absolute;
-				margin-left: -60px;		// TODO: where does this magic number come from?
-										// needed to align with arrow points.
-				h4 {
-					margin: 0;
-					line-height: 1em;
-					cursor: pointer;
-				}
-			}
-
-			transition: opacity #{$states-highlighted-out}s ease-in;
+			// transition: opacity #{$states-highlighted-out}s ease-in;
 			opacity: 1.0;
+
 			&.muted {
-				transition: opacity #{$states-highlighted-out}s ease-out;
+				// transition: opacity #{$states-highlighted-out}s ease-out;
 				opacity: 0.2;
 			}
 		}

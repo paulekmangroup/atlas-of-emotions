@@ -9,6 +9,7 @@ import calm from './calm.js';
 import moreInfo from './moreInfo.js';
 import emotionsData from '../static/emotionsData.json';
 import sassVars from '../scss/variables.json';
+import popupManager from './popupManager.js';
 
 export default function (...initArgs) {
 
@@ -60,13 +61,13 @@ export default function (...initArgs) {
 		initDownArrow();
 		initMoreInfoDropdown();
 		initCallout();
-		// popupManager.init();
 		initModal();
 
 		// navigation events
 		dispatcher.addListener(dispatcher.EVENTS.NAVIGATE, onNavigate);
 		dispatcher.addListener(dispatcher.EVENTS.CHANGE_EMOTION_STATE, onEmotionStateChange);
 		dispatcher.addListener(dispatcher.EVENTS.CHANGE_CALLOUT, onCalloutChange);
+		dispatcher.addListener(dispatcher.EVENTS.POPUP_CHANGE, onPopupChange);
 		window.addEventListener('hashchange', onHashChange);
 
 		onResize();
@@ -297,7 +298,6 @@ export default function (...initArgs) {
 	}
 
 	function setSection (sectionName, previousEmotion, previousMorePage) {
-
 		let section = sections[sectionName],
 			previousSection = currentSection,
 			previousContainer;
@@ -308,7 +308,6 @@ export default function (...initArgs) {
 				break;
 			}
 		}
-
 
 		if (!section.isInited) {
 			// init any uninited background sections
@@ -357,7 +356,6 @@ export default function (...initArgs) {
 			});
 
 			setSectionEmotion(section, previousEmotion, previousMorePage);
-
 		} else {
 
 			// some section is already open; perform transition
@@ -382,6 +380,9 @@ export default function (...initArgs) {
 				// 	if the section to which we're navigating is a background section, unbackground it
 				// 	else close the background section.
 				//
+
+				// remove any popups
+				onPopupChange();
 
 				// update down arrow
 				fadeArrowOutAndIn(sectionName);
@@ -979,6 +980,17 @@ export default function (...initArgs) {
 
 	}
 
+	function onPopupChange (section, emotion, desc) {
+		if (!section){
+			popupManager.manage();
+		} else {
+			if (emotion !== popupManager.currentName ||
+				(emotion && !popupManager.exists(section, emotion))) {
+				popupManager.manage(section, emotion, desc);
+			}
+		}
+	}
+
 	function onCalloutChange (emotion, title, body) {
 		if (!title) {
 			callout.classList.remove('visible');
@@ -997,7 +1009,6 @@ export default function (...initArgs) {
 	}
 
 	function onEmotionStateChange (state, selected) {
-
 		if (selected) {
 			sections.actions.setState(state);
 			sections.states.setBackgroundedState(state);

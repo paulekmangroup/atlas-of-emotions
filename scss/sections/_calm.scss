@@ -46,4 +46,8 @@
 			margin: 0;
 		}
 	}
+
+	.label {
+		@include emotion-color();
+	}
 }

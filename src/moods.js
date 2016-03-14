@@ -177,7 +177,6 @@ export default {
 
 		if (!event) { event = d3.event; }
 		event.stopImmediatePropagation();
-
 		this.setCallout(true);
 
 	},
@@ -202,8 +201,10 @@ export default {
 	},
 
 	setCallout: function (active) {
-
+		console.log('>> Set Callout: ', active);
 		if (active) {
+			// will want to set popup up here
+			// dispatcher.popupChange('states', statesData.name, statesData.desc);
 			let moodsCopy = emotionsData.emotions[this.currentEmotion].moods[0];
 			dispatcher.changeCallout(this.currentEmotion, moodsCopy.name, moodsCopy.desc);
 		} else {

@@ -3,7 +3,7 @@
     "anger": {
       "continent": {
         "name": "Anger",
-        "desc": "The Anger actions differ not only in their strength but also in how they deal with what triggered the anger. "
+        "desc": "We experience anger whenever our pursuit of an important goal is blocked, especially by a physical threat. "
       },
       "states": [
         {
@@ -769,7 +769,7 @@
         },
         {
           "name": "Avoid",
-          "desc": "Either phsyically stay away from someone or something, or internally keep one's mind away from what is triggering the disgust."
+          "desc": "Either phsyically stay away from someone or something, or internally keep one’s mind away from what is triggering the disgust."
         },
         {
           "name": "Vomit",
@@ -1110,7 +1110,7 @@
         },
         {
           "name": "Hopelessness",
-          "desc": "NEED DESCRIPTION",
+          "desc": "A feeling that nothing good is to come, a lack of hope about changing one’s circumstances.",
           "range": {
             "min": 6,
             "max": 10
@@ -1186,8 +1186,8 @@
       },
       "states": [
         {
-          "name": "Sensory Pleasures",
-          "desc": "NEED DESCRIPTION",
+          "name": "Sensory pleasures",
+          "desc": "Enjoyment derived through one of the five physical senses: sight, sound, touch, taste and smell.",
           "range": {
             "min": 1,
             "max": 5
@@ -1208,7 +1208,7 @@
         },
         {
           "name": "Relief",
-          "desc": "When something expected to be unplesant, especialy the threat of harm, is avoided or comes to an end.",
+          "desc": "When something expected to be unpleasant, especially the threat of harm, is avoided or comes to an end.",
           "range": {
             "min": 2,
             "max": 10
@@ -1236,7 +1236,7 @@
         },
         {
           "name": "Amusement",
-          "desc": "Light, playful, humorous feelings of enjoyment.",
+          "desc": "Light, playful feelings of enjoyment and good humor.",
           "range": {
             "min": 2,
             "max": 8
@@ -1266,7 +1266,7 @@
         },
         {
           "name": "Excitement",
-          "desc": "Energetic pursuit that, unlike other enjoyable emotions, is rarely felt slightly, but ranges from mid to high in intesnity. May merge with any of the emotions generate a very active form of that emotion.",
+          "desc": "Energy that, unlike other enjoyable emotions, is rarely felt slightly, but ranges from mid to high in intesnity. May merge with any of the emotions, generatinga very active form of that emotion.",
           "range": {
             "min": 6,
             "max": 10
@@ -1358,7 +1358,7 @@
         },
         {
           "name": "Naches",
-          "desc": "The Yiddish word for feelings of pride in the accomplishments, or sometimes just the existence, of your actual offspring, or mentored offspring. Crucial for motivating the nurture of infants and children.",
+          "desc": "The Yiddish word for feelings of pride in the accomplishments, or sometimes just the existence, of your actual offspring or mentored offspring. Crucial for motivating the nurture of infants and children.",
           "range": {
             "min": 3,
             "max": 10
@@ -1390,7 +1390,7 @@
         },
         {
           "name": "Wonder",
-          "desc": "Experiencing something that is very surprising, beautiful, amazing, or hard to believe.",
+          "desc": "An experience of something that is very surprising, beautiful, amazing, or hard to believe.",
           "range": {
             "min": 5,
             "max": 10
@@ -1420,7 +1420,7 @@
         },
         {
           "name": "Schadenfreude",
-          "desc": "Enjoying the misfortunes of another person, usually a rival.",
+          "desc": "Enjoyment of the misfortunes of another person, usually a rival.",
           "range": {
             "min": 3,
             "max": 8
@@ -1478,8 +1478,8 @@
           }
         },
         {
-          "name": "Compassion-joy",
-          "desc": "Enjoyment felt when you act compassionately, especially if your actions help to relieve another person's suffering.",
+          "name": "Compassion/joy",
+          "desc": "Enjoyment felt when you act compassionately, especially if your actions help to relieve another person’s suffering.",
           "range": {
             "min": 3,
             "max": 6
@@ -1506,7 +1506,7 @@
         },
         {
           "name": "Pride",
-          "desc": "Wanting others to know the pleasure you feel in your own accomplishments or the accomplishments of another who you either nurtured directly or identified with.",
+          "desc": "A desire for others to know the pleasure you feel in your own accomplishments or the accomplishments of someone you either nurtured directly or identify with.",
           "range": {
             "min": 4,
             "max": 9
@@ -1539,72 +1539,40 @@
               "indulge"
             ]
           }
-        },
-        {
-          "name": "Debauchery",
-          "desc": "NEED DESCRIPTION",
-          "range": {
-            "min": 6,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "withdraw",
-              "engage/connect",
-              "seek more",
-              "maintain",
-              "savor",
-              "indulge"
-            ],
-            "con": [
-              "withdraw",
-              "engage/connect"
-            ],
-            "des": [
-              "seek more",
-              "maintain",
-              "engage/connect",
-              "savor",
-              "indulge"
-            ],
-            "both": [
-              "engage/connect"
-            ]
-          }
         }
       ],
       "actions": [
         {
           "name": "Withdraw",
-          "desc": "To physically or mentally leave the scene."
+          "desc": "Physically or mentally leave the scene of what is causing the enjoyment."
         },
         {
           "name": "Seek more",
-          "desc": "To increase the enjoyable feelings."
+          "desc": "Attempt to iincrease the enjoyable feelings."
         },
         {
           "name": "Maintain",
-          "desc": "To continue to do what is necessary to continue the enjoyable feelings."
+          "desc": "Continue to do what is necessary to continue the enjoyable feelings."
         },
         {
           "name": "Gloat",
-          "desc": "To enjoy others envying your enjoyable state."
+          "desc": "Enjoy others envy of your state of enjoyment."
         },
         {
           "name": "Exclaim",
-          "desc": "To vocally express enjoyment to others."
+          "desc": "Vocally express enjoyment to others."
         },
         {
-          "name": "Engage/Connect",
-          "desc": "To desire connection and engagement with others to share in feelings of enjoyment."
+          "name": "Engage/connect",
+          "desc": "Desire connection and engagement with others to share in feelings of enjoyment."
         },
         {
           "name": "Savor",
-          "desc": "To relish in the experience of good feelings about the felt and psychological experiences."
+          "desc": "Relish the experience of good feelings about felt and psychological experiences."
         },
         {
           "name": "Indulge",
-          "desc": "Excessively engaging in the enjoyable feelings"
+          "desc": "Excessively engage in the enjoyable feelings."
         }
       ],
       "triggers": [
@@ -1619,7 +1587,7 @@
       "moods": [
         {
           "name": "High",
-          "desc": "Generalized, non-specific feeling good not about any trigger; lasting hours."
+          "desc": "Generalized, non-specific, non-triggered good feeling, lasting hours."
         }
       ]
     }
@@ -1627,11 +1595,11 @@
   "metadata": {
     "intro": {
       "header": "Welcome to Atlas of Emotion ",
-      "body": "This collection of maps was created by Paul and Eve Ekman to help you better understand your emotions, where they come from and the effects they have on your life.<br><br>Navigate by scrolling between sections or by using the right-hand navigation bar, and by clicking elements to dig deeper.<br><br>This is an opportunity for you to explore the vast world of emotions. The atlas begins with what scholars agree on and gradually introduces the Ekmans' working hypotheses about more complex subject matter."
+      "body": "This is an opportunity for you to explore the vast world of emotions. This collection of maps is based on the work of many scholars and was created by Paul and Eve Ekman to help you better understand your emotions, where they come from and the effects they have on your life.<br><br>Navigate by scrolling between sections or by using the right-hand navigation bar, and by clicking elements to dig deeper."
     },
     "continents": {
       "header": "The Emotions",
-      "body": "Each emotion is represented as a continent. The movement of the continents reflects how emotions vary in strength and frequency in people's lives."
+      "body": "Each emotion is represented as a continent. The movement of the continents reflects how emotions vary in strength and frequency in people’s lives."
     },
     "states": {
       "header": "The States of an Emotion",
@@ -1669,7 +1637,7 @@
         },
         {
           "header": "Response",
-          "body": "It is very difficult to modify our emotional actions once triggered. Identifying what triggers our emotions may enable us to lead a more balanced emotional life."
+          "body": "The emotions are our response to triggers. They arise automatically and result in emotional actions."
         },
         {
           "header": "Universal Triggers",
@@ -1687,10 +1655,10 @@
     },
     "calm": {
       "header": "Achieving Calm",
-      "body": "Calm is a state of mind that is actively engaged in using intelligence and wisdom to evaulate the changing world.",
+      "body": "It is very difficult to modify our emotional actions once our emotions have been triggered. Focusing on identifying our triggers, instead of on our emotional actions, may enable us to lead a more balanced emotional life.<br><br>Calm is a balanced frame of mind that is actively engaged in evaluating and understanding our changing emotions without dwelling on them or being ruled by them.",
       "secondary": {
         "header": "Visit the Annex",
-        "body": "To learn more about emotions, click on \"more information\" to the right."
+        "body": "To learn more about emotions, click on “More Information” in the bottom right corner."
       }
     }
   }

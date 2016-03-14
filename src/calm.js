@@ -61,6 +61,10 @@ export default {
 			.attr('height', '100%')
 			.attr('xmlns:atlas', 'http://www.atlasofemotion.org');
 
+		this.labelContainer = d3.select(containerNode)
+			.append('div')
+			.attr('class', 'label-container');
+
 		let w = containerNode.offsetWidth,
 			h = containerNode.offsetHeight,
 			continentGeom;
@@ -131,13 +135,37 @@ export default {
 			}
 		});
 
+		this.initLabels(this.labelContainer);
+
 		// Bind event handlers to current scope
 		this.onContinentMouseEnter = this.onContinentMouseEnter.bind(this);
 		this.onContinentMouseLeave = this.onContinentMouseLeave.bind(this);
-		this.onContinentMouseUp = this.onContinentMouseUp.bind(this);
+		this.onContinentMouseClick = this.onContinentMouseClick.bind(this);
+
+		dispatcher.addListener(dispatcher.EVENTS.POPUP_CLOSE_BUTTON_CLICKED, this.onPopupCloseButtonClicked.bind(this));
 
 		this.isInited = true;
 
+	},
+
+	initLabels: function (labelContainer) {
+		continents.forEach(c => {
+			let labels = labelContainer.selectAll('.emotion-label')
+				.data(continents, d => d.id);
+
+			// TODO: positioning not right
+			let labelsEnter = labels.enter()
+				.append('div')
+				.attr('class', d => `emotion-label label show-only no-body ${d.id}`)
+				.attr('data-popuptarget', d => `calm:${d.id}`)
+				.style('left', d => Math.round(centerX + d.x - d.size) + 'px')
+				.style('top', d => Math.round(centerY + d.y - 17) + 'px');
+
+			labelsEnter.append('a')
+				.attr('href', d => `#continents:${d.id}`)
+				.append('h3')
+					.text('START AGAIN');
+		});
 	},
 
 	setEmotion: function (emotion) {
@@ -187,7 +215,7 @@ export default {
 	 * so size changes take a bit of time to propagate.
 	 */
 	onResize: function () {
-			
+
 		// update continents
 		let w = this.sectionContainer.offsetWidth,
 			h = this.sectionContainer.offsetHeight,
@@ -208,6 +236,16 @@ export default {
 		d3.select('.calm-paths')
 			.attr('transform', 'scale(' + w/PATH_SOURCE_WIDTH + ',' + h/PATH_SOURCE_HEIGHT + ')');
 
+		// update label positions
+		let labels = this.labelContainer.selectAll('.emotion-label')
+			.data(continents, d => d.id);
+
+		// we're not adding anything, so skip right to update
+		// TODO: positioning not right
+		labels
+			.style('left', d => Math.round(centerX + d.x - d.size) + 'px')
+			.style('top', d => Math.round(centerY + d.y - 17) + 'px');
+
 	},
 
 	setActive: function (val) {
@@ -219,8 +257,11 @@ export default {
 			continent.d3Selection
 				.on('mouseenter', val ? section.onContinentMouseEnter : null)
 				.on('mouseleave', val ? section.onContinentMouseLeave : null)
-				.on('mouseup', val ? section.onContinentMouseUp : null);
+				.on('click', val ? section.onContinentMouseClick : null);
 		});
+
+		// handle background click for deselection
+		d3.select('#calm').on('click', val ? this.onBackgroundClick : null, false);
 
 	},
 
@@ -450,10 +491,23 @@ export default {
 
 	},
 
-	onContinentMouseUp: function (continent) {
+	onContinentMouseClick: function (continent) {
+		if (d3.event) {
+			d3.event.stopImmediatePropagation();
+		}
+
+		dispatcher.popupChange('calm', continent.id);
 
 		console.log('TODO: implement "START AGAIN" popup when popups are implemented');
+		this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.SELECTED);
 
+		/*
+		if (d3.event) {
+			d3.event.stopImmediatePropagation();
+		}
+
+		dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS, continent.id);
+		*/
 	},
 
 	setContinentHighlight: function (continent, highlightLevel) {
@@ -479,6 +533,20 @@ export default {
 			});
 		}
 
+	},
+
+	onBackgroundClick: function(e) {
+		if (d3.event) {
+			d3.event.stopImmediatePropagation();
+		}
+
+		continents.forEach(c => {
+			c.highlightLevel = Continent.HIGHLIGHT_LEVELS.NONE;
+		});
+	},
+
+	onPopupCloseButtonClicked: function() {
+		this.onBackgroundClick();
 	},
 
 	openCallout: function (delay) {

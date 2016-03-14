@@ -54,6 +54,8 @@ export default {
 		this.onStateClick = this.onStateClick.bind(this);
 		this.onBackgroundClick = this.onBackgroundClick.bind(this);
 
+		// dispatcher.addListener(dispatcher.EVENTS.POPUP_CLOSE_BUTTON_CLICKED, this.onPopupCloseButtonClicked.bind(this));
+
 		this.isInited = true;
 
 	},
@@ -244,21 +246,20 @@ export default {
 		};
 
 		if (!labels.size()) {
+			// get a random label to set a box around it
+			const randomLabelIndex = Math.floor(Math.random() * ranges.length);
 
 			// if labels have not yet been rendered, create them
 			labels.enter().append('div');
 
 			labels
-				.classed(emotion + ' label', true)
+				.classed(`${emotion} label emotion-label`, true)
+				.classed('default-interactive-helper', (d, i) => i === randomLabelIndex)
+				.attr('data-popuptarget', (d,i) => `states:${statesData[i].name}`)
 				.html((d, i) => '<h3>' + statesData[i].name.toUpperCase() + '</h3>')
 				.style({
 					left: d => (Math.round(stateSection.xScale(d[1].x) + 20) + 'px'),	// not sure why this 20px magic number is necessary...?
 					top: d => (Math.round(yOffsets[emotion](stateSection.yScale(d[1].y), d)) + 'px')
-				})
-				.each(function () {
-					setTimeout(() => {
-						this.classList.add('visible');
-					}, LABEL_APPEAR_DELAY);
 				});
 
 			labels.exit().remove();
@@ -270,6 +271,11 @@ export default {
 			.style({
 				left: d => (Math.round(stateSection.xScale(d[1].x) + 20) + 'px'),	// not sure why this 20px magic number is necessary...?
 				top: d => (Math.round(yOffsets[emotion](stateSection.yScale(d[1].y), d)) + 'px')
+			})
+			.each(function () {
+				setTimeout(() => {
+					this.classList.add('visible');
+				}, LABEL_APPEAR_DELAY);
 			});
 
 	},
@@ -400,7 +406,6 @@ export default {
 			}, resolveDelay);
 
 		});
-
 	},
 
 	renderEmotion: function (emotion) {
@@ -460,7 +465,6 @@ export default {
 	},
 
 	open: function (options) {
-
 		this.setBackgrounded(options && options.inBackground, options);
 
 		if (options && (options.sectionName === dispatcher.SECTIONS.STATES || options.sectionName === dispatcher.SECTIONS.ACTIONS)) {
@@ -471,9 +475,7 @@ export default {
 	},
 
 	close: function () {
-
 		return new Promise((resolve, reject) => {
-
 			//
 			// TODO: the logic below should be reusable for transitioning between emotions.
 			// refactor as such, along with refactor noted at top of setEmotion().
@@ -560,7 +562,7 @@ export default {
 			}
 
 		}
-		
+
 	},
 
 	setActive: function (val) {
@@ -602,6 +604,7 @@ export default {
 	setBackgrounded: function (val, options) {
 
 		return new Promise((resolve, reject) => {
+			const hasBackgroundedClass = this.sectionContainer.classList.contains('backgrounded');
 
 			// apply `states-in-out` class any time animating into or out of states section
 			if (!val && this.sectionContainer.classList.contains('backgrounded') ||
@@ -1362,13 +1365,13 @@ export default {
 			dispatcher.setEmotionState(statesData.name, true);
 		} else {
 			this.setHighlightedState(statesData.name);
-			dispatcher.changeCallout(this.currentEmotion, statesData.name, statesData.desc);
+			dispatcher.popupChange('states', statesData.name, statesData.desc);
+			// dispatcher.changeCallout(this.currentEmotion, statesData.name, statesData.desc);
 		}
 
 	},
 
 	onBackgroundClick: function () {
-
 		if (this.isBackgrounded) {
 			dispatcher.setEmotionState(null, true);
 		} else {
@@ -1379,7 +1382,6 @@ export default {
 	},
 
 	setBackgroundedState: function (state) {
-
 		this.backgroundedState = state;
 		this.displayBackgroundedStates(null);
 		this.setHighlightedState(state);
@@ -1449,7 +1451,7 @@ export default {
 
 			// labelContainer.selectAll('div h3')
 			// 	.classed('highlighted', (data, index) => stateIndexes[index]);
-			labelContainer.selectAll('div h3')
+			labelContainer.selectAll('div .label')
 				.classed('unhighlighted', (data, index) => !stateIndexes[index]);
 
 		} else {
@@ -1458,7 +1460,7 @@ export default {
 				.classed('unhighlighted', false);
 			// labelContainer.selectAll('div h3')
 			// 	.classed('highlighted', false);
-			labelContainer.selectAll('div h3')
+			labelContainer.selectAll('div .label')
 				.classed('unhighlighted', false);
 
 		}
@@ -1466,7 +1468,7 @@ export default {
 	},
 
 	resetCallout: function () {
-
+		dispatcher.popupChange();
 		dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.states.header, emotionsData.metadata.states.body/* + '<br><br>' + emotionsData.emotions[this.currentEmotion].statesDesc*/);
 
 	}

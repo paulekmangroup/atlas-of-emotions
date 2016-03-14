@@ -4,7 +4,7 @@
       "emotions": [
         {
           "name": "Anger",
-          "desc": "A hostile person who is often angry, known to others by the frequency of anger responses to the world. Often anger occurs with any frustration, the threshold for frustration is low. Hostile people may regret afterwards and apologize for their anger, but nevertheless continue to respond angrily. Sometimes hostile people express their anger in a nasty way, using words to demean and cause psychological pain to the recipients."
+          "desc": "A hostile person is often angry and is known to others for the frequency of anger responses to the world. Often anger occurs with any frustration; the threshold for frustration is low. Hostile people may experience regret afterward and apologize for their anger, but nevertheless continue to respond angrily. Sometimes hostile people express their anger in a nasty way, using words to demean and cause psychological pain to others."
         },
         {
           "name": "Fear",
@@ -12,15 +12,15 @@
         },
         {
           "name": "Disgust",
-          "desc": "A person who often feels disgusted by others may have an inflated sense of self worth and hyper aversion towards others. Someone who is disgusted or dissatisfied with everything can be unpleasant to be around."
+          "desc": "A person who often feels disgusted by others may have an inflated sense of self-worth and hyper-aversion toward others. Someone who is disgusted or dissatisfied with everything can be unpleasant to be around."
         },
         {
           "name": "Sadness",
-          "desc": "A somber person who is often feeling low may have clinical depression or simply have more frequent feelings of sadness. This person may hold a perspective about the world that things are hard and difficult."
+          "desc": "A somber person who is often feeling low may have clinical depression or may simply have more frequent feelings of sadness. This person may hold a perspective about the world that things are hard and difficult."
         },
         {
           "name": "Enjoyment",
-          "desc": "A cheerful person is also thought of as optimistic. This person sees the world in positive way and can be easily made to feel enjoyment and laughter."
+          "desc": "A cheerful person is also thought of as optimistic. This person sees the world in positive way and can easily be made to laugh and feel enjoyment."
         }
       ],
       "title": "Personality Trait",
@@ -30,15 +30,15 @@
       "emotions": [
         {
           "name": "Anger",
-          "desc": "Causing physical or verbal harm within inappropriate contexts, anger that is out of control, anger that is passive but persistently preoccupying.",
+          "desc": "A tendency to cause physical or verbal harm in inappropriate contexts. Anger may be out of control, or passive but persistently preoccupying.",
           "children": [
             {
               "name": "Intermittent Explosive Disorder",
-              "desc": "Characterized by impulsive aggressive and assaultive behaviors out of proportion to stressors."
+              "desc": "Characterized by impulsively aggressive and assaultive behaviors out of proportion to stressors."
             },
             {
               "name": "Oppositional Defiance Disorder",
-              "desc": "Operationally distinct from conduct disorder which is characterized by behaviorally aggressive acts."
+              "desc": "A pattern of defiant, disobedient and hostile behavior in children or teens toward parents and people in authority, beyond normal age-appropriate misbehavior."
             },
             {
               "name": "Antisocial Personality Disorder",
@@ -52,87 +52,87 @@
         },
         {
           "name": "Fear",
-          "desc": "Anxiety states, involve prolonged fear without knowing the source of the threat as well as indcidents of panic (episodic attacks of severe anxiety).",
+          "desc": "Anxiety states involve prolonged fear without knowing the source of the threat as well as indcidents of panic (episodic attacks of severe anxiety).",
           "children": [
             {
               "name": "Social Anxiety Disorder",
-              "desc": "A persistent fear of one or more social or performance situations in which the person is exposed to unfamiliar people or to possible scrutiny by others. The individual fears that he or she will act in a way (or show anxietysymptoms) that will be embarrassing and humiliating."
+              "desc": "A persistent fear of one or more social or performance situations in which the person is exposed to unfamiliar people or to possible scrutiny by others. The individual fears that he or she will act in a way (or show anxiety symptoms) that will be embarrassing and humiliating."
             },
             {
               "name": "Post-Traumatic Stress Disorder (PTSD)",
-              "desc": "A mental health condition that's triggered by an often overwhelming terrifying event — either experiencing it or witnessing it. Symptoms may include flashbacks, nightmares and severe anxiety, as well as uncontrollable thoughts about the event."
+              "desc": "A mental health condition that's triggered by an often overwhelmingly terrifying event — either experiencing it or witnessing it. Symptoms may include flashbacks, nightmares and severe anxiety, as well as uncontrollable thoughts about the event."
             },
             {
               "name": "Avoidant Personality Disorder",
-              "desc": "Characterized by a pervasive pattern of social inhibition, feelings of inadequacy, and a hypersensitivity to negative evaluation. People with this disorder are intensely afraid that others will ridicule them, reject them, or criticize them."
+              "desc": "Characterized by a pervasive pattern of social inhibition, feelings of inadequacy and a hypersensitivity to negative evaluation. People with this disorder are intensely afraid that others will ridicule them, reject them or criticize them."
             },
             {
               "name": "Generalized Anxiety Disorder",
-              "desc": "An anxiety disorder that is characterized by excessive, uncontrollable and often irrational worry, that is, apprehensive expectation about events or activities."
+              "desc": "An anxiety disorder that is characterized by excessive, uncontrollable and often irrational worry and apprehensive expectation about events or activities."
             },
             {
               "name": "Obsessive-Compulsive Disorder (OCD)",
-              "desc": "An anxiety disorder characterized by intrusive thoughts that produce uneasiness, apprehension, fear or worry (obsessions), repetitive behaviors aimed at reducing the associated anxiety (compulsions), or a combination of such obsessions and compulsions."
+              "desc": "An anxiety disorder characterized by intrusive thoughts that produce uneasiness, apprehension, fear or worry (obsessions); repetitive behaviors aimed at reducing the associated anxiety (compulsions); or a combination of such obsessions and compulsions."
             }
           ]
         },
         {
           "name": "Disgust",
-          "desc": "The psychopathology of disgust includes feelings of disgust that prevent everyday interaction with the world, the self or others. The disgust can be a paralyzing feeling making simple interactions (such as eating) extremely painful if not impossible. Disgust and fear are both thought to contribute to various phobias, such as of small animals.",
+          "desc": "The psychopathology of disgust includes feelings that prevent everyday interaction with the world, the self or others. Disgust can be a paralyzing feeling that makes simple interactions (such as eating) extremely painful if not impossible. Disgust and fear are both thought to contribute to various phobias, such as fear of small animals.",
           "children": [
             {
-              "name": "Anorexia nervosa",
-              "desc": "Often coupled with a distorted self imagethat  may be maintained by various cognitive biases that alter how the affected individuals evaluates and thinks about their body, food, and eating. People with anorexia nervosa often view themselves as disgusting, overweight or \"big\" even when they are already underweight."
+              "name": "Anorexia Nervosa",
+              "desc": "A distorted self-image that may be maintained by various cognitive biases that alter how the affected individual evaluates and thinks about their body, food and eating. People with anorexia nervosa often view themselves as disgusting, overweight or “big” even when they are already underweight."
             },
             {
               "name": "Body Dysmorphic Disorder",
-              "desc": "A body-image disorder characterized by persistent and intrusive preoccupations with an imagined or slight defect in one's appearance, feeling disgusted by one’s appearance."
+              "desc": "A body-image disorder characterized by persistent and intrusive preoccupations with an imagined or slight defect in one’s appearance or a feeling of disgust with one’s appearance."
             },
             {
               "name": "Bulimia",
-              "desc": "Need description."
+              "desc": "A disorder characterized by repeated binging on large quantities of food followed by induced vomiting; both the binging and purging may be accompanied by feelings of self-disgust."
             },
             {
               "name": "Sexual Aversion Disorder",
-              "desc": "Characterized by disgust, fear, revulsion, or lack of desire in consensual relationships involving genital contact."
+              "desc": "Characterized by disgust, fear, revulsion or lack of desire in consensual relationships involving genital contact."
             }
           ]
         },
         {
           "name": "Sadness",
-          "desc": "Depression is a well known psychopathology, reported to effect over 25% of the population. When you have depression, it interferes with daily life and causes pain for both you and those who care about you. Depression is a common but serious illness.\n",
+          "desc": "Depression is a well-known psychopathology that is reported to affect over 25 percent of the population. When you have depression, it interferes with daily life and causes pain for both you and those who care about you. Depression is a common but serious illness.\n",
           "children": [
             {
               "name": "Major Depressive Disorder",
-              "desc": "Also known as clinical depression, major depression, or unipolar depression, is a mental disorder characterized by a pervasive and persistent low mood that is accompanied by low self-esteem and by a loss of interest or pleasure in normally enjoyable activities."
+              "desc": "Also known as clinical depression, major depression or unipolar depression, this is a mental disorder characterized by a pervasive and persistent low mood that is accompanied by low self-esteem and by a loss of interest or pleasure in normally enjoyable activities."
             },
             {
               "name": "Dysthymia",
-              "desc": "Sometimes also called neurotic depression, dysthymic disorder, or chronic depression, is a mood disorder consisting of the same cognitive and physical problems as in depression, with less severe but longer-lasting symptoms."
+              "desc": "Sometimes also called neurotic depression, dysthymic disorder or chronic depression, this is a mood disorder consisting of the same cognitive and physical problems as in depression, with less severe but longer-lasting symptoms."
             },
             {
               "name": "Bipolar Disorder",
-              "desc": "Also known as bipolar affective disorder (and originally called manic-depressive illness), is a mental disorder characterized by periods of elevated mood and periods of depression."
+              "desc": "Also known as bipolar affective disorder (and originally called manic-depressive illness), this is a mental disorder characterized by periods of elevated mood and periods of depression."
             }
           ]
         },
         {
           "name": "Enjoyment",
-          "desc": "It is harder to imagine the drawbacks of enjoyable emotions contributing to challenges in managing our everyday relationships, work and getting our basic needs in comparison to other emotions. However pathological enjoyment is quite serious, the hyper elevated states of enjoyment can be quite delusional as well as an addition to feeling good which can lead to destructive behaviors.\n",
+          "desc": "Unlike with other emotions, it is harder to imagine enjoyable emotions contributing to challenges in managing our everyday relationships, work and ability to meet our basic needs. However, pathological enjoyment is quite serious; hyper-elevated states of enjoyment can cause delusions in addition to feeling good, which can lead to destructive behaviors.\n",
           "children": [
             {
               "name": "Mania/Manic Episode",
-              "desc": "Manic episode at its extreme is commonly characterized by frenzied, ungovernable exuberance — essentially elation not grounded in reality. Frequently, confidence and self-esteem are excessively enlarged, and grand, extravagant ideas are expressed, this is called ‘grandiosity’. Mania is often part of bipolar disorder."
+              "desc": "Mania at its extreme is commonly characterized by frenzied, ungovernable exuberance — essentially elation not grounded in reality. Frequently, confidence and self-esteem are excessively enlarged, and grand, extravagant ideas are expressed; this is called “grandiosity.” Mania is often part of bipolar disorder."
             },
             {
               "name": "Cyclothemia",
-              "desc": "The experience when moods noticeably shifts up and down from baseline. It may feel on top of the world for a time, followed by a low period when the feeling is somewhat blue. Between these cyclothymic highs and lows, the person may feel stable and fine."
+              "desc": "This is characterized by moods that shift noticeably up and down from a person’s baseline. The person may feel on top of the world for a time, followed by a low period when their feeling is somewhat blue. Between these cyclothymic highs and lows, the person may feel stable and fine."
             }
           ]
         }
       ],
       "title": "Psychopathology",
-      "desc": "Each emotion relates to distinct psychopathologies, which describe a persistent behavior that interferes with one's ability to function."
+      "desc": "Each emotion relates to distinct psychopathologies, which describe a persistent behavior that interferes with one’s ability to function."
     },
     "signals": {
       "emotions": [
@@ -142,11 +142,11 @@
           "children": [
             {
               "name": "Signal",
-              "desc": "In the voice, anger generates a roar if not controlled; when controlled may have sharp edge that is very detectable. In the face, it includes glaring eyes, lowered brows and narrowed, tightened lips. When people hear or see an angry signal they are typically hurt just by the perception of the signal, and are likely to retaliate with angry actions."
+              "desc": "In the voice, anger generates a roar if not controlled; when anger is controlled, the voice may have sharp edge that is very detectable. In the face, the signal includes glaring eyes, lowered brows and narrowed, tightened lips. When people hear or see an angry signal, they are typically hurt just by the perception of the signal, and are likely to retaliate with angry actions."
             },
             {
               "name": "Message",
-              "desc": "The message of anger is to let the target know to “Get out of my way.”  Anger can carry a message ranging from threat to dissatisfaction."
+              "desc": "The message of anger is to let the target know to “get out of my way.”  Anger can carry a message ranging from threat to dissatisfaction."
             }
           ]
         },
@@ -156,11 +156,11 @@
           "children": [
             {
               "name": "Signal",
-              "desc": "Common signals are movement backwards, eyes very wide open lips stretched horizontally, eyebrows raised and drawn together. Screams will also accompany intense fear. Lesser fear signals can include heavy breathing, head position slightly backwards and away, and horizontally stretched lower lip including tightened neck muscles."
+              "desc": "Common signals are very wide open eyes, horizontally stretched lips and raised, drawn together eyebrows. There may be movement away from the target. Screams will accompany intense fear. Lesser fear signals can include heavy breathing, a head position slightly backwards and away, and a horizontally stretched lower lip accompanied by tightened neck muscles."
             },
             {
               "name": "Message",
-              "desc": "The message of fear is “help me”, it can range from showing panic to low level concern."
+              "desc": "The message of fear is “help me”; it can range from showing low-level concern to conveying panic."
             }
           ]
         },
@@ -170,11 +170,11 @@
           "children": [
             {
               "name": "Signal",
-              "desc": "There are three facial expressions associated with disgust. The first is sticking the tongue out as if you are getting something out of your mouth. The second is raising the upper lip but it is relaxed and not tense, this can display gums and teeth depending on the shape of the mouth. The third is the wrinkling of the nose and the raising of the nostrils. All three can occur in unison or separately."
+              "desc": "There are three facial expressions associated with disgust. The first is sticking the tongue out as if the person is getting something out of their mouth. The second is raising the upper lip, but it is relaxed and not tense, which can display gums and teeth depending on the shape of the mouth. The third is wrinkling of the nose and raising of the nostrils. All three can occur in unison or separately."
             },
             {
               "name": "Message",
-              "desc": "The message of disgust is “get away from me”, this can show others that the target of disgust is to be kept away from or that it is unclean, dirty or socially/morally reprehensible."
+              "desc": "The message of disgust is “get away from this.” It can show others that the target of disgust is to be kept away from or that the target is unclean, dirty or socially/morally reprehensible."
             }
           ]
         },
@@ -184,11 +184,11 @@
           "children": [
             {
               "name": "Signal",
-              "desc": "The signal of sadness includes a frown (lower lip pushed up and lip corners pulled slightly down), inner corners of the eyebrows drawn up and together in the center of the forehead, cheeks raised and can include tears. The vocalization of sadness can include sobs, heaving and quavering of voice."
+              "desc": "The signals of sadness include a frown (lower lip pushed up and lip corners pulled slightly down), the inner corners of the eyebrows drawn up and together in the center of the forehead, raised cheeks and tears. Tears are a powerful example of a signal that can be seen even by strangers. The vocalization of sadness can include sobs and heaving and quavering of the voice."
             },
             {
               "name": "Message",
-              "desc": "The message of sadness is “comfort me”. Witnessing tears is a powerful example of a signal that can even be seen by strangers."
+              "desc": "The message of sadness is “comfort me.” It encourages, or intends to encourage, empathy in the target."
             }
           ]
         },
@@ -198,27 +198,35 @@
           "children": [
             {
               "name": "Signal",
-              "desc": "The enjoyment signal includes the Duchenne (authentic) smile, activation of a smile (lip corners facing up), and activation of the orbital eye muscles that tighten the lower eyelid and create wrinkling around the outer eye corners (especially with age). Enjoyment also includes vocal signals, for example the sound of relief (a sigh or exhalation) and the sound of amusement such as laughter and giggling."
+              "desc": "Enjoyment signals include the Duchenne (authentic) smile, activation of a smile (lip corners facing up), and activation of the orbital eye muscles that tighten the lower eyelid and create wrinkling around the outer eye corners (especially with age). Enjoyment also includes vocal signals such as the sound of relief (a sigh or exhalation) and the sound of amusement (laughter or giggling)."
             },
             {
               "name": "Message",
-              "desc": "The message of enjoyment is “this feels good”, and is encouraging and engaging of social interaction."
+              "desc": "The message of enjoyment is “this feels good,” and it is encouraging of engaging in social interaction."
             }
           ]
         }
       ],
       "title": "Signal and Message",
-      "desc": "The signal to an emotion describes how the universal ways emotion is displayed on the face. There can also be vocal tone changes and body language but we have not included them here because they are often culturally informed, learned as opposed to universal. The message is what the emotion is telling us.\nAll emotions have a message which is responds to the world around us."
+      "desc": "The signal of an emotion describes the universal ways that emotion is displayed on the face and/or voice. There can also be other vocal tone changes and body language indicators, but these are not included here because they are often culturally informed and learned as opposed to universal.<br><br>The message is what the emotion is telling us. All emotions have a message that is a response to the world around us."
     },
     "partially-charted": {
       "emotions": [
         {
           "name": "Love",
-          "desc": "A strong attachment to another person, typically parent towards child and child towards parennt, but also between those romantically committed. Within loving relationships, anger, fear, sadness, disgust and enjoyment all can be experienced."
+          "desc": "A strong attachment to another person, typically parent toward child and child toward parent, but also between those romantically committed. Within loving relationships, anger, fear, sadness, disgust and enjoyment can all be experienced."
+        },
+        {
+          "name": "Surprise",
+          "desc": "The briefest emotion, surprise is triggered by the sudden occurrence of an unexpected event. It is often a way station that leads, after more appraisal, to any of the other emotions."
+        },
+        {
+          "name": "Jealousy",
+          "desc": "An emotional storyline involving three people: a desired person, a rival and the person afraid of losing the commitment of the desired person. During jealousy, anger, fear, disgust, sadness or surprise may be felt by any of the three people."
         },
         {
           "name": "Envy",
-          "desc": "Although often misused as a synonym for jealousy, envy involves resenting and wanting what another person posseses. When feeling envy, anger, contempt, or sadness may also be felt."
+          "desc": "Although often misused as a synonym for jealousy, envy involves resenting and wanting what another person posseses. When a person feels envy, anger, contempt or sadness may also be felt."
         },
         {
           "name": "Hate",
@@ -226,68 +234,60 @@
         },
         {
           "name": "Embarrassment",
-          "desc": "Activated often by praise from another, also by a faux pas. No facial or vocal signal, but a blush which is only visible in light-skinned people."
-        },
-        {
-          "name": "Surprise",
-          "desc": "The briefest emotion, triggered by the sudden occurrence of an unexpected event. It often is a way station, leading, after more appraisal, to any of the other emotions."
+          "desc": "Self-conscious distress or awkwardness. Often activated by praise from another, or by a faux pas. It has no vocal signal, but may cause a blush that is visible only in light-skinned people."
         },
         {
           "name": "Shame",
-          "desc": "Expecting others would be disgusted with you if they knew what you were thinking of or had done. It motivates a strong wish to prevent others from learning what you have done or thought."
+          "desc": "An expectation that others would be disgusted if they knew what the person was thinking of or had done. It motivates a strong wish to prevent others from learning what the person has done or thought."
         },
         {
           "name": "Contempt",
-          "desc": "The last to appear in child declopment, it is a feeling of moral superiorit to the target. Often mixed with enjoyment."
+          "desc": "The last emotion to appear in child development, it is a feeling of moral superiority to the target. Often mixed with enjoyment."
         },
         {
           "name": "Guilt",
           "desc": "Regret about a past action, which motivates the wish to confess the wrongful action, hoping for forgiveness."
-        },
-        {
-          "name": "Jealousy",
-          "desc": "An emotional storyline involving three people: a desired person, a rival, and the person afraid of losing the commitmet of the desired person. During jealousy, anger, fear, disgust, sadness or surprise may be felt by any of the three people."
         }
       ],
-      "title": "Partially-Charted Emotions",
+      "title": "Partially Charted Emotions",
       "desc": "Half or less than half of emotion scientists believe there is convincing evidence that each of the following is an emotion."
     },
     "scientific-basis": {
-      "title": "The Scientific Basis For This Work",
-      "desc": "The Emotions Atlas is based on the consensus among scientists (in the choice of the five emotion continents and the relationship of emotions to moods, personality and psychopathology), the work of a few scientists who focused on the naming of states within emotions, dictionary definitions in the glossary, and theory or best guesses about the actions for each state and whether they are constructive or destructive. For more information, see \"What Emotion Scientists Agree About\", by Paul Ekman Perspectives in Psychological Science, 2016."
+      "title": "The Scientific Basis for This Work",
+      "desc": "The Atlas of Emotion is based on the consensus among scientists as determined by survey (in the choice of the five emotion continents and the relationship of emotions to moods, personality and psychopathology), the work of a few scientists who have focused on the naming of states within emotions, dictionary definitions (in the glossary), and theory or best guesses about the actions for each state and whether they are constructive or destructive. For more information, see “What Emotion Scientists Agree About,” by Paul Ekman (Perspectives in Psychological Science, 2016)."
     },
     "triggers-timeline": {
       "content": [
         {
-          "txt": "Appraisal: the constant and subjective appraisal of the environment seen through the lens of our individual mind. \n",
+          "txt": "Appraisal: The constant and subjective evaluation of the environment by an individual mind. \n",
           "id": "appraisal"
         },
         {
-          "txt": "Event: the physical context including places, people and other sensual input as well as thoughts or memories. \n",
+          "txt": "Event: A person’s physical context, including places, people and other sensual input as well as thoughts or memories. \n",
           "id": "event"
         },
         {
-          "txt": "Assessment: the emotional alert database where universal/hardwired responses and acquired memories create the scripts behind all of our triggers. For example, from the environment we get a smell and in the emotion alert database is the stored memory of the shampoo our mother used in our childhood and we are triggered to experience an emotion of warm nostalgia of a happy childhood. ",
+          "txt": "Assessment: The emotional-alert database where universal/hardwired responses and acquired memories create the scripts behind all of our triggers. For example, from the environment we get a smell and in the emotion-alert database is the stored memory of the shampoo our mother used in our childhood, and we are triggered to experience an emotion of warm nostalgia of a happy childhood. ",
           "id": "assessment"
         },
         {
-          "txt": "Trigger: the initiator of the physiological emotion response. Can be universal (sudden loss of ground under the feet creating fear) or learned (the smell of a certain shampoo). They are created from the combination of the automatic appraisal of the environment matching to some universal/hardwired or acquired script in the emotion alert database. When the trigger resembles something in the emotion alert database, it may be a highly accurate or distorted perception of the triggering event. ",
+          "txt": "Trigger: The initiator of the physiological emotion response. Can be universal (sudden loss of ground under the feet creating fear) or learned (the smell of a certain shampoo). Triggers are created from the combination of the automatic appraisal of the environment matching to some universal/hardwired or acquired script in the emotion-alert database. When the trigger resembles something in the emotion-alert database, it may be a highly accurate or a distorted perception of the triggering event. ",
           "id": "trigger"
         },
         {
-          "txt": "State: each emotion has a separate affect program. This occurs also in milliseconds. The affect program contains instructions for facial, vocal and postural signals, preset changes in physiology to support preset actions, learned changes in physiology to support learned actions – physical actions, words, memories, images. The instructions in an affect program generate impulses in milliseconds. \n",
+          "txt": "State: Each emotion has a separate affect program that takes only milliseconds to generate impulses. The affect program contains instructions for facial, vocal and postural signals, preset changes in physiology to support preset actions, and learned changes in physiology to support learned actions—physical actions, words, memories, images.\n",
           "id": "state"
         },
         {
-          "txt": "Learned display rules (to regulate the signals) and learned feeling rules (to modify, amplify or suppress the subjective feelings) arise. We don’t know how quickly these occur. Do they occur before signals and actions, or immediately during the onset of signals and actions? Impulses are translated into actions and signals. ",
+          "txt": "Learned display rules (to regulate signals) and learned feeling rules (to modify, amplify or suppress subjective feelings) arise. We don’t know how quickly these occur. Do they occur before signals and actions, or immediately during the onset of signals and actions? Impulses are translated into actions and signals. ",
           "id": null
         },
         {
-          "txt": "The Selective Filtering Period is initiated with the onset of actions and signals – perception is narrowed and distorted, filtering and interpreting information relevant to and consistent with the prevailing emotion. For example,when fear is aroused, there is a heightened sensitivity to real and imagined threats. ",
+          "txt": "The Selective Filtering Period is initiated with the onset of actions and signals—perception is narrowed and distorted, filtering and interpreting information relevant to and consistent with the prevailing emotion. For example,when fear is aroused, there is a heightened sensitivity to real and imagined threats. ",
           "id": null
         },
         {
-          "txt": "The gap between impulses (Step 2) and action/signals (Step 4) is variable, depending on: ",
+          "txt": "The gap between Step 2 (impulses) and Step 4 (actions/signals) is variable, depending on: ",
           "id": null
         },
         {
@@ -316,10 +316,6 @@
               "desc": "Patience, open-mindedness, concern for others."
             },
             {
-              "name": "Exasperation",
-              "desc": "Letting go of grasping. Patience, inner calm. Trying to understand the causes and conditions that brought about the undesirable situation."
-            },
-            {
               "name": "Frustration",
               "desc": "Letting go, letting go of grasping, putting things in a larger perspective."
             },
@@ -328,12 +324,16 @@
               "desc": "Making effort to understand the other’s perspective, cognitive empathy, benevolence, wishing to solve the problem through a mutually agreeable solution."
             },
             {
+              "name": "Exasperation",
+              "desc": "Letting go of grasping. Patience, inner calm. Trying to understand the causes and conditions that brought about the undesirable situation."
+            },
+            {
               "name": "Vengefulness",
-              "desc": "In case of vengefulness, contemplating the negative effects of taking revenge, in the short and in the long term; forgiveness not as condoning harmful behavior but as breaking the cycle of resentment and hatred."
+              "desc": "Contemplating the negative effects of taking revenge, in the short and long term; forgiveness not as condoning harmful behavior but as breaking the cycle of resentment and hatred."
             },
             {
               "name": "Fury",
-              "desc": "Take a break, physically and mentally, from the circumstances that brought fury about. Look at fury itself with the eye of awareness as if gazing to a raging fire and slowly let it calm down."
+              "desc": "Taking a break, physically and mentally, from the circumstances that brought fury about. Looking at fury itself with the eye of awareness as if gazing at a raging fire and slowly letting it calm down."
             }
           ]
         },
@@ -346,27 +346,27 @@
           "children": [
             {
               "name": "Trepidation",
-              "desc": "Try to ponder what could be done. Calming the mind gives the best chance to find the appropriate solution to what caused the trepidation in the first place."
+              "desc": "Trying to ponder what could be done. Calming the mind gives the best chance to find the appropriate solution to what caused the trepidation in the first place."
             },
             {
               "name": "Nervousness",
-              "desc": "Try to ponder what could be done. Calming the mind gives the best chance to find the appropriate solution to what caused the trepidation in the first place."
+              "desc": "Trying to ponder what could be done. Calming the mind gives the best chance to find the appropriate solution to what caused the nervousness in the first place."
             },
             {
               "name": "Anxiety",
-              "desc": "Make a special effort of letting go of ruminations about the past and anticipations about the future."
+              "desc": "Making a special effort of letting go of ruminations about the past and anticipations of the future."
             },
             {
               "name": "Dread",
-              "desc": "Remain as calm as as possible. See what could be done for yourself and  for others as well."
+              "desc": "Remaining as calm as as possible. Seeing what could be done for yourself and  for others as well."
             },
             {
               "name": "Panic",
-              "desc": "Make the effort to see if anything could at least act as a mitigating factor (depending on the causes involved). "
+              "desc": "Making an effort to see if anything could act as a mitigating factor (depending on the causes involved). "
             },
             {
               "name": "Horror",
-              "desc": "Try to see if anything can be done. If that is not the case, take your distance to see if something can be done from afar. Respond with firmness and compassion, never with hatred. "
+              "desc": "Trying to see if anything can be done immediately. If that is not the case, taking distance to see if something can be done from afar. Responding with firmness and compassion, never with hatred. "
             },
             {
               "name": "Terror",
@@ -382,36 +382,36 @@
           "name": "Disgust Antidotes",
           "children": [
             {
-              "name": "Dislike",
-              "desc": "While evaluating impartially the ethical issues, generate compassion so as to find the best way to remedy to the causes and conditions that triggered your dislike."
+              "name": "Aversion",
+              "desc": "Evaluating impartially the degree of harmfulness, taking appropriate measures, and then letting aversion dissolve in a space of mindful awareness."
             },
             {
-              "name": "Aversion",
-              "desc": "Evaluate impartially the degree of harmfulness, take the appropriate measures, and then let aversion dissolve in the space of mindful awareness."
+              "name": "Dislike",
+              "desc": "While evaluating impartially the ethical issues, generating compassion so as to find the best way to remedy to the causes and conditions that triggered dislike."
             },
             {
               "name": "Distaste",
-              "desc": "Evaluate impartially the degree of harmfulness, take the appropriate measures, and then let aversion dissolve in the space of mindful awareness."
+              "desc": "Evaluating impartially the degree of harmfulness, taking appropriate measures, and then letting distaste dissolve in a space of mindful awareness."
             },
             {
               "name": "Repugnance",
-              "desc": "Evaluate impartially the degree of harmfulness, take the appropriate measures, and then let aversion dissolve in the space of mindful awareness."
+              "desc": "Evaluating impartially the degree of harmfulness, taking appropriate measures, and then letting repugnance dissolve in a space of mindful awareness."
             },
             {
-              "name": "Loathing - Self",
-              "desc": "Use healthy regret to generate the determination to improve yourself; whenever possible, repair the harm caused to others. \nDo not fall into pessimistic guilt, thinking that you are fundamentally bad and that’s the way you are bound to remain. \nDo not underestimate the potential for change."
+              "name": "Loathing—Self",
+              "desc": "Using healthy regret to generate the determination to improve oneself; whenever possible, repairing the harm caused to others. \nNot falling into pessimistic guilt, thinking that one is fundamentally bad and that’s the way one is bound to remain. \nNot underestimating the potential for change."
             },
             {
-              "name": "Loathing - Others",
-              "desc": "Adopt the outlook of a caring physician, who might deeply disapprove certain behaviors, but will focus on doing all that is possible to cure the person from her afflictions."
+              "name": "Loathing—Others",
+              "desc": "Adopting the outlook of a caring physician, who might deeply disapprove certain behaviors but will focus on doing all that is possible to cure a person of their afflictions."
             },
             {
               "name": "Revulsion",
-              "desc": "Adopt the outlook of a caring physician, who might deeply disapprove certain behaviors, but will focus on doing all that is possible to cure the person from her afflictions."
+              "desc": "Adopting the outlook of a caring physician, who might deeply disapprove certain behaviors but will focus on doing all that is possible to cure a person of their afflictions."
             },
             {
               "name": "Abhorrence",
-              "desc": "In case of toxic substances or situations, do the best you can to calmly avoid them. In the case of actions, Adopt the outlook of a caring physician, who might deeply disapprove certain behaviors, but will focus on doing all that is possible to cure the person from her afflictions."
+              "desc": "In case of toxic substances or situations, doing the best one can to calmly avoid them. In the case of actions, adopting the outlook of a caring physician, who might deeply disapprove certain behaviors but will focus on doing all that is possible to cure a person of their afflictions."
             }
           ]
         },
@@ -424,35 +424,35 @@
           "children": [
             {
               "name": "Disappointment",
-              "desc": "Understand that sadness is natural in appropriate circumstances, but also that experiencing loss is part of life and that one should not let oneself be overwhelmed. Try to find a place of peace within oneself and think of constructive things that could be done instead."
+              "desc": "Understanding that sadness is natural in appropriate circumstances, but also that experiencing loss is part of life and that one should not let oneself be overwhelmed. Trying to find a place of peace within oneself and thinking of constructive things that could be done instead."
             },
             {
               "name": "Distraughtness",
-              "desc": "Understand that a permanent state of sadness will not bring any real benefit. \nIn the case of mourning someone, to fall in long-term sadness and despair should to be seen as an homage paid to that person. \nIt is better to pay homage by doing meaningful and altruistic acts."
+              "desc": "Understanding that a permanent state of sadness will not bring any real benefit. In the case of mourning someone, falling into long-term sadness and despair should not be seen as an homage paid to that person. It is better to pay homage by doing meaningful and altruistic acts."
             },
             {
               "name": "Discouragement",
-              "desc": "Understand that a permanent state of sadness will not bring any real benefit. \nIn the case of mourning someone, to fall in long-term sadness and despair should to be seen as an homage paid to that person. \nIt is better to pay homage by doing meaningful and altruistic acts."
+              "desc": "Understanding that a permanent state of sadness will not bring any real benefit. In the case of mourning someone, falling into long-term sadness and despair should not be seen as an homage paid to that person. It is better to pay homage by doing meaningful and altruistic acts."
             },
             {
               "name": "Helplessness",
-              "desc": "Understand that a permanent state of sadness will not bring any real benefit. \nIn the case of mourning someone, to fall in long-term sadness and despair should to be seen as an homage paid to that person. \nIt is better to pay homage by doing meaningful and altruistic acts."
+              "desc": "Understanding that a permanent state of sadness will not bring any real benefit. In the case of mourning someone, falling into long-term sadness and despair should not be seen as an homage paid to that person. It is better to pay homage by doing meaningful and altruistic acts."
             },
             {
               "name": "Misery",
-              "desc": "Understand that a permanent state of sadness will not bring any real benefit. \nIn the case of mourning someone, to fall in long-term sadness and despair should to be seen as an homage paid to that person. \nIt is better to pay homage by doing meaningful and altruistic acts."
+              "desc": "Understanding that a permanent state of sadness will not bring any real benefit. In the case of mourning someone, falling into long-term sadness and despair should not be seen as an homage paid to that person. It is better to pay homage by doing meaningful and altruistic acts."
             },
             {
               "name": "Grief",
-              "desc": "Understand that a permanent state of sadness will not bring any real benefit. \nIn the case of mourning someone, to fall in long-term sadness and despair should to be seen as an homage paid to that person. \nIt is better to pay homage by doing meaningful and altruistic acts."
+              "desc": "Understanding that a permanent state of sadness will not bring any real benefit. In the case of mourning someone, falling into long-term sadness and despair should not be seen as an homage paid to that person. It is better to pay homage by doing meaningful and altruistic acts."
             },
             {
               "name": "Despair",
-              "desc": "Understand that a permanent state of sadness will not bring any real benefit. \nIn the case of mourning someone, to fall in long-term sadness and despair should to be seen as an homage paid to that person. \nIt is better to pay homage by doing meaningful and altruistic acts. Think also well that nothing is engraved in stone: there is always a potential for change."
+              "desc": "Understanding that a permanent state of sadness will not bring any real benefit. In the case of mourning someone, falling into long-term sadness and despair should not be seen as an homage paid to that person. It is better to pay homage by doing meaningful and altruistic acts."
             },
             {
               "name": "Anguish",
-              "desc": "Realize that things and people are impermanent by nature. Revolting against this cannot lead to a fulfilled life."
+              "desc": "Realizing that things and people are impermanent by nature. Revolting against this cannot lead to a fulfilled life."
             }
           ]
         },
@@ -465,11 +465,11 @@
           "children": [
             {
               "name": "Schadenfreude",
-              "desc": "Perceive the destructive aspect of it and rather try to generate benevolence towards that person."
+              "desc": "Perceiving the destructive aspect of it and trying to generate benevolence toward the person."
             },
             {
               "name": "Pride",
-              "desc": "Humility. Putting things into perspective and realizing that there are many other people with similar or even better qualities than yours. Understanding that you could do all this not just thanks to the fact that you are so special, but see it as being the result of many interdepend causes and conditions in which others have taken part."
+              "desc": "Humility. Putting things into perspective and realizing that there are many other people with similar or even better qualities than one’s own. Understanding that one could do something not just because one is so special, but because of many interdependent causes and conditions in which others have taken part."
             }
           ]
         },
@@ -482,27 +482,27 @@
             },
             {
               "name": "Relief",
-              "desc": "To persist in worrying unnecessarily."
+              "desc": "Persisting in worrying unnecessarily."
             },
             {
               "name": "Amusement",
-              "desc": "Tendency to see things in negative ways."
+              "desc": "Tending to see things in negative ways."
             },
             {
               "name": "Excitement",
-              "desc": "Pessimism and negative affects."
+              "desc": "Feeling pessimism."
             },
             {
               "name": "Ecstasy",
-              "desc": "Grasping, attachment, and any other afflictive mental state (animosity, envy, arrogance, etc)."
+              "desc": "Grasping, attachment, and any other afflictive mental state (animosity, envy, arrogance, etc.)."
             },
             {
               "name": "Fiero",
-              "desc": "Vanity, narcissism, failing to acknowledge with gratitude all those who contributed to make that achievement possible."
+              "desc": "Vanity, narcissism, failing to acknowledge with gratitude all those who contributed to make an achievement possible."
             },
             {
               "name": "Naches",
-              "desc": "Pride mixed with arrogance and with partiality that makes you feel contemptuous about others’ achievements."
+              "desc": "Pride mixed with arrogance and with partiality that makes one feel contemptuous about others’ achievements."
             },
             {
               "name": "Wonder",
@@ -513,14 +513,14 @@
               "desc": "Envy, jealousy, pride."
             },
             {
-              "name": "Compassion-Joy",
-              "desc": "Regret of having done something good at the cost of some personal efforts. \nNarrow mindedness when caring only for a limited number of people who are close to you."
+              "name": "Compassion/Joy",
+              "desc": "Regret at having done something good at the cost of some personal efforts. Narrow-mindedness when caring only for a limited number of people who are close."
             }
           ]
         }
       ],
       "title": "Impediments and Antidotes",
-      "desc": "Here are some ways to counteract emotional states. Impediments apply to blocking a positive emotion, antidotes apply to reversing negative ones."
+      "desc": "Here are some ways to counteract emotional states. Impediments involve blocking a positive emotion; antidotes involve reversing negative ones."
     },
     "intrinsic-or-intentional": {
       "emotions": [
@@ -529,7 +529,7 @@
           "children": [
             {
               "name": "Intrinsic",
-              "desc": "Quarrel, Insult, Undermine, Dispute, Scream/yell, Use physical force, Simmer/brood, Passive agressiveness"
+              "desc": "Quarrel, Insult, Undermine, Dispute, Scream/yell, Use physical force, Simmer/brood, Be passive-aggressive"
             },
             {
               "name": "Intentional",
@@ -591,38 +591,38 @@
         }
       ],
       "title": "Intrinsic or Intentional",
-      "desc": "Actions can be intrinsic (take place without intent) or intentional (active attempt to enact change) or both."
+      "desc": "Actions can be intrinsic (without intent) or intentional (an active attempt to enact change), or both."
     }
   },
   "about": {
     "subsections": [
       {
         "title": "About the Ekmans",
-        "desc": "Paul Ekman is a renowned American psychologist who pioneered the field of emotion research through demonstrating the universality of facial expression of emotion and mapping all 43 muscle groups used in facial expression. His widely accessible research has gained him the unique status as working with both law enforcement (to train in identifying deception) and the Dalia Lama (to explore the philosophical underpinning of east and west approach to emotion). After 40 years on the faculty of UCSF he had been running a private training company, Paul Ekman Group, since 2001.\nEve Ekman is a Post Doctoral Scholar at UCSF’s Osher Center for Integrative Medicine. Eve’s research focuses on reducing stress to sustain empathy and meaning in work. She is a teacher trainer for Cultivating Emotional Balance, CEB, an emotion regulation and meditation intervention based in western science and contemplative practices of emotion designed by Paul Ekman and Buddhist scholar B. Alan Wallace. Eve adapts CEB to training care providers in medicine, education and criminal justice."
+        "desc": "Paul Ekman is a renowned American psychologist who pioneered the field of emotion research by demonstrating the universality of facial expression of emotion and mapping all 43 muscle groups used in facial expression. His widely accessible research has gained him the unique status of working with both law enforcement (to train people in identifying deception) and the Dalai Lama (to explore the philosophical underpinning of eastern and western approach to emotion). After 40 years on the faculty of the University of California, San Francisco, he has been running a private training company, Paul Ekman Group, since 2001.<br><br>Eve Ekman is a post-doctoral scholar at UCSF’s Osher Center for Integrative Medicine. Eve’s research focuses on reducing stress to sustain empathy and meaning in work. She is a teacher trainer for Cultivating Emotional Balance, CEB, an emotion regulation and meditation intervention based in western science and contemplative practices of emotion designed by Paul Ekman and Buddhist scholar B. Alan Wallace. Eve adapts CEB to train care providers in medicine, education and criminal justice."
       },
       {
         "title": "Why Use This Atlas?",
-        "desc": "A world without the pull of our emotions would be impossibly bland and dangerous. Anger, fear and disgust can save our lives. We need to understand and develop the skills to have choice about (1) when we become emotional or what brings forth an emotional response and (2) how we respond when we are emotional and what we say and do. These skills are not given to us by nature but we can learn them. Exploring this Atlas can help us to achieve a more balanced emotional life, involving choice (at least some of the time). The Atlas of Emotions will increase your understanding of what emotions are: how they happen, what occurs, what you need to know to gain heightened awareness of your emotions."
+        "desc": "We need to understand our emotions and develop skills to have a choice about (1) when we become emotional or what brings forth an emotional response, and (2) how we respond and what we say and do when we are emotional. These skills are not given to us by nature, but we can learn them. Exploring the Atlas of Emotion will increase your understanding of what emotions are and their effects on us, giving you an increased awareness of what is happening to you when you experience emotions. "
       },
       {
-        "title": "What is Emotional Awareness?",
-        "desc": "Why does emotional awareness help us to manage our emotional lives? The simple answer is: we live most of our days completely unaware of what emotions we are feeling and the words and actions that they motivate. Typically we are aware of our emotions after an emotional episode, especially if we then regret how we acted. The goal is to become aware of the impulse to act before acting, choosing whether to engage, and if so how to engage. This means understanding what triggers emotions, which triggers most people share, which triggers we are especially sensitive to, and which triggers usually result in a regrettable emotional episode. This isn’t easy to achieve, but exploring this Atlas provides the vital, necessary first step. In the Annex of the Atlas you will find suggestions about other practices you may want to adopt to heighten your awareness of your own emotions."
+        "title": "What Is Emotional Awareness?",
+        "desc": "Why does emotional awareness help us manage our emotional lives? The simple answer is that we live most of our days completely unaware of what emotions we are feeling and what words and actions they motivate. Typically we are aware of our emotions only after an emotional episode, especially if we then regret how we acted. The goal of the Atlas of Emotion is to help people become aware of the impulse to act before acting and then choose whether to engage, and if so how to engage. This means understanding what triggers emotions, which triggers most people share, which triggers we are especially sensitive to, and which triggers usually result in a regrettable emotional episode. This isn’t easy to achieve, but exploring the Atlas of Emotion provides the vital, necessary first step. In the Annex of the Atlas you will find suggestions about other practices you may want to adopt to heighten your awareness of your own emotions."
       },
       {
-        "title": "What is the link Between Emotion and Stress?",
-        "desc": "Our uncontrolled emotions make us susceptible to stress, in fact the definition of stress is an emotional over-arousal (too strong of an emotional experience that lasts too long and interferes with the rest of our life). The consequences of stress, especially prolonged stress, include poor sleep, negative moods, diminished cognitive functioning such as memory and focus, strain on our personal and professional relationships and a variety of poor physical health outcomes."
+        "title": "What Is the Link Between Emotion and Stress?",
+        "desc": "Our uncontrolled emotions make us susceptible to stress. In fact, stress is defined as an emotional over-arousal (an emotional experience that is too strong and lasts too long, and interferes with the rest of our life). The consequences of stress, especially prolonged stress, include poor sleep, negative moods, diminished cognitive functioning (including memory and focus), strain on personal and professional relationships and a variety of poor physical health outcomes."
       },
       {
-        "title": "What is an Emotion?",
-        "desc": "An episode of emotion is actually a brief and succinct experience, one which does not always fit our expectations. Most emotions arise in under a twenty fifth of a second and last no longer than a few minutes. We often feel as though our emotions last much longer, however what we are remembering is likely a series of emotion episodes. The definition is as follows: \n\nEmotion is a process, a particular kind of very fast automatic appraisal influenced by our evolutionary and personal past, in which we sense that something important to our welfare is occurring, and a set of physiological changes and behaviors begin to deal with the situation. In particular, emotions efficiently coordinate diverse response systems, thereby helping us respond to important challenges or opportunities.\n\nLets unpack this definition. Emotion is a process, meaning there are a series of small stages that make up an emotion episode. This begins with our automatic appraisal, or perspective of the world as influenced by our personal experiences (our learned responses from prior life experiences) and evolutionary past (our hardwired responses which have been passed down genetically). Our appraisal helps us filter what is ‘an important event to our welfare’. Typically appraisal is so fast that we are totally unaware of it. Because our appraisal is influenced by our personal pasts we can have quite distinct responses to the world. Consider this example: you are walking down the street with a close friend and an approach car with its windows down is loudly playing a song. For you this song elicits a feeling of great sadness, it is the favorite song of a friend who died from cancer that was played at her or his eulogy. However for your friend, who did not know this person and has no association with the song there is no emotional response or perhaps annoyance about the loud noise. You are on the same street, with the same song but for you this is a learned and personal response. However, if that same car had to avoid a cat running through the road and suddenly veered on to the sidewalk behind, both you and your friend, irrespective of personal past, would jump backwards in fear. This is a universal response to an imminent threat. Emotions help us respond before we even have time to think “what is that car doing?”. This is the brilliance and burden of emotions, they can rally our physiological responses and behaviors for immediate behaviors to save our lives, but they arise without our choosing them and can feel quite out of our control. We will begin mapping our own emotion episodes as explorers immersed in this Atlas.\n\nThe end of this definition points to the evolutionary perspective of emotions, this means looking at emotions the way we look at our thumbs or eyelashes for their functional properties. While emotions do not serve the critical functions of allowing us to grasp or keeping dust from our eyes, they were just as critical for our survival in the environment of our evolutionary adaptedness. In addition to helping us respond to immediate threats (running from a saber tooth tiger in fear or standing up to a less threatening beast with anger) they also helped us in the social cohesion of a tribe through shared enjoyment. Importantly for our early survival, our emotion system includes our rapid internal response as well as a nonverbal signaling through our face."
+        "title": "What Is an Emotion?",
+        "desc": "An episode of emotion is a brief, succinct experience, one which does not always fit our expectations. Most emotions arise in under a twenty-fifth of a second and last no longer than a few minutes. We often feel as though our emotions last much longer; however, what we are remembering is likely a series of emotion episodes. The definition of emotion is as follows: \n\nEmotion is a process, a particular kind of very fast, automatic appraisal influenced by our evolutionary and personal past, in which we sense that something important to our welfare is occurring and a set of physiological changes and behaviors begin to deal with the situation. In particular, emotions efficiently coordinate diverse response systems, thereby helping us respond to important challenges or opportunities.\n\nLet’s unpack this definition. Emotion is a process, meaning there are a series of small stages that make up an emotion episode. This begins with our automatic appraisal or perspective of the world as influenced by our personal experiences (our learned responses from prior life experiences) and our evolutionary past (our hardwired responses that have been passed down genetically). This appraisal helps us filter what is “important to our welfare.” Typically appraisal is so fast that we are totally unaware of it. Because our appraisal is influenced by our personal pasts, we can have quite distinct responses to the world. Consider this example: You are walking down the street with a close friend and an approaching car with its windows down is loudly playing a song. For you this song elicits a feeling of great sadness; it is the favorite song of a friend who died from cancer and was played at her or his eulogy. However, for your friend, who did not know this person and has no association with the song, there is no emotional response, or perhaps there is annoyance about the loud noise. You and your friend are on the same street hearing the same song, but your response is learned and personal. But if that same car had to avoid a cat running across the road and suddenly veered onto the sidewalk, both you and your friend, irrespective of personal pasts, would jump backwards in fear. This is a universal response to an imminent threat. Emotions help us respond before we even have time to think, “What is that car doing?” This is the brilliance and burden of emotions; they can rally our physiological responses to cause immediate behaviors to save our lives, but they arise without our choosing them and can feel quite out of our control. We will begin mapping our own emotion episodes as explorers immersed in this Atlas.\n\nThe end of this definition points to the evolutionary perspective of emotions. This means looking at emotions the way we look at our thumbs or eyelashes for their functional properties. While emotions do not serve the critical functions of allowing us to grasp or keeping dust from our eyes, they were just as critical for our survival in the environment in which we evolved. In addition to helping us respond to immediate threats (running from a saber-tooth tiger in fear or standing up to a less-threatening beast with anger), they also helped us in the social cohesion of a tribe through shared enjoyment. Importantly for our early survival, our emotion system includes our rapid internal response as well as nonverbal signaling through our face."
       }
     ],
-    "title": "About this Atlas",
-    "desc": "“To get to the new world we needed a map, and to achieve awareness of our emotions we need a map!” This statement from the Dalia Lama inspired the creation of this visual series of maps for the emotion atlas. The scientific and conceptual content is driven by Drs. Paul and Eve Ekman and the visualization was crafted by a design firm, Stamen. The Atlas uses research and hypothesis from life long emotion research of Dr. Ekman Sr. and Jr. Dr. Ekman’s teaching experiences of emotion skills. The intention for the Atlas of Emotion is to visually navigate the territories of our emotions."
+    "title": "About This Atlas",
+    "desc": "A world without the pull of our emotions would be impossibly bland and dangerous. Anger, fear and disgust can save our lives. We need to understand emotions, what they are and how they work, to better understand ourselves. Exploring the Atlas can help us achieve a more balanced emotional life involving choice (at least some of the time). The Atlas of Emotion will increase your understanding of what emotions are, how they happen, what occurs when you experience them and what you need to know to gain heightened awareness of your emotions."
   },
   "donate": {
-    "title": "Support our Cause",
-    "desc": "This project was generously supported by the Dalia Lama Trust. To give back, and to help bring more emotion awareness to the world, consider donating here: ",
+    "title": "Support Our Cause",
+    "desc": "This project was generously supported by the Dalai Lama Trust. To support the Trust and help bring more emotional awareness to the world, consider donating here: ",
     "link": "http://www.dalailamatrust.org/donate",
     "imgs": []
   },
@@ -630,26 +630,26 @@
     "links": [
       {
         "link": "http://www.emotrak.com/",
-        "desc": "Learn more about your emotions through daily tracking with EmoTrak. Eve Ekman has developed a program which trains your emotional awareness through daily questions, reminders and suggested brief meditations all in your pocket through a phone based app."
+        "desc": "Eve Ekman has developed EmoTrak, an app that trains you in emotional awareness through daily questions, reminders and suggested brief meditations. >"
       },
       {
         "link": "http://greatergood.berkeley.edu/",
-        "desc": "Read about the latest research on the science of a meaningful life. Greater Good"
+        "desc": "Read about the latest research on the science of living a meaningful life. >"
       },
       {
         "link": "http://www.paulekman.com/",
-        "desc": "Learn more about the online trainings, writings and past works of Paul Ekman."
+        "desc": "Learn more about the work of Paul Ekman. >"
       },
       {
         "link": "http://eveekman.com/",
-        "desc": "Learn more about the research and teaching of Eve Ekman"
+        "desc": "Learn more about the work of Eve Ekman. >"
       },
       {
         "link": "http://stamen.com/",
-        "desc": "Learn more about the design work of visualizing information of Stamen."
+        "desc": "Learn more about the information visualization work of Stamen. >"
       }
     ],
-    "title": "Further Resources",
-    "desc": "Here are some of the publications that guided us, or that you might be interested in seeking out to learn more. "
+    "title": "Additional Resources",
+    "desc": "Learn more about your emotions, the work of Atlas of Emotion creators Paul and Eve Ekman, and Stamen, the design company that built this website."
   }
 }

@@ -16,7 +16,10 @@ The CDN-backed production version of the site is running on GitHub Pages, direct
 
 ## Deploying to Heroku (staging)
 
-`git push heroku master`
+```
+heroku git:remote -a stamen-atlas-of-emotions
+git push heroku master
+```
 
 ### Heroku setup
 
@@ -26,8 +29,10 @@ The heroku web process is `npm run start-heroku`, specified in [`Procfile`](http
 
 ## Deploying to studio.stamen.com
 
-`npm run dist`
-`scp -prq ./dist/. studio.stamen.com:www/emotionmap/show/v2/latest/` (or `/yyyy-mm-dd/`)
+```
+npm run dist
+scp -prq ./dist/. studio.stamen.com:www/emotionmap/show/v2/latest/` (or `/yyyy-mm-dd/`)
+```
 
 ## Updating text content
 
