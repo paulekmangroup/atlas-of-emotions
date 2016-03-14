@@ -625,11 +625,27 @@ export default function (...initArgs) {
 		scrollbarBounds.left = scrollbar.getBoundingClientRect().left;
 
 		// update all sections
-		let section;
+		let section,
+			sectionContainer,
+			containerIsHidden;
 		for (let sectionKey in sections) {
 			section = sections[sectionKey];
 			if (section.isInited) {
+
+				// un-hide section container as necessary
+				// to get accurate measurements for resize
+				sectionContainer = containers[sectionKey];
+				containerIsHidden = sectionContainer.style.display === 'none';
+				if (containerIsHidden) {
+					sectionContainer.style.display = 'block';
+				}
+
 				section.onResize();
+
+				if (containerIsHidden) {
+					sectionContainer.style.display = 'none';
+				}
+
 			}
 		}
 
