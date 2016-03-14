@@ -806,7 +806,8 @@ export default {
 					// `a` is the previous value for the 'transform' style;
 					// d3 stores this internally as a matrix string.
 					// d3.transform() turns this string into a matrix object.
-					let previousTranslate = d3.transform(a).translate;
+					let previousTransform = a === 'none' ? null : d3.transform(a);
+					let previousTranslate = previousTransform ? previousTransform.translate : [0, 0];
 					let previousRotation = Math.atan2(previousTranslate[1], previousTranslate[0]);
 					let targetRotation = Math.PI * (d.rotation-90) / 180;
 					let rot;
