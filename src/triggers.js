@@ -430,11 +430,11 @@ export default {
 			.style('top', (d, i) => {
 				switch (i) {
 					case 0:
-						return (-1.4 * haloRadius) + 'px';
+						return Math.round(-1.4 * haloRadius) + 'px';
 					case 1:
-						return (-0.9 * haloRadius) + 'px';
+						return Math.round(-0.9 * haloRadius) + 'px';
 					case 2:
-						return (-0.65 * haloRadius) + 'px';
+						return Math.round(-0.65 * haloRadius) + 'px';
 				}
 			});
 
@@ -782,11 +782,11 @@ export default {
 			.style('top', (d, i) => {
 				switch (i) {
 					case 0:
-						return (-1.4 * haloRadius) + 'px';
+						return Math.round(-1.4 * haloRadius) + 'px';
 					case 1:
-						return (-0.9 * haloRadius) + 'px';
+						return Math.round(-0.9 * haloRadius) + 'px';
 					case 2:
-						return (-0.65 * haloRadius) + 'px';
+						return Math.round(-0.65 * haloRadius) + 'px';
 				}
 			});
 
