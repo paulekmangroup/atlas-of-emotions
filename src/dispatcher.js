@@ -109,9 +109,9 @@ const dispatcher = {
 
 	},
 
-	popupCloseButtonClicked: function() {
+	popupCloseButtonClicked: function(section, name) {
 
-		this.emit(this.EVENTS.POPUP_CLOSE_BUTTON_CLICKED);
+		this.emit(this.EVENTS.POPUP_CLOSE_BUTTON_CLICKED, section, name);
 
 	},
 

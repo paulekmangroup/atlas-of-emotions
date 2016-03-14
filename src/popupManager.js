@@ -104,8 +104,8 @@ class PopupManager {
 		e.preventDefault();
 		e.stopPropagation();
 		this.popups[id].state = '';
+		dispatcher.popupCloseButtonClicked(this.popups[id].section, this.popups[id].name);
 		this.closeAll();
-		dispatcher.popupCloseButtonClicked();
 	}
 
 	initTemplate() {
@@ -159,6 +159,8 @@ class PopupManager {
 			this.open({
 				target,
 				desc,
+				section,
+				name,
 				id,
 				state: 'active'
 			});

@@ -15,9 +15,11 @@
 		opacity: 1.0;
 	}
 
-	h3 {
+	h3, h4 {
 		margin: 0;
 		line-height: 1;
+		white-space: nowrap;
+		cursor: pointer;
 	}
 
 	a {

@@ -128,7 +128,6 @@
 		pointer-events: none; // turn pointer events off for container
 
 		.label {
-			position: absolute;
 			@include emotion-color;
 			pointer-events: auto; // enable pointer events for label
 			transform: translate(-50%, -50%);
@@ -142,6 +141,15 @@
 
 			&.unhighlighted {
 				opacity: 0.2;
+			}
+		}
+	}
+
+	&.backgrounded {
+		.label-container {
+			.label {
+				opacity: 0.0 !important;
+				pointer-events: none;
 			}
 		}
 	}

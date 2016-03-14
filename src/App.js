@@ -61,7 +61,6 @@ export default function (...initArgs) {
 		initDownArrow();
 		initMoreInfoDropdown();
 		initCallout();
-		// popupManager.init();
 		initModal();
 
 		// navigation events
@@ -299,7 +298,6 @@ export default function (...initArgs) {
 	}
 
 	function setSection (sectionName, previousEmotion, previousMorePage) {
-
 		let section = sections[sectionName],
 			previousSection = currentSection,
 			previousContainer;
@@ -310,7 +308,6 @@ export default function (...initArgs) {
 				break;
 			}
 		}
-
 
 		if (!section.isInited) {
 			// init any uninited background sections
@@ -359,7 +356,6 @@ export default function (...initArgs) {
 			});
 
 			setSectionEmotion(section, previousEmotion, previousMorePage);
-
 		} else {
 
 			// some section is already open; perform transition
@@ -384,6 +380,9 @@ export default function (...initArgs) {
 				// 	if the section to which we're navigating is a background section, unbackground it
 				// 	else close the background section.
 				//
+
+				// remove any popups
+				onPopupChange();
 
 				// update down arrow
 				fadeArrowOutAndIn(sectionName);
@@ -1010,7 +1009,6 @@ export default function (...initArgs) {
 	}
 
 	function onEmotionStateChange (state, selected) {
-
 		if (selected) {
 			sections.actions.setState(state);
 			sections.states.setBackgroundedState(state);

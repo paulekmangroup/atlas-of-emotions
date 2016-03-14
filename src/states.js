@@ -54,7 +54,7 @@ export default {
 		this.onStateClick = this.onStateClick.bind(this);
 		this.onBackgroundClick = this.onBackgroundClick.bind(this);
 
-		dispatcher.addListener(dispatcher.EVENTS.POPUP_CLOSE_BUTTON_CLICKED, this.onPopupCloseButtonClicked.bind(this));
+		// dispatcher.addListener(dispatcher.EVENTS.POPUP_CLOSE_BUTTON_CLICKED, this.onPopupCloseButtonClicked.bind(this));
 
 		this.isInited = true;
 
@@ -247,24 +247,19 @@ export default {
 
 		if (!labels.size()) {
 			// get a random label to set a box around it
-			const randomeLabelIndex = Math.floor(Math.random() * ranges.length);
+			const randomLabelIndex = Math.floor(Math.random() * ranges.length);
 
 			// if labels have not yet been rendered, create them
 			labels.enter().append('div');
 
 			labels
 				.classed(`${emotion} label emotion-label`, true)
-				.classed('default-interactive-helper', (d, i) => i === randomeLabelIndex)
+				.classed('default-interactive-helper', (d, i) => i === randomLabelIndex)
 				.attr('data-popuptarget', (d,i) => `states:${statesData[i].name}`)
 				.html((d, i) => '<h3>' + statesData[i].name.toUpperCase() + '</h3>')
 				.style({
 					left: d => (Math.round(stateSection.xScale(d[1].x) + 20) + 'px'),	// not sure why this 20px magic number is necessary...?
 					top: d => (Math.round(yOffsets[emotion](stateSection.yScale(d[1].y), d)) + 'px')
-				})
-				.each(function () {
-					setTimeout(() => {
-						this.classList.add('visible');
-					}, LABEL_APPEAR_DELAY);
 				});
 
 			labels.exit().remove();
@@ -276,6 +271,11 @@ export default {
 			.style({
 				left: d => (Math.round(stateSection.xScale(d[1].x) + 20) + 'px'),	// not sure why this 20px magic number is necessary...?
 				top: d => (Math.round(yOffsets[emotion](stateSection.yScale(d[1].y), d)) + 'px')
+			})
+			.each(function () {
+				setTimeout(() => {
+					this.classList.add('visible');
+				}, LABEL_APPEAR_DELAY);
 			});
 
 	},
@@ -465,7 +465,6 @@ export default {
 	},
 
 	open: function (options) {
-
 		this.setBackgrounded(options && options.inBackground, options);
 
 		if (options && (options.sectionName === dispatcher.SECTIONS.STATES || options.sectionName === dispatcher.SECTIONS.ACTIONS)) {
@@ -476,11 +475,7 @@ export default {
 	},
 
 	close: function () {
-
 		return new Promise((resolve, reject) => {
-			// close all label popups
-			dispatcher.popupChange();
-
 			//
 			// TODO: the logic below should be reusable for transitioning between emotions.
 			// refactor as such, along with refactor noted at top of setEmotion().
@@ -609,6 +604,7 @@ export default {
 	setBackgrounded: function (val, options) {
 
 		return new Promise((resolve, reject) => {
+			const hasBackgroundedClass = this.sectionContainer.classList.contains('backgrounded');
 
 			// apply `states-in-out` class any time animating into or out of states section
 			if (!val && this.sectionContainer.classList.contains('backgrounded') ||
@@ -1375,11 +1371,6 @@ export default {
 
 	},
 
-	onPopupCloseButtonClicked: function () {
-		this.setHighlightedState(null);
-		this.resetCallout();
-	},
-
 	onBackgroundClick: function () {
 		if (this.isBackgrounded) {
 			dispatcher.setEmotionState(null, true);
@@ -1391,7 +1382,6 @@ export default {
 	},
 
 	setBackgroundedState: function (state) {
-
 		this.backgroundedState = state;
 		this.displayBackgroundedStates(null);
 		this.setHighlightedState(state);

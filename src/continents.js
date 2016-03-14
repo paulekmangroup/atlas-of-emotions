@@ -341,8 +341,6 @@ const continentsSection = {
 	close: function (nextSection) {
 
 		return new Promise((resolve, reject) => {
-			// close all label popups
-			dispatcher.popupChange();
 
 			let continent = continents.find(c => c.id === currentEmotion);
 			if (nextSection === dispatcher.SECTIONS.STATES && continent && continent.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED) {
