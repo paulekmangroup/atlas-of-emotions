@@ -54,6 +54,82 @@ export default {
 
 	},
 
+	parseTriggers: function (haloRadius) {
+
+		let { startAngle, angleSpread, innerRadius, radiusSpread } = this.calcArrowsGeom(haloRadius),
+			triggersData = {};
+
+		_.values(dispatcher.EMOTIONS).forEach(emotion => {
+
+			let numTriggers = emotionsData.emotions[emotion].triggers.length,
+				middleIndex = Math.floor(numTriggers / 2);
+
+			triggersData[emotion] = emotionsData.emotions[emotion].triggers.concat()
+			.sort((a, b) => {
+				if (a < b) return -1;
+				else if (a > b) return 1;
+				else return 0;
+			})
+			.map((trigger, i) => ({
+				name: trigger,
+
+				// distribute evenly between startAngle and startAngle + angleSpread,
+				// with a gap in the middle
+				angle: startAngle + angleSpread * (i + (i < middleIndex ? 0.5 : 1.5)) / (numTriggers + 1),
+
+				// distribute along rings spanning between innerRadius and innerRadius + radiusSpread,
+				// starting at the second ring and cycling between rings
+				radius: innerRadius + radiusSpread * ((i + 1) % NUM_RINGS) / (NUM_RINGS - 1),
+
+				// fraction of radius.
+				arrowLength: 0.4
+			}));
+
+		});
+
+		return triggersData;
+
+	},
+
+	calcArrowsGeom: function (haloRadius) {
+
+		let startAngle,
+			angleSpread,
+			innerRadius,
+			radiusSpread;
+
+		let aspectRatio = this.sectionContainer.offsetWidth / this.sectionContainer.offsetHeight;
+		if (aspectRatio > 1.75) {
+			startAngle = -0.9 * Math.PI;
+			angleSpread = 0.8 * Math.PI;
+			innerRadius = haloRadius * 1.05;
+			radiusSpread = haloRadius * 0.15;
+		} else if (aspectRatio > 1.4) {
+			startAngle = -0.8 * Math.PI;
+			angleSpread = 0.6 * Math.PI;
+			innerRadius = haloRadius * 1.15;
+			radiusSpread = haloRadius * 0.225;
+		} else if (aspectRatio > 1) {
+			startAngle = -0.7 * Math.PI;
+			angleSpread = 0.4 * Math.PI;
+			innerRadius = haloRadius * 1.25;
+			radiusSpread = haloRadius * 0.3;
+		} else {
+			startAngle = -0.6 * Math.PI;
+			angleSpread = 0.2 * Math.PI;
+			innerRadius = haloRadius * 1.35;
+			radiusSpread = haloRadius * 0.375;
+		}
+
+		return {
+			startAngle: startAngle,
+			angleSpread: angleSpread,
+			innerRadius: innerRadius,
+			radiusSpread: radiusSpread
+		};
+
+	},
+
 	initContainers: function (containerNode) {
 
 		_.values(dispatcher.EMOTIONS).forEach(emotion => {
@@ -69,50 +145,6 @@ export default {
 			containerNode.appendChild(triggersContainer);
 
 		});
-
-	},
-
-	initLabels: function (containerNode, haloRadius) {
-
-		// label container for each emotion
-		this.labelContainers = {};
-		_.values(dispatcher.EMOTIONS).forEach(emotion => {
-
-			let h = (1 - sassVars.triggers.bottom.replace('%', '')/100) * containerNode.offsetHeight,
-				container = d3.select('.triggers-container.' + emotion),
-				labelContainer = container.append('div')
-					.classed('label-container', true);
-
-			let arrowsContainer = labelContainer.append('div')
-				.attr('class', 'arrows-container')
-			.append('svg')
-				.attr('width', containerNode.offsetWidth)
-				.attr('height', h)
-			.append('g')
-				.attr('transform', 'translate(' + 0.5 * containerNode.offsetWidth + ',' + h + ')');
-
-			this.labelContainers[emotion] = labelContainer;
-
-		});
-
-		// only one phase label container for all emotions
-		this.phaseLabelContainer = d3.select(containerNode).append('div')
-			.attr('id', 'trigger-phase-labels');
-		this.phaseLabelContainer.selectAll('h3.label')
-			.data(emotionsData.metadata.triggers.steps)
-		.enter().append('h3')
-			.classed('label', true)
-			.text(d => d.header.toUpperCase())
-			.style('top', (d, i) => {
-				switch (i) {
-					case 0:
-						return (-1.4 * haloRadius) + 'px';
-					case 1:
-						return (-0.9 * haloRadius) + 'px';
-					case 2:
-						return (-0.65 * haloRadius) + 'px';
-				}
-			});
 
 	},
 
@@ -152,93 +184,50 @@ export default {
 			.outerRadius(haloRadius);
 
 		//
-		// Set up each graph
+		// Set up each graph,
+		// or update if already set up (on resize)
 		//
-		this.graphContainers = {};
-		_.values(dispatcher.EMOTIONS).forEach((emotion, i) => {
+		if (!this.graphContainers) {
 
-			let graphContainer = containerNode.querySelector('.' + emotion + ' .graph-container');
+			this.graphContainers = {};
+			_.values(dispatcher.EMOTIONS).forEach((emotion, i) => {
 
-			let svg = d3.select(graphContainer).append('svg')
-				.attr('width', graphContainer.offsetWidth)
-				.attr('height', graphContainer.offsetHeight);
+				let graphContainer = containerNode.querySelector('.' + emotion + ' .graph-container');
 
-			let graph = svg.append('g')
-				.attr('transform', 'translate(' + (margin.left + 0.5*innerWidth) + ',' + (margin.top + innerHeight) + ')');
+				let svg = d3.select(graphContainer).append('svg')
+					.attr('width', graphContainer.offsetWidth)
+					.attr('height', graphContainer.offsetHeight);
 
-			this.graphContainers[emotion] = graph;
+				let graph = svg.append('g')
+					.attr('transform', 'translate(' + (margin.left + 0.5*innerWidth) + ',' + (margin.top + innerHeight) + ')');
 
-		});
+				this.graphContainers[emotion] = graph;
 
-		// create an <svg> solely for <defs> shared across all emotions via xlink:href
-		let defsSvg = d3.select(containerNode).append('svg')
-			.classed('triggers-defs', true);
-		this.setUpDefs(defsSvg.append('defs'), haloRadius);
+			});
 
-		return haloRadius;
+			// create an <svg> solely for <defs> shared across all emotions via xlink:href
+			let defsSvg = d3.select(containerNode).append('svg')
+				.classed('triggers-defs', true);
+			this.setUpDefs(defsSvg.append('defs'), haloRadius);
 
-	},
-
-	parseTriggers: function (haloRadius) {
-
-		let startAngle,
-			angleSpread,
-			innerRadius,
-			radiusSpread;
-
-		let aspectRatio = this.sectionContainer.offsetWidth / this.sectionContainer.offsetHeight;
-		if (aspectRatio > 1.75) {
-			startAngle = -0.9 * Math.PI;
-			angleSpread = 0.8 * Math.PI;
-			innerRadius = haloRadius * 1.05;
-			radiusSpread = haloRadius * 0.15;
-		} else if (aspectRatio > 1.4) {
-			startAngle = -0.8 * Math.PI;
-			angleSpread = 0.6 * Math.PI;
-			innerRadius = haloRadius * 1.15;
-			radiusSpread = haloRadius * 0.225;
-		} else if (aspectRatio > 1) {
-			startAngle = -0.7 * Math.PI;
-			angleSpread = 0.4 * Math.PI;
-			innerRadius = haloRadius * 1.25;
-			radiusSpread = haloRadius * 0.3;
 		} else {
-			startAngle = -0.6 * Math.PI;
-			angleSpread = 0.2 * Math.PI;
-			innerRadius = haloRadius * 1.35;
-			radiusSpread = haloRadius * 0.375;
+
+			_.values(dispatcher.EMOTIONS).forEach((emotion, i) => {
+
+				let graphContainer = containerNode.querySelector('.' + emotion + ' .graph-container');
+
+				let svg = d3.select(graphContainer).select('svg')
+					.attr('width', graphContainer.offsetWidth)
+					.attr('height', graphContainer.offsetHeight);
+
+				let graph = svg.select('g')
+					.attr('transform', 'translate(' + (margin.left + 0.5*innerWidth) + ',' + (margin.top + innerHeight) + ')');
+
+			});
+
 		}
 
-
-		let triggersData = {};
-		_.values(dispatcher.EMOTIONS).forEach(emotion => {
-
-			let numTriggers = emotionsData.emotions[emotion].triggers.length;
-			let middleIndex = Math.floor(numTriggers / 2);
-			triggersData[emotion] = emotionsData.emotions[emotion].triggers.concat()
-			.sort((a, b) => {
-				if (a < b) return -1;
-				else if (a > b) return 1;
-				else return 0;
-			})
-			.map((trigger, i) => ({
-				name: trigger,
-
-				// distribute evenly between startAngle and startAngle + angleSpread,
-				// with a gap in the middle
-				angle: startAngle + angleSpread * (i + (i < middleIndex ? 0.5 : 1.5)) / (numTriggers + 1),
-
-				// distribute along rings spanning between innerRadius and innerRadius + radiusSpread,
-				// starting at the second ring and cycling between rings
-				radius: innerRadius + radiusSpread * ((i + 1) % NUM_RINGS) / (NUM_RINGS - 1),
-
-				// fraction of radius.
-				arrowLength: 0.4
-			}));
-
-		});
-
-		return triggersData;
+		return haloRadius;
 
 	},
 
@@ -407,6 +396,50 @@ export default {
 			.attr('stop-color', d => d.color);
 	},
 
+	initLabels: function (containerNode, haloRadius) {
+
+		// label container for each emotion
+		this.labelContainers = {};
+		_.values(dispatcher.EMOTIONS).forEach(emotion => {
+
+			let h = (1 - sassVars.triggers.bottom.replace('%', '')/100) * containerNode.offsetHeight,
+				container = d3.select('.triggers-container.' + emotion),
+				labelContainer = container.append('div')
+					.classed('label-container', true);
+
+			let arrowsContainer = labelContainer.append('div')
+				.attr('class', 'arrows-container')
+			.append('svg')
+				.attr('width', containerNode.offsetWidth)
+				.attr('height', h)
+			.append('g')
+				.attr('transform', 'translate(' + 0.5 * containerNode.offsetWidth + ',' + h + ')');
+
+			this.labelContainers[emotion] = labelContainer;
+
+		});
+
+		// only one phase label container for all emotions
+		this.phaseLabelContainer = d3.select(containerNode).append('div')
+			.attr('id', 'trigger-phase-labels');
+		this.phaseLabelContainer.selectAll('h3.label')
+			.data(emotionsData.metadata.triggers.steps)
+		.enter().append('h3')
+			.classed('label', true)
+			.text(d => d.header.toUpperCase())
+			.style('top', (d, i) => {
+				switch (i) {
+					case 0:
+						return Math.round(-1.4 * haloRadius) + 'px';
+					case 1:
+						return Math.round(-0.9 * haloRadius) + 'px';
+					case 2:
+						return Math.round(-0.65 * haloRadius) + 'px';
+				}
+			});
+
+	},
+
 	drawHorizon: function (containerNode) {
 
 		let horizon = document.createElement('div');
@@ -519,6 +552,7 @@ export default {
 
 			this.renderGraph(this.currentEmotion);
 			this.renderLabels(this.currentEmotion);
+			this.phaseLabelContainer.attr('class', this.currentEmotion);
 
 			// leave a bit of time for other transitions to happen
 			this.openCallout(500);
@@ -592,19 +626,20 @@ export default {
 			labelSelection = labelContainer.selectAll('div.label')
 			.data(triggersData);
 
-		// update
-
 		// enter
-		let labelEnterSelection = labelSelection.enter().append('div')
+		labelSelection.enter().append('div')
 			.classed('label ' + emotion, true)
 			.style('opacity', 1.0)
+		.append('h4')
+			.html(d => d.name);
+
+		// merge
+		labelSelection
 			.style('transform', d => {
 				let x = 0.5 * this.sectionContainer.offsetWidth + Math.cos(d.angle) * d.radius,
 					y = h + Math.sin(d.angle) * d.radius;
 				return 'translate(' + x + 'px,' + y + 'px)';
 			});
-		labelEnterSelection.append('h4')
-			.html(d => d.name);
 
 		// exit
 		labelSelection.exit().transition()
@@ -614,34 +649,39 @@ export default {
 
 
 		//
-		// label arrows
+		// label arrows (lines + arrowheads) and gradients
 		//
-		let labelArrowSelection = labelContainer.select('.arrows-container g').selectAll('g.arrow')
-			.data(triggersData);
-
-		// update
+		let emotionGradientName = 'triggers-' + emotion + '-linear-gradient',
+			arrowsContainer = labelContainer.select('.arrows-container g'),
+			gradientsSelection = arrowsContainer.selectAll('linearGradient')
+				.data(triggersData),
+			arrowsSelection = arrowsContainer.selectAll('g.arrow')
+				.data(triggersData);
 
 		// enter
-		let emotionGradientName = 'triggers-' + emotion + '-linear-gradient';
-		let arrowsEnterSelection = labelArrowSelection.enter();
-		arrowsEnterSelection.append('linearGradient')
+		gradientsSelection.enter().append('linearGradient')
 			.attr('xlink:href', '#' + emotionGradientName)
-			.attr('id', (d, i) => emotionGradientName + '-arrow-' + i)
+			.attr('id', (d, i) => emotionGradientName + '-arrow-' + i);
+
+		let arrowsEnterSelection = arrowsSelection.enter().append('g')
+			.classed('arrow ' + emotion, true)
+			.style('opacity', 1.0);
+		arrowsEnterSelection.append('line')
+			.attr('stroke', (d, i) => 'url(#' + emotionGradientName + '-arrow-' + i + ')');
+		arrowsEnterSelection.append('path');
+
+		// merge
+		gradientsSelection
 			.attr('x1', d => Math.cos(d.angle) * d.radius * 0.95)
 			.attr('x2', d => Math.cos(d.angle) * d.radius * (1 - d.arrowLength))
 			.attr('y1', d => Math.sin(d.angle) * d.radius * 0.95)
 			.attr('y2', d => Math.sin(d.angle) * d.radius * (1 - d.arrowLength));
-
-		let arrowsContainerEnterSelection = arrowsEnterSelection.append('g')
-			.classed('arrow ' + emotion, true)
-			.style('opacity', 1.0);
-		arrowsContainerEnterSelection.append('line')
+		arrowsSelection.select('line')
 			.attr('x1', d => Math.cos(d.angle) * d.radius * 0.95)
 			.attr('x2', d => Math.cos(d.angle) * d.radius * (1 - d.arrowLength))
 			.attr('y1', d => Math.sin(d.angle) * d.radius * 0.95)
-			.attr('y2', d => Math.sin(d.angle) * d.radius * (1 - d.arrowLength))
-			.attr('stroke', (d, i) => 'url(#' + emotionGradientName + '-arrow-' + i + ')');
-		arrowsContainerEnterSelection.append('path')
+			.attr('y2', d => Math.sin(d.angle) * d.radius * (1 - d.arrowLength));
+		arrowsSelection.select('path')
 			.attr('d', ARROWHEAD)
 			.attr('transform', d => {
 				return 'translate(' + Math.cos(d.angle) * d.radius * (1 - d.arrowLength) + ',' + Math.sin(d.angle) * d.radius * (1 - d.arrowLength) + ') ' +
@@ -649,12 +689,11 @@ export default {
 			});
 
 		// exit
-		labelArrowSelection.exit().transition()
+		gradientsSelection.exit().remove();
+		arrowsSelection.exit().transition()
 			.duration(600)
 			.style('opacity', 0.0)
 			.remove();
-
-		this.phaseLabelContainer.attr('class', emotion);
 
 	},
 
@@ -692,7 +731,98 @@ export default {
 
 	onResize: function () {
 
-		//
+		// update halo
+		let haloRadius = this.setUpGraphs(this.sectionContainer);
+
+		// update gradients
+		d3.select('#triggers-radial-gradient')
+			.attr('r', haloRadius);
+
+		// update labels, and halos that have already been rendered
+		let w = this.sectionContainer.offsetWidth,
+			h = (1 - sassVars.triggers.bottom.replace('%', '')/100) * this.sectionContainer.offsetHeight,
+			haloArc = this.haloArcGenerator,
+			innerRadius = haloArc.innerRadius(),
+			pieLayoutData = this.haloPieLayout([{}]);
+
+		_.values(dispatcher.EMOTIONS).forEach(emotion => {
+
+			// update halo if already rendered
+			let graphContainer = this.graphContainers[emotion],
+				haloSelection = graphContainer.selectAll('path.halo')
+					.data(pieLayoutData);
+
+			if (haloSelection.size()) {
+				haloSelection.attr('d', haloArc);
+			}
+
+			// update label container
+			let labelContainer = this.labelContainers[emotion];
+			labelContainer.select('.arrows-container g')
+				.attr('width', this.sectionContainer.offsetWidth)
+				.attr('height', h)
+				.attr('transform', 'translate(' + 0.5 * this.sectionContainer.offsetWidth + ',' + h + ')');
+
+			// update labels + arrows
+			let { startAngle, angleSpread, innerRadius, radiusSpread } = this.calcArrowsGeom(haloRadius),
+				numTriggers = this.triggersData[emotion].length,
+				middleIndex = Math.floor(numTriggers / 2);
+
+			this.triggersData[emotion].forEach((triggerDatum, i) => {
+				triggerDatum.angle = startAngle + angleSpread * (i + (i < middleIndex ? 0.5 : 1.5)) / (numTriggers + 1);
+				triggerDatum.radius = innerRadius + radiusSpread * ((i + 1) % NUM_RINGS) / (NUM_RINGS - 1);
+			});
+
+			this.renderLabels(emotion);
+
+		});
+
+		// update phase labels
+		d3.select('#trigger-phase-labels').selectAll('h3.label')
+			.style('top', (d, i) => {
+				switch (i) {
+					case 0:
+						return Math.round(-1.4 * haloRadius) + 'px';
+					case 1:
+						return Math.round(-0.9 * haloRadius) + 'px';
+					case 2:
+						return Math.round(-0.65 * haloRadius) + 'px';
+				}
+			});
+
+		// update hit areas
+		let hitAreaContainer = document.querySelector('#trigger-hit-area-container'),
+			svg = d3.select('#trigger-hit-area-container svg')
+				.attr('width', hitAreaContainer.offsetWidth)
+				.attr('height', hitAreaContainer.offsetHeight),
+			container = svg.select('g')
+				.attr('transform', 'translate(' + (0.5 * w) + ',' + h + ')');
+
+		container.selectAll('.hit-area')
+			.each(function (d, i) {
+				switch (i) {
+					case 0:
+						d3.select(this)
+							.attr('x', -w/2)
+							.attr('y', -h)
+							.attr('width', w)
+							.attr('height', h);
+						return;
+					case 1:
+						d3.select(this)
+							.data(pieLayoutData)
+							.attr('d', haloArc);
+						return;
+					case 2:
+						let innerArcGenerator = d3.svg.arc()
+							.innerRadius(0)
+							.outerRadius(innerRadius);
+						d3.select(this)
+							.data(pieLayoutData)
+							.attr('d', innerArcGenerator);
+						return;
+				}
+			});
 
 	},
 
