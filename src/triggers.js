@@ -739,16 +739,21 @@ export default {
 			.attr('r', haloRadius);
 
 		// update labels, and halos that have already been rendered
-		let h = (1 - sassVars.triggers.bottom.replace('%', '')/100) * this.sectionContainer.offsetHeight;
+		let w = this.sectionContainer.offsetWidth,
+			h = (1 - sassVars.triggers.bottom.replace('%', '')/100) * this.sectionContainer.offsetHeight,
+			haloArc = this.haloArcGenerator,
+			innerRadius = haloArc.innerRadius(),
+			pieLayoutData = this.haloPieLayout([{}]);
+
 		_.values(dispatcher.EMOTIONS).forEach(emotion => {
 
 			// update halo if already rendered
 			let graphContainer = this.graphContainers[emotion],
 				haloSelection = graphContainer.selectAll('path.halo')
-					.data(this.haloPieLayout([{}]));
+					.data(pieLayoutData);
 
 			if (haloSelection.size()) {
-				haloSelection.attr('d', this.haloArcGenerator);
+				haloSelection.attr('d', haloArc);
 			}
 
 			// update label container
@@ -785,9 +790,39 @@ export default {
 				}
 			});
 
-		/*
-		this.setUpHitAreas(this.sectionContainer);
-		*/
+		// update hit areas
+		let hitAreaContainer = document.querySelector('#trigger-hit-area-container'),
+			svg = d3.select('#trigger-hit-area-container svg')
+				.attr('width', hitAreaContainer.offsetWidth)
+				.attr('height', hitAreaContainer.offsetHeight),
+			container = svg.select('g')
+				.attr('transform', 'translate(' + (0.5 * w) + ',' + h + ')');
+
+		container.selectAll('.hit-area')
+			.each(function (d, i) {
+				switch (i) {
+					case 0:
+						d3.select(this)
+							.attr('x', -w/2)
+							.attr('y', -h)
+							.attr('width', w)
+							.attr('height', h);
+						return;
+					case 1:
+						d3.select(this)
+							.data(pieLayoutData)
+							.attr('d', haloArc);
+						return;
+					case 2:
+						let innerArcGenerator = d3.svg.arc()
+							.innerRadius(0)
+							.outerRadius(innerRadius);
+						d3.select(this)
+							.data(pieLayoutData)
+							.attr('d', innerArcGenerator);
+						return;
+				}
+			});
 
 	},
 
