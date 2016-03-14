@@ -31,12 +31,6 @@ const continentsSection = {
 			.append('div')
 			.attr('class', 'label-container');
 
-		// labelContainer.id = 'continent-labels';
-		// containerNode.appendChild(labelContainer);
-
-
-
-
 		continentContainer = d3.select(containerNode).append('svg')
 			.attr('width', '100%')
 			.attr('height', '100%');
@@ -379,7 +373,7 @@ const continentsSection = {
 				}, (sassVars.continents.spread.delay.in + sassVars.continents.spread.duration.in) * 1000);
 
 			} else {
-
+				this.setActive(false);
 				resolve();
 
 			}
