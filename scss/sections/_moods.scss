@@ -25,23 +25,22 @@
 
 .moodCircle {
 
-	@include emotion-fill-color;
 
 	// TODO: translate a gradient up from bottom
 	// instead of a solid fill over whole container?
 	// (could do this perhaps by animating gradient stops...)
 
-	opacity: 0.08;
+	opacity: 0.1;
 	mix-blend-mode: multiply;
 
 	&.highlight0 {
-		opacity: .14
+		opacity: .2
 	}
 	&.highlight1 {
-		opacity: .28
+		opacity: .4
 	}
 	&.highlight2 {
-		opacity: .36
+		opacity: .6
 	}
 
 	// this should probably be done with a transition instead of animation

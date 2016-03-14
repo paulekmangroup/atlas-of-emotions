@@ -14,6 +14,7 @@ export default {
 	moodsData: null,
 	backgroundSections: [ states, actions ],
 	calloutActive: false,
+	moodCircleRadii: [1.15, .95, .75],
 
 	init: function (containerNode) {
 
@@ -46,11 +47,13 @@ export default {
 		this.moodCircles.attr('width', window.innerWidth)
 			.attr('height', window.innerHeight);
 
-		this.moodCircles.selectAll(".moodCircle")
+		let circles = this.moodCircles.selectAll(".moodCircle")
 			// values are % of radius to edge for each circle
-			.data([1.15, .95, .75])
+			.data(this.moodCircleRadii)
 			.enter()
-			.append("circle")
+			.append("g");
+
+		circles.append("circle")
 			.attr({
 				'cx': window.innerWidth / 2,
 				'cy': window.innerHeight / 2,
@@ -60,6 +63,78 @@ export default {
 			.on('mouseover', function(d, i){d3.selectAll(".moodCircle").classed("highlight" + i, true);})
 			.on('mouseout', function(d, i){d3.selectAll(".moodCircle").classed("highlight" + i, false);})
 			.on('click', this.onElementClick);
+
+		this.initGradientDefs(radius);
+
+
+	},
+
+	initGradientDefs: function(radius){
+		let gradients = [
+			{
+				emotion: 'anger',
+				data: [
+				{ offset: '0%', color: 'rgba(228, 135, 102, 0)' },
+				{ offset: '60%', color: 'rgba(214, 50, 60, .8)' },
+				{ offset: '100%', color: 'rgba(204, 28, 43, 1.0)' }
+				]
+			},
+			{
+				emotion: 'fear',
+				data: [
+					{ offset: '0%', color: 'rgba(248, 58, 248, 0)' },
+					{ offset: '60%', color: 'rgba(180, 45, 160, .8)' },
+					{ offset: '100%', color: 'rgba(143, 39, 139, 1.0)' }
+				]
+			},
+			{
+				emotion: 'disgust',
+				data: [
+					{ offset: '0%', color: 'rgba(0, 142, 69, 0)' },
+					{ offset: '60%', color: 'rgba(0, 110, 58, .8)' },
+					{ offset: '100%', color: 'rgba(0, 104, 55, 1.0)' }
+				]
+			},
+			{
+				emotion: 'sadness',
+				data: [
+					{ offset: '0%', color: 'rgba(200, 220, 240, 0)' },
+					{ offset: '60%', color: 'rgba(90, 110, 180, .8)' },
+					{ offset: '100%', color: 'rgba(64, 70, 164, 1.0)' }
+				]
+			},
+			{
+				emotion: 'enjoyment',
+				data: [
+					{ offset: '0%', color: 'rgba(241, 196, 83, 0)' },
+					{ offset: '60%', color: 'rgba(246, 150, 40, .8)' },
+					{ offset: '100%', color: 'rgba(248, 136, 29, 1.0)' }
+				]
+			},
+		];
+
+		let defsSvg = d3.select(this.sectionContainer).append('svg')
+			.classed('moods-defs', true)
+			.append('defs');
+
+		this.moodCircleRadii.forEach(function(radiusMultiplier, index){
+			defsSvg.selectAll(".radialGradient")
+				.data(gradients)
+				.enter()
+				.append('radialGradient')
+				.attr('xlink:href', function(d){'#' + 'moods-' + d.emotion+ '-radial-gradient' + '-' + index;})
+				.attr('id', function(d){return 'moods-' + d.emotion + '-radial-gradient' + '-' + index;})
+					.attr('gradientUnits', 'userSpaceOnUse')
+					.attr('cx', window.innerWidth / 2)
+					.attr('cy', window.innerHeight / 2)
+					.attr('r', radius * radiusMultiplier)
+					.selectAll('stop')
+						.data(function(d){return d.data;})
+					.enter().append('stop')
+						.attr('offset', d => d.offset)
+						.attr('stop-color', d => d.color);
+		});
+
 
 	},
 
@@ -110,8 +185,10 @@ export default {
 				this.moodCircles.selectAll("circle").classed(previousEmotion, false);
 			}
 
-			this.moodCircles.selectAll("circle").classed(this.currentEmotion, true);
-
+			// to reference inside of function below with different 'this'
+			let currentEmotion = this.currentEmotion;
+			this.moodCircles.selectAll("circle").classed(this.currentEmotion, true)
+				.attr('fill', function(d,i){return 'url(#' + 'moods-' + currentEmotion + '-radial-gradient' + '-' + i +')';});
 
 			if (previousEmotion !== this.currentEmotion) this.updateLabel();
 
