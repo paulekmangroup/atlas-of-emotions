@@ -13,6 +13,7 @@ export default {
 	currentEmotion: null,
 	moodsData: null,
 	backgroundSections: [ states, actions ],
+	calloutActive: false,
 
 	init: function (containerNode) {
 
@@ -21,13 +22,17 @@ export default {
 		this.onElementOver = this.onElementOver.bind(this);
 		this.onElementOut = this.onElementOut.bind(this);
 		this.onElementClick = this.onElementClick.bind(this);
-		this.onBackgroundClick = this.onBackgroundClick.bind(this);
 
 		//this.overlayContainer = document.createElement('div');
 		//this.overlayContainer.id = 'moods-overlay-container';
 		//containerNode.appendChild(this.overlayContainer);
 
+		this.labelContainer = d3.select(containerNode)
+			.append('div')
+			.attr('class', 'label-container');
+
 		this.initMoodIntensifiers();
+		this.initLabels(this.labelContainer);
 
 		this.isInited = true;
 
@@ -54,13 +59,34 @@ export default {
 			})
 			.on('mouseover', function(d, i){d3.selectAll(".moodCircle").classed("highlight" + i, true);})
 			.on('mouseout', function(d, i){d3.selectAll(".moodCircle").classed("highlight" + i, false);})
-			.on('click', function(d){console.log('circle clicked');});
+			.on('click', this.onElementClick);
 
 	},
 
-	setEmotion: function (emotion) {
+	initLabels: function () {
+		const label = this.labelContainer
+			.append('div')
+			.attr('class', 'emotion-label label');
 
-		console.log('set emotion satrt');
+		label
+			.append('h3');
+
+		label.on('click', this.onElementClick);
+	},
+
+	updateLabel: function() {
+		if (!this.currentEmotion || !emotionsData.emotions[this.currentEmotion]) return;
+		let moodsCopy = emotionsData.emotions[this.currentEmotion].moods[0];
+
+		const label = this.labelContainer.select('.emotion-label');
+		label
+			.attr('class', `emotion-label label ${this.currentEmotion} visible default-interactive-helper`)
+			.attr('data-popuptarget', `moods:${this.currentEmotion}`);
+
+		label.select('h3').text(moodsCopy.name.toUpperCase());
+	},
+
+	setEmotion: function (emotion) {
 		return new Promise((resolve, reject) => {
 			// fade out circles
 			function endFade(){
@@ -86,17 +112,8 @@ export default {
 
 			this.moodCircles.selectAll("circle").classed(this.currentEmotion, true);
 
-			states.applyEventListenersToEmotion(emotion, {
-				mouseover: this.onElementOver,
-				mouseout: this.onElementOut,
-				click: this.onElementClick
-			});
 
-			actions.applyEventListenersToEmotion(emotion, {
-				mouseover: this.onElementOver,
-				mouseout: this.onElementOut,
-				click: this.onElementClick
-			});
+			if (previousEmotion !== this.currentEmotion) this.updateLabel();
 
 			// leave a bit of time for other transitions to happen
 			this.openCallout(500);
@@ -111,27 +128,15 @@ export default {
 	},
 
 	open: function () {
-
+		this.labelContainer.select('.emotion-label').classed('visible', true);
 		// transition time from _states.scss::#states
 		this.openCallout(1500);
 
 	},
 
 	close: function () {
-
-		states.applyEventListenersToEmotion(this.currentEmotion, {
-			mouseover: null,
-			mouseout: null,
-			click: null
-		});
-
-		actions.applyEventListenersToEmotion(this.currentEmotion, {
-			mouseover: null,
-			mouseout: null,
-			click: null
-		});
-
-		document.querySelector('#main').removeEventListener('click', this.onBackgroundClick, true);
+		this.labelContainer.select('.emotion-label').classed('visible', false);
+		this.setBackgroundListener(false);
 
 		return new Promise((resolve, reject) => {
 
@@ -152,15 +157,22 @@ export default {
 
 	},
 
+	setBackgroundListener: function(pleaseSet) {
+		console.log('pleaseSet: ', pleaseSet);
+		document.querySelector('#moods').removeEventListener('click', this.closeThings, false);
+
+		if (pleaseSet) {
+			document.querySelector('#moods').addEventListener('click', this.closeThings, false);
+		}
+
+	},
+
 	onElementOver: function (event) {
 
 		if (!event) { event = d3.event; }
 		event.stopImmediatePropagation();
 
 		// don't execute mouseout behavior when rolling from one hit area into another
-		document.querySelector('#main').removeEventListener('click', this.onBackgroundClick, true);
-		clearTimeout(this.mouseOutTimeout);
-
 	},
 
 	onElementOut: function (event) {
@@ -168,24 +180,19 @@ export default {
 		if (!event) { event = d3.event; }
 		event.stopImmediatePropagation();
 
-		this.mouseOutTimeout = setTimeout(() => {
-			document.querySelector('#main').addEventListener('click', this.onBackgroundClick, true);
-		}, 100);
 	},
 
 	onElementClick: function (event) {
+		if (d3.event) {
+			d3.event.preventDefault();
+			d3.event.stopImmediatePropagation();
+		}
 
-		if (!event) { event = d3.event; }
-		event.stopImmediatePropagation();
+		if (this.calloutActive) {
+			return this.setCallout(false);
+		}
+
 		this.setCallout(true);
-
-	},
-
-	onBackgroundClick: function (event) {
-
-		event.stopImmediatePropagation();
-
-		this.setCallout(false);
 
 	},
 
@@ -201,16 +208,17 @@ export default {
 	},
 
 	setCallout: function (active) {
-		console.log('>> Set Callout: ', active);
+		this.calloutActive = active;
 		if (active) {
-			// will want to set popup up here
-			// dispatcher.popupChange('states', statesData.name, statesData.desc);
 			let moodsCopy = emotionsData.emotions[this.currentEmotion].moods[0];
-			dispatcher.changeCallout(this.currentEmotion, moodsCopy.name, moodsCopy.desc);
+			// will want to set popup up here
+			dispatcher.popupChange('moods', this.currentEmotion, moodsCopy.desc);
+			this.setBackgroundListener(true);
 		} else {
+			dispatcher.popupChange();
 			dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.moods.header, emotionsData.metadata.moods.body);
+			this.setBackgroundListener(false);
 		}
-
 	}
 
 };
