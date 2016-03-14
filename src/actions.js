@@ -154,7 +154,7 @@ export default {
 					.attr('height', h);
 
 				let graph = svg.append('g')
-					.attr('transform', 'translate(' + (margin.left + 0.5*innerWidth) + ',' + margin.top + ')');
+					.attr('transform', 'translate(' + (margin.left + 0.5 * innerWidth) + ',' + margin.top + ')');
 
 				// TODO: remove if we end up not using textures
 				let valenceTextures = {};
