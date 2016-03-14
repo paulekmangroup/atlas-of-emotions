@@ -552,6 +552,7 @@ export default {
 
 			this.renderGraph(this.currentEmotion);
 			this.renderLabels(this.currentEmotion);
+			this.phaseLabelContainer.attr('class', this.currentEmotion);
 
 			// leave a bit of time for other transitions to happen
 			this.openCallout(500);
@@ -694,8 +695,6 @@ export default {
 			.style('opacity', 0.0)
 			.remove();
 
-		this.phaseLabelContainer.attr('class', emotion);
-
 	},
 
 	open: function () {
@@ -773,16 +772,8 @@ export default {
 
 		});
 
-		/*
-		// TODO: handle phase label container
-		// only one phase label container for all emotions
-		this.phaseLabelContainer = d3.select(this.sectionContainer).append('div')
-			.attr('id', 'trigger-phase-labels');
-		this.phaseLabelContainer.selectAll('h3.label')
-			.data(emotionsData.metadata.triggers.steps)
-		.enter().append('h3')
-			.classed('label', true)
-			.text(d => d.header.toUpperCase())
+		// update phase labels
+		d3.select('#trigger-phase-labels').selectAll('h3.label')
 			.style('top', (d, i) => {
 				switch (i) {
 					case 0:
@@ -793,10 +784,6 @@ export default {
 						return (-0.65 * haloRadius) + 'px';
 				}
 			});
-		*/
-
-
-
 
 		/*
 		this.setUpHitAreas(this.sectionContainer);
