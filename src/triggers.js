@@ -56,6 +56,43 @@ export default {
 
 	parseTriggers: function (haloRadius) {
 
+		let { startAngle, angleSpread, innerRadius, radiusSpread } = this.calcArrowsGeom(haloRadius),
+			triggersData = {};
+
+		_.values(dispatcher.EMOTIONS).forEach(emotion => {
+
+			let numTriggers = emotionsData.emotions[emotion].triggers.length,
+				middleIndex = Math.floor(numTriggers / 2);
+
+			triggersData[emotion] = emotionsData.emotions[emotion].triggers.concat()
+			.sort((a, b) => {
+				if (a < b) return -1;
+				else if (a > b) return 1;
+				else return 0;
+			})
+			.map((trigger, i) => ({
+				name: trigger,
+
+				// distribute evenly between startAngle and startAngle + angleSpread,
+				// with a gap in the middle
+				angle: startAngle + angleSpread * (i + (i < middleIndex ? 0.5 : 1.5)) / (numTriggers + 1),
+
+				// distribute along rings spanning between innerRadius and innerRadius + radiusSpread,
+				// starting at the second ring and cycling between rings
+				radius: innerRadius + radiusSpread * ((i + 1) % NUM_RINGS) / (NUM_RINGS - 1),
+
+				// fraction of radius.
+				arrowLength: 0.4
+			}));
+
+		});
+
+		return triggersData;
+
+	},
+
+	calcArrowsGeom: function (haloRadius) {
+
 		let startAngle,
 			angleSpread,
 			innerRadius,
@@ -84,36 +121,12 @@ export default {
 			radiusSpread = haloRadius * 0.375;
 		}
 
-
-		let triggersData = {};
-		_.values(dispatcher.EMOTIONS).forEach(emotion => {
-
-			let numTriggers = emotionsData.emotions[emotion].triggers.length;
-			let middleIndex = Math.floor(numTriggers / 2);
-			triggersData[emotion] = emotionsData.emotions[emotion].triggers.concat()
-			.sort((a, b) => {
-				if (a < b) return -1;
-				else if (a > b) return 1;
-				else return 0;
-			})
-			.map((trigger, i) => ({
-				name: trigger,
-
-				// distribute evenly between startAngle and startAngle + angleSpread,
-				// with a gap in the middle
-				angle: startAngle + angleSpread * (i + (i < middleIndex ? 0.5 : 1.5)) / (numTriggers + 1),
-
-				// distribute along rings spanning between innerRadius and innerRadius + radiusSpread,
-				// starting at the second ring and cycling between rings
-				radius: innerRadius + radiusSpread * ((i + 1) % NUM_RINGS) / (NUM_RINGS - 1),
-
-				// fraction of radius.
-				arrowLength: 0.4
-			}));
-
-		});
-
-		return triggersData;
+		return {
+			startAngle: startAngle,
+			angleSpread: angleSpread,
+			innerRadius: innerRadius,
+			radiusSpread: radiusSpread
+		};
 
 	},
 
@@ -662,12 +675,12 @@ export default {
 			.attr('x2', d => Math.cos(d.angle) * d.radius * (1 - d.arrowLength))
 			.attr('y1', d => Math.sin(d.angle) * d.radius * 0.95)
 			.attr('y2', d => Math.sin(d.angle) * d.radius * (1 - d.arrowLength));
-		arrowsSelection.selectAll('g.arrow line')
+		arrowsSelection.select('line')
 			.attr('x1', d => Math.cos(d.angle) * d.radius * 0.95)
 			.attr('x2', d => Math.cos(d.angle) * d.radius * (1 - d.arrowLength))
 			.attr('y1', d => Math.sin(d.angle) * d.radius * 0.95)
 			.attr('y2', d => Math.sin(d.angle) * d.radius * (1 - d.arrowLength));
-		arrowsSelection.selectAll('g.arrow path')
+		arrowsSelection.select('path')
 			.attr('d', ARROWHEAD)
 			.attr('transform', d => {
 				return 'translate(' + Math.cos(d.angle) * d.radius * (1 - d.arrowLength) + ',' + Math.sin(d.angle) * d.radius * (1 - d.arrowLength) + ') ' +
@@ -746,47 +759,17 @@ export default {
 				.attr('height', h)
 				.attr('transform', 'translate(' + 0.5 * this.sectionContainer.offsetWidth + ',' + h + ')');
 
+			// update labels + arrows
+			let { startAngle, angleSpread, innerRadius, radiusSpread } = this.calcArrowsGeom(haloRadius),
+				numTriggers = this.triggersData[emotion].length,
+				middleIndex = Math.floor(numTriggers / 2);
+
+			this.triggersData[emotion].forEach((triggerDatum, i) => {
+				triggerDatum.angle = startAngle + angleSpread * (i + (i < middleIndex ? 0.5 : 1.5)) / (numTriggers + 1);
+				triggerDatum.radius = innerRadius + radiusSpread * ((i + 1) % NUM_RINGS) / (NUM_RINGS - 1);
+			});
+
 			this.renderLabels(emotion);
-			/*
-			// update the labels
-			labelContainer.selectAll('div.label').data(this.triggersData[emotion])
-				.style('transform', d => {
-					let x = 0.5 * this.sectionContainer.offsetWidth + Math.cos(d.angle) * d.radius,
-						y = h + Math.sin(d.angle) * d.radius;
-					return 'translate(' + x + 'px,' + y + 'px)';
-				});
-				*/
-
-			// TODO: have to update trigger data, which contains
-			// knowledge of viewport aspect ratio...
-			// parseTriggers()
-			// and then bind that to labelArrowSelection in order to recalulate x1/x2/y1/y2.
-			/*
-			// update label arrows and gradients
-			let labelArrowSelection = labelContainer.select('.arrows-container g').selectAll('g.arrow');
-			labelArrowSelection.select('linearGradient')
-				.attr('x1', d => Math.cos(d.angle) * d.radius * 0.95)
-				.attr('x2', d => Math.cos(d.angle) * d.radius * (1 - d.arrowLength))
-				.attr('y1', d => Math.sin(d.angle) * d.radius * 0.95)
-				.attr('y2', d => Math.sin(d.angle) * d.radius * (1 - d.arrowLength));
-
-			let arrowsContainerEnterSelection = arrowsEnterSelection.append('g')
-				.classed('arrow ' + emotion, true)
-				.style('opacity', 1.0);
-			arrowsContainerEnterSelection.append('line')
-				.attr('x1', d => Math.cos(d.angle) * d.radius * 0.95)
-				.attr('x2', d => Math.cos(d.angle) * d.radius * (1 - d.arrowLength))
-				.attr('y1', d => Math.sin(d.angle) * d.radius * 0.95)
-				.attr('y2', d => Math.sin(d.angle) * d.radius * (1 - d.arrowLength))
-				.attr('stroke', (d, i) => 'url(#' + emotionGradientName + '-arrow-' + i + ')');
-			arrowsContainerEnterSelection.append('path')
-				.attr('d', ARROWHEAD)
-				.attr('transform', d => {
-					return 'translate(' + Math.cos(d.angle) * d.radius * (1 - d.arrowLength) + ',' + Math.sin(d.angle) * d.radius * (1 - d.arrowLength) + ') ' +
-						'rotate(' + (180 * d.angle / Math.PI + 90) + ')';
-				});
-			*/
-
 
 		});
 
