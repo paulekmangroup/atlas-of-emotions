@@ -25,8 +25,15 @@
 		}
 
 		&.active {
-			// pointer-events: auto;
 			opacity: 1.0;
+
+			.label-container .label {
+				h3,
+				h4 {
+					pointer-events: auto;
+					cursor: pointer;
+				}
+			}
 		}
 	}
 
@@ -75,8 +82,8 @@
 					text-transform: uppercase;
 				}
 
-				pointer-events: auto;
-				cursor: pointer;
+				// pointer-events: auto;
+				// cursor: pointer;
 			}
 		}
 
@@ -162,6 +169,7 @@
 	}
 
 	.hit-area {
-		pointer-events: fill;
+		pointer-events: auto;
+		cursor: default;
 	}
 }

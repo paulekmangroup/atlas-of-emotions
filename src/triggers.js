@@ -427,7 +427,7 @@ export default {
 			let { startAngle, angleSpread, innerRadius, radiusSpread } = this.calcArrowsGeom(haloRadius);
 			universalLearnedLabelContainer.append('div')
 				.attr('class', `emotion-label ${TRIGGER_TYPES.UNIVERSAL} ${emotion}`)
-				.attr('data-popuptarget', `triggers:${TRIGGER_TYPES.UNIVERSAL}`)
+				.attr('data-popuptarget', `triggers:${emotion}-${TRIGGER_TYPES.UNIVERSAL}`)
 				.style('transform', 'translate('+
 					Math.round((innerRadius + 0.5*radiusSpread) * Math.cos(startAngle + 0.1*angleSpread)) +'px,'+	// a bit to the left, since popup opens to the right
 					Math.round((innerRadius + 0.5*radiusSpread) * Math.sin(startAngle + 0.2*angleSpread)) +'px)')
@@ -435,7 +435,7 @@ export default {
 				.text(emotionsData.metadata.triggers.steps[3].header.toUpperCase());
 			universalLearnedLabelContainer.append('div')
 				.attr('class', `emotion-label ${TRIGGER_TYPES.LEARNED} ${emotion}`)
-				.attr('data-popuptarget', `triggers:${TRIGGER_TYPES.LEARNED}`)
+				.attr('data-popuptarget', `triggers:${emotion}-${TRIGGER_TYPES.LEARNED}`)
 				.style('transform', 'translate('+
 					Math.round((innerRadius + 0.5*radiusSpread) * Math.cos(startAngle + 0.7*angleSpread)) +'px,'+	// a bit to the left, since popup opens to the right
 					Math.round((innerRadius + 0.5*radiusSpread) * Math.sin(startAngle + 0.8*angleSpread)) +'px)')
@@ -454,7 +454,7 @@ export default {
 			let labelsEnter = labels.enter()
 				.append('div')
 				.attr('class', 'emotion-label')
-				.attr('data-popuptarget', d => `triggers:${d.header.toLowerCase()}`)
+				.attr('data-popuptarget', d => `triggers:${emotion}-${d.header.toLowerCase()}`)
 				.style('top', (d, i) => {
 					switch (i) {
 						case 0:
@@ -879,7 +879,7 @@ export default {
 			.classed('visible', false);
 
 		const step = emotionsData.metadata.triggers.steps[triggerType === TRIGGER_TYPES.UNIVERSAL ? 3 : 4];
-		dispatcher.popupChange('triggers', triggerType, step.body);
+		dispatcher.popupChange('triggers', emotion +'-'+ triggerType, step.body);
 
 	},
 
