@@ -37,7 +37,7 @@ export default function (...initArgs) {
 		currentSection = null,
 		currentEmotion = null,
 		currentMorePage = null,
-		previousSectionNotNamedMore = null,
+		previousNonSecondaryHash = null,
 
 		scrollbarSegments = {},
 		scrollbarCloseTimeout = null,
@@ -280,8 +280,6 @@ export default function (...initArgs) {
 			// console.log(">>>>> isNavigating -> false (setEmotion promise resolution 1)");
 			isNavigating = false;
 		});
-
-		if (section.setPreviousSection) section.setPreviousSection(previousSectionNotNamedMore);
 	}
 
 	function fadeArrowOutAndIn (sectionName) {
@@ -322,6 +320,8 @@ export default function (...initArgs) {
 			// init current section
 			initSection(section);
 		}
+
+		if (sectionName === 'more' && section.setPreviousSection) section.setPreviousSection(previousNonSecondaryHash.section);
 
 		let backgroundSections = section.backgroundSections || [];
 
@@ -1099,7 +1099,6 @@ export default function (...initArgs) {
 		return null;
 	}
 
-	let prevHash;
 	function onHashChange (event, defaults=NAVIGATION_DEFAULTS) {
 		if (currentSection) {
 
@@ -1125,15 +1124,15 @@ export default function (...initArgs) {
 		}
 
 		let hash = document.location.hash.replace(/^#/, '');
-		// if (hash === prevHash) return;
-
-		prevHash = hash;
-
 		hash = parseHash(hash);
 
 		const section = coerceSectionFromHash(hash);
 		const moreName = coerceMoreFromHash(hash);
 		const emotion = (moreName) ? null : coerceEmotionFromHash(hash);
+
+		if (section !== 'more') {
+			previousNonSecondaryHash = {section, emotion};
+		}
 
 		// set flag after setting modal visibility,
 		// prior to setting emotion and section
@@ -1149,19 +1148,8 @@ export default function (...initArgs) {
 			setEmotion(emotion);
 		}
 
-		setPreviousSectionNotNamedMore(section, defaults);
 
 		setSection(section, previousEmotion, previousMorePage);
-	}
-
-	function setPreviousSectionNotNamedMore(section, defaults) {
-
-		if (section && section !== 'more') {
-			previousSectionNotNamedMore = section;
-		} else if (defaults && defaults.section) {
-			previousSectionNotNamedMore = defaults.section;
-		}
-
 	}
 
 	function parseHash (hash) {
