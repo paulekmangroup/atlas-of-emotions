@@ -27,11 +27,14 @@
 		&.active {
 			opacity: 1.0;
 
-			.label-container .label {
-				h3,
-				h4 {
-					pointer-events: auto;
-					cursor: pointer;
+			.label-container {
+				.label,
+				.emotion-label {
+					h3,
+					h4 {
+						pointer-events: auto;
+						cursor: pointer;
+					}
 				}
 			}
 		}
@@ -50,11 +53,13 @@
 			fill-opacity: 0.75;
 		}
 
-		opacity: 1.0;
-		-webkit-transition: opacity 0.5s;
-		transition:         opacity 0.5s;
-		&.muted {
-			opacity: 0.3;
+		g {
+			opacity: 1.0;
+			-webkit-transition: opacity 0.5s;
+			transition:         opacity 0.5s;
+			&.muted {
+				opacity: 0.3;
+			}
 		}
 	}
 

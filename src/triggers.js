@@ -30,6 +30,7 @@ export default {
 	currentEmotion: null,
 	triggersData: null,
 	backgroundSections: [ states, actions ],
+	hitAreasLocked: false,
 
 	labelContainers: null,
 	graphContainers: null,
@@ -53,7 +54,7 @@ export default {
 
 		this.onHitAreaMouseOver = this.onHitAreaMouseOver.bind(this);
 		this.onHitAreaMouseOut = this.onHitAreaMouseOut.bind(this);
-		this.onHitAreaClick = this.onHitAreaClick.bind(this);
+		this.onPhaseLabelClick = this.onPhaseLabelClick.bind(this);
 
 		this.isInited = true;
 
@@ -464,6 +465,18 @@ export default {
 						case 2:
 							return Math.round(-0.65 * haloRadius) + 'px';
 					}
+				})
+				.on('mouseenter', d => this.setHitAreasLocked(true))
+				.on('mouseleave', d => this.setHitAreasLocked(false))
+				.on('click', (d, i) => {
+					switch (i) {
+						case 0:
+							return this.onPhaseLabelClick(HIT_AREAS.APPRAISAL);
+						case 1:
+							return this.onPhaseLabelClick(HIT_AREAS.DATABASE);
+						case 2:
+							return this.onPhaseLabelClick(HIT_AREAS.IMPULSE);
+					}
 				});
 
 			labelsEnter
@@ -496,17 +509,17 @@ export default {
 			.attr('y', -ch)
 			.attr('width', cw)
 			.attr('height', ch)
-			.on('mouseenter', () => { this.onHitAreaMouseOver(HIT_AREAS.APPRAISAL); })
-			.on('mouseleave', () => { this.onHitAreaMouseOut(HIT_AREAS.APPRAISAL); })
-			.on('click', () => { this.onHitAreaClick(HIT_AREAS.APPRAISAL); });
+			.on('mouseover', () => { this.onHitAreaMouseOver(HIT_AREAS.APPRAISAL); })
+			.on('mouseout', () => { this.onHitAreaMouseOut(HIT_AREAS.APPRAISAL); })
+			.on('click', () => { this.setCallout(null); });
 
 		container.append('path')
 			.data(this.haloPieLayout([{}]))
 			.attr('class', 'hit-area')
 			.attr('d', this.haloArcGenerator)
-			.on('mouseenter', () => { this.onHitAreaMouseOver(HIT_AREAS.DATABASE); })
-			.on('mouseleave', () => { this.onHitAreaMouseOut(HIT_AREAS.DATABASE); })
-			.on('click', () => { this.onHitAreaClick(HIT_AREAS.DATABASE); });
+			.on('mouseover', () => { this.onHitAreaMouseOver(HIT_AREAS.DATABASE); })
+			.on('mouseout', () => { this.onHitAreaMouseOut(HIT_AREAS.DATABASE); })
+			.on('click', () => { this.setCallout(null); });
 
 		let innerArcGenerator = d3.svg.arc()
 			.innerRadius(0)
@@ -515,11 +528,11 @@ export default {
 			.data(this.haloPieLayout([{}]))
 			.attr('class', 'hit-area')
 			.attr('d', innerArcGenerator)
-			.on('mouseenter', () => { this.onHitAreaMouseOver(HIT_AREAS.IMPULSE); })
-			.on('mouseleave', () => { this.onHitAreaMouseOut(HIT_AREAS.IMPULSE); })
-			.on('click', () => { this.onHitAreaClick(HIT_AREAS.IMPULSE); });
+			.on('mouseover', () => { this.onHitAreaMouseOver(HIT_AREAS.IMPULSE); })
+			.on('mouseout', () => { this.onHitAreaMouseOut(HIT_AREAS.IMPULSE); })
+			.on('click', () => { this.setCallout(null); });
 
-		d3.select('#header').on('click', () => { this.onHitAreaClick(null); });
+		d3.select('#header').on('click', () => { this.onPhaseLabelClick(null); });
 
 	},
 
@@ -658,6 +671,8 @@ export default {
 			.style('opacity', 1.0)
 		.append('h4')
 			.html(d => d.name)
+			.on('mouseenter', d => this.setHitAreasLocked(true))
+			.on('mouseleave', d => this.setHitAreasLocked(false))
 			.on('click', d => this.showTriggerPopup(emotion, d.type));
 
 		// merge
@@ -894,7 +909,7 @@ export default {
 		this.displayHighlightedHitArea(null);
 	},
 
-	onHitAreaClick: function (hitAreaId) {
+	onPhaseLabelClick: function (hitAreaId) {
 
 		if (d3.event) {
 			d3.event.stopImmediatePropagation();
@@ -903,7 +918,12 @@ export default {
 		this.setHighlightedHitArea(hitAreaId);
 	},
 
+	setHitAreasLocked: function (val) {
+		this.hitAreasLocked = val;
+	},
+
 	setHighlightedHitArea: function (hitAreaId) {
+
 		if (hitAreaId === this.highlightedHitArea) {
 			this.highlightedHitArea = null;
 			this.displayHighlightedHitArea(null);
@@ -918,33 +938,40 @@ export default {
 
 	displayHighlightedHitArea: function (hitAreaId) {
 
-		hitAreaId = hitAreaId || this.highlightedHitArea || null;
+		// wrap in timeout to resolve after mouseenter/leave events that could set hitAreasLocked
+		setTimeout(() => {
 
-		let graphContainer = this.graphContainers[this.currentEmotion],
-			statesContainer = d3.select('#states'),
-			actionsContainer = d3.select('#actions');
+			if (this.hitAreasLocked) { return; }
 
-		switch (hitAreaId) {
-			case HIT_AREAS.APPRAISAL:
-				graphContainer.classed('muted', true);
-				statesContainer.classed('faded', true);
-				actionsContainer.classed('faded', true);
-				break;
-			case HIT_AREAS.DATABASE:
-				graphContainer.classed('muted', false);
-				statesContainer.classed('faded', true);
-				actionsContainer.classed('faded', true);
-				break;
-			case HIT_AREAS.IMPULSE:
-				graphContainer.classed('muted', true);
-				statesContainer.classed('faded', false);
-				actionsContainer.classed('faded', false);
-				break;
-			default:
-				graphContainer.classed('muted', false);
-				statesContainer.classed('faded', false);
-				actionsContainer.classed('faded', false);
-		}
+			hitAreaId = hitAreaId || this.highlightedHitArea || null;
+
+			let graphContainer = this.graphContainers[this.currentEmotion],
+				statesContainer = d3.select('#states'),
+				actionsContainer = d3.select('#actions');
+
+			switch (hitAreaId) {
+				case HIT_AREAS.APPRAISAL:
+					graphContainer.classed('muted', true);
+					statesContainer.classed('faded', true);
+					actionsContainer.classed('faded', true);
+					break;
+				case HIT_AREAS.DATABASE:
+					graphContainer.classed('muted', false);
+					statesContainer.classed('faded', true);
+					actionsContainer.classed('faded', true);
+					break;
+				case HIT_AREAS.IMPULSE:
+					graphContainer.classed('muted', true);
+					statesContainer.classed('faded', false);
+					actionsContainer.classed('faded', false);
+					break;
+				default:
+					graphContainer.classed('muted', false);
+					statesContainer.classed('faded', false);
+					actionsContainer.classed('faded', false);
+			}
+
+		}, 1);
 
 	},
 
@@ -967,7 +994,7 @@ export default {
 
 		if (hitAreaId) {
 			const step = emotionsData.metadata.triggers.steps[hitAreaId-1];
-			dispatcher.popupChange('triggers', step.header.toLowerCase(), step.body);
+			dispatcher.popupChange('triggers', `${this.currentEmotion}-${step.header.toLowerCase()}`, step.body);
 		} else {
 			dispatcher.popupChange();
 			dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.triggers.header, emotionsData.metadata.triggers.body);
