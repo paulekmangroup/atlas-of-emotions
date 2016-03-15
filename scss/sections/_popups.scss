@@ -21,8 +21,15 @@
 	opacity: 1.0;
 }
 
-.default-interactive-helper[data-popuptarget] {
+.default-interactive-helper[data-popuptarget],
+.highlight[data-popuptarget] {
 	@include emotion-border-color();
+}
+
+.unhighlight.default-interactive-helper[data-popuptarget],
+.unhighlight[data-popuptarget] {
+	@include emotion-border-color(0.0);
+	opacity: 0.5 !important;
 }
 
 .popup-template {

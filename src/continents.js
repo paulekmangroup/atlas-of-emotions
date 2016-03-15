@@ -63,6 +63,9 @@ const continentsSection = {
 		this.onContinentMouseLeave = this.onContinentMouseLeave.bind(this);
 		this.onContinentClick = this.onContinentClick.bind(this);
 
+		// this.onLabelOver = this.onLabelOver.bind(this);
+		// this.onLabelOut = this.onLabelOut.bind(this);
+
 		this.isInited = true;
 
 	},
@@ -154,6 +157,7 @@ const continentsSection = {
 					// deselect all continents
 					continents.forEach(c => c.highlightLevel = Continent.HIGHLIGHT_LEVELS.NONE);
 					dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+					this.setContinentHighlight(null, Continent.HIGHLIGHT_LEVELS.NONE);
 
 					if (this.zoomedInContinent) {
 
@@ -308,6 +312,7 @@ const continentsSection = {
 			.attr('href', d => `#continents:${d.id}`)
 			.append('h3')
 				.text(d => d.name.toUpperCase());
+
 	},
 
 	open: function (options) {
@@ -426,6 +431,12 @@ const continentsSection = {
 				.on('mouseleave', val ? section.onContinentMouseLeave : null)
 				.on('click', val ? section.onContinentClick : null, true);
 		});
+
+		this.labelContainer.selectAll('.emotion-label').on({
+			mouseenter: val ? section.onContinentMouseEnter : null,
+			mouseleave: val ? section.onContinentMouseLeave : null
+		});
+
 
 		// handle background click for deselection
 		d3.select('#main').on('click', val ? this.onBackgroundClick : null, false);
@@ -708,34 +719,7 @@ const continentsSection = {
 		let mouseLeaveDelay = 80;
 
 		this.mouseLeaveTimeout = setTimeout(() => {
-
-			let otherHighlightedContinent;
-			continents.some((c => {
-				if (c !== continent &&
-					(c.highlightLevel === Continent.HIGHLIGHT_LEVELS.HIGHLIGHTED ||
-					c.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED)) {
-					otherHighlightedContinent = c;
-					return true;
-				}
-			}));
-
-			if (otherHighlightedContinent) {
-				// If there is a highlighted continent other than the event target continent,
-				// just unhiglight the event target continent (unless it's selected, then leave as-is)
-				let unhighlightLevel = otherHighlightedContinent.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED ? Continent.HIGHLIGHT_LEVELS.UNSELECTED : Continent.HIGHLIGHT_LEVELS.UNHIGHLIGHTED;
-				if (continent && continent.highlightLevel !== Continent.HIGHLIGHT_LEVELS.SELECTED) {
-					continent.highlightLevel = unhighlightLevel;
-				}
-			} else {
-				// Else, turn off all highlights except selected.
-				let unhighlightLevel = continent.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED ? Continent.HIGHLIGHT_LEVELS.UNSELECTED : Continent.HIGHLIGHT_LEVELS.NONE;
-				continents.forEach(c => {
-					if (c.highlightLevel !== Continent.HIGHLIGHT_LEVELS.SELECTED) {
-						c.highlightLevel = unhighlightLevel;
-					}
-				});
-			}
-
+			this.unsetContinentHighlight(continent);
 		}, mouseLeaveDelay);
 
 	},
@@ -746,17 +730,75 @@ const continentsSection = {
 			d3.event.stopImmediatePropagation();
 		}
 
+		if (this.mouseLeaveTimeout) {
+			clearTimeout(this.mouseLeaveTimeout);
+		}
+
 		dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS, continent.id);
 
 	},
 
 	onBackgroundClick: function () {
 
+		if (this.mouseLeaveTimeout) {
+			clearTimeout(this.mouseLeaveTimeout);
+		}
+
 		dispatcher.navigate(dispatcher.HOME);
 
 	},
 
+	unsetContinentHighlight: function (continent) {
+		let otherHighlightedContinent;
+		continents.some((c => {
+			if (c !== continent &&
+				(c.highlightLevel === Continent.HIGHLIGHT_LEVELS.HIGHLIGHTED ||
+				c.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED)) {
+				otherHighlightedContinent = c;
+				return true;
+			}
+		}));
+
+		let somethingSelected;
+		continents.some((c => {
+			if (c.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED) {
+				somethingSelected = c;
+				return true;
+			}
+		}));
+
+		this.labelContainer.selectAll('.emotion-label')
+			.classed('highlight', false)
+			.classed('unhighlight', false);
+
+		if (somethingSelected) {
+			this.labelContainer.select('.default-interactive-helper')
+				.classed('unhighlight', true);
+			this.labelContainer.select(`[data-popuptarget="continents:${somethingSelected.id}"]`)
+				.classed('highlight', true)
+				.classed('unhighlight', false);
+		}
+
+		if (otherHighlightedContinent) {
+			// If there is a highlighted continent other than the event target continent,
+			// just unhiglight the event target continent (unless it's selected, then leave as-is)
+			let unhighlightLevel = otherHighlightedContinent.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED ? Continent.HIGHLIGHT_LEVELS.UNSELECTED : Continent.HIGHLIGHT_LEVELS.UNHIGHLIGHTED;
+			if (continent && continent.highlightLevel !== Continent.HIGHLIGHT_LEVELS.SELECTED) {
+				continent.highlightLevel = unhighlightLevel;
+			}
+		} else {
+			// Else, turn off all highlights except selected.
+			let unhighlightLevel = continent.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED ? Continent.HIGHLIGHT_LEVELS.UNSELECTED : Continent.HIGHLIGHT_LEVELS.NONE;
+			continents.forEach(c => {
+				if (c.highlightLevel !== Continent.HIGHLIGHT_LEVELS.SELECTED) {
+					c.highlightLevel = unhighlightLevel;
+				}
+			});
+		}
+	},
+
 	setContinentHighlight: function (continent, highlightLevel) {
+
 		// Set unhighlightLevel based on if any continent highlighted
 		let unhighlightLevel;
 		if (highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED || continents.some(c => c.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED)) {
@@ -765,19 +807,34 @@ const continentsSection = {
 			unhighlightLevel = Continent.HIGHLIGHT_LEVELS.UNHIGHLIGHTED;
 		}
 
+		let somethingSelected;
+		continents.some((c => {
+			if (c.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED) {
+				somethingSelected = c;
+				return true;
+			}
+		}));
+
+		this.labelContainer.selectAll('.emotion-label')
+			.classed('highlight', false)
+			.classed('unhighlight', false);
+
 		if (continent) {
 			continents.forEach(c => {
+				const elm = this.labelContainer.select(`[data-popuptarget="continents:${c.id}"]`);
 				if (c === continent) {
 					c.highlightLevel = highlightLevel;
+					elm.classed('highlight', true);
 				} else {
 					// unhighlight all but selected
 					if (c.highlightLevel !== Continent.HIGHLIGHT_LEVELS.SELECTED) {
 						c.highlightLevel = unhighlightLevel;
 					}
+
+					elm.classed('unhighlight', true);
 				}
 			});
 		}
-
 	}
 
 };
