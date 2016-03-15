@@ -19,6 +19,11 @@ const HIT_AREAS = {
 // path for arrowhead shape
 const ARROWHEAD = "M0,0.1C3.1-3,9.3-4.5,13.6-4.6C7.9-0.3,2.8,5.2,0,12C-2.7,5.2-8-0.1-13.6-4.6C-9-4.3-3.4-3.1,0,0.1z";
 
+const TRIGGER_TYPES = {
+	UNIVERSAL: 'universal',
+	LEARNED: 'learned'
+};
+
 export default {
 
 	isInited: false,
@@ -421,18 +426,18 @@ export default {
 				.classed('universal-learned-labels ' + emotion, true);
 			let { startAngle, angleSpread, innerRadius, radiusSpread } = this.calcArrowsGeom(haloRadius);
 			universalLearnedLabelContainer.append('div')
-				.attr('class', 'emotion-label universal ' + emotion)
-				.attr('data-popuptarget', 'triggers:universal')
+				.attr('class', `emotion-label ${TRIGGER_TYPES.UNIVERSAL} ${emotion}`)
+				.attr('data-popuptarget', `triggers:${TRIGGER_TYPES.UNIVERSAL}`)
 				.style('transform', 'translate('+
-					Math.round((innerRadius + 0.5*radiusSpread) * Math.cos(startAngle + 0.2*angleSpread)) +'px,'+
+					Math.round((innerRadius + 0.5*radiusSpread) * Math.cos(startAngle + 0.1*angleSpread)) +'px,'+	// a bit to the left, since popup opens to the right
 					Math.round((innerRadius + 0.5*radiusSpread) * Math.sin(startAngle + 0.2*angleSpread)) +'px)')
 			.append('h3')
 				.text(emotionsData.metadata.triggers.steps[3].header.toUpperCase());
 			universalLearnedLabelContainer.append('div')
-				.attr('class', 'emotion-label learned ' + emotion)
-				.attr('data-popuptarget', 'triggers:learned')
+				.attr('class', `emotion-label ${TRIGGER_TYPES.LEARNED} ${emotion}`)
+				.attr('data-popuptarget', `triggers:${TRIGGER_TYPES.LEARNED}`)
 				.style('transform', 'translate('+
-					Math.round((innerRadius + 0.5*radiusSpread) * Math.cos(startAngle + 0.8*angleSpread)) +'px,'+
+					Math.round((innerRadius + 0.5*radiusSpread) * Math.cos(startAngle + 0.7*angleSpread)) +'px,'+	// a bit to the left, since popup opens to the right
 					Math.round((innerRadius + 0.5*radiusSpread) * Math.sin(startAngle + 0.8*angleSpread)) +'px)')
 			.append('h3')
 				.text(emotionsData.metadata.triggers.steps[4].header.toUpperCase());
@@ -808,11 +813,11 @@ export default {
 			});
 
 			// update universal/learned labels
-			labelContainer.select('.universal')
+			labelContainer.select(`.${TRIGGER_TYPES.UNIVERSAL}`)
 				.style('transform', 'translate('+
 					Math.round((innerRadius + 0.5*radiusSpread) * Math.cos(startAngle + 0.2*angleSpread)) +'px,'+
 					Math.round((innerRadius + 0.5*radiusSpread) * Math.sin(startAngle + 0.2*angleSpread)) +'px)');
-			labelContainer.select('.learned')
+			labelContainer.select(`.${TRIGGER_TYPES.LEARNED}`)
 				.style('transform', 'translate('+
 					Math.round((innerRadius + 0.5*radiusSpread) * Math.cos(startAngle + 0.8*angleSpread)) +'px,'+
 					Math.round((innerRadius + 0.5*radiusSpread) * Math.sin(startAngle + 0.8*angleSpread)) +'px)');
@@ -872,16 +877,17 @@ export default {
 
 	showTriggerPopup: function (emotion, triggerType) {
 
-		console.log(">>>>> TODO: show trigger popup for type:", triggerType, "for emotion:", emotion);
-		// triggerType = 'universal';
-		// triggerType = 'learned';
+		if (triggerType !== TRIGGER_TYPES.UNIVERSAL && triggerType !== TRIGGER_TYPES.LEARNED) { return; }
 
-		if (triggerType !== 'universal' && triggerType !== 'learned') { return; }
+		let unselectedTriggerType = triggerType === TRIGGER_TYPES.UNIVERSAL ? TRIGGER_TYPES.LEARNED : TRIGGER_TYPES.UNIVERSAL;
 
-		this.labelContainers[emotion].select('.' + triggerType)
+		// show the selected one, hide the unselected one
+		this.labelContainers[emotion].select(`.${triggerType}`)
 			.classed('visible', true);
+		this.labelContainers[emotion].select(`.${unselectedTriggerType}`)
+			.classed('visible', false);
 
-		const step = emotionsData.metadata.triggers.steps[triggerType === 'universal' ? 3 : 4];
+		const step = emotionsData.metadata.triggers.steps[triggerType === TRIGGER_TYPES.UNIVERSAL ? 3 : 4];
 		dispatcher.popupChange('triggers', triggerType, step.body);
 
 	},
