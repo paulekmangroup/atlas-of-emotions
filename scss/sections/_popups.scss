@@ -21,7 +21,8 @@
 }
 
 .default-interactive-helper[data-popuptarget],
-.highlight[data-popuptarget] {
+.highlight[data-popuptarget],
+.selected[data-popuptarget] {
 	@include emotion-border-color();
 }
 
