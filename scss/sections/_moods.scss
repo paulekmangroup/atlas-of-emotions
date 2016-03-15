@@ -46,19 +46,65 @@
 	// this should probably be done with a transition instead of animation
 	@keyframes circleFade {
 	  0% {
-			fill: white;
+			opacity: 0;
 	  }
-		30% {
-			fill: white;
+		50% {
+			opacity: 0;
 		}
 	  100% {
-			@include emotion-fill-color;
+			opacity: .1;
 	  }
+	}
+
+	@keyframes circleFade0 {
+		0% {
+			opacity: 0;
+		}
+		50% {
+			opacity: 0;
+		}
+		100% {
+			opacity: .2;
+		}
+	}
+
+	@keyframes circleFade1 {
+		0% {
+			opacity: 0;
+		}
+		50% {
+			opacity: 0;
+		}
+		100% {
+			opacity: .4;
+		}
+	}
+
+	@keyframes circleFade2 {
+		0% {
+			opacity: 0;
+		}
+		50% {
+			opacity: 0;
+		}
+		100% {
+			opacity: .6;
+		}
 	}
 
 	&.fadeOutIn {
 		animation-name: circleFade;
-		animation-duration: 2.4s;
+		&.highlight0{
+			animation-name: circleFade0;
+		}
+		&.highlight1{
+			animation-name: circleFade1;
+		}
+		&.highlight2{
+			animation-name: circleFade2;
+		}
+
+		animation-duration: 1.5s;
 		animation-timing-function: ease-in;
 		animation-delay: 0;
 		animation-direction: normal;

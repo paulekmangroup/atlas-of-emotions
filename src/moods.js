@@ -171,7 +171,7 @@ export default {
 			d3.selectAll('.moodCircle').classed("fadeOutIn", true);
 			this.circleTimeout = setTimeout(() => {
 				endFade();
-			}, 2400);
+			}, 1500);
 
 			// enter circles here (?)
 
