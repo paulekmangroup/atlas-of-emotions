@@ -929,6 +929,8 @@ export default {
 		d3.select(this.sectionContainer).selectAll('.universal, .learned')
 			.classed('visible', false);
 
+		this.highlightedHitArea = null;
+
 	},
 
 	setHitAreasLocked: function (val) {
@@ -941,11 +943,11 @@ export default {
 			this.highlightedHitArea = null;
 			this.displayHighlightedHitArea(null);
 			this.setCallout(null);
-			return;
+		} else {
+			this.highlightedHitArea = hitAreaId;
+			this.displayHighlightedHitArea();
+			this.setCallout(hitAreaId);
 		}
-		this.highlightedHitArea = hitAreaId;
-		this.displayHighlightedHitArea();
-		this.setCallout(hitAreaId);
 
 	},
 
@@ -1011,6 +1013,11 @@ export default {
 		} else {
 			dispatcher.popupChange();
 			dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.triggers.header, emotionsData.metadata.triggers.body);
+
+			// this should technically be in a popup closed handler,
+			// but popupManager only dispatches events for popup close button clicks.
+			// so, it's here as well as in onPopupCloseButtonClicked.
+			this.highlightedHitArea = null;
 		}
 
 	}
