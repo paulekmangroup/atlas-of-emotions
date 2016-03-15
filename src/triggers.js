@@ -61,6 +61,15 @@ export default {
 
 	},
 
+	calcAngle: function (startAngle, angleSpread, middleIndex, numTriggers, i) {
+		return startAngle + angleSpread * (i + (i < middleIndex ? 1 : 2)) / (numTriggers + 1);
+	},
+
+	calcRadius: function (innerRadius, radiusSpread, i) {
+		let arrange = [.6,.5,.8,.1,1,.2,.5];
+		return innerRadius + radiusSpread * arrange[i];
+	},
+
 	parseTriggers: function (haloRadius) {
 
 		let { startAngle, angleSpread, innerRadius, radiusSpread } = this.calcArrowsGeom(haloRadius),
@@ -73,8 +82,8 @@ export default {
 
 			triggersData[emotion] = emotionsData.emotions[emotion].triggers.concat()
 			.sort((a, b) => {
-				if (a.name < b.name) return -1;
-				else if (a.name > b.name) return 1;
+				if (a.type > b.type) return -1;
+				else if (a.type < b.type) return 1;
 				else return 0;
 			})
 			.map((trigger, i) => ({
@@ -83,11 +92,11 @@ export default {
 
 				// distribute evenly between startAngle and startAngle + angleSpread,
 				// with a gap in the middle
-				angle: startAngle + angleSpread * (i + (i < middleIndex ? 0.5 : 1.5)) / (numTriggers + 1),
+				angle: this.calcAngle(startAngle, angleSpread, middleIndex, numTriggers, i),
 
 				// distribute along rings spanning between innerRadius and innerRadius + radiusSpread,
 				// starting at the second ring and cycling between rings
-				radius: innerRadius + radiusSpread * ((i + 1) % NUM_RINGS) / (NUM_RINGS - 1),
+				radius: this.calcRadius(innerRadius, radiusSpread, i),
 
 				// fraction of radius.
 				arrowLength: 0.4
@@ -123,10 +132,10 @@ export default {
 			innerRadius = haloRadius * 1.25;
 			radiusSpread = haloRadius * 0.3;
 		} else {
-			startAngle = -0.6 * Math.PI;
-			angleSpread = 0.2 * Math.PI;
-			innerRadius = haloRadius * 1.35;
-			radiusSpread = haloRadius * 0.375;
+			startAngle = -0.7 * Math.PI;
+			angleSpread = 0.4 * Math.PI;
+			innerRadius = haloRadius * 1.15;
+			radiusSpread = haloRadius * 0.575;
 		}
 
 		return {
@@ -819,8 +828,8 @@ export default {
 				middleIndex = Math.floor(numTriggers / 2);
 
 			this.triggersData[emotion].forEach((triggerDatum, i) => {
-				triggerDatum.angle = startAngle + angleSpread * (i + (i < middleIndex ? 0.5 : 1.5)) / (numTriggers + 1);
-				triggerDatum.radius = innerRadius + radiusSpread * ((i + 1) % NUM_RINGS) / (NUM_RINGS - 1);
+				triggerDatum.angle = this.calcAngle(startAngle, angleSpread, middleIndex, numTriggers, i);
+				triggerDatum.radius = this.calcRadius(innerRadius, radiusSpread, i);
 			});
 
 			// update universal/learned labels
