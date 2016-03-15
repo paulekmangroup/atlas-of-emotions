@@ -123,6 +123,9 @@ export default {
 			const id = `more-${item}`;
 			containerEl.id = `more-${item}`;
 			containerEl.classList.add('more-child');
+			if (item.indexOf('annex-') === 0) {
+				containerEl.classList.add('annex-subpage');
+			}
 			this.sectionContainer.appendChild(containerEl);
 			this.containers[item] = containerEl;
 		});

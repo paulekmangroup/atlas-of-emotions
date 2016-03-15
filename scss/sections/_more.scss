@@ -107,8 +107,13 @@
 	width: 100%;
 	transition: left 0.5s linear;
 
-	&.active {
+	&.active,
+	&.annex-subpage.active {
 		left: 0;
+	}
+
+	&.annex-subpage {
+		left: 100%;
 	}
 
 	.wrapper {
