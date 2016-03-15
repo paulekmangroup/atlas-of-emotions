@@ -114,14 +114,15 @@
 	}
 }
 
-#trigger-phase-labels,
+.trigger-phase-labels,
 .universal-learned-labels {
 	position: absolute;
 	left: 50%;
+	bottom: 0;
 
 	text-align: center;
 	@include emotion-color;
-
+	/*
 	.label {
 		position: absolute;
 		transform: translate(-50%, -50%);
@@ -138,13 +139,15 @@
 			opacity: 1.0;
 		}
 	}
+	*/
 }
-#trigger-phase-labels {
-	bottom: $triggers-bottom;
+.trigger-phase-labels {
+	.emotion-label {
+		opacity: 1.0;
+		transform: translate(-50%, -50%);
+	}
 }
-.universal-learned-labels {
-	bottom: 0;
-}
+
 
 #trigger-hit-area-container {
 	position: absolute;

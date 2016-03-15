@@ -423,7 +423,7 @@ export default {
 
 			// universal/learned triggers popup labels
 			let universalLearnedLabelContainer = labelContainer.append('div')
-				.classed('universal-learned-labels ' + emotion, true);
+				.classed(`universal-learned-labels ${emotion}`, true);
 			let { startAngle, angleSpread, innerRadius, radiusSpread } = this.calcArrowsGeom(haloRadius);
 			universalLearnedLabelContainer.append('div')
 				.attr('class', `emotion-label ${TRIGGER_TYPES.UNIVERSAL} ${emotion}`)
@@ -444,33 +444,34 @@ export default {
 
 			this.labelContainers[emotion] = labelContainer;
 
+			// phase labels (EVENT/PERCEPTION/RESPONSE)
+			let phaseLabelContainer = labelContainer.append('div')
+				.classed(`trigger-phase-labels ${emotion}`, true);
+
+			let labels = phaseLabelContainer.selectAll('.emotion-label')
+				.data(emotionsData.metadata.triggers.steps.slice(0, 3));
+
+			let labelsEnter = labels.enter()
+				.append('div')
+				.attr('class', 'emotion-label')
+				.attr('data-popuptarget', d => `triggers:${d.header.toLowerCase()}`)
+				.style('top', (d, i) => {
+					switch (i) {
+						case 0:
+							return Math.round(-1.4 * haloRadius) + 'px';
+						case 1:
+							return Math.round(-0.9 * haloRadius) + 'px';
+						case 2:
+							return Math.round(-0.65 * haloRadius) + 'px';
+					}
+				});
+
+			labelsEnter
+				.append('h3')
+					.text(d => d.header.toUpperCase());
+
 		});
 
-		// only one phase label container for all emotions
-		this.phaseLabelContainer = d3.select(containerNode).append('div')
-			.attr('id', 'trigger-phase-labels');
-
-		const labels = this.phaseLabelContainer.selectAll('.label')
-			.data(emotionsData.metadata.triggers.steps.slice(0, 3));
-
-		const labelsEnter = labels.enter()
-			.append('div')
-			.attr('class', 'emotion-label label')
-			.attr('data-popuptarget', d => `triggers:${d.header.toLowerCase()}`)
-			.style('top', (d, i) => {
-				switch (i) {
-					case 0:
-						return Math.round(-1.4 * haloRadius) + 'px';
-					case 1:
-						return Math.round(-0.9 * haloRadius) + 'px';
-					case 2:
-						return Math.round(-0.65 * haloRadius) + 'px';
-				}
-			});
-
-		labelsEnter
-			.append('h3')
-				.text(d => d.header.toUpperCase());
 	},
 
 	setUpHitAreas: function (containerNode) {
@@ -585,20 +586,12 @@ export default {
 
 			this.renderGraph(this.currentEmotion);
 			this.renderLabels(this.currentEmotion);
-			this.phaseLabelContainer.attr('class', this.currentEmotion);
-			this.phaseLabelContainer.selectAll('.label')
-				.attr('class', `emotion-label label ${this.currentEmotion}`);
 
 			// leave a bit of time for other transitions to happen
 			this.openCallout(500);
 
 			// fade in horizon
 			document.querySelector('#triggers .horizon').classList.add('visible');
-
-			// hide phase labels until the next interaction
-			// (mostly a thing when back/fwd navigating with the trackpad)
-			this.phaseLabelContainer.selectAll('.label')
-				.classed('visible', false);
 
 			// resolve on completion of primary transitions
 			let resolveDelay;
@@ -654,8 +647,6 @@ export default {
 		let triggersData = emotion ? this.triggersData[emotion] : [];
 		emotion = emotion || this.currentEmotion;
 
-		// TODO: use a force-directed layout instead,
-		// to ensure every label finds a good, non-overlapping place
 		let h = (1 - sassVars.triggers.bottom.replace('%', '')/100) * this.sectionContainer.offsetHeight,
 			labelContainer = this.labelContainers[emotion],
 			labelSelection = labelContainer.selectAll('div.label')
@@ -824,20 +815,20 @@ export default {
 
 			this.renderLabels(emotion);
 
-		});
+			// update phase labels
+			labelContainer.select('.trigger-phase-labels').selectAll('.emotion-label')
+				.style('top', (d, i) => {
+					switch (i) {
+						case 0:
+							return Math.round(-1.4 * haloRadius) + 'px';
+						case 1:
+							return Math.round(-0.9 * haloRadius) + 'px';
+						case 2:
+							return Math.round(-0.65 * haloRadius) + 'px';
+					}
+				});
 
-		// update phase labels
-		d3.select('#trigger-phase-labels').selectAll('h3.label')
-			.style('top', (d, i) => {
-				switch (i) {
-					case 0:
-						return Math.round(-1.4 * haloRadius) + 'px';
-					case 1:
-						return Math.round(-0.9 * haloRadius) + 'px';
-					case 2:
-						return Math.round(-0.65 * haloRadius) + 'px';
-				}
-			});
+		});
 
 		// update hit areas
 		let hitAreaContainer = document.querySelector('#trigger-hit-area-container'),
@@ -954,9 +945,6 @@ export default {
 				statesContainer.classed('faded', false);
 				actionsContainer.classed('faded', false);
 		}
-
-		this.phaseLabelContainer.selectAll('.label')
-			.classed('visible', (d, i) => i + 1 === hitAreaId);
 
 	},
 
