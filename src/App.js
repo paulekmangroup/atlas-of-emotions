@@ -269,6 +269,7 @@ export default function (...initArgs) {
 
 		closeButton.addEventListener('click', (event) => {
 			event.stopImmediatePropagation();
+			localStorage.setItem("modalSeen", true);
 			setModalVisibility(false);
 		});
 
@@ -1110,16 +1111,18 @@ export default function (...initArgs) {
 			document.body.classList.remove('intro-closing', 'intro-open');
 			document.body.classList.add('intro-opening');
 
-			// if a section has not yet been selected this session
+			// if a section has not yet been selected for this browser
 			// (i.e. this is the start of the session),
 			// open the intro modal and the scrollbar
-			setTimeout(() => {
-				setModalVisibility(true);
-			}, sassVars.ui.intro.delay * 1000);
+			if(!localStorage.modalSeen){
+				setTimeout(() => {
+					setModalVisibility(true);
+				}, sassVars.ui.intro.delay * 1000);
 
-			setTimeout(() => {
-				setScrollbarFractionalOpen(1.0);
-			}, sassVars.ui.scrollbar.introOpenDelay * 1000);
+				setTimeout(() => {
+					setScrollbarFractionalOpen(1.0);
+				}, sassVars.ui.scrollbar.introOpenDelay * 1000);
+			}
 
 		}
 
