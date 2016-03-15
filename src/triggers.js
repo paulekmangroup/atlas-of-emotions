@@ -418,10 +418,11 @@ export default {
 
 			// universal/learned triggers popup labels
 			let universalLearnedLabelContainer = labelContainer.append('div')
-				.style('transform', 'translate(' + 0.5 * containerNode.offsetWidth + 'px,' + h + 'px)');
+				.classed('universal-learned-labels ' + emotion, true);
+				// .style('transform', 'translate(' + 0.5 * containerNode.offsetWidth + 'px,' + h + 'px)');
 			let { startAngle, angleSpread, innerRadius, radiusSpread } = this.calcArrowsGeom(haloRadius);
 			universalLearnedLabelContainer.append('div')
-				.attr('class', 'emotion-label hidden-label universal')// hidden')
+				.attr('class', 'emotion-label universal')// hidden')
 				.attr('data-popuptarget', 'triggers:universal')
 				.style('transform', 'translate('+
 					Math.round((innerRadius + 0.5*radiusSpread) * Math.cos(startAngle + 0.2*angleSpread)) +'px,'+
@@ -429,7 +430,7 @@ export default {
 			.append('h3')
 				.text(emotionsData.metadata.triggers.steps[3].header.toUpperCase());
 			universalLearnedLabelContainer.append('div')
-				.attr('class', 'emotion-label hidden-label learned')// hidden')
+				.attr('class', 'emotion-label learned')// hidden')
 				.attr('data-popuptarget', 'triggers:learned')
 				.style('transform', 'translate('+
 					Math.round((innerRadius + 0.5*radiusSpread) * Math.cos(startAngle + 0.8*angleSpread)) +'px,'+
@@ -662,7 +663,7 @@ export default {
 			.style('opacity', 1.0)
 		.append('h4')
 			.html(d => d.name)
-			.on('click', d => this.showTriggerPopup(d.type));
+			.on('click', d => this.showTriggerPopup(emotion, d.type));
 
 		// merge
 		labelSelection
@@ -805,7 +806,14 @@ export default {
 			});
 
 			// update universal/learned labels
-			console.log(">>>>> TODO: update universal/learned labels");
+			labelContainer.select('.universal')
+				.style('transform', 'translate('+
+					Math.round((innerRadius + 0.5*radiusSpread) * Math.cos(startAngle + 0.2*angleSpread)) +'px,'+
+					Math.round((innerRadius + 0.5*radiusSpread) * Math.sin(startAngle + 0.2*angleSpread)) +'px)');
+			labelContainer.select('.learned')
+				.style('transform', 'translate('+
+					Math.round((innerRadius + 0.5*radiusSpread) * Math.cos(startAngle + 0.8*angleSpread)) +'px,'+
+					Math.round((innerRadius + 0.5*radiusSpread) * Math.sin(startAngle + 0.8*angleSpread)) +'px)');
 
 			this.renderLabels(emotion);
 
@@ -860,13 +868,16 @@ export default {
 
 	},
 
-	showTriggerPopup: function (triggerType) {
+	showTriggerPopup: function (emotion, triggerType) {
 
-		console.log(">>>>> TODO: show trigger popup for type:", triggerType);
+		console.log(">>>>> TODO: show trigger popup for type:", triggerType, "for emotion:", emotion);
 		triggerType = 'universal';
 		// triggerType = 'learned';
 
 		if (triggerType !== 'universal' && triggerType !== 'learned') { return; }
+
+		this.labelContainers[emotion].select('.' + triggerType)
+			.classed('visible', true);
 
 		const step = emotionsData.metadata.triggers.steps[triggerType === 'universal' ? 3 : 4];
 		dispatcher.popupChange('triggers', triggerType, step.body);
@@ -953,6 +964,10 @@ export default {
 	},
 
 	setCallout: function (hitAreaId) {
+
+		// hide all universal/learned labels
+		d3.select(this.sectionContainer).selectAll('.universal, .learned')
+			.classed('visible', false);
 
 		if (hitAreaId) {
 			const step = emotionsData.metadata.triggers.steps[hitAreaId-1];

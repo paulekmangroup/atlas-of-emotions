@@ -57,8 +57,7 @@
 		height: calc(100% - #{$triggers-bottom});
 		bottom: $triggers-bottom;
 
-		.label,
-		.hidden-label {
+		.label {
 			position: absolute;
 			width: 10em;
 
@@ -78,16 +77,6 @@
 
 				pointer-events: auto;
 				cursor: pointer;
-			}
-
-			&.hidden {
-				visibility: none;
-			}
-			.universal {
-				//
-			}
-			.learned {
-				//
 			}
 		}
 
@@ -125,10 +114,10 @@
 	}
 }
 
-#trigger-phase-labels {
+#trigger-phase-labels,
+.universal-learned-labels {
 	position: absolute;
 	left: 50%;
-	bottom: $triggers-bottom;
 
 	text-align: center;
 	@include emotion-color;
@@ -149,6 +138,12 @@
 			opacity: 1.0;
 		}
 	}
+}
+#trigger-phase-labels {
+	bottom: $triggers-bottom;
+}
+.universal-learned-labels {
+	bottom: 0;
 }
 
 #trigger-hit-area-container {
