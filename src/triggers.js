@@ -19,6 +19,11 @@ const HIT_AREAS = {
 // path for arrowhead shape
 const ARROWHEAD = "M0,0.1C3.1-3,9.3-4.5,13.6-4.6C7.9-0.3,2.8,5.2,0,12C-2.7,5.2-8-0.1-13.6-4.6C-9-4.3-3.4-3.1,0,0.1z";
 
+const TRIGGER_TYPES = {
+	UNIVERSAL: 'universal',
+	LEARNED: 'learned'
+};
+
 export default {
 
 	isInited: false,
@@ -42,9 +47,9 @@ export default {
 		this.initLabels(containerNode, haloRadius);
 		this.triggersData = this.parseTriggers(haloRadius);
 
-		this.drawHorizon(containerNode);
-
 		this.setUpHitAreas(containerNode);
+
+		this.drawHorizon(containerNode);
 
 		this.onHitAreaMouseOver = this.onHitAreaMouseOver.bind(this);
 		this.onHitAreaMouseOut = this.onHitAreaMouseOut.bind(this);
@@ -66,12 +71,13 @@ export default {
 
 			triggersData[emotion] = emotionsData.emotions[emotion].triggers.concat()
 			.sort((a, b) => {
-				if (a < b) return -1;
-				else if (a > b) return 1;
+				if (a.name < b.name) return -1;
+				else if (a.name > b.name) return 1;
 				else return 0;
 			})
 			.map((trigger, i) => ({
-				name: trigger,
+				name: trigger.name,
+				type: trigger.type.toLowerCase(),
 
 				// distribute evenly between startAngle and startAngle + angleSpread,
 				// with a gap in the middle
@@ -415,6 +421,27 @@ export default {
 			.append('g')
 				.attr('transform', 'translate(' + 0.5 * containerNode.offsetWidth + ',' + h + ')');
 
+			// universal/learned triggers popup labels
+			let universalLearnedLabelContainer = labelContainer.append('div')
+				.classed('universal-learned-labels ' + emotion, true);
+			let { startAngle, angleSpread, innerRadius, radiusSpread } = this.calcArrowsGeom(haloRadius);
+			universalLearnedLabelContainer.append('div')
+				.attr('class', `emotion-label ${TRIGGER_TYPES.UNIVERSAL} ${emotion}`)
+				.attr('data-popuptarget', `triggers:${TRIGGER_TYPES.UNIVERSAL}`)
+				.style('transform', 'translate('+
+					Math.round((innerRadius + 0.5*radiusSpread) * Math.cos(startAngle + 0.1*angleSpread)) +'px,'+	// a bit to the left, since popup opens to the right
+					Math.round((innerRadius + 0.5*radiusSpread) * Math.sin(startAngle + 0.2*angleSpread)) +'px)')
+			.append('h3')
+				.text(emotionsData.metadata.triggers.steps[3].header.toUpperCase());
+			universalLearnedLabelContainer.append('div')
+				.attr('class', `emotion-label ${TRIGGER_TYPES.LEARNED} ${emotion}`)
+				.attr('data-popuptarget', `triggers:${TRIGGER_TYPES.LEARNED}`)
+				.style('transform', 'translate('+
+					Math.round((innerRadius + 0.5*radiusSpread) * Math.cos(startAngle + 0.7*angleSpread)) +'px,'+	// a bit to the left, since popup opens to the right
+					Math.round((innerRadius + 0.5*radiusSpread) * Math.sin(startAngle + 0.8*angleSpread)) +'px)')
+			.append('h3')
+				.text(emotionsData.metadata.triggers.steps[4].header.toUpperCase());
+
 			this.labelContainers[emotion] = labelContainer;
 
 		});
@@ -424,7 +451,7 @@ export default {
 			.attr('id', 'trigger-phase-labels');
 
 		const labels = this.phaseLabelContainer.selectAll('.label')
-			.data(emotionsData.metadata.triggers.steps);
+			.data(emotionsData.metadata.triggers.steps.slice(0, 3));
 
 		const labelsEnter = labels.enter()
 			.append('div')
@@ -446,14 +473,6 @@ export default {
 				.text(d => d.header.toUpperCase());
 	},
 
-	drawHorizon: function (containerNode) {
-
-		let horizon = document.createElement('div');
-		horizon.classList.add('horizon');
-		containerNode.insertBefore(horizon, containerNode.childNodes[0]);
-
-	},
-
 	setUpHitAreas: function (containerNode) {
 
 		const cw = containerNode.offsetWidth,
@@ -462,7 +481,7 @@ export default {
 
 		let hitAreaContainer = document.createElement('div');
 		hitAreaContainer.id = 'trigger-hit-area-container';
-		containerNode.appendChild(hitAreaContainer);
+		containerNode.insertBefore(hitAreaContainer, containerNode.childNodes[0]);
 
 		let svg = d3.select(hitAreaContainer).append('svg')
 			.attr('width', hitAreaContainer.offsetWidth)
@@ -476,16 +495,16 @@ export default {
 			.attr('y', -ch)
 			.attr('width', cw)
 			.attr('height', ch)
-			.on('mouseover', () => { this.onHitAreaMouseOver(HIT_AREAS.APPRAISAL); })
-			.on('mouseout', () => { this.onHitAreaMouseOut(HIT_AREAS.APPRAISAL); })
+			.on('mouseenter', () => { this.onHitAreaMouseOver(HIT_AREAS.APPRAISAL); })
+			.on('mouseleave', () => { this.onHitAreaMouseOut(HIT_AREAS.APPRAISAL); })
 			.on('click', () => { this.onHitAreaClick(HIT_AREAS.APPRAISAL); });
 
 		container.append('path')
 			.data(this.haloPieLayout([{}]))
 			.attr('class', 'hit-area')
 			.attr('d', this.haloArcGenerator)
-			.on('mouseover', () => { this.onHitAreaMouseOver(HIT_AREAS.DATABASE); })
-			.on('mouseout', () => { this.onHitAreaMouseOut(HIT_AREAS.DATABASE); })
+			.on('mouseenter', () => { this.onHitAreaMouseOver(HIT_AREAS.DATABASE); })
+			.on('mouseleave', () => { this.onHitAreaMouseOut(HIT_AREAS.DATABASE); })
 			.on('click', () => { this.onHitAreaClick(HIT_AREAS.DATABASE); });
 
 		let innerArcGenerator = d3.svg.arc()
@@ -495,11 +514,19 @@ export default {
 			.data(this.haloPieLayout([{}]))
 			.attr('class', 'hit-area')
 			.attr('d', innerArcGenerator)
-			.on('mouseover', () => { this.onHitAreaMouseOver(HIT_AREAS.IMPULSE); })
-			.on('mouseout', () => { this.onHitAreaMouseOut(HIT_AREAS.IMPULSE); })
+			.on('mouseenter', () => { this.onHitAreaMouseOver(HIT_AREAS.IMPULSE); })
+			.on('mouseleave', () => { this.onHitAreaMouseOut(HIT_AREAS.IMPULSE); })
 			.on('click', () => { this.onHitAreaClick(HIT_AREAS.IMPULSE); });
 
 		d3.select('#header').on('click', () => { this.onHitAreaClick(null); });
+
+	},
+
+	drawHorizon: function (containerNode) {
+
+		let horizon = document.createElement('div');
+		horizon.classList.add('horizon');
+		containerNode.insertBefore(horizon, containerNode.childNodes[0]);
 
 	},
 
@@ -639,7 +666,8 @@ export default {
 			.classed('label ' + emotion, true)
 			.style('opacity', 1.0)
 		.append('h4')
-			.html(d => d.name);
+			.html(d => d.name)
+			.on('click', d => this.showTriggerPopup(emotion, d.type));
 
 		// merge
 		labelSelection
@@ -766,7 +794,10 @@ export default {
 
 			// update label container
 			let labelContainer = this.labelContainers[emotion];
-			labelContainer.select('.arrows-container g')
+			labelContainer.select('.arrows-container svg')
+				.attr('width', this.sectionContainer.offsetWidth)
+				.attr('height', h)
+			.select('g')
 				.attr('width', this.sectionContainer.offsetWidth)
 				.attr('height', h)
 				.attr('transform', 'translate(' + 0.5 * this.sectionContainer.offsetWidth + ',' + h + ')');
@@ -780,6 +811,16 @@ export default {
 				triggerDatum.angle = startAngle + angleSpread * (i + (i < middleIndex ? 0.5 : 1.5)) / (numTriggers + 1);
 				triggerDatum.radius = innerRadius + radiusSpread * ((i + 1) % NUM_RINGS) / (NUM_RINGS - 1);
 			});
+
+			// update universal/learned labels
+			labelContainer.select(`.${TRIGGER_TYPES.UNIVERSAL}`)
+				.style('transform', 'translate('+
+					Math.round((innerRadius + 0.5*radiusSpread) * Math.cos(startAngle + 0.2*angleSpread)) +'px,'+
+					Math.round((innerRadius + 0.5*radiusSpread) * Math.sin(startAngle + 0.2*angleSpread)) +'px)');
+			labelContainer.select(`.${TRIGGER_TYPES.LEARNED}`)
+				.style('transform', 'translate('+
+					Math.round((innerRadius + 0.5*radiusSpread) * Math.cos(startAngle + 0.8*angleSpread)) +'px,'+
+					Math.round((innerRadius + 0.5*radiusSpread) * Math.sin(startAngle + 0.8*angleSpread)) +'px)');
 
 			this.renderLabels(emotion);
 
@@ -831,6 +872,23 @@ export default {
 						return;
 				}
 			});
+
+	},
+
+	showTriggerPopup: function (emotion, triggerType) {
+
+		if (triggerType !== TRIGGER_TYPES.UNIVERSAL && triggerType !== TRIGGER_TYPES.LEARNED) { return; }
+
+		let unselectedTriggerType = triggerType === TRIGGER_TYPES.UNIVERSAL ? TRIGGER_TYPES.LEARNED : TRIGGER_TYPES.UNIVERSAL;
+
+		// show the selected one, hide the unselected one
+		this.labelContainers[emotion].select(`.${triggerType}`)
+			.classed('visible', true);
+		this.labelContainers[emotion].select(`.${unselectedTriggerType}`)
+			.classed('visible', false);
+
+		const step = emotionsData.metadata.triggers.steps[triggerType === TRIGGER_TYPES.UNIVERSAL ? 3 : 4];
+		dispatcher.popupChange('triggers', triggerType, step.body);
 
 	},
 
@@ -914,6 +972,10 @@ export default {
 	},
 
 	setCallout: function (hitAreaId) {
+
+		// hide all universal/learned labels
+		d3.select(this.sectionContainer).selectAll('.universal, .learned')
+			.classed('visible', false);
 
 		if (hitAreaId) {
 			const step = emotionsData.metadata.triggers.steps[hitAreaId-1];

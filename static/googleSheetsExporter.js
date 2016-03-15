@@ -270,7 +270,10 @@ var emotionSectionParsers = (function () {
 
 		triggers: function (data) {
 			return data.map(function (row) {
-				return row[0];
+				return {
+					name: row[0],
+					type: row[1]
+				};
 			});
 		},
 
