@@ -55,6 +55,7 @@ export default {
 		this.onHitAreaMouseOver = this.onHitAreaMouseOver.bind(this);
 		this.onHitAreaMouseOut = this.onHitAreaMouseOut.bind(this);
 		this.onPhaseLabelClick = this.onPhaseLabelClick.bind(this);
+		this.onPopupCloseButtonClicked = this.onPopupCloseButtonClicked.bind(this);
 
 		this.isInited = true;
 
@@ -744,6 +745,8 @@ export default {
 		// transition time from _states.scss::#states
 		this.openCallout(1500);
 
+		dispatcher.addListener(dispatcher.EVENTS.POPUP_CLOSE_BUTTON_CLICKED, this.onPopupCloseButtonClicked);
+
 	},
 
 	close: function () {
@@ -763,6 +766,8 @@ export default {
 			}
 
 			document.querySelector('#triggers .horizon').classList.remove('visible');
+
+			dispatcher.removeListener(dispatcher.EVENTS.POPUP_CLOSE_BUTTON_CLICKED, this.onPopupCloseButtonClicked);
 
 			// TODO: resolve on completion of animation
 			resolve();
@@ -916,6 +921,14 @@ export default {
 		}
 
 		this.setHighlightedHitArea(hitAreaId);
+	},
+
+	onPopupCloseButtonClicked: function (evt) {
+
+		// hide all universal/learned labels
+		d3.select(this.sectionContainer).selectAll('.universal, .learned')
+			.classed('visible', false);
+
 	},
 
 	setHitAreasLocked: function (val) {
