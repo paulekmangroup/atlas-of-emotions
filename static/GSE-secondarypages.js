@@ -123,7 +123,7 @@ var PARSER_CONFIG = {
 
 					obj.children.push({
 						name: 'Intentional',
-						intentional: row.intentional
+						desc: row.intentional
 					});
 
 					rsp.emotions.push(obj);

@@ -14,6 +14,7 @@ export default {
 	moodsData: null,
 	backgroundSections: [ states, actions ],
 	calloutActive: false,
+	// values are % of radius to edge for each mood circle
 	moodCircleRadii: [1.15, .95, .75],
 
 	init: function (containerNode) {
@@ -39,42 +40,74 @@ export default {
 
 	},
 
+	resizeMoodIntesifiers: function() {
+		let width = this.sectionContainer.offsetWidth,
+			height = this.sectionContainer.offsetHeight;
+
+		let radius = d3.min([width, height]) / 2;
+
+		// update svg width/height
+		this.moodCircles.attr("width", width).attr("height", height);
+
+		// update circles cx/cy/r, and their gradients
+		this.resizeMoodCircles(width, height, radius);
+		this.resizeRadialGradients(width, height, radius);
+
+	},
+
+	resizeMoodCircles: function(width, height, radius){
+		this.moodCircles.selectAll(".moodCircle")
+			.attr(
+				{'cx': width / 2,
+				'cy': height / 2,
+				'r': function(d){return radius * d;}
+			});
+	},
+
+	resizeRadialGradients: function (width, height, radius){
+		this.moodCircleRadii.forEach(function(radiusMultiplier, index){
+			d3.selectAll(".moods-defs").selectAll(".radial-gradient-" + index)
+				.attr(
+							{'cx': width / 2,
+							'cy': height / 2,
+							'r': function(d){return radius * radiusMultiplier;}
+						});
+		});
+	},
+
 	initMoodIntensifiers: function() {
 
+		let width = this.sectionContainer.offsetWidth,
+			height = this.sectionContainer.offsetHeight;
+
 		this.moodCircles = d3.select(this.sectionContainer).append('svg').attr("class", "moods-overlay-container");
-		let radius = d3.min([window.innerHeight, window.innerWidth]) / 2;
+		let radius = d3.min([width, height]) / 2;
 
-		this.moodCircles.attr('width', window.innerWidth)
-			.attr('height', window.innerHeight);
+		this.moodCircles.attr('width', width)
+			.attr('height', height);
 
-		let circles = this.moodCircles.selectAll(".moodCircle")
-			// values are % of radius to edge for each circle
+		this.moodCircles.selectAll(".moodCircle")
 			.data(this.moodCircleRadii)
 			.enter()
-			.append("g");
+			.append("g")
+			.append("circle")
+				.attr('class', function(d,i){return 'moodCircle circle' + i;})
+				.on('mouseover', function(d, i){d3.selectAll(".moodCircle").classed("highlight" + i, true);})
+				.on('mouseout', function(d, i){d3.selectAll(".moodCircle").classed("highlight" + i, false);})
+				.on('click', this.onElementClick);
 
-		circles.append("circle")
-			.attr({
-				'cx': window.innerWidth / 2,
-				'cy': window.innerHeight / 2,
-				'r': function(d){return radius * d;},
-				'class': function(d,i){return 'moodCircle circle' + i;},
-			})
-			.on('mouseover', function(d, i){d3.selectAll(".moodCircle").classed("highlight" + i, true);})
-			.on('mouseout', function(d, i){d3.selectAll(".moodCircle").classed("highlight" + i, false);})
-			.on('click', this.onElementClick);
-
-		this.initGradientDefs(radius);
+		this.resizeMoodCircles(width, height, radius);
+		this.initGradientDefs(width, height, radius);
 
 
 	},
 
-	initGradientDefs: function(radius){
+	initGradientDefs: function(width, height, radius){
 		let gradients = [
 			{
 				emotion: 'anger',
 				data: [
-				{ offset: '0%', color: 'rgba(228, 135, 102, 0)' },
+				{ offset: '0%', color: 'rgba(228, 135, 102, 0.1)' },
 				{ offset: '60%', color: 'rgba(214, 50, 60, .8)' },
 				{ offset: '100%', color: 'rgba(204, 28, 43, 1.0)' }
 				]
@@ -82,7 +115,7 @@ export default {
 			{
 				emotion: 'fear',
 				data: [
-					{ offset: '0%', color: 'rgba(248, 58, 248, 0)' },
+					{ offset: '0%', color: 'rgba(248, 58, 248, 0.1)' },
 					{ offset: '60%', color: 'rgba(180, 45, 160, .8)' },
 					{ offset: '100%', color: 'rgba(143, 39, 139, 1.0)' }
 				]
@@ -90,7 +123,7 @@ export default {
 			{
 				emotion: 'disgust',
 				data: [
-					{ offset: '0%', color: 'rgba(0, 142, 69, 0)' },
+					{ offset: '0%', color: 'rgba(0, 142, 69, 0.1)' },
 					{ offset: '60%', color: 'rgba(0, 110, 58, .8)' },
 					{ offset: '100%', color: 'rgba(0, 104, 55, 1.0)' }
 				]
@@ -98,7 +131,7 @@ export default {
 			{
 				emotion: 'sadness',
 				data: [
-					{ offset: '0%', color: 'rgba(200, 220, 240, 0)' },
+					{ offset: '0%', color: 'rgba(200, 220, 240, 0.1)' },
 					{ offset: '60%', color: 'rgba(90, 110, 180, .8)' },
 					{ offset: '100%', color: 'rgba(64, 70, 164, 1.0)' }
 				]
@@ -106,7 +139,7 @@ export default {
 			{
 				emotion: 'enjoyment',
 				data: [
-					{ offset: '0%', color: 'rgba(241, 196, 83, 0)' },
+					{ offset: '0%', color: 'rgba(241, 196, 83, 0.1)' },
 					{ offset: '60%', color: 'rgba(246, 150, 40, .8)' },
 					{ offset: '100%', color: 'rgba(248, 136, 29, 1.0)' }
 				]
@@ -125,9 +158,7 @@ export default {
 				.attr('xlink:href', function(d){'#' + 'moods-' + d.emotion+ '-radial-gradient' + '-' + index;})
 				.attr('id', function(d){return 'moods-' + d.emotion + '-radial-gradient' + '-' + index;})
 					.attr('gradientUnits', 'userSpaceOnUse')
-					.attr('cx', window.innerWidth / 2)
-					.attr('cy', window.innerHeight / 2)
-					.attr('r', radius * radiusMultiplier)
+					.attr('class', 'radial-gradient-' + index)
 					.selectAll('stop')
 						.data(function(d){return d.data;})
 					.enter().append('stop')
@@ -135,6 +166,7 @@ export default {
 						.attr('stop-color', d => d.color);
 		});
 
+		this.resizeRadialGradients(width, height, radius);
 
 	},
 
@@ -171,7 +203,7 @@ export default {
 			d3.selectAll('.moodCircle').classed("fadeOutIn", true);
 			this.circleTimeout = setTimeout(() => {
 				endFade();
-			}, 2400);
+			}, 1500);
 
 			// enter circles here (?)
 
@@ -231,11 +263,10 @@ export default {
 	onResize: function () {
 
 		//
-
+		this.resizeMoodIntesifiers();
 	},
 
 	setBackgroundListener: function(pleaseSet) {
-		console.log('pleaseSet: ', pleaseSet);
 		document.querySelector('#moods').removeEventListener('click', this.closeThings, false);
 
 		if (pleaseSet) {

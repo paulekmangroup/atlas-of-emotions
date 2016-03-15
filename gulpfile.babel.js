@@ -136,6 +136,9 @@ function cssTask (options) {
 			gulp.src(options.src)
 				.pipe($.sass())
 				.pipe(gulp.dest(options.dest))
+				.pipe($.autoprefixer({
+							browsers: ['last 2 versions', '> 2%']
+						}))
 				.pipe(gulpif(options.reload, connect.reload()))
 				.pipe($.notify({
 					'onLast': true,

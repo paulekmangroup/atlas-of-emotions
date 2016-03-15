@@ -107,8 +107,13 @@
 	width: 100%;
 	transition: left 0.5s linear;
 
-	&.active {
+	&.active,
+	&.annex-subpage.active {
 		left: 0;
+	}
+
+	&.annex-subpage {
+		left: 100%;
 	}
 
 	.wrapper {
@@ -305,9 +310,17 @@
 		background: rgba(rgb(230, 215, 200), 0.5);
 	}
 
+	tr.no-children {
+		display: none;
+	}
+
+	td {
+		vertical-align: top;
+	}
+
 	tr.content > td {
-		padding-top: 0.5em;
-		padding-bottom: 0.5em;
+		padding-top: 1em;
+		padding-bottom: 1em;
 	}
 
 	tr.content > td:first-child {
@@ -321,6 +334,7 @@
 
 	td.upper {
 		text-transform: uppercase;
+		line-height: 1.1;
 	}
 
 	tr.content > td.has-sub-table {

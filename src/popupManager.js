@@ -20,6 +20,8 @@ class PopupManager {
 		this.closeAll();
 
 		const clone = this.template.cloneNode(true);
+		clone.style.display = 'block';
+
 		clone.querySelector('.body')
 			.textContent = props.desc;
 
@@ -126,6 +128,8 @@ class PopupManager {
 		this.template.appendChild(close);
 		this.template.appendChild(title);
 		this.template.appendChild(body);
+
+		this.template.style.display = 'none';
 
 		document.body.appendChild(this.template);
 	}

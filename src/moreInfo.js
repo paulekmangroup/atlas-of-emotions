@@ -47,7 +47,6 @@ export default {
 
 	// Emotion in this context is the more-info page
 	setEmotion: function (currentEmotion, previousEmotion, currentMorePage, previousMorePage) {
-		console.log('Set Emotion: ', currentEmotion, previousEmotion);
 		this.previousPage = this.currentPage;
 		this.currentPage = currentMorePage;
 		this.currentEmotion = currentEmotion;
@@ -84,7 +83,7 @@ export default {
 	},
 
 	close: function () {
-		
+
 		this.toggleMoreClass(false);
 
 		return new Promise((resolve, reject) => {
@@ -100,7 +99,7 @@ export default {
 	onResize: function () {
 
 		//
-		
+
 	},
 
 	onCloseButtonClicked: function() {
@@ -124,6 +123,9 @@ export default {
 			const id = `more-${item}`;
 			containerEl.id = `more-${item}`;
 			containerEl.classList.add('more-child');
+			if (item.indexOf('annex-') === 0) {
+				containerEl.classList.add('annex-subpage');
+			}
 			this.sectionContainer.appendChild(containerEl);
 			this.containers[item] = containerEl;
 		});
