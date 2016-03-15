@@ -70,6 +70,16 @@ export default {
 		return innerRadius + radiusSpread * arrange[i];
 	},
 
+	calcArrowLength: function (haloRadius, triggerRadius, type) {
+		if (type == 'universal') {
+			console.log('universal');
+		}
+		if (type == 'learned') {
+			console.log('learned');
+		}
+		return 0.4;
+	},
+
 	parseTriggers: function (haloRadius) {
 
 		let { startAngle, angleSpread, innerRadius, radiusSpread } = this.calcArrowsGeom(haloRadius),
@@ -99,7 +109,7 @@ export default {
 				radius: this.calcRadius(innerRadius, radiusSpread, i),
 
 				// fraction of radius.
-				arrowLength: 0.4
+				arrowLength: this.calcArrowLength(haloRadius, this.calcRadius(innerRadius, radiusSpread, i), trigger.type.toLowerCase())
 			}));
 
 		});
@@ -710,6 +720,8 @@ export default {
 			arrowsSelection = arrowsContainer.selectAll('g.arrow')
 				.data(triggersData);
 
+		console.log(triggersData);
+
 		// enter
 		gradientsSelection.enter().append('linearGradient')
 			.attr('xlink:href', '#' + emotionGradientName)
@@ -830,6 +842,7 @@ export default {
 			this.triggersData[emotion].forEach((triggerDatum, i) => {
 				triggerDatum.angle = this.calcAngle(startAngle, angleSpread, middleIndex, numTriggers, i);
 				triggerDatum.radius = this.calcRadius(innerRadius, radiusSpread, i);
+				triggerDatum.arrowLength = this.calcArrowLength(haloRadius, this.calcRadius(innerRadius, radiusSpread, i), trigger.type.toLowerCase());
 			});
 
 			// update universal/learned labels
