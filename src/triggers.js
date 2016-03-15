@@ -402,7 +402,7 @@ export default {
 		this.labelContainers = {};
 		_.values(dispatcher.EMOTIONS).forEach(emotion => {
 
-			let h = (1 - sassVars.triggers.bottom.replace('%', '')/100) * containerNode.offsetHeight,
+			let h = (1 - sassVars.triggers.bottom.replace('%', '') / 100) * containerNode.offsetHeight,
 				container = d3.select('.triggers-container.' + emotion),
 				labelContainer = container.append('div')
 					.classed('label-container', true);
@@ -422,11 +422,14 @@ export default {
 		// only one phase label container for all emotions
 		this.phaseLabelContainer = d3.select(containerNode).append('div')
 			.attr('id', 'trigger-phase-labels');
-		this.phaseLabelContainer.selectAll('h3.label')
-			.data(emotionsData.metadata.triggers.steps)
-		.enter().append('h3')
-			.classed('label', true)
-			.text(d => d.header.toUpperCase())
+
+		const labels = this.phaseLabelContainer.selectAll('.label')
+			.data(emotionsData.metadata.triggers.steps);
+
+		const labelsEnter = labels.enter()
+			.append('div')
+			.attr('class', 'emotion-label label')
+			.attr('data-popuptarget', d => `triggers:${d.header.toLowerCase()}`)
 			.style('top', (d, i) => {
 				switch (i) {
 					case 0:
@@ -438,6 +441,9 @@ export default {
 				}
 			});
 
+		labelsEnter
+			.append('h3')
+				.text(d => d.header.toUpperCase());
 	},
 
 	drawHorizon: function (containerNode) {
@@ -553,6 +559,8 @@ export default {
 			this.renderGraph(this.currentEmotion);
 			this.renderLabels(this.currentEmotion);
 			this.phaseLabelContainer.attr('class', this.currentEmotion);
+			this.phaseLabelContainer.selectAll('.label')
+				.attr('class', `emotion-label label ${this.currentEmotion}`);
 
 			// leave a bit of time for other transitions to happen
 			this.openCallout(500);
@@ -562,7 +570,7 @@ export default {
 
 			// hide phase labels until the next interaction
 			// (mostly a thing when back/fwd navigating with the trackpad)
-			this.phaseLabelContainer.selectAll('h3.label')
+			this.phaseLabelContainer.selectAll('.label')
 				.classed('visible', false);
 
 			// resolve on completion of primary transitions
@@ -847,7 +855,12 @@ export default {
 	},
 
 	setHighlightedHitArea: function (hitAreaId) {
-
+		if (hitAreaId === this.highlightedHitArea) {
+			this.highlightedHitArea = null;
+			this.displayHighlightedHitArea(null);
+			this.setCallout(null);
+			return;
+		}
 		this.highlightedHitArea = hitAreaId;
 		this.displayHighlightedHitArea();
 		this.setCallout(hitAreaId);
@@ -884,7 +897,7 @@ export default {
 				actionsContainer.classed('faded', false);
 		}
 
-		this.phaseLabelContainer.selectAll('h3.label')
+		this.phaseLabelContainer.selectAll('.label')
 			.classed('visible', (d, i) => i + 1 === hitAreaId);
 
 	},
@@ -903,8 +916,10 @@ export default {
 	setCallout: function (hitAreaId) {
 
 		if (hitAreaId) {
-			dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.triggers.steps[hitAreaId-1].header, emotionsData.metadata.triggers.steps[hitAreaId-1].body);
+			const step = emotionsData.metadata.triggers.steps[hitAreaId-1];
+			dispatcher.popupChange('triggers', step.header.toLowerCase(), step.body);
 		} else {
+			dispatcher.popupChange();
 			dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.triggers.header, emotionsData.metadata.triggers.body);
 		}
 

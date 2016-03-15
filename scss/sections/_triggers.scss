@@ -132,7 +132,8 @@
 		transition-duration: 0.5s, #{$emotions-panX-duration}s;
 		transition-timing-function: ease, cubic-bezier(0.9, 0.0, 0.5, 1.0);
 
-		&.visible {
+		&.visible,
+		&.popped {
 			opacity: 1.0;
 		}
 	}

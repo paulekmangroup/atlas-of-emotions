@@ -38,6 +38,7 @@
 	height: auto;
 	width: auto;
 	overflow: hidden;
+	pointer-events: auto;
 
 	&.transition {
 		transition: all #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
