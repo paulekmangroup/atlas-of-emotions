@@ -314,9 +314,13 @@
 		display: none;
 	}
 
+	td {
+		vertical-align: top;
+	}
+
 	tr.content > td {
-		padding-top: 0.5em;
-		padding-bottom: 0.5em;
+		padding-top: 1em;
+		padding-bottom: 1em;
 	}
 
 	tr.content > td:first-child {
@@ -330,6 +334,7 @@
 
 	td.upper {
 		text-transform: uppercase;
+		line-height: 1.1;
 	}
 
 	tr.content > td.has-sub-table {
