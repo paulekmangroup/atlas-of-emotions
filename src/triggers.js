@@ -789,7 +789,10 @@ export default {
 
 			// update label container
 			let labelContainer = this.labelContainers[emotion];
-			labelContainer.select('.arrows-container g')
+			labelContainer.select('.arrows-container svg')
+				.attr('width', this.sectionContainer.offsetWidth)
+				.attr('height', h)
+			.select('g')
 				.attr('width', this.sectionContainer.offsetWidth)
 				.attr('height', h)
 				.attr('transform', 'translate(' + 0.5 * this.sectionContainer.offsetWidth + ',' + h + ')');
