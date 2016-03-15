@@ -235,7 +235,6 @@ export default {
 	},
 
 	setBackgroundListener: function(pleaseSet) {
-		console.log('pleaseSet: ', pleaseSet);
 		document.querySelector('#moods').removeEventListener('click', this.closeThings, false);
 
 		if (pleaseSet) {

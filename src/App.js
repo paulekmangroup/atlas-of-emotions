@@ -37,7 +37,7 @@ export default function (...initArgs) {
 		currentSection = null,
 		currentEmotion = null,
 		currentMorePage = null,
-		previousNonSecondaryHash = null,
+		previousNonSecondaryHash = {section: 'continents', emotion: null},
 
 		scrollbarSegments = {},
 		scrollbarCloseTimeout = null,
@@ -320,6 +320,7 @@ export default function (...initArgs) {
 			// init current section
 			initSection(section);
 		}
+
 
 		if (sectionName === 'more' && section.setPreviousSection) section.setPreviousSection(previousNonSecondaryHash.section);
 
@@ -1035,7 +1036,6 @@ export default function (...initArgs) {
 	}
 
 	function onNavigate (section, emotion) {
-
 		if (section === dispatcher.HOME) {
 			document.location.hash = '';
 			return;
