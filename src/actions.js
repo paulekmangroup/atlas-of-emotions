@@ -267,6 +267,17 @@ export default {
 				else return 0;
 			});
 
+			if (emotionName === dispatcher.EMOTIONS.ANGER) {
+				// move first and last actions out of pole position
+				// because they're too long to fit there comfortably
+				allActionsForEmotion.splice(1, 0, allActionsForEmotion.shift());
+				allActionsForEmotion.splice(-1, 0, allActionsForEmotion.pop());
+			} else if (emotionName === dispatcher.EMOTIONS.ENJOYMENT) {
+				// move first action out of pole position
+				// because it's too long to fit there comfortably
+				allActionsForEmotion.splice(1, 0, allActionsForEmotion.shift());
+			}
+
 			// add additional data for each of allActionsForEmotion,
 			// and compile hash keyed by name for lookup below
 			let allActionsForEmotionByName = {},
