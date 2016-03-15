@@ -269,7 +269,7 @@ export default function (...initArgs) {
 
 		closeButton.addEventListener('click', (event) => {
 			event.stopImmediatePropagation();
-			localStorage.setItem("modalSeen", true);
+			markModalAsSeen();
 			setModalVisibility(false);
 		});
 
@@ -278,12 +278,18 @@ export default function (...initArgs) {
 			document.querySelector('#infoButton')
 				.addEventListener('click', (event) => {
 					event.stopImmediatePropagation();
-					// interesting toggling seems to work despite this being always 'true'
+					// this works for removal also, since a click outside closes the modal
 					setModalVisibility(true);
 				}
 			);
 		}
 
+	}
+
+	function markModalAsSeen () {
+		if(!localStorage.modalSeen){
+			localStorage.setItem("modalSeen", true);
+		}
 	}
 
 	function setSectionEmotion (section, previousEmotion, previousMorePage) {
@@ -958,6 +964,7 @@ export default function (...initArgs) {
 				let onOverlayClick = (event) => {
 					event.stopImmediatePropagation();
 					modalOverlay.removeEventListener('click', onOverlayClick);
+					markModalAsSeen();
 					setModalVisibility(false);
 				};
 				modalOverlay.addEventListener('click', onOverlayClick);
