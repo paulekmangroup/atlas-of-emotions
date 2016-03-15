@@ -305,6 +305,10 @@
 		background: rgba(rgb(230, 215, 200), 0.5);
 	}
 
+	tr.no-children {
+		display: none;
+	}
+
 	tr.content > td {
 		padding-top: 0.5em;
 		padding-bottom: 0.5em;

@@ -86,9 +86,13 @@ export function makeTable(title, rows, subTable) {
 
 		td0.textContent = row.name;
 		if (row.children) {
-			const child = makeTable(row.desc, row.children, true);
-			td1.classList.add('has-sub-table');
-			td1.appendChild(child);
+			if (row.children.length) {
+				const child = makeTable(row.desc, row.children, true);
+				td1.classList.add('has-sub-table');
+				td1.appendChild(child);
+			} else {
+				tr.classList.add('no-children');
+			}
 		} else {
 			td1.textContent = row.desc;
 		}
