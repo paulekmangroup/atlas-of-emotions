@@ -36,13 +36,13 @@ const dispatcher = {
 		title: 'More Information',
 		items: [
 			{
+				label: 'About this Atlas',
+				page: 'about'
+			},
+			{
 				label: 'The Annex',
 				page: 'annex',
 				pageName: 'Annex'
-			},
-			{
-				label: 'About',
-				page: 'about'
 			},
 			{
 				label: 'Donate',
