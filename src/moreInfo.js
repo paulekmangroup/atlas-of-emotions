@@ -106,26 +106,40 @@ export default {
 		dispatcher.navigate(this.previousSection, this.currentEmotion, null);
 	},
 
+	createContainer(id) {
+		const containerEl = document.createElement('div');
+		const innerwrapper = document.createElement('div');
+		const outerwrapper = document.createElement('div');
+
+		containerEl.id = id;
+
+		containerEl.classList.add('more-child');
+		outerwrapper.classList.add('outer-wrapper');
+		innerwrapper.classList.add('wrapper');
+
+		outerwrapper.appendChild(innerwrapper);
+		containerEl.appendChild(outerwrapper);
+
+		return containerEl;
+	},
+
 	initContainers: function() {
 		let containerEl;
 
 		dispatcher.MORE_INFO.items.forEach(item => {
-			containerEl = document.createElement('div');
-			const id = `more-${item.page}`;
-			containerEl.id = `more-${item.page}`;
-			containerEl.classList.add('more-child');
+			containerEl = this.createContainer(`more-${item.page}`);
+
 			this.sectionContainer.appendChild(containerEl);
 			this.containers[item.page] = containerEl;
 		});
 
 		dispatcher.ANNEX_SECTIONS.forEach(item => {
-			containerEl = document.createElement('div');
-			const id = `more-${item}`;
-			containerEl.id = `more-${item}`;
-			containerEl.classList.add('more-child');
+			containerEl = this.createContainer(`more-${item}`);
+
 			if (item.indexOf('annex-') === 0) {
 				containerEl.classList.add('annex-subpage');
 			}
+
 			this.sectionContainer.appendChild(containerEl);
 			this.containers[item] = containerEl;
 		});

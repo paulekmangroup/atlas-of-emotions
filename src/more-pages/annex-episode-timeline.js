@@ -71,9 +71,7 @@ export default {
 
 		this.sectionContainer = containerNode;
 
-		this.wrapper = document.createElement('div');
-		this.wrapper.classList.add('wrapper');
-		this.sectionContainer.appendChild(this.wrapper);
+		this.wrapper = this.sectionContainer.querySelector('.wrapper');
 
 		this.setContent();
 		this.isInited = true;

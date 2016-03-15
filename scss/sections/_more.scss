@@ -86,9 +86,7 @@
 	z-index: $depth-100;
 	text-align: left;
 	opacity: 0;
-	transition-property: opacity;
-	transition-duration: #{$ui-overlays-duration-out}s;
-	transition-timing-function: ease-in-out;
+	transition: opacity #{$ui-overlays-duration-out}s ease-in-out;
 }
 
 .more-on #more {
@@ -116,28 +114,30 @@
 		left: 100%;
 	}
 
+	.outer-wrapper {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		overflow: auto;
+	}
+
 	.wrapper {
 		display: block;
 		height: 100%;
 		width: 35em;
 		margin: 0 auto;
 		padding-top: 2.75em;
-		padding-bottom: $more-info-height;
-		overflow: auto;
+		padding-bottom: 0;
 
 		.tb {
 			display: table;
 			width: 100%;
-			height: 100%;
+			height: auto;
 		}
 
 		.tb-row {
 			display: table-row;
 			height: auto;
-
-			&:last-child {
-				height: 100%;
-			}
 		}
 
 		.tb-cell {
@@ -294,8 +294,9 @@
 
 .annex-table-wrapper {
 	position: relative;
-	height: 100%;
-	overflow: auto;
+	width: 100%;
+	height: auto;
+	margin-bottom: 0.5em;
 }
 
 .annex-table {
@@ -384,6 +385,10 @@
 
 	.wrapper {
 		width: 90%;
+	}
+
+	.timeline-content {
+		margin-bottom: 0.5em;
 	}
 
 	text {
