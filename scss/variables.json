@@ -59,6 +59,7 @@
 			"scale": 0.7
 		},
 		"margins": {
+			"top": 25,
 			"bottom": 10
 		},
 		"add": {

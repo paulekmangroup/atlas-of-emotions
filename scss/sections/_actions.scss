@@ -145,20 +145,23 @@
 	}
 
 	.label-container {
-		// pointer-events: none;
+		top: #{$actions-margins-top}px;
 
 		.label {
 			bottom: 0;
 			transform-origin: bottom;
 			@include emotion-color;
-			margin-left: -60px; // TODO: where does this magic number come from?
-								// needed to align with arrow points.
 
-			// transition: opacity #{$states-highlighted-out}s ease-in;
+			// override [data-popuptarget] transitions
+			// to ensure smooth circular transitions
+			transition-property: transform, opacity;
+			transition-duration: 0ms, #{$states-highlighted-out}s;
+			transition-timing-function: linear, ease-in;
+
 			opacity: 1.0;
 
 			&.muted {
-				// transition: opacity #{$states-highlighted-out}s ease-out;
+				transition-timing-function: linear, ease-out;
 				opacity: 0.2;
 			}
 		}

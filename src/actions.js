@@ -102,7 +102,7 @@ export default {
 		// d3 conventional margins
 		//
 		let margin = {
-			top: 25,		// actions graph is upside down, so 'top' means bottom of the screen
+			top: sassVars.actions.margins.top,		// actions graph is upside down, so 'top' means bottom of the screen
 			right: 100,
 			bottom: sassVars.actions.margins.bottom,
 			left: 100
@@ -276,8 +276,11 @@ export default {
 					x: pt.x,
 					y: pt.y
 				}));
-				action.rotation = (90 + (numAllActions-i-1) * 180/(numAllActions-1));
 				action.states = [];
+
+				// arrange actions between 10° and 170°
+				action.rotation = (100 + (numAllActions-i-1) * 160/(numAllActions-1));
+				
 				allActionsForEmotionByName[action.name] = action;
 			});
 
@@ -327,7 +330,8 @@ export default {
 						x: pt.x,
 						y: pt.y
 					}));
-					action.rotation = (90 + (numAllActionsForState-i-1) * 180/(numAllActionsForState-1));
+					// arrange actions between 10° and 170°
+					action.rotation = (100 + (numAllActionsForState-i-1) * 160/(numAllActionsForState-1));
 
 					// determine valence based on earlier sorting
 					if (i < numActionsCon) {
@@ -787,14 +791,14 @@ export default {
 		if (actionsData) {
 
 			const sqrt3 = Math.sqrt(3);
-			let labelSize = this.lineGenerator.radius()({x:1}) + 50,
+			let labelSize = this.lineGenerator.radius()({x:1}) + 10,
 				labelSelection = labelContainer.selectAll('div.label')
 					.data(actionsData, d => d.name);
 
 			// update
 			labelSelection.transition()
 				.duration(sassVars.actions.update.time)
-				.styleTween('transform', (() => (d, i, a) => {
+				.styleTween('transform', (() => function (d, i, a) {
 
 					// BUG: `a` can refer to the value of an element that was removed from the selection.
 					// in this case, the element being transitioned jumps to the removed element's position
@@ -806,17 +810,18 @@ export default {
 					// `a` is the previous value for the 'transform' style;
 					// d3 stores this internally as a matrix string.
 					// d3.transform() turns this string into a matrix object.
-					let previousTransform = a === 'none' ? null : d3.transform(a);
-					let previousTranslate = previousTransform ? previousTransform.translate : [0, 0];
-					let previousRotation = Math.atan2(previousTranslate[1], previousTranslate[0]);
-					let targetRotation = Math.PI * (d.rotation-90) / 180;
-					let rot;
+					let previousTransform = a === 'none' ? null : d3.transform(a),
+						previousTranslate = previousTransform ? previousTransform.translate : [0, 0],
+						previousRotation = Math.atan2(previousTranslate[1], previousTranslate[0]),
+						targetRotation = Math.PI * (d.rotation-90) / 180,
+						rot,
+						verticalOffset = (i === 0 || i === labelSelection.size() - 1) ? 20 : 0;
 
 					return (t) => {
 						rot = previousRotation + t * (targetRotation - previousRotation);
 						return 'translate(' +
-							Math.round(labelSize * Math.cos(rot)) + 'px,' +
-							Math.round(labelSize / sqrt3 * Math.sin(rot)) + 'px)';
+							Math.round((labelSize * Math.cos(rot)) - 0.5*this.offsetWidth) + 'px,' +	// center on label width
+							Math.round(labelSize / sqrt3 * Math.sin(rot) + verticalOffset) + 'px)';		// bump down the first and last label
 					};
 
 				})());
@@ -831,7 +836,6 @@ export default {
 				.classed(`${this.currentEmotion} label emotion-label`, true)
 				.classed('default-interactive-helper', (d, i) => i === randomLabelIndex)
 				.attr('data-popuptarget', (d,i) => `actions:${d.name}`)
-				.style('transform', d => 'translate(' + Math.round(labelSize * Math.cos(Math.PI*(d.rotation-90)/180)) + 'px,' + Math.round(labelSize * Math.sin(Math.PI*(d.rotation-90)/180) / sqrt3) + 'px)')
 				.style('opacity', 0.0);
 			labelEnterSelection.append('div')
 				.attr('class', 'label-text-wrapper')
@@ -840,6 +844,14 @@ export default {
 				.on('mouseover', this.onActionMouseOver)
 				.on('mouseout', this.onActionMouseOut)
 				.on('click', this.onActionMouseClick);
+
+			// do this last, so that width (determined by text) can be calculated and used
+			labelEnterSelection.style('transform', function (d, i) {
+				let verticalOffset = (i === 0 || i === labelEnterSelection.size() - 1) ? 20 : 0;
+				return 'translate(' +
+					Math.round(labelSize * Math.cos(Math.PI*(d.rotation-90)/180) - 0.5*this.offsetWidth) + 'px,' +		// center on label width
+					Math.round(labelSize * Math.sin(Math.PI*(d.rotation-90)/180) / sqrt3 + verticalOffset) + 'px)';		// bump down the first and last label
+			});
 
 			labelEnterSelection.transition()
 				.duration(sassVars.actions.add.time)
@@ -861,7 +873,7 @@ export default {
 				.on('mouseover', null)
 				.on('mouseout', null)
 			.transition()
-				.duration(immediate ? 0 : 1000)
+				.duration(immediate ? 0 : sassVars.actions.remove.time)
 				.style('opacity', 0.0)
 				.remove();
 
