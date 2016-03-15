@@ -70,14 +70,15 @@ export default {
 		return innerRadius + radiusSpread * arrange[i];
 	},
 
-	calcArrowLength: function (haloRadius, triggerRadius, type) {
+	calcArrowLength: function (haloRadius, triggerRadius, type, i) {
 		if (type == 'universal') {
-			console.log('universal');
+			let adjustArrowLength = [.05,.12,0,0];
+			return 1 - (haloRadius * (.76 - adjustArrowLength[i])) / triggerRadius;
 		}
 		if (type == 'learned') {
-			console.log('learned');
+			let haloPercent = [0,0,.93, .74, .85, .9, .73];
+			return 1 - (haloRadius * haloPercent[i]) / triggerRadius;
 		}
-		return 0.4;
 	},
 
 	parseTriggers: function (haloRadius) {
@@ -109,7 +110,7 @@ export default {
 				radius: this.calcRadius(innerRadius, radiusSpread, i),
 
 				// fraction of radius.
-				arrowLength: this.calcArrowLength(haloRadius, this.calcRadius(innerRadius, radiusSpread, i), trigger.type.toLowerCase())
+				arrowLength: this.calcArrowLength(haloRadius, this.calcRadius(innerRadius, radiusSpread, i), trigger.type.toLowerCase(), i)
 			}));
 
 		});
@@ -842,7 +843,7 @@ export default {
 			this.triggersData[emotion].forEach((triggerDatum, i) => {
 				triggerDatum.angle = this.calcAngle(startAngle, angleSpread, middleIndex, numTriggers, i);
 				triggerDatum.radius = this.calcRadius(innerRadius, radiusSpread, i);
-				triggerDatum.arrowLength = this.calcArrowLength(haloRadius, this.calcRadius(innerRadius, radiusSpread, i), trigger.type.toLowerCase());
+				triggerDatum.arrowLength = this.calcArrowLength(haloRadius, this.calcRadius(innerRadius, radiusSpread, i), trigger.type.toLowerCase(), i);
 			});
 
 			// update universal/learned labels
