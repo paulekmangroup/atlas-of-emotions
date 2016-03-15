@@ -34,7 +34,6 @@ class PopupManager {
 		props.target.appendChild(clone);
 		props.target.classList.add('popped');
 
-
 		// set w/h
 		let w = clone.offsetWidth + 100;
 		w = Math.min(w, 250);
@@ -47,7 +46,7 @@ class PopupManager {
 		clone.offsetWidth; // force repaint
 
 		clone.classList.add('transition');
-		clone.style.cssText = `width: ${w}px; height: ${h}px; opacity: 1;`;
+		clone.style.cssText = `width: ${w}px; height: ${h}px;`;
 	}
 
 	resetPopup(key) {

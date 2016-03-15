@@ -328,9 +328,7 @@ const continentsSection = {
 			// if first section in session, move continents out of the way of the intro modal
 			this.setContinentIntroPositions(true);
 		} else {
-			// else, fade in continent labels
-			this.labelContainer.selectAll('.emotion-label')
-				.style('opacity', 1.0);
+			this.setLabelVisibility(true);
 		}
 
 		this.update();
@@ -479,13 +477,18 @@ const continentsSection = {
 
 				// display the default continents callout and continent labels.
 				dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
-				this.labelContainer.selectAll('.emotion-label')
-					.style('opacity', 1.0);
+				this.setLabelVisibility(true);
 
 			}
 
 		});
 
+	},
+
+	setLabelVisibility: function(val) {
+		this.labelContainer
+			.selectAll('.emotion-label')
+			.classed('visible', val);
 	},
 
 	update: function (time) {
@@ -609,9 +612,7 @@ const continentsSection = {
 			.start();
 
 			// fade in/out continent labels
-			this.labelContainer.selectAll('.emotion-label')
-				.style('opacity', targetContinent ? 0.0 : 1.0);
-
+			this.setLabelVisibility(!!targetContinent);
 		},
 
 		// 2b. spread circles along horizontal axis as they fade in + grow
@@ -769,13 +770,14 @@ const continentsSection = {
 
 		this.labelContainer.selectAll('.emotion-label')
 			.classed('highlight', false)
-			.classed('unhighlight', false);
+			.classed('unhighlight', false)
+			.classed('selected', false);
 
 		if (somethingSelected) {
 			this.labelContainer.select('.default-interactive-helper')
 				.classed('unhighlight', true);
 			this.labelContainer.select(`[data-popuptarget="continents:${somethingSelected.id}"]`)
-				.classed('highlight', true)
+				.classed('selected', true)
 				.classed('unhighlight', false);
 		}
 
@@ -817,7 +819,8 @@ const continentsSection = {
 
 		this.labelContainer.selectAll('.emotion-label')
 			.classed('highlight', false)
-			.classed('unhighlight', false);
+			.classed('unhighlight', false)
+			.classed('selected', false);
 
 		if (continent) {
 			continents.forEach(c => {
@@ -829,9 +832,10 @@ const continentsSection = {
 					// unhighlight all but selected
 					if (c.highlightLevel !== Continent.HIGHLIGHT_LEVELS.SELECTED) {
 						c.highlightLevel = unhighlightLevel;
+						elm.classed('unhighlight', true);
+					} else if (c.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED) {
+						elm.classed('selected', true);
 					}
-
-					elm.classed('unhighlight', true);
 				}
 			});
 		}

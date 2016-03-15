@@ -1,6 +1,5 @@
 .popped {
 	z-index: 9999;
-	border: 1px solid #666;
 }
 
 [data-popuptarget] {
@@ -48,6 +47,7 @@
 	pointer-events: auto;
 
 	&.transition {
+		opacity: 1;
 		transition: all #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
 	}
 
