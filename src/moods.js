@@ -107,7 +107,7 @@ export default {
 			{
 				emotion: 'anger',
 				data: [
-				{ offset: '0%', color: 'rgba(228, 135, 102, 0)' },
+				{ offset: '0%', color: 'rgba(228, 135, 102, 0.1)' },
 				{ offset: '60%', color: 'rgba(214, 50, 60, .8)' },
 				{ offset: '100%', color: 'rgba(204, 28, 43, 1.0)' }
 				]
@@ -115,7 +115,7 @@ export default {
 			{
 				emotion: 'fear',
 				data: [
-					{ offset: '0%', color: 'rgba(248, 58, 248, 0)' },
+					{ offset: '0%', color: 'rgba(248, 58, 248, 0.1)' },
 					{ offset: '60%', color: 'rgba(180, 45, 160, .8)' },
 					{ offset: '100%', color: 'rgba(143, 39, 139, 1.0)' }
 				]
@@ -123,7 +123,7 @@ export default {
 			{
 				emotion: 'disgust',
 				data: [
-					{ offset: '0%', color: 'rgba(0, 142, 69, 0)' },
+					{ offset: '0%', color: 'rgba(0, 142, 69, 0.1)' },
 					{ offset: '60%', color: 'rgba(0, 110, 58, .8)' },
 					{ offset: '100%', color: 'rgba(0, 104, 55, 1.0)' }
 				]
@@ -131,7 +131,7 @@ export default {
 			{
 				emotion: 'sadness',
 				data: [
-					{ offset: '0%', color: 'rgba(200, 220, 240, 0)' },
+					{ offset: '0%', color: 'rgba(200, 220, 240, 0.1)' },
 					{ offset: '60%', color: 'rgba(90, 110, 180, .8)' },
 					{ offset: '100%', color: 'rgba(64, 70, 164, 1.0)' }
 				]
@@ -139,7 +139,7 @@ export default {
 			{
 				emotion: 'enjoyment',
 				data: [
-					{ offset: '0%', color: 'rgba(241, 196, 83, 0)' },
+					{ offset: '0%', color: 'rgba(241, 196, 83, 0.1)' },
 					{ offset: '60%', color: 'rgba(246, 150, 40, .8)' },
 					{ offset: '100%', color: 'rgba(248, 136, 29, 1.0)' }
 				]
