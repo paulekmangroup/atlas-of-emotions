@@ -42,9 +42,9 @@ export default {
 		this.initLabels(containerNode, haloRadius);
 		this.triggersData = this.parseTriggers(haloRadius);
 
-		this.drawHorizon(containerNode);
-
 		this.setUpHitAreas(containerNode);
+
+		this.drawHorizon(containerNode);
 
 		this.onHitAreaMouseOver = this.onHitAreaMouseOver.bind(this);
 		this.onHitAreaMouseOut = this.onHitAreaMouseOut.bind(this);
@@ -72,6 +72,7 @@ export default {
 			})
 			.map((trigger, i) => ({
 				name: trigger,
+				// type:
 
 				// distribute evenly between startAngle and startAngle + angleSpread,
 				// with a gap in the middle
@@ -415,6 +416,27 @@ export default {
 			.append('g')
 				.attr('transform', 'translate(' + 0.5 * containerNode.offsetWidth + ',' + h + ')');
 
+			// universal/learned triggers popup labels
+			let universalLearnedLabelContainer = labelContainer.append('div')
+				.style('transform', 'translate(' + 0.5 * containerNode.offsetWidth + 'px,' + h + 'px)');
+			let { startAngle, angleSpread, innerRadius, radiusSpread } = this.calcArrowsGeom(haloRadius);
+			universalLearnedLabelContainer.append('div')
+				.attr('class', 'emotion-label hidden-label universal')// hidden')
+				.attr('data-popuptarget', 'triggers:universal')
+				.style('transform', 'translate('+
+					Math.round((innerRadius + 0.5*radiusSpread) * Math.cos(startAngle + 0.2*angleSpread)) +'px,'+
+					Math.round((innerRadius + 0.5*radiusSpread) * Math.sin(startAngle + 0.2*angleSpread)) +'px)')
+			.append('h3')
+				.text(emotionsData.metadata.triggers.steps[3].header.toUpperCase());
+			universalLearnedLabelContainer.append('div')
+				.attr('class', 'emotion-label hidden-label learned')// hidden')
+				.attr('data-popuptarget', 'triggers:learned')
+				.style('transform', 'translate('+
+					Math.round((innerRadius + 0.5*radiusSpread) * Math.cos(startAngle + 0.8*angleSpread)) +'px,'+
+					Math.round((innerRadius + 0.5*radiusSpread) * Math.sin(startAngle + 0.8*angleSpread)) +'px)')
+			.append('h3')
+				.text(emotionsData.metadata.triggers.steps[4].header.toUpperCase());
+
 			this.labelContainers[emotion] = labelContainer;
 
 		});
@@ -424,7 +446,7 @@ export default {
 			.attr('id', 'trigger-phase-labels');
 
 		const labels = this.phaseLabelContainer.selectAll('.label')
-			.data(emotionsData.metadata.triggers.steps);
+			.data(emotionsData.metadata.triggers.steps.slice(0, 3));
 
 		const labelsEnter = labels.enter()
 			.append('div')
@@ -446,14 +468,6 @@ export default {
 				.text(d => d.header.toUpperCase());
 	},
 
-	drawHorizon: function (containerNode) {
-
-		let horizon = document.createElement('div');
-		horizon.classList.add('horizon');
-		containerNode.insertBefore(horizon, containerNode.childNodes[0]);
-
-	},
-
 	setUpHitAreas: function (containerNode) {
 
 		const cw = containerNode.offsetWidth,
@@ -462,7 +476,7 @@ export default {
 
 		let hitAreaContainer = document.createElement('div');
 		hitAreaContainer.id = 'trigger-hit-area-container';
-		containerNode.appendChild(hitAreaContainer);
+		containerNode.insertBefore(hitAreaContainer, containerNode.childNodes[0]);
 
 		let svg = d3.select(hitAreaContainer).append('svg')
 			.attr('width', hitAreaContainer.offsetWidth)
@@ -476,16 +490,16 @@ export default {
 			.attr('y', -ch)
 			.attr('width', cw)
 			.attr('height', ch)
-			.on('mouseover', () => { this.onHitAreaMouseOver(HIT_AREAS.APPRAISAL); })
-			.on('mouseout', () => { this.onHitAreaMouseOut(HIT_AREAS.APPRAISAL); })
+			.on('mouseenter', () => { this.onHitAreaMouseOver(HIT_AREAS.APPRAISAL); })
+			.on('mouseleave', () => { this.onHitAreaMouseOut(HIT_AREAS.APPRAISAL); })
 			.on('click', () => { this.onHitAreaClick(HIT_AREAS.APPRAISAL); });
 
 		container.append('path')
 			.data(this.haloPieLayout([{}]))
 			.attr('class', 'hit-area')
 			.attr('d', this.haloArcGenerator)
-			.on('mouseover', () => { this.onHitAreaMouseOver(HIT_AREAS.DATABASE); })
-			.on('mouseout', () => { this.onHitAreaMouseOut(HIT_AREAS.DATABASE); })
+			.on('mouseenter', () => { this.onHitAreaMouseOver(HIT_AREAS.DATABASE); })
+			.on('mouseleave', () => { this.onHitAreaMouseOut(HIT_AREAS.DATABASE); })
 			.on('click', () => { this.onHitAreaClick(HIT_AREAS.DATABASE); });
 
 		let innerArcGenerator = d3.svg.arc()
@@ -495,11 +509,19 @@ export default {
 			.data(this.haloPieLayout([{}]))
 			.attr('class', 'hit-area')
 			.attr('d', innerArcGenerator)
-			.on('mouseover', () => { this.onHitAreaMouseOver(HIT_AREAS.IMPULSE); })
-			.on('mouseout', () => { this.onHitAreaMouseOut(HIT_AREAS.IMPULSE); })
+			.on('mouseenter', () => { this.onHitAreaMouseOver(HIT_AREAS.IMPULSE); })
+			.on('mouseleave', () => { this.onHitAreaMouseOut(HIT_AREAS.IMPULSE); })
 			.on('click', () => { this.onHitAreaClick(HIT_AREAS.IMPULSE); });
 
 		d3.select('#header').on('click', () => { this.onHitAreaClick(null); });
+
+	},
+
+	drawHorizon: function (containerNode) {
+
+		let horizon = document.createElement('div');
+		horizon.classList.add('horizon');
+		containerNode.insertBefore(horizon, containerNode.childNodes[0]);
 
 	},
 
@@ -639,7 +661,8 @@ export default {
 			.classed('label ' + emotion, true)
 			.style('opacity', 1.0)
 		.append('h4')
-			.html(d => d.name);
+			.html(d => d.name)
+			.on('click', d => this.showTriggerPopup(d.type));
 
 		// merge
 		labelSelection
@@ -781,6 +804,9 @@ export default {
 				triggerDatum.radius = innerRadius + radiusSpread * ((i + 1) % NUM_RINGS) / (NUM_RINGS - 1);
 			});
 
+			// update universal/learned labels
+			console.log(">>>>> TODO: update universal/learned labels");
+
 			this.renderLabels(emotion);
 
 		});
@@ -831,6 +857,19 @@ export default {
 						return;
 				}
 			});
+
+	},
+
+	showTriggerPopup: function (triggerType) {
+
+		console.log(">>>>> TODO: show trigger popup for type:", triggerType);
+		triggerType = 'universal';
+		// triggerType = 'learned';
+
+		if (triggerType !== 'universal' && triggerType !== 'learned') { return; }
+
+		const step = emotionsData.metadata.triggers.steps[triggerType === 'universal' ? 3 : 4];
+		dispatcher.popupChange('triggers', triggerType, step.body);
 
 	},
 
