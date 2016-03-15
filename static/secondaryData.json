@@ -533,7 +533,7 @@
 						},
 						{
 							"name": "Intentional",
-							"intentional": "Set limits, Be firm, Withdraw, Take a time out, Breathe, Practice patience, Reframe, Distract, Avoid, Remove the interference"
+							"desc": "Set limits, Be firm, Withdraw, Take a time out, Breathe, Practice patience, Reframe, Distract, Avoid, Remove the interference"
 						}
 					]
 				},
@@ -546,7 +546,7 @@
 						},
 						{
 							"name": "Intentional",
-							"intentional": "Reframe, Be mindful, Breathe, Distract"
+							"desc": "Reframe, Be mindful, Breathe, Distract"
 						}
 					]
 				},
@@ -559,7 +559,7 @@
 						},
 						{
 							"name": "Intentional",
-							"intentional": "Withdraw, Avoid"
+							"desc": "Withdraw, Avoid"
 						}
 					]
 				},
@@ -572,7 +572,7 @@
 						},
 						{
 							"name": "Intentional",
-							"intentional": "Withdraw, Distract"
+							"desc": "Withdraw, Distract"
 						}
 					]
 				},
@@ -585,7 +585,7 @@
 						},
 						{
 							"name": "Intentional",
-							"intentional": ""
+							"desc": ""
 						}
 					]
 				}
