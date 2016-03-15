@@ -66,13 +66,13 @@ export default {
 
 			triggersData[emotion] = emotionsData.emotions[emotion].triggers.concat()
 			.sort((a, b) => {
-				if (a < b) return -1;
-				else if (a > b) return 1;
+				if (a.name < b.name) return -1;
+				else if (a.name > b.name) return 1;
 				else return 0;
 			})
 			.map((trigger, i) => ({
-				name: trigger,
-				// type:
+				name: trigger.name,
+				type: trigger.type.toLowerCase(),
 
 				// distribute evenly between startAngle and startAngle + angleSpread,
 				// with a gap in the middle
@@ -870,7 +870,7 @@ export default {
 	showTriggerPopup: function (emotion, triggerType) {
 
 		console.log(">>>>> TODO: show trigger popup for type:", triggerType, "for emotion:", emotion);
-		triggerType = 'universal';
+		// triggerType = 'universal';
 		// triggerType = 'learned';
 
 		if (triggerType !== 'universal' && triggerType !== 'learned') { return; }

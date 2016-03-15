@@ -278,13 +278,34 @@
         }
       ],
       "triggers": [
-        "Interference with locomotion",
-        "Interference with action",
-        "Rejection by a loved one",
-        "Encountering offensive beliefs",
-        "Being put down by an authority figure",
-        "Inefficiency or bureaucracy",
-        "Being wrongfully accused"
+        {
+          "name": "Interference with locomotion",
+          "type": "Universal"
+        },
+        {
+          "name": "Interference with action",
+          "type": "Universal"
+        },
+        {
+          "name": "Rejection by a loved one",
+          "type": "Universal"
+        },
+        {
+          "name": "Encountering offensive beliefs",
+          "type": "Learned"
+        },
+        {
+          "name": "Being put down by an authority figure",
+          "type": "Learned"
+        },
+        {
+          "name": "Inefficiency or bureaucracy",
+          "type": "Learned"
+        },
+        {
+          "name": "Being wrongfully accused",
+          "type": "Learned"
+        }
       ],
       "moods": [
         {
@@ -569,13 +590,34 @@
         }
       ],
       "triggers": [
-        "Threat of losing status",
-        "Threat to safety",
-        "Sudden loss of gravity",
-        "Snake-like shapes",
-        "Threat of losing job",
-        "Thunder",
-        "Public speaking"
+        {
+          "name": "Threat of losing status",
+          "type": "Universal"
+        },
+        {
+          "name": "Threat to safety",
+          "type": "Universal"
+        },
+        {
+          "name": "Sudden loss of gravity",
+          "type": "Universal"
+        },
+        {
+          "name": "Snake-like shapes",
+          "type": "Universal"
+        },
+        {
+          "name": "Threat of losing job",
+          "type": "Learned"
+        },
+        {
+          "name": "Thunder",
+          "type": "Learned"
+        },
+        {
+          "name": "Public speaking",
+          "type": "Learned"
+        }
       ],
       "moods": [
         {
@@ -781,16 +823,31 @@
         }
       ],
       "triggers": [
-        "Rotting or decay",
-        "Anything coming out of the body",
-        "Unfamiliar religious customs",
-        "Eating insects or raw meat",
-        "Fans of an opposing sports team"
+        {
+          "name": "Rotting or decay",
+          "type": "Universal"
+        },
+        {
+          "name": "Anything coming out of the body",
+          "type": "Universal"
+        },
+        {
+          "name": "Unfamiliar religious customs",
+          "type": "Learned"
+        },
+        {
+          "name": "Eating insects or raw meat",
+          "type": "Learned"
+        },
+        {
+          "name": "Fans of an opposing sports team",
+          "type": "Learned"
+        }
       ],
       "moods": [
         {
           "name": "Sour",
-          "desc": "Not commonly a mood, it can occur as a mood when there is a generalized feeling of repugnance or revulsion — usually of low intensity."
+          "desc": "Disgust can occur as a mood as a generalized feeling of repugnance."
         }
       ]
     },
@@ -1166,16 +1223,31 @@
         }
       ],
       "triggers": [
-        "Losing a loved one",
-        "Being rejected by someone important",
-        "Perceived loss of status",
-        "Not being invited to a party",
-        "Losing a treasured belonging"
+        {
+          "name": "Losing a loved one",
+          "type": "Universal"
+        },
+        {
+          "name": "Being rejected by someone important",
+          "type": "Universal"
+        },
+        {
+          "name": "Perceived loss of status",
+          "type": "Learned"
+        },
+        {
+          "name": "Not being invited to a party",
+          "type": "Learned"
+        },
+        {
+          "name": "Losing a treasured belonging",
+          "type": "Learned"
+        }
       ],
       "moods": [
         {
           "name": "Dysphoria (or feeling blue)",
-          "desc": "Feelings of resignation, discouragement or disappointment that endure for a long period. The anguished side of sadness does not transform into a mood."
+          "desc": "Feelings of resignation, discouragement or disappointment that endure. Anguish does not transform into a mood."
         }
       ]
     },
@@ -1576,13 +1648,34 @@
         }
       ],
       "triggers": [
-        "Sensory experience of nature",
-        "Helping others",
-        "Social interaction",
-        "Playing badminton",
-        "The taste of chocolate cake",
-        "Spending time with family",
-        "Places associated with enjoyable memories"
+        {
+          "name": "Sensory experience of nature",
+          "type": "Universal"
+        },
+        {
+          "name": "Helping others",
+          "type": "Universal"
+        },
+        {
+          "name": "Social interaction",
+          "type": "Universal"
+        },
+        {
+          "name": "Playing badminton",
+          "type": "Learned"
+        },
+        {
+          "name": "The taste of chocolate cake",
+          "type": "Learned"
+        },
+        {
+          "name": "Spending time with family",
+          "type": "Learned"
+        },
+        {
+          "name": "Places associated with enjoyable memories",
+          "type": "Learned"
+        }
       ],
       "moods": [
         {
@@ -1598,16 +1691,16 @@
       "body": "This is an opportunity for you to explore the vast world of emotions. This collection of maps is based on the work of many scholars and was created by Paul and Eve Ekman to help you better understand your emotions, where they come from and the effects they have on your life.<br><br>Navigate by scrolling between sections or by using the right-hand navigation bar, and by clicking elements to dig deeper."
     },
     "continents": {
-      "header": "The Emotions",
+      "header": "The Five Continents of Emotion",
       "body": "Each emotion is represented as a continent. The movement of the continents reflects how emotions vary in strength and frequency in people’s lives."
     },
     "states": {
       "header": "The States of an Emotion",
-      "body": "Each emotion contains a number of related but different states. These states differ not only in their nature but in their intensity. The states listed below are representative, not exhaustive."
+      "body": "Each emotion contains a number of related states. These states differ in their intensity. The states shown here are representative, not exhaustive."
     },
     "actions": {
       "header": "The Actions of a State",
-      "body": "Each emotional state can result in a number of likely actions. Click on a state to see whether an action is constructive or destructive.",
+      "body": "Each emotional state can result in a number of actions. The actions represented here are “intrinsic,” happening without conscious thought. Click on a state to see whether an action is constructive or destructive. ",
       "qualities": [
         {
           "header": "Constructive Actions",
