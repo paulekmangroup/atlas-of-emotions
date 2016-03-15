@@ -273,6 +273,15 @@ export default function (...initArgs) {
 			setModalVisibility(false);
 		});
 
+		// enable infoButton
+		document.querySelector('#infoButton')
+			.addEventListener('click', (event) => {
+				event.stopImmediatePropagation();
+				// interesting toggling seems to work despite this being always 'true'
+				setModalVisibility(true);
+			}
+		);
+
 	}
 
 	function setSectionEmotion (section, previousEmotion, previousMorePage) {

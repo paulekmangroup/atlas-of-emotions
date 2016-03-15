@@ -348,6 +348,22 @@ a:active {
 	}
 }
 
+#infoButton {
+	cursor: pointer;
+	&::after{
+  	display: inline-block;
+  	width: 1.4em;
+  	height: 1.4em;
+  	background: $infoButton-highlight-color;
+  	border-radius: 50%;
+    content: 'i';
+		line-height: 1.5em;
+    font-size: .8em;
+		margin-left: 1em;
+		color: $text-overlay-color;
+  }
+}
+
 #modal {
 	$modal-width: 35em;
 	$modal-height: 20em;
