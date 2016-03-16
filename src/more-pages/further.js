@@ -26,8 +26,9 @@ export default {
 	makeLink: function (linkStr, textStr) {
 		const item = document.createElement('li');
 		const link = document.createElement('a');
+		const isEmail = linkStr.indexOf('mailto') > -1 ? true : false;
 		link.href = linkStr;
-		link.target = '_blank';
+		link.target = isEmail ? '_self' : '_blank';
 		link.innerHTML = textStr;
 		item.appendChild(link);
 

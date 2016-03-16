@@ -585,7 +585,7 @@
 						},
 						{
 							"name": "Intentional",
-							"desc": ""
+							"desc": "None"
 						}
 					]
 				}
@@ -647,6 +647,10 @@
 			{
 				"link": "http://stamen.com/",
 				"desc": "Learn more about the information visualization work of Stamen. >"
+			},
+			{
+				"link": "mailto:info@atlasofemotions.org",
+				"desc": "Send feedback on the Atlas of Emotions >"
 			}
 		],
 		"title": "Additional Resources",
