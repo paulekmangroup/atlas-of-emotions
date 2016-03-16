@@ -103,7 +103,7 @@
 	left: -100%;
 	height: 100%;
 	width: 100%;
-	transition: left 0.5s linear;
+	transition: left #{$emotions-panX-duration}s ease-in-out;
 
 	&.active,
 	&.annex-subpage.active {
