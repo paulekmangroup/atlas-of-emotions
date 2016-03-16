@@ -499,7 +499,6 @@ export default {
 
 		dispatcher.popupChange('calm', continent.id);
 
-		//console.log('TODO: implement "START AGAIN" popup when popups are implemented');
 		this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.SELECTED);
 	},
 

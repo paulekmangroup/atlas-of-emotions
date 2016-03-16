@@ -7,14 +7,20 @@
 	border-style: solid;
 	@include emotion-border-color(0.0);
 	background: rgba(255,255,255,0.0);
-	transition: all #{$ui-popups-duration-out}s ease-in;
+	transition:
+		background #{$ui-popups-duration-out}s ease-in,
+		padding #{$ui-popups-duration-out}s ease-in,
+		border-color #{$ui-popups-duration-in}s ease-out;	// remove highlight borders a bit more quickly
 }
 
 .popped[data-popuptarget] {
 	@include emotion-border-color();
 	background: rgba(255,255,255,0.8);
 	padding: 18px 20px;
-	transition: all #{$ui-popups-duration-in}s ease-out;
+	transition:
+		background #{$ui-popups-duration-in}s ease-out,
+		padding #{$ui-popups-duration-in}s ease-out,
+		border-color #{$ui-popups-duration-in}s ease-out;
 }
 
 .popped[data-popuptarget].show-only {
@@ -33,6 +39,7 @@
 .highlighted[data-popuptarget],
 .selected[data-popuptarget] {
 	@include emotion-border-color();
+	transition: border-color #{$ui-popups-duration-in}s ease-in;
 }
 
 .muted.default-interactive-helper[data-popuptarget],
