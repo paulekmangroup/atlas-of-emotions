@@ -291,7 +291,7 @@ export default {
 
 				// arrange actions between 10° and 170°
 				action.rotation = (100 + (numAllActions-i-1) * 160/(numAllActions-1));
-				
+
 				allActionsForEmotionByName[action.name] = action;
 			});
 
@@ -753,7 +753,6 @@ export default {
 	},
 
 	setHighlightedState: function (state) {
-
 		if (!state) {
 
 			this.displayHighlightedAction(null);
@@ -768,9 +767,39 @@ export default {
 			graphContainer.selectAll('g.action-arrow')
 				.classed('muted', (data, index) => !~stateActions.indexOf(data.name));
 
-			labelContainer.selectAll('div.label')
-				.classed('muted', (data, index) => !~stateActions.indexOf(data.name));
+			/*labelContainer.selectAll('div.label')
+				.classed('muted', (data, index) => !~stateActions.indexOf(data.name));*/
+			this.setLabelStates(labelContainer, stateActions);
+		}
 
+	},
+
+	/**
+	 * labels can have one of three states:
+	 * 1 - 'highlighted'
+	 * 2 - 'selected'
+	 * 3 - 'muted'
+	 */
+	setLabelStates: function(labelContainer, highlighted) {
+		if (!labelContainer) return;
+
+		const labels = labelContainer.selectAll('.label');
+		labels
+			.classed('highlighted', false)
+			.classed('muted', false)
+			.classed('selected', false);
+
+		const selected = this.highlightedAction ? this.highlightedAction.name : null;
+
+		if (selected || highlighted.length){
+			labels
+				.classed('muted', d => {
+					return highlighted.indexOf(d.name) < 0 && d.name !== selected;
+				})
+				.classed('highlighted', d => {
+					return highlighted.indexOf(d.name) > -1;
+				})
+				.classed('selected', d => d.name === selected);
 		}
 
 	},
@@ -1020,7 +1049,6 @@ export default {
 	},
 
 	displayHighlightedAction: function (action, valence) {
-
 		let highlightedAction = action || this.highlightedAction || null,
 			arrowSelection = this.graphContainers[this.currentEmotion].selectAll('g.action-arrow'),
 			labelSelection = this.labelContainers[this.currentEmotion].selectAll('div.label');
@@ -1047,19 +1075,23 @@ export default {
 
 			}
 
+			/*
 			// highlight the action's name regardless of valence
 			labelSelection
 				.classed('muted', (data, index) => data.name !== highlightedAction.name);
-
+			*/
+			this.setLabelStates(this.labelContainers[this.currentEmotion], [highlightedAction.name]);
 		} else {
 
 			arrowSelection
 				.classed('muted', false);
-
+			/*
 			labelSelection
 				.classed('muted', false);
-
+			*/
+			this.setLabelStates(this.labelContainers[this.currentEmotion], []);
 		}
+
 		/*
 		if (!action && this.highlightedValence) {
 			this.displayHighlightedValence();
