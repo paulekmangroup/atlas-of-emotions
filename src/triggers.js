@@ -541,7 +541,7 @@ export default {
 
 			let labelsEnter = labels.enter()
 				.append('div')
-				.attr('class', 'emotion-label')
+				.attr('class', `emotion-label ${emotion}`)
 				.attr('data-popuptarget', d => `triggers:${emotion}-${d.header.toLowerCase()}`)
 				.style('top', (d, i) => {
 					switch (i) {
@@ -1059,6 +1059,7 @@ export default {
 			hitAreaId = hitAreaId || this.highlightedHitArea || null;
 
 			let graphContainer = this.graphContainers[this.currentEmotion],
+				phaseLabels = this.labelContainers[this.currentEmotion].selectAll('.trigger-phase-labels .emotion-label'),
 				statesContainer = d3.select('#states'),
 				actionsContainer = d3.select('#actions');
 
@@ -1083,6 +1084,11 @@ export default {
 					statesContainer.classed('faded', false);
 					actionsContainer.classed('faded', false);
 			}
+
+			phaseLabels
+				.each(function (d, i) {
+					d3.select(this).classed('highlighted', i === hitAreaId - 1);
+				});
 
 		}, 1);
 
