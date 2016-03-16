@@ -39,7 +39,7 @@ const continentsSection = {
 			h = containerNode.offsetHeight,
 			continentGeom;
 
-		centerX = 0.55 * w;
+		centerX = 0.48 * w;
 		centerY = 0.5 * h;
 		continentGeom = {
 			w: w,
@@ -324,8 +324,9 @@ const continentsSection = {
 		// otherwise, callout display is handled within setEmotion.
 		// this will probably have to change to support deeplinking to a zoomed-in emotion,
 		// we'll figure that out later.
-		if (options && options.firstSection) {
-			// if first section in session, move continents out of the way of the intro modal
+		if (options && options.firstSection && !localStorage.modalSeen) {
+			// if first section in session, and intro modal has not been viewed,
+			// move continents out of the way of the intro modal
 			this.setContinentIntroPositions(true);
 		} else {
 			this.setLabelVisibility(true);
@@ -397,7 +398,7 @@ const continentsSection = {
 			h = this.sectionContainer.offsetHeight,
 			continentGeom;
 
-		centerX = 0.55 * w;
+		centerX = 0.48 * w;
 		centerY = 0.5 * h;
 		continentGeom = {
 			w: w,

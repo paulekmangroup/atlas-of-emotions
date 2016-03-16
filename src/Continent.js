@@ -40,54 +40,58 @@ export default class Continent {
 
 	static BASE_TRANSFORMS = [
 		{
-			x: 0.03,
+			// top
+			x: 0.02,
 			y: -0.20,
 			label: {
-				x: 0.19,
-				y: -0.13
-			},
-			size: 0.24,
-			introSpreadMaxRad: 0.13
-		},
-		{
-			x: -0.22,
-			y: -0.14,
-			label: {
-				x: -0.25,
-				y: -0.01
-			},
-			size: 0.23,
-			introSpreadMaxRad: 0.2
-		},
-		{
-			x: -0.06,
-			y: 0.07,
-			label: {
-				x: -0.22,
-				y: 0.07
-			},
-			size: 0.18,
-			introSpreadMaxRad: 0.35,
-			isCenterContinent: true
-		},
-		{
-			x: -0.03,
-			y: 0.22,
-			label: {
-				x: -0.17,
-				y: 0.17
+				x: 0.15,
+				y: -0.15
 			},
 			size: 0.22,
 			introSpreadMaxRad: 0.15
 		},
 		{
-			x: 0.19,
-			y: 0.10,
+			// left-top
+			x: -0.17,
+			y: -0.16,
 			label: {
-				x: 0.01,
-				y: 0.25
+				x: -0.13,
+				y: 0.14
 			},
-			size: 0.24,
+			size: 0.22,
+			introSpreadMaxRad: 0.15
+		},
+		{
+			// left-bottom
+			x: -0.12,
+			y: 0.14,
+			label: {
+				x: -0.15,
+				y: 0.06
+			},
+			size: 0.22,
+			introSpreadMaxRad: 0.15
+		},
+		{
+			// right
+			x: 0.19,
+			y: 0.00,
+			label: {
+				x: 0.13,
+				y: 0.18
+			},
+			size: 0.22,
+			introSpreadMaxRad: 0.15
+		},
+		{
+			// bottom
+			x: 0.02,
+			y: 0.21,
+			label: {
+				x: 0.14,
+				y: 0.16
+			},
+			size: 0.22,
 			introSpreadMaxRad: 0.15
 		}
 	];
@@ -320,11 +324,6 @@ export default class Continent {
 		Object.assign(this, transform);
 
 		this.introSpreadAng = Math.atan2(this.y, this.x);
-		if (this.isCenterContinent) {
-			// move center continent a little off-angle.
-			this.introSpreadAng += 0.4;
-		}
-
 		this.centerX = continentGeom.centerX;
 		this.centerY = continentGeom.centerY;
 
