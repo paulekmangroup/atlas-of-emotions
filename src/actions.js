@@ -32,8 +32,8 @@ export default {
 	labelContainers: null,
 	graphContainers: null,
 	valenceTextures: null,
-
 	mouseOutTimeout: null,
+	randomLabelPositions: {},
 
 
 	init: function (containerNode) {
@@ -829,7 +829,6 @@ export default {
 
 		let labelContainer = this.labelContainers[this.currentEmotion];
 		if (actionsData) {
-
 			const sqrt3 = Math.sqrt(3);
 			let labelSize = this.lineGenerator.radius()({x:1}) + 10,
 				labelSelection = labelContainer.selectAll('div.label')
@@ -869,14 +868,16 @@ export default {
 				.html(labelText);
 
 			// get a random label to set a box around it
-			const randomLabelIndex = Math.floor(Math.random() * actionsData.length);
+			if (!this.randomLabelPositions.hasOwnProperty(this.currentEmotion)) {
+				this.randomLabelPositions[this.currentEmotion] = actionsData[Math.floor(Math.random() * actionsData.length)];
+			}
 
 			// enter
 			let labelEnterSelection = labelSelection.enter().append('div')
-				.classed(`${this.currentEmotion} label emotion-label`, true)
-				.classed('default-interactive-helper', (d, i) => i === randomLabelIndex)
+				.attr('class', `${this.currentEmotion} label emotion-label`)
 				.attr('data-popuptarget', (d,i) => `actions:${d.name}`)
 				.style('opacity', 0.0);
+
 			labelEnterSelection.append('div')
 				.attr('class', 'label-text-wrapper')
 				.append('h4')
@@ -902,6 +903,9 @@ export default {
 				});
 
 			// exit
+			labelSelection
+				.classed('default-interactive-helper', (d, i) => d.name === this.randomLabelPositions[this.currentEmotion].name);
+
 			labelSelection.exit().transition()
 				.duration(sassVars.actions.remove.time)
 				.style('opacity', 0.0)
