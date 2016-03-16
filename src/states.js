@@ -32,6 +32,7 @@ export default {
 	emotionStates: null,
 	currentEmotion: null,
 	isBackgrounded: false,
+	selectedState: null,
 
 	mouseOutTimeout: null,
 
@@ -1364,6 +1365,7 @@ export default {
 		if (this.isBackgrounded) {
 			dispatcher.setEmotionState(statesData.name, true);
 		} else {
+			this.selectedState = statesData.name;
 			this.setHighlightedState(statesData.name);
 			dispatcher.popupChange('states', statesData.name, statesData.desc);
 			// dispatcher.changeCallout(this.currentEmotion, statesData.name, statesData.desc);
@@ -1375,6 +1377,7 @@ export default {
 		if (this.isBackgrounded) {
 			dispatcher.setEmotionState(null, true);
 		} else {
+			this.selectedState = null;
 			this.setHighlightedState(null);
 			this.resetCallout();
 		}
@@ -1440,7 +1443,6 @@ export default {
 			labelContainer = this.labelContainers[this.currentEmotion];
 
 		if (states && states.length) {
-
 			// create map of highlighted state indices (list of booleans)
 			let stateIndexes = this.emotionStates[this.currentEmotion].data.map(d => {
 				return !!~states.indexOf(d.name);
@@ -1449,22 +1451,47 @@ export default {
 			graphContainer.selectAll('path.area')
 				.classed('unhighlighted', (data, index) => !stateIndexes[index]);
 
-			// labelContainer.selectAll('div h3')
-			// 	.classed('highlighted', (data, index) => stateIndexes[index]);
-			labelContainer.selectAll('div .label')
-				.classed('unhighlighted', (data, index) => !stateIndexes[index]);
-
 		} else {
 
 			graphContainer.selectAll('path.area')
 				.classed('unhighlighted', false);
-			// labelContainer.selectAll('div h3')
-			// 	.classed('highlighted', false);
-			labelContainer.selectAll('div .label')
-				.classed('unhighlighted', false);
-
 		}
 
+		this.setLabelStates(labelContainer, states);
+	},
+
+	/**
+	 * labels can have one of three states:
+	 * 1 - 'highlighted'
+	 * 2 - 'selected'
+	 * 3 - 'muted'
+	 */
+	setLabelStates: function(labelContainer, highlighted) {
+		if (!labelContainer) return;
+
+		const labels = labelContainer.selectAll('.label');
+		labels
+			.classed('highlighted', false)
+			.classed('muted', false)
+			.classed('selected', false);
+
+		highlighted = (highlighted && highlighted.length) ? highlighted[0] : null;
+		const selected = this.selectedState;
+
+		if (selected || highlighted){
+			labels
+				.each(function() {
+					const elm = d3.select(this);
+					const target = elm.attr('data-popuptarget');
+					if (target.indexOf(selected) > -1) {
+						elm.classed('selected', true);
+					} else if (target.indexOf(highlighted) > -1) {
+						elm.classed('highlighted', true);
+					} else {
+						elm.classed('muted', true);
+					}
+				});
+		}
 	},
 
 	resetCallout: function () {

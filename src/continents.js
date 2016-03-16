@@ -469,7 +469,7 @@ const continentsSection = {
 
 				// display the default continents callout and continent labels.
 				dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
-				this.setLabelVisibility(true);
+				// this.setLabelVisibility(true);
 
 			}
 
@@ -602,9 +602,6 @@ const continentsSection = {
 				});
 			})
 			.start();
-
-			// fade in/out continent labels
-			this.setLabelVisibility(!!targetContinent);
 		},
 
 		// 2b. spread circles along horizontal axis as they fade in + grow
