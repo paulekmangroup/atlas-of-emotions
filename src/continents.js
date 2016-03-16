@@ -145,8 +145,7 @@ const continentsSection = {
 
 						let continent = continents.find(c => c.id === emotion);
 						this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.SELECTED);
-
-						// dispatcher.changeCallout(emotion, emotion, emotionsData.emotions[emotion].continent.desc);
+						dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
 
 						resolve();
 
@@ -156,8 +155,10 @@ const continentsSection = {
 
 					// deselect all continents
 					continents.forEach(c => c.highlightLevel = Continent.HIGHLIGHT_LEVELS.NONE);
-					dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
 					this.setContinentHighlight(null, Continent.HIGHLIGHT_LEVELS.NONE);
+
+					// display all-continents callout
+					dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
 
 					if (this.zoomedInContinent) {
 
@@ -250,7 +251,8 @@ const continentsSection = {
 						let continent = continents.find(c => c.id === emotion);
 						this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.SELECTED);
 
-						// dispatcher.changeCallout(emotion, emotion, emotionsData.emotions[emotion].continent.desc);
+						// display all-continents callout
+						dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
 
 						resolve();
 
@@ -258,19 +260,8 @@ const continentsSection = {
 
 				} else {
 
-					// this was used when navigating from states view directly to all continents view,
-					// with no intermediate zoomed-in continent view.
-					/*
-					// display all continents
-					let delays = {};
-					continents.forEach(continent => {
-						delays[continent.id] = continent.id === previousEmotion ? 0 : 800;
-					});
-					this.transitions.scaleContinents(continents.map(continent => continent.id), 1.0, delays, 500);
-
+					// display all-continents callout
 					dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
-					*/
-
 					resolve();
 
 				}
@@ -328,8 +319,6 @@ const continentsSection = {
 			// if first section in session, and intro modal has not been viewed,
 			// move continents out of the way of the intro modal
 			this.setContinentIntroPositions(true);
-		} else {
-			this.setLabelVisibility(true);
 		}
 
 		this.update();
@@ -431,7 +420,9 @@ const continentsSection = {
 				.on('click', val ? section.onContinentClick : null, true);
 		});
 
-		this.labelContainer.selectAll('.emotion-label').on({
+		this.labelContainer.selectAll('.emotion-label')
+		.classed('visible', val)
+		.on({
 			mouseenter: val ? section.onContinentMouseEnter : null,
 			mouseleave: val ? section.onContinentMouseLeave : null
 		});
@@ -761,27 +752,6 @@ const continentsSection = {
 			}
 		}));
 
-		let somethingSelected;
-		continents.some((c => {
-			if (c.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED) {
-				somethingSelected = c;
-				return true;
-			}
-		}));
-
-		this.labelContainer.selectAll('.emotion-label')
-			.classed('highlight', false)
-			.classed('unhighlight', false)
-			.classed('selected', false);
-
-		if (somethingSelected) {
-			this.labelContainer.select('.default-interactive-helper')
-				.classed('unhighlight', true);
-			this.labelContainer.select(`[data-popuptarget="continents:${somethingSelected.id}"]`)
-				.classed('selected', true)
-				.classed('unhighlight', false);
-		}
-
 		if (otherHighlightedContinent) {
 			// If there is a highlighted continent other than the event target continent,
 			// just unhiglight the event target continent (unless it's selected, then leave as-is)
@@ -798,6 +768,8 @@ const continentsSection = {
 				}
 			});
 		}
+
+		this.setLabelStates();
 	},
 
 	setContinentHighlight: function (continent, highlightLevel) {
@@ -810,35 +782,51 @@ const continentsSection = {
 			unhighlightLevel = Continent.HIGHLIGHT_LEVELS.UNHIGHLIGHTED;
 		}
 
-		let somethingSelected;
-		continents.some((c => {
-			if (c.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED) {
-				somethingSelected = c;
-				return true;
-			}
-		}));
-
-		this.labelContainer.selectAll('.emotion-label')
-			.classed('highlight', false)
-			.classed('unhighlight', false)
-			.classed('selected', false);
-
 		if (continent) {
 			continents.forEach(c => {
-				const elm = this.labelContainer.select(`[data-popuptarget="continents:${c.id}"]`);
 				if (c === continent) {
 					c.highlightLevel = highlightLevel;
-					elm.classed('highlight', true);
 				} else {
 					// unhighlight all but selected
 					if (c.highlightLevel !== Continent.HIGHLIGHT_LEVELS.SELECTED) {
 						c.highlightLevel = unhighlightLevel;
-						elm.classed('unhighlight', true);
-					} else if (c.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED) {
-						elm.classed('selected', true);
 					}
 				}
 			});
+		}
+
+		this.setLabelStates();
+	},
+
+	/**
+	 * labels can have one of three states:
+	 * 1 - 'highlighted'
+	 * 2 - 'selected'
+	 * 3 - 'muted'
+	 */
+	setLabelStates: function() {
+		if (!this.labelContainer) return;
+
+		const somethingSelected = continents
+			.filter(c => c.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED);
+
+		const somethingHighlighted = continents.filter(c => c.highlightLevel === Continent.HIGHLIGHT_LEVELS.HIGHLIGHTED);
+
+		const labels = this.labelContainer.selectAll('.emotion-label');
+
+		labels
+			.classed('highlighted', false)
+			.classed('muted', false)
+			.classed('selected', false);
+
+		if (somethingSelected.length || somethingHighlighted.length) {
+			labels
+				.classed('muted', d => {
+					return d.highlightLevel !== Continent.HIGHLIGHT_LEVELS.HIGHLIGHTED &&
+					d.highlightLevel !== Continent.HIGHLIGHT_LEVELS.SELECTED;
+				})
+				.classed('highlighted', d => d.highlightLevel === Continent.HIGHLIGHT_LEVELS.HIGHLIGHTED)
+				.classed('selected', d => d.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED);
 		}
 	}
 

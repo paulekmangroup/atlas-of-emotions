@@ -22,13 +22,13 @@
 }
 
 .default-interactive-helper[data-popuptarget],
-.highlight[data-popuptarget],
+.highlighted[data-popuptarget],
 .selected[data-popuptarget] {
 	@include emotion-border-color();
 }
 
-.unhighlight.default-interactive-helper[data-popuptarget],
-.unhighlight[data-popuptarget] {
+.muted.default-interactive-helper[data-popuptarget],
+.muted[data-popuptarget] {
 	@include emotion-border-color(0.0);
 	opacity: 0.5 !important;
 }
