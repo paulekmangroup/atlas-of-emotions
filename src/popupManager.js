@@ -36,7 +36,7 @@ class PopupManager {
 
 		// set w/h
 		let w = clone.offsetWidth + 100;
-		w = Math.min(w, 250);
+		w = Math.max(w, 250);
 
 		clone.style.cssText = `width: ${w}px;`;
 		clone.offsetWidth; // force repaint
