@@ -72,6 +72,7 @@ export default {
 		this.sectionContainer = containerNode;
 
 		this.wrapper = this.sectionContainer.querySelector('.wrapper');
+		this.scrollContainer = this.sectionContainer.querySelector('.outer-wrapper');
 
 		this.setContent();
 		this.isInited = true;
@@ -89,9 +90,11 @@ export default {
 		this.data.content.forEach(item => {
 			const p = document.createElement('p');
 			p.textContent = item.txt;
+
 			if (item.id) {
 				p.id = `tl-content-${item.id}`;
 			}
+
 			contentElm.appendChild(p);
 		});
 
@@ -101,13 +104,13 @@ export default {
 	handleChartClick: function(d) {
 		if (d.scrollTo) {
 			const target = d3.select(`#tl-content-${d.scrollTo}`);
-			if (!target) return;
+			if (!target || !target.node()) return;
 			// const wrapperHeight = this.wrapper.scrollHeight;
 			// const wrapperTop = this.wrapper.getBoundingClientRect().top + window.pageYOffset;
 
 			const sectionHeight = this.sectionContainer.offsetHeight;
 			const offset = target.node().getBoundingClientRect().top + this.wrapper.scrollTop;
-			smoothScroll(offset - sectionHeight / 2, 500, null, this.wrapper);
+			smoothScroll(offset - sectionHeight / 2, 500, null, this.scrollContainer);
 		}
 	},
 
@@ -247,7 +250,7 @@ export default {
 		enter.append('text')
 			.attr('x', SECTION_WIDTH / 2)
 			.attr('y', SECTION_HEIGHT / 2)
-			.attr('dy', 3)
+			.attr('dy', 4)
 			.text(d => d.name);
 
 		// vertical section names
@@ -318,8 +321,9 @@ export default {
 			.on('click', that.handleChartClick.bind(that));
 
 		subEnter.append('text')
-			.attr('dy', 3)
-			.text(d => d.name);
+			.attr('y', 4)
+			.attr('dy', 0)
+			.call(this.wrap, RADIUS * 2); // wrap text
 
 
 		// draw node lines that connect to main nodes
@@ -418,6 +422,31 @@ export default {
 			.attr('d', resetPath)
 			.attr('marker-end', 'url(#arrow)');
 
+	},
+
+	wrap: function(elms, width) {
+		elms.each(function(d) {
+			let text = d3.select(this),
+				words = d.name.split(/\s+/).reverse(),
+				word,
+				line = [],
+				lineNumber = 0,
+				lineHeight = 1.1, // ems
+				y = text.attr("y"),
+				dy = parseFloat(text.attr("dy")),
+				tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+
+			while (word = words.pop()) {
+				line.push(word);
+				tspan.text(line.join(" "));
+				if (tspan.node().getComputedTextLength() > width) {
+					line.pop();
+					tspan.text(line.join(" "));
+					line = [word];
+					tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+				}
+			}
+		});
 	},
 
 	setEmotion: function (emotion) {
