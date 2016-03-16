@@ -7,13 +7,14 @@
 	border-style: solid;
 	@include emotion-border-color(0.0);
 	background: rgba(255,255,255,0.0);
-	transition: all #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
+	transition: all #{$ui-popups-duration-out}s ease-in;
 }
 
 .popped[data-popuptarget] {
 	@include emotion-border-color();
 	background: rgba(255,255,255,0.8);
 	padding: 18px 20px;
+	transition: all #{$ui-popups-duration-in}s ease-out;
 }
 
 .popped[data-popuptarget].show-only {
@@ -46,10 +47,11 @@
 	width: auto;
 	overflow: hidden;
 	pointer-events: auto;
+	transition: all #{$ui-popups-duration-out}s ease-in;
 
 	&.transition {
 		opacity: 1;
-		transition: all #{$label-fade-in-time} cubic-bezier(0.645, 0.045, 0.355, 1);
+		transition: all #{$ui-popups-duration-in}s ease-out;
 	}
 
 	&.fade-out {

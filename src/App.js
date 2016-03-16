@@ -935,7 +935,8 @@ export default function (...initArgs) {
 		}
 
 		if (val) {
-			// already open
+
+			// bail if already open
 			if (modal.style.display === 'block') { return; }
 
 			// set body class for intro open
@@ -953,14 +954,6 @@ export default function (...initArgs) {
 				modal.classList.add('visible');
 				modalOverlay.classList.add('visible');
 
-				/*
-				// hide overlay on CONTINENTS,
-				// but keep it in DOM to block interaction until modal dismissed
-				if (currentSection === sections[dispatcher.SECTIONS.CONTINENTS]) {
-					modalOverlay.style.opacity = 0.0;
-				}
-				*/
-
 				let onOverlayClick = (event) => {
 					event.stopImmediatePropagation();
 					modalOverlay.removeEventListener('click', onOverlayClick);
@@ -970,11 +963,9 @@ export default function (...initArgs) {
 				modalOverlay.addEventListener('click', onOverlayClick);
 			}, 100);
 
-			// disable scrollbar interaction
-			// window.removeEventListener('mousemove', onWindowMouseMove);
-
 		} else {
-			// already closed
+
+			// bail if already closed
 			if (!modalOverlay.classList.contains('visible')) { return; }
 
 			// set body class for intro closing
@@ -999,7 +990,7 @@ export default function (...initArgs) {
 			// close the scrollbar, if it was opened along with the intro modal,
 			// and enable scrollbar interaction
 			setScrollbarFractionalOpen(0.0);
-			// window.addEventListener('mousemove', onWindowMouseMove);
+
 		}
 	}
 
