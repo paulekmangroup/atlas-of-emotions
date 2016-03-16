@@ -122,7 +122,7 @@ export default {
 		let additive = 0,
 			multiplier = 1,
 			aspectRatio = this.sectionContainer.offsetWidth / this.sectionContainer.offsetHeight;
-		console.log(aspectRatio);
+
 		if(aspectRatio > 1.75){
 			additive = 1;
 		}
