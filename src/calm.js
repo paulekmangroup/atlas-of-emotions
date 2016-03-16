@@ -158,6 +158,7 @@ export default {
 				.append('div')
 				.attr('class', d => `emotion-label label show-only no-body ${d.id}`)
 				.attr('data-popuptarget', d => `calm:${d.id}`)
+				.attr('data-clip', '1')
 				.style('left', d => Math.round(centerX + d.x - d.size) + 'px')
 				.style('top', d => Math.round(centerY + d.y - 17) + 'px');
 
@@ -498,16 +499,8 @@ export default {
 
 		dispatcher.popupChange('calm', continent.id);
 
-		console.log('TODO: implement "START AGAIN" popup when popups are implemented');
+		//console.log('TODO: implement "START AGAIN" popup when popups are implemented');
 		this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.SELECTED);
-
-		/*
-		if (d3.event) {
-			d3.event.stopImmediatePropagation();
-		}
-
-		dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS, continent.id);
-		*/
 	},
 
 	setContinentHighlight: function (continent, highlightLevel) {
@@ -543,6 +536,8 @@ export default {
 		continents.forEach(c => {
 			c.highlightLevel = Continent.HIGHLIGHT_LEVELS.NONE;
 		});
+
+		dispatcher.popupChange();
 	},
 
 	onPopupCloseButtonClicked: function() {

@@ -21,6 +21,14 @@
 	opacity: 1.0;
 }
 
+[data-popuptarget][data-clip] {
+	clip: rect(0px, 0px, 0px, 0px);
+}
+
+.unclip[data-popuptarget][data-clip] {
+	clip: initial;
+}
+
 .default-interactive-helper[data-popuptarget],
 .highlighted[data-popuptarget],
 .selected[data-popuptarget] {

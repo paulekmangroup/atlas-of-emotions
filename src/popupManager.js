@@ -34,6 +34,10 @@ class PopupManager {
 		props.target.appendChild(clone);
 		props.target.classList.add('popped');
 
+		if (props.target.getAttribute('data-clip')) {
+			props.target.classList.add('unclip');
+		}
+
 		// set w/h
 		let w = clone.offsetWidth + 100;
 		w = Math.max(w, 250);
@@ -72,6 +76,7 @@ class PopupManager {
 		popup.querySelector('.close')
 			.removeEventListener('click', this.onPopupCloseButtonClick, false);
 
+		target.classList.remove('unclip');
 		target.removeChild(popup);
 		delete this.popups[key];
 	}
