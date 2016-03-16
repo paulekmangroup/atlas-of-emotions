@@ -974,7 +974,6 @@ export default function (...initArgs) {
 			// window.removeEventListener('mousemove', onWindowMouseMove);
 
 		} else {
-
 			// already closed
 			if (!modalOverlay.classList.contains('visible')) { return; }
 
@@ -1125,14 +1124,16 @@ export default function (...initArgs) {
 			setModalVisibility(false);
 
 		} else {
-			// set a class on body so other sections can react
-			document.body.classList.remove('intro-closing', 'intro-open');
-			document.body.classList.add('intro-opening');
 
 			// if a section has not yet been selected for this browser
 			// (i.e. this is the start of the session),
 			// open the intro modal and the scrollbar
 			if(!localStorage.modalSeen){
+
+				// set a class on body so other sections can react
+				document.body.classList.remove('intro-closing', 'intro-open');
+				document.body.classList.add('intro-opening');
+
 				setTimeout(() => {
 					setModalVisibility(true);
 				}, sassVars.ui.intro.delay * 1000);
