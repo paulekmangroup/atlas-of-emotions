@@ -906,12 +906,14 @@ export default function (...initArgs) {
 
 		let scrollbarX = event.pageX - scrollbarBounds.left,
 			scrollbarY = event.pageY - scrollbarBounds.top,
-			scrollbarRelX = scrollbarX / scrollbarBounds.width;
+			scrollbarRelX = scrollbarX / scrollbarBounds.width,
+			scrollbarTriggerX = scrollbarIsOpen ? 0.0 : 0.65;	// hit area increases once scrollbar is open,
+																// to make it harder to accidentally close once open
 
 		if (scrollbarX < 0 || scrollbarX > window.innerWidth || scrollbarY < 0 || scrollbarY > scrollbarBounds.height) {
 			// manually call leave handler, in case it wasn't already called
 			onScrollbarHitAreaLeave();
-		} else if (scrollbarRelX > 0.75) {
+		} else if (scrollbarRelX > scrollbarTriggerX) {
 			setScrollbarOpen(true);
 		} else {
 			setScrollbarOpen(false);
