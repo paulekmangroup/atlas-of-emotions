@@ -1491,6 +1491,10 @@ export default {
 						elm.classed('muted', true);
 					}
 				});
+
+			// remove default-interactive-helper once user highlights something
+			labelContainer.select('.default-interactive-helper')
+				.classed('default-interactive-helper', false);
 		}
 	},
 

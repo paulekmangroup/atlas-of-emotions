@@ -824,6 +824,10 @@ const continentsSection = {
 				})
 				.classed('highlighted', d => d.highlightLevel === Continent.HIGHLIGHT_LEVELS.HIGHLIGHTED)
 				.classed('selected', d => d.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED);
+
+			// remove default-interactive-helper once user highlights something
+			this.labelContainer.select('.default-interactive-helper')
+				.classed('default-interactive-helper', false);
 		}
 	}
 

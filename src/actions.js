@@ -800,6 +800,10 @@ export default {
 					return highlighted.indexOf(d.name) > -1;
 				})
 				.classed('selected', d => d.name === selected);
+
+			// remove default-interactive-helper once user highlights something
+			labelContainer.select('.default-interactive-helper')
+				.classed('default-interactive-helper', false);
 		}
 
 	},
