@@ -135,10 +135,10 @@ function cssTask (options) {
 			console.log('Building CSS bundle');
 			gulp.src(options.src)
 				.pipe($.sass())
-				.pipe(gulp.dest(options.dest))
 				.pipe($.autoprefixer({
-							browsers: ['last 2 versions', '> 2%']
+							browsers: ['> 1%', 'last 2 versions']
 						}))
+				.pipe(gulp.dest(options.dest))
 				.pipe(gulpif(options.reload, connect.reload()))
 				.pipe($.notify({
 					'onLast': true,
@@ -152,6 +152,9 @@ function cssTask (options) {
 	} else {
 		gulp.src(options.src)
 			.pipe($.sass())
+			.pipe($.autoprefixer({
+				browsers: ['> 1%', 'last 2 versions']
+			}))
 			.pipe($.cssmin())
 			.pipe(gulp.dest(options.dest));
 	}

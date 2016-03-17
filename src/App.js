@@ -68,6 +68,8 @@ export default function (...initArgs) {
 		dispatcher.addListener(dispatcher.EVENTS.CHANGE_EMOTION_STATE, onEmotionStateChange);
 		dispatcher.addListener(dispatcher.EVENTS.CHANGE_CALLOUT, onCalloutChange);
 		dispatcher.addListener(dispatcher.EVENTS.POPUP_CHANGE, onPopupChange);
+		dispatcher.addListener(dispatcher.EVENTS.OPEN_MORE_INFO_MENU, onMoreInfoMenuClick);
+
 		window.addEventListener('hashchange', onHashChange);
 
 		onResize();
@@ -759,6 +761,7 @@ export default function (...initArgs) {
 	}
 
 	function onMoreInfoMenuClick (event) {
+		if (event) event.stopPropagation();
 
 		let dropdown = document.querySelector('#more-info .dropup'),
 			classList = dropdown.classList;
@@ -773,7 +776,6 @@ export default function (...initArgs) {
 		}
 
 		menuBackgroundClick();
-		event.stopPropagation();
 	}
 
 	function onMoreInfoMenuItemClick (event) {
