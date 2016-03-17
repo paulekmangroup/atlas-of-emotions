@@ -24,6 +24,35 @@ const TRIGGER_TYPES = {
 	LEARNED: 'learned'
 };
 
+// scalars used to determine length for each arrow;
+// there are times to make general solutions, and there are times not to.
+// note that 1 is outer boundary and .8 is inner boundary of perception arc
+const emotionUniversalArrowPercents = {
+	// 3:4 universal to learned
+	'anger': [.74, .65, .77],
+	// 4:3 universal to learned
+	'fear': [.71, .63, .68, .76],
+	// 2:3 universal to learned
+	'disgust': [.68, .76],
+	// 2:3 universal to learned
+	'sadness': [.67, .77],
+	// 3:4 universal to learned
+	'enjoyment': [.70, .62, .76]
+};
+const emotionLearnedArrowPercents = {
+	// 3:4 universal to learned
+	'anger': [.9, .7, .73, .91],
+	// 4:3 universal to learned
+	'fear': [.91, .77, .9],
+	// 2:3 universal to learned
+	'disgust': [.92, .72, .9],
+	// 2:3 universal to learned
+	'sadness': [.89, .9, .65],
+	// 3:4 universal to learned
+	'enjoyment': [.92, .88, .72, .73]
+};
+
+
 export default {
 
 	isInited: false,
@@ -34,6 +63,7 @@ export default {
 
 	labelContainers: null,
 	graphContainers: null,
+	emotionArrowPercents: null,
 
 	init: function (containerNode) {
 
@@ -45,6 +75,7 @@ export default {
 
 		// need radius to set up labels and to parse data,
 		// so these come after d3 setup.
+		this.initArrowPercents();
 		this.initLabels(containerNode, haloRadius);
 		this.triggersData = this.parseTriggers(haloRadius);
 
@@ -58,26 +89,6 @@ export default {
 		this.onPopupCloseButtonClicked = this.onPopupCloseButtonClicked.bind(this);
 
 		this.isInited = true;
-
-	},
-
-	getHaloArrowPercent: function (emotion, i) {
-		// note that 1 is outer boundary and .8 is inner boundary of perception arc
-
-		// there are times to make general solutions, and there are times not to
-		let emotionArrowPercents = {
-			// 3:4 universal to learned
-			'anger': [.74, .65, .77, .9, .7, .73, .91],
-			// 4:3 universal to learned
-			'fear': [.71, .63, .68, .76, .91, .77, .9],
-			// 2:3 universal to learned
-			'disgust': [.68, .76, .92, .72, .9],
-			// 2:3 universal to learned
-			'sadness': [.67, .77, .89, .9, .65],
-			// 3:4 universal to learned
-			'enjoyment': [.70, .62, .76, .92, .88, .72, .73]
-		};
-		return emotionArrowPercents[emotion][i];
 
 	},
 
@@ -143,7 +154,7 @@ export default {
 	},
 
 	calcArrowLength: function (haloRadius, triggerRadius, emotion, i) {
-		return 1 - (haloRadius * this.getHaloArrowPercent(emotion, i) / triggerRadius);
+		return 1 - (haloRadius * this.emotionArrowPercents[emotion][i] / triggerRadius);
 	},
 
 	parseTriggers: function (haloRadius) {
@@ -181,6 +192,18 @@ export default {
 		});
 
 		return triggersData;
+
+	},
+
+	initArrowPercents: function () {
+
+		this.emotionArrowPercents = _.values(dispatcher.EMOTIONS).reduce((acc, emotion) => {
+
+			let shuffledLearnedVals = _.shuffle(emotionLearnedArrowPercents[emotion]);
+			acc[emotion] = emotionUniversalArrowPercents[emotion].concat(shuffledLearnedVals);
+			return acc;
+
+		}, {});
 
 	},
 
