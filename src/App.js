@@ -13,7 +13,10 @@ import popupManager from './popupManager.js';
 
 export default function (...initArgs) {
 
-	const NAVIGATION_DEFAULTS = {
+	const MIN_ALLOWED_WIDTH = 950,
+		MIN_ALLOWED_HEIGHT = 650,
+
+		NAVIGATION_DEFAULTS = {
 			section: dispatcher.SECTIONS.CONTINENTS,
 			emotion: null
 		},
@@ -37,7 +40,10 @@ export default function (...initArgs) {
 		currentSection = null,
 		currentEmotion = null,
 		currentMorePage = null,
-		previousNonSecondaryHash = {section: 'continents', emotion: null},
+		previousNonSecondaryHash = {
+			section: 'continents',
+			emotion: null
+		},
 
 		scrollbarSegments = {},
 		scrollbarCloseTimeout = null,
@@ -54,6 +60,10 @@ export default function (...initArgs) {
 
 
 	function init (containerNode) {
+
+		if (renderSmallScreenWarning()) {
+			return;
+		}
 
 		initContainers();
 		initSections();
@@ -1215,6 +1225,38 @@ export default function (...initArgs) {
 			section: hashValues[0],
 			emotion: hashValues[1]
 		};
+
+	}
+
+	/**
+	 * If viewport is below minimum screen size,
+	 * render small screen warning and return true.
+	 * TODO (yeah right): pull in this text from elsewhere instead of hardcoding.
+	 */
+	function renderSmallScreenWarning () {
+
+		if (window.innerWidth >= MIN_ALLOWED_WIDTH && window.innerHeight >= MIN_ALLOWED_HEIGHT) {
+			return false;
+		}
+
+		document.querySelector('body').classList.add('small-screen-warning');
+
+		let warningDiv = document.createElement('div');
+		warningDiv.classList.add('warning-container');
+
+		let warningHeader = document.createElement('h3');
+		warningHeader.innerHTML = 'ATLAS OF EMOTIONS';
+		warningDiv.appendChild(warningHeader);
+
+		let warningBody = document.createElement('p');
+		warningBody.innerHTML = 'For the best viewing experience, please enlarge your browser or view on a tablet or larger device.';
+		warningDiv.appendChild(warningBody);
+
+		// TODO: how to not blow away content for bots?
+		document.querySelector('#app-container').innerHTML = '';
+		document.querySelector('#app-container').appendChild(warningDiv);
+
+		return true;
 
 	}
 

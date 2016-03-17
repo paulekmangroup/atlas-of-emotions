@@ -35,6 +35,22 @@ body {
 		and (min-width: 1280px) {
 			font-size: 22px;
 	}
+
+	&.small-screen-warning {
+		background-color: $text-color;
+		color: $text-overlay-color;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		.warning-container {
+			width: 15em;
+			p {
+				@extend %raleway-light;
+				color: $text-overlay-color;
+			}
+		}
+	}	
 }
 
 h1 { font-size: 1.5em; font-weight: normal; }
