@@ -10,6 +10,7 @@
 	transition:
 		background #{$ui-popups-duration-close}s ease-in,
 		padding #{$ui-popups-duration-close}s ease-in,
+		opacity #{$ui-popups-duration-close}s ease-in,
 		border-color #{$ui-popups-duration-close}s ease-in;
 }
 
