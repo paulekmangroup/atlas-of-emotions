@@ -174,28 +174,7 @@ export default {
 
 	calcArrowLength: function (haloRadius, triggerRadius, emotion, i) {
 		// how long arrow should be based on how far arrow goes into center halo
-		return 1 - (haloRadius * this.getHaloArrowPercent(emotion, i) / triggerRadius);
-	},
-
-	getHaloArrowPercent: function (emotion, i) {
-		// 1 is outer boundary, .8 is inner boundary of arc, anything < .8 gets into center halo
-		// all universal must be < .8
-
-		// there are times to make general solutions, and there are times not to
-		let emotionArrowPercents = {
-			// 3:4 universal to learned
-			'anger': [.74, .65, .77, .9, .7, .73, .91],
-			// 4:3 universal to learned
-			'fear': [.71, .63, .68, .76, .91, .77, .9],
-			// 2:3 universal to learned
-			'disgust': [.68, .76, .92, .72, .9],
-			// 2:3 universal to learned
-			'sadness': [.67, .77, .89, .9, .65],
-			// 3:4 universal to learned
-			'enjoyment': [.70, .62, .76, .92, .88, .72, .73]
-		};
-		return emotionArrowPercents[emotion][i];
-
+		return 1 - (haloRadius * this.emotionArrowPercents[emotion][i] / triggerRadius);
 	},
 
 	parseTriggers: function (haloRadius) {
