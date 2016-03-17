@@ -291,7 +291,7 @@
           "type": "Universal"
         },
         {
-          "name": "Encountering offensive beliefs",
+          "name": "Inefficiency or bureaucracy",
           "type": "Learned"
         },
         {
@@ -299,7 +299,7 @@
           "type": "Learned"
         },
         {
-          "name": "Inefficiency or bureaucracy",
+          "name": "Encountering offensive beliefs",
           "type": "Learned"
         },
         {
@@ -595,11 +595,11 @@
           "type": "Universal"
         },
         {
-          "name": "Threat to safety",
+          "name": "Sudden loss of gravity",
           "type": "Universal"
         },
         {
-          "name": "Sudden loss of gravity",
+          "name": "Threat to safety",
           "type": "Universal"
         },
         {
@@ -824,12 +824,16 @@
       ],
       "triggers": [
         {
+          "name": "Anything coming out of the body",
+          "type": "Universal"
+        },
+        {
           "name": "Rotting or decay",
           "type": "Universal"
         },
         {
-          "name": "Anything coming out of the body",
-          "type": "Universal"
+          "name": "Fans of an opposing sports team",
+          "type": "Learned"
         },
         {
           "name": "Unfamiliar religious customs",
@@ -837,10 +841,6 @@
         },
         {
           "name": "Eating insects or raw meat",
-          "type": "Learned"
-        },
-        {
-          "name": "Fans of an opposing sports team",
           "type": "Learned"
         }
       ],
@@ -1224,11 +1224,11 @@
       ],
       "triggers": [
         {
-          "name": "Losing a loved one",
+          "name": "Being rejected by someone important",
           "type": "Universal"
         },
         {
-          "name": "Being rejected by someone important",
+          "name": "Losing a loved one",
           "type": "Universal"
         },
         {
@@ -1665,15 +1665,15 @@
           "type": "Learned"
         },
         {
+          "name": "Places associated with enjoyable memories",
+          "type": "Learned"
+        },
+        {
           "name": "The taste of chocolate cake",
           "type": "Learned"
         },
         {
           "name": "Spending time with family",
-          "type": "Learned"
-        },
-        {
-          "name": "Places associated with enjoyable memories",
           "type": "Learned"
         }
       ],
