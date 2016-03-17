@@ -99,6 +99,15 @@ export default {
 		let innerRadius = haloRadius * 1.15,
 			radiusSpread = haloRadius * 0.225;
 
+		let angleFactors = {
+			'anger': [-.6, -.43, -.22, .24, .37, .5, .6],
+			'fear': [-.7, -.53, -.42, -.22, .3, .45, .7],
+			'disgust': [-.5, -.3, .24, .4, .6],
+			'sadness': [-.5, -.3, .24, .42, .6],
+			'enjoyment': [-.6, -.4, -.22, .24, .37, .53, .68],
+			'universalLearned': [-.7,.1]
+		};
+
 		let multiplier = 1,
 			additive = 0;
 		let aspectRatio = this.sectionContainer.offsetWidth / this.sectionContainer.offsetHeight;
@@ -107,23 +116,24 @@ export default {
 		}
 		if (aspectRatio < 1){
 			multiplier = .75;
+			angleFactors['universalLearned'] = [-.7, 0];
 		}
-		//let angleFactors = [-.6, -.5, -.3, .25, .4, .5, .65];
-		let angleFactors = {
-			'anger': [-.6, -.43, -.22, .24, .37, .5, .6],
-			'fear': [-.7, -.53, -.42, -.22, .3, .45, .7],
-			'disgust': [-.5, -.3, .24, .4, .6],
-			'sadness': [-.5, -.3, .24, .42, .6],
-			'enjoyment': [-.6, -.4, -.22, .24, .37, .53, .68],
-		};
+
+
+
 		// angleFactor can be any value from -1 (all the way left) to +1 (all the way right)
-		//return startAngle + angleSpread * (i + (i < middleIndex ? 1 : 2)) / (numTriggers + 1);
 		return (angleFactors[emotion][i] * multiplier - 1) * Math.PI / 2;
 	},
 
 	calcRadius: function (i, emotion, haloRadius) {
 
-		let innerRadius = haloRadius * 1.15,
+		// TODO: to create more general solution for label placement,
+		// recommend thinking of it as x/y distance instead of radius/angle
+		// because we still see the text as very left/right when we read
+
+		// for labels/arrows, as distance from middle/bottom of halo semi-circle
+
+		let minRadius = haloRadius * 1.15,
 			radiusSpread = haloRadius * 0.225;
 
 		let spreadPercent = {
@@ -132,11 +142,14 @@ export default {
 			'disgust': [.6,.3,.3,.12,1],
 			'sadness': [.6,.4,.3,1.8,1],
 			'enjoyment': [.2,.3,0.2,.12,1.7,.2,.3],
+			'universalLearned': [1.5,.2],
 		};
+
 		let additive = 0,
 			multiplier = 1,
 			aspectRatio = this.sectionContainer.offsetWidth / this.sectionContainer.offsetHeight;
 
+		// adjust spread based on aspect ratio
 		if(aspectRatio > 1.75){
 			additive = 1;
 		}
@@ -144,31 +157,52 @@ export default {
 			multiplier = .6;
 		}
 		if (aspectRatio < 1){
-			// too hard to just adjust, give separate
+			// when narrow, need different set of values rather than an adjustment
 			spreadPercent = {
 				'anger': [.4,2.8,.8,3.0,1.4,.5,0],
 				'fear': [.3,1.4,2.2,.1,1,2.5,.6],
 				'disgust': [2.5,.3,3,2.5,1],
 				'sadness': [3,.4,.3,2.5,.3],
 				'enjoyment': [.5,3.0,1.5,0,2.5,.5,.3],
+				'universalLearned': [1.5,0]
 			};
 		}
-		return innerRadius + radiusSpread * (spreadPercent[emotion][i] + additive) * multiplier;
+
+		// start with minRadius and then add a multiple of radiusSpread value
+		return minRadius + radiusSpread * (spreadPercent[emotion][i] + additive) * multiplier;
 	},
 
 	calcArrowLength: function (haloRadius, triggerRadius, emotion, i) {
-		return 1 - (haloRadius * this.emotionArrowPercents[emotion][i] / triggerRadius);
+		// how long arrow should be based on how far arrow goes into center halo
+		return 1 - (haloRadius * this.getHaloArrowPercent(emotion, i) / triggerRadius);
+	},
+
+	getHaloArrowPercent: function (emotion, i) {
+		// 1 is outer boundary, .8 is inner boundary of arc, anything < .8 gets into center halo
+		// all universal must be < .8
+
+		// there are times to make general solutions, and there are times not to
+		let emotionArrowPercents = {
+			// 3:4 universal to learned
+			'anger': [.74, .65, .77, .9, .7, .73, .91],
+			// 4:3 universal to learned
+			'fear': [.71, .63, .68, .76, .91, .77, .9],
+			// 2:3 universal to learned
+			'disgust': [.68, .76, .92, .72, .9],
+			// 2:3 universal to learned
+			'sadness': [.67, .77, .89, .9, .65],
+			// 3:4 universal to learned
+			'enjoyment': [.70, .62, .76, .92, .88, .72, .73]
+		};
+		return emotionArrowPercents[emotion][i];
+
 	},
 
 	parseTriggers: function (haloRadius) {
 
-		let { startAngle, angleSpread, innerRadius, radiusSpread } = this.calcArrowsGeom(haloRadius),
-			triggersData = {};
+		let triggersData = {};
 
 		_.values(dispatcher.EMOTIONS).forEach(emotion => {
-
-			let numTriggers = emotionsData.emotions[emotion].triggers.length,
-				middleIndex = Math.floor(numTriggers / 2);
 
 			triggersData[emotion] = emotionsData.emotions[emotion].triggers.concat()
 			.sort((a, b) => {
@@ -180,12 +214,8 @@ export default {
 				name: trigger.name,
 				type: trigger.type.toLowerCase(),
 
-				// distribute evenly between startAngle and startAngle + angleSpread,
-				// with a gap in the middle
 				angle: this.calcAngle(i, emotion, haloRadius),
 
-				// distribute along rings spanning between innerRadius and innerRadius + radiusSpread,
-				// starting at the second ring and cycling between rings
 				radius: this.calcRadius(i, emotion, haloRadius),
 
 				// fraction of radius.
@@ -209,46 +239,6 @@ export default {
 			return acc;
 
 		}, {});
-
-	},
-
-	calcArrowsGeom: function (haloRadius) {
-
-		let startAngle,
-			angleSpread,
-			innerRadius,
-			radiusSpread;
-
-		let aspectRatio = this.sectionContainer.offsetWidth / this.sectionContainer.offsetHeight;
-		if (aspectRatio > 1.75) {
-			startAngle = -0.9 * Math.PI;
-			angleSpread = 0.8 * Math.PI;
-			innerRadius = haloRadius * 1.05;
-			radiusSpread = haloRadius * 0.15;
-		} else if (aspectRatio > 1.4) {
-			startAngle = -.95 * Math.PI;
-			angleSpread = .9 * Math.PI;
-			innerRadius = haloRadius * 1.15;
-			radiusSpread = haloRadius * 0.225;
-		} else if (aspectRatio > 1) {
-			startAngle = -0.7 * Math.PI;
-			angleSpread = 0.4 * Math.PI;
-			innerRadius = haloRadius * 1.25;
-			radiusSpread = haloRadius * 0.3;
-		} else {
-			startAngle = -0.7 * Math.PI;
-			angleSpread = 0.4 * Math.PI;
-			innerRadius = haloRadius * 1.15;
-			radiusSpread = haloRadius * 0.575;
-		}
-
-
-		return {
-			startAngle: startAngle,
-			angleSpread: angleSpread,
-			innerRadius: innerRadius,
-			radiusSpread: radiusSpread,
-		};
 
 	},
 
@@ -540,21 +530,16 @@ export default {
 			// universal/learned triggers popup labels
 			let universalLearnedLabelContainer = labelContainer.append('div')
 				.classed(`universal-learned-labels ${emotion}`, true);
-			let { startAngle, angleSpread, innerRadius, radiusSpread } = this.calcArrowsGeom(haloRadius);
 			universalLearnedLabelContainer.append('div')
 				.attr('class', `emotion-label ${TRIGGER_TYPES.UNIVERSAL} ${emotion}`)
 				.attr('data-popuptarget', `triggers:${emotion}-${TRIGGER_TYPES.UNIVERSAL}`)
-				.style('transform', 'translate('+
-					Math.round((innerRadius + 0.5*radiusSpread) * Math.cos(startAngle + 0.1*angleSpread)) +'px,'+	// a bit to the left, since popup opens to the right
-					Math.round((innerRadius + 0.5*radiusSpread) * Math.sin(startAngle + 0.2*angleSpread)) +'px)')
+				.style('transform', this.getUniversalLearnedTranslation('universal', haloRadius))
 			.append('h3')
 				.text(emotionsData.metadata.triggers.steps[3].header.toUpperCase());
 			universalLearnedLabelContainer.append('div')
 				.attr('class', `emotion-label ${TRIGGER_TYPES.LEARNED} ${emotion}`)
 				.attr('data-popuptarget', `triggers:${emotion}-${TRIGGER_TYPES.LEARNED}`)
-				.style('transform', 'translate('+
-					Math.round((innerRadius + 0.5*radiusSpread) * Math.cos(startAngle + 0.7*angleSpread)) +'px,'+	// a bit to the left, since popup opens to the right
-					Math.round((innerRadius + 0.5*radiusSpread) * Math.sin(startAngle + 0.8*angleSpread)) +'px)')
+				.style('transform', this.getUniversalLearnedTranslation('learned', haloRadius))
 			.append('h3')
 				.text(emotionsData.metadata.triggers.steps[4].header.toUpperCase());
 
@@ -782,6 +767,7 @@ export default {
 
 		let aspectRatio = this.sectionContainer.offsetWidth / this.sectionContainer.offsetHeight;
 
+		// shift labels right/left relative to end of arrow placement
 		let adjustTranslation = {
 			'anger': aspectRatio > 1 ? [-.05,0,0,-.1,0,.15,.2] :[-.1,0,0,0,0.25,.27,.24] ,
 			'fear': [0,-.15,0,0,0,0,0],
@@ -907,6 +893,19 @@ export default {
 
 	},
 
+	getUniversalLearnedTranslation: function (typeName, haloRadius) {
+		let type = {
+			'universal': 0,
+			'learned': 1
+		};
+		let angle = this.calcAngle(type[typeName],'universalLearned', haloRadius),
+			radius = this.calcRadius(type[typeName],'universalLearned', haloRadius);
+
+		return 'translate('
+			+  Math.cos(angle) * radius + 'px,' +
+				Math.sin(angle) * radius + 'px)';
+	},
+
 	onResize: function () {
 
 		// update halo
@@ -945,10 +944,6 @@ export default {
 				.attr('transform', 'translate(' + 0.5 * this.sectionContainer.offsetWidth + ',' + h + ')');
 
 			// update labels + arrows
-			let { startAngle, angleSpread, innerRadius, radiusSpread } = this.calcArrowsGeom(haloRadius),
-				numTriggers = this.triggersData[emotion].length,
-				middleIndex = Math.floor(numTriggers / 2);
-
 			this.triggersData[emotion].forEach((triggerDatum, i) => {
 				triggerDatum.angle = this.calcAngle(i, emotion, haloRadius);
 				triggerDatum.radius = this.calcRadius(i, emotion, haloRadius);
@@ -957,13 +952,9 @@ export default {
 
 			// update universal/learned labels
 			labelContainer.select(`.${TRIGGER_TYPES.UNIVERSAL}`)
-				.style('transform', 'translate('+
-					Math.round((innerRadius + 0.5*radiusSpread) * Math.cos(startAngle + 0.2*angleSpread)) +'px,'+
-					Math.round((innerRadius + 0.5*radiusSpread) * Math.sin(startAngle + 0.2*angleSpread)) +'px)');
+				.style('transform', this.getUniversalLearnedTranslation('universal', haloRadius));
 			labelContainer.select(`.${TRIGGER_TYPES.LEARNED}`)
-				.style('transform', 'translate('+
-					Math.round((innerRadius + 0.5*radiusSpread) * Math.cos(startAngle + 0.8*angleSpread)) +'px,'+
-					Math.round((innerRadius + 0.5*radiusSpread) * Math.sin(startAngle + 0.8*angleSpread)) +'px)');
+				.style('transform', this.getUniversalLearnedTranslation('learned', haloRadius));
 
 			this.renderLabels(emotion);
 
