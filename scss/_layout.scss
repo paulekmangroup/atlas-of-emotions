@@ -303,6 +303,10 @@ a:active {
 		font-size: 1.0em;
 	}
 
+	a {
+		pointer-events: auto;
+	}
+
 	.more-on & {
 		display: none;
 	}
