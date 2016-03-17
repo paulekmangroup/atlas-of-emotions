@@ -830,8 +830,8 @@ export default {
 					'aversion': [-0.25, -0.15],
 					'distaste': [0.25, 0.15],
 					'repugnance': [0, 0],
-					'abhorrence': [-0.25, -0.3],
-					'revulsion': [0, 0],
+					'revulsion': [-0.25, -0.3],
+					'abhorrence': [0, 0],
 					'loathing': [0, 0]
 				},
 				offsets = states.map(s => s.name).map(name => keyedOffsets[name] || [0, 0]);
