@@ -51,6 +51,9 @@ const emotionLearnedArrowPercents = {
 	// 3:4 universal to learned
 	'enjoyment': [.92, .88, .72, .73]
 };
+// arrow percents > DATABASE_FILTERED_THRESHOLD indicate triggers that are filtered out
+// in the DATABASE phase (i.e. arrows that do not penetrate inside the halo)
+const DATABASE_FILTERED_THRESHOLD = 0.85;
 
 
 export default {
@@ -186,7 +189,9 @@ export default {
 				radius: this.calcRadius(i, emotion, haloRadius),
 
 				// fraction of radius.
-				arrowLength: this.calcArrowLength(haloRadius, this.calcRadius(i, emotion, haloRadius), emotion, i)
+				arrowLength: this.calcArrowLength(haloRadius, this.calcRadius(i, emotion, haloRadius), emotion, i),
+
+				isFilteredByDatabasePhase: this.emotionArrowPercents[emotion][i] > DATABASE_FILTERED_THRESHOLD
 			}));
 
 		});
@@ -788,7 +793,8 @@ export default {
 		// enter
 		labelSelection.enter().append('div')
 			.classed('label ' + emotion, true)
-			.style('opacity', 1.0)
+			.classed('filtered-by-database', d => d.isFilteredByDatabasePhase)
+			// .style('opacity', 1.0)
 		.append('h4')
 			.style("transform", function(d,i){return "translate(" + (adjustTranslation[emotion][i]*100 + -50) + "%,-50%)";})
 			.html(d => d.name)
@@ -805,7 +811,9 @@ export default {
 			});
 
 		// exit
-		labelSelection.exit().transition()
+		labelSelection.exit()
+			.style('opacity', 1.0)
+		.transition()
 			.duration(600)
 			.style('opacity', 0.0)
 			.remove();
@@ -828,7 +836,8 @@ export default {
 
 		let arrowsEnterSelection = arrowsSelection.enter().append('g')
 			.classed('arrow ' + emotion, true)
-			.style('opacity', 1.0);
+			.classed('filtered-by-database', d => d.isFilteredByDatabasePhase);
+			// .style('opacity', 1.0);
 		arrowsEnterSelection.append('line')
 			.attr('stroke', (d, i) => 'url(#' + emotionGradientName + '-arrow-' + i + ')');
 		arrowsEnterSelection.append('path');
@@ -853,7 +862,9 @@ export default {
 
 		// exit
 		gradientsSelection.exit().remove();
-		arrowsSelection.exit().transition()
+		arrowsSelection.exit()
+			.style('opacity', 1.0)
+		.transition()
 			.duration(600)
 			.style('opacity', 0.0)
 			.remove();
@@ -1082,7 +1093,7 @@ export default {
 			hitAreaId = hitAreaId || this.highlightedHitArea || null;
 
 			let graphContainer = this.graphContainers[this.currentEmotion],
-				phaseLabels = this.labelContainers[this.currentEmotion].selectAll('.trigger-phase-labels .emotion-label'),
+				labelContainer = this.labelContainers[this.currentEmotion],
 				statesContainer = d3.select('#states'),
 				actionsContainer = d3.select('#actions');
 
@@ -1108,7 +1119,14 @@ export default {
 					actionsContainer.classed('faded', false);
 			}
 
-			phaseLabels
+			// trigger labels and arrows
+			labelContainer.selectAll('.filtered-by-database')
+				.each(function (d, i) {
+					d3.select(this).classed('muted', hitAreaId === HIT_AREAS.IMPULSE);
+				});
+
+			// phase labels
+			labelContainer.selectAll('.trigger-phase-labels .emotion-label')
 				.each(function (d, i) {
 					d3.select(this).classed('highlighted', i === hitAreaId - 1);
 					d3.select(this).classed('muted', i !== hitAreaId - 1);

@@ -55,8 +55,7 @@
 
 		g {
 			opacity: 1.0;
-			-webkit-transition: opacity 0.5s;
-			transition:         opacity 0.5s;
+			transition: opacity 0.5s;
 			&.muted {
 				opacity: 0.3;
 			}
@@ -104,6 +103,14 @@
 			}
 			path {
 				stroke: none;
+			}
+		}
+
+		.filtered-by-database {
+			opacity: 1.0;
+			transition: opacity 0.5s;
+			&.muted {
+				opacity: 0.3;
 			}
 		}
 	}
