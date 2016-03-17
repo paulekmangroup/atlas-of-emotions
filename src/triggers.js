@@ -61,8 +61,85 @@ export default {
 
 	},
 
+	calcAngle: function (i, emotion, haloRadius) {
+		let innerRadius = haloRadius * 1.15,
+			radiusSpread = haloRadius * 0.225;
+
+		let multiplier = 1,
+			additive = 0;
+		let aspectRatio = this.sectionContainer.offsetWidth / this.sectionContainer.offsetHeight;
+		if (aspectRatio < 1.4){
+			multiplier = .86;
+		}
+		if (aspectRatio < 1){
+			multiplier = .75;
+		}
+
+		let angleFactors = {
+			'anger': [-.6, -.43, -.22, .24, .37, .5, .6],
+			'fear': [-.7, -.53, -.42, -.22, .3, .45, .7],
+			'disgust': [-.5, -.3, .24, .4, .6],
+			'sadness': [-.5, -.3, .24, .42, .6],
+			'enjoyment': [-.6, -.4, -.22, .24, .37, .53, .68],
+		};
+
+		// angleFactor can be any value from -1 (all the way left) to +1 (all the way right)
+		return (angleFactors[emotion][i] * multiplier - 1) * Math.PI / 2;
+	},
+
+	calcRadius: function (i, emotion, haloRadius) {
+
+		// TODO: to create more general solution for label placement,
+		// recommend thinking of it as x/y distance instead of radius/angle
+		// because we still see the text as very left/right when we read
+
+		// for labels/arrows, as distance from middle/bottom of halo semi-circle
+
+		let minRadius = haloRadius * 1.15,
+			radiusSpread = haloRadius * 0.225;
+
+		let spreadPercent = {
+			'anger': [.6,.7,.2,0,1.5,.2,.3],
+			'fear': [.3,.2,.9,.1,.5,.2,.6],
+			'disgust': [.6,.3,.3,.12,1],
+			'sadness': [.6,.4,.3,1.8,1],
+			'enjoyment': [.2,.3,0.2,.12,1.7,.2,.3],
+		};
+
+		let additive = 0,
+			multiplier = 1,
+			aspectRatio = this.sectionContainer.offsetWidth / this.sectionContainer.offsetHeight;
+
+		// adjust spread based on aspect ratio
+		if(aspectRatio > 1.75){
+			additive = 1;
+		}
+		if (aspectRatio < 1.4){
+			multiplier = .6;
+		}
+		if (aspectRatio < 1){
+			// when narrow, need different set of values rather than an adjustment
+			spreadPercent = {
+				'anger': [.4,2.8,.8,3.0,1.4,.5,0],
+				'fear': [.3,1.4,2.2,.1,1,2.5,.6],
+				'disgust': [2.5,.3,3,2.5,1],
+				'sadness': [3,.4,.3,2.5,.3],
+				'enjoyment': [.5,3.0,1.5,0,2.5,.5,.3],
+			};
+		}
+
+		// start with minRadius and then add a multiple of radiusSpread value
+		return minRadius + radiusSpread * (spreadPercent[emotion][i] + additive) * multiplier;
+	},
+
+	calcArrowLength: function (haloRadius, triggerRadius, emotion, i) {
+		// how long arrow should be based on how far arrow goes into center halo
+		return 1 - (haloRadius * this.getHaloArrowPercent(emotion, i) / triggerRadius);
+	},
+
 	getHaloArrowPercent: function (emotion, i) {
-		// note that 1 is outer boundary and .8 is inner boundary of perception arc
+		// 1 is outer boundary, .8 is inner boundary of arc, anything < .8 gets into center halo
+		// all universal must be < .8
 
 		// there are times to make general solutions, and there are times not to
 		let emotionArrowPercents = {
@@ -79,71 +156,6 @@ export default {
 		};
 		return emotionArrowPercents[emotion][i];
 
-	},
-
-	calcAngle: function (i, emotion, haloRadius) {
-		let innerRadius = haloRadius * 1.15,
-			radiusSpread = haloRadius * 0.225;
-
-		let multiplier = 1,
-			additive = 0;
-		let aspectRatio = this.sectionContainer.offsetWidth / this.sectionContainer.offsetHeight;
-		if (aspectRatio < 1.4){
-			multiplier = .86;
-		}
-		if (aspectRatio < 1){
-			multiplier = .75;
-		}
-		//let angleFactors = [-.6, -.5, -.3, .25, .4, .5, .65];
-		let angleFactors = {
-			'anger': [-.6, -.43, -.22, .24, .37, .5, .6],
-			'fear': [-.7, -.53, -.42, -.22, .3, .45, .7],
-			'disgust': [-.5, -.3, .24, .4, .6],
-			'sadness': [-.5, -.3, .24, .42, .6],
-			'enjoyment': [-.6, -.4, -.22, .24, .37, .53, .68],
-		};
-		// angleFactor can be any value from -1 (all the way left) to +1 (all the way right)
-		//return startAngle + angleSpread * (i + (i < middleIndex ? 1 : 2)) / (numTriggers + 1);
-		return (angleFactors[emotion][i] * multiplier - 1) * Math.PI / 2;
-	},
-
-	calcRadius: function (i, emotion, haloRadius) {
-
-		let innerRadius = haloRadius * 1.15,
-			radiusSpread = haloRadius * 0.225;
-
-		let spreadPercent = {
-			'anger': [.6,.7,.2,0,1.5,.2,.3],
-			'fear': [.3,.2,.9,.1,.5,.2,.6],
-			'disgust': [.6,.3,.3,.12,1],
-			'sadness': [.6,.4,.3,1.8,1],
-			'enjoyment': [.2,.3,0.2,.12,1.7,.2,.3],
-		};
-		let additive = 0,
-			multiplier = 1,
-			aspectRatio = this.sectionContainer.offsetWidth / this.sectionContainer.offsetHeight;
-
-		if(aspectRatio > 1.75){
-			additive = 1;
-		}
-		if (aspectRatio < 1.4){
-			multiplier = .6;
-		}
-		if (aspectRatio < 1){
-			// too hard to just adjust, give separate
-			spreadPercent = {
-				'anger': [.4,2.8,.8,3.0,1.4,.5,0],
-				'fear': [.3,1.4,2.2,.1,1,2.5,.6],
-				'disgust': [2.5,.3,3,2.5,1],
-				'sadness': [3,.4,.3,2.5,.3],
-				'enjoyment': [.5,3.0,1.5,0,2.5,.5,.3],
-			};
-		}
-		return innerRadius + radiusSpread * (spreadPercent[emotion][i] + additive) * multiplier;
-	},
-
-	calcArrowLength: function (haloRadius, triggerRadius, emotion, i) {
-		return 1 - (haloRadius * this.getHaloArrowPercent(emotion, i) / triggerRadius);
 	},
 
 	parseTriggers: function (haloRadius) {
@@ -754,6 +766,7 @@ export default {
 
 		let aspectRatio = this.sectionContainer.offsetWidth / this.sectionContainer.offsetHeight;
 
+		// shift labels right/left relative to end of arrow placement
 		let adjustTranslation = {
 			'anger': aspectRatio > 1 ? [-.05,0,0,-.1,0,.15,.2] :[-.1,0,0,0,0.25,.27,.24] ,
 			'fear': [0,-.15,0,0,0,0,0],
