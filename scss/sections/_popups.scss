@@ -6,21 +6,17 @@
 	border-width: 1px;
 	border-style: solid;
 	@include emotion-border-color(0.0);
-	background: rgba(255,255,255,0.0);
+	// background: rgba(255,255,255,0.0);
 	transition:
-		background #{$ui-popups-duration-out}s ease-in,
-		padding #{$ui-popups-duration-out}s ease-in,
-		border-color #{$ui-popups-duration-in}s ease-out;	// remove highlight borders a bit more quickly
+		background #{$ui-popups-duration-close}s ease-in,
+		padding #{$ui-popups-duration-close}s ease-in,
+		border-color #{$ui-popups-duration-close}s ease-in;
 }
 
 .popped[data-popuptarget] {
 	@include emotion-border-color();
 	background: rgba(255,255,255,0.8);
 	padding: 18px 20px;
-	transition:
-		background #{$ui-popups-duration-in}s ease-out,
-		padding #{$ui-popups-duration-in}s ease-out,
-		border-color #{$ui-popups-duration-in}s ease-out;
 }
 
 .popped[data-popuptarget].show-only {
@@ -39,7 +35,7 @@
 .highlighted[data-popuptarget],
 .selected[data-popuptarget] {
 	@include emotion-border-color();
-	transition: border-color #{$ui-popups-duration-in}s ease-in;
+	transition: border-color #{$ui-popups-duration-border-open}s ease-out;	// add highlight borders a bit more quickly
 }
 
 .muted.default-interactive-helper[data-popuptarget],
@@ -62,11 +58,10 @@
 	width: auto;
 	overflow: hidden;
 	pointer-events: auto;
-	transition: all #{$ui-popups-duration-out}s ease-in;
 
 	&.transition {
 		opacity: 1;
-		transition: all #{$ui-popups-duration-in}s ease-out;
+		transition: all #{$ui-popups-duration-open}s ease;
 	}
 
 	&.fade-out {

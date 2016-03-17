@@ -105,8 +105,9 @@
 		},
 		"popups": {
 			"duration": {
-				"in": 0.25,
-				"out": 0.5
+				"open": 0.5,
+				"close": 0.5,
+				"border-open": 0.25
 			}
 		}
 	}
