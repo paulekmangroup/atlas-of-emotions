@@ -45,6 +45,7 @@ export default function (...initArgs) {
 		scrollbarBounds,
 		scrollbarClosedPos,
 		scrollbarAnimUpdate,
+		scrollbarIsOpen = false,
 
 		recentScrollDeltas = [],				// cache recent scroll delta values to check intentionality of scroll
 		lastScroll = 0,							// timestamp of most recent scroll event
@@ -199,8 +200,10 @@ export default function (...initArgs) {
 		scrollbarBounds = scrollbar.getBoundingClientRect();
 		scrollbarBounds = {
 			top: scrollbarBounds.top,
+			bottom: scrollbarBounds.bottom,
 			left: scrollbarBounds.left,
-			width: scrollbarBounds.width - (scrollbarBounds.right - segmentContainer.getBoundingClientRect().left)
+			width: scrollbarBounds.width - (scrollbarBounds.right - segmentContainer.getBoundingClientRect().left),
+			height: scrollbarBounds.height
 		};
 		scrollbarClosedPos = parseInt(window.getComputedStyle(segmentContainer).left.replace('px', ''));
 
@@ -821,6 +824,7 @@ export default function (...initArgs) {
 
 	/**
 	 * Note: this function is _.throttle()d in initScrollInterface().
+	 * Note: this function is not currently in use.
 	 */
 	function onWindowMouseMove (event) {
 
@@ -830,9 +834,23 @@ export default function (...initArgs) {
 
 	}
 
+	function setScrollbarOpen (val) {
+
+		if (val && !scrollbarIsOpen) {
+			setScrollbarFractionalOpen(1.0, 0.15);
+		} else if (!val && scrollbarIsOpen) {
+			setScrollbarFractionalOpen(0.0, 0.08);
+		}
+
+		scrollbarIsOpen = val;
+
+	}
+
 	/**
 	 * Open the scrollbar to a value between
 	 * 0.0 (totally closed) and 1.0 (totally open).
+	 * @param {Number} float scrollbar open amount
+	 * @param {Number} speed Value between 0.0001 (slow open) and 1 (immediate open)
 	 */
 	function setScrollbarFractionalOpen (val, speed) {
 
@@ -862,11 +880,33 @@ export default function (...initArgs) {
 	}
 
 	function onScrollbarHitAreaEnter (event) {
-		setScrollbarFractionalOpen(1.0, 0.15);
+
+		document.querySelector('#scrollbar').addEventListener('mousemove', onScrollbarMouseMove);
+
 	}
 
 	function onScrollbarHitAreaLeave (event) {
-		setScrollbarFractionalOpen(0.0, 0.08);
+
+		document.querySelector('#scrollbar').removeEventListener('mousemove', onScrollbarMouseMove);
+		setScrollbarOpen(false);
+
+	}
+
+	function onScrollbarMouseMove (event) {
+
+		let scrollbarX = event.pageX - scrollbarBounds.left,
+			scrollbarY = event.pageY - scrollbarBounds.top,
+			scrollbarRelX = scrollbarX / scrollbarBounds.width;
+
+		if (scrollbarX < 0 || scrollbarX > window.innerWidth || scrollbarY < 0 || scrollbarY > scrollbarBounds.height) {
+			// manually call leave handler, in case it wasn't already called
+			onScrollbarHitAreaLeave();
+		} else if (scrollbarRelX > 0.75) {
+			setScrollbarOpen(true);
+		} else {
+			setScrollbarOpen(false);
+		}
+
 	}
 
 	function onScrollbarOver (event) {
