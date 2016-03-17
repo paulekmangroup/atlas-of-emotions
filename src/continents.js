@@ -293,7 +293,7 @@ const continentsSection = {
 
 		let labelsEnter = labels.enter()
 			.append('div')
-			.attr('class', 'emotion-label')
+			.attr('class', d => `emotion-label ${d.id}`)
 			.attr('data-popuptarget', d => `continents:${d.id}`)
 			.classed('default-interactive-helper', d => d.name.toLowerCase() === this.defaultEmotionHelper.toLowerCase())
 			.style('left', d => Math.round(centerX + d.x + d.label.x) + 'px')

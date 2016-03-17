@@ -30,5 +30,6 @@
 
 	.emotion-label {
 		transform: translate(-50%, -50%);
+		@include emotion-color;
 	}
 }
