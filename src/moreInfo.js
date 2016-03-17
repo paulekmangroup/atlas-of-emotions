@@ -97,9 +97,12 @@ export default {
 	},
 
 	onResize: function () {
+		console.log('RESIZE: ');
+		if (!this.currentPage) return;
 
-		//
-
+		if (typeof this.pages[this.currentPage].onResize === 'function') {
+			this.pages[this.currentPage].onResize();
+		}
 	},
 
 	onCloseButtonClicked: function() {

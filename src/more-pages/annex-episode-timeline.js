@@ -60,6 +60,10 @@ const FAKE = [
 	}
 ];
 
+const brown = '#D4B49B';
+const grey = '#CBC2BB';
+const dkGrey = '#B4ABA4';
+
 export default {
 
 	isInited: false,
@@ -82,7 +86,7 @@ export default {
 		if (!this.wrapper) return;
 		this.sectionContainer.appendChild(utils.makeAnnexBackNav(this.data.title));
 
-		this.makeChart();
+		this.initChart();
 
 		const contentElm = document.createElement('div');
 		contentElm.classList.add('timeline-content');
@@ -114,15 +118,75 @@ export default {
 		}
 	},
 
-	makeChart: function() {
+	initChart: function() {
+		if (this.chartSVG) return;
+
+		const svg = this.chartSVG = d3.select(this.wrapper).append('svg');
+
+		// arrow marker
+		const def = svg.append('defs');
+		const marker = def.append('marker')
+			.attr('id', 'arrow')
+			.attr('markerWidth', 6)
+			.attr('markerHeight', 6)
+			.attr('viewBox', '-3 -3 6 6')
+			.attr('refX', -1)
+			.attr('refY', 0)
+			.attr('markerUnits', 'strokeWidth')
+			.attr('orient', 'auto');
+
+		marker.append('polygon')
+			.attr('points', '-1,0 -3,3 3,0 -3,-3')
+			.attr('fill', dkGrey);
+
+
+		// Container for all the circles & lines
+		const container = svg.append('g')
+			.attr('class', 'timline-container')
+			.attr('transform', `translate(0,0)`);
+
+
+		// background
+		container.append('rect')
+			.attr('class', 'timeline-background')
+			.attr('y', 0)
+			.attr('x', 0)
+			.attr('fill', '#E8D6C7')
+			.attr('opacity', 1)
+			.attr('stroke', '#E8D6C7');
+
+		// draws that grey-ish background box under
+		// state & reponse sections
+		container.append('rect')
+			.attr('class', 'timeline-highlight')
+			.attr('y', 40)
+			.attr('fill', grey)
+			.attr('opacity', 0.3)
+			.attr('stroke', grey);
+
+		// Selective Filter Period text
+		container.append('text')
+			.attr('class', 'selective-text')
+			.text('Selective Filter Period');
+
+		container.append('path')
+			.attr('class', 'reset-path');
+
+		this.drawChart();
+	},
+
+	drawChart: function() {
+		if (!this.chartSVG) return;
+
 		const that = this;
-		const brown = '#D4B49B';
-		const grey = '#CBC2BB';
-		const dkGrey = '#B4ABA4';
 		const PADDING = 60;
 		const ARROW_PADDING = 10;
 		const PADDING_HALF = PADDING / 2;
-		let SECTION_WIDTH = this.sectionContainer.offsetWidth / FAKE.length;
+
+		// Chart kinda falls apart < 950,
+		// so for now just make sure width is >= 950
+		const WIDTH = Math.max(this.sectionContainer.offsetWidth-20, 950);
+		let SECTION_WIDTH = Math.floor(WIDTH / FAKE.length);
 		const SECTION_HEIGHT = this.wrapper.offsetHeight - 100;
 
 		// calc radius from dimensions
@@ -149,7 +213,7 @@ export default {
 		    .value(function(d) { return d; });
 
 		// Begin drawing chart
-		const svg = d3.select(this.wrapper).append('svg');
+		const svg = this.chartSVG;
 
 		svg
 			.attr('width', FAKE.length * SECTION_WIDTH)
@@ -157,55 +221,25 @@ export default {
 
 		this.wrapper.style.width = (FAKE.length * SECTION_WIDTH) + 'px';
 
-		// arrow marker
-		const def = svg.append('defs');
-		const marker = def.append('marker')
-			.attr('id', 'arrow')
-			.attr('markerWidth', 6)
-			.attr('markerHeight', 6)
-			.attr('viewBox', '-3 -3 6 6')
-			.attr('refX', -1)
-			.attr('refY', 0)
-			.attr('markerUnits', 'strokeWidth')
-			.attr('orient', 'auto');
-
-		marker.append('polygon')
-			.attr('points', '-1,0 -3,3 3,0 -3,-3')
-			.attr('fill', dkGrey);
-
-
 		// Container for all the circles & lines
-		const container = svg.append('g')
-			.attr('transform', `translate(0,0)`);
-
+		const container = svg.select('.timline-container');
 
 		// background
-		container.append('rect')
+		container.select('.timeline-background')
 			.attr('width', SECTION_WIDTH * FAKE.length)
-			.attr('height', SECTION_HEIGHT)
-			.attr('y', 0)
-			.attr('x', 0)
-			.attr('fill', '#E8D6C7')
-			.attr('opacity', 1)
-			.attr('stroke', '#E8D6C7');
+			.attr('height', SECTION_HEIGHT);
 
 		// draws that grey-ish background box under
 		// state & reponse sections
-		container.append('rect')
+		container.select('.timeline-highlight')
 			.attr('width', SECTION_WIDTH * 2)
 			.attr('height', SECTION_HEIGHT - 10 - 40)
-			.attr('y', 40)
-			.attr('x', 2 * SECTION_WIDTH)
-			.attr('fill', grey)
-			.attr('opacity', 0.3)
-			.attr('stroke', grey);
+			.attr('x', 2 * SECTION_WIDTH);
 
 		// Selective Filter Period text
-		container.append('text')
-			.attr('class', 'selective-text')
+		container.select('.selective-text')
 			.attr('x', SECTION_WIDTH * 2 + (SECTION_WIDTH / 2))
-			.attr('y', SECTION_HEIGHT - 15)
-			.text('Selective Filter Period');
+			.attr('y', SECTION_HEIGHT - 15);
 
 
 		// Creating a group for each vertical section
@@ -248,6 +282,7 @@ export default {
 		// not inside group because
 		// we rotate the group
 		enter.append('text')
+			.attr('class', 'main-circle-txt')
 			.attr('x', SECTION_WIDTH / 2)
 			.attr('y', SECTION_HEIGHT / 2)
 			.attr('dy', 4)
@@ -255,10 +290,46 @@ export default {
 
 		// vertical section names
 		enter.append('text')
+			.attr('class', 'timeline-header-txt')
 			.attr('x', SECTION_WIDTH / 2)
 			.attr('y', 20)
 			.attr('dy', 3)
 			.text(d => d.header);
+
+		sections.exit().remove();
+
+		sections
+			.attr('transform', (d, i) => {
+				const x = i * SECTION_WIDTH;
+				return `translate(${x}, 0)`;
+			});
+
+		sections.select('.main')
+			.attr('transform', (d, i) => {
+				const x = SECTION_WIDTH / 2;
+				const y = SECTION_HEIGHT / 2;
+
+				if (FAKE[i-1] && FAKE[i-1].nodes.length) {
+					return `translate(${x}, ${y}) rotate(30)`;
+				} else {
+					return `translate(${x}, ${y}) rotate(-30)`;
+				}
+
+			});
+
+		sections.select('.eventable')
+			.attr('cx', SECTION_WIDTH / 2)
+			.attr('cy', SECTION_HEIGHT / 2)
+			.attr('r', RADIUS);
+
+		sections.select('.main-circle-txt')
+			.attr('x', SECTION_WIDTH / 2)
+			.attr('y', SECTION_HEIGHT / 2);
+
+		sections.select('.timeline-header-txt')
+			.attr('x', SECTION_WIDTH / 2);
+
+
 
 		// The five main circles
 		const mains = sections.select('.main').selectAll('.arcs')
@@ -291,6 +362,17 @@ export default {
 				return arc(d);
 			})
 			.attr('fill', d => d.clr);
+
+		mains.exit().remove();
+
+		mains.select('path')
+			.attr('d', d => {
+				if (d.data === 100) {
+					return arc2(d);
+				}
+
+				return arc(d);
+			});
 
 		// Nodes that come off main nodes
 		const subs = sections.selectAll('.node')
@@ -357,10 +439,55 @@ export default {
 			})
 			.attr('marker-end', 'url(#arrow)');
 
+		subs.exit().remove();
+
+		subs
+			.attr('transform', (d, i) => {
+				const x = SECTION_WIDTH / 2;
+				const y = (d.above) ? (SECTION_HEIGHT / 2) - (RADIUS * 2 + PADDING_HALF) :
+										(SECTION_HEIGHT / 2) + (RADIUS * 2 + PADDING_HALF);
+
+				return `translate(${x}, ${y})`;
+			});
+
+		subs.select('circle')
+			.attr('r', RADIUS);
+
+		subs.select('text').remove();
+
+		subs.append('text')
+			.attr('y', 4)
+			.attr('dy', 0)
+			.call(this.wrap, RADIUS * 2); // wrap text
+
+		subs.select('line')
+			.attr('y1', (d, i) => {
+				let y = 0;
+				if (d.above) {
+					if (d.outward) return RADIUS;
+					return RADIUS + PADDING_HALF;
+				} else {
+					if (d.outward) return -RADIUS;
+					return -(RADIUS + PADDING_HALF);
+				}
+			})
+			.attr('y2', (d, i) => {
+				const padOut = PADDING_HALF - ARROW_PADDING;
+				if (d.above) {
+					if (d.outward) return RADIUS + padOut;
+					return RADIUS + ARROW_PADDING;
+				} else {
+					if (d.outward) return -(RADIUS + padOut);
+					return -(RADIUS + ARROW_PADDING);
+				}
+			});
+
+
 		// draw the main connection lines
-		container.selectAll('.main-lines')
-			.data(FAKE)
-			.enter()
+		const connectors = container.selectAll('.main-lines')
+			.data(FAKE);
+
+		const connectorsEnter = connectors.enter()
 			.append('line')
 			.attr('class', 'main-lines')
 			.attr('x1', (d,i) => {
@@ -386,10 +513,36 @@ export default {
 			})
 			.attr('marker-end', 'url(#arrow)');
 
+		connectors.exit().remove();
+
+		connectors
+			.attr('x1', (d,i) => {
+				if (FAKE[i + 1]) {
+					return (i * SECTION_WIDTH ) + (SECTION_WIDTH / 2) + RADIUS;
+				}
+			})
+			.attr('x2', (d,i) => {
+				if (FAKE[i + 1]) {
+					const x = ((i + 1) * SECTION_WIDTH ) + (SECTION_WIDTH / 2) - RADIUS;
+					return x - ARROW_PADDING;
+				}
+			})
+			.attr('y1', (d,i) => {
+				if (FAKE[i + 1]) {
+					return SECTION_HEIGHT / 2;
+				}
+			})
+			.attr('y2', (d,i) => {
+				if (FAKE[i + 1]) {
+					return SECTION_HEIGHT / 2;
+				}
+			});
+
 		// those little arrow between section names
-		container.selectAll('.header-lines')
-			.data(FAKE)
-			.enter()
+		const arrows = container.selectAll('.header-lines')
+			.data(FAKE);
+
+		const arrowsEnter = arrows.enter()
 			.append('line')
 			.attr('class', 'header-lines')
 			.style('display', (d,i) => {
@@ -410,6 +563,22 @@ export default {
 			})
 			.attr('marker-end', 'url(#arrow)');
 
+		arrows.exit().remove();
+
+		arrows
+			.attr('x1', (d,i) => {
+				return (i * SECTION_WIDTH ) - 15;
+			})
+			.attr('x2', (d,i) => {
+				return (i * SECTION_WIDTH ) + 15;
+			})
+			.attr('y1', (d,i) => {
+				return 20;
+			})
+			.attr('y2', (d,i) => {
+				return 20;
+			});
+
 		// draw that line that goes from end to beginning
 		const sx = (FAKE.length - 1) * SECTION_WIDTH + SECTION_WIDTH / 2;
 		const sy = SECTION_HEIGHT / 2 + RADIUS;
@@ -417,8 +586,7 @@ export default {
 
 		let resetPath = `M ${sx} ${sy} V ${SECTION_HEIGHT-10} H ${ex} V ${sy + ARROW_PADDING}`;
 
-		container.append('path')
-			.attr('class', 'reset-path')
+		container.select('.reset-path')
 			.attr('d', resetPath)
 			.attr('marker-end', 'url(#arrow)');
 
@@ -479,6 +647,10 @@ export default {
 
 		});
 
+	},
+	onResize: function () {
+		console.log('Timeline resize');
+		this.drawChart();
 	}
 
 };
