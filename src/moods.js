@@ -225,7 +225,8 @@ export default {
 			if (previousEmotion !== this.currentEmotion) this.updateLabel();
 
 			// leave a bit of time for other transitions to happen
-			this.openCallout(500);
+			this.labelContainer.select('.emotion-label').classed('visible', false);
+			this.manageTextTransition(500);
 
 			// resolve after backgrounded elements complete their transitions
 			setTimeout(() => {
@@ -237,9 +238,8 @@ export default {
 	},
 
 	open: function () {
-		this.labelContainer.select('.emotion-label').classed('visible', true);
 		// transition time from _states.scss::#states
-		this.openCallout(1500);
+		this.manageTextTransition(1500);
 
 	},
 
@@ -304,11 +304,14 @@ export default {
 
 	},
 
-	openCallout: function (delay) {
+	manageTextTransition: function (delay) {
+
+		// on timeout takes care of callout and label transition
 
 		if (!this.calloutTimeout) {
 			this.calloutTimeout = setTimeout(() => {
 				this.setCallout(false);
+				this.labelContainer.select('.emotion-label').classed('visible', true);
 				this.calloutTimeout = null;
 			}, delay);
 		}
