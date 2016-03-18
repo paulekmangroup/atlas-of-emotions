@@ -235,16 +235,90 @@ export default {
 		// implement for disgust, enjoyment, fear as necessary
 		let yOffsets = {},
 			innerHeight = this.yScale.range()[0];
-		yOffsets[dispatcher.EMOTIONS.ANGER] = y => y - 100;
+		yOffsets[dispatcher.EMOTIONS.ANGER] = y => y + 15;
 		yOffsets[dispatcher.EMOTIONS.DISGUST] = yOffsets[dispatcher.EMOTIONS.ANGER];
-		yOffsets[dispatcher.EMOTIONS.ENJOYMENT] = yOffsets[dispatcher.EMOTIONS.ANGER];
-		yOffsets[dispatcher.EMOTIONS.FEAR] = yOffsets[dispatcher.EMOTIONS.ANGER];
+		yOffsets[dispatcher.EMOTIONS.ENJOYMENT] =  y => y + 10;
+		yOffsets[dispatcher.EMOTIONS.FEAR] = y => y + 35;
 		yOffsets[dispatcher.EMOTIONS.SADNESS] = (y, d) => {
 			// due to interpolation, steeper peaks result in
 			// further distance to the label.
 			// compensate here with manual offsets.
-			return y + Math.pow(d[1].x/10, 2) * .3 * innerHeight;
+			console.log(d[1].x, Math.pow(d[1].x/10, 2) , y, Math.pow(d[1].x/10, 2) * .7 * innerHeight);
+			return y + Math.pow(d[1].x/10, 2) * .4 * innerHeight + 70;
+			//return y;
 		};
+
+		let leftAdjustConstants = {
+			'anger': 20,
+			'fear': -5,
+			'disgust': 5,
+			'enjoyment': 20
+		};
+
+		let aspectRatio = this.sectionContainer.offsetWidth / this.sectionContainer.offsetHeight;
+		let leftAdjustManual = {
+			'sadness': {
+				'disappointment': -30,
+				'discouragement': -20,
+				'distraughtness': -10,
+				'resignation': -18,
+				'helplessness': 0,
+				'hopelessness': 0,
+				'misery': 10,
+				'despair':13,
+				'grief': 13,
+				'sorrow': 13,
+				'anguish': 10
+			},
+			'enjoyment': {
+				'sensory pleasures': -90,
+				'compassion/joy': -80,
+				'amusement': -80,
+				'rejoicing': -40,
+				'schadenfreude': -40,
+				'relief': -10,
+				'pride': -5,
+				'fiero': 15,
+				'naches': 30,
+				'wonder': 15,
+				'excitement': 5,
+				'ecstasy': 10
+			}
+		};
+
+		let leftAdjust = function(emotion, i, name) {
+			if (emotion == 'sadness' || emotion == 'enjoyment') {
+				return leftAdjustManual[emotion][name];
+			}
+			return leftAdjustConstants[emotion];
+		};
+
+		let positions = [];
+		statesData.forEach(function(states, i){
+			let d = ranges[i];
+			positions.push({
+				'name': states.name,
+				'top': Math.round(yOffsets[emotion](stateSection.yScale(d[1].y), d)),
+				'left': Math.round(stateSection.xScale(d[1].x)) + leftAdjust(emotion, i, states.name),
+			});
+		});
+		// order from bottom to top of screen
+		positions.sort(function(a,b){
+			return b.top - a.top;
+		});
+
+		let positionsLookup = {};
+
+		positions.forEach(function(label, i){
+			if(positions[i + 1]){
+				let diff = positions[i].top - positions[i + 1].top;
+				// based on 16px font size
+				if(diff < 30){
+					positions[i + 1].top = positions[i].top - 30;
+				}
+			}
+			positionsLookup[positions[i].name] = {'top': positions[i].top, 'left': positions[i].left};
+		});
 
 		if (!labels.size()) {
 			// get a random label to set a box around it
@@ -259,19 +333,21 @@ export default {
 				.attr('data-popuptarget', (d,i) => `states:${statesData[i].name}`)
 				.html((d, i) => '<h3>' + statesData[i].name.toUpperCase() + '</h3>')
 				.style({
-					left: d => (Math.round(stateSection.xScale(d[1].x) + 20) + 'px'),	// not sure why this 20px magic number is necessary...?
-					top: d => (Math.round(yOffsets[emotion](stateSection.yScale(d[1].y), d)) + 'px')
+					left: function(d,i){return positionsLookup[statesData[i].name].left + 'px';},	// not sure why this 20px magic number is necessary...?
+					top: function(d,i){return positionsLookup[statesData[i].name].top + 'px';},
 				});
 
 			labels.exit().remove();
 
 		}
 
+
 		// set label positions whether new or existing
 		labels
 			.style({
-				left: d => (Math.round(stateSection.xScale(d[1].x) + 20) + 'px'),	// not sure why this 20px magic number is necessary...?
-				top: d => (Math.round(yOffsets[emotion](stateSection.yScale(d[1].y), d)) + 'px')
+				top: function(d,i){return positionsLookup[statesData[i].name].top + 'px';},
+				left: function(d,i){return positionsLookup[statesData[i].name].left + 'px';},	// not sure why this 20px magic number is necessary...?
+				//top: d => (Math.round(yOffsets[emotion](stateSection.yScale(d[1].y), d)) + 'px')
 			})
 			.each(function () {
 				setTimeout(() => {
@@ -900,10 +976,10 @@ export default {
 
 			// manually offset each state
 			let keyedOffsets = {
-					'disappointment': [0, 0],
-					'discouragement': [-0.5, -0.25],
+					'disappointment': [-0.95, 0],
+					'discouragement': [-1.2, -0.25],
 					'distraughtness': [0.25, 0.25],
-					'resignation': [0.75, 0.5],
+					'resignation': [1.2, 0.5],
 					'helplessness': [-0.5, -0.5],
 					'hopelessness': [-0.5, -0.5],
 					'misery': [0, 0],
