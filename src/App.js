@@ -291,16 +291,11 @@ export default function (...initArgs) {
 		modalCopy.classList.add('body');
 		modalCopy.innerHTML = emotionsData.metadata.intro.body;
 
-		let homeLink = document.createElement('p');
-		homeLink.classList.add('home-link');
-		homeLink.innerHTML = '<a href="#">Start at the beginning</a>';
-
 		let closeButton = document.createElement('div');
 		closeButton.classList.add('close-button');
 
 		modal.appendChild(modalHeadline);
 		modal.appendChild(modalCopy);
-		modal.appendChild(homeLink);
 		modal.appendChild(closeButton);
 
 		closeButton.addEventListener('click', (event) => {
@@ -993,13 +988,15 @@ export default function (...initArgs) {
 	function setModalVisibility (val) {
 
 		let modal = document.querySelector('#modal'),
-			modalOverlay = document.querySelector('#modal-overlay');
+			modalOverlay = document.querySelector('#modal-overlay'),
+			homeLink;
 
 		if (currentSection === sections[dispatcher.SECTIONS.CONTINENTS]) {
-			// current section is Continents
+
+			// hide "Start at the beginning" link when already at the beginning
 			if (val) {
 				// remove homeLink when opening modal
-				let homeLink = modal.querySelector('.home-link');
+				homeLink = modal.querySelector('.home-link');
 				if (homeLink) {
 					modal.removeChild(homeLink);
 				}
@@ -1007,6 +1004,19 @@ export default function (...initArgs) {
 				// bring continents back to center when closing modal
 				currentSection.setContinentIntroPositions(false);
 			}
+
+		} else {
+
+			// show "Start at the beginning" link when not at the beginning
+			// (if not already visible)
+			homeLink = modal.querySelector('.home-link');
+			if (!homeLink) {
+				homeLink = document.createElement('p');
+				homeLink.classList.add('home-link');
+				homeLink.innerHTML = '<a href="#">Start at the beginning</a>';
+				modal.appendChild(homeLink);
+			}
+
 		}
 
 		if (val) {
