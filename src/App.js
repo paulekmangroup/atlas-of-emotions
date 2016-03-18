@@ -1101,12 +1101,24 @@ export default function (...initArgs) {
 		callout.removeAttribute('class');
 		callout.classList.add('visible');
 
-		if (emotion) {
-			callout.classList.add(emotion);
+		// remove class names on link if link exists, so it's possible to test similarity below
+		if(document.getElementById("annexLink")){
+			document.getElementById("annexLink").removeAttribute('class');
 		}
 
 		callout.querySelector('.headline').innerHTML = title;
-		callout.querySelector('.body').innerHTML = body;
+		// only replace the innerHTML if the content is different - this is to enable fading on the links in the actions section
+		if(callout.querySelector('.body').innerHTML != body){
+			callout.querySelector('.body').innerHTML = body;
+		};
+
+		if (emotion) {
+			callout.classList.add(emotion);
+			// update class names on link if link exists
+			if(document.getElementById("annexLink")){
+				document.getElementById("annexLink").className = emotion;
+			};
+		}
 	}
 
 	function onEmotionStateChange (state, selected) {
