@@ -320,7 +320,11 @@ a:active {
 	}
 
 	a {
+		transition-property: color;
+		transition-duration:  #{$ui-overlays-duration-out}s;
+		transition-timing-function: ease-in-out;
 		pointer-events: auto;
+		@include emotion-link-color;
 	}
 
 	.more-on & {
