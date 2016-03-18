@@ -753,23 +753,23 @@ export default {
 	},
 
 	setHighlightedState: function (state) {
+
 		if (!state) {
 
 			this.displayHighlightedAction(null);
-			// this.displayHighlightedValence(null);
 
 		} else {
 
-			let stateActions = this.actionsData[this.currentEmotion].actions[state].actions.map(action => action.name),
+			let allActions = this.actionsData[this.currentEmotion].allActions,
+				stateActions = this.actionsData[this.currentEmotion].actions[state].actions.map(action => action.name),
+				otherActions = allActions.filter(action => !~stateActions.indexOf(action.name)).map(action => action.name),
 				graphContainer = this.graphContainers[this.currentEmotion],
 				labelContainer = this.labelContainers[this.currentEmotion];
 
 			graphContainer.selectAll('g.action-arrow')
 				.classed('muted', (data, index) => !~stateActions.indexOf(data.name));
 
-			/*labelContainer.selectAll('div.label')
-				.classed('muted', (data, index) => !~stateActions.indexOf(data.name));*/
-			this.setLabelStates(labelContainer, stateActions);
+			this.setLabelStates(labelContainer, [], otherActions);
 		}
 
 	},
@@ -780,7 +780,8 @@ export default {
 	 * 2 - 'selected'
 	 * 3 - 'muted'
 	 */
-	setLabelStates: function(labelContainer, highlighted) {
+	setLabelStates: function(labelContainer, highlighted, muted=[]) {
+
 		if (!labelContainer) return;
 
 		const labels = labelContainer.selectAll('.label');
@@ -793,13 +794,11 @@ export default {
 
 		if (selected || highlighted.length){
 			labels
-				.classed('muted', d => {
-					return highlighted.indexOf(d.name) < 0 && d.name !== selected;
-				})
-				.classed('highlighted', d => {
-					return highlighted.indexOf(d.name) > -1;
-				})
-				.classed('selected', d => d.name === selected);
+				.classed({
+					'muted': d => (highlighted.indexOf(d.name) < 0 && d.name !== selected) || ~muted.indexOf(d.name),
+					'highlighted': d => highlighted.indexOf(d.name) > -1,
+					'selected': d => d.name === selected
+				});
 
 			// remove default-interactive-helper once user highlights something
 			labelContainer.select('.default-interactive-helper')
@@ -941,7 +940,6 @@ export default {
 			if (!options || !options.inBackground) {
 				this.resetCallout();
 			}
-			// dispatcher.setEmotionState(null, true);
 		}, openDelay);
 
 	},
@@ -1083,20 +1081,12 @@ export default {
 
 			}
 
-			/*
-			// highlight the action's name regardless of valence
-			labelSelection
-				.classed('muted', (data, index) => data.name !== highlightedAction.name);
-			*/
 			this.setLabelStates(this.labelContainers[this.currentEmotion], [highlightedAction.name]);
 		} else {
 
 			arrowSelection
 				.classed('muted', false);
-			/*
-			labelSelection
-				.classed('muted', false);
-			*/
+
 			this.setLabelStates(this.labelContainers[this.currentEmotion], []);
 		}
 
@@ -1107,6 +1097,42 @@ export default {
 		*/
 
 	},
+
+	onActionMouseOver: function (d, i) {
+
+		if (this.mouseOutTimeout) {
+			clearTimeout(this.mouseOutTimeout);
+		}
+		this.displayHighlightedAction(d, d.valence);
+
+	},
+
+	onActionMouseOut: function (d, i) {
+
+		this.mouseOutTimeout = setTimeout(() => {
+			this.displayHighlightedAction(null);
+		}, 350);
+
+	},
+
+	onActionMouseClick: function (d, i) {
+
+		if (d3.event) {
+			d3.event.stopImmediatePropagation();
+		}
+
+		if (this.mouseOutTimeout) {
+			clearTimeout(this.mouseOutTimeout);
+		}
+		this.setHighlightedAction(d);
+
+	},
+
+	resetCallout: function () {
+		dispatcher.popupChange();
+		dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.actions.header, emotionsData.metadata.actions.body);
+	}
+
 	/*
 	setHighlightedValence: function (valence, preventRecursion) {
 
@@ -1176,38 +1202,7 @@ export default {
 			});
 
 	},
-	*/
-
-	onActionMouseOver: function (d, i) {
-
-		if (this.mouseOutTimeout) {
-			clearTimeout(this.mouseOutTimeout);
-		}
-		this.displayHighlightedAction(d, d.valence);
-
-	},
-
-	onActionMouseOut: function (d, i) {
-
-		this.mouseOutTimeout = setTimeout(() => {
-			this.displayHighlightedAction(null);
-		}, 350);
-
-	},
-
-	onActionMouseClick: function (d, i) {
-
-		if (d3.event) {
-			d3.event.stopImmediatePropagation();
-		}
-
-		if (this.mouseOutTimeout) {
-			clearTimeout(this.mouseOutTimeout);
-		}
-		this.setHighlightedAction(d);
-
-	},
-	/*
+	
 	onValenceMouseOver: function (d, i) {
 
 		let valence = VALENCES[d.data.name];
@@ -1239,9 +1234,5 @@ export default {
 
 	},
 	*/
-	resetCallout: function () {
-		dispatcher.popupChange();
-		dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.actions.header, emotionsData.metadata.actions.body);
-	}
 
 };
