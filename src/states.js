@@ -271,9 +271,9 @@ export default {
 				'anguish': 10
 			},
 			'enjoyment': {
-				'sensory pleasures': -90,
-				'compassion/joy': -80,
-				'amusement': -80,
+				'sensory pleasures': -100,
+				'compassion/joy': -100,
+				'amusement': -90,
 				'rejoicing': -40,
 				'schadenfreude': -40,
 				'relief': -10,
