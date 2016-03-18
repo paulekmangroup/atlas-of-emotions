@@ -68,7 +68,7 @@ export default function (...initArgs) {
 		initContainers();
 		initSections();
 		initHeader();
-		initScrollInterface();
+		initSectionNavigation();
 		initDownArrow();
 		initMoreInfoDropdown();
 		initCallout();
@@ -174,7 +174,15 @@ export default function (...initArgs) {
 		dropdown.querySelector('.dropdown-toggle').addEventListener('click', onMoreInfoMenuClick);
 	}
 
-	function initScrollInterface () {
+	function initSectionNavigation () {
+
+		initNavbar();
+		// initScrollNavigation();
+		initKeyboardNavigation();
+
+	}
+
+	function initNavbar () {
 
 		let scrollbar = document.querySelector('#scrollbar'),
 			segmentContainer = document.createElement('div');
@@ -197,7 +205,12 @@ export default function (...initArgs) {
 
 		});
 
+		/*
+		// Note: deprecated in favor of onScrollbarHitAreaEnter/onScrollbarHitAreaLeave/onScrollbarMouseMove
 		onWindowMouseMove = _.throttle(onWindowMouseMove, 50);
+		window.addEventListener('mousemove', onWindowMouseMove);
+		*/
+
 		scrollbar.addEventListener('mouseenter', onScrollbarHitAreaEnter);
 		scrollbar.addEventListener('mouseleave', onScrollbarHitAreaLeave);
 
@@ -217,6 +230,10 @@ export default function (...initArgs) {
 		};
 		scrollbarClosedPos = parseInt(window.getComputedStyle(segmentContainer).left.replace('px', ''));
 
+	}
+
+	function initScrollNavigation () {
+		
 		// throttle wheel events, and
 		// prune cached scroll events every frame
 		recentScrollDeltas = [];
@@ -237,6 +254,10 @@ export default function (...initArgs) {
 		});
 		window.requestAnimationFrame(onRAF);
 
+	}
+
+	function initKeyboardNavigation () {
+		
 		document.addEventListener('keydown', onKeyDown);
 
 	}
@@ -714,7 +735,7 @@ export default function (...initArgs) {
 		// might interfere with two-finger-swipe browser back/fwd.
 
 		//
-		// TODO NEXT THURS: don't just block wheel events when they're continuous;
+		// TODO: don't just block wheel events when they're continuous;
 		// block them when they're continuously <= the last value.
 		// need to be able to support sequential, yet discrete, swipes.
 		//
@@ -833,7 +854,7 @@ export default function (...initArgs) {
 	}
 
 	/**
-	 * Note: this function is _.throttle()d in initScrollInterface().
+	 * Note: this function is _.throttle()d in initNavBar().
 	 * Note: this function is not currently in use.
 	 */
 	function onWindowMouseMove (event) {
