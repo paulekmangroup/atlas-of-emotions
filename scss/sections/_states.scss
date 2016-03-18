@@ -67,6 +67,10 @@
 		opacity: 0.0;
 		pointer-events: none;
 
+		& h3 {
+			font-size: 16px;
+		}
+
 		&.transitioning {
 			transition-property: transform, opacity;
 			transition-duration: #{$emotions-panX-duration}s;
