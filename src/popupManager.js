@@ -1,7 +1,7 @@
 import dispatcher from './dispatcher.js';
 
 class PopupManager {
-	constructor() {
+	constructor () {
 		this.selected = null;
 		this.template = null;
 		this.currentName = null;
@@ -9,14 +9,14 @@ class PopupManager {
 		this.init();
 	}
 
-	init() {
+	init () {
 		// create the template node
 		if (!this.template) this.initTemplate();
 		this.template.classList.add('popup-template');
 	}
 
 
-	open(props) {
+	open (props) {
 		this.closeAll();
 
 		const clone = this.template.cloneNode(true);
@@ -49,11 +49,18 @@ class PopupManager {
 		clone.style.cssText = 'width: 0px; height: 0px;';
 		clone.offsetWidth; // force repaint
 
+		if (props.auxDesc) {
+			console.log(">>>>> add sidecar with content:", auxDesc);
+			let auxDiv = document.createElement('div');
+			auxDiv
+			// auxClone.removeChild(auxClone.querySelector('.close'))
+		}
+
 		clone.classList.add('transition');
 		clone.style.cssText = `width: ${w}px; height: ${h}px;`;
 	}
 
-	resetPopup(key) {
+	resetPopup (key) {
 		if (!this.popups[key]) return;
 
 		const target = this.popups[key].target;
@@ -64,7 +71,7 @@ class PopupManager {
 		target.classList.add('popped');
 	}
 
-	onTransitionOut(key, e) {
+	onTransitionOut (key, e) {
 		if (!this.popups[key]) return;
 		if (this.popups[key].abortTransition) return;
 
@@ -81,7 +88,7 @@ class PopupManager {
 		delete this.popups[key];
 	}
 
-	close(key) {
+	close (key) {
 		if (this.popups[key].state === 'active') return;
 
 		const target = this.popups[key].target;
@@ -93,20 +100,20 @@ class PopupManager {
 		popup.classList.add('fade-out');
 	}
 
-	closeAll() {
+	closeAll () {
 		Object.keys(this.popups).forEach((key) => {
 			this.popups[key].state = '';
 			this.close(key);
 		});
 	}
 
-	reset() {
+	reset () {
 		this.selected = null;
 		this.currentName = null;
 		this.closeAll();
 	}
 
-	onPopupCloseButtonClick(id, e) {
+	onPopupCloseButtonClick (id, e) {
 		e.preventDefault();
 		e.stopPropagation();
 		this.popups[id].state = '';
@@ -114,7 +121,7 @@ class PopupManager {
 		this.closeAll();
 	}
 
-	initTemplate() {
+	initTemplate () {
 		this.template = document.createElement('div');
 
 		const close = document.createElement('button');
@@ -138,15 +145,15 @@ class PopupManager {
 		document.body.appendChild(this.template);
 	}
 
-	makeID(section, name) {
+	makeID (section, name) {
 		return `${section}:${name}`;
 	}
 
-	getTarget(selector) {
+	getTarget (selector) {
 		return document.querySelector(`[data-popuptarget="${selector}"]`);
 	}
 
-	manage(section, name, desc) {
+	manage (section, name, desc, auxDesc) {
 		const id = this.makeID(section, name);
 		const keys = Object.keys(this.popups);
 		if (name && section) {
@@ -167,6 +174,7 @@ class PopupManager {
 			this.open({
 				target,
 				desc,
+				auxDesc,
 				section,
 				name,
 				id,
@@ -178,7 +186,7 @@ class PopupManager {
 		}
 	}
 
-	exists(section, name) {
+	exists (section, name) {
 		const id = this.makeID(section, name);
 		return this.popups[id] ? true : false;
 	}

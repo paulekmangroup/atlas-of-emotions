@@ -1042,12 +1042,18 @@ export default {
 		}
 		*/
 		if (action) {
-			dispatcher.popupChange('actions', action.name, action.desc);
+
+			let valenceDesc = action.valence && emotionsData.metadata.actions.qualities[action.valence - 1];
+
+			dispatcher.popupChange('actions', action.name, action.desc, valenceDesc);
 			// dispatcher.changeCallout(this.currentEmotion, action.name, action.desc);
 			states.displayHighlightedStates(action.states);
+
 		} else {
+
 			this.resetCallout();
 			states.displayHighlightedStates(null);
+
 		}
 
 		this.displayHighlightedAction(action);
@@ -1055,6 +1061,7 @@ export default {
 	},
 
 	displayHighlightedAction: function (action, valence) {
+		
 		let highlightedAction = action || this.highlightedAction || null,
 			arrowSelection = this.graphContainers[this.currentEmotion].selectAll('g.action-arrow'),
 			labelSelection = this.labelContainers[this.currentEmotion].selectAll('div.label');
