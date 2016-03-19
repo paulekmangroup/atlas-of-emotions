@@ -62,6 +62,10 @@ class PopupManager {
 		popup.removeEventListener('transitionend', this.onTransitionOut, false);
 		popup.classList.remove('fade-out');
 		target.classList.add('popped');
+
+		if (target.getAttribute('data-clip')) {
+			target.classList.add('unclip');
+		}
 	}
 
 	onTransitionOut(key, e) {

@@ -32,14 +32,14 @@
 	clip: initial;
 }
 
-.default-interactive-helper[data-popuptarget],
+//.default-interactive-helper[data-popuptarget],
 .highlighted[data-popuptarget],
 .selected[data-popuptarget] {
 	@include emotion-border-color();
 	transition: border-color #{$ui-popups-duration-border-open}s ease-out;	// add highlight borders a bit more quickly
 }
 
-.muted.default-interactive-helper[data-popuptarget],
+//.muted.default-interactive-helper[data-popuptarget],
 .muted[data-popuptarget] {
 	@include emotion-border-color(0.0);
 	opacity: 0.5 !important;
