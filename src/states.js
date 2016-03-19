@@ -238,7 +238,7 @@ export default {
 		yOffsets[dispatcher.EMOTIONS.ANGER] = y => y + 15;
 		yOffsets[dispatcher.EMOTIONS.DISGUST] = yOffsets[dispatcher.EMOTIONS.ANGER];
 		yOffsets[dispatcher.EMOTIONS.ENJOYMENT] =  y => y + 30;
-		yOffsets[dispatcher.EMOTIONS.FEAR] = y => y + 35;
+		yOffsets[dispatcher.EMOTIONS.FEAR] = y => y + 45;
 		yOffsets[dispatcher.EMOTIONS.SADNESS] = (y, d) => {
 			// due to interpolation, steeper peaks result in
 			// further distance to the label.
@@ -270,23 +270,23 @@ export default {
 				'anguish': 10
 			},
 			'enjoyment': {
-				'sensory pleasures': -100,
-				'compassion/joy': -100,
-				'amusement': -90,
-				'rejoicing': -40,
-				'schadenfreude': -40,
-				'relief': -10,
-				'pride': -5,
-				'fiero': 15,
-				'naches': 30,
-				'wonder': 15,
-				'excitement': 5,
-				'ecstasy': 10
+				'sensory pleasures': -40,
+				'compassion/joy': -10,
+				'amusement': -20,
+				'rejoicing': -20,
+				'schadenfreude': 0,
+				'relief': 0,
+				'pride': 0,
+				'fiero': 0,
+				'naches': 0,
+				'wonder': 0,
+				'excitement': 0,
+				'ecstasy': 0
 			}
 		};
 
 		let leftAdjust = function(emotion, i, name) {
-			if (emotion == 'sadness' /*|| emotion == 'enjoyment'*/) {
+			if (emotion == 'sadness' || emotion == 'enjoyment') {
 				return leftAdjustManual[emotion][name];
 			}
 			return leftAdjustConstants[emotion];
@@ -930,8 +930,8 @@ export default {
 					'schadenfreude': [-1, -.5],
 					'relief': [-.5, -.5],
 					'pride': [-.4, -.5],
-					'fiero': [.4, -.5],
-					'naches': [0.8, -.5],
+					'fiero': [0, -.5],
+					'naches': [0.4, -.5],
 					'wonder': [.4, -.6],
 					'excitement': [.8, -.5],
 					'ecstasy': [0, 0]
