@@ -54,13 +54,6 @@ $label-fade-out-time: 0.5s;
 	&.sadness { color: $color-sadness; }
 }
 
-@mixin emotion-link-color () {
-	&.anger { color: darken(rgba($color-anger, 0.5),20%); }
-	&.disgust { color: darken(rgba($color-disgust, 0.5),20%); }
-	&.enjoyment { color: darken(rgba($color-enjoyment, 0.5),20%); }
-	&.fear { color: darken(rgba($color-fear, 0.5),20%); }
-	&.sadness { color: darken(rgba($color-sadness, 0.5),20%) }
-}
 
 @mixin emotion-stroke-color () {
 	&.anger { stroke: $color-anger; }
