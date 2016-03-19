@@ -1043,10 +1043,9 @@ export default {
 		*/
 		if (action) {
 
-			let valenceDesc = action.valence && emotionsData.metadata.actions.qualities[action.valence - 1];
+			let valenceDesc = action.valence && emotionsData.metadata.actions.qualities[action.valence - 1].body;
 
 			dispatcher.popupChange('actions', action.name, action.desc, valenceDesc);
-			// dispatcher.changeCallout(this.currentEmotion, action.name, action.desc);
 			states.displayHighlightedStates(action.states);
 
 		} else {
@@ -1061,7 +1060,7 @@ export default {
 	},
 
 	displayHighlightedAction: function (action, valence) {
-		
+
 		let highlightedAction = action || this.highlightedAction || null,
 			arrowSelection = this.graphContainers[this.currentEmotion].selectAll('g.action-arrow'),
 			labelSelection = this.labelContainers[this.currentEmotion].selectAll('div.label');
@@ -1209,7 +1208,7 @@ export default {
 			});
 
 	},
-	
+
 	onValenceMouseOver: function (d, i) {
 
 		let valence = VALENCES[d.data.name];

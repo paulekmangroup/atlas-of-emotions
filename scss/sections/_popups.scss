@@ -1,3 +1,7 @@
+$body-font-size: 0.8em;
+$body-line-height: 1.25em;
+$horiz-padding: 20px;
+
 .popped {
 	z-index: 9999;
 }
@@ -16,7 +20,7 @@
 	&.popped {
 		@include emotion-border-color();
 		background: rgba(255,255,255,0.8);
-		padding: 18px 20px;
+		padding: 18px $horiz-padding;
 
 		&.show-only {
 			opacity: 1.0;
@@ -45,6 +49,31 @@
 	&.muted.default-interactive-helper {
 		@include emotion-border-color(0.0);
 		opacity: 0.5 !important;
+	}
+
+	&.has-secondary {
+		white-space: nowrap;
+	}
+
+	.secondary {
+		display: inline-block;
+		padding-left: $horiz-padding;
+
+		font-size: $body-font-size;
+		line-height: $body-line-height;
+		white-space: normal;
+	}
+
+	.secondary-bkgd {
+		position: absolute;
+		width: 50%;
+		height: 100%;
+		top: 0;
+		right: 0;
+
+		background-color: rgba(0, 255, 0, 0.25);
+		border-left-width: 1px;
+		border-left-style: solid;
 	}
 }
 
@@ -109,8 +138,18 @@
 
 	.body {
 		margin: 0.5em 0 0;
-		font-size: 0.8em;
-		line-height: 1.25;
+		font-size: $body-font-size;
+		line-height: $body-line-height;
 		word-wrap: break-word;
+	}
+
+	.has-secondary & {
+		display: inline-block;
+		white-space: normal;
+		padding-right: $horiz-padding;
+
+		.close {
+			right: calc(50% + 0.5 * #{$horiz-padding});
+		}
 	}
 }

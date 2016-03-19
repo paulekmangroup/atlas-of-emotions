@@ -49,11 +49,19 @@ class PopupManager {
 		clone.style.cssText = 'width: 0px; height: 0px;';
 		clone.offsetWidth; // force repaint
 
-		if (props.auxDesc) {
-			console.log(">>>>> add sidecar with content:", auxDesc);
-			let auxDiv = document.createElement('div');
-			auxDiv
-			// auxClone.removeChild(auxClone.querySelector('.close'))
+		if (props.secondaryDesc) {
+			console.log(">>>>> TODO: display secondary content to left when toward right edge of viewport");
+			let secondaryContainer = document.createElement('div');
+			secondaryContainer.classList.add('secondary');
+			secondaryContainer.style.width = `${w}px`;
+			secondaryContainer.textContent = props.secondaryDesc;
+			props.target.appendChild(secondaryContainer);
+
+			let secondaryBkgd = document.createElement('div');
+			secondaryBkgd.classList.add('secondary-bkgd');
+			props.target.appendChild(secondaryBkgd);
+
+			props.target.classList.add('has-secondary');
 		}
 
 		clone.classList.add('transition');
@@ -93,6 +101,13 @@ class PopupManager {
 
 		const target = this.popups[key].target;
 		const popup = this.popups[key].popup;
+
+		if (target.classList.contains('has-secondary')) {
+			console.log(">>>>> animate secondaryContainer closed");
+			target.removeChild(target.querySelector('.secondary'));
+			target.removeChild(target.querySelector('.secondary-bkgd'));
+			target.classList.remove('has-secondary');
+		}
 
 		popup.addEventListener('transitionend', this.onTransitionOut.bind(this, key), false);
 
@@ -153,7 +168,7 @@ class PopupManager {
 		return document.querySelector(`[data-popuptarget="${selector}"]`);
 	}
 
-	manage (section, name, desc, auxDesc) {
+	manage (section, name, desc, secondaryDesc) {
 		const id = this.makeID(section, name);
 		const keys = Object.keys(this.popups);
 		if (name && section) {
@@ -174,7 +189,7 @@ class PopupManager {
 			this.open({
 				target,
 				desc,
-				auxDesc,
+				secondaryDesc,
 				section,
 				name,
 				id,

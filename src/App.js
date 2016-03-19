@@ -233,7 +233,7 @@ export default function (...initArgs) {
 	}
 
 	function initScrollNavigation () {
-		
+
 		// throttle wheel events, and
 		// prune cached scroll events every frame
 		recentScrollDeltas = [];
@@ -257,7 +257,7 @@ export default function (...initArgs) {
 	}
 
 	function initKeyboardNavigation () {
-		
+
 		document.addEventListener('keydown', onKeyDown);
 
 	}
@@ -1091,13 +1091,13 @@ export default function (...initArgs) {
 
 	}
 
-	function onPopupChange (section, emotion, desc, auxDesc) {
+	function onPopupChange (section, emotion, desc, secondaryDesc) {
 		if (!section){
 			popupManager.manage();
 		} else {
 			if (emotion !== popupManager.currentName ||
 				(emotion && !popupManager.exists(section, emotion))) {
-				popupManager.manage(section, emotion, desc, auxDesc);
+				popupManager.manage(section, emotion, desc, secondaryDesc);
 			}
 		}
 	}
