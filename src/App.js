@@ -1206,6 +1206,7 @@ export default function (...initArgs) {
 	}
 
 	function onHashChange (event, defaults=NAVIGATION_DEFAULTS) {
+
 		if (currentSection) {
 
 			// if a section has already been selected this session, close the intro modal
@@ -1256,8 +1257,11 @@ export default function (...initArgs) {
 			setMore(moreName);
 		} else {
 			setEmotion(emotion);
-		}
 
+			if (section === dispatcher.SECTIONS.CONTINENTS) {
+				setScrollbarOpen(!!emotion);
+			}
+		}
 
 		setSection(section, previousEmotion, previousMorePage);
 	}
