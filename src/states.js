@@ -237,13 +237,12 @@ export default {
 			innerHeight = this.yScale.range()[0];
 		yOffsets[dispatcher.EMOTIONS.ANGER] = y => y + 15;
 		yOffsets[dispatcher.EMOTIONS.DISGUST] = yOffsets[dispatcher.EMOTIONS.ANGER];
-		yOffsets[dispatcher.EMOTIONS.ENJOYMENT] =  y => y + 10;
-		yOffsets[dispatcher.EMOTIONS.FEAR] = y => y + 35;
+		yOffsets[dispatcher.EMOTIONS.ENJOYMENT] =  y => y + 30;
+		yOffsets[dispatcher.EMOTIONS.FEAR] = y => y + 45;
 		yOffsets[dispatcher.EMOTIONS.SADNESS] = (y, d) => {
 			// due to interpolation, steeper peaks result in
 			// further distance to the label.
 			// compensate here with manual offsets.
-			console.log(d[1].x, Math.pow(d[1].x/10, 2) , y, Math.pow(d[1].x/10, 2) * .7 * innerHeight);
 			return y + Math.pow(d[1].x/10, 2) * .4 * innerHeight + 70;
 			//return y;
 		};
@@ -252,7 +251,7 @@ export default {
 			'anger': 20,
 			'fear': -5,
 			'disgust': 5,
-			'enjoyment': 20
+			'enjoyment': 0
 		};
 
 		let aspectRatio = this.sectionContainer.offsetWidth / this.sectionContainer.offsetHeight;
@@ -271,18 +270,18 @@ export default {
 				'anguish': 10
 			},
 			'enjoyment': {
-				'sensory pleasures': -100,
-				'compassion/joy': -100,
-				'amusement': -90,
-				'rejoicing': -40,
-				'schadenfreude': -40,
-				'relief': -10,
-				'pride': -5,
-				'fiero': 15,
-				'naches': 30,
-				'wonder': 15,
-				'excitement': 5,
-				'ecstasy': 10
+				'sensory pleasures': -40,
+				'compassion/joy': -10,
+				'amusement': -20,
+				'rejoicing': -20,
+				'schadenfreude': 0,
+				'relief': 0,
+				'pride': 0,
+				'fiero': 0,
+				'naches': 0,
+				'wonder': 0,
+				'excitement': 0,
+				'ecstasy': 0
 			}
 		};
 
@@ -924,18 +923,17 @@ export default {
 
 			// manually offset each state
 			let keyedOffsets = {
-					'sensory pleasures': [0, 0],
-					'compassion-joy': [-0.25, -0.25],
-					'amusement': [-0.15, -0.15],
-					'rejoicing': [0.15, 0.15],
-					'schadenfreude': [0, 0],
-					'relief': [0, 0],
-					'pride': [-0.15, -0.15],
-					'fiero': [0.1, 0.1],
-					'naches': [0.4, 0.4],
-					'wonder': [0, 0],
-					'debauchery': [-0.15, -0.15],
-					'excitement': [0.15, 0.15],
+					'sensory pleasures': [-1.5, 0],
+					'compassion/joy': [-1.3, 0.2],
+					'amusement': [-1, -.1],
+					'rejoicing': [-2.3, -.5],
+					'schadenfreude': [-1, -.5],
+					'relief': [-.5, -.5],
+					'pride': [-.4, -.5],
+					'fiero': [0, -.5],
+					'naches': [0.4, -.5],
+					'wonder': [.4, -.6],
+					'excitement': [.8, -.5],
 					'ecstasy': [0, 0]
 				},
 				offsets = states.map(s => s.name).map(name => keyedOffsets[name] || [0, 0]);
@@ -1209,13 +1207,14 @@ export default {
 					let y1 = points[1][1],
 						bulbousness = xScale(1);	// relative to overall graph, not to each shape
 
+					let y0 = points[0][1];
+
 					let path = points[0].join(' ') +							// first anchor point
-						' C' + points[0].join(' ') + ',' +						// repeat first anchor point
-						(points[0][0] - bulbousness) + ' ' + y1 + ',' +			// first control point, outside curve to left
-						points[1].join(' ') +									// middle anchor point
-						' C' + (points[2][0] + bulbousness) + ' ' + y1 + ',' +	// second control point, outside curve to right
-						points[2].join(' ') + ',' +								// last anchor point
-						points[2].join(' ');									// repeat last anchor point
+							' C' + points[0].join(' ') + ',' +						// repeat first anchor point
+							points[0][0]  + ' ' + (y0 - (y0 - y1) / 2) + ',' +			// first control point, outside curve to left
+							points[1].join(' ') +	"L" + points[1].join(' ') +			// middle anchor point
+							' C' + points[1].join(' ') + "," + points[2][0] + ' ' + (y0 - (y0 - y1) / 2) + ',' +	// second control point, outside curve to right
+							points[2].join(' ');								// last anchor point
 
 					return path;
 				}),
