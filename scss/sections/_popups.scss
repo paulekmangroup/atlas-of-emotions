@@ -6,43 +6,46 @@
 	border-width: 1px;
 	border-style: solid;
 	@include emotion-border-color(0.0);
-	// background: rgba(255,255,255,0.0);
+
 	transition:
 		background #{$ui-popups-duration-close}s ease-in,
 		padding #{$ui-popups-duration-close}s ease-in,
 		opacity #{$ui-popups-duration-close}s ease-in,
 		border-color #{$ui-popups-duration-close}s ease-in;
-}
 
-.popped[data-popuptarget] {
-	@include emotion-border-color();
-	background: rgba(255,255,255,0.8);
-	padding: 18px 20px;
-}
+	&.popped {
+		@include emotion-border-color();
+		background: rgba(255,255,255,0.8);
+		padding: 18px 20px;
 
-.popped[data-popuptarget].show-only {
-	opacity: 1.0;
-}
+		&.show-only {
+			opacity: 1.0;
+		}
 
-[data-popuptarget][data-clip] {
-	clip: rect(0px, 0px, 0px, 0px);
-}
+		&.no-body {
+			.body {display: none;}
+		}
+	}
 
-.unclip[data-popuptarget][data-clip] {
-	clip: initial;
-}
+	&.default-interactive-helper,
+	&.highlighted,
+	&.selected {
+		@include emotion-border-color();
+		transition: border-color #{$ui-popups-duration-border-open}s ease-out;	// add highlight borders a bit more quickly
+	}
 
-.default-interactive-helper[data-popuptarget],
-.highlighted[data-popuptarget],
-.selected[data-popuptarget] {
-	@include emotion-border-color();
-	transition: border-color #{$ui-popups-duration-border-open}s ease-out;	// add highlight borders a bit more quickly
-}
+	&[data-clip] {
+		clip: rect(0px, 0px, 0px, 0px);
+		&.unclip {
+			clip: initial;
+		}
+	}
 
-.muted.default-interactive-helper[data-popuptarget],
-.muted[data-popuptarget] {
-	@include emotion-border-color(0.0);
-	opacity: 0.5 !important;
+	&.muted,
+	&.muted.default-interactive-helper {
+		@include emotion-border-color(0.0);
+		opacity: 0.5 !important;
+	}
 }
 
 .popup-template {
@@ -111,15 +114,3 @@
 		word-wrap: break-word;
 	}
 }
-
-.popped[data-popuptarget].no-body {
-	.body {display: none;}
-}
-
-
-
-.popped {
-	z-index: 9999;
-}
-
-
