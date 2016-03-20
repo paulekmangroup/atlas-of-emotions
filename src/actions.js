@@ -1053,7 +1053,7 @@ export default {
 					]
 				};
 			}
-			console.log("TODO: 1. reorder metadata.actions.qualities to match VALENCES, 3. set max-height on secondaryBody");
+			console.log("TODO: 3. set max-height on secondaryBody");
 
 			dispatcher.popupChange('actions', action.name, action.desc, secondaryData);
 			states.displayHighlightedStates(action.states);

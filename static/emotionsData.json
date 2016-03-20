@@ -1709,12 +1709,12 @@
           "body": "Actions that further future collaboration with others."
         },
         {
-          "header": "Destructive Actions",
-          "body": "Actions that decrease the likelihood of being able to collaborate with others."
+          "header": "Ambiguous Actions",
+          "body": "An action can be both constructive and destructive, depending on the context."
         },
         {
-          "header": "Ambiguous Actions",
-          "body": "Sometimes an action can be both constructive and destructive, depending on the context."
+          "header": "Destructive Actions",
+          "body": "Actions that decrease the likelihood of being able to collaborate with others."
         }
       ]
     },
