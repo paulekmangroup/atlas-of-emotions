@@ -1,3 +1,8 @@
+$body-font-size: 0.8em;
+$body-line-height: 1.25em;
+$vert-padding: 18px;
+$horiz-padding: 20px;
+
 .popped {
 	z-index: 9999;
 }
@@ -6,43 +11,100 @@
 	border-width: 1px;
 	border-style: solid;
 	@include emotion-border-color(0.0);
-	// background: rgba(255,255,255,0.0);
+
 	transition:
 		background #{$ui-popups-duration-close}s ease-in,
 		padding #{$ui-popups-duration-close}s ease-in,
 		opacity #{$ui-popups-duration-close}s ease-in,
 		border-color #{$ui-popups-duration-close}s ease-in;
-}
 
-.popped[data-popuptarget] {
-	@include emotion-border-color();
-	background: rgba(255,255,255,0.8);
-	padding: 18px 20px;
-}
+	&.popped {
+		@include emotion-border-color();
+		background: $popup-background-color;
+		padding: $vert-padding $horiz-padding;
 
-.popped[data-popuptarget].show-only {
-	opacity: 1.0;
-}
+		&.show-only {
+			opacity: 1.0;
+		}
 
-[data-popuptarget][data-clip] {
-	clip: rect(0px, 0px, 0px, 0px);
-}
+		&.no-body {
+			.body {display: none;}
+		}
+	}
 
-.unclip[data-popuptarget][data-clip] {
-	clip: initial;
-}
+	// &.default-interactive-helper,
+	&.highlighted,
+	&.selected {
+		@include emotion-border-color();
+		transition: border-color #{$ui-popups-duration-border-open}s ease-out;	// add highlight borders a bit more quickly
+	}
 
-//.default-interactive-helper[data-popuptarget],
-.highlighted[data-popuptarget],
-.selected[data-popuptarget] {
-	@include emotion-border-color();
-	transition: border-color #{$ui-popups-duration-border-open}s ease-out;	// add highlight borders a bit more quickly
-}
+	&[data-clip] {
+		clip: rect(0px, 0px, 0px, 0px);
+		&.unclip {
+			clip: initial;
+		}
+	}
 
-//.muted.default-interactive-helper[data-popuptarget],
-.muted[data-popuptarget] {
-	@include emotion-border-color(0.0);
-	opacity: 0.5 !important;
+	// &.muted.default-interactive-helper,
+	&.muted {
+		@include emotion-border-color(0.0);
+		opacity: 0.5 !important;
+	}
+
+	.secondary {
+		position: absolute;
+		display: block;
+		box-sizing: border-box;
+		width: 0px;
+		top: -1px;		// account for some box measurement problem i can't figure out
+
+		padding: calc(#{$vert-padding}) $horiz-padding $vert-padding $horiz-padding;
+		opacity: 0.0;
+		overflow: hidden;
+
+		@include emotion-background-color(0.5);
+		&.constructive {
+			@include emotion-background-color(0.75);
+		}
+		&.destructive {
+			@include emotion-background-color(0.25);
+		}
+
+		border-width: 1px;
+		border-style: solid;
+		@include emotion-border-color(1.0);
+
+		transition: width #{$ui-popups-duration-open}s ease, opacity #{$ui-popups-duration-open}s ease;
+		&.closing {
+			transition: width #{0.5 * $ui-popups-duration-open}s ease-out, opacity #{0.5 * $ui-popups-duration-open}s ease-out;
+		}
+
+		&.constructive {
+			color: $text-overlay-color;
+		}
+
+		// white background below to improve readability/contrast
+		&::before {
+			z-index: -1;
+			display: block;
+			position: absolute;
+			width: inherit;
+			height: inherit;
+			left: 0;
+			top: 0;
+			content: ' ';
+			background-color: $popup-background-color;
+			opacity: inherit;
+			transition: inherit;
+		}
+
+		.body {
+			// limit to 3 lines
+			max-height: calc(#{$body-line-height} * 3);
+			overflow: hidden;
+		}
+	}
 }
 
 .popup-template {
@@ -103,23 +165,20 @@
 	.title {
 		display: none;
 	}
+}
 
+.popup-template,
+.secondary {
 	.body {
 		margin: 0.5em 0 0;
-		font-size: 0.8em;
-		line-height: 1.25;
+		font-size: $body-font-size;
+		line-height: $body-line-height;
 		word-wrap: break-word;
 	}
 }
 
-.popped[data-popuptarget].no-body {
-	.body {display: none;}
+// popups with secondary popups maintain a minimum height to support secondary content
+// (see e.g. Sadness > Mourn)
+.has-secondary .body {
+	min-height: calc(#{$body-line-height} * 2);
 }
-
-
-
-.popped {
-	z-index: 9999;
-}
-
-

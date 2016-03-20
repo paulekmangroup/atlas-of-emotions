@@ -1,7 +1,8 @@
 import dispatcher from './dispatcher.js';
+import sassVars from '../scss/variables.json';
 
 class PopupManager {
-	constructor() {
+	constructor () {
 		this.selected = null;
 		this.template = null;
 		this.currentName = null;
@@ -9,14 +10,14 @@ class PopupManager {
 		this.init();
 	}
 
-	init() {
+	init () {
 		// create the template node
 		if (!this.template) this.initTemplate();
 		this.template.classList.add('popup-template');
 	}
 
 
-	open(props) {
+	open (props) {
 		this.closeAll();
 
 		const clone = this.template.cloneNode(true);
@@ -38,6 +39,11 @@ class PopupManager {
 			props.target.classList.add('unclip');
 		}
 
+		if (props.secondaryData) {
+			// mark popup as containing a secondary popup before measuring
+			props.target.classList.add('has-secondary');
+		}
+
 		// set w/h
 		let w = clone.offsetWidth + 100;
 		w = Math.max(w, 250);
@@ -45,15 +51,56 @@ class PopupManager {
 		clone.style.cssText = `width: ${w}px;`;
 		clone.offsetWidth; // force repaint
 
-		let h = clone.offsetHeight;
+		// measure elements while at full size
+		let h = clone.offsetHeight,
+			popupWidth = props.target.offsetWidth,
+			popupHeight = props.target.offsetHeight;
+
 		clone.style.cssText = 'width: 0px; height: 0px;';
 		clone.offsetWidth; // force repaint
+
+		if (props.secondaryData) {
+
+			let targetLeft = props.target.getBoundingClientRect().left,
+				distRight = window.innerWidth - (targetLeft + 2*w),
+				direction = targetLeft < distRight ? 'left' : 'right';
+
+			let secondaryContainer = document.createElement('div');
+			secondaryContainer.classList.add('secondary');
+			secondaryContainer.style.height = `${popupHeight}px`;
+
+			secondaryContainer.style[direction] = `${popupWidth - 2}px`;	// -2 to account for some box measurement problem i can't figure out
+			if (props.secondaryData.classes) {
+				secondaryContainer.classList.add(...props.secondaryData.classes);
+			}
+
+			let secondaryBkgd = document.createElement('div');
+			secondaryBkgd.classList.add('background');
+			if (props.secondaryData.classes) {
+				secondaryBkgd.classList.add(...props.secondaryData.classes);
+			}
+			secondaryContainer.appendChild(secondaryBkgd);
+
+			let secondaryBody = document.createElement('p');
+			secondaryBody.classList.add('body');
+			secondaryBody.textContent = props.secondaryData.body;
+			// secondaryBody.style.maxHeight = `calc(${h}px - 0.5em)`;
+			secondaryContainer.appendChild(secondaryBody);
+
+			props.target.appendChild(secondaryContainer);
+
+			setTimeout(() => {
+				secondaryContainer.style.width = `${popupWidth}px`;
+				secondaryContainer.style.opacity = 1.0;
+			}, sassVars.ui.popups.duration.open * 0.5 * 1000);
+
+		}
 
 		clone.classList.add('transition');
 		clone.style.cssText = `width: ${w}px; height: ${h}px;`;
 	}
 
-	resetPopup(key) {
+	resetPopup (key) {
 		if (!this.popups[key]) return;
 
 		const target = this.popups[key].target;
@@ -68,7 +115,7 @@ class PopupManager {
 		}
 	}
 
-	onTransitionOut(key, e) {
+	onTransitionOut (key, e) {
 		if (!this.popups[key]) return;
 		if (this.popups[key].abortTransition) return;
 
@@ -85,32 +132,58 @@ class PopupManager {
 		delete this.popups[key];
 	}
 
-	close(key) {
+	close (key) {
 		if (this.popups[key].state === 'active') return;
 
 		const target = this.popups[key].target;
 		const popup = this.popups[key].popup;
 
-		popup.addEventListener('transitionend', this.onTransitionOut.bind(this, key), false);
+		let closePopup = () => {
+			popup.addEventListener('transitionend', this.onTransitionOut.bind(this, key), false);
+			target.classList.remove('popped');
+			popup.classList.add('fade-out');
+		};
 
-		target.classList.remove('popped');
-		popup.classList.add('fade-out');
+		if (target.classList.contains('has-secondary')) {
+
+			// if secondary container exists, close it (fast) and then the popup
+			let secondaryContainer = target.querySelector('.secondary');
+			secondaryContainer.addEventListener('transitionend', (event) => {
+				// wrap in try-catch until cause is found for bug
+				// that causes popup to not appear on click, and throw an error here
+				// with `secondaryContainer` not a child of `target`
+				try {
+					target.removeChild(secondaryContainer);
+				} catch (err) {};
+				target.classList.remove('has-secondary');
+				closePopup();
+			});
+			secondaryContainer.classList.add('closing');
+			secondaryContainer.style.width = '0px';
+
+		} else {
+
+			// else, just the popup immediately
+			closePopup();
+
+		}
+
 	}
 
-	closeAll() {
+	closeAll () {
 		Object.keys(this.popups).forEach((key) => {
 			this.popups[key].state = '';
 			this.close(key);
 		});
 	}
 
-	reset() {
+	reset () {
 		this.selected = null;
 		this.currentName = null;
 		this.closeAll();
 	}
 
-	onPopupCloseButtonClick(id, e) {
+	onPopupCloseButtonClick (id, e) {
 		e.preventDefault();
 		e.stopPropagation();
 		this.popups[id].state = '';
@@ -118,7 +191,7 @@ class PopupManager {
 		this.closeAll();
 	}
 
-	initTemplate() {
+	initTemplate () {
 		this.template = document.createElement('div');
 
 		const close = document.createElement('button');
@@ -142,15 +215,15 @@ class PopupManager {
 		document.body.appendChild(this.template);
 	}
 
-	makeID(section, name) {
+	makeID (section, name) {
 		return `${section}:${name}`;
 	}
 
-	getTarget(selector) {
+	getTarget (selector) {
 		return document.querySelector(`[data-popuptarget="${selector}"]`);
 	}
 
-	manage(section, name, desc) {
+	manage (section, name, desc, secondaryData) {
 		const id = this.makeID(section, name);
 		const keys = Object.keys(this.popups);
 		if (name && section) {
@@ -171,6 +244,7 @@ class PopupManager {
 			this.open({
 				target,
 				desc,
+				secondaryData,
 				section,
 				name,
 				id,
@@ -182,7 +256,7 @@ class PopupManager {
 		}
 	}
 
-	exists(section, name) {
+	exists (section, name) {
 		const id = this.makeID(section, name);
 		return this.popups[id] ? true : false;
 	}

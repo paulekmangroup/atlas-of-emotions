@@ -1042,12 +1042,26 @@ export default {
 		}
 		*/
 		if (action) {
-			dispatcher.popupChange('actions', action.name, action.desc);
-			// dispatcher.changeCallout(this.currentEmotion, action.name, action.desc);
+
+			let secondaryData;
+			if (action.valence) {
+				secondaryData = {
+					body: action.valence && emotionsData.metadata.actions.qualities[action.valence - 1].body,
+					classes: [
+						this.currentEmotion,
+						_.findKey(VALENCES, (val) => val === action.valence).toLowerCase()
+					]
+				};
+			}
+
+			dispatcher.popupChange('actions', action.name, action.desc, secondaryData);
 			states.displayHighlightedStates(action.states);
+
 		} else {
+
 			this.resetCallout();
 			states.displayHighlightedStates(null);
+
 		}
 
 		this.displayHighlightedAction(action);
@@ -1055,6 +1069,7 @@ export default {
 	},
 
 	displayHighlightedAction: function (action, valence) {
+
 		let highlightedAction = action || this.highlightedAction || null,
 			arrowSelection = this.graphContainers[this.currentEmotion].selectAll('g.action-arrow'),
 			labelSelection = this.labelContainers[this.currentEmotion].selectAll('div.label');
@@ -1202,7 +1217,7 @@ export default {
 			});
 
 	},
-	
+
 	onValenceMouseOver: function (d, i) {
 
 		let valence = VALENCES[d.data.name];
