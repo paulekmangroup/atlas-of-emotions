@@ -39,6 +39,11 @@ class PopupManager {
 			props.target.classList.add('unclip');
 		}
 
+		if (props.secondaryData) {
+			// mark popup as containing a secondary popup before measuring
+			props.target.classList.add('has-secondary');
+		}
+
 		// set w/h
 		let w = clone.offsetWidth + 100;
 		w = Math.max(w, 250);
@@ -83,7 +88,6 @@ class PopupManager {
 			secondaryContainer.appendChild(secondaryBody);
 
 			props.target.appendChild(secondaryContainer);
-			props.target.classList.add('has-secondary');
 
 			setTimeout(() => {
 				secondaryContainer.style.width = `${popupWidth}px`;
@@ -145,7 +149,12 @@ class PopupManager {
 			// if secondary container exists, close it (fast) and then the popup
 			let secondaryContainer = target.querySelector('.secondary');
 			secondaryContainer.addEventListener('transitionend', (event) => {
-				target.removeChild(secondaryContainer);
+				// wrap in try-catch until cause is found for bug
+				// that causes popup to not appear on click, and throw an error here
+				// with `secondaryContainer` not a child of `target`
+				try {
+					target.removeChild(secondaryContainer);
+				} catch (err) {};
 				target.classList.remove('has-secondary');
 				closePopup();
 			});

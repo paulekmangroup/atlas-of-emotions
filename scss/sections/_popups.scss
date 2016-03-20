@@ -176,3 +176,9 @@ $horiz-padding: 20px;
 		word-wrap: break-word;
 	}
 }
+
+// popups with secondary popups maintain a minimum height to support secondary content
+// (see e.g. Sadness > Mourn)
+.has-secondary .body {
+	min-height: calc(#{$body-line-height} * 2);
+}
