@@ -1091,13 +1091,13 @@ export default function (...initArgs) {
 
 	}
 
-	function onPopupChange (section, emotion, desc, secondaryDesc) {
+	function onPopupChange (section, emotion, desc, secondaryData) {
 		if (!section){
 			popupManager.manage();
 		} else {
 			if (emotion !== popupManager.currentName ||
 				(emotion && !popupManager.exists(section, emotion))) {
-				popupManager.manage(section, emotion, desc, secondaryDesc);
+				popupManager.manage(section, emotion, desc, secondaryData);
 			}
 		}
 	}

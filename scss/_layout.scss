@@ -50,7 +50,7 @@ body {
 				color: $text-overlay-color;
 			}
 		}
-	}	
+	}
 }
 
 h1 { font-size: 1.5em; font-weight: normal; }
@@ -307,7 +307,7 @@ a:active {
 	}
 
 	background-color: rgba($callout-background-color, 0.5);
-	@include emotion-background-color;
+	@include emotion-background-color(0.5);
 
 	h3 {
 		margin-top: 0;

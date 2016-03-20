@@ -54,16 +54,24 @@ class PopupManager {
 		clone.style.cssText = 'width: 0px; height: 0px;';
 		clone.offsetWidth; // force repaint
 
-		if (props.secondaryDesc) {
+		if (props.secondaryData) {
 
 			let secondaryContainer = document.createElement('div');
 			secondaryContainer.classList.add('secondary');
 			secondaryContainer.style.height = `${popupHeight}px`;
-			secondaryContainer.style.left = `${popupWidth - 2}px`;	// -2 to account for some box measurement problem i can't figure out
+
+			let direction = 'left';
+			// TODO: determine distance to edges and choose 'left' or 'right'
+			// TODO: gradient background
+			secondaryContainer.style[direction] = `${popupWidth - 2}px`;	// -2 to account for some box measurement problem i can't figure out
+			if (props.secondaryData.classes) {
+				secondaryContainer.classList.add(...props.secondaryData.classes);
+			}
 
 			let secondaryBody = document.createElement('p');
 			secondaryBody.classList.add('body');
-			secondaryBody.textContent = props.secondaryDesc;
+			secondaryBody.textContent = props.secondaryData.body;
+			// secondaryBody.style.maxHeight = `calc(${h}px - 0.5em)`;
 			secondaryContainer.appendChild(secondaryBody);
 
 			props.target.appendChild(secondaryContainer);
@@ -194,7 +202,7 @@ class PopupManager {
 		return document.querySelector(`[data-popuptarget="${selector}"]`);
 	}
 
-	manage (section, name, desc, secondaryDesc) {
+	manage (section, name, desc, secondaryData) {
 		const id = this.makeID(section, name);
 		const keys = Object.keys(this.popups);
 		if (name && section) {
@@ -215,7 +223,7 @@ class PopupManager {
 			this.open({
 				target,
 				desc,
-				secondaryDesc,
+				secondaryData,
 				section,
 				name,
 				id,

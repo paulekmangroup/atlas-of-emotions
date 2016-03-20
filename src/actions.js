@@ -1043,9 +1043,19 @@ export default {
 		*/
 		if (action) {
 
-			let valenceDesc = action.valence && emotionsData.metadata.actions.qualities[action.valence - 1].body;
+			let secondaryData;
+			if (action.valence) {
+				secondaryData = {
+					body: action.valence && emotionsData.metadata.actions.qualities[action.valence - 1].body,
+					classes: [
+						this.currentEmotion,
+						_.findKey(VALENCES, (val) => val === action.valence).toLowerCase()
+					]
+				};
+			}
+			console.log("TODO: 1. reorder metadata.actions.qualities to match VALENCES, 2. tweak background fill alphas, 3. set max-height on secondaryBody, 4. display sidecar left/right as needed");
 
-			dispatcher.popupChange('actions', action.name, action.desc, valenceDesc);
+			dispatcher.popupChange('actions', action.name, action.desc, secondaryData);
 			states.displayHighlightedStates(action.states);
 
 		} else {

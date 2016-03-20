@@ -104,9 +104,9 @@ const dispatcher = {
 
 	},
 
-	popupChange: function (section, emotion, desc, secondaryDesc) {
+	popupChange: function (section, emotion, desc, secondaryData) {
 
-		this.emit(this.EVENTS.POPUP_CHANGE, section, emotion, desc, secondaryDesc);
+		this.emit(this.EVENTS.POPUP_CHANGE, section, emotion, desc, secondaryData);
 
 	},
 

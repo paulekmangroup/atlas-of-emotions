@@ -78,21 +78,12 @@ $label-fade-out-time: 0.5s;
 	&.sadness { fill: $color-sadness; }
 }
 
-@mixin emotion-background-color () {
-	&.anger { background-color: rgba($color-anger, 0.5); }
-	&.disgust { background-color: rgba($color-disgust, 0.5); }
-	&.enjoyment { background-color: rgba($color-enjoyment, 0.5); }
-	&.fear { background-color: rgba($color-fear, 0.5); }
-	&.sadness { background-color: rgba($color-sadness, 0.5); }
-	background-blend-mode: multiply;
-}
-
-@mixin emotion-background-color-light () {
-	&.anger { background-color: rgba($color-anger, 0.4); }
-	&.disgust { background-color: rgba($color-disgust, 0.4); }
-	&.enjoyment { background-color: rgba($color-enjoyment, 0.4); }
-	&.fear { background-color: rgba($color-fear, 0.4); }
-	&.sadness { background-color: rgba($color-sadness, 0.4); }
+@mixin emotion-background-color ($val:0.5) {
+	&.anger { background-color: rgba($color-anger, $val); }
+	&.disgust { background-color: rgba($color-disgust, $val); }
+	&.enjoyment { background-color: rgba($color-enjoyment, $val); }
+	&.fear { background-color: rgba($color-fear, $val); }
+	&.sadness { background-color: rgba($color-sadness, $val); }
 	background-blend-mode: multiply;
 }
 
