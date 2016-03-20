@@ -59,7 +59,7 @@ $horiz-padding: 20px;
 		width: 0px;
 		top: -1px;		// account for some box measurement problem i can't figure out
 
-		padding: calc(#{$vert-padding}/* + 0.8em*/) $horiz-padding $vert-padding $horiz-padding;
+		padding: calc(#{$vert-padding}) $horiz-padding $vert-padding $horiz-padding;
 		opacity: 0.0;
 		overflow: hidden;
 
@@ -84,6 +84,7 @@ $horiz-padding: 20px;
 			color: $text-overlay-color;
 		}
 
+		// white background below to improve readability/contrast
 		&::before {
 			z-index: -1;
 			display: block;
@@ -96,6 +97,12 @@ $horiz-padding: 20px;
 			background-color: $popup-background-color;
 			opacity: inherit;
 			transition: inherit;
+		}
+
+		.body {
+			// limit to 3 lines
+			max-height: calc(#{$body-line-height} * 3);
+			overflow: hidden;
 		}
 	}
 }

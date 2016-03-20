@@ -1053,7 +1053,6 @@ export default {
 					]
 				};
 			}
-			console.log("TODO: 3. set max-height on secondaryBody");
 
 			dispatcher.popupChange('actions', action.name, action.desc, secondaryData);
 			states.displayHighlightedStates(action.states);
