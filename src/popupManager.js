@@ -1,4 +1,5 @@
 import dispatcher from './dispatcher.js';
+import sassVars from '../scss/variables.json';
 
 class PopupManager {
 	constructor () {
@@ -45,23 +46,34 @@ class PopupManager {
 		clone.style.cssText = `width: ${w}px;`;
 		clone.offsetWidth; // force repaint
 
-		let h = clone.offsetHeight;
+		// measure elements while at full size
+		let h = clone.offsetHeight,
+			popupWidth = props.target.offsetWidth,
+			popupHeight = props.target.offsetHeight;
+
 		clone.style.cssText = 'width: 0px; height: 0px;';
 		clone.offsetWidth; // force repaint
 
 		if (props.secondaryDesc) {
-			console.log(">>>>> TODO: display secondary content to left when toward right edge of viewport");
+
 			let secondaryContainer = document.createElement('div');
 			secondaryContainer.classList.add('secondary');
-			secondaryContainer.style.width = `${w}px`;
-			secondaryContainer.textContent = props.secondaryDesc;
+			secondaryContainer.style.height = `${popupHeight}px`;
+			secondaryContainer.style.left = `${popupWidth - 2}px`;	// -2 to account for some box measurement problem i can't figure out
+
+			let secondaryBody = document.createElement('p');
+			secondaryBody.classList.add('body');
+			secondaryBody.textContent = props.secondaryDesc;
+			secondaryContainer.appendChild(secondaryBody);
+
 			props.target.appendChild(secondaryContainer);
-
-			let secondaryBkgd = document.createElement('div');
-			secondaryBkgd.classList.add('secondary-bkgd');
-			props.target.appendChild(secondaryBkgd);
-
 			props.target.classList.add('has-secondary');
+
+			setTimeout(() => {
+				secondaryContainer.style.width = `${popupWidth}px`;
+				secondaryContainer.style.opacity = 1.0;
+			}, sassVars.ui.popups.duration.open * 0.5 * 1000);
+
 		}
 
 		clone.classList.add('transition');
@@ -102,17 +114,31 @@ class PopupManager {
 		const target = this.popups[key].target;
 		const popup = this.popups[key].popup;
 
+		let closePopup = () => {
+			popup.addEventListener('transitionend', this.onTransitionOut.bind(this, key), false);
+			target.classList.remove('popped');
+			popup.classList.add('fade-out');
+		};
+
 		if (target.classList.contains('has-secondary')) {
-			console.log(">>>>> animate secondaryContainer closed");
-			target.removeChild(target.querySelector('.secondary'));
-			target.removeChild(target.querySelector('.secondary-bkgd'));
-			target.classList.remove('has-secondary');
+
+			// if secondary container exists, close it (fast) and then the popup
+			let secondaryContainer = target.querySelector('.secondary');
+			secondaryContainer.addEventListener('transitionend', (event) => {
+				target.removeChild(secondaryContainer);
+				target.classList.remove('has-secondary');
+				closePopup();
+			});
+			secondaryContainer.classList.add('closing');
+			secondaryContainer.style.width = '0px';
+
+		} else {
+
+			// else, just the popup immediately
+			closePopup();
+
 		}
 
-		popup.addEventListener('transitionend', this.onTransitionOut.bind(this, key), false);
-
-		target.classList.remove('popped');
-		popup.classList.add('fade-out');
 	}
 
 	closeAll () {

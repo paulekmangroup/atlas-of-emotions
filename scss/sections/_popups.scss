@@ -1,5 +1,6 @@
 $body-font-size: 0.8em;
 $body-line-height: 1.25em;
+$vert-padding: 18px;
 $horiz-padding: 20px;
 
 .popped {
@@ -20,7 +21,7 @@ $horiz-padding: 20px;
 	&.popped {
 		@include emotion-border-color();
 		background: rgba(255,255,255,0.8);
-		padding: 18px $horiz-padding;
+		padding: $vert-padding $horiz-padding;
 
 		&.show-only {
 			opacity: 1.0;
@@ -51,29 +52,28 @@ $horiz-padding: 20px;
 		opacity: 0.5 !important;
 	}
 
-	&.has-secondary {
-		white-space: nowrap;
-	}
-
 	.secondary {
-		display: inline-block;
-		padding-left: $horiz-padding;
-
-		font-size: $body-font-size;
-		line-height: $body-line-height;
-		white-space: normal;
-	}
-
-	.secondary-bkgd {
 		position: absolute;
-		width: 50%;
-		height: 100%;
-		top: 0;
-		right: 0;
+		display: block;
+		box-sizing: border-box;
+		width: 0px;
+		top: -1px;		// account for some box measurement problem i can't figure out
 
-		background-color: rgba(0, 255, 0, 0.25);
-		border-left-width: 1px;
-		border-left-style: solid;
+		background-color: rgba(0, 0, 255, 0.25);
+
+		padding: calc(#{$vert-padding} + 0.8em) $horiz-padding $vert-padding $horiz-padding;
+		opacity: 0.0;
+		overflow: hidden;
+
+		border-width: 1px;
+		border-style: solid;
+		@include emotion-border-color(1.0);
+
+		transition: width #{$ui-popups-duration-open}s ease, opacity #{$ui-popups-duration-open}s ease;
+
+		&.closing {
+			transition: width #{0.5 * $ui-popups-duration-open}s ease-out, opacity #{0.5 * $ui-popups-duration-open}s ease-out;
+		}
 	}
 }
 
@@ -135,21 +135,14 @@ $horiz-padding: 20px;
 	.title {
 		display: none;
 	}
+}
 
+.popup-template,
+.secondary {
 	.body {
 		margin: 0.5em 0 0;
 		font-size: $body-font-size;
 		line-height: $body-line-height;
 		word-wrap: break-word;
-	}
-
-	.has-secondary & {
-		display: inline-block;
-		white-space: normal;
-		padding-right: $horiz-padding;
-
-		.close {
-			right: calc(50% + 0.5 * #{$horiz-padding});
-		}
 	}
 }
