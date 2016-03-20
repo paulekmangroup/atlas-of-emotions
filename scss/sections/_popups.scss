@@ -32,7 +32,7 @@ $horiz-padding: 20px;
 		}
 	}
 
-	&.default-interactive-helper,
+	// &.default-interactive-helper,
 	&.highlighted,
 	&.selected {
 		@include emotion-border-color();
@@ -46,8 +46,8 @@ $horiz-padding: 20px;
 		}
 	}
 
-	&.muted,
-	&.muted.default-interactive-helper {
+	// &.muted.default-interactive-helper,
+	&.muted {
 		@include emotion-border-color(0.0);
 		opacity: 0.5 !important;
 	}
