@@ -1053,7 +1053,7 @@ export default {
 					]
 				};
 			}
-			console.log("TODO: 1. reorder metadata.actions.qualities to match VALENCES, 2. tweak background fill alphas, 3. set max-height on secondaryBody, 4. display sidecar left/right as needed");
+			console.log("TODO: 1. reorder metadata.actions.qualities to match VALENCES, 3. set max-height on secondaryBody");
 
 			dispatcher.popupChange('actions', action.name, action.desc, secondaryData);
 			states.displayHighlightedStates(action.states);

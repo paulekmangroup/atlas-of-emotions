@@ -56,17 +56,25 @@ class PopupManager {
 
 		if (props.secondaryData) {
 
+			let targetLeft = props.target.getBoundingClientRect().left,
+				distRight = window.innerWidth - (targetLeft + 2*w),
+				direction = targetLeft < distRight ? 'left' : 'right';
+
 			let secondaryContainer = document.createElement('div');
 			secondaryContainer.classList.add('secondary');
 			secondaryContainer.style.height = `${popupHeight}px`;
 
-			let direction = 'left';
-			// TODO: determine distance to edges and choose 'left' or 'right'
-			// TODO: gradient background
 			secondaryContainer.style[direction] = `${popupWidth - 2}px`;	// -2 to account for some box measurement problem i can't figure out
 			if (props.secondaryData.classes) {
 				secondaryContainer.classList.add(...props.secondaryData.classes);
 			}
+
+			let secondaryBkgd = document.createElement('div');
+			secondaryBkgd.classList.add('background');
+			if (props.secondaryData.classes) {
+				secondaryBkgd.classList.add(...props.secondaryData.classes);
+			}
+			secondaryContainer.appendChild(secondaryBkgd);
 
 			let secondaryBody = document.createElement('p');
 			secondaryBody.classList.add('body');

@@ -20,7 +20,7 @@ $horiz-padding: 20px;
 
 	&.popped {
 		@include emotion-border-color();
-		background: rgba(255,255,255,0.8);
+		background: $popup-background-color;
 		padding: $vert-padding $horiz-padding;
 
 		&.show-only {
@@ -63,6 +63,14 @@ $horiz-padding: 20px;
 		opacity: 0.0;
 		overflow: hidden;
 
+		@include emotion-background-color(0.5);
+		&.constructive {
+			@include emotion-background-color(0.75);
+		}
+		&.destructive {
+			@include emotion-background-color(0.25);
+		}
+
 		border-width: 1px;
 		border-style: solid;
 		@include emotion-border-color(1.0);
@@ -72,13 +80,22 @@ $horiz-padding: 20px;
 			transition: width #{0.5 * $ui-popups-duration-open}s ease-out, opacity #{0.5 * $ui-popups-duration-open}s ease-out;
 		}
 
-		@include emotion-background-color(0.5);
 		&.constructive {
-			@include emotion-background-color(0.75);
 			color: $text-overlay-color;
 		}
-		&.destructive {
-			@include emotion-background-color(0.25);
+
+		&::before {
+			z-index: -1;
+			display: block;
+			position: absolute;
+			width: inherit;
+			height: inherit;
+			left: 0;
+			top: 0;
+			content: ' ';
+			background-color: $popup-background-color;
+			opacity: inherit;
+			transition: inherit;
 		}
 	}
 }
