@@ -112,6 +112,12 @@
 		"intro": {
 			"delay": 1.0
 		},
+		"labels": {
+			"duration": {
+				"in": 1.0,
+				"out": 0.5
+			}
+		},
 		"popups": {
 			"duration": {
 				"open": 0.5,

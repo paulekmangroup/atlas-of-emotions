@@ -370,14 +370,17 @@ export default function (...initArgs) {
 			initSection(section);
 		}
 
-
-		if (sectionName === 'more' && section.setPreviousSection) section.setPreviousSection(previousNonSecondaryHash.section);
+		// if navigating into 'more' section, store current section
+		// for navigating back to when leaving 'more' section
+		if (sectionName === 'more' && section.setPreviousSection) {
+			section.setPreviousSection(previousNonSecondaryHash.section);
+		}
 
 		let backgroundSections = section.backgroundSections || [];
 
 		if (!previousSection) {
 
-			// first section opened in this session
+			// this is the first section opened in this session
 
 			// update down arrow
 			fadeArrowOutAndIn(sectionName);
@@ -406,6 +409,7 @@ export default function (...initArgs) {
 			});
 
 			setSectionEmotion(section, previousEmotion, previousMorePage);
+
 		} else {
 
 			// some section is already open; perform transition
@@ -427,7 +431,7 @@ export default function (...initArgs) {
 				// sections can have background sections.
 				// when a section is opened, all its background sections must be opened and backgrounded.
 				// when a section is closed, for all of its background sections:
-				// 	if the section to which we're navigating is a background section, unbackground it
+				// 	if the section to which we're navigating is a background section, unbackground it;
 				// 	else close the background section.
 				//
 
@@ -485,10 +489,14 @@ export default function (...initArgs) {
 				}
 
 				Promise.all(promises).then(values => {
+
 					if (!previousSectionBackgrounded) {
-						// hide the previous section's container if not backgrounded
+						// hide the previous section's container if not backgrounded,
+						// after a delay if specified
 						if (previousContainer) {
-							previousContainer.style.display = 'none';
+							setTimeout(() => {
+								previousContainer.style.display = 'none';
+							}, previousSection.closeDelay || 0);
 						}
 					}
 

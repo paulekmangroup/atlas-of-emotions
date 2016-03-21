@@ -19,6 +19,7 @@ const continentsSection = {
 
 	isInited: false,
 	isActive: false,
+	closeDelay: sassVars.ui.labels.duration.in * 1000,
 
 	init: function (containerNode) {
 		this.sectionContainer = containerNode;
@@ -335,7 +336,9 @@ const continentsSection = {
 				// if there is a selected continent, and we're transitioning into States,
 				// animate the continent down into the floor of the States graph.
 
-				let targetScale = 1.0;
+				let targetScale = 1.0,
+					spreadDelay = sassVars.continents.spread.delay.in * 1000,
+					spreadDuration = sassVars.continents.spread.duration.in * 1000;
 
 				this.transitions.scaleContinents(
 					continents
@@ -348,22 +351,25 @@ const continentsSection = {
 
 				setTimeout(() => {
 					targetScale = this.transitions.focusZoomedOutContinent(continent.id);
-				}, sassVars.continents.spread.delay.in * 1000);
+				}, spreadDelay);
 
 				setTimeout(() => {
 					this.transitions.spreadFocusedContinent(continent.id, targetScale);
-				}, sassVars.continents.spread.delay.in * 1000);
+				}, spreadDelay);
 
 				setTimeout(() => {
-
 					// turn off updates and interaction
 					this.setActive(false);
 
-					// resolve once continent zoom transition completes
+					// store continent zoomed into for later reverse animation
 					this.zoomedInContinent = continent.id;
-					resolve();
+				}, spreadDelay + spreadDuration);
 
-				}, (sassVars.continents.spread.delay.in + sassVars.continents.spread.duration.in) * 1000);
+				setTimeout(() => {
+					// resolve `closeDelay` ms before continent zoom transition completes,
+					// to allow overlap between continent transition and next section's intro transition
+					resolve();
+				}, spreadDelay + spreadDuration - this.closeDelay);
 
 			} else {
 				this.setActive(false);
