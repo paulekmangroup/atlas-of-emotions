@@ -104,9 +104,9 @@ export default {
 		//
 		let margin = {
 			top: 20,
-			right: 20,
+			right: sassVars.states.graph.margins.right,
 			bottom: 50,
-			left: 20
+			left: sassVars.states.graph.margins.left
 		};
 
 		// All the same size, just grab the first one

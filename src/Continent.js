@@ -10,10 +10,6 @@ import sassVars from '../scss/variables.json';
 const FRAMERATE = 60;
 const MAX_NUM_CIRCLES = 8;
 
-// zoomed-in continents (with spread circles) are
-// this much larger than their corresponding state graph.
-const SPREAD_SCALE = 1.2;
-
 export default class Continent {
 
 	static HIGHLIGHT_LEVELS = {
@@ -169,13 +165,13 @@ export default class Continent {
 			Continent.transforms = _.shuffle(Continent.BASE_TRANSFORMS);
 		}
 
-		this.initInstanceProperties(emotion, container, continentGeom, transforms);
+		this.initInstanceProperties(emotion, container, transforms);
 		this.onResize(continentGeom);
 		this.prepopulate();
 
 	}
 
-	initInstanceProperties (emotion, container, continentGeom, transforms) {
+	initInstanceProperties (emotion, container, transforms) {
 
 		let emotionIndex = Object.keys(Continent.configsByEmotion).indexOf(emotion);
 		if (emotionIndex === -1) {
@@ -356,10 +352,13 @@ export default class Continent {
 
 	}
 
+	/**
+	 * @param	container		SVG node containing all continents
+	 * @param	containerScale	Scale that will be applied to this Continent, from continents.focusZoomedOutContinent()
+	 */
 	spreadCircles (container, containerScale) {
 
-		// TODO: set up range / margins in constructor
-		// TODO: DRY this out. Copied from states.js.
+		// TODO: DRY this out. Most of this math is copied from states.js.
 		// TODO: creating + manipulating circles here, instead of using Circle.js, is going to cause problems.
 
 		this.isFocused = true;
@@ -367,21 +366,19 @@ export default class Continent {
 
 		// d3 conventional margins
 		let margin = {
-				top: 20,
-				right: 20,
-				bottom: 50,
-				left: 20
+				right: sassVars.states.graph.margins.right,
+				left: sassVars.states.graph.margins.left
 			},
-			statesGraphWidth = 0.7,		// from _variables.scss
+			statesGraphWidth = parseFloat(sassVars.states.graph.width.replace('%', '')) / 100,
 			containerBounds = container.getBoundingClientRect(),
-			innerWidth = statesGraphWidth * (containerBounds.width - margin.left - margin.right) / containerScale * SPREAD_SCALE,
-			innerHeight = (containerBounds.height - margin.top - margin.bottom) / containerScale * SPREAD_SCALE,
+			innerWidth = (statesGraphWidth * containerBounds.width - margin.left - margin.right) / containerScale,
+			centerOffset = (sassVars.continents.centerX - 0.5) * containerBounds.width / containerScale,
 			xScale = d3.scale.linear()
 				.domain([0, 10])
-				.range([-0.5 * innerWidth, 0.5 * innerWidth]),
+				.range([-0.5 * innerWidth - centerOffset, 0.5 * innerWidth - centerOffset]),
 			rScale = d3.scale.linear()
 				.domain([0, 10])
-				.range([0, 0.5 * innerWidth]);
+				.range([0, innerWidth]);
 
 		const growTime = sassVars.continents.spread.duration.in * 1000,
 			shrinkTime = 0.5 * growTime;
@@ -531,14 +528,12 @@ export default class Continent {
 				min = state.range.min - 1,
 				halfWidth = 0.5 * (max - min),
 
-				// This line allows strokeWidth to vary from a half-full circle to a nearly-full circle.
+				// allow strokeWidth to vary from a half-full circle to a nearly-full circle
 				strokeWidth = (0.4 + 0.5 * Math.random()) * halfWidth;
 
 			return {
 				cx: min + halfWidth,
-
-				// Allow circles to occupy a bit more room than state graph xScale.
-				strokeWidth: strokeWidth * 1.2,
+				strokeWidth: strokeWidth,
 
 				// To keep total width pegged to state graph xScale,
 				// r + 0.5 * strokeWidth must equal halfWidth.

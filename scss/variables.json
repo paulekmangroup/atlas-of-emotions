@@ -1,5 +1,7 @@
 {
 	"continents": {
+		"centerX": 0.48,
+		"centerY": 0.5,
 		"panX": {
 			"duration": {
 				"in": 0.75,
@@ -34,6 +36,13 @@
 		}
 	},
 	"states": {
+		"graph": {
+			"width": "60%",
+			"margins": {
+				"left": 20,
+				"right": 20
+			}
+		},
 		"backgrounded": {
 			"actions": {
 				"scale": 0.6,

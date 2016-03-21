@@ -39,8 +39,8 @@ const continentsSection = {
 			h = containerNode.offsetHeight,
 			continentGeom;
 
-		centerX = 0.48 * w;
-		centerY = 0.5 * h;
+		centerX = sassVars.continents.centerX * w;
+		centerY = sassVars.continents.centerY * h;
 		continentGeom = {
 			w: w,
 			h: h,
@@ -634,8 +634,7 @@ const continentsSection = {
 
 			return new Promise((resolve, reject) => {
 
-				let targetContinents = continents.filter(continent => ~emotions.indexOf(continent.id)),
-					translate;
+				let targetContinents = continents.filter(continent => ~emotions.indexOf(continent.id));
 				targetContinents.forEach(continent => {
 
 					// toggle spawning
