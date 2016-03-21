@@ -1690,7 +1690,7 @@
   "metadata": {
     "intro": {
       "header": "Welcome to the Atlas of Emotions ",
-      "body": "This is an opportunity for you to explore the vast world of emotions. This collection of maps is based on the work of many scholars and was created by Paul and Eve Ekman to help you better understand your emotions, where they come from and the effects they have on your life.<br><br>Navigate by scrolling between sections or by using the right-hand navigation bar, and by clicking elements to dig deeper."
+      "body": "This is an opportunity for you to explore the vast world of emotions. This collection of maps is based on the work of many scholars and was created by <a class=\"aboutLink\" href=\"#more:about\">Paul and Eve Ekman</a> to help you better understand your emotions, where they come from and the effects they have on your life.<br><br>Navigate by scrolling between sections or by using the right-hand navigation bar, and by clicking elements to dig deeper."
     },
     "continents": {
       "header": "The Five Continents of Emotion",
