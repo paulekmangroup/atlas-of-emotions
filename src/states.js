@@ -543,6 +543,12 @@ export default {
 	open: function (options) {
 		this.setBackgrounded(options && options.inBackground, options);
 
+		// if not in the background, clear out previousEmotion
+		// to prevent unneccesary animation between emotions
+		if (!options.inBackground) {
+			this.currentEmotion = null;
+		}
+
 		if (options && (options.sectionName === dispatcher.SECTIONS.STATES || options.sectionName === dispatcher.SECTIONS.ACTIONS)) {
 			// handle background click for deselection
 			d3.select('#main').on('click', this.onBackgroundClick, false);
