@@ -1369,14 +1369,36 @@ export default {
 
 	applyEffects: function (selection) {
 
+		let isSafari = navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1;
+		let isFirefox = navigator.userAgent.indexOf('Firefox') > -1;
+
 		if (this.currentEmotion === 'sadness') {
-			selection.attr('filter', 'url(#sadness-blur-1)');
-			setTimeout(() => {
-				selection.attr('filter', 'url(#sadness-blur-2)');
-			}, 0.85 * this.transitions.sadness.duration);
-			setTimeout(() => {
-				selection.attr('filter', 'url(#sadness-blur-3)');
-			}, 1.0 * this.transitions.sadness.duration);
+			if(isSafari){
+				// blur immediately, to avoid awkward color switch
+				selection.attr('filter', 'url(#sadness-blur-1)');
+			} else if(!isFirefox) {
+				setTimeout(() => {
+					selection.attr('filter', 'url(#sadness-blur-1)');
+				}, 0.8 * this.transitions.sadness.duration);
+			}
+
+			// non firefox
+			if(!isFirefox){
+				setTimeout(() => {
+					selection.attr('filter', 'url(#sadness-blur-2)');
+				}, 0.9 * this.transitions.sadness.duration);
+				setTimeout(() => {
+					selection.attr('filter', 'url(#sadness-blur-3)');
+				}, 1.0 * this.transitions.sadness.duration);
+			} else {
+				// for firefox, not as much blur & later
+				setTimeout(() => {
+					selection.attr('filter', 'url(#sadness-blur-1)');
+				}, 1.0 * this.transitions.sadness.duration);
+				setTimeout(() => {
+					selection.attr('filter', 'url(#sadness-blur-2)');
+				}, 1.1 * this.transitions.sadness.duration);
+			}
 		}
 
 	},
