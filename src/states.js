@@ -1008,8 +1008,6 @@ export default {
 		// TODO: DRY this out
 		defs.append('filter')
 			.attr('id', 'sadness-blur-0')
-			.attr('x', -16)
-			.attr('y', -16)
 			.attr('width', 128)
 			.attr('height', 128)
 		.append('feGaussianBlur')
