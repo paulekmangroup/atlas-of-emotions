@@ -137,7 +137,7 @@ export default {
 
 	setBackButton: function(element) {
 		const backToAtlas = document.createElement('div');
-		backToAtlas.innerHTML = "<h4>Back to Atlas</h4>";
+		backToAtlas.innerHTML = "<h4>BACK TO ATLAS</h4>";
 		backToAtlas.classList.add('back-to-atlas');
 		backToAtlas.addEventListener('click', this.onCloseButtonClicked.bind(this));
 		element.appendChild(backToAtlas);
