@@ -124,10 +124,8 @@ export default {
 
 		let visitAnnex = d3.select(this.sectionContainer).append('div')
 			.classed('visit-annex', true);
-		visitAnnex.append('h3')
+		visitAnnex.append('h4')
 			.text(emotionsData.metadata.calm.secondary.header.toUpperCase());
-		visitAnnex.append('p')
-			.text(emotionsData.metadata.calm.secondary.body);
 		visitAnnex.on('click', event => {
 			dispatcher.navigate(dispatcher.SECTIONS.MORE, null, 'annex');
 		});
