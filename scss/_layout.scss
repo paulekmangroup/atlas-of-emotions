@@ -362,7 +362,8 @@ a:active {
 	display: inline-block;
 	bottom: 0em;
 	left: 50%;
-	margin: 1em 0em 1em -2.5em;
+	transform: translateX(-50%);
+	margin: 1em 0em 1em 0em;
 
 	border: 1px solid;
 	text-align: center;
