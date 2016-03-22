@@ -129,12 +129,7 @@ export default {
 		visitAnnex.append('p')
 			.text(emotionsData.metadata.calm.secondary.body);
 		visitAnnex.on('click', event => {
-			dispatcher.openMoreInfoMenu();
-			/*
-			let moreInfoMenu = document.querySelector('#more-info .dropup');
-			if (moreInfoMenu) {
-				moreInfoMenu.classList.add('open');
-			}*/
+			dispatcher.navigate(dispatcher.SECTIONS.MORE, null, 'annex');
 		});
 
 		this.initLabels(this.labelContainer);

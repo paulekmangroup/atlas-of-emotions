@@ -10,7 +10,6 @@ const dispatcher = {
 		MODAL_CHANGE: 'modalChange',
 		POPUP_CHANGE: 'popupChange',
 		POPUP_CLOSE_BUTTON_CLICKED: 'popupCloseButtonClicked',
-		OPEN_MORE_INFO_MENU: 'openMoreInfoMenu'
 	},
 
 	SECTIONS: {
@@ -120,10 +119,6 @@ const dispatcher = {
 
 		this.emit(this.EVENTS.CHANGE_EMOTION_STATE, state, selected);
 
-	},
-
-	openMoreInfoMenu: function () {
-		this.emit(this.EVENTS.OPEN_MORE_INFO_MENU);
 	},
 
 	validateSection: function (section) {
