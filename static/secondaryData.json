@@ -100,7 +100,7 @@
         },
         {
           "name": "Sadness",
-          "desc": "Depression is a well-known psychopathology that is reported to affect over 25 percent of the population. When you have depression, it interferes with daily life and causes pain for both you and those who care about you. Depression is a common but serious illness.\n",
+          "desc": "Depression is a well-known psychopathology that is reported to affect over 25% of the population. When you have depression, it interferes with daily life and causes pain for both you and those who care about you. Depression is a common but serious illness.\n",
           "children": [
             {
               "name": "Major Depressive Disorder",
@@ -387,7 +387,7 @@
             },
             {
               "name": "Dislike",
-              "desc": "While evaluating impartially the ethical issues, generating compassion so as to find the best way to remedy to the causes and conditions that triggered dislike."
+              "desc": "While evaluating impartially the ethical issues, generating compassion so as to find the best way to remedy the causes and conditions that triggered dislike."
             },
             {
               "name": "Distaste",

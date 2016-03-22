@@ -1690,7 +1690,7 @@
   "metadata": {
     "intro": {
       "header": "Welcome to the Atlas of Emotions ",
-      "body": "This is an opportunity for you to explore the vast world of emotions. This collection of maps is based on the work of many scholars and was created by <a class=\"aboutLink\" href=\"#more:about\">Paul and Eve Ekman</a> to help you better understand your emotions, where they come from and the effects they have on your life.<br><br>Navigate by scrolling between sections or by using the right-hand navigation bar, and by clicking elements to dig deeper."
+      "body": "This is an opportunity for you to explore the vast world of emotions. This collection of maps is based on the work of many scholars and was created by  <a class=\"aboutLink\" href=\"#more:about\">Doctors Paul Ekman and Eve Ekman</a> and built by <a href=\"http://www.stamen.com/\">Stamen Design</a> to help you better understand your emotions, where they come from and the effects they have on your life.<br><br>Navigate by scrolling between sections or by using the right-hand navigation bar, and by clicking elements to dig deeper."
     },
     "continents": {
       "header": "The Five Continents of Emotion",
@@ -1752,7 +1752,8 @@
       "header": "Achieving Calm",
       "body": "It is very difficult to modify our emotional actions once our emotions have been triggered. Focusing on identifying our triggers, instead of on our emotional actions, may enable us to lead a more balanced emotional life.<br><br>Calm is a balanced frame of mind that is actively engaged in evaluating and understanding our changing emotions without dwelling on them or being ruled by them.",
       "secondary": {
-        "header": "Visit the Annex"
+        "header": "Visit the Annex",
+        "body": "To learn more about emotions, click on “More Information” in the bottom right corner."
       }
     }
   }
