@@ -1370,15 +1370,10 @@ export default {
 	applyEffects: function (selection) {
 
 		if (this.currentEmotion === 'sadness') {
-			setTimeout(() => {
-				selection.attr('filter', 'url(#sadness-blur-0)');
-			}, 0.6 * this.transitions.sadness.duration);
-			setTimeout(() => {
-				selection.attr('filter', 'url(#sadness-blur-1)');
-			}, 0.8 * this.transitions.sadness.duration);
+			selection.attr('filter', 'url(#sadness-blur-1)');
 			setTimeout(() => {
 				selection.attr('filter', 'url(#sadness-blur-2)');
-			}, 0.9 * this.transitions.sadness.duration);
+			}, 0.85 * this.transitions.sadness.duration);
 			setTimeout(() => {
 				selection.attr('filter', 'url(#sadness-blur-3)');
 			}, 1.0 * this.transitions.sadness.duration);
