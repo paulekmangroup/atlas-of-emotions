@@ -118,12 +118,29 @@ export default {
 
 		containerEl.classList.add('more-child');
 		outerwrapper.classList.add('outer-wrapper');
-		innerwrapper.classList.add('wrapper');
 
 		outerwrapper.appendChild(innerwrapper);
 		containerEl.appendChild(outerwrapper);
 
+		if (id == 'more-about' || id == 'more-annex' || id == 'more-donate' || id == 'more-further') {
+			// add back button for main more pages
+			const innerinnerwrapper = document.createElement('div');
+			innerinnerwrapper.classList.add('wrapper');
+			innerwrapper.appendChild(innerinnerwrapper);
+			this.setBackButton(innerwrapper);
+		} else {
+			innerwrapper.classList.add('wrapper');
+		}
+
 		return containerEl;
+	},
+
+	setBackButton: function(element) {
+		const backToAtlas = document.createElement('div');
+		backToAtlas.innerHTML = "<h4>Back to Atlas</h4>";
+		backToAtlas.classList.add('back-to-atlas');
+		backToAtlas.addEventListener('click', this.onCloseButtonClicked.bind(this));
+		element.appendChild(backToAtlas);
 	},
 
 	initContainers: function() {
