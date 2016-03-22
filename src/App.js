@@ -291,18 +291,9 @@ export default function (...initArgs) {
 		modalCopy.classList.add('body');
 		modalCopy.innerHTML = emotionsData.metadata.intro.body;
 
-		let closeButton = document.createElement('div');
-		closeButton.classList.add('close-button');
-
 		modal.appendChild(modalHeadline);
 		modal.appendChild(modalCopy);
-		modal.appendChild(closeButton);
 
-		closeButton.addEventListener('click', (event) => {
-			event.stopImmediatePropagation();
-			markModalAsSeen();
-			setModalVisibility(false);
-		});
 
 		// enable infoButton
 		if (document.querySelector('#infoButton')) {
