@@ -354,16 +354,15 @@ a:active {
 #more-about {
 	.back-to-atlas {
 		position: relative;
-		bottom: 1em;
 	}
 }
 
 .back-to-atlas {
 	position: absolute;
-	bottom: 1em;
 	display: inline-block;
+	bottom: 0em;
 	left: 50%;
-	margin: 1em 0em 1em -3.5em;
+	margin: 1em 0em 1em -2.5em;
 
 	border: 1px solid;
 	text-align: center;
