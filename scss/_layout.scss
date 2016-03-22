@@ -351,6 +351,37 @@ a:active {
 	}
 }
 
+#more-about {
+	.back-to-atlas {
+		position: relative;
+		bottom: 1em;
+	}
+}
+
+.back-to-atlas {
+	position: absolute;
+	bottom: 1em;
+	display: inline-block;
+	left: 50%;
+	margin: 1em 0em 1em -3.5em;
+
+	border: 1px solid;
+	text-align: center;
+	padding: .2em .4em;
+
+	color: $text-color;
+	background-color: rgba($background-color, 0.5);
+	cursor: pointer;
+
+	h4 {
+		margin: 0;
+	}
+
+	p {
+		margin: 0;
+	}
+}
+
 #modal-overlay {
 	position: absolute;
 	top: 0;
