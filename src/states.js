@@ -1470,8 +1470,14 @@ export default {
 	},
 
 	onBackgroundClick: function () {
+		// check if on states or not
 		if (this.isBackgrounded) {
-			dispatcher.setEmotionState(null, true);
+			// check to see if any action labels are popped - if no, dispatch emotion state, if yes reset popups
+			if(d3.selectAll('.label').filter('.popped')[0].length == 0){
+				dispatcher.setEmotionState(null, true);
+			} else {
+				dispatcher.popupChange();
+			}
 		} else {
 			this.selectedState = null;
 			this.setHighlightedState(null);
