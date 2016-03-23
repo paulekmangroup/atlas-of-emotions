@@ -845,22 +845,13 @@ export default {
 				.duration(sassVars.actions.update.time)
 				.styleTween('transform', (() => function (d, i, a) {
 
-					// BUG: `a` can refer to the value of an element that was removed from the selection.
-					// in this case, the element being transitioned jumps to the removed element's position
-					// at the start of the transition.
-					// need to figure out how to skip elements that are no longer in the transition.
-					// repro: click a different state to view a different set of actions.
-					// another repro: navigate between actions for already-loaded emotions.
-
-					// `a` is the previous value for the 'transform' style;
-					// d3 stores this internally as a matrix string.
-					// d3.transform() turns this string into a matrix object.
 					let previousTransform = a === 'none' ? null : d3.transform(a),
 						previousTranslate = previousTransform ? previousTransform.translate : [0, 0],
-						previousRotation = Math.atan2(previousTranslate[1], previousTranslate[0]),
+						verticalOffset = (i === 0 || i === labelSelection.size() - 1) ? 20 : 0,
+						// critical to fully invert function that translates from rotation to x/y translation
+						previousRotation = Math.atan2((previousTranslate[1] - verticalOffset) * sqrt3, (previousTranslate[0] + .5 * this.offsetWidth)),
 						targetRotation = Math.PI * (d.rotation-90) / 180,
-						rot,
-						verticalOffset = (i === 0 || i === labelSelection.size() - 1) ? 20 : 0;
+						rot;
 
 					return (t) => {
 						rot = previousRotation + t * (targetRotation - previousRotation);
