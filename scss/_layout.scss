@@ -232,6 +232,15 @@ a:active {
 	top: $header-height;
 	right: 0;
 	overflow: hidden;
+	pointer-events: none;
+
+	.mousemoveTriggerScrollbar {
+			pointer-events: all;
+			height: calc(100% - #{$header-height});
+			// width of hidden scrollbar trigger at 4 time segment-container's width
+			width: calc(0.75em * 4);
+			margin-left: calc(#{$emotions-dropdown-width} - 0.75em * 4);
+	}
 
 	div {
 		display: flex;

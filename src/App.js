@@ -187,6 +187,10 @@ export default function (...initArgs) {
 		let scrollbar = document.querySelector('#scrollbar'),
 			segmentContainer = document.createElement('div');
 
+		let mouseHandlerScrollBar = document.createElement('div');
+		mouseHandlerScrollBar.classList.add('mousemoveTriggerScrollbar');
+		scrollbar.appendChild(mouseHandlerScrollBar);
+
 		segmentContainer.classList.add('segment-container');
 		scrollbar.appendChild(segmentContainer);
 
@@ -205,11 +209,12 @@ export default function (...initArgs) {
 
 		});
 
-		/*
 		// Note: deprecated in favor of onScrollbarHitAreaEnter/onScrollbarHitAreaLeave/onScrollbarMouseMove
-		onWindowMouseMove = _.throttle(onWindowMouseMove, 50);
-		window.addEventListener('mousemove', onWindowMouseMove);
-		*/
+		//onWindowMouseMove = _.throttle(onWindowMouseMove, 50);
+		//window.addEventListener('mousemove', onWindowMouseMove);
+
+		// div that's 3x as wide as the minimized scrollbar, designed to capture mousemove events
+		mouseHandlerScrollBar.addEventListener('mousemove', onScrollbarMouseMove);
 
 		scrollbar.addEventListener('mouseenter', onScrollbarHitAreaEnter);
 		scrollbar.addEventListener('mouseleave', onScrollbarHitAreaLeave);
@@ -918,12 +923,15 @@ export default function (...initArgs) {
 	}
 
 	function onScrollbarMouseMove (event) {
+		// do this math elsewhere
 
 		let scrollbarX = event.pageX - scrollbarBounds.left,
 			scrollbarY = event.pageY - scrollbarBounds.top,
 			scrollbarRelX = scrollbarX / scrollbarBounds.width,
-			scrollbarTriggerX = scrollbarIsOpen ? 0.0 : 0.65;	// hit area increases once scrollbar is open,
+			// managing this with the width of the scrollbar mouse sensor box instead
+			//scrollbarTriggerX = scrollbarIsOpen ? 0.0 : 0.65;	// hit area increases once scrollbar is open,
 																// to make it harder to accidentally close once open
+			scrollbarTriggerX = 0;
 
 		if (scrollbarX < 0 || scrollbarX > window.innerWidth || scrollbarY < 0 || scrollbarY > scrollbarBounds.height) {
 			// manually call leave handler, in case it wasn't already called
