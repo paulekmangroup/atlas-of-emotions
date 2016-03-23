@@ -584,8 +584,9 @@ export default {
 		}
 
 		if (state && state === this.currentState) { return; }
+
 		// if transitioning from null selection to null selection, then skip transition
-		if (state === null && this.currentState === null) { return; }
+		
 		this.currentState = state;
 
 		let stateActionsData,
