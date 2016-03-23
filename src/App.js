@@ -61,9 +61,7 @@ export default function (...initArgs) {
 
 	function init (containerNode) {
 
-		if (renderSmallScreenWarning()) {
-			return;
-		}
+		renderSmallScreenWarning();
 
 		initContainers();
 		initSections();
@@ -670,6 +668,8 @@ export default function (...initArgs) {
 	 * Note: this function is _.debounce()d in init().
 	 */
 	function onResize () {
+
+		renderSmallScreenWarning();
 
 		// size main container to viewport
 		let headerHeight = 55;	// from _variables.scss
@@ -1292,6 +1292,9 @@ export default function (...initArgs) {
 	function renderSmallScreenWarning () {
 
 		if (window.innerWidth >= MIN_ALLOWED_WIDTH && window.innerHeight >= MIN_ALLOWED_HEIGHT) {
+			document.querySelector('body').classList.remove('small-screen-warning');
+			document.querySelector('#warning').innerHTML = '';
+			document.querySelector('#app-container').classList.remove("hidden");
 			return false;
 		}
 
@@ -1305,12 +1308,13 @@ export default function (...initArgs) {
 		warningDiv.appendChild(warningHeader);
 
 		let warningBody = document.createElement('p');
-		warningBody.innerHTML = 'For the best viewing experience, please enlarge your browser or view on a tablet or larger device.';
+		warningBody.innerHTML = 'For the best viewing experience, please enlarge your browser, switch to landscape, or view on a larger device.';
 		warningDiv.appendChild(warningBody);
 
 		// TODO: how to not blow away content for bots?
-		document.querySelector('#app-container').innerHTML = '';
-		document.querySelector('#app-container').appendChild(warningDiv);
+		document.querySelector('#warning').innerHTML = '';
+		document.querySelector('#warning').appendChild(warningDiv);
+		document.querySelector('#app-container').classList.add("hidden");
 
 		return true;
 
