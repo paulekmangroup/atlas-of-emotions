@@ -1746,7 +1746,7 @@
     },
     "moods": {
       "header": "The Mood of an Emotion",
-      "body": "Moods are longer-lasting cousins of emotions that cause the related emotion to be felt more frequently and intensely. It is not always apparent what triggers a mood."
+      "body": "Each emotion has one mood, a longer-lasting cousin of the emotion that causes the related emotion to be felt more frequently and intensely. It is not always apparent what triggers a mood."
     },
     "calm": {
       "header": "Achieving Calm",
