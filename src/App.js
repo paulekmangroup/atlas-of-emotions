@@ -867,7 +867,7 @@ export default function (...initArgs) {
 	function setScrollbarOpen (val) {
 
 		if (val && !scrollbarIsOpen) {
-			setScrollbarFractionalOpen(1.0, 0.15);
+			setScrollbarFractionalOpen(1.0, 0.08);
 		} else if (!val && scrollbarIsOpen) {
 			setScrollbarFractionalOpen(0.0, 0.08);
 		}
