@@ -739,10 +739,6 @@ export default {
 
 		this.renderLabels(null);
 
-		if (!this.isBackgrounded) {
-			this.resetCallout();
-		}
-
 		/*
 		if (this.currentEmotion) {
 			this.graphContainers[this.currentEmotion].select('g.valences').selectAll('path.valence')
