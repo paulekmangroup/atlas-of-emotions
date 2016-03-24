@@ -1706,15 +1706,15 @@
       "qualities": [
         {
           "header": "Constructive Actions",
-          "body": "Actions that further future collaboration with others."
+          "body": "Constructive action: enables collaboration with others."
         },
         {
           "header": "Ambiguous Actions",
-          "body": "An action can be both constructive and destructive, depending on the context."
+          "body": "Ambiguous action: either constructive and destructive, depending on the context."
         },
         {
           "header": "Destructive Actions",
-          "body": "Actions that decrease the likelihood of being able to collaborate with others."
+          "body": "Destructive action: inhibits collaboration with others."
         }
       ]
     },
