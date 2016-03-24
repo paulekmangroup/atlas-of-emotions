@@ -259,6 +259,9 @@ export default {
 		// handle background click for deselection
 		d3.select('#calm').on('click', val ? this.onBackgroundClick : null, false);
 
+		// hide emotion menu on calm, show again when you leave
+		d3.select('.emotion-menu').classed("hidden", val);
+
 	},
 
 	update: function (time) {
