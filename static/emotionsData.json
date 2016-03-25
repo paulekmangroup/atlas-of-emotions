@@ -1690,7 +1690,7 @@
   "metadata": {
     "intro": {
       "header": "Welcome to the Atlas of Emotions ",
-      "body": "This is an opportunity for you to explore the vast world of emotions. This collection of maps is based on the work of many scholars and was created by  <a class=\"aboutLink\" href=\"#more:about\">Doctors Paul Ekman and Eve Ekman</a> and built by <a href=\"http://www.stamen.com/\">Stamen Design</a> to help you better understand your emotions, where they come from and the effects they have on your life.<br><br>Navigate by scrolling between sections or by using the right-hand navigation bar, and by clicking elements to dig deeper."
+      "body": "This is an opportunity for you to explore the vast world of emotions. This collection of maps is based on the work of many scholars and was created by  <a class=\"aboutLink\" href=\"#more:about\">Doctors Paul Ekman and Eve Ekman</a> and built by <a href=\"http://www.stamen.com/\">Stamen Design</a> to help you better understand the landscapes of emotion, where they come from and the effects they can have.<br><br>Navigate by scrolling between sections or by using the right-hand navigation bar, and by clicking elements to dig deeper."
     },
     "continents": {
       "header": "The Five Continents of Emotion",
@@ -1702,7 +1702,7 @@
     },
     "actions": {
       "header": "The Actions of a State",
-      "body": "Each emotional state can result in a number of actions. The actions represented here are “intrinsic,” happening without conscious thought. <a id=\"annexLink\" href=\"#more:annex-intrinsic-remedial\">Visit the Annex</a> to learn about the difference between intrinsic and intentional actions. Click on a state to see whether an action is constructive or destructive.",
+      "body": "An emotional state may lead to actions, which can be intrinsic or intentional and constructive or destructive. Actions shown here are <a id=\"annexLink\" href=\"#more:annex-intrinsic-remedial\">intrinsic</a>, happening without conscious thought. Click on a state to explore.",
       "qualities": [
         {
           "header": "Constructive Actions",
@@ -1723,7 +1723,7 @@
       "body": "Triggers automatically bring forth an emotion without consideration.",
       "steps": [
         {
-          "header": "Event",
+          "header": "Triggers",
           "body": "Some triggers are universal, some are cultural, and some are individual."
         },
         {
