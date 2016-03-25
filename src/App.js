@@ -867,7 +867,7 @@ export default function (...initArgs) {
 	function setScrollbarOpen (val) {
 
 		if (val && !scrollbarIsOpen) {
-			setScrollbarFractionalOpen(1.0, 0.08);
+			setScrollbarFractionalOpen(1.0, 0.15);
 		} else if (!val && scrollbarIsOpen) {
 			setScrollbarFractionalOpen(0.0, 0.08);
 		}
@@ -895,7 +895,7 @@ export default function (...initArgs) {
 		let updatePos = function () {
 
 			let dPos = (speed || 0.25) * (scrollbarTgtPos - scrollbarPos);
-			if (Math.abs(dPos) < 1) {
+			if (Math.abs(dPos) < 0.25) {
 				segmentContainer.style.left = scrollbarTgtPos + 'px';
 				scrollbarAnimUpdate = null;
 			} else {
