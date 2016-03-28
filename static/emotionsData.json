@@ -1697,11 +1697,11 @@
       "body": "Each emotion is represented as a continent. The movement of the continents reflects how emotions vary in strength and frequency in people’s lives."
     },
     "states": {
-      "header": "The States of an Emotion",
+      "header": "The States of LHAMO",
       "body": "Each emotion contains a number of related states, which differ in intensity. The states shown here are representative, not exhaustive."
     },
     "actions": {
-      "header": "The Actions of a State",
+      "header": "The Actions of LHAMO",
       "body": "An emotional state may lead to actions, which can be intrinsic or intentional and constructive or destructive. Actions shown here are <a id=\"annexLink\" href=\"#more:annex-intrinsic-remedial\">intrinsic</a>, happening without conscious thought. Click on a state to explore.",
       "qualities": [
         {
@@ -1719,7 +1719,7 @@
       ]
     },
     "triggers": {
-      "header": "The Triggers of an Emotion",
+      "header": "The Triggers of LHAMO",
       "body": "Triggers automatically bring forth an emotion without consideration.",
       "steps": [
         {
@@ -1745,7 +1745,7 @@
       ]
     },
     "moods": {
-      "header": "The Mood of an Emotion",
+      "header": "The Mood of LHAMO",
       "body": "Each emotion has one mood, a longer-lasting cousin of the emotion that causes the related emotion to be felt more frequently and intensely. It is not always apparent what triggers a mood."
     },
     "calm": {

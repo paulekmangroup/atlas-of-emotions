@@ -1115,6 +1115,8 @@ export default function (...initArgs) {
 			return;
 		}
 
+		title = title.replace(/LHAMO/i, emotion);
+
 		callout.removeAttribute('class');
 		callout.classList.add('visible');
 
