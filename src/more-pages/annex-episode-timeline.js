@@ -50,7 +50,7 @@ const FAKE = [
 	},
 	{
 		header: 'Step 4',
-		name: 'Response',
+		name: 'Action',
 		nodes: []
 	},
 	{
