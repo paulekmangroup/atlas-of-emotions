@@ -935,9 +935,9 @@ export default {
 					'rejoicing': [-2.3, -.5],
 					'schadenfreude': [-1, -.5],
 					'relief': [-.5, -.5],
-					'pride': [-.4, -.5],
+					'pride': [-.45, -.6],
 					'fiero': [0, -.5],
-					'naches': [0.4, -.5],
+					'naches': [0.45, -.4],
 					'wonder': [.4, -.6],
 					'excitement': [.8, -.5],
 					'ecstasy': [0, 0]
