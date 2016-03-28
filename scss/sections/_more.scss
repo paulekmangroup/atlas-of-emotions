@@ -222,7 +222,7 @@
 	list-style: none;
 
 	li {
-		background-color: rgba($callout-background-color, 0.5);
+		background-color: rgba($scrollbar-background-color, 0.5);
 	}
 
 	li + li {
@@ -306,7 +306,7 @@
 
 	tr td {
 		padding: 1em;
-		background: rgba(rgb(230, 215, 200), 0.5);
+		background: rgba(rgb(238, 238, 238), 1);
 	}
 
 	tr.no-children {

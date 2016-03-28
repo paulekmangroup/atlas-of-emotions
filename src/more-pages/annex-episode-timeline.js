@@ -151,7 +151,7 @@ export default {
 			.attr('class', 'timeline-background')
 			.attr('y', 0)
 			.attr('x', 0)
-			.attr('fill', '#E8D6C7')
+			.attr('fill', '#eeeeee')
 			.attr('opacity', 1)
 			.attr('stroke', '#E8D6C7');
 
