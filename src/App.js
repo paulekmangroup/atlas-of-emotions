@@ -1310,7 +1310,7 @@ export default function (...initArgs) {
 		warningDiv.appendChild(warningHeader);
 
 		let warningBody = document.createElement('p');
-		warningBody.innerHTML = 'For the best viewing experience, please enlarge your browser, switch to landscape, or view on a larger device.';
+		warningBody.innerHTML = 'For the best viewing experience, please enlarge your browser, switch to landscape orientation, or view on a larger device.';
 		warningDiv.appendChild(warningBody);
 
 		// TODO: how to not blow away content for bots?
