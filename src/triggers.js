@@ -1007,8 +1007,10 @@ export default {
 
 	onHitAreaMouseOver: function (hitAreaId) {
 
-		this.displayHighlightedHitArea(hitAreaId);
-
+		// check to see if emotion labels are popped, and only highlight if not
+		if(d3.selectAll('.emotion-label').filter('.popped')[0].length == 0){
+			this.displayHighlightedHitArea(hitAreaId);
+		}
 	},
 
 	onHitAreaMouseOut: function (hitAreaId) {
