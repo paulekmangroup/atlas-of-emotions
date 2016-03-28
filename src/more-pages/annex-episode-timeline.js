@@ -87,22 +87,12 @@ export default {
 		this.sectionContainer.appendChild(utils.makeAnnexBackNav(this.data.title));
 
 		this.initChart();
-
-		const contentElm = document.createElement('div');
-		contentElm.classList.add('timeline-content');
-
-		this.data.content.forEach(item => {
-			const p = document.createElement('p');
-			p.textContent = item.txt;
-
-			if (item.id) {
-				p.id = `tl-content-${item.id}`;
-			}
-
-			contentElm.appendChild(p);
+		this.wrapper.appendChild(utils.makeTable(this.data.desc, this.data.content));
+		let wrapper = this.wrapper;
+		this.data.footer.forEach(function(footerInfo){
+			wrapper.appendChild(utils.makeTable(footerInfo, []));
 		});
 
-		this.wrapper.appendChild(contentElm);
 	},
 
 	handleChartClick: function(d) {

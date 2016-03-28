@@ -385,6 +385,15 @@
 		width: 90%;
 	}
 
+	.annex-table-wrapper {
+		margin: 1em auto;
+		width: 45em;
+	}
+
+	.annex-table {
+		font-size: 1em;
+	}
+
 	.timeline-content {
 		margin-bottom: 0.5em;
 	}
@@ -420,7 +429,4 @@
 		}
 	}
 
-	.eventable {
-		cursor: pointer;
-	}
 }

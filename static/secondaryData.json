@@ -259,49 +259,29 @@
     "triggers-timeline": {
       "content": [
         {
-          "txt": "Appraisal: The constant and subjective evaluation of the environment by an individual mind. \n",
-          "id": "appraisal"
+          "desc": "A person’s physical context, including places, people and other sensual input as well as thoughts or memories. \n",
+          "name": "environment"
         },
         {
-          "txt": "Event: A person’s physical context, including places, people and other sensual input as well as thoughts or memories. \n",
-          "id": "event"
+          "desc": "The emotional-alert database where universal/hardwired responses and acquired memories create the scripts behind all of our triggers. For example, from the environment we get a smell and in the emotion-alert database is the stored memory of the shampoo our mother used in our childhood, and we are triggered to experience an emotion of warm nostalgia of a happy childhood. ",
+          "name": "perception"
         },
         {
-          "txt": "Perception: The emotional-alert database where universal/hardwired responses and acquired memories create the scripts behind all of our triggers. For example, from the environment we get a smell and in the emotion-alert database is the stored memory of the shampoo our mother used in our childhood, and we are triggered to experience an emotion of warm nostalgia of a happy childhood. ",
-          "id": "assessment"
+          "desc": "The initiator of the physiological emotion response. Can be universal (sudden loss of ground under the feet creating fear) or learned (the smell of a certain shampoo). Triggers are created from the combination of the automatic appraisal of the environment matching to some universal/hardwired or acquired script in the emotion-alert database. When the trigger resembles something in the emotion-alert database, it may be a highly accurate or a distorted perception of the triggering event. ",
+          "name": "trigger"
         },
         {
-          "txt": "Trigger: The initiator of the physiological emotion response. Can be universal (sudden loss of ground under the feet creating fear) or learned (the smell of a certain shampoo). Triggers are created from the combination of the automatic appraisal of the environment matching to some universal/hardwired or acquired script in the emotion-alert database. When the trigger resembles something in the emotion-alert database, it may be a highly accurate or a distorted perception of the triggering event. ",
-          "id": "trigger"
+          "desc": "Each emotion has a separate affect program that takes only milliseconds to generate impulses. The affect program contains instructions for facial, vocal and postural signals, preset changes in physiology to support preset actions, and learned changes in physiology to support learned actions—physical actions, words, memories, images.\n",
+          "name": "state"
         },
         {
-          "txt": "State: Each emotion has a separate affect program that takes only milliseconds to generate impulses. The affect program contains instructions for facial, vocal and postural signals, preset changes in physiology to support preset actions, and learned changes in physiology to support learned actions—physical actions, words, memories, images.\n",
-          "id": "state"
-        },
-        {
-          "txt": "Learned display rules (to regulate signals) and learned feeling rules (to modify, amplify or suppress subjective feelings) arise. We don’t know how quickly these occur. Do they occur before signals and actions, or immediately during the onset of signals and actions? Impulses are translated into actions and signals. ",
-          "id": null
-        },
-        {
-          "txt": "The Selective Filtering Period is initiated with the onset of actions and signals—perception is narrowed and distorted, filtering and interpreting information relevant to and consistent with the prevailing emotion. For example,when fear is aroused, there is a heightened sensitivity to real and imagined threats. ",
-          "id": null
-        },
-        {
-          "txt": "The gap between Step 2 (impulses) and Step 4 (actions/signals) is variable, depending on: ",
-          "id": null
-        },
-        {
-          "txt": "• The individual characteristics of each person, the person’s emotional profile. ",
-          "id": null
-        },
-        {
-          "txt": "• The intensity of the appraised trigger. ",
-          "id": null
-        },
-        {
-          "txt": "• The momentary psychological state of the individual when the trigger is appraised (how much sleep the person had last night; what, if any, emotion the person last experienced or is currently experiencing, etc.).",
-          "id": null
+          "desc": "The Selective Filtering Period is initiated with the onset of actions and signals—perception is narrowed and distorted, filtering and interpreting information relevant to and consistent with the prevailing emotion. For example,when fear is aroused, there is a heightened sensitivity to real and imagined threats. ",
+          "name": "selective filter period"
         }
+      ],
+      "footer": [
+        "Learned display rules (to regulate signals) and learned feeling rules (to modify, amplify or suppress subjective feelings) arise. We don’t know how quickly these occur. Do they occur before signals and actions, or immediately during the onset of signals and actions? Impulses are translated into actions and signals. ",
+        "The gap between Step 2 (impulses) and Step 4 (actions/signals) is variable, depending on the individual characteristics of each person and the person’s emotional profile, the intensity of the appraised trigger, and the momentary psychological state of the individual when the trigger is appraised (how much sleep the person had last night; what, if any, emotion the person last experienced or is currently experiencing, etc.)."
       ],
       "title": "Emotional Episode Timeline",
       "desc": ""
