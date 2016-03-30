@@ -1072,14 +1072,31 @@ export default {
 			.attr('stop-color', d => d.color);
 
 		// enjoyment
+		// assume Chrome
+		let gradientOffsets = [
+			{ offset: '0%', color: 'rgba(255, 221, 98, 0.7)' },
+			{ offset: '100%', color: 'rgba(248, 136, 29, 1.0)' }
+		];
+		// if firefox
+		if(navigator.userAgent.indexOf('Firefox') > -1){
+			gradientOffsets =[
+				{ offset: '0%', color: 'rgba(255, 236, 119, 0.4)' },
+				{ offset: '100%', color: 'rgba(255, 127, 0, 1.0)' }
+			];
+		}
+		// if Safari
+		if(navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1){
+			gradientOffsets =[
+				{ offset: '0%', color: 'rgba(241, 196, 83, 0.4)' },
+				{ offset: '100%', color: 'rgba(248, 136, 29, 1.0)' }
+			];
+		}
+
 		defs.append('linearGradient')
 			.attr('id', 'enjoyment-gradient')
 			.attr('xlink:href', '#states-gradient')
 		.selectAll('stop')
-			.data([
-				{ offset: '0%', color: 'rgba(241, 196, 83, 0.8)' },
-				{ offset: '100%', color: 'rgba(248, 136, 29, 1.0)' }
-			])
+			.data(gradientOffsets)
 		.enter().append('stop')
 			.attr('offset', d => d.offset)
 			.attr('stop-color', d => d.color);
