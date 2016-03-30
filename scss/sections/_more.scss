@@ -33,6 +33,15 @@
 	z-index: $depth-5;
 }
 
+#more-annex-scientific-basis {
+	.annex-table {
+		tr.content > td:last-child {
+			padding-top: .9em;
+			font-size: 1em;
+		}
+	}
+}
+
 #more-info .dropup {
 	position: relative;
 	display: block;

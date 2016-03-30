@@ -25,7 +25,13 @@ export default {
 	setContent: function() {
 		if (!this.wrapper) return;
 		this.sectionContainer.appendChild(utils.makeAnnexBackNav(this.data.title));
+		// intro
 		this.wrapper.appendChild(utils.makeTable(this.data.desc, []));
+		// survey results
+		this.wrapper.appendChild(utils.makeTable(this.data.contentIntro, this.data.content));
+		// footer content
+		this.wrapper.appendChild(utils.makeTable(this.data.footer[0], []));
+		this.wrapper.appendChild(utils.makeTable(this.data.footer[1], []));
 	},
 
 	setEmotion: function (emotion) {
