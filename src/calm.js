@@ -29,8 +29,8 @@ const PATH_STRINGS = [
 	PATH_SOURCE_WIDTH = 1540,
 	PATH_SOURCE_HEIGHT = 1157,
 	MAX_NUM_PER_PATH = 3,
-	MIN_PATH_SPAWN_DELAY = 180,
-	PATH_SPAWN_FREQ = 0.0018,
+	MIN_PATH_SPAWN_DELAY = 240,
+	PATH_SPAWN_FREQ = 0.0010,
 	PATH_LIFETIME_BASE = 14000,
 	PATH_LIFETIME_SPREAD = 6000,
 	PATH_LENGTH_BASE = 0.25,
@@ -334,8 +334,9 @@ export default {
 				.data([
 					{ offset: '0%', color: 'rgba('+ strokeColor +','+ strokeColor +','+ strokeColor +',0.0)' },
 					{ offset: '20%', color: 'rgba('+ strokeColor +','+ strokeColor +','+ strokeColor +','+ 0.6*strokeOpacity +')' },
-					{ offset: '80%', color: 'rgba('+ strokeColor +','+ strokeColor +','+ strokeColor +','+ 0.95*strokeOpacity +')' },
-					{ offset: '100%', color: 'rgba('+ strokeColor +','+ strokeColor +','+ strokeColor +','+ strokeOpacity +')' }
+					{ offset: '50%', color: 'rgba('+ strokeColor +','+ strokeColor +','+ strokeColor +','+ 0.95*strokeOpacity +')' },
+					{ offset: '80%', color: 'rgba('+ strokeColor +','+ strokeColor +','+ strokeColor +','+ 0.6*strokeOpacity +')' },
+					{ offset: '100%', color: 'rgba('+ strokeColor +','+ strokeColor +','+ strokeColor +',0.0)' }
 				])
 			.enter().append('stop')
 				.attr('offset', d => d.offset)
