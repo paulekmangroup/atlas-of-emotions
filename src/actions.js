@@ -1007,6 +1007,11 @@ export default {
 
 			this.renderLabels(null);
 
+			// reset actions state
+			if(val) {
+				this.setState(null);
+			}
+
 			// TODO: resolve on completion of animation
 			resolve();
 
