@@ -15,10 +15,15 @@
 	.label-container {
 		top: 50%;
     	left: 50%;
+			pointer-events: none;
+
 
     	.label {
     		transform: translate(-50%, 160px);
     		@include emotion-color();
+				&.showBorder {
+			 		@include emotion-border-color();	
+				}
     	}
 	}
 }

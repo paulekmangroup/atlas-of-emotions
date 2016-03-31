@@ -86,15 +86,31 @@ export default {
 		this.moodCircles.attr('width', width)
 			.attr('height', height);
 
+		let clickAction = this.onElementClick;
+
 		this.moodCircles.selectAll(".moodCircle")
 			.data(this.moodCircleRadii)
 			.enter()
 			.append("g")
 			.append("circle")
 				.attr('class', function(d,i){return 'moodCircle circle' + i;})
-				.on('mouseover', function(d, i){d3.selectAll(".moodCircle").classed("highlight" + i, true);})
-				.on('mouseout', function(d, i){d3.selectAll(".moodCircle").classed("highlight" + i, false);})
-				.on('click', this.onElementClick);
+				.on('mouseover', function(d, i){
+					if(d3.selectAll('.label').filter('.popped')[0].length == 0){
+						d3.selectAll(".moodCircle").classed("highlight" + i, true);
+						d3.selectAll(".label").classed("showBorder", true);
+					}
+				})
+				.on('mouseout', function(d, i){
+					if(d3.selectAll('.label').filter('.popped')[0].length == 0){
+						d3.selectAll(".moodCircle").classed("highlight" + i, false);
+						d3.selectAll(".label").classed("showBorder", false);
+					}
+				})
+				.on('click', function(d, i){
+					if(i == 2){
+						clickAction();
+					}
+				});
 
 		this.resizeMoodCircles(width, height, radius);
 		this.initGradientDefs(width, height, radius);
