@@ -1232,7 +1232,7 @@
           "type": "Universal"
         },
         {
-          "name": "Perceived loss of status",
+          "name": "Perceiving a loss of status",
           "type": "Learned"
         },
         {
@@ -1681,7 +1681,7 @@
       ],
       "moods": [
         {
-          "name": "High",
+          "name": "Elation",
           "desc": "Generalized, non-specific, non-triggered good feeling, lasting hours."
         }
       ]
@@ -1697,34 +1697,34 @@
       "body": "Each emotion is represented as a continent. The movement of the continents reflects how emotions vary in strength and frequency in people’s lives."
     },
     "states": {
-      "header": "The States of LHAMO",
+      "header": "States of LHAMO",
       "body": "Each emotion contains a number of related states, which differ in intensity. The states shown here are representative, not exhaustive."
     },
     "actions": {
-      "header": "The Actions of LHAMO",
-      "body": "An emotional state may lead to actions, which can be intrinsic or intentional and constructive or destructive. Actions shown here are <a id=\"annexLink\" href=\"#more:annex-intrinsic-remedial\">intrinsic</a>, happening without conscious thought. Click on a state to explore.",
+      "header": "Actions of LHAMO",
+      "body": "An emotional state may lead to actions, which can be <a id=\"annexLink\" href=\"#more:annex-intrinsic-remedial\">intrinsic or intentional</a> and constructive, destructive or ambigouous, depending on the state. Actions shown here are intrinsic, happening without conscious choice. Click on a state to explore.",
       "qualities": [
         {
           "header": "Constructive Actions",
-          "body": "Constructive action: enables collaboration with others."
+          "body": "In the context of this state, this is a constructive action, one that enables collaboration with others."
         },
         {
           "header": "Ambiguous Actions",
-          "body": "Ambiguous action: either constructive and destructive, depending on the context."
+          "body": "In the context of this state, this action is ambiguous and may either enable or inhibit collaboration with others."
         },
         {
           "header": "Destructive Actions",
-          "body": "Destructive action: inhibits collaboration with others."
+          "body": "In the context of this state, this is a destructive action, one that inhibits collaboration with others."
         }
       ]
     },
     "triggers": {
-      "header": "The Triggers of LHAMO",
+      "header": "Triggers of LHAMO",
       "body": "Triggers automatically bring forth an emotion without consideration.",
       "steps": [
         {
           "header": "Triggers",
-          "body": "Some triggers are universal, some are cultural, and some are individual."
+          "body": "Some triggers are universal, some are learned through cultural experience, and some are learned through individual experience."
         },
         {
           "header": "Perception",
@@ -1736,21 +1736,21 @@
         },
         {
           "header": "Universal Triggers",
-          "body": "Universal triggers are innate, common to everyone. They affect us more intensely than learned triggers."
+          "body": "These triggers are universal. Universal triggers are innate, common to everyone. They affect us more intensely than learned triggers."
         },
         {
           "header": "Learned Triggers",
-          "body": "Learned triggers are either cultural, stemming from widely shared experiences, or personal, arising from more individual experiences."
+          "body": "These triggers are learned. Learned triggers are either cultural, stemming from widely shared experiences, or personal, arising from more individual experiences."
         }
       ]
     },
     "moods": {
-      "header": "The Mood of LHAMO",
-      "body": "Each emotion has one mood, a longer-lasting cousin of the emotion that causes the related emotion to be felt more frequently and intensely. It is not always apparent what triggers a mood."
+      "header": "A Mood of LHAMO",
+      "body": "This is an example of a mood, a longer-lasting cousin of the emotion that causes the related emotion to be felt more frequently and intensely. It is not always apparent what triggers a mood."
     },
     "calm": {
-      "header": "Achieving Calm",
-      "body": "It is very difficult to modify our emotional actions once our emotions have been triggered. Focusing on identifying our triggers, instead of on our emotional actions, may enable us to lead a more balanced emotional life.<br><br>Calm is a balanced frame of mind that is actively engaged in evaluating and understanding our changing emotions without dwelling on them or being ruled by them.",
+      "header": "Experiencing Calm",
+      "body": "Calm is a balanced frame of mind that is actively engaged in evaluating and understanding our changing emotions without dwelling on them. Calm abides as a person moves through life, unlike emotions, which arise when triggered and then recede.",
       "secondary": {
         "header": "Visit the Annex",
         "body": "To learn more about emotions, click on “More Information” in the bottom right corner."
