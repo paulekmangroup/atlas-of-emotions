@@ -246,7 +246,7 @@
         },
         {
           "name": "Insult",
-          "desc": "Disparage the other person in a offensive or hurtful way that is likely to escalate the conflict rather than resolve it."
+          "desc": "Disparage the other person in an offensive or hurtful way that is likely to escalate the conflict rather than resolve it."
         },
         {
           "name": "Undermine",
@@ -1690,7 +1690,7 @@
   "metadata": {
     "intro": {
       "header": "Welcome to the Atlas of Emotions ",
-      "body": "This is an opportunity for you to explore the vast world of emotions. This collection of maps is based on the work of many scholars and was created by  <a class=\"aboutLink\" href=\"#more:about\">Doctors Paul Ekman and Eve Ekman</a> and built by <a href=\"http://www.stamen.com/\">Stamen Design</a> to help you better understand the landscapes of emotion, where they come from and the effects they can have.<br><br>Navigate by scrolling between sections or by using the right-hand navigation bar, and by clicking elements to dig deeper."
+      "body": "This collection of maps is an opportunity for you to explore the landscape of emotions, where they come from and the effects they can have."
     },
     "continents": {
       "header": "The Five Continents of Emotion",
@@ -1702,7 +1702,7 @@
     },
     "actions": {
       "header": "Actions of LHAMO",
-      "body": "An emotional state may lead to actions, which can be <a id=\"annexLink\" href=\"#more:annex-intrinsic-remedial\">intrinsic or intentional</a> and constructive, destructive or ambigouous, depending on the state. Actions shown here are intrinsic, happening without conscious choice. Click on a state to explore.",
+      "body": "An emotional state may lead to actions, which can be <a id=\"annexLink\" href=\"#more:annex-intrinsic-remedial\">intrinsic or intentional</a> and constructive, destructive or ambiguous, depending on the state. Actions shown here are intrinsic, happening without conscious choice. Click on a state to explore.",
       "qualities": [
         {
           "header": "Constructive Actions",
