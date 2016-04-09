@@ -14,7 +14,7 @@ import popupManager from './popupManager.js';
 export default function (...initArgs) {
 
 	const MIN_ALLOWED_WIDTH = 950,
-		MIN_ALLOWED_HEIGHT = 650,
+		MIN_ALLOWED_HEIGHT = 600,
 
 		NAVIGATION_DEFAULTS = {
 			section: dispatcher.SECTIONS.CONTINENTS,
@@ -53,10 +53,11 @@ export default function (...initArgs) {
 		scrollbarAnimUpdate,
 		scrollbarIsOpen = false,
 
-		recentScrollDeltas = [],				// cache recent scroll delta values to check intentionality of scroll
-		lastScroll = 0,							// timestamp of most recent scroll event
-		hasNavigatedThisScroll = false,			// has already navigated during the current inertia/continuous scroll
-		isNavigating = false;				// currently navigating between emotions or sections
+		recentScrollDeltas = [],			// cache recent scroll delta values to check intentionality of scroll
+		lastScroll = 0,						// timestamp of most recent scroll event
+		hasNavigatedThisScroll = false,		// has already navigated during the current inertia/continuous scroll
+		isNavigating = false,				// currently navigating between emotions or sections
+		bypassedWarning = false;			// user has bypassed small screen warning
 
 
 	function init (containerNode) {
@@ -1293,7 +1294,7 @@ export default function (...initArgs) {
 	 */
 	function renderSmallScreenWarning () {
 
-		if (window.innerWidth >= MIN_ALLOWED_WIDTH && window.innerHeight >= MIN_ALLOWED_HEIGHT) {
+		if (bypassedWarning || (window.innerWidth >= MIN_ALLOWED_WIDTH && window.innerHeight >= MIN_ALLOWED_HEIGHT)) {
 			document.querySelector('body').classList.remove('small-screen-warning');
 			document.querySelector('#warning').innerHTML = '';
 			document.querySelector('#app-container').classList.remove("hidden");
@@ -1310,13 +1311,18 @@ export default function (...initArgs) {
 		warningDiv.appendChild(warningHeader);
 
 		let warningBody = document.createElement('p');
-		warningBody.innerHTML = 'For the best viewing experience, please enlarge your browser, switch to landscape orientation, or view on a larger device.';
+		warningBody.innerHTML = 'For the best experience, please enlarge your browser, switch to landscape orientation, or view on a larger device. Or, <a href="#" class="bypass-warning">click here</a> to proceed anyway.';
 		warningDiv.appendChild(warningBody);
 
 		// TODO: how to not blow away content for bots?
 		document.querySelector('#warning').innerHTML = '';
 		document.querySelector('#warning').appendChild(warningDiv);
 		document.querySelector('#app-container').classList.add("hidden");
+
+		document.querySelector('.bypass-warning').addEventListener('click', event => {
+			bypassedWarning = true;
+			onResize();
+		});
 
 		return true;
 

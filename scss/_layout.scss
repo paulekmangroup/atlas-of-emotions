@@ -49,6 +49,15 @@ body {
 				@extend %raleway-light;
 				color: $text-overlay-color;
 			}
+			a,
+			a:link,
+			a:visited,
+			a:hover,
+			a:active {
+				// @extend %raleway-regular;
+				text-decoration: underline;
+				color: $text-overlay-color;
+			}
 		}
 	}
 }
@@ -166,15 +175,15 @@ a:active {
 }
 
 @keyframes stretch {
-  0% {
+	0% {
 		opacity: 0;
-  }
+	}
 	60% {
 		opacity: 0;
 	}
-  100% {
+	100% {
 		opacity: 1;
-  }
+	}
 }
 
 #down-arrow {
