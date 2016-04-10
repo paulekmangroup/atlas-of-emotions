@@ -2,6 +2,7 @@
 // import d3 from 'd3';
 // import TWEEN from 'tween.js';
 
+import dispatcher from './dispatcher.js';
 import emotionsData from '../static/emotionsData.json';
 import sassVars from '../scss/variables.json';
 
@@ -50,7 +51,7 @@ export default {
 
 		let exitButton = document.createElement('h3');
 		exitButton.classList.add('button', 'exit');
-		exitButton.innerHTML = '<a href="#">LETS_GET_STARTED</a>';
+		exitButton.textContent = '<a href="#">LETS_GET_STARTED</a>';
 		buttonFooter.appendChild(exitButton);
 
 		contentContainer.appendChild(modalHeadline);
@@ -67,23 +68,36 @@ export default {
 
 	initInteraction () {
 
-		// TODO: get this delegation working -- mouse events are coming from nested element :/
-		this.modalContainer.addEventListener('mouseenter', event => {
+		// TODO: toggle event handlers when modal opened/closed
+		this.modalContainer.addEventListener('mouseover', event => {
+
 			if (event.target.classList.contains('button')) {
 				event.target.classList.add('active');
+				event.stopImmediatePropagation();
 			}
+
 		});
 
-		this.modalContainer.addEventListener('mouseleave', event => {
+		this.modalContainer.addEventListener('mouseout', event => {
+
 			if (event.target.classList.contains('button')) {
 				event.target.classList.remove('active');
+				event.stopImmediatePropagation();
 			}
+
 		});
 
 		this.modalContainer.addEventListener('click', event => {
+
 			if (event.target.classList.contains('button')) {
-				console.log(">>>>> clicked");
+				if (event.target.classList.contains('exit')) {
+					dispatcher.navigate(dispatcher.HOME);
+				} else {
+					console.log(">>>>> clicked");
+				}
+				event.stopImmediatePropagation();
 			}
+
 		});
 
 	},

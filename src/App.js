@@ -1122,6 +1122,10 @@ export default function (...initArgs) {
 	function onNavigate (section, emotion) {
 		if (section === dispatcher.HOME) {
 			document.location.hash = '';
+			if (!document.location.hash) {
+				// If already at root, ensure modal is closed.
+				setModalVisibility(false);
+			}
 			return;
 		}
 

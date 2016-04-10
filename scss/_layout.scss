@@ -450,7 +450,7 @@ a:active {
 	margin-left: -0.5 * $modal-width;
 	top: 50%;
 	margin-top: -0.5 * $modal-height-cover;
-	padding: 4.5em 7em;
+	padding: 4.5em 6em;
 	z-index: $depth-100;
 
 	text-align: center;
@@ -519,17 +519,17 @@ a:active {
 	}
 
 	.button {
-		width: 47.5%;
+		width: 45%;
 		padding: .2em .4em;
 		margin: 0;
-		border: 1px solid;
+		outline: 1px solid $text-overlay-color;
 
 		text-align: center;
 		text-transform: uppercase;
 		cursor: pointer;
 
 		&.active {
-			border-width: 2px;
+			outline-width: 2px;
 		}
 	}
 }
