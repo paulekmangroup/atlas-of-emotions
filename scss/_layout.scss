@@ -439,23 +439,24 @@ a:active {
 }
 
 #modal {
-	$modal-width: 30em;
-	$modal-height: 15em;
+	$modal-width: 40em;
+	$modal-height-cover: 24em;
+	$modal-height-pages: 32em;
 
 	position: absolute;
 	width: $modal-width;
-	min-height: $modal-height;
-	top: 50%;
-	margin-top: -0.5 * $modal-height;
+	height: $modal-height-cover;
 	left: 50%;
 	margin-left: -0.5 * $modal-width;
-	padding: 1.5em;
+	top: 50%;
+	margin-top: -0.5 * $modal-height-cover;
+	padding: 4.5em 7em;
+	z-index: $depth-100;
 
+	text-align: center;
+	@extend %raleway-light;
 	background-color: rgba($scrollbar-background-color, 0.9);
 	color: $text-overlay-color;
-
-	z-index: $depth-100;
-	@extend %raleway-light;
 
 	opacity: 0.0;
 	display: none;
@@ -464,18 +465,37 @@ a:active {
 	transition-duration: #{$ui-overlays-duration-out}s;
 	transition-timing-function: ease-in-out;
 
+	.content {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.footer {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
 	&.visible {
 		transition-duration: #{$ui-overlays-duration-in}s;
 		opacity: 1.0;
 	}
 
-	h3 {
-		margin-top: 0;
+	h2 {
+		text-align: center;
+		width: 12em;
+		margin: 0;
 		text-transform: uppercase;
 	}
 
 	p {
-		margin-bottom: 0;
+		margin: 0;
+		text-align: left;
 		font-size: 1.0em;
 	}
 
@@ -496,5 +516,20 @@ a:active {
 		width: 100%;
 		margin: 1em 0 1.5em 0;
 		text-align: center;
+	}
+
+	.button {
+		width: 47.5%;
+		padding: .2em .4em;
+		margin: 0;
+		border: 1px solid;
+
+		text-align: center;
+		text-transform: uppercase;
+		cursor: pointer;
+
+		&.active {
+			border-width: 2px;
+		}
 	}
 }

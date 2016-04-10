@@ -7,6 +7,7 @@ import triggers from './triggers.js';
 import moods from './moods.js';
 import calm from './calm.js';
 import moreInfo from './moreInfo.js';
+import introModal from './introModal.js';
 import emotionsData from '../static/emotionsData.json';
 import sassVars from '../scss/variables.json';
 import popupManager from './popupManager.js';
@@ -285,21 +286,9 @@ export default function (...initArgs) {
 
 	function initModal () {
 
-		let modal = document.querySelector('#modal');
+		introModal.init(document.querySelector('#modal'));
 
-		let modalHeadline = document.createElement('h3');
-		modalHeadline.classList.add('headline');
-		modalHeadline.textContent = emotionsData.metadata.intro.header;
-
-		let modalCopy = document.createElement('p');
-		modalCopy.classList.add('body');
-		modalCopy.innerHTML = emotionsData.metadata.intro.body;
-
-		modal.appendChild(modalHeadline);
-		modal.appendChild(modalCopy);
-
-
-		// enable infoButton
+		// reopen modal on infoButton click
 		if (document.querySelector('#infoButton')) {
 			document.querySelector('#infoButton')
 				.addEventListener('click', (event) => {
@@ -999,32 +988,11 @@ export default function (...initArgs) {
 			modalOverlay = document.querySelector('#modal-overlay'),
 			homeLink;
 
-		if (currentSection === sections[dispatcher.SECTIONS.CONTINENTS]) {
+		introModal.setExitButtonText(currentSection === sections[dispatcher.SECTIONS.CONTINENTS]);
 
-			// hide "Start at the beginning" link when already at the beginning
-			if (val) {
-				// remove homeLink when opening modal
-				homeLink = modal.querySelector('.home-link');
-				if (homeLink) {
-					modal.removeChild(homeLink);
-				}
-			} else {
-				// bring continents back to center when closing modal
-				currentSection.setContinentIntroPositions(false);
-			}
-
-		} else {
-
-			// show "Start at the beginning" link when not at the beginning
-			// (if not already visible)
-			homeLink = modal.querySelector('.home-link');
-			if (!homeLink) {
-				homeLink = document.createElement('p');
-				homeLink.classList.add('home-link');
-				homeLink.innerHTML = '<a href="#">Start at the beginning</a>';
-				modal.appendChild(homeLink);
-			}
-
+		if (currentSection === sections[dispatcher.SECTIONS.CONTINENTS] && !val) {
+			// bring continents back to center when closing modal
+			currentSection.setContinentIntroPositions(false);
 		}
 
 		if (val) {
@@ -1032,7 +1000,7 @@ export default function (...initArgs) {
 			// bail if already open
 			if (modal.style.display === 'block') { return; }
 
-			// set body class for intro open
+			// set intro open flag as class on body
 			document.body.classList.add('intro-open');
 			document.body.classList.remove('intro-closing', 'intro-opening');
 
@@ -1061,7 +1029,7 @@ export default function (...initArgs) {
 			// bail if already closed
 			if (!modalOverlay.classList.contains('visible')) { return; }
 
-			// set body class for intro closing
+			// set intro closing flag as class on body
 			document.body.classList.add('intro-closing');
 			document.body.classList.remove('intro-open', 'intro-opening');
 
@@ -1073,7 +1041,7 @@ export default function (...initArgs) {
 				modal.style.display = 'none';
 				modalOverlay.style.display = 'none';
 
-				// set body class for intro closed
+				// set intro closed flag as class on body
 				document.body.classList.remove('intro-closing', 'intro-open', 'intro-opening');
 			};
 			modal.addEventListener('transitionend', onTransitionEnd);

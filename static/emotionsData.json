@@ -1690,7 +1690,24 @@
   "metadata": {
     "intro": {
       "header": "Welcome to the Atlas of Emotions ",
-      "body": "This collection of maps is an opportunity for you to explore the landscape of emotions, where they come from and the effects they can have."
+      "body": "This collection of maps is an opportunity for you to explore the landscape of emotions, where they come from and the effects they can have.",
+      "steps": [
+        {
+          "header": "What this is",
+          "body": "This atlas was inspired by a series of conversations between the <a href=\"http://www.dalailama.com/\">Dalai Lama</a> and <a class=\"aboutLink\" href=\"#more:about\">Paul Ekman</a> about the science of emotion. With the help of <a href=\"http://www.stamen.com/\">Stamen Design</a> and Paul’s daughter Eve, this tool was created as a visual journey through the known world of emotion.",
+          "caption": "His Holiness the Dalai Lama, Dr. Paul Ekman, and Dr. Eve Ekman"
+        },
+        {
+          "header": "What it’s based on",
+          "body": "In June of 2014, Paul Ekman sent out a survey to 248 emotions researchers to establish a consensus as the scientific basis for this atlas.",
+          "caption": "of those surveyed agreed that there are Universal Emotions: emotions that all humans, no matter where we live or how we were raised, have in common."
+        },
+        {
+          "header": "How to navigate",
+          "body": "This is an opportunity for exploration and discovery. Click on shapes to learn about them. Use the arrows to navigate to other pages.",
+          "caption": ""
+        }
+      ]
     },
     "continents": {
       "header": "The Five Continents of Emotion",
