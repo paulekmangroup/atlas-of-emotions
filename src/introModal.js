@@ -1,15 +1,15 @@
-// import _ from 'lodash';
-// import d3 from 'd3';
-// import TWEEN from 'tween.js';
+import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
 import emotionsData from '../static/emotionsData.json';
+import secondaryData from '../static/secondaryData.json';
 import sassVars from '../scss/variables.json';
 
 // TODO: this copy should go elsewhere
 const LETS_GET_STARTED = 'Let\'s get started',
 	START_FROM_BEGINNING = 'Take it from the top',
-	TELL_ME_MORE = 'Tell me more';
+	TELL_ME_MORE = 'Tell me more',
+	IS_UNIVERSAL = 'is universal';
 
 const OVERVIEW_IMG_SIZE = {
 	w: 225,
@@ -144,12 +144,44 @@ export default {
 
 		//
 		// research
-		// 
-		let researchPage = this.pages[2];
+		//
+		let researchPage = this.pages[2],
+			researchData = secondaryData.annex['scientific-basis'].content,
+			findResearchDatum = key => {
+				let match = researchData.find(datum => datum.desc.toLowerCase().indexOf(key) !== -1);
+				return match ? match.name : '';
+			},
+			surveyResultUniversal = findResearchDatum('universal emotion'),
+			surveyResultsEmotions = _.values(dispatcher.EMOTIONS).reduce((obj, emotion) => {
+				// 'enjoyment' is called 'happiness' in researchData
+				obj[emotion] = findResearchDatum(emotion === 'enjoyment' ? 'happiness' : emotion);
+				return obj;
+			}, {});
+
+		let researchCaption = researchPage.querySelector('figcaption');
+		researchPage.querySelector('figcaption').innerHTML = '<span class="big-num">' + surveyResultUniversal + '</span>' + researchCaption.textContent;
+
+		let vizContainer = document.createElement('div');
+		vizContainer.classList.add('survey-results');
+		_.values(dispatcher.EMOTIONS).forEach(emotion => {
+			let viz = document.createElement('div');
+			viz.classList.add('viz');
+			let bar = document.createElement('div');
+			bar.classList.add('bar', emotion);
+			bar.style.height = surveyResultsEmotions[emotion];
+			bar.style.marginTop = (100 - parseInt(surveyResultsEmotions[emotion].replace('%', ''))) + '%';
+			let copy = document.createElement('p');
+			copy.innerHTML = '<span class="big-num">' + surveyResultsEmotions[emotion] + '</span><span class="cap">' + emotion + ' ' + IS_UNIVERSAL + '</span>';
+			viz.appendChild(bar);
+			viz.appendChild(copy);
+			vizContainer.appendChild(viz);
+		});
+
+		researchPage.appendChild(vizContainer);
 
 		//
 		// overview
-		// 
+		//
 		let navigationPage = this.pages[3];
 
 		this.paginationFooter = document.createElement('div');

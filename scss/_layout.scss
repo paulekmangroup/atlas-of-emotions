@@ -533,6 +533,45 @@ a:active {
 		}
 	}
 
+	.research {
+		.big-num {
+			display: block;
+			font-size: 1.8em;
+		}
+		.survey-results {
+			width: 100%;
+			height: 6.5em;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+
+			font-size: 0.8em;
+
+			.viz {
+				position: relative;
+				height: 100%;
+				flex: 1 1 auto;
+				margin: 0 0.2em;
+				background-color: rgba($scrollbar-background-color, 1.0);
+			}
+
+			.bar {
+				margin: 0 0.2em;
+				@include emotion-background-color;
+			}
+
+			p {
+				display: block;
+				position: absolute;
+				bottom: 0;
+				text-align: center;
+			}
+			.cap {
+				text-transform: capitalize;
+			}
+		}
+	}
+
 	.footer {
 		width: 100%;
 		display: flex;
