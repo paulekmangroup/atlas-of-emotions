@@ -286,7 +286,7 @@ export default function (...initArgs) {
 
 	function initModal () {
 
-		introModal.init(document.querySelector('#modal'));
+		introModal.init(document.querySelector('#modal'), setModalVisibility);
 
 		// reopen modal on infoButton click
 		if (document.querySelector('#infoButton')) {
