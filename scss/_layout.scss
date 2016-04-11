@@ -127,7 +127,7 @@ a:active {
 			border: none;
 			margin-left: 0.5em;
 			vertical-align: top;
-			&:after {
+			&::after {
 				content: '▼';
 				display: inline-block;
 				position: relative;
@@ -424,18 +424,19 @@ a:active {
 
 #infoButton {
 	cursor: pointer;
-	&::after{
-  	display: inline-block;
-  	width: 1.4em;
-  	height: 1.4em;
-  	background: $infoButton-highlight-color;
-  	border-radius: 50%;
-    content: 'i';
+
+	&::after {
+		display: inline-block;
+		width: 1.4em;
+		height: 1.4em;
+		background: $infoButton-highlight-color;
+		border-radius: 50%;
+		content: 'i';
 		line-height: 1.5em;
-    font-size: .8em;
+		font-size: .8em;
 		margin-left: 1em;
 		color: $text-overlay-color;
-  }
+	}
 }
 
 #modal {
@@ -453,6 +454,11 @@ a:active {
 	padding: 4.5em 6em;
 	z-index: $depth-100;
 
+	&.pages {
+		height: $modal-height-pages;
+		margin-top: -0.5 * $modal-height-pages;
+	}
+
 	text-align: center;
 	@extend %raleway-light;
 	background-color: rgba($scrollbar-background-color, 0.9);
@@ -469,6 +475,16 @@ a:active {
 		transition-duration: #{$ui-overlays-duration-in}s;
 		opacity: 1.0;
 	}
+	/*
+	transition-property: opacity, height, margin-top;
+	transition-duration: #{$ui-overlays-duration-out}s, #{$ui-modal-pages-duration}s, #{$ui-modal-pages-duration}s;
+	transition-timing-function: ease-in-out;
+
+	&.visible {
+		transition-duration: #{$ui-overlays-duration-in}s, #{$ui-modal-pages-duration}s, #{$ui-modal-pages-duration}s;
+		opacity: 1.0;
+	}
+	*/
 
 	.page-container {
 		position: relative;
@@ -488,9 +504,32 @@ a:active {
 		align-items: center;
 		justify-content: space-between;
 
-		visibility: hidden;
+		display: none;
 		&.visible {
-			visibility: visible;
+			display: flex;
+		}
+
+		// opacity: 0.0;
+		transition: opacity #{$ui-modal-pages-duration}s ease-in-out;
+		&.focused {
+			opacity: 1.0;
+		}
+	}
+
+	.overview {
+		figure {
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			margin: 0;
+		}
+
+		figcaption {
+			width: 100%;
+			margin: 0 0 1em 0;
+			text-align: center;
+			font-size: 0.8em;
 		}
 	}
 
@@ -501,26 +540,12 @@ a:active {
 		justify-content: space-between;
 
 		&.pagination {
+			margin-top: 1em;
 			visibility: hidden;
 			&.visible {
 				visibility: visible;
 			}
 			justify-content: center;
-
-			.button.pagination {
-				width: 1em;
-				height: 1em;
-				flex: none;
-				margin: 0 1em;
-
-				border: 1px solid $text-overlay-color;
-				border-radius: 50%;
-				cursor: pointer;
-
-				&.active {
-					background-color: $text-overlay-color;
-				}
-			}
 		}
 	}
 
@@ -562,6 +587,41 @@ a:active {
 
 		&.active {
 			outline-width: 2px;
+		}
+	}
+
+	.button.pagination {
+		width: 1.6em;
+		height: 1.6em;
+		flex: none;
+		margin: 0;
+
+		background-color: rgba(0,0,0,0);
+		cursor: pointer;
+
+		&::after {
+			position: relative;
+			display: block;
+			width: 0.6em;
+			height: 0.6em;
+			left: 0.5em;
+			top: 0.5em;
+
+			content: '';
+			border: 1px solid $text-overlay-color;
+			border-radius: 50%;
+
+			transition-property: width, height, left, top;
+			transition-duration: 0.15s;
+			transition-timing-function: ease-in-out;
+		}
+
+		&.active::after {
+			width: 0.8em;
+			height: 0.8em;
+			left: 0.4em;
+			top: 0.4em;
+			background-color: $text-overlay-color;
 		}
 	}
 }

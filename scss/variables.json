@@ -109,6 +109,11 @@
 				"out": 0.5
 			}
 		},
+		"modal": {
+			"pages": {
+				"duration": 0.5
+			}
+		},
 		"intro": {
 			"delay": 1.0
 		},

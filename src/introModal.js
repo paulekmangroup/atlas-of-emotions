@@ -11,6 +11,11 @@ const LETS_GET_STARTED = 'Let\'s get started',
 	START_FROM_BEGINNING = 'Take it from the top',
 	TELL_ME_MORE = 'Tell me more';
 
+const OVERVIEW_IMG_SIZE = {
+	w: 225,
+	h: 150
+};
+
 export default {
 
 	modalContainer: null,
@@ -18,6 +23,7 @@ export default {
 	setModalVisibility: null,	// NOTE: this tight coupling is pretty 💩😱, but it's time to finish this site. So, I'm sorry. 😰
 	pages: [],
 	paginationFooter: null,
+	currentPage: Number.NaN,
 
 	init (modalContainer, setModalVisibility) {
 
@@ -96,8 +102,7 @@ export default {
 			modalBody.classList.add('body');
 			modalBody.innerHTML = pageData.body;
 
-			let modalCaption = document.createElement('p');
-			modalCaption.classList.add('caption');
+			let modalCaption = document.createElement('figcaption');
 			modalCaption.innerHTML = pageData.caption;
 
 			page.appendChild(modalHeadline);
@@ -109,12 +114,51 @@ export default {
 
 		}));
 
+		//
+		// overview
+		//
+		let overviewPage = this.pages[1];
+		let overviewBody = overviewPage.querySelector('.body');
+
+		let imgContainer = document.createElement('figure');
+		overviewPage.insertBefore(imgContainer, overviewBody);
+
+		let imgLeftWrapper = document.createElement('div');
+		imgLeftWrapper.style.width = '49%';
+		let imgLeft = document.createElement('img');
+		imgLeft.src = './img/hhAndPaul.jpg';
+		imgLeft.style.width = '100%';
+		imgLeftWrapper.appendChild(imgLeft);
+		imgContainer.appendChild(imgLeftWrapper);
+
+		let imgRightWrapper = document.createElement('div');
+		imgRightWrapper.style.width = '49%';
+		let imgRight = document.createElement('img');
+		imgRight.src = './img/hhAndEve.jpg';
+		imgRight.style.width = '100%';
+		imgRightWrapper.appendChild(imgRight);
+		imgContainer.appendChild(imgRightWrapper);
+
+		overviewPage.insertBefore(overviewPage.querySelector('figcaption'), overviewBody);
+
+
+		//
+		// research
+		// 
+		let researchPage = this.pages[2];
+
+		//
+		// overview
+		// 
+		let navigationPage = this.pages[3];
+
 		this.paginationFooter = document.createElement('div');
 		this.paginationFooter.classList.add('footer', 'pagination');
+		pageIds.unshift('cover');
 		pageIds.forEach((id, i) => {
 			let paginationButton = document.createElement('div');
 			paginationButton.classList.add('button', 'pagination');
-			paginationButton.setAttribute('data-page-id', i + 1);
+			paginationButton.setAttribute('data-page-id', i);
 			this.paginationFooter.appendChild(paginationButton);
 		});
 		this.modalContainer.appendChild(this.paginationFooter);
@@ -126,7 +170,8 @@ export default {
 		// TODO: toggle event handlers when modal opened/closed
 		this.modalContainer.addEventListener('mouseover', event => {
 
-			if (event.target.classList.contains('button')) {
+			if (event.target.classList.contains('button') &&
+				parseInt(event.target.dataset.pageId) !== this.currentPage) {
 				event.target.classList.add('active');
 				event.stopImmediatePropagation();
 			}
@@ -135,7 +180,8 @@ export default {
 
 		this.modalContainer.addEventListener('mouseout', event => {
 
-			if (event.target.classList.contains('button')) {
+			if (event.target.classList.contains('button') &&
+				parseInt(event.target.dataset.pageId) !== this.currentPage) {
 				event.target.classList.remove('active');
 				event.stopImmediatePropagation();
 			}
@@ -177,15 +223,38 @@ export default {
 	setCurrentPage (index) {
 
 		if (isNaN(index)) { return; }
+		if (index === this.currentPage) { return; }
+		this.currentPage = index;
 
+		// container
+		this.modalContainer.classList[index ? 'add' : 'remove']('pages');
+
+		// pages
 		this.pages.forEach((page, i) => page.classList[i === index ? 'add' : 'remove']('visible'));
+		/*
+		// pages
+		this.pages.forEach((page, i) => {
+			if (i === index && !page.classList.contains('visible')) {
+				// make visible and fade in after last page fades out
+				setTimeout(() => {
+					page.classList.add('visible', 'focused');
+				}, sassVars.ui.modal.pages.duration * 1000);
+			} else if (i !== index && page.classList.contains('visible')) {
+				// fade out and make visible on transition end
+				page.classList.remove('focused');
+				page.addEventListener('transitionend', event => page.classList.remove('visible'));
+			}
+		});
+		*/
 
+
+		// footers / buttons
 		this.paginationFooter.classList[index ? 'add' : 'remove']('visible');
 
 		if (index) {
 			let paginationButtons = this.paginationFooter.querySelectorAll('.button');
 			for (let i=0; i<paginationButtons.length; i++) {
-				paginationButtons[i].classList[index === i + 1 ? 'add' : 'remove']('active');
+				paginationButtons[i].classList[index === i ? 'add' : 'remove']('active');
 			}
 		}
 
