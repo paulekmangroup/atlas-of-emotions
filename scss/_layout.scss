@@ -624,10 +624,7 @@ a:active {
 	a:active {
 		@extend %raleway-regular;
 		text-decoration: none;
-		color: $text-overlay-color;
-		&.aboutLink {
-			color: lighten($color-enjoyment, 15%);
-		}
+		color: lighten($color-enjoyment, 15%);
 	}
 
 	.button.cover {

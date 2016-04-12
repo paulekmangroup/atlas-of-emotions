@@ -181,10 +181,18 @@ export default {
 		researchPage.appendChild(vizContainer);
 
 		//
-		// overview
+		// navigation
 		//
 		let navigationPage = this.pages[3];
+		let navDiagram = document.createElement('img');
+		navDiagram.src = './img/navigate.png';
+		navDiagram.style.width = '100%';
+		navigationPage.appendChild(navDiagram);
+		navigationPage.removeChild(navigationPage.querySelector('figcaption'));
 
+		//
+		// footer
+		//
 		this.paginationFooter = document.createElement('div');
 		this.paginationFooter.classList.add('footer', 'pagination');
 		pageIds.unshift('cover');
