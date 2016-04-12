@@ -457,6 +457,7 @@ a:active {
 	&.pages {
 		height: $modal-height-pages;
 		margin-top: -0.5 * $modal-height-pages;
+		padding: 4.5em 6em 5.5em 6em;
 	}
 
 	text-align: center;
@@ -598,7 +599,7 @@ a:active {
 		justify-content: space-between;
 
 		&.pagination {
-			margin-top: 1em;
+			margin-top: 2em;
 			visibility: hidden;
 			&.visible {
 				visibility: visible;
