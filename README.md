@@ -31,7 +31,7 @@ The heroku web process is `npm run start-heroku`, specified in [`Procfile`](http
 
 ```
 npm run dist
-scp -prq ./dist/. studio.stamen.com:www/emotionmap/show/v2/latest/` (or `/yyyy-mm-dd/`)
+scp -prq ./dist/. studio.stamen.com:www/emotionmap/show/v2/latest/ (or `/yyyy-mm-dd/`)
 ```
 
 ## Updating text content
