@@ -64,15 +64,15 @@ export default {
 		let buttonFooter = document.createElement('div');
 		buttonFooter.classList.add('footer');
 
-		let moreButton = document.createElement('h3');
-		moreButton.classList.add('button', 'more', 'cover');
-		moreButton.textContent = TELL_ME_MORE;
-		buttonFooter.appendChild(moreButton);
-
 		let exitButton = document.createElement('h3');
 		exitButton.classList.add('button', 'exit', 'cover');
 		exitButton.textContent = '<a href="#">LETS_GET_STARTED</a>';
 		buttonFooter.appendChild(exitButton);
+
+		let moreButton = document.createElement('h3');
+		moreButton.classList.add('button', 'more', 'cover');
+		moreButton.textContent = TELL_ME_MORE;
+		buttonFooter.appendChild(moreButton);
 
 		page.appendChild(modalHeadline);
 		page.appendChild(modalBody);
