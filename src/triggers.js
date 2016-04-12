@@ -653,6 +653,10 @@ export default {
 				if (emotions.indexOf(emotion) < emotions.indexOf(previousEmotion)) {
 					dx *= -1;
 				}
+				// switch for going from enjoyment to anger, and back
+				if (Math.abs(emotions.indexOf(emotion) - emotions.indexOf(previousEmotion)) == emotions.length - 1){
+					dx *= -1;
+				}
 
 				// delay to allow a little time for opacity to come up before translating
 				setTimeout(() => {

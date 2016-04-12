@@ -395,6 +395,10 @@ export default {
 				if (emotionState.index < this.emotionStates[previousEmotion].index) {
 					dx *= -1;
 				}
+				// switch for going from enjoyment to anger, and back
+				if (Math.abs(emotionState.index - this.emotionStates[previousEmotion].index) == this.emotions.length - 1){
+					dx *= -1;
+				}
 
 				// delay to allow a little time for opacity to come up before translating
 				setTimeout(() => {

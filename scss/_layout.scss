@@ -186,7 +186,7 @@ a:active {
 	}
 }
 
-#down-arrow {
+.navArrow {
 
 	img {
 		cursor: pointer;
@@ -199,6 +199,14 @@ a:active {
 		bottom: 20px;
 
 		display: none;
+
+		&.left {
+			left: -100px
+		}
+
+		&.right {
+			left: 100px
+		}
 
 		&.fadeOutIn {
 			animation-name: stretch;

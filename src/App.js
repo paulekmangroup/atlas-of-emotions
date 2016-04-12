@@ -69,7 +69,7 @@ export default function (...initArgs) {
 		initSections();
 		initHeader();
 		initSectionNavigation();
-		initDownArrow();
+		initNavArrows();
 		initMoreInfoDropdown();
 		initCallout();
 		initModal();
@@ -140,19 +140,30 @@ export default function (...initArgs) {
 
 	}
 
-	function initDownArrow() {
-		let downArrows = document.querySelector('#down-arrow'),
+	function setUpArrow(direction) {
+		let downArrows = document.querySelector('#' + direction + '-arrow'),
 			attentionArrow = document.createElement('img');
 
-		attentionArrow.addEventListener('click', onDownArrowClick);
+		let onClickNav = direction == 'down' ? onDownArrowClick : (direction == 'left' ? onLeftArrowClick : onRightArrowClick);
+		attentionArrow.addEventListener('click', onClickNav);
 
 		// add both images here
-		attentionArrow.src = './img/attentionArrow.png';
+		attentionArrow.src = './img/' + direction + 'Arrow.png';
 
 		// set classes
-		attentionArrow.classList.add('attentionArrow');
+		downArrows.classList.add('navArrow');
+		attentionArrow.classList.add(direction);
+		attentionArrow.classList.add(direction + 'Arrow');
 
 		downArrows.appendChild(attentionArrow);
+
+	}
+
+	function initNavArrows() {
+		setUpArrow('down');
+		setUpArrow('left');
+		setUpArrow('right');
+
 		updateArrowVisibility();
 	}
 
@@ -318,10 +329,14 @@ export default function (...initArgs) {
 	function fadeArrowOutAndIn (sectionName) {
 
 		function endFade(){
-			document.querySelector('.attentionArrow').classList.remove("fadeOutIn");
+			document.querySelector('.downArrow').classList.remove("fadeOutIn");
+			document.querySelector('.leftArrow').classList.remove("fadeOutIn");
+			document.querySelector('.rightArrow').classList.remove("fadeOutIn");
 		}
 
-		document.querySelector('.attentionArrow').classList.add("fadeOutIn");
+		document.querySelector('.downArrow').classList.add("fadeOutIn");
+		document.querySelector('.leftArrow').classList.add("fadeOutIn");
+		document.querySelector('.rightArrow').classList.add("fadeOutIn");
 		setTimeout(endFade, 4000);
 
 		updateArrowVisibility(sectionName);
@@ -640,9 +655,11 @@ export default function (...initArgs) {
 		// console.log(">>>>> scroll from currentEmotionIndex:", currentEmotionIndex);
 
 		if (dir < 0) {
-			targetEmotionIndex = Math.max(0, currentEmotionIndex - 1);
+			//targetEmotionIndex = Math.max(0, currentEmotionIndex - 1);
+			targetEmotionIndex = (currentEmotionIndex - 1 + emotionNames.length) % emotionNames.length;
 		} else {
-			targetEmotionIndex = Math.min(currentEmotionIndex + 1, emotionNames.length - 1);
+			//targetEmotionIndex = Math.min(currentEmotionIndex + 1, emotionNames.length - 1);
+			targetEmotionIndex = (currentEmotionIndex + 1) % emotionNames.length;
 		}
 
 		// console.log(">>>>> scroll to targetEmotionIndex:", targetEmotionIndex);
@@ -955,6 +972,16 @@ export default function (...initArgs) {
 
 	}
 
+	function onLeftArrowClick (event) {
+		scrollEmotion(-1);
+	}
+
+	function onRightArrowClick (event) {
+
+		scrollEmotion(1);
+
+	}
+
 	function onScrollbarClick (event) {
 
 		let section = event.target.dataset.section;
@@ -1059,10 +1086,18 @@ export default function (...initArgs) {
 
 		if (sectionName == 'calm' || sectionName == 'more'){
 			// arrow not visible
-			document.querySelector('.attentionArrow').classList.remove("visible");
+			document.querySelector('.downArrow').classList.remove("visible");
+			document.querySelector('.leftArrow').classList.remove("visible");
+			document.querySelector('.rightArrow').classList.remove("visible");
+		} else if (sectionName == 'continents'){
+			document.querySelector('.downArrow').classList.add("visible");
+			document.querySelector('.leftArrow').classList.remove("visible");
+			document.querySelector('.rightArrow').classList.remove("visible");
 		} else {
 			// arrow visible
-			document.querySelector('.attentionArrow').classList.add("visible");
+			document.querySelector('.downArrow').classList.add("visible");
+			document.querySelector('.leftArrow').classList.add("visible");
+			document.querySelector('.rightArrow').classList.add("visible");
 		}
 
 	}
