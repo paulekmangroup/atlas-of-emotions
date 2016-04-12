@@ -24,6 +24,7 @@ export default {
 	pages: [],
 	paginationFooter: null,
 	currentPage: Number.NaN,
+	isSettingPage: false,
 
 	init (modalContainer, setModalVisibility) {
 
@@ -265,29 +266,53 @@ export default {
 
 		if (isNaN(index)) { return; }
 		if (index === this.currentPage) { return; }
-		this.currentPage = index;
+		if (this.isSettingPage) { return; }
 
 		// container
 		this.modalContainer.classList[index ? 'add' : 'remove']('pages');
 
 		// pages
-		this.pages.forEach((page, i) => page.classList[i === index ? 'add' : 'remove']('visible'));
-		/*
-		// pages
-		this.pages.forEach((page, i) => {
-			if (i === index && !page.classList.contains('visible')) {
-				// make visible and fade in after last page fades out
-				setTimeout(() => {
-					page.classList.add('visible', 'focused');
-				}, sassVars.ui.modal.pages.duration * 1000);
-			} else if (i !== index && page.classList.contains('visible')) {
-				// fade out and make visible on transition end
-				page.classList.remove('focused');
-				page.addEventListener('transitionend', event => page.classList.remove('visible'));
-			}
-		});
-		*/
+		this.pages.forEach((page, i) => page.classList[i === index ? 'add' : 'remove']('visible', 'focused'));
 
+		/*
+		// this fanciness didn't work out, taking too much time. nevermind.
+		// pages
+		if (this.currentPage === 0 || (this.currentPage && index === 0)) {
+
+			// apply transitions between the cover page and other pages
+			this.isSettingPage = true;
+
+			let prevPage = this.pages[this.currentPage],
+				nextPage = this.pages[index];
+
+			// fade out the last page
+			prevPage.classList.remove('focused');
+			prevPage.addEventListener('transitionend', pageEvent => {
+				// once faded out, remove visibility
+				// and change height of modal
+				prevPage.classList.remove('visible');
+				this.modalContainer.classList[index ? 'add' : 'remove']('pages');
+				this.modalContainer.addEventListener('transitionend', modalEvent => {
+					if (modalEvent.propertyName === 'height') {
+						// once modal height changes,
+						// reveal the next page
+						nextPage.classList.add('visible');
+						setTimeout(() => {
+							// transition won't happen if it starts while element is not visible
+							nextPage.classList.add('focused');
+						}, 1);
+						this.isSettingPage = false;
+					}
+				});
+			});
+
+		} else {
+
+			// no transitions between other pages
+			this.pages.forEach((page, i) => page.classList[i === index ? 'add' : 'remove']('visible', 'focused'));
+
+		}
+		*/
 
 		// footers / buttons
 		this.paginationFooter.classList[index ? 'add' : 'remove']('visible');
@@ -298,6 +323,8 @@ export default {
 				paginationButtons[i].classList[index === i ? 'add' : 'remove']('active');
 			}
 		}
+
+		this.currentPage = index;
 
 	}
 

@@ -475,7 +475,9 @@ a:active {
 		transition-duration: #{$ui-overlays-duration-in}s;
 		opacity: 1.0;
 	}
+
 	/*
+	// this fanciness didn't work out, taking too much time. nevermind.
 	transition-property: opacity, height, margin-top;
 	transition-duration: #{$ui-overlays-duration-out}s, #{$ui-modal-pages-duration}s, #{$ui-modal-pages-duration}s;
 	transition-timing-function: ease-in-out;
@@ -545,8 +547,8 @@ a:active {
 			flex: 1 1 20%;
 			@extend %raleway-regular;
 			color: $text-overlay-color;
-			font-size: 1.8em;
-			margin-top: -0.5em;
+			margin-top: -0.6em;
+			font-size: 2em;
 		}
 		.right {
 			display: block;
@@ -584,6 +586,7 @@ a:active {
 			}
 			.big-num {
 				margin-top: 0;
+				font-size: 1.8em;
 			}
 		}
 	}
