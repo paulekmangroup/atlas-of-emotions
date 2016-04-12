@@ -458,6 +458,11 @@ export default {
 					this.setBackgroundedState(null);
 				}, sassVars.emotions.panX.delay * 1000);
 
+				setTimeout(() => {
+					this.graphContainers[emotion].selectAll('.axis')
+						.classed('visible', false);
+				}, 1);
+
 			}
 
 			this.setActive(!this.isBackgrounded);
