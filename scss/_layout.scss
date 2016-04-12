@@ -534,13 +534,29 @@ a:active {
 	}
 
 	.research {
+		figcaption {
+			width: 100%;
+			display: flex;
+			flex-direction: row;
+			text-align: left;
+		}
 		.big-num {
 			display: block;
+			flex: 1 1 20%;
+			@extend %raleway-regular;
+			color: $text-overlay-color;
 			font-size: 1.8em;
+			margin-top: -0.5em;
 		}
+		.right {
+			display: block;
+			flex: 1 1 80%;
+			padding-right: 1em;	// no orphans
+		}
+
 		.survey-results {
 			width: 100%;
-			height: 6.5em;
+			height: 8em;
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
@@ -563,11 +579,11 @@ a:active {
 			p {
 				display: block;
 				position: absolute;
-				bottom: 0;
+				bottom: 0.5em;
 				text-align: center;
 			}
-			.cap {
-				text-transform: capitalize;
+			.big-num {
+				margin-top: 0;
 			}
 		}
 	}

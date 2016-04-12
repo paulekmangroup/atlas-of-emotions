@@ -159,9 +159,10 @@ export default {
 			}, {});
 
 		let researchCaption = researchPage.querySelector('figcaption');
-		researchPage.querySelector('figcaption').innerHTML = '<span class="big-num">' + surveyResultUniversal + '</span>' + researchCaption.textContent;
+		researchPage.querySelector('figcaption').innerHTML = '<span class="big-num">' + surveyResultUniversal + '</span><span class="right">' + researchCaption.textContent + '</span>';
 
-		let vizContainer = document.createElement('div');
+		let vizContainer = document.createElement('div'),
+			capitalize = str => str[0].toUpperCase() + str.substr(1);
 		vizContainer.classList.add('survey-results');
 		_.values(dispatcher.EMOTIONS).forEach(emotion => {
 			let viz = document.createElement('div');
@@ -171,7 +172,7 @@ export default {
 			bar.style.height = surveyResultsEmotions[emotion];
 			bar.style.marginTop = (100 - parseInt(surveyResultsEmotions[emotion].replace('%', ''))) + '%';
 			let copy = document.createElement('p');
-			copy.innerHTML = '<span class="big-num">' + surveyResultsEmotions[emotion] + '</span><span class="cap">' + emotion + ' ' + IS_UNIVERSAL + '</span>';
+			copy.innerHTML = '<span class="big-num">' + surveyResultsEmotions[emotion] + '</span>' + capitalize(emotion) + ' ' + IS_UNIVERSAL;
 			viz.appendChild(bar);
 			viz.appendChild(copy);
 			vizContainer.appendChild(viz);
