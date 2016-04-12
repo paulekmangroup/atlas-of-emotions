@@ -1694,17 +1694,17 @@
       "steps": [
         {
           "header": "What this is",
-          "body": "This atlas was inspired by a series of conversations between the <a href=\"http://www.dalailama.com/\">Dalai Lama</a> and <a class=\"aboutLink\" href=\"#more:about\">Paul Ekman</a> about the science of emotion. With the help of <a href=\"http://www.stamen.com/\">Stamen Design</a> and Paul’s daughter Eve, this tool was created as a visual journey through the known world of emotion.",
+          "body": "This atlas was inspired by a series of conversations between the <a href=\"http://www.dalailama.com/\" target=\"_blank\">Dalai Lama</a> and <a href=\"#more:about\">Paul Ekman</a> about the science of emotion. With the help of <a href=\"http://www.stamen.com/\" target=\"_blank\">Stamen Design</a> and Paul’s daughter <a href=\"#more:about\">Eve Ekman</a>, this tool was created as a visual journey through the world of emotion.",
           "caption": "His Holiness the Dalai Lama, Dr. Paul Ekman, and Dr. Eve Ekman"
         },
         {
           "header": "What it’s based on",
-          "body": "In June of 2014, Paul Ekman sent out a <a href=\"http://pps.sagepub.com/content/11/1/31.full.pdf?ijkey=AMIJzv8J9Tn0VF1&keytype=finite\" target=\"_blank\">survey</a> to 248 of the most active emotions researchers to establish a consensus as <a class=\"aboutLink\" href=\"#more:annex-scientific-basis\">the scientific basis for this atlas</a>.",
-          "caption": "of those surveyed agreed that there are Universal Emotions: emotions that all humans, no matter where we live or how we were raised, have in common."
+          "body": "In June of 2014, Paul Ekman sent out a <a href=\"http://pps.sagepub.com/content/11/1/31.full.pdf?ijkey=AMIJzv8J9Tn0VF1&keytype=finite\" target=\"_blank\">survey</a> to 248 of the most active emotions researchers to establish a consensus as <a href=\"#more:annex-scientific-basis\">the scientific basis for this atlas</a>.",
+          "caption": "of those who responded agreed that there are Universal Emotions: emotions that all humans, no matter where we live or how we were raised, have in common."
         },
         {
           "header": "How to navigate",
-          "body": "This is an opportunity for exploration and discovery. Click on shapes to learn about them. Use the arrows to navigate to other pages.",
+          "body": "This is an opportunity for exploration and discovery. Click on shapes to learn about them. Use the arrows and scrollbar to navigate to other pages.",
           "caption": ""
         }
       ]
@@ -1737,7 +1737,7 @@
     },
     "triggers": {
       "header": "Triggers of LHAMO",
-      "body": "Triggers automatically bring forth an emotion without consideration.",
+      "body": "Triggers automatically bring forth an emotion without consideration. Awareness of the trigger usually takes place at the end of this <a id=\"annexLink\" href=\"#more:annex-episode-timeline\">process</a>, if at all.",
       "steps": [
         {
           "header": "Triggers",
@@ -1753,11 +1753,11 @@
         },
         {
           "header": "Universal Triggers",
-          "body": "These triggers are universal. Universal triggers are innate, common to everyone. They affect us more intensely than learned triggers."
+          "body": "This is an example of a universal trigger. Universal triggers are innate, common to everyone. They affect us more intensely than learned triggers."
         },
         {
           "header": "Learned Triggers",
-          "body": "These triggers are learned. Learned triggers are either cultural, stemming from widely shared experiences, or personal, arising from more individual experiences."
+          "body": "This is an example of a learned trigger. Learned triggers are either cultural, stemming from widely shared experiences, or personal, arising from more individual experiences."
         }
       ]
     },
