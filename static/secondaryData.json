@@ -257,7 +257,7 @@
         {
           "desc": "There are universal emotions",
           "name": "88%",
-          "formatting": ""
+          "formatting": "beforebreak"
         },
         {
           "desc": "There are universal facial signals to emotion",
@@ -320,7 +320,7 @@
         "The respondents were asked whether the evidence for each emotion was compelling. There was high agreement about five emotions (all of which were described by both Darwin and Wundt): anger (91%), fear (90%), disgust (86%), sadness (80%), and happiness (76%). Shame, surprise and embarrassment were listed by 40% to 50%. Other emotions, currently under study by various investigators, drew substantially less support: guilt (37%), contempt (34%), love (32%), awe (31%), pain (28%), envy (28%), compassion (20%), pride (9%), and gratitude (6%)."
       ],
       "title": "The Scientific Basis for This Work",
-      "desc": "The Atlas of Emotion is based on the consensus among scientists as determined by a survey (in the choice of the five emotion continents and the relationship of emotions to moods, personality and psychopathology), the work of a few scientists who have focused on the naming of states within emotions, dictionary definitions, theory and best guesses about the actions for each state and whether they are constructive or destructive. For more information, see <a href=\"http://pps.sagepub.com/content/11/1/31.full.pdf?ijkey=AMIJzv8J9Tn0VF1&keytype=finite\">\"What Scientists Who Study Emotion Agree About,\"</a> by Paul Ekman (Perspectives on Psychological Science, 2015).",
+      "desc": "The Atlas of Emotion is based on the consensus among scientists as determined by a survey (in the choice of the five emotion continents and the relationship of emotions to moods, personality and psychopathology), the work of a few scientists who have focused on the naming of states within emotions, dictionary definitions, theory and best guesses about the actions for each state and whether they are constructive or destructive. For more information, see <a href=\"http://pps.sagepub.com/content/11/1/31.full.pdf?ijkey=AMIJzv8J9Tn0VF1&keytype=finite\" target=\"_blank\">\"What Scientists Who Study Emotion Agree About,\"</a> by Paul Ekman (Perspectives on Psychological Science, 2015).",
       "contentIntro": "The survey was emailed in mid-June of 2014 to 248 scientists who had frequently published quantitative research on emotion."
     },
     "triggers-timeline": {

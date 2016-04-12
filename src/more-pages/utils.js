@@ -103,10 +103,15 @@ export function makeTable(title, rows, subTable) {
 		table.appendChild(tr);
 
 		if (row.formatting) {
-			if (row.formatting === 'break') {
+			if (row.formatting === 'break' || row.formatting === 'beforebreak') {
 				let spacer = document.createElement('tr');
 				spacer.classList.add('table-break');
-				table.appendChild(spacer);
+				if (row.formatting === 'break') {
+					table.appendChild(spacer);
+				} else {
+					table.insertBefore(spacer, tr);
+				}
+
 			}
 		}
 	});
