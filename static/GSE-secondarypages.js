@@ -22,22 +22,41 @@ var ANNEX_SECTIONS = [
 
 var PARSER_CONFIG = {
 	'scientific basis': {
-		start: [1, 3], // col, row
+		start: [[1, 3],[1, 6],[1,9],[1,26]], // col, row
 		parse: function(data) {
 			if (!data) return {};
 
-			return {
-				title: data[0].title,
-				desc: data[0].introduction
-			}
-		}
+          var scientific = {};
+          scientific.content = [];
+          scientific.footer = [];
+
+			data.forEach(function(row) {
+				if (row.title) {
+					scientific.title = row.title;
+					scientific.desc = row.introduction || '';
+				} else if (row.surveydata) {
+					scientific.content.push({
+						desc: row.surveyquestion,
+						name: row.surveydata.toString() || null,
+						formatting: row.formatting
+					});
+                } else if (row.survey) {
+                  scientific.contentIntro = row.survey;
+                } else if (row.footer) {
+                  scientific.footer.push(row.footer)
+                }
+			});
+
+		return scientific;
+        }
 	},
 
 	'triggers timeline': {
-		start: [[1, 3], [1, 6]], // col, row
+		start: [[1, 3], [1, 6], [1,15]], // col, row
 		parse: function(data) {
 			var rsp = {};
 			rsp.content = [];
+            rsp.footer = [];
 
 			data.forEach(function(row) {
 				if (row.title) {
@@ -45,10 +64,12 @@ var PARSER_CONFIG = {
 					rsp.desc = row.introduction || '';
 				} else if (row.text) {
 					rsp.content.push({
-						txt: row.text,
-						id: row.id || null
+						desc: row.text,
+						name: row.id || null
 					});
-				}
+                } else if (row.footer) {
+                  rsp.footer.push(row.footer)
+                }
 			});
 
 			return rsp;

@@ -69,7 +69,7 @@ export function makeTable(title, rows, subTable) {
 
 		const titleCell = document.createElement('td');
 		titleCell.setAttribute('colspan', 2);
-		titleCell.textContent = title;
+		titleCell.innerHTML = title;
 
 		titleRow.appendChild(titleCell);
 		table.appendChild(titleRow);
@@ -97,11 +97,18 @@ export function makeTable(title, rows, subTable) {
 			td1.textContent = row.desc;
 		}
 
-
 		tr.appendChild(td0);
 		tr.appendChild(td1);
 
 		table.appendChild(tr);
+
+		if (row.formatting) {
+			if (row.formatting === 'break') {
+				let spacer = document.createElement('tr');
+				spacer.classList.add('table-break');
+				table.appendChild(spacer);
+			}
+		}
 	});
 
 	if (subTable) return table;

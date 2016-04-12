@@ -256,51 +256,63 @@
       "content": [
         {
           "desc": "There are universal emotions",
-          "name": "88%"
+          "name": "88%",
+          "formatting": ""
         },
         {
           "desc": "There are universal facial signals to emotion",
-          "name": "80%"
+          "name": "80%",
+          "formatting": "break"
         },
         {
           "desc": "Anger is a universal emotion",
-          "name": "91%"
+          "name": "91%",
+          "formatting": ""
         },
         {
           "desc": "Fear is a universal emotion",
-          "name": "90%"
+          "name": "90%",
+          "formatting": ""
         },
         {
           "desc": "Disgust is a universal emotion",
-          "name": "86%"
+          "name": "86%",
+          "formatting": ""
         },
         {
           "desc": "Sadness is a universal emotion",
-          "name": "80%"
+          "name": "80%",
+          "formatting": ""
         },
         {
           "desc": "Happiness is a universal emotion",
-          "name": "76%"
+          "name": "76%",
+          "formatting": "break"
         },
         {
           "desc": "There are universal triggers to emotion",
-          "name": "66%"
+          "name": "66%",
+          "formatting": ""
         },
         {
           "desc": "There is universal physiology of emotion",
-          "name": "51%"
+          "name": "51%",
+          "formatting": ""
         },
         {
           "desc": "There are biologically discrete, separate emotions",
-          "name": "49%"
+          "name": "49%",
+          "formatting": ""
         },
         {
           "desc": "Emotions are constructed by social factors",
-          "name": "11%"
+          "name": "11%",
+          "formatting": ""
         },
         {
           "desc": "Emotions are both biologically separate and socially constructed",
-          "name": "3%"
+          "name": "3%",
+          "formatting": ""
         }
       ],
       "footer": [
