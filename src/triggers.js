@@ -89,6 +89,7 @@ export default {
 		this.onHitAreaMouseOver = this.onHitAreaMouseOver.bind(this);
 		this.onHitAreaMouseOut = this.onHitAreaMouseOut.bind(this);
 		this.onPhaseLabelClick = this.onPhaseLabelClick.bind(this);
+		this.showTriggerPopup = this.showTriggerPopup.bind(this);
 		this.onPopupCloseButtonClicked = this.onPopupCloseButtonClicked.bind(this);
 
 		this.isInited = true;
@@ -759,20 +760,23 @@ export default {
 		// enter
 		labelSelection.enter().append('div')
 			.classed('label ' + emotion, true)
+			.attr('data-popuptarget', (d,i) => 'triggers:' + d.name)
 			.classed('filtered-by-database', d => d.isFilteredByDatabasePhase)
 			// .style('opacity', 1.0)
 		.append('h4')
-			.style("transform", function(d,i){return "translate(" + (adjustTranslation[emotion][i]*100 + -50) + "%,-50%)";})
 			.html(d => d.name)
+			.style("text-align", "left")
+			.attr("class", d => d.name.replace(/\s+/g, '-'))
 			.on('mouseenter', d => this.setHitAreasLocked(true))
 			.on('mouseleave', d => this.setHitAreasLocked(false))
-			.on('click', d => this.showTriggerPopup(emotion, d.type));
+			.on('click', d => this.showTriggerPopup(d.type, d.name));
 
 		// merge
 		labelSelection
-			.style('transform', d => {
-				let x = 0.5 * this.sectionContainer.offsetWidth + Math.cos(d.angle) * d.radius,
-					y = h + Math.sin(d.angle) * d.radius;
+			.style('transform', (d,i) => {
+				let xShift = document.getElementsByClassName(d.name.replace(/\s+/g, '-'))[0].offsetWidth * (adjustTranslation[emotion][i] - .5);
+				let x = 0.5 * this.sectionContainer.offsetWidth + Math.cos(d.angle) * d.radius + xShift,
+					y = h + Math.sin(d.angle) * d.radius - 10;
 				return 'translate(' + x + 'px,' + y + 'px)';
 			});
 
@@ -847,6 +851,7 @@ export default {
 	},
 
 	close: function () {
+		dispatcher.popupChange();
 
 		return new Promise((resolve, reject) => {
 
@@ -989,20 +994,18 @@ export default {
 
 	},
 
-	showTriggerPopup: function (emotion, triggerType) {
+	showTriggerPopup: function (triggerType, name) {
+		if (d3.event) {
+			d3.event.stopImmediatePropagation();
+		}
 
-		if (triggerType !== TRIGGER_TYPES.UNIVERSAL && triggerType !== TRIGGER_TYPES.LEARNED) { return; }
-
-		let unselectedTriggerType = triggerType === TRIGGER_TYPES.UNIVERSAL ? TRIGGER_TYPES.LEARNED : TRIGGER_TYPES.UNIVERSAL;
-
-		// show the selected one, hide the unselected one
-		this.labelContainers[emotion].select(`.${triggerType}`)
-			.classed('visible', true);
-		this.labelContainers[emotion].select(`.${unselectedTriggerType}`)
-			.classed('visible', false);
-
-		const step = emotionsData.metadata.triggers.steps[triggerType === TRIGGER_TYPES.UNIVERSAL ? 3 : 4];
-		dispatcher.popupChange('triggers', emotion +'-'+ triggerType, step.body);
+		let triggerText = "";
+		if(triggerType == 'universal'){
+			triggerText = emotionsData.metadata.triggers.steps[3].body;
+		} else {
+			triggerText = emotionsData.metadata.triggers.steps[4].body;
+		}
+		dispatcher.popupChange('triggers', name, triggerText);
 
 	},
 
