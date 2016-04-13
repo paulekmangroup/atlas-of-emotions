@@ -137,8 +137,8 @@ export default {
 			radiusSpread = haloRadius * 0.225;
 
 		let spreadPercent = {
-			'anger': [.6,.7,.2,0,1.5,.2,.3],
-			'fear': [.3,.2,.9,.1,.5,.2,.6],
+			'anger': [.6,0,.2,0,1.5,.2,.3],
+			'fear': [.3,.2,.5,.1,.5,.2,.6],
 			'disgust': [.6,.3,.3,.12,1],
 			'sadness': [.6,.4,.3,1.8,1],
 			'enjoyment': [.2,.3,0.2,.12,1.7,.2,.3],
@@ -150,9 +150,6 @@ export default {
 			aspectRatio = this.sectionContainer.offsetWidth / this.sectionContainer.offsetHeight;
 
 		// adjust spread based on aspect ratio
-		if(aspectRatio > 1.75){
-			additive = 1;
-		}
 		if (aspectRatio < 1.4){
 			multiplier = .6;
 		}
