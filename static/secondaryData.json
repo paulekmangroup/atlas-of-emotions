@@ -20,11 +20,11 @@
         },
         {
           "name": "Enjoyment",
-          "desc": "A cheerful person is also thought of as optimistic. This person sees the world in positive way and can easily be made to laugh and feel enjoyment."
+          "desc": "A cheerful person may also be thought of as optimistic. This person sees the world in positive way and can easily be made to laugh and feel enjoyment."
         }
       ],
       "title": "Personality Trait",
-      "desc": "Certain personality traits relate to specific emotions."
+      "desc": "Certain personality traits are related to specific emotions."
     },
     "psychopathology": {
       "emotions": [
@@ -34,7 +34,7 @@
           "children": [
             {
               "name": "Intermittent Explosive Disorder",
-              "desc": "Characterized by impulsively aggressive and assaultive behaviors out of proportion to stressors."
+              "desc": "Impulsively aggressive and assaultive behaviors out of proportion to triggers."
             },
             {
               "name": "Oppositional Defiance Disorder",
@@ -72,7 +72,7 @@
             },
             {
               "name": "Obsessive-Compulsive Disorder (OCD)",
-              "desc": "An anxiety disorder characterized by intrusive thoughts that produce uneasiness, apprehension, fear or worry (obsessions); repetitive behaviors aimed at reducing the associated anxiety (compulsions); or a combination of such obsessions and compulsions."
+              "desc": "An anxiety disorder characterized by intrusive thoughts that produce uneasiness, apprehension, fear or worry (obsessions); repetitive behaviors aimed at reducing the associated anxiety (compulsions); or a combination of both obsessions and compulsions."
             }
           ]
         },
@@ -100,7 +100,7 @@
         },
         {
           "name": "Sadness",
-          "desc": "Depression is a well-known psychopathology that is reported to affect over 25% of the population. When you have depression, it interferes with daily life and causes pain for both you and those who care about you. Depression is a common but serious illness.\n",
+          "desc": "Depression is a well-known type of psychopathology that is reported to affect over 25% of the population. Depression interferes with daily life and causes pain for both you and those who care about you. Depression is a common but serious illness.\n",
           "children": [
             {
               "name": "Major Depressive Disorder",
@@ -142,7 +142,7 @@
           "children": [
             {
               "name": "Signal",
-              "desc": "In the voice, anger generates a roar if not controlled; when anger is controlled, the voice may have sharp edge that is very detectable. In the face, the signal includes glaring eyes, lowered brows and narrowed, tightened lips. When people hear or see an angry signal, they are typically hurt just by the perception of the signal, and are likely to retaliate with angry actions."
+              "desc": "In the voice, anger generates a roar if not controlled; when anger is controlled, the voice may have sharp edge that is very detectable. In the face, the signal includes glaring eyes, lowered brows and narrowed, tightened lips. When people hear or see an angry signal, they are typically hurt just by the perception of the signal, and may retaliate with angry actions."
             },
             {
               "name": "Message",
@@ -156,7 +156,7 @@
           "children": [
             {
               "name": "Signal",
-              "desc": "Common signals are very wide open eyes, horizontally stretched lips and raised, drawn together eyebrows. There may be movement away from the target. Screams will accompany intense fear. Lesser fear signals can include heavy breathing, a head position slightly backwards and away, and a horizontally stretched lower lip accompanied by tightened neck muscles."
+              "desc": "Common signals are very wide open eyes, horizontally stretched lips and raised, drawn together eyebrows. There may be movement away from the target. Screams may accompany intense fear. Lesser fear signals can include heavy breathing, a head position slightly backwards and away, and a horizontally stretched lips accompanied by tightened neck muscles."
             },
             {
               "name": "Message",
@@ -184,11 +184,11 @@
           "children": [
             {
               "name": "Signal",
-              "desc": "The signals of sadness include a frown (lower lip pushed up and lip corners pulled slightly down), the inner corners of the eyebrows drawn up and together in the center of the forehead, raised cheeks and tears. Tears are a powerful example of a signal that can be seen even by strangers. The vocalization of sadness can include sobs and heaving and quavering of the voice."
+              "desc": "The signals of sadness include a frown (lower lip pushed up slightly and lip corners pulled slightly down), the inner corners of the eyebrows drawn up and together in the center of the forehead, raised cheeks and tears. The vocalization of sadness can include sobs and heaving and quavering of the voice."
             },
             {
               "name": "Message",
-              "desc": "The message of sadness is “comfort me.” It encourages, or intends to encourage, empathy in the target."
+              "desc": "The message of sadness is “comfort me.” It encourages, or intends to encourage, empathy from others."
             }
           ]
         },
@@ -198,11 +198,11 @@
           "children": [
             {
               "name": "Signal",
-              "desc": "Enjoyment signals include the Duchenne (authentic) smile, activation of a smile (lip corners facing up), and activation of the orbital eye muscles that tighten the lower eyelid and create wrinkling around the outer eye corners (especially with age). Enjoyment also includes vocal signals such as the sound of relief (a sigh or exhalation) and the sound of amusement (laughter or giggling)."
+              "desc": "Enjoyment signals include the Duchenne (authentic) smile, activation of a smile (lip corners pulled obliquely up), and activation of the orbital eye muscles that tighten the lower eyelid and create wrinkling around the outer eye corners (especially with age). Enjoyment also includes vocal signals such as the sound of relief (a sigh or exhalation) and the sound of amusement (laughter or giggling)."
             },
             {
               "name": "Message",
-              "desc": "The message of enjoyment is “this feels good,” and it is encouraging of engaging in social interaction."
+              "desc": "The message of enjoyment is “this feels good.” It encourages engaging in social interaction."
             }
           ]
         }
@@ -637,8 +637,8 @@
           ]
         }
       ],
-      "title": "Intrinsic or Intentional",
-      "desc": "Actions can be intrinsic (without intent) or intentional (an active attempt to enact change), or both."
+      "title": "Intrinsic or Intentional Actions",
+      "desc": "Actions can be intrinsic (without conscious intent) or intentional (an active attempt to enact change), or both."
     }
   },
   "about": {
