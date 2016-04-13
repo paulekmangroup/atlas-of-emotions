@@ -29,11 +29,18 @@ class PopupManager {
 		clone.querySelector('.close')
 			.addEventListener('click', this.onPopupCloseButtonClick.bind(this, props.id), false);
 
+
 		props.popup = clone;
 		this.popups[props.id] = props;
 
+		// refer from target instead of clone, and before appending clone to target
+		let w = props.target.offsetWidth + 100;
+		w = Math.max(w, 250);
+		//let w = 250;
+
 		props.target.appendChild(clone);
 		props.target.classList.add('popped');
+
 
 		if (props.target.getAttribute('data-clip')) {
 			props.target.classList.add('unclip');
@@ -43,10 +50,6 @@ class PopupManager {
 			// mark popup as containing a secondary popup before measuring
 			props.target.classList.add('has-secondary');
 		}
-
-		// set w/h
-		let w = clone.offsetWidth + 100;
-		w = Math.max(w, 250);
 
 		clone.style.cssText = `width: ${w}px;`;
 		clone.offsetWidth; // force repaint
