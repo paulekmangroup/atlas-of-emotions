@@ -91,9 +91,6 @@ export default {
 
 		});
 
-		this.backgroundedLabel = d3.select(containerNode).append('div')
-			.attr('id', 'backgrounded-state-label');
-		this.backgroundedLabel.append('h3');
 
 	},
 
@@ -340,19 +337,28 @@ export default {
 
 		}
 
-
 		// set label positions whether new or existing
 		labels
 			.style({
 				top: function(d,i){return positionsLookup[statesData[i].name].top + 'px';},
 				left: function(d,i){return positionsLookup[statesData[i].name].left + 'px';},	// not sure why this 20px magic number is necessary...?
 				//top: d => (Math.round(yOffsets[emotion](stateSection.yScale(d[1].y), d)) + 'px')
-			})
-			.each(function () {
-				setTimeout(() => {
-					this.classList.add('visible');
-				}, LABEL_APPEAR_DELAY);
 			});
+		if(!this.isBackgrounded){
+			labels
+				.each(function () {
+					setTimeout(() => {
+						this.classList.add('visible');
+					}, LABEL_APPEAR_DELAY);
+				});
+		} else {
+			labels
+				.each(function () {
+					setTimeout(() => {
+						this.classList.remove('visible');
+					}, LABEL_APPEAR_DELAY);
+				});
+		}
 
 	},
 
@@ -428,6 +434,9 @@ export default {
 				currentLabels.style('transform', 'translateX(0)');
 			}, sassVars.emotions.panX.delay * 1000);
 
+			// render labels regardless of if backgrounded or not
+			this.renderLabels(this.currentEmotion);
+
 			if (!this.isBackgrounded) {
 
 				setTimeout(() => {
@@ -437,7 +446,6 @@ export default {
 					}
 				}, sassVars.emotions.scale.in.delay * 1000);
 
-				this.renderLabels(this.currentEmotion);
 
 				setTimeout(() => {
 					this.graphContainers[emotion].selectAll('.axis')
@@ -647,9 +655,7 @@ export default {
 					.attr('d', this.areaGenerators[emotion]);
 
 				// reposition labels
-				if (!this.isBackgrounded) {
-					this.renderLabels(emotion);
-				}
+				this.renderLabels(emotion);
 			}
 
 		}
@@ -709,10 +715,6 @@ export default {
 			this.sectionContainer.classList[(options && (options.sectionName === dispatcher.SECTIONS.ACTIONS) ? 'add' : 'remove')]('actions');
 			this.sectionContainer.classList[(options && (options.sectionName === dispatcher.SECTIONS.TRIGGERS) ? 'add' : 'remove')]('triggers');
 			this.sectionContainer.classList[(options && (options.sectionName === dispatcher.SECTIONS.MOODS) ? 'add' : 'remove')]('moods');
-
-			if (!val) {
-				this.backgroundedLabel.classed('visible', false);
-			}
 
 			this.hideChrome();
 			this.setActive(!val);
@@ -1484,11 +1486,11 @@ export default {
 		}
 
 		let statesData = this.emotionStates[this.currentEmotion].data[i];
+		this.selectedState = statesData.name;
+		this.setHighlightedState(statesData.name);
 		if (this.isBackgrounded) {
 			dispatcher.setEmotionState(statesData.name, true);
 		} else {
-			this.selectedState = statesData.name;
-			this.setHighlightedState(statesData.name);
 			dispatcher.popupChange('states', statesData.name, statesData.desc);
 			// dispatcher.changeCallout(this.currentEmotion, statesData.name, statesData.desc);
 		}
@@ -1496,6 +1498,8 @@ export default {
 	},
 
 	onBackgroundClick: function () {
+		this.selectedState = null;
+		this.setHighlightedState(null);
 		// check if on states or not
 		if (this.isBackgrounded) {
 			// check to see if any action labels are popped - if no, dispatch emotion state, if yes reset popups
@@ -1505,8 +1509,6 @@ export default {
 				dispatcher.popupChange();
 			}
 		} else {
-			this.selectedState = null;
-			this.setHighlightedState(null);
 			this.resetCallout();
 		}
 
@@ -1514,7 +1516,7 @@ export default {
 
 	setBackgroundedState: function (state) {
 		this.backgroundedState = state;
-		this.displayBackgroundedStates(null);
+		this.displayBackgroundedStates(state);
 		this.setHighlightedState(state);
 
 	},
@@ -1535,18 +1537,6 @@ export default {
 			classes[emotion] = emotion === this.currentEmotion;
 		});
 
-		if (singleStateName) {
-			this.backgroundedLabel.select('h3').html(singleStateName);
-			this.backgroundedLabel.classed('visible', true);
-			this.backgroundedLabel.classed(classes);
-		} else {
-			// finish fading out before changing emotion class (and color)
-			this.backgroundedLabel.classed('visible', false);
-			setTimeout(() => {
-				this.backgroundedLabel.classed(classes);
-			}, sassVars.states.highlighted.out * 1000);
-		}
-
 		this.displayHighlightedStates(states);
 
 	},
@@ -1558,8 +1548,12 @@ export default {
 
 	},
 
-	// does not set any state, just displays.
+	// if both states and this.highlightedState are null, this sets state
 	displayHighlightedStates: function (states) {
+		// essentially clear state going into triggers
+		if (!states && !this.highlightedState) {
+			this.selectedState = null;
+		}
 
 		if (!this.currentEmotion) { return; }
 

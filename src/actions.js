@@ -561,7 +561,7 @@ export default {
 
 			let openDelay = 1500;
 			this.setStateTimeout = setTimeout(() => {
-				dispatcher.setEmotionState(null, true);
+				dispatcher.setEmotionState(states.selectedState, true);
 			}, this.isBackgrounded ? 0 : openDelay);
 
 			// resolve on completion of primary transitions
@@ -587,10 +587,11 @@ export default {
 			this.setHighlightedAction(null);
 		}
 
-		if (state && state === this.currentState) { return; }
+		// remove this since now might keep state from actions
+		// if (state && state === this.currentState) { return; }
 
 		// if transitioning from null selection to null selection, then skip transition
-		
+
 		this.currentState = state;
 
 		let stateActionsData,
