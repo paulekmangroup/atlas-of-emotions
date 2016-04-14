@@ -91,9 +91,6 @@ export default {
 
 		});
 
-		this.backgroundedLabel = d3.select(containerNode).append('div')
-			.attr('id', 'backgrounded-state-label');
-		this.backgroundedLabel.append('h3');
 
 	},
 
@@ -709,10 +706,6 @@ export default {
 			this.sectionContainer.classList[(options && (options.sectionName === dispatcher.SECTIONS.ACTIONS) ? 'add' : 'remove')]('actions');
 			this.sectionContainer.classList[(options && (options.sectionName === dispatcher.SECTIONS.TRIGGERS) ? 'add' : 'remove')]('triggers');
 			this.sectionContainer.classList[(options && (options.sectionName === dispatcher.SECTIONS.MOODS) ? 'add' : 'remove')]('moods');
-
-			if (!val) {
-				this.backgroundedLabel.classed('visible', false);
-			}
 
 			this.hideChrome();
 			this.setActive(!val);
@@ -1534,18 +1527,6 @@ export default {
 		_.values(dispatcher.EMOTIONS).forEach(emotion => {
 			classes[emotion] = emotion === this.currentEmotion;
 		});
-
-		if (singleStateName) {
-			this.backgroundedLabel.select('h3').html(singleStateName);
-			this.backgroundedLabel.classed('visible', true);
-			this.backgroundedLabel.classed(classes);
-		} else {
-			// finish fading out before changing emotion class (and color)
-			this.backgroundedLabel.classed('visible', false);
-			setTimeout(() => {
-				this.backgroundedLabel.classed(classes);
-			}, sassVars.states.highlighted.out * 1000);
-		}
 
 		this.displayHighlightedStates(states);
 

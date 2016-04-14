@@ -162,30 +162,3 @@
 		pointer-events: none;
 	}
 }
-
-#backgrounded-state-label {
-	position: absolute;
-	top: 20%;
-	left: 50%;
-
-	text-align: center;
-	pointer-events: none;
-
-	@include emotion-color;
-	white-space: nowrap;
-
-	transition: opacity #{$states-highlighted-out}s ease-out;
-	opacity: 0.0;
-
-	&.visible {
-		transition: opacity #{$states-highlighted-in}s ease-in;
-		opacity: 1.0;
-	}
-
-	h3 {
-		transform: translate(-50%, -50%);
-		margin: 0;
-		font-size: calc(0.66667em / #{$states-backgrounded-scale});
-		text-transform: uppercase;
-	}
-}
