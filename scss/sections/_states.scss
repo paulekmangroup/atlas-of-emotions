@@ -14,9 +14,10 @@
 	opacity: 1.0;
 
 	transform: scale(1.0);
-	transition-property: transform, top, opacity;
-	transition-duration: #{$states-backgrounded-duration-in}s, #{$states-backgrounded-duration-in}s, 0.5s;
-	transition-timing-function: cubic-bezier(0.4, 0.4, 0.35, 1), cubic-bezier(.81,.34,.63,.85), ease;
+	transition-property: transform, top, opacity, font-size;
+	transition-duration: #{$states-backgrounded-duration-in}s, #{$states-backgrounded-duration-in}s, 0.5s, .2s;
+	transition-delay: 0s, 0s, 0s, #{$states-backgrounded-duration-in / 2}s;
+	transition-timing-function: cubic-bezier(0.4, 0.4, 0.35, 1), cubic-bezier(.81,.34,.63,.85), ease, linear;
 
 	&.backgrounded {
 		transform: scale($states-backgrounded-scale);
