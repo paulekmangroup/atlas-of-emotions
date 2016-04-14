@@ -34,6 +34,7 @@
 			// states appear a bit larger in actions than in triggers and moods
 			transform: scale($states-backgrounded-actions-scale);
 			top: $states-backgrounded-actions-top;
+			font-size: calc(0.66667em / #{$states-backgrounded-scale});
 		}
 
 		/*
@@ -67,9 +68,6 @@
 		opacity: 0.0;
 		pointer-events: none;
 
-		& h3 {
-			font-size: 16px;
-		}
 
 		&.transitioning {
 			transition-property: transform, opacity;
@@ -152,9 +150,22 @@
 	&.backgrounded {
 		.label-container {
 			.label {
-				opacity: 0.0 !important;
 				pointer-events: none;
+				border-color: rgba(255,255,255, 0);
+
 			}
+
+			.highlighted {
+				opacity: 1;
+			}
+			.selected {
+				opacity: 1;
+			}
+			.muted {
+				// ug - hate having the !important here... but it's overriding another one that we need
+				opacity: 0 !important;
+			}
+
 		}
 	}
 
