@@ -1055,12 +1055,10 @@ export default {
 			}
 
 			dispatcher.popupChange('actions', action.name, action.desc, secondaryData);
-			states.displayHighlightedStates(action.states);
 
 		} else {
 
 			this.resetCallout();
-			states.displayHighlightedStates(null);
 
 		}
 
