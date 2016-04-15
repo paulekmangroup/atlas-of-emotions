@@ -59,6 +59,11 @@ export default {
 			h = containerNode.offsetHeight,
 			continentGeom;
 
+		this.opacityState = {
+			start: [20,100,500,200,700],
+			duration: [400,400,150,600,300],
+		};
+
 		continentGeom = this.defineContinentGeom(w,h);
 
 		// left-to-right
@@ -259,9 +264,29 @@ export default {
 			someContinentIsHighlighted: false
 		};
 
-		continents.forEach(continent => continent.update(updateState, frameCount));
+		let calcPercentElapsed = function(fc, start, duration) {
+			let val = (fc - start) / duration;
+			if (val > 0 && val < 1) {
+				return (fc - start) / duration;
+			} else {
+				return 0;
+			}
+		};
 
-		this.spawnPaths(time);
+		let elapsedToOpacity = d3.scale.linear().domain([0,.2,.5,1]).range([0,1,1,0]);
+
+		let currentState = this.opacityState;
+
+		continents.forEach(continent => continent.update(updateState, frameCount * 3));
+		d3.selectAll(".continent").style("opacity", function(d,i){
+			// if just completed, set a new start point and new duration
+			if(currentState.start[i] + currentState.duration[i] < frameCount){
+				currentState.start[i] = frameCount + 900 * Math.random() + 100;
+				currentState.duration[i] = 600 * Math.random() + 100;
+			};
+			return elapsedToOpacity(calcPercentElapsed(frameCount, currentState.start[i], currentState.duration[i]));
+			//return 6 * Math.abs((frameCount + 400 * i) % 1000 / 1000 - .5)-1.5;
+		});
 
 		frameCount++;
 		if (this.isActive) {
@@ -271,7 +296,7 @@ export default {
 	},
 
 	spawnPaths: function (time) {
-
+		/*
 		paths.forEach((p, i) => {
 
 			if (frameCount - p.lastSpawnTime < MIN_PATH_SPAWN_DELAY) { return; }
@@ -281,6 +306,7 @@ export default {
 			this.spawnPath(i, time);
 
 		});
+		*/
 
 	},
 
