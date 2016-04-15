@@ -60,9 +60,12 @@ export default {
 			continentGeom;
 
 		this.opacityState = {
-			start: [20,100,500,200,700],
-			duration: [400,400,150,600,300],
+			start: [700,100,500,200,20],
+			duration: [300,400,150,600,400],
+			opacity: [0,0,0,0,0]
 		};
+
+		this.elapsedToOpacity = d3.scale.linear().domain([0,.2,.5,1]).range([0,1,1,0]);
 
 		continentGeom = this.defineContinentGeom(w,h);
 
@@ -257,6 +260,20 @@ export default {
 
 	},
 
+	generateNormal: function() {
+		let value = ((Math.random() + Math.random() + Math.random() + Math.random() + Math.random() + Math.random())) / 6;
+		return value;
+	},
+
+	calcPercentElapsed: function(fc, start, duration) {
+		let val = (fc - start) / duration;
+		if (val > 0 && val < 1) {
+			return (fc - start) / duration;
+		} else {
+			return 0;
+		}
+	},
+
 	update: function (time) {
 
 		let updateState = {
@@ -264,28 +281,33 @@ export default {
 			someContinentIsHighlighted: false
 		};
 
-		let calcPercentElapsed = function(fc, start, duration) {
-			let val = (fc - start) / duration;
-			if (val > 0 && val < 1) {
-				return (fc - start) / duration;
-			} else {
-				return 0;
+		let currentState = this.opacityState;
+
+		// update opacity if
+		for(var i = 0; i < 5; i++){
+			// if current cycle is over, set a new start and duration
+			if(currentState.start[i] + currentState.duration[i] < frameCount){
+				currentState.start[i] = frameCount + 900 * this.generateNormal() + 100;
+				currentState.duration[i] = 500 * this.generateNormal() + 100;
+			};
+			// define opacity based on frame count, start, and duration
+			currentState.opacity[i] = this.elapsedToOpacity(this.calcPercentElapsed(frameCount, currentState.start[i], currentState.duration[i]));
+
+			// update continent state if continent is visible
+			if(currentState.opacity[i] != 0){
+				continents[i].update(updateState, frameCount * 4);
 			}
 		};
 
-		let elapsedToOpacity = d3.scale.linear().domain([0,.2,.5,1]).range([0,1,1,0]);
-
-		let currentState = this.opacityState;
-
-		continents.forEach(continent => continent.update(updateState, frameCount * 3));
 		d3.selectAll(".continent").style("opacity", function(d,i){
-			// if just completed, set a new start point and new duration
-			if(currentState.start[i] + currentState.duration[i] < frameCount){
-				currentState.start[i] = frameCount + 900 * Math.random() + 100;
-				currentState.duration[i] = 600 * Math.random() + 100;
-			};
-			return elapsedToOpacity(calcPercentElapsed(frameCount, currentState.start[i], currentState.duration[i]));
-			//return 6 * Math.abs((frameCount + 400 * i) % 1000 / 1000 - .5)-1.5;
+			return currentState.opacity[i];
+		}).style("display", function(d,i){
+			// only show continent if it's visible
+			if(currentState.opacity[i] == 0){
+				return "none";
+			} else {
+				return "block";
+			}
 		});
 
 		frameCount++;
