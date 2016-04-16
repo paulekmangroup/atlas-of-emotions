@@ -141,7 +141,7 @@ export default {
 		this.setActive(true);
 
 		// transition time from _states.scss::#states
-		this.openCallout(1500);
+		this.openCallout(1000);
 
 		this.update();
 
@@ -219,6 +219,14 @@ export default {
 		// hide emotion menu on calm, show again when you leave
 		d3.select('.emotion-menu').classed("hidden", val);
 
+		// reset continents
+		if(!val){
+			continents.forEach(function (continent, i) {
+				continent.d3Selection
+					.style("opacity", 1.0).style("display", "block");
+			});
+		}
+
 	},
 
 	generateNormal: function() {
@@ -256,20 +264,22 @@ export default {
 
 			// update continent state if continent is visible
 			if(currentState.opacity[i] != 0){
-				continents[i].update(updateState, frameCount * 4);
+				continents[i].update(updateState, frameCount);
 			}
 		};
 
-		d3.selectAll(".continent").style("opacity", function(d,i){
-			return currentState.opacity[i];
-		}).style("display", function(d,i){
-			// only show continent if it's visible
-			if(currentState.opacity[i] == 0){
-				return "none";
-			} else {
-				return "block";
-			}
-		});
+
+		continents.forEach(function (continent, i) {
+			continent.d3Selection
+				.style("opacity", currentState.opacity[i])
+				.style("display",
+					// only show continent if it's visible
+					function(){if(currentState.opacity[i] == 0){
+						return "none";
+					} else {
+						return "block";
+					}});}
+		);
 
 		frameCount++;
 		if (this.isActive) {
