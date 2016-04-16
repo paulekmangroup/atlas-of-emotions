@@ -591,7 +591,7 @@
       ],
       "triggers": [
         {
-          "name": "Threat of losing status",
+          "name": "Impending impact of a rapidly moving object",
           "type": "Universal"
         },
         {
@@ -847,7 +847,7 @@
       "moods": [
         {
           "name": "Sour",
-          "desc": "Disgust can occur as a mood as a generalized feeling of repugnance."
+          "desc": "Disgust can occur as a mood, a generalized feeling of repugnance."
         }
       ]
     },
@@ -901,7 +901,6 @@
               "protest",
               "ruminate",
               "mourn",
-              "protect",
               "feel ashamed"
             ],
             "con": [
@@ -913,11 +912,12 @@
               "withdraw",
               "ruminate",
               "mourn",
-              "protect",
+              "protest",
               "feel ashamed"
             ],
             "both": [
-              "withdraw"
+              "withdraw",
+              "protest"
             ]
           }
         },
@@ -1258,7 +1258,7 @@
       },
       "states": [
         {
-          "name": "Sensory pleasures",
+          "name": "Sensory pleasure",
           "desc": "Enjoyment derived through one of the five physical senses: sight, sound, touch, taste and smell.",
           "range": {
             "min": 1,
@@ -1282,7 +1282,7 @@
         },
         {
           "name": "Rejoicing",
-          "desc": "A warm, uplifting feeling that people experience when they see acts of human goodness, kindness, and compassion. Also called elevation.",
+          "desc": "A warm, uplifting feeling that people experience when they see acts of human goodness, kindness and compassion. Also called elevation.",
           "range": {
             "min": 2,
             "max": 8
@@ -1370,7 +1370,7 @@
         },
         {
           "name": "Compassion/joy",
-          "desc": "Enjoyment felt when you act compassionately, especially if your actions help to relieve another person’s suffering.",
+          "desc": "Enjoyment felt when you act to relieve another person’s suffering.",
           "range": {
             "min": 3,
             "max": 6
@@ -1462,7 +1462,7 @@
         },
         {
           "name": "Naches",
-          "desc": "The Yiddish word for feelings of pride in the accomplishments, or sometimes just the existence, of your actual offspring or mentored offspring. Crucial for motivating the nurture of infants and children.",
+          "desc": "A Yiddish word for feelings of pride in the accomplishments, or sometimes just the existence, of your actual offspring or mentored offspring. Crucial for motivating the nurture of infants and children.",
           "range": {
             "min": 3,
             "max": 10
@@ -1530,7 +1530,7 @@
         },
         {
           "name": "Wonder",
-          "desc": "An experience of something that is very surprising, beautiful, amazing, or hard to believe.",
+          "desc": "An experience of something that is very surprising, beautiful, amazing or hard to believe.",
           "range": {
             "min": 5,
             "max": 10
@@ -1630,7 +1630,7 @@
         },
         {
           "name": "Gloat",
-          "desc": "Enjoy others' envy of your state of enjoyment."
+          "desc": "Enjoy others’ envy of your state of enjoyment."
         },
         {
           "name": "Exclaim",
@@ -1642,7 +1642,7 @@
         },
         {
           "name": "Savor",
-          "desc": "Relish the experience of good feelings about felt and psychological experiences."
+          "desc": "Relish the experience of good feelings about physical and psychological experiences."
         },
         {
           "name": "Indulge",
@@ -1694,13 +1694,13 @@
       "steps": [
         {
           "header": "What this is",
-          "body": "This atlas was inspired by a series of conversations between the <a href=\"http://www.dalailama.com/\" target=\"_blank\">Dalai Lama</a> and <a href=\"#more:about\">Paul Ekman</a> about the science of emotion. With the help of <a href=\"http://www.stamen.com/\" target=\"_blank\">Stamen Design</a> and Paul’s daughter Eve, this tool was created as a visual journey through the world of emotion.",
-          "caption": "His Holiness the Dalai Lama, Dr. Paul Ekman, and Dr. Eve Ekman"
+          "body": "This atlas was inspired by a series of conversations between the <a href=\"http://www.dalailama.com/\" target=\"_blank\">Dalai Lama</a> and <a href=\"#more:about\">Paul Ekman</a> about the science of emotions. With the help of <a href=\"http://www.stamen.com/\" target=\"_blank\">Stamen Design</a> and Paul’s daughter, Dr. Eve Ekman, this tool was created to be a visual journey through the world of emotions.",
+          "caption": "His Holiness the Dalai Lama, Dr. Paul Ekman and Dr. Eve Ekman"
         },
         {
           "header": "What it’s based on",
-          "body": "In June of 2014, Paul Ekman sent out a <a href=\"http://pps.sagepub.com/content/11/1/31.full.pdf?ijkey=AMIJzv8J9Tn0VF1&keytype=finite\" target=\"_blank\">survey</a> to 248 of the most active emotions researchers to establish a consensus as <a href=\"#more:annex-scientific-basis\">the scientific basis for this atlas</a>.",
-          "caption": "of those who responded agreed that there are Universal Emotions: emotions that all humans, no matter where we live or how we were raised, have in common."
+          "body": "In June 2014, Paul Ekman sent a <a href=\"http://pps.sagepub.com/content/11/1/31.full.pdf?ijkey=AMIJzv8J9Tn0VF1&keytype=finite\" target=\"_blank\">survey</a> to 248 of the most active emotion researchers in the world to establish a consensus that became <a href=\"#more:annex-scientific-basis\">the scientific basis for this atlas</a>.",
+          "caption": "of those who responded agreed that there are universal emotions that all humans, no matter where we live or how we were raised, have in common."
         },
         {
           "header": "How to navigate",
@@ -1723,15 +1723,15 @@
       "qualities": [
         {
           "header": "Constructive Actions",
-          "body": "In the context of this state, this is a constructive action, one that enables collaboration with others."
+          "body": "Within this state, this is a CONSTRUCTIVE action, one that enables collaboration with others."
         },
         {
           "header": "Ambiguous Actions",
-          "body": "In the context of this state, this action is ambiguous and may either enable or inhibit collaboration with others."
+          "body": "Within this state, this action is AMBIGUOUS and may either enable or inhibit collaboration with others."
         },
         {
           "header": "Destructive Actions",
-          "body": "In the context of this state, this is a destructive action, one that inhibits collaboration with others."
+          "body": "Within this state, this is a DESTRUCTIVE action, one that inhibits collaboration with others."
         }
       ]
     },

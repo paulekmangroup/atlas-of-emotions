@@ -52,7 +52,7 @@ var PARSER_CONFIG = {
 	},
 
 	'triggers timeline': {
-		start: [[1, 3], [1, 6], [1,15]], // col, row
+		start: [[1, 3], [1, 6], [1,29]], // col, row
 		parse: function(data) {
 			var rsp = {};
 			rsp.content = [];
