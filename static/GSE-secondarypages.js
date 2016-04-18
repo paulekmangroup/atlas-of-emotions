@@ -278,8 +278,8 @@ var PARSER_CONFIG = {
 			rsp.links = [];
 
 			data.forEach(function(row) {
-				if (row.title && row.introduction) {
-					rsp.title = row.title;
+				if (row.introduction) {
+                  rsp.title = row.title ? row.title : ' ';
 					rsp.desc = row.introduction;
 				} else if (row.link && row['link text']) {
 					rsp.links.push({
