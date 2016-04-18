@@ -33,6 +33,13 @@
 	z-index: $depth-5;
 }
 
+#more-emotrak {
+	img {
+		display: block;
+		margin: 0 auto;
+	}
+}
+
 #more-annex-scientific-basis {
 	.annex-table {
 		tr.content > td:last-child {

@@ -623,5 +623,20 @@
     ],
     "title": " ",
     "desc": "Learn more about your emotions, the work of Atlas of Emotions creators Paul and Eve Ekman, and Stamen, the design company that built this website."
+  },
+  "emotrak": {
+    "subsections": [
+      {
+        "title": "",
+        "image": "./img/emotrak.png",
+        "desc": "A brand new app, EmoTrak, is under development by Dr. Eve Ekman and collaborators. Sign up here to be the first to find out about the release of this science based emotional training app."
+      },
+      {
+        "title": "",
+        "desc": "Dr. Eve Ekman is a University of California San Francisco postdoctoral fellow studying burnout and emotional well being. Dr. Ekman has been developing and evaluating EmoTrak to support health care providers. The app is a self assessment tool to investigate emotion triggers, experiences and responses. It also provides brief emotion focused meditations and feedback on your emotional profile."
+      }
+    ],
+    "title": "",
+    "desc": "Improve your well being with daily emotional balance training."
   }
 }

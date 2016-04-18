@@ -22,6 +22,27 @@ export function makeBlock(titleStr, descStr) {
 	return block;
 };
 
+export function makeImageBlock(titleStr, descStr, imageStr) {
+	const block = document.createElement('div');
+	const title = document.createElement('h3');
+	const desc = document.createElement('p');
+	const image = document.createElement('img');
+
+	block.classList.add('block');
+	title.classList.add('title');
+	desc.classList.add('desc');
+
+	image.src = imageStr;
+
+	desc.innerHTML = descStr;
+
+	block.appendChild(title);
+	block.appendChild(desc);
+	block.appendChild(image);
+
+	return block;
+};
+
 export function makeLinkBlock(linkStr) {
 	const block = document.createElement('div');
 	const title = document.createElement('h3');

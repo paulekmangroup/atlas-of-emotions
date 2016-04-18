@@ -9,7 +9,7 @@ import sassVars from '../scss/variables.json';
 import About from './more-pages/about.js';
 import Donate from './more-pages/donate.js';
 import Further from './more-pages/further.js';
-import EmoTracker from './more-pages/emotracker.js';
+import EmoTrak from './more-pages/emotrak.js';
 import Annex from './more-pages/annex.js';
 import AnnexEpisodeTimeline from './more-pages/annex-episode-timeline.js';
 import AnnexImpedimentAntidote from './more-pages/annex-impediment-antidote.js';
@@ -123,7 +123,7 @@ export default {
 		outerwrapper.appendChild(innerwrapper);
 		containerEl.appendChild(outerwrapper);
 
-		if (id == 'more-about' || id == 'more-annex' || id == 'more-donate' || id == 'more-further') {
+		if (id == 'more-about' || id == 'more-annex' || id == 'more-donate' || id == 'more-further' || id == 'more-emotrak') {
 			// add back button for main more pages
 			const innerinnerwrapper = document.createElement('div');
 			innerinnerwrapper.classList.add('wrapper');
@@ -171,7 +171,7 @@ export default {
 		this.pages.donate = Donate;
 		this.pages.further = Further;
 		this.pages.annex = Annex;
-		this.pages.emotracker = EmoTracker;
+		this.pages.emotrak = EmoTrak;
 		this.pages['annex-episode-timeline'] = AnnexEpisodeTimeline;
 		this.pages['annex-partially-charted'] = AnnexPartiallyCharted;
 		this.pages['annex-traits'] = AnnexTraits;

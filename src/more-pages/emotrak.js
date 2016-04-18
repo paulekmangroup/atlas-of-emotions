@@ -12,8 +12,8 @@ export default {
 	wrapper: null,
 
 	init: function (containerNode, data) {
-		this.data = data.donate;
-		console.log('emotracker', this.data);
+		this.data = data.emotrak;
+		console.log(data);
 
 		this.sectionContainer = containerNode;
 
@@ -40,10 +40,15 @@ export default {
 		const subBlocks = document.createElement('div');
 		subBlocks.classList.add('sub-blocks');
 
-		// Link
-		subBlocks.appendChild(utils.makeLinkBlock(this.data.link));
+		this.data.subsections.forEach(section => {
+			if(section.image){
+				subBlocks.appendChild(utils.makeImageBlock(section.title, section.desc, section.image));
+			} else {
+				subBlocks.appendChild(utils.makeBlock(section.title, section.desc));
+			}
+		});
 
-		// Images?
+		subRow.appendChild(subBlocks);
 
 		subRow.appendChild(subBlocks);
 		table.appendChild(introRow);
@@ -67,6 +72,9 @@ export default {
 	open: function () {
 		this.sectionContainer.classList.add('active');
 
+		if (this.wrapper) {
+			document.querySelector('.sub-blocks').scrollTo(0, 0);
+		}
 		// any section-wide opening animations not specific to a particular page go here.
 		// probably won't be anything here for the more info section.
 

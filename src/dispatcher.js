@@ -49,8 +49,8 @@ const dispatcher = {
 				page: 'donate'
 			},
 			{
-				label: 'EmoTracker',
-				page: 'emotracker'
+				label: 'EmoTrak',
+				page: 'emotrak'
 			},
 			{
 				label: 'Additional Resources',
