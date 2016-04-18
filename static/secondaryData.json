@@ -629,12 +629,20 @@
       {
         "title": "",
         "desc": "A brand new app, EmoTrak, is under development by Dr. Eve Ekman and collaborators. Sign up below to be the first to find out about the release of this science based emotional training app.",
-        "image": "emotrak"
+        "image": "emotrak",
+        "mail": null
+      },
+      {
+        "title": "",
+        "desc": "true in mail column indicates that it will include hardcoded subscribe link",
+        "image": null,
+        "mail": true
       },
       {
         "title": "",
         "desc": "Dr. Eve Ekman is a University of California San Francisco postdoctoral fellow studying burnout and emotional well being. Dr. Ekman has been developing and evaluating EmoTrak to support health care providers. The app is a self assessment tool to investigate emotion triggers, experiences and responses. It also provides brief emotion focused meditations and feedback on your emotional profile.",
-        "image": null
+        "image": null,
+        "mail": null
       }
     ],
     "title": "",

@@ -30,6 +30,9 @@ export default {
 		const table = document.createElement('div');
 		const introRow = document.createElement('div');
 		const subRow = document.createElement('div');
+		const signup = document.createElement('div');
+
+		signup.innerHTML = '<div id="mc_embed_signup"><form action="//eveekman.us12.list-manage.com/subscribe/post?u=a8f41488aed929208e96dcf44&amp;id=76c8861d7d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate><div id="mc_embed_signup_scroll"><label for="mce-EMAIL">Subscribe for EmoTrak Release Updates</label><input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required><div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_a8f41488aed929208e96dcf44_76c8861d7d" tabindex="-1" value=""></div><div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div></div></form></div>';
 
 		table.classList.add('tb');
 		introRow.classList.add('tb-row');
@@ -43,6 +46,8 @@ export default {
 		this.data.subsections.forEach(section => {
 			if(section.image){
 				subBlocks.appendChild(utils.makeImageBlock(section.title, section.desc, section.image));
+			} else if (section.mail){
+				subBlocks.appendChild(signup);
 			} else {
 				subBlocks.appendChild(utils.makeBlock(section.title, section.desc));
 			}

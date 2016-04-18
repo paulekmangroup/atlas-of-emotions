@@ -313,6 +313,30 @@ var PARSER_CONFIG = {
 		}
 	},
 
+    emotrak: {
+		start: [[1, 2], [1, 5]], // col, row
+		parse: function (data) {
+			var rsp = {};
+			rsp.subsections = [];
+
+			data.forEach(function(row) {
+				if (row.introduction) {
+                  rsp.title = row.title ? row.title : '';
+					rsp.desc = row.introduction;
+				} else if (row.text) {
+					rsp.subsections.push({
+                      title: row.subhead ? row.subhead : '',
+					  desc: row.text,
+                      image: row.image ? row.image : null,
+                      mail: row.mail ? row.mail : null
+					});
+				}
+			});
+
+			return rsp;
+		}
+	},
+
 	about: {
 		start: [[1, 3], [1, 6]], // col, row
 		parse: function (data) {
