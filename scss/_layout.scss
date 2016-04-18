@@ -31,10 +31,12 @@ body {
 	}
 
 	/* ----------- Desktop Screens ----------- */
+	/*
 	@media screen
 		and (min-width: 1600px) {
 			font-size: 22px;
 	}
+	*/
 
 	&.small-screen-warning {
 		background-color: $text-color;
