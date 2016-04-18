@@ -49,7 +49,11 @@ const dispatcher = {
 				page: 'donate'
 			},
 			{
-				label: 'Further Reading',
+				label: 'EmoTracker',
+				page: 'emotracker'
+			},
+			{
+				label: 'Additional Resources',
 				page: 'further'
 			}
 		]

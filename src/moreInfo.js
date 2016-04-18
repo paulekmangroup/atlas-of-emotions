@@ -9,6 +9,7 @@ import sassVars from '../scss/variables.json';
 import About from './more-pages/about.js';
 import Donate from './more-pages/donate.js';
 import Further from './more-pages/further.js';
+import EmoTracker from './more-pages/emotracker.js';
 import Annex from './more-pages/annex.js';
 import AnnexEpisodeTimeline from './more-pages/annex-episode-timeline.js';
 import AnnexImpedimentAntidote from './more-pages/annex-impediment-antidote.js';
@@ -170,6 +171,7 @@ export default {
 		this.pages.donate = Donate;
 		this.pages.further = Further;
 		this.pages.annex = Annex;
+		this.pages.emotracker = EmoTracker;
 		this.pages['annex-episode-timeline'] = AnnexEpisodeTimeline;
 		this.pages['annex-partially-charted'] = AnnexPartiallyCharted;
 		this.pages['annex-traits'] = AnnexTraits;
