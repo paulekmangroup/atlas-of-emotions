@@ -32,7 +32,7 @@ export function makeImageBlock(titleStr, descStr, imageStr) {
 	title.classList.add('title');
 	desc.classList.add('desc');
 
-	image.src = imageStr;
+	image.src = './img/' + imageStr + '.png';
 
 	desc.innerHTML = descStr;
 
