@@ -1,154 +1,5 @@
 {
   "annex": {
-    "personality-trait": {
-      "emotions": [
-        {
-          "name": "Anger",
-          "desc": "A hostile person is often angry and is known to others for the frequency of anger responses to the world. Often anger occurs with any frustration; the threshold for frustration is low. Hostile people may experience regret afterward and apologize for their anger, but nevertheless continue to respond angrily. Sometimes hostile people express their anger in a nasty way, using words to demean and cause psychological pain to others."
-        },
-        {
-          "name": "Fear",
-          "desc": "A shy or timid person. This personality type is likely to avoid risks and uncomfortable situations. Timid people may perceive the world as full of difficult situations."
-        },
-        {
-          "name": "Disgust",
-          "desc": "A person who often feels disgusted by others may have an inflated sense of self-worth and a hyper-aversion toward others. Someone who is disgusted or dissatisfied with everything can be unpleasant to be around."
-        },
-        {
-          "name": "Sadness",
-          "desc": "A somber person who is often feeling low may have clinical depression or may simply have more frequent feelings of sadness. This person may hold the perspective that life is hard and difficult."
-        },
-        {
-          "name": "Enjoyment",
-          "desc": "A cheerful person may also be thought of as optimistic. This person sees the world in positive way and can easily be made to laugh and feel enjoyment."
-        }
-      ],
-      "title": "Personality Trait",
-      "desc": "Certain personality traits are related to specific emotions."
-    },
-    "psychopathology": {
-      "emotions": [],
-      "title": "Psychopathology",
-      "desc": "Each emotion relates to distinct psychopathologies, which describe persistent behaviors that interfere with one’s ability to function."
-    },
-    "signals": {
-      "emotions": [
-        {
-          "name": "Anger",
-          "desc": null,
-          "children": [
-            {
-              "name": "Signal",
-              "desc": "In the voice, anger generates a roar if not controlled; when anger is controlled, the voice may have a sharp edge that is very detectable. In the face, the signal includes glaring eyes, lowered brows and narrowed, tightened lips. When people hear or see an angry signal, they are typically hurt just by the perception of the signal, and may retaliate with angry actions."
-            },
-            {
-              "name": "Message",
-              "desc": "The message of anger is “get out of my way.”  Anger can carry a message ranging from dissatisfaction to threat."
-            }
-          ]
-        },
-        {
-          "name": "Fear",
-          "desc": null,
-          "children": [
-            {
-              "name": "Signal",
-              "desc": "Common signals are very wide open eyes, horizontally stretched lips and raised, drawn together eyebrows. There may be movement away from the target. Screams may accompany intense fear. Lesser fear signals can include heavy breathing, a head position slightly backwards and away, and horizontally stretched lips accompanied by tightened neck muscles."
-            },
-            {
-              "name": "Message",
-              "desc": "The message of fear is “help me”; it can range from showing low-level concern to conveying panic."
-            }
-          ]
-        },
-        {
-          "name": "Disgust",
-          "desc": null,
-          "children": [
-            {
-              "name": "Signal",
-              "desc": "There are three facial expressions associated with disgust. The first is sticking the tongue out as if the person is getting something out of their mouth. The second is raising the upper lip, but it is relaxed and not tense, which can display gums and teeth depending on the shape of the mouth. The third is wrinkling of the nose and raising of the nostrils. These expressions can occur separately or in unison."
-            },
-            {
-              "name": "Message",
-              "desc": "The message of disgust is “get away from this.” It can show others that the target of disgust is to be kept away from or that the target is unclean, dirty or socially/morally reprehensible."
-            }
-          ]
-        },
-        {
-          "name": "Sadness",
-          "desc": null,
-          "children": [
-            {
-              "name": "Signal",
-              "desc": "The signals of sadness include a frown (lower lip pushed up slightly and lip corners pulled slightly down), the inner corners of the eyebrows drawn up and together in the center of the forehead, raised cheeks and tears. The vocalization of sadness can include sobs and heaving and quavering of the voice."
-            },
-            {
-              "name": "Message",
-              "desc": "The message of sadness is “comfort me.” It encourages, or intends to encourage, empathy from others."
-            }
-          ]
-        },
-        {
-          "name": "Enjoyment",
-          "desc": null,
-          "children": [
-            {
-              "name": "Signal",
-              "desc": "Enjoyment signals include the Duchenne (authentic) smile, activation of a smile (lip corners pulled obliquely up), and activation of the orbital eye muscles that tighten the lower eyelid and create wrinkling around the outer eye corners (especially with age). Enjoyment also includes vocal signals such as the sound of relief (a sigh or exhalation) and the sound of amusement (laughter or giggling)."
-            },
-            {
-              "name": "Message",
-              "desc": "The message of enjoyment is “this feels good.” It encourages engaging in social interaction."
-            }
-          ]
-        }
-      ],
-      "title": "Signal and Message",
-      "desc": "The signal of an emotion describes the universal ways that emotion is displayed in the face and/or voice. There can also be other vocal tone changes and body language indicators, but these are not included here because they are often culturally informed and learned as opposed to universal.<br><br>The message is what the emotion is telling us. All emotions have a message that is a response to the world around us."
-    },
-    "partially-charted": {
-      "emotions": [
-        {
-          "name": "Love",
-          "desc": "A strong attachment to another person, typically parent toward child and child toward parent, but also between those romantically committed. Within loving relationships, anger, fear, sadness, disgust and enjoyment can all be experienced."
-        },
-        {
-          "name": "Surprise",
-          "desc": "The briefest emotion, surprise is triggered by the sudden occurrence of an unexpected event. It is often a way station that leads, after more appraisal, to any of the other emotions."
-        },
-        {
-          "name": "Jealousy",
-          "desc": "An emotional storyline involving three people: the desired person, the person afraid of losing the commitment of the desired person, and the rival. During jealousy, anger, fear, disgust, sadness or surprise may be felt by any of the three people."
-        },
-        {
-          "name": "Envy",
-          "desc": "Although often misused as a synonym for jealousy, envy involves resenting and wanting what another person possesses. When a person feels envy, anger, contempt or sadness may also be felt."
-        },
-        {
-          "name": "Hate",
-          "desc": "Enduring anger focused on a particular person or group of persons. Over time hatred may generate the personality trait of hostility."
-        },
-        {
-          "name": "Embarrassment",
-          "desc": "Self-conscious distress or awkwardness. Often activated by praise from another, or by a faux pas. It has no vocal signal, but may cause a blush that is visible only in light-skinned people."
-        },
-        {
-          "name": "Shame",
-          "desc": "An expectation that others would be disgusted if they knew what the person was thinking of or had done. It motivates a strong wish to prevent others from learning what the person has done or thought."
-        },
-        {
-          "name": "Contempt",
-          "desc": "The last emotion to appear in child development, it is a feeling of moral superiority to the target. Often mixed with enjoyment."
-        },
-        {
-          "name": "Guilt",
-          "desc": "Regret about a past action, which motivates the wish to confess the wrongful action, hoping for forgiveness."
-        }
-      ],
-      "title": "Partially Charted Emotions",
-      "desc": "Half or less than half of emotion scientists believe there is convincing evidence that each of the following is an emotion."
-    },
     "scientific-basis": {
       "content": [
         {
@@ -269,6 +120,226 @@
       ],
       "title": "Emotional Episode Timeline",
       "desc": ""
+    },
+    "intrinsic-or-intentional": {
+      "emotions": [
+        {
+          "name": "Anger",
+          "children": [
+            {
+              "name": "Intrinsic",
+              "desc": "Quarrel, Insult, Undermine, Dispute, Scream/yell, Use physical force, Simmer/brood, Be passive-aggressive"
+            },
+            {
+              "name": "Intentional",
+              "desc": "Set limits, Be firm, Withdraw, Take a time out, Breathe, Practice patience, Reframe, Distract, Avoid, Remove the interference"
+            }
+          ]
+        },
+        {
+          "name": "Fear",
+          "children": [
+            {
+              "name": "Intrinsic",
+              "desc": "Withdraw, Avoid, Hesitate, Freeze, Scream/yell, Ruminate, Worry"
+            },
+            {
+              "name": "Intentional",
+              "desc": "Reframe, Be mindful, Breathe, Distract"
+            }
+          ]
+        },
+        {
+          "name": "Disgust",
+          "children": [
+            {
+              "name": "Intrinsic",
+              "desc": "Withdraw, Avoid, Vomit, Dehumanize"
+            },
+            {
+              "name": "Intentional",
+              "desc": "Withdraw, Avoid"
+            }
+          ]
+        },
+        {
+          "name": "Sadness",
+          "children": [
+            {
+              "name": "Intrinsic",
+              "desc": "Seek comfort, Withdraw, Mourn, Protest, Feel ashamed"
+            },
+            {
+              "name": "Intentional",
+              "desc": "Withdraw, Distract"
+            }
+          ]
+        },
+        {
+          "name": "Enjoyment",
+          "children": [
+            {
+              "name": "Intrinsic",
+              "desc": "Seek more, Maintain, Exclaim, Engage/connect, Savor, Indulge"
+            },
+            {
+              "name": "Intentional",
+              "desc": "None"
+            }
+          ]
+        }
+      ],
+      "title": "Intrinsic or Intentional Actions",
+      "desc": "Actions can be intrinsic (without conscious intent) or intentional (an active attempt to enact change), or both."
+    },
+    "partially-charted": {
+      "emotions": [
+        {
+          "name": "Love",
+          "desc": "A strong attachment to another person, typically parent toward child and child toward parent, but also between those romantically committed. Within loving relationships, anger, fear, sadness, disgust and enjoyment can all be experienced."
+        },
+        {
+          "name": "Surprise",
+          "desc": "The briefest emotion, surprise is triggered by the sudden occurrence of an unexpected event. It is often a way station that leads, after more appraisal, to any of the other emotions."
+        },
+        {
+          "name": "Jealousy",
+          "desc": "An emotional storyline involving three people: the desired person, the person afraid of losing the commitment of the desired person, and the rival. During jealousy, anger, fear, disgust, sadness or surprise may be felt by any of the three people."
+        },
+        {
+          "name": "Envy",
+          "desc": "Although often misused as a synonym for jealousy, envy involves resenting and wanting what another person possesses. When a person feels envy, anger, contempt or sadness may also be felt."
+        },
+        {
+          "name": "Hate",
+          "desc": "Enduring anger focused on a particular person or group of persons. Over time hatred may generate the personality trait of hostility."
+        },
+        {
+          "name": "Embarrassment",
+          "desc": "Self-conscious distress or awkwardness. Often activated by praise from another, or by a faux pas. It has no vocal signal, but may cause a blush that is visible only in light-skinned people."
+        },
+        {
+          "name": "Shame",
+          "desc": "An expectation that others would be disgusted if they knew what the person was thinking of or had done. It motivates a strong wish to prevent others from learning what the person has done or thought."
+        },
+        {
+          "name": "Contempt",
+          "desc": "The last emotion to appear in child development, it is a feeling of moral superiority to the target. Often mixed with enjoyment."
+        },
+        {
+          "name": "Guilt",
+          "desc": "Regret about a past action, which motivates the wish to confess the wrongful action, hoping for forgiveness."
+        }
+      ],
+      "title": "Partially Charted Emotions",
+      "desc": "Half or less than half of emotion scientists believe there is convincing evidence that each of the following is an emotion."
+    },
+    "personality-trait": {
+      "emotions": [
+        {
+          "name": "Anger",
+          "desc": "A hostile person is often angry and is known to others for the frequency of anger responses to the world. Often anger occurs with any frustration; the threshold for frustration is low. Hostile people may experience regret afterward and apologize for their anger, but nevertheless continue to respond angrily. Sometimes hostile people express their anger in a nasty way, using words to demean and cause psychological pain to others."
+        },
+        {
+          "name": "Fear",
+          "desc": "A shy or timid person. This personality type is likely to avoid risks and uncomfortable situations. Timid people may perceive the world as full of difficult situations."
+        },
+        {
+          "name": "Disgust",
+          "desc": "A person who often feels disgusted by others may have an inflated sense of self-worth and a hyper-aversion toward others. Someone who is disgusted or dissatisfied with everything can be unpleasant to be around."
+        },
+        {
+          "name": "Sadness",
+          "desc": "A somber person who is often feeling low may have clinical depression or may simply have more frequent feelings of sadness. This person may hold the perspective that life is hard and difficult."
+        },
+        {
+          "name": "Enjoyment",
+          "desc": "A cheerful person may also be thought of as optimistic. This person sees the world in positive way and can easily be made to laugh and feel enjoyment."
+        }
+      ],
+      "title": "Personality Trait",
+      "desc": "Certain personality traits are related to specific emotions."
+    },
+    "psychopathology": {
+      "emotions": [],
+      "title": "Psychopathology",
+      "desc": "Each emotion relates to distinct psychopathologies, which describe persistent behaviors that interfere with one’s ability to function."
+    },
+    "signals": {
+      "emotions": [
+        {
+          "name": "Anger",
+          "desc": null,
+          "children": [
+            {
+              "name": "Signal",
+              "desc": "In the voice, anger generates a roar if not controlled; when anger is controlled, the voice may have a sharp edge that is very detectable. In the face, the signal includes glaring eyes, lowered brows and narrowed, tightened lips. When people hear or see an angry signal, they are typically hurt just by the perception of the signal, and may retaliate with angry actions."
+            },
+            {
+              "name": "Message",
+              "desc": "The message of anger is “get out of my way.”  Anger can carry a message ranging from dissatisfaction to threat."
+            }
+          ]
+        },
+        {
+          "name": "Fear",
+          "desc": null,
+          "children": [
+            {
+              "name": "Signal",
+              "desc": "Common signals are very wide open eyes, horizontally stretched lips and raised, drawn together eyebrows. There may be movement away from the target. Screams may accompany intense fear. Lesser fear signals can include heavy breathing, a head position slightly backwards and away, and horizontally stretched lips accompanied by tightened neck muscles."
+            },
+            {
+              "name": "Message",
+              "desc": "The message of fear is “help me”; it can range from showing low-level concern to conveying panic."
+            }
+          ]
+        },
+        {
+          "name": "Disgust",
+          "desc": null,
+          "children": [
+            {
+              "name": "Signal",
+              "desc": "There are three facial expressions associated with disgust. The first is sticking the tongue out as if the person is getting something out of their mouth. The second is raising the upper lip, but it is relaxed and not tense, which can display gums and teeth depending on the shape of the mouth. The third is wrinkling of the nose and raising of the nostrils. These expressions can occur separately or in unison."
+            },
+            {
+              "name": "Message",
+              "desc": "The message of disgust is “get away from this.” It can show others that the target of disgust is to be kept away from or that the target is unclean, dirty or socially/morally reprehensible."
+            }
+          ]
+        },
+        {
+          "name": "Sadness",
+          "desc": null,
+          "children": [
+            {
+              "name": "Signal",
+              "desc": "The signals of sadness include a frown (lower lip pushed up slightly and lip corners pulled slightly down), the inner corners of the eyebrows drawn up and together in the center of the forehead, raised cheeks and tears. The vocalization of sadness can include sobs and heaving and quavering of the voice."
+            },
+            {
+              "name": "Message",
+              "desc": "The message of sadness is “comfort me.” It encourages, or intends to encourage, empathy from others."
+            }
+          ]
+        },
+        {
+          "name": "Enjoyment",
+          "desc": null,
+          "children": [
+            {
+              "name": "Signal",
+              "desc": "Enjoyment signals include the Duchenne (authentic) smile, activation of a smile (lip corners pulled obliquely up), and activation of the orbital eye muscles that tighten the lower eyelid and create wrinkling around the outer eye corners (especially with age). Enjoyment also includes vocal signals such as the sound of relief (a sigh or exhalation) and the sound of amusement (laughter or giggling)."
+            },
+            {
+              "name": "Message",
+              "desc": "The message of enjoyment is “this feels good.” It encourages engaging in social interaction."
+            }
+          ]
+        }
+      ],
+      "title": "Signal and Message",
+      "desc": "The signal of an emotion describes the universal ways that emotion is displayed in the face and/or voice. There can also be other vocal tone changes and body language indicators, but these are not included here because they are often culturally informed and learned as opposed to universal.<br><br>The message is what the emotion is telling us. All emotions have a message that is a response to the world around us."
     },
     "impediment-antidote": {
       "emotions": [
@@ -485,77 +556,6 @@
       ],
       "title": "Impediments and Antidotes",
       "desc": "Here are some ways to counteract emotional states. Impediments involve blocking a positive emotion; antidotes involve reversing negative ones."
-    },
-    "intrinsic-or-intentional": {
-      "emotions": [
-        {
-          "name": "Anger",
-          "children": [
-            {
-              "name": "Intrinsic",
-              "desc": "Quarrel, Insult, Undermine, Dispute, Scream/yell, Use physical force, Simmer/brood, Be passive-aggressive"
-            },
-            {
-              "name": "Intentional",
-              "desc": "Set limits, Be firm, Withdraw, Take a time out, Breathe, Practice patience, Reframe, Distract, Avoid, Remove the interference"
-            }
-          ]
-        },
-        {
-          "name": "Fear",
-          "children": [
-            {
-              "name": "Intrinsic",
-              "desc": "Withdraw, Avoid, Hesitate, Freeze, Scream/yell, Ruminate, Worry"
-            },
-            {
-              "name": "Intentional",
-              "desc": "Reframe, Be mindful, Breathe, Distract"
-            }
-          ]
-        },
-        {
-          "name": "Disgust",
-          "children": [
-            {
-              "name": "Intrinsic",
-              "desc": "Withdraw, Avoid, Vomit, Dehumanize"
-            },
-            {
-              "name": "Intentional",
-              "desc": "Withdraw, Avoid"
-            }
-          ]
-        },
-        {
-          "name": "Sadness",
-          "children": [
-            {
-              "name": "Intrinsic",
-              "desc": "Seek comfort, Withdraw, Mourn, Protest, Feel ashamed"
-            },
-            {
-              "name": "Intentional",
-              "desc": "Withdraw, Distract"
-            }
-          ]
-        },
-        {
-          "name": "Enjoyment",
-          "children": [
-            {
-              "name": "Intrinsic",
-              "desc": "Seek more, Maintain, Exclaim, Engage/connect, Savor, Indulge"
-            },
-            {
-              "name": "Intentional",
-              "desc": "None"
-            }
-          ]
-        }
-      ],
-      "title": "Intrinsic or Intentional Actions",
-      "desc": "Actions can be intrinsic (without conscious intent) or intentional (an active attempt to enact change), or both."
     }
   },
   "about": {

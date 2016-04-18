@@ -40,13 +40,7 @@ export default {
 				title: this.data[key].title
 			};
 		});
-
-		sections.sort((a,b) => {
-			if(a.title < b.title) return -1;
-			if(a.title > b.title) return 1;
-			return 0;
-		});
-
+		
 		const title = document.createElement('h4');
 		title.classList.add('annex-title');
 		title.textContent = 'Welcome to the Annex, home to additional information regarding emotions research.';
