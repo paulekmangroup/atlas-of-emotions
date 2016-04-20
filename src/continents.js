@@ -310,6 +310,7 @@ const continentsSection = {
 	open: function (options) {
 
 		this.setActive(true);
+		this.setInteractive(true);
 
 		// fade in continent labels, with delay if this is the first opened section of the session
 		// display callout here if this is the first opened section of the session;
@@ -340,6 +341,9 @@ const continentsSection = {
 					spreadDelay = sassVars.continents.spread.delay.in * 1000,
 					spreadDuration = sassVars.continents.spread.duration.in * 1000;
 
+				// disable interaction immediately
+				this.setInteractive(false);
+
 				this.transitions.scaleContinents(
 					continents
 						.filter(c => c !== continent)
@@ -358,7 +362,7 @@ const continentsSection = {
 				}, spreadDelay);
 
 				setTimeout(() => {
-					// turn off updates and interaction
+					// turn off updates
 					this.setActive(false);
 
 					// store continent zoomed into for later reverse animation
@@ -372,7 +376,11 @@ const continentsSection = {
 				}, spreadDelay + spreadDuration - this.closeDelay);
 
 			} else {
+
+				// not transitioning a selected continent into states.
+				// disable updates and interaction and resolve close sequence immediately.
 				this.setActive(false);
+				this.setInteractive(false);
 				resolve();
 
 			}
@@ -433,6 +441,9 @@ const continentsSection = {
 			mouseleave: val ? section.onContinentMouseLeave : null
 		});
 
+	},
+
+	setInteractive: function (val) {
 
 		// handle background click for deselection
 		d3.select('#main').on('click', val ? this.onBackgroundClick : null, false);
