@@ -102,11 +102,11 @@
           "name": "psychological changes"
         },
         {
-          "desc": "This describes our response to the emotion, this could be an external behavior such as yelling in anger, or could be internal, such as suppressing anger. Each emotion in the atlas shows a range of immediate actions, as well as intrinsic or intention actions.  The action can be either constructive or destructive. Leading to further collaboration with others or to difficulty.",
+          "desc": "This describes our emotional responses. This could be an external behavior such as yelling in anger, or could be internal, such as suppressing anger. Each emotion in the atlas shows a range of immediate actions, as well as intrinsic or intention actions.  The action can be either constructive or destructive. Leading to further collaboration with others or to difficulty in collaborating.",
           "name": "action"
         },
         {
-          "desc": "This describes what the result or impact of our action of emotion. This could be external, if we have yelled at someone they may then yell back, or internal, if we have suppressed we could be feeling some ongoing irritation. The post condition could lead to our next episode of emotion, if someone is yelling back at us we are triggered once again to either anger, fear or sadness/ regret for our actions. Our post condition is an opportunity for us to build emotional awareness through reflection on our emotion, to understand the trigger, identify the felt experience and consider its impact it has had.",
+          "desc": "This describes the result or impact of our emotional actions. This could be external: if we have yelled at someone they may then yell back; or internal: if we have suppressed we could be feeling some ongoing irritation. The post condition could lead to our next episode of emotion, if someone is yelling back at us we are triggered once again to either anger, fear or sadness/ regret for our actions. Our post condition is an opportunity for us to build emotional awareness through reflection on our emotion, to understand the trigger, identify the felt experience and consider its impact it has had.",
           "name": "post-condition"
         },
         {
@@ -569,6 +569,10 @@
         "desc": "<a href=\"http://www.stamen.com/\">Stamen</a> was founded by Eric Rodenbeck in 2001 to take advantage of opportunities in emerging digital media in the wake of the dot-com crash. The studio has since grown to a staff of twelve and has established a reputation for its expertise in creating compelling interactive design and data visualization projects. Its portfolio is not easily classified, but is characterized by a loving engagement with media and a deep involvement with its collaborators. It is neither a research and development lab nor a straight-up design firm, but something in between: a place where work is valued, good ideas can come from anywhere, and results are paramount. Its close engagement with technology leads to numerous research projects that have a way of finding applications in the real world."
       },
       {
+        "title": "How Did This Atlas Come To Be?",
+        "desc": "Emotions occur automatically, they seem to happen to us, not by choice but without conscious thought. We don’t always realize we are in the grip of an emotion until someone points it out to us, or until the emotional episode is over. Having choice about when to experience an emotion, and how to experience it requires introducing a foreign element into the onset of an emotion – awareness. Skills must be developed if that awareness is to become possible, if we are to exercise choice about when we experience which emotion, and how we experience it. The Atlas of Emotions was created to illuminate it.<br><br>\n\nThe Dalai Lama asked Paul Ekman to create a map of the emotions, hoping that such a map would enable people to have more constructive emotional experiences. When we wanted to get to the new world he said, we needed a map to get there. If we want to get to a calm state of mind we need a map of the emotion. He asked Ekman to base the emotional map on the scientific consensus about what emotions are."
+      },
+      {
         "title": "Why Use This Atlas?",
         "desc": "We need to understand our emotions and develop skills to have a choice about (1) when we become emotional or what brings forth an emotional response, and (2) how we respond and what we say and do when we are emotional. These skills are not given to us by nature, but we can learn them. Exploring the Atlas of Emotions will increase your understanding of what emotions are and their effects on us, giving you an increased awareness of what is happening to you when you experience emotions. "
       },
@@ -586,7 +590,7 @@
       }
     ],
     "title": "About This Atlas",
-    "desc": "A world without the pull of our emotions would be impossibly bland and dangerous. Anger, fear and disgust can save our lives. We need to understand emotions, what they are and how they work, to better understand ourselves. Exploring the Atlas of Emotions can help us achieve a more balanced emotional life involving choice (at least some of the time). The Atlas of Emotions will increase your understanding of what emotions are, how they happen, what occurs when you experience them and what you need to know to gain heightened awareness of your emotions."
+    "desc": "This Atlas was created to increase understanding of how emotions influence our lives, giving us choice, (at least some of the time) about which emotion we are experiencing, and how our emotions influence what we say and do. While emotions are central to our lives – providing the joy, alerting us to threats, a force for change, a warning against what is toxic, and calling to others for help – we don’t choose what to feel or when to feel it. The Atlas of Emotions was created to give us more awareness of our emotions, and sometimes even some choice about what we are feeling, through better understanding of how emotions work."
   },
   "donate": {
     "title": "Support Our Cause",
@@ -597,7 +601,7 @@
   "further-reading": {
     "links": [
       {
-        "link": "http://www.emotrak.com/",
+        "link": "http://",
         "desc": "Eve Ekman has developed EmoTrak, an app that trains you in emotional awareness through daily questions, reminders and suggested brief meditations. >"
       },
       {
