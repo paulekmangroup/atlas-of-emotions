@@ -298,7 +298,7 @@ const continentsSection = {
 			.attr('data-popuptarget', d => `continents:${d.id}`)
 			.classed('default-interactive-helper', d => d.name.toLowerCase() === this.defaultEmotionHelper.toLowerCase())
 			.style('left', d => Math.round(centerX + d.x + d.label.x) + 'px')
-			.style('top', d => Math.round(centerY + d.y + d.label.y) + 'px');
+			.each(positionLabelsVertically);
 
 		labelsEnter.append('a')
 			.attr('href', d => `#continents:${d.id}`)
@@ -419,7 +419,7 @@ const continentsSection = {
 		// we're not adding anything, so skip right to update
 		labels
 			.style('left', d => Math.round(centerX + d.x + d.label.x) + 'px')
-			.style('top', d => Math.round(centerY + d.y + d.label.y) + 'px');
+			.each(positionLabelsVertically);
 	},
 
 	setActive: function (val) {
@@ -848,5 +848,19 @@ const continentsSection = {
 	}
 
 };
+
+function positionLabelsVertically (d, i) {
+	const bottomness = (d.y + d.label.y + centerY) / centerY;
+	if (bottomness > 1.5) {
+		// bottom align labels toward bottom of screen, so popups open upwards
+		delete this.style.top;
+		this.style.bottom = -Math.round(centerY + d.y + d.label.y) + 'px';
+	} else {
+		// open other popups normally
+		this.style.top = Math.round(centerY + d.y + d.label.y) + 'px';
+		delete this.style.bottom;
+	}
+
+}
 
 export default continentsSection;
