@@ -16,7 +16,7 @@ var ANNEX_SECTIONS = [
 	'personality trait',
 	'partially charted',
 	'triggers timeline',
-	'impediment-antidote',
+	//'impediment-antidote',
 	'intrinsic or intentional',
 ];
 
@@ -154,6 +154,7 @@ var PARSER_CONFIG = {
 			return rsp;
 		}
 	},
+
 
 	'partially charted': {
 		start: [[1, 3], [1, 6]], // col, row
