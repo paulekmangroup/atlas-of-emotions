@@ -22,6 +22,39 @@ const ARROW_SHAPE = [
 	{ x: 0.0, y: 0.0 }
 ];
 
+const GRAMMER_TRANSLATE = {
+	suppress: 'suppression',
+	quarrel: 'quarreling',
+	insult: 'insulting others',
+	'scream/yell': 'screaming or yelling',
+	'simmer/brood': 'simmering or brooding',
+	undermine: 'undermining others',
+	dispute: 'disputing',
+	'be passive-aggressive': 'being passive-aggressive',
+	'use physical force': 'using physical force',
+	'feel ashamed': 'feeling ashamed',
+	'mourn': 'mourning',
+	'protest': 'protesting',
+	'ruminate': 'ruminating',
+	'seek comfort': 'seeking comfort',
+	'withdraw': 'withdrawing',
+	'avoid': 'avoiding',
+	'dehumanize': 'dehumanizing',
+	'vomit': 'vomiting',
+	'hesitate': 'hestitation',
+	'worry': 'worrying',
+	'withdraw': 'withdrawing',
+	'ruminate': 'ruminating',
+	'freeze': 'freezing',
+	'exclaim': 'exclaiming',
+	'engage/connect': 'engaging or connecting',
+	'gloat': 'gloating',
+	indulge: 'indulging',
+	'maintain': 'maintaining',
+	'savor': 'savoring',
+	'seek more': 'seeking more'
+};
+
 export default {
 
 	isInited: false,
@@ -352,6 +385,9 @@ export default {
 					} else if (i < numActionsCon + numActionsBoth + numActionsDes) {
 						action.valence = VALENCES.DESTRUCTIVE;
 					}
+
+					// attach state name
+					action.state = state.name;
 
 					// cross-reference states to action
 					if (!~actionByName.states.indexOf(stateName)) {
@@ -1033,15 +1069,13 @@ export default {
 
 	},
 
-	setHighlightedAction: function (action, preventRecursion) {
+	setHighlightedAction: function (action) {
 
 		this.highlightedAction = action;
-		/*
-		if (!preventRecursion) {
-			this.setHighlightedValence(null, true);
-		}
-		*/
+
 		if (action) {
+
+
 
 			let secondaryData;
 			if (action.valence) {
@@ -1052,6 +1086,8 @@ export default {
 						_.findKey(VALENCES, (val) => val === action.valence).toLowerCase()
 					]
 				};
+				secondaryData.body = secondaryData.body.replace(/In this state/, 'In a state of ' + action.state.toLowerCase());
+				secondaryData.body = secondaryData.body.replace(/this action/, GRAMMER_TRANSLATE[action.name.toLowerCase()]);
 			}
 
 			dispatcher.popupChange('actions', action.name, action.desc, secondaryData);

@@ -1723,15 +1723,15 @@
       "qualities": [
         {
           "header": "Constructive Actions",
-          "body": "Within this state, this is a CONSTRUCTIVE action, one that enables collaboration with others."
+          "body": "In this state, this action is CONSTRUCTIVE. It enables collaboration."
         },
         {
           "header": "Ambiguous Actions",
-          "body": "Within this state, this action is AMBIGUOUS and may either enable or inhibit collaboration with others."
+          "body": "In this state, this action is AMBIGUOUS. It may either enable or inhibit collaboration."
         },
         {
           "header": "Destructive Actions",
-          "body": "Within this state, this is a DESTRUCTIVE action, one that inhibits collaboration with others."
+          "body": "In this state, this action is DESTRUCTIVE. It inhibits collaboration."
         }
       ]
     },
