@@ -486,7 +486,10 @@ export default class Continent {
 			.attr('transform', d3Transform().scale(0, 0));
 
 		// unflatten the circles wrapper
-		this.circleWrapper.classed('flat', false);
+		// (after delay, to ensure they're visible so that transition will play correctly)
+		setTimeout(() => {
+			this.circleWrapper.classed('flat', false);
+		}, 1);
 
 	}
 
