@@ -77,30 +77,9 @@ const continentsSection = {
 
 			if (currentEmotion) {
 
-				// -->> TODO: keep in mind what happens if setEmotion() is called during a transition! <<--
-
 				let currentContinent = continents.find(c => c.id === currentEmotion);
 
 				if (emotion) {
-
-					// TODO:
-					// transition from one emotion to another
-					// implement as Promise chain? steps will overlap.
-
-					// transitions.scaleContinents(currentEmotion)
-					// 1a. fade out and shrink circles of current continent;
-					// 1b. pull circles together toward center along horizontal axis as they fade/shrink
-
-					// transitions.panToContinent(currentEmotion)
-					// 1c. while 1a-b happens, pan toward continent location from current continent's location, according to all continents view layout.
-
-					// transitions.focusZoomedInContinent(currentEmotion)
-					// 2a. fade in and grow all circles for zoomed continent view from center of circle
-					//		random colors or picked from mocks?
-
-					// transitions.spreadFocusedContinent(currentEmotion)
-					// 2b. spread circles along horizontal axis as they fade in + grow
-					// 2c. (later) allow circles to drift slightly along horizontal axis only. this motion can be reflected in the states view as well.
 
 					if (this.zoomedInContinent) {
 
@@ -195,22 +174,6 @@ const continentsSection = {
 				}
 
 			} else {
-
-				// TODO:
-				// transition from all continents view into single continent view
-				// implement as Promise chain? steps will overlap.
-
-				// transitions.scaleContinents(all other continents)
-				// 1. fade out and shrink all but focused continent
-
-				// transitions.panToContinent(currentEmotion)
-				// transitions.focusZoomedOutContinent(currentEmotion)
-				// 2a. zoom in on focused continent and pan to center
-				// 2b. while zooming, remove/add enough circles to match number of states
-				// 2c. while 2a-b happens, tween colors of circles to match mocks? or leave them randomized?
-
-				// transitions.spreadFocusedContinent()
-				// 2d. while 2a-c happens, execute (currentEmotion):2b-c above.
 
 				if (emotion) {
 
