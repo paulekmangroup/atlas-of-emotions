@@ -359,7 +359,6 @@ export default class Continent {
 	spreadCircles (container, containerScale) {
 
 		// TODO: DRY this out. Most of this math is copied from states.js.
-		// TODO: creating + manipulating circles here, instead of using Circle.js, is going to cause problems.
 
 		this.isFocused = true;
 		let continent = this;
@@ -380,12 +379,11 @@ export default class Continent {
 				.domain([0, 10])
 				.range([0, innerWidth]);
 
-		const growTime = sassVars.continents.spread.duration.in * 1000,
-			shrinkTime = 0.5 * growTime;
+		const growTime = sassVars.continents.spread.duration.in * 1000;
 
 		let ranges = this.transformRanges(emotionsData.emotions[this.id].states),
 			circles = this.circleWrapper.selectAll('circle')
-				.data(ranges);
+				.data(ranges, (d, i) => i);
 
 		let calcStrokeColor = function (d, i) {
 			let colorPalette = Continent.configsByEmotion[continent.id].colorPalette,
@@ -415,29 +413,17 @@ export default class Continent {
 			.attr('cx', d => xScale(d.cx))
 			.attr('r', d => rScale(d.r));
 
-		circles.exit().transition()
-			.duration(shrinkTime)
-			.ease('quad-out')
-			.attr('opacity', 0.0)
-			.attr('transform', d3Transform().scale(0, 0));
-
-		// flatten out the circles wrapper as well,
-		// in preparation for displaying states (elevation/profile of continent)
+		// flatten out the circles wrapper in preparation for
+		// displaying states (elevation/profile of continent)
 		this.circleWrapper.classed('flat', true);
-
-		// TODO: hook into transition complete (.each(.on('end', fn))) and:
-		// - update this.circles with newly-created circles, or don't?
-		// - allow circles to drift?
-		// - set this.isFocused = false?
-		// might instead just let circles made here exist outside of zoomed-out 'normal' animation,
-		// and let them go away when transitioning back to zoomed-out view.
 
 	}
 
 	gatherCircles (immediate) {
 
-		const growTime = immediate ? 0 : sassVars.continents.spread.duration.out * 1000,
-			shrinkTime = immediate ? 0 : 0.5 * growTime;
+		const growTime = immediate ? 0 : sassVars.continents.spread.duration.out * 1000;
+
+		let ranges = this.transformRanges(emotionsData.emotions[this.id].states);
 
 		let calledOnEnd = false,
 			circles = this.circleWrapper.selectAll('circle')
@@ -459,31 +445,15 @@ export default class Continent {
 				}
 			});
 
-		// TODO: necessary to add circles back in?
-		// it's possible for there to be more circles in this.circles than there are states in the selected emotion.
-		// probably the simplest way to handle this is to remove from this.circles any circles transitioned out
-		// via the exit selection in spreadCircles, so they don't even come into play here.
-		/*
-		// Add new circles as needed, and fade/grow them in at positions and sizes corresponding to states
-		circles.enter().append('circle')
+		// remove all circles created within spreadCircles that are not present in this.circles
+		circles.exit().transition()
+			.duration(growTime)
+			.ease('quad-out')
 			.attr('cx', 0)
 			.attr('cy', 0)
 			.attr('r', 0)
-			.attr('stroke', calcStrokeColor)
-			.attr('stroke-opacity', Circle.BASE_ALPHA)
-			.attr('stroke-width', d => rScale(d.strokeWidth))
-		.transition()
-			.duration(growTime)
-			.attr('cx', d => xScale(d.cx))
-			.attr('r', d => rScale(d.r));
-		*/
-
-		// remove all circles created within spreadCircles that are not present in this.circles
-		circles.exit().transition()
-			.duration(shrinkTime)
-			.ease('quad-out')
-			.attr('opacity', 0.0)
-			.attr('transform', d3Transform().scale(0, 0));
+			.attr('stroke-opacity', 0)
+			.remove();
 
 		// unflatten the circles wrapper
 		// (after delay, to ensure they're visible so that transition will play correctly)
