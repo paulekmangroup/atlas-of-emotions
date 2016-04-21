@@ -8,7 +8,7 @@ import emotionsData from '../static/emotionsData.json';
 import sassVars from '../scss/variables.json';
 
 const FRAMERATE = 60;
-const MAX_NUM_CIRCLES = 8;
+const MAX_NUM_CIRCLES = 20;
 
 export default class Continent {
 
@@ -221,7 +221,7 @@ export default class Continent {
 
 	prepopulate () {
 
-		let numCircles = 2 + Math.floor(Math.random() * 2);
+		let numCircles = 10 + Math.floor(Math.random() * 2);
 		for (let i=0; i<numCircles; i++) {
 			let newCircle = Circle.spawn(this, 1, true);
 			newCircle.radius = 0.75 + (0.25 * Math.random()) * newCircle.size;

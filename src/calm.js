@@ -47,31 +47,33 @@ export default {
 		continentGeom = this.defineContinentGeom(w,h);
 
 		// left-to-right
+		let posScalar = 2.0;
+		let sizeScalar = 6.0;
 		let continentTransforms = [
 			{
-				x: -0.37,
-				y: 0.17,
-				size: 0.12
+				x: -0.37 * posScalar,
+				y: 0.17 * posScalar,
+				size: 0.12 * sizeScalar
 			},
 			{
-				x: -0.19,
-				y: -0.02,
-				size: 0.12
+				x: -0.19 * posScalar,
+				y: -0.02 * posScalar,
+				size: 0.12 * sizeScalar
 			},
 			{
-				x: 0.04,
-				y: -0.26,
-				size: 0.12
+				x: 0.04 * posScalar,
+				y: -0.26 * posScalar,
+				size: 0.12 * sizeScalar
 			},
 			{
-				x: 0.08,
-				y: 0.15,
-				size: 0.12
+				x: 0.08 * posScalar,
+				y: 0.15 * posScalar,
+				size: 0.12 * sizeScalar
 			},
 			{
-				x: 0.32,
-				y: -0.11,
-				size: 0.12
+				x: 0.32 * posScalar,
+				y: -0.11 * posScalar,
+				size: 0.12 * sizeScalar
 			}
 		];
 
