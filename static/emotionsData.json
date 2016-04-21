@@ -1699,7 +1699,7 @@
         },
         {
           "header": "What it’s based on",
-          "body": "In June 2014, Paul Ekman sent a <a href=\"http://pps.sagepub.com/content/11/1/31.full.pdf?ijkey=AMIJzv8J9Tn0VF1&keytype=finite\" target=\"_blank\">survey</a> to 248 of the most active emotion researchers in the world to establish a consensus that became <a href=\"#more:annex-scientific-basis\">the scientific basis for this atlas</a>.",
+          "body": "In June 2014, Paul Ekman sent a <a href=\"http://pps.sagepub.com/content/11/1/31.full.pdf?ijkey=AMIJzv8J9Tn0VF1&keytype=finite\" target=\"_blank\">survey</a> to 248 of the most active emotion researchers in the world to establish the consensus that provided <a href=\"#more:annex-scientific-basis\">the scientific basis for this atlas</a>.",
           "caption": "of those who responded agreed that there are universal emotions that all humans, no matter where we live or how we were raised, have in common."
         },
         {
@@ -1767,7 +1767,7 @@
     },
     "calm": {
       "header": "Experiencing Calm",
-      "body": "Calm is a balanced frame of mind that is actively engaged in evaluating and understanding our changing emotions without dwelling on them. Calm abides as a person moves through life, unlike emotions, which arise when triggered and then recede.",
+      "body": "A calm, balanced frame of mind is necessary to evaluate and understand our changing emotions. Calmness ideally is a baseline state, unlike emotions, which arise when triggered and then recede.",
       "secondary": {
         "header": "Visit the Annex",
         "body": "To learn more about emotions, click on “More Information” in the bottom right corner."
