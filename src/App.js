@@ -676,7 +676,28 @@ export default function (...initArgs) {
 	 */
 	function onResize () {
 
-		renderSmallScreenWarning();
+		if (!renderSmallScreenWarning()) {
+
+			// if the intro modal hasn't ever been viewed yet in this browser,
+			// and the screen is big enough to render the site below it,
+			// open the intro modal (and the scrollbar along with it)
+			if (!localStorage.modalSeen) {
+
+				// set a class on body so other sections can react
+				document.body.classList.remove('intro-closing', 'intro-open');
+				document.body.classList.add('intro-opening');
+
+				setTimeout(() => {
+					setModalVisibility(true);
+				}, sassVars.ui.intro.delay * 1000);
+
+				setTimeout(() => {
+					setScrollbarFractionalOpen(1.0);
+				}, sassVars.ui.scrollbar.introOpenDelay * 1000);
+				
+			}
+
+		}
 
 		// size main container to viewport
 		let headerHeight = 55;	// from _variables.scss
@@ -1227,30 +1248,8 @@ export default function (...initArgs) {
 	function onHashChange (event, defaults=NAVIGATION_DEFAULTS) {
 
 		if (currentSection) {
-
 			// if a section has already been selected this session, close the intro modal
 			setModalVisibility(false);
-
-		} else {
-
-			// if a section has not yet been selected for this browser
-			// (i.e. this is the start of the session),
-			// open the intro modal and the scrollbar
-			if(!localStorage.modalSeen){
-
-				// set a class on body so other sections can react
-				document.body.classList.remove('intro-closing', 'intro-open');
-				document.body.classList.add('intro-opening');
-
-				setTimeout(() => {
-					setModalVisibility(true);
-				}, sassVars.ui.intro.delay * 1000);
-
-				setTimeout(() => {
-					setScrollbarFractionalOpen(1.0);
-				}, sassVars.ui.scrollbar.introOpenDelay * 1000);
-			}
-
 		}
 
 		let hash = document.location.hash.replace(/^#/, '');
