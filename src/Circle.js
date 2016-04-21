@@ -6,7 +6,7 @@ const STROKE_WIDTH_MIN = 0.4,
 
 export default class Circle {
 
-	static BASE_ALPHA = 0.5;
+	static BASE_ALPHA = 0.4;
 	static SIZE_MOD = 1 / (1 + 0.5 * (STROKE_WIDTH_MIN + STROKE_WIDTH_VAR));
 
 	// Note: continent.spawnConfig.lastSpawn is mutated by this function

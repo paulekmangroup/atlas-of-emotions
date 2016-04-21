@@ -37,41 +37,45 @@ export default {
 			continentGeom;
 
 		this.opacityState = {
-			start: [700,100,500,200,20],
-			duration: [300,400,150,600,400],
-			opacity: [0,0,0,0,0]
+			start: [0,130,0,0,-20],
+			duration: [0,500,0,0,400],
+			opacity: [0,0,0,0,0],
+			activeEmotion: [0,1,0,0,1],
+			lastEmotion: -1
 		};
 
-		this.elapsedToOpacity = d3.scale.linear().domain([0,.2,.5,1]).range([0,1,1,0]);
+		this.elapsedToOpacity = d3.scale.linear().domain([0, .05 ,.25, .4, 1]).range([0,.1,.9,.9,0]);
 
 		continentGeom = this.defineContinentGeom(w,h);
 
 		// left-to-right
+		let posScalar = 2.0;
+		let sizeScalar = 6.0;
 		let continentTransforms = [
 			{
-				x: -0.37,
-				y: 0.17,
-				size: 0.12
+				x: 0.08 * posScalar,
+				y: 0.15 * posScalar,
+				size: 0.11 * sizeScalar
 			},
 			{
-				x: -0.19,
-				y: -0.02,
-				size: 0.12
+				x: -0.37 * posScalar,
+				y: 0.17 * posScalar,
+				size: 0.13 * sizeScalar
 			},
 			{
-				x: 0.04,
-				y: -0.26,
-				size: 0.12
+				x: 0.04 * posScalar,
+				y: -0.26 * posScalar,
+				size: 0.15 * sizeScalar
 			},
 			{
-				x: 0.08,
-				y: 0.15,
-				size: 0.12
+				x: -0.19 * posScalar,
+				y: -0.02 * posScalar,
+				size: 0.11 * sizeScalar
 			},
 			{
-				x: 0.32,
-				y: -0.11,
-				size: 0.12
+				x: 0.32 * posScalar,
+				y: -0.11 * posScalar,
+				size: 0.13 * sizeScalar
 			}
 		];
 
@@ -87,11 +91,6 @@ export default {
 		});
 
 		this.initLabels(this.labelContainer);
-
-		// Bind event handlers to current scope
-		this.onContinentMouseEnter = this.onContinentMouseEnter.bind(this);
-		this.onContinentMouseLeave = this.onContinentMouseLeave.bind(this);
-		this.onContinentMouseClick = this.onContinentMouseClick.bind(this);
 
 		dispatcher.addListener(dispatcher.EVENTS.POPUP_CLOSE_BUTTON_CLICKED, this.onPopupCloseButtonClicked.bind(this));
 
@@ -125,7 +124,7 @@ export default {
 		return new Promise((resolve, reject) => {
 
 			// leave a bit of time for other transitions to happen
-			this.openCallout(500);
+			this.openCallout(300);
 
 			// TODO: resolve after any intro animations
 			setTimeout(() => {
@@ -206,12 +205,6 @@ export default {
 		let section = this;
 		this.isActive = val;
 
-		continents.forEach(function (continent, i) {
-			continent.d3Selection
-				.on('mouseenter', val ? section.onContinentMouseEnter : null)
-				.on('mouseleave', val ? section.onContinentMouseLeave : null)
-				.on('click', val ? section.onContinentMouseClick : null);
-		});
 
 		// handle background click for deselection
 		d3.select('#calm').on('click', val ? this.onBackgroundClick : null, false);
@@ -229,11 +222,6 @@ export default {
 
 	},
 
-	generateNormal: function() {
-		let value = ((Math.random() + Math.random() + Math.random() + Math.random() + Math.random() + Math.random())) / 6;
-		return value;
-	},
-
 	calcPercentElapsed: function(fc, start, duration) {
 		let val = (fc - start) / duration;
 		if (val > 0 && val < 1) {
@@ -241,6 +229,13 @@ export default {
 		} else {
 			return 0;
 		}
+	},
+
+	spawnNew: function(currentState, i) {
+		currentState.activeEmotion[i] = 1;
+		currentState.start[i] = frameCount;
+		// duration ranging uniformally from 100 to 500
+		currentState.duration[i] = 400 * Math.random() + 100;
 	},
 
 	update: function (time) {
@@ -254,16 +249,24 @@ export default {
 
 		// update opacity if
 		for(var i = 0; i < 5; i++){
-			// if current cycle is over, set a new start and duration
-			if(currentState.start[i] + currentState.duration[i] < frameCount){
-				currentState.start[i] = frameCount + 900 * this.generateNormal() + 100;
-				currentState.duration[i] = 500 * this.generateNormal() + 100;
+			// for the inactive emotions, give them an .0005 chance of spawning
+			if(currentState.activeEmotion[i] == 0 && currentState.lastEmotion != i){
+				let numActive = d3.sum(currentState.activeEmotion);
+				// never more than 3, and never less than 1 active
+				let rand = Math.random();
+				if ((rand < .0015 && numActive < 2) || (rand < .0001 && numActive < 3) || numActive == 0) {
+					this.spawnNew(currentState, i);
+				}
+			}
+			// if current cycle just ended, reset
+			if(currentState.activeEmotion[i] == 1 && currentState.start[i] + currentState.duration[i] < frameCount){
+				currentState.activeEmotion[i] = 0;
+				currentState.opacity[i] = 0;
+				currentState.lastEmotion = i;
 			};
 			// define opacity based on frame count, start, and duration
-			currentState.opacity[i] = this.elapsedToOpacity(this.calcPercentElapsed(frameCount, currentState.start[i], currentState.duration[i]));
-
-			// update continent state if continent is visible
-			if(currentState.opacity[i] != 0){
+			if(currentState.activeEmotion[i] != 0){
+				currentState.opacity[i] = this.elapsedToOpacity(this.calcPercentElapsed(frameCount, currentState.start[i], currentState.duration[i]));
 				continents[i].update(updateState, frameCount);
 			}
 		};
@@ -284,95 +287,6 @@ export default {
 		frameCount++;
 		if (this.isActive) {
 			window.requestAnimationFrame(this.update);
-		}
-
-	},
-
-	onContinentMouseEnter: function (continent) {
-
-		// if already selected, leave as-is
-		if (continent.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED) { return; }
-
-		this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.HIGHLIGHTED);
-
-		// If mouseenter fires after mouseleave,
-		// prevent mouseleave behavior (maintain highlight)
-		if (this.mouseLeaveTimeout) {
-			clearTimeout(this.mouseLeaveTimeout);
-		}
-
-	},
-
-	onContinentMouseLeave: function (continent) {
-
-		// enough time to smoothly roll across a gap from one continent
-		// to another without selections flashing on/off
-		let mouseLeaveDelay = 80;
-
-		this.mouseLeaveTimeout = setTimeout(() => {
-
-			let otherHighlightedContinent;
-			continents.some((c => {
-				if (c !== continent &&
-					(c.highlightLevel === Continent.HIGHLIGHT_LEVELS.HIGHLIGHTED ||
-					c.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED)) {
-					otherHighlightedContinent = c;
-					return true;
-				}
-			}));
-
-			if (otherHighlightedContinent) {
-				// If there is a highlighted continent other than the event target continent,
-				// just unhiglight the event target continent (unless it's selected, then leave as-is)
-				let unhighlightLevel = otherHighlightedContinent.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED ? Continent.HIGHLIGHT_LEVELS.UNSELECTED : Continent.HIGHLIGHT_LEVELS.UNHIGHLIGHTED;
-				if (continent && continent.highlightLevel !== Continent.HIGHLIGHT_LEVELS.SELECTED) {
-					continent.highlightLevel = unhighlightLevel;
-				}
-			} else {
-				// Else, turn off all highlights except selected.
-				let unhighlightLevel = continent.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED ? Continent.HIGHLIGHT_LEVELS.UNSELECTED : Continent.HIGHLIGHT_LEVELS.NONE;
-				continents.forEach(c => {
-					if (c.highlightLevel !== Continent.HIGHLIGHT_LEVELS.SELECTED) {
-						c.highlightLevel = unhighlightLevel;
-					}
-				});
-			}
-
-		}, mouseLeaveDelay);
-
-	},
-
-	onContinentMouseClick: function (continent) {
-		if (d3.event) {
-			d3.event.stopImmediatePropagation();
-		}
-
-		dispatcher.popupChange('calm', continent.id);
-
-		this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.SELECTED);
-	},
-
-	setContinentHighlight: function (continent, highlightLevel) {
-
-		// Set unhighlightLevel based on if any continent highlighted
-		let unhighlightLevel;
-		if (highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED || continents.some(c => c.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED)) {
-			unhighlightLevel = Continent.HIGHLIGHT_LEVELS.UNSELECTED;
-		} else {
-			unhighlightLevel = Continent.HIGHLIGHT_LEVELS.UNHIGHLIGHTED;
-		}
-
-		if (continent) {
-			continents.forEach(c => {
-				if (c === continent) {
-					c.highlightLevel = highlightLevel;
-				} else {
-					// unhighlight all but selected
-					if (c.highlightLevel !== Continent.HIGHLIGHT_LEVELS.SELECTED) {
-						c.highlightLevel = unhighlightLevel;
-					}
-				}
-			});
 		}
 
 	},
