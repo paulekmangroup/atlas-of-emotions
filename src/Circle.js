@@ -85,6 +85,7 @@ export default class Circle {
 
 	// Note: there is no "age", everything that changes is calculated off of this.radius.
 	grow (speedMod) {
+
 		// stroke is centered on this.radius
 		let maxRad = this.size + 0.5*this.weight;
 
@@ -92,12 +93,15 @@ export default class Circle {
 		this.rSpeed = BASE_SPEED + Math.pow((1 - this.radius / maxRad), 0.5) * this.initSpeed;
 		this.rSpeed *= speedMod;
 
-		this.radius += this.rSpeed;
+		if (this.rSpeed) {
+			this.radius += this.rSpeed;
+		}
 
 		// fade out once radius hits outside edge
 		if (this.radius > this.size) {
 			this.alpha = Math.max(0, Circle.BASE_ALPHA * (maxRad - this.radius) / (0.5 * this.weight));
 		}
+
 	}
 
 	calcStrokeWidth () {
