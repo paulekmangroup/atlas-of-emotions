@@ -1045,7 +1045,6 @@ export default function (...initArgs) {
 				let onOverlayClick = (event) => {
 					event.stopImmediatePropagation();
 					modalOverlay.removeEventListener('click', onOverlayClick);
-					markModalAsSeen();
 					setModalVisibility(false);
 				};
 				modalOverlay.addEventListener('click', onOverlayClick);
@@ -1055,6 +1054,9 @@ export default function (...initArgs) {
 
 			// bail if already closed
 			if (!modalOverlay.classList.contains('visible')) { return; }
+
+			// set localStorage flag to prevent auto-opening modal on subsequent site visits
+			markModalAsSeen();
 
 			// set intro closing flag as class on body
 			document.body.classList.add('intro-closing');
