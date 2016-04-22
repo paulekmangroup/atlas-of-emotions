@@ -35,7 +35,7 @@ export default {
 		this.pageContainer.classList.add('page-container');
 		this.modalContainer.appendChild(this.pageContainer);
 
-		this.initCoverPage();
+		// this.initCoverPage();
 		this.initPages();
 
 		let closeButton = document.createElement('div');
@@ -46,7 +46,7 @@ export default {
 		this.setCurrentPage(0);
 
 	},
-
+	/*
 	initCoverPage () {
 
 		let page = document.createElement('div');
@@ -81,7 +81,7 @@ export default {
 
 
 	},
-
+	*/
 	initPages () {
 
 		let pageIds = [
@@ -118,7 +118,7 @@ export default {
 		//
 		// overview
 		//
-		let overviewPage = this.pages[1];
+		let overviewPage = this.pages[0];
 		let overviewBody = overviewPage.querySelector('.body');
 
 		let imgContainer = document.createElement('figure');
@@ -142,11 +142,25 @@ export default {
 
 		overviewPage.insertBefore(overviewPage.querySelector('figcaption'), overviewBody);
 
+		let buttonFooter = document.createElement('div');
+		buttonFooter.classList.add('footer');
+
+		let exitButton = document.createElement('h3');
+		exitButton.classList.add('button', 'exit', 'cover');
+		exitButton.textContent = '<a href="#">LETS_GET_STARTED</a>';
+		buttonFooter.appendChild(exitButton);
+
+		let moreButton = document.createElement('h3');
+		moreButton.classList.add('button', 'more', 'cover');
+		moreButton.textContent = TELL_ME_MORE;
+		buttonFooter.appendChild(moreButton);
+		overviewPage.appendChild(buttonFooter);
+
 
 		//
 		// research
 		//
-		let researchPage = this.pages[2],
+		let researchPage = this.pages[1],
 			researchData = secondaryData.annex['scientific-basis'].content,
 			findResearchDatum = key => {
 				let match = researchData.find(datum => datum.desc.toLowerCase().indexOf(key) !== -1);
@@ -184,7 +198,7 @@ export default {
 		//
 		// navigation
 		//
-		let navigationPage = this.pages[3];
+		let navigationPage = this.pages[2];
 		let navDiagram = document.createElement('img');
 		navDiagram.src = './img/navigate.png';
 		navDiagram.style.width = '100%';
@@ -196,7 +210,7 @@ export default {
 		//
 		this.paginationFooter = document.createElement('div');
 		this.paginationFooter.classList.add('footer', 'pagination');
-		pageIds.unshift('cover');
+		// pageIds.unshift('cover');
 		pageIds.forEach((id, i) => {
 			let paginationButton = document.createElement('div');
 			paginationButton.classList.add('button', 'pagination');
@@ -268,7 +282,7 @@ export default {
 		if (index === this.currentPage) { return; }
 		if (this.isSettingPage) { return; }
 
-		// container
+		// container (pages after cover page are styled differently)
 		this.modalContainer.classList[index ? 'add' : 'remove']('pages');
 
 		// pages
