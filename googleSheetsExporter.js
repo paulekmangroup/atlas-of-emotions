@@ -111,7 +111,21 @@ var metadataSectionParsers = (function () {
 
 	return {
 
-		intro: standard,
+		intro: function (data) {
+			var obj = {
+				header: data[0][0],
+				body: data[0][1]
+			};
+			obj.steps = data.map(function (row) {
+				return {
+					header: row[2],
+					body: row[3],
+					caption: row[4]
+				};
+			});
+
+			return obj;
+		},
 
 		continents: standard,
 
@@ -270,7 +284,10 @@ var emotionSectionParsers = (function () {
 
 		triggers: function (data) {
 			return data.map(function (row) {
-				return row[0];
+				return {
+					name: row[0],
+					type: row[1]
+				};
 			});
 		},
 

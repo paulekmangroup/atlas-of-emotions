@@ -3,12 +3,12 @@
     "anger": {
       "continent": {
         "name": "Anger",
-        "desc": "The Anger actions differ not only in their strength but also in how they deal with what triggered the anger. "
+        "desc": "We’re angered by interference."
       },
       "states": [
         {
           "name": "Annoyance",
-          "desc": "The mildest state of anger, never felt very strongly.",
+          "desc": "Very mild anger.",
           "range": {
             "min": 1,
             "max": 2
@@ -34,7 +34,7 @@
         },
         {
           "name": "Frustration",
-          "desc": "A loss of patience with a person or task.",
+          "desc": "A response to failure to overcome an obstacle despite repeated attempts.",
           "range": {
             "min": 1,
             "max": 10
@@ -68,7 +68,7 @@
         },
         {
           "name": "Argumentativeness",
-          "desc": "An inclination to partake in unfriendly verbal disagreements.",
+          "desc": "An inclination to prolong disagreements.",
           "range": {
             "min": 2,
             "max": 10
@@ -102,7 +102,7 @@
         },
         {
           "name": "Bitterness",
-          "desc": "The residue from having been repeatedly angry, usually due to feeling that the world is populated by people or events that block pursuit of what is important to you.",
+          "desc": "Disappointment that no one wanted to settle a problem.",
           "range": {
             "min": 3,
             "max": 10
@@ -136,7 +136,7 @@
         },
         {
           "name": "Exasperation",
-          "desc": "The feeling of losing patience with a person or task that is generating an overload of frustration.",
+          "desc": "A loss of patience at repeated failures to settle a problem.",
           "range": {
             "min": 4,
             "max": 7
@@ -172,7 +172,7 @@
         },
         {
           "name": "Vengefulness",
-          "desc": "A strong desire to harm someone who has harmed you.",
+          "desc": "A desire for retaliation.",
           "range": {
             "min": 5,
             "max": 10
@@ -207,7 +207,7 @@
         },
         {
           "name": "Fury",
-          "desc": "The highest, most intense state of anger, often resulting in a loss of control. May also result in violent actions.",
+          "desc": "Intense anger.",
           "range": {
             "min": 10,
             "max": 10
@@ -246,7 +246,7 @@
         },
         {
           "name": "Insult",
-          "desc": "Disparage the other person in a offensive or hurtful way that is likely to escalate the conflict rather than resolve it."
+          "desc": "Disparage the other person in an offensive or hurtful way that is likely to escalate the conflict rather than resolve it."
         },
         {
           "name": "Undermine",
@@ -265,32 +265,8 @@
           "desc": "Harm or constrain someone, an action that may be deliberately chosen or the result of a loss of control over how one acts."
         },
         {
-          "name": "Be firm",
-          "desc": "Convey that one's position is strongly held, not likely to be abandoned."
-        },
-        {
-          "name": "Withdraw",
-          "desc": "Physically or mentally leave the scene of the conflict."
-        },
-        {
-          "name": "Take a time out",
-          "desc": "Announce intention to withdraw to prevent escalation of the conflict."
-        },
-        {
-          "name": "Practice patience",
-          "desc": "Regard the conflict as an opportunity to not lose one's temper."
-        },
-        {
           "name": "Suppress",
           "desc": "Try to avoid feeling or acting upon the emotion that is being experienced."
-        },
-        {
-          "name": "Distract",
-          "desc": "Engage in other activities in an attempt to avoid feeling this emotion."
-        },
-        {
-          "name": "Avoid",
-          "desc": "Either physically stay away from someone or something, or internally keep one’s mind away from what is triggering the anger."
         },
         {
           "name": "Simmer/brood",
@@ -299,20 +275,37 @@
         {
           "name": "Be passive-aggressive",
           "desc": "Take indirect actions that have an angry undercurrent."
-        },
-        {
-          "name": "Remove the interference",
-          "desc": "Attempt to eliminate whatever is blocking the pursuit of a goal."
         }
       ],
       "triggers": [
-        "Interference with locomotion",
-        "Interference with action",
-        "Rejection by a loved one",
-        "Encountering offensive beliefs",
-        "Being put down by an authority figure",
-        "Inefficiency or bureaucracy",
-        "Being wrongfully accused"
+        {
+          "name": "Interference with locomotion",
+          "type": "Universal"
+        },
+        {
+          "name": "Interference with action",
+          "type": "Universal"
+        },
+        {
+          "name": "Rejection by a loved one",
+          "type": "Universal"
+        },
+        {
+          "name": "Inefficiency or bureaucracy",
+          "type": "Learned"
+        },
+        {
+          "name": "Being put down by an authority figure",
+          "type": "Learned"
+        },
+        {
+          "name": "Encountering offensive beliefs",
+          "type": "Learned"
+        },
+        {
+          "name": "Being wrongfully accused",
+          "type": "Learned"
+        }
       ],
       "moods": [
         {
@@ -324,12 +317,12 @@
     "fear": {
       "continent": {
         "name": "Fear",
-        "desc": "Fear is the response to perceived danger."
+        "desc": "We’re afraid of danger."
       },
       "states": [
         {
           "name": "Trepidation",
-          "desc": "A sense of slight danger, often pending but not immediate.",
+          "desc": "Anticipation of the possibility of danger.",
           "range": {
             "min": 1,
             "max": 3
@@ -351,31 +344,8 @@
           }
         },
         {
-          "name": "Nervousness",
-          "desc": "Perception of a danger that you do not know how to respond to.",
-          "range": {
-            "min": 2,
-            "max": 7
-          },
-          "actions": {
-            "all": [
-              "hesitate",
-              "ruminate",
-              "worry"
-            ],
-            "con": [
-              "hesitate"
-            ],
-            "des": [
-              "ruminate",
-              "worry"
-            ],
-            "both": []
-          }
-        },
-        {
           "name": "Anxiety",
-          "desc": "Apprehensiveness about an anticipated or unspecified threat.",
+          "desc": "Inability to cope with an anticipated or actual threat.",
           "range": {
             "min": 1,
             "max": 10
@@ -406,8 +376,31 @@
           }
         },
         {
+          "name": "Nervousness",
+          "desc": "Uncertainty as to whether there is a danger.",
+          "range": {
+            "min": 2,
+            "max": 7
+          },
+          "actions": {
+            "all": [
+              "hesitate",
+              "ruminate",
+              "worry"
+            ],
+            "con": [
+              "hesitate"
+            ],
+            "des": [
+              "ruminate",
+              "worry"
+            ],
+            "both": []
+          }
+        },
+        {
           "name": "Dread",
-          "desc": "Anticipation of severe danger from which there is no protection or escape.",
+          "desc": "Anticipation of severe danger.",
           "range": {
             "min": 6,
             "max": 10
@@ -439,7 +432,7 @@
         },
         {
           "name": "Desperation",
-          "desc": "Realization of the futility of our attempts to reduce danger.",
+          "desc": "A response to the inability to reduce danger.",
           "range": {
             "min": 9,
             "max": 10
@@ -507,7 +500,7 @@
         },
         {
           "name": "Horror",
-          "desc": "A mixture of fear and disgust which probably alternate quickly rather than merge together.",
+          "desc": "A mixture of fear and disgust.",
           "range": {
             "min": 10,
             "max": 10
@@ -537,7 +530,7 @@
         },
         {
           "name": "Terror",
-          "desc": "The most extreme fear that can be felt.",
+          "desc": "Maximum fear.",
           "range": {
             "min": 10,
             "max": 10
@@ -588,38 +581,43 @@
           "desc": "Lose control of how one speaks; speak in a loud volume and, when screaming, in a higher pitch."
         },
         {
-          "name": "Reframe",
-          "desc": "Reconsider the emotional trigger in an attempt to reduce or eliminate it."
-        },
-        {
-          "name": "Be mindful",
-          "desc": "Accept how you feel and recognize that it's temporary. "
-        },
-        {
-          "name": "Breathe",
-          "desc": "Focus awareness on breathing in order to diminish fearful feelings. "
-        },
-        {
           "name": "Ruminate",
           "desc": "Repetitively think about the emotional experience."
         },
         {
           "name": "Worry",
           "desc": "Anticipate the possibility of harm."
-        },
-        {
-          "name": "Distract",
-          "desc": "Engage in other activities in an attempt to avoid feeling this emotion."
         }
       ],
       "triggers": [
-        "Threat of losing status",
-        "Threat to safety",
-        "Sudden loss of gravity",
-        "Snake-like shapes",
-        "Threat of losing job",
-        "Thunder",
-        "Public speaking"
+        {
+          "name": "Imminent bodily impact",
+          "type": "Universal"
+        },
+        {
+          "name": "Sudden loss of gravity",
+          "type": "Universal"
+        },
+        {
+          "name": "Threat to safety",
+          "type": "Universal"
+        },
+        {
+          "name": "Snake-like shapes",
+          "type": "Universal"
+        },
+        {
+          "name": "Threat of losing job",
+          "type": "Learned"
+        },
+        {
+          "name": "Thunder",
+          "type": "Learned"
+        },
+        {
+          "name": "Public speaking",
+          "type": "Learned"
+        }
       ],
       "moods": [
         {
@@ -631,35 +629,12 @@
     "disgust": {
       "continent": {
         "name": "Disgust",
-        "desc": "We are disgusted by anything that is literally or physically toxic. "
+        "desc": "We’re disgusted by anything toxic."
       },
       "states": [
         {
-          "name": "Aversion",
-          "desc": "A desire to avoid something noxious.",
-          "range": {
-            "min": 2,
-            "max": 7
-          },
-          "actions": {
-            "all": [
-              "withdraw",
-              "avoid",
-              "dehumanize"
-            ],
-            "con": [
-              "withdraw",
-              "avoid"
-            ],
-            "des": [
-              "dehumanize"
-            ],
-            "both": []
-          }
-        },
-        {
           "name": "Dislike",
-          "desc": "Disapproval of a thing, person or action.",
+          "desc": "The mildest form of disgust.",
           "range": {
             "min": 1,
             "max": 5
@@ -684,8 +659,31 @@
           }
         },
         {
+          "name": "Aversion",
+          "desc": "A desire to avoid something disgusting.",
+          "range": {
+            "min": 2,
+            "max": 7
+          },
+          "actions": {
+            "all": [
+              "withdraw",
+              "avoid",
+              "dehumanize"
+            ],
+            "con": [
+              "withdraw",
+              "avoid"
+            ],
+            "des": [
+              "dehumanize"
+            ],
+            "both": []
+          }
+        },
+        {
           "name": "Distaste",
-          "desc": "Offense caused by a taste or smell; metaphorically, offense caused by sights or actions.",
+          "desc": "Response to a bad taste or smell; can also be metaphorical.",
           "range": {
             "min": 2,
             "max": 7
@@ -735,31 +733,8 @@
           }
         },
         {
-          "name": "Loathing",
-          "desc": "Intense repulsion to a thing or person.",
-          "range": {
-            "min": 9,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "withdraw",
-              "avoid",
-              "dehumanize"
-            ],
-            "con": [
-              "withdraw"
-            ],
-            "des": [
-              "avoid",
-              "dehumanize"
-            ],
-            "both": []
-          }
-        },
-        {
           "name": "Revulsion",
-          "desc": "Very strong repulsion that usually implies a movement away from the source.",
+          "desc": "Very intense disgust.",
           "range": {
             "min": 8,
             "max": 10
@@ -784,7 +759,7 @@
         },
         {
           "name": "Abhorrence",
-          "desc": "Extreme repulsion to the look, smell or taste of toxic sustances, or to highly offensive actions.",
+          "desc": "Extreme repulsion.",
           "range": {
             "min": 8,
             "max": 10
@@ -804,6 +779,29 @@
             ],
             "both": []
           }
+        },
+        {
+          "name": "Loathing",
+          "desc": "Intense disgust focused on a person.",
+          "range": {
+            "min": 9,
+            "max": 10
+          },
+          "actions": {
+            "all": [
+              "withdraw",
+              "avoid",
+              "dehumanize"
+            ],
+            "con": [
+              "withdraw"
+            ],
+            "des": [
+              "avoid",
+              "dehumanize"
+            ],
+            "both": []
+          }
         }
       ],
       "actions": [
@@ -813,7 +811,7 @@
         },
         {
           "name": "Avoid",
-          "desc": "Either phsyically stay away from someone or something, or internally keep one's mind away from what is triggering the disgust."
+          "desc": "Either physically stay away from someone or something, or internally keep one’s mind away from what is triggering the disgust."
         },
         {
           "name": "Vomit",
@@ -825,23 +823,38 @@
         }
       ],
       "triggers": [
-        "Rotting or decay",
-        "Anything coming out of the body",
-        "Unfamiliar religious customs",
-        "Eating insects or raw meat",
-        "Fans of an opposing sports team"
+        {
+          "name": "Anything coming out of the body",
+          "type": "Universal"
+        },
+        {
+          "name": "Rotting or decay",
+          "type": "Universal"
+        },
+        {
+          "name": "Fans of an opposing sports team",
+          "type": "Learned"
+        },
+        {
+          "name": "Unfamiliar religious customs",
+          "type": "Learned"
+        },
+        {
+          "name": "Eating insects or raw meat",
+          "type": "Learned"
+        }
       ],
       "moods": [
         {
           "name": "Sour",
-          "desc": "Not commonly a mood, it can occur as a mood when there is a generalized feeling of repugnance or revulsion — usually of low intensity."
+          "desc": "Disgust can occur as a mood, a generalized feeling of repugnance."
         }
       ]
     },
     "sadness": {
       "continent": {
         "name": "Sadness",
-        "desc": "We experience sadness at the actual or perceived loss of a person to whom we are attached, such as a parent or child, a lover or a close friend; at a loss of our own health or social status; and at a loss of an object that we value highly."
+        "desc": "We’re saddened by loss."
       },
       "states": [
         {
@@ -875,8 +888,42 @@
           }
         },
         {
+          "name": "Resignation",
+          "desc": "Acceptance that nothing can be done.",
+          "range": {
+            "min": 1,
+            "max": 10
+          },
+          "actions": {
+            "all": [
+              "seek comfort",
+              "withdraw",
+              "protest",
+              "ruminate",
+              "mourn",
+              "feel ashamed"
+            ],
+            "con": [
+              "seek comfort",
+              "withdraw",
+              "protest"
+            ],
+            "des": [
+              "withdraw",
+              "ruminate",
+              "mourn",
+              "protest",
+              "feel ashamed"
+            ],
+            "both": [
+              "withdraw",
+              "protest"
+            ]
+          }
+        },
+        {
           "name": "Distraughtness",
-          "desc": "Agitated sadness. Felt intensely and often for long periods.",
+          "desc": "Agitated sadness.",
           "range": {
             "min": 2,
             "max": 8
@@ -904,7 +951,7 @@
         },
         {
           "name": "Discouragement",
-          "desc": "A feeling that there is no way to cope with an actual or potential loss.",
+          "desc": "A feeling that there is no way to cope.",
           "range": {
             "min": 2,
             "max": 8
@@ -929,40 +976,6 @@
             ],
             "both": [
               "mourn"
-            ]
-          }
-        },
-        {
-          "name": "Resignation",
-          "desc": "Acceptance that nothing can be done to prevent an important loss.",
-          "range": {
-            "min": 1,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "seek comfort",
-              "withdraw",
-              "protest",
-              "ruminate",
-              "mourn",
-              "protect",
-              "feel ashamed"
-            ],
-            "con": [
-              "seek comfort",
-              "withdraw",
-              "protest"
-            ],
-            "des": [
-              "withdraw",
-              "ruminate",
-              "mourn",
-              "protect",
-              "feel ashamed"
-            ],
-            "both": [
-              "withdraw"
             ]
           }
         },
@@ -998,7 +1011,7 @@
         },
         {
           "name": "Misery",
-          "desc": "An intense, prolonged feeling of anguish.",
+          "desc": "Anguished sadness, usually prolonged.",
           "range": {
             "min": 6,
             "max": 10
@@ -1029,8 +1042,38 @@
           }
         },
         {
+          "name": "Hopelessness",
+          "desc": "A feeling that nothing good is to come.",
+          "range": {
+            "min": 6,
+            "max": 10
+          },
+          "actions": {
+            "all": [
+              "seek comfort",
+              "mourn",
+              "withdraw",
+              "ruminate",
+              "feel ashamed"
+            ],
+            "con": [
+              "seek comfort",
+              "mourn"
+            ],
+            "des": [
+              "withdraw",
+              "ruminate",
+              "mourn",
+              "feel ashamed"
+            ],
+            "both": [
+              "mourn"
+            ]
+          }
+        },
+        {
           "name": "Grief",
-          "desc": "Anguish aroused by the death of a loved one. Varies over time, from very intense at the time of the death to intermittently moderate as time goes on.",
+          "desc": "Anguished sadness over the loss of a loved one.",
           "range": {
             "min": 7,
             "max": 10
@@ -1092,7 +1135,7 @@
         },
         {
           "name": "Sorrow",
-          "desc": "Response to an important loss.",
+          "desc": "Sadness over a loss.",
           "range": {
             "min": 7,
             "max": 10
@@ -1122,7 +1165,7 @@
         },
         {
           "name": "Anguish",
-          "desc": "Intense agitation. Protesting form of despair over an actual or expected loss.",
+          "desc": "Intense agitated sadness.",
           "range": {
             "min": 10,
             "max": 10
@@ -1151,36 +1194,6 @@
               "protest"
             ]
           }
-        },
-        {
-          "name": "Hopelessness",
-          "desc": "NEED DESCRIPTION",
-          "range": {
-            "min": 6,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "seek comfort",
-              "mourn",
-              "withdraw",
-              "ruminate",
-              "feel ashamed"
-            ],
-            "con": [
-              "seek comfort",
-              "mourn"
-            ],
-            "des": [
-              "withdraw",
-              "ruminate",
-              "mourn",
-              "feel ashamed"
-            ],
-            "both": [
-              "mourn"
-            ]
-          }
         }
       ],
       "actions": [
@@ -1207,35 +1220,46 @@
         {
           "name": "Feel ashamed",
           "desc": "Feel the need to hide how one feels about what or who is lost."
-        },
-        {
-          "name": "Distract",
-          "desc": "Engage in other activities in an attempt to avoid feeling this emotion."
         }
       ],
       "triggers": [
-        "Losing a loved one",
-        "Being rejected by someone important",
-        "Perceived loss of status",
-        "Not being invited to a party",
-        "Losing a treasured belonging"
+        {
+          "name": "Being rejected by someone important",
+          "type": "Universal"
+        },
+        {
+          "name": "Losing a loved one",
+          "type": "Universal"
+        },
+        {
+          "name": "Perceiving a loss of status",
+          "type": "Learned"
+        },
+        {
+          "name": "Not being invited to a party",
+          "type": "Learned"
+        },
+        {
+          "name": "Losing a treasured belonging",
+          "type": "Learned"
+        }
       ],
       "moods": [
         {
           "name": "Dysphoria (or feeling blue)",
-          "desc": "Feelings of resignation, discouragement or disappointment that endure for a long period. The anguished side of sadness does not transform into a mood."
+          "desc": "Feelings of resignation, discouragement or disappointment that endure. Anguish does not transform into a mood."
         }
       ]
     },
     "enjoyment": {
       "continent": {
         "name": "Enjoyment",
-        "desc": "The pursuit of what feels good is a primary motive in our lives. "
+        "desc": "We enjoy what feels good."
       },
       "states": [
         {
-          "name": "Sensory Pleasures",
-          "desc": "NEED DESCRIPTION",
+          "name": "Sensory pleasure",
+          "desc": "Enjoyment derived through one of the five physical senses: sight, sound, touch, taste and smell.",
           "range": {
             "min": 1,
             "max": 5
@@ -1243,10 +1267,12 @@
           "actions": {
             "all": [
               "seek more",
+              "savor",
               ""
             ],
             "con": [
-              "seek more"
+              "seek more",
+              "savor"
             ],
             "des": [
               ""
@@ -1255,20 +1281,22 @@
           }
         },
         {
-          "name": "Relief",
-          "desc": "When something expected to be unplesant, especialy the threat of harm, is avoided or comes to an end.",
+          "name": "Rejoicing",
+          "desc": "A warm, uplifting feeling that people experience when they see acts of human goodness, kindness and compassion. Also called elevation.",
           "range": {
             "min": 2,
-            "max": 10
+            "max": 8
           },
           "actions": {
             "all": [
+              "seek more",
               "exclaim",
               "engage/connect",
               "savor",
               "indulge"
             ],
             "con": [
+              "seek more",
               "exclaim",
               "engage/connect",
               "savor",
@@ -1284,7 +1312,7 @@
         },
         {
           "name": "Amusement",
-          "desc": "Light, playful, humorous feelings of enjoyment.",
+          "desc": "Light, playful feelings of enjoyment and good humor.",
           "range": {
             "min": 2,
             "max": 8
@@ -1313,8 +1341,226 @@
           }
         },
         {
+          "name": "Relief",
+          "desc": "When something expected to be unpleasant, especially the threat of harm, is avoided or comes to an end.",
+          "range": {
+            "min": 2,
+            "max": 10
+          },
+          "actions": {
+            "all": [
+              "exclaim",
+              "engage/connect",
+              "savor",
+              "indulge"
+            ],
+            "con": [
+              "exclaim",
+              "engage/connect",
+              "savor",
+              "indulge"
+            ],
+            "des": [
+              "indulge"
+            ],
+            "both": [
+              "indulge"
+            ]
+          }
+        },
+        {
+          "name": "Compassion/joy",
+          "desc": "Enjoyment felt when you act to relieve another person’s suffering.",
+          "range": {
+            "min": 3,
+            "max": 6
+          },
+          "actions": {
+            "all": [
+              "seek more",
+              "exclaim",
+              "engage/connect",
+              "savor",
+              ""
+            ],
+            "con": [
+              "seek more",
+              "exclaim",
+              "engage/connect",
+              "savor"
+            ],
+            "des": [
+              ""
+            ],
+            "both": []
+          }
+        },
+        {
+          "name": "Schadenfreude",
+          "desc": "Enjoyment of the misfortunes of another person, usually a rival.",
+          "range": {
+            "min": 3,
+            "max": 8
+          },
+          "actions": {
+            "all": [
+              "",
+              "seek more",
+              "maintain",
+              "gloat",
+              "exclaim",
+              "engage/connect"
+            ],
+            "con": [
+              ""
+            ],
+            "des": [
+              "seek more",
+              "maintain",
+              "gloat",
+              "exclaim",
+              "engage/connect"
+            ],
+            "both": []
+          }
+        },
+        {
+          "name": "Fiero",
+          "desc": "An Italian word that describes the enjoyment felt when you have met a challenge that stretched your capabilities.",
+          "range": {
+            "min": 3,
+            "max": 10
+          },
+          "actions": {
+            "all": [
+              "seek more",
+              "maintain",
+              "engage/connect",
+              "savor",
+              "indulge",
+              "gloat"
+            ],
+            "con": [
+              "seek more",
+              "maintain",
+              "engage/connect",
+              "savor",
+              "indulge"
+            ],
+            "des": [
+              "gloat",
+              "engage/connect",
+              "savor",
+              "indulge"
+            ],
+            "both": [
+              "engage/connect",
+              "savor",
+              "indulge"
+            ]
+          }
+        },
+        {
+          "name": "Naches",
+          "desc": "A Yiddish word for feelings of pride in the accomplishments, or sometimes just the existence, of your actual offspring or mentored offspring. Crucial for motivating the nurture of infants and children.",
+          "range": {
+            "min": 3,
+            "max": 10
+          },
+          "actions": {
+            "all": [
+              "exclaim",
+              "engage/connect",
+              "savor",
+              "gloat"
+            ],
+            "con": [
+              "exclaim",
+              "engage/connect",
+              "savor"
+            ],
+            "des": [
+              "gloat",
+              "exclaim",
+              "engage/connect",
+              "savor"
+            ],
+            "both": [
+              "exclaim",
+              "engage/connect",
+              "savor"
+            ]
+          }
+        },
+        {
+          "name": "Pride",
+          "desc": "A desire for others to know the pleasure you feel in your own accomplishments or the accomplishments of someone you either nurtured directly or identify with.",
+          "range": {
+            "min": 4,
+            "max": 9
+          },
+          "actions": {
+            "all": [
+              "seek more",
+              "exclaim",
+              "engage/connect",
+              "savor",
+              "indulge"
+            ],
+            "con": [
+              "seek more",
+              "exclaim",
+              "engage/connect",
+              "savor",
+              "indulge"
+            ],
+            "des": [
+              "exclaim",
+              "engage/connect",
+              "savor",
+              "indulge"
+            ],
+            "both": [
+              "exclaim",
+              "engage/connect",
+              "savor",
+              "indulge"
+            ]
+          }
+        },
+        {
+          "name": "Wonder",
+          "desc": "An experience of something that is very surprising, beautiful, amazing or hard to believe.",
+          "range": {
+            "min": 5,
+            "max": 10
+          },
+          "actions": {
+            "all": [
+              "seek more",
+              "exclaim",
+              "engage/connect",
+              "savor",
+              "indulge"
+            ],
+            "con": [
+              "seek more",
+              "exclaim",
+              "engage/connect",
+              "savor",
+              "indulge"
+            ],
+            "des": [
+              "indulge"
+            ],
+            "both": [
+              "indulge"
+            ]
+          }
+        },
+        {
           "name": "Excitement",
-          "desc": "Energetic pursuit that, unlike other enjoyable emotions, is rarely felt slightly, but ranges from mid to high in intesnity. May merge with any of the emotions generate a very active form of that emotion.",
+          "desc": "Energy that, unlike other enjoyable emotions, is rarely felt slightly, but ranges from mid to high in intesnity. May merge with any of the emotions, generating a very active form of that emotion.",
           "range": {
             "min": 6,
             "max": 10
@@ -1367,349 +1613,135 @@
               "indulge"
             ]
           }
-        },
-        {
-          "name": "Fiero",
-          "desc": "An Italian word that descrives the enjoyment felt when you have met a challenge that stretched your capabilities.",
-          "range": {
-            "min": 3,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "seek more",
-              "maintain",
-              "engage/connect",
-              "savor",
-              "indulge",
-              "gloat"
-            ],
-            "con": [
-              "seek more",
-              "maintain",
-              "engage/connect",
-              "savor",
-              "indulge"
-            ],
-            "des": [
-              "gloat",
-              "engage/connect",
-              "savor",
-              "indulge"
-            ],
-            "both": [
-              "engage/connect",
-              "savor",
-              "indulge"
-            ]
-          }
-        },
-        {
-          "name": "Naches",
-          "desc": "The Yiddish word for feelings of pride in the accomplishments, or sometimes just the existence, of your actual offspring, or mentored offspring. Crucial for motivating the nurture of infants and children.",
-          "range": {
-            "min": 3,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "exclaim",
-              "engage/connect",
-              "savor",
-              "gloat"
-            ],
-            "con": [
-              "exclaim",
-              "engage/connect",
-              "savor"
-            ],
-            "des": [
-              "gloat",
-              "exclaim",
-              "engage/connect",
-              "savor"
-            ],
-            "both": [
-              "exclaim",
-              "engage/connect",
-              "savor"
-            ]
-          }
-        },
-        {
-          "name": "Wonder",
-          "desc": "Experiencing something that is very surprising, beautiful, amazing, or hard to believe.",
-          "range": {
-            "min": 5,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "seek more",
-              "exclaim",
-              "engage/connect",
-              "savor",
-              "indulge"
-            ],
-            "con": [
-              "seek more",
-              "exclaim",
-              "engage/connect",
-              "savor",
-              "indulge"
-            ],
-            "des": [
-              "indulge"
-            ],
-            "both": [
-              "indulge"
-            ]
-          }
-        },
-        {
-          "name": "Schadenfreude",
-          "desc": "Enjoying the misfortunes of another person, usually a rival.",
-          "range": {
-            "min": 3,
-            "max": 8
-          },
-          "actions": {
-            "all": [
-              "",
-              "seek more",
-              "maintain",
-              "gloat",
-              "exclaim",
-              "engage/connect"
-            ],
-            "con": [
-              ""
-            ],
-            "des": [
-              "seek more",
-              "maintain",
-              "gloat",
-              "exclaim",
-              "engage/connect"
-            ],
-            "both": []
-          }
-        },
-        {
-          "name": "Rejoicing",
-          "desc": "A warm, uplifting feeling that people experience when they see acts of human goodness, kindness, and compassion. Also called elevation.",
-          "range": {
-            "min": 2,
-            "max": 8
-          },
-          "actions": {
-            "all": [
-              "seek more",
-              "exclaim",
-              "engage/connect",
-              "savor",
-              "indulge"
-            ],
-            "con": [
-              "seek more",
-              "exclaim",
-              "engage/connect",
-              "savor",
-              "indulge"
-            ],
-            "des": [
-              "indulge"
-            ],
-            "both": [
-              "indulge"
-            ]
-          }
-        },
-        {
-          "name": "Compassion-joy",
-          "desc": "Enjoyment felt when you act compassionately, especially if your actions help to relieve another person's suffering.",
-          "range": {
-            "min": 3,
-            "max": 6
-          },
-          "actions": {
-            "all": [
-              "seek more",
-              "exclaim",
-              "engage/connect",
-              "savor",
-              ""
-            ],
-            "con": [
-              "seek more",
-              "exclaim",
-              "engage/connect",
-              "savor"
-            ],
-            "des": [
-              ""
-            ],
-            "both": []
-          }
-        },
-        {
-          "name": "Pride",
-          "desc": "Wanting others to know the pleasure you feel in your own accomplishments or the accomplishments of another who you either nurtured directly or identified with.",
-          "range": {
-            "min": 4,
-            "max": 9
-          },
-          "actions": {
-            "all": [
-              "seek more",
-              "exclaim",
-              "engage/connect",
-              "savor",
-              "indulge"
-            ],
-            "con": [
-              "seek more",
-              "exclaim",
-              "engage/connect",
-              "savor",
-              "indulge"
-            ],
-            "des": [
-              "exclaim",
-              "engage/connect",
-              "savor",
-              "indulge"
-            ],
-            "both": [
-              "exclaim",
-              "engage/connect",
-              "savor",
-              "indulge"
-            ]
-          }
-        },
-        {
-          "name": "Debauchery",
-          "desc": "NEED DESCRIPTION",
-          "range": {
-            "min": 6,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "withdraw",
-              "engage/connect",
-              "seek more",
-              "maintain",
-              "savor",
-              "indulge"
-            ],
-            "con": [
-              "withdraw",
-              "engage/connect"
-            ],
-            "des": [
-              "seek more",
-              "maintain",
-              "engage/connect",
-              "savor",
-              "indulge"
-            ],
-            "both": [
-              "engage/connect"
-            ]
-          }
         }
       ],
       "actions": [
         {
           "name": "Withdraw",
-          "desc": "To physically or mentally leave the scene."
+          "desc": "Physically or mentally leave the scene of what is causing the enjoyment."
         },
         {
           "name": "Seek more",
-          "desc": "To increase the enjoyable feelings."
+          "desc": "Attempt to increase the enjoyable feelings."
         },
         {
           "name": "Maintain",
-          "desc": "To continue to do what is necessary to continue the enjoyable feelings."
+          "desc": "Continue to do what is necessary to continue the enjoyable feelings."
         },
         {
           "name": "Gloat",
-          "desc": "To enjoy others envying your enjoyable state."
+          "desc": "Enjoy others’ envy of your state of enjoyment."
         },
         {
           "name": "Exclaim",
-          "desc": "To vocally express enjoyment to others."
+          "desc": "Vocally express enjoyment to others."
         },
         {
-          "name": "Engage/Connect",
-          "desc": "To desire connection and engagement with others to share in feelings of enjoyment."
+          "name": "Engage/connect",
+          "desc": "Desire connection and engagement with others to share in feelings of enjoyment."
         },
         {
           "name": "Savor",
-          "desc": "To relish in the experience of good feelings about the felt and psychological experiences."
+          "desc": "Relish the experience of good feelings about physical and psychological experiences."
         },
         {
           "name": "Indulge",
-          "desc": "Excessively engaging in the enjoyable feelings"
+          "desc": "Excessively engage in the enjoyable feelings."
         }
       ],
       "triggers": [
-        "Sensory experience of nature",
-        "Helping others",
-        "Social interaction",
-        "Playing badminton",
-        "The taste of chocolate cake",
-        "Spending time with family",
-        "Places associated with enjoyable memories"
+        {
+          "name": "Sensory experience of nature",
+          "type": "Universal"
+        },
+        {
+          "name": "Helping others",
+          "type": "Universal"
+        },
+        {
+          "name": "Social interaction",
+          "type": "Universal"
+        },
+        {
+          "name": "Playing badminton",
+          "type": "Learned"
+        },
+        {
+          "name": "Places associated with enjoyable memories",
+          "type": "Learned"
+        },
+        {
+          "name": "The taste of chocolate cake",
+          "type": "Learned"
+        },
+        {
+          "name": "Spending time with family",
+          "type": "Learned"
+        }
       ],
       "moods": [
         {
-          "name": "High",
-          "desc": "Generalized, non-specific feeling good not about any trigger; lasting hours."
+          "name": "Elation",
+          "desc": "Generalized, non-specific, non-triggered good feeling, lasting hours."
         }
       ]
     }
   },
   "metadata": {
     "intro": {
-      "header": "Welcome to Atlas of Emotion ",
-      "body": "This collection of maps was created by Paul and Eve Ekman to help you better understand your emotions, where they come from and the effects they have on your life.<br><br>Navigate by scrolling between sections or by using the right-hand navigation bar, and by clicking elements to dig deeper.<br><br>This is an opportunity for you to explore the vast world of emotions. The atlas begins with what scholars agree on and gradually introduces the Ekmans' working hypotheses about more complex subject matter."
+      "header": "Welcome to the Atlas of Emotions ",
+      "body": "This collection of maps is an opportunity for you to explore the landscape of emotions, where they come from and the effects they can have.",
+      "steps": [
+        {
+          "header": "Welcome to the Atlas of Emotions",
+          "body": "This atlas was inspired by a series of conversations between the <a href=\"http://www.dalailama.com/\" target=\"_blank\">Dalai Lama</a> and <a href=\"#more:about\">Paul Ekman</a> about the science of emotions. With the help of <a href=\"http://www.stamen.com/\" target=\"_blank\">Stamen Design</a> and Paul’s daughter, Dr. Eve Ekman, this tool was created to be a visual journey through the world of emotions.",
+          "caption": "His Holiness the Dalai Lama, Dr. Paul Ekman and Dr. Eve Ekman"
+        },
+        {
+          "header": "What it’s based on",
+          "body": "In June 2014, Paul Ekman sent a <a href=\"http://pps.sagepub.com/content/11/1/31.full.pdf?ijkey=AMIJzv8J9Tn0VF1&keytype=finite\" target=\"_blank\">survey</a> to 248 of the most active emotion researchers in the world to establish the consensus that provided <a href=\"#more:annex-scientific-basis\">the scientific basis for this atlas</a>.",
+          "caption": "of those who responded agree that there are Universal Emotions: emotions that all humans, no matter where we live or how we were raised, have in common."
+        },
+        {
+          "header": "How to navigate",
+          "body": "This collection of maps is an opportunity for you to explore the landscape of emotions, where they come from, and the effects they can have. Click on shapes to learn about them. Use the arrows and scrollbar to navigate to other pages.",
+          "caption": ""
+        }
+      ]
     },
     "continents": {
-      "header": "The Emotions",
-      "body": "Each emotion is represented as a continent. The movement of the continents reflects how emotions vary in strength and frequency in people's lives."
+      "header": "The Five Continents of Emotion",
+      "body": "Each emotion is represented as a continent. The movement of the continents reflects how emotions vary in strength and frequency in people’s lives."
     },
     "states": {
-      "header": "The States of an Emotion",
-      "body": "Each emotion contains a number of related but different states. These states differ not only in their nature but in their intensity. The states listed below are representative, not exhaustive."
+      "header": "States of LHAMO",
+      "body": "Each emotion contains a number of related states, which differ in intensity. The states shown here are representative, not exhaustive."
     },
     "actions": {
-      "header": "The Actions of a State",
-      "body": "Each emotional state can result in a number of likely actions. Click on a state to see whether an action is constructive or destructive.",
+      "header": "Actions of LHAMO",
+      "body": "An emotional state may lead to actions, which can be <a id=\"annexLink\" href=\"#more:annex-intrinsic-remedial\">intrinsic or intentional</a> and constructive, destructive or ambiguous, depending on the state. Actions shown here are intrinsic, happening without conscious choice. Click on a state to explore.",
       "qualities": [
         {
           "header": "Constructive Actions",
-          "body": "Actions that further future collaboration with others."
-        },
-        {
-          "header": "Destructive Actions",
-          "body": "Actions that decrease the likelihood of being able to collaborate with others."
+          "body": "In this state, this action is CONSTRUCTIVE. It enables collaboration."
         },
         {
           "header": "Ambiguous Actions",
-          "body": "Sometimes an action can be both constructive and destructive, depending on the context."
+          "body": "In this state, this action is AMBIGUOUS. It may either enable or inhibit collaboration."
+        },
+        {
+          "header": "Destructive Actions",
+          "body": "In this state, this action is DESTRUCTIVE. It inhibits collaboration."
         }
       ]
     },
     "triggers": {
-      "header": "The Triggers of an Emotion",
-      "body": "Triggers automatically bring forth an emotion without consideration.",
+      "header": "Triggers of LHAMO",
+      "body": "Triggers automatically bring forth an emotion without consideration. Awareness of the trigger usually takes place at the end of this <a id=\"annexLink\" href=\"#more:annex-episode-timeline\">process</a>, if at all.",
       "steps": [
         {
-          "header": "Event",
-          "body": "Some triggers are universal, some are cultural, and some are individual."
+          "header": "Triggers",
+          "body": "Some triggers are universal, some are learned through cultural experience, and some are learned through individual experience."
         },
         {
           "header": "Perception",
@@ -1717,28 +1749,28 @@
         },
         {
           "header": "Response",
-          "body": "It is very difficult to modify our emotional actions once triggered. Identifying what triggers our emotions may enable us to lead a more balanced emotional life."
+          "body": "The emotions are our response to triggers. They arise automatically and result in emotional actions."
         },
         {
           "header": "Universal Triggers",
-          "body": "Universal triggers are innate, common to everyone. They affect us more intensely than learned triggers."
+          "body": "This is an example of a universal trigger. Universal triggers are innate, common to everyone. They affect us more intensely than learned triggers."
         },
         {
           "header": "Learned Triggers",
-          "body": "Learned triggers are either cultural, stemming from widely shared experiences, or personal, arising from more individual experiences."
+          "body": "This is an example of a learned trigger. Learned triggers are either cultural, stemming from widely shared experiences, or personal, arising from more individual experiences."
         }
       ]
     },
     "moods": {
-      "header": "The Mood of an Emotion",
-      "body": "Moods are longer-lasting cousins of emotions that cause the related emotion to be felt more frequently and intensely. It is not always apparent what triggers a mood."
+      "header": "A Mood of LHAMO",
+      "body": "This is an example of a mood, a longer-lasting cousin of the emotion that causes the related emotion to be felt more frequently and intensely. It is not always apparent what triggers a mood."
     },
     "calm": {
-      "header": "Achieving Calm",
-      "body": "Calm is a state of mind that is actively engaged in using intelligence and wisdom to evaulate the changing world.",
+      "header": "Experiencing Calm",
+      "body": "A calm, balanced frame of mind is necessary to evaluate and understand our changing emotions. Calmness ideally is a baseline state, unlike emotions, which arise when triggered and then recede.",
       "secondary": {
         "header": "Visit the Annex",
-        "body": "To learn more about emotions, click on \"more information\" to the right."
+        "body": "To learn more about emotions, click on “More Information” in the bottom right corner."
       }
     }
   }

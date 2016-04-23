@@ -16,28 +16,47 @@ var ANNEX_SECTIONS = [
 	'personality trait',
 	'partially charted',
 	'triggers timeline',
-	'impediment-antidote',
+	//'impediment-antidote',
 	'intrinsic or intentional',
 ];
 
 var PARSER_CONFIG = {
 	'scientific basis': {
-		start: [1, 3], // col, row
+		start: [[1, 3],[1, 6],[1,9],[1,26]], // col, row
 		parse: function(data) {
 			if (!data) return {};
 
-			return {
-				title: data[0].title,
-				desc: data[0].introduction
-			}
-		}
+          var scientific = {};
+          scientific.content = [];
+          scientific.footer = [];
+
+			data.forEach(function(row) {
+				if (row.title) {
+					scientific.title = row.title;
+					scientific.desc = row.introduction || '';
+				} else if (row.surveydata) {
+					scientific.content.push({
+						desc: row.surveyquestion,
+						name: row.surveydata.toString() || null,
+						formatting: row.formatting
+					});
+                } else if (row.survey) {
+                  scientific.contentIntro = row.survey;
+                } else if (row.footer) {
+                  scientific.footer.push(row.footer)
+                }
+			});
+
+		return scientific;
+        }
 	},
 
 	'triggers timeline': {
-		start: [[1, 3], [1, 6]], // col, row
+		start: [[1, 3], [1, 6], [1,29]], // col, row
 		parse: function(data) {
 			var rsp = {};
 			rsp.content = [];
+            rsp.footer = [];
 
 			data.forEach(function(row) {
 				if (row.title) {
@@ -45,10 +64,12 @@ var PARSER_CONFIG = {
 					rsp.desc = row.introduction || '';
 				} else if (row.text) {
 					rsp.content.push({
-						txt: row.text,
-						id: row.id || null
+						desc: row.text,
+						name: row.id || null
 					});
-				}
+                } else if (row.footer) {
+                  rsp.footer.push(row.footer)
+                }
 			});
 
 			return rsp;
@@ -123,7 +144,7 @@ var PARSER_CONFIG = {
 
 					obj.children.push({
 						name: 'Intentional',
-						intentional: row.intentional
+						desc: row.intentional
 					});
 
 					rsp.emotions.push(obj);
@@ -133,6 +154,7 @@ var PARSER_CONFIG = {
 			return rsp;
 		}
 	},
+
 
 	'partially charted': {
 		start: [[1, 3], [1, 6]], // col, row
@@ -257,8 +279,8 @@ var PARSER_CONFIG = {
 			rsp.links = [];
 
 			data.forEach(function(row) {
-				if (row.title && row.introduction) {
-					rsp.title = row.title;
+				if (row.introduction) {
+                  rsp.title = row.title ? row.title : ' ';
 					rsp.desc = row.introduction;
 				} else if (row.link && row['link text']) {
 					rsp.links.push({
@@ -285,6 +307,30 @@ var PARSER_CONFIG = {
 			data.forEach(function(row) {
 				if (row.image) {
 					rsp.imgs.push(row.image);
+				}
+			});
+
+			return rsp;
+		}
+	},
+
+    emotrak: {
+		start: [[1, 2], [1, 5]], // col, row
+		parse: function (data) {
+			var rsp = {};
+			rsp.subsections = [];
+
+			data.forEach(function(row) {
+				if (row.introduction) {
+                  rsp.title = row.title ? row.title : '';
+					rsp.desc = row.introduction;
+				} else if (row.text) {
+					rsp.subsections.push({
+                      title: row.subhead ? row.subhead : '',
+					  desc: row.text,
+                      image: row.image ? row.image : null,
+                      mail: row.mail ? row.mail : null
+					});
 				}
 			});
 
