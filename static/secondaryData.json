@@ -261,7 +261,110 @@
       "desc": "Certain personality traits are related to specific emotions."
     },
     "psychopathology": {
-      "emotions": [],
+      "emotions": [
+        {
+          "name": "Anger",
+          "desc": "A tendency to cause physical or verbal harm in inappropriate contexts. Anger may be out of control, or passive but persistently preoccupying.",
+          "children": [
+            {
+              "name": "Intermittent Explosive Disorder",
+              "desc": "Impulsively aggressive and assaultive behaviors out of proportion to triggers."
+            },
+            {
+              "name": "Oppositional Defiance Disorder",
+              "desc": "A pattern of defiant, disobedient and hostile behavior in children or teens toward parents and people in authority, beyond normal age-appropriate misbehavior."
+            },
+            {
+              "name": "Antisocial Personality Disorder",
+              "desc": "Characterized by a pervasive pattern of disregard for the rights of other people that often manifests as hostility and/or aggression. Deceit and manipulation are also central features."
+            },
+            {
+              "name": "Disruptive Mood Dysregulation Disorder",
+              "desc": "Severe recurrent temper outbursts manifested verbally (e.g., verbal rages) and/or behaviorally (e.g., physical aggression toward people or property) that are grossly out of proportion in intensity or duration to the situation or provocation."
+            }
+          ]
+        },
+        {
+          "name": "Fear",
+          "desc": "Anxiety states involve prolonged fear without knowledge of the source of the threat, and incidents of panic (episodic attacks of severe anxiety).",
+          "children": [
+            {
+              "name": "Social Anxiety Disorder",
+              "desc": "A persistent fear of one or more social or performance situations in which the person is exposed to unfamiliar people or to possible scrutiny by others. The individual fears that he or she will act (or show anxiety symptoms) in a way that will be embarrassing and humiliating."
+            },
+            {
+              "name": "Post-Traumatic Stress Disorder (PTSD)",
+              "desc": "A mental health condition that’s triggered by an often overwhelmingly terrifying event — either experiencing it or witnessing it. Symptoms may include flashbacks, nightmares and severe anxiety, as well as uncontrollable thoughts about the event."
+            },
+            {
+              "name": "Avoidant Personality Disorder",
+              "desc": "Characterized by a pervasive pattern of social inhibition, feelings of inadequacy and a hypersensitivity to negative evaluation. People with this disorder are intensely afraid that others will ridicule them, reject them or criticize them."
+            },
+            {
+              "name": "Generalized Anxiety Disorder",
+              "desc": "An anxiety disorder that is characterized by excessive, uncontrollable and often irrational worry and apprehensive expectation about events or activities."
+            },
+            {
+              "name": "Obsessive-Compulsive Disorder (OCD)",
+              "desc": "An anxiety disorder characterized by intrusive thoughts that produce uneasiness, apprehension, fear or worry (obsessions); repetitive behaviors aimed at reducing the associated anxiety (compulsions); or a combination of both obsessions and compulsions."
+            }
+          ]
+        },
+        {
+          "name": "Disgust",
+          "desc": "The psychopathology of disgust includes feelings that prevent everyday interaction with the world, the self or others. Disgust can be a paralyzing feeling that makes simple interactions (such as eating) extremely painful if not impossible. Disgust and fear are both thought to contribute to various phobias, such as fear of small animals.",
+          "children": [
+            {
+              "name": "Anorexia Nervosa",
+              "desc": "A distorted self-image that may be maintained by various cognitive biases that alter how the affected individual evaluates and thinks about their body, food and eating. People with anorexia nervosa often view themselves as disgusting, overweight or “big” even when they are underweight."
+            },
+            {
+              "name": "Body Dysmorphic Disorder",
+              "desc": "A body-image disorder characterized by persistent and intrusive preoccupations with an imagined or slight defect in one’s appearance or a feeling of disgust with one’s appearance."
+            },
+            {
+              "name": "Bulimia",
+              "desc": "A disorder characterized by repeated binging on large quantities of food followed by induced vomiting; both the binging and purging may be accompanied by feelings of self-disgust."
+            },
+            {
+              "name": "Sexual Aversion Disorder",
+              "desc": "Characterized by disgust, fear, revulsion or lack of desire in consensual relationships involving genital contact."
+            }
+          ]
+        },
+        {
+          "name": "Sadness",
+          "desc": "Depression is a well-known type of psychopathology that is reported to affect over 25% of the population. Depression interferes with daily life and causes pain for both the sufferers and those who care about them. Depression is a common but serious illness.\n",
+          "children": [
+            {
+              "name": "Major Depressive Disorder",
+              "desc": "Also known as clinical depression, major depression or unipolar depression, this is a mental disorder characterized by a pervasive and persistent low mood that is accompanied by low self-esteem and by a loss of interest or pleasure in normally enjoyable activities."
+            },
+            {
+              "name": "Dysthymia",
+              "desc": "Sometimes also called neurotic depression, dysthymic disorder or chronic depression, this is a mood disorder consisting of the same cognitive and physical problems as depression, with less severe but longer-lasting symptoms."
+            },
+            {
+              "name": "Bipolar Disorder",
+              "desc": "Also known as bipolar affective disorder (and originally called manic-depressive illness), this is a mental disorder characterized by periods of elevated mood and periods of depression."
+            }
+          ]
+        },
+        {
+          "name": "Enjoyment",
+          "desc": "Unlike with other emotions, it is hard to imagine enjoyable emotions contributing to challenges in managing our everyday relationships, work and ability to meet our basic needs. However, pathological enjoyment is quite serious; hyper-elevated states of enjoyment can cause delusions in addition to feeling good, which can lead to destructive behaviors.\n",
+          "children": [
+            {
+              "name": "Mania/Manic Episode",
+              "desc": "Mania at its extreme is commonly characterized by frenzied, ungovernable exuberance — essentially elation not grounded in reality. Frequently, confidence and self-esteem are excessively enlarged, and grand, extravagant ideas are expressed; this is called “grandiosity.” Mania is often part of bipolar disorder."
+            },
+            {
+              "name": "Cyclothemia",
+              "desc": "This is characterized by moods that shift noticeably up and down from a person’s baseline. The person may feel on top of the world for a time, followed by a low period when their feeling is somewhat blue. Between these cyclothymic highs and lows, the person may feel stable and fine."
+            }
+          ]
+        }
+      ],
       "title": "Psychopathology",
       "desc": "Each emotion relates to distinct psychopathologies, which describe persistent behaviors that interfere with one’s ability to function."
     },
@@ -602,7 +705,7 @@
     "links": [
       {
         "link": "/#more:emotrak",
-        "desc": "Eve Ekman has developed EmoTrak, an app that trains you in emotional awareness through daily questions, reminders and suggested brief meditations. >"
+        "desc": "Eve Ekman has developed EmoTrak, an app to improve your well being with daily emotional balance training. >"
       },
       {
         "link": "http://greatergood.berkeley.edu/",

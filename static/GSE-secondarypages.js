@@ -228,7 +228,7 @@ var PARSER_CONFIG = {
 				if (row.title && row.introduction) {
 					rsp.title = row.title;
 					rsp.desc = row.introduction;
-				} else if (row['associated diagnoses'] && row['diagnoses description']) {
+				} else if (row['associated diagnoses'] && row['description of diagnoses']) {
 					if (row.name && (!currentName || currentName !== row.name)) {
 						currentName = row.name;
 						obj = {};
@@ -240,7 +240,7 @@ var PARSER_CONFIG = {
 					if (obj) {
 						obj.children.push({
 							name: row['associated diagnoses'],
-							desc: row['diagnoses description']
+							desc: row['description of diagnoses']
 						});
 					}
 				}
