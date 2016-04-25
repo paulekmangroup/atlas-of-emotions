@@ -82,6 +82,14 @@ export default {
 		// map each emotion to a Continent instance
 		continents = _.values(dispatcher.EMOTIONS).map(emotion => new Continent(emotion, continentContainer, continentGeom, continentTransforms));
 
+		let startAgain = d3.select(this.sectionContainer).append('div')
+			.classed('start-again', true);
+		startAgain.append('h4')
+			.text('START AGAIN');
+		startAgain.on('click', event => {
+			dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS, null);
+		});
+
 		let visitAnnex = d3.select(this.sectionContainer).append('div')
 			.classed('visit-annex', true);
 		visitAnnex.append('h4')

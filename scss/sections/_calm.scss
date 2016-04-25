@@ -23,11 +23,12 @@
 		fill: none;
 	}
 
+	.start-again,
 	.visit-annex {
 		position: absolute;
-		bottom: 1em;
 		left: 50%;
 		transform: translateX(-50%);
+		width: 10em;
 
 		border: 1px solid;
 		text-align: center;
@@ -44,6 +45,14 @@
 		p {
 			margin: 0;
 		}
+	}
+
+	.start-again {
+		bottom: 3em;
+	}
+
+	.visit-annex {
+		bottom: 1em;
 	}
 
 	.label {
