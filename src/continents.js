@@ -299,6 +299,8 @@ const continentsSection = {
 
 				// if there is a selected continent, and we're transitioning into States,
 				// animate the continent down into the floor of the States graph.
+				
+				this.closeDelay = sassVars.ui.labels.duration.in * 1000;
 
 				let targetScale = 1.0,
 					spreadDelay = sassVars.continents.spread.delay.in * 1000,
@@ -339,6 +341,8 @@ const continentsSection = {
 				}, spreadDelay + spreadDuration - this.closeDelay);
 
 			} else {
+
+				this.closeDelay = 0;
 
 				// not transitioning a selected continent into states.
 				// disable updates and interaction and resolve close sequence immediately.
