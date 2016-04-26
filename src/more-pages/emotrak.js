@@ -13,7 +13,6 @@ export default {
 
 	init: function (containerNode, data) {
 		this.data = data.emotrak;
-		console.log(data);
 
 		this.sectionContainer = containerNode;
 
@@ -45,7 +44,7 @@ export default {
 
 		this.data.subsections.forEach(section => {
 			if(section.image){
-				subBlocks.appendChild(utils.makeImageBlock(section.title, section.desc, section.image));
+				subBlocks.appendChild(utils.makeImageBlock(section.title, section.desc, section.image, 'jpg'));
 			} else if (section.mail){
 				subBlocks.appendChild(signup);
 			} else {

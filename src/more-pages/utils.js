@@ -22,7 +22,7 @@ export function makeBlock(titleStr, descStr) {
 	return block;
 };
 
-export function makeImageBlock(titleStr, descStr, imageStr) {
+export function makeImageBlock(titleStr, descStr, imageStr, filetype='png') {
 	const block = document.createElement('div');
 	const title = document.createElement('h3');
 	const desc = document.createElement('p');
@@ -32,7 +32,7 @@ export function makeImageBlock(titleStr, descStr, imageStr) {
 	title.classList.add('title');
 	desc.classList.add('desc');
 
-	image.src = './img/' + imageStr + '.png';
+	image.src = './img/' + imageStr + '.' + filetype;
 
 	desc.innerHTML = descStr;
 
