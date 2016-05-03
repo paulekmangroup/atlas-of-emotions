@@ -71,8 +71,10 @@ export default function (...initArgs) {
 		initSectionNavigation();
 		initNavArrows();
 		initMoreInfoDropdown();
+		initPegLogo();
 		initCallout();
 		initModal();
+
 
 		// navigation events
 		dispatcher.addListener(dispatcher.EVENTS.NAVIGATE, onNavigate);
@@ -165,6 +167,18 @@ export default function (...initArgs) {
 		setUpArrow('right');
 
 		updateArrowVisibility();
+	}
+
+	function initPegLogo() {
+		let logoDiv = document.querySelector('#lower-left-logo');
+		logoDiv.addEventListener('click', function(){
+			window.open('http://www.paulekman.com/', '_blank');
+		});
+		let logo = document.createElement('img');
+
+		logo.setAttribute("src", './img/peg.png');
+
+		logoDiv.appendChild(logo);
 	}
 
 	function initMoreInfoDropdown() {
@@ -677,6 +691,7 @@ export default function (...initArgs) {
 	function onResize () {
 
 		if (!renderSmallScreenWarning()) {
+			console.log('currentSection', currentSection);
 
 			// if the intro modal hasn't ever been viewed yet in this browser,
 			// and the screen is big enough to render the site below it,
@@ -694,7 +709,7 @@ export default function (...initArgs) {
 				setTimeout(() => {
 					setScrollbarFractionalOpen(1.0);
 				}, sassVars.ui.scrollbar.introOpenDelay * 1000);
-				
+
 			}
 
 		}
