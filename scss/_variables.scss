@@ -25,7 +25,10 @@ $depth-3: 3;
 $depth-5: 5;
 $depth-10: 10;
 $depth-100: 100;
-$depth-max: 10000;
+// the below are above bootstrap z-indexes:
+$depth-2000: 2000;
+$depth-3000: 3000;
+$depth-4000: 4000;
 
 $gradient-anger: radial-gradient(ellipse at center, rgba(228,135,102,0.2) 0%, rgba(204,28,43,1) 100%);
 $gradient-disgust: radial-gradient(ellipse at center, rgba(0,142,69,0.3) 0%, rgba(0,122,61,0.8) 56%, rgba(0,104,55,1) 100%);

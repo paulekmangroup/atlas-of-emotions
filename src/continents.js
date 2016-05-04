@@ -280,9 +280,8 @@ const continentsSection = {
 		// otherwise, callout display is handled within setEmotion.
 		// this will probably have to change to support deeplinking to a zoomed-in emotion,
 		// we'll figure that out later.
-		if (options && options.firstSection && !localStorage.modalSeen) {
-			// if first section in session, and intro modal has not been viewed,
-			// move continents out of the way of the intro modal
+		if (options && options.introModalIsOpen) {
+			// if intro modal is open, move continents out of the way of the intro modal
 			this.setContinentIntroPositions(true);
 		}
 

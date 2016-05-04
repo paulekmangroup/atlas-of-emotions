@@ -423,7 +423,7 @@ a:active {
 	transition-property: opacity;
 	transition-duration: #{$ui-overlays-duration-out}s;
 	transition-timing-function: ease-in-out;
-	z-index: $depth-10;
+	z-index: $depth-3000;
 
 	&.visible {
 		transition-duration: #{$ui-overlays-duration-in}s;
@@ -461,7 +461,7 @@ a:active {
 	top: 50%;
 	margin-top: -0.5 * $modal-height-cover;
 	padding: 4.5em 6em;
-	z-index: $depth-100;
+	z-index: $depth-4000;
 
 	&.pages {
 		height: $modal-height-pages;

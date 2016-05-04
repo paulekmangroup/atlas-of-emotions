@@ -44,7 +44,7 @@ export default class Continent {
 				y: -0.15
 			},
 			size: 0.22,
-			introSpreadMaxRad: 0.15
+			introSpreadMaxRad: 0.25
 		},
 		{
 			// left-top
@@ -55,7 +55,7 @@ export default class Continent {
 				y: 0.14
 			},
 			size: 0.22,
-			introSpreadMaxRad: 0.15
+			introSpreadMaxRad: 0.25
 		},
 		{
 			// left-bottom
@@ -66,7 +66,7 @@ export default class Continent {
 				y: 0.06
 			},
 			size: 0.22,
-			introSpreadMaxRad: 0.15
+			introSpreadMaxRad: 0.25
 		},
 		{
 			// right
@@ -77,7 +77,7 @@ export default class Continent {
 				y: 0.18
 			},
 			size: 0.22,
-			introSpreadMaxRad: 0.15
+			introSpreadMaxRad: 0.25
 		},
 		{
 			// bottom
@@ -88,7 +88,7 @@ export default class Continent {
 				y: 0.16
 			},
 			size: 0.22,
-			introSpreadMaxRad: 0.15
+			introSpreadMaxRad: 0.25
 		}
 	];
 

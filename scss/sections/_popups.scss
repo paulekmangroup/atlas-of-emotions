@@ -4,7 +4,7 @@ $vert-padding: 18px;
 $horiz-padding: 20px;
 
 .popped {
-	z-index: 9999;
+	z-index: $depth-2000;
 }
 
 [data-popuptarget] {

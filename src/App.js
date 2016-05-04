@@ -409,8 +409,7 @@ export default function (...initArgs) {
 			backgroundSections.forEach(backgroundSection => {
 				backgroundSection.open({
 					sectionName: sectionName,
-					inBackground: true,
-					firstSection: false
+					inBackground: true
 				});
 				backgroundSection.setEmotion(currentEmotion, previousEmotion);
 			});
@@ -418,7 +417,7 @@ export default function (...initArgs) {
 			section.open({
 				sectionName: sectionName,
 				inBackground: false,
-				firstSection: true
+				introModalIsOpen: getIntroModalOpenState()
 			});
 
 			setSectionEmotion(section, previousEmotion, previousMorePage);
@@ -474,8 +473,7 @@ export default function (...initArgs) {
 							// open it in the background
 							let openPromise = backgroundSection.open({
 								sectionName: sectionName,
-								inBackground: true,
-								firstSection: false
+								inBackground: true
 							});
 							backgroundSection.setEmotion(currentEmotion, previousEmotion);
 							return openPromise;
@@ -529,8 +527,7 @@ export default function (...initArgs) {
 					containers[sectionName].removeAttribute('style');
 					section.open({
 						sectionName: sectionName,
-						inBackground: false,
-						firstSection: false
+						inBackground: false
 					});
 
 					setSectionEmotion(section, previousEmotion, previousMorePage);
@@ -692,10 +689,11 @@ export default function (...initArgs) {
 
 		if (!renderSmallScreenWarning()) {
 
-			// if the intro modal hasn't ever been viewed yet in this browser,
+			// if we're on the homepage, or the intro modal
+			// hasn't ever been viewed yet in this browser,
 			// and the screen is big enough to render the site below it,
 			// open the intro modal (and the scrollbar along with it)
-			if (!localStorage.modalSeen) {
+			if (getIntroModalOpenState()) {
 
 				// set a class on body so other sections can react
 				document.body.classList.remove('intro-closing', 'intro-open');
@@ -1136,6 +1134,12 @@ export default function (...initArgs) {
 			document.querySelector('.leftArrow').classList.add("visible");
 			document.querySelector('.rightArrow').classList.add("visible");
 		}
+
+	}
+
+	function getIntroModalOpenState () {
+
+		return !window.location.hash || !localStorage.modalSeen;
 
 	}
 
