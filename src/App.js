@@ -31,7 +31,10 @@ export default function (...initArgs) {
 
 		// if no `wheel` events received in this time,
 		// consider an inertia scroll (swipe) complete.
-		INERTIA_SCROLL_TIMEOUT = 100;
+		INERTIA_SCROLL_TIMEOUT = 100,
+
+		// number of times to show the intro modal
+		MAX_MODAL_VIEWS = 2;
 
 
 	let containers = {},
@@ -59,6 +62,7 @@ export default function (...initArgs) {
 		hasNavigatedThisScroll = false,		// has already navigated during the current inertia/continuous scroll
 		isNavigating = false,				// currently navigating between emotions or sections
 		bypassedWarning = false;			// user has bypassed small screen warning
+
 
 
 	function init (containerNode) {
@@ -327,7 +331,7 @@ export default function (...initArgs) {
 	}
 
 	function markModalAsSeen () {
-		if(!localStorage.modalSeen || localStorage.modalSeen < 2){
+		if(!localStorage.modalSeen || localStorage.modalSeen < MAX_MODAL_VIEWS){
 			let count = !localStorage.modalSeen ? 0 : localStorage.modalSeen;
 			localStorage.setItem("modalSeen", +count + 1);
 		}
@@ -697,7 +701,7 @@ export default function (...initArgs) {
 			// if the intro modal hasn't ever been viewed yet in this browser,
 			// and the screen is big enough to render the site below it,
 			// open the intro modal (and the scrollbar along with it)
-			if (!localStorage.modalSeen || localStorage.modalSeen < 2 || hash == '') {
+			if (!localStorage.modalSeen || localStorage.modalSeen < MAX_MODAL_VIEWS || hash == '') {
 
 				// set a class on body so other sections can react
 				document.body.classList.remove('intro-closing', 'intro-open');
