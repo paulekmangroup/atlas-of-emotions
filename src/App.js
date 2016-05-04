@@ -691,7 +691,6 @@ export default function (...initArgs) {
 	function onResize () {
 
 		if (!renderSmallScreenWarning()) {
-			console.log('currentSection', currentSection);
 
 			// if the intro modal hasn't ever been viewed yet in this browser,
 			// and the screen is big enough to render the site below it,
