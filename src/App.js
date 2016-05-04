@@ -327,8 +327,9 @@ export default function (...initArgs) {
 	}
 
 	function markModalAsSeen () {
-		if(!localStorage.modalSeen){
-			localStorage.setItem("modalSeen", true);
+		if(!localStorage.modalSeen || localStorage.modalSeen < 2){
+			let count = !localStorage.modalSeen ? 0 : localStorage.modalSeen;
+			localStorage.setItem("modalSeen", +count + 1);
 		}
 	}
 
@@ -691,12 +692,12 @@ export default function (...initArgs) {
 	function onResize () {
 
 		if (!renderSmallScreenWarning()) {
-			console.log('currentSection', currentSection);
+			let hash = document.location.hash.replace(/^#/, '');
 
 			// if the intro modal hasn't ever been viewed yet in this browser,
 			// and the screen is big enough to render the site below it,
 			// open the intro modal (and the scrollbar along with it)
-			if (!localStorage.modalSeen) {
+			if (!localStorage.modalSeen || localStorage.modalSeen < 2 || hash == '') {
 
 				// set a class on body so other sections can react
 				document.body.classList.remove('intro-closing', 'intro-open');
