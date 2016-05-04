@@ -261,7 +261,7 @@ const continentsSection = {
 			.attr('data-popuptarget', d => `continents:${d.id}`)
 			.classed('default-interactive-helper', d => d.name.toLowerCase() === this.defaultEmotionHelper.toLowerCase())
 			.style('left', d => Math.round(centerX + d.x + d.label.x) + 'px')
-			.style('top', d => Math.round(centerY + d.y + d.label.y) + 'px');
+			.each(positionLabelsVertically);
 
 		labelsEnter.append('a')
 			.attr('href', d => `#continents:${d.id}`)
@@ -299,7 +299,7 @@ const continentsSection = {
 
 				// if there is a selected continent, and we're transitioning into States,
 				// animate the continent down into the floor of the States graph.
-
+				
 				this.closeDelay = sassVars.ui.labels.duration.in * 1000;
 
 				let targetScale = 1.0,
@@ -386,8 +386,7 @@ const continentsSection = {
 		// we're not adding anything, so skip right to update
 		labels
 			.style('left', d => Math.round(centerX + d.x + d.label.x) + 'px')
-			.style('top', d => Math.round(centerY + d.y + d.label.y) + 'px');
-
+			.each(positionLabelsVertically);
 	},
 
 	setActive: function (val) {
