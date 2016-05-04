@@ -299,7 +299,7 @@ const continentsSection = {
 
 				// if there is a selected continent, and we're transitioning into States,
 				// animate the continent down into the floor of the States graph.
-				
+
 				this.closeDelay = sassVars.ui.labels.duration.in * 1000;
 
 				let targetScale = 1.0,
@@ -820,12 +820,12 @@ function positionLabelsVertically (d, i) {
 	const bottomness = (d.y + d.label.y + centerY) / centerY;
 	if (bottomness > 1.5) {
 		// bottom align labels toward bottom of screen, so popups open upwards
-		delete this.style.top;
+		this.style.top = null;
 		this.style.bottom = -Math.round(centerY + d.y + d.label.y) + 'px';
 	} else {
 		// open other popups normally
 		this.style.top = Math.round(centerY + d.y + d.label.y) + 'px';
-		delete this.style.bottom;
+		this.style.bottom = null;
 	}
 
 }
