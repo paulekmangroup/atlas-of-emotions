@@ -31,7 +31,7 @@ export default {
 		const subRow = document.createElement('div');
 		const signup = document.createElement('div');
 
-		signup.innerHTML = '<div id="mc_embed_signup"><form action="//eveekman.us12.list-manage.com/subscribe/post?u=a8f41488aed929208e96dcf44&amp;id=76c8861d7d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate><div id="mc_embed_signup_scroll"><label for="mce-EMAIL">Subscribe for EmoTrak Release Updates</label><input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required><div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_a8f41488aed929208e96dcf44_76c8861d7d" tabindex="-1" value=""></div><div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div></div></form></div>';
+		signup.innerHTML = '<div id="mc_embed_signup"><form action="//stamen.us13.list-manage.com/subscribe/post?u=3bae09430f39842a9b396d740&amp;id=526dc21981" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate><div id="mc_embed_signup_scroll"><label for="mce-EMAIL">Subscribe for EmoTrak Release Updates</label><input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required><div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3bae09430f39842a9b396d740_526dc21981" tabindex="-1" value=""></div><div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div></div></form></div>';
 
 		table.classList.add('tb');
 		introRow.classList.add('tb-row');
