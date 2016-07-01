@@ -1300,6 +1300,16 @@ export default function (...initArgs) {
 		}
 
 		setSection(section, previousEmotion, previousMorePage);
+
+		// Track hash changes in Google Analytics as virtual pageviews
+		// https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications#tracking_virtual_pageviews
+		window.ga('set', 'page', document.location.pathname + document.location.search + document.location.hash);
+		window.ga('send', 'pageview');
+		/*
+		window.ga('send', 'pageview', {
+			'page': location.pathname + location.search  + location.hash
+		});
+		*/
 	}
 
 	function parseHash (hash) {
