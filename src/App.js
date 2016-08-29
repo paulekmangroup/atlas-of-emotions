@@ -1161,6 +1161,7 @@ export default function (...initArgs) {
 		}
 
 		title = title.replace(/LHAMO/i, emotion);
+		body = body.replace(/LHAMO/i, emotion.charAt(0).toUpperCase() + emotion.slice(1));
 
 		callout.removeAttribute('class');
 		callout.classList.add('visible');
