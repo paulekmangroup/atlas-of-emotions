@@ -287,6 +287,7 @@ export default {
 				'amusement': -20,
 				'rejoicing': -20,
 				'schadenfreude': 0,
+				'peace': -10,
 				'relief': 0,
 				'pride': 0,
 				'fiero': 0,
@@ -344,7 +345,7 @@ export default {
 				.attr('data-popuptarget', (d,i) => `states:${statesData[i].name}`)
 				.html((d, i) => '<h3>' + statesData[i].name.toUpperCase() + '</h3>')
 				.style({
-					left: function(d,i){return positionsLookup[statesData[i].name].left + 'px';},	// not sure why this 20px magic number is necessary...?
+					left: function(d,i){return positionsLookup[statesData[i].name].left + 'px';},
 					top: function(d,i){return positionsLookup[statesData[i].name].top + 'px';},
 				});
 
@@ -356,7 +357,7 @@ export default {
 		labels
 			.style({
 				top: function(d,i){return positionsLookup[statesData[i].name].top + 'px';},
-				left: function(d,i){return positionsLookup[statesData[i].name].left + 'px';},	// not sure why this 20px magic number is necessary...?
+				left: function(d,i){return positionsLookup[statesData[i].name].left + 'px';},
 				//top: d => (Math.round(yOffsets[emotion](stateSection.yScale(d[1].y), d)) + 'px')
 			});
 		if(!this.isBackgrounded){
@@ -970,8 +971,9 @@ export default {
 					'amusement': [-1, -.1],
 					'rejoicing': [-2.3, -.5],
 					'schadenfreude': [-1, -.5],
-					'relief': [-.5, -.5],
-					'pride': [-.45, -.6],
+					'peace': [-.25, -.25],
+					'relief': [-.75, -.5],
+					'pride': [-.45, -.5],
 					'fiero': [0, -.5],
 					'naches': [0.45, -.4],
 					'wonder': [.4, -.6],

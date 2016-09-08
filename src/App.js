@@ -1214,7 +1214,12 @@ export default function (...initArgs) {
 			return;
 		}
 
+		let cappedEmotion = emotion ?
+			emotion.charAt(0).toUpperCase() + emotion.slice(1) :
+			'The Emotion';
+
 		title = title.replace(/LHAMO/i, emotion);
+		body = body.replace(/LHAMO/i, cappedEmotion);
 
 		callout.removeAttribute('class');
 		callout.classList.add('visible');
