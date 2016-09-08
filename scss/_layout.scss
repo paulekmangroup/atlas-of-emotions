@@ -105,6 +105,10 @@ a:active {
 	}
 }
 
+#app-container {
+	position: relative;
+}
+
 #header .dropdown,
 #more-info .dropup {
 	display: inline-block;
@@ -688,5 +692,24 @@ a:active {
 			top: 0.4em;
 			background-color: $text-overlay-color;
 		}
+	}
+}
+
+#mobile-caption {
+	$horiz-margin: 2rem;
+	position: absolute;
+	bottom: 0;
+
+	height: 15rem;
+	width: calc(100% - #{2 * $horiz-margin});
+	margin: 0 $horiz-margin;
+	text-align: center;
+
+	.headline {
+		text-transform: uppercase;
+	}
+
+	.body {
+		padding: 0 2rem;
 	}
 }

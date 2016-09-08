@@ -49,6 +49,7 @@ export default function (...initArgs) {
 
 		screenIsSmall = false,
 		nonMobileElements = [],
+		mobileElements = [],
 
 		scrollbarSegments = {},
 		scrollbarCloseTimeout = null,
@@ -77,6 +78,7 @@ export default function (...initArgs) {
 		initMoreInfoDropdown();
 		initPegLogo();
 		initCallout();
+		initMobileCaption();
 		initModal();
 
 		// mobile setup
@@ -86,6 +88,8 @@ export default function (...initArgs) {
 		nonMobileElements.push(document.querySelector('#more-info'));
 		nonMobileElements.push(document.querySelector('#lower-left-logo'));
 		nonMobileElements = nonMobileElements.concat([...document.querySelectorAll('.navArrow')]);
+
+		mobileElements.push(document.querySelector('#mobile-caption'));
 
 		// navigation events
 		dispatcher.addListener(dispatcher.EVENTS.NAVIGATE, onNavigate);
@@ -317,6 +321,19 @@ export default function (...initArgs) {
 		callout.appendChild(p);
 
 		mainEl.appendChild(callout);
+
+	}
+
+	function initMobileCaption () {
+
+		let caption = document.querySelector('#mobile-caption');
+
+		let h3 = document.createElement('h3');
+		h3.classList.add('headline');
+		caption.appendChild(h3);
+		let p = document.createElement('p');
+		p.classList.add('body');
+		caption.appendChild(p);
 
 	}
 
@@ -1159,6 +1176,12 @@ export default function (...initArgs) {
 	}
 
 	function onPopupChange (section, emotion, desc, secondaryData) {
+
+		if (screenIsSmall) {
+			setMobileCaption(emotion, desc);
+			return;
+		}
+
 		if (!section){
 			popupManager.manage();
 		} else {
@@ -1171,7 +1194,10 @@ export default function (...initArgs) {
 
 	function onCalloutChange (emotion, title, body) {
 
-		if (screenIsSmall) return;
+		if (screenIsSmall) {
+			setMobileCaption(title ? title.replace(/LHAMO/i, emotion) : null, body);
+			return;
+		}
 
 		if (!title) {
 			callout.classList.remove('visible');
@@ -1184,7 +1210,7 @@ export default function (...initArgs) {
 		callout.classList.add('visible');
 
 		// remove class names on link if link exists, so it's possible to test similarity below
-		if(document.getElementById("annexLink")){
+		if (document.getElementById("annexLink")) {
 			document.getElementById("annexLink").removeAttribute('class');
 		}
 
@@ -1197,10 +1223,17 @@ export default function (...initArgs) {
 		if (emotion) {
 			callout.classList.add(emotion);
 			// update class names on link if link exists
-			if(document.getElementById("annexLink")){
+			if (document.getElementById("annexLink")) {
 				document.getElementById("annexLink").className = emotion;
 			};
 		}
+	}
+
+	function setMobileCaption (title, body) {
+
+		document.querySelector('#mobile-caption .headline').innerHTML = title;
+		document.querySelector('#mobile-caption .body').innerHTML = body;
+
 	}
 
 	function onEmotionStateChange (state, selected) {
@@ -1353,6 +1386,7 @@ export default function (...initArgs) {
 			if (IS_TESTING_MOBILE) {
 
 				nonMobileElements.forEach(el => el.style.removeProperty('display'));
+				mobileElements.forEach(el => el.style.display = 'none');
 				document.querySelector('body').classList.remove('small-screen');
 
 			} else {
@@ -1363,6 +1397,7 @@ export default function (...initArgs) {
 
 			}
 
+			// allow resetting this flag regardless of targeting mobile or desktop
 			screenIsSmall = false;
 
 		} else {
@@ -1370,7 +1405,11 @@ export default function (...initArgs) {
 			if (IS_TESTING_MOBILE) {
 
 				nonMobileElements.forEach(el => el.style.display = 'none');
+				mobileElements.forEach(el => el.style.removeProperty('display'));
 				document.querySelector('body').classList.add('small-screen');
+
+				// only ever set this flag when targeting mobile
+				screenIsSmall = true;
 
 			} else {
 
@@ -1398,8 +1437,6 @@ export default function (...initArgs) {
 				});
 
 			}
-
-			screenIsSmall = true;
 
 		}
 

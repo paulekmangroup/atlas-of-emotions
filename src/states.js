@@ -133,7 +133,7 @@ export default {
 			.orient('bottom')
 			.ticks(10)
 			.tickFormat(d => '')
-			.tickSize(10);
+			.tickSize(this.screenIsSmall ? 5 : 10);
 
 		let labelsXScale = d3.scale.ordinal()
 			.domain(['LEAST INTENSE', 'MOST INTENSE'])
@@ -699,7 +699,6 @@ export default {
 
 				if (this.screenIsSmall) {
 
-					console.log(">>>>> states.setActive for screenIsSmall");
 					this.graphContainers[this.currentEmotion]
 						.on('touchstart', this.onContainerTouchStart);
 
@@ -1550,7 +1549,7 @@ export default {
 				this.graphContainers[this.currentEmotion].selectAll('path.area')
 				.each(function (d, i) {
 					if (this === touchedShape) {
-						_states.onStateMouseOver(d, i);
+						_states.onStateClick(d, i);
 					}
 				});
 			}
