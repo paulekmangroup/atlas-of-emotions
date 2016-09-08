@@ -89,8 +89,7 @@
 		.small-screen & {
 			width: $states-graph-width-small;
 			height: 50%;
-			top: $states-containers-top-small;
-			bottom: auto;
+			bottom: $states-containers-bottom-small;
 			margin-left: -$states-graph-width-small/2;
 			min-height: 200px;
 		}

@@ -58,7 +58,7 @@
 		},
 		"containers": {
 			"bottom": "10%",
-			"top-small": "5%"
+			"bottom-small": "30rem"
 		},
 		"highlighted": {
 			"in": 0,
