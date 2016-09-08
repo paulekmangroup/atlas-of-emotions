@@ -86,6 +86,14 @@
 		width: $states-graph-width;
 		height: 70%;
 
+		.small-screen & {
+			width: $states-graph-width-small;
+			height: 50%;
+			bottom: $states-containers-bottom-small;
+			margin-left: -$states-graph-width-small/2;
+			min-height: 200px;
+		}
+
 		.axis {
 			line,
 			path {

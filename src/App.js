@@ -16,6 +16,7 @@ export default function (...initArgs) {
 
 	const MIN_ALLOWED_WIDTH = 950,
 		MIN_ALLOWED_HEIGHT = 600,
+		IS_TESTING_MOBILE = true,
 
 		NAVIGATION_DEFAULTS = {
 			section: dispatcher.SECTIONS.CONTINENTS,
@@ -46,6 +47,9 @@ export default function (...initArgs) {
 			emotion: null
 		},
 
+		screenIsSmall = false,
+		nonMobileElements = [],
+
 		scrollbarSegments = {},
 		scrollbarCloseTimeout = null,
 		highlightedScrollbarSection = null,
@@ -63,7 +67,7 @@ export default function (...initArgs) {
 
 	function init (containerNode) {
 
-		renderSmallScreenWarning();
+		adjustForScreenSize();
 
 		initContainers();
 		initSections();
@@ -75,6 +79,13 @@ export default function (...initArgs) {
 		initCallout();
 		initModal();
 
+		// mobile setup
+		nonMobileElements.push(document.querySelector('#header'));
+		nonMobileElements.push(document.querySelector('#scrollbar'));
+		nonMobileElements.push(document.querySelector('#callout'));
+		nonMobileElements.push(document.querySelector('#more-info'));
+		nonMobileElements.push(document.querySelector('#lower-left-logo'));
+		nonMobileElements = nonMobileElements.concat([...document.querySelectorAll('.navArrow')]);
 
 		// navigation events
 		dispatcher.addListener(dispatcher.EVENTS.NAVIGATE, onNavigate);
@@ -584,7 +595,7 @@ export default function (...initArgs) {
 		let currentDisplay = containers[sectionName].style.display;
 		containers[sectionName].removeAttribute('style');
 
-		section.init(containers[sectionName]);
+		section.init(containers[sectionName], screenIsSmall);
 
 		// set display back to where it was
 		if (currentDisplay) {
@@ -687,7 +698,9 @@ export default function (...initArgs) {
 	 */
 	function onResize () {
 
-		if (!renderSmallScreenWarning()) {
+		adjustForScreenSize();
+
+		if (!screenIsSmall) {
 
 			// if we're on the homepage, or the intro modal
 			// hasn't ever been viewed yet in this browser,
@@ -734,7 +747,7 @@ export default function (...initArgs) {
 					sectionContainer.style.display = 'block';
 				}
 
-				section.onResize();
+				section.onResize(screenIsSmall);
 
 				if (containerIsHidden) {
 					sectionContainer.style.display = 'none';
@@ -905,6 +918,8 @@ export default function (...initArgs) {
 	}
 
 	function setScrollbarOpen (val) {
+
+		if (screenIsSmall) return;
 
 		if (val && !scrollbarIsOpen) {
 			setScrollbarFractionalOpen(1.0, 0.15);
@@ -1155,6 +1170,9 @@ export default function (...initArgs) {
 	}
 
 	function onCalloutChange (emotion, title, body) {
+
+		if (screenIsSmall) return;
+
 		if (!title) {
 			callout.classList.remove('visible');
 			return;
@@ -1326,41 +1344,66 @@ export default function (...initArgs) {
 	/**
 	 * If viewport is below minimum screen size,
 	 * render small screen warning and return true.
-	 * TODO (yeah right): pull in this text from elsewhere instead of hardcoding.
+	 * TODO: pull in this text from elsewhere instead of hardcoding.
 	 */
-	function renderSmallScreenWarning () {
+	function adjustForScreenSize () {
 
 		if (bypassedWarning || (window.innerWidth >= MIN_ALLOWED_WIDTH && window.innerHeight >= MIN_ALLOWED_HEIGHT)) {
-			document.querySelector('body').classList.remove('small-screen-warning');
-			document.querySelector('#warning').innerHTML = '';
-			document.querySelector('#app-container').classList.remove("hidden");
-			return false;
+
+			if (IS_TESTING_MOBILE) {
+
+				nonMobileElements.forEach(el => el.style.removeProperty('display'));
+				document.querySelector('body').classList.remove('small-screen');
+
+			} else {
+
+				document.querySelector('body').classList.remove('small-screen-warning');
+				document.querySelector('#warning').innerHTML = '';
+				document.querySelector('#app-container').classList.remove("hidden");
+
+			}
+
+			screenIsSmall = false;
+
+		} else {
+
+			if (IS_TESTING_MOBILE) {
+
+				nonMobileElements.forEach(el => el.style.display = 'none');
+				document.querySelector('body').classList.add('small-screen');
+
+			} else {
+
+				document.querySelector('body').classList.add('small-screen-warning');
+
+				let warningDiv = document.createElement('div');
+				warningDiv.classList.add('warning-container');
+
+				let warningHeader = document.createElement('h3');
+				warningHeader.innerHTML = 'ATLAS OF EMOTIONS';
+				warningDiv.appendChild(warningHeader);
+
+				let warningBody = document.createElement('p');
+				warningBody.innerHTML = 'For the best experience, please enlarge your browser, switch to landscape orientation, or view on a larger device. Or, <a href="#" class="bypass-warning">click here</a> to proceed anyway.';
+				warningDiv.appendChild(warningBody);
+
+				// TODO: how to not blow away content for bots?
+				document.querySelector('#warning').innerHTML = '';
+				document.querySelector('#warning').appendChild(warningDiv);
+				document.querySelector('#app-container').classList.add("hidden");
+
+				document.querySelector('.bypass-warning').addEventListener('click', event => {
+					bypassedWarning = true;
+					onResize();
+				});
+
+			}
+
+			screenIsSmall = true;
+
 		}
 
-		document.querySelector('body').classList.add('small-screen-warning');
-
-		let warningDiv = document.createElement('div');
-		warningDiv.classList.add('warning-container');
-
-		let warningHeader = document.createElement('h3');
-		warningHeader.innerHTML = 'ATLAS OF EMOTIONS';
-		warningDiv.appendChild(warningHeader);
-
-		let warningBody = document.createElement('p');
-		warningBody.innerHTML = 'For the best experience, please enlarge your browser, switch to landscape orientation, or view on a larger device. Or, <a href="#" class="bypass-warning">click here</a> to proceed anyway.';
-		warningDiv.appendChild(warningBody);
-
-		// TODO: how to not blow away content for bots?
-		document.querySelector('#warning').innerHTML = '';
-		document.querySelector('#warning').appendChild(warningDiv);
-		document.querySelector('#app-container').classList.add("hidden");
-
-		document.querySelector('.bypass-warning').addEventListener('click', event => {
-			bypassedWarning = true;
-			onResize();
-		});
-
-		return true;
+		return screenIsSmall;
 
 	}
 

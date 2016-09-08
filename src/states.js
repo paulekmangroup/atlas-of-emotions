@@ -32,13 +32,16 @@ export default {
 	emotionStates: null,
 	currentEmotion: null,
 	isBackgrounded: false,
+	screenIsSmall: false,
 	selectedState: null,
 
 	mouseOutTimeout: null,
 
-	init: function (containerNode) {
+	init: function (containerNode, screenIsSmall) {
 
 		this.sectionContainer = containerNode;
+
+		this.screenIsSmall = screenIsSmall;
 
 		this.applyTransitions = this.applyTransitions.bind(this);
 
@@ -161,14 +164,16 @@ export default {
 					.attr('transform', 'translate(0,' + innerHeight + ')')
 					.call(xAxis);
 
-				graph.append('g')
-					.attr('class', 'x axis labels')
-					.attr('transform', 'translate(0,' + innerHeight + ')')
-					.call(xAxisLabels)
-				// align labels
-				.selectAll('.tick text')
-					.attr('text-anchor', (d, i) => i ? 'end' : 'start')
-					.attr('style', null);
+				if (!this.screenIsSmall) {
+					graph.append('g')
+						.attr('class', 'x axis labels')
+						.attr('transform', 'translate(0,' + innerHeight + ')')
+						.call(xAxisLabels)
+					// align labels
+					.selectAll('.tick text')
+						.attr('text-anchor', (d, i) => i ? 'end' : 'start')
+						.attr('style', null);
+				}
 
 				this.graphContainers[emotion] = d3.select(graphContainer);
 
@@ -202,14 +207,16 @@ export default {
 					.attr('transform', 'translate(0,' + innerHeight + ')')
 					.call(xAxis);
 
-				graph.select('g.x.axis.labels')
-					.html('')
-					.attr('transform', 'translate(0,' + innerHeight + ')')
-					.call(xAxisLabels)
-				// align labels
-				.selectAll('.tick text')
-					.attr('text-anchor', (d, i) => i ? 'end' : 'start')
-					.attr('style', null);
+				if (!this.screenIsSmall) {
+					graph.select('g.x.axis.labels')
+						.html('')
+						.attr('transform', 'translate(0,' + innerHeight + ')')
+						.call(xAxisLabels)
+					// align labels
+					.selectAll('.tick text')
+						.attr('text-anchor', (d, i) => i ? 'end' : 'start')
+						.attr('style', null);
+				}
 
 			});
 
@@ -227,6 +234,11 @@ export default {
 			statesData = this.emotionStates[emotion].data,
 			labels = this.labelContainers[emotion].selectAll('div')
 				.data(ranges);
+
+		if (this.screenIsSmall) {
+			labels.style('display', 'none');
+			return;
+		}
 
 		// TODO: copying anger as placeholder;
 		// implement for disgust, enjoyment, fear as necessary
@@ -362,7 +374,7 @@ export default {
 
 	},
 
-	setEmotion: function (emotion) {
+	setEmotion: function (emotion, previousEmotion) {
 
 		return new Promise((resolve, reject) => {
 
@@ -636,7 +648,9 @@ export default {
 
 	},
 
-	onResize: function () {
+	onResize: function (screenIsSmall) {
+
+		this.screenIsSmall = screenIsSmall;
 
 		// recalculate containers, scales, axes
 		this.setUpGraphs(this.sectionContainer);
@@ -679,15 +693,22 @@ export default {
 
 			// add new handlers if active
 			if (val) {
-				this.graphContainers[this.currentEmotion].selectAll('path.area')
-					.on('mouseover', this.onStateMouseOver)
-					.on('mouseout', this.onStateMouseOut)
-					.on('click', this.onStateClick, true);
 
-				this.labelContainers[this.currentEmotion].selectAll('div').select('h3')
-					.on('mouseover', this.onStateMouseOver)
-					.on('mouseout', this.onStateMouseOut)
-					.on('click', this.onStateClick, true);
+				if (this.screenIsSmall) {
+
+					console.log(">>>>> states.setActive for screenIsSmall");
+
+				} else {
+					this.graphContainers[this.currentEmotion].selectAll('path.area')
+						.on('mouseover', this.onStateMouseOver)
+						.on('mouseout', this.onStateMouseOut)
+						.on('click', this.onStateClick, true);
+
+					this.labelContainers[this.currentEmotion].selectAll('div').select('h3')
+						.on('mouseover', this.onStateMouseOver)
+						.on('mouseout', this.onStateMouseOut)
+						.on('click', this.onStateClick, true);
+				}
 			}
 
 		}
