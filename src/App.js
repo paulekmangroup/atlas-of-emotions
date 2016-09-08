@@ -1204,12 +1204,8 @@ export default function (...initArgs) {
 
 	function onCalloutChange (emotion, title, body) {
 
-		if (screenIsSmall) {
-			setMobileCaption(title ? title.replace(/LHAMO/i, emotion) : null, body);
-			return;
-		}
-
-		if (!title) {
+		// on non-mobile, if no title passed just hide callout and bail
+		if (!screenIsSmall && !title) {
 			callout.classList.remove('visible');
 			return;
 		}
@@ -1220,6 +1216,11 @@ export default function (...initArgs) {
 
 		title = title.replace(/LHAMO/i, emotion);
 		body = body.replace(/LHAMO/i, cappedEmotion);
+
+		if (screenIsSmall) {
+			setMobileCaption(title, body);
+			return;
+		}
 
 		callout.removeAttribute('class');
 		callout.classList.add('visible');
