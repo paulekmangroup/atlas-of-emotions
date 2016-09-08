@@ -705,6 +705,9 @@ a:active {
 	margin: 0 $horiz-margin;
 	text-align: center;
 
+	pointer-events: none;
+	user-select: none;
+
 	.headline {
 		text-transform: uppercase;
 	}
