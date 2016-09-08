@@ -1633,10 +1633,6 @@ export default {
 	// if both states and this.highlightedState are null, this sets state
 	displayHighlightedStates: function (states) {
 
-		if (!states) {
-			console.log(">>>>> clear!");
-		}
-
 		// essentially clear state going into triggers
 		if (!states && !this.highlightedState) {
 			this.selectedState = null;

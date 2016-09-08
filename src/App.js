@@ -89,6 +89,7 @@ export default function (...initArgs) {
 		nonMobileElements.push(document.querySelector('#lower-left-logo'));
 		nonMobileElements = nonMobileElements.concat([...document.querySelectorAll('.navArrow')]);
 
+		mobileElements.push(document.querySelector('#mobile-header'));
 		mobileElements.push(document.querySelector('#mobile-caption'));
 
 		// navigation events
@@ -154,6 +155,14 @@ export default function (...initArgs) {
 		});
 
 		dropdown.querySelector('.dropdown-toggle').addEventListener('click', onDropdownClick);
+
+		let mobileHeader = document.querySelector('#mobile-header');
+		mobileHeader.style.removeProperty('display');
+
+		// TODO: implement title and nav here or elsewhere.
+		let navButton = document.createElement('div');
+		navButton.classList.add('nav-button');
+		mobileHeader.appendChild(navButton);
 
 	}
 
@@ -327,6 +336,7 @@ export default function (...initArgs) {
 	function initMobileCaption () {
 
 		let caption = document.querySelector('#mobile-caption');
+		caption.style.removeProperty('display');
 
 		let h3 = document.createElement('h3');
 		h3.classList.add('headline');
@@ -742,7 +752,7 @@ export default function (...initArgs) {
 		}
 
 		// size main container to viewport
-		let headerHeight = 55;	// from _variables.scss
+		let headerHeight = screenIsSmall ? sassVars.ui.header['height-small'] : sassVars.ui.header.height;
 		document.getElementById('main').style.height = (window.innerHeight - headerHeight) + 'px';
 
 		// update scrollbar values

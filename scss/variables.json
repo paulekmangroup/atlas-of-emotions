@@ -58,7 +58,7 @@
 		},
 		"containers": {
 			"bottom": "10%",
-			"top-small": "10%"
+			"top-small": "5%"
 		},
 		"highlighted": {
 			"in": 0,
@@ -101,6 +101,10 @@
 		}
 	},
 	"ui": {
+		"header": {
+			"height": 55,
+			"height-small": 44
+		},
 		"scrollbar": {
 			"introOpenDelay": 1.5,
 			"closeDelay": 0.2
