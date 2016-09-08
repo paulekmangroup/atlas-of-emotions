@@ -56,6 +56,9 @@ export default {
 		this.onStateMouseOver = this.onStateMouseOver.bind(this);
 		this.onStateMouseOut = this.onStateMouseOut.bind(this);
 		this.onStateClick = this.onStateClick.bind(this);
+		this.onContainerTouchStart = this.onContainerTouchStart.bind(this);
+		this.onContainerTouchMove = this.onContainerTouchMove.bind(this);
+		this.onContainerTouchEnd = this.onContainerTouchEnd.bind(this);
 		this.onBackgroundClick = this.onBackgroundClick.bind(this);
 
 		// dispatcher.addListener(dispatcher.EVENTS.POPUP_CLOSE_BUTTON_CLICKED, this.onPopupCloseButtonClicked.bind(this));
@@ -697,6 +700,8 @@ export default {
 				if (this.screenIsSmall) {
 
 					console.log(">>>>> states.setActive for screenIsSmall");
+					this.graphContainers[this.currentEmotion]
+						.on('touchstart', this.onContainerTouchStart);
 
 				} else {
 					this.graphContainers[this.currentEmotion].selectAll('path.area')
@@ -1518,7 +1523,63 @@ export default {
 
 	},
 
+	onContainerTouchStart: function () {
+
+		this.touchedShape = null;
+		this.graphContainers[this.currentEmotion]
+			.on('touchmove', this.onContainerTouchMove)
+			.on('touchend', this.onContainerTouchEnd)
+			.on('touchcancel', this.onContainerTouchEnd);
+
+		this.onContainerTouchMove();
+
+	},
+
+	onContainerTouchMove: function () {
+
+		let { event } = d3;
+		if (!event) return;
+
+		let touchedShape = document.elementFromPoint(event.touches[0].clientX, event.touches[0].clientY),
+			_states = this;
+
+		if (touchedShape.classList.contains('area')) {
+			if (touchedShape !== this.touchedShape) {
+				// moving into a shape
+				this.touchedShape = touchedShape;
+				this.graphContainers[this.currentEmotion].selectAll('path.area')
+				.each(function (d, i) {
+					if (this === touchedShape) {
+						_states.onStateMouseOver(d, i);
+					}
+				});
+			}
+		} else if (this.touchedShape) {
+			// moving out of a shape
+			this.touchedShape = null;
+			this.onStateMouseOut();
+		}
+
+		// if a shape was just touched,
+		// kill the event before it can trigger onBackgroundClick
+		if (this.touchedShape) {
+			d3.event.stopImmediatePropagation();
+			d3.event.preventDefault();
+		}
+
+	},
+
+	onContainerTouchEnd: function (event) {
+
+		this.graphContainers[this.currentEmotion]
+			.on('touchmove', null)
+			.on('touchend', null)
+			.on('touchcancel', null);
+
+	},
+
 	onBackgroundClick: function () {
+
 		this.selectedState = null;
 		this.setHighlightedState(null);
 		// check if on states or not
@@ -1536,6 +1597,7 @@ export default {
 	},
 
 	setBackgroundedState: function (state) {
+
 		this.backgroundedState = state;
 		this.displayBackgroundedStates(state);
 		this.setHighlightedState(state);
@@ -1571,6 +1633,11 @@ export default {
 
 	// if both states and this.highlightedState are null, this sets state
 	displayHighlightedStates: function (states) {
+
+		if (!states) {
+			console.log(">>>>> clear!");
+		}
+
 		// essentially clear state going into triggers
 		if (!states && !this.highlightedState) {
 			this.selectedState = null;
