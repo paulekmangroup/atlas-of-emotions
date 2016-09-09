@@ -57,8 +57,7 @@
 			}
 		},
 		"containers": {
-			"bottom": "10%",
-			"bottom-small": "30rem"
+			"bottom": "10%"
 		},
 		"highlighted": {
 			"in": 0,
@@ -104,6 +103,12 @@
 		"header": {
 			"height": 55,
 			"height-small": 44
+		},
+		"mobile-footer": {
+			"height": 44
+		},
+		"mobile-caption": {
+			"height": "15rem"
 		},
 		"scrollbar": {
 			"introOpenDelay": 1.5,

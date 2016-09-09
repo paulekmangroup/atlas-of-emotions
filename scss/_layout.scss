@@ -715,9 +715,9 @@ a:active {
 #mobile-caption {
 	$horiz-margin: 2rem;
 	position: absolute;
-	bottom: #{$ui-header-height-small}px;
+	bottom: #{$ui-mobile-footer-height}px;
 
-	height: 15rem;
+	height: $ui-mobile-caption-height;
 	width: calc(100% - #{2 * $horiz-margin});
 	margin: 0 $horiz-margin 1rem $horiz-margin;
 	text-align: center;

@@ -1214,8 +1214,8 @@ export default function (...initArgs) {
 			emotion.charAt(0).toUpperCase() + emotion.slice(1) :
 			'The Emotion';
 
-		title = title.replace(/LHAMO/i, emotion);
-		body = body.replace(/LHAMO/i, cappedEmotion);
+		title = title ? title.replace(/LHAMO/i, emotion) : null;
+		body = body ? body.replace(/LHAMO/i, cappedEmotion) : null;
 
 		if (screenIsSmall) {
 			setMobileCaption(title, body);
@@ -1247,8 +1247,8 @@ export default function (...initArgs) {
 
 	function setMobileCaption (title, body) {
 
-		document.querySelector('#mobile-caption .headline').innerHTML = title;
-		document.querySelector('#mobile-caption .body').innerHTML = body;
+		document.querySelector('#mobile-caption .headline').innerHTML = title || '';
+		document.querySelector('#mobile-caption .body').innerHTML = body || '';
 
 	}
 
