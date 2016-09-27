@@ -16,7 +16,7 @@ export default function (...initArgs) {
 
 	const MIN_ALLOWED_WIDTH = 950,
 		MIN_ALLOWED_HEIGHT = 600,
-		IS_TESTING_MOBILE = true,
+		MOBILE_ENABLED = true,
 
 		NAVIGATION_DEFAULTS = {
 			section: dispatcher.SECTIONS.CONTINENTS,
@@ -87,7 +87,7 @@ export default function (...initArgs) {
 		nonMobileElements.push(document.querySelector('#callout'));
 		nonMobileElements.push(document.querySelector('#more-info'));
 		nonMobileElements.push(document.querySelector('#lower-left-logo'));
-		nonMobileElements = nonMobileElements.concat([...document.querySelectorAll('.navArrow')]);
+		// nonMobileElements = nonMobileElements.concat([...document.querySelectorAll('.navArrow')]);
 
 		mobileElements.push(document.querySelector('#mobile-header'));
 		mobileElements.push(document.querySelector('#mobile-caption'));
@@ -166,22 +166,35 @@ export default function (...initArgs) {
 
 	}
 
-	function setUpArrow(direction) {
-		let downArrows = document.querySelector('#' + direction + '-arrow'),
-			attentionArrow = document.createElement('img');
+	function setUpArrow (direction) {
+
+		let navArrow = document.querySelector('#' + direction + '-arrow'),
+			attentionArrow = document.createElement('img'),
+			suffix = screenIsSmall ? '-white' : '';
 
 		let onClickNav = direction == 'down' ? onDownArrowClick : (direction == 'left' ? onLeftArrowClick : onRightArrowClick);
 		attentionArrow.addEventListener('click', onClickNav);
 
 		// add both images here
-		attentionArrow.src = './img/' + direction + 'Arrow.png';
+		attentionArrow.src = './img/' + direction + 'Arrow' + suffix + '.png';
 
 		// set classes
-		downArrows.classList.add('navArrow');
+		navArrow.classList.add('navArrow');
 		attentionArrow.classList.add(direction);
 		attentionArrow.classList.add(direction + 'Arrow');
 
-		downArrows.appendChild(attentionArrow);
+		navArrow.appendChild(attentionArrow);
+
+		if (direction === 'left' || direction === 'right') {
+			// add label
+			let label = document.createElement('h4');
+			label.classList.add('navLabel');
+			if (direction === 'left') {
+				navArrow.appendChild(label);
+			} else {
+				navArrow.insertBefore(label, attentionArrow);
+			}
+		}
 
 	}
 
@@ -392,6 +405,7 @@ export default function (...initArgs) {
 		section.setEmotion(currentEmotion, previousEmotion, currentMorePage, previousMorePage)
 		.then(() => {
 			// console.log(">>>>> isNavigating -> false (setEmotion promise resolution 1)");
+			updateArrowLabels();
 			isNavigating = false;
 		});
 	}
@@ -1187,21 +1201,42 @@ export default function (...initArgs) {
 
 	function updateArrowVisibility (sectionName) {
 
-		if (sectionName == 'calm' || sectionName == 'more'){
+		if (screenIsSmall) {
+			// arrows always visible on mobile
+			document.querySelector('.downArrow').classList.add('visible');
+			document.querySelector('.leftArrow').classList.add('visible');
+			document.querySelector('.rightArrow').classList.add('visible');
+		} else if (sectionName == 'calm' || sectionName == 'more'){
 			// arrow not visible
-			document.querySelector('.downArrow').classList.remove("visible");
-			document.querySelector('.leftArrow').classList.remove("visible");
-			document.querySelector('.rightArrow').classList.remove("visible");
+			document.querySelector('.downArrow').classList.remove('visible');
+			document.querySelector('.leftArrow').classList.remove('visible');
+			document.querySelector('.rightArrow').classList.remove('visible');
 		} else if (sectionName == 'continents'){
-			document.querySelector('.downArrow').classList.add("visible");
-			document.querySelector('.leftArrow').classList.remove("visible");
-			document.querySelector('.rightArrow').classList.remove("visible");
+			document.querySelector('.downArrow').classList.add('visible');
+			document.querySelector('.leftArrow').classList.remove('visible');
+			document.querySelector('.rightArrow').classList.remove('visible');
 		} else {
 			// arrow visible
-			document.querySelector('.downArrow').classList.add("visible");
-			document.querySelector('.leftArrow').classList.add("visible");
-			document.querySelector('.rightArrow').classList.add("visible");
+			document.querySelector('.downArrow').classList.add('visible');
+			document.querySelector('.leftArrow').classList.add('visible');
+			document.querySelector('.rightArrow').classList.add('visible');
 		}
+
+	}
+
+	function updateArrowLabels () {
+
+		let emotionNames = _.values(dispatcher.EMOTIONS),
+			currentEmotionIndex = emotionNames.indexOf(currentEmotion),
+			leftEmotion = emotionNames[(currentEmotionIndex - 1 + emotionNames.length) % emotionNames.length],
+			rightEmotion = emotionNames[(currentEmotionIndex + 1) % emotionNames.length];
+
+		if (screenIsSmall) {
+			document.querySelector('#left-arrow .navLabel').textContent = leftEmotion;
+			document.querySelector('#right-arrow .navLabel').textContent = rightEmotion;
+		}
+
+		console.log(">>>>> emotion labels:", leftEmotion, rightEmotion);
 
 	}
 
@@ -1425,7 +1460,7 @@ export default function (...initArgs) {
 
 		if (bypassedWarning || (window.innerWidth >= MIN_ALLOWED_WIDTH && window.innerHeight >= MIN_ALLOWED_HEIGHT)) {
 
-			if (IS_TESTING_MOBILE) {
+			if (MOBILE_ENABLED) {
 
 				nonMobileElements.forEach(el => el.style.removeProperty('display'));
 				mobileElements.forEach(el => el.style.display = 'none');
@@ -1444,7 +1479,7 @@ export default function (...initArgs) {
 
 		} else {
 
-			if (IS_TESTING_MOBILE) {
+			if (MOBILE_ENABLED) {
 
 				nonMobileElements.forEach(el => el.style.display = 'none');
 				mobileElements.forEach(el => el.style.removeProperty('display'));
