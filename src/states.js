@@ -1625,6 +1625,23 @@ export default {
 
 	},
 
+	paginateState (dir) {
+
+		// states are sorted from highest to lowest
+		dir *= -1;
+
+		let nextStateIndex = 0;
+
+		if (this.selectedState) {
+			let statesData = this.statesData[this.currentEmotion];
+			nextStateIndex = statesData.findIndex(s => s.name === this.selectedState) + dir;
+			nextStateIndex = nextStateIndex >= statesData.length ? 0 : nextStateIndex < 0 ? statesData.length - 1 : nextStateIndex;
+		}
+
+		this.onStateClick(null, nextStateIndex);
+
+	},
+
 	setHighlightedState: function (state) {
 
 		this.highlightedState = state;

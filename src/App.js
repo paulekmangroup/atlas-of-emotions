@@ -345,6 +345,24 @@ export default function (...initArgs) {
 		p.classList.add('body');
 		caption.appendChild(p);
 
+		let arrow = document.createElement('div');
+		arrow.classList.add('mobile-nav-arrow');
+		let arrowImg = document.createElement('img');
+		arrowImg.src = './img/leftArrow.png';
+		arrowImg.classList.add('left', 'leftArrow');
+		arrow.appendChild(arrowImg);
+		caption.appendChild(arrow);
+		arrowImg.addEventListener('click', onMobileLeftArrowClick);
+
+		arrow = document.createElement('div');
+		arrow.classList.add('mobile-nav-arrow');
+		arrowImg = document.createElement('img');
+		arrowImg.src = './img/rightArrow.png';
+		arrowImg.classList.add('right', 'rightArrow');
+		arrow.appendChild(arrowImg);
+		caption.appendChild(arrow);
+		arrowImg.addEventListener('click', onMobileRightArrowClick);
+		
 	}
 
 	function initModal () {
@@ -717,7 +735,16 @@ export default function (...initArgs) {
 			dispatcher.navigate(null, emotionNames[targetEmotionIndex]);
 		}
 
+	}
 
+	function paginateSelectedElement (dir) {
+
+		// KLUDGE: not great to be calling methods directly on the state,
+		// but scope on this project has been severely limited by the chits-chats.
+		if (currentSection === sections[dispatcher.SECTIONS.STATES]) {
+			currentSection.paginateState(dir);
+		}
+		
 	}
 
 	/**
@@ -1036,25 +1063,24 @@ export default function (...initArgs) {
 	}
 
 	function onScrollbarOut (event) {
-
 		displayScrollbarHighlight(null);
-
 	}
 
 	function onDownArrowClick (event) {
-
 		scrollSection(1);
-
 	}
-
 	function onLeftArrowClick (event) {
 		scrollEmotion(-1);
 	}
-
 	function onRightArrowClick (event) {
-
 		scrollEmotion(1);
+	}
 
+	function onMobileLeftArrowClick (event) {
+		paginateSelectedElement(-1);
+	}
+	function onMobileRightArrowClick (event) {
+		paginateSelectedElement(1);
 	}
 
 	function onScrollbarClick (event) {

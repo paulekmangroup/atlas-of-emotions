@@ -249,6 +249,26 @@ a:active {
 
 }
 
+.mobile-nav-arrow {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	pointer-events: none;
+
+	img {
+		position: absolute;
+		pointer-events: auto;
+		cursor: pointer;
+		padding: 1rem;			// increase hit area size
+	}
+	.left {
+		left: calc(-1rem - 8px);
+	}
+	.right {
+		right: calc(-1rem - 8px);
+	}
+}
+
 #header .dropdown {
 	.more-on &.hide-on-more {
 		display: none;
