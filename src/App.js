@@ -173,7 +173,13 @@ export default function (...initArgs) {
 			suffix = screenIsSmall ? '-white' : '';
 
 		let onClickNav = direction == 'down' ? onDownArrowClick : (direction == 'left' ? onLeftArrowClick : onRightArrowClick);
-		attentionArrow.addEventListener('click', onClickNav);
+		if (screenIsSmall) {
+			// attach handler to container
+			navArrow.addEventListener('click', onClickNav);
+		} else {
+			// attach handler to inner img, due to 100% width on container
+			attentionArrow.addEventListener('click', onClickNav);
+		}
 
 		// add both images here
 		attentionArrow.src = './img/' + direction + 'Arrow' + suffix + '.png';
@@ -402,26 +408,32 @@ export default function (...initArgs) {
 	}
 
 	function setSectionEmotion (section, previousEmotion, previousMorePage) {
-		section.setEmotion(currentEmotion, previousEmotion, currentMorePage, previousMorePage)
-		.then(() => {
-			// console.log(">>>>> isNavigating -> false (setEmotion promise resolution 1)");
-			updateArrowLabels();
+
+		
+		let promise = section.setEmotion(currentEmotion, previousEmotion, currentMorePage, previousMorePage);
+		updateArrowLabels();
+
+		promise.then(() => {
 			isNavigating = false;
+			updateArrowLabels();
 		});
+
 	}
 
 	function fadeArrowOutAndIn (sectionName) {
 
-		function endFade(){
-			document.querySelector('.downArrow').classList.remove("fadeOutIn");
-			document.querySelector('.leftArrow').classList.remove("fadeOutIn");
-			document.querySelector('.rightArrow').classList.remove("fadeOutIn");
-		}
+		if (!screenIsSmall) {
+			function endFade(){
+				document.querySelector('.downArrow').classList.remove("fadeOutIn");
+				document.querySelector('.leftArrow').classList.remove("fadeOutIn");
+				document.querySelector('.rightArrow').classList.remove("fadeOutIn");
+			}
 
-		document.querySelector('.downArrow').classList.add("fadeOutIn");
-		document.querySelector('.leftArrow').classList.add("fadeOutIn");
-		document.querySelector('.rightArrow').classList.add("fadeOutIn");
-		setTimeout(endFade, 4000);
+			document.querySelector('.downArrow').classList.add("fadeOutIn");
+			document.querySelector('.leftArrow').classList.add("fadeOutIn");
+			document.querySelector('.rightArrow').classList.add("fadeOutIn");
+			setTimeout(endFade, 4000);
+		}
 
 		updateArrowVisibility(sectionName);
 
@@ -1234,9 +1246,15 @@ export default function (...initArgs) {
 		if (screenIsSmall) {
 			document.querySelector('#left-arrow .navLabel').textContent = leftEmotion;
 			document.querySelector('#right-arrow .navLabel').textContent = rightEmotion;
-		}
 
-		console.log(">>>>> emotion labels:", leftEmotion, rightEmotion);
+			if (isNavigating) {
+				document.querySelector('#left-arrow').classList.add('disabled');
+				document.querySelector('#right-arrow').classList.add('disabled');
+			} else {
+				document.querySelector('#left-arrow').classList.remove('disabled');
+				document.querySelector('#right-arrow').classList.remove('disabled');
+			}
+		}
 
 	}
 

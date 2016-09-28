@@ -252,7 +252,7 @@ a:active {
 	position: absolute;
 	bottom: 0;
 
-	// no container element, so manually position.
+	// no container element for navArrows, so manually position.
 	width: 33%;
 	&#left-arrow {
 		left: 0;
@@ -279,6 +279,13 @@ a:active {
 
 	color: $background-color;
 	background-color: rgba($scrollbar-background-color, 0.5);
+
+	&.disabled {
+		img,
+		.navLabel {
+			opacity: 0.5;
+		}
+	}
 
 	img {
 		display: inline-block;
