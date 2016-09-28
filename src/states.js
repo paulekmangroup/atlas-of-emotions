@@ -1625,20 +1625,20 @@ export default {
 
 	},
 
-	paginateState (dir) {
+	paginateElement: function (dir) {
 
 		// states are sorted from highest to lowest
 		dir *= -1;
 
-		let nextStateIndex = 0;
+		let nextIndex = 0;
 
 		if (this.selectedState) {
 			let statesData = this.statesData[this.currentEmotion];
-			nextStateIndex = statesData.findIndex(s => s.name === this.selectedState) + dir;
-			nextStateIndex = nextStateIndex >= statesData.length ? 0 : nextStateIndex < 0 ? statesData.length - 1 : nextStateIndex;
+			nextIndex = statesData.findIndex(s => s.name === this.selectedState) + dir;
+			nextIndex = nextIndex >= statesData.length ? 0 : nextIndex < 0 ? statesData.length - 1 : nextIndex;
 		}
 
-		this.onStateClick(null, nextStateIndex);
+		this.onStateClick(null, nextIndex);
 
 	},
 

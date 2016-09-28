@@ -1077,13 +1077,25 @@ export default {
 
 	},
 
+	paginateElement: function (dir) {
+
+		let nextIndex = 0,
+			actionsData = this.actionsData[this.currentEmotion].allActions;
+
+		if (this.highlightedAction) {
+			nextIndex = actionsData.findIndex(s => s.name === this.highlightedAction.name) + dir;
+			nextIndex = nextIndex >= actionsData.length ? 0 : nextIndex < 0 ? actionsData.length - 1 : nextIndex;
+		}
+
+		this.setHighlightedAction(actionsData[nextIndex]);
+
+	},
+
 	setHighlightedAction: function (action) {
 
 		this.highlightedAction = action;
 
 		if (action) {
-
-
 
 			let secondaryData;
 			if (action.valence) {

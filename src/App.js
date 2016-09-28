@@ -168,7 +168,7 @@ export default function (...initArgs) {
 	}
 
 	function initNavArrows() {
-		
+
 		function setUpArrow (direction) {
 
 			let navArrow = document.querySelector('#' + direction + '-arrow'),
@@ -767,11 +767,7 @@ export default function (...initArgs) {
 
 	function paginateSelectedElement (dir) {
 
-		// KLUDGE: not great to be calling methods directly on the state,
-		// but scope on this project has been severely limited by the chits-chats.
-		if (currentSection === sections[dispatcher.SECTIONS.STATES]) {
-			currentSection.paginateState(dir);
-		}
+		if (currentSection.paginateElement) currentSection.paginateElement(dir);
 		
 	}
 
