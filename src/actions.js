@@ -58,6 +58,7 @@ const GRAMMER_TRANSLATE = {
 export default {
 
 	isInited: false,
+	screenIsSmall: false,
 	currentEmotion: null,
 	actionsData: null,
 	backgroundSections: [ states ],
@@ -69,9 +70,11 @@ export default {
 	randomLabelPositions: {},
 
 
-	init: function (containerNode) {
+	init: function (containerNode, screenIsSmall) {
 
 		this.sectionContainer = containerNode;
+
+		this.screenIsSmall = screenIsSmall;
 
 		this.actionsData = this.parseActions();
 
@@ -136,9 +139,9 @@ export default {
 		//
 		let margin = {
 			top: sassVars.actions.margins.top,		// actions graph is upside down, so 'top' means bottom of the screen
-			right: 100,
+			right: this.screenIsSmall ? 95 : 100,
 			bottom: sassVars.actions.margins.bottom,
-			left: 100
+			left: this.screenIsSmall ? 95 : 100
 		};
 
 		// All the same size, just grab the first one
@@ -153,7 +156,9 @@ export default {
 		//
 		let section = this,
 			transformedHeight = Math.sqrt(3) / 2 * innerHeight,	// from rotateX(60deg) applied to #action-graph-container
-			radius = Math.min(0.5 * innerWidth, transformedHeight * 0.75);	// TODO: revisit this magic number munging to keep everything on-screen
+			radius = this.screenIsSmall ?
+				innerWidth :
+				Math.min(0.5 * innerWidth, transformedHeight * 0.75);	// TODO: revisit this magic number munging to keep everything on-screen
 
 		this.lineGenerator = d3.svg.line.radial()
 			.radius(d => d.x * radius)
@@ -849,7 +854,8 @@ export default {
 
 	renderLabels: function (actionsData, immediate) {
 
-		if (!this.currentEmotion) { return; }
+		if (!this.currentEmotion) return;
+		if (this.screenIsSmall) return;
 
 		let labelText = d => {
 			/*
@@ -993,7 +999,9 @@ export default {
 
 	},
 
-	onResize: function () {
+	onResize: function (screenIsSmall) {
+
+		this.screenIsSmall = screenIsSmall;
 
 		// recalculate containers, scales, etc
 		this.setUpGraphs(this.sectionContainer);

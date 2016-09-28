@@ -86,6 +86,10 @@
 		pointer-events: none;
 		opacity: 0.0;
 
+		.small-screen & {
+			// top: TODO
+		}
+
 		&.transitioning {
 			transition-property: transform, opacity;
 			transition-duration: #{$emotions-panX-duration}s;
