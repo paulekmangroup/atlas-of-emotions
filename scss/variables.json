@@ -47,7 +47,9 @@
 		"backgrounded": {
 			"actions": {
 				"scale": 0.6,
-				"top": "-17%"
+				"top": "-17%",
+				"scale-small": 0.66,
+				"top-small": "-17%"
 			},
 			"scale": 0.4,
 			"top": "-10%",

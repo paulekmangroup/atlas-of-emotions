@@ -87,7 +87,10 @@
 		opacity: 0.0;
 
 		.small-screen & {
-			// top: TODO
+			top: calc((100% + #{$states-backgrounded-top}) -
+				(100% * (1 - #{$states-backgrounded-scale}) / 2) -
+				#{$states-backgrounded-scale} * (#{$states-containers-bottom} + 50px) -
+				#{$ui-mobile-caption-height});
 		}
 
 		&.transitioning {

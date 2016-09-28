@@ -40,6 +40,11 @@
 			transform: scale($states-backgrounded-actions-scale);
 			top: $states-backgrounded-actions-top;
 			font-size: calc(0.66667em / #{$states-backgrounded-scale});
+
+			.small-screen & {
+				transform: scale($states-backgrounded-actions-scale-small);
+				top: $states-backgrounded-actions-top-small;
+			}
 		}
 
 		/*
@@ -93,7 +98,7 @@
 		.small-screen & {
 			width: $states-graph-width-small;
 			height: 50%;
-			bottom: calc(#{$ui-mobile-footer-height}px + #{$ui-mobile-caption-height});
+			bottom: calc(#{$ui-mobile-footer-height}px + #{$ui-mobile-caption-height});	// align within parent container, to account for mobile UI
 			margin-left: -$states-graph-width-small/2;
 			min-height: 200px;
 		}
