@@ -163,48 +163,50 @@ export default function (...initArgs) {
 		let navButton = document.createElement('div');
 		navButton.classList.add('nav-button');
 		mobileHeader.appendChild(navButton);
-
-	}
-
-	function setUpArrow (direction) {
-
-		let navArrow = document.querySelector('#' + direction + '-arrow'),
-			attentionArrow = document.createElement('img'),
-			suffix = screenIsSmall ? '-white' : '';
-
-		let onClickNav = direction == 'down' ? onDownArrowClick : (direction == 'left' ? onLeftArrowClick : onRightArrowClick);
-		if (screenIsSmall) {
-			// attach handler to container
-			navArrow.addEventListener('click', onClickNav);
-		} else {
-			// attach handler to inner img, due to 100% width on container
-			attentionArrow.addEventListener('click', onClickNav);
-		}
-
-		// add both images here
-		attentionArrow.src = './img/' + direction + 'Arrow' + suffix + '.png';
-
-		// set classes
-		navArrow.classList.add('navArrow');
-		attentionArrow.classList.add(direction);
-		attentionArrow.classList.add(direction + 'Arrow');
-
-		navArrow.appendChild(attentionArrow);
-
-		if (direction === 'left' || direction === 'right') {
-			// add label
-			let label = document.createElement('h4');
-			label.classList.add('navLabel');
-			if (direction === 'left') {
-				navArrow.appendChild(label);
-			} else {
-				navArrow.insertBefore(label, attentionArrow);
-			}
-		}
+		navButton.addEventListener('click', onMobileHeaderClick);
 
 	}
 
 	function initNavArrows() {
+		
+		function setUpArrow (direction) {
+
+			let navArrow = document.querySelector('#' + direction + '-arrow'),
+				attentionArrow = document.createElement('img'),
+				suffix = screenIsSmall ? '-white' : '';
+
+			let onClickNav = direction == 'down' ? onDownArrowClick : (direction == 'left' ? onLeftArrowClick : onRightArrowClick);
+			if (screenIsSmall) {
+				// attach handler to container
+				navArrow.addEventListener('click', onClickNav);
+			} else {
+				// attach handler to inner img, due to 100% width on container
+				attentionArrow.addEventListener('click', onClickNav);
+			}
+
+			// add both images here
+			attentionArrow.src = './img/' + direction + 'Arrow' + suffix + '.png';
+
+			// set classes
+			navArrow.classList.add('navArrow');
+			attentionArrow.classList.add(direction);
+			attentionArrow.classList.add(direction + 'Arrow');
+
+			navArrow.appendChild(attentionArrow);
+
+			if (direction === 'left' || direction === 'right') {
+				// add label
+				let label = document.createElement('h4');
+				label.classList.add('navLabel');
+				if (direction === 'left') {
+					navArrow.appendChild(label);
+				} else {
+					navArrow.insertBefore(label, attentionArrow);
+				}
+			}
+
+		}
+
 		setUpArrow('down');
 		setUpArrow('left');
 		setUpArrow('right');
@@ -983,6 +985,10 @@ export default function (...initArgs) {
 
 		dispatcher.navigate(null, event.target.dataset.emotion);
 
+	}
+
+	function onMobileHeaderClick (event) {
+		scrollSection(-1);
 	}
 
 	/**
