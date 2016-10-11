@@ -4,6 +4,10 @@
 	height: 100%;
 	min-height: 600px;
 
+	.small-screen & {
+		min-height: 0px;
+	}
+
 	top: 0;
 	left: 50%;
 	margin-left: -50%;
@@ -86,11 +90,19 @@
 		pointer-events: none;
 		opacity: 0.0;
 
+		// align top of actions containers with bottom of
+		// 'backgrounded' states graph, which is scaled and translated.
+		// this math is basically:
+		// 	(scaled states offset) +
+		// 	states position -
+		// 	scale * (states graph offset from parent + states graph bottom margin (50px, from states.js)) -
+		// 	actions bottom margin (25px, from actions.js), scaled per rotateX(60deg) (30-60-90 triangle means 0.5x)
 		.small-screen & {
-			top: calc((100% + #{$states-backgrounded-top}) -
-				(100% * (1 - #{$states-backgrounded-scale}) / 2) -
-				#{$states-backgrounded-scale} * (#{$states-containers-bottom} + 50px) -
-				#{$ui-mobile-caption-height});
+			top: calc((100% * (1 - (1 - #{$states-backgrounded-actions-scale-small}) / 2)) +
+				#{$states-backgrounded-actions-top-small} -
+				#{$states-backgrounded-actions-scale-small} * (#{$ui-mobile-footer-height}px + #{$ui-mobile-caption-height} + 50px) -
+				(25px / 2));
+			// top: calc(83% - 17% - 0.66*(44px + 15rem + 50px) - (25px / 2))
 		}
 
 		&.transitioning {
