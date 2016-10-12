@@ -336,6 +336,15 @@ a:active {
 	width: 100%;
 	pointer-events: none;
 
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0s 1s, opacity #{$ui-labels-duration-in}s ease;
+	&.visible {
+		visibility: visible;
+		opacity: 1.0;
+		transition: visibility 0s, opacity #{$ui-labels-duration-in}s 1s ease;
+	}
+
 	img {
 		position: absolute;
 		pointer-events: auto;

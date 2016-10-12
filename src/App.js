@@ -632,6 +632,8 @@ export default function (...initArgs) {
 
 		currentSection = section;
 
+		if (screenIsSmall) updateMobileElementPaginationArrows();
+
 	}
 
 	function setMore (page) {
@@ -1260,6 +1262,23 @@ export default function (...initArgs) {
 
 	}
 
+	function updateMobileElementPaginationArrows (visible) {
+
+		// if forcing to be hidden, hide arrows
+		// else, decide based on the currentSection
+		if (visible !== false) {
+			visible =
+				currentSection === sections[dispatcher.SECTIONS.STATES] ||
+				currentSection === sections[dispatcher.SECTIONS.ACTIONS];
+		}
+
+		let paginationArrows = document.querySelectorAll('.mobile-nav-arrow');
+		for (let i=0; i<paginationArrows.length; i++) {
+			paginationArrows[i].classList[visible ? 'add' : 'remove']('visible');
+		}
+
+	}
+
 	function getIntroModalOpenState () {
 
 		return !window.location.hash || !localStorage.modalSeen;
@@ -1300,6 +1319,7 @@ export default function (...initArgs) {
 
 		if (screenIsSmall) {
 			setMobileCaption(title, body);
+			updateMobileElementPaginationArrows(!!title);
 			return;
 		}
 
