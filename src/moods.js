@@ -10,6 +10,7 @@ import actions from './actions.js';
 export default {
 
 	isInited: false,
+	screenIsSmall: false,
 	currentEmotion: null,
 	moodsData: null,
 	backgroundSections: [ states, actions ],
@@ -17,9 +18,11 @@ export default {
 	// values are % of radius to edge for each mood circle
 	moodCircleRadii: [1.15, .95, .75],
 
-	init: function (containerNode) {
+	init: function (containerNode, screenIsSmall) {
 
 		this.sectionContainer = containerNode;
+
+		this.screenIsSmall = screenIsSmall;
 
 		this.onElementOver = this.onElementOver.bind(this);
 		this.onElementOut = this.onElementOut.bind(this);
@@ -55,21 +58,26 @@ export default {
 
 	},
 
-	resizeMoodCircles: function(width, height, radius){
+	resizeMoodCircles: function(width, height, radius) {
+
+		let small = this.screenIsSmall;
 		this.moodCircles.selectAll(".moodCircle")
 			.attr(
 				{'cx': width / 2,
-				'cy': height / 2,
+				'cy': small ? height * 0.4 : height / 2,
 				'r': function(d){return radius * d;}
 			});
+
 	},
 
-	resizeRadialGradients: function (width, height, radius){
+	resizeRadialGradients: function (width, height, radius) {
+
+		let small = this.screenIsSmall;
 		this.moodCircleRadii.forEach(function(radiusMultiplier, index){
 			d3.selectAll(".moods-defs").selectAll(".radial-gradient-" + index)
 				.attr(
 							{'cx': width / 2,
-							'cy': height / 2,
+							'cy': small ? height * 0.4 : height / 2,
 							'r': function(d){return radius * radiusMultiplier;}
 						});
 		});
@@ -187,18 +195,21 @@ export default {
 	},
 
 	initLabels: function () {
+
 		const label = this.labelContainer
 			.append('div')
 			.attr('class', 'emotion-label label');
 
-		label
-			.append('h3');
-
+		label.append('h3');
 		label.on('click', this.onElementClick);
+
 	},
 
-	updateLabel: function() {
+	updateLabel: function () {
+
 		if (!this.currentEmotion || !emotionsData.emotions[this.currentEmotion]) return;
+		if (this.screenIsSmall) return;
+		
 		let moodsCopy = emotionsData.emotions[this.currentEmotion].moods[0];
 
 		const label = this.labelContainer.select('.emotion-label');
@@ -207,9 +218,11 @@ export default {
 			.attr('data-popuptarget', `moods:${this.currentEmotion}`);
 
 		label.select('h3').text(moodsCopy.name.toUpperCase());
+
 	},
 
 	setEmotion: function (emotion) {
+
 		return new Promise((resolve, reject) => {
 			// fade out circles
 			function endFade(){
@@ -254,12 +267,14 @@ export default {
 	},
 
 	open: function () {
+
 		// transition time from _states.scss::#states
 		this.manageTextTransition(1500);
 
 	},
 
 	close: function () {
+
 		this.labelContainer.select('.emotion-label').classed('visible', false);
 		this.setBackgroundListener(false);
 
@@ -276,10 +291,12 @@ export default {
 
 	},
 
-	onResize: function () {
+	onResize: function (screenIsSmall) {
 
-		//
+		this.screenIsSmall = screenIsSmall;
+
 		this.resizeMoodIntesifiers();
+
 	},
 
 	setBackgroundListener: function(pleaseSet) {
@@ -307,6 +324,7 @@ export default {
 	},
 
 	onElementClick: function (event) {
+
 		if (d3.event) {
 			d3.event.preventDefault();
 			d3.event.stopImmediatePropagation();
@@ -335,6 +353,7 @@ export default {
 	},
 
 	setCallout: function (active) {
+
 		this.calloutActive = active;
 		if (active) {
 			let moodsCopy = emotionsData.emotions[this.currentEmotion].moods[0];
@@ -346,6 +365,7 @@ export default {
 			dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.moods.header, emotionsData.metadata.moods.body);
 			this.setBackgroundListener(false);
 		}
+
 	}
 
 };
