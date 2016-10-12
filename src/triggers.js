@@ -529,7 +529,7 @@ export default {
 
 			this.labelContainers[emotion] = labelContainer;
 
-			// phase labels (EVENT/PERCEPTION/RESPONSE)
+			// phase labels (TRIGGERS/PERCEPTION/RESPONSE)
 			let phaseLabelContainer = labelContainer.append('div')
 				.classed(`trigger-phase-labels ${emotion}`, true);
 
@@ -540,6 +540,7 @@ export default {
 				.append('div')
 				.attr('class', `emotion-label ${emotion}`)
 				.attr('data-popuptarget', d => `triggers:${emotion}-${d.header.toLowerCase()}`)
+				.style('display', (d, i) => (this.screenIsSmall && i === 0) ? 'none' : null)	// hide 'TRIGGERS' on small screens
 				.style('top', (d, i) => {
 					switch (i) {
 						case 0:
@@ -746,8 +747,6 @@ export default {
 	},
 
 	renderLabels: function (emotion) {
-
-		if (this.screenIsSmall) return;
 
 		let triggersData = emotion ? this.triggersData[emotion] : [];
 		emotion = emotion || this.currentEmotion;

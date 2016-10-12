@@ -38,6 +38,11 @@
 						pointer-events: auto;
 						cursor: pointer;
 					}
+
+					// override _labels.scss
+					.small-screen & {
+						opacity: 1.0;
+					}
 				}
 			}
 		}
@@ -71,7 +76,16 @@
 		height: calc(100% - #{$triggers-bottom});
 		bottom: $triggers-bottom;
 
+		.small-screen & {
+			height: calc(100% - #{$triggers-bottom-small});
+			bottom: $triggers-bottom-small;
+		}
+
 		.label {
+			.small-screen & {
+				display: none;
+			}
+
 			position: absolute;
 
 			@include emotion-color;
@@ -126,8 +140,6 @@
 		.small-screen & {
 			height: $triggers-bottom-height-small;
 			bottom: $triggers-bottom-small - $triggers-bottom-height-small;
-			// top: 100% - #{$triggers-bottom-small;
-			// bottom: auto;
 		}
 		background: linear-gradient(to bottom, rgba(245,245,245,1.0) 0%,rgba(255,255,255,1.0) 100%);
 
