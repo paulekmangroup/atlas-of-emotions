@@ -167,6 +167,19 @@
 		transform: translate(-50%, -50%);
 	}
 }
+.small-screen .universal-learned-labels {
+	h3 {
+		white-space: normal;
+		max-width: 10rem;
+		text-align: center;
+		transform: translate(-50%,-50%);
+	}
+	.universal h3 {
+		// no idea why this label is not lining up correctly.
+		// manual tweak.
+		transform: translate(-70%,-50%);
+	}
+}
 
 
 #trigger-hit-area-container {

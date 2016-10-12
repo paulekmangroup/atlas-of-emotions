@@ -146,7 +146,7 @@ export default {
 			'disgust': [.6,.3,.3,.12,1],
 			'sadness': [.6,.4,.3,1.8,1],
 			'enjoyment': [.2,.3,0.2,.12,1.7,.2,.3],
-			'universalLearned': [1.5,.2],
+			'universalLearned': this.screenIsSmall ? [2.5,2.5] : [1.5,.2],
 		};
 
 		let additive = 0,
@@ -165,7 +165,7 @@ export default {
 				'disgust': [2.5,.3,3,2.5,1],
 				'sadness': [3,.4,.3,2.5,.3],
 				'enjoyment': [.5,3.0,1.5,0,2.5,.5,.3],
-				'universalLearned': [1.5,0]
+				'universalLearned': this.screenIsSmall ? [2.5,2.5] : [1.5,0]
 			};
 		}
 
@@ -517,13 +517,13 @@ export default {
 			universalLearnedLabelContainer.append('div')
 				.attr('class', `emotion-label ${TRIGGER_TYPES.UNIVERSAL} ${emotion}`)
 				.attr('data-popuptarget', `triggers:${emotion}-${TRIGGER_TYPES.UNIVERSAL}`)
-				.style('transform', this.getUniversalLearnedTranslation('universal', haloRadius))
+				.style('transform', this.getUniversalLearnedTransform('universal', haloRadius))
 			.append('h3')
 				.text(emotionsData.metadata.triggers.steps[3].header.toUpperCase());
 			universalLearnedLabelContainer.append('div')
 				.attr('class', `emotion-label ${TRIGGER_TYPES.LEARNED} ${emotion}`)
 				.attr('data-popuptarget', `triggers:${emotion}-${TRIGGER_TYPES.LEARNED}`)
-				.style('transform', this.getUniversalLearnedTranslation('learned', haloRadius))
+				.style('transform', this.getUniversalLearnedTransform('learned', haloRadius))
 			.append('h3')
 				.text(emotionsData.metadata.triggers.steps[4].header.toUpperCase());
 
@@ -889,17 +889,28 @@ export default {
 
 	},
 
-	getUniversalLearnedTranslation: function (typeName, haloRadius) {
+	getUniversalLearnedTransform: function (typeName, haloRadius) {
+
 		let type = {
 			'universal': 0,
 			'learned': 1
 		};
+
 		let angle = this.calcAngle(type[typeName],'universalLearned', haloRadius),
 			radius = this.calcRadius(type[typeName],'universalLearned', haloRadius);
+
+		if (this.screenIsSmall) {
+			if (typeName === 'universal') {
+				angle = -Math.PI/2 - 0.4;
+			} else if (typeName === 'learned') {
+				angle = -Math.PI/2 + 0.4;
+			}
+		}
 
 		return 'translate('
 			+  Math.cos(angle) * radius + 'px,' +
 				Math.sin(angle) * radius + 'px)';
+
 	},
 
 	onResize: function (screenIsSmall) {
@@ -952,9 +963,9 @@ export default {
 
 			// update universal/learned labels
 			labelContainer.select(`.${TRIGGER_TYPES.UNIVERSAL}`)
-				.style('transform', this.getUniversalLearnedTranslation('universal', haloRadius));
+				.style('transform', this.getUniversalLearnedTransform('universal', haloRadius));
 			labelContainer.select(`.${TRIGGER_TYPES.LEARNED}`)
-				.style('transform', this.getUniversalLearnedTranslation('learned', haloRadius));
+				.style('transform', this.getUniversalLearnedTransform('learned', haloRadius));
 
 			this.renderLabels(emotion);
 
