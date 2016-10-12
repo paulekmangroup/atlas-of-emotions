@@ -165,6 +165,10 @@
 	.emotion-label {
 		opacity: 1.0;
 		transform: translate(-50%, -50%);
+
+		.small-screen & {
+			transform: translate(-50%, -20%);
+		}
 	}
 }
 .small-screen .universal-learned-labels {

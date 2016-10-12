@@ -123,10 +123,12 @@ export default {
 			angleFactors['universalLearned'] = [-.7, 0];
 		}
 
-
+		// rotate arrows further away from center to avoid label overlap on small screens
+		if (this.screenIsSmall) multiplier += 0.25;
 
 		// angleFactor can be any value from -1 (all the way left) to +1 (all the way right)
 		return (angleFactors[emotion][i] * multiplier - 1) * Math.PI / 2;
+
 	},
 
 	calcRadius: function (i, emotion, haloRadius) {
@@ -750,6 +752,14 @@ export default {
 
 		let triggersData = emotion ? this.triggersData[emotion] : [];
 		emotion = emotion || this.currentEmotion;
+
+		if (this.screenIsSmall) {
+			let counts = {
+				universal: 0,
+				learned: 0
+			};
+			triggersData = triggersData.filter(d => counts[d.type]++ < 3);
+		}
 
 		let triggersBottom = this.screenIsSmall ? sassVars.triggers['bottom-small'] : sassVars.triggers.bottom;
 		let h = (1 - triggersBottom.replace('%', '')/100) * this.sectionContainer.offsetHeight,
