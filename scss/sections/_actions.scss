@@ -3,7 +3,6 @@
 	width: 100%;
 	height: 100%;
 	min-height: 600px;
-
 	.small-screen & {
 		min-height: 0px;
 	}
@@ -22,6 +21,10 @@
 	&.backgrounded {
 		transform: translateY(#{$actions-margins-bottom}px) scale($actions-backgrounded-scale);
 
+		.small-screen & {
+			transform: scale($actions-backgrounded-scale-small);
+		}
+
 		&.triggers {
 
 			// same math as in .actions-container below,
@@ -32,6 +35,17 @@
 					(100% * (1 - #{$states-backgrounded-scale}) / 2) -
 					#{$states-backgrounded-scale} * (#{$states-containers-bottom} + 50px/* + #{$actions-margins-bottom}px*/)
 				) - #{$triggers-bottom});
+
+			.small-screen & {
+				// same math as in `.small-screen .actions-container` below,
+				// but offset from triggers bottom and actions bottom margin
+				top: calc(#{$actions-backgrounded-scale-small} * (#{100% - $triggers-bottom-small} - 25px -
+					((100% * (1 - (1 - #{$states-backgrounded-actions-scale-small}) / 2)) +
+					#{$states-backgrounded-actions-top-small} -
+					#{$states-backgrounded-actions-scale-small} * (#{$ui-mobile-footer-height}px + #{$ui-mobile-caption-height} + 50px) -
+					(25px / 2))));
+
+			}
 		}
 
 		.actions-container.active {

@@ -68,7 +68,8 @@
 	},
 	"actions": {
 		"backgrounded": {
-			"scale": 0.7
+			"scale": 0.7,
+			"scale-small": 0.5
 		},
 		"margins": {
 			"top": 25,
@@ -88,7 +89,9 @@
 		}
 	},
 	"triggers": {
-		"bottom": "20%"
+		"bottom": "20%",
+		"bottom-small": "53%",
+		"bottom-height-small": "15%"
 	},
 	"emotions": {
 		"panX": {

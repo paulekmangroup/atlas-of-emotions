@@ -59,6 +59,7 @@ const DATABASE_FILTERED_THRESHOLD = 0.85;
 export default {
 
 	isInited: false,
+	screenIsSmall: false,
 	currentEmotion: null,
 	triggersData: null,
 	backgroundSections: [ states, actions ],
@@ -68,9 +69,11 @@ export default {
 	graphContainers: null,
 	emotionArrowPercents: null,
 
-	init: function (containerNode) {
+	init: function (containerNode, screenIsSmall) {
 
 		this.sectionContainer = containerNode;
+
+		this.screenIsSmall = screenIsSmall;
 
 		this.initContainers(containerNode);
 
@@ -244,13 +247,15 @@ export default {
 			w = graphContainer.offsetWidth,
 			h = graphContainer.offsetHeight;
 
+		let triggersBottom = this.screenIsSmall ? sassVars.triggers['bottom-small'] : sassVars.triggers.bottom;
+
 		//
 		// d3 conventional margins
 		//
 		let margin = {
 				top: 0 * h,
 				right: 0 * w,
-				bottom: (sassVars.triggers.bottom.replace('%', '')/100) * h,
+				bottom: (triggersBottom.replace('%', '')/100) * h,
 				left: 0 * w
 			},
 			innerWidth = w - margin.left - margin.right,
@@ -491,7 +496,9 @@ export default {
 		this.labelContainers = {};
 		_.values(dispatcher.EMOTIONS).forEach(emotion => {
 
-			let h = (1 - sassVars.triggers.bottom.replace('%', '') / 100) * containerNode.offsetHeight,
+			let triggersBottom = this.screenIsSmall ? sassVars.triggers['bottom-small'] : sassVars.triggers.bottom;
+
+			let h = (1 - triggersBottom.replace('%', '') / 100) * containerNode.offsetHeight,
 				container = d3.select('.triggers-container.' + emotion),
 				labelContainer = container.append('div')
 					.classed('label-container', true);
@@ -566,8 +573,10 @@ export default {
 
 	setUpHitAreas: function (containerNode) {
 
+		let triggersBottom = this.screenIsSmall ? sassVars.triggers['bottom-small'] : sassVars.triggers.bottom;
+
 		const cw = containerNode.offsetWidth,
-			ch = (1 - sassVars.triggers.bottom.replace('%', '')/100) * containerNode.offsetHeight,
+			ch = (1 - triggersBottom.replace('%', '')/100) * containerNode.offsetHeight,
 			innerRadius = this.haloArcGenerator.innerRadius();
 
 		let hitAreaContainer = document.createElement('div');
@@ -738,10 +747,13 @@ export default {
 
 	renderLabels: function (emotion) {
 
+		if (this.screenIsSmall) return;
+
 		let triggersData = emotion ? this.triggersData[emotion] : [];
 		emotion = emotion || this.currentEmotion;
 
-		let h = (1 - sassVars.triggers.bottom.replace('%', '')/100) * this.sectionContainer.offsetHeight,
+		let triggersBottom = this.screenIsSmall ? sassVars.triggers['bottom-small'] : sassVars.triggers.bottom;
+		let h = (1 - triggersBottom.replace('%', '')/100) * this.sectionContainer.offsetHeight,
 			labelContainer = this.labelContainers[emotion],
 			labelSelection = labelContainer.selectAll('div.label')
 			.data(triggersData);
@@ -891,7 +903,9 @@ export default {
 				Math.sin(angle) * radius + 'px)';
 	},
 
-	onResize: function () {
+	onResize: function (screenIsSmall) {
+
+		this.screenIsSmall = screenIsSmall;
 
 		// update halo
 		let haloRadius = this.setUpGraphs(this.sectionContainer);
@@ -900,9 +914,11 @@ export default {
 		d3.select('#triggers-radial-gradient')
 			.attr('r', haloRadius);
 
+		let triggersBottom = this.screenIsSmall ? sassVars.triggers['bottom-small'] : sassVars.triggers.bottom;
+
 		// update labels, and halos that have already been rendered
 		let w = this.sectionContainer.offsetWidth,
-			h = (1 - sassVars.triggers.bottom.replace('%', '')/100) * this.sectionContainer.offsetHeight,
+			h = (1 - triggersBottom.replace('%', '')/100) * this.sectionContainer.offsetHeight,
 			haloArc = this.haloArcGenerator,
 			innerRadius = haloArc.innerRadius(),
 			pieLayoutData = this.haloPieLayout([{}]);

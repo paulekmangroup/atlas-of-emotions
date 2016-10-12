@@ -635,6 +635,8 @@ export default {
 
 		this.currentState = state;
 
+		if (!this.currentEmotion) return;
+
 		let stateActionsData,
 			currentActionsData;
 
