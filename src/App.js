@@ -158,12 +158,19 @@ export default function (...initArgs) {
 
 		let mobileHeader = document.querySelector('#mobile-header');
 		mobileHeader.style.removeProperty('display');
+		mobileHeader.classList.add('visible');
 
-		// TODO: implement title and nav here or elsewhere.
-		let navButton = document.createElement('div');
-		navButton.classList.add('nav-button');
-		mobileHeader.appendChild(navButton);
-		navButton.addEventListener('click', onMobileHeaderClick);
+		if (screenIsSmall) {
+			let navButton = document.createElement('div');
+			navButton.classList.add('nav-button');
+			mobileHeader.appendChild(navButton);
+			navButton.addEventListener('click', onMobileHeaderClick);
+
+			let mobileTitle = document.createElement('div');
+			mobileTitle.classList.add('mobile-title');
+			mobileTitle.appendChild(document.querySelector('#header .header-content'));
+			mobileHeader.appendChild(mobileTitle);
+		}
 
 	}
 
@@ -632,7 +639,7 @@ export default function (...initArgs) {
 
 		currentSection = section;
 
-		if (screenIsSmall) updateMobileElementPaginationArrows();
+		if (screenIsSmall) updateMobileUI();
 
 	}
 
@@ -986,7 +993,13 @@ export default function (...initArgs) {
 	}
 
 	function onMobileHeaderClick (event) {
-		scrollSection(-1);
+
+		if (currentSection === sections[dispatcher.SECTIONS.CONTINENTS]) {
+			dispatcher.navigate(dispatcher.HOME);
+		} else {
+			scrollSection(-1);
+		}
+
 	}
 
 	/**
@@ -1215,13 +1228,16 @@ export default function (...initArgs) {
 		}
 	}
 
-	function updateArrowVisibility (sectionName) {
+	function updateArrowVisibility (sectionName, smallScreenVisibility) {
 
 		if (screenIsSmall) {
-			// arrows always visible on mobile
-			document.querySelector('.downArrow').classList.add('visible');
-			document.querySelector('.leftArrow').classList.add('visible');
-			document.querySelector('.rightArrow').classList.add('visible');
+			// arrows visibility on mobile controlled by second param,
+			// defaults to true
+			if (typeof smallScreenVisibility === 'undefined') smallScreenVisibility = true;
+			let classMethod = smallScreenVisibility ? 'add' : 'remove';
+			document.querySelector('#down-arrow').classList[classMethod]('visible');
+			document.querySelector('#left-arrow').classList[classMethod]('visible');
+			document.querySelector('#right-arrow').classList[classMethod]('visible');
 		} else if (sectionName == 'calm' || sectionName == 'more'){
 			// arrow not visible
 			document.querySelector('.downArrow').classList.remove('visible');
@@ -1262,19 +1278,31 @@ export default function (...initArgs) {
 
 	}
 
-	function updateMobileElementPaginationArrows (visible) {
+	function updateMobileUI (paginationUIVisible) {
+
+		// show title mobile header and hide mobile footer when appropriate
+		let titleHeaderAndFooter = currentSection === sections[dispatcher.SECTIONS.CONTINENTS] && !currentEmotion;
+		updateArrowVisibility(null, !titleHeaderAndFooter);
+
+		if (titleHeaderAndFooter) {
+			document.querySelector('#mobile-header .nav-button').style.display = 'none';
+			document.querySelector('#mobile-header .header-content').style.display = 'block';
+		} else {
+			document.querySelector('#mobile-header .nav-button').style.display = 'block';
+			document.querySelector('#mobile-header .header-content').style.display = 'none';
+		}
 
 		// if forcing to be hidden, hide arrows
 		// else, decide based on the currentSection
-		if (visible !== false) {
-			visible =
+		if (paginationUIVisible !== false) {
+			paginationUIVisible =
 				currentSection === sections[dispatcher.SECTIONS.STATES] ||
 				currentSection === sections[dispatcher.SECTIONS.ACTIONS];
 		}
 
 		let paginationArrows = document.querySelectorAll('.mobile-nav-arrow');
 		for (let i=0; i<paginationArrows.length; i++) {
-			paginationArrows[i].classList[visible ? 'add' : 'remove']('visible');
+			paginationArrows[i].classList[paginationUIVisible ? 'add' : 'remove']('visible');
 		}
 
 	}
@@ -1319,7 +1347,7 @@ export default function (...initArgs) {
 
 		if (screenIsSmall) {
 			setMobileCaption(title, body);
-			updateMobileElementPaginationArrows(!!title);
+			updateMobileUI(!!title);
 			return;
 		}
 
@@ -1364,6 +1392,7 @@ export default function (...initArgs) {
 	}
 
 	function onNavigate (section, emotion) {
+		
 		if (section === dispatcher.HOME) {
 			document.location.hash = '';
 			if (!document.location.hash) {

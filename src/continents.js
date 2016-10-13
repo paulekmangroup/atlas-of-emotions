@@ -19,10 +19,14 @@ const continentsSection = {
 
 	isInited: false,
 	isActive: false,
+	screenIsSmall: false,
 	closeDelay: sassVars.ui.labels.duration.in * 1000,
 
-	init: function (containerNode) {
+	init: function (containerNode, screenIsSmall) {
+
 		this.sectionContainer = containerNode;
+
+		this.screenIsSmall = screenIsSmall;
 
 		this.update = this.update.bind(this);
 
@@ -40,8 +44,13 @@ const continentsSection = {
 			h = containerNode.offsetHeight,
 			continentGeom;
 
-		centerX = sassVars.continents.centerX * w;
-		centerY = sassVars.continents.centerY * h;
+		if (this.screenIsSmall) {
+			centerX = sassVars.continents['centerX-small'] * w;
+			centerY = sassVars.continents['centerY-small'] * h;
+		} else {
+			centerX = sassVars.continents.centerX * w;
+			centerY = sassVars.continents.centerY * h;
+		}
 		continentGeom = {
 			w: w,
 			h: h,
@@ -49,8 +58,10 @@ const continentsSection = {
 			centerY: centerY
 		};
 
+		let continentTransforms = this.calculateContinentTransforms();
+
 		// map each emotion to a Continent instance
-		continents = _.values(dispatcher.EMOTIONS).map(emotion => new Continent(emotion, continentContainer, continentGeom));
+		continents = _.values(dispatcher.EMOTIONS).map(emotion => new Continent(emotion, continentContainer, continentGeom, continentTransforms, this.screenIsSmall));
 
 		this.initLabels(this.labelContainer);
 
@@ -252,8 +263,14 @@ const continentsSection = {
 	},
 
 	initLabels: function (labelContainer) {
+
 		let labels = labelContainer.selectAll('.emotion-label')
 			.data(continents, d => d.id);
+
+		if (this.screenIsSmall) {
+			labels.style('display', 'none');
+			return;
+		}
 
 		let labelsEnter = labels.enter()
 			.append('div')
@@ -267,6 +284,41 @@ const continentsSection = {
 			.attr('href', d => `#continents:${d.id}`)
 			.append('h3')
 				.text(d => d.name.toUpperCase());
+
+	},
+
+	calculateContinentTransforms: function () {
+
+		if (!this.screenIsSmall) return null;
+
+		// left-to-right
+		return [
+			{
+				x: -0.23,
+				y: -0.13,
+				size: 0.15
+			},
+			{
+				x: -0.17,
+				y: 0.03,
+				size: 0.15
+			},
+			{
+				x: 0.06,
+				y: -0.18,
+				size: 0.15
+			},
+			{
+				x: 0.12,
+				y: 0.10,
+				size: 0.15
+			},
+			{
+				x: 0.24,
+				y: -0.02,
+				size: 0.15
+			}
+		];
 
 	},
 
@@ -361,14 +413,21 @@ const continentsSection = {
 	 * but Continent.onResize() does not update existing Circle sizes
 	 * so size changes take a bit of time to propagate.
 	 */
-	onResize: function () {
+	onResize: function (screenIsSmall) {
+
+		this.screenIsSmall = screenIsSmall;
 
 		let w = this.sectionContainer.offsetWidth,
 			h = this.sectionContainer.offsetHeight,
 			continentGeom;
 
-		centerX = 0.48 * w;
-		centerY = 0.5 * h;
+		if (this.screenIsSmall) {
+			centerX = sassVars.continents['centerX-small'] * w;
+			centerY = sassVars.continents['centerY-small'] * h;
+		} else {
+			centerX = sassVars.continents.centerX * w;
+			centerY = sassVars.continents.centerY * h;
+		}
 		continentGeom = {
 			w: w,
 			h: h,
@@ -376,7 +435,7 @@ const continentsSection = {
 			centerY: centerY
 		};
 
-		continents.forEach(c => c.onResize(continentGeom));
+		continents.forEach(c => c.onResize(continentGeom, this.screenIsSmall));
 
 		// update label positions
 		let labels = this.labelContainer.selectAll('.emotion-label')

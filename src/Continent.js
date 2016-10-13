@@ -9,6 +9,7 @@ import sassVars from '../scss/variables.json';
 
 const FRAMERATE = 60;
 const MAX_NUM_CIRCLES = 15;
+const MAX_NUM_CIRCLES_SMALL = 4;
 
 export default class Continent {
 
@@ -159,14 +160,16 @@ export default class Continent {
 
 	static transforms;
 
-	constructor (emotion, container, continentGeom, transforms={}) {
+	constructor (emotion, container, continentGeom, transforms={}, screenIsSmall) {
 
 		if (!Continent.transforms) {
 			Continent.transforms = _.shuffle(Continent.BASE_TRANSFORMS);
 		}
 
+		this.screenIsSmall = screenIsSmall;
+
 		this.initInstanceProperties(emotion, container, transforms);
-		this.onResize(continentGeom);
+		this.onResize(continentGeom, screenIsSmall);
 		this.prepopulate();
 
 	}
@@ -184,8 +187,8 @@ export default class Continent {
 
 		this.spawnConfig = {
 			lastSpawn: 0,
-			minDelay: 3 * FRAMERATE,
-			freq: 0.010
+			minDelay: (this.screenIsSmall ? 2 : 3) * FRAMERATE,
+			freq: this.screenIsSmall ? 0.05 : 0.010
 		};
 
 		this.drift = {
@@ -221,7 +224,7 @@ export default class Continent {
 
 	prepopulate () {
 
-		let numCircles = 5 + Math.floor(Math.random() * 10);
+		let numCircles = 0.333 * this.maxNumCircles + Math.floor(Math.random() * 0.666 * this.maxNumCircles);
 		for (let i=0; i<numCircles; i++) {
 			let newCircle = Circle.spawn(this, 1, true);
 			newCircle.radius = 0.75 + (0.25 * Math.random()) * newCircle.size;
@@ -250,7 +253,7 @@ export default class Continent {
 		if (!this.isFocused) {
 
 			// probabilistically spawn new Circles
-			if (this.circles.length < MAX_NUM_CIRCLES) {
+			if (this.circles.length < this.maxNumCircles) {
 				newCircle = Circle.spawn(this, frameCount);
 				if (newCircle) {
 					this.circles.push(newCircle);
@@ -261,8 +264,10 @@ export default class Continent {
 			alphaMod = Continent.HIGHLIGHT_ALPHA_MODS[this.highlightLevel];
 			speedMod = Continent.HIGHLIGHT_SPEED_MODS[this.highlightLevel];
 
-			// apply drift
-			this.wander(this.drift, 3);
+			if (!this.screenIsSmall) {
+				// apply drift
+				this.wander(this.drift, 3);
+			}
 
 		}
 
@@ -306,7 +311,7 @@ export default class Continent {
 
 	}
 
-	onResize (continentGeom) {
+	onResize (continentGeom, screenIsSmall) {
 
 		// scale base transforms per continentGeom
 		let transform = _.cloneDeep(this.baseTransforms);
@@ -322,6 +327,19 @@ export default class Continent {
 		this.introSpreadAng = Math.atan2(this.y, this.x);
 		this.centerX = continentGeom.centerX;
 		this.centerY = continentGeom.centerY;
+
+		this.screenIsSmall = screenIsSmall;
+		this.maxNumCircles = this.screenIsSmall ? MAX_NUM_CIRCLES_SMALL : MAX_NUM_CIRCLES;
+
+
+		if (!this.circleHitArea && this.screenIsSmall) {
+			this.circleHitArea = this.d3Selection.insert('circle', ':first-child')
+				.style('fill', 'white')
+				.style('fill-opacity', 0.0)
+				.attr('cx', 0)
+				.attr('cy', 0)
+				.attr('r', transform.size);
+		}
 
 	}
 

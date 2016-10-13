@@ -8,6 +8,10 @@
 	left: 50%;
 	margin-left: -50%;
 
+	.small-screen & {
+		min-height: 0;
+	}
+
 	text-align: center;
 
 	g.continent {
@@ -31,5 +35,10 @@
 	.emotion-label {
 		transform: translate(-50%, -50%);
 		@include emotion-color;
+		.small-screen & {
+			h3 {	// specificity
+				color: $text-overlay-color;
+			}
+		}
 	}
 }
