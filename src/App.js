@@ -1317,7 +1317,7 @@ export default function (...initArgs) {
 
 	function onPopupChange (section, emotion, desc, secondaryData) {
 
-		if (screenIsSmall) {
+		if (screenIsSmall && emotion) {
 			setMobileCaption(emotion, desc);
 			return;
 		}
@@ -1401,6 +1401,7 @@ export default function (...initArgs) {
 				// If already at root, ensure modal is closed.
 				setModalVisibility(false);
 			}
+
 			return;
 		}
 

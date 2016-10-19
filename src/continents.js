@@ -237,8 +237,8 @@ const continentsSection = {
 
 				} else {
 
-					// display all-continents callout
-					dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+					// display all-continents callout if on non-mobile
+					if (!this.screenIsSmall) dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
 					resolve();
 
 				}
@@ -530,19 +530,25 @@ const continentsSection = {
 					sassVars.continents.introSpread.duration.in * 1000,
 					sassVars.continents.introSpread.delay.in * 1000,
 					TWEEN.Easing.Cubic.InOut);
-
-				// NOTE: this code is specific to displaying/activating continents for the first time in the session
-				// (when the intro modal is dismissed and the continents brought back to the screen center),
-				// but doesn't really have anything to do with bringing the continents back to the screen center.
-				// So, this code should probably belong elsewhere, but for now, here it stays.
-
-				// display the default continents callout and continent labels.
-				dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
-				// this.setLabelVisibility(true);
-
 			}
 
 		});
+
+		if (val) {
+
+			// no mobile caption when continents are spread
+			if (this.screenIsSmall) dispatcher.changeCallout();
+
+		} else {
+			// NOTE: this code is specific to displaying/activating continents for the first time in the session
+			// (when the intro modal is dismissed and the continents brought back to the screen center),
+			// but doesn't really have anything to do with bringing the continents back to the screen center.
+			// So, this code should probably belong elsewhere, but for now, here it stays.
+
+			// display the default continents callout and continent labels.
+			dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+			// this.setLabelVisibility(true);
+		}
 
 		if (this.screenIsSmall) this.setMobileIntroVisibility(val);
 

@@ -117,7 +117,7 @@ a:active {
 
 	visibility: hidden;
 	opacity: 0;
-	transition: visibility 0s 1s, opacity #{$ui-labels-duration-in}s ease;
+	transition: visibility 0s 1s, opacity #{$ui-labels-duration-out}s ease;
 	&.visible {
 		visibility: visible;
 		opacity: 1.0;
@@ -317,7 +317,7 @@ a:active {
 	&#right-arrow {
 		visibility: hidden;
 		opacity: 0;
-		transition: visibility 0s 1s, opacity #{$ui-labels-duration-in}s ease;
+		transition: visibility 0s 1s, opacity #{$ui-labels-duration-out}s ease;
 		&.visible {
 			visibility: visible;
 			opacity: 1.0;
@@ -378,7 +378,7 @@ a:active {
 
 	visibility: hidden;
 	opacity: 0;
-	transition: visibility 0s 1s, opacity #{$ui-labels-duration-in}s ease;
+	transition: visibility 0s 1s, opacity #{$ui-labels-duration-out}s ease;
 	&.visible {
 		visibility: visible;
 		opacity: 1.0;
