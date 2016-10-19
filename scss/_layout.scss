@@ -157,9 +157,10 @@ a:active {
 		border-bottom: 1px solid $text-color;
 
 		#infoButton {
+			display: none;
 			position: relative;
 			bottom: 0.2rem;
-			display: inline-block;
+			// display: inline-block;
 		}
 	}
 }
