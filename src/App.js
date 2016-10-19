@@ -1166,6 +1166,8 @@ export default function (...initArgs) {
 			currentSection.setContinentIntroPositions(false);
 		}
 
+		if (screenIsSmall) return;
+
 		if (val) {
 
 			// bail if already open

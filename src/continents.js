@@ -65,6 +65,8 @@ const continentsSection = {
 
 		this.initLabels(this.labelContainer);
 
+		this.initMobileElements(containerNode, this.labelContainer);
+
 		// Bind transition namespace to current scope
 		Object.keys(this.transitions).forEach(transitionKey => {
 			this.transitions[transitionKey] = this.transitions[transitionKey].bind(this);
@@ -287,6 +289,19 @@ const continentsSection = {
 
 	},
 
+	initMobileElements: function (containerNode, labelContainer) {
+
+		labelContainer.append('div')
+			.classed('intro-element message', true)
+		.append('p')
+		.html(emotionsData.metadata.intro.body);
+
+		d3.select(containerNode).append('div')
+			.classed('intro-element button', true)
+		.text(`Let's get started`);
+
+	},
+
 	calculateContinentTransforms: function () {
 
 		if (!this.screenIsSmall) return null;
@@ -296,27 +311,37 @@ const continentsSection = {
 			{
 				x: -0.23,
 				y: -0.13,
-				size: 0.15
+				size: 0.15,
+				introSpreadMaxRad: 0.55,
+				introSpreadSizeMod: 1
 			},
 			{
 				x: -0.17,
 				y: 0.03,
-				size: 0.15
+				size: 0.15,
+				introSpreadMaxRad: 0.7,
+				introSpreadSizeMod: 1
 			},
 			{
 				x: 0.06,
 				y: -0.18,
-				size: 0.15
+				size: 0.15,
+				introSpreadMaxRad: 0.4,
+				introSpreadSizeMod: 1
 			},
 			{
 				x: 0.12,
 				y: 0.10,
-				size: 0.15
+				size: 0.15,
+				introSpreadMaxRad: 0.8,
+				introSpreadSizeMod: 1
 			},
 			{
 				x: 0.24,
 				y: -0.02,
-				size: 0.15
+				size: 0.15,
+				introSpreadMaxRad: 0.55,
+				introSpreadSizeMod: 1
 			}
 		];
 
@@ -489,7 +514,8 @@ const continentsSection = {
 			if (val) {
 				continent.addTween(
 					{
-						'introSpreadRad': continent.introSpreadMaxRad * diag
+						'introSpreadRad': continent.introSpreadMaxRad * diag,
+						'introSpreadSize': continent.introSpreadSizeMod || 0
 					},
 					sassVars.continents.introSpread.duration.out * 1000,
 					sassVars.continents.introSpread.delay.out * 1000,
@@ -498,7 +524,8 @@ const continentsSection = {
 			} else {
 				continent.addTween(
 					{
-						'introSpreadRad': 0
+						'introSpreadRad': 0,
+						'introSpreadSize': 0
 					},
 					sassVars.continents.introSpread.duration.in * 1000,
 					sassVars.continents.introSpread.delay.in * 1000,
@@ -517,9 +544,28 @@ const continentsSection = {
 
 		});
 
+		if (this.screenIsSmall) this.setMobileIntroVisibility(val);
+
 	},
 
-	setLabelVisibility: function(val) {
+	setMobileIntroVisibility: function (val) {
+
+		this.labelContainer.select('.intro-element.message')
+			.classed('visible', val);
+
+		let introButton = d3.select('.intro-element.button')
+			.style('display', 'block');
+
+		// set visible class after one-frame delay so that 'display' style doesn't interfere with transition
+		setTimeout(() => { introButton.classed('visible', val); }, 1);
+
+		introButton.on('click', val ? event => {
+			dispatcher.navigate(dispatcher.HOME);
+		} : null);
+
+	},
+
+	setLabelVisibility: function (val) {
 		this.labelContainer
 			.selectAll('.emotion-label')
 			.classed('visible', val);

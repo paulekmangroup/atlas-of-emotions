@@ -201,6 +201,7 @@ export default class Continent {
 		this.baseTransforms = Object.assign({}, Continent.transforms[emotionIndex], transforms[emotionIndex]);
 
 		this.introSpreadRad = 0;
+		this.introSpreadSize = 0;
 
 		this.scaleX = 1.0;
 		this.scaleY = 1.0;
@@ -272,7 +273,8 @@ export default class Continent {
 		}
 
 		let transX = this.centerX + this.x + this.drift.x,
-			transY = this.centerY + this.y + this.drift.y;
+			transY = this.centerY + this.y + this.drift.y,
+			introSizeMod = 1 + (this.introSpreadSize || 0);
 
 		if (this.introSpreadRad) {
 			transX += this.introSpreadRad * Math.cos(this.introSpreadAng);
@@ -288,8 +290,8 @@ export default class Continent {
 						transY
 					)
 					.scale(
-						this.scaleX,
-						this.scaleY
+						this.scaleX * introSizeMod,
+						this.scaleY * introSizeMod
 					)
 				);
 		}
@@ -356,7 +358,7 @@ export default class Continent {
 			this.tweens = {};
 		}
 
-		let key = Object.keys(props).sort().join(',');
+		let key = Object.keys(props).sort().join('-');
 		if (this.tweens[key]) {
 			this.tweens[key].stop();
 		}
