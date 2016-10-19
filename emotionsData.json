@@ -1559,6 +1559,29 @@
           }
         },
         {
+          "name": "Peace",
+          "desc": "An experience of ease and contenment.",
+          "range": {
+            "min": 2,
+            "max": 10
+          },
+          "actions": {
+            "all": [
+              "maintain",
+              "engage/connect",
+              ""
+            ],
+            "con": [
+              "maintain",
+              "engage/connect"
+            ],
+            "des": [
+              ""
+            ],
+            "both": []
+          }
+        },
+        {
           "name": "Excitement",
           "desc": "Energy that, unlike other enjoyable emotions, is rarely felt slightly, but ranges from mid to high in intesnity. May merge with any of the emotions, generating a very active form of that emotion.",
           "range": {
@@ -1689,8 +1712,8 @@
   },
   "metadata": {
     "intro": {
-      "header": "Welcome to the Atlas of Emotions ",
-      "body": "This collection of maps is an opportunity for you to explore the landscape of emotions, where they come from and the effects they can have.",
+      "header": "Welcome to the Atlas of Emotions",
+      "body": "This atlas was inspired by a series of conversations between the Dalai Lama and Dr. Paul Ekman about the science of emotion.<br><br> The following collection of maps provide an opportunity to explore the landscape of emotions, where they come from and the effects they can have.",
       "steps": [
         {
           "header": "Welcome to the Atlas of Emotions",
@@ -1710,16 +1733,16 @@
       ]
     },
     "continents": {
-      "header": "The Five Continents of Emotion",
-      "body": "Each emotion is represented as a continent. The movement of the continents reflects how emotions vary in strength and frequency in people’s lives."
+      "header": "Five Universal Emotions",
+      "body": "Most emotions researchers agree on these five Universal Emotions: emotions that all humans, no matter where or how we were raised, have in common. The movement of the shapes reflects how the emotions vary in strength and frequency in our lives. Select an emotion to learn more."
     },
     "states": {
       "header": "States of LHAMO",
-      "body": "Each emotion contains a number of related states, which differ in intensity. The states shown here are representative, not exhaustive."
+      "body": "LHAMO can be felt mildly, extremely, or somewhere in between. Tap and drag across the shapes above to learn about a few of the states that we can experience."
     },
     "actions": {
       "header": "Actions of LHAMO",
-      "body": "An emotional state may lead to actions, which can be <a id=\"annexLink\" href=\"#more:annex-intrinsic-remedial\">intrinsic or intentional</a> and constructive, destructive or ambiguous, depending on the state. Actions shown here are intrinsic, happening without conscious choice. Click on a state to explore.",
+      "body": "We respond to emotional states with our actions. Select a state to learn about the possible actions resulting from LHAMO. Then click on an action to learn more.",
       "qualities": [
         {
           "header": "Constructive Actions",
@@ -1737,19 +1760,19 @@
     },
     "triggers": {
       "header": "Triggers of LHAMO",
-      "body": "Triggers automatically bring forth an emotion without consideration. Awareness of the trigger usually takes place at the end of this <a id=\"annexLink\" href=\"#more:annex-episode-timeline\">process</a>, if at all.",
+      "body": "A trigger is something around us or in our own minds that causes us to feel an emotion. Select the labels to learn about triggering LHAMO.",
       "steps": [
         {
           "header": "Triggers",
-          "body": "Some triggers are universal, some are learned through cultural experience, and some are learned through individual experience."
+          "body": "Some triggers are hardwired and universal for everyone, other triggers are learned from the world around us and our individual experience."
         },
         {
           "header": "Perception",
-          "body": "We can become emotional about anything: the world around us, both novel and familiar, and our own expectations and memories."
+          "body": "Past personal experience determines whether or not a learned trigger makes us feel emotional. Universal triggers break through regardless."
         },
         {
           "header": "Response",
-          "body": "The emotions are our response to triggers. They arise automatically and result in emotional actions."
+          "body": "Emotion is our automatic response to being triggered. The state of emotion we feel and the actions we take often happen without our realizing why."
         },
         {
           "header": "Universal Triggers",
@@ -1757,17 +1780,17 @@
         },
         {
           "header": "Learned Triggers",
-          "body": "This is an example of a learned trigger. Learned triggers are either cultural, stemming from widely shared experiences, or personal, arising from more individual experiences."
+          "body": "This is an example of a learned trigger. Learned triggers can be informed by our culture, stemming from widely shared experiences and norms, or personal, created from important and impactful individual experiences."
         }
       ]
     },
     "moods": {
       "header": "A Mood of LHAMO",
-      "body": "This is an example of a mood, a longer-lasting cousin of the emotion that causes the related emotion to be felt more frequently and intensely. It is not always apparent what triggers a mood."
+      "body": "Moods are longer-lasting cousins of an emotion that cause us to feel the related emotion repeatedly without any clear trigger. Select the shape to learn more."
     },
     "calm": {
       "header": "Experiencing Calm",
-      "body": "A calm, balanced frame of mind is necessary to evaluate and understand our changing emotions. Calmness ideally is a baseline state, unlike emotions, which arise when triggered and then recede.",
+      "body": "A calm, balanced frame of mind helps us understand our changing emotions. We can reach calmness through developing an awareness of what triggers our emotions, how we experience our states of emotions and what actions are constructive. Calmness ideally is our baseline in which emotions arise when triggered and then recede .",
       "secondary": {
         "header": "Visit the Annex",
         "body": "To learn more about emotions, click on “More Information” in the bottom right corner."
