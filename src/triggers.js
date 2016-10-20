@@ -515,17 +515,21 @@ export default {
 
 			// universal/learned triggers popup labels
 			let universalLearnedLabelContainer = labelContainer.append('div')
-				.classed(`universal-learned-labels ${emotion}`, true);
+					.classed(`universal-learned-labels ${emotion}`, true),
+				universalTransform = this.getUniversalLearnedTransform('universal', haloRadius),
+				learnedTransform = this.getUniversalLearnedTransform('learned', haloRadius);
 			universalLearnedLabelContainer.append('div')
 				.attr('class', `emotion-label ${TRIGGER_TYPES.UNIVERSAL} ${emotion}`)
 				.attr('data-popuptarget', `triggers:${emotion}-${TRIGGER_TYPES.UNIVERSAL}`)
-				.style('transform', this.getUniversalLearnedTransform('universal', haloRadius))
+				.style('transform', universalTransform)
+				.style('-webkit-transform', universalTransform)
 			.append('h3')
 				.text(emotionsData.metadata.triggers.steps[3].header.toUpperCase());
 			universalLearnedLabelContainer.append('div')
 				.attr('class', `emotion-label ${TRIGGER_TYPES.LEARNED} ${emotion}`)
 				.attr('data-popuptarget', `triggers:${emotion}-${TRIGGER_TYPES.LEARNED}`)
-				.style('transform', this.getUniversalLearnedTransform('learned', haloRadius))
+				.style('transform', learnedTransform)
+				.style('-webkit-transform', learnedTransform)
 			.append('h3')
 				.text(emotionsData.metadata.triggers.steps[4].header.toUpperCase());
 
@@ -651,6 +655,7 @@ export default {
 				previousContainer.on('transitionend', event => {
 					previousContainer.on('transitionend', null);
 					previousContainer.style('transform', null);
+					previousContainer.style('-webkit-transform', null);
 					previousContainer.classed('transitioning', false);
 				});
 
@@ -671,6 +676,7 @@ export default {
 				// delay to allow a little time for opacity to come up before translating
 				setTimeout(() => {
 					previousContainer.style('transform', 'translateX(' + -dx + 'px)');
+					previousContainer.style('-webkit-transform', 'translateX(' + -dx + 'px)');
 				}, sassVars.emotions.panX.delay * 1000);
 			}
 
@@ -682,12 +688,14 @@ export default {
 				// else, move into position immediately to prepare for transition
 				currentContainer.classed('transitioning', false);
 				currentContainer.style('transform', 'translateX(' + dx + 'px)');
+				currentContainer.style('-webkit-transform', 'translateX(' + dx + 'px)');
 			}
 
 			// delay to allow a little time for opacity to come up before translating
 			setTimeout(() => {
 				currentContainer.classed('transitioning active', true);
 				currentContainer.style('transform', 'translateX(0)');
+				currentContainer.style('-webkit-transform', 'translateX(0)');
 			}, sassVars.emotions.panX.delay * 1000);
 
 			this.renderGraph(this.currentEmotion);
@@ -793,13 +801,15 @@ export default {
 			.on('click', d => this.showTriggerPopup(d.type, d.name));
 
 		// merge
+		let t = (d,i) => {
+			let xShift = document.getElementsByClassName(d.name.replace(/\s+/g, '-'))[0].offsetWidth * (adjustTranslation[emotion][i] - .5);
+			let x = 0.5 * this.sectionContainer.offsetWidth + Math.cos(d.angle) * d.radius + xShift,
+				y = h + Math.sin(d.angle) * d.radius - 10;
+			return 'translate(' + x + 'px,' + y + 'px)';
+		};
 		labelSelection
-			.style('transform', (d,i) => {
-				let xShift = document.getElementsByClassName(d.name.replace(/\s+/g, '-'))[0].offsetWidth * (adjustTranslation[emotion][i] - .5);
-				let x = 0.5 * this.sectionContainer.offsetWidth + Math.cos(d.angle) * d.radius + xShift,
-					y = h + Math.sin(d.angle) * d.radius - 10;
-				return 'translate(' + x + 'px,' + y + 'px)';
-			});
+			.style('transform', t)
+			.style('-webkit-transform', t);
 
 		// exit
 		labelSelection.exit()
@@ -972,10 +982,14 @@ export default {
 			});
 
 			// update universal/learned labels
+			let universalTransform = this.getUniversalLearnedTransform('universal', haloRadius),
+				learnedTransform = this.getUniversalLearnedTransform('learned', haloRadius);
 			labelContainer.select(`.${TRIGGER_TYPES.UNIVERSAL}`)
-				.style('transform', this.getUniversalLearnedTransform('universal', haloRadius));
+				.style('transform', universalTransform)
+				.style('-webkit-transform', universalTransform);
 			labelContainer.select(`.${TRIGGER_TYPES.LEARNED}`)
-				.style('transform', this.getUniversalLearnedTransform('learned', haloRadius));
+				.style('transform', learnedTransform)
+				.style('-webkit-transform', learnedTransform);
 
 			this.renderLabels(emotion);
 

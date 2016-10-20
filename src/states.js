@@ -413,6 +413,8 @@ export default {
 					previousGraph.on('transitionend', null);
 					previousGraph.style('transform', null);
 					previousLabels.style('transform', null);
+					previousGraph.style('-webkit-transform', null);
+					previousLabels.style('-webkit-transform', null);
 					previousGraph.classed('transitioning', false);
 					previousLabels.classed('transitioning', false);
 				});
@@ -434,6 +436,8 @@ export default {
 				setTimeout(() => {
 					previousGraph.style('transform', 'translateX(' + -dx + 'px)');
 					previousLabels.style('transform', 'translateX(' + -dx + 'px)');
+					previousGraph.style('-webkit-transform', 'translateX(' + -dx + 'px)');
+					previousLabels.style('-webkit-transform', 'translateX(' + -dx + 'px)');
 				}, sassVars.emotions.panX.delay * 1000);
 			}
 
@@ -446,16 +450,20 @@ export default {
 				// else, move into position immediately to prepare for transition
 				currentGraph.classed('transitioning', false);
 				currentGraph.style('transform', 'translateX(' + dx + 'px)');
+				currentGraph.style('-webkit-transform', 'translateX(' + dx + 'px)');
 				currentLabels.classed('transitioning', false);
 				currentLabels.style('transform', 'translateX(' + dx + 'px)');
+				currentLabels.style('-webkit-transform', 'translateX(' + dx + 'px)');
 			}
 
 			// delay to allow a little time for opacity to come up before translating
 			setTimeout(() => {
 				currentGraph.classed('transitioning active', true);
 				currentGraph.style('transform', 'translateX(0)');
+				currentGraph.style('-webkit-transform', 'translateX(0)');
 				currentLabels.classed('transitioning active', true);
 				currentLabels.style('transform', 'translateX(0)');
+				currentLabels.style('-webkit-transform', 'translateX(0)');
 			}, sassVars.emotions.panX.delay * 1000);
 
 			// render labels regardless of if backgrounded or not

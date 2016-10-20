@@ -560,6 +560,7 @@ export default {
 				previousContainer.on('transitionend', event => {
 					previousContainer.on('transitionend', null);
 					previousContainer.style('transform', null);
+					previousContainer.style('-webkit-transform', null);
 					previousContainer.classed('transitioning', false);
 				});
 
@@ -580,6 +581,7 @@ export default {
 				// delay to allow a little time for opacity to come up before translating
 				setTimeout(() => {
 					previousContainer.style('transform', 'translateX(' + -dx + 'px)');
+					previousContainer.style('-webkit-transform', 'translateX(' + -dx + 'px)');
 				}, sassVars.emotions.panX.delay * 1000);
 			}
 
@@ -591,12 +593,14 @@ export default {
 				// else, move into position immediately to prepare for transition
 				currentContainer.classed('transitioning', false);
 				currentContainer.style('transform', 'translateX(' + dx + 'px)');
+				currentContainer.style('-webkit-transform', 'translateX(' + dx + 'px)');
 			}
 
 			// delay to allow a little time for opacity to come up before translating
 			setTimeout(() => {
 				currentContainer.classed('transitioning active', true);
 				currentContainer.style('transform', 'translateX(0)');
+				currentContainer.style('-webkit-transform', 'translateX(0)');
 			}, sassVars.emotions.panX.delay * 1000);
 
 			if (!this.isBackgrounded) {
@@ -936,12 +940,14 @@ export default {
 				.on('click', this.onActionMouseClick);
 
 			// do this last, so that width (determined by text) can be calculated and used
-			labelEnterSelection.style('transform', function (d, i) {
+			let t = function (d, i) {
 				let verticalOffset = (i === 0 || i === labelEnterSelection.size() - 1) ? 20 : 0;
 				return 'translate(' +
 					Math.round(labelSize * Math.cos(Math.PI*(d.rotation-90)/180) - 0.5*this.offsetWidth) + 'px,' +		// center on label width
 					Math.round(labelSize * Math.sin(Math.PI*(d.rotation-90)/180) / sqrt3 + verticalOffset) + 'px)';		// bump down the first and last label
-			});
+			};
+			labelEnterSelection.style('transform', t);
+			labelEnterSelection.style('-webkit-transform', t);
 
 			labelEnterSelection.transition()
 				.duration(sassVars.actions.add.time)
