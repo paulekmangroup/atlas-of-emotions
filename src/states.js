@@ -701,30 +701,31 @@ export default {
 		if (this.currentEmotion) {
 
 			// clear out any existing handlers
-			this.graphContainers[this.currentEmotion].selectAll('path.area')
-				.on('mouseover', null)
-				.on('mouseout', null)
-				.on('click', null, true);
-
-			this.labelContainers[this.currentEmotion].selectAll('div').select('h3')
-				.on('mouseover', null)
-				.on('mouseout', null)
-				.on('click', null, true);
+			if (this.screenIsSmall) {
+				this.graphContainers[this.currentEmotion]
+					.on('touchstart', null);
+			} else {
+				this.graphContainers[this.currentEmotion].selectAll('path.area')
+					.on('mouseover', null)
+					.on('mouseout', null)
+					.on('click', null, true);
+				this.labelContainers[this.currentEmotion].selectAll('div').select('h3')
+					.on('mouseover', null)
+					.on('mouseout', null)
+					.on('click', null, true);
+			}
 
 			// add new handlers if active
 			if (val) {
 
 				if (this.screenIsSmall) {
-
 					this.graphContainers[this.currentEmotion]
 						.on('touchstart', this.onContainerTouchStart);
-
 				} else {
 					this.graphContainers[this.currentEmotion].selectAll('path.area')
 						.on('mouseover', this.onStateMouseOver)
 						.on('mouseout', this.onStateMouseOut)
 						.on('click', this.onStateClick, true);
-
 					this.labelContainers[this.currentEmotion].selectAll('div').select('h3')
 						.on('mouseover', this.onStateMouseOver)
 						.on('mouseout', this.onStateMouseOut)
