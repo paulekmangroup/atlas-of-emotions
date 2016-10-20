@@ -386,7 +386,7 @@ a:active {
 	&.visible {
 		visibility: visible;
 		opacity: 1.0;
-		transition: visibility 0s, opacity #{$ui-labels-duration-in}s 1s ease;
+		transition: visibility 0s, opacity #{$ui-labels-duration-in}s ease;
 	}
 
 	img {

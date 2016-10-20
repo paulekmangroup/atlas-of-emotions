@@ -1070,6 +1070,14 @@ export default {
 
 	},
 
+	shouldDisplayPaginationUI: function () {
+
+		// TODO: only return true if an action is selected
+		// TODO: suppress state selection on mobile
+		return true;
+		
+	},
+
 	applyEventListenersToEmotion: function (emotion, handlersByEvent) {
 
 		let graphContainer = this.graphContainers[emotion];

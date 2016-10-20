@@ -1242,12 +1242,10 @@ export default function (...initArgs) {
 			document.querySelector('#right-arrow').classList[classMethod]('visible');
 
 			if (currentSection === sections[dispatcher.SECTIONS.CONTINENTS]) {
-				console.log(">>>> add immediate");
 				document.querySelector('#down-arrow').classList.add('immediate');
 				document.querySelector('#left-arrow').classList.add('immediate');
 				document.querySelector('#right-arrow').classList.add('immediate');
 			} else {
-				console.log(">>>> remove immediate");
 				document.querySelector('#down-arrow').classList.remove('immediate');
 				document.querySelector('#left-arrow').classList.remove('immediate');
 				document.querySelector('#right-arrow').classList.remove('immediate');
@@ -1292,7 +1290,7 @@ export default function (...initArgs) {
 
 	}
 
-	function updateMobileUI (paginationUIVisible) {
+	function updateMobileUI () {
 
 		// show title mobile header and hide mobile footer when appropriate
 		let titleHeaderAndFooter = currentSection === sections[dispatcher.SECTIONS.CONTINENTS] && !currentEmotion;
@@ -1308,13 +1306,8 @@ export default function (...initArgs) {
 
 		// if forcing to be hidden, hide arrows
 		// else, decide based on the currentSection
-		if (paginationUIVisible !== false) {
-			paginationUIVisible =
-				currentSection === sections[dispatcher.SECTIONS.STATES] ||
-				currentSection === sections[dispatcher.SECTIONS.ACTIONS];
-		}
-
-		let paginationArrows = document.querySelectorAll('.mobile-nav-arrow');
+		let paginationUIVisible = currentSection && currentSection.shouldDisplayPaginationUI && currentSection.shouldDisplayPaginationUI(),
+			paginationArrows = document.querySelectorAll('.mobile-nav-arrow');
 		for (let i=0; i<paginationArrows.length; i++) {
 			paginationArrows[i].classList[paginationUIVisible ? 'add' : 'remove']('visible');
 		}
@@ -1361,7 +1354,6 @@ export default function (...initArgs) {
 
 		if (screenIsSmall) {
 			setMobileCaption(title, body);
-			updateMobileUI(!!title);
 			return;
 		}
 
@@ -1390,7 +1382,7 @@ export default function (...initArgs) {
 
 	function setMobileCaption (title, body) {
 
-		console.log(">>>>> mobile caption:", title);
+		updateMobileUI();
 
 		document.querySelector('#mobile-caption .headline').innerHTML = title || '';
 		document.querySelector('#mobile-caption .body').innerHTML = body || '';

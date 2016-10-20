@@ -388,6 +388,14 @@ export default {
 			let previousEmotion = this.currentEmotion;
 			this.currentEmotion = emotion;
 
+			// unselect any selected state when changing emotions.
+			// currently only happens on mobile, but might also want to happen on desktop...
+			// TODO: evaluate ^^.
+			if (this.screenIsSmall) {
+				this.selectedState = null;
+				this.setHighlightedState(null);
+			}
+
 			let emotionState = this.emotionStates[emotion];
 			let isClosed = !emotionState.data;
 			if (isClosed) {
@@ -590,6 +598,7 @@ export default {
 	},
 
 	close: function () {
+		console.log(">>>>> Close");
 		return new Promise((resolve, reject) => {
 			//
 			// TODO: the logic below should be reusable for transitioning between emotions.
@@ -750,6 +759,13 @@ export default {
 			resolve();
 
 		});
+
+	},
+
+	shouldDisplayPaginationUI: function () {
+
+		// only display pagination UI while a state is selected
+		return !!this.selectedState;
 
 	},
 
