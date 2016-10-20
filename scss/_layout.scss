@@ -323,6 +323,9 @@ a:active {
 			visibility: visible;
 			opacity: 1.0;
 			transition: visibility 0s, opacity #{$ui-labels-duration-in}s 1s ease;
+			&.immediate {
+				transition: visibility 0s, opacity #{$ui-labels-duration-in}s ease;
+			}
 		}
 	}
 

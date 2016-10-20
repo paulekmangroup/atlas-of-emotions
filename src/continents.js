@@ -20,6 +20,7 @@ const continentsSection = {
 	isInited: false,
 	isActive: false,
 	screenIsSmall: false,
+	displayingIntro: false,
 	closeDelay: sassVars.ui.labels.duration.in * 1000,
 
 	init: function (containerNode, screenIsSmall) {
@@ -505,6 +506,9 @@ const continentsSection = {
 	 * @param {Boolean} val If true, continents tween away from center; false, back to normal positions.
 	 */
 	setContinentIntroPositions (val) {
+
+		if (this.displayingIntro === val) return;
+		this.displayingIntro = val;
 
 		let w = this.sectionContainer.offsetWidth,
 			h = this.sectionContainer.offsetHeight,

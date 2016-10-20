@@ -1240,6 +1240,18 @@ export default function (...initArgs) {
 			document.querySelector('#down-arrow').classList[classMethod]('visible');
 			document.querySelector('#left-arrow').classList[classMethod]('visible');
 			document.querySelector('#right-arrow').classList[classMethod]('visible');
+
+			if (currentSection === sections[dispatcher.SECTIONS.CONTINENTS]) {
+				console.log(">>>> add immediate");
+				document.querySelector('#down-arrow').classList.add('immediate');
+				document.querySelector('#left-arrow').classList.add('immediate');
+				document.querySelector('#right-arrow').classList.add('immediate');
+			} else {
+				console.log(">>>> remove immediate");
+				document.querySelector('#down-arrow').classList.remove('immediate');
+				document.querySelector('#left-arrow').classList.remove('immediate');
+				document.querySelector('#right-arrow').classList.remove('immediate');
+			}
 		} else if (sectionName == 'calm' || sectionName == 'more'){
 			// arrow not visible
 			document.querySelector('.downArrow').classList.remove('visible');
@@ -1377,6 +1389,8 @@ export default function (...initArgs) {
 	}
 
 	function setMobileCaption (title, body) {
+
+		console.log(">>>>> mobile caption:", title);
 
 		document.querySelector('#mobile-caption .headline').innerHTML = title || '';
 		document.querySelector('#mobile-caption .body').innerHTML = body || '';
