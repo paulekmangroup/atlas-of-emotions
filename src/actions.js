@@ -600,8 +600,8 @@ export default {
 			}, sassVars.emotions.panX.delay * 1000);
 
 			if (!this.isBackgrounded) {
-				// activate states if not backgrounded
-				states.setActive(true);
+				// activate states if not backgrounded, and on desktop
+				if (!this.screenIsSmall) states.setActive(true);
 			} else {
 				// remove labels if backgrounded
 				this.renderLabels(null, true);
