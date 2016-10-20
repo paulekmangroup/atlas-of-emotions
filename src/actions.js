@@ -545,6 +545,13 @@ export default {
 			let previousEmotion = this.currentEmotion;
 			this.currentEmotion = emotion;
 
+			// deselect anything selected.
+			// currently only happens on mobile, but might also want to happen on desktop...
+			// TODO: evaluate ^^.
+			if (this.screenIsSmall) {
+				this.setHighlightedAction(null);
+			}
+
 			// transition graphs and labels
 			let dx = 0;
 			if (previousEmotion) {
@@ -1053,6 +1060,13 @@ export default {
 			this.sectionContainer.classList[(options && (options.sectionName === dispatcher.SECTIONS.TRIGGERS) ? 'add' : 'remove')]('triggers');
 			this.sectionContainer.classList[(options && (options.sectionName === dispatcher.SECTIONS.MOODS) ? 'add' : 'remove')]('moods');
 
+			// deselect anything selected.
+			// currently only happens on mobile, but might also want to happen on desktop...
+			// TODO: evaluate ^^.
+			if (val && this.screenIsSmall) {
+				this.setHighlightedAction(null);
+			}
+
 			// this.hideChrome();
 			// this.setActive(!val);
 
@@ -1067,14 +1081,12 @@ export default {
 			resolve();
 
 		});
-
 	},
 
 	shouldDisplayPaginationUI: function () {
 
-		// TODO: only return true if an action is selected
-		// TODO: suppress state selection on mobile
-		return true;
+		// only display pagination UI while an action is selected
+		return !!this.highlightedAction;
 		
 	},
 

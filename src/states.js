@@ -598,7 +598,6 @@ export default {
 	},
 
 	close: function () {
-		console.log(">>>>> Close");
 		return new Promise((resolve, reject) => {
 			//
 			// TODO: the logic below should be reusable for transitioning between emotions.
@@ -739,9 +738,16 @@ export default {
 			const hasBackgroundedClass = this.sectionContainer.classList.contains('backgrounded');
 
 			// apply `states-in-out` class any time animating into or out of states section
-			if (!val && this.sectionContainer.classList.contains('backgrounded') ||
-				val && !this.sectionContainer.classList.contains('backgrounded')) {
+			if (!val && hasBackgroundedClass || val && !hasBackgroundedClass) {
 				this.sectionContainer.classList.add('states-in-out');
+
+				// and deselect anything selected.
+				// currently only happens on mobile, but might also want to happen on desktop...
+				// TODO: evaluate ^^.
+				if (this.screenIsSmall) {
+					this.selectedState = null;
+					this.setHighlightedState(null);
+				}
 			} else {
 				this.sectionContainer.classList.remove('states-in-out');
 			}
