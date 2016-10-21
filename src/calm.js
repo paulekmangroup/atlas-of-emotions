@@ -16,10 +16,13 @@ export default {
 
 	isInited: false,
 	isActive: false,
+	screenIsSmall: false,
 
-	init: function (containerNode) {
+	init: function (containerNode, screenIsSmall) {
 
 		this.sectionContainer = containerNode;
+
+		this.screenIsSmall = screenIsSmall;
 
 		this.update = this.update.bind(this);
 
@@ -46,41 +49,15 @@ export default {
 
 		this.elapsedToOpacity = d3.scale.linear().domain([0, .05 ,.25, .4, 1]).range([0,.1,.9,.9,0]);
 
-		continentGeom = this.defineContinentGeom(w,h);
+		continentGeom = this.defineContinentGeom(w, h);
 
 		// left-to-right
 		let posScalar = 2.0;
 		let sizeScalar = 6.0;
-		let continentTransforms = [
-			{
-				x: 0.08 * posScalar,
-				y: 0.15 * posScalar,
-				size: 0.11 * sizeScalar
-			},
-			{
-				x: -0.37 * posScalar,
-				y: 0.17 * posScalar,
-				size: 0.13 * sizeScalar
-			},
-			{
-				x: 0.04 * posScalar,
-				y: -0.26 * posScalar,
-				size: 0.15 * sizeScalar
-			},
-			{
-				x: -0.19 * posScalar,
-				y: -0.02 * posScalar,
-				size: 0.11 * sizeScalar
-			},
-			{
-				x: 0.32 * posScalar,
-				y: -0.11 * posScalar,
-				size: 0.13 * sizeScalar
-			}
-		];
+		let continentTransforms = this.calculateContinentTransforms();
 
 		// map each emotion to a Continent instance
-		continents = _.values(dispatcher.EMOTIONS).map(emotion => new Continent(emotion, continentContainer, continentGeom, continentTransforms));
+		continents = _.values(dispatcher.EMOTIONS).map(emotion => new Continent(emotion, continentContainer, continentGeom, continentTransforms, this.screenIsSmall));
 
 		let startAgain = d3.select(this.sectionContainer).append('div')
 			.classed('start-again', true);
@@ -143,6 +120,84 @@ export default {
 
 	},
 
+	calculateContinentTransforms: function () {
+
+		// TODO: DRY this out, this is continents.js copypasta
+		if (!this.screenIsSmall) {
+
+			return [
+				{
+					x: 0.08 * posScalar,
+					y: 0.15 * posScalar,
+					size: 0.11 * sizeScalar
+				},
+				{
+					x: -0.37 * posScalar,
+					y: 0.17 * posScalar,
+					size: 0.13 * sizeScalar
+				},
+				{
+					x: 0.04 * posScalar,
+					y: -0.26 * posScalar,
+					size: 0.15 * sizeScalar
+				},
+				{
+					x: -0.19 * posScalar,
+					y: -0.02 * posScalar,
+					size: 0.11 * sizeScalar
+				},
+				{
+					x: 0.32 * posScalar,
+					y: -0.11 * posScalar,
+					size: 0.13 * sizeScalar
+				}
+			];
+
+		} else {
+
+			// left-to-right
+			return [
+				{
+					x: -0.23,
+					y: -0.13,
+					size: 0.15,
+					introSpreadMaxRad: 0.55,
+					introSpreadSizeMod: 1
+				},
+				{
+					x: -0.17,
+					y: 0.03,
+					size: 0.15,
+					introSpreadMaxRad: 0.7,
+					introSpreadSizeMod: 1
+				},
+				{
+					x: 0.06,
+					y: -0.18,
+					size: 0.15,
+					introSpreadMaxRad: 0.4,
+					introSpreadSizeMod: 1
+				},
+				{
+					x: 0.12,
+					y: 0.10,
+					size: 0.15,
+					introSpreadMaxRad: 0.8,
+					introSpreadSizeMod: 1
+				},
+				{
+					x: 0.24,
+					y: -0.02,
+					size: 0.15,
+					introSpreadMaxRad: 0.55,
+					introSpreadSizeMod: 1
+				}
+			];
+
+		}
+
+	},
+
 	open: function () {
 
 		this.setActive(true);
@@ -167,16 +222,23 @@ export default {
 
 	},
 
-	defineContinentGeom(w,h){
-		centerX = 0.55 * w;
-		centerY = 0.5 * h;
+	defineContinentGeom (w, h) {
+
+		if (this.screenIsSmall) {
+			centerX = sassVars.continents['centerX-small'] * w;
+			centerY = sassVars.continents['centerY-small'] * h;
+		} else {
+			centerX = 0.55/*sassVars.continents.centerX*/ * w;
+			centerY = sassVars.continents.centerY * h;
+		}
 
 		return {
-			w: Math.min(w,h),
-			h: Math.min(w,h),
+			w: Math.min(w, h),
+			h: Math.min(w, h),
 			centerX: centerX,
 			centerY: centerY
 		};
+
 	},
 
 	/**
@@ -185,16 +247,18 @@ export default {
 	 * but Continent.onResize() does not update existing Circle sizes
 	 * so size changes take a bit of time to propagate.
 	 */
-	onResize: function () {
+	onResize: function (screenIsSmall) {
+
+		this.screenIsSmall = screenIsSmall;
 
 		// update continents
 		let w = this.sectionContainer.offsetWidth,
 			h = this.sectionContainer.offsetHeight,
 			continentGeom;
 
-		continentGeom = this.defineContinentGeom(w,h);
+		continentGeom = this.defineContinentGeom(w, h);
 
-		continents.forEach((c) => c.onResize(continentGeom));
+		continents.forEach((c) => c.onResize(continentGeom, this.screenIsSmall));
 
 		// update label positions
 		let labels = this.labelContainer.selectAll('.emotion-label')
