@@ -4,6 +4,7 @@ import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
 import emotionsData from '../static/emotionsData.json';
+import localizer from './localizer.js';
 import sassVars from '../scss/variables.json';
 import states from './states.js';
 
@@ -644,6 +645,7 @@ export default {
 
 		} else {
 
+			// TODO: actions.js:648 Uncaught (in promise) TypeError: Cannot read property 'allActions' of undefined(…)
 			currentActionsData = this.actionsData[this.currentEmotion].allActions;
 
 		}
@@ -1179,7 +1181,7 @@ export default {
 
 	resetCallout: function () {
 		dispatcher.popupChange();
-		dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.actions.header, emotionsData.metadata.actions.body);
+		dispatcher.changeCallout(this.currentEmotion, localizer(emotionsData.metadata.actions.header), localizer(emotionsData.metadata.actions.body));
 	}
 
 	/*

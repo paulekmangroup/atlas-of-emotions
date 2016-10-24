@@ -2,6 +2,7 @@ import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
 import emotionsData from '../static/emotionsData.json';
+import localizer from './localizer.js';
 import secondaryData from '../static/secondaryData.json';
 import sassVars from '../scss/variables.json';
 
@@ -97,14 +98,14 @@ export default {
 
 			let modalHeadline = document.createElement('h2');
 			modalHeadline.classList.add('headline');
-			modalHeadline.textContent = pageData.header;
+			modalHeadline.textContent = localizer(pageData.header);
 
 			let modalBody = document.createElement('p');
 			modalBody.classList.add('body');
-			modalBody.innerHTML = pageData.body;
+			modalBody.innerHTML = localizer(pageData.body);
 
 			let modalCaption = document.createElement('figcaption');
-			modalCaption.innerHTML = pageData.caption;
+			modalCaption.innerHTML = localizer(pageData.caption);
 
 			page.appendChild(modalHeadline);
 			page.appendChild(modalBody);

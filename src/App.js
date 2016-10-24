@@ -62,7 +62,7 @@ export default function (...initArgs) {
 
 
 	function init (containerNode) {
-
+		console.log(emotionsData);
 		renderSmallScreenWarning();
 
 		initContainers();

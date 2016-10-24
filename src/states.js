@@ -3,6 +3,7 @@ import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
 import emotionsData from '../static/emotionsData.json';
+import localizer from './localizer.js';
 import sassVars from '../scss/variables.json';
 
 const LABEL_APPEAR_DELAY = 1000;
@@ -1622,7 +1623,7 @@ export default {
 
 	resetCallout: function () {
 		dispatcher.popupChange();
-		dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.states.header, emotionsData.metadata.states.body/* + '<br><br>' + emotionsData.emotions[this.currentEmotion].statesDesc*/);
+		dispatcher.changeCallout(this.currentEmotion, localizer(emotionsData.metadata.states.header), localizer(emotionsData.metadata.states.body)/* + '<br><br>' + emotionsData.emotions[this.currentEmotion].statesDesc*/);
 
 	}
 

@@ -3,6 +3,7 @@ import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
 import emotionsData from '../static/emotionsData.json';
+import localizer from './localizer.js';
 import sassVars from '../scss/variables.json';
 import states from './states.js';
 import actions from './actions.js';
@@ -206,7 +207,8 @@ export default {
 			.attr('class', `emotion-label label ${this.currentEmotion} visible default-interactive-helper`)
 			.attr('data-popuptarget', `moods:${this.currentEmotion}`);
 
-		label.select('h3').text(moodsCopy.name.toUpperCase());
+		console.log(moodsCopy);
+		label.select('h3').text( (localizer(moodsCopy.name)).toUpperCase());
 	},
 
 	setEmotion: function (emotion) {
@@ -343,7 +345,7 @@ export default {
 			this.setBackgroundListener(true);
 		} else {
 			dispatcher.popupChange();
-			dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.moods.header, emotionsData.metadata.moods.body);
+			dispatcher.changeCallout(this.currentEmotion, localizer(emotionsData.metadata.moods.header), localizer(emotionsData.metadata.moods.body));
 			this.setBackgroundListener(false);
 		}
 	}

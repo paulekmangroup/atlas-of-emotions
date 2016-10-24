@@ -3,6 +3,7 @@ import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
 import emotionsData from '../static/emotionsData.json';
+import localizer from './localizer.js';
 import sassVars from '../scss/variables.json';
 import states from './states.js';
 import actions from './actions.js';
@@ -512,13 +513,13 @@ export default {
 				.attr('data-popuptarget', `triggers:${emotion}-${TRIGGER_TYPES.UNIVERSAL}`)
 				.style('transform', this.getUniversalLearnedTranslation('universal', haloRadius))
 			.append('h3')
-				.text(emotionsData.metadata.triggers.steps[3].header.toUpperCase());
+				.text( (localizer(emotionsData.metadata.triggers.steps[3].header)).toUpperCase());
 			universalLearnedLabelContainer.append('div')
 				.attr('class', `emotion-label ${TRIGGER_TYPES.LEARNED} ${emotion}`)
 				.attr('data-popuptarget', `triggers:${emotion}-${TRIGGER_TYPES.LEARNED}`)
 				.style('transform', this.getUniversalLearnedTranslation('learned', haloRadius))
 			.append('h3')
-				.text(emotionsData.metadata.triggers.steps[4].header.toUpperCase());
+				.text( (localizer(emotionsData.metadata.triggers.steps[4].header)).toUpperCase());
 
 			this.labelContainers[emotion] = labelContainer;
 
@@ -558,7 +559,7 @@ export default {
 
 			labelsEnter
 				.append('h3')
-					.text(d => d.header.toUpperCase());
+					.text(d => (localizer(d.header)).toUpperCase());
 
 		});
 
@@ -1001,9 +1002,9 @@ export default {
 
 		let triggerText = "";
 		if(triggerType == 'universal'){
-			triggerText = emotionsData.metadata.triggers.steps[3].body;
+			triggerText = localizer(emotionsData.metadata.triggers.steps[3].body);
 		} else {
-			triggerText = emotionsData.metadata.triggers.steps[4].body;
+			triggerText = localizer(emotionsData.metadata.triggers.steps[4].body);
 		}
 		dispatcher.popupChange('triggers', name, triggerText);
 
@@ -1131,10 +1132,10 @@ export default {
 
 		if (hitAreaId) {
 			const step = emotionsData.metadata.triggers.steps[hitAreaId-1];
-			dispatcher.popupChange('triggers', `${this.currentEmotion}-${step.header.toLowerCase()}`, step.body);
+			dispatcher.popupChange('triggers', `${this.currentEmotion}-${(localizer(step.header)).toLowerCase()}`, localizer(step.body));
 		} else {
 			dispatcher.popupChange();
-			dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.triggers.header, emotionsData.metadata.triggers.body);
+			dispatcher.changeCallout(this.currentEmotion, localizer(emotionsData.metadata.triggers.header), localizer(emotionsData.metadata.triggers.body));
 
 			// this should technically be in a popup closed handler,
 			// but popupManager only dispatches events for popup close button clicks.

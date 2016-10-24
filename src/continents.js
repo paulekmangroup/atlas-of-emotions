@@ -7,6 +7,7 @@ import Circle from './Circle.js';
 import Continent from './Continent.js';
 
 import emotionsData from '../static/emotionsData.json';
+import localizer from './localizer.js';
 import sassVars from '../scss/variables.json';
 
 let continents,
@@ -112,7 +113,7 @@ const continentsSection = {
 							this.transitions.panToContinent(null, currentEmotion);
 
 							// display all-continents callout
-							dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+							dispatcher.changeCallout(null, localizer(emotionsData.metadata.continents.header), localizer(emotionsData.metadata.continents.body));
 
 							resolve();
 
@@ -125,7 +126,7 @@ const continentsSection = {
 
 						let continent = continents.find(c => c.id === emotion);
 						this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.SELECTED);
-						dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+						dispatcher.changeCallout(null, localizer(emotionsData.metadata.continents.header), localizer(emotionsData.metadata.continents.body));
 
 						resolve();
 
@@ -138,7 +139,7 @@ const continentsSection = {
 					this.setContinentHighlight(null, Continent.HIGHLIGHT_LEVELS.NONE);
 
 					// display all-continents callout
-					dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+					dispatcher.changeCallout(null, localizer(emotionsData.metadata.continents.header), localizer(emotionsData.metadata.continents.body));
 
 					if (this.zoomedInContinent) {
 
@@ -203,7 +204,7 @@ const continentsSection = {
 							this.transitions.panToContinent(null, previousEmotion);
 
 							// display all-continents callout
-							dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+							dispatcher.changeCallout(null, localizer(emotionsData.metadata.continents.header), localizer(emotionsData.metadata.continents.body));
 
 							resolve();
 
@@ -216,7 +217,7 @@ const continentsSection = {
 						this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.SELECTED);
 
 						// display all-continents callout
-						dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+						dispatcher.changeCallout(null, localizer(emotionsData.metadata.continents.header), localizer(emotionsData.metadata.continents.body));
 
 						resolve();
 
@@ -225,7 +226,7 @@ const continentsSection = {
 				} else {
 
 					// display all-continents callout
-					dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+					dispatcher.changeCallout(null, localizer(emotionsData.metadata.continents.header), localizer(emotionsData.metadata.continents.body));
 					resolve();
 
 				}
@@ -451,7 +452,7 @@ const continentsSection = {
 				// So, this code should probably belong elsewhere, but for now, here it stays.
 
 				// display the default continents callout and continent labels.
-				dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+				dispatcher.changeCallout(null, localizer(emotionsData.metadata.continents.header), localizer(emotionsData.metadata.continents.body));
 				// this.setLabelVisibility(true);
 
 			}
