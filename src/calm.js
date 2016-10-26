@@ -59,6 +59,15 @@ export default {
 		// map each emotion to a Continent instance
 		continents = _.values(dispatcher.EMOTIONS).map(emotion => new Continent(emotion, continentContainer, continentGeom, continentTransforms, this.screenIsSmall));
 
+		if (this.screenIsSmall) {
+			// on mobile, spread continents to match continents section
+			let diag = Math.sqrt(w * w + h * h) / 2;
+			continents.forEach(continent => {
+				continent.introSpreadRad = continent.introSpreadMaxRad * diag;
+				continent.introSpreadSize = continent.introSpreadSizeMod || 0;
+			});
+		}
+
 		let startAgain = d3.select(this.sectionContainer).append('div')
 			.classed('start-again', true);
 		startAgain.append('h4')

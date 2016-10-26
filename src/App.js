@@ -390,7 +390,7 @@ export default function (...initArgs) {
 		arrow.appendChild(arrowImg);
 		caption.appendChild(arrow);
 		arrowImg.addEventListener('click', onMobileRightArrowClick);
-		
+
 	}
 
 	function initModal () {
@@ -418,7 +418,7 @@ export default function (...initArgs) {
 
 	function setSectionEmotion (section, previousEmotion, previousMorePage) {
 
-		
+
 		let promise = section.setEmotion(currentEmotion, previousEmotion, currentMorePage, previousMorePage);
 		updateArrowLabels();
 
@@ -777,7 +777,7 @@ export default function (...initArgs) {
 	function paginateSelectedElement (dir) {
 
 		if (currentSection.paginateElement) currentSection.paginateElement(dir);
-		
+
 	}
 
 	/**
@@ -1382,6 +1382,12 @@ export default function (...initArgs) {
 
 	function setMobileCaption (title, body) {
 
+		if (currentSection === sections[dispatcher.SECTIONS.CALM]) {
+			// TODO: increase height of caption
+		} else {
+			// TODO: restore height of caption
+		}
+
 		updateMobileUI();
 
 		document.querySelector('#mobile-caption .headline').innerHTML = title || '';
@@ -1400,7 +1406,7 @@ export default function (...initArgs) {
 	}
 
 	function onNavigate (section, emotion) {
-		
+
 		if (section === dispatcher.HOME) {
 			document.location.hash = '';
 			if (!document.location.hash) {
