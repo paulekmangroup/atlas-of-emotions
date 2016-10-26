@@ -2,7 +2,7 @@ import d3 from 'd3';
 import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
-import emotionsData from '../static/emotionsData.json';
+import appStrings from './appStrings.js';
 import sassVars from '../scss/variables.json';
 import states from './states.js';
 import actions from './actions.js';
@@ -207,10 +207,11 @@ export default {
 
 	updateLabel: function () {
 
-		if (!this.currentEmotion || !emotionsData.emotions[this.currentEmotion]) return;
+		let emotionData = appStrings().getStr(`emotionsData.emotions.${ this.currentEmotion }`);
+		if (!this.currentEmotion || !emotionData) return;
 		if (this.screenIsSmall) return;
 		
-		let moodsCopy = emotionsData.emotions[this.currentEmotion].moods[0];
+		let moodsCopy = emotionData.moods[0];
 
 		const label = this.labelContainer.select('.emotion-label');
 		label
@@ -356,13 +357,13 @@ export default {
 
 		this.calloutActive = active;
 		if (active) {
-			let moodsCopy = emotionsData.emotions[this.currentEmotion].moods[0];
+			let moodsCopy = appStrings().getStr(`emotionsData.emotions.${ this.currentEmotion }.moods[0]`);
 			// will want to set popup up here
 			dispatcher.popupChange('moods', this.currentEmotion, moodsCopy.desc);
 			this.setBackgroundListener(true);
 		} else {
 			dispatcher.popupChange();
-			dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.moods.header, emotionsData.metadata.moods.body);
+			dispatcher.changeCallout(this.currentEmotion, appStrings().getStr('emotionsData.metadata.moods.header'), appStrings().getStr('emotionsData.metadata.moods.body'));
 			this.setBackgroundListener(false);
 		}
 

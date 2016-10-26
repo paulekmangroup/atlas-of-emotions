@@ -138,7 +138,9 @@ var metadataSectionParsers = (function () {
 		actions: function (data) {
 			var obj = {
 				header: data[0][0],
-				body: data[0][1]
+				body: data[0][1],
+				header_mobile: data[0][5] || data[0][0],
+				body_mobile: data[0][6] || data[0][1]
 			};
 			obj.qualities = data.map(function (row) {
 				return {
@@ -155,7 +157,9 @@ var metadataSectionParsers = (function () {
 		triggers: function (data) {
 			var obj = {
 				header: data[0][0],
-				body: data[0][1]
+				body: data[0][1],
+				header_mobile: data[0][5] || data[0][0],
+				body_mobile: data[0][6] || data[0][1]
 			};
 			obj.steps = data.map(function (row) {
 				return {
@@ -175,6 +179,8 @@ var metadataSectionParsers = (function () {
 			return {
 				header: data[0][0],
 				body: data[0][1],
+				header_mobile: data[0][5] || data[0][0],
+				body_mobile: data[0][6] || data[0][1],
 				secondary: {
 					header: data[0][2],
 					body: data[0][3],

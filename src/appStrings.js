@@ -38,7 +38,11 @@ function appStrings (_lang, _screenIsSmall) {
 
 		console.log(">>>>> ", _.get(source, path.join('.')));
 
-		return _.get(source, path.join('.')) || '';
+		// NOTE: until localization is complete, this may return an array/obj instead of a string,
+		// depending on whether the passed path resolves to a leaf node or a branch.
+		// will have to figure this out for localization as well,
+		// and be sure to rename appStrings / getStr() if necessary (appData / getData()?)
+		return _.get(source, path.join('.')) || null;
 
 		// TODO: implement localization
 		// if (!strings.hasOwnProperty(key)) return key;

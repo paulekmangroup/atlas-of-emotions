@@ -4,7 +4,7 @@ import _ from 'lodash';
 import Continent from './Continent.js';
 
 import dispatcher from './dispatcher.js';
-import emotionsData from '../static/emotionsData.json';
+import appStrings from './appStrings.js';
 import sassVars from '../scss/variables.json';
 
 let continents,
@@ -82,7 +82,7 @@ export default {
 		let visitAnnex = d3.select(this.sectionContainer).append('div')
 			.classed('visit-annex', true);
 		visitAnnex.append('h4')
-			.text(emotionsData.metadata.calm.secondary.header.toUpperCase());
+			.text(appStrings().getStr('emotionsData.metadata.calm.secondary.header').toUpperCase());
 		visitAnnex.on('click', event => {
 			dispatcher.navigate(dispatcher.SECTIONS.MORE, null, 'annex');
 		});
@@ -402,7 +402,7 @@ export default {
 
 	setCallout: function () {
 
-		dispatcher.changeCallout(null, emotionsData.metadata.calm.header, emotionsData.metadata.calm.body);
+		dispatcher.changeCallout(null, appStrings().getStr('emotionsData.metadata.calm.header'), appStrings().getStr('emotionsData.metadata.calm.body'));
 
 	}
 

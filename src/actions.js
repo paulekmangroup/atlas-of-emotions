@@ -3,7 +3,7 @@ import textures from 'textures';
 import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
-import emotionsData from '../static/emotionsData.json';
+import appStrings from './appStrings.js';
 import sassVars from '../scss/variables.json';
 import states from './states.js';
 
@@ -22,7 +22,7 @@ const ARROW_SHAPE = [
 	{ x: 0.0, y: 0.0 }
 ];
 
-const GRAMMER_TRANSLATE = {
+const GRAMMAR_TRANSLATE = {
 	suppress: 'suppression',
 	quarrel: 'quarreling',
 	insult: 'insulting others',
@@ -292,10 +292,10 @@ export default {
 		let actionsData = Object.keys(dispatcher.EMOTIONS).reduce((actionsOutput, emotionKey) => {
 
 			let emotionName = dispatcher.EMOTIONS[emotionKey],
-				statesData = emotionsData.emotions[emotionName].states;
+				statesData = appStrings().getStr(`emotionsData.emotions.${ emotionName }.states`);
 
 			// copy list of all actions for emotion with lowercased names, and alpha sort
-			let allActionsForEmotion = emotionsData.emotions[emotionName].actions.map(action => {
+			let allActionsForEmotion = appStrings().getStr(`emotionsData.emotions.${ emotionName }.actions`).map(action => {
 				return Object.assign({}, action, {
 					name: action.name.toLowerCase()
 				});
@@ -1128,14 +1128,14 @@ export default {
 			let secondaryData;
 			if (action.valence) {
 				secondaryData = {
-					body: action.valence && emotionsData.metadata.actions.qualities[action.valence - 1].body,
+					body: action.valence && appStrings().getStr(`emotionsData.metadata.actions.qualities[${ action.valence - 1 }].body`),
 					classes: [
 						this.currentEmotion,
 						_.findKey(VALENCES, (val) => val === action.valence).toLowerCase()
 					]
 				};
 				secondaryData.body = secondaryData.body.replace(/In this state/, 'In a state of ' + action.state.toLowerCase());
-				secondaryData.body = secondaryData.body.replace(/this action/, GRAMMER_TRANSLATE[action.name.toLowerCase()]);
+				secondaryData.body = secondaryData.body.replace(/this action/, GRAMMAR_TRANSLATE[action.name.toLowerCase()]);
 			}
 
 			dispatcher.popupChange('actions', action.name, action.desc, secondaryData);
@@ -1227,7 +1227,7 @@ export default {
 
 	resetCallout: function () {
 		dispatcher.popupChange();
-		dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.actions.header, emotionsData.metadata.actions.body);
+		dispatcher.changeCallout(this.currentEmotion, appStrings().getStr('emotionsData.metadata.actions.header'), appStrings().getStr('emotionsData.metadata.actions.body'));
 	}
 
 	/*

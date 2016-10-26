@@ -1991,6 +1991,8 @@
     "actions": {
       "header": "Actions of LHAMO",
       "body": "We respond to emotional states with our actions. Select a state to learn about the possible actions resulting from LHAMO. Then click on an action to learn more.",
+      "header_mobile": "Actions of LHAMO",
+      "body_mobile": "We respond to emotional states with our actions. Tap and drag across the shapes to learn about the possible actions resulting from LHAMO.",
       "qualities": [
         {
           "header": "Constructive Actions",
@@ -2015,6 +2017,8 @@
     "triggers": {
       "header": "Triggers of LHAMO",
       "body": "A trigger is something around us or in our own minds that causes us to feel an emotion. Select the labels to learn about triggering LHAMO.",
+      "header_mobile": "Triggers of LHAMO",
+      "body_mobile": "A trigger is something around us or in our own minds that causes us to feel an emotion. Tap on the labels to learn about triggering LHAMO.",
       "steps": [
         {
           "header": "Triggers",
@@ -2057,6 +2061,8 @@
     "calm": {
       "header": "Experiencing Calm",
       "body": "A calm, balanced frame of mind helps us understand our changing emotions. We can reach calmness through developing an awareness of what triggers our emotions, how we experience our states of emotions and what actions are constructive. Calmness ideally is our baseline in which emotions arise when triggered and then recede .",
+      "header_mobile": "Experiencing Calm",
+      "body_mobile": "A calm, balanced frame of mind helps us understand our changing emotions. We can reach calmness through developing an awareness of what triggers our emotions, how we experience our states of emotions and what actions are constructive. Calmness ideally is our baseline in which emotions arise when triggered and then recede .",
       "secondary": {
         "header": "Visit the Annex",
         "body": "To learn more about emotions, click on “More Information” in the bottom right corner.",

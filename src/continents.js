@@ -7,7 +7,6 @@ import Circle from './Circle.js';
 import Continent from './Continent.js';
 
 import appStrings from './appStrings.js';
-import emotionsData from '../static/emotionsData.json';
 import sassVars from '../scss/variables.json';
 
 let continents,

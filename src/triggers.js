@@ -2,7 +2,7 @@ import d3 from 'd3';
 import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
-import emotionsData from '../static/emotionsData.json';
+import appStrings from './appStrings.js';
 import sassVars from '../scss/variables.json';
 import states from './states.js';
 import actions from './actions.js';
@@ -186,7 +186,7 @@ export default {
 
 		_.values(dispatcher.EMOTIONS).forEach(emotion => {
 
-			triggersData[emotion] = emotionsData.emotions[emotion].triggers.concat()
+			triggersData[emotion] = appStrings().getStr(`emotionsData.emotions.${ emotion }.triggers`).concat()
 			.sort((a, b) => {
 				if (a.type > b.type) return -1;
 				else if (a.type < b.type) return 1;
@@ -524,14 +524,14 @@ export default {
 				.style('transform', universalTransform)
 				.style('-webkit-transform', universalTransform)
 			.append('h3')
-				.text(emotionsData.metadata.triggers.steps[3].header.toUpperCase());
+				.text(appStrings().getStr('emotionsData.metadata.triggers.steps[3].header').toUpperCase());
 			universalLearnedLabelContainer.append('div')
 				.attr('class', `emotion-label ${TRIGGER_TYPES.LEARNED} ${emotion}`)
 				.attr('data-popuptarget', `triggers:${emotion}-${TRIGGER_TYPES.LEARNED}`)
 				.style('transform', learnedTransform)
 				.style('-webkit-transform', learnedTransform)
 			.append('h3')
-				.text(emotionsData.metadata.triggers.steps[4].header.toUpperCase());
+				.text(appStrings().getStr('emotionsData.metadata.triggers.steps[4].header').toUpperCase());
 
 			this.labelContainers[emotion] = labelContainer;
 
@@ -540,7 +540,7 @@ export default {
 				.classed(`trigger-phase-labels ${emotion}`, true);
 
 			let labels = phaseLabelContainer.selectAll('.emotion-label')
-				.data(emotionsData.metadata.triggers.steps.slice(0, 3));
+				.data(appStrings().getStr('emotionsData.metadata.triggers.steps').slice(0, 3));
 
 			let labelsEnter = labels.enter()
 				.append('div')
@@ -1051,9 +1051,9 @@ export default {
 
 		let triggerText = "";
 		if(triggerType == 'universal'){
-			triggerText = emotionsData.metadata.triggers.steps[3].body;
+			triggerText = appStrings().getStr('emotionsData.metadata.triggers.steps[3].body');
 		} else {
-			triggerText = emotionsData.metadata.triggers.steps[4].body;
+			triggerText = appStrings().getStr('emotionsData.metadata.triggers.steps[4].body');
 		}
 		dispatcher.popupChange('triggers', name, triggerText);
 
@@ -1180,11 +1180,11 @@ export default {
 			.classed('visible', false);
 
 		if (hitAreaId) {
-			const step = emotionsData.metadata.triggers.steps[hitAreaId-1];
+			const step = appStrings().getStr(`emotionsData.metadata.triggers.steps[${ hitAreaId - 1 }]`);
 			dispatcher.popupChange('triggers', `${this.currentEmotion}-${step.header.toLowerCase()}`, step.body);
 		} else {
 			dispatcher.popupChange();
-			dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.triggers.header, emotionsData.metadata.triggers.body);
+			dispatcher.changeCallout(this.currentEmotion, appStrings().getStr('emotionsData.metadata.triggers.header'), appStrings().getStr('emotionsData.metadata.triggers.body'));
 
 			// this should technically be in a popup closed handler,
 			// but popupManager only dispatches events for popup close button clicks.
