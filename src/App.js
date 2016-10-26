@@ -8,16 +8,17 @@ import moods from './moods.js';
 import calm from './calm.js';
 import moreInfo from './moreInfo.js';
 import introModal from './introModal.js';
+import popupManager from './popupManager.js';
 import emotionsData from '../static/emotionsData.json';
 import secondaryData from '../static/secondaryData.json';
+import appStrings from './appStrings.js';
 import sassVars from '../scss/variables.json';
-import popupManager from './popupManager.js';
 
 export default function (...initArgs) {
 
 	const MIN_ALLOWED_WIDTH = 950,
 		MIN_ALLOWED_HEIGHT = 600,
-		MOBILE_ENABLED = true,
+		MOBILE_ENABLED = true,		// feature flag for mobile
 
 		NAVIGATION_DEFAULTS = {
 			section: dispatcher.SECTIONS.CONTINENTS,
@@ -1642,6 +1643,9 @@ export default function (...initArgs) {
 			}
 
 		}
+
+		// set up appStrings
+		appStrings('en', screenIsSmall);
 
 		return screenIsSmall;
 

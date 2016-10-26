@@ -6,6 +6,7 @@ import dispatcher from './dispatcher.js';
 import Circle from './Circle.js';
 import Continent from './Continent.js';
 
+import appStrings from './appStrings.js';
 import emotionsData from '../static/emotionsData.json';
 import sassVars from '../scss/variables.json';
 
@@ -126,7 +127,7 @@ const continentsSection = {
 							this.transitions.panToContinent(null, currentEmotion);
 
 							// display all-continents callout
-							dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+							dispatcher.changeCallout(null, appStrings().getStr('emotionsData.metadata.continents.header'), appStrings().getStr('emotionsData.metadata.continents.body'));
 
 							resolve();
 
@@ -139,7 +140,7 @@ const continentsSection = {
 
 						let continent = continents.find(c => c.id === emotion);
 						this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.SELECTED);
-						dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+						dispatcher.changeCallout(null, appStrings().getStr('emotionsData.metadata.continents.header'), appStrings().getStr('emotionsData.metadata.continents.body'));
 
 						resolve();
 
@@ -152,7 +153,7 @@ const continentsSection = {
 					this.setContinentHighlight(null, Continent.HIGHLIGHT_LEVELS.NONE);
 
 					// display all-continents callout
-					dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+					dispatcher.changeCallout(null, appStrings().getStr('emotionsData.metadata.continents.header'), appStrings().getStr('emotionsData.metadata.continents.body'));
 
 					if (this.zoomedInContinent) {
 
@@ -217,7 +218,7 @@ const continentsSection = {
 							this.transitions.panToContinent(null, previousEmotion);
 
 							// display all-continents callout
-							dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+							dispatcher.changeCallout(null, appStrings().getStr('emotionsData.metadata.continents.header'), appStrings().getStr('emotionsData.metadata.continents.body'));
 
 							resolve();
 
@@ -230,7 +231,7 @@ const continentsSection = {
 						this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.SELECTED);
 
 						// display all-continents callout
-						dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+						dispatcher.changeCallout(null, appStrings().getStr('emotionsData.metadata.continents.header'), appStrings().getStr('emotionsData.metadata.continents.body'));
 
 						resolve();
 
@@ -239,14 +240,14 @@ const continentsSection = {
 				} else {
 
 					// display all-continents callout if on non-mobile
-					if (!this.screenIsSmall) dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+					if (!this.screenIsSmall) dispatcher.changeCallout(null, appStrings().getStr('emotionsData.metadata.continents.header'), appStrings().getStr('emotionsData.metadata.continents.body'));
 					resolve();
 
 				}
 
 			}
 
-			const desc = (emotion) ? emotionsData.emotions[emotion].continent.desc : null;
+			const desc = emotion ? appStrings().getStr(`emotionsData.emotions.${ emotion }.continent.desc`) : null;
 			dispatcher.popupChange('continents', emotion, desc);
 
 			currentEmotion = emotion;
@@ -295,7 +296,7 @@ const continentsSection = {
 		labelContainer.append('div')
 			.classed('intro-element message', true)
 		.append('p')
-		.html(emotionsData.metadata.intro.body);
+		.html(appStrings().getStr('emotionsData.metadata.intro.body_mobile'));
 
 		d3.select(containerNode).append('div')
 			.classed('intro-element button', true)
@@ -550,7 +551,7 @@ const continentsSection = {
 			// So, this code should probably belong elsewhere, but for now, here it stays.
 
 			// display the default continents callout and continent labels.
-			dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+			dispatcher.changeCallout(null, appStrings().getStr('emotionsData.metadata.continents.header'), appStrings().getStr('emotionsData.metadata.continents.body'));
 			// this.setLabelVisibility(true);
 		}
 

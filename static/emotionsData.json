@@ -3,12 +3,16 @@
     "anger": {
       "continent": {
         "name": "Anger",
-        "desc": "We’re angered by interference."
+        "desc": "We are blocked in our progress or goal.",
+        "name_mobile": "The Continent of Anger",
+        "desc_mobile": "The movement of this shape reflects how anger varies in strength and frequency in our lives. Tap on the shape to learn more about the universal nature of anger."
       },
       "states": [
         {
           "name": "Annoyance",
           "desc": "Very mild anger.",
+          "name_mobile": "Annoyance",
+          "desc_mobile": "Very mild anger.",
           "range": {
             "min": 1,
             "max": 2
@@ -35,6 +39,8 @@
         {
           "name": "Frustration",
           "desc": "A response to failure to overcome an obstacle despite repeated attempts.",
+          "name_mobile": "Frustration",
+          "desc_mobile": "A response to failure to overcome an obstacle despite repeated attempts.",
           "range": {
             "min": 1,
             "max": 10
@@ -69,6 +75,8 @@
         {
           "name": "Argumentativeness",
           "desc": "An inclination to prolong disagreements.",
+          "name_mobile": "Argumentativeness",
+          "desc_mobile": "An inclination to prolong disagreements.",
           "range": {
             "min": 2,
             "max": 10
@@ -103,6 +111,8 @@
         {
           "name": "Bitterness",
           "desc": "Disappointment that no one wanted to settle a problem.",
+          "name_mobile": "Bitterness",
+          "desc_mobile": "Disappointment that no one wanted to settle a problem.",
           "range": {
             "min": 3,
             "max": 10
@@ -137,6 +147,8 @@
         {
           "name": "Exasperation",
           "desc": "A loss of patience at repeated failures to settle a problem.",
+          "name_mobile": "Exasperation",
+          "desc_mobile": "A loss of patience at repeated failures to settle a problem.",
           "range": {
             "min": 4,
             "max": 7
@@ -173,6 +185,8 @@
         {
           "name": "Vengefulness",
           "desc": "A desire for retaliation.",
+          "name_mobile": "Vengefulness",
+          "desc_mobile": "A desire for retaliation.",
           "range": {
             "min": 5,
             "max": 10
@@ -208,6 +222,8 @@
         {
           "name": "Fury",
           "desc": "Intense anger.",
+          "name_mobile": "Fury",
+          "desc_mobile": "Intense anger.",
           "range": {
             "min": 10,
             "max": 10
@@ -242,87 +258,125 @@
       "actions": [
         {
           "name": "Quarrel",
-          "desc": "Verbally oppose in a manner intended to escalate the disagreement."
+          "desc": "Verbally oppose in a manner intended to escalate the disagreement.",
+          "name_mobile": "Quarrel",
+          "desc_mobile": "Verbally oppose in a manner intended to escalate the disagreement."
         },
         {
           "name": "Insult",
-          "desc": "Disparage the other person in an offensive or hurtful way that is likely to escalate the conflict rather than resolve it."
+          "desc": "Disparage the other person in an offensive or hurtful way that is likely to escalate the conflict rather than resolve it.",
+          "name_mobile": "Insult",
+          "desc_mobile": "Disparage the other person in an offensive or hurtful way that is likely to escalate the conflict rather than resolve it."
         },
         {
           "name": "Undermine",
-          "desc": "Take action to make someone or something weaker or less effective, usually in a secret or gradual way."
+          "desc": "Take action to make someone or something weaker or less effective, usually in a secret or gradual way.",
+          "name_mobile": "Undermine",
+          "desc_mobile": "Take action to make someone or something weaker or less effective, usually in a secret or gradual way."
         },
         {
           "name": "Dispute",
-          "desc": "Disagree in a manner that may escalate the dispute."
+          "desc": "Disagree in a manner that may escalate an argument.",
+          "name_mobile": "Dispute",
+          "desc_mobile": "Disagree in a manner that may escalate an argument."
         },
         {
           "name": "Scream/yell",
-          "desc": "Lose control of how one speaks; speak in a loud volume and, when screaming, in a higher pitch."
+          "desc": "Lose control of how one speaks; speak in a loud volume and, when screaming, in a higher pitch.",
+          "name_mobile": "Scream/yell",
+          "desc_mobile": "Lose control of how one speaks; speak in a loud volume and, when screaming, in a higher pitch."
         },
         {
           "name": "Use physical force",
-          "desc": "Harm or constrain someone, an action that may be deliberately chosen or the result of a loss of control over how one acts."
+          "desc": "Harm or constrain someone, an action that may be deliberately chosen or the result of a loss of control over how one acts.",
+          "name_mobile": "Use physical force",
+          "desc_mobile": "Harm or constrain someone, an action that may be deliberately chosen or the result of a loss of control over how one acts."
         },
         {
           "name": "Suppress",
-          "desc": "Try to avoid feeling or acting upon the emotion that is being experienced."
+          "desc": "Try to avoid feeling or acting upon the emotion that is being experienced.",
+          "name_mobile": "Suppress",
+          "desc_mobile": "Try to avoid feeling or acting upon the emotion that is being experienced."
         },
         {
           "name": "Simmer/brood",
-          "desc": "Act in a way that makes clear that angry actions are building or being contemplated."
+          "desc": "Act in a way that makes clear that angry actions are building or being contemplated.",
+          "name_mobile": "Simmer/brood",
+          "desc_mobile": "Act in a way that makes clear that angry actions are building or being contemplated."
         },
         {
           "name": "Be passive-aggressive",
-          "desc": "Take indirect actions that have an angry undercurrent."
+          "desc": "Take indirect actions that have an angry undercurrent.",
+          "name_mobile": "Be passive-aggressive",
+          "desc_mobile": "Take indirect actions that have an angry undercurrent."
         }
       ],
       "triggers": [
         {
           "name": "Interference with locomotion",
-          "type": "Universal"
+          "type": "Universal",
+          "name_mobile": "Universal Triggers of Anger",
+          "desc_mobile": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Interference with action or locomotion are examples."
         },
         {
           "name": "Interference with action",
-          "type": "Universal"
+          "type": "Universal",
+          "name_mobile": "Learned Triggers of Anger",
+          "desc_mobile": "Some triggers can be learned from personal or shared cultural experiences. Being wrongfully accused or put down by an authority figure are examples."
         },
         {
           "name": "Rejection by a loved one",
-          "type": "Universal"
+          "type": "Universal",
+          "name_mobile": "Rejection by a loved one",
+          "desc_mobile": "Universal"
         },
         {
           "name": "Inefficiency or bureaucracy",
-          "type": "Learned"
+          "type": "Learned",
+          "name_mobile": "Inefficiency or bureaucracy",
+          "desc_mobile": "Learned"
         },
         {
           "name": "Being put down by an authority figure",
-          "type": "Learned"
+          "type": "Learned",
+          "name_mobile": "Being put down by an authority figure",
+          "desc_mobile": "Learned"
         },
         {
           "name": "Encountering offensive beliefs",
-          "type": "Learned"
+          "type": "Learned",
+          "name_mobile": "Encountering offensive beliefs",
+          "desc_mobile": "Learned"
         },
         {
           "name": "Being wrongfully accused",
-          "type": "Learned"
+          "type": "Learned",
+          "name_mobile": "Being wrongfully accused",
+          "desc_mobile": "Learned"
         }
       ],
       "moods": [
         {
           "name": "Irritable",
-          "desc": "A readiness, a need to become angry. Filtering perceptions to see provocations not noticed when not irritable."
+          "desc": "A readiness, a need to become angry. Filtering perceptions to see provocations not noticed when not irritable.",
+          "name_mobile": "Irritable",
+          "desc_mobile": "A readiness, a need to become angry. Filtering perceptions to see provocations not noticed when not irritable."
         }
       ]
     },
     "fear": {
       "continent": {
         "name": "Fear",
-        "desc": "We’re afraid of danger."
+        "desc": "We are threatened to our safety or wellbeing.",
+        "name_mobile": "The Continent of Fear",
+        "desc_mobile": "The movement of this shape reflects how anger varies in strength and frequency in our lives. Tap on the shape to learn more about the universal nature of fear."
       },
       "states": [
         {
           "name": "Trepidation",
           "desc": "Anticipation of the possibility of danger.",
+          "name_mobile": "Trepidation",
+          "desc_mobile": "Anticipation of the possibility of danger.",
           "range": {
             "min": 1,
             "max": 3
@@ -346,6 +400,8 @@
         {
           "name": "Anxiety",
           "desc": "Inability to cope with an anticipated or actual threat.",
+          "name_mobile": "Anxiety",
+          "desc_mobile": "Inability to cope with an anticipated or actual threat.",
           "range": {
             "min": 1,
             "max": 10
@@ -378,6 +434,8 @@
         {
           "name": "Nervousness",
           "desc": "Uncertainty as to whether there is a danger.",
+          "name_mobile": "Nervousness",
+          "desc_mobile": "Uncertainty as to whether there is a danger.",
           "range": {
             "min": 2,
             "max": 7
@@ -401,6 +459,8 @@
         {
           "name": "Dread",
           "desc": "Anticipation of severe danger.",
+          "name_mobile": "Dread",
+          "desc_mobile": "Anticipation of severe danger.",
           "range": {
             "min": 6,
             "max": 10
@@ -433,6 +493,8 @@
         {
           "name": "Desperation",
           "desc": "A response to the inability to reduce danger.",
+          "name_mobile": "Desperation",
+          "desc_mobile": "A response to the inability to reduce danger.",
           "range": {
             "min": 9,
             "max": 10
@@ -467,6 +529,8 @@
         {
           "name": "Panic",
           "desc": "A consequence of desperation.",
+          "name_mobile": "Panic",
+          "desc_mobile": "A consequence of desperation.",
           "range": {
             "min": 10,
             "max": 10
@@ -501,6 +565,8 @@
         {
           "name": "Horror",
           "desc": "A mixture of fear and disgust.",
+          "name_mobile": "Horror",
+          "desc_mobile": "A mixture of fear and disgust.",
           "range": {
             "min": 10,
             "max": 10
@@ -531,6 +597,8 @@
         {
           "name": "Terror",
           "desc": "Maximum fear.",
+          "name_mobile": "Terror",
+          "desc_mobile": "Maximum fear.",
           "range": {
             "min": 10,
             "max": 10
@@ -562,79 +630,113 @@
       "actions": [
         {
           "name": "Withdraw",
-          "desc": "Physically or mentally leave the scene of the threat."
+          "desc": "Physically or mentally leave the scene of the threat.",
+          "name_mobile": "Withdraw",
+          "desc_mobile": "Physically or mentally leave the scene of the threat."
         },
         {
           "name": "Avoid",
-          "desc": "Either physically stay away from someone or something, or internally keep one’s mind away from what is triggering the fear."
+          "desc": "Either physically stay away from someone or something, or internally keep one’s mind away from what is triggering the fear.",
+          "name_mobile": "Avoid",
+          "desc_mobile": "Either physically stay away from someone or something, or internally keep one’s mind away from what is triggering the fear."
         },
         {
           "name": "Hesitate",
-          "desc": "Hold back in doubt or indecision, often momentarily."
+          "desc": "Hold back in doubt or indecision, often momentarily.",
+          "name_mobile": "Hesitate",
+          "desc_mobile": "Hold back in doubt or indecision, often momentarily."
         },
         {
           "name": "Freeze",
-          "desc": "Become incapable of acting or speaking."
+          "desc": "Become incapable of acting or speaking.",
+          "name_mobile": "Freeze",
+          "desc_mobile": "Become incapable of acting or speaking."
         },
         {
           "name": "Scream/yell",
-          "desc": "Lose control of how one speaks; speak in a loud volume and, when screaming, in a higher pitch."
+          "desc": "Lose control of how one speaks; speak in a loud volume and, when screaming, in a higher pitch.",
+          "name_mobile": "Scream/yell",
+          "desc_mobile": "Lose control of how one speaks; speak in a loud volume and, when screaming, in a higher pitch."
         },
         {
           "name": "Ruminate",
-          "desc": "Repetitively think about the emotional experience."
+          "desc": "Repetitively think about the emotional experience.",
+          "name_mobile": "Ruminate",
+          "desc_mobile": "Repetitively think about the emotional experience."
         },
         {
           "name": "Worry",
-          "desc": "Anticipate the possibility of harm."
+          "desc": "Anticipate the possibility of harm.",
+          "name_mobile": "Worry",
+          "desc_mobile": "Anticipate the possibility of harm."
         }
       ],
       "triggers": [
         {
           "name": "Imminent bodily impact",
-          "type": "Universal"
+          "type": "Universal",
+          "name_mobile": "Universal Triggers of Fear",
+          "desc_mobile": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Snake-like shapes and sudden loss of gravity are examples."
         },
         {
           "name": "Sudden loss of gravity",
-          "type": "Universal"
+          "type": "Universal",
+          "name_mobile": "Learned Triggers of Fear",
+          "desc_mobile": "Some triggers can be learned from personal or shared cultural experiences. Public speaking, thunder, and the threat of losing one’s job are examples."
         },
         {
           "name": "Threat to safety",
-          "type": "Universal"
+          "type": "Universal",
+          "name_mobile": "Threat to safety",
+          "desc_mobile": "Universal"
         },
         {
           "name": "Snake-like shapes",
-          "type": "Universal"
+          "type": "Universal",
+          "name_mobile": "Snake-like shapes",
+          "desc_mobile": "Universal"
         },
         {
           "name": "Threat of losing job",
-          "type": "Learned"
+          "type": "Learned",
+          "name_mobile": "Threat of losing job",
+          "desc_mobile": "Learned"
         },
         {
           "name": "Thunder",
-          "type": "Learned"
+          "type": "Learned",
+          "name_mobile": "Thunder",
+          "desc_mobile": "Learned"
         },
         {
           "name": "Public speaking",
-          "type": "Learned"
+          "type": "Learned",
+          "name_mobile": "Public speaking",
+          "desc_mobile": "Learned"
         }
       ],
       "moods": [
         {
           "name": "Apprehensive",
-          "desc": "Expecting harm but not knowing how to avoid it. Perceiving threats when they are not there, or magnifying the seriousness of a threat."
+          "desc": "Expecting harm but not knowing how to avoid it. Perceiving threats when they are not there, or magnifying the seriousness of a threat.",
+          "name_mobile": "Apprehensive",
+          "desc_mobile": "Expecting harm but not knowing how to avoid it. Perceiving threats when they are not there, or magnifying the seriousness of a threat."
         }
       ]
     },
     "disgust": {
       "continent": {
         "name": "Disgust",
-        "desc": "We’re disgusted by anything toxic."
+        "desc": "We are facing something toxic or otherwise unpleasing.",
+        "name_mobile": "The Continent of Disgust",
+        "desc_mobile": "The movement of this shape reflects how anger varies in strength and frequency in our lives. Tap on the shape to learn more about the universal nature of disgust."
       },
       "states": [
         {
           "name": "Dislike",
           "desc": "The mildest form of disgust.",
+          "name_mobile": "Dislike",
+          "desc_mobile": "The mildest form of disgust.",
           "range": {
             "min": 1,
             "max": 5
@@ -661,6 +763,8 @@
         {
           "name": "Aversion",
           "desc": "A desire to avoid something disgusting.",
+          "name_mobile": "Aversion",
+          "desc_mobile": "A desire to avoid something disgusting.",
           "range": {
             "min": 2,
             "max": 7
@@ -684,6 +788,8 @@
         {
           "name": "Distaste",
           "desc": "Response to a bad taste or smell; can also be metaphorical.",
+          "name_mobile": "Distaste",
+          "desc_mobile": "Response to a bad taste or smell; can also be metaphorical.",
           "range": {
             "min": 2,
             "max": 7
@@ -709,6 +815,8 @@
         {
           "name": "Repugnance",
           "desc": "Repulsion to something literally or figuratively toxic.",
+          "name_mobile": "Repugnance",
+          "desc_mobile": "Repulsion to something literally or figuratively toxic.",
           "range": {
             "min": 2,
             "max": 9
@@ -735,6 +843,8 @@
         {
           "name": "Revulsion",
           "desc": "Very intense disgust.",
+          "name_mobile": "Revulsion",
+          "desc_mobile": "Very intense disgust.",
           "range": {
             "min": 8,
             "max": 10
@@ -760,6 +870,8 @@
         {
           "name": "Abhorrence",
           "desc": "Extreme repulsion.",
+          "name_mobile": "Abhorrence",
+          "desc_mobile": "Extreme repulsion.",
           "range": {
             "min": 8,
             "max": 10
@@ -783,6 +895,8 @@
         {
           "name": "Loathing",
           "desc": "Intense disgust focused on a person.",
+          "name_mobile": "Loathing",
+          "desc_mobile": "Intense disgust focused on a person.",
           "range": {
             "min": 9,
             "max": 10
@@ -807,59 +921,83 @@
       "actions": [
         {
           "name": "Withdraw",
-          "desc": "Physically or mentally leave the scene of what is triggering the disgust."
+          "desc": "Physically or mentally leave the scene of what is triggering the disgust.",
+          "name_mobile": "Withdraw",
+          "desc_mobile": "Physically or mentally leave the scene of what is triggering the disgust."
         },
         {
           "name": "Avoid",
-          "desc": "Either physically stay away from someone or something, or internally keep one’s mind away from what is triggering the disgust."
+          "desc": "Either physically stay away from someone or something, or internally keep one’s mind away from what is triggering the disgust.",
+          "name_mobile": "Avoid",
+          "desc_mobile": "Either physically stay away from someone or something, or internally keep one’s mind away from what is triggering the disgust."
         },
         {
           "name": "Vomit",
-          "desc": "Expel material from the stomach via the mouth; metaphorically denotes very intense disgust."
+          "desc": "Expel material from the stomach via the mouth; metaphorically denotes very intense disgust.",
+          "name_mobile": "Vomit",
+          "desc_mobile": "Expel material from the stomach via the mouth; metaphorically denotes very intense disgust."
         },
         {
           "name": "Dehumanize",
-          "desc": "Treat someone as though he or she is not a human being; deprive someone of human qualities, personality or spirit."
+          "desc": "Treat someone as though he or she is not a human being; deprive someone of human qualities, personality or spirit.",
+          "name_mobile": "Dehumanize",
+          "desc_mobile": "Treat someone as though he or she is not a human being; deprive someone of human qualities, personality or spirit."
         }
       ],
       "triggers": [
         {
           "name": "Anything coming out of the body",
-          "type": "Universal"
+          "type": "Universal",
+          "name_mobile": "Universal Triggers of Disgust",
+          "desc_mobile": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Anything in decay or coming out of the body are examples."
         },
         {
           "name": "Rotting or decay",
-          "type": "Universal"
+          "type": "Universal",
+          "name_mobile": "Learned Triggers of Disgust",
+          "desc_mobile": "Some triggers can be learned from personal or shared cultural experiences. Unfamiliar religious customs and eating insects or raw meat are examples."
         },
         {
           "name": "Fans of an opposing sports team",
-          "type": "Learned"
+          "type": "Learned",
+          "name_mobile": "Fans of an opposing sports team",
+          "desc_mobile": "Learned"
         },
         {
           "name": "Unfamiliar religious customs",
-          "type": "Learned"
+          "type": "Learned",
+          "name_mobile": "Unfamiliar religious customs",
+          "desc_mobile": "Learned"
         },
         {
           "name": "Eating insects or raw meat",
-          "type": "Learned"
+          "type": "Learned",
+          "name_mobile": "Eating insects or raw meat",
+          "desc_mobile": "Learned"
         }
       ],
       "moods": [
         {
           "name": "Sour",
-          "desc": "Disgust can occur as a mood, a generalized feeling of repugnance."
+          "desc": "Disgust can occur as a mood, a generalized feeling of repugnance.",
+          "name_mobile": "Sour",
+          "desc_mobile": "Disgust can occur as a mood, a generalized feeling of repugnance."
         }
       ]
     },
     "sadness": {
       "continent": {
         "name": "Sadness",
-        "desc": "We’re saddened by loss."
+        "desc": "We are experiencing loss of something valuable.",
+        "name_mobile": "The Continent of Sadness",
+        "desc_mobile": "The movement of this shape reflects how anger varies in strength and frequency in our lives. Tap on the shape to learn more about the universal nature of sadness."
       },
       "states": [
         {
           "name": "Disappointment",
           "desc": "A feeling that expectations are not being met.",
+          "name_mobile": "Disappointment",
+          "desc_mobile": "A feeling that expectations are not being met.",
           "range": {
             "min": 1,
             "max": 5
@@ -890,6 +1028,8 @@
         {
           "name": "Resignation",
           "desc": "Acceptance that nothing can be done.",
+          "name_mobile": "Resignation",
+          "desc_mobile": "Acceptance that nothing can be done.",
           "range": {
             "min": 1,
             "max": 10
@@ -924,6 +1064,8 @@
         {
           "name": "Distraughtness",
           "desc": "Agitated sadness.",
+          "name_mobile": "Distraughtness",
+          "desc_mobile": "Agitated sadness.",
           "range": {
             "min": 2,
             "max": 8
@@ -952,6 +1094,8 @@
         {
           "name": "Discouragement",
           "desc": "A feeling that there is no way to cope.",
+          "name_mobile": "Discouragement",
+          "desc_mobile": "A feeling that there is no way to cope.",
           "range": {
             "min": 2,
             "max": 8
@@ -982,6 +1126,8 @@
         {
           "name": "Helplessness",
           "desc": "Realization of the inability to prevent or cope with loss.",
+          "name_mobile": "Helplessness",
+          "desc_mobile": "Realization of the inability to prevent or cope with loss.",
           "range": {
             "min": 5,
             "max": 10
@@ -1012,6 +1158,8 @@
         {
           "name": "Misery",
           "desc": "Anguished sadness, usually prolonged.",
+          "name_mobile": "Misery",
+          "desc_mobile": "Anguished sadness, usually prolonged.",
           "range": {
             "min": 6,
             "max": 10
@@ -1044,6 +1192,8 @@
         {
           "name": "Hopelessness",
           "desc": "A feeling that nothing good is to come.",
+          "name_mobile": "Hopelessness",
+          "desc_mobile": "A feeling that nothing good is to come.",
           "range": {
             "min": 6,
             "max": 10
@@ -1074,6 +1224,8 @@
         {
           "name": "Grief",
           "desc": "Anguished sadness over the loss of a loved one.",
+          "name_mobile": "Grief",
+          "desc_mobile": "Anguished sadness over the loss of a loved one.",
           "range": {
             "min": 7,
             "max": 10
@@ -1108,6 +1260,8 @@
         {
           "name": "Despair",
           "desc": "Resigned anguish.",
+          "name_mobile": "Despair",
+          "desc_mobile": "Resigned anguish.",
           "range": {
             "min": 7,
             "max": 10
@@ -1136,6 +1290,8 @@
         {
           "name": "Sorrow",
           "desc": "Sadness over a loss.",
+          "name_mobile": "Sorrow",
+          "desc_mobile": "Sadness over a loss.",
           "range": {
             "min": 7,
             "max": 10
@@ -1166,6 +1322,8 @@
         {
           "name": "Anguish",
           "desc": "Intense agitated sadness.",
+          "name_mobile": "Anguish",
+          "desc_mobile": "Intense agitated sadness.",
           "range": {
             "min": 10,
             "max": 10
@@ -1199,67 +1357,95 @@
       "actions": [
         {
           "name": "Seek comfort",
-          "desc": "Seek help or support from others."
+          "desc": "Seek help or support from others.",
+          "name_mobile": "Seek comfort",
+          "desc_mobile": "Seek help or support from others."
         },
         {
           "name": "Withdraw",
-          "desc": "Physically or mentally leave the scene of what is triggering the sadness."
+          "desc": "Physically or mentally leave the scene of what is triggering the sadness.",
+          "name_mobile": "Withdraw",
+          "desc_mobile": "Physically or mentally leave the scene of what is triggering the sadness."
         },
         {
           "name": "Ruminate",
-          "desc": "Repetitively think about the emotional experience."
+          "desc": "Repetitively think about the emotional experience.",
+          "name_mobile": "Ruminate",
+          "desc_mobile": "Repetitively think about the emotional experience."
         },
         {
           "name": "Mourn",
-          "desc": "Focus on the loss."
+          "desc": "Focus on the loss.",
+          "name_mobile": "Mourn",
+          "desc_mobile": "Focus on the loss."
         },
         {
           "name": "Protest",
-          "desc": "Complain about the loss, knowing that the complaint will not recover what was lost."
+          "desc": "Complain about the loss, knowing that the complaint will not recover what was lost.",
+          "name_mobile": "Protest",
+          "desc_mobile": "Complain about the loss, knowing that the complaint will not recover what was lost."
         },
         {
           "name": "Feel ashamed",
-          "desc": "Feel the need to hide how one feels about what or who is lost."
+          "desc": "Feel the need to hide how one feels about what or who is lost.",
+          "name_mobile": "Feel ashamed",
+          "desc_mobile": "Feel the need to hide how one feels about what or who is lost."
         }
       ],
       "triggers": [
         {
           "name": "Being rejected by someone important",
-          "type": "Universal"
+          "type": "Universal",
+          "name_mobile": "Universal Triggers of Sadness",
+          "desc_mobile": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Losing or being rejected by a loved one are examples."
         },
         {
           "name": "Losing a loved one",
-          "type": "Universal"
+          "type": "Universal",
+          "name_mobile": "Learned Triggers of Sadness",
+          "desc_mobile": "Some triggers can be learned from personal or shared cultural experiences. Feeling left out or experiencing a perceived loss of status are examples."
         },
         {
           "name": "Perceiving a loss of status",
-          "type": "Learned"
+          "type": "Learned",
+          "name_mobile": "Perceiving a loss of status",
+          "desc_mobile": "Learned"
         },
         {
           "name": "Not being invited to a party",
-          "type": "Learned"
+          "type": "Learned",
+          "name_mobile": "Not being invited to a party",
+          "desc_mobile": "Learned"
         },
         {
           "name": "Losing a treasured belonging",
-          "type": "Learned"
+          "type": "Learned",
+          "name_mobile": "Losing a treasured belonging",
+          "desc_mobile": "Learned"
         }
       ],
       "moods": [
         {
           "name": "Dysphoria (or feeling blue)",
-          "desc": "Feelings of resignation, discouragement or disappointment that endure. Anguish does not transform into a mood."
+          "desc": "Feelings of resignation, discouragement or disappointment that endure. Anguish does not transform into a mood.",
+          "name_mobile": "Dysphoria (or feeling blue)",
+          "desc_mobile": "Feelings of resignation, discouragement or disappointment that endure. Anguish does not transform into a mood."
         }
       ]
     },
     "enjoyment": {
       "continent": {
         "name": "Enjoyment",
-        "desc": "We enjoy what feels good."
+        "desc": "We are pleased with our experience.",
+        "name_mobile": "The Continent of Enjoyment",
+        "desc_mobile": "The movement of this shape reflects how anger varies in strength and frequency in our lives. Tap on the shape to learn more about the universal nature of enjoyment."
       },
       "states": [
         {
           "name": "Sensory pleasure",
           "desc": "Enjoyment derived through one of the five physical senses: sight, sound, touch, taste and smell.",
+          "name_mobile": "Sensory pleasure",
+          "desc_mobile": "Enjoyment derived through one of the five physical senses: sight, sound, touch, taste and smell.",
           "range": {
             "min": 1,
             "max": 5
@@ -1283,6 +1469,8 @@
         {
           "name": "Rejoicing",
           "desc": "A warm, uplifting feeling that people experience when they see acts of human goodness, kindness and compassion. Also called elevation.",
+          "name_mobile": "Rejoicing",
+          "desc_mobile": "A warm, uplifting feeling that people experience when they see acts of human goodness, kindness and compassion. Also called elevation.",
           "range": {
             "min": 2,
             "max": 8
@@ -1313,6 +1501,8 @@
         {
           "name": "Amusement",
           "desc": "Light, playful feelings of enjoyment and good humor.",
+          "name_mobile": "Amusement",
+          "desc_mobile": "Light, playful feelings of enjoyment and good humor.",
           "range": {
             "min": 2,
             "max": 8
@@ -1343,6 +1533,8 @@
         {
           "name": "Relief",
           "desc": "When something expected to be unpleasant, especially the threat of harm, is avoided or comes to an end.",
+          "name_mobile": "Relief",
+          "desc_mobile": "When something expected to be unpleasant, especially the threat of harm, is avoided or comes to an end.",
           "range": {
             "min": 2,
             "max": 10
@@ -1371,6 +1563,8 @@
         {
           "name": "Compassion/joy",
           "desc": "Enjoyment felt when you act to relieve another person’s suffering.",
+          "name_mobile": "Compassion/joy",
+          "desc_mobile": "Enjoyment felt when you act to relieve another person’s suffering.",
           "range": {
             "min": 3,
             "max": 6
@@ -1398,6 +1592,8 @@
         {
           "name": "Schadenfreude",
           "desc": "Enjoyment of the misfortunes of another person, usually a rival.",
+          "name_mobile": "Schadenfreude",
+          "desc_mobile": "Enjoyment of the misfortunes of another person, usually a rival.",
           "range": {
             "min": 3,
             "max": 8
@@ -1427,6 +1623,8 @@
         {
           "name": "Fiero",
           "desc": "An Italian word that describes the enjoyment felt when you have met a challenge that stretched your capabilities.",
+          "name_mobile": "Fiero",
+          "desc_mobile": "An Italian word that describes the enjoyment felt when you have met a challenge that stretched your capabilities.",
           "range": {
             "min": 3,
             "max": 10
@@ -1463,6 +1661,8 @@
         {
           "name": "Naches",
           "desc": "A Yiddish word for feelings of pride in the accomplishments, or sometimes just the existence, of your actual offspring or mentored offspring. Crucial for motivating the nurture of infants and children.",
+          "name_mobile": "Naches",
+          "desc_mobile": "A Yiddish word for feelings of pride in the accomplishments, or sometimes just the existence, of your actual offspring or mentored offspring. Crucial for motivating the nurture of infants and children.",
           "range": {
             "min": 3,
             "max": 10
@@ -1495,6 +1695,8 @@
         {
           "name": "Pride",
           "desc": "A desire for others to know the pleasure you feel in your own accomplishments or the accomplishments of someone you either nurtured directly or identify with.",
+          "name_mobile": "Pride",
+          "desc_mobile": "A desire for others to know the pleasure you feel in your own accomplishments or the accomplishments of someone you either nurtured directly or identify with.",
           "range": {
             "min": 4,
             "max": 9
@@ -1531,6 +1733,8 @@
         {
           "name": "Wonder",
           "desc": "An experience of something that is very surprising, beautiful, amazing or hard to believe.",
+          "name_mobile": "Wonder",
+          "desc_mobile": "An experience of something that is very surprising, beautiful, amazing or hard to believe.",
           "range": {
             "min": 5,
             "max": 10
@@ -1561,6 +1765,8 @@
         {
           "name": "Peace",
           "desc": "An experience of ease and contenment.",
+          "name_mobile": "Peace",
+          "desc_mobile": "An experience of ease and contenment.",
           "range": {
             "min": 2,
             "max": 10
@@ -1584,6 +1790,8 @@
         {
           "name": "Excitement",
           "desc": "Energy that, unlike other enjoyable emotions, is rarely felt slightly, but ranges from mid to high in intesnity. May merge with any of the emotions, generating a very active form of that emotion.",
+          "name_mobile": "Excitement",
+          "desc_mobile": "Energy that, unlike other enjoyable emotions, is rarely felt slightly, but ranges from mid to high in intesnity. May merge with any of the emotions, generating a very active form of that emotion.",
           "range": {
             "min": 6,
             "max": 10
@@ -1614,6 +1822,8 @@
         {
           "name": "Ecstasy",
           "desc": "Rapturous delight. A state of very great happiness, nearly overwhelming.",
+          "name_mobile": "Ecstasy",
+          "desc_mobile": "Rapturous delight. A state of very great happiness, nearly overwhelming.",
           "range": {
             "min": 9,
             "max": 10
@@ -1641,71 +1851,103 @@
       "actions": [
         {
           "name": "Withdraw",
-          "desc": "Physically or mentally leave the scene of what is causing the enjoyment."
+          "desc": "Physically or mentally leave the scene of what is causing the enjoyment.",
+          "name_mobile": "Withdraw",
+          "desc_mobile": "Physically or mentally leave the scene of what is causing the enjoyment."
         },
         {
           "name": "Seek more",
-          "desc": "Attempt to increase the enjoyable feelings."
+          "desc": "Attempt to increase the enjoyable feelings.",
+          "name_mobile": "Seek more",
+          "desc_mobile": "Attempt to increase the enjoyable feelings."
         },
         {
           "name": "Maintain",
-          "desc": "Continue to do what is necessary to continue the enjoyable feelings."
+          "desc": "Continue to do what is necessary to continue the enjoyable feelings.",
+          "name_mobile": "Maintain",
+          "desc_mobile": "Continue to do what is necessary to continue the enjoyable feelings."
         },
         {
           "name": "Gloat",
-          "desc": "Enjoy others’ envy of your state of enjoyment."
+          "desc": "Enjoy others’ envy of your state of enjoyment.",
+          "name_mobile": "Gloat",
+          "desc_mobile": "Enjoy others’ envy of your state of enjoyment."
         },
         {
           "name": "Exclaim",
-          "desc": "Vocally express enjoyment to others."
+          "desc": "Vocally express enjoyment to others.",
+          "name_mobile": "Exclaim",
+          "desc_mobile": "Vocally express enjoyment to others."
         },
         {
           "name": "Engage/connect",
-          "desc": "Desire connection and engagement with others to share in feelings of enjoyment."
+          "desc": "Desire connection and engagement with others to share in feelings of enjoyment.",
+          "name_mobile": "Engage/connect",
+          "desc_mobile": "Desire connection and engagement with others to share in feelings of enjoyment."
         },
         {
           "name": "Savor",
-          "desc": "Relish the experience of good feelings about physical and psychological experiences."
+          "desc": "Relish the experience of good feelings about physical and psychological experiences.",
+          "name_mobile": "Savor",
+          "desc_mobile": "Relish the experience of good feelings about physical and psychological experiences."
         },
         {
           "name": "Indulge",
-          "desc": "Excessively engage in the enjoyable feelings."
+          "desc": "Excessively engage in the enjoyable feelings.",
+          "name_mobile": "Indulge",
+          "desc_mobile": "Excessively engage in the enjoyable feelings."
         }
       ],
       "triggers": [
         {
           "name": "Sensory experience of nature",
-          "type": "Universal"
+          "type": "Universal",
+          "name_mobile": "Universal Triggers of Enjoyment",
+          "desc_mobile": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Social interaction and experiencing nature are examples."
         },
         {
           "name": "Helping others",
-          "type": "Universal"
+          "type": "Universal",
+          "name_mobile": "Learned Triggers of Enjoyment",
+          "desc_mobile": "Some triggers can be learned from personal or shared cultural experiences. Spending time with family or visiting places from one’s youth are examples."
         },
         {
           "name": "Social interaction",
-          "type": "Universal"
+          "type": "Universal",
+          "name_mobile": "Social interaction",
+          "desc_mobile": "Universal"
         },
         {
           "name": "Playing badminton",
-          "type": "Learned"
+          "type": "Learned",
+          "name_mobile": "Playing badminton",
+          "desc_mobile": "Learned"
         },
         {
           "name": "Places associated with enjoyable memories",
-          "type": "Learned"
+          "type": "Learned",
+          "name_mobile": "Places associated with enjoyable memories",
+          "desc_mobile": "Learned"
         },
         {
           "name": "The taste of chocolate cake",
-          "type": "Learned"
+          "type": "Learned",
+          "name_mobile": "The taste of chocolate cake",
+          "desc_mobile": "Learned"
         },
         {
           "name": "Spending time with family",
-          "type": "Learned"
+          "type": "Learned",
+          "name_mobile": "Spending time with family",
+          "desc_mobile": "Learned"
         }
       ],
       "moods": [
         {
           "name": "Elation",
-          "desc": "Generalized, non-specific, non-triggered good feeling, lasting hours."
+          "desc": "Generalized, non-specific, non-triggered good feeling, lasting hours.",
+          "name_mobile": "Elation",
+          "desc_mobile": "Generalized, non-specific, non-triggered good feeling, lasting hours."
         }
       ]
     }
@@ -1713,7 +1955,9 @@
   "metadata": {
     "intro": {
       "header": "Welcome to the Atlas of Emotions",
-      "body": "This atlas was inspired by a series of conversations between the Dalai Lama and Dr. Paul Ekman about the science of emotion.<br><br> The following collection of maps provide an opportunity to explore the landscape of emotions, where they come from and the effects they can have.",
+      "body": "",
+      "header_mobile": "Welcome to the Atlas of Emotions",
+      "body_mobile": "This atlas was inspired by a series of conversations between the Dalai Lama and Dr. Paul Ekman about the science of emotion.<br><br> The following collection of maps provide an opportunity to explore the landscape of emotions, where they come from and the effects they can have.",
       "steps": [
         {
           "header": "Welcome to the Atlas of Emotions",
@@ -1734,11 +1978,15 @@
     },
     "continents": {
       "header": "Five Universal Emotions",
-      "body": "Most emotions researchers agree on these five Universal Emotions: emotions that all humans, no matter where or how we were raised, have in common. The movement of the shapes reflects how the emotions vary in strength and frequency in our lives. Select an emotion to learn more."
+      "body": "Most emotions researchers agree on these five Universal Emotions: emotions that all humans, no matter where or how we were raised, have in common. The movement of the shapes reflects how the emotions vary in strength and frequency in our lives. Select an emotion to learn more.",
+      "header_mobile": "Five Universal Emotions",
+      "body_mobile": "Most emotions researchers agree on these five Universal Emotions: emotions that all humans, no matter where or how we were raised, have in common. Tap on an emotion to start exploring."
     },
     "states": {
       "header": "States of LHAMO",
-      "body": "LHAMO can be felt mildly, extremely, or somewhere in between. Tap and drag across the shapes above to learn about a few of the states that we can experience."
+      "body": "LHAMO can be felt mildly, extremely, or somewhere in between. Select a shape to learn about a few of the states that we can experience.",
+      "header_mobile": "States of LHAMO",
+      "body_mobile": "LHAMO can be felt mildly, extremely, or somewhere in between. Tap and drag across the shapes above to learn about a few of the states that we can experience."
     },
     "actions": {
       "header": "Actions of LHAMO",
@@ -1746,15 +1994,21 @@
       "qualities": [
         {
           "header": "Constructive Actions",
-          "body": "In this state, this action is CONSTRUCTIVE. It enables collaboration."
+          "body": "In this state, this action is CONSTRUCTIVE. It enables collaboration.",
+          "header_mobile": "Constructive Actions",
+          "body_mobile": "We respond to emotional states with our actions. Tap and drag across the shapes to learn about the possible actions resulting from LHAMO."
         },
         {
           "header": "Ambiguous Actions",
-          "body": "In this state, this action is AMBIGUOUS. It may either enable or inhibit collaboration."
+          "body": "In this state, this action is AMBIGUOUS. It may either enable or inhibit collaboration.",
+          "header_mobile": "Ambiguous Actions",
+          "body_mobile": "In this state, this action is AMBIGUOUS. It may either enable or inhibit collaboration."
         },
         {
           "header": "Destructive Actions",
-          "body": "In this state, this action is DESTRUCTIVE. It inhibits collaboration."
+          "body": "In this state, this action is DESTRUCTIVE. It inhibits collaboration.",
+          "header_mobile": "Destructive Actions",
+          "body_mobile": "In this state, this action is DESTRUCTIVE. It inhibits collaboration."
         }
       ]
     },
@@ -1764,36 +2018,50 @@
       "steps": [
         {
           "header": "Triggers",
-          "body": "Some triggers are hardwired and universal for everyone, other triggers are learned from the world around us and our individual experience."
+          "body": "Some triggers are hardwired and universal for everyone, other triggers are learned from the world around us and our individual experience.",
+          "header_mobile": "Triggers",
+          "body_mobile": "A trigger is something around us or in our own minds that causes us to feel an emotion. Tap on the labels to learn about triggering LHAMO."
         },
         {
           "header": "Perception",
-          "body": "Past personal experience determines whether or not a learned trigger makes us feel emotional. Universal triggers break through regardless."
+          "body": "Past personal experience determines whether or not a learned trigger makes us feel emotional. Universal triggers break through regardless.",
+          "header_mobile": "Perception",
+          "body_mobile": "Past personal experience determines whether or not a learned trigger makes us feel emotional. Universal triggers break through regardless."
         },
         {
           "header": "Response",
-          "body": "Emotion is our automatic response to being triggered. The state of emotion we feel and the actions we take often happen without our realizing why."
+          "body": "Emotion is our automatic response to being triggered. The state of emotion we feel and the actions we take often happen without our realizing why.",
+          "header_mobile": "Response",
+          "body_mobile": "Emotion is our automatic response to being triggered. The state of emotion we feel and the actions we take often happen without our realizing why."
         },
         {
           "header": "Universal Triggers",
-          "body": "This is an example of a universal trigger. Universal triggers are innate, common to everyone. They affect us more intensely than learned triggers."
+          "body": "This is an example of a universal trigger. Universal triggers are innate, common to everyone. They affect us more intensely than learned triggers.",
+          "header_mobile": "Universal Triggers",
+          "body_mobile": "This is an example of a universal trigger. Universal triggers are innate, common to everyone. They affect us more intensely than learned triggers."
         },
         {
           "header": "Learned Triggers",
-          "body": "This is an example of a learned trigger. Learned triggers can be informed by our culture, stemming from widely shared experiences and norms, or personal, created from important and impactful individual experiences."
+          "body": "This is an example of a learned trigger. Learned triggers can be informed by our culture, stemming from widely shared experiences and norms, or personal, created from important and impactful individual experiences.",
+          "header_mobile": "Learned Triggers",
+          "body_mobile": "This is an example of a learned trigger. Learned triggers can be informed by our culture, stemming from widely shared experiences and norms, or personal, created from important and impactful individual experiences."
         }
       ]
     },
     "moods": {
       "header": "A Mood of LHAMO",
-      "body": "Moods are longer-lasting cousins of an emotion that cause us to feel the related emotion repeatedly without any clear trigger. Select the shape to learn more."
+      "body": "Moods are longer-lasting cousins of an emotion that cause us to feel the related emotion repeatedly without any clear trigger. Select the shape to learn more.",
+      "header_mobile": "A Mood of LHAMO",
+      "body_mobile": "Moods are longer-lasting cousins of an emotion that cause us to feel the related emotion repeatedly without any clear trigger. Tap on the shape to learn more."
     },
     "calm": {
       "header": "Experiencing Calm",
       "body": "A calm, balanced frame of mind helps us understand our changing emotions. We can reach calmness through developing an awareness of what triggers our emotions, how we experience our states of emotions and what actions are constructive. Calmness ideally is our baseline in which emotions arise when triggered and then recede .",
       "secondary": {
         "header": "Visit the Annex",
-        "body": "To learn more about emotions, click on “More Information” in the bottom right corner."
+        "body": "To learn more about emotions, click on “More Information” in the bottom right corner.",
+        "header_mobile": "Visit the Annex",
+        "body_mobile": "A calm, balanced frame of mind helps us understand our changing emotions. We can reach calmness through developing an awareness of what triggers our emotions, how we experience our states of emotions and what actions are constructive. Calmness ideally is our baseline in which emotions arise when triggered and then recede ."
       }
     }
   }
