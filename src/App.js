@@ -9,6 +9,7 @@ import calm from './calm.js';
 import moreInfo from './moreInfo.js';
 import introModal from './introModal.js';
 import emotionsData from '../static/emotionsData.json';
+import secondaryData from '../static/secondaryData.json';
 import sassVars from '../scss/variables.json';
 import popupManager from './popupManager.js';
 
@@ -174,7 +175,7 @@ export default function (...initArgs) {
 
 	}
 
-	function initNavArrows() {
+	function initNavArrows () {
 
 		function setUpArrow (direction) {
 
@@ -201,15 +202,16 @@ export default function (...initArgs) {
 
 			navArrow.appendChild(attentionArrow);
 
-			if (direction === 'left' || direction === 'right') {
-				// add label
-				let label = document.createElement('h4');
-				label.classList.add('navLabel');
-				if (direction === 'left') {
-					navArrow.appendChild(label);
-				} else {
-					navArrow.insertBefore(label, attentionArrow);
-				}
+			// add label
+			let label = document.createElement('h4');
+			label.classList.add('navLabel');
+			if (direction === 'left') {
+				navArrow.appendChild(label);
+			} else {
+				navArrow.insertBefore(label, attentionArrow);
+			}
+			if (direction === 'down') {
+				label.style.display = 'none';
 			}
 
 		}
@@ -221,7 +223,7 @@ export default function (...initArgs) {
 		updateArrowVisibility();
 	}
 
-	function initPegLogo() {
+	function initPegLogo () {
 		let logoDiv = document.querySelector('#lower-left-logo');
 		logoDiv.addEventListener('click', function(){
 			window.open('http://www.paulekman.com/', '_blank');
@@ -233,7 +235,7 @@ export default function (...initArgs) {
 		logoDiv.appendChild(logo);
 	}
 
-	function initMoreInfoDropdown() {
+	function initMoreInfoDropdown () {
 		let dropdown = document.querySelector('#more-info .dropup'),
 			title = dropdown.querySelector('.dup-title'),
 			menu = dropdown.querySelector('ul');
@@ -1110,13 +1112,25 @@ export default function (...initArgs) {
 	}
 
 	function onDownArrowClick (event) {
-		scrollSection(1);
+		if (screenIsSmall && currentSection === sections[dispatcher.SECTIONS.CALM]) {
+			dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS, null);
+		} else {
+			scrollSection(1);
+		}
 	}
 	function onLeftArrowClick (event) {
-		scrollEmotion(-1);
+		if (screenIsSmall && currentSection === sections[dispatcher.SECTIONS.CALM]) {
+			dispatcher.navigate(dispatcher.SECTIONS.MORE, null, 'about');
+		} else {
+			scrollEmotion(-1);
+		}
 	}
 	function onRightArrowClick (event) {
-		scrollEmotion(1);
+		if (screenIsSmall && currentSection === sections[dispatcher.SECTIONS.CALM]) {
+			dispatcher.navigate(dispatcher.SECTIONS.MORE, null, 'emotrak');
+		} else {
+			scrollEmotion(1);
+		}
 	}
 
 	function onMobileLeftArrowClick (event) {
@@ -1276,15 +1290,38 @@ export default function (...initArgs) {
 			rightEmotion = emotionNames[(currentEmotionIndex + 1) % emotionNames.length];
 
 		if (screenIsSmall) {
-			document.querySelector('#left-arrow .navLabel').textContent = leftEmotion;
-			document.querySelector('#right-arrow .navLabel').textContent = rightEmotion;
+			let arrows = document.querySelectorAll('.navArrow'),
+				arrowLeft = document.querySelector('#left-arrow'),
+				arrowRight = document.querySelector('#right-arrow'),
+				arrowDown = document.querySelector('#down-arrow'),
+				labelLeft = arrowLeft.querySelector('.navLabel'),
+				labelRight = arrowRight.querySelector('.navLabel'),
+				labelDown = arrowDown.querySelector('.navLabel'),
+				i;
 
-			if (isNavigating) {
-				document.querySelector('#left-arrow').classList.add('disabled');
-				document.querySelector('#right-arrow').classList.add('disabled');
+			if (currentSection === sections[dispatcher.SECTIONS.CALM]) {
+				for (i=0; i<arrows.length; i++) {
+					arrows[i].querySelector('img').style.display = 'none';
+				}
+
+				// TODO: translation
+				labelLeft.textContent = secondaryData.about.title.split(' ')[0] || 'about';
+				labelRight.textContent = secondaryData.emotrak.title.split(' ')[0] || 'emotrak';
+				labelDown.textContent = 'start over';
+				labelDown.style.removeProperty('display');
 			} else {
-				document.querySelector('#left-arrow').classList.remove('disabled');
-				document.querySelector('#right-arrow').classList.remove('disabled');
+				for (i=0; i<arrows.length; i++) {
+					arrows[i].querySelector('img').style.removeProperty('display');
+				}
+
+				labelLeft.textContent = leftEmotion;
+				labelRight.textContent = rightEmotion;
+				labelDown.textContent = '';
+				labelDown.style.display = 'none';
+			}
+
+			for (i=0; i<arrows.length; i++) {
+				arrows[i].classList[isNavigating ? 'add' : 'remove']('disabled');
 			}
 		}
 

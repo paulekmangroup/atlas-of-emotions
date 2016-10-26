@@ -74,7 +74,7 @@ export default {
 		let startAgain = d3.select(this.sectionContainer).append('div')
 			.classed('start-again', true);
 		startAgain.append('h4')
-			.text('START AGAIN');
+			.text('START AGAIN');	// TODO: translation
 		startAgain.on('click', event => {
 			dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS, null);
 		});
