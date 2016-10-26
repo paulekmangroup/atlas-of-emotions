@@ -115,7 +115,8 @@
 			"height": 44
 		},
 		"mobile-caption": {
-			"height": "15rem"
+			"height": "15rem",
+			"height-tall": "22rem"
 		},
 		"scrollbar": {
 			"introOpenDelay": 1.5,

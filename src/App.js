@@ -1382,16 +1382,21 @@ export default function (...initArgs) {
 
 	function setMobileCaption (title, body) {
 
+		let mobileCaption = document.querySelector('#mobile-caption');
 		if (currentSection === sections[dispatcher.SECTIONS.CALM]) {
-			// TODO: increase height of caption
+			// increase height of caption (override stylesheet)
+			let newHeight = sassVars.ui['mobile-caption']['height-tall'];
+			mobileCaption.style.height = newHeight;
 		} else {
-			// TODO: restore height of caption
+			// restore height of caption
+			// (remove inline style and let stylesheet determine height)
+			mobileCaption.style.removeProperty('height');
 		}
 
 		updateMobileUI();
 
-		document.querySelector('#mobile-caption .headline').innerHTML = title || '';
-		document.querySelector('#mobile-caption .body').innerHTML = body || '';
+		mobileCaption.querySelector('.headline').innerHTML = title || '';
+		mobileCaption.querySelector('.body').innerHTML = body || '';
 
 	}
 

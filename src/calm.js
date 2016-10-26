@@ -44,7 +44,10 @@ export default {
 			duration: [0,500,0,0,400],
 			opacity: [0,0,0,0,0],
 			activeEmotion: [0,1,0,0,1],
-			lastEmotion: -1
+			lastEmotion: -1,
+			maxNumVisible: this.screenIsSmall ? 5 : 3,
+			durationBase: this.screenIsSmall ? 400 : 400,
+			durationSpread: this.screenIsSmall ? 800 : 100,
 		};
 
 		this.elapsedToOpacity = d3.scale.linear().domain([0, .05 ,.25, .4, 1]).range([0,.1,.9,.9,0]);
@@ -170,36 +173,36 @@ export default {
 					x: -0.23,
 					y: -0.13,
 					size: 0.15,
-					introSpreadMaxRad: 0.55,
-					introSpreadSizeMod: 1
+					introSpreadMaxRad: 0.45,
+					introSpreadSizeMod: 1.5
 				},
 				{
 					x: -0.17,
 					y: 0.03,
 					size: 0.15,
-					introSpreadMaxRad: 0.7,
-					introSpreadSizeMod: 1
+					introSpreadMaxRad: 0.55,
+					introSpreadSizeMod: 1.5
 				},
 				{
 					x: 0.06,
 					y: -0.18,
 					size: 0.15,
-					introSpreadMaxRad: 0.4,
-					introSpreadSizeMod: 1
+					introSpreadMaxRad: 0.3,
+					introSpreadSizeMod: 1.5
 				},
 				{
 					x: 0.12,
 					y: 0.10,
 					size: 0.15,
-					introSpreadMaxRad: 0.8,
-					introSpreadSizeMod: 1
+					introSpreadMaxRad: 0.65,
+					introSpreadSizeMod: 1.5
 				},
 				{
 					x: 0.24,
 					y: -0.02,
 					size: 0.15,
-					introSpreadMaxRad: 0.55,
-					introSpreadSizeMod: 1
+					introSpreadMaxRad: 0.45,
+					introSpreadSizeMod: 1.5
 				}
 			];
 
@@ -303,7 +306,7 @@ export default {
 
 	},
 
-	calcPercentElapsed: function(fc, start, duration) {
+	calcPercentElapsed: function (fc, start, duration) {
 		let val = (fc - start) / duration;
 		if (val > 0 && val < 1) {
 			return (fc - start) / duration;
@@ -312,11 +315,11 @@ export default {
 		}
 	},
 
-	spawnNew: function(currentState, i) {
+	spawnNew: function (currentState, i) {
 		currentState.activeEmotion[i] = 1;
 		currentState.start[i] = frameCount;
-		// duration ranging uniformally from 100 to 500
-		currentState.duration[i] = 400 * Math.random() + 100;
+		// duration ranging uniformally from durationBase to durationBase + durationSpread
+		currentState.duration[i] = currentState.durationBase * Math.random() + currentState.durationSpread;
 	},
 
 	update: function (time) {
@@ -329,24 +332,26 @@ export default {
 		let currentState = this.opacityState;
 
 		// update opacity if
-		for(var i = 0; i < 5; i++){
+		for (var i = 0; i < 5; i++) {
 			// for the inactive emotions, give them an .0005 chance of spawning
-			if(currentState.activeEmotion[i] == 0 && currentState.lastEmotion != i){
+			if (currentState.activeEmotion[i] == 0 && currentState.lastEmotion != i) {
 				let numActive = d3.sum(currentState.activeEmotion);
-				// never more than 3, and never less than 1 active
+				// never more than `maxNumVisible`, and never less than 1 active
 				let rand = Math.random();
-				if ((rand < .0015 && numActive < 2) || (rand < .0001 && numActive < 3) || numActive == 0) {
+				if ((rand < .0015 && numActive < currentState.maxNumVisible - 1) || (rand < .0001 && numActive < currentState.maxNumVisible) || numActive == 0) {
 					this.spawnNew(currentState, i);
 				}
 			}
+
 			// if current cycle just ended, reset
-			if(currentState.activeEmotion[i] == 1 && currentState.start[i] + currentState.duration[i] < frameCount){
+			if (currentState.activeEmotion[i] == 1 && currentState.start[i] + currentState.duration[i] < frameCount) {
 				currentState.activeEmotion[i] = 0;
 				currentState.opacity[i] = 0;
 				currentState.lastEmotion = i;
 			};
+
 			// define opacity based on frame count, start, and duration
-			if(currentState.activeEmotion[i] != 0){
+			if (currentState.activeEmotion[i] != 0) {
 				currentState.opacity[i] = this.elapsedToOpacity(this.calcPercentElapsed(frameCount, currentState.start[i], currentState.duration[i]));
 				continents[i].update(updateState, frameCount);
 			}
@@ -356,14 +361,10 @@ export default {
 		continents.forEach(function (continent, i) {
 			continent.d3Selection
 				.style("opacity", currentState.opacity[i])
-				.style("display",
-					// only show continent if it's visible
-					function(){if(currentState.opacity[i] == 0){
-						return "none";
-					} else {
-						return "block";
-					}});}
-		);
+
+				// only show continent if it's visible
+				.style("display", () => currentState.opacity[i] == 0 ? "none" : "block");
+		});
 
 		frameCount++;
 		if (this.isActive) {
