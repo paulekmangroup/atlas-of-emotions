@@ -6,7 +6,7 @@ import dispatcher from './dispatcher.js';
 import Circle from './Circle.js';
 import Continent from './Continent.js';
 
-import emotionsData from '../static/emotionsData.json';
+import appStrings from './appStrings.js';
 import sassVars from '../scss/variables.json';
 
 let continents,
@@ -19,10 +19,15 @@ const continentsSection = {
 
 	isInited: false,
 	isActive: false,
+	screenIsSmall: false,
+	displayingIntro: false,
 	closeDelay: sassVars.ui.labels.duration.in * 1000,
 
-	init: function (containerNode) {
+	init: function (containerNode, screenIsSmall) {
+
 		this.sectionContainer = containerNode;
+
+		this.screenIsSmall = screenIsSmall;
 
 		this.update = this.update.bind(this);
 
@@ -40,8 +45,13 @@ const continentsSection = {
 			h = containerNode.offsetHeight,
 			continentGeom;
 
-		centerX = sassVars.continents.centerX * w;
-		centerY = sassVars.continents.centerY * h;
+		if (this.screenIsSmall) {
+			centerX = sassVars.continents['centerX-small'] * w;
+			centerY = sassVars.continents['centerY-small'] * h;
+		} else {
+			centerX = sassVars.continents.centerX * w;
+			centerY = sassVars.continents.centerY * h;
+		}
 		continentGeom = {
 			w: w,
 			h: h,
@@ -49,10 +59,14 @@ const continentsSection = {
 			centerY: centerY
 		};
 
+		let continentTransforms = this.calculateContinentTransforms();
+
 		// map each emotion to a Continent instance
-		continents = _.values(dispatcher.EMOTIONS).map(emotion => new Continent(emotion, continentContainer, continentGeom));
+		continents = _.values(dispatcher.EMOTIONS).map(emotion => new Continent(emotion, continentContainer, continentGeom, continentTransforms, this.screenIsSmall));
 
 		this.initLabels(this.labelContainer);
+
+		this.initMobileElements(containerNode, this.labelContainer);
 
 		// Bind transition namespace to current scope
 		Object.keys(this.transitions).forEach(transitionKey => {
@@ -112,7 +126,7 @@ const continentsSection = {
 							this.transitions.panToContinent(null, currentEmotion);
 
 							// display all-continents callout
-							dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+							dispatcher.changeCallout(null, appStrings().getStr('emotionsData.metadata.continents.header'), appStrings().getStr('emotionsData.metadata.continents.body'));
 
 							resolve();
 
@@ -125,7 +139,7 @@ const continentsSection = {
 
 						let continent = continents.find(c => c.id === emotion);
 						this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.SELECTED);
-						dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+						dispatcher.changeCallout(null, appStrings().getStr('emotionsData.metadata.continents.header'), appStrings().getStr('emotionsData.metadata.continents.body'));
 
 						resolve();
 
@@ -138,7 +152,7 @@ const continentsSection = {
 					this.setContinentHighlight(null, Continent.HIGHLIGHT_LEVELS.NONE);
 
 					// display all-continents callout
-					dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+					dispatcher.changeCallout(null, appStrings().getStr('emotionsData.metadata.continents.header'), appStrings().getStr('emotionsData.metadata.continents.body'));
 
 					if (this.zoomedInContinent) {
 
@@ -203,7 +217,7 @@ const continentsSection = {
 							this.transitions.panToContinent(null, previousEmotion);
 
 							// display all-continents callout
-							dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+							dispatcher.changeCallout(null, appStrings().getStr('emotionsData.metadata.continents.header'), appStrings().getStr('emotionsData.metadata.continents.body'));
 
 							resolve();
 
@@ -216,7 +230,7 @@ const continentsSection = {
 						this.setContinentHighlight(continent, Continent.HIGHLIGHT_LEVELS.SELECTED);
 
 						// display all-continents callout
-						dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+						dispatcher.changeCallout(null, appStrings().getStr('emotionsData.metadata.continents.header'), appStrings().getStr('emotionsData.metadata.continents.body'));
 
 						resolve();
 
@@ -224,15 +238,15 @@ const continentsSection = {
 
 				} else {
 
-					// display all-continents callout
-					dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
+					// display all-continents callout if on non-mobile
+					if (!this.screenIsSmall) dispatcher.changeCallout(null, appStrings().getStr('emotionsData.metadata.continents.header'), appStrings().getStr('emotionsData.metadata.continents.body'));
 					resolve();
 
 				}
 
 			}
 
-			const desc = (emotion) ? emotionsData.emotions[emotion].continent.desc : null;
+			const desc = emotion ? appStrings().getStr(`emotionsData.emotions.${ emotion }.continent.desc`) : null;
 			dispatcher.popupChange('continents', emotion, desc);
 
 			currentEmotion = emotion;
@@ -252,8 +266,14 @@ const continentsSection = {
 	},
 
 	initLabels: function (labelContainer) {
+
 		let labels = labelContainer.selectAll('.emotion-label')
 			.data(continents, d => d.id);
+
+		if (this.screenIsSmall) {
+			labels.style('display', 'none');
+			return;
+		}
 
 		let labelsEnter = labels.enter()
 			.append('div')
@@ -267,6 +287,64 @@ const continentsSection = {
 			.attr('href', d => `#continents:${d.id}`)
 			.append('h3')
 				.text(d => d.name.toUpperCase());
+
+	},
+
+	initMobileElements: function (containerNode, labelContainer) {
+
+		labelContainer.append('div')
+			.classed('intro-element message', true)
+		.append('p')
+		.html(appStrings().getStr('emotionsData.metadata.intro.body_mobile'));
+
+		d3.select(containerNode).append('div')
+			.classed('intro-element button', true)
+		.text(`Let's get started`);
+
+	},
+
+	calculateContinentTransforms: function () {
+
+		if (!this.screenIsSmall) return undefined;
+
+		// left-to-right
+		return [
+			{
+				x: -0.23,
+				y: -0.13,
+				size: 0.15,
+				introSpreadMaxRad: 0.55,
+				introSpreadSizeMod: 1
+			},
+			{
+				x: -0.17,
+				y: 0.03,
+				size: 0.15,
+				introSpreadMaxRad: 0.7,
+				introSpreadSizeMod: 1
+			},
+			{
+				x: 0.06,
+				y: -0.18,
+				size: 0.15,
+				introSpreadMaxRad: 0.4,
+				introSpreadSizeMod: 1
+			},
+			{
+				x: 0.12,
+				y: 0.10,
+				size: 0.15,
+				introSpreadMaxRad: 0.8,
+				introSpreadSizeMod: 1
+			},
+			{
+				x: 0.24,
+				y: -0.02,
+				size: 0.15,
+				introSpreadMaxRad: 0.55,
+				introSpreadSizeMod: 1
+			}
+		];
 
 	},
 
@@ -361,14 +439,21 @@ const continentsSection = {
 	 * but Continent.onResize() does not update existing Circle sizes
 	 * so size changes take a bit of time to propagate.
 	 */
-	onResize: function () {
+	onResize: function (screenIsSmall) {
+
+		this.screenIsSmall = screenIsSmall;
 
 		let w = this.sectionContainer.offsetWidth,
 			h = this.sectionContainer.offsetHeight,
 			continentGeom;
 
-		centerX = 0.48 * w;
-		centerY = 0.5 * h;
+		if (this.screenIsSmall) {
+			centerX = sassVars.continents['centerX-small'] * w;
+			centerY = sassVars.continents['centerY-small'] * h;
+		} else {
+			centerX = sassVars.continents.centerX * w;
+			centerY = sassVars.continents.centerY * h;
+		}
 		continentGeom = {
 			w: w,
 			h: h,
@@ -376,7 +461,7 @@ const continentsSection = {
 			centerY: centerY
 		};
 
-		continents.forEach(c => c.onResize(continentGeom));
+		continents.forEach(c => c.onResize(continentGeom, this.screenIsSmall));
 
 		// update label positions
 		let labels = this.labelContainer.selectAll('.emotion-label')
@@ -422,6 +507,9 @@ const continentsSection = {
 	 */
 	setContinentIntroPositions (val) {
 
+		if (this.displayingIntro === val) return;
+		this.displayingIntro = val;
+
 		let w = this.sectionContainer.offsetWidth,
 			h = this.sectionContainer.offsetHeight,
 			diag = Math.sqrt(w * w + h * h) / 2;
@@ -430,7 +518,8 @@ const continentsSection = {
 			if (val) {
 				continent.addTween(
 					{
-						'introSpreadRad': continent.introSpreadMaxRad * diag
+						'introSpreadRad': continent.introSpreadMaxRad * diag,
+						'introSpreadSize': continent.introSpreadSizeMod || 0
 					},
 					sassVars.continents.introSpread.duration.out * 1000,
 					sassVars.continents.introSpread.delay.out * 1000,
@@ -439,28 +528,54 @@ const continentsSection = {
 			} else {
 				continent.addTween(
 					{
-						'introSpreadRad': 0
+						'introSpreadRad': 0,
+						'introSpreadSize': 0
 					},
 					sassVars.continents.introSpread.duration.in * 1000,
 					sassVars.continents.introSpread.delay.in * 1000,
 					TWEEN.Easing.Cubic.InOut);
-
-				// NOTE: this code is specific to displaying/activating continents for the first time in the session
-				// (when the intro modal is dismissed and the continents brought back to the screen center),
-				// but doesn't really have anything to do with bringing the continents back to the screen center.
-				// So, this code should probably belong elsewhere, but for now, here it stays.
-
-				// display the default continents callout and continent labels.
-				dispatcher.changeCallout(null, emotionsData.metadata.continents.header, emotionsData.metadata.continents.body);
-				// this.setLabelVisibility(true);
-
 			}
 
 		});
 
+		if (val) {
+
+			// no mobile caption when continents are spread
+			if (this.screenIsSmall) dispatcher.changeCallout();
+
+		} else {
+			// NOTE: this code is specific to displaying/activating continents for the first time in the session
+			// (when the intro modal is dismissed and the continents brought back to the screen center),
+			// but doesn't really have anything to do with bringing the continents back to the screen center.
+			// So, this code should probably belong elsewhere, but for now, here it stays.
+
+			// display the default continents callout and continent labels.
+			dispatcher.changeCallout(null, appStrings().getStr('emotionsData.metadata.continents.header'), appStrings().getStr('emotionsData.metadata.continents.body'));
+			// this.setLabelVisibility(true);
+		}
+
+		if (this.screenIsSmall) this.setMobileIntroVisibility(val);
+
 	},
 
-	setLabelVisibility: function(val) {
+	setMobileIntroVisibility: function (val) {
+
+		this.labelContainer.select('.intro-element.message')
+			.classed('visible', val);
+
+		let introButton = d3.select('.intro-element.button')
+			.style('display', 'block');
+
+		// set visible class after one-frame delay so that 'display' style doesn't interfere with transition
+		setTimeout(() => { introButton.classed('visible', val); }, 1);
+
+		introButton.on('click', val ? event => {
+			dispatcher.navigate(dispatcher.HOME);
+		} : null);
+
+	},
+
+	setLabelVisibility: function (val) {
 		this.labelContainer
 			.selectAll('.emotion-label')
 			.classed('visible', val);

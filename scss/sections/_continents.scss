@@ -8,6 +8,10 @@
 	left: 50%;
 	margin-left: -50%;
 
+	.small-screen & {
+		min-height: 0;
+	}
+
 	text-align: center;
 
 	g.continent {
@@ -31,5 +35,48 @@
 	.emotion-label {
 		transform: translate(-50%, -50%);
 		@include emotion-color;
+		.small-screen & {
+			h3 {	// specificity
+				color: $text-overlay-color;
+			}
+		}
 	}
+
+	.intro-element {
+		visibility: hidden;
+		opacity: 0;
+		transition: visibility 0s 1s, opacity #{$ui-labels-duration-out}s ease;
+		&.visible {
+			visibility: visible;
+			opacity: 1.0;
+			transition: visibility 0s, opacity #{$ui-labels-duration-in}s 2s ease;
+		}
+
+		&.message {
+			position: absolute;
+			left: 15vw;
+			width: 70vw;
+			top: 20vh;
+			font-size: 1.6rem;
+		}
+
+		&.button {
+			display: none;
+
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			height: #{$ui-header-height-small}px;
+			box-sizing: border-box;
+
+			line-height: #{$ui-header-height-small}px;
+			white-space: nowrap;
+			text-align: center;
+			text-transform: uppercase;
+
+			color: $background-color;
+			background-color: rgba($scrollbar-background-color, 0.5);
+		}
+	}
+
 }

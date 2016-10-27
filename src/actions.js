@@ -3,7 +3,7 @@ import textures from 'textures';
 import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
-import emotionsData from '../static/emotionsData.json';
+import appStrings from './appStrings.js';
 import sassVars from '../scss/variables.json';
 import states from './states.js';
 
@@ -22,7 +22,7 @@ const ARROW_SHAPE = [
 	{ x: 0.0, y: 0.0 }
 ];
 
-const GRAMMER_TRANSLATE = {
+const GRAMMAR_TRANSLATE = {
 	suppress: 'suppression',
 	quarrel: 'quarreling',
 	insult: 'insulting others',
@@ -58,6 +58,7 @@ const GRAMMER_TRANSLATE = {
 export default {
 
 	isInited: false,
+	screenIsSmall: false,
 	currentEmotion: null,
 	actionsData: null,
 	backgroundSections: [ states ],
@@ -69,9 +70,11 @@ export default {
 	randomLabelPositions: {},
 
 
-	init: function (containerNode) {
+	init: function (containerNode, screenIsSmall) {
 
 		this.sectionContainer = containerNode;
+
+		this.screenIsSmall = screenIsSmall;
 
 		this.actionsData = this.parseActions();
 
@@ -136,9 +139,9 @@ export default {
 		//
 		let margin = {
 			top: sassVars.actions.margins.top,		// actions graph is upside down, so 'top' means bottom of the screen
-			right: 100,
+			right: this.screenIsSmall ? 95 : 100,
 			bottom: sassVars.actions.margins.bottom,
-			left: 100
+			left: this.screenIsSmall ? 95 : 100
 		};
 
 		// All the same size, just grab the first one
@@ -153,7 +156,9 @@ export default {
 		//
 		let section = this,
 			transformedHeight = Math.sqrt(3) / 2 * innerHeight,	// from rotateX(60deg) applied to #action-graph-container
-			radius = Math.min(0.5 * innerWidth, transformedHeight * 0.75);	// TODO: revisit this magic number munging to keep everything on-screen
+			radius = this.screenIsSmall ?
+				innerWidth :
+				Math.min(0.5 * innerWidth, transformedHeight * 0.75);	// TODO: revisit this magic number munging to keep everything on-screen
 
 		this.lineGenerator = d3.svg.line.radial()
 			.radius(d => d.x * radius)
@@ -287,10 +292,10 @@ export default {
 		let actionsData = Object.keys(dispatcher.EMOTIONS).reduce((actionsOutput, emotionKey) => {
 
 			let emotionName = dispatcher.EMOTIONS[emotionKey],
-				statesData = emotionsData.emotions[emotionName].states;
+				statesData = appStrings().getStr(`emotionsData.emotions.${ emotionName }.states`);
 
 			// copy list of all actions for emotion with lowercased names, and alpha sort
-			let allActionsForEmotion = emotionsData.emotions[emotionName].actions.map(action => {
+			let allActionsForEmotion = appStrings().getStr(`emotionsData.emotions.${ emotionName }.actions`).map(action => {
 				return Object.assign({}, action, {
 					name: action.name.toLowerCase()
 				});
@@ -540,6 +545,13 @@ export default {
 			let previousEmotion = this.currentEmotion;
 			this.currentEmotion = emotion;
 
+			// deselect anything selected.
+			// currently only happens on mobile, but might also want to happen on desktop...
+			// TODO: evaluate ^^.
+			if (this.screenIsSmall) {
+				this.setHighlightedAction(null);
+			}
+
 			// transition graphs and labels
 			let dx = 0;
 			if (previousEmotion) {
@@ -548,6 +560,7 @@ export default {
 				previousContainer.on('transitionend', event => {
 					previousContainer.on('transitionend', null);
 					previousContainer.style('transform', null);
+					previousContainer.style('-webkit-transform', null);
 					previousContainer.classed('transitioning', false);
 				});
 
@@ -568,6 +581,7 @@ export default {
 				// delay to allow a little time for opacity to come up before translating
 				setTimeout(() => {
 					previousContainer.style('transform', 'translateX(' + -dx + 'px)');
+					previousContainer.style('-webkit-transform', 'translateX(' + -dx + 'px)');
 				}, sassVars.emotions.panX.delay * 1000);
 			}
 
@@ -579,17 +593,19 @@ export default {
 				// else, move into position immediately to prepare for transition
 				currentContainer.classed('transitioning', false);
 				currentContainer.style('transform', 'translateX(' + dx + 'px)');
+				currentContainer.style('-webkit-transform', 'translateX(' + dx + 'px)');
 			}
 
 			// delay to allow a little time for opacity to come up before translating
 			setTimeout(() => {
 				currentContainer.classed('transitioning active', true);
 				currentContainer.style('transform', 'translateX(0)');
+				currentContainer.style('-webkit-transform', 'translateX(0)');
 			}, sassVars.emotions.panX.delay * 1000);
 
 			if (!this.isBackgrounded) {
-				// activate states if not backgrounded
-				states.setActive(true);
+				// activate states if not backgrounded, and on desktop
+				if (!this.screenIsSmall) states.setActive(true);
 			} else {
 				// remove labels if backgrounded
 				this.renderLabels(null, true);
@@ -629,6 +645,8 @@ export default {
 		// if transitioning from null selection to null selection, then skip transition
 
 		this.currentState = state;
+
+		if (!this.currentEmotion) return;
 
 		let stateActionsData,
 			currentActionsData;
@@ -849,7 +867,8 @@ export default {
 
 	renderLabels: function (actionsData, immediate) {
 
-		if (!this.currentEmotion) { return; }
+		if (!this.currentEmotion) return;
+		if (this.screenIsSmall) return;
 
 		let labelText = d => {
 			/*
@@ -921,12 +940,14 @@ export default {
 				.on('click', this.onActionMouseClick);
 
 			// do this last, so that width (determined by text) can be calculated and used
-			labelEnterSelection.style('transform', function (d, i) {
+			let t = function (d, i) {
 				let verticalOffset = (i === 0 || i === labelEnterSelection.size() - 1) ? 20 : 0;
 				return 'translate(' +
 					Math.round(labelSize * Math.cos(Math.PI*(d.rotation-90)/180) - 0.5*this.offsetWidth) + 'px,' +		// center on label width
 					Math.round(labelSize * Math.sin(Math.PI*(d.rotation-90)/180) / sqrt3 + verticalOffset) + 'px)';		// bump down the first and last label
-			});
+			};
+			labelEnterSelection.style('transform', t);
+			labelEnterSelection.style('-webkit-transform', t);
 
 			labelEnterSelection.transition()
 				.duration(sassVars.actions.add.time)
@@ -993,7 +1014,9 @@ export default {
 
 	},
 
-	onResize: function () {
+	onResize: function (screenIsSmall) {
+
+		this.screenIsSmall = screenIsSmall;
 
 		// recalculate containers, scales, etc
 		this.setUpGraphs(this.sectionContainer);
@@ -1043,6 +1066,13 @@ export default {
 			this.sectionContainer.classList[(options && (options.sectionName === dispatcher.SECTIONS.TRIGGERS) ? 'add' : 'remove')]('triggers');
 			this.sectionContainer.classList[(options && (options.sectionName === dispatcher.SECTIONS.MOODS) ? 'add' : 'remove')]('moods');
 
+			// deselect anything selected.
+			// currently only happens on mobile, but might also want to happen on desktop...
+			// TODO: evaluate ^^.
+			if (val && this.screenIsSmall) {
+				this.setHighlightedAction(null);
+			}
+
 			// this.hideChrome();
 			// this.setActive(!val);
 
@@ -1057,7 +1087,13 @@ export default {
 			resolve();
 
 		});
+	},
 
+	shouldDisplayPaginationUI: function () {
+
+		// only display pagination UI while an action is selected
+		return !!this.highlightedAction;
+		
 	},
 
 	applyEventListenersToEmotion: function (emotion, handlersByEvent) {
@@ -1069,25 +1105,37 @@ export default {
 
 	},
 
+	paginateElement: function (dir) {
+
+		let nextIndex = 0,
+			actionsData = this.actionsData[this.currentEmotion].allActions;
+
+		if (this.highlightedAction) {
+			nextIndex = actionsData.findIndex(s => s.name === this.highlightedAction.name) + dir;
+			nextIndex = nextIndex >= actionsData.length ? 0 : nextIndex < 0 ? actionsData.length - 1 : nextIndex;
+		}
+
+		this.setHighlightedAction(actionsData[nextIndex]);
+
+	},
+
 	setHighlightedAction: function (action) {
 
 		this.highlightedAction = action;
 
 		if (action) {
 
-
-
 			let secondaryData;
 			if (action.valence) {
 				secondaryData = {
-					body: action.valence && emotionsData.metadata.actions.qualities[action.valence - 1].body,
+					body: action.valence && appStrings().getStr(`emotionsData.metadata.actions.qualities[${ action.valence - 1 }].body`),
 					classes: [
 						this.currentEmotion,
 						_.findKey(VALENCES, (val) => val === action.valence).toLowerCase()
 					]
 				};
 				secondaryData.body = secondaryData.body.replace(/In this state/, 'In a state of ' + action.state.toLowerCase());
-				secondaryData.body = secondaryData.body.replace(/this action/, GRAMMER_TRANSLATE[action.name.toLowerCase()]);
+				secondaryData.body = secondaryData.body.replace(/this action/, GRAMMAR_TRANSLATE[action.name.toLowerCase()]);
 			}
 
 			dispatcher.popupChange('actions', action.name, action.desc, secondaryData);
@@ -1103,6 +1151,8 @@ export default {
 	},
 
 	displayHighlightedAction: function (action, valence) {
+
+		if (!this.graphContainers[this.currentEmotion]) return;
 
 		let highlightedAction = action || this.highlightedAction || null,
 			arrowSelection = this.graphContainers[this.currentEmotion].selectAll('g.action-arrow'),
@@ -1179,7 +1229,7 @@ export default {
 
 	resetCallout: function () {
 		dispatcher.popupChange();
-		dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.actions.header, emotionsData.metadata.actions.body);
+		dispatcher.changeCallout(this.currentEmotion, appStrings().getStr('emotionsData.metadata.actions.header'), appStrings().getStr('emotionsData.metadata.actions.body'));
 	}
 
 	/*

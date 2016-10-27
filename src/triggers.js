@@ -2,7 +2,7 @@ import d3 from 'd3';
 import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
-import emotionsData from '../static/emotionsData.json';
+import appStrings from './appStrings.js';
 import sassVars from '../scss/variables.json';
 import states from './states.js';
 import actions from './actions.js';
@@ -59,6 +59,7 @@ const DATABASE_FILTERED_THRESHOLD = 0.85;
 export default {
 
 	isInited: false,
+	screenIsSmall: false,
 	currentEmotion: null,
 	triggersData: null,
 	backgroundSections: [ states, actions ],
@@ -68,9 +69,11 @@ export default {
 	graphContainers: null,
 	emotionArrowPercents: null,
 
-	init: function (containerNode) {
+	init: function (containerNode, screenIsSmall) {
 
 		this.sectionContainer = containerNode;
+
+		this.screenIsSmall = screenIsSmall;
 
 		this.initContainers(containerNode);
 
@@ -120,10 +123,12 @@ export default {
 			angleFactors['universalLearned'] = [-.7, 0];
 		}
 
-
+		// rotate arrows further away from center to avoid label overlap on small screens
+		if (this.screenIsSmall) multiplier += 0.25;
 
 		// angleFactor can be any value from -1 (all the way left) to +1 (all the way right)
 		return (angleFactors[emotion][i] * multiplier - 1) * Math.PI / 2;
+
 	},
 
 	calcRadius: function (i, emotion, haloRadius) {
@@ -143,7 +148,7 @@ export default {
 			'disgust': [.6,.3,.3,.12,1],
 			'sadness': [.6,.4,.3,1.8,1],
 			'enjoyment': [.2,.3,0.2,.12,1.7,.2,.3],
-			'universalLearned': [1.5,.2],
+			'universalLearned': this.screenIsSmall ? [2.5,2.5] : [1.5,.2],
 		};
 
 		let additive = 0,
@@ -162,7 +167,7 @@ export default {
 				'disgust': [2.5,.3,3,2.5,1],
 				'sadness': [3,.4,.3,2.5,.3],
 				'enjoyment': [.5,3.0,1.5,0,2.5,.5,.3],
-				'universalLearned': [1.5,0]
+				'universalLearned': this.screenIsSmall ? [2.5,2.5] : [1.5,0]
 			};
 		}
 
@@ -181,7 +186,7 @@ export default {
 
 		_.values(dispatcher.EMOTIONS).forEach(emotion => {
 
-			triggersData[emotion] = emotionsData.emotions[emotion].triggers.concat()
+			triggersData[emotion] = appStrings().getStr(`emotionsData.emotions.${ emotion }.triggers`).concat()
 			.sort((a, b) => {
 				if (a.type > b.type) return -1;
 				else if (a.type < b.type) return 1;
@@ -244,13 +249,15 @@ export default {
 			w = graphContainer.offsetWidth,
 			h = graphContainer.offsetHeight;
 
+		let triggersBottom = this.screenIsSmall ? sassVars.triggers['bottom-small'] : sassVars.triggers.bottom;
+
 		//
 		// d3 conventional margins
 		//
 		let margin = {
 				top: 0 * h,
 				right: 0 * w,
-				bottom: (sassVars.triggers.bottom.replace('%', '')/100) * h,
+				bottom: (triggersBottom.replace('%', '')/100) * h,
 				left: 0 * w
 			},
 			innerWidth = w - margin.left - margin.right,
@@ -491,7 +498,9 @@ export default {
 		this.labelContainers = {};
 		_.values(dispatcher.EMOTIONS).forEach(emotion => {
 
-			let h = (1 - sassVars.triggers.bottom.replace('%', '') / 100) * containerNode.offsetHeight,
+			let triggersBottom = this.screenIsSmall ? sassVars.triggers['bottom-small'] : sassVars.triggers.bottom;
+
+			let h = (1 - triggersBottom.replace('%', '') / 100) * containerNode.offsetHeight,
 				container = d3.select('.triggers-container.' + emotion),
 				labelContainer = container.append('div')
 					.classed('label-container', true);
@@ -506,33 +515,38 @@ export default {
 
 			// universal/learned triggers popup labels
 			let universalLearnedLabelContainer = labelContainer.append('div')
-				.classed(`universal-learned-labels ${emotion}`, true);
+					.classed(`universal-learned-labels ${emotion}`, true),
+				universalTransform = this.getUniversalLearnedTransform('universal', haloRadius),
+				learnedTransform = this.getUniversalLearnedTransform('learned', haloRadius);
 			universalLearnedLabelContainer.append('div')
 				.attr('class', `emotion-label ${TRIGGER_TYPES.UNIVERSAL} ${emotion}`)
 				.attr('data-popuptarget', `triggers:${emotion}-${TRIGGER_TYPES.UNIVERSAL}`)
-				.style('transform', this.getUniversalLearnedTranslation('universal', haloRadius))
+				.style('transform', universalTransform)
+				.style('-webkit-transform', universalTransform)
 			.append('h3')
-				.text(emotionsData.metadata.triggers.steps[3].header.toUpperCase());
+				.text(appStrings().getStr('emotionsData.metadata.triggers.steps[3].header').toUpperCase());
 			universalLearnedLabelContainer.append('div')
 				.attr('class', `emotion-label ${TRIGGER_TYPES.LEARNED} ${emotion}`)
 				.attr('data-popuptarget', `triggers:${emotion}-${TRIGGER_TYPES.LEARNED}`)
-				.style('transform', this.getUniversalLearnedTranslation('learned', haloRadius))
+				.style('transform', learnedTransform)
+				.style('-webkit-transform', learnedTransform)
 			.append('h3')
-				.text(emotionsData.metadata.triggers.steps[4].header.toUpperCase());
+				.text(appStrings().getStr('emotionsData.metadata.triggers.steps[4].header').toUpperCase());
 
 			this.labelContainers[emotion] = labelContainer;
 
-			// phase labels (EVENT/PERCEPTION/RESPONSE)
+			// phase labels (TRIGGERS/PERCEPTION/RESPONSE)
 			let phaseLabelContainer = labelContainer.append('div')
 				.classed(`trigger-phase-labels ${emotion}`, true);
 
 			let labels = phaseLabelContainer.selectAll('.emotion-label')
-				.data(emotionsData.metadata.triggers.steps.slice(0, 3));
+				.data(appStrings().getStr('emotionsData.metadata.triggers.steps').slice(0, 3));
 
 			let labelsEnter = labels.enter()
 				.append('div')
 				.attr('class', `emotion-label ${emotion}`)
 				.attr('data-popuptarget', d => `triggers:${emotion}-${d.header.toLowerCase()}`)
+				.style('display', (d, i) => (this.screenIsSmall && i === 0) ? 'none' : null)	// hide 'TRIGGERS' on small screens
 				.style('top', (d, i) => {
 					switch (i) {
 						case 0:
@@ -566,8 +580,10 @@ export default {
 
 	setUpHitAreas: function (containerNode) {
 
+		let triggersBottom = this.screenIsSmall ? sassVars.triggers['bottom-small'] : sassVars.triggers.bottom;
+
 		const cw = containerNode.offsetWidth,
-			ch = (1 - sassVars.triggers.bottom.replace('%', '')/100) * containerNode.offsetHeight,
+			ch = (1 - triggersBottom.replace('%', '')/100) * containerNode.offsetHeight,
 			innerRadius = this.haloArcGenerator.innerRadius();
 
 		let hitAreaContainer = document.createElement('div');
@@ -639,6 +655,7 @@ export default {
 				previousContainer.on('transitionend', event => {
 					previousContainer.on('transitionend', null);
 					previousContainer.style('transform', null);
+					previousContainer.style('-webkit-transform', null);
 					previousContainer.classed('transitioning', false);
 				});
 
@@ -659,6 +676,7 @@ export default {
 				// delay to allow a little time for opacity to come up before translating
 				setTimeout(() => {
 					previousContainer.style('transform', 'translateX(' + -dx + 'px)');
+					previousContainer.style('-webkit-transform', 'translateX(' + -dx + 'px)');
 				}, sassVars.emotions.panX.delay * 1000);
 			}
 
@@ -670,12 +688,14 @@ export default {
 				// else, move into position immediately to prepare for transition
 				currentContainer.classed('transitioning', false);
 				currentContainer.style('transform', 'translateX(' + dx + 'px)');
+				currentContainer.style('-webkit-transform', 'translateX(' + dx + 'px)');
 			}
 
 			// delay to allow a little time for opacity to come up before translating
 			setTimeout(() => {
 				currentContainer.classed('transitioning active', true);
 				currentContainer.style('transform', 'translateX(0)');
+				currentContainer.style('-webkit-transform', 'translateX(0)');
 			}, sassVars.emotions.panX.delay * 1000);
 
 			this.renderGraph(this.currentEmotion);
@@ -741,7 +761,16 @@ export default {
 		let triggersData = emotion ? this.triggersData[emotion] : [];
 		emotion = emotion || this.currentEmotion;
 
-		let h = (1 - sassVars.triggers.bottom.replace('%', '')/100) * this.sectionContainer.offsetHeight,
+		if (this.screenIsSmall) {
+			let counts = {
+				universal: 0,
+				learned: 0
+			};
+			triggersData = triggersData.filter(d => counts[d.type]++ < 3);
+		}
+
+		let triggersBottom = this.screenIsSmall ? sassVars.triggers['bottom-small'] : sassVars.triggers.bottom;
+		let h = (1 - triggersBottom.replace('%', '')/100) * this.sectionContainer.offsetHeight,
 			labelContainer = this.labelContainers[emotion],
 			labelSelection = labelContainer.selectAll('div.label')
 			.data(triggersData);
@@ -772,13 +801,15 @@ export default {
 			.on('click', d => this.showTriggerPopup(d.type, d.name));
 
 		// merge
+		let t = (d,i) => {
+			let xShift = document.getElementsByClassName(d.name.replace(/\s+/g, '-'))[0].offsetWidth * (adjustTranslation[emotion][i] - .5);
+			let x = 0.5 * this.sectionContainer.offsetWidth + Math.cos(d.angle) * d.radius + xShift,
+				y = h + Math.sin(d.angle) * d.radius - 10;
+			return 'translate(' + x + 'px,' + y + 'px)';
+		};
 		labelSelection
-			.style('transform', (d,i) => {
-				let xShift = document.getElementsByClassName(d.name.replace(/\s+/g, '-'))[0].offsetWidth * (adjustTranslation[emotion][i] - .5);
-				let x = 0.5 * this.sectionContainer.offsetWidth + Math.cos(d.angle) * d.radius + xShift,
-					y = h + Math.sin(d.angle) * d.radius - 10;
-				return 'translate(' + x + 'px,' + y + 'px)';
-			});
+			.style('transform', t)
+			.style('-webkit-transform', t);
 
 		// exit
 		labelSelection.exit()
@@ -878,20 +909,33 @@ export default {
 
 	},
 
-	getUniversalLearnedTranslation: function (typeName, haloRadius) {
+	getUniversalLearnedTransform: function (typeName, haloRadius) {
+
 		let type = {
 			'universal': 0,
 			'learned': 1
 		};
+
 		let angle = this.calcAngle(type[typeName],'universalLearned', haloRadius),
 			radius = this.calcRadius(type[typeName],'universalLearned', haloRadius);
+
+		if (this.screenIsSmall) {
+			if (typeName === 'universal') {
+				angle = -Math.PI/2 - 0.4;
+			} else if (typeName === 'learned') {
+				angle = -Math.PI/2 + 0.4;
+			}
+		}
 
 		return 'translate('
 			+  Math.cos(angle) * radius + 'px,' +
 				Math.sin(angle) * radius + 'px)';
+
 	},
 
-	onResize: function () {
+	onResize: function (screenIsSmall) {
+
+		this.screenIsSmall = screenIsSmall;
 
 		// update halo
 		let haloRadius = this.setUpGraphs(this.sectionContainer);
@@ -900,9 +944,11 @@ export default {
 		d3.select('#triggers-radial-gradient')
 			.attr('r', haloRadius);
 
+		let triggersBottom = this.screenIsSmall ? sassVars.triggers['bottom-small'] : sassVars.triggers.bottom;
+
 		// update labels, and halos that have already been rendered
 		let w = this.sectionContainer.offsetWidth,
-			h = (1 - sassVars.triggers.bottom.replace('%', '')/100) * this.sectionContainer.offsetHeight,
+			h = (1 - triggersBottom.replace('%', '')/100) * this.sectionContainer.offsetHeight,
 			haloArc = this.haloArcGenerator,
 			innerRadius = haloArc.innerRadius(),
 			pieLayoutData = this.haloPieLayout([{}]);
@@ -936,10 +982,14 @@ export default {
 			});
 
 			// update universal/learned labels
+			let universalTransform = this.getUniversalLearnedTransform('universal', haloRadius),
+				learnedTransform = this.getUniversalLearnedTransform('learned', haloRadius);
 			labelContainer.select(`.${TRIGGER_TYPES.UNIVERSAL}`)
-				.style('transform', this.getUniversalLearnedTranslation('universal', haloRadius));
+				.style('transform', universalTransform)
+				.style('-webkit-transform', universalTransform);
 			labelContainer.select(`.${TRIGGER_TYPES.LEARNED}`)
-				.style('transform', this.getUniversalLearnedTranslation('learned', haloRadius));
+				.style('transform', learnedTransform)
+				.style('-webkit-transform', learnedTransform);
 
 			this.renderLabels(emotion);
 
@@ -1001,9 +1051,9 @@ export default {
 
 		let triggerText = "";
 		if(triggerType == 'universal'){
-			triggerText = emotionsData.metadata.triggers.steps[3].body;
+			triggerText = appStrings().getStr('emotionsData.metadata.triggers.steps[3].body');
 		} else {
-			triggerText = emotionsData.metadata.triggers.steps[4].body;
+			triggerText = appStrings().getStr('emotionsData.metadata.triggers.steps[4].body');
 		}
 		dispatcher.popupChange('triggers', name, triggerText);
 
@@ -1130,11 +1180,11 @@ export default {
 			.classed('visible', false);
 
 		if (hitAreaId) {
-			const step = emotionsData.metadata.triggers.steps[hitAreaId-1];
+			const step = appStrings().getStr(`emotionsData.metadata.triggers.steps[${ hitAreaId - 1 }]`);
 			dispatcher.popupChange('triggers', `${this.currentEmotion}-${step.header.toLowerCase()}`, step.body);
 		} else {
 			dispatcher.popupChange();
-			dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.triggers.header, emotionsData.metadata.triggers.body);
+			dispatcher.changeCallout(this.currentEmotion, appStrings().getStr('emotionsData.metadata.triggers.header'), appStrings().getStr('emotionsData.metadata.triggers.body'));
 
 			// this should technically be in a popup closed handler,
 			// but popupManager only dispatches events for popup close button clicks.

@@ -9,7 +9,7 @@
     "node": true
   },
   "rules": {
-    "indent": [2, "tab", { "SwitchCase": 1 }],
-    "semi": [2, "always"]
+    "indent": [1, "tab", { "SwitchCase": 1 }],
+    "semi": [1, "always"]
   }
 }

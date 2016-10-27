@@ -3,6 +3,9 @@
 	width: 100%;
 	height: 100%;
 	min-height: 600px;
+	.small-screen & {
+		min-height: 0px;
+	}
 
 	top: 0;
 	left: 50%;
@@ -34,6 +37,11 @@
 					h4 {
 						pointer-events: auto;
 						cursor: pointer;
+					}
+
+					// override _labels.scss
+					.small-screen & {
+						opacity: 1.0;
 					}
 				}
 			}
@@ -68,7 +76,16 @@
 		height: calc(100% - #{$triggers-bottom});
 		bottom: $triggers-bottom;
 
+		.small-screen & {
+			height: calc(100% - #{$triggers-bottom-small});
+			bottom: $triggers-bottom-small;
+		}
+
 		.label {
+			.small-screen & {
+				display: none;
+			}
+
 			position: absolute;
 
 			@include emotion-color;
@@ -120,6 +137,10 @@
 		bottom: 0;
 		width: 100%;
 		height: $triggers-bottom;
+		.small-screen & {
+			height: $triggers-bottom-height-small;
+			bottom: $triggers-bottom-small - $triggers-bottom-height-small;
+		}
 		background: linear-gradient(to bottom, rgba(245,245,245,1.0) 0%,rgba(255,255,255,1.0) 100%);
 
 		opacity: 0.0;
@@ -144,6 +165,23 @@
 	.emotion-label {
 		opacity: 1.0;
 		transform: translate(-50%, -50%);
+
+		.small-screen & {
+			transform: translate(-50%, -20%);
+		}
+	}
+}
+.small-screen .universal-learned-labels {
+	h3 {
+		white-space: normal;
+		max-width: 10rem;
+		text-align: center;
+		transform: translate(-50%,-50%);
+	}
+	.universal h3 {
+		// no idea why this label is not lining up correctly.
+		// manual tweak.
+		transform: translate(-70%,-50%);
 	}
 }
 
@@ -153,6 +191,10 @@
 	width: 100%;
 	height: calc(100% - #{$triggers-bottom});
 	bottom: $triggers-bottom;
+	.small-screen & {
+		height: calc(100% - #{$triggers-bottom-small});
+		bottom: $triggers-bottom-small;
+	}
 
 	svg {
 		stroke: none;

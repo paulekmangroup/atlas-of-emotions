@@ -8,14 +8,17 @@ import moods from './moods.js';
 import calm from './calm.js';
 import moreInfo from './moreInfo.js';
 import introModal from './introModal.js';
-import emotionsData from '../static/emotionsData.json';
-import sassVars from '../scss/variables.json';
 import popupManager from './popupManager.js';
+import emotionsData from '../static/emotionsData.json';
+import secondaryData from '../static/secondaryData.json';
+import appStrings from './appStrings.js';
+import sassVars from '../scss/variables.json';
 
 export default function (...initArgs) {
 
 	const MIN_ALLOWED_WIDTH = 950,
 		MIN_ALLOWED_HEIGHT = 600,
+		MOBILE_ENABLED = true,		// feature flag for mobile
 
 		NAVIGATION_DEFAULTS = {
 			section: dispatcher.SECTIONS.CONTINENTS,
@@ -46,6 +49,10 @@ export default function (...initArgs) {
 			emotion: null
 		},
 
+		screenIsSmall = false,
+		nonMobileElements = [],
+		mobileElements = [],
+
 		scrollbarSegments = {},
 		scrollbarCloseTimeout = null,
 		highlightedScrollbarSection = null,
@@ -63,7 +70,7 @@ export default function (...initArgs) {
 
 	function init (containerNode) {
 
-		renderSmallScreenWarning();
+		adjustForScreenSize();
 
 		initContainers();
 		initSections();
@@ -73,8 +80,19 @@ export default function (...initArgs) {
 		initMoreInfoDropdown();
 		initPegLogo();
 		initCallout();
+		initMobileCaption();
 		initModal();
 
+		// mobile setup
+		nonMobileElements.push(document.querySelector('#header'));
+		nonMobileElements.push(document.querySelector('#scrollbar'));
+		nonMobileElements.push(document.querySelector('#callout'));
+		nonMobileElements.push(document.querySelector('#more-info'));
+		nonMobileElements.push(document.querySelector('#lower-left-logo'));
+		// nonMobileElements = nonMobileElements.concat([...document.querySelectorAll('.navArrow')]);
+
+		mobileElements.push(document.querySelector('#mobile-header'));
+		mobileElements.push(document.querySelector('#mobile-caption'));
 
 		// navigation events
 		dispatcher.addListener(dispatcher.EVENTS.NAVIGATE, onNavigate);
@@ -140,28 +158,65 @@ export default function (...initArgs) {
 
 		dropdown.querySelector('.dropdown-toggle').addEventListener('click', onDropdownClick);
 
-	}
+		let mobileHeader = document.querySelector('#mobile-header');
+		mobileHeader.style.removeProperty('display');
+		mobileHeader.classList.add('visible');
 
-	function setUpArrow(direction) {
-		let downArrows = document.querySelector('#' + direction + '-arrow'),
-			attentionArrow = document.createElement('img');
+		if (screenIsSmall) {
+			let navButton = document.createElement('div');
+			navButton.classList.add('nav-button');
+			mobileHeader.appendChild(navButton);
+			navButton.addEventListener('click', onMobileHeaderClick);
 
-		let onClickNav = direction == 'down' ? onDownArrowClick : (direction == 'left' ? onLeftArrowClick : onRightArrowClick);
-		attentionArrow.addEventListener('click', onClickNav);
-
-		// add both images here
-		attentionArrow.src = './img/' + direction + 'Arrow.png';
-
-		// set classes
-		downArrows.classList.add('navArrow');
-		attentionArrow.classList.add(direction);
-		attentionArrow.classList.add(direction + 'Arrow');
-
-		downArrows.appendChild(attentionArrow);
+			let mobileTitle = document.createElement('div');
+			mobileTitle.classList.add('mobile-title');
+			mobileTitle.appendChild(document.querySelector('#header .header-content'));
+			mobileHeader.appendChild(mobileTitle);
+		}
 
 	}
 
-	function initNavArrows() {
+	function initNavArrows () {
+
+		function setUpArrow (direction) {
+
+			let navArrow = document.querySelector('#' + direction + '-arrow'),
+				attentionArrow = document.createElement('img'),
+				suffix = screenIsSmall ? '-white' : '';
+
+			let onClickNav = direction == 'down' ? onDownArrowClick : (direction == 'left' ? onLeftArrowClick : onRightArrowClick);
+			if (screenIsSmall) {
+				// attach handler to container
+				navArrow.addEventListener('click', onClickNav);
+			} else {
+				// attach handler to inner img, due to 100% width on container
+				attentionArrow.addEventListener('click', onClickNav);
+			}
+
+			// add both images here
+			attentionArrow.src = './img/' + direction + 'Arrow' + suffix + '.png';
+
+			// set classes
+			navArrow.classList.add('navArrow');
+			attentionArrow.classList.add(direction);
+			attentionArrow.classList.add(direction + 'Arrow');
+
+			navArrow.appendChild(attentionArrow);
+
+			// add label
+			let label = document.createElement('h4');
+			label.classList.add('navLabel');
+			if (direction === 'left') {
+				navArrow.appendChild(label);
+			} else {
+				navArrow.insertBefore(label, attentionArrow);
+			}
+			if (direction === 'down') {
+				label.style.display = 'none';
+			}
+
+		}
+
 		setUpArrow('down');
 		setUpArrow('left');
 		setUpArrow('right');
@@ -169,7 +224,7 @@ export default function (...initArgs) {
 		updateArrowVisibility();
 	}
 
-	function initPegLogo() {
+	function initPegLogo () {
 		let logoDiv = document.querySelector('#lower-left-logo');
 		logoDiv.addEventListener('click', function(){
 			window.open('http://www.paulekman.com/', '_blank');
@@ -181,7 +236,7 @@ export default function (...initArgs) {
 		logoDiv.appendChild(logo);
 	}
 
-	function initMoreInfoDropdown() {
+	function initMoreInfoDropdown () {
 		let dropdown = document.querySelector('#more-info .dropup'),
 			title = dropdown.querySelector('.dup-title'),
 			menu = dropdown.querySelector('ul');
@@ -309,6 +364,38 @@ export default function (...initArgs) {
 
 	}
 
+	function initMobileCaption () {
+
+		let caption = document.querySelector('#mobile-caption');
+		caption.style.removeProperty('display');
+
+		let h3 = document.createElement('h3');
+		h3.classList.add('headline');
+		caption.appendChild(h3);
+		let p = document.createElement('p');
+		p.classList.add('body');
+		caption.appendChild(p);
+
+		let arrow = document.createElement('div');
+		arrow.classList.add('mobile-nav-arrow');
+		let arrowImg = document.createElement('img');
+		arrowImg.src = './img/leftArrow.png';
+		arrowImg.classList.add('left', 'leftArrow');
+		arrow.appendChild(arrowImg);
+		caption.appendChild(arrow);
+		arrowImg.addEventListener('click', onMobileLeftArrowClick);
+
+		arrow = document.createElement('div');
+		arrow.classList.add('mobile-nav-arrow');
+		arrowImg = document.createElement('img');
+		arrowImg.src = './img/rightArrow.png';
+		arrowImg.classList.add('right', 'rightArrow');
+		arrow.appendChild(arrowImg);
+		caption.appendChild(arrow);
+		arrowImg.addEventListener('click', onMobileRightArrowClick);
+
+	}
+
 	function initModal () {
 
 		introModal.init(document.querySelector('#modal'), setModalVisibility);
@@ -333,25 +420,32 @@ export default function (...initArgs) {
 	}
 
 	function setSectionEmotion (section, previousEmotion, previousMorePage) {
-		section.setEmotion(currentEmotion, previousEmotion, currentMorePage, previousMorePage)
-		.then(() => {
-			// console.log(">>>>> isNavigating -> false (setEmotion promise resolution 1)");
+
+
+		let promise = section.setEmotion(currentEmotion, previousEmotion, currentMorePage, previousMorePage);
+		updateArrowLabels();
+
+		promise.then(() => {
 			isNavigating = false;
+			updateArrowLabels();
 		});
+
 	}
 
 	function fadeArrowOutAndIn (sectionName) {
 
-		function endFade(){
-			document.querySelector('.downArrow').classList.remove("fadeOutIn");
-			document.querySelector('.leftArrow').classList.remove("fadeOutIn");
-			document.querySelector('.rightArrow').classList.remove("fadeOutIn");
-		}
+		if (!screenIsSmall) {
+			function endFade(){
+				document.querySelector('.downArrow').classList.remove("fadeOutIn");
+				document.querySelector('.leftArrow').classList.remove("fadeOutIn");
+				document.querySelector('.rightArrow').classList.remove("fadeOutIn");
+			}
 
-		document.querySelector('.downArrow').classList.add("fadeOutIn");
-		document.querySelector('.leftArrow').classList.add("fadeOutIn");
-		document.querySelector('.rightArrow').classList.add("fadeOutIn");
-		setTimeout(endFade, 4000);
+			document.querySelector('.downArrow').classList.add("fadeOutIn");
+			document.querySelector('.leftArrow').classList.add("fadeOutIn");
+			document.querySelector('.rightArrow').classList.add("fadeOutIn");
+			setTimeout(endFade, 4000);
+		}
 
 		updateArrowVisibility(sectionName);
 
@@ -548,6 +642,8 @@ export default function (...initArgs) {
 
 		currentSection = section;
 
+		if (screenIsSmall) updateMobileUI();
+
 	}
 
 	function setMore (page) {
@@ -584,7 +680,7 @@ export default function (...initArgs) {
 		let currentDisplay = containers[sectionName].style.display;
 		containers[sectionName].removeAttribute('style');
 
-		section.init(containers[sectionName]);
+		section.init(containers[sectionName], screenIsSmall);
 
 		// set display back to where it was
 		if (currentDisplay) {
@@ -679,6 +775,11 @@ export default function (...initArgs) {
 			dispatcher.navigate(null, emotionNames[targetEmotionIndex]);
 		}
 
+	}
+
+	function paginateSelectedElement (dir) {
+
+		if (currentSection.paginateElement) currentSection.paginateElement(dir);
 
 	}
 
@@ -687,7 +788,9 @@ export default function (...initArgs) {
 	 */
 	function onResize () {
 
-		if (!renderSmallScreenWarning()) {
+		adjustForScreenSize();
+
+		if (!screenIsSmall) {
 
 			// if we're on the homepage, or the intro modal
 			// hasn't ever been viewed yet in this browser,
@@ -712,7 +815,7 @@ export default function (...initArgs) {
 		}
 
 		// size main container to viewport
-		let headerHeight = 55;	// from _variables.scss
+		let headerHeight = screenIsSmall ? sassVars.ui.header['height-small'] : sassVars.ui.header.height;
 		document.getElementById('main').style.height = (window.innerHeight - headerHeight) + 'px';
 
 		// update scrollbar values
@@ -734,7 +837,7 @@ export default function (...initArgs) {
 					sectionContainer.style.display = 'block';
 				}
 
-				section.onResize();
+				section.onResize(screenIsSmall);
 
 				if (containerIsHidden) {
 					sectionContainer.style.display = 'none';
@@ -892,6 +995,16 @@ export default function (...initArgs) {
 
 	}
 
+	function onMobileHeaderClick (event) {
+
+		if (currentSection === sections[dispatcher.SECTIONS.CONTINENTS]) {
+			dispatcher.navigate(dispatcher.HOME);
+		} else {
+			scrollSection(-1);
+		}
+
+	}
+
 	/**
 	 * Note: this function is _.throttle()d in initNavBar().
 	 * Note: this function is not currently in use.
@@ -905,6 +1018,8 @@ export default function (...initArgs) {
 	}
 
 	function setScrollbarOpen (val) {
+
+		if (screenIsSmall) return;
 
 		if (val && !scrollbarIsOpen) {
 			setScrollbarFractionalOpen(1.0, 0.15);
@@ -994,25 +1109,36 @@ export default function (...initArgs) {
 	}
 
 	function onScrollbarOut (event) {
-
 		displayScrollbarHighlight(null);
-
 	}
 
 	function onDownArrowClick (event) {
-
-		scrollSection(1);
-
+		if (screenIsSmall && currentSection === sections[dispatcher.SECTIONS.CALM]) {
+			dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS, null);
+		} else {
+			scrollSection(1);
+		}
 	}
-
 	function onLeftArrowClick (event) {
-		scrollEmotion(-1);
+		if (screenIsSmall && currentSection === sections[dispatcher.SECTIONS.CALM]) {
+			dispatcher.navigate(dispatcher.SECTIONS.MORE, null, 'about');
+		} else {
+			scrollEmotion(-1);
+		}
+	}
+	function onRightArrowClick (event) {
+		if (screenIsSmall && currentSection === sections[dispatcher.SECTIONS.CALM]) {
+			dispatcher.navigate(dispatcher.SECTIONS.MORE, null, 'emotrak');
+		} else {
+			scrollEmotion(1);
+		}
 	}
 
-	function onRightArrowClick (event) {
-
-		scrollEmotion(1);
-
+	function onMobileLeftArrowClick (event) {
+		paginateSelectedElement(-1);
+	}
+	function onMobileRightArrowClick (event) {
+		paginateSelectedElement(1);
 	}
 
 	function onScrollbarClick (event) {
@@ -1054,6 +1180,8 @@ export default function (...initArgs) {
 			// bring continents back to center when closing modal
 			currentSection.setContinentIntroPositions(false);
 		}
+
+		if (screenIsSmall) return;
 
 		if (val) {
 
@@ -1117,22 +1245,109 @@ export default function (...initArgs) {
 		}
 	}
 
-	function updateArrowVisibility (sectionName) {
+	function updateArrowVisibility (sectionName, smallScreenVisibility) {
 
-		if (sectionName == 'calm' || sectionName == 'more'){
+		if (screenIsSmall) {
+			// arrows visibility on mobile controlled by second param,
+			// defaults to true
+			if (typeof smallScreenVisibility === 'undefined') smallScreenVisibility = true;
+			let classMethod = smallScreenVisibility ? 'add' : 'remove';
+			document.querySelector('#down-arrow').classList[classMethod]('visible');
+			document.querySelector('#left-arrow').classList[classMethod]('visible');
+			document.querySelector('#right-arrow').classList[classMethod]('visible');
+
+			if (currentSection === sections[dispatcher.SECTIONS.CONTINENTS]) {
+				document.querySelector('#down-arrow').classList.add('immediate');
+				document.querySelector('#left-arrow').classList.add('immediate');
+				document.querySelector('#right-arrow').classList.add('immediate');
+			} else {
+				document.querySelector('#down-arrow').classList.remove('immediate');
+				document.querySelector('#left-arrow').classList.remove('immediate');
+				document.querySelector('#right-arrow').classList.remove('immediate');
+			}
+		} else if (sectionName == 'calm' || sectionName == 'more'){
 			// arrow not visible
-			document.querySelector('.downArrow').classList.remove("visible");
-			document.querySelector('.leftArrow').classList.remove("visible");
-			document.querySelector('.rightArrow').classList.remove("visible");
+			document.querySelector('.downArrow').classList.remove('visible');
+			document.querySelector('.leftArrow').classList.remove('visible');
+			document.querySelector('.rightArrow').classList.remove('visible');
 		} else if (sectionName == 'continents'){
-			document.querySelector('.downArrow').classList.add("visible");
-			document.querySelector('.leftArrow').classList.remove("visible");
-			document.querySelector('.rightArrow').classList.remove("visible");
+			document.querySelector('.downArrow').classList.add('visible');
+			document.querySelector('.leftArrow').classList.remove('visible');
+			document.querySelector('.rightArrow').classList.remove('visible');
 		} else {
 			// arrow visible
-			document.querySelector('.downArrow').classList.add("visible");
-			document.querySelector('.leftArrow').classList.add("visible");
-			document.querySelector('.rightArrow').classList.add("visible");
+			document.querySelector('.downArrow').classList.add('visible');
+			document.querySelector('.leftArrow').classList.add('visible');
+			document.querySelector('.rightArrow').classList.add('visible');
+		}
+
+	}
+
+	function updateArrowLabels () {
+
+		let emotionNames = _.values(dispatcher.EMOTIONS),
+			currentEmotionIndex = emotionNames.indexOf(currentEmotion),
+			leftEmotion = emotionNames[(currentEmotionIndex - 1 + emotionNames.length) % emotionNames.length],
+			rightEmotion = emotionNames[(currentEmotionIndex + 1) % emotionNames.length];
+
+		if (screenIsSmall) {
+			let arrows = document.querySelectorAll('.navArrow'),
+				arrowLeft = document.querySelector('#left-arrow'),
+				arrowRight = document.querySelector('#right-arrow'),
+				arrowDown = document.querySelector('#down-arrow'),
+				labelLeft = arrowLeft.querySelector('.navLabel'),
+				labelRight = arrowRight.querySelector('.navLabel'),
+				labelDown = arrowDown.querySelector('.navLabel'),
+				i;
+
+			if (currentSection === sections[dispatcher.SECTIONS.CALM]) {
+				for (i=0; i<arrows.length; i++) {
+					arrows[i].querySelector('img').style.display = 'none';
+				}
+
+				// TODO: translation
+				labelLeft.textContent = secondaryData.about.title.split(' ')[0] || 'about';
+				labelRight.textContent = secondaryData.emotrak.title.split(' ')[0] || 'emotrak';
+				labelDown.textContent = 'start over';
+				labelDown.style.removeProperty('display');
+			} else {
+				for (i=0; i<arrows.length; i++) {
+					arrows[i].querySelector('img').style.removeProperty('display');
+				}
+
+				labelLeft.textContent = leftEmotion;
+				labelRight.textContent = rightEmotion;
+				labelDown.textContent = '';
+				labelDown.style.display = 'none';
+			}
+
+			for (i=0; i<arrows.length; i++) {
+				arrows[i].classList[isNavigating ? 'add' : 'remove']('disabled');
+			}
+		}
+
+	}
+
+	function updateMobileUI () {
+
+		// show title mobile header and hide mobile footer when appropriate
+		let titleHeaderAndFooter = currentSection === sections[dispatcher.SECTIONS.CONTINENTS] && !currentEmotion;
+		updateArrowVisibility(null, !titleHeaderAndFooter);
+
+		if (titleHeaderAndFooter) {
+			document.querySelector('#mobile-header .nav-button').style.display = 'none';
+			document.querySelector('#mobile-header .header-content').style.display = 'block';
+		} else {
+			document.querySelector('#mobile-header .nav-button').style.display = 'block';
+			document.querySelector('#mobile-header .header-content').style.display = 'none';
+		}
+
+		// if forcing to be hidden, hide arrows
+		// else, decide based on the currentSection
+		let paginationUIVisible = currentSection && currentSection.shouldDisplayPaginationUI && currentSection.shouldDisplayPaginationUI(),
+			paginationArrows = document.querySelectorAll('.mobile-nav-arrow');
+		for (let i=0; i<paginationArrows.length; i++) {
+			paginationArrows[i].classList[paginationUIVisible ? 'add' : 'remove']('visible');
 		}
 
 	}
@@ -1144,6 +1359,12 @@ export default function (...initArgs) {
 	}
 
 	function onPopupChange (section, emotion, desc, secondaryData) {
+
+		if (screenIsSmall && emotion) {
+			setMobileCaption(emotion, desc);
+			return;
+		}
+
 		if (!section){
 			popupManager.manage();
 		} else {
@@ -1155,18 +1376,30 @@ export default function (...initArgs) {
 	}
 
 	function onCalloutChange (emotion, title, body) {
-		if (!title) {
+
+		// on non-mobile, if no title passed just hide callout and bail
+		if (!screenIsSmall && !title) {
 			callout.classList.remove('visible');
 			return;
 		}
 
-		title = title.replace(/LHAMO/i, emotion);
+		let cappedEmotion = emotion ?
+			emotion.charAt(0).toUpperCase() + emotion.slice(1) :
+			'The Emotion';
+
+		title = title ? title.replace(/LHAMO/i, emotion) : null;
+		body = body ? body.replace(/LHAMO/i, cappedEmotion) : null;
+
+		if (screenIsSmall) {
+			setMobileCaption(title, body);
+			return;
+		}
 
 		callout.removeAttribute('class');
 		callout.classList.add('visible');
 
 		// remove class names on link if link exists, so it's possible to test similarity below
-		if(document.getElementById("annexLink")){
+		if (document.getElementById("annexLink")) {
 			document.getElementById("annexLink").removeAttribute('class');
 		}
 
@@ -1179,10 +1412,30 @@ export default function (...initArgs) {
 		if (emotion) {
 			callout.classList.add(emotion);
 			// update class names on link if link exists
-			if(document.getElementById("annexLink")){
+			if (document.getElementById("annexLink")) {
 				document.getElementById("annexLink").className = emotion;
 			};
 		}
+	}
+
+	function setMobileCaption (title, body) {
+
+		let mobileCaption = document.querySelector('#mobile-caption');
+		if (currentSection === sections[dispatcher.SECTIONS.CALM]) {
+			// increase height of caption (override stylesheet)
+			let newHeight = sassVars.ui['mobile-caption']['height-tall'];
+			mobileCaption.style.height = newHeight;
+		} else {
+			// restore height of caption
+			// (remove inline style and let stylesheet determine height)
+			mobileCaption.style.removeProperty('height');
+		}
+
+		updateMobileUI();
+
+		mobileCaption.querySelector('.headline').innerHTML = title || '';
+		mobileCaption.querySelector('.body').innerHTML = body || '';
+
 	}
 
 	function onEmotionStateChange (state, selected) {
@@ -1196,12 +1449,14 @@ export default function (...initArgs) {
 	}
 
 	function onNavigate (section, emotion) {
+
 		if (section === dispatcher.HOME) {
 			document.location.hash = '';
 			if (!document.location.hash) {
 				// If already at root, ensure modal is closed.
 				setModalVisibility(false);
 			}
+
 			return;
 		}
 
@@ -1326,41 +1581,73 @@ export default function (...initArgs) {
 	/**
 	 * If viewport is below minimum screen size,
 	 * render small screen warning and return true.
-	 * TODO (yeah right): pull in this text from elsewhere instead of hardcoding.
+	 * TODO: pull in this text from elsewhere instead of hardcoding.
 	 */
-	function renderSmallScreenWarning () {
+	function adjustForScreenSize () {
 
 		if (bypassedWarning || (window.innerWidth >= MIN_ALLOWED_WIDTH && window.innerHeight >= MIN_ALLOWED_HEIGHT)) {
-			document.querySelector('body').classList.remove('small-screen-warning');
-			document.querySelector('#warning').innerHTML = '';
-			document.querySelector('#app-container').classList.remove("hidden");
-			return false;
+
+			if (MOBILE_ENABLED) {
+
+				nonMobileElements.forEach(el => el.style.removeProperty('display'));
+				mobileElements.forEach(el => el.style.display = 'none');
+				document.querySelector('body').classList.remove('small-screen');
+
+			} else {
+
+				document.querySelector('body').classList.remove('small-screen-warning');
+				document.querySelector('#warning').innerHTML = '';
+				document.querySelector('#app-container').classList.remove("hidden");
+
+			}
+
+			// allow resetting this flag regardless of targeting mobile or desktop
+			screenIsSmall = false;
+
+		} else {
+
+			if (MOBILE_ENABLED) {
+
+				nonMobileElements.forEach(el => el.style.display = 'none');
+				mobileElements.forEach(el => el.style.removeProperty('display'));
+				document.querySelector('body').classList.add('small-screen');
+
+				// only ever set this flag when targeting mobile
+				screenIsSmall = true;
+
+			} else {
+
+				document.querySelector('body').classList.add('small-screen-warning');
+
+				let warningDiv = document.createElement('div');
+				warningDiv.classList.add('warning-container');
+
+				let warningHeader = document.createElement('h3');
+				warningHeader.innerHTML = 'ATLAS OF EMOTIONS';
+				warningDiv.appendChild(warningHeader);
+
+				let warningBody = document.createElement('p');
+				warningBody.innerHTML = 'For the best experience, please enlarge your browser, switch to landscape orientation, or view on a larger device. Or, <a href="#" class="bypass-warning">click here</a> to proceed anyway.';
+				warningDiv.appendChild(warningBody);
+
+				// TODO: how to not blow away content for bots?
+				document.querySelector('#warning').innerHTML = '';
+				document.querySelector('#warning').appendChild(warningDiv);
+				document.querySelector('#app-container').classList.add("hidden");
+
+				document.querySelector('.bypass-warning').addEventListener('click', event => {
+					bypassedWarning = true;
+					onResize();
+				});
+
+			}
+
 		}
 
-		document.querySelector('body').classList.add('small-screen-warning');
+		// set up appStrings
+		appStrings('en', screenIsSmall);
 
-		let warningDiv = document.createElement('div');
-		warningDiv.classList.add('warning-container');
-
-		let warningHeader = document.createElement('h3');
-		warningHeader.innerHTML = 'ATLAS OF EMOTIONS';
-		warningDiv.appendChild(warningHeader);
-
-		let warningBody = document.createElement('p');
-		warningBody.innerHTML = 'For the best experience, please enlarge your browser, switch to landscape orientation, or view on a larger device. Or, <a href="#" class="bypass-warning">click here</a> to proceed anyway.';
-		warningDiv.appendChild(warningBody);
-
-		// TODO: how to not blow away content for bots?
-		document.querySelector('#warning').innerHTML = '';
-		document.querySelector('#warning').appendChild(warningDiv);
-		document.querySelector('#app-container').classList.add("hidden");
-
-		document.querySelector('.bypass-warning').addEventListener('click', event => {
-			bypassedWarning = true;
-			onResize();
-		});
-
-		return true;
+		return screenIsSmall;
 
 	}
 

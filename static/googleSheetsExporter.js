@@ -105,7 +105,9 @@ var metadataSectionParsers = (function () {
 	var standard = function (data) {
 		return {
 			header: data[0][0],
-			body: data[0][1]
+			body: data[0][1],
+			header_mobile: data[0][5] || data[0][0],
+			body_mobile: data[0][6] || data[0][1]
 		};
 	};
 
@@ -114,7 +116,9 @@ var metadataSectionParsers = (function () {
 		intro: function (data) {
 			var obj = {
 				header: data[0][0],
-				body: data[0][1]
+				body: data[0][1],
+				header_mobile: data[0][5] || data[0][0],
+				body_mobile: data[0][6] || data[0][1]
 			};
 			obj.steps = data.map(function (row) {
 				return {
@@ -134,12 +138,16 @@ var metadataSectionParsers = (function () {
 		actions: function (data) {
 			var obj = {
 				header: data[0][0],
-				body: data[0][1]
+				body: data[0][1],
+				header_mobile: data[0][5] || data[0][0],
+				body_mobile: data[0][6] || data[0][1]
 			};
 			obj.qualities = data.map(function (row) {
 				return {
 					header: row[2],
-					body: row[3]
+					body: row[3],
+					header_mobile: row[5] || row[2],
+					body_mobile: row[6] || row[3]
 				};
 			});
 
@@ -149,12 +157,16 @@ var metadataSectionParsers = (function () {
 		triggers: function (data) {
 			var obj = {
 				header: data[0][0],
-				body: data[0][1]
+				body: data[0][1],
+				header_mobile: data[0][5] || data[0][0],
+				body_mobile: data[0][6] || data[0][1]
 			};
 			obj.steps = data.map(function (row) {
 				return {
 					header: row[2],
-					body: row[3]
+					body: row[3],
+					header_mobile: row[5] || row[2],
+					body_mobile: row[6] || row[3]
 				};
 			});
 
@@ -167,9 +179,13 @@ var metadataSectionParsers = (function () {
 			return {
 				header: data[0][0],
 				body: data[0][1],
+				header_mobile: data[0][5] || data[0][0],
+				body_mobile: data[0][6] || data[0][1],
 				secondary: {
 					header: data[0][2],
-					body: data[0][3]
+					body: data[0][3],
+					header_mobile: data[0][5] || data[0][2],
+					body_mobile: data[0][6] || data[0][3]
 				}
 			};
 		}
@@ -233,7 +249,9 @@ var emotionSectionParsers = (function () {
 		return data.map(function (row) {
 			return {
 				name: row[0],
-				desc: row[1]
+				desc: row[1],
+				name_mobile: row[5] || row[0],
+				desc_mobile: row[6] || row[1]
 			};
 		});
 	};
@@ -248,7 +266,7 @@ var emotionSectionParsers = (function () {
 			return data.filter(function (row) {
 				return !!row[0];
 			}).map(function (row) {
-				Logger.log("row len:" + row.length + "; row[0]:" + row[0]);
+				// Logger.log("row len:" + row.length + "; row[0]:" + row[0]);
 				var con = (row[2].split(',') || []).map(function (val) { return val.trim().toLowerCase(); }),
 					des = (row[3].split(',') || []).map(function (val) { return val.trim().toLowerCase(); }),
 					both = [],
@@ -266,6 +284,8 @@ var emotionSectionParsers = (function () {
 				return {
 					name: row[0],
 					desc: row[1],
+					name_mobile: row[5] || row[0],
+					desc_mobile: row[6] || row[1],
 					range: {
 						min: parseInt(range[0]),
 						max: parseInt(range[1])
@@ -286,7 +306,9 @@ var emotionSectionParsers = (function () {
 			return data.map(function (row) {
 				return {
 					name: row[0],
-					type: row[1]
+					type: row[1],
+					name_mobile: row[5] || row[0],
+					desc_mobile: row[6] || row[1]
 				};
 			});
 		},

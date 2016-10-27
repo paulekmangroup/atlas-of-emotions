@@ -2,7 +2,7 @@ import d3 from 'd3';
 import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
-import emotionsData from '../static/emotionsData.json';
+import appStrings from './appStrings.js';
 import sassVars from '../scss/variables.json';
 
 const LABEL_APPEAR_DELAY = 1000;
@@ -32,13 +32,16 @@ export default {
 	emotionStates: null,
 	currentEmotion: null,
 	isBackgrounded: false,
+	screenIsSmall: false,
 	selectedState: null,
 
 	mouseOutTimeout: null,
 
-	init: function (containerNode) {
+	init: function (containerNode, screenIsSmall) {
 
 		this.sectionContainer = containerNode;
+
+		this.screenIsSmall = screenIsSmall;
 
 		this.applyTransitions = this.applyTransitions.bind(this);
 
@@ -53,6 +56,9 @@ export default {
 		this.onStateMouseOver = this.onStateMouseOver.bind(this);
 		this.onStateMouseOut = this.onStateMouseOut.bind(this);
 		this.onStateClick = this.onStateClick.bind(this);
+		this.onContainerTouchStart = this.onContainerTouchStart.bind(this);
+		this.onContainerTouchMove = this.onContainerTouchMove.bind(this);
+		this.onContainerTouchEnd = this.onContainerTouchEnd.bind(this);
 		this.onBackgroundClick = this.onBackgroundClick.bind(this);
 
 		// dispatcher.addListener(dispatcher.EVENTS.POPUP_CLOSE_BUTTON_CLICKED, this.onPopupCloseButtonClicked.bind(this));
@@ -127,7 +133,7 @@ export default {
 			.orient('bottom')
 			.ticks(10)
 			.tickFormat(d => '')
-			.tickSize(10);
+			.tickSize(this.screenIsSmall ? 5 : 10);
 
 		let labelsXScale = d3.scale.ordinal()
 			.domain(['LEAST INTENSE', 'MOST INTENSE'])
@@ -161,14 +167,16 @@ export default {
 					.attr('transform', 'translate(0,' + innerHeight + ')')
 					.call(xAxis);
 
-				graph.append('g')
-					.attr('class', 'x axis labels')
-					.attr('transform', 'translate(0,' + innerHeight + ')')
-					.call(xAxisLabels)
-				// align labels
-				.selectAll('.tick text')
-					.attr('text-anchor', (d, i) => i ? 'end' : 'start')
-					.attr('style', null);
+				if (!this.screenIsSmall) {
+					graph.append('g')
+						.attr('class', 'x axis labels')
+						.attr('transform', 'translate(0,' + innerHeight + ')')
+						.call(xAxisLabels)
+					// align labels
+					.selectAll('.tick text')
+						.attr('text-anchor', (d, i) => i ? 'end' : 'start')
+						.attr('style', null);
+				}
 
 				this.graphContainers[emotion] = d3.select(graphContainer);
 
@@ -202,14 +210,16 @@ export default {
 					.attr('transform', 'translate(0,' + innerHeight + ')')
 					.call(xAxis);
 
-				graph.select('g.x.axis.labels')
-					.html('')
-					.attr('transform', 'translate(0,' + innerHeight + ')')
-					.call(xAxisLabels)
-				// align labels
-				.selectAll('.tick text')
-					.attr('text-anchor', (d, i) => i ? 'end' : 'start')
-					.attr('style', null);
+				if (!this.screenIsSmall) {
+					graph.select('g.x.axis.labels')
+						.html('')
+						.attr('transform', 'translate(0,' + innerHeight + ')')
+						.call(xAxisLabels)
+					// align labels
+					.selectAll('.tick text')
+						.attr('text-anchor', (d, i) => i ? 'end' : 'start')
+						.attr('style', null);
+				}
 
 			});
 
@@ -227,6 +237,11 @@ export default {
 			statesData = this.emotionStates[emotion].data,
 			labels = this.labelContainers[emotion].selectAll('div')
 				.data(ranges);
+
+		if (this.screenIsSmall) {
+			labels.style('display', 'none');
+			return;
+		}
 
 		// TODO: copying anger as placeholder;
 		// implement for disgust, enjoyment, fear as necessary
@@ -272,6 +287,7 @@ export default {
 				'amusement': -20,
 				'rejoicing': -20,
 				'schadenfreude': 0,
+				'peace': -10,
 				'relief': 0,
 				'pride': 0,
 				'fiero': 0,
@@ -329,7 +345,7 @@ export default {
 				.attr('data-popuptarget', (d,i) => `states:${statesData[i].name}`)
 				.html((d, i) => '<h3>' + statesData[i].name.toUpperCase() + '</h3>')
 				.style({
-					left: function(d,i){return positionsLookup[statesData[i].name].left + 'px';},	// not sure why this 20px magic number is necessary...?
+					left: function(d,i){return positionsLookup[statesData[i].name].left + 'px';},
 					top: function(d,i){return positionsLookup[statesData[i].name].top + 'px';},
 				});
 
@@ -341,7 +357,7 @@ export default {
 		labels
 			.style({
 				top: function(d,i){return positionsLookup[statesData[i].name].top + 'px';},
-				left: function(d,i){return positionsLookup[statesData[i].name].left + 'px';},	// not sure why this 20px magic number is necessary...?
+				left: function(d,i){return positionsLookup[statesData[i].name].left + 'px';},
 				//top: d => (Math.round(yOffsets[emotion](stateSection.yScale(d[1].y), d)) + 'px')
 			});
 		if(!this.isBackgrounded){
@@ -362,7 +378,7 @@ export default {
 
 	},
 
-	setEmotion: function (emotion) {
+	setEmotion: function (emotion, previousEmotion) {
 
 		return new Promise((resolve, reject) => {
 
@@ -371,6 +387,14 @@ export default {
 			}
 			let previousEmotion = this.currentEmotion;
 			this.currentEmotion = emotion;
+
+			// unselect any selected state when changing emotions.
+			// currently only happens on mobile, but might also want to happen on desktop...
+			// TODO: evaluate ^^.
+			if (this.screenIsSmall) {
+				this.selectedState = null;
+				this.setHighlightedState(null);
+			}
 
 			let emotionState = this.emotionStates[emotion];
 			let isClosed = !emotionState.data;
@@ -389,6 +413,8 @@ export default {
 					previousGraph.on('transitionend', null);
 					previousGraph.style('transform', null);
 					previousLabels.style('transform', null);
+					previousGraph.style('-webkit-transform', null);
+					previousLabels.style('-webkit-transform', null);
 					previousGraph.classed('transitioning', false);
 					previousLabels.classed('transitioning', false);
 				});
@@ -410,6 +436,8 @@ export default {
 				setTimeout(() => {
 					previousGraph.style('transform', 'translateX(' + -dx + 'px)');
 					previousLabels.style('transform', 'translateX(' + -dx + 'px)');
+					previousGraph.style('-webkit-transform', 'translateX(' + -dx + 'px)');
+					previousLabels.style('-webkit-transform', 'translateX(' + -dx + 'px)');
 				}, sassVars.emotions.panX.delay * 1000);
 			}
 
@@ -422,16 +450,20 @@ export default {
 				// else, move into position immediately to prepare for transition
 				currentGraph.classed('transitioning', false);
 				currentGraph.style('transform', 'translateX(' + dx + 'px)');
+				currentGraph.style('-webkit-transform', 'translateX(' + dx + 'px)');
 				currentLabels.classed('transitioning', false);
 				currentLabels.style('transform', 'translateX(' + dx + 'px)');
+				currentLabels.style('-webkit-transform', 'translateX(' + dx + 'px)');
 			}
 
 			// delay to allow a little time for opacity to come up before translating
 			setTimeout(() => {
 				currentGraph.classed('transitioning active', true);
 				currentGraph.style('transform', 'translateX(0)');
+				currentGraph.style('-webkit-transform', 'translateX(0)');
 				currentLabels.classed('transitioning active', true);
 				currentLabels.style('transform', 'translateX(0)');
+				currentLabels.style('-webkit-transform', 'translateX(0)');
 			}, sassVars.emotions.panX.delay * 1000);
 
 			// render labels regardless of if backgrounded or not
@@ -636,7 +668,9 @@ export default {
 
 	},
 
-	onResize: function () {
+	onResize: function (screenIsSmall) {
+
+		this.screenIsSmall = screenIsSmall;
 
 		// recalculate containers, scales, axes
 		this.setUpGraphs(this.sectionContainer);
@@ -667,27 +701,36 @@ export default {
 		if (this.currentEmotion) {
 
 			// clear out any existing handlers
-			this.graphContainers[this.currentEmotion].selectAll('path.area')
-				.on('mouseover', null)
-				.on('mouseout', null)
-				.on('click', null, true);
-
-			this.labelContainers[this.currentEmotion].selectAll('div').select('h3')
-				.on('mouseover', null)
-				.on('mouseout', null)
-				.on('click', null, true);
+			if (this.screenIsSmall) {
+				this.graphContainers[this.currentEmotion]
+					.on('touchstart', null);
+			} else {
+				this.graphContainers[this.currentEmotion].selectAll('path.area')
+					.on('mouseover', null)
+					.on('mouseout', null)
+					.on('click', null, true);
+				this.labelContainers[this.currentEmotion].selectAll('div').select('h3')
+					.on('mouseover', null)
+					.on('mouseout', null)
+					.on('click', null, true);
+			}
 
 			// add new handlers if active
 			if (val) {
-				this.graphContainers[this.currentEmotion].selectAll('path.area')
-					.on('mouseover', this.onStateMouseOver)
-					.on('mouseout', this.onStateMouseOut)
-					.on('click', this.onStateClick, true);
 
-				this.labelContainers[this.currentEmotion].selectAll('div').select('h3')
-					.on('mouseover', this.onStateMouseOver)
-					.on('mouseout', this.onStateMouseOut)
-					.on('click', this.onStateClick, true);
+				if (this.screenIsSmall) {
+					this.graphContainers[this.currentEmotion]
+						.on('touchstart', this.onContainerTouchStart);
+				} else {
+					this.graphContainers[this.currentEmotion].selectAll('path.area')
+						.on('mouseover', this.onStateMouseOver)
+						.on('mouseout', this.onStateMouseOut)
+						.on('click', this.onStateClick, true);
+					this.labelContainers[this.currentEmotion].selectAll('div').select('h3')
+						.on('mouseover', this.onStateMouseOver)
+						.on('mouseout', this.onStateMouseOut)
+						.on('click', this.onStateClick, true);
+				}
 			}
 
 		}
@@ -704,9 +747,16 @@ export default {
 			const hasBackgroundedClass = this.sectionContainer.classList.contains('backgrounded');
 
 			// apply `states-in-out` class any time animating into or out of states section
-			if (!val && this.sectionContainer.classList.contains('backgrounded') ||
-				val && !this.sectionContainer.classList.contains('backgrounded')) {
+			if (!val && hasBackgroundedClass || val && !hasBackgroundedClass) {
 				this.sectionContainer.classList.add('states-in-out');
+
+				// and deselect anything selected.
+				// currently only happens on mobile, but might also want to happen on desktop...
+				// TODO: evaluate ^^.
+				if (this.screenIsSmall) {
+					this.selectedState = null;
+					this.setHighlightedState(null);
+				}
 			} else {
 				this.sectionContainer.classList.remove('states-in-out');
 			}
@@ -724,6 +774,13 @@ export default {
 			resolve();
 
 		});
+
+	},
+
+	shouldDisplayPaginationUI: function () {
+
+		// only display pagination UI while a state is selected
+		return !!this.selectedState;
 
 	},
 
@@ -768,7 +825,7 @@ export default {
 		}
 
 		// copy states of current emotion
-		let states = emotionsData.emotions[emotion].states.map(state => {
+		let states = appStrings().getStr(`emotionsData.emotions.${ emotion }.states`).map(state => {
 			return Object.assign({}, state, {
 				name: state.name.toLowerCase()
 			});
@@ -945,8 +1002,9 @@ export default {
 					'amusement': [-1, -.1],
 					'rejoicing': [-2.3, -.5],
 					'schadenfreude': [-1, -.5],
-					'relief': [-.5, -.5],
-					'pride': [-.45, -.6],
+					'peace': [-.25, -.25],
+					'relief': [-.75, -.5],
+					'pride': [-.45, -.5],
 					'fiero': [0, -.5],
 					'naches': [0.45, -.4],
 					'wonder': [.4, -.6],
@@ -1497,7 +1555,63 @@ export default {
 
 	},
 
+	onContainerTouchStart: function () {
+
+		this.touchedShape = null;
+		this.graphContainers[this.currentEmotion]
+			.on('touchmove', this.onContainerTouchMove)
+			.on('touchend', this.onContainerTouchEnd)
+			.on('touchcancel', this.onContainerTouchEnd);
+
+		this.onContainerTouchMove();
+
+	},
+
+	onContainerTouchMove: function () {
+
+		let { event } = d3;
+		if (!event) return;
+
+		let touchedShape = document.elementFromPoint(event.touches[0].clientX, event.touches[0].clientY),
+			_states = this;
+
+		if (touchedShape.classList.contains('area')) {
+			if (touchedShape !== this.touchedShape) {
+				// moving into a shape
+				this.touchedShape = touchedShape;
+				this.graphContainers[this.currentEmotion].selectAll('path.area')
+				.each(function (d, i) {
+					if (this === touchedShape) {
+						_states.onStateClick(d, i);
+					}
+				});
+			}
+		} else if (this.touchedShape) {
+			// moving out of a shape
+			this.touchedShape = null;
+			this.onStateMouseOut();
+		}
+
+		// if a shape was just touched,
+		// kill the event before it can trigger onBackgroundClick
+		if (this.touchedShape) {
+			d3.event.stopImmediatePropagation();
+			d3.event.preventDefault();
+		}
+
+	},
+
+	onContainerTouchEnd: function (event) {
+
+		this.graphContainers[this.currentEmotion]
+			.on('touchmove', null)
+			.on('touchend', null)
+			.on('touchcancel', null);
+
+	},
+
 	onBackgroundClick: function () {
+
 		this.selectedState = null;
 		this.setHighlightedState(null);
 		// check if on states or not
@@ -1515,6 +1629,7 @@ export default {
 	},
 
 	setBackgroundedState: function (state) {
+
 		this.backgroundedState = state;
 		this.displayBackgroundedStates(state);
 		this.setHighlightedState(state);
@@ -1541,6 +1656,23 @@ export default {
 
 	},
 
+	paginateElement: function (dir) {
+
+		// states are sorted from highest to lowest
+		dir *= -1;
+
+		let nextIndex = 0;
+
+		if (this.selectedState) {
+			let statesData = this.statesData[this.currentEmotion];
+			nextIndex = statesData.findIndex(s => s.name === this.selectedState) + dir;
+			nextIndex = nextIndex >= statesData.length ? 0 : nextIndex < 0 ? statesData.length - 1 : nextIndex;
+		}
+
+		this.onStateClick(null, nextIndex);
+
+	},
+
 	setHighlightedState: function (state) {
 
 		this.highlightedState = state;
@@ -1550,6 +1682,7 @@ export default {
 
 	// if both states and this.highlightedState are null, this sets state
 	displayHighlightedStates: function (states) {
+
 		// essentially clear state going into triggers
 		if (!states && !this.highlightedState) {
 			this.selectedState = null;
@@ -1622,8 +1755,7 @@ export default {
 
 	resetCallout: function () {
 		dispatcher.popupChange();
-		dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.states.header, emotionsData.metadata.states.body/* + '<br><br>' + emotionsData.emotions[this.currentEmotion].statesDesc*/);
-
+		dispatcher.changeCallout(this.currentEmotion, appStrings().getStr('emotionsData.metadata.states.header'), appStrings().getStr('emotionsData.metadata.states.body'));
 	}
 
 };

@@ -82,10 +82,10 @@ a:active {
 #header {
 	position: relative;
 	width: 100%;
-	height: $header-height;
+	height: #{$ui-header-height}px;
 	box-sizing: border-box;
 
-	line-height: $header-height;
+	line-height: #{$ui-header-height}px;
 	text-align: center;
 	border-bottom: 1px solid $text-color;
 	white-space: nowrap;
@@ -103,6 +103,71 @@ a:active {
 		position: absolute;
 		left: 1em;
 	}
+}
+
+#mobile-header {
+	position: relative;
+	width: 100%;
+	height: #{$ui-header-height-small}px;
+	box-sizing: border-box;
+
+	line-height: #{$ui-header-height-small}px;
+	text-align: center;
+	white-space: nowrap;
+
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0s 1s, opacity #{$ui-labels-duration-out}s ease;
+	&.visible {
+		visibility: visible;
+		opacity: 1.0;
+		transition: visibility 0s, opacity #{$ui-labels-duration-in}s 1s ease;
+	}
+
+	.nav-button {
+		width: 100%;
+		height: 100%;
+		background-color: rgba($scrollbar-background-color, 0.5);
+
+		&::after {
+			content: '';
+			position: absolute;
+			display: block;
+
+			width: 100%;
+			height: 100%;
+			transform: rotate(180deg);
+
+			background: url('./img/downArrow-white.png');
+			background-size: 18px 12px;
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+	}
+
+	.header-content {
+		width: 100%;
+		height: 100%;
+
+		margin: 0;
+		font-size: 1.75rem;
+
+		color: $text-color;
+		background-color: $background-color;
+		border-bottom: 1px solid $text-color;
+
+		#infoButton {
+			display: none;
+			position: relative;
+			bottom: 0.2rem;
+			// display: inline-block;
+		}
+	}
+}
+
+#app-container {
+	position: relative;
+	height: 100%;
 }
 
 #header .dropdown,
@@ -227,6 +292,117 @@ a:active {
 	}
 
 }
+.small-screen .navArrow {
+	position: absolute;
+	bottom: 0;
+
+	// no container element for navArrows, so manually position.
+	width: 33%;
+	&#left-arrow {
+		left: 0;
+		& .navLabel {
+			margin-left: 0.65rem;
+		}
+	}
+	&#down-arrow {
+		left: 33.5%;
+	}
+	&#right-arrow {
+		right: 0;
+		& .navLabel {
+			margin-right: 0.65rem;
+		}
+	}
+
+	&#left-arrow,
+	&#down-arrow,
+	&#right-arrow {
+		visibility: hidden;
+		opacity: 0;
+		transition: visibility 0s 1s, opacity #{$ui-labels-duration-out}s ease;
+		&.visible {
+			visibility: visible;
+			opacity: 1.0;
+			transition: visibility 0s, opacity #{$ui-labels-duration-in}s 1s ease;
+			&.immediate {
+				transition: visibility 0s, opacity #{$ui-labels-duration-in}s ease;
+			}
+		}
+	}
+
+	height: #{$ui-header-height-small}px;
+	box-sizing: border-box;
+
+	line-height: #{$ui-header-height-small}px;
+	text-align: center;
+	white-space: nowrap;
+
+	color: $background-color;
+	background-color: rgba($scrollbar-background-color, 0.5);
+
+	&.disabled {
+		img,
+		.navLabel {
+			opacity: 0.5;
+		}
+	}
+
+	img {
+		display: inline-block;
+		position: relative;
+		top: 0;
+		width: 18px;
+		height: 9px;
+
+		&.left {
+			left: auto;
+			width: 9px;
+			height: 18px;
+		}
+
+		&.right {
+			left: auto;
+			width: 9px;
+			height: 18px;
+		}
+	}
+
+	.navLabel {
+		position: relative;
+		display: inline-block;
+		text-transform: uppercase;
+		margin: 0;
+	}
+}
+
+.mobile-nav-arrow {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	pointer-events: none;
+
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0s 1s, opacity #{$ui-labels-duration-out}s ease;
+	&.visible {
+		visibility: visible;
+		opacity: 1.0;
+		transition: visibility 0s, opacity #{$ui-labels-duration-in}s ease;
+	}
+
+	img {
+		position: absolute;
+		pointer-events: auto;
+		cursor: pointer;
+		padding: 1rem;			// increase hit area size
+	}
+	.left {
+		left: calc(-1rem - 8px);
+	}
+	.right {
+		right: calc(-1rem - 8px);
+	}
+}
 
 #header .dropdown {
 	.more-on &.hide-on-more {
@@ -246,15 +422,15 @@ a:active {
 #scrollbar {
 	position: absolute;
 	width: $emotions-dropdown-width;
-	height: calc(100% - #{$header-height});
-	top: $header-height;
+	height: calc(100% - #{$ui-header-height}px);
+	top: #{$ui-header-height}px;
 	right: 0;
 	overflow: hidden;
 	pointer-events: none;
 
 	.mousemoveTriggerScrollbar {
 			pointer-events: all;
-			height: calc(100% - #{$header-height});
+			height: calc(100% - #{$ui-header-height}px);
 			// width of hidden scrollbar trigger at 4 time segment-container's width
 			width: calc(0.75em * 6);
 			margin-left: calc(#{$emotions-dropdown-width} - 0.75em * 6);
@@ -688,5 +864,27 @@ a:active {
 			top: 0.4em;
 			background-color: $text-overlay-color;
 		}
+	}
+}
+
+#mobile-caption {
+	$horiz-margin: 2rem;
+	position: absolute;
+	bottom: #{$ui-mobile-footer-height}px;
+
+	height: $ui-mobile-caption-height;
+	width: calc(100% - #{2 * $horiz-margin});
+	margin: 0 $horiz-margin 1rem $horiz-margin;
+	text-align: center;
+
+	pointer-events: none;
+	user-select: none;
+
+	.headline {
+		text-transform: uppercase;
+	}
+
+	.body {
+		// padding: 0 2rem;
 	}
 }

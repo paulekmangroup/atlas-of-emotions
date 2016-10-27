@@ -2,6 +2,8 @@
 	"continents": {
 		"centerX": 0.48,
 		"centerY": 0.5,
+		"centerX-small": 0.5,
+		"centerY-small": 0.35,
 		"panX": {
 			"duration": {
 				"in": 0.75,
@@ -38,6 +40,7 @@
 	"states": {
 		"graph": {
 			"width": "60%",
+			"width-small": "100%",
 			"margins": {
 				"left": 20,
 				"right": 20
@@ -46,7 +49,9 @@
 		"backgrounded": {
 			"actions": {
 				"scale": 0.6,
-				"top": "-17%"
+				"top": "-17%",
+				"scale-small": 0.66,
+				"top-small": "-17%"
 			},
 			"scale": 0.4,
 			"top": "-10%",
@@ -65,7 +70,8 @@
 	},
 	"actions": {
 		"backgrounded": {
-			"scale": 0.7
+			"scale": 0.7,
+			"scale-small": 0.5
 		},
 		"margins": {
 			"top": 25,
@@ -85,7 +91,9 @@
 		}
 	},
 	"triggers": {
-		"bottom": "20%"
+		"bottom": "20%",
+		"bottom-small": "53%",
+		"bottom-height-small": "15%"
 	},
 	"emotions": {
 		"panX": {
@@ -99,6 +107,17 @@
 		}
 	},
 	"ui": {
+		"header": {
+			"height": 55,
+			"height-small": 44
+		},
+		"mobile-footer": {
+			"height": 44
+		},
+		"mobile-caption": {
+			"height": "15rem",
+			"height-tall": "22rem"
+		},
 		"scrollbar": {
 			"introOpenDelay": 1.5,
 			"closeDelay": 0.2
