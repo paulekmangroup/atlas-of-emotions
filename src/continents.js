@@ -305,7 +305,7 @@ const continentsSection = {
 
 	calculateContinentTransforms: function () {
 
-		if (!this.screenIsSmall) return null;
+		if (!this.screenIsSmall) return undefined;
 
 		// left-to-right
 		return [
