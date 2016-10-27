@@ -55,8 +55,6 @@ export default {
 		continentGeom = this.defineContinentGeom(w, h);
 
 		// left-to-right
-		let posScalar = 2.0;
-		let sizeScalar = 6.0;
 		let continentTransforms = this.calculateContinentTransforms();
 
 		// map each emotion to a Continent instance
@@ -137,6 +135,8 @@ export default {
 		// TODO: DRY this out, this is continents.js copypasta
 		if (!this.screenIsSmall) {
 
+			let posScalar = 2.0;
+			let sizeScalar = 6.0;
 			return [
 				{
 					x: 0.08 * posScalar,
