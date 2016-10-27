@@ -1152,6 +1152,8 @@ export default {
 
 	displayHighlightedAction: function (action, valence) {
 
+		if (!this.graphContainers[this.currentEmotion]) return;
+
 		let highlightedAction = action || this.highlightedAction || null,
 			arrowSelection = this.graphContainers[this.currentEmotion].selectAll('g.action-arrow'),
 			labelSelection = this.labelContainers[this.currentEmotion].selectAll('div.label');
