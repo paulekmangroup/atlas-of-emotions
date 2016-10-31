@@ -1,8 +1,7 @@
 import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
-import emotionsData from '../static/emotionsData.json';
-import secondaryData from '../static/secondaryData.json';
+import appStrings from './appStrings.js';
 import sassVars from '../scss/variables.json';
 
 // TODO: this copy should go elsewhere
@@ -90,7 +89,7 @@ export default {
 			'navigation'
 		];
 
-		this.pages = this.pages.concat(emotionsData.metadata.intro.steps.map((pageData, i) => {
+		this.pages = this.pages.concat(appStrings().getStr('emotionsData.metadata.intro.steps').map((pageData, i) => {
 
 			let page = document.createElement('div');
 			page.classList.add('page', pageIds[i]);
@@ -161,7 +160,7 @@ export default {
 		// research
 		//
 		let researchPage = this.pages[1],
-			researchData = secondaryData.annex['scientific-basis'].content,
+			researchData = appStrings().getStr('secondaryData.annex.scientific-basis.content'),
 			findResearchDatum = key => {
 				let match = researchData.find(datum => datum.desc.toLowerCase().indexOf(key) !== -1);
 				return match ? match.name : '';

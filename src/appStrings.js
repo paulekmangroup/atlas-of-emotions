@@ -10,7 +10,8 @@ let instance;
 let langs = [];
 
 /**
- * Load an arbitrary string from the Google Sheets that back this application.
+ * Utility for loading an arbitrary string or set of strings
+ * from the Google Sheets that back this application.
  * Note that strings files per language are loaded at runtime 
  * and are not guaranteed to be loaded when a `getStr()` call is made;
  * it's up to the application to call loadStrings() and safely request strings
@@ -53,24 +54,41 @@ function appStrings (_lang, _screenIsSmall, _stringsLoadedCallback) {
 
 		}
 
-		// NOTE: until localization is complete, this may return an array/obj instead of a string,
-		// depending on whether the passed path resolves to a leaf node or a branch.
-		// will have to figure this out for localization as well,
-		// and be sure to rename appStrings / getStr() if necessary (appData / getData()?)
-		let parsedKey = _.get(source, path.join('.')) || null;
+		let parsedKey = _.get(source, path.join('.')),
+			parsedValue;
 
-		if (typeof parsedKey === 'string') {
-			return strings[parsedKey];
-		} else if (Array.isArray(parsedKey)) {
-			return parsedKey;
-		} else if (typeof parsedKey === 'object') {
-			return parsedKey;
-		} else {
-			throw new Error(`Key not found at ${ key }`);
+		// this weirdness is an artifact of implementing localization long after the content spreadsheets and parsers were all set up.
+		// if future you is cut+pasting this, you can probably eliminate this block and just `return strings[parsedKey]`.
+		// 
+		// -->>	TODO: only running nested parsing on emotionsData for now,
+		// 		until secondaryData also has keys.
+		if (source === emotionsData) {
+			console.log(">>>>> key:", key);
+			console.log(">>>>> parsedKey:", parsedKey);
+
+			if (typeof parsedKey === 'string') {
+				parsedValue = strings[parsedKey];
+			} else if (Array.isArray(parsedKey)) {
+				parsedValue = parsedKey.map((k, i) => {
+					let pathPrefix = `${ key }[${ i }].`;
+					if (typeof k === 'string') return getStr(pathPrefix + k);
+					else if (typeof k === 'object') {
+						return Object.keys(k).reduce((acc, k1) => {
+							// console.log(">>>>> nested object -- ", (pathPrefix + k1));
+							acc[k1] = getStr(pathPrefix + k1);
+							return acc;
+						}, {});
+					}
+				});
+			} else {
+				throw new Error(`Key not found at ${ key }`);
+			}
+
+			console.log(">>>>> parsedValue:", parsedValue);
 		}
 
 		// fall back to returning parsed key or empty string
-		return parsedKey || '';
+		return parsedValue || parsedKey || '';
 
 	}
 
