@@ -41,8 +41,20 @@ scp -prq ./dist/. studio.stamen.com:www/emotionmap/show/v2/latest/ (or `/yyyy-mm
 
 ## Updating text content
 
-Primary content lives in a [spreadsheet on Drive](https://docs.google.com/spreadsheets/d/1d9_u-7heRc1VHHOJQpvLqXOMXfSgmNBT9olpWk2cdvE/edit#gid=0), and in the project, in [`emotionsData.json`](https://github.com/stamen/atlas-of-emotions/blob/master/static/emotionsData.json).
+TL;DR:
+`npm run strings`
 
-Secondary content lives in a [spreadsheet on Drive](https://docs.google.com/a/stamen.com/spreadsheets/d/1eNeWj8q3geMb8HZsSR9ZT7vmFzXSR7nzd9nKNrvE1Ko/edit?usp=drive_web), and in the project in [`secondaryData.json`](https://github.com/stamen/atlas-of-emotions/blob/master/static/secondaryData.json).
+Text content is arranged as follows:
 
-To update either, click the "Export to JSON" button in the top menu on the google sheet, cut+paste into the corresponding json file, and rebuild.
+#### Localized strings
+
+Text content source for the application is in a single Google Sheet per language, e.g. [AoE - English](https://docs.google.com/spreadsheets/d/1mZH66DoV1F3f1k2cP1jo5t7ApcaSIzl5Xycw_oUSPNo/edit#gid=0). These files are manually edited, with the keys pulled from the content keys files (see below), and the values provided by writers / translators.
+
+Local text content for the application lives in a single strings file per language: [`en.json`](./static/strings/langs/es.json), [`es.json`](./static/strings/langs/es.json), etc. These files are loaded on request at runtime when the application loads or the language is changed. In order to prevent accidentally breaking the app, these strings files do not update automatically; call `npm run strings` to pull down the latest content from Google Sheets that contain the strings. They are committed with the rest of the source, however; this means that strings don't have to be pulled down when the repo is checked out, only when the source changes and an update is required.
+
+#### Content keys
+Primary content keys live in a [spreadsheet on Drive](https://docs.google.com/spreadsheets/d/1d9_u-7heRc1VHHOJQpvLqXOMXfSgmNBT9olpWk2cdvE/edit#gid=0), and in the project, in [`emotionsData.json`](https://github.com/stamen/atlas-of-emotions/blob/master/static/strings/emotionsData.json).
+
+Secondary content keys live in a [spreadsheet on Drive](https://docs.google.com/a/stamen.com/spreadsheets/d/1eNeWj8q3geMb8HZsSR9ZT7vmFzXSR7nzd9nKNrvE1Ko/edit?usp=drive_web), and in the project in [`secondaryData.json`](https://github.com/stamen/atlas-of-emotions/blob/master/static/strings/secondaryData.json).
+
+To update either, click the "Export to JSON" button in the top menu on the google sheet, cut+paste into the corresponding json file, run `npm run strings`.

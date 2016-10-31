@@ -8,6 +8,7 @@ import gulpLoadPlugins from 'gulp-load-plugins';
 import rimraf from 'rimraf';
 import connect from 'gulp-connect';
 import gulpif from 'gulp-if';
+import stringsConfig from './static/strings/stringsConfig.json';
 
 // Automatically load any gulp plugins in your package.json
 const $ = gulpLoadPlugins();
@@ -181,6 +182,17 @@ function lintTask (options) {
 		}));
 }
 
+function stringsTask (options) {
+	let accessToken = options.token,
+		langs = stringsConfig.stringsFiles;
+
+	return gulp.src(options.src)
+		.pipe($.shell([
+			`mkdir ${ options.src }static/strings/langs`
+		]))
+		.pipe($.shell(langs.map(lang => `gsjson ${ lang.fileId } ${ options.dest + lang.lang }.json${ accessToken ? (' -t ' + accessToken) : '' }`)));
+}
+
 function webserverTask (options) {
 	options = options || {};
 	const port = options.port || WEB_SERVER_PORT;
@@ -300,6 +312,32 @@ gulp.task('dist', () => {
 			src: './scss/*.scss',
 			dest: dest
 		});
+
+	});
+
+});
+
+/**
+ * Pull down strings from Google Sheets and save locally
+ */
+gulp.task('strings', () => {
+
+	rimraf('./static/strings/langs/**', () => {
+
+		// Using a Google Sheets File > Publish to Web:
+		stringsTask({
+			src: './',
+			dest: './static/strings/langs/'
+		});
+
+		/*
+		// Using Google OAuth:
+		stringsTask({
+			src: './',
+			dest: './static/strings/langs/',
+			token: stringsConfig.googleOAuthAccessToken
+		});
+		*/
 
 	});
 

@@ -72,43 +72,49 @@ export default function (...initArgs) {
 
 		adjustForScreenSize();
 
-		initContainers();
-		initSections();
-		initHeader();
-		initSectionNavigation();
-		initNavArrows();
-		initMoreInfoDropdown();
-		initPegLogo();
-		initCallout();
-		initMobileCaption();
-		initModal();
+		// wait for strings to load before continuing init
+		appStrings().loadStrings()
+		.then(() => {
 
-		// mobile setup
-		nonMobileElements.push(document.querySelector('#header'));
-		nonMobileElements.push(document.querySelector('#scrollbar'));
-		nonMobileElements.push(document.querySelector('#callout'));
-		nonMobileElements.push(document.querySelector('#more-info'));
-		nonMobileElements.push(document.querySelector('#lower-left-logo'));
-		// nonMobileElements = nonMobileElements.concat([...document.querySelectorAll('.navArrow')]);
+			initContainers();
+			initSections();
+			initHeader();
+			initSectionNavigation();
+			initNavArrows();
+			initMoreInfoDropdown();
+			initPegLogo();
+			initCallout();
+			initMobileCaption();
+			initModal();
 
-		mobileElements.push(document.querySelector('#mobile-header'));
-		mobileElements.push(document.querySelector('#mobile-caption'));
+			// mobile setup
+			nonMobileElements.push(document.querySelector('#header'));
+			nonMobileElements.push(document.querySelector('#scrollbar'));
+			nonMobileElements.push(document.querySelector('#callout'));
+			nonMobileElements.push(document.querySelector('#more-info'));
+			nonMobileElements.push(document.querySelector('#lower-left-logo'));
+			// nonMobileElements = nonMobileElements.concat([...document.querySelectorAll('.navArrow')]);
 
-		// navigation events
-		dispatcher.addListener(dispatcher.EVENTS.NAVIGATE, onNavigate);
-		dispatcher.addListener(dispatcher.EVENTS.CHANGE_EMOTION_STATE, onEmotionStateChange);
-		dispatcher.addListener(dispatcher.EVENTS.CHANGE_CALLOUT, onCalloutChange);
-		dispatcher.addListener(dispatcher.EVENTS.POPUP_CHANGE, onPopupChange);
-		dispatcher.addListener(dispatcher.EVENTS.OPEN_MORE_INFO_MENU, onMoreInfoMenuClick);
+			mobileElements.push(document.querySelector('#mobile-header'));
+			mobileElements.push(document.querySelector('#mobile-caption'));
 
-		window.addEventListener('hashchange', onHashChange);
+			// navigation events
+			dispatcher.addListener(dispatcher.EVENTS.NAVIGATE, onNavigate);
+			dispatcher.addListener(dispatcher.EVENTS.CHANGE_EMOTION_STATE, onEmotionStateChange);
+			dispatcher.addListener(dispatcher.EVENTS.CHANGE_CALLOUT, onCalloutChange);
+			dispatcher.addListener(dispatcher.EVENTS.POPUP_CHANGE, onPopupChange);
+			dispatcher.addListener(dispatcher.EVENTS.OPEN_MORE_INFO_MENU, onMoreInfoMenuClick);
 
-		onResize();
-		onHashChange();
+			window.addEventListener('hashchange', onHashChange);
 
-		// debounce after initial call
-		onResize = _.debounce(onResize, 250);
-		window.addEventListener('resize', onResize);
+			onResize();
+			onHashChange();
+
+			// debounce after initial call
+			onResize = _.debounce(onResize, 250);
+			window.addEventListener('resize', onResize);
+
+		});
 
 	}
 
