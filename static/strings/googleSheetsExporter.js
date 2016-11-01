@@ -267,11 +267,11 @@ var emotionSectionParsers = (function () {
 				return !!row[0];
 			}).map(function (row) {
 				// Logger.log("row len:" + row.length + "; row[0]:" + row[0]);
-				var con = (row[2].split(',') || []).map(function (val) { return val.trim().toLowerCase(); }),
-					des = (row[3].split(',') || []).map(function (val) { return val.trim().toLowerCase(); }),
+				var con = (String(row[2]).split(',') || []).map(function (val) { return val.trim().toLowerCase(); }),
+					des = (String(row[3]).split(',') || []).map(function (val) { return val.trim().toLowerCase(); }),
 					both = [],
 					all = con.concat(),
-					range = row[4].replace(/\s+/g, '').split('-');
+					range = String(row[4]).replace(/\s+/g, '').split('-');
 
 				des.forEach(function (val) {
 					if (~all.indexOf(val)) {

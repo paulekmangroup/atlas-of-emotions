@@ -12,11 +12,11 @@ let langs = [];
 /**
  * Utility for loading an arbitrary string or set of strings
  * from the Google Sheets that back this application.
- * Note that strings files per language are loaded at runtime 
+ * Note that strings files per language are loaded at runtime
  * and are not guaranteed to be loaded when a `getStr()` call is made;
  * it's up to the application to call loadStrings() and safely request strings
  * only after the returned Promise is resolved.
- * 
+ *
  * @param  {[type]} _lang                  Language code (ISO 639-1)
  * @param  {[type]} _screenIsSmall         Request mobile or desktop strings
  */
@@ -59,7 +59,7 @@ function appStrings (_lang, _screenIsSmall, _stringsLoadedCallback) {
 
 		// this weirdness is an artifact of implementing localization long after the content spreadsheets and parsers were all set up.
 		// if future you is cut+pasting this, you can probably eliminate this block and just `return strings[parsedKey]`.
-		// 
+		//
 		// -->>	TODO: only running nested parsing on emotionsData for now,
 		// 		until secondaryData also has keys.
 		if (source === emotionsData) {
@@ -73,6 +73,7 @@ function appStrings (_lang, _screenIsSmall, _stringsLoadedCallback) {
 					let pathPrefix = `${ key }[${ i }].`;
 					if (typeof k === 'string') return getStr(pathPrefix + k);
 					else if (typeof k === 'object') {
+						// localize nested objects
 						return Object.keys(k).reduce((acc, k1) => {
 							// console.log(">>>>> nested object -- ", (pathPrefix + k1));
 							acc[k1] = getStr(pathPrefix + k1);
@@ -80,6 +81,9 @@ function appStrings (_lang, _screenIsSmall, _stringsLoadedCallback) {
 						}, {});
 					}
 				});
+			} else if (typeof parsedKey === 'object') {
+				// pass through non-nested objects as-is
+				parsedValue = parsedKey;
 			} else {
 				throw new Error(`Key not found at ${ key }`);
 			}
@@ -106,10 +110,12 @@ function appStrings (_lang, _screenIsSmall, _stringsLoadedCallback) {
 		else {
 			return fetch(`./strings/langs/${ _lang }.json`)
 				.then(response => response.json())
-				.then(json => strings = json.reduce((acc, kv) => {
-					acc[kv.key] = kv.value;
-					return acc;
-				}, {}));
+				.then(json => strings = json
+						.reduce((acc, worksheet) => acc.concat(worksheet), [])
+						.reduce((acc, kv) => {
+							acc[kv.key] = kv.value;
+							return acc;
+						}, {}));
 		}
 
 	}

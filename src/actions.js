@@ -295,11 +295,12 @@ export default {
 				statesData = appStrings().getStr(`emotionsData.emotions.${ emotionName }.states`);
 
 			// copy list of all actions for emotion with lowercased names, and alpha sort
-			let allActionsForEmotion = appStrings().getStr(`emotionsData.emotions.${ emotionName }.actions`).map(action => {
+			let allActionsForEmotionRaw = appStrings().getStr(`emotionsData.emotions.${ emotionName }.actions`).map(action => {
 				return Object.assign({}, action, {
 					name: action.name.toLowerCase()
 				});
-			}).sort((a, b) => {
+			});
+			let allActionsForEmotion = allActionsForEmotionRaw.concat().sort((a, b) => {
 				if (a.name < b.name) return -1;
 				else if (a.name > b.name) return 1;
 				else return 0;
@@ -340,18 +341,31 @@ export default {
 
 				// copy actions from source data and lowercase,
 				// dedupe across valences and filter out any that do not have prototypical definitions,
+				// map numeric keys to action names (for localization),
 				// alpha sort within valence
 				let actionsBoth = state.actions.both.map(lowercase).filter(action => {
-						return !!allActionsForEmotionByName[action];
-					}).sort(),
+						let actionName = action;
+						if (!isNaN(parseInt(action))) actionName = allActionsForEmotionRaw[+action - 1].name;
+						return !!allActionsForEmotionByName[actionName];
+					})
+					.map(action => isNaN(parseInt(action)) ? action : allActionsForEmotionRaw[+action - 1].name)
+					.sort(),
 					actionsCon = state.actions.con.map(lowercase).filter(action => {
-						return !!allActionsForEmotionByName[action] &&
+						let actionName = action;
+						if (!isNaN(parseInt(action))) actionName = allActionsForEmotionRaw[+action - 1].name;
+						return !!allActionsForEmotionByName[actionName] &&
 							!~state.actions.both.indexOf(action);
-					}).sort(),
+					})
+					.map(action => isNaN(parseInt(action)) ? action : allActionsForEmotionRaw[+action - 1].name)
+					.sort(),
 					actionsDes = state.actions.des.map(lowercase).filter(action => {
-						return !!allActionsForEmotionByName[action] &&
+						let actionName = action;
+						if (!isNaN(parseInt(action))) actionName = allActionsForEmotionRaw[+action - 1].name;
+						return !!allActionsForEmotionByName[actionName] &&
 							!~state.actions.both.indexOf(action);
-					}).sort(),
+					})
+					.map(action => isNaN(parseInt(action)) ? action : allActionsForEmotionRaw[+action - 1].name)
+					.sort(),
 
 					// count number of actions within each valence
 					numActionsCon = actionsCon.length,
@@ -1093,7 +1107,7 @@ export default {
 
 		// only display pagination UI while an action is selected
 		return !!this.highlightedAction;
-		
+
 	},
 
 	applyEventListenersToEmotion: function (emotion, handlersByEvent) {

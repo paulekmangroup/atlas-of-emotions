@@ -210,15 +210,15 @@ export default {
 		let emotionData = appStrings().getStr(`emotionsData.emotions.${ this.currentEmotion }`);
 		if (!this.currentEmotion || !emotionData) return;
 		if (this.screenIsSmall) return;
-		
-		let moodsCopy = emotionData.moods[0];
+
+		let moodName = appStrings().getStr(`emotionsData.emotions.${ this.currentEmotion }.moods[0].name`);
 
 		const label = this.labelContainer.select('.emotion-label');
 		label
 			.attr('class', `emotion-label label ${this.currentEmotion} visible default-interactive-helper`)
 			.attr('data-popuptarget', `moods:${this.currentEmotion}`);
 
-		label.select('h3').text(moodsCopy.name.toUpperCase());
+		label.select('h3').text(moodName.toUpperCase());
 
 	},
 
@@ -357,9 +357,9 @@ export default {
 
 		this.calloutActive = active;
 		if (active) {
-			let moodsCopy = appStrings().getStr(`emotionsData.emotions.${ this.currentEmotion }.moods[0]`);
+			let moodDesc = appStrings().getStr(`emotionsData.emotions.${ this.currentEmotion }.moods[0].desc`);
 			// will want to set popup up here
-			dispatcher.popupChange('moods', this.currentEmotion, moodsCopy.desc);
+			dispatcher.popupChange('moods', this.currentEmotion, moodDesc);
 			this.setBackgroundListener(true);
 		} else {
 			dispatcher.popupChange();

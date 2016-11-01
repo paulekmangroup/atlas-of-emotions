@@ -190,7 +190,7 @@ function stringsTask (options) {
 		.pipe($.shell([
 			`mkdir ${ options.src }static/strings/langs`
 		]))
-		.pipe($.shell(langs.map(lang => `gsjson ${ lang.fileId } ${ options.dest + lang.lang }.json${ accessToken ? (' -t ' + accessToken) : '' }`)));
+		.pipe($.shell(langs.map(lang => `gsjson ${ lang.fileId } ${ options.dest + lang.lang }.json -w 0 -w 1 -w 2 -w 3 -w 4${ accessToken ? (' -t ' + accessToken) : '' }`)));
 }
 
 function webserverTask (options) {

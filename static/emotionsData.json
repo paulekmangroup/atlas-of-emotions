@@ -2,191 +2,187 @@
   "emotions": {
     "anger": {
       "continent": {
-        "name": "Anger",
-        "desc": "We are blocked in our progress or goal.",
-        "name_mobile": "The Continent of Anger",
-        "desc_mobile": "The movement of this shape reflects how anger varies in strength and frequency in our lives. Tap on the shape to learn more about the universal nature of anger."
+        "name": "anger_continent_header",
+        "desc": "anger_continent_body",
+        "name_mobile": "anger_continent_header_mobile",
+        "desc_mobile": "anger_continent_body_mobile"
       },
       "states": [
         {
-          "name": "Annoyance",
-          "desc": "Very mild anger.",
-          "name_mobile": "Annoyance",
-          "desc_mobile": "Very mild anger.",
+          "name": "anger_states_header_1",
+          "desc": "anger_states_body_1",
+          "name_mobile": "anger_states_header_1",
+          "desc_mobile": "anger_states_body_1",
           "range": {
             "min": 1,
             "max": 2
           },
           "actions": {
             "all": [
-              "suppress",
-              "be passive-aggressive",
-              "simmer/brood"
+              "7",
+              "9",
+              "8"
             ],
             "con": [
-              "suppress"
+              "7"
             ],
             "des": [
-              "suppress",
-              "be passive-aggressive",
-              "simmer/brood"
+              "7",
+              "9",
+              "8"
             ],
             "both": [
-              "suppress"
+              "7"
             ]
           }
         },
         {
-          "name": "Frustration",
-          "desc": "A response to failure to overcome an obstacle despite repeated attempts.",
-          "name_mobile": "Frustration",
-          "desc_mobile": "A response to failure to overcome an obstacle despite repeated attempts.",
+          "name": "anger_states_header_2",
+          "desc": "anger_states_body_2",
+          "name_mobile": "anger_states_header_2",
+          "desc_mobile": "anger_states_body_2",
           "range": {
             "min": 1,
             "max": 10
           },
           "actions": {
             "all": [
-              "suppress",
-              "quarrel",
-              "insult",
-              "undermine",
-              "scream/yell",
-              "simmer/brood",
-              "be passive-aggressive"
+              "7",
+              "1",
+              "2",
+              "3",
+              "5",
+              "8",
+              "9"
             ],
             "con": [
-              "suppress"
+              "7"
             ],
             "des": [
-              "quarrel",
-              "insult",
-              "undermine",
-              "scream/yell",
-              "suppress",
-              "simmer/brood",
-              "be passive-aggressive"
+              "1",
+              "2",
+              "3",
+              "5",
+              "7",
+              "8",
+              "9"
             ],
             "both": [
-              "suppress"
+              "7"
             ]
           }
         },
         {
-          "name": "Argumentativeness",
-          "desc": "An inclination to prolong disagreements.",
-          "name_mobile": "Argumentativeness",
-          "desc_mobile": "An inclination to prolong disagreements.",
+          "name": "anger_states_header_3",
+          "desc": "anger_states_body_3",
+          "name_mobile": "anger_states_header_3",
+          "desc_mobile": "anger_states_body_3",
           "range": {
             "min": 2,
             "max": 10
           },
           "actions": {
             "all": [
-              "suppress",
-              "quarrel",
-              "insult",
-              "undermine",
-              "distract",
-              "avoid",
-              "simmer/brood"
+              "7",
+              "1",
+              "2",
+              "3",
+              "8"
             ],
             "con": [
-              "suppress"
+              "7"
             ],
             "des": [
-              "quarrel",
-              "insult",
-              "undermine",
-              "suppress",
-              "distract",
-              "avoid",
-              "simmer/brood"
+              "1",
+              "2",
+              "3",
+              "7",
+              "8"
             ],
             "both": [
-              "suppress"
+              "7"
             ]
           }
         },
         {
-          "name": "Bitterness",
-          "desc": "Disappointment that no one wanted to settle a problem.",
-          "name_mobile": "Bitterness",
-          "desc_mobile": "Disappointment that no one wanted to settle a problem.",
+          "name": "anger_states_header_4",
+          "desc": "anger_states_body_4",
+          "name_mobile": "anger_states_header_4",
+          "desc_mobile": "anger_states_body_4",
           "range": {
             "min": 3,
             "max": 10
           },
           "actions": {
             "all": [
-              "suppress",
-              "insult",
-              "undermine",
-              "dispute",
-              "scream/yell",
-              "simmer/brood",
-              "be passive-aggressive"
+              "7",
+              "2",
+              "3",
+              "4",
+              "5",
+              "8",
+              "9"
             ],
             "con": [
-              "suppress"
+              "7"
             ],
             "des": [
-              "insult",
-              "undermine",
-              "dispute",
-              "scream/yell",
-              "suppress",
-              "simmer/brood",
-              "be passive-aggressive"
+              "2",
+              "3",
+              "4",
+              "5",
+              "7",
+              "8",
+              "9"
             ],
             "both": [
-              "suppress"
+              "7"
             ]
           }
         },
         {
-          "name": "Exasperation",
-          "desc": "A loss of patience at repeated failures to settle a problem.",
-          "name_mobile": "Exasperation",
-          "desc_mobile": "A loss of patience at repeated failures to settle a problem.",
+          "name": "anger_states_header_5",
+          "desc": "anger_states_body_5",
+          "name_mobile": "anger_states_header_5",
+          "desc_mobile": "anger_states_body_5",
           "range": {
             "min": 4,
             "max": 7
           },
           "actions": {
             "all": [
-              "suppress",
-              "quarrel",
-              "insult",
-              "undermine",
-              "be passive-aggressive",
-              "dispute",
-              "scream/yell",
-              "simmer/brood"
+              "7",
+              "1",
+              "2",
+              "3",
+              "9",
+              "4",
+              "5",
+              "8"
             ],
             "con": [
-              "suppress"
+              "7"
             ],
             "des": [
-              "quarrel",
-              "insult",
-              "undermine",
-              "suppress",
-              "be passive-aggressive",
-              "dispute",
-              "scream/yell",
-              "simmer/brood"
+              "1",
+              "2",
+              "3",
+              "7",
+              "9",
+              "4",
+              "5",
+              "8"
             ],
             "both": [
-              "suppress"
+              "7"
             ]
           }
         },
         {
-          "name": "Vengefulness",
-          "desc": "A desire for retaliation.",
-          "name_mobile": "Vengefulness",
-          "desc_mobile": "A desire for retaliation.",
+          "name": "anger_states_header_6",
+          "desc": "anger_states_body_6",
+          "name_mobile": "anger_states_header_6",
+          "desc_mobile": "anger_states_body_6",
           "range": {
             "min": 5,
             "max": 10
@@ -194,36 +190,36 @@
           "actions": {
             "all": [
               "",
-              "quarrel",
-              "insult",
-              "undermine",
-              "dispute",
-              "scream/yell",
-              "use physical force",
-              "suppress",
-              "simmer/brood"
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8"
             ],
             "con": [
               ""
             ],
             "des": [
-              "quarrel",
-              "insult",
-              "undermine",
-              "dispute",
-              "scream/yell",
-              "use physical force",
-              "suppress",
-              "simmer/brood"
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8"
             ],
             "both": []
           }
         },
         {
-          "name": "Fury",
-          "desc": "Intense anger.",
-          "name_mobile": "Fury",
-          "desc_mobile": "Intense anger.",
+          "name": "anger_states_header_7",
+          "desc": "anger_states_body_7",
+          "name_mobile": "anger_states_header_7",
+          "desc_mobile": "anger_states_body_7",
           "range": {
             "min": 10,
             "max": 10
@@ -231,25 +227,25 @@
           "actions": {
             "all": [
               "",
-              "quarrel",
-              "insult",
-              "undermine",
-              "scream/yell",
-              "use physical force",
-              "suppress",
-              "simmer/brood"
+              "1",
+              "2",
+              "3",
+              "5",
+              "6",
+              "7",
+              "8"
             ],
             "con": [
               ""
             ],
             "des": [
-              "quarrel",
-              "insult",
-              "undermine",
-              "scream/yell",
-              "use physical force",
-              "suppress",
-              "simmer/brood"
+              "1",
+              "2",
+              "3",
+              "5",
+              "6",
+              "7",
+              "8"
             ],
             "both": []
           }
@@ -257,110 +253,110 @@
       ],
       "actions": [
         {
-          "name": "Quarrel",
-          "desc": "Verbally oppose in a manner intended to escalate the disagreement.",
-          "name_mobile": "Quarrel",
-          "desc_mobile": "Verbally oppose in a manner intended to escalate the disagreement."
+          "name": "anger_actions_header_1",
+          "desc": "anger_actions_body_1",
+          "name_mobile": "anger_actions_header_1",
+          "desc_mobile": "anger_actions_body_1"
         },
         {
-          "name": "Insult",
-          "desc": "Disparage the other person in an offensive or hurtful way that is likely to escalate the conflict rather than resolve it.",
-          "name_mobile": "Insult",
-          "desc_mobile": "Disparage the other person in an offensive or hurtful way that is likely to escalate the conflict rather than resolve it."
+          "name": "anger_actions_header_2",
+          "desc": "anger_actions_body_2",
+          "name_mobile": "anger_actions_header_2",
+          "desc_mobile": "anger_actions_body_2"
         },
         {
-          "name": "Undermine",
-          "desc": "Take action to make someone or something weaker or less effective, usually in a secret or gradual way.",
-          "name_mobile": "Undermine",
-          "desc_mobile": "Take action to make someone or something weaker or less effective, usually in a secret or gradual way."
+          "name": "anger_actions_header_3",
+          "desc": "anger_actions_body_3",
+          "name_mobile": "anger_actions_header_3",
+          "desc_mobile": "anger_actions_body_3"
         },
         {
-          "name": "Dispute",
-          "desc": "Disagree in a manner that may escalate an argument.",
-          "name_mobile": "Dispute",
-          "desc_mobile": "Disagree in a manner that may escalate an argument."
+          "name": "anger_actions_header_4",
+          "desc": "anger_actions_body_4",
+          "name_mobile": "anger_actions_header_4",
+          "desc_mobile": "anger_actions_body_4"
         },
         {
-          "name": "Scream/yell",
-          "desc": "Lose control of how one speaks; speak in a loud volume and, when screaming, in a higher pitch.",
-          "name_mobile": "Scream/yell",
-          "desc_mobile": "Lose control of how one speaks; speak in a loud volume and, when screaming, in a higher pitch."
+          "name": "anger_actions_header_5",
+          "desc": "anger_actions_body_5",
+          "name_mobile": "anger_actions_header_5",
+          "desc_mobile": "anger_actions_body_5"
         },
         {
-          "name": "Use physical force",
-          "desc": "Harm or constrain someone, an action that may be deliberately chosen or the result of a loss of control over how one acts.",
-          "name_mobile": "Use physical force",
-          "desc_mobile": "Harm or constrain someone, an action that may be deliberately chosen or the result of a loss of control over how one acts."
+          "name": "anger_actions_header_6",
+          "desc": "anger_actions_body_6",
+          "name_mobile": "anger_actions_header_6",
+          "desc_mobile": "anger_actions_body_6"
         },
         {
-          "name": "Suppress",
-          "desc": "Try to avoid feeling or acting upon the emotion that is being experienced.",
-          "name_mobile": "Suppress",
-          "desc_mobile": "Try to avoid feeling or acting upon the emotion that is being experienced."
+          "name": "anger_actions_header_7",
+          "desc": "anger_actions_body_7",
+          "name_mobile": "anger_actions_header_7",
+          "desc_mobile": "anger_actions_body_7"
         },
         {
-          "name": "Simmer/brood",
-          "desc": "Act in a way that makes clear that angry actions are building or being contemplated.",
-          "name_mobile": "Simmer/brood",
-          "desc_mobile": "Act in a way that makes clear that angry actions are building or being contemplated."
+          "name": "anger_actions_header_8",
+          "desc": "anger_actions_body_8",
+          "name_mobile": "anger_actions_header_8",
+          "desc_mobile": "anger_actions_body_8"
         },
         {
-          "name": "Be passive-aggressive",
-          "desc": "Take indirect actions that have an angry undercurrent.",
-          "name_mobile": "Be passive-aggressive",
-          "desc_mobile": "Take indirect actions that have an angry undercurrent."
+          "name": "anger_actions_header_9",
+          "desc": "anger_actions_body_9",
+          "name_mobile": "anger_actions_header_9",
+          "desc_mobile": "anger_actions_body_9"
         }
       ],
       "triggers": [
         {
-          "name": "Interference with locomotion",
+          "name": "anger_triggers_header_1",
           "type": "Universal",
-          "name_mobile": "Universal Triggers of Anger",
-          "desc_mobile": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Interference with action or locomotion are examples."
+          "name_mobile": "anger_triggers_universal_header_mobile",
+          "desc_mobile": "anger_triggers_universal_body_mobile"
         },
         {
-          "name": "Interference with action",
+          "name": "anger_triggers_header_2",
           "type": "Universal",
-          "name_mobile": "Learned Triggers of Anger",
-          "desc_mobile": "Some triggers can be learned from personal or shared cultural experiences. Being wrongfully accused or put down by an authority figure are examples."
+          "name_mobile": "anger_triggers_learned_header_mobile",
+          "desc_mobile": "anger_triggers_learned_body_mobile"
         },
         {
-          "name": "Rejection by a loved one",
+          "name": "anger_triggers_header_3",
           "type": "Universal",
-          "name_mobile": "Rejection by a loved one",
+          "name_mobile": "anger_triggers_header_3",
           "desc_mobile": "Universal"
         },
         {
-          "name": "Inefficiency or bureaucracy",
+          "name": "anger_triggers_header_4",
           "type": "Learned",
-          "name_mobile": "Inefficiency or bureaucracy",
+          "name_mobile": "anger_triggers_header_4",
           "desc_mobile": "Learned"
         },
         {
-          "name": "Being put down by an authority figure",
+          "name": "anger_triggers_header_5",
           "type": "Learned",
-          "name_mobile": "Being put down by an authority figure",
+          "name_mobile": "anger_triggers_header_5",
           "desc_mobile": "Learned"
         },
         {
-          "name": "Encountering offensive beliefs",
+          "name": "anger_triggers_header_6",
           "type": "Learned",
-          "name_mobile": "Encountering offensive beliefs",
+          "name_mobile": "anger_triggers_header_6",
           "desc_mobile": "Learned"
         },
         {
-          "name": "Being wrongfully accused",
+          "name": "anger_triggers_header_7",
           "type": "Learned",
-          "name_mobile": "Being wrongfully accused",
+          "name_mobile": "anger_triggers_header_7",
           "desc_mobile": "Learned"
         }
       ],
       "moods": [
         {
-          "name": "Irritable",
-          "desc": "A readiness, a need to become angry. Filtering perceptions to see provocations not noticed when not irritable.",
-          "name_mobile": "Irritable",
-          "desc_mobile": "A readiness, a need to become angry. Filtering perceptions to see provocations not noticed when not irritable."
+          "name": "anger_moods_header",
+          "desc": "anger_moods_body",
+          "name_mobile": "anger_moods_header",
+          "desc_mobile": "anger_moods_body"
         }
       ]
     },
