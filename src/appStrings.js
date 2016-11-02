@@ -63,9 +63,6 @@ function appStrings (_lang, _screenIsSmall, _stringsLoadedCallback) {
 		// -->>	TODO: only running nested parsing on emotionsData for now,
 		// 		until secondaryData also has keys.
 		if (source === emotionsData) {
-			console.log(">>>>> key:", key);
-			console.log(">>>>> parsedKey:", parsedKey);
-
 			if (typeof parsedKey === 'string') {
 				parsedValue = strings[parsedKey];
 			} else if (Array.isArray(parsedKey)) {
@@ -75,7 +72,6 @@ function appStrings (_lang, _screenIsSmall, _stringsLoadedCallback) {
 					else if (typeof k === 'object') {
 						// localize nested objects
 						return Object.keys(k).reduce((acc, k1) => {
-							// console.log(">>>>> nested object -- ", (pathPrefix + k1));
 							acc[k1] = getStr(pathPrefix + k1);
 							return acc;
 						}, {});
@@ -87,8 +83,6 @@ function appStrings (_lang, _screenIsSmall, _stringsLoadedCallback) {
 			} else {
 				throw new Error(`Key not found at ${ key }`);
 			}
-
-			console.log(">>>>> parsedValue:", parsedValue);
 		}
 
 		// fall back to returning parsed key or empty string

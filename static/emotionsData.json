@@ -362,445 +362,438 @@
     },
     "fear": {
       "continent": {
-        "name": "Fear",
-        "desc": "We are threatened to our safety or wellbeing.",
-        "name_mobile": "The Continent of Fear",
-        "desc_mobile": "The movement of this shape reflects how anger varies in strength and frequency in our lives. Tap on the shape to learn more about the universal nature of fear."
+        "name": "fear_continent_header",
+        "desc": "fear_continent_body",
+        "name_mobile": "fear_continent_header_mobile",
+        "desc_mobile": "fear_continent_body_mobile"
       },
       "states": [
         {
-          "name": "Trepidation",
-          "desc": "Anticipation of the possibility of danger.",
-          "name_mobile": "Trepidation",
-          "desc_mobile": "Anticipation of the possibility of danger.",
+          "name": "fear_states_header_1",
+          "desc": "fear_states_body_1",
+          "name_mobile": "fear_states_header_1",
+          "desc_mobile": "fear_states_body_1",
           "range": {
             "min": 1,
             "max": 3
           },
           "actions": {
             "all": [
-              "hesitate",
-              "ruminate",
-              "worry"
+              "3",
+              "tue jun 07 2016 00:00:00 gmt-0700 (pdt)"
             ],
             "con": [
-              "hesitate"
+              "3"
             ],
             "des": [
-              "ruminate",
-              "worry"
+              "tue jun 07 2016 00:00:00 gmt-0700 (pdt)"
             ],
             "both": []
           }
         },
         {
-          "name": "Anxiety",
-          "desc": "Inability to cope with an anticipated or actual threat.",
-          "name_mobile": "Anxiety",
-          "desc_mobile": "Inability to cope with an anticipated or actual threat.",
+          "name": "fear_states_header_2",
+          "desc": "fear_states_body_2",
+          "name_mobile": "fear_states_header_2",
+          "desc_mobile": "fear_states_body_2",
           "range": {
             "min": 1,
             "max": 10
           },
           "actions": {
             "all": [
-              "hesitate",
-              "withdraw",
-              "freeze",
-              "ruminate",
-              "worry"
+              "3",
+              "1",
+              "4",
+              "6",
+              "7"
             ],
             "con": [
-              "hesitate",
-              "withdraw",
-              "freeze"
+              "3",
+              "1",
+              "4"
             ],
             "des": [
-              "withdraw",
-              "freeze",
-              "ruminate",
-              "worry"
+              "1",
+              "4",
+              "6",
+              "7"
             ],
             "both": [
-              "withdraw",
-              "freeze"
+              "1",
+              "4"
             ]
           }
         },
         {
-          "name": "Nervousness",
-          "desc": "Uncertainty as to whether there is a danger.",
-          "name_mobile": "Nervousness",
-          "desc_mobile": "Uncertainty as to whether there is a danger.",
+          "name": "fear_states_header_3",
+          "desc": "fear_states_body_3",
+          "name_mobile": "fear_states_header_3",
+          "desc_mobile": "fear_states_body_3",
           "range": {
             "min": 2,
             "max": 7
           },
           "actions": {
             "all": [
-              "hesitate",
-              "ruminate",
-              "worry"
+              "3",
+              "tue jun 07 2016 00:00:00 gmt-0700 (pdt)"
             ],
             "con": [
-              "hesitate"
+              "3"
             ],
             "des": [
-              "ruminate",
-              "worry"
+              "tue jun 07 2016 00:00:00 gmt-0700 (pdt)"
             ],
             "both": []
           }
         },
         {
-          "name": "Dread",
-          "desc": "Anticipation of severe danger.",
-          "name_mobile": "Dread",
-          "desc_mobile": "Anticipation of severe danger.",
+          "name": "fear_states_header_4",
+          "desc": "fear_states_body_4",
+          "name_mobile": "fear_states_header_4",
+          "desc_mobile": "fear_states_body_4",
           "range": {
             "min": 6,
             "max": 10
           },
           "actions": {
             "all": [
-              "withdraw",
-              "freeze",
-              "scream/yell",
-              "ruminate",
-              "worry"
+              "mon jan 04 2016 00:00:00 gmt-0800 (pst)",
+              "1",
+              "4",
+              "5",
+              "6",
+              "7"
             ],
             "con": [
-              "withdraw",
-              "freeze"
+              "mon jan 04 2016 00:00:00 gmt-0800 (pst)"
             ],
             "des": [
-              "withdraw",
-              "freeze",
-              "scream/yell",
-              "ruminate",
-              "worry"
+              "1",
+              "4",
+              "5",
+              "6",
+              "7"
             ],
-            "both": [
-              "withdraw",
-              "freeze"
-            ]
+            "both": []
           }
         },
         {
-          "name": "Desperation",
-          "desc": "A response to the inability to reduce danger.",
-          "name_mobile": "Desperation",
-          "desc_mobile": "A response to the inability to reduce danger.",
+          "name": "fear_states_header_5",
+          "desc": "fear_states_body_5",
+          "name_mobile": "fear_states_header_5",
+          "desc_mobile": "fear_states_body_5",
           "range": {
             "min": 9,
             "max": 10
           },
           "actions": {
             "all": [
-              "avoid",
-              "hesitate",
-              "freeze",
-              "scream/yell",
-              "ruminate"
+              "2",
+              "3",
+              "4",
+              "5",
+              "6"
             ],
             "con": [
-              "avoid",
-              "hesitate",
-              "freeze"
+              "2",
+              "3",
+              "4"
             ],
             "des": [
-              "avoid",
-              "hesitate",
-              "freeze",
-              "scream/yell",
-              "ruminate"
+              "2",
+              "3",
+              "4",
+              "5",
+              "6"
             ],
             "both": [
-              "avoid",
-              "hesitate",
-              "freeze"
+              "2",
+              "3",
+              "4"
             ]
           }
         },
         {
-          "name": "Panic",
-          "desc": "A consequence of desperation.",
-          "name_mobile": "Panic",
-          "desc_mobile": "A consequence of desperation.",
+          "name": "fear_states_header_6",
+          "desc": "fear_states_body_6",
+          "name_mobile": "fear_states_header_6",
+          "desc_mobile": "fear_states_body_6",
           "range": {
             "min": 10,
             "max": 10
           },
           "actions": {
             "all": [
-              "withdraw",
-              "freeze",
-              "scream/yell",
-              "ruminate",
-              "worry"
+              "1",
+              "4",
+              "5",
+              "6",
+              "7"
             ],
             "con": [
-              "withdraw",
-              "freeze",
-              "scream/yell"
+              "1",
+              "4",
+              "5"
             ],
             "des": [
-              "withdraw",
-              "freeze",
-              "scream/yell",
-              "ruminate",
-              "worry"
+              "1",
+              "4",
+              "5",
+              "6",
+              "7"
             ],
             "both": [
-              "withdraw",
-              "freeze",
-              "scream/yell"
+              "1",
+              "4",
+              "5"
             ]
           }
         },
         {
-          "name": "Horror",
-          "desc": "A mixture of fear and disgust.",
-          "name_mobile": "Horror",
-          "desc_mobile": "A mixture of fear and disgust.",
+          "name": "fear_states_header_7",
+          "desc": "fear_states_body_7",
+          "name_mobile": "fear_states_header_7",
+          "desc_mobile": "fear_states_body_7",
           "range": {
             "min": 10,
             "max": 10
           },
           "actions": {
             "all": [
-              "withdraw",
-              "freeze",
-              "scream/yell"
+              "1",
+              "4",
+              "5"
             ],
             "con": [
-              "withdraw",
-              "freeze",
-              "scream/yell"
+              "1",
+              "4",
+              "5"
             ],
             "des": [
-              "withdraw",
-              "freeze",
-              "scream/yell"
+              "1",
+              "4",
+              "5"
             ],
             "both": [
-              "withdraw",
-              "freeze",
-              "scream/yell"
+              "1",
+              "4",
+              "5"
             ]
           }
         },
         {
-          "name": "Terror",
-          "desc": "Maximum fear.",
-          "name_mobile": "Terror",
-          "desc_mobile": "Maximum fear.",
+          "name": "fear_states_header_8",
+          "desc": "fear_states_body_8",
+          "name_mobile": "fear_states_header_8",
+          "desc_mobile": "fear_states_body_8",
           "range": {
             "min": 10,
             "max": 10
           },
           "actions": {
             "all": [
-              "withdraw",
-              "freeze",
-              "scream/yell"
+              "1",
+              "4",
+              "5"
             ],
             "con": [
-              "withdraw",
-              "freeze",
-              "scream/yell"
+              "1",
+              "4",
+              "5"
             ],
             "des": [
-              "withdraw",
-              "freeze",
-              "scream/yell"
+              "1",
+              "4",
+              "5"
             ],
             "both": [
-              "withdraw",
-              "freeze",
-              "scream/yell"
+              "1",
+              "4",
+              "5"
             ]
           }
         }
       ],
       "actions": [
         {
-          "name": "Withdraw",
-          "desc": "Physically or mentally leave the scene of the threat.",
-          "name_mobile": "Withdraw",
-          "desc_mobile": "Physically or mentally leave the scene of the threat."
+          "name": "fear_actions_header_1",
+          "desc": "fear_actions_body_1",
+          "name_mobile": "fear_actions_header_1",
+          "desc_mobile": "fear_actions_body_1"
         },
         {
-          "name": "Avoid",
-          "desc": "Either physically stay away from someone or something, or internally keep one’s mind away from what is triggering the fear.",
-          "name_mobile": "Avoid",
-          "desc_mobile": "Either physically stay away from someone or something, or internally keep one’s mind away from what is triggering the fear."
+          "name": "fear_actions_header_2",
+          "desc": "fear_actions_body_2",
+          "name_mobile": "fear_actions_header_2",
+          "desc_mobile": "fear_actions_body_2"
         },
         {
-          "name": "Hesitate",
-          "desc": "Hold back in doubt or indecision, often momentarily.",
-          "name_mobile": "Hesitate",
-          "desc_mobile": "Hold back in doubt or indecision, often momentarily."
+          "name": "fear_actions_header_3",
+          "desc": "fear_actions_body_3",
+          "name_mobile": "fear_actions_header_3",
+          "desc_mobile": "fear_actions_body_3"
         },
         {
-          "name": "Freeze",
-          "desc": "Become incapable of acting or speaking.",
-          "name_mobile": "Freeze",
-          "desc_mobile": "Become incapable of acting or speaking."
+          "name": "fear_actions_header_4",
+          "desc": "fear_actions_body_4",
+          "name_mobile": "fear_actions_header_4",
+          "desc_mobile": "fear_actions_body_4"
         },
         {
-          "name": "Scream/yell",
-          "desc": "Lose control of how one speaks; speak in a loud volume and, when screaming, in a higher pitch.",
-          "name_mobile": "Scream/yell",
-          "desc_mobile": "Lose control of how one speaks; speak in a loud volume and, when screaming, in a higher pitch."
+          "name": "fear_actions_header_5",
+          "desc": "fear_actions_body_5",
+          "name_mobile": "fear_actions_header_5",
+          "desc_mobile": "fear_actions_body_5"
         },
         {
-          "name": "Ruminate",
-          "desc": "Repetitively think about the emotional experience.",
-          "name_mobile": "Ruminate",
-          "desc_mobile": "Repetitively think about the emotional experience."
+          "name": "fear_actions_header_6",
+          "desc": "fear_actions_body_6",
+          "name_mobile": "fear_actions_header_6",
+          "desc_mobile": "fear_actions_body_6"
         },
         {
-          "name": "Worry",
-          "desc": "Anticipate the possibility of harm.",
-          "name_mobile": "Worry",
-          "desc_mobile": "Anticipate the possibility of harm."
+          "name": "fear_actions_header_7",
+          "desc": "fear_actions_body_7",
+          "name_mobile": "fear_actions_header_7",
+          "desc_mobile": "fear_actions_body_7"
         }
       ],
       "triggers": [
         {
-          "name": "Imminent bodily impact",
+          "name": "fear_triggers_header_1",
           "type": "Universal",
-          "name_mobile": "Universal Triggers of Fear",
-          "desc_mobile": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Snake-like shapes and sudden loss of gravity are examples."
+          "name_mobile": "fear_triggers_universal_header_mobile",
+          "desc_mobile": "fear_triggers_universal_body_mobile"
         },
         {
-          "name": "Sudden loss of gravity",
+          "name": "fear_triggers_header_2",
           "type": "Universal",
-          "name_mobile": "Learned Triggers of Fear",
-          "desc_mobile": "Some triggers can be learned from personal or shared cultural experiences. Public speaking, thunder, and the threat of losing one’s job are examples."
+          "name_mobile": "fear_triggers_learned_header_mobile",
+          "desc_mobile": "fear_triggers_learned_body_mobile"
         },
         {
-          "name": "Threat to safety",
+          "name": "fear_triggers_header_3",
           "type": "Universal",
-          "name_mobile": "Threat to safety",
+          "name_mobile": "fear_triggers_header_3",
           "desc_mobile": "Universal"
         },
         {
-          "name": "Snake-like shapes",
+          "name": "fear_triggers_header_4",
           "type": "Universal",
-          "name_mobile": "Snake-like shapes",
+          "name_mobile": "fear_triggers_header_4",
           "desc_mobile": "Universal"
         },
         {
-          "name": "Threat of losing job",
+          "name": "fear_triggers_header_5",
           "type": "Learned",
-          "name_mobile": "Threat of losing job",
+          "name_mobile": "fear_triggers_header_5",
           "desc_mobile": "Learned"
         },
         {
-          "name": "Thunder",
+          "name": "fear_triggers_header_6",
           "type": "Learned",
-          "name_mobile": "Thunder",
+          "name_mobile": "fear_triggers_header_6",
           "desc_mobile": "Learned"
         },
         {
-          "name": "Public speaking",
+          "name": "fear_triggers_header_7",
           "type": "Learned",
-          "name_mobile": "Public speaking",
+          "name_mobile": "fear_triggers_header_7",
           "desc_mobile": "Learned"
         }
       ],
       "moods": [
         {
-          "name": "Apprehensive",
-          "desc": "Expecting harm but not knowing how to avoid it. Perceiving threats when they are not there, or magnifying the seriousness of a threat.",
-          "name_mobile": "Apprehensive",
-          "desc_mobile": "Expecting harm but not knowing how to avoid it. Perceiving threats when they are not there, or magnifying the seriousness of a threat."
+          "name": "fear_moods_header",
+          "desc": "fear_moods_body",
+          "name_mobile": "fear_moods_header",
+          "desc_mobile": "fear_moods_body"
         }
       ]
     },
     "disgust": {
       "continent": {
-        "name": "Disgust",
-        "desc": "We are facing something toxic or otherwise unpleasing.",
-        "name_mobile": "The Continent of Disgust",
-        "desc_mobile": "The movement of this shape reflects how anger varies in strength and frequency in our lives. Tap on the shape to learn more about the universal nature of disgust."
+        "name": "disgust_continent_header",
+        "desc": "disgust_continent_body",
+        "name_mobile": "disgust_continent_header_mobile",
+        "desc_mobile": "disgust_continent_body_mobile"
       },
       "states": [
         {
-          "name": "Dislike",
-          "desc": "The mildest form of disgust.",
-          "name_mobile": "Dislike",
-          "desc_mobile": "The mildest form of disgust.",
+          "name": "disgust_states_header_1",
+          "desc": "disgust_states_body_1",
+          "name_mobile": "disgust_states_header_1",
+          "desc_mobile": "disgust_states_body_1",
           "range": {
             "min": 1,
             "max": 5
           },
           "actions": {
             "all": [
-              "withdraw",
-              "avoid",
-              "dehumanize"
+              "1",
+              "2",
+              "4"
             ],
             "con": [
-              "withdraw",
-              "avoid"
+              "1",
+              "2"
             ],
             "des": [
-              "avoid",
-              "dehumanize"
+              "2",
+              "4"
             ],
             "both": [
-              "avoid"
+              "2"
             ]
           }
         },
         {
-          "name": "Aversion",
-          "desc": "A desire to avoid something disgusting.",
-          "name_mobile": "Aversion",
-          "desc_mobile": "A desire to avoid something disgusting.",
+          "name": "disgust_states_header_2",
+          "desc": "disgust_states_body_2",
+          "name_mobile": "disgust_states_header_2",
+          "desc_mobile": "disgust_states_body_2",
           "range": {
             "min": 2,
             "max": 7
           },
           "actions": {
             "all": [
-              "withdraw",
-              "avoid",
-              "dehumanize"
+              "1",
+              "2",
+              "4"
             ],
             "con": [
-              "withdraw",
-              "avoid"
+              "1",
+              "2"
             ],
             "des": [
-              "dehumanize"
+              "4"
             ],
             "both": []
           }
         },
         {
-          "name": "Distaste",
-          "desc": "Response to a bad taste or smell; can also be metaphorical.",
-          "name_mobile": "Distaste",
-          "desc_mobile": "Response to a bad taste or smell; can also be metaphorical.",
+          "name": "disgust_states_header_3",
+          "desc": "disgust_states_body_3",
+          "name_mobile": "disgust_states_header_3",
+          "desc_mobile": "disgust_states_body_3",
           "range": {
             "min": 2,
             "max": 7
           },
           "actions": {
             "all": [
-              "withdraw",
-              "avoid",
-              "vomit",
+              "1",
+              "2",
+              "3",
               ""
             ],
             "con": [
-              "withdraw",
-              "avoid",
-              "vomit"
+              "1",
+              "2",
+              "3"
             ],
             "des": [
               ""
@@ -809,106 +802,106 @@
           }
         },
         {
-          "name": "Repugnance",
-          "desc": "Repulsion to something literally or figuratively toxic.",
-          "name_mobile": "Repugnance",
-          "desc_mobile": "Repulsion to something literally or figuratively toxic.",
+          "name": "disgust_states_header_4",
+          "desc": "disgust_states_body_4",
+          "name_mobile": "disgust_states_header_4",
+          "desc_mobile": "disgust_states_body_4",
           "range": {
             "min": 2,
             "max": 9
           },
           "actions": {
             "all": [
-              "withdraw",
-              "avoid",
-              "dehumanize"
+              "1",
+              "2",
+              "4"
             ],
             "con": [
-              "withdraw",
-              "avoid"
+              "1",
+              "2"
             ],
             "des": [
-              "avoid",
-              "dehumanize"
+              "2",
+              "4"
             ],
             "both": [
-              "avoid"
+              "2"
             ]
           }
         },
         {
-          "name": "Revulsion",
-          "desc": "Very intense disgust.",
-          "name_mobile": "Revulsion",
-          "desc_mobile": "Very intense disgust.",
+          "name": "disgust_states_header_5",
+          "desc": "disgust_states_body_5",
+          "name_mobile": "disgust_states_header_5",
+          "desc_mobile": "disgust_states_body_5",
           "range": {
             "min": 8,
             "max": 10
           },
           "actions": {
             "all": [
-              "withdraw",
-              "avoid",
-              "vomit",
-              "dehumanize"
+              "1",
+              "2",
+              "3",
+              "4"
             ],
             "con": [
-              "withdraw",
-              "avoid",
-              "vomit"
+              "1",
+              "2",
+              "3"
             ],
             "des": [
-              "dehumanize"
+              "4"
             ],
             "both": []
           }
         },
         {
-          "name": "Abhorrence",
-          "desc": "Extreme repulsion.",
-          "name_mobile": "Abhorrence",
-          "desc_mobile": "Extreme repulsion.",
+          "name": "disgust_states_header_6",
+          "desc": "disgust_states_body_6",
+          "name_mobile": "disgust_states_header_6",
+          "desc_mobile": "disgust_states_body_6",
           "range": {
             "min": 8,
             "max": 10
           },
           "actions": {
             "all": [
-              "withdraw",
-              "avoid",
-              "dehumanize"
+              "1",
+              "2",
+              "4"
             ],
             "con": [
-              "withdraw",
-              "avoid"
+              "1",
+              "2"
             ],
             "des": [
-              "dehumanize"
+              "4"
             ],
             "both": []
           }
         },
         {
-          "name": "Loathing",
-          "desc": "Intense disgust focused on a person.",
-          "name_mobile": "Loathing",
-          "desc_mobile": "Intense disgust focused on a person.",
+          "name": "disgust_states_header_7",
+          "desc": "disgust_states_body_7",
+          "name_mobile": "disgust_states_header_7",
+          "desc_mobile": "disgust_states_body_7",
           "range": {
             "min": 9,
             "max": 10
           },
           "actions": {
             "all": [
-              "withdraw",
-              "avoid",
-              "dehumanize"
+              "1",
+              "2",
+              "4"
             ],
             "con": [
-              "withdraw"
+              "1"
             ],
             "des": [
-              "avoid",
-              "dehumanize"
+              "2",
+              "4"
             ],
             "both": []
           }
@@ -916,545 +909,545 @@
       ],
       "actions": [
         {
-          "name": "Withdraw",
-          "desc": "Physically or mentally leave the scene of what is triggering the disgust.",
-          "name_mobile": "Withdraw",
-          "desc_mobile": "Physically or mentally leave the scene of what is triggering the disgust."
+          "name": "disgust_actions_header_1",
+          "desc": "disgust_actions_body_1",
+          "name_mobile": "disgust_actions_header_1",
+          "desc_mobile": "disgust_actions_body_1"
         },
         {
-          "name": "Avoid",
-          "desc": "Either physically stay away from someone or something, or internally keep one’s mind away from what is triggering the disgust.",
-          "name_mobile": "Avoid",
-          "desc_mobile": "Either physically stay away from someone or something, or internally keep one’s mind away from what is triggering the disgust."
+          "name": "disgust_actions_header_2",
+          "desc": "disgust_actions_body_2",
+          "name_mobile": "disgust_actions_header_2",
+          "desc_mobile": "disgust_actions_body_2"
         },
         {
-          "name": "Vomit",
-          "desc": "Expel material from the stomach via the mouth; metaphorically denotes very intense disgust.",
-          "name_mobile": "Vomit",
-          "desc_mobile": "Expel material from the stomach via the mouth; metaphorically denotes very intense disgust."
+          "name": "disgust_actions_header_3",
+          "desc": "disgust_actions_body_3",
+          "name_mobile": "disgust_actions_header_3",
+          "desc_mobile": "disgust_actions_body_3"
         },
         {
-          "name": "Dehumanize",
-          "desc": "Treat someone as though he or she is not a human being; deprive someone of human qualities, personality or spirit.",
-          "name_mobile": "Dehumanize",
-          "desc_mobile": "Treat someone as though he or she is not a human being; deprive someone of human qualities, personality or spirit."
+          "name": "disgust_actions_header_4",
+          "desc": "disgust_actions_body_4",
+          "name_mobile": "disgust_actions_header_4",
+          "desc_mobile": "disgust_actions_body_4"
         }
       ],
       "triggers": [
         {
-          "name": "Anything coming out of the body",
+          "name": "disgust_triggers_header_1",
           "type": "Universal",
-          "name_mobile": "Universal Triggers of Disgust",
-          "desc_mobile": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Anything in decay or coming out of the body are examples."
+          "name_mobile": "disgust_triggers_universal_header_mobile",
+          "desc_mobile": "disgust_triggers_universal_body_mobile"
         },
         {
-          "name": "Rotting or decay",
+          "name": "disgust_triggers_header_2",
           "type": "Universal",
-          "name_mobile": "Learned Triggers of Disgust",
-          "desc_mobile": "Some triggers can be learned from personal or shared cultural experiences. Unfamiliar religious customs and eating insects or raw meat are examples."
+          "name_mobile": "disgust_triggers_learned_header_mobile",
+          "desc_mobile": "disgust_triggers_learned_body_mobile"
         },
         {
-          "name": "Fans of an opposing sports team",
+          "name": "disgust_triggers_header_3",
           "type": "Learned",
-          "name_mobile": "Fans of an opposing sports team",
+          "name_mobile": "disgust_triggers_header_3",
           "desc_mobile": "Learned"
         },
         {
-          "name": "Unfamiliar religious customs",
+          "name": "disgust_triggers_header_4",
           "type": "Learned",
-          "name_mobile": "Unfamiliar religious customs",
+          "name_mobile": "disgust_triggers_header_4",
           "desc_mobile": "Learned"
         },
         {
-          "name": "Eating insects or raw meat",
+          "name": "disgust_triggers_header_5",
           "type": "Learned",
-          "name_mobile": "Eating insects or raw meat",
+          "name_mobile": "disgust_triggers_header_5",
           "desc_mobile": "Learned"
         }
       ],
       "moods": [
         {
-          "name": "Sour",
-          "desc": "Disgust can occur as a mood, a generalized feeling of repugnance.",
-          "name_mobile": "Sour",
-          "desc_mobile": "Disgust can occur as a mood, a generalized feeling of repugnance."
+          "name": "disgust_moods_header",
+          "desc": "disgust_moods_body",
+          "name_mobile": "disgust_moods_header",
+          "desc_mobile": "disgust_moods_body"
         }
       ]
     },
     "sadness": {
       "continent": {
-        "name": "Sadness",
-        "desc": "We are experiencing loss of something valuable.",
-        "name_mobile": "The Continent of Sadness",
-        "desc_mobile": "The movement of this shape reflects how anger varies in strength and frequency in our lives. Tap on the shape to learn more about the universal nature of sadness."
+        "name": "sadness_continent_header",
+        "desc": "sadness_continent_body",
+        "name_mobile": "sadness_continent_header_mobile",
+        "desc_mobile": "sadness_continent_body_mobile"
       },
       "states": [
         {
-          "name": "Disappointment",
-          "desc": "A feeling that expectations are not being met.",
-          "name_mobile": "Disappointment",
-          "desc_mobile": "A feeling that expectations are not being met.",
+          "name": "sadness_states_header_1",
+          "desc": "sadness_states_body_1",
+          "name_mobile": "sadness_states_header_1",
+          "desc_mobile": "sadness_states_body_1",
           "range": {
             "min": 1,
             "max": 5
           },
           "actions": {
             "all": [
-              "seek comfort",
-              "mourn",
-              "withdraw",
-              "ruminate",
-              "feel ashamed"
+              "1",
+              "4",
+              "2",
+              "3",
+              "6"
             ],
             "con": [
-              "seek comfort",
-              "mourn"
+              "1",
+              "4"
             ],
             "des": [
-              "withdraw",
-              "ruminate",
-              "mourn",
-              "feel ashamed"
+              "2",
+              "3",
+              "4",
+              "6"
             ],
             "both": [
-              "mourn"
+              "4"
             ]
           }
         },
         {
-          "name": "Resignation",
-          "desc": "Acceptance that nothing can be done.",
-          "name_mobile": "Resignation",
-          "desc_mobile": "Acceptance that nothing can be done.",
+          "name": "sadness_states_header_2",
+          "desc": "sadness_states_body_2",
+          "name_mobile": "sadness_states_header_2",
+          "desc_mobile": "sadness_states_body_2",
           "range": {
             "min": 1,
             "max": 10
           },
           "actions": {
             "all": [
-              "seek comfort",
-              "withdraw",
-              "protest",
-              "ruminate",
-              "mourn",
-              "feel ashamed"
+              "1",
+              "2",
+              "5",
+              "3",
+              "4",
+              "6"
             ],
             "con": [
-              "seek comfort",
-              "withdraw",
-              "protest"
+              "1",
+              "2",
+              "5"
             ],
             "des": [
-              "withdraw",
-              "ruminate",
-              "mourn",
-              "protest",
-              "feel ashamed"
+              "2",
+              "3",
+              "4",
+              "5",
+              "6"
             ],
             "both": [
-              "withdraw",
-              "protest"
+              "2",
+              "5"
             ]
           }
         },
         {
-          "name": "Distraughtness",
-          "desc": "Agitated sadness.",
-          "name_mobile": "Distraughtness",
-          "desc_mobile": "Agitated sadness.",
+          "name": "sadness_states_header_3",
+          "desc": "sadness_states_body_3",
+          "name_mobile": "sadness_states_header_3",
+          "desc_mobile": "sadness_states_body_3",
           "range": {
             "min": 2,
             "max": 8
           },
           "actions": {
             "all": [
-              "seek comfort",
-              "protest",
-              "withdraw",
-              "feel ashamed"
+              "1",
+              "5",
+              "2",
+              "6"
             ],
             "con": [
-              "seek comfort",
-              "protest"
+              "1",
+              "5"
             ],
             "des": [
-              "withdraw",
-              "protest",
-              "feel ashamed"
+              "2",
+              "5",
+              "6"
             ],
             "both": [
-              "protest"
+              "5"
             ]
           }
         },
         {
-          "name": "Discouragement",
-          "desc": "A feeling that there is no way to cope.",
-          "name_mobile": "Discouragement",
-          "desc_mobile": "A feeling that there is no way to cope.",
+          "name": "sadness_states_header_4",
+          "desc": "sadness_states_body_4",
+          "name_mobile": "sadness_states_header_4",
+          "desc_mobile": "sadness_states_body_4",
           "range": {
             "min": 2,
             "max": 8
           },
           "actions": {
             "all": [
-              "seek comfort",
-              "mourn",
-              "protest",
-              "withdraw",
-              "ruminate"
+              "1",
+              "4",
+              "5",
+              "2",
+              "3"
             ],
             "con": [
-              "seek comfort",
-              "mourn",
-              "protest"
+              "1",
+              "4",
+              "5"
             ],
             "des": [
-              "withdraw",
-              "ruminate",
-              "mourn"
+              "2",
+              "3",
+              "4"
             ],
             "both": [
-              "mourn"
+              "4"
             ]
           }
         },
         {
-          "name": "Helplessness",
-          "desc": "Realization of the inability to prevent or cope with loss.",
-          "name_mobile": "Helplessness",
-          "desc_mobile": "Realization of the inability to prevent or cope with loss.",
+          "name": "sadness_states_header_5",
+          "desc": "sadness_states_body_5",
+          "name_mobile": "sadness_states_header_5",
+          "desc_mobile": "sadness_states_body_5",
           "range": {
             "min": 5,
             "max": 10
           },
           "actions": {
             "all": [
-              "seek comfort",
-              "protest",
-              "withdraw",
-              "ruminate",
-              "feel ashamed"
+              "1",
+              "5",
+              "2",
+              "3",
+              "6"
             ],
             "con": [
-              "seek comfort",
-              "protest"
+              "1",
+              "5"
             ],
             "des": [
-              "withdraw",
-              "ruminate",
-              "protest",
-              "feel ashamed"
+              "2",
+              "3",
+              "5",
+              "6"
             ],
             "both": [
-              "protest"
+              "5"
             ]
           }
         },
         {
-          "name": "Misery",
-          "desc": "Anguished sadness, usually prolonged.",
-          "name_mobile": "Misery",
-          "desc_mobile": "Anguished sadness, usually prolonged.",
+          "name": "sadness_states_header_6",
+          "desc": "sadness_states_body_6",
+          "name_mobile": "sadness_states_header_6",
+          "desc_mobile": "sadness_states_body_6",
           "range": {
             "min": 6,
             "max": 10
           },
           "actions": {
             "all": [
-              "seek comfort",
-              "mourn",
-              "protest",
-              "withdraw",
-              "ruminate"
+              "1",
+              "4",
+              "5",
+              "2",
+              "3"
             ],
             "con": [
-              "seek comfort",
-              "mourn",
-              "protest"
+              "1",
+              "4",
+              "5"
             ],
             "des": [
-              "withdraw",
-              "ruminate",
-              "mourn",
-              "protest"
+              "2",
+              "3",
+              "4",
+              "5"
             ],
             "both": [
-              "mourn",
-              "protest"
+              "4",
+              "5"
             ]
           }
         },
         {
-          "name": "Hopelessness",
-          "desc": "A feeling that nothing good is to come.",
-          "name_mobile": "Hopelessness",
-          "desc_mobile": "A feeling that nothing good is to come.",
+          "name": "sadness_states_header_7",
+          "desc": "sadness_states_body_7",
+          "name_mobile": "sadness_states_header_7",
+          "desc_mobile": "sadness_states_body_7",
           "range": {
             "min": 6,
             "max": 10
           },
           "actions": {
             "all": [
-              "seek comfort",
-              "mourn",
-              "withdraw",
-              "ruminate",
-              "feel ashamed"
+              "1",
+              "4",
+              "2",
+              "3",
+              "6"
             ],
             "con": [
-              "seek comfort",
-              "mourn"
+              "1",
+              "4"
             ],
             "des": [
-              "withdraw",
-              "ruminate",
-              "mourn",
-              "feel ashamed"
+              "2",
+              "3",
+              "4",
+              "6"
             ],
             "both": [
-              "mourn"
+              "4"
             ]
           }
         },
         {
-          "name": "Grief",
-          "desc": "Anguished sadness over the loss of a loved one.",
-          "name_mobile": "Grief",
-          "desc_mobile": "Anguished sadness over the loss of a loved one.",
+          "name": "sadness_states_header_8",
+          "desc": "sadness_states_body_8",
+          "name_mobile": "sadness_states_header_8",
+          "desc_mobile": "sadness_states_body_8",
           "range": {
             "min": 7,
             "max": 10
           },
           "actions": {
             "all": [
-              "seek comfort",
-              "mourn",
-              "protest",
-              "withdraw",
-              "ruminate",
-              "feel ashamed"
+              "1",
+              "4",
+              "5",
+              "2",
+              "3",
+              "6"
             ],
             "con": [
-              "seek comfort",
-              "mourn",
-              "protest"
+              "1",
+              "4",
+              "5"
             ],
             "des": [
-              "withdraw",
-              "ruminate",
-              "mourn",
-              "protest",
-              "feel ashamed"
+              "2",
+              "3",
+              "4",
+              "5",
+              "6"
             ],
             "both": [
-              "mourn",
-              "protest"
+              "4",
+              "5"
             ]
           }
         },
         {
-          "name": "Despair",
-          "desc": "Resigned anguish.",
-          "name_mobile": "Despair",
-          "desc_mobile": "Resigned anguish.",
+          "name": "sadness_states_header_9",
+          "desc": "sadness_states_body_9",
+          "name_mobile": "sadness_states_header_9",
+          "desc_mobile": "sadness_states_body_9",
           "range": {
             "min": 7,
             "max": 10
           },
           "actions": {
             "all": [
-              "seek comfort",
-              "mourn",
-              "withdraw",
-              "ruminate"
+              "1",
+              "4",
+              "2",
+              "3"
             ],
             "con": [
-              "seek comfort",
-              "mourn"
+              "1",
+              "4"
             ],
             "des": [
-              "withdraw",
-              "ruminate",
-              "mourn"
+              "2",
+              "3",
+              "4"
             ],
             "both": [
-              "mourn"
+              "4"
             ]
           }
         },
         {
-          "name": "Sorrow",
-          "desc": "Sadness over a loss.",
-          "name_mobile": "Sorrow",
-          "desc_mobile": "Sadness over a loss.",
+          "name": "sadness_states_header_10",
+          "desc": "sadness_states_body_10",
+          "name_mobile": "sadness_states_header_10",
+          "desc_mobile": "sadness_states_body_10",
           "range": {
             "min": 7,
             "max": 10
           },
           "actions": {
             "all": [
-              "seek comfort",
-              "mourn",
-              "withdraw",
-              "ruminate",
-              "feel ashamed"
+              "1",
+              "4",
+              "2",
+              "3",
+              "6"
             ],
             "con": [
-              "seek comfort",
-              "mourn"
+              "1",
+              "4"
             ],
             "des": [
-              "withdraw",
-              "ruminate",
-              "mourn",
-              "feel ashamed"
+              "2",
+              "3",
+              "4",
+              "6"
             ],
             "both": [
-              "mourn"
+              "4"
             ]
           }
         },
         {
-          "name": "Anguish",
-          "desc": "Intense agitated sadness.",
-          "name_mobile": "Anguish",
-          "desc_mobile": "Intense agitated sadness.",
+          "name": "sadness_states_header_11",
+          "desc": "sadness_states_body_11",
+          "name_mobile": "sadness_states_header_11",
+          "desc_mobile": "sadness_states_body_11",
           "range": {
             "min": 10,
             "max": 10
           },
           "actions": {
             "all": [
-              "seek comfort",
-              "mourn",
-              "protest",
-              "withdraw",
-              "ruminate"
+              "1",
+              "4",
+              "5",
+              "2",
+              "3"
             ],
             "con": [
-              "seek comfort",
-              "mourn",
-              "protest"
+              "1",
+              "4",
+              "5"
             ],
             "des": [
-              "withdraw",
-              "ruminate",
-              "mourn",
-              "protest"
+              "2",
+              "3",
+              "4",
+              "5"
             ],
             "both": [
-              "mourn",
-              "protest"
+              "4",
+              "5"
             ]
           }
         }
       ],
       "actions": [
         {
-          "name": "Seek comfort",
-          "desc": "Seek help or support from others.",
-          "name_mobile": "Seek comfort",
-          "desc_mobile": "Seek help or support from others."
+          "name": "sadness_actions_header_1",
+          "desc": "sadness_actions_body_1",
+          "name_mobile": "sadness_actions_header_1",
+          "desc_mobile": "sadness_actions_body_1"
         },
         {
-          "name": "Withdraw",
-          "desc": "Physically or mentally leave the scene of what is triggering the sadness.",
-          "name_mobile": "Withdraw",
-          "desc_mobile": "Physically or mentally leave the scene of what is triggering the sadness."
+          "name": "sadness_actions_header_2",
+          "desc": "sadness_actions_body_2",
+          "name_mobile": "sadness_actions_header_2",
+          "desc_mobile": "sadness_actions_body_2"
         },
         {
-          "name": "Ruminate",
-          "desc": "Repetitively think about the emotional experience.",
-          "name_mobile": "Ruminate",
-          "desc_mobile": "Repetitively think about the emotional experience."
+          "name": "sadness_actions_header_3",
+          "desc": "sadness_actions_body_3",
+          "name_mobile": "sadness_actions_header_3",
+          "desc_mobile": "sadness_actions_body_3"
         },
         {
-          "name": "Mourn",
-          "desc": "Focus on the loss.",
-          "name_mobile": "Mourn",
-          "desc_mobile": "Focus on the loss."
+          "name": "sadness_actions_header_4",
+          "desc": "sadness_actions_body_4",
+          "name_mobile": "sadness_actions_header_4",
+          "desc_mobile": "sadness_actions_body_4"
         },
         {
-          "name": "Protest",
-          "desc": "Complain about the loss, knowing that the complaint will not recover what was lost.",
-          "name_mobile": "Protest",
-          "desc_mobile": "Complain about the loss, knowing that the complaint will not recover what was lost."
+          "name": "sadness_actions_header_5",
+          "desc": "sadness_actions_body_5",
+          "name_mobile": "sadness_actions_header_5",
+          "desc_mobile": "sadness_actions_body_5"
         },
         {
-          "name": "Feel ashamed",
-          "desc": "Feel the need to hide how one feels about what or who is lost.",
-          "name_mobile": "Feel ashamed",
-          "desc_mobile": "Feel the need to hide how one feels about what or who is lost."
+          "name": "sadness_actions_header_6",
+          "desc": "sadness_actions_body_6",
+          "name_mobile": "sadness_actions_header_6",
+          "desc_mobile": "sadness_actions_body_6"
         }
       ],
       "triggers": [
         {
-          "name": "Being rejected by someone important",
+          "name": "sadness_triggers_header_1",
           "type": "Universal",
-          "name_mobile": "Universal Triggers of Sadness",
-          "desc_mobile": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Losing or being rejected by a loved one are examples."
+          "name_mobile": "sadness_triggers_universal_header_mobile",
+          "desc_mobile": "sadness_triggers_universal_body_mobile"
         },
         {
-          "name": "Losing a loved one",
+          "name": "sadness_triggers_header_2",
           "type": "Universal",
-          "name_mobile": "Learned Triggers of Sadness",
-          "desc_mobile": "Some triggers can be learned from personal or shared cultural experiences. Feeling left out or experiencing a perceived loss of status are examples."
+          "name_mobile": "sadness_triggers_learned_header_mobile",
+          "desc_mobile": "sadness_triggers_learned_body_mobile"
         },
         {
-          "name": "Perceiving a loss of status",
+          "name": "sadness_triggers_header_3",
           "type": "Learned",
-          "name_mobile": "Perceiving a loss of status",
+          "name_mobile": "sadness_triggers_header_3",
           "desc_mobile": "Learned"
         },
         {
-          "name": "Not being invited to a party",
+          "name": "sadness_triggers_header_4",
           "type": "Learned",
-          "name_mobile": "Not being invited to a party",
+          "name_mobile": "sadness_triggers_header_4",
           "desc_mobile": "Learned"
         },
         {
-          "name": "Losing a treasured belonging",
+          "name": "sadness_triggers_header_5",
           "type": "Learned",
-          "name_mobile": "Losing a treasured belonging",
+          "name_mobile": "sadness_triggers_header_5",
           "desc_mobile": "Learned"
         }
       ],
       "moods": [
         {
-          "name": "Dysphoria (or feeling blue)",
-          "desc": "Feelings of resignation, discouragement or disappointment that endure. Anguish does not transform into a mood.",
-          "name_mobile": "Dysphoria (or feeling blue)",
-          "desc_mobile": "Feelings of resignation, discouragement or disappointment that endure. Anguish does not transform into a mood."
+          "name": "sadness_moods_header",
+          "desc": "sadness_moods_body",
+          "name_mobile": "sadness_moods_header",
+          "desc_mobile": "sadness_moods_body"
         }
       ]
     },
     "enjoyment": {
       "continent": {
-        "name": "Enjoyment",
-        "desc": "We are pleased with our experience.",
-        "name_mobile": "The Continent of Enjoyment",
-        "desc_mobile": "The movement of this shape reflects how anger varies in strength and frequency in our lives. Tap on the shape to learn more about the universal nature of enjoyment."
+        "name": "enjoyment_continent_header",
+        "desc": "enjoyment_continent_body",
+        "name_mobile": "enjoyment_continent_header_mobile",
+        "desc_mobile": "enjoyment_continent_body_mobile"
       },
       "states": [
         {
-          "name": "Sensory pleasure",
-          "desc": "Enjoyment derived through one of the five physical senses: sight, sound, touch, taste and smell.",
-          "name_mobile": "Sensory pleasure",
-          "desc_mobile": "Enjoyment derived through one of the five physical senses: sight, sound, touch, taste and smell.",
+          "name": "enjoyment_states_header_1",
+          "desc": "enjoyment_states_body_1",
+          "name_mobile": "enjoyment_states_header_1",
+          "desc_mobile": "enjoyment_states_body_1",
           "range": {
             "min": 1,
             "max": 5
           },
           "actions": {
             "all": [
-              "seek more",
-              "savor",
+              "2",
+              "7",
               ""
             ],
             "con": [
-              "seek more",
-              "savor"
+              "2",
+              "7"
             ],
             "des": [
               ""
@@ -1463,121 +1456,121 @@
           }
         },
         {
-          "name": "Rejoicing",
-          "desc": "A warm, uplifting feeling that people experience when they see acts of human goodness, kindness and compassion. Also called elevation.",
-          "name_mobile": "Rejoicing",
-          "desc_mobile": "A warm, uplifting feeling that people experience when they see acts of human goodness, kindness and compassion. Also called elevation.",
+          "name": "enjoyment_states_header_2",
+          "desc": "enjoyment_states_body_2",
+          "name_mobile": "enjoyment_states_header_2",
+          "desc_mobile": "enjoyment_states_body_2",
           "range": {
             "min": 2,
             "max": 8
           },
           "actions": {
             "all": [
-              "seek more",
-              "exclaim",
-              "engage/connect",
-              "savor",
-              "indulge"
+              "2",
+              "5",
+              "6",
+              "7",
+              "8"
             ],
             "con": [
-              "seek more",
-              "exclaim",
-              "engage/connect",
-              "savor",
-              "indulge"
+              "2",
+              "5",
+              "6",
+              "7",
+              "8"
             ],
             "des": [
-              "indulge"
+              "8"
             ],
             "both": [
-              "indulge"
+              "8"
             ]
           }
         },
         {
-          "name": "Amusement",
-          "desc": "Light, playful feelings of enjoyment and good humor.",
-          "name_mobile": "Amusement",
-          "desc_mobile": "Light, playful feelings of enjoyment and good humor.",
+          "name": "enjoyment_states_header_3",
+          "desc": "enjoyment_states_body_3",
+          "name_mobile": "enjoyment_states_header_3",
+          "desc_mobile": "enjoyment_states_body_3",
           "range": {
             "min": 2,
             "max": 8
           },
           "actions": {
             "all": [
-              "seek more",
-              "maintain",
-              "exclaim",
-              "engage/connect",
-              "indulge"
+              "2",
+              "3",
+              "5",
+              "6",
+              "8"
             ],
             "con": [
-              "seek more",
-              "maintain",
-              "exclaim",
-              "engage/connect",
-              "indulge"
+              "2",
+              "3",
+              "5",
+              "6",
+              "8"
             ],
             "des": [
-              "indulge"
+              "8"
             ],
             "both": [
-              "indulge"
+              "8"
             ]
           }
         },
         {
-          "name": "Relief",
-          "desc": "When something expected to be unpleasant, especially the threat of harm, is avoided or comes to an end.",
-          "name_mobile": "Relief",
-          "desc_mobile": "When something expected to be unpleasant, especially the threat of harm, is avoided or comes to an end.",
+          "name": "enjoyment_states_header_4",
+          "desc": "enjoyment_states_body_4",
+          "name_mobile": "enjoyment_states_header_4",
+          "desc_mobile": "enjoyment_states_body_4",
           "range": {
             "min": 2,
             "max": 10
           },
           "actions": {
             "all": [
-              "exclaim",
-              "engage/connect",
-              "savor",
-              "indulge"
+              "5",
+              "6",
+              "7",
+              "8"
             ],
             "con": [
-              "exclaim",
-              "engage/connect",
-              "savor",
-              "indulge"
+              "5",
+              "6",
+              "7",
+              "8"
             ],
             "des": [
-              "indulge"
+              "8"
             ],
             "both": [
-              "indulge"
+              "8"
             ]
           }
         },
         {
-          "name": "Compassion/joy",
-          "desc": "Enjoyment felt when you act to relieve another person’s suffering.",
-          "name_mobile": "Compassion/joy",
-          "desc_mobile": "Enjoyment felt when you act to relieve another person’s suffering.",
+          "name": "enjoyment_states_header_5",
+          "desc": "enjoyment_states_body_5",
+          "name_mobile": "enjoyment_states_header_5",
+          "desc_mobile": "enjoyment_states_body_5",
           "range": {
             "min": 3,
             "max": 6
           },
           "actions": {
             "all": [
-              "seek more",
-              "exclaim",
-              "engage/connect",
-              "savor",
+              "2",
+              "5",
+              "6",
+              "7",
               ""
             ],
             "con": [
-              "seek more",
-              "exclaim",
-              "engage/connect",
-              "savor"
+              "2",
+              "5",
+              "6",
+              "7"
             ],
             "des": [
               ""
@@ -1586,10 +1579,10 @@
           }
         },
         {
-          "name": "Schadenfreude",
-          "desc": "Enjoyment of the misfortunes of another person, usually a rival.",
-          "name_mobile": "Schadenfreude",
-          "desc_mobile": "Enjoyment of the misfortunes of another person, usually a rival.",
+          "name": "enjoyment_states_header_6",
+          "desc": "enjoyment_states_body_6",
+          "name_mobile": "enjoyment_states_header_6",
+          "desc_mobile": "enjoyment_states_body_6",
           "range": {
             "min": 3,
             "max": 8
@@ -1597,185 +1590,185 @@
           "actions": {
             "all": [
               "",
-              "seek more",
-              "maintain",
-              "gloat",
-              "exclaim",
-              "engage/connect"
+              "2",
+              "3",
+              "4",
+              "5",
+              "6"
             ],
             "con": [
               ""
             ],
             "des": [
-              "seek more",
-              "maintain",
-              "gloat",
-              "exclaim",
-              "engage/connect"
+              "2",
+              "3",
+              "4",
+              "5",
+              "6"
             ],
             "both": []
           }
         },
         {
-          "name": "Fiero",
-          "desc": "An Italian word that describes the enjoyment felt when you have met a challenge that stretched your capabilities.",
-          "name_mobile": "Fiero",
-          "desc_mobile": "An Italian word that describes the enjoyment felt when you have met a challenge that stretched your capabilities.",
+          "name": "enjoyment_states_header_7",
+          "desc": "enjoyment_states_body_7",
+          "name_mobile": "enjoyment_states_header_7",
+          "desc_mobile": "enjoyment_states_body_7",
           "range": {
             "min": 3,
             "max": 10
           },
           "actions": {
             "all": [
-              "seek more",
-              "maintain",
-              "engage/connect",
-              "savor",
-              "indulge",
-              "gloat"
+              "2",
+              "3",
+              "6",
+              "7",
+              "8",
+              "4"
             ],
             "con": [
-              "seek more",
-              "maintain",
-              "engage/connect",
-              "savor",
-              "indulge"
+              "2",
+              "3",
+              "6",
+              "7",
+              "8"
             ],
             "des": [
-              "gloat",
-              "engage/connect",
-              "savor",
-              "indulge"
+              "4",
+              "6",
+              "7",
+              "8"
             ],
             "both": [
-              "engage/connect",
-              "savor",
-              "indulge"
+              "6",
+              "7",
+              "8"
             ]
           }
         },
         {
-          "name": "Naches",
-          "desc": "A Yiddish word for feelings of pride in the accomplishments, or sometimes just the existence, of your actual offspring or mentored offspring. Crucial for motivating the nurture of infants and children.",
-          "name_mobile": "Naches",
-          "desc_mobile": "A Yiddish word for feelings of pride in the accomplishments, or sometimes just the existence, of your actual offspring or mentored offspring. Crucial for motivating the nurture of infants and children.",
+          "name": "enjoyment_states_header_8",
+          "desc": "enjoyment_states_body_8",
+          "name_mobile": "enjoyment_states_header_8",
+          "desc_mobile": "enjoyment_states_body_8",
           "range": {
             "min": 3,
             "max": 10
           },
           "actions": {
             "all": [
-              "exclaim",
-              "engage/connect",
-              "savor",
-              "gloat"
+              "5",
+              "6",
+              "7",
+              "4"
             ],
             "con": [
-              "exclaim",
-              "engage/connect",
-              "savor"
+              "5",
+              "6",
+              "7"
             ],
             "des": [
-              "gloat",
-              "exclaim",
-              "engage/connect",
-              "savor"
+              "4",
+              "5",
+              "6",
+              "7"
             ],
             "both": [
-              "exclaim",
-              "engage/connect",
-              "savor"
+              "5",
+              "6",
+              "7"
             ]
           }
         },
         {
-          "name": "Pride",
-          "desc": "A desire for others to know the pleasure you feel in your own accomplishments or the accomplishments of someone you either nurtured directly or identify with.",
-          "name_mobile": "Pride",
-          "desc_mobile": "A desire for others to know the pleasure you feel in your own accomplishments or the accomplishments of someone you either nurtured directly or identify with.",
+          "name": "enjoyment_states_header_9",
+          "desc": "enjoyment_states_body_9",
+          "name_mobile": "enjoyment_states_header_9",
+          "desc_mobile": "enjoyment_states_body_9",
           "range": {
             "min": 4,
             "max": 9
           },
           "actions": {
             "all": [
-              "seek more",
-              "exclaim",
-              "engage/connect",
-              "savor",
-              "indulge"
+              "2",
+              "5",
+              "6",
+              "7",
+              "8"
             ],
             "con": [
-              "seek more",
-              "exclaim",
-              "engage/connect",
-              "savor",
-              "indulge"
+              "2",
+              "5",
+              "6",
+              "7",
+              "8"
             ],
             "des": [
-              "exclaim",
-              "engage/connect",
-              "savor",
-              "indulge"
+              "5",
+              "6",
+              "7",
+              "8"
             ],
             "both": [
-              "exclaim",
-              "engage/connect",
-              "savor",
-              "indulge"
+              "5",
+              "6",
+              "7",
+              "8"
             ]
           }
         },
         {
-          "name": "Wonder",
-          "desc": "An experience of something that is very surprising, beautiful, amazing or hard to believe.",
-          "name_mobile": "Wonder",
-          "desc_mobile": "An experience of something that is very surprising, beautiful, amazing or hard to believe.",
+          "name": "enjoyment_states_header_10",
+          "desc": "enjoyment_states_body_10",
+          "name_mobile": "enjoyment_states_header_10",
+          "desc_mobile": "enjoyment_states_body_10",
           "range": {
             "min": 5,
             "max": 10
           },
           "actions": {
             "all": [
-              "seek more",
-              "exclaim",
-              "engage/connect",
-              "savor",
-              "indulge"
+              "2",
+              "5",
+              "6",
+              "7",
+              "8"
             ],
             "con": [
-              "seek more",
-              "exclaim",
-              "engage/connect",
-              "savor",
-              "indulge"
+              "2",
+              "5",
+              "6",
+              "7",
+              "8"
             ],
             "des": [
-              "indulge"
+              "8"
             ],
             "both": [
-              "indulge"
+              "8"
             ]
           }
         },
         {
-          "name": "Peace",
-          "desc": "An experience of ease and contenment.",
-          "name_mobile": "Peace",
-          "desc_mobile": "An experience of ease and contenment.",
+          "name": "enjoyment_states_header_11",
+          "desc": "enjoyment_states_body_11",
+          "name_mobile": "enjoyment_states_header_11",
+          "desc_mobile": "enjoyment_states_body_11",
           "range": {
             "min": 2,
             "max": 10
           },
           "actions": {
             "all": [
-              "maintain",
-              "engage/connect",
+              "3",
+              "6",
               ""
             ],
             "con": [
-              "maintain",
-              "engage/connect"
+              "3",
+              "6"
             ],
             "des": [
               ""
@@ -1784,166 +1777,166 @@
           }
         },
         {
-          "name": "Excitement",
-          "desc": "Energy that, unlike other enjoyable emotions, is rarely felt slightly, but ranges from mid to high in intesnity. May merge with any of the emotions, generating a very active form of that emotion.",
-          "name_mobile": "Excitement",
-          "desc_mobile": "Energy that, unlike other enjoyable emotions, is rarely felt slightly, but ranges from mid to high in intesnity. May merge with any of the emotions, generating a very active form of that emotion.",
+          "name": "enjoyment_states_header_12",
+          "desc": "enjoyment_states_body_12",
+          "name_mobile": "enjoyment_states_header_12",
+          "desc_mobile": "enjoyment_states_body_12",
           "range": {
             "min": 6,
             "max": 10
           },
           "actions": {
             "all": [
-              "seek more",
-              "maintain",
-              "exclaim",
-              "engage/connect",
-              "indulge"
+              "2",
+              "3",
+              "5",
+              "6",
+              "8"
             ],
             "con": [
-              "seek more",
-              "maintain",
-              "exclaim",
-              "engage/connect",
-              "indulge"
+              "2",
+              "3",
+              "5",
+              "6",
+              "8"
             ],
             "des": [
-              "indulge"
+              "8"
             ],
             "both": [
-              "indulge"
+              "8"
             ]
           }
         },
         {
-          "name": "Ecstasy",
-          "desc": "Rapturous delight. A state of very great happiness, nearly overwhelming.",
-          "name_mobile": "Ecstasy",
-          "desc_mobile": "Rapturous delight. A state of very great happiness, nearly overwhelming.",
+          "name": "enjoyment_states_header_13",
+          "desc": "enjoyment_states_body_13",
+          "name_mobile": "enjoyment_states_header_13",
+          "desc_mobile": "enjoyment_states_body_13",
           "range": {
             "min": 9,
             "max": 10
           },
           "actions": {
             "all": [
-              "maintain",
-              "savor",
-              "indulge"
+              "3",
+              "7",
+              "8"
             ],
             "con": [
-              "maintain",
-              "savor",
-              "indulge"
+              "3",
+              "7",
+              "8"
             ],
             "des": [
-              "indulge"
+              "8"
             ],
             "both": [
-              "indulge"
+              "8"
             ]
           }
         }
       ],
       "actions": [
         {
-          "name": "Withdraw",
-          "desc": "Physically or mentally leave the scene of what is causing the enjoyment.",
-          "name_mobile": "Withdraw",
-          "desc_mobile": "Physically or mentally leave the scene of what is causing the enjoyment."
+          "name": "enjoyment_actions_header_1",
+          "desc": "enjoyment_actions_body_1",
+          "name_mobile": "enjoyment_actions_header_1",
+          "desc_mobile": "enjoyment_actions_body_1"
         },
         {
-          "name": "Seek more",
-          "desc": "Attempt to increase the enjoyable feelings.",
-          "name_mobile": "Seek more",
-          "desc_mobile": "Attempt to increase the enjoyable feelings."
+          "name": "enjoyment_actions_header_2",
+          "desc": "enjoyment_actions_body_2",
+          "name_mobile": "enjoyment_actions_header_2",
+          "desc_mobile": "enjoyment_actions_body_2"
         },
         {
-          "name": "Maintain",
-          "desc": "Continue to do what is necessary to continue the enjoyable feelings.",
-          "name_mobile": "Maintain",
-          "desc_mobile": "Continue to do what is necessary to continue the enjoyable feelings."
+          "name": "enjoyment_actions_header_3",
+          "desc": "enjoyment_actions_body_3",
+          "name_mobile": "enjoyment_actions_header_3",
+          "desc_mobile": "enjoyment_actions_body_3"
         },
         {
-          "name": "Gloat",
-          "desc": "Enjoy others’ envy of your state of enjoyment.",
-          "name_mobile": "Gloat",
-          "desc_mobile": "Enjoy others’ envy of your state of enjoyment."
+          "name": "enjoyment_actions_header_4",
+          "desc": "enjoyment_actions_body_4",
+          "name_mobile": "enjoyment_actions_header_4",
+          "desc_mobile": "enjoyment_actions_body_4"
         },
         {
-          "name": "Exclaim",
-          "desc": "Vocally express enjoyment to others.",
-          "name_mobile": "Exclaim",
-          "desc_mobile": "Vocally express enjoyment to others."
+          "name": "enjoyment_actions_header_5",
+          "desc": "enjoyment_actions_body_5",
+          "name_mobile": "enjoyment_actions_header_5",
+          "desc_mobile": "enjoyment_actions_body_5"
         },
         {
-          "name": "Engage/connect",
-          "desc": "Desire connection and engagement with others to share in feelings of enjoyment.",
-          "name_mobile": "Engage/connect",
-          "desc_mobile": "Desire connection and engagement with others to share in feelings of enjoyment."
+          "name": "enjoyment_actions_header_6",
+          "desc": "enjoyment_actions_body_6",
+          "name_mobile": "enjoyment_actions_header_6",
+          "desc_mobile": "enjoyment_actions_body_6"
         },
         {
-          "name": "Savor",
-          "desc": "Relish the experience of good feelings about physical and psychological experiences.",
-          "name_mobile": "Savor",
-          "desc_mobile": "Relish the experience of good feelings about physical and psychological experiences."
+          "name": "enjoyment_actions_header_7",
+          "desc": "enjoyment_actions_body_7",
+          "name_mobile": "enjoyment_actions_header_7",
+          "desc_mobile": "enjoyment_actions_body_7"
         },
         {
-          "name": "Indulge",
-          "desc": "Excessively engage in the enjoyable feelings.",
-          "name_mobile": "Indulge",
-          "desc_mobile": "Excessively engage in the enjoyable feelings."
+          "name": "enjoyment_actions_header_8",
+          "desc": "enjoyment_actions_body_8",
+          "name_mobile": "enjoyment_actions_header_8",
+          "desc_mobile": "enjoyment_actions_body_8"
         }
       ],
       "triggers": [
         {
-          "name": "Sensory experience of nature",
+          "name": "enjoyment_triggers_header_1",
           "type": "Universal",
-          "name_mobile": "Universal Triggers of Enjoyment",
-          "desc_mobile": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Social interaction and experiencing nature are examples."
+          "name_mobile": "enjoyment_triggers_universal_header_mobile",
+          "desc_mobile": "enjoyment_triggers_universal_body_mobile"
         },
         {
-          "name": "Helping others",
+          "name": "enjoyment_triggers_header_2",
           "type": "Universal",
-          "name_mobile": "Learned Triggers of Enjoyment",
-          "desc_mobile": "Some triggers can be learned from personal or shared cultural experiences. Spending time with family or visiting places from one’s youth are examples."
+          "name_mobile": "enjoyment_triggers_learned_header_mobile",
+          "desc_mobile": "enjoyment_triggers_learned_body_mobile"
         },
         {
-          "name": "Social interaction",
+          "name": "enjoyment_triggers_header_3",
           "type": "Universal",
-          "name_mobile": "Social interaction",
+          "name_mobile": "enjoyment_triggers_header_3",
           "desc_mobile": "Universal"
         },
         {
-          "name": "Playing badminton",
+          "name": "enjoyment_triggers_header_4",
           "type": "Learned",
-          "name_mobile": "Playing badminton",
+          "name_mobile": "enjoyment_triggers_header_4",
           "desc_mobile": "Learned"
         },
         {
-          "name": "Places associated with enjoyable memories",
+          "name": "enjoyment_triggers_header_5",
           "type": "Learned",
-          "name_mobile": "Places associated with enjoyable memories",
+          "name_mobile": "enjoyment_triggers_header_5",
           "desc_mobile": "Learned"
         },
         {
-          "name": "The taste of chocolate cake",
+          "name": "enjoyment_triggers_header_6",
           "type": "Learned",
-          "name_mobile": "The taste of chocolate cake",
+          "name_mobile": "enjoyment_triggers_header_6",
           "desc_mobile": "Learned"
         },
         {
-          "name": "Spending time with family",
+          "name": "enjoyment_triggers_header_7",
           "type": "Learned",
-          "name_mobile": "Spending time with family",
+          "name_mobile": "enjoyment_triggers_header_7",
           "desc_mobile": "Learned"
         }
       ],
       "moods": [
         {
-          "name": "Elation",
-          "desc": "Generalized, non-specific, non-triggered good feeling, lasting hours.",
-          "name_mobile": "Elation",
-          "desc_mobile": "Generalized, non-specific, non-triggered good feeling, lasting hours."
+          "name": "enjoyment_moods_header",
+          "desc": "enjoyment_moods_body",
+          "name_mobile": "enjoyment_moods_header",
+          "desc_mobile": "enjoyment_moods_body"
         }
       ]
     }
