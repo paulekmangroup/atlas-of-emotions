@@ -163,6 +163,20 @@ a:active {
 			// display: inline-block;
 		}
 	}
+
+	.dropdown-curtain {
+		display: none;
+		&.open {
+			display: block;
+		}
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100vh;
+		height: 100vh;
+		opacity: 0;
+		z-index: $depth-5;
+	}
 }
 
 #app-container {
@@ -287,6 +301,7 @@ a:active {
 
 		background-color: $background-color;
 		box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+		z-index: $depth-10;
 		
 		li {
 			padding: 0;
@@ -595,11 +610,11 @@ $lower-left-logo-width: 100px;
 	pointer-events: none;
 
 	.mousemoveTriggerScrollbar {
-			pointer-events: all;
-			height: calc(100% - #{$ui-header-height}px);
-			// width of hidden scrollbar trigger at 4 time segment-container's width
-			width: calc(0.75em * 6);
-			margin-left: calc(#{$emotions-dropdown-width} - 0.75em * 6);
+		pointer-events: all;
+		height: calc(100% - #{$ui-header-height}px);
+		// width of hidden scrollbar trigger at 4 time segment-container's width
+		width: calc(0.75em * 6);
+		margin-left: calc(#{$emotions-dropdown-width} - 0.75em * 6);
 	}
 
 	div {

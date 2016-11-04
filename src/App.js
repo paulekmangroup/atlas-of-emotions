@@ -1127,17 +1127,22 @@ export default function (...initArgs) {
 	function onMobileNavClick (event) {
 
 		let dropdown = document.querySelector('#mobile-header .dropdown'),
+			curtain = document.querySelector('#mobile-header .dropdown-curtain'),
 			classList = dropdown.classList;
 
 		classList.toggle('open');
 
 		if (classList.contains('open')) {
 			dropdown.addEventListener('click', onMobileNavItemClick);
+			curtain.addEventListener('click', onMobileNavCurtainClick);
+			curtain.classList.add('open');
 		} else {
 			dropdown.removeEventListener('click', onMobileNavItemClick);
+			curtain.removeEventListener('click', onMobileNavCurtainClick);
+			curtain.classList.remove('open');
 		}
 
-		event.stopPropagation();
+		event && event.stopPropagation();
 
 	}
 
@@ -1149,10 +1154,16 @@ export default function (...initArgs) {
 		document.querySelector('#mobile-header .dropdown').classList.remove('open');
 
 		if (event.target.dataset.section) {
-			dispatcher.navigate(section);
+			dispatcher.navigate(event.target.dataset.section);
 		} else if (event.target.dataset.lang) {
 			setLanguage(event.target.dataset.lang);
 		}
+
+	}
+
+	function onMobileNavCurtainClick (event) {
+
+		onMobileNavClick();
 
 	}
 
