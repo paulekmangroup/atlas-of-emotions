@@ -96,8 +96,9 @@
 				text-align: left;
 			}
 			.placeholder #header .dropdown,
-			.placeholder #lang-selector .dropdown,
-			.placeholder #more-info {
+			.placeholder #lang-selector,
+			.placeholder #more-info,
+			.placeholder #lower-left-logo {
 				display: none;
 			}
 		</style>
@@ -206,6 +207,7 @@
 	<script>
 		// clear out existing content, hardcoded for bots,
 		// in preparation for main script to repopulate.
+		document.querySelector('body').style.visibility = 'hidden';
 		document.querySelector('body').classList.remove('placeholder');
 		document.querySelector('#main').innerHTML = '';
 	</script>

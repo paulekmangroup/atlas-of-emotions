@@ -99,6 +99,9 @@ export default function (...initArgs) {
 			mobileElements.push(document.querySelector('#mobile-header'));
 			mobileElements.push(document.querySelector('#mobile-caption'));
 
+			// unhide content rendered for bots
+			document.querySelector('body').style.removeProperty('visibility');
+
 			// navigation events
 			dispatcher.addListener(dispatcher.EVENTS.NAVIGATE, onNavigate);
 			dispatcher.addListener(dispatcher.EVENTS.CHANGE_EMOTION_STATE, onEmotionStateChange);
