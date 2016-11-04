@@ -171,12 +171,11 @@ a:active {
 }
 
 #header .dropdown,
+#lang-selector .dropup,
 #more-info .dropup {
 	display: inline-block;
 	position: absolute;
 	width: $emotions-dropdown-width;
-	right: 0;
-	text-align: right;
 	outline: none;
 
 	h4 {
@@ -235,6 +234,94 @@ a:active {
 			&:active {
 				background-color: rgba($menu-highlight-color, 1);
 				outline: none;
+			}
+		}
+	}
+}
+#header .dropdown,
+#more-info .dropup {
+	right: 0;
+	text-align: right;
+}
+#lang-selector .dropup {
+	left: 0;
+	text-align: left;
+}
+
+$lower-left-logo-width: 100px;
+#lower-left-logo {
+	cursor: pointer;
+	display: block;
+	position: absolute;
+	left: 0;
+	width: $lower-left-logo-width;
+	height: $more-info-height;
+	bottom: 0;
+	left: 0;
+	background-color: rgba($scrollbar-background-color, 0.5);
+
+	img {
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		position: absolute;
+	}
+}
+
+#lang-selector {
+	position: absolute;
+	width: $emotions-dropdown-width;
+	height: $more-info-height;
+	bottom: 0;
+	left: $lower-left-logo-width + 1px;
+
+	color: $text-color;
+	background-color: rgba($scrollbar-background-color, 0.5);
+	pointer-events: auto;
+	user-select: none;
+	cursor: pointer;
+	z-index: $depth-5;
+
+	// TODO: DRY this out. largely copied from _more.scss
+	.dropup {
+		position: relative;
+		display: block;
+		width: 100%;
+		text-align: center;
+
+		& button {
+			width: 100%;
+			height: 100%;
+			padding: 0;
+			text-transform: uppercase;
+			line-height: $more-info-height;
+
+			// .caret {
+			// 	display: none;
+			// }
+		}
+
+		.dropdown-menu {
+			position: absolute;
+			top: auto;
+			bottom: 100%;
+			margin-bottom: 1px;
+			padding-top: 1px;
+			background-color: rgba($callout-highlight-color, 1);
+
+			li {
+				text-transform: uppercase;
+				color: $text-color;
+				text-align: left;
+
+				&:first-of-type {
+					margin-top: 0.5em;
+					padding-top: 0;
+				}
+				&:last-of-type {
+					padding-bottom: 0;
+					margin-bottom: 0.5em;
+				}
 			}
 		}
 	}

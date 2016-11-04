@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import fetch from 'isomorphic-fetch';
-// import strings from '../static/strings.json';
 import emotionsData from '../static/emotionsData.json';
 import secondaryData from '../static/secondaryData.json';
 

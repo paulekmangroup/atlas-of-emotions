@@ -12,6 +12,7 @@ import popupManager from './popupManager.js';
 import emotionsData from '../static/emotionsData.json';
 import secondaryData from '../static/secondaryData.json';
 import appStrings from './appStrings.js';
+import stringsConfig from '../static/strings/stringsConfig.json';
 import sassVars from '../scss/variables.json';
 
 export default function (...initArgs) {
@@ -83,6 +84,7 @@ export default function (...initArgs) {
 			initNavArrows();
 			initMoreInfoDropdown();
 			initPegLogo();
+			initLanguageSelector();
 			initCallout();
 			initMobileCaption();
 			initModal();
@@ -93,8 +95,7 @@ export default function (...initArgs) {
 			nonMobileElements.push(document.querySelector('#callout'));
 			nonMobileElements.push(document.querySelector('#more-info'));
 			nonMobileElements.push(document.querySelector('#lower-left-logo'));
-			// nonMobileElements = nonMobileElements.concat([...document.querySelectorAll('.navArrow')]);
-
+			nonMobileElements.push(document.querySelector('#lang-selector'));
 			mobileElements.push(document.querySelector('#mobile-header'));
 			mobileElements.push(document.querySelector('#mobile-caption'));
 
@@ -162,7 +163,7 @@ export default function (...initArgs) {
 			menu.appendChild(li);
 		});
 
-		dropdown.querySelector('.dropdown-toggle').addEventListener('click', onDropdownClick);
+		dropdown.querySelector('.dropdown-toggle').addEventListener('click', onEmotionDropdownClick);
 
 		let mobileHeader = document.querySelector('#mobile-header');
 		mobileHeader.style.removeProperty('display');
@@ -231,6 +232,7 @@ export default function (...initArgs) {
 	}
 
 	function initPegLogo () {
+
 		let logoDiv = document.querySelector('#lower-left-logo');
 		logoDiv.addEventListener('click', function(){
 			window.open('http://www.paulekman.com/', '_blank');
@@ -240,9 +242,33 @@ export default function (...initArgs) {
 		logo.setAttribute("src", './img/peg.png');
 
 		logoDiv.appendChild(logo);
+
+	}
+
+	function initLanguageSelector () {
+
+		let dropdown = document.querySelector('#lang-selector .dropup'),
+			title = dropdown.querySelector('.dup-title'),
+			menu = dropdown.querySelector('ul');
+
+		let langFile = stringsConfig.stringsFiles.find(f => f.lang === getLanguagePref());
+
+		title.innerHTML = '<h4>' + langFile.name + '</h4>';
+
+		stringsConfig.stringsFiles.forEach(f => {
+			let li = document.createElement('li');
+			li.setAttribute('role', 'menuitem');
+			li.setAttribute('data-lang', f.lang);
+			li.innerHTML = '<h4>' + f.name + '</h4>';
+			menu.appendChild(li);
+		});
+
+		dropdown.querySelector('.dropdown-toggle').addEventListener('click', onLangMenuClick);
+
 	}
 
 	function initMoreInfoDropdown () {
+
 		let dropdown = document.querySelector('#more-info .dropup'),
 			title = dropdown.querySelector('.dup-title'),
 			menu = dropdown.querySelector('ul');
@@ -258,6 +284,7 @@ export default function (...initArgs) {
 		});
 
 		dropdown.querySelector('.dropdown-toggle').addEventListener('click', onMoreInfoMenuClick);
+
 	}
 
 	function initSectionNavigation () {
@@ -949,6 +976,7 @@ export default function (...initArgs) {
 	}
 
 	function onMoreInfoMenuClick (event) {
+
 		if (event) event.stopPropagation();
 
 		let dropdown = document.querySelector('#more-info .dropup'),
@@ -964,9 +992,11 @@ export default function (...initArgs) {
 		}
 
 		menuBackgroundClick();
+
 	}
 
 	function onMoreInfoMenuItemClick (event) {
+
 		event.stopImmediatePropagation();
 
 		if (!event.target || event.target.nodeName.toLowerCase() !== 'li') { return; }
@@ -977,9 +1007,45 @@ export default function (...initArgs) {
 		if (!page) return;
 
 		dispatcher.navigate(dispatcher.SECTIONS.MORE, null, page);
+
 	}
 
-	function onDropdownClick (event) {
+	function onLangMenuClick (event) {
+		
+		if (event) event.stopPropagation();
+
+		let dropdown = document.querySelector('#lang-selector .dropup'),
+			classList = dropdown.classList;
+
+		closeMenus(dropdown);
+		classList.toggle('open');
+
+		if (classList.contains('open')) {
+			dropdown.addEventListener('click', onLangMenuItemClick);
+		} else {
+			dropdown.removeEventListener('click', onLangMenuItemClick);
+		}
+
+		menuBackgroundClick();
+
+	}
+
+	function onLangMenuItemClick (event) {
+
+		event.stopImmediatePropagation();
+
+		if (!event.target || event.target.nodeName.toLowerCase() !== 'li') { return; }
+
+		document.querySelector('#lang-selector .dropup').classList.remove('open');
+
+		let lang = event.target.dataset.lang;
+		if (!lang) return;
+
+		setLanguage(lang);
+
+	}
+
+	function onEmotionDropdownClick (event) {
 
 		let dropdown = document.querySelector('#header .dropdown'),
 			classList = dropdown.classList;
@@ -1674,11 +1740,17 @@ export default function (...initArgs) {
 	 */
 	function getLanguagePref () {
 
+		// check localStorage for previously-set pref
 		let lang = localStorage.lang;
 
+		// check window.navigator
 		if (!lang) lang = navigator.languages ?
 			navigator.languages[0] : (navigator.language || navigator.userLanguage);
 
+		// if lang not present in stringsConfig.json, skip it
+		if (lang && !stringsConfig.stringsFiles.find(f => f.lang === lang)) lang = null;
+
+		// default to 'en'
 		if (!lang) lang = 'en';
 
 		// only support major languages

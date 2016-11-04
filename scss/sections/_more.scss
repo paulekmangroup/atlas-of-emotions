@@ -19,25 +19,6 @@
 	margin-top: -14px;
 }
 
-#lower-left-logo {
-	cursor: pointer;
-	display: block;
-	position: absolute;
-	left: 0;
-	width: 100px;
-	height: $more-info-height;
-	bottom: 0;
-	left: 0;
-	background-color: rgba($scrollbar-background-color, 0.5);
-
-	img {
-		left: 50%;
-		top: 50%;
-		transform: translate(-50%, -50%);
-		position: absolute;
-	}
-}
-
 #more-info {
 	position: absolute;
 	width: $emotions-dropdown-width;
@@ -120,7 +101,6 @@
 		}
 	}
 }
-
 
 #more {
 	position: relative;

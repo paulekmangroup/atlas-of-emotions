@@ -96,6 +96,7 @@
 				text-align: left;
 			}
 			.placeholder #header .dropdown,
+			.placeholder #lang-selector .dropdown,
 			.placeholder #more-info {
 				display: none;
 			}
@@ -180,12 +181,20 @@
 			<div id="down-arrow"></div>
 			<div id="right-arrow"></div>
 			<div id="lower-left-logo"></div>
+			<div id="lang-selector">
+				<div class="dropup emotion-menu">
+					<button class="btn btn-default dropdown-toggle" type="button" id="lang-selector-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<span class="dup-title"></span><span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" aria-labelledby="lang-selector-toggle"></ul>
+				</div>
+			</div>
 			<div id="more-info">
 				<div class="dropup emotion-menu">
-				  <button class="btn btn-default dropdown-toggle" type="button" id="emotion-more-info" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				  	<span class="dup-title"></span><span class="caret"></span>
-				  </button>
-				  <ul class="dropdown-menu" aria-labelledby="emotion-more-info"></ul>
+					<button class="btn btn-default dropdown-toggle" type="button" id="emotion-more-info" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<span class="dup-title"></span><span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" aria-labelledby="emotion-more-info"></ul>
 				</div>
 			</div>
 			<div id="mobile-caption" style="display: none"></div>
