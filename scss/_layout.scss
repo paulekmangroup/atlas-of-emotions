@@ -171,6 +171,7 @@ a:active {
 }
 
 #header .dropdown,
+#mobile-header .dropdown,
 #lang-selector .dropup,
 #more-info .dropup {
 	display: inline-block;
@@ -239,6 +240,7 @@ a:active {
 	}
 }
 #header .dropdown,
+#mobile-header .dropdown,
 #more-info .dropup {
 	right: 0;
 	text-align: right;
@@ -246,6 +248,73 @@ a:active {
 #lang-selector .dropup {
 	left: 0;
 	text-align: left;
+}
+
+#mobile-header .dropdown {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: auto;
+
+	$mobile-nav-button-height: 18;
+	button {
+		position: absolute;
+		top: calc(#{($ui-header-height-small - $mobile-nav-button-height)/2}px - 1rem);
+		right: 0;
+		width: 28px;
+		height: #{$mobile-nav-button-height}px;
+
+		margin: 1rem;
+		padding: 0;
+		border: none;
+
+		background: url('./img/hamburger.png');
+		background-size: 100% 100%;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+
+	.dropdown-menu {
+		width: 50vw;
+		height: 100vh;
+
+		// override bootstrap
+		left: auto;
+		float: none;
+
+		overflow-x: hidden;
+		overflow-y: auto;
+
+		background-color: $background-color;
+		box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+		
+		li {
+			padding: 0;
+			width: 100%;
+			font-size: 2rem;
+			line-height: #{$ui-header-height-small}px;
+
+			color: $text-color;
+			text-align: center;
+
+			&:first-of-type {
+				margin: -0.5rem 0 0.5rem 0;
+				padding: 0 1rem 0 0;
+				@extend %raleway-light;
+				text-align: right;
+				font-size: 5rem;
+				color: rgba($scrollbar-background-color, 0.5);
+			}
+			&:last-of-type {
+				padding-bottom: 0;
+			}
+
+			&:hover,
+			&:active {
+				background-color: rgba($scrollbar-background-color, 0.5);
+			}
+		}
+	}
 }
 
 $lower-left-logo-width: 100px;

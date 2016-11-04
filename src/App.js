@@ -191,7 +191,13 @@ export default function (...initArgs) {
 
 	function initMobileHeaderNav () {
 
-		// TODO: implement
+		let dropdown = document.querySelector('#mobile-header .dropdown'),
+			menu = dropdown.querySelector('ul');
+
+		// TODO: populate menu
+		populateLanguageSelector(menu, 'link');
+
+		dropdown.querySelector('.dropdown-toggle').addEventListener('click', onMobileNavClick);
 		
 	}
 
@@ -261,21 +267,25 @@ export default function (...initArgs) {
 
 		let dropdown = document.querySelector('#lang-selector .dropup'),
 			title = dropdown.querySelector('.dup-title'),
-			menu = dropdown.querySelector('ul');
-
-		let langFile = stringsConfig.stringsFiles.find(f => f.lang === getLanguagePref());
+			menu = dropdown.querySelector('ul'),
+			langFile = stringsConfig.stringsFiles.find(f => f.lang === getLanguagePref());
 
 		title.innerHTML = '<h4>' + langFile.name + '</h4>';
+		populateLanguageSelector(menu);
+
+		dropdown.querySelector('.dropdown-toggle').addEventListener('click', onLangMenuClick);
+
+	}
+
+	function populateLanguageSelector (container, dataName='lang') {
 
 		stringsConfig.stringsFiles.forEach(f => {
 			let li = document.createElement('li');
 			li.setAttribute('role', 'menuitem');
-			li.setAttribute('data-lang', f.lang);
+			li.setAttribute('data-' + dataName, f.lang);
 			li.innerHTML = '<h4>' + f.name + '</h4>';
-			menu.appendChild(li);
+			container.appendChild(li);
 		});
-
-		dropdown.querySelector('.dropdown-toggle').addEventListener('click', onLangMenuClick);
 
 	}
 
@@ -1092,6 +1102,39 @@ export default function (...initArgs) {
 		} else {
 			scrollSection(-1);
 		}
+
+	}
+
+	function onMobileNavClick (event) {
+
+		let dropdown = document.querySelector('#mobile-header .dropdown'),
+			classList = dropdown.classList;
+
+		classList.toggle('open');
+
+		if (classList.contains('open')) {
+			dropdown.addEventListener('click', onMobileNavItemClick);
+		} else {
+			dropdown.removeEventListener('click', onMobileNavItemClick);
+		}
+
+		event.stopPropagation();
+
+	}
+
+	function onMobileNavItemClick (event) {
+
+		if (!event.target || event.target.nodeName.toLowerCase() !== 'li') { return; }
+		event.stopImmediatePropagation();
+
+		document.querySelector('#mobile-header .dropdown').classList.remove('open');
+
+		console.log(event.target.dataset.link);
+		switch (event.target.dataset.link) {
+
+		}
+
+		// dispatcher.navigate(null, event.target.dataset.emotion);
 
 	}
 
