@@ -87,6 +87,7 @@ export default function (...initArgs) {
 			initLanguageSelector();
 			initCallout();
 			initMobileCaption();
+
 			initModal();
 
 			// mobile setup
@@ -182,8 +183,16 @@ export default function (...initArgs) {
 			mobileTitle.classList.add('mobile-title');
 			mobileTitle.appendChild(document.querySelector('#header .header-content'));
 			mobileHeader.appendChild(mobileTitle);
+
+			initMobileHeaderNav();
 		}
 
+	}
+
+	function initMobileHeaderNav () {
+
+		// TODO: implement
+		
 	}
 
 	function initNavArrows () {
