@@ -334,10 +334,11 @@ export default function (...initArgs) {
 			// more info does not appear in scrollbar
 			if (section === dispatcher.SECTIONS.MORE) { return; }
 
+			let sectionName = appStrings().getStr(`emotionsData.metadata.${ section }.sectionName`) || section;
 			let segment = document.createElement('div');
 			segment.setAttribute('data-section', section);
 			let label = document.createElement('h4');
-			label.innerHTML = section.toUpperCase();
+			label.innerHTML = sectionName.toUpperCase();
 			segment.appendChild(label);
 			segmentContainer.appendChild(segment);
 			scrollbarSegments[section] = segment;

@@ -1982,19 +1982,22 @@
       "header": "continents_header",
       "body": "continents_body_mobile",
       "header_mobile": "continents_header",
-      "body_mobile": "continents_body_mobile"
+      "body_mobile": "continents_body_mobile",
+      "sectionName": "continents_section_name"
     },
     "states": {
       "header": "states_header",
       "body": "states_body",
       "header_mobile": "states_header",
-      "body_mobile": "states_body_mobile"
+      "body_mobile": "states_body_mobile",
+      "sectionName": "states_section_name"
     },
     "actions": {
       "header": "actions_header",
       "body": "actions_body",
       "header_mobile": "actions_header",
       "body_mobile": "actions_body_mobile",
+      "sectionName": "actions_section_name",
       "qualities": [
         {
           "header": "actions_secondary_header_1",
@@ -2021,6 +2024,7 @@
       "body": "triggers_body",
       "header_mobile": "triggers_header",
       "body_mobile": "triggers_body_mobile",
+      "sectionName": "triggers_section_name",
       "steps": [
         {
           "header": "triggers_secondary_header_1",
@@ -2058,13 +2062,15 @@
       "header": "moods_header",
       "body": "moods_body",
       "header_mobile": "moods_header",
-      "body_mobile": "moods_body_mobile"
+      "body_mobile": "moods_body_mobile",
+      "sectionName": "moods_section_name"
     },
     "calm": {
       "header": "calm_header",
       "body": "calm_body",
       "header_mobile": "calm_header",
       "body_mobile": "calm_body_mobile",
+      "sectionName": "calm_section_name",
       "secondary": {
         "header": "calm_secondary_header",
         "body": "calm_secondary_body",

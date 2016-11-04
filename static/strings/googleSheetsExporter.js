@@ -107,7 +107,8 @@ var metadataSectionParsers = (function () {
 			header: data[0][0],
 			body: data[0][1],
 			header_mobile: data[0][5] || data[0][0],
-			body_mobile: data[0][6] || data[0][1]
+			body_mobile: data[0][6] || data[0][1],
+			sectionName: data[0][7]
 		};
 	};
 
@@ -142,7 +143,8 @@ var metadataSectionParsers = (function () {
 				header: data[0][0],
 				body: data[0][1],
 				header_mobile: data[0][5] || data[0][0],
-				body_mobile: data[0][6] || data[0][1]
+				body_mobile: data[0][6] || data[0][1],
+				sectionName: data[0][7]
 			};
 			obj.qualities = data.map(function (row) {
 				return {
@@ -161,7 +163,8 @@ var metadataSectionParsers = (function () {
 				header: data[0][0],
 				body: data[0][1],
 				header_mobile: data[0][5] || data[0][0],
-				body_mobile: data[0][6] || data[0][1]
+				body_mobile: data[0][6] || data[0][1],
+				sectionName: data[0][7]
 			};
 			obj.steps = data.map(function (row) {
 				return {
@@ -183,6 +186,7 @@ var metadataSectionParsers = (function () {
 				body: data[0][1],
 				header_mobile: data[0][5] || data[0][0],
 				body_mobile: data[0][6] || data[0][1],
+				sectionName: data[0][7],
 				secondary: {
 					header: data[0][2],
 					body: data[0][3],
