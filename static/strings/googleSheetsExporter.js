@@ -124,6 +124,8 @@ var metadataSectionParsers = (function () {
 				return {
 					header: row[2],
 					body: row[3],
+					header_mobile: row[2],
+					body_mobile: row[3],
 					caption: row[4]
 				};
 			});

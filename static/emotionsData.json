@@ -1958,16 +1958,22 @@
         {
           "header": "intro_secondary_header_1",
           "body": "intro_secondary_copy_1",
+          "header_mobile": "intro_secondary_header_1",
+          "body_mobile": "intro_secondary_copy_1",
           "caption": "intro_caption_1"
         },
         {
           "header": "intro_secondary_header_2",
           "body": "intro_secondary_copy_2",
+          "header_mobile": "intro_secondary_header_2",
+          "body_mobile": "intro_secondary_copy_2",
           "caption": "intro_caption_2"
         },
         {
           "header": "intro_secondary_header_3",
           "body": "intro_secondary_copy_3",
+          "header_mobile": "intro_secondary_header_3",
+          "body_mobile": "intro_secondary_copy_3",
           "caption": ""
         }
       ]
