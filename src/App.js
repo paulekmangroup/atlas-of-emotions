@@ -420,9 +420,11 @@ export default function (...initArgs) {
 	}
 
 	function markModalAsSeen () {
-		if(!localStorage.modalSeen){
+
+		if (!localStorage.modalSeen) {
 			localStorage.setItem("modalSeen", true);
 		}
+
 	}
 
 	function setSectionEmotion (section, previousEmotion, previousMorePage) {
@@ -872,6 +874,10 @@ export default function (...initArgs) {
 			case 40:
 				// bottom
 				scrollSection(1);
+				break;
+			case 76:
+				// L
+				setLanguage(appStrings().lang() === 'en' ? 'es' : 'en');
 				break;
 		}
 
@@ -1651,9 +1657,46 @@ export default function (...initArgs) {
 		}
 
 		// set up appStrings
-		appStrings('en', screenIsSmall);
+		appStrings(getLanguagePref(), screenIsSmall);
 
 		return screenIsSmall;
+
+	}
+
+	/**
+	 * Get language preference for viewer.
+	 * This does not necessarily return the same value as appStrings().lang(),
+	 * which returns the language currently being displayed.
+	 * 
+	 * Checks `localStorage`, then NavigatorLanguage.
+	 * If no lang found, or lang is not implemented by the application
+	 * (as keyed in stringsConfig.json), falls back to default of 'en'.
+	 */
+	function getLanguagePref () {
+
+		let lang = localStorage.lang;
+
+		if (!lang) lang = navigator.languages ?
+			navigator.languages[0] : (navigator.language || navigator.userLanguage);
+
+		if (!lang) lang = 'en';
+
+		// only support major languages
+		lang = lang.slice(0, 2);
+
+		return lang;
+
+	}
+
+	/**
+	 * Set language pref for viewer to localStorage,
+	 * and refresh the page with the new language.
+	 */
+	function setLanguage (lang) {
+
+		// set lang in localStorage, refresh
+		localStorage.setItem('lang', lang);
+		document.location.reload();
 
 	}
 

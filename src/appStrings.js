@@ -109,7 +109,10 @@ function appStrings (_lang, _screenIsSmall, _stringsLoadedCallback) {
 						.reduce((acc, kv) => {
 							acc[kv.key] = kv.value;
 							return acc;
-						}, {}));
+						}, {}))
+				.catch(() => {
+					throw new Error(`Language ${ _lang } not supported, or language file is malformed.`);
+				});
 		}
 
 	}
