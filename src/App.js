@@ -194,8 +194,26 @@ export default function (...initArgs) {
 		let dropdown = document.querySelector('#mobile-header .dropdown'),
 			menu = dropdown.querySelector('ul');
 
-		// TODO: populate menu
-		populateLanguageSelector(menu, 'link');
+		['intro', 'home'].concat(_.values(dispatcher.SECTIONS).filter(v => v !== dispatcher.SECTIONS.MORE)).forEach((section, i, arr) => {
+
+			let sectionName = appStrings().getStr(`emotionsData.metadata.${ section }.sectionName`) || section,
+				li = document.createElement('li');
+			li.setAttribute('role', 'menuitem');
+			li.setAttribute('data-section', section);
+			li.innerHTML = '<h4>' + sectionName + '</h4>';
+			menu.appendChild(li);
+
+			// add divider at the end
+			if (i === arr.length - 1) {
+				li = document.createElement('li');
+				li.setAttribute('role', 'menuitem');
+				li.classList.add('divider');
+				menu.appendChild(li);
+			}
+
+		});
+
+		populateLanguageSelector(menu);
 
 		dropdown.querySelector('.dropdown-toggle').addEventListener('click', onMobileNavClick);
 		
@@ -277,12 +295,12 @@ export default function (...initArgs) {
 
 	}
 
-	function populateLanguageSelector (container, dataName='lang') {
+	function populateLanguageSelector (container) {
 
 		stringsConfig.stringsFiles.forEach(f => {
 			let li = document.createElement('li');
 			li.setAttribute('role', 'menuitem');
-			li.setAttribute('data-' + dataName, f.lang);
+			li.setAttribute('data-lang', f.lang);
 			li.innerHTML = '<h4>' + f.name + '</h4>';
 			container.appendChild(li);
 		});
@@ -1130,12 +1148,11 @@ export default function (...initArgs) {
 
 		document.querySelector('#mobile-header .dropdown').classList.remove('open');
 
-		console.log(event.target.dataset.link);
-		switch (event.target.dataset.link) {
-
+		if (event.target.dataset.section) {
+			dispatcher.navigate(section);
+		} else if (event.target.dataset.lang) {
+			setLanguage(event.target.dataset.lang);
 		}
-
-		// dispatcher.navigate(null, event.target.dataset.emotion);
 
 	}
 

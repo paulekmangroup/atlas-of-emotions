@@ -1954,6 +1954,7 @@
       "body": "",
       "header_mobile": "intro_header",
       "body_mobile": "intro_body_mobile",
+      "sectionName": "intro_section_name",
       "steps": [
         {
           "header": "intro_secondary_header_1",

@@ -313,6 +313,13 @@ a:active {
 			&:active {
 				background-color: rgba($scrollbar-background-color, 0.5);
 			}
+
+			&.divider {
+				margin: 0 0 1rem 0;
+				padding-bottom: 1rem;
+				background: none;
+				border-bottom: solid 1px rgba($scrollbar-background-color, 0.5);
+			}
 		}
 	}
 }
