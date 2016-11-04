@@ -101,7 +101,9 @@ function appStrings (_lang, _screenIsSmall, _stringsLoadedCallback) {
 
 		if (strings) return Promise.resolve(instance);
 		else {
-			return fetch(`strings/langs/${ _lang }.json`)
+			return fetch(`strings/langs/${ _lang }.json`,
+				{ credentials: 'same-origin' }	// needed on studio to pass .htaccess login creds to same-origin requests
+			)
 				.then(response => response.json())
 				.then(json => strings = json
 						.reduce((acc, worksheet) => acc.concat(worksheet), [])
