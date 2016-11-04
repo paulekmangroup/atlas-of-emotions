@@ -407,12 +407,15 @@ $lower-left-logo-width: 100px;
 		visibility: hidden;
 		opacity: 0;
 		transition: visibility 0s 1s, opacity #{$ui-labels-duration-out}s ease;
+		&.immediate {
+			transition: visibility 0s, opacity 0s;
+		}
 		&.visible {
 			visibility: visible;
 			opacity: 1.0;
 			transition: visibility 0s, opacity #{$ui-labels-duration-in}s 1s ease;
 			&.immediate {
-				transition: visibility 0s, opacity #{$ui-labels-duration-in}s ease;
+				transition: visibility 0s, opacity 0s;
 			}
 		}
 	}
