@@ -134,6 +134,12 @@ var metadataSectionParsers = (function () {
 			return obj;
 		},
 
+		home: function (data) {
+			return {
+				sectionName: data[0][7]
+			};
+		},
+
 		continents: standard,
 
 		states: standard,

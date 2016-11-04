@@ -1978,6 +1978,9 @@
         }
       ]
     },
+    "home": {
+      "sectionName": "home_section_name"
+    },
     "continents": {
       "header": "continents_header",
       "body": "continents_body_mobile",
