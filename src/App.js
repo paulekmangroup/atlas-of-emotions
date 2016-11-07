@@ -204,7 +204,7 @@ export default function (...initArgs) {
 			menu.appendChild(li);
 
 			// add divider at the end
-			if (i === arr.length - 1) {
+			if (i === arr.length - 1 && languageSelectorIsEnabled()) {
 				li = document.createElement('li');
 				li.setAttribute('role', 'menuitem');
 				li.classList.add('divider');
@@ -213,7 +213,7 @@ export default function (...initArgs) {
 
 		});
 
-		populateLanguageSelector(menu);
+		if (languageSelectorIsEnabled()) populateLanguageSelector(menu);
 
 		dropdown.querySelector('.dropdown-toggle').addEventListener('click', onMobileNavClick);
 		
@@ -283,10 +283,14 @@ export default function (...initArgs) {
 
 	function initLanguageSelector () {
 
+		if (!languageSelectorIsEnabled()) return;
+
+		document.querySelector('#lang-selector').classList.add('enabled');
+
 		let dropdown = document.querySelector('#lang-selector .dropup'),
 			title = dropdown.querySelector('.dup-title'),
 			menu = dropdown.querySelector('ul'),
-			langFile = stringsConfig.stringsFiles.find(f => f.lang === getLanguagePref());
+			langFile = getActiveLanguages().find(f => f.lang === getLanguagePref());
 
 		title.innerHTML = '<h4>' + langFile.name + '</h4>';
 		populateLanguageSelector(menu);
@@ -295,9 +299,17 @@ export default function (...initArgs) {
 
 	}
 
+	function getActiveLanguages () {
+		return stringsConfig.stringsFiles.filter(f => f.enabled);
+	}
+
+	function languageSelectorIsEnabled () {
+		return getActiveLanguages().length > 1;
+	}
+
 	function populateLanguageSelector (container) {
 
-		stringsConfig.stringsFiles.forEach(f => {
+		getActiveLanguages().forEach(f => {
 			let li = document.createElement('li');
 			li.setAttribute('role', 'menuitem');
 			li.setAttribute('data-lang', f.lang);
@@ -1832,7 +1844,7 @@ export default function (...initArgs) {
 			navigator.languages[0] : (navigator.language || navigator.userLanguage);
 
 		// if lang not present in stringsConfig.json, skip it
-		if (lang && !stringsConfig.stringsFiles.find(f => f.lang === lang)) lang = null;
+		if (lang && !getActiveLanguages().find(f => f.lang === lang)) lang = null;
 
 		// default to 'en'
 		if (!lang) lang = 'en';

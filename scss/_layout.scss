@@ -366,6 +366,11 @@ $lower-left-logo-width: 100px;
 	bottom: 0;
 	left: $lower-left-logo-width + 1px;
 
+	display: none;
+	&.enabled {
+		display: block;
+	}
+
 	color: $text-color;
 	background-color: rgba($scrollbar-background-color, 0.5);
 	pointer-events: auto;
