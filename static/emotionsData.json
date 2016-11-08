@@ -1984,7 +1984,7 @@
     },
     "continents": {
       "header": "continents_header",
-      "body": "continents_body_mobile",
+      "body": "continents_body",
       "header_mobile": "continents_header",
       "body_mobile": "continents_body_mobile",
       "sectionName": "continents_section_name"

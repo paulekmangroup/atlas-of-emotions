@@ -1180,8 +1180,9 @@ export default {
 			.classed('visible', false);
 
 		if (hitAreaId) {
-			const step = appStrings().getStr(`emotionsData.metadata.triggers.steps[${ hitAreaId - 1 }]`);
-			dispatcher.popupChange('triggers', `${this.currentEmotion}-${step.header.toLowerCase()}`, step.body);
+			const stepHeader = appStrings().getStr(`emotionsData.metadata.triggers.steps[${ hitAreaId - 1 }].header`),
+				stepBody = appStrings().getStr(`emotionsData.metadata.triggers.steps[${ hitAreaId - 1 }].body`);
+			dispatcher.popupChange('triggers', `${this.currentEmotion}-${stepHeader.toLowerCase()}`, stepBody);
 		} else {
 			dispatcher.popupChange();
 			dispatcher.changeCallout(this.currentEmotion, appStrings().getStr('emotionsData.metadata.triggers.header'), appStrings().getStr('emotionsData.metadata.triggers.body'));
