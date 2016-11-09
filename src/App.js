@@ -215,8 +215,10 @@ export default function (...initArgs) {
 
 		if (languageSelectorIsEnabled()) populateLanguageSelector(menu);
 
+		document.querySelector('#mobile-header').appendChild(dropdown);
+
 		dropdown.querySelector('.dropdown-toggle').addEventListener('click', onMobileNavClick);
-		
+
 	}
 
 	function initNavArrows () {
@@ -1064,7 +1066,7 @@ export default function (...initArgs) {
 	}
 
 	function onLangMenuClick (event) {
-		
+
 		if (event) event.stopPropagation();
 
 		let dropdown = document.querySelector('#lang-selector .dropup'),
@@ -1511,9 +1513,11 @@ export default function (...initArgs) {
 		if (titleHeaderAndFooter) {
 			document.querySelector('#mobile-header .nav-button').style.display = 'none';
 			document.querySelector('#mobile-header .header-content').style.display = 'block';
+			document.querySelector('#mobile-header .dropdown').classList.remove('dark');
 		} else {
 			document.querySelector('#mobile-header .nav-button').style.display = 'block';
 			document.querySelector('#mobile-header .header-content').style.display = 'none';
+			document.querySelector('#mobile-header .dropdown').classList.add('dark');
 		}
 
 		// if forcing to be hidden, hide arrows
@@ -1829,7 +1833,7 @@ export default function (...initArgs) {
 	 * Get language preference for viewer.
 	 * This does not necessarily return the same value as appStrings().lang(),
 	 * which returns the language currently being displayed.
-	 * 
+	 *
 	 * Checks `localStorage`, then NavigatorLanguage.
 	 * If no lang found, or lang is not implemented by the application
 	 * (as keyed in stringsConfig.json), falls back to default of 'en'.

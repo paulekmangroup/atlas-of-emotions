@@ -125,7 +125,7 @@ a:active {
 	}
 
 	.nav-button {
-		width: 100%;
+		width: calc(100% - #{$ui-header-mobile-nav-width + 2}px - #{2 * $ui-header-mobile-nav-margin}rem);
 		height: 100%;
 		background-color: rgba($scrollbar-background-color, 0.5);
 
@@ -270,19 +270,37 @@ a:active {
 	right: 0;
 	width: auto;
 
-	$mobile-nav-button-height: 18;
+	.dropdown-bkgd {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: calc(#{$ui-header-mobile-nav-width}px + #{2*$ui-header-mobile-nav-margin}rem);
+		height: #{$ui-header-height-small}px;
+		background-color: rgba($scrollbar-background-color, 0.5);
+		display: none;
+
+	}
+	&.dark {
+		.dropdown-bkgd {
+			display: block;
+		}
+		button {
+			filter: brightness(0.75);
+		}
+	}
+
 	button {
 		position: absolute;
-		top: calc(#{($ui-header-height-small - $mobile-nav-button-height)/2}px - 1rem);
+		top: calc(#{($ui-header-height-small - $ui-header-mobile-nav-height)/2}px - 1rem);
 		right: 0;
-		width: 28px;
-		height: #{$mobile-nav-button-height}px;
+		width: #{$ui-header-mobile-nav-width}px;
+		height: #{$ui-header-mobile-nav-height}px;
 
-		margin: 1rem;
+		margin: #{$ui-header-mobile-nav-margin}rem;
 		padding: 0;
 		border: none;
 
-		background: url('./img/hamburger.png');
+		background-image: url('./img/hamburger.png');
 		background-size: 100% 100%;
 		background-position: center;
 		background-repeat: no-repeat;
@@ -302,7 +320,7 @@ a:active {
 		background-color: $background-color;
 		box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
 		z-index: $depth-10;
-		
+
 		li {
 			padding: 0;
 			width: 100%;

@@ -109,7 +109,12 @@
 	"ui": {
 		"header": {
 			"height": 55,
-			"height-small": 44
+			"height-small": 44,
+			"mobile-nav": {
+				"width": 28,
+				"height": 18,
+				"margin": 1
+			}
 		},
 		"mobile-footer": {
 			"height": 44
