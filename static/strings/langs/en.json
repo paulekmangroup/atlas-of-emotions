@@ -45,10 +45,6 @@
             "value": "Introduction"
         },
         {
-            "key": "home_section_name",
-            "value": "Universal Emotions"
-        },
-        {
             "key": "continents_header",
             "value": "Five Universal Emotions"
         },
@@ -62,7 +58,7 @@
         },
         {
             "key": "continents_section_name",
-            "value": "Emotions"
+            "value": "Universal Emotions"
         },
         {
             "key": "states_header",
@@ -215,6 +211,394 @@
         {
             "key": "calm_section_name",
             "value": "Calm"
+        }
+    ],
+    [
+        {
+            "key": "anger_continent_header",
+            "value": "Anger"
+        },
+        {
+            "key": "anger_continent_header_mobile",
+            "value": "The Continent of Anger"
+        },
+        {
+            "key": "anger_continent_body",
+            "value": "We are blocked in our progress or goal."
+        },
+        {
+            "key": "anger_continent_body_mobile",
+            "value": "We feel anger when we are mentally or physically blocked. Anger varies in strength and frequency in our lives."
+        },
+        {
+            "key": "anger_states_header_1",
+            "value": "Annoyance"
+        },
+        {
+            "key": "anger_states_body_1",
+            "value": "Very mild anger."
+        },
+        {
+            "key": "anger_states_header_2",
+            "value": "Frustration"
+        },
+        {
+            "key": "anger_states_body_2",
+            "value": "A response to failure to overcome an obstacle despite repeated attempts."
+        },
+        {
+            "key": "anger_states_header_3",
+            "value": "Argumentativeness"
+        },
+        {
+            "key": "anger_states_body_3",
+            "value": "An inclination to prolong disagreements."
+        },
+        {
+            "key": "anger_states_header_4",
+            "value": "Bitterness"
+        },
+        {
+            "key": "anger_states_body_4",
+            "value": "Disappointment that no one wanted to settle a problem."
+        },
+        {
+            "key": "anger_states_header_5",
+            "value": "Exasperation"
+        },
+        {
+            "key": "anger_states_body_5",
+            "value": "A loss of patience at repeated failures to settle a problem."
+        },
+        {
+            "key": "anger_states_header_6",
+            "value": "Vengefulness"
+        },
+        {
+            "key": "anger_states_body_6",
+            "value": "A desire for retaliation."
+        },
+        {
+            "key": "anger_states_header_7",
+            "value": "Fury"
+        },
+        {
+            "key": "anger_states_body_7",
+            "value": "Intense anger."
+        },
+        {
+            "key": "anger_actions_header_1",
+            "value": "Quarrel"
+        },
+        {
+            "key": "anger_actions_body_1",
+            "value": "Verbally oppose in a manner intended to escalate the disagreement."
+        },
+        {
+            "key": "anger_actions_header_2",
+            "value": "Insult"
+        },
+        {
+            "key": "anger_actions_body_2",
+            "value": "Disparage the other person in an offensive or hurtful way that is likely to escalate the conflict rather than resolve it."
+        },
+        {
+            "key": "anger_actions_header_3",
+            "value": "Undermine"
+        },
+        {
+            "key": "anger_actions_body_3",
+            "value": "Take action to make someone or something weaker or less effective, usually in a secret or gradual way."
+        },
+        {
+            "key": "anger_actions_header_4",
+            "value": "Dispute"
+        },
+        {
+            "key": "anger_actions_body_4",
+            "value": "Disagree in a manner that may escalate an argument."
+        },
+        {
+            "key": "anger_actions_header_5",
+            "value": "Scream/yell"
+        },
+        {
+            "key": "anger_actions_body_5",
+            "value": "Lose control of how one speaks; speak in a loud volume and, when screaming, in a higher pitch."
+        },
+        {
+            "key": "anger_actions_header_6",
+            "value": "Use physical force"
+        },
+        {
+            "key": "anger_actions_body_6",
+            "value": "Harm or constrain someone, an action that may be deliberately chosen or the result of a loss of control over how one acts."
+        },
+        {
+            "key": "anger_actions_header_7",
+            "value": "Suppress"
+        },
+        {
+            "key": "anger_actions_body_7",
+            "value": "Try to avoid feeling or acting upon the emotion that is being experienced."
+        },
+        {
+            "key": "anger_actions_header_8",
+            "value": "Simmer/brood"
+        },
+        {
+            "key": "anger_actions_body_8",
+            "value": "Act in a way that makes clear that angry actions are building or being contemplated."
+        },
+        {
+            "key": "anger_actions_header_9",
+            "value": "Be passive-aggressive"
+        },
+        {
+            "key": "anger_actions_body_9",
+            "value": "Take indirect actions that have an angry undercurrent."
+        },
+        {
+            "key": "anger_triggers_universal_header_mobile",
+            "value": "Universal Triggers of Anger"
+        },
+        {
+            "key": "anger_triggers_universal_body_mobile",
+            "value": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Interference with action or locomotion are examples."
+        },
+        {
+            "key": "anger_triggers_learned_header_mobile",
+            "value": "Learned Triggers of Anger"
+        },
+        {
+            "key": "anger_triggers_learned_body_mobile",
+            "value": "Some triggers can be learned from personal or shared cultural experiences. Being wrongfully accused or put down by an authority figure are examples."
+        },
+        {
+            "key": "anger_triggers_header_1",
+            "value": "Interference with locomotion"
+        },
+        {
+            "key": "anger_triggers_header_2",
+            "value": "Interference with action"
+        },
+        {
+            "key": "anger_triggers_header_3",
+            "value": "Rejection by a loved one"
+        },
+        {
+            "key": "anger_triggers_header_4",
+            "value": "Inefficiency or bureaucracy"
+        },
+        {
+            "key": "anger_triggers_header_5",
+            "value": "Being put down by an authority figure"
+        },
+        {
+            "key": "anger_triggers_header_6",
+            "value": "Encountering offensive beliefs"
+        },
+        {
+            "key": "anger_triggers_header_7",
+            "value": "Being wrongfully accused"
+        },
+        {
+            "key": "anger_moods_header",
+            "value": "Irritable"
+        },
+        {
+            "key": "anger_moods_body",
+            "value": "A readiness, a need to become angry. Filtering perceptions to see provocations not noticed when not irritable."
+        }
+    ],
+    [
+        {
+            "key": "fear_continent_header",
+            "value": "Fear"
+        },
+        {
+            "key": "fear_continent_header_mobile",
+            "value": "Fear"
+        },
+        {
+            "key": "fear_continent_body",
+            "value": "We are threatened to our safety or wellbeing."
+        },
+        {
+            "key": "fear_continent_body_mobile",
+            "value": "We feel fear when our safety or wellbeing is threatened. Fear varies in strength and frequency in our lives."
+        },
+        {
+            "key": "fear_states_header_1",
+            "value": "Trepidation"
+        },
+        {
+            "key": "fear_states_body_1",
+            "value": "Anticipation of the possibility of danger."
+        },
+        {
+            "key": "fear_states_header_2",
+            "value": "Anxiety"
+        },
+        {
+            "key": "fear_states_body_2",
+            "value": "Inability to cope with an anticipated or actual threat."
+        },
+        {
+            "key": "fear_states_header_3",
+            "value": "Nervousness"
+        },
+        {
+            "key": "fear_states_body_3",
+            "value": "Uncertainty as to whether there is a danger."
+        },
+        {
+            "key": "fear_states_header_4",
+            "value": "Dread"
+        },
+        {
+            "key": "fear_states_body_4",
+            "value": "Anticipation of severe danger."
+        },
+        {
+            "key": "fear_states_header_5",
+            "value": "Desperation"
+        },
+        {
+            "key": "fear_states_body_5",
+            "value": "A response to the inability to reduce danger."
+        },
+        {
+            "key": "fear_states_header_6",
+            "value": "Panic"
+        },
+        {
+            "key": "fear_states_body_6",
+            "value": "A consequence of desperation."
+        },
+        {
+            "key": "fear_states_header_7",
+            "value": "Horror"
+        },
+        {
+            "key": "fear_states_body_7",
+            "value": "A mixture of fear and disgust."
+        },
+        {
+            "key": "fear_states_header_8",
+            "value": "Terror"
+        },
+        {
+            "key": "fear_states_body_8",
+            "value": "Maximum fear."
+        },
+        {
+            "key": "fear_actions_header_1",
+            "value": "Withdraw"
+        },
+        {
+            "key": "fear_actions_body_1",
+            "value": "Physically or mentally leave the scene of the threat."
+        },
+        {
+            "key": "fear_actions_header_2",
+            "value": "Avoid"
+        },
+        {
+            "key": "fear_actions_body_2",
+            "value": "Either physically stay away from someone or something, or internally keep one’s mind away from what is triggering the fear."
+        },
+        {
+            "key": "fear_actions_header_3",
+            "value": "Hesitate"
+        },
+        {
+            "key": "fear_actions_body_3",
+            "value": "Hold back in doubt or indecision, often momentarily."
+        },
+        {
+            "key": "fear_actions_header_4",
+            "value": "Freeze"
+        },
+        {
+            "key": "fear_actions_body_4",
+            "value": "Become incapable of acting or speaking."
+        },
+        {
+            "key": "fear_actions_header_5",
+            "value": "Scream/yell"
+        },
+        {
+            "key": "fear_actions_body_5",
+            "value": "Lose control of how one speaks; speak in a loud volume and, when screaming, in a higher pitch."
+        },
+        {
+            "key": "fear_actions_header_6",
+            "value": "Ruminate"
+        },
+        {
+            "key": "fear_actions_body_6",
+            "value": "Repetitively think about the emotional experience."
+        },
+        {
+            "key": "fear_actions_header_7",
+            "value": "Worry"
+        },
+        {
+            "key": "fear_actions_body_7",
+            "value": "Anticipate the possibility of harm."
+        },
+        {
+            "key": "fear_triggers_universal_header_mobile",
+            "value": "Universal Triggers of Fear"
+        },
+        {
+            "key": "fear_triggers_universal_body_mobile",
+            "value": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Snake-like shapes and sudden loss of gravity are examples."
+        },
+        {
+            "key": "fear_triggers_learned_header_mobile",
+            "value": "Learned Triggers of Fear"
+        },
+        {
+            "key": "fear_triggers_learned_body_mobile",
+            "value": "Some triggers can be learned from personal or shared cultural experiences. Public speaking, thunder, and the threat of losing one’s job are examples."
+        },
+        {
+            "key": "fear_triggers_header_1",
+            "value": "Imminent bodily impact"
+        },
+        {
+            "key": "fear_triggers_header_2",
+            "value": "Sudden loss of gravity"
+        },
+        {
+            "key": "fear_triggers_header_3",
+            "value": "Threat to safety"
+        },
+        {
+            "key": "fear_triggers_header_4",
+            "value": "Snake-like shapes"
+        },
+        {
+            "key": "fear_triggers_header_5",
+            "value": "Threat of losing job"
+        },
+        {
+            "key": "fear_triggers_header_6",
+            "value": "Thunder"
+        },
+        {
+            "key": "fear_triggers_header_7",
+            "value": "Public speaking"
+        },
+        {
+            "key": "fear_moods_header",
+            "value": "Apprehensive"
+        },
+        {
+            "key": "fear_moods_body",
+            "value": "Expecting harm but not knowing how to avoid it. Perceiving threats when they are not there, or magnifying the seriousness of a threat."
         }
     ],
     [
@@ -801,394 +1185,6 @@
         {
             "key": "enjoyment_moods_body",
             "value": "Generalized, non-specific, non-triggered good feeling, lasting hours."
-        }
-    ],
-    [
-        {
-            "key": "fear_continent_header",
-            "value": "Fear"
-        },
-        {
-            "key": "fear_continent_header_mobile",
-            "value": "Fear"
-        },
-        {
-            "key": "fear_continent_body",
-            "value": "We are threatened to our safety or wellbeing."
-        },
-        {
-            "key": "fear_continent_body_mobile",
-            "value": "We feel fear when our safety or wellbeing is threatened. Fear varies in strength and frequency in our lives."
-        },
-        {
-            "key": "fear_states_header_1",
-            "value": "Trepidation"
-        },
-        {
-            "key": "fear_states_body_1",
-            "value": "Anticipation of the possibility of danger."
-        },
-        {
-            "key": "fear_states_header_2",
-            "value": "Anxiety"
-        },
-        {
-            "key": "fear_states_body_2",
-            "value": "Inability to cope with an anticipated or actual threat."
-        },
-        {
-            "key": "fear_states_header_3",
-            "value": "Nervousness"
-        },
-        {
-            "key": "fear_states_body_3",
-            "value": "Uncertainty as to whether there is a danger."
-        },
-        {
-            "key": "fear_states_header_4",
-            "value": "Dread"
-        },
-        {
-            "key": "fear_states_body_4",
-            "value": "Anticipation of severe danger."
-        },
-        {
-            "key": "fear_states_header_5",
-            "value": "Desperation"
-        },
-        {
-            "key": "fear_states_body_5",
-            "value": "A response to the inability to reduce danger."
-        },
-        {
-            "key": "fear_states_header_6",
-            "value": "Panic"
-        },
-        {
-            "key": "fear_states_body_6",
-            "value": "A consequence of desperation."
-        },
-        {
-            "key": "fear_states_header_7",
-            "value": "Horror"
-        },
-        {
-            "key": "fear_states_body_7",
-            "value": "A mixture of fear and disgust."
-        },
-        {
-            "key": "fear_states_header_8",
-            "value": "Terror"
-        },
-        {
-            "key": "fear_states_body_8",
-            "value": "Maximum fear."
-        },
-        {
-            "key": "fear_actions_header_1",
-            "value": "Withdraw"
-        },
-        {
-            "key": "fear_actions_body_1",
-            "value": "Physically or mentally leave the scene of the threat."
-        },
-        {
-            "key": "fear_actions_header_2",
-            "value": "Avoid"
-        },
-        {
-            "key": "fear_actions_body_2",
-            "value": "Either physically stay away from someone or something, or internally keep one’s mind away from what is triggering the fear."
-        },
-        {
-            "key": "fear_actions_header_3",
-            "value": "Hesitate"
-        },
-        {
-            "key": "fear_actions_body_3",
-            "value": "Hold back in doubt or indecision, often momentarily."
-        },
-        {
-            "key": "fear_actions_header_4",
-            "value": "Freeze"
-        },
-        {
-            "key": "fear_actions_body_4",
-            "value": "Become incapable of acting or speaking."
-        },
-        {
-            "key": "fear_actions_header_5",
-            "value": "Scream/yell"
-        },
-        {
-            "key": "fear_actions_body_5",
-            "value": "Lose control of how one speaks; speak in a loud volume and, when screaming, in a higher pitch."
-        },
-        {
-            "key": "fear_actions_header_6",
-            "value": "Ruminate"
-        },
-        {
-            "key": "fear_actions_body_6",
-            "value": "Repetitively think about the emotional experience."
-        },
-        {
-            "key": "fear_actions_header_7",
-            "value": "Worry"
-        },
-        {
-            "key": "fear_actions_body_7",
-            "value": "Anticipate the possibility of harm."
-        },
-        {
-            "key": "fear_triggers_universal_header_mobile",
-            "value": "Universal Triggers of Fear"
-        },
-        {
-            "key": "fear_triggers_universal_body_mobile",
-            "value": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Snake-like shapes and sudden loss of gravity are examples."
-        },
-        {
-            "key": "fear_triggers_learned_header_mobile",
-            "value": "Learned Triggers of Fear"
-        },
-        {
-            "key": "fear_triggers_learned_body_mobile",
-            "value": "Some triggers can be learned from personal or shared cultural experiences. Public speaking, thunder, and the threat of losing one’s job are examples."
-        },
-        {
-            "key": "fear_triggers_header_1",
-            "value": "Imminent bodily impact"
-        },
-        {
-            "key": "fear_triggers_header_2",
-            "value": "Sudden loss of gravity"
-        },
-        {
-            "key": "fear_triggers_header_3",
-            "value": "Threat to safety"
-        },
-        {
-            "key": "fear_triggers_header_4",
-            "value": "Snake-like shapes"
-        },
-        {
-            "key": "fear_triggers_header_5",
-            "value": "Threat of losing job"
-        },
-        {
-            "key": "fear_triggers_header_6",
-            "value": "Thunder"
-        },
-        {
-            "key": "fear_triggers_header_7",
-            "value": "Public speaking"
-        },
-        {
-            "key": "fear_moods_header",
-            "value": "Apprehensive"
-        },
-        {
-            "key": "fear_moods_body",
-            "value": "Expecting harm but not knowing how to avoid it. Perceiving threats when they are not there, or magnifying the seriousness of a threat."
-        }
-    ],
-    [
-        {
-            "key": "anger_continent_header",
-            "value": "Anger"
-        },
-        {
-            "key": "anger_continent_header_mobile",
-            "value": "The Continent of Anger"
-        },
-        {
-            "key": "anger_continent_body",
-            "value": "We are blocked in our progress or goal."
-        },
-        {
-            "key": "anger_continent_body_mobile",
-            "value": "We feel anger when we are mentally or physically blocked. Anger varies in strength and frequency in our lives."
-        },
-        {
-            "key": "anger_states_header_1",
-            "value": "Annoyance"
-        },
-        {
-            "key": "anger_states_body_1",
-            "value": "Very mild anger."
-        },
-        {
-            "key": "anger_states_header_2",
-            "value": "Frustration"
-        },
-        {
-            "key": "anger_states_body_2",
-            "value": "A response to failure to overcome an obstacle despite repeated attempts."
-        },
-        {
-            "key": "anger_states_header_3",
-            "value": "Argumentativeness"
-        },
-        {
-            "key": "anger_states_body_3",
-            "value": "An inclination to prolong disagreements."
-        },
-        {
-            "key": "anger_states_header_4",
-            "value": "Bitterness"
-        },
-        {
-            "key": "anger_states_body_4",
-            "value": "Disappointment that no one wanted to settle a problem."
-        },
-        {
-            "key": "anger_states_header_5",
-            "value": "Exasperation"
-        },
-        {
-            "key": "anger_states_body_5",
-            "value": "A loss of patience at repeated failures to settle a problem."
-        },
-        {
-            "key": "anger_states_header_6",
-            "value": "Vengefulness"
-        },
-        {
-            "key": "anger_states_body_6",
-            "value": "A desire for retaliation."
-        },
-        {
-            "key": "anger_states_header_7",
-            "value": "Fury"
-        },
-        {
-            "key": "anger_states_body_7",
-            "value": "Intense anger."
-        },
-        {
-            "key": "anger_actions_header_1",
-            "value": "Quarrel"
-        },
-        {
-            "key": "anger_actions_body_1",
-            "value": "Verbally oppose in a manner intended to escalate the disagreement."
-        },
-        {
-            "key": "anger_actions_header_2",
-            "value": "Insult"
-        },
-        {
-            "key": "anger_actions_body_2",
-            "value": "Disparage the other person in an offensive or hurtful way that is likely to escalate the conflict rather than resolve it."
-        },
-        {
-            "key": "anger_actions_header_3",
-            "value": "Undermine"
-        },
-        {
-            "key": "anger_actions_body_3",
-            "value": "Take action to make someone or something weaker or less effective, usually in a secret or gradual way."
-        },
-        {
-            "key": "anger_actions_header_4",
-            "value": "Dispute"
-        },
-        {
-            "key": "anger_actions_body_4",
-            "value": "Disagree in a manner that may escalate an argument."
-        },
-        {
-            "key": "anger_actions_header_5",
-            "value": "Scream/yell"
-        },
-        {
-            "key": "anger_actions_body_5",
-            "value": "Lose control of how one speaks; speak in a loud volume and, when screaming, in a higher pitch."
-        },
-        {
-            "key": "anger_actions_header_6",
-            "value": "Use physical force"
-        },
-        {
-            "key": "anger_actions_body_6",
-            "value": "Harm or constrain someone, an action that may be deliberately chosen or the result of a loss of control over how one acts."
-        },
-        {
-            "key": "anger_actions_header_7",
-            "value": "Suppress"
-        },
-        {
-            "key": "anger_actions_body_7",
-            "value": "Try to avoid feeling or acting upon the emotion that is being experienced."
-        },
-        {
-            "key": "anger_actions_header_8",
-            "value": "Simmer/brood"
-        },
-        {
-            "key": "anger_actions_body_8",
-            "value": "Act in a way that makes clear that angry actions are building or being contemplated."
-        },
-        {
-            "key": "anger_actions_header_9",
-            "value": "Be passive-aggressive"
-        },
-        {
-            "key": "anger_actions_body_9",
-            "value": "Take indirect actions that have an angry undercurrent."
-        },
-        {
-            "key": "anger_triggers_universal_header_mobile",
-            "value": "Universal Triggers of Anger"
-        },
-        {
-            "key": "anger_triggers_universal_body_mobile",
-            "value": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Interference with action or locomotion are examples."
-        },
-        {
-            "key": "anger_triggers_learned_header_mobile",
-            "value": "Learned Triggers of Anger"
-        },
-        {
-            "key": "anger_triggers_learned_body_mobile",
-            "value": "Some triggers can be learned from personal or shared cultural experiences. Being wrongfully accused or put down by an authority figure are examples."
-        },
-        {
-            "key": "anger_triggers_header_1",
-            "value": "Interference with locomotion"
-        },
-        {
-            "key": "anger_triggers_header_2",
-            "value": "Interference with action"
-        },
-        {
-            "key": "anger_triggers_header_3",
-            "value": "Rejection by a loved one"
-        },
-        {
-            "key": "anger_triggers_header_4",
-            "value": "Inefficiency or bureaucracy"
-        },
-        {
-            "key": "anger_triggers_header_5",
-            "value": "Being put down by an authority figure"
-        },
-        {
-            "key": "anger_triggers_header_6",
-            "value": "Encountering offensive beliefs"
-        },
-        {
-            "key": "anger_triggers_header_7",
-            "value": "Being wrongfully accused"
-        },
-        {
-            "key": "anger_moods_header",
-            "value": "Irritable"
-        },
-        {
-            "key": "anger_moods_body",
-            "value": "A readiness, a need to become angry. Filtering perceptions to see provocations not noticed when not irritable."
         }
     ]
 ]

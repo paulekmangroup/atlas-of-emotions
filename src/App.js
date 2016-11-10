@@ -194,10 +194,21 @@ export default function (...initArgs) {
 		let dropdown = document.querySelector('#mobile-header .dropdown'),
 			menu = dropdown.querySelector('ul');
 
-		['intro', 'home'].concat(_.values(dispatcher.SECTIONS).filter(v => v !== dispatcher.SECTIONS.MORE)).forEach((section, i, arr) => {
+		['intro']
+			.concat(_.values(dispatcher.SECTIONS).filter(v => v !== dispatcher.SECTIONS.MORE))
+			.concat['about', 'emotrak']
+		.forEach((section, i, arr) => {
 
-			let sectionName = appStrings().getStr(`emotionsData.metadata.${ section }.sectionName`) || section,
+			let sectionName,
 				li = document.createElement('li');
+
+			if (section === 'about' || section === 'emotrak') {
+				// TODO: implement
+				sectionName = section;
+			} else {
+				sectionName = appStrings().getStr(`emotionsData.metadata.${ section }.sectionName`) || section;
+			}
+
 			li.setAttribute('role', 'menuitem');
 			li.setAttribute('data-section', section);
 			li.innerHTML = '<h4>' + sectionName + '</h4>';
@@ -1165,6 +1176,7 @@ export default function (...initArgs) {
 		if (!event.target || event.target.nodeName.toLowerCase() !== 'li') { return; }
 		event.stopImmediatePropagation();
 
+		onMobileNavClick();
 		document.querySelector('#mobile-header .dropdown').classList.remove('open');
 
 		if (event.target.dataset.section) {
