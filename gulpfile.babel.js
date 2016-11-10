@@ -190,7 +190,8 @@ function stringsTask (options) {
 		.pipe($.shell([
 			`mkdir ${ options.src }static/strings/langs`
 		]))
-		.pipe($.shell(langs.map(lang => `gsjson ${ lang.fileId } ${ options.dest + lang.lang }.json -b -w 0 -w 1 -w 2 -w 3 -w 4 -w 5${ accessToken ? (' -t ' + accessToken) : '' }`)));
+		// NOTE: have to manually enumerate each worksheet tab...
+		.pipe($.shell(langs.map(lang => `gsjson ${ lang.fileId } ${ options.dest + lang.lang }.json -b -w 0 -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7${ accessToken ? (' -t ' + accessToken) : '' }`)));
 }
 
 function webserverTask (options) {

@@ -10,6 +10,11 @@
  */
 
 
+
+// ---------------------------------------------------------------------------- //
+// SETUP / ENTRY
+// ---------------------------------------------------------------------------- //
+
 /**
  * Add toolbar menu to export to JSON.
  */
@@ -32,14 +37,29 @@ function onOpen () {
  */
 function exportAll (e) {
 
+	var emotionsDataSheets = [
+		'anger',
+		'fear',
+		'sadness',
+		'disgust',
+		'enjoyment'
+	];
+
 	var ss = SpreadsheetApp.getActiveSpreadsheet(),
 		sheetName,
 		parsedSheets = ss.getSheets().reduce(function (acc, sheet) {
-			sheetName = sheet.getName().toLowerCase();
+			sheetName = sheet.getName().toLowerCase().trim();
 			if (sheetName === 'metadata') {
 				acc.metadata = parseMetadataSheet(sheet);
-			} else {
+			} else if (~emotionsDataSheets.indexOf(sheetName)) {
 				acc.emotions[sheetName] = parseEmotionSheet(sheet);
+			} else if (SECONDARY_PARSER_CONFIG[sheetName]) {
+				var parsedObj = parseSecondary(sheetName, sheet);
+				if (ANNEX_SECTIONS.indexOf(sheetName) > -1) {
+					acc.annex[slugify(sheetName)] = parsedObj;
+				} else {
+					acc[slugify(sheetName)] = parsedObj;
+				}
 			}
 			return acc;
 		}, {
@@ -51,9 +71,39 @@ function exportAll (e) {
 
 }
 
-/**
- * Atlas Of Emotions-specific parsing.
- */
+function parseSecondary (name, sheet) {
+
+	var config = SECONDARY_PARSER_CONFIG[name];
+	var rows = [];
+	var ranges = (config.start[0].length) ? config.start : [config.start];
+	ranges.forEach(function(start, j){
+		var next = ranges[j + 1];
+		var endRow = (next) ? next[1] - 1 : sheet.getLastRow();
+		var range = sheet.getRange(start[1], start[0], endRow - (start[1] - 1), sheet.getLastColumn() - (start[0] - 1));
+		var values = range.getValues();
+		var headers = values[0];
+		var len = values.length;
+
+		for (var i=1; i<len; i++) {
+			var row = values[i];
+			if (!isEmptyRow(row)) {
+				var obj = {};
+				headers.forEach(function(header, k){
+					obj[header.toLowerCase()] = row[k];
+				});
+				rows.push(obj);
+			}
+		}
+	});
+
+	return config.parse(rows);
+
+}
+
+// ---------------------------------------------------------------------------- //
+// ATLAS OF EMOTIONS-SPECIFIC PARSING
+// ---------------------------------------------------------------------------- //
+
 function parseMetadataSheet (sheet) {
 
 	// top-left (1-indexed) of valid data in sheet
@@ -97,9 +147,6 @@ function parseMetadataSheet (sheet) {
 
 }
 
-/**
- * Atlas Of Emotions-specific parsing.
- */
 var metadataSectionParsers = (function () {
 
 	var standard = function (data) {
@@ -201,9 +248,6 @@ var metadataSectionParsers = (function () {
 
 })();
 
-/**
- * Atlas Of Emotions-specific parsing.
- */
 function parseEmotionSheet (sheet) {
 
 	// top-left (1-indexed) of valid data in sheet
@@ -247,9 +291,6 @@ function parseEmotionSheet (sheet) {
 
 }
 
-/**
- * Atlas Of Emotions-specific parsing.
- */
 var emotionSectionParsers = (function () {
 
 	var standard = function (data) {
@@ -329,6 +370,384 @@ var emotionSectionParsers = (function () {
 	};
 
 })();
+
+var ANNEX_SECTIONS = [
+	'scientific basis',
+	'signals',
+	'psychopathology',
+	'personality trait',
+	'partially charted',
+	'triggers timeline',
+	//'impediment-antidote',
+	'intrinsic or intentional',
+];
+
+var SECONDARY_PARSER_CONFIG = {
+	'scientific basis': {
+		start: [[1, 3],[1, 6],[1,9],[1,26]], // col, row
+		parse: function(data) {
+			if (!data) return {};
+
+          var scientific = {};
+          scientific.content = [];
+          scientific.footer = [];
+
+			data.forEach(function(row) {
+				if (row.title) {
+					scientific.title = row.title;
+					scientific.desc = row.introduction || '';
+				} else if (row.surveydata) {
+					scientific.content.push({
+						desc: row.surveyquestion,
+						name: row.surveydata.toString() || null,
+						formatting: row.formatting
+					});
+                } else if (row.survey) {
+                  scientific.contentIntro = row.survey;
+                } else if (row.footer) {
+                  scientific.footer.push(row.footer)
+                }
+			});
+
+		return scientific;
+        }
+	},
+
+	'triggers timeline': {
+		start: [[1, 3], [1, 6], [1,29]], // col, row
+		parse: function(data) {
+			var rsp = {};
+			rsp.content = [];
+            rsp.footer = [];
+
+			data.forEach(function(row) {
+				if (row.title) {
+					rsp.title = row.title;
+					rsp.desc = row.introduction || '';
+				} else if (row.text) {
+					rsp.content.push({
+						desc: row.text,
+						name: row.id || null
+					});
+                } else if (row.footer) {
+                  rsp.footer.push(row.footer)
+                }
+			});
+
+			return rsp;
+		}
+	},
+
+	'impediment-antidote': {
+		start: [[1, 3], [1, 6]], // col, row
+		parse: function(data) {
+			var rsp = {};
+			rsp.emotions = [];
+
+			var currentEmotion, antidotes, impediments;
+			data.forEach(function(row) {
+				if (row.title && row.introduction) {
+					rsp.title = row.title;
+					rsp.desc = row.introduction;
+
+				} else if (row['state name']) {
+					if (row.emotion && currentEmotion !== row.emotion) {
+						currentEmotion = row.emotion;
+						antidotes = {};
+						impediments = {};
+						antidotes.name = row.emotion + ' Antidotes';
+						impediments.name = row.emotion + ' Impediments';
+						antidotes.children = [];
+						impediments.children = [];
+						rsp.emotions.push(antidotes);
+						rsp.emotions.push(impediments);
+					}
+
+					if (antidotes && row.antidote) {
+						antidotes.children.push({
+							name: row['state name'],
+							desc: row.antidote
+						});
+					}
+
+					if (impediments && row.impediment) {
+						impediments.children.push({
+							name: row['state name'],
+							desc: row.impediment
+						});
+					}
+				}
+			});
+
+			return rsp;
+		}
+	},
+
+	'intrinsic or intentional': {
+		start: [[1, 3], [1, 6]], // col, row
+		parse: function(data) {
+			var rsp = {};
+			rsp.emotions = [];
+
+			var obj;
+			data.forEach(function(row) {
+				if (row.title && row.introduction) {
+					rsp.title = row.title;
+					rsp.desc = row.introduction;
+				} else if (row.name) {
+					obj = {}
+					obj.name = row.name;
+					obj.children = [];
+
+					obj.children.push({
+						name: 'Intrinsic',
+						desc: row.intrinsic
+					});
+
+					obj.children.push({
+						name: 'Intentional',
+						desc: row.intentional
+					});
+
+					rsp.emotions.push(obj);
+				}
+			});
+
+			return rsp;
+		}
+	},
+
+
+	'partially charted': {
+		start: [[1, 3], [1, 6]], // col, row
+		parse: function(data) {
+			var rsp = {};
+			rsp.emotions = [];
+
+			data.forEach(function(row) {
+				if (row.title && row.introduction) {
+					rsp.title = row.title;
+					rsp.desc = row.introduction;
+				} else if (row['emotion name'] && row.description) {
+					rsp.emotions.push({
+						name: row['emotion name'],
+						desc: row.description
+					});
+				}
+			});
+
+			return rsp;
+		}
+	},
+
+	'signals': {
+		start: [[1, 3], [1, 6]], // col, row
+		parse: function(data) {
+			var rsp = {};
+			rsp.emotions = [];
+
+			var currentName, obj;
+			data.forEach(function(row) {
+				if (row.title && row.introduction) {
+					rsp.title = row.title;
+					rsp.desc = row.introduction;
+				} else if (row.message && row.signal) {
+					if (row.name && (!currentName || currentName !== row.name)) {
+						currentName = row.name;
+						obj = {};
+						obj.name = row.name;
+						obj.desc = null;
+						obj.children = [];
+						rsp.emotions.push(obj);
+					}
+
+					if (obj) {
+						obj.children.push({
+							name: 'Signal',
+							desc: row.signal
+						});
+
+						obj.children.push({
+							name: 'Message',
+							desc: row.message
+						});
+					}
+				}
+			});
+
+			return rsp;
+		}
+	},
+
+	'psychopathology': {
+		start: [[1, 3], [1, 6]], // col, row
+		parse: function(data) {
+			var rsp = {};
+			rsp.emotions = [];
+
+			var currentName, obj;
+			data.forEach(function(row) {
+				if (row.title && row.introduction) {
+					rsp.title = row.title;
+					rsp.desc = row.introduction;
+				} else if (row['associated diagnoses'] && row['description of diagnoses']) {
+					if (row.name && (!currentName || currentName !== row.name)) {
+						currentName = row.name;
+						obj = {};
+						obj.name = row.name;
+						obj.desc = row.description;
+						obj.children = [];
+						rsp.emotions.push(obj);
+					}
+					if (obj) {
+						obj.children.push({
+							name: row['associated diagnoses'],
+							desc: row['description of diagnoses']
+						});
+					}
+				}
+			});
+
+			return rsp;
+		}
+	},
+
+	'personality trait': {
+		start: [[1, 3], [1, 6]], // col, row
+		parse: function(data) {
+			var rsp = {};
+			rsp.emotions = [];
+
+			data.forEach(function(row) {
+				if (row.title && row.introduction) {
+					rsp.title = row.title;
+					rsp.desc = row.introduction;
+				} else if (row.name && row.description) {
+					rsp.emotions.push({
+						name: row.name,
+						desc: row.description
+					})
+				}
+			});
+
+			return rsp;
+		}
+	},
+
+	'further reading': {
+		start: [[1, 3], [1, 6]], // col, row
+		parse: function(data) {
+			var rsp = {};
+			rsp.links = [];
+
+			data.forEach(function(row) {
+				if (row.introduction) {
+                  rsp.title = row.title ? row.title : ' ';
+					rsp.desc = row.introduction;
+				} else if (row.link && row['link text']) {
+					rsp.links.push({
+						link: row.link,
+						desc: row['link text']
+					});
+				}
+			});
+
+			return rsp;
+		}
+	},
+
+	donate: {
+		start: [1, 3], // col, row
+		parse: function (data) {
+			var rsp = {
+				title: data[0].title,
+				desc: data[0].text,
+				link: data[0].link,
+				imgs: []
+			};
+
+			data.forEach(function(row) {
+				if (row.image) {
+					rsp.imgs.push(row.image);
+				}
+			});
+
+			return rsp;
+		}
+	},
+
+    emotrak: {
+		start: [[1, 2], [1, 5]], // col, row
+		parse: function (data) {
+			var rsp = {};
+			rsp.subsections = [];
+
+			data.forEach(function(row) {
+				if (row.introduction) {
+                  rsp.title = row.title ? row.title : '';
+					rsp.desc = row.introduction;
+					rsp.header_mobile = row['mobile alt header'];
+					rsp.body_mobile = row['mobile alt body'];
+				} else if (row.text) {
+					rsp.subsections.push({
+                      title: row.subhead ? row.subhead : '',
+					  desc: row.text,
+                      image: row.image ? row.image : null,
+                      mail: row.mail ? row.mail : null
+					});
+				}
+			});
+
+			return rsp;
+		}
+	},
+
+	about: {
+		start: [[1, 3], [1, 6]], // col, row
+		parse: function (data) {
+			var rsp = {};
+			rsp.subsections = [];
+
+			data.forEach(function(row) {
+				if (row.title && row.introduction) {
+					rsp.title = row.title;
+					rsp.desc = row.introduction;
+					rsp.header_mobile = row['mobile alt header'];
+					rsp.body_mobile = row['mobile alt body'];
+				} else if (row.subhead) {
+					rsp.subsections.push({
+						title: row.subhead,
+						desc: row.text
+					});
+				}
+			});
+
+			return rsp;
+		}
+	}
+};
+
+
+
+// ---------------------------------------------------------------------------- //
+// UTILITIES
+// ---------------------------------------------------------------------------- //
+
+function slugify (text) {
+  return text.toString()
+  	.toLowerCase()
+  	.trim()
+    .replace(/\s+/g, '-')           // Replace spaces with -
+    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+    .replace(/^-+/, '')             // Trim - from start of text
+    .replace(/-+$/, '');            // Trim - from end of text
+}
+
+
+function isEmptyRow(row) {
+	return (row.join('')).length < 1;
+}
 
 /**
  * Output parsed sheets for consumption by end user.

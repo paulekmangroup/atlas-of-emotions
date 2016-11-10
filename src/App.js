@@ -196,7 +196,7 @@ export default function (...initArgs) {
 
 		['intro']
 			.concat(_.values(dispatcher.SECTIONS).filter(v => v !== dispatcher.SECTIONS.MORE))
-			.concat['about', 'emotrak']
+			.concat(['about', 'emotrak'])
 		.forEach((section, i, arr) => {
 
 			let sectionName,
@@ -204,13 +204,14 @@ export default function (...initArgs) {
 
 			if (section === 'about' || section === 'emotrak') {
 				// TODO: implement
-				sectionName = section;
+				sectionName = appStrings().getStr(`secondaryData.${ section }.title`) || section;
+				li.setAttribute('data-page', section);
 			} else {
 				sectionName = appStrings().getStr(`emotionsData.metadata.${ section }.sectionName`) || section;
+				li.setAttribute('data-section', section);
 			}
 
 			li.setAttribute('role', 'menuitem');
-			li.setAttribute('data-section', section);
 			li.innerHTML = '<h4>' + sectionName + '</h4>';
 			menu.appendChild(li);
 
@@ -1181,6 +1182,8 @@ export default function (...initArgs) {
 
 		if (event.target.dataset.section) {
 			dispatcher.navigate(event.target.dataset.section);
+		} else if (event.target.dataset.page) {
+			dispatcher.navigate(dispatcher.SECTIONS.MORE, null, event.target.dataset.page);
 		} else if (event.target.dataset.lang) {
 			setLanguage(event.target.dataset.lang);
 		}

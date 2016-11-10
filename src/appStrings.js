@@ -53,8 +53,17 @@ function appStrings (_lang, _screenIsSmall, _stringsLoadedCallback) {
 
 		}
 
-		let parsedKey = _.get(source, path.join('.')),
+		let parsedKey = _.get(emotionsData, path.join('.')),
 			parsedValue;
+
+		// if the key exists in emotionsData.json,
+		// then use it, whether this key-value was originally in emotionsData or secondaryData.
+		// we're moving everything from secondaryData into emotionsData, tab-by-tab.
+		if (parsedKey) {
+			source = emotionsData;
+		} else if (source === secondaryData) {
+			parsedKey = _.get(source, path.join('.'));
+		}
 
 		// this weirdness is an artifact of implementing localization long after the content spreadsheets and parsers were all set up.
 		// if future you is cut+pasting this, you can probably eliminate this block and just `return strings[parsedKey]`.
