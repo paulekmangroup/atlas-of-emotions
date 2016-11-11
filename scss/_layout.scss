@@ -787,6 +787,24 @@ $lower-left-logo-width: 100px;
 	p {
 		margin: 0;
 	}
+
+	.small-screen & {
+		position: fixed;
+		width: 100%;
+		height: #{$ui-header-height-small}px;
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+
+		font-size: 2rem;
+		line-height: #{$ui-header-height-small}px;
+		text-align: center;
+		white-space: nowrap;
+
+		border: none;
+		color: $text-overlay-color;
+		background-color: #a6a6a6;	// same as rgba($scrollbar-background-color, 0.5) but opaque
+	}
 }
 
 #modal-overlay {

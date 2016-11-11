@@ -195,6 +195,11 @@
 			padding: 1.125em;
 			margin-bottom: 0.55em;
 			font-weight: 400;
+
+			.small-screen & {
+				background: none;
+				padding: 0;
+			}
 		}
 	}
 
@@ -206,6 +211,7 @@
 
 		.small-screen & {
 			font-weight: 400;
+			margin-bottom: 2rem;
 			// text-align: center;
 		}
 
