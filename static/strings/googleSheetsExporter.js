@@ -692,6 +692,8 @@ var SECONDARY_PARSER_CONFIG = {
 					rsp.subsections.push({
                       title: row.subhead ? row.subhead : '',
 					  desc: row.text,
+                      title_mobile: row.subhead ? row.subhead : '',
+					  desc_mobile: row.text,
                       image: row.image ? row.image : null,
                       mail: row.mail ? row.mail : null
 					});
@@ -712,12 +714,14 @@ var SECONDARY_PARSER_CONFIG = {
 				if (row.title && row.introduction) {
 					rsp.title = row.title;
 					rsp.desc = row.introduction;
-					rsp.header_mobile = row['mobile alt header'];
-					rsp.body_mobile = row['mobile alt body'];
+					rsp.title_mobile = row['mobile alt header'];
+					rsp.desc_mobile = row['mobile alt body'];
 				} else if (row.subhead) {
 					rsp.subsections.push({
 						title: row.subhead,
-						desc: row.text
+						desc: row.text,
+						title_mobile: row.subhead,
+						desc_mobile: row.text
 					});
 				}
 			});

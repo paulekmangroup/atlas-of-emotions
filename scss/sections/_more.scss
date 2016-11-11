@@ -156,9 +156,15 @@
 		display: block;
 		height: 100%;
 		width: 35em;
+
 		margin: 0 auto;
 		padding-top: 2.75em;
 		padding-bottom: 0;
+
+		.small-screen & {
+			width: 100%;
+			padding: 2.5rem 3.5rem;
+		}
 
 		.tb {
 			display: table;
@@ -197,6 +203,11 @@
 		text-align: left;
 		margin-bottom: 1em;
 		font-weight: 700;
+
+		.small-screen & {
+			font-weight: 400;
+			// text-align: center;
+		}
 
 		&.link-list {
 			list-style: none;

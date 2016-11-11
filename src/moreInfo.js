@@ -2,7 +2,7 @@ import d3 from 'd3';
 import _ from 'lodash';
 
 import dispatcher from './dispatcher.js';
-import secondaryData from '../static/secondaryData.json';
+import appStrings from './appStrings.js';
 import sassVars from '../scss/variables.json';
 
 // Pages
@@ -60,7 +60,7 @@ export default {
 
 			if (this.currentPage && this.pages[this.currentPage]) {
 				if (!this.pages[this.currentPage].isInited) {
-					this.pages[this.currentPage].init(this.containers[this.currentPage], secondaryData);
+					this.pages[this.currentPage].init(this.containers[this.currentPage], appStrings().getSecondaryDataBlock(this.getKeyByPage(this.currentPage)));
 				}
 				this.pages[this.currentPage].open();
 				this.pages[this.currentPage].setEmotion();
@@ -180,6 +180,26 @@ export default {
 		this.pages['annex-scientific-basis'] = AnnexScientificBasis;
 		this.pages['annex-impediment-antidote'] = AnnexImpedimentAntidote;
 		this.pages['annex-intrinsic-remedial'] = AnnexIntrinsicRemedial;
+	},
+
+	/**
+	 * Convert from the page name to the key name within secondary data.
+	 */
+	getKeyByPage: function (page) {
+		switch (page) {
+			case 'annex-psychopathologies':
+				return 'annex-psychopathology';
+			case 'annex-episode-timeline':
+				return 'annex-triggers-timeline';
+			case 'annex-intrinsic-remedial':
+				return 'annex-intrinsic-or-intentional';
+			case 'annex-traits':
+				return 'annex-personality-trait';
+			case 'further':
+				return 'further-reading';
+			default:
+				return page;
+		}
 	},
 
 	toggleMoreClass: function (val) {

@@ -2084,55 +2084,75 @@
     "subsections": [
       {
         "title": "about_header_1",
-        "desc": "about_body_1"
+        "desc": "about_body_1",
+        "title_mobile": "about_header_1",
+        "desc_mobile": "about_body_1"
       },
       {
         "title": "about_header_2",
-        "desc": "about_body_2"
+        "desc": "about_body_2",
+        "title_mobile": "about_header_2",
+        "desc_mobile": "about_body_2"
       },
       {
         "title": "about_header_3",
-        "desc": "about_body_3"
+        "desc": "about_body_3",
+        "title_mobile": "about_header_3",
+        "desc_mobile": "about_body_3"
       },
       {
         "title": "about_header_4",
-        "desc": "about_body_4"
+        "desc": "about_body_4",
+        "title_mobile": "about_header_4",
+        "desc_mobile": "about_body_4"
       },
       {
         "title": "about_header_5",
-        "desc": "about_body_5"
+        "desc": "about_body_5",
+        "title_mobile": "about_header_5",
+        "desc_mobile": "about_body_5"
       },
       {
         "title": "about_header_6",
-        "desc": "about_body_6"
+        "desc": "about_body_6",
+        "title_mobile": "about_header_6",
+        "desc_mobile": "about_body_6"
       },
       {
         "title": "about_header_7",
-        "desc": "about_body_7"
+        "desc": "about_body_7",
+        "title_mobile": "about_header_7",
+        "desc_mobile": "about_body_7"
       }
     ],
     "title": "about_intro_title",
     "desc": "about_intro_body",
-    "header_mobile": "about_intro_title_mobile",
-    "body_mobile": "about_intro_body_mobile"
+    "title_mobile": "about_intro_title_mobile",
+    "desc_mobile": "about_intro_body_mobile"
   },
   "emotrak": {
     "subsections": [
       {
         "title": "",
         "desc": "emotrak_section_1",
+        "title_mobile": "",
+        "desc_mobile": "emotrak_section_1",
         "image": "emotrak",
         "mail": null
       },
       {
         "title": "",
         "desc": "emotrak_section_2",
+        "title_mobile": "",
+        "desc_mobile": "emotrak_section_2",
         "image": null,
         "mail": true
       },
       {
         "title": "",
         "desc": "emotrak_section_3",
+        "title_mobile": "",
+        "desc_mobile": "emotrak_section_3",
         "image": null,
         "mail": null
       }

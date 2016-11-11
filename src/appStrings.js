@@ -48,6 +48,7 @@ function appStrings (_lang, _screenIsSmall, _stringsLoadedCallback) {
 				case 'body':
 				case 'name':
 				case 'desc':
+				case 'title':
 					path[path.length - 1] = lastPathSegment + '_mobile';
 			}
 
@@ -66,10 +67,9 @@ function appStrings (_lang, _screenIsSmall, _stringsLoadedCallback) {
 		}
 
 		// this weirdness is an artifact of implementing localization long after the content spreadsheets and parsers were all set up.
-		// if future you is cut+pasting this, you can probably eliminate this block and just `return strings[parsedKey]`.
-		//
-		// -->>	TODO: only running nested parsing on emotionsData for now,
-		// 		until secondaryData also has keys.
+		// only running nested parsing on emotionsData;
+		// secondaryData will eventually be phased into emotionsData and will all run through this block,
+		// but until then, we leave secondaryData strings alone.
 		if (source === emotionsData) {
 			if (typeof parsedKey === 'string') {
 				parsedValue = strings[parsedKey];
@@ -86,8 +86,16 @@ function appStrings (_lang, _screenIsSmall, _stringsLoadedCallback) {
 					}
 				});
 			} else if (typeof parsedKey === 'object') {
-				// pass through non-nested objects as-is
-				parsedValue = parsedKey;
+				if (key.split('.')[0] === 'secondaryData') {
+					// recursively parse nested objects in secondary data (more info / annex / etc)
+					parsedValue = Object.keys(parsedKey).reduce((acc, k) => {
+						acc[k] = getStr(`${ key }.${ k }`);
+						return acc;
+					}, {});
+				} else {
+					// pass through non-nested objects in metadata / emotions tabs as-is
+					parsedValue = parsedKey;
+				}
 			} else {
 				throw new Error(`Key not found at ${ key }`);
 			}
@@ -95,6 +103,19 @@ function appStrings (_lang, _screenIsSmall, _stringsLoadedCallback) {
 
 		// fall back to returning parsed key or empty string
 		return parsedValue || parsedKey || '';
+
+	}
+
+	function getSecondaryDataBlock (page) {
+
+		let withinAnnex = page.substr(0, 6) === 'annex-';
+		if (withinAnnex) page = page.slice(6);
+
+		// wrap results in an object that each more-page expects
+		let out = {
+			[page]: getStr(`secondaryData${ withinAnnex ? '.annex' : '' }.${ page }`)
+		};
+		return withinAnnex ? { annex: out } : out;
 
 	}
 
@@ -129,6 +150,7 @@ function appStrings (_lang, _screenIsSmall, _stringsLoadedCallback) {
 
 	instance = {
 		getStr,
+		getSecondaryDataBlock,
 		lang,
 		screenIsSmall,
 		loadStrings
