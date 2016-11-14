@@ -1179,9 +1179,10 @@ export default {
 				});
 
 			// phase labels
+			let smallScreen = this.screenIsSmall;
 			labelContainer.selectAll('.trigger-phase-labels .emotion-label')
 				.each(function (d, i) {
-					d3.select(this).classed('highlighted', i === hitAreaId - 1);
+					d3.select(this).classed('highlighted', smallScreen ? false : i === hitAreaId - 1);
 					d3.select(this).classed('muted', i !== hitAreaId - 1);
 				});
 
@@ -1189,7 +1190,7 @@ export default {
 				// universal/learned labels
 				labelContainer.selectAll('.universal-learned-labels .emotion-label')
 					.each(function (d, i) {
-						d3.select(this).classed('highlighted', i === hitAreaId - 4);
+						d3.select(this).classed('highlighted', smallScreen ? false : i === hitAreaId - 4);
 						d3.select(this).classed('muted', i !== hitAreaId - 4);
 					});
 			}
