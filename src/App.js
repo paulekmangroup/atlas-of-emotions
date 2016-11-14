@@ -1522,7 +1522,9 @@ export default function (...initArgs) {
 	function updateMobileUI () {
 
 		// show title mobile header and hide mobile footer when appropriate
-		let titleHeaderAndFooter = currentSection === sections[dispatcher.SECTIONS.CONTINENTS] && !currentEmotion;
+		let titleHeaderAndFooter = 
+			(currentSection === sections[dispatcher.SECTIONS.CONTINENTS] && !currentEmotion) ||
+			currentSection === sections[dispatcher.SECTIONS.MORE];
 		updateArrowVisibility(null, !titleHeaderAndFooter);
 
 		if (titleHeaderAndFooter) {

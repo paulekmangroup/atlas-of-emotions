@@ -111,6 +111,11 @@
 	opacity: 0;
 	transition: opacity #{$ui-overlays-duration-out}s ease-in-out;
 
+	.small-screen & {
+		background: none;
+		z-index: 0;
+	}
+
 	a,
 	a:link,
 	a:visited,
