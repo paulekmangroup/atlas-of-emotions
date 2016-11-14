@@ -13,7 +13,9 @@ const NUM_RINGS = 3;
 const HIT_AREAS = {
 	APPRAISAL: 1,
 	DATABASE: 2,
-	IMPULSE: 3
+	IMPULSE: 3,
+	UNIVERSAL: 4,
+	LEARNED: 5
 };
 
 // path for arrowhead shape
@@ -574,6 +576,18 @@ export default {
 				.append('h3')
 					.text(d => d.header.toUpperCase());
 
+			if (this.screenIsSmall) {
+				universalLearnedLabelContainer.selectAll('.emotion-label')
+					.on('click', (d, i) => {
+						switch (i) {
+							case 0:
+								return this.onPhaseLabelClick(HIT_AREAS.UNIVERSAL);
+							case 1:
+								return this.onPhaseLabelClick(HIT_AREAS.LEARNED);
+						}
+					});
+			}
+
 		});
 
 	},
@@ -1092,7 +1106,11 @@ export default {
 	},
 
 	setHitAreasLocked: function (val) {
+
+		// never lock hit areas on touch devices
+		if (this.screenIsSmall) val = false;
 		this.hitAreasLocked = val;
+		
 	},
 
 	setHighlightedHitArea: function (hitAreaId) {
@@ -1125,6 +1143,8 @@ export default {
 
 			switch (hitAreaId) {
 				case HIT_AREAS.APPRAISAL:
+				case HIT_AREAS.UNIVERSAL:
+				case HIT_AREAS.LEARNED:
 					graphContainer.classed('muted', true);
 					statesContainer.classed('faded', true);
 					actionsContainer.classed('faded', true);
@@ -1180,9 +1200,21 @@ export default {
 			.classed('visible', false);
 
 		if (hitAreaId) {
-			const stepHeader = appStrings().getStr(`emotionsData.metadata.triggers.steps[${ hitAreaId - 1 }].header`),
+			let stepHeader,
+				stepBody,
+				emotion;
+
+			if (this.screenIsSmall && hitAreaId === HIT_AREAS.UNIVERSAL || hitAreaId === HIT_AREAS.LEARNED) {
+				// special-case universal / learned labels on mobile
+				stepHeader = appStrings().getStr(`emotionsData.emotions.${ this.currentEmotion }.triggers[${ hitAreaId - 4 }].name_mobile`);
+				stepBody = appStrings().getStr(`emotionsData.emotions.${ this.currentEmotion }.triggers[${ hitAreaId - 4 }].desc_mobile`);
+				emotion = stepHeader.toLowerCase();
+			} else {
+				stepHeader = appStrings().getStr(`emotionsData.metadata.triggers.steps[${ hitAreaId - 1 }].header`);
 				stepBody = appStrings().getStr(`emotionsData.metadata.triggers.steps[${ hitAreaId - 1 }].body`);
-			dispatcher.popupChange('triggers', `${this.currentEmotion}-${stepHeader.toLowerCase()}`, stepBody);
+				emotion = this.screenIsSmall ? stepHeader.toLowerCase() : `${ this.currentEmotion }-${ stepHeader.toLowerCase() }`;
+			}
+			dispatcher.popupChange('triggers', emotion, stepBody);
 		} else {
 			dispatcher.popupChange();
 			dispatcher.changeCallout(this.currentEmotion, appStrings().getStr('emotionsData.metadata.triggers.header'), appStrings().getStr('emotionsData.metadata.triggers.body'));
