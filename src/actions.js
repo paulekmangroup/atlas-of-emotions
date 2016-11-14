@@ -1156,7 +1156,7 @@ export default {
 
 		} else {
 
-			this.resetCallout();
+			if (!this.isBackgrounded) this.resetCallout();
 
 		}
 
