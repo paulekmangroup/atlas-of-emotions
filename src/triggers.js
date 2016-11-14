@@ -125,11 +125,16 @@ export default {
 			angleFactors['universalLearned'] = [-.7, 0];
 		}
 
-		// rotate arrows further away from center to avoid label overlap on small screens
-		if (this.screenIsSmall) multiplier += 0.25;
-
 		// angleFactor can be any value from -1 (all the way left) to +1 (all the way right)
-		return (angleFactors[emotion][i] * multiplier - 1) * Math.PI / 2;
+		let ang = angleFactors[emotion][i] * multiplier;
+
+		// rotate arrows further away from center to avoid label overlap on small screens
+		if (this.screenIsSmall) {
+			let sign = angleFactors[emotion][i] < 0 ? -1 : 1;
+			ang = sign * Math.pow(Math.abs(angleFactors[emotion][i]), 0.75) * 1.5 * multiplier;
+		}
+		
+		return (ang - 1) * Math.PI / 2;
 
 	},
 
@@ -200,7 +205,7 @@ export default {
 
 				angle: this.calcAngle(i, emotion, haloRadius),
 
-				radius: this.calcRadius(i, emotion, haloRadius),
+				radius: this.calcRadius(i, emotion, haloRadius) * (this.screenIsSmall ? 0.8888 : 1),
 
 				// fraction of radius.
 				arrowLength: this.calcArrowLength(haloRadius, this.calcRadius(i, emotion, haloRadius), emotion, i),
@@ -526,6 +531,7 @@ export default {
 				.style('transform', universalTransform)
 				.style('-webkit-transform', universalTransform)
 			.append('h3')
+				.attr('class', this.screenIsSmall ? emotion : null)
 				.text(appStrings().getStr('emotionsData.metadata.triggers.steps[3].header').toUpperCase());
 			universalLearnedLabelContainer.append('div')
 				.attr('class', `emotion-label ${TRIGGER_TYPES.LEARNED} ${emotion}`)
@@ -533,6 +539,7 @@ export default {
 				.style('transform', learnedTransform)
 				.style('-webkit-transform', learnedTransform)
 			.append('h3')
+				.attr('class', this.screenIsSmall ? emotion : null)
 				.text(appStrings().getStr('emotionsData.metadata.triggers.steps[4].header').toUpperCase());
 
 			this.labelContainers[emotion] = labelContainer;
@@ -618,7 +625,7 @@ export default {
 			.attr('height', ch)
 			.on('mouseover', () => { this.onHitAreaMouseOver(HIT_AREAS.APPRAISAL); })
 			.on('mouseout', () => { this.onHitAreaMouseOut(HIT_AREAS.APPRAISAL); })
-			.on('click', () => { this.setCallout(null); });
+			.on('click', () => { this.screenIsSmall ? this.setCallout(HIT_AREAS.APPRAISAL) : this.setCallout(null); });
 
 		container.append('path')
 			.data(this.haloPieLayout([{}]))
@@ -626,7 +633,7 @@ export default {
 			.attr('d', this.haloArcGenerator)
 			.on('mouseover', () => { this.onHitAreaMouseOver(HIT_AREAS.DATABASE); })
 			.on('mouseout', () => { this.onHitAreaMouseOut(HIT_AREAS.DATABASE); })
-			.on('click', () => { this.setCallout(null); });
+			.on('click', () => { this.screenIsSmall ? this.setCallout(HIT_AREAS.DATABASE) : this.setCallout(null); });
 
 		let innerArcGenerator = d3.svg.arc()
 			.innerRadius(0)
@@ -637,7 +644,7 @@ export default {
 			.attr('d', innerArcGenerator)
 			.on('mouseover', () => { this.onHitAreaMouseOver(HIT_AREAS.IMPULSE); })
 			.on('mouseout', () => { this.onHitAreaMouseOut(HIT_AREAS.IMPULSE); })
-			.on('click', () => { this.setCallout(null); });
+			.on('click', () => { this.screenIsSmall ? this.setCallout(HIT_AREAS.IMPULSE) : this.setCallout(null); });
 
 		d3.select('#header').on('click', () => { this.onPhaseLabelClick(null); });
 
@@ -931,13 +938,13 @@ export default {
 		};
 
 		let angle = this.calcAngle(type[typeName],'universalLearned', haloRadius),
-			radius = this.calcRadius(type[typeName],'universalLearned', haloRadius);
+			radius = this.calcRadius(type[typeName],'universalLearned', haloRadius) * (this.screenIsSmall ? 0.95 : 1);
 
 		if (this.screenIsSmall) {
 			if (typeName === 'universal') {
-				angle = -Math.PI/2 - 0.4;
+				angle = -Math.PI/2 - 0.5;
 			} else if (typeName === 'learned') {
-				angle = -Math.PI/2 + 0.4;
+				angle = -Math.PI/2 + 0.5;
 			}
 		}
 
@@ -1110,7 +1117,7 @@ export default {
 		// never lock hit areas on touch devices
 		if (this.screenIsSmall) val = false;
 		this.hitAreasLocked = val;
-		
+
 	},
 
 	setHighlightedHitArea: function (hitAreaId) {
@@ -1177,6 +1184,15 @@ export default {
 					d3.select(this).classed('highlighted', i === hitAreaId - 1);
 					d3.select(this).classed('muted', i !== hitAreaId - 1);
 				});
+
+			if (this.screenIsSmall) {
+				// universal/learned labels
+				labelContainer.selectAll('.universal-learned-labels .emotion-label')
+					.each(function (d, i) {
+						d3.select(this).classed('highlighted', i === hitAreaId - 4);
+						d3.select(this).classed('muted', i !== hitAreaId - 4);
+					});
+			}
 
 		}, 1);
 

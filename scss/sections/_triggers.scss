@@ -178,6 +178,29 @@
 		text-align: center;
 		transform: translate(-50%,-50%);
 	}
+
+	// because of custom transform on mobile,
+	// have to place border on h3 instead of .highlighted container.
+	.highlighted {
+		border-width: 0;
+		border-color: transparent;
+		transition: none;
+		&[data-popuptarget] {
+			&.highlighted,
+			&.selected {
+				border-width: 0;
+				border-color: transparent;
+				transition: none;
+			}
+		}
+		h3 {
+			padding: 5px 10px;	// from _labels.scss
+			border-width: 1px;
+			border-style: solid;
+			@include emotion-border-color();
+		}
+	}
+
 	.universal h3 {
 		// no idea why this label is not lining up correctly.
 		// manual tweak.
