@@ -1665,8 +1665,22 @@ export default {
 
 		if (this.selectedState) {
 			let statesData = this.statesData[this.currentEmotion];
-			nextIndex = statesData.findIndex(s => s.name === this.selectedState) + dir;
-			nextIndex = nextIndex >= statesData.length ? 0 : nextIndex < 0 ? statesData.length - 1 : nextIndex;
+
+			// sort pagination order to match ascending peak height
+			let ranges = this.transformRanges(statesData, this.currentEmotion, 1.0)
+				.map((r, i) => ({
+					y: r[1].y,
+					index: i
+				}))
+				.sort((a, b) => b.y - a.y);
+
+			let sortedStates = ranges.map(r => statesData[r.index]);
+
+			nextIndex = sortedStates.findIndex(s => s.name === this.selectedState) + dir;
+			nextIndex = nextIndex >= sortedStates.length ? 0 : nextIndex < 0 ? sortedStates.length - 1 : nextIndex;
+
+			// map back to original array order
+			nextIndex = statesData.findIndex(s => s.name === sortedStates[nextIndex].name);
 		}
 
 		this.onStateClick(null, nextIndex);
