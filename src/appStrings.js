@@ -71,7 +71,7 @@ function appStrings (_lang, _screenIsSmall, _stringsLoadedCallback) {
 		// secondaryData will eventually be phased into emotionsData and will all run through this block,
 		// but until then, we leave secondaryData strings alone.
 		if (source === emotionsData) {
-			if (typeof parsedKey === 'string') {
+			if (typeof parsedKey === 'string' || typeof parsedKey === 'boolean') {
 				parsedValue = strings[parsedKey];
 			} else if (Array.isArray(parsedKey)) {
 				parsedValue = parsedKey.map((k, i) => {
