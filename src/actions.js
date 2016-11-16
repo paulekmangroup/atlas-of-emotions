@@ -72,7 +72,7 @@ export default {
 
 	init: function (containerNode, screenIsSmall) {
 
-		this.sectionContainer = containerNode;
+		this.sectionHitArea = containerNode;
 
 		this.screenIsSmall = screenIsSmall;
 
@@ -89,7 +89,9 @@ export default {
 		this.onActionMouseOver = this.onActionMouseOver.bind(this);
 		this.onActionMouseOut = this.onActionMouseOut.bind(this);
 		this.onActionMouseClick = this.onActionMouseClick.bind(this);
-		this.onHitAreaClick = this.onHitAreaClick.bind(this);
+		this.onContainerTouchStart = this.onContainerTouchStart.bind(this);
+		this.onContainerTouchMove = this.onContainerTouchMove.bind(this);
+		this.onContainerTouchEnd = this.onContainerTouchEnd.bind(this);
 		// this.onValenceMouseOver = this.onValenceMouseOver.bind(this);
 		// this.onValenceMouseOut = this.onValenceMouseOut.bind(this);
 		// this.onValenceMouseClick = this.onValenceMouseClick.bind(this);
@@ -231,6 +233,7 @@ export default {
 					.classed('valences', true);
 				*/
 
+				/*
 				if (this.screenIsSmall) {
 					graph.append('g')
 						.classed('actions-hit-area', true)
@@ -243,9 +246,9 @@ export default {
 						.attr('d', d3.svg.arc()
 							.innerRadius(0)
 							.outerRadius(radius * 1.1)
-						)
-						.on('click', () => this.onHitAreaClick());
+						);
 				}
+				*/
 
 				this.valenceTextures[emotion] = valenceTextures;
 
@@ -730,10 +733,15 @@ export default {
 			})
 			.attr('transform', d => 'rotate(' + d.rotation + ')');
 		if (!this.isBackgrounded) {
-			arrowEnterSelection
-				.on('mouseover', this.onActionMouseOver)
-				.on('mouseout', this.onActionMouseOut)
-				.on('click', this.onActionMouseClick);
+			if (this.screenIsSmall) {
+				d3.select(`#actions .${ this.currentEmotion } .graph-container`)
+					.on('touchstart', this.onContainerTouchStart);
+			} else {
+				arrowEnterSelection
+					.on('mouseover', this.onActionMouseOver)
+					.on('mouseout', this.onActionMouseOut)
+					.on('click', this.onActionMouseClick);
+			}
 		}
 		arrowEnterSelection.append('path')
 			.classed('gradient-fill', true)
@@ -817,9 +825,17 @@ export default {
 	clearStates: function (duration) {
 
 		if (this.currentEmotion) {
-			this.graphContainers[this.currentEmotion].selectAll('g.action-arrow')
-				.on('mouseover', null)
-				.on('mouseout', null)
+			let graphContainer = this.graphContainers[this.currentEmotion];
+			if (this.screenIsSmall) {
+				d3.select(`#actions .${ this.currentEmotion } .graph-container`)
+					.on('touchstart', null);
+			} else {
+				graphContainer.selectAll('g.action-arrow')
+					.on('mouseover', null)
+					.on('mouseout', null);
+			}
+
+			graphContainer.selectAll('g.action-arrow')
 			.data([]).exit().transition()
 				.duration(duration)
 				.remove()
@@ -1050,7 +1066,7 @@ export default {
 		this.screenIsSmall = screenIsSmall;
 
 		// recalculate containers, scales, etc
-		this.setUpGraphs(this.sectionContainer);
+		this.setUpGraphs(this.sectionHitArea);
 
 		for (let emotion in this.graphContainers) {
 
@@ -1093,9 +1109,9 @@ export default {
 
 			this.isBackgrounded = val;
 
-			this.sectionContainer.classList[(val ? 'add' : 'remove')]('backgrounded');
-			this.sectionContainer.classList[(options && (options.sectionName === dispatcher.SECTIONS.TRIGGERS) ? 'add' : 'remove')]('triggers');
-			this.sectionContainer.classList[(options && (options.sectionName === dispatcher.SECTIONS.MOODS) ? 'add' : 'remove')]('moods');
+			this.sectionHitArea.classList[(val ? 'add' : 'remove')]('backgrounded');
+			this.sectionHitArea.classList[(options && (options.sectionName === dispatcher.SECTIONS.TRIGGERS) ? 'add' : 'remove')]('triggers');
+			this.sectionHitArea.classList[(options && (options.sectionName === dispatcher.SECTIONS.MOODS) ? 'add' : 'remove')]('moods');
 
 			// deselect anything selected.
 			// currently only happens on mobile, but might also want to happen on desktop...
@@ -1258,20 +1274,77 @@ export default {
 
 	},
 
-	onHitAreaClick: function () {
+	/**
+	 * Hit area below/around actions arrows on mobile.
+	 */
+	onContainerTouchStart: function () {
 
-		if (d3.event) {
-			d3.event.stopImmediatePropagation();
+		this.touchedShape = null;
+		d3.select(`#actions .${ this.currentEmotion } .graph-container`)
+			.on('touchmove', this.onContainerTouchMove)
+			.on('touchend', this.onContainerTouchEnd)
+			.on('touchcancel', this.onContainerTouchEnd);
+
+		this.onContainerTouchMove();
+
+	},
+
+	onContainerTouchMove: function () {
+
+		let { event } = d3;
+		if (!event) return;
+
+		let touchedShape = document.elementFromPoint(event.touches[0].clientX, event.touches[0].clientY),
+			_actions = this;
+
+		if (touchedShape.nodeName === 'path') {
+			if (touchedShape !== this.touchedShape) {
+				// moving into a shape
+				this.touchedShape = touchedShape;
+				this.graphContainers[this.currentEmotion].selectAll('path')
+				.each(function (d, i) {
+					if (this === touchedShape) {
+						// if (action) this.onActionMouseClick(allActions[i]);
+						_actions.onActionMouseClick(d, i);
+					}
+				});
+			}
+		} else if (this.touchedShape) {
+			// moving out of a shape
+			this.touchedShape = null;
+			// this.onActionMouseOut();
+			
+			console.log("TODO: reimplement hitarea angle calculation for fuzzy action arrow hit areas");
+			// 
+			// TODO: reimplement hitarea angle calculation for fuzzy action arrow hit areas
+			// 
+			/*
+			let hitArea = d3.select(`#actions .${ this.currentEmotion } .graph-container .actions-hit-area`),
+				m = d3.mouse(hitArea.node()),
+				ang = Math.atan2(2 * m[1], m[0]),
+				{ allActions } = this.actionsData[this.currentEmotion],
+				i = Math.floor((1 - ang / Math.PI) * allActions.length),
+				action = allActions[Math.max(0, Math.min(i, allActions.length - 1))];
+
+			if (action) this.onActionMouseClick(allActions[i]);
+			*/
 		}
 
-		let hitArea = d3.select(`#actions .${ this.currentEmotion } .graph-container .actions-hit-area`),
-			m = d3.mouse(hitArea.node()),
-			ang = Math.atan2(2 * m[1], m[0]),
-			{ allActions } = this.actionsData[this.currentEmotion],
-			i = Math.floor((1 - ang / Math.PI) * allActions.length),
-			action = allActions[Math.max(0, Math.min(i, allActions.length - 1))];
+		// if a shape was just touched,
+		// kill the event before it can trigger onBackgroundClick
+		if (this.touchedShape) {
+			d3.event.stopImmediatePropagation();
+			d3.event.preventDefault();
+		}
 
-		if (action) this.onActionMouseClick(allActions[i]);
+	},
+
+	onContainerTouchEnd: function (event) {
+
+		d3.select(`#actions .${ this.currentEmotion } .graph-container`)
+			.on('touchmove', null)
+			.on('touchend', null)
+			.on('touchcancel', null);
 
 	},
 
