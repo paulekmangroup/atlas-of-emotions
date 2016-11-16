@@ -89,6 +89,7 @@ export default {
 		this.onActionMouseOver = this.onActionMouseOver.bind(this);
 		this.onActionMouseOut = this.onActionMouseOut.bind(this);
 		this.onActionMouseClick = this.onActionMouseClick.bind(this);
+		this.onHitAreaClick = this.onHitAreaClick.bind(this);
 		// this.onValenceMouseOver = this.onValenceMouseOver.bind(this);
 		// this.onValenceMouseOut = this.onValenceMouseOut.bind(this);
 		// this.onValenceMouseClick = this.onValenceMouseClick.bind(this);
@@ -229,6 +230,22 @@ export default {
 				graph.append('g')
 					.classed('valences', true);
 				*/
+
+				if (this.screenIsSmall) {
+					graph.append('g')
+						.classed('actions-hit-area', true)
+					.append('path')
+						.datum({
+							startAngle: 0.5 * Math.PI,
+							endAngle: 1.5 * Math.PI
+						})
+						.style('fill', 'rgba(255, 255, 255, 0)')
+						.attr('d', d3.svg.arc()
+							.innerRadius(0)
+							.outerRadius(radius * 1.1)
+						)
+						.on('click', () => this.onHitAreaClick());
+				}
 
 				this.valenceTextures[emotion] = valenceTextures;
 
@@ -1238,6 +1255,23 @@ export default {
 			clearTimeout(this.mouseOutTimeout);
 		}
 		this.setHighlightedAction(d);
+
+	},
+
+	onHitAreaClick: function () {
+
+		if (d3.event) {
+			d3.event.stopImmediatePropagation();
+		}
+
+		let hitArea = d3.select(`#actions .${ this.currentEmotion } .graph-container .actions-hit-area`),
+			m = d3.mouse(hitArea.node()),
+			ang = Math.atan2(2 * m[1], m[0]),
+			{ allActions } = this.actionsData[this.currentEmotion],
+			i = Math.floor((1 - ang / Math.PI) * allActions.length),
+			action = allActions[Math.max(0, Math.min(i, allActions.length - 1))];
+
+		if (action) this.onActionMouseClick(allActions[i]);
 
 	},
 
