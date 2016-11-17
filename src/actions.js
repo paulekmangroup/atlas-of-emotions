@@ -1274,9 +1274,6 @@ export default {
 
 	},
 
-	/**
-	 * Hit area below/around actions arrows on mobile.
-	 */
 	onContainerTouchStart: function () {
 
 		this.touchedShape = null;
@@ -1298,36 +1295,55 @@ export default {
 			_actions = this;
 
 		if (touchedShape.nodeName === 'path') {
+			// touch is on an action arrow
 			if (touchedShape !== this.touchedShape) {
 				// moving into a shape
 				this.touchedShape = touchedShape;
 				this.graphContainers[this.currentEmotion].selectAll('path')
 				.each(function (d, i) {
-					if (this === touchedShape) {
-						// if (action) this.onActionMouseClick(allActions[i]);
+					if (this === touchedShape) _actions.onActionMouseClick(d, i);
+				});
+			}
+		} else {
+			// touch is not on an action arrow;
+			// see if there is a nearby arrow
+			this.touchedShape = null;
+			
+			const angThreshold = Math.min(10, 180 / (1.5 * this.actionsData[this.currentEmotion].allActions.length)),	// detect touches within angle determined by total number of arrows,
+																														// but no more than 10 degrees from an arrow
+				radThreshold = 0.4;
+
+			let container = this.graphContainers[this.currentEmotion].node(),
+				m = d3.mouse(container),
+				ang = 180 * Math.atan2(2 * m[1], m[0]) / Math.PI + 90,	// normalize to same scale used by action.rotation
+				rad = Math.sqrt(m[0] * m[0] + m[1] * m[1]),
+				closestIndex = -1,
+				closestAngDelta = Number.POSITIVE_INFINITY,
+				dAng;
+
+			// only check for nearest action arrow if we're far enough away from the middle
+			// that there won't be lots of noise with overlapping actions
+			if (rad / container.getBoundingClientRect().height > 0.5) {
+				this.graphContainers[this.currentEmotion].selectAll('path')
+					.each((d, i) => {
+						dAng = Math.abs(d.rotation - ang);
+						if (dAng < closestAngDelta && dAng <= angThreshold) {
+							closestAngDelta = dAng;
+							closestIndex = i;
+						}
+					});
+			}
+
+			// gymnastics going back and forth between DOM element and data associated with it >.<
+			if (closestIndex !== -1) {
+				this.graphContainers[this.currentEmotion].selectAll('path')
+				.each(function (d, i) {
+					if (i === closestIndex) {
+						_actions.touchedShape = this;
 						_actions.onActionMouseClick(d, i);
 					}
 				});
 			}
-		} else if (this.touchedShape) {
-			// moving out of a shape
-			this.touchedShape = null;
-			// this.onActionMouseOut();
-			
-			console.log("TODO: reimplement hitarea angle calculation for fuzzy action arrow hit areas");
-			// 
-			// TODO: reimplement hitarea angle calculation for fuzzy action arrow hit areas
-			// 
-			/*
-			let hitArea = d3.select(`#actions .${ this.currentEmotion } .graph-container .actions-hit-area`),
-				m = d3.mouse(hitArea.node()),
-				ang = Math.atan2(2 * m[1], m[0]),
-				{ allActions } = this.actionsData[this.currentEmotion],
-				i = Math.floor((1 - ang / Math.PI) * allActions.length),
-				action = allActions[Math.max(0, Math.min(i, allActions.length - 1))];
-
-			if (action) this.onActionMouseClick(allActions[i]);
-			*/
 		}
 
 		// if a shape was just touched,
