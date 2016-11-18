@@ -348,9 +348,10 @@ export default {
 
 		this.calloutActive = active;
 		if (active) {
-			let moodDesc = appStrings().getStr(`emotionsData.emotions.${ this.currentEmotion }.moods[0].desc`);
+			let moodHeader = this.screenIsSmall ? appStrings().getStr(`emotionsData.emotions.${ this.currentEmotion }.moods[0].name`) : this.currentEmotion,
+				moodDesc = appStrings().getStr(`emotionsData.emotions.${ this.currentEmotion }.moods[0].desc`);
 			// will want to set popup up here
-			dispatcher.popupChange('moods', this.currentEmotion, moodDesc);
+			dispatcher.popupChange('moods', moodHeader, moodDesc);
 			this.setBackgroundListener(true);
 		} else {
 			dispatcher.popupChange();
