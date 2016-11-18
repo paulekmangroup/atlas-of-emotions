@@ -92,8 +92,6 @@ export default {
 		this.moodCircles.attr('width', width)
 			.attr('height', height);
 
-		let clickAction = this.onElementClick;
-
 		this.moodCircles.selectAll(".moodCircle")
 			.data(this.moodCircleRadii)
 			.enter()
@@ -112,10 +110,8 @@ export default {
 						d3.selectAll(".label").classed("showBorder", false);
 					}
 				})
-				.on('click', function(d, i){
-					if(i == 2){
-						clickAction();
-					}
+				.on('click', (d, i) => {
+					if (this.screenIsSmall || i === 2) this.onElementClick();
 				});
 
 		this.resizeMoodCircles(width, height, radius);
