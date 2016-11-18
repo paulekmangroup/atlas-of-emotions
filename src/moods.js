@@ -24,8 +24,6 @@ export default {
 
 		this.screenIsSmall = screenIsSmall;
 
-		this.onElementOver = this.onElementOver.bind(this);
-		this.onElementOut = this.onElementOut.bind(this);
 		this.onElementClick = this.onElementClick.bind(this);
 
 		//this.overlayContainer = document.createElement('div');
@@ -102,13 +100,13 @@ export default {
 			.append("g")
 			.append("circle")
 				.attr('class', function(d,i){return 'moodCircle circle' + i;})
-				.on('mouseover', function(d, i){
+				.on('mouseover', this.screenIsSmall ? null : function(d, i) {
 					if(d3.selectAll('.label').filter('.popped')[0].length == 0){
 						d3.selectAll(".moodCircle").classed("highlight" + i, true);
 						d3.selectAll(".label").classed("showBorder", true);
 					}
 				})
-				.on('mouseout', function(d, i){
+				.on('mouseout', this.screenIsSmall ? null : function(d, i){
 					if(d3.selectAll('.label').filter('.popped')[0].length == 0){
 						d3.selectAll(".moodCircle").classed("highlight" + i, false);
 						d3.selectAll(".label").classed("showBorder", false);
@@ -309,21 +307,6 @@ export default {
 
 	},
 
-	onElementOver: function (event) {
-
-		if (!event) { event = d3.event; }
-		event.stopImmediatePropagation();
-
-		// don't execute mouseout behavior when rolling from one hit area into another
-	},
-
-	onElementOut: function (event) {
-
-		if (!event) { event = d3.event; }
-		event.stopImmediatePropagation();
-
-	},
-
 	onElementClick: function (event) {
 
 		if (d3.event) {
@@ -331,11 +314,19 @@ export default {
 			d3.event.stopImmediatePropagation();
 		}
 
-		if (this.calloutActive) {
-			return this.setCallout(false);
+		let activate = !this.calloutActive;
+
+		// on mobile, toggle mood circle highlights here
+		// instead of in mouseover/mouseout handlers
+		if (this.screenIsSmall) {
+			d3.selectAll(".moodCircle")
+				.each(function (d, i) {
+					this.classList[activate ? 'add' : 'remove'](`highlight${ i }`);
+				});
 		}
 
-		this.setCallout(true);
+		this.setCallout(activate);
+
 
 	},
 
