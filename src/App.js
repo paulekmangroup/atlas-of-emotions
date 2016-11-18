@@ -1522,12 +1522,14 @@ export default function (...initArgs) {
 	function updateMobileUI () {
 
 		// show title mobile header and hide mobile footer when appropriate
-		let titleHeaderAndFooter = 
-			(currentSection === sections[dispatcher.SECTIONS.CONTINENTS] && !currentEmotion) ||
+		let titleHeader = 
+			currentSection === sections[dispatcher.SECTIONS.CONTINENTS] ||
 			currentSection === sections[dispatcher.SECTIONS.MORE];
-		updateArrowVisibility(null, !titleHeaderAndFooter);
+		let titleFooter = currentSection === sections[dispatcher.SECTIONS.CONTINENTS] && !currentEmotion;
 
-		if (titleHeaderAndFooter) {
+		updateArrowVisibility(null, !titleFooter);
+
+		if (titleHeader) {
 			document.querySelector('#mobile-header .nav-button').style.display = 'none';
 			document.querySelector('#mobile-header .header-content').style.display = 'block';
 			document.querySelector('#mobile-header .dropdown').classList.remove('dark');
