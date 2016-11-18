@@ -43,13 +43,19 @@
 	cursor: pointer;
 
 	&.highlight0 {
-		opacity: .2
+		opacity: .2;
 	}
 	&.highlight1 {
-		opacity: .4
+		opacity: .4;
+		&.mobile-lighten {
+			opacity: .2;
+		}
 	}
 	&.highlight2 {
-		opacity: .6
+		opacity: .6;
+		&.mobile-lighten {
+			opacity: .4;
+		}
 	}
 
 	// this should probably be done with a transition instead of animation

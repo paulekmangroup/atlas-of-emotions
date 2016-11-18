@@ -314,7 +314,10 @@ export default {
 			d3.event.stopImmediatePropagation();
 		}
 
-		let activate = !this.calloutActive;
+		let activate = !this.calloutActive,
+			lightenEmotion = this.currentEmotion === dispatcher.EMOTIONS.FEAR ||
+				this.currentEmotion === dispatcher.EMOTIONS.DISGUST ||
+				this.currentEmotion === dispatcher.EMOTIONS.SADNESS;
 
 		// on mobile, toggle mood circle highlights here
 		// instead of in mouseover/mouseout handlers
@@ -322,6 +325,7 @@ export default {
 			d3.selectAll(".moodCircle")
 				.each(function (d, i) {
 					this.classList[activate ? 'add' : 'remove'](`highlight${ i }`);
+					if (lightenEmotion) this.classList[activate ? 'add' : 'remove']('mobile-lighten');
 				});
 		}
 
