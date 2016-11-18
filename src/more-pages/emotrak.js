@@ -77,7 +77,7 @@ export default {
 		this.sectionContainer.classList.add('active');
 
 		if (this.wrapper) {
-			document.querySelector('.sub-blocks').scrollTo(0, 0);
+			window.scrollTo(0, 0);
 		}
 		// any section-wide opening animations not specific to a particular page go here.
 		// probably won't be anything here for the more info section.

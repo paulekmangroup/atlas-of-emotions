@@ -1628,6 +1628,14 @@ export default function (...initArgs) {
 			mobileCaption.style.removeProperty('height');
 		}
 
+		// hide mobile caption on More pages
+		if (currentSection === sections[dispatcher.SECTIONS.MORE]) {
+			mobileCaption.style.display = 'none';
+		} else {
+			mobileCaption.style.removeProperty('display');
+		}
+		
+
 		updateMobileUI();
 
 		mobileCaption.querySelector('.headline').innerHTML = title || '';

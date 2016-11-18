@@ -23,6 +23,7 @@ import AnnexTraits from './more-pages/annex-traits.js';
 export default {
 
 	isInited: false,
+	screenIsSmall: false,
 	currentEmotion: null,
 	currentPage: null,
 	previousPage: null,
@@ -30,8 +31,11 @@ export default {
 	pages: {},
 	containers: {},
 
-	init: function (containerNode) {
+	init: function (containerNode, screenIsSmall) {
+
 		this.sectionContainer = containerNode;
+
+		this.screenIsSmall = screenIsSmall;
 
 		this.initContainers();
 		this.initialPages();
@@ -80,6 +84,11 @@ export default {
 		this.toggleMoreClass(true);
 
 		// any section-wide opening animations not specific to a particular page go here.
+		
+		if (this.screenIsSmall) {
+			// no mobile caption on More pages
+			dispatcher.changeCallout();
+		}
 
 	},
 
@@ -97,8 +106,10 @@ export default {
 
 	},
 
-	onResize: function () {
-		console.log('RESIZE: ');
+	onResize: function (screenIsSmall) {
+
+		this.screenIsSmall = screenIsSmall;
+		
 		if (!this.currentPage) return;
 
 		if (typeof this.pages[this.currentPage].onResize === 'function') {
