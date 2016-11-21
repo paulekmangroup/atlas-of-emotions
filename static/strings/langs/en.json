@@ -6,7 +6,7 @@
         },
         {
             "key": "intro_body_mobile",
-            "value": "This atlas was inspired by a series of conversations between the Dalai Lama and Dr. Paul Ekman about the science of emotion.<br><br> The following collection of maps provide an opportunity to explore the landscape of emotions, where they come from and the effects they can have."
+            "value": "This Atlas was inspired by a series of conversations about the science of emotion between the Dalai Lama and Dr. Paul Ekman. Created in collaboration with Stamen Design and Paul’s daughter, Dr. Eve Ekman, the Atlas of Emotions is an interactive visual journey through the world of emotions."
         },
         {
             "key": "intro_secondary_header_1",
@@ -14,7 +14,7 @@
         },
         {
             "key": "intro_secondary_copy_1",
-            "value": "This atlas was inspired by a series of conversations between the <a href=\"http://www.dalailama.com/\" target=\"_blank\">Dalai Lama</a> and <a href=\"http://www.paulekman.com/\" target=\"_blank\">Paul Ekman</a> about the science of emotions. With the help of <a href=\"http://www.stamen.com/\" target=\"_blank\">Stamen Design</a> and Paul’s daughter, Dr. Eve Ekman, this tool was created to be a visual journey through the world of emotions.<br><br> Learn more about the work of Paul Ekman at <a href=\"http://www.paulekman.com/\" target=\"_blank\">www.paulekman.com</a>."
+            "value": "This Atlas was inspired by a series of conversations about the science of emotion between the Dalai Lama and Dr. Paul Ekman. Created in collaboration with Stamen Design and Paul’s daughter, Dr. Eve Ekman, the Atlas of Emotions is an interactive visual journey through the world of emotions."
         },
         {
             "key": "intro_caption_1",
@@ -22,11 +22,11 @@
         },
         {
             "key": "intro_secondary_header_2",
-            "value": "What it’s based on"
+            "value": "BASED ON EMOTION RESEARCH"
         },
         {
             "key": "intro_secondary_copy_2",
-            "value": "In June 2014, Paul Ekman sent a <a href=\"http://pps.sagepub.com/content/11/1/31.full.pdf?ijkey=AMIJzv8J9Tn0VF1&keytype=finite\" target=\"_blank\">survey</a> to 248 of the most active emotion researchers in the world to establish the consensus that provided <a href=\"#more:annex-scientific-basis\">the scientific basis for this atlas</a>."
+            "value": "In 2014, Paul Ekman sent a survey to 248 of the world’s most active emotion researchers. Their replies provided the scientific basis for this Atlas. \t"
         },
         {
             "key": "intro_caption_2",
@@ -34,11 +34,11 @@
         },
         {
             "key": "intro_secondary_header_3",
-            "value": "How to navigate"
+            "value": "NAVIGATING THE ATLAS"
         },
         {
             "key": "intro_secondary_copy_3",
-            "value": "This collection of maps is an opportunity for you to explore the landscape of emotions, where they come from, and the effects they can have. Click on shapes to learn about them. Use the arrows and scrollbar to navigate to other pages."
+            "value": "You're invited to explore the landscape of emotions, learning about their origins and the effects they can have. Click on shapes to read about them. Use the arrows and scrollbar to navigate to other pages."
         },
         {
             "key": "intro_section_name",
@@ -50,7 +50,7 @@
         },
         {
             "key": "continents_body",
-            "value": "Most emotions researchers agree on these five Universal Emotions: emotions that all humans, no matter where or how we were raised, have in common. The movement of the shapes reflects how the emotions vary in strength and frequency in our lives. Select an emotion to learn more."
+            "value": "Most emotions researchers agree on these five Universal Emotions: emotions that all humans, no matter where or how we were raised, have in common. The movement of the shapes reflects the fluid nature of emotions – the way their strength and frequency varies from moment to moment. Select an emotion to learn more."
         },
         {
             "key": "continents_body_mobile",
@@ -158,7 +158,7 @@
         },
         {
             "key": "triggers_secondary_body_4",
-            "value": "This is an example of a universal trigger. Universal triggers are innate, common to everyone. They affect us more intensely than learned triggers."
+            "value": "This is an example of a universal trigger. Everyone has the same universal triggers – we're born with them. They affect us more intensely than learned triggers.\r\r"
         },
         {
             "key": "triggers_secondary_header_5",
@@ -166,7 +166,7 @@
         },
         {
             "key": "triggers_secondary_body_5",
-            "value": "This is an example of a learned trigger. Learned triggers can be informed by our culture, stemming from widely shared experiences and norms, or personal, created from important and impactful individual experiences."
+            "value": "This is an example of a learned trigger. Some learned triggers are shared across a culture, while others are highly personal and created by individual experiences. \r"
         },
         {
             "key": "triggers_section_name",
@@ -194,7 +194,7 @@
         },
         {
             "key": "calm_body",
-            "value": "A calm, balanced frame of mind helps us understand our changing emotions. We can reach calmness through developing an awareness of what triggers our emotions, how we experience our states of emotions and what actions are constructive. Calmness ideally is our baseline in which emotions arise when triggered and then recede."
+            "value": "A calm, balanced frame of mind helps us understand our changing emotions. We can reach calmness through developing an awareness of our emotions: what triggers them, how we experience them and how we can respond constructively.  \r \r"
         },
         {
             "key": "calm_body_mobile",
@@ -236,7 +236,7 @@
         },
         {
             "key": "anger_states_body_1",
-            "value": "Very mild anger."
+            "value": "Very mild anger caused by a nuisance or inconvenience. "
         },
         {
             "key": "anger_states_header_2",
@@ -244,7 +244,7 @@
         },
         {
             "key": "anger_states_body_2",
-            "value": "A response to failure to overcome an obstacle despite repeated attempts."
+            "value": "A response to repeated failures to overcome an obstacle."
         },
         {
             "key": "anger_states_header_3",
@@ -252,7 +252,7 @@
         },
         {
             "key": "anger_states_body_3",
-            "value": "An inclination to prolong disagreements."
+            "value": "A tendency to engage in disagreements."
         },
         {
             "key": "anger_states_header_4",
@@ -260,7 +260,7 @@
         },
         {
             "key": "anger_states_body_4",
-            "value": "Disappointment that no one wanted to settle a problem."
+            "value": "Anger after unfair treatment. "
         },
         {
             "key": "anger_states_header_5",
@@ -268,7 +268,7 @@
         },
         {
             "key": "anger_states_body_5",
-            "value": "A loss of patience at repeated failures to settle a problem."
+            "value": "Anger caused by a repeated or strong nuisance. "
         },
         {
             "key": "anger_states_header_6",
@@ -276,7 +276,7 @@
         },
         {
             "key": "anger_states_body_6",
-            "value": "A desire for retaliation."
+            "value": "Desire to retaliate after one is hurt. "
         },
         {
             "key": "anger_states_header_7",
@@ -284,7 +284,7 @@
         },
         {
             "key": "anger_states_body_7",
-            "value": "Intense anger."
+            "value": "Uncontrolled and often violent anger."
         },
         {
             "key": "anger_actions_header_1",
@@ -316,7 +316,7 @@
         },
         {
             "key": "anger_actions_body_4",
-            "value": "Disagree in a manner that may escalate an argument."
+            "value": "Disagree in a manner that may escalate the conflict."
         },
         {
             "key": "anger_actions_header_5",
@@ -324,7 +324,7 @@
         },
         {
             "key": "anger_actions_body_5",
-            "value": "Lose control of how one speaks; speak in a loud volume and, when screaming, in a higher pitch."
+            "value": "Lose control of one's speech; speak loudly and possibly at a higher pitch."
         },
         {
             "key": "anger_actions_header_6",
@@ -332,7 +332,7 @@
         },
         {
             "key": "anger_actions_body_6",
-            "value": "Harm or constrain someone, an action that may be deliberately chosen or the result of a loss of control over how one acts."
+            "value": "Harm or trap someone."
         },
         {
             "key": "anger_actions_header_7",
@@ -348,7 +348,7 @@
         },
         {
             "key": "anger_actions_body_8",
-            "value": "Act in a way that makes clear that angry actions are building or being contemplated."
+            "value": "Express anger by sulking."
         },
         {
             "key": "anger_actions_header_9",
@@ -408,7 +408,7 @@
         },
         {
             "key": "anger_moods_body",
-            "value": "A readiness, a need to become angry. Filtering perceptions to see provocations not noticed when not irritable."
+            "value": "Predisposed to becoming angry, easily provoked. "
         }
     ],
     [
@@ -442,7 +442,7 @@
         },
         {
             "key": "fear_states_body_2",
-            "value": "Inability to cope with an anticipated or actual threat."
+            "value": "Fear of an anticipated or actual threat and uncertainty about one's ability to cope with it. "
         },
         {
             "key": "fear_states_header_3",
@@ -474,7 +474,7 @@
         },
         {
             "key": "fear_states_body_6",
-            "value": "A consequence of desperation."
+            "value": "Sudden uncontrollable fear."
         },
         {
             "key": "fear_states_header_7",
@@ -482,7 +482,7 @@
         },
         {
             "key": "fear_states_body_7",
-            "value": "A mixture of fear and disgust."
+            "value": "A mixture of fear, disgust, and shock."
         },
         {
             "key": "fear_states_header_8",
@@ -490,7 +490,7 @@
         },
         {
             "key": "fear_states_body_8",
-            "value": "Maximum fear."
+            "value": "Intense, overpowering fear."
         },
         {
             "key": "fear_actions_header_1",
@@ -506,7 +506,7 @@
         },
         {
             "key": "fear_actions_body_2",
-            "value": "Either physically stay away from someone or something, or internally keep one’s mind away from what is triggering the fear."
+            "value": "Either physically stay away from the threat or keep oneself from thinking about it."
         },
         {
             "key": "fear_actions_header_3",
@@ -530,7 +530,7 @@
         },
         {
             "key": "fear_actions_body_5",
-            "value": "Lose control of how one speaks; speak in a loud volume and, when screaming, in a higher pitch."
+            "value": "Lose control of one's speech; cry out in a loud and high voice."
         },
         {
             "key": "fear_actions_header_6",
@@ -538,7 +538,7 @@
         },
         {
             "key": "fear_actions_body_6",
-            "value": "Repetitively think about the emotional experience."
+            "value": "Obsessively think about a past emotional experience. "
         },
         {
             "key": "fear_actions_header_7",
@@ -598,7 +598,7 @@
         },
         {
             "key": "fear_moods_body",
-            "value": "Expecting harm but not knowing how to avoid it. Perceiving threats when they are not there, or magnifying the seriousness of a threat."
+            "value": "Anxious that something bad will happen, on edge."
         }
     ],
     [
@@ -624,7 +624,7 @@
         },
         {
             "key": "disgust_states_body_1",
-            "value": "The mildest form of disgust."
+            "value": "A preference against something."
         },
         {
             "key": "disgust_states_header_2",
@@ -632,7 +632,7 @@
         },
         {
             "key": "disgust_states_body_2",
-            "value": "A desire to avoid something disgusting."
+            "value": "An impulse to avoid something disgusting."
         },
         {
             "key": "disgust_states_header_3",
@@ -640,7 +640,7 @@
         },
         {
             "key": "disgust_states_body_3",
-            "value": "Response to a bad taste or smell; can also be metaphorical."
+            "value": "Reaction to a bad taste, smell, thing or idea. Can be literal or metaphorical."
         },
         {
             "key": "disgust_states_header_4",
@@ -648,7 +648,7 @@
         },
         {
             "key": "disgust_states_body_4",
-            "value": "Repulsion to something literally or figuratively toxic."
+            "value": "Strong distaste for something, often a concept or idea."
         },
         {
             "key": "disgust_states_header_5",
@@ -656,7 +656,7 @@
         },
         {
             "key": "disgust_states_body_5",
-            "value": "Very intense disgust."
+            "value": "A mixture of disgust and loathing. "
         },
         {
             "key": "disgust_states_header_6",
@@ -664,7 +664,7 @@
         },
         {
             "key": "disgust_states_body_6",
-            "value": "Extreme repulsion."
+            "value": "A mixture of intense disgust and hatred."
         },
         {
             "key": "disgust_states_header_7",
@@ -672,7 +672,7 @@
         },
         {
             "key": "disgust_states_body_7",
-            "value": "Intense disgust focused on a person."
+            "value": "Intense disgust focused on a person. Intense disgust focused on oneself is called self-loathing. "
         },
         {
             "key": "disgust_actions_header_1",
@@ -688,7 +688,7 @@
         },
         {
             "key": "disgust_actions_body_2",
-            "value": "Either physically stay away from someone or something, or internally keep one’s mind away from what is triggering the disgust."
+            "value": "Either physically stay away from whatever is triggering the disgust or keep oneself from thinking about it."
         },
         {
             "key": "disgust_actions_header_3",
@@ -696,7 +696,7 @@
         },
         {
             "key": "disgust_actions_body_3",
-            "value": "Expel material from the stomach via the mouth; metaphorically denotes very intense disgust."
+            "value": "Respond to feelings of disgust by throwing up. "
         },
         {
             "key": "disgust_actions_header_4",
@@ -748,7 +748,7 @@
         },
         {
             "key": "disgust_moods_body",
-            "value": "Disgust can occur as a mood, a generalized feeling of repugnance."
+            "value": "Generally repulsed."
         }
     ],
     [
@@ -782,7 +782,7 @@
         },
         {
             "key": "sadness_states_body_2",
-            "value": "Acceptance that nothing can be done."
+            "value": "The belief that nothing can be done. "
         },
         {
             "key": "sadness_states_header_3",
@@ -790,7 +790,7 @@
         },
         {
             "key": "sadness_states_body_3",
-            "value": "Agitated sadness."
+            "value": "Sadness that makes it hard to think clearly. [or: A mixture of sadness and agitation.]"
         },
         {
             "key": "sadness_states_header_4",
@@ -798,7 +798,7 @@
         },
         {
             "key": "sadness_states_body_4",
-            "value": "A feeling that there is no way to cope."
+            "value": "A response to repeated failures to accomplish something: the belief that it can't be done."
         },
         {
             "key": "sadness_states_header_5",
@@ -806,7 +806,7 @@
         },
         {
             "key": "sadness_states_body_5",
-            "value": "Realization of the inability to prevent or cope with loss."
+            "value": "The realization that one cannot make a situation better or easier."
         },
         {
             "key": "sadness_states_header_6",
@@ -814,7 +814,7 @@
         },
         {
             "key": "sadness_states_body_6",
-            "value": "Anguished sadness, usually prolonged."
+            "value": "Strong suffering or unhappiness."
         },
         {
             "key": "sadness_states_header_7",
@@ -822,7 +822,7 @@
         },
         {
             "key": "sadness_states_body_7",
-            "value": "A feeling that nothing good is to come."
+            "value": "The belief that nothing good will happen."
         },
         {
             "key": "sadness_states_header_8",
@@ -830,7 +830,7 @@
         },
         {
             "key": "sadness_states_body_8",
-            "value": "Anguished sadness over the loss of a loved one."
+            "value": "Sadness over a deep loss. "
         },
         {
             "key": "sadness_states_header_9",
@@ -838,7 +838,7 @@
         },
         {
             "key": "sadness_states_body_9",
-            "value": "Resigned anguish."
+            "value": "The loss of hope that a bad situation will improve or change."
         },
         {
             "key": "sadness_states_header_10",
@@ -846,7 +846,7 @@
         },
         {
             "key": "sadness_states_body_10",
-            "value": "Sadness over a loss."
+            "value": "A feeling of distress and sadness, often caused by a loss."
         },
         {
             "key": "sadness_states_header_11",
@@ -854,7 +854,7 @@
         },
         {
             "key": "sadness_states_body_11",
-            "value": "Intense agitated sadness."
+            "value": "Intense sadness or suffering."
         },
         {
             "key": "sadness_actions_header_1",
@@ -870,7 +870,7 @@
         },
         {
             "key": "sadness_actions_body_2",
-            "value": "Physically or mentally leave the scene of what is triggering the sadness."
+            "value": "Either physically stay away from what is triggering the sadness or keep oneself from thinking about it."
         },
         {
             "key": "sadness_actions_header_3",
@@ -878,7 +878,7 @@
         },
         {
             "key": "sadness_actions_body_3",
-            "value": "Repetitively think about the emotional experience."
+            "value": "Obsessively think about the emotional experience. "
         },
         {
             "key": "sadness_actions_header_4",
@@ -886,7 +886,7 @@
         },
         {
             "key": "sadness_actions_body_4",
-            "value": "Focus on the loss."
+            "value": "Express grief for one's loss through actions, dress and speech."
         },
         {
             "key": "sadness_actions_header_5",
@@ -894,7 +894,7 @@
         },
         {
             "key": "sadness_actions_body_5",
-            "value": "Complain about the loss, knowing that the complaint will not recover what was lost."
+            "value": "Object to the loss."
         },
         {
             "key": "sadness_actions_header_6",
@@ -902,7 +902,7 @@
         },
         {
             "key": "sadness_actions_body_6",
-            "value": "Feel the need to hide how one feels about what or who is lost."
+            "value": "Feel embarrassed by one's feelings about the loss."
         },
         {
             "key": "sadness_triggers_universal_header_mobile",
@@ -946,7 +946,7 @@
         },
         {
             "key": "sadness_moods_body",
-            "value": "Feelings of resignation, discouragement or disappointment that endure. Anguish does not transform into a mood."
+            "value": "An enduring feeling of discouragement or disappointment."
         }
     ],
     [
@@ -1004,7 +1004,7 @@
         },
         {
             "key": "enjoyment_states_body_5",
-            "value": "Enjoyment felt when you act to relieve another person’s suffering."
+            "value": "Enjoyment of helping to relieve another person's suffering."
         },
         {
             "key": "enjoyment_states_header_6",
@@ -1020,7 +1020,7 @@
         },
         {
             "key": "enjoyment_states_body_7",
-            "value": "An Italian word that describes the enjoyment felt when you have met a challenge that stretched your capabilities."
+            "value": "Enjoyment of meeting a difficult challenge (an Italian word). "
         },
         {
             "key": "enjoyment_states_header_8",
@@ -1028,7 +1028,7 @@
         },
         {
             "key": "enjoyment_states_body_8",
-            "value": "A Yiddish word for feelings of pride in the accomplishments, or sometimes just the existence, of your actual offspring or mentored offspring. Crucial for motivating the nurture of infants and children."
+            "value": "Joyful pride in the accomplishments of one's children or mentees (a Yiddish word)."
         },
         {
             "key": "enjoyment_states_header_9",
@@ -1036,7 +1036,7 @@
         },
         {
             "key": "enjoyment_states_body_9",
-            "value": "A desire for others to know the pleasure you feel in your own accomplishments or the accomplishments of someone you either nurtured directly or identify with."
+            "value": "Deep pleasure and satisfaction derived from one's own achievements or the achievements of an associate."
         },
         {
             "key": "enjoyment_states_header_10",
@@ -1060,7 +1060,7 @@
         },
         {
             "key": "enjoyment_states_body_12",
-            "value": "Energy that, unlike other enjoyable emotions, is rarely felt slightly, but ranges from mid to high in intensity. May merge with any of the emotions, generating a very active form of that emotion."
+            "value": "A powerful enthusiasm. "
         },
         {
             "key": "enjoyment_states_header_13",
@@ -1116,7 +1116,7 @@
         },
         {
             "key": "enjoyment_actions_body_6",
-            "value": "Desire connection and engagement with others to share in feelings of enjoyment."
+            "value": "Share one's feelings of enjoyment with others without a desire to cause jealousy."
         },
         {
             "key": "enjoyment_actions_header_7",
@@ -1124,7 +1124,7 @@
         },
         {
             "key": "enjoyment_actions_body_7",
-            "value": "Relish the experience of good feelings about physical and psychological experiences."
+            "value": "Appreciate the good feelings around an experience completely, especially by dwelling on them."
         },
         {
             "key": "enjoyment_actions_header_8",
@@ -1132,7 +1132,7 @@
         },
         {
             "key": "enjoyment_actions_body_8",
-            "value": "Excessively engage in the enjoyable feelings."
+            "value": "Allow oneself to fully experience the pleasure of good feelings. "
         },
         {
             "key": "enjoyment_triggers_universal_header_mobile",
@@ -1184,7 +1184,7 @@
         },
         {
             "key": "enjoyment_moods_body",
-            "value": "Generalized, non-specific, non-triggered good feeling, lasting hours."
+            "value": "A long-lasting, generalized good feeling. "
         }
     ],
     [
@@ -1194,7 +1194,7 @@
         },
         {
             "key": "about_intro_body",
-            "value": "The goal of this Atlas is provide a visual tool to explore and identify some of our primary emotions. The site invites your exploration in to the continents of 5 basic emotions and their related states of feelings, how we respond with actions to these emotions, what triggers our emotions and the experience of moods. While emotions are central to our lives – providing the joy, alerting us to threats, a force for change, a warning against what is toxic, and calling to others for help – we don’t choose what to feel or when to feel it. The Atlas of Emotions was created to build emotional awareness and sometimes even some choice about how we respond to what we are feeling, through better understanding of how emotions work.\n"
+            "value": "The Atlas of Emotions is an interactive tool designed to build emotional awareness. The site invites you to visualize, identify and explore five primary emotions (and their related feeling states, actions, triggers and moods) in order to gain a better understanding of how they influence our lives. Although we can’t always choose what emotions to feel or when to feel them, by building emotional awareness, it may be possible to choose how we respond to what we’re feeling. \n\nThe Atlas began when the Dalai Lama asked prominent emotion researcher Paul Ekman to create a map of the emotions that could help people learn to have more constructive emotional experiences. Ekman, an expert in the field, had previously consulted on a wide range of emotion-related projects, including the popular Pixar film Inside Out. With his daughter, scholar Eve Ekman, he created the Atlas of Emotions in response to the Dalai Lama’s request."
         },
         {
             "key": "about_intro_title_mobile",
@@ -1202,7 +1202,7 @@
         },
         {
             "key": "about_intro_body_mobile",
-            "value": "The goal of this Atlas is provide a visual tool to explore and identify some of our primary emotions. The site invites your exploration in to the continents of 5 basic emotions and their related states of feelings, how we respond with actions to these emotions, what triggers our emotions and the experience of moods. While emotions are central to our lives – providing the joy, alerting us to threats, a force for change, a warning against what is toxic, and calling to others for help – we don’t choose what to feel or when to feel it. The Atlas of Emotions was created to build emotional awareness and sometimes even some choice about how we respond to what we are feeling, through better understanding of how emotions work.\n"
+            "value": "The Atlas of Emotions is an interactive tool designed to build emotional awareness. The site invites you to visualize, identify and explore five primary emotions (and their related feeling states, actions, triggers and moods) in order to gain a better understanding of how they influence our lives. Although we can’t always choose what emotions to feel or when to feel them, by building emotional awareness, it may be possible to choose how we respond to what we’re feeling. \n\nThe Atlas began when the Dalai Lama asked prominent emotion researcher Paul Ekman to create a map of the emotions that could help people learn to have more constructive emotional experiences. Ekman, an expert in the field, had previously consulted on a wide range of emotion-related projects, including the popular Pixar film Inside Out. With his daughter, scholar Eve Ekman, he created the Atlas of Emotions in response to the Dalai Lama’s request."
         },
         {
             "key": "about_header_1",
@@ -1210,7 +1210,7 @@
         },
         {
             "key": "about_body_1",
-            "value": "Paul Ekman is a renowned American psychologist who pioneered the field of emotion research by demonstrating the universality of facial expression of emotion and mapping all 43 muscle groups used in facial expression. His widely accessible research has gained him the unique status of working with both law enforcement (to train people in identifying deception) and the Dalai Lama (to explore the philosophical underpinning of eastern and western approaches to emotions). After 40 years on the faculty of the University of California, San Francisco, he has been running a private training company, Paul Ekman Group, since 2001.<br><br>Eve Ekman is a post-doctoral scholar at UCSF’s Osher Center for Integrative Medicine. Eve’s research focuses on reducing stress to sustain empathy and meaning in work. She is a teacher trainer for Cultivating Emotional Balance (CEB), an emotion-regulation and meditation intervention based in western science and contemplative practices of emotion designed by Paul Ekman and Buddhist scholar B. Alan Wallace. Eve adapts CEB to train care providers in medicine, education and criminal justice."
+            "value": "Paul Ekman is a renowned American psychologist who pioneered the field of emotion research. After teaching at UCSF for 40 years and collaborating with partners as diverse as law enforcement agencies and the Dalai Lama, he now runs a private training company. \n \nEve Ekman is a post-doctoral scholar at UCSF’s Osher Center for Integrative Medicine. As a teacher trainer for Cultivating Emotional Balance (CEB), an emotion-regulation and meditation intervention, Eve adapts CEB to train care providers in various fields."
         },
         {
             "key": "about_header_2",
@@ -1218,7 +1218,7 @@
         },
         {
             "key": "about_body_2",
-            "value": "<a href=\"http://www.stamen.com/\">Stamen</a> was founded by Eric Rodenbeck in 2001 to take advantage of opportunities in emerging digital media in the wake of the dot-com crash. The studio has since grown to a staff of twelve and has established a reputation for its expertise in creating compelling interactive design and data visualization projects. Its portfolio is not easily classified, but is characterized by a loving engagement with media and a deep involvement with its collaborators. It is neither a research and development lab nor a straight-up design firm, but something in between: a place where work is valued, good ideas can come from anywhere, and results are paramount. Its close engagement with technology leads to numerous research projects that have a way of finding applications in the real world."
+            "value": "<a href=\"http://www.stamen.com/\">Stamen Design</a> was founded by Eric Rodenbeck in 2001. Since then, the studio has grown to a staff of 12 and established a reputation for its expertise in creating compelling interactive design and data visualization projects. Stamen is neither a research and development lab nor a traditional design firm, but something in between: a place where collaboration is valued, good ideas can come from anywhere and results are paramount. "
         },
         {
             "key": "about_header_3",
