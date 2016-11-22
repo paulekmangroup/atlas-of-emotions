@@ -94,7 +94,7 @@
         },
         {
             "key": "actions_secondary_copy_1",
-            "value": "In this state, this action is CONSTRUCTIVE. It enables collaboration."
+            "value": "In this state, this action is CONSTRUCTIVE. It’s a useful response the emotion."
         },
         {
             "key": "actions_secondary_header_2",
@@ -102,7 +102,7 @@
         },
         {
             "key": "actions_secondary_copy_2",
-            "value": "In this state, this action is AMBIGUOUS. It may either enable or inhibit collaboration."
+            "value": "In this state, this action is AMBIGUOUS. It could either be a useful response to the emotion or it could cause harm."
         },
         {
             "key": "actions_secondary_header_3",
@@ -110,7 +110,7 @@
         },
         {
             "key": "actions_secondary_copy_3",
-            "value": "In this state, this action is DESTRUCTIVE. It inhibits collaboration."
+            "value": "In this state, this action is DESTRUCTIVE. It could cause harm."
         },
         {
             "key": "actions_section_name",

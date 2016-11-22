@@ -216,7 +216,7 @@
     [
         {
             "key": "anger_continent_header",
-            "value": "Anger"
+            "value": "Enojo"
         },
         {
             "key": "anger_continent_header_mobile",
@@ -224,7 +224,7 @@
         },
         {
             "key": "anger_continent_body",
-            "value": "We are blocked in our progress or goal."
+            "value": "Nos enoja la interferencia"
         },
         {
             "key": "anger_continent_body_mobile",
@@ -232,131 +232,131 @@
         },
         {
             "key": "anger_states_header_1",
-            "value": "Annoyance"
+            "value": "Fastidio"
         },
         {
             "key": "anger_states_body_1",
-            "value": "Very mild anger."
+            "value": "Enojo muy leve"
         },
         {
             "key": "anger_states_header_2",
-            "value": "Frustration"
+            "value": "Frustración"
         },
         {
             "key": "anger_states_body_2",
-            "value": "A response to failure to overcome an obstacle despite repeated attempts."
+            "value": "Respuesta tras no haber podido superar un obstáculo pese a repetidos intentos."
         },
         {
             "key": "anger_states_header_3",
-            "value": "Argumentativeness"
+            "value": "Propensión a discutir"
         },
         {
             "key": "anger_states_body_3",
-            "value": "An inclination to prolong disagreements."
+            "value": "Inclinación a prolongar los desacuerdos."
         },
         {
             "key": "anger_states_header_4",
-            "value": "Bitterness"
+            "value": "Amargura"
         },
         {
             "key": "anger_states_body_4",
-            "value": "Disappointment that no one wanted to settle a problem."
+            "value": "Decepción porque nadie quiso resolver un problema."
         },
         {
             "key": "anger_states_header_5",
-            "value": "Exasperation"
+            "value": "Exasperación"
         },
         {
             "key": "anger_states_body_5",
-            "value": "A loss of patience at repeated failures to settle a problem."
+            "value": "Pérdida de paciencia ante repetidos fracasos para resolver un problema."
         },
         {
             "key": "anger_states_header_6",
-            "value": "Vengefulness"
+            "value": "Vengatividad"
         },
         {
             "key": "anger_states_body_6",
-            "value": "A desire for retaliation."
+            "value": "Deseo de tomar represalias."
         },
         {
             "key": "anger_states_header_7",
-            "value": "Fury"
+            "value": "Furia"
         },
         {
             "key": "anger_states_body_7",
-            "value": "Intense anger."
+            "value": "Enojo Intenso."
         },
         {
             "key": "anger_actions_header_1",
-            "value": "Quarrel"
+            "value": "Reñir"
         },
         {
             "key": "anger_actions_body_1",
-            "value": "Verbally oppose in a manner intended to escalate the disagreement."
+            "value": "Oponerse verbalmente de manera que se intensifique el desacuerdo."
         },
         {
             "key": "anger_actions_header_2",
-            "value": "Insult"
+            "value": "Insultar"
         },
         {
             "key": "anger_actions_body_2",
-            "value": "Disparage the other person in an offensive or hurtful way that is likely to escalate the conflict rather than resolve it."
+            "value": "Menospreciar a la otra persona de una manera ofensiva o lesiva que probablemente intensificará el conflicto en vez de resolverlo."
         },
         {
             "key": "anger_actions_header_3",
-            "value": "Undermine"
+            "value": "Socavar"
         },
         {
             "key": "anger_actions_body_3",
-            "value": "Take action to make someone or something weaker or less effective, usually in a secret or gradual way."
+            "value": "Actuar con el propósito de hacer a alguien o algo más débil o menos eficaz, por lo común en forma secreta o gradual."
         },
         {
             "key": "anger_actions_header_4",
-            "value": "Dispute"
+            "value": "Discutir"
         },
         {
             "key": "anger_actions_body_4",
-            "value": "Disagree in a manner that may escalate an argument."
+            "value": "Disentir de manera tal que pudiera intensificar la disputa."
         },
         {
             "key": "anger_actions_header_5",
-            "value": "Scream/yell"
+            "value": "Vociferar/gritar"
         },
         {
             "key": "anger_actions_body_5",
-            "value": "Lose control of how one speaks; speak in a loud volume and, when screaming, in a higher pitch."
+            "value": "Perder el control de cómo uno habla; hablar con voz fuerte y, al gritar, con un tono más alto."
         },
         {
             "key": "anger_actions_header_6",
-            "value": "Use physical force"
+            "value": "Usar fuerza física"
         },
         {
             "key": "anger_actions_body_6",
-            "value": "Harm or constrain someone, an action that may be deliberately chosen or the result of a loss of control over how one acts."
+            "value": "Dañar o coaccionar a alguien, una acción que puede ser elegida deliberadamente o ser el resultado de una pérdida de control sobre cómo uno actúa."
         },
         {
             "key": "anger_actions_header_7",
-            "value": "Suppress"
+            "value": "Reprimir"
         },
         {
             "key": "anger_actions_body_7",
-            "value": "Try to avoid feeling or acting upon the emotion that is being experienced."
+            "value": "Tratar de evitar sentir o actuar bajo el efecto de la emoción que se experimenta."
         },
         {
             "key": "anger_actions_header_8",
-            "value": "Simmer/brood"
+            "value": "Fermentar/rumiar"
         },
         {
             "key": "anger_actions_body_8",
-            "value": "Act in a way that makes clear that angry actions are building or being contemplated."
+            "value": "Actuar de un modo que deja en claro que se están gestando o se contemplan acciones iracundas."
         },
         {
             "key": "anger_actions_header_9",
-            "value": "Be passive-aggressive"
+            "value": "Ser pasivo-agresivo"
         },
         {
             "key": "anger_actions_body_9",
-            "value": "Take indirect actions that have an angry undercurrent."
+            "value": "Llevar a cabo acciones indirectas que tienen un trasfondo iracundo."
         },
         {
             "key": "anger_triggers_universal_header_mobile",
@@ -376,31 +376,31 @@
         },
         {
             "key": "anger_triggers_header_1",
-            "value": "Interference with locomotion"
+            "value": "Interferenceia con la locomoción"
         },
         {
             "key": "anger_triggers_header_2",
-            "value": "Interference with action"
+            "value": "Interferencia con la acción"
         },
         {
             "key": "anger_triggers_header_3",
-            "value": "Rejection by a loved one"
+            "value": "Rechazo por parte de un ser querido"
         },
         {
             "key": "anger_triggers_header_4",
-            "value": "Inefficiency or bureaucracy"
+            "value": "Ineficiencia o burocracia"
         },
         {
             "key": "anger_triggers_header_5",
-            "value": "Being put down by an authority figure"
+            "value": "Ser menospreciado por una figura de autoridad"
         },
         {
             "key": "anger_triggers_header_6",
-            "value": "Encountering offensive beliefs"
+            "value": "Toparse con creencias ofensivas"
         },
         {
             "key": "anger_triggers_header_7",
-            "value": "Being wrongfully accused"
+            "value": "Ser acusado injustamente"
         },
         {
             "key": "anger_moods_header",
@@ -408,7 +408,7 @@
         },
         {
             "key": "anger_moods_body",
-            "value": "A readiness, a need to become angry. Filtering perceptions to see provocations not noticed when not irritable."
+            "value": "Una disposición a enojarse, una necesidad de hacerlo. Filtrar las percepciones para ver provocaciones que uno no advierte cuando no está irritable."
         }
     ],
     [
