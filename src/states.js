@@ -947,6 +947,16 @@ export default {
 
 		},
 
+		// use index instead of key-matching.
+		// workaround for i18n
+		getOffsetByIndex (keyedOffsets, i) {
+
+			let keys = Object.keys(keyedOffsets);
+			if (keys.length <= i) return null;
+			return keyedOffsets[keys[i]];
+
+		},
+
 		anger: function (states, strengthMod) {
 
 			let points = this.isosceles(states, strengthMod);
@@ -954,14 +964,14 @@ export default {
 			// manually offset each state
 			let keyedOffsets = {
 					'annoyance': [-0.5, 0],
+					'exasperation': [-0.5, 0],
 					'frustration': [-1.5, -0.5],
 					'argumentativeness': [0, 0],
 					'bitterness': [0.5, 0],
-					'exasperation': [-0.5, 0],
 					'vengefulness': [0.5, 0],
 					'fury': [0, 0]
 				},
-				offsets = states.map(s => s.name).map(name => keyedOffsets[name] || [0, 0]);
+				offsets = states.map(s => s.name).map((name, i) => keyedOffsets[name] || this.getOffsetByIndex(keyedOffsets, states.length - i - 1) || [0, 0]);
 
 			this.offsetPoints(points, offsets, strengthMod);
 
