@@ -414,7 +414,7 @@
     [
         {
             "key": "fear_continent_header",
-            "value": "Fear"
+            "value": "Miedo"
         },
         {
             "key": "fear_continent_header_mobile",
@@ -422,7 +422,7 @@
         },
         {
             "key": "fear_continent_body",
-            "value": "We are threatened to our safety or wellbeing."
+            "value": "Tenemos miedo al peligro"
         },
         {
             "key": "fear_continent_body_mobile",
@@ -430,51 +430,51 @@
         },
         {
             "key": "fear_states_header_1",
-            "value": "Trepidation"
+            "value": "Inquietud"
         },
         {
             "key": "fear_states_body_1",
-            "value": "Anticipation of the possibility of danger."
+            "value": "Previsión de la posibilidad de peligro."
         },
         {
             "key": "fear_states_header_2",
-            "value": "Anxiety"
+            "value": "Ansiedad"
         },
         {
             "key": "fear_states_body_2",
-            "value": "Inability to cope with an anticipated or actual threat."
+            "value": "Incapacidad para hacer frente a una amenaza prevista o real."
         },
         {
             "key": "fear_states_header_3",
-            "value": "Nervousness"
+            "value": "Nerviosismo"
         },
         {
             "key": "fear_states_body_3",
-            "value": "Uncertainty as to whether there is a danger."
+            "value": "Incertidumbre respecto a si hay un peligro."
         },
         {
             "key": "fear_states_header_4",
-            "value": "Dread"
+            "value": "Temor"
         },
         {
             "key": "fear_states_body_4",
-            "value": "Anticipation of severe danger."
+            "value": "Previsión de un peligro grave."
         },
         {
             "key": "fear_states_header_5",
-            "value": "Desperation"
+            "value": "Desesperación"
         },
         {
             "key": "fear_states_body_5",
-            "value": "A response to the inability to reduce danger."
+            "value": "Una respuesta a la incapacidad para aminorar el peligro."
         },
         {
             "key": "fear_states_header_6",
-            "value": "Panic"
+            "value": "Pánico"
         },
         {
             "key": "fear_states_body_6",
-            "value": "A consequence of desperation."
+            "value": "Una consecuencia de la desesperación."
         },
         {
             "key": "fear_states_header_7",
@@ -482,7 +482,7 @@
         },
         {
             "key": "fear_states_body_7",
-            "value": "A mixture of fear and disgust."
+            "value": "Mezcla de miedo y repugnancia."
         },
         {
             "key": "fear_states_header_8",
@@ -490,63 +490,63 @@
         },
         {
             "key": "fear_states_body_8",
-            "value": "Maximum fear."
+            "value": "Miedo máximo."
         },
         {
             "key": "fear_actions_header_1",
-            "value": "Withdraw"
+            "value": "Retirarse"
         },
         {
             "key": "fear_actions_body_1",
-            "value": "Physically or mentally leave the scene of the threat."
+            "value": "Abandonar física o mentalmente el escenario de la amenaza."
         },
         {
             "key": "fear_actions_header_2",
-            "value": "Avoid"
+            "value": "Evitar"
         },
         {
             "key": "fear_actions_body_2",
-            "value": "Either physically stay away from someone or something, or internally keep one’s mind away from what is triggering the fear."
+            "value": "Físicamente mantenerse alejado de alguien o algo, o internamente mantener la mente alejada de lo que está disparando el miedo."
         },
         {
             "key": "fear_actions_header_3",
-            "value": "Hesitate"
+            "value": "Titubear"
         },
         {
             "key": "fear_actions_body_3",
-            "value": "Hold back in doubt or indecision, often momentarily."
+            "value": "Contenerse por duda o indecisión, a menudo momentáneamente."
         },
         {
             "key": "fear_actions_header_4",
-            "value": "Freeze"
+            "value": "Paralizarse"
         },
         {
             "key": "fear_actions_body_4",
-            "value": "Become incapable of acting or speaking."
+            "value": "Volverse incapaz de actuar o hablar."
         },
         {
             "key": "fear_actions_header_5",
-            "value": "Scream/yell"
+            "value": "Vociferar/gritar"
         },
         {
             "key": "fear_actions_body_5",
-            "value": "Lose control of how one speaks; speak in a loud volume and, when screaming, in a higher pitch."
+            "value": "Perder el control de como uno habla; hablar con voz fuerte y, al gritar, con un tono más alto."
         },
         {
             "key": "fear_actions_header_6",
-            "value": "Ruminate"
+            "value": "Rumiar"
         },
         {
             "key": "fear_actions_body_6",
-            "value": "Repetitively think about the emotional experience."
+            "value": "Pensar repetitivamente acerca de la experiencia emocional."
         },
         {
             "key": "fear_actions_header_7",
-            "value": "Worry"
+            "value": "Preocuparse"
         },
         {
             "key": "fear_actions_body_7",
-            "value": "Anticipate the possibility of harm."
+            "value": "Prever la posibilidad de un daño."
         },
         {
             "key": "fear_triggers_universal_header_mobile",
@@ -566,45 +566,45 @@
         },
         {
             "key": "fear_triggers_header_1",
-            "value": "Imminent bodily impact"
+            "value": "Impacto corporal inminente"
         },
         {
             "key": "fear_triggers_header_2",
-            "value": "Sudden loss of gravity"
+            "value": "Pérdida súbita del equilibrio"
         },
         {
             "key": "fear_triggers_header_3",
-            "value": "Threat to safety"
+            "value": "Amenaza a la seguridad"
         },
         {
             "key": "fear_triggers_header_4",
-            "value": "Snake-like shapes"
+            "value": "Formas que asemejan serpientes"
         },
         {
             "key": "fear_triggers_header_5",
-            "value": "Threat of losing job"
+            "value": "Amenaza de perder el empleo"
         },
         {
             "key": "fear_triggers_header_6",
-            "value": "Thunder"
+            "value": "Trueno"
         },
         {
             "key": "fear_triggers_header_7",
-            "value": "Public speaking"
+            "value": "Hablar en público"
         },
         {
             "key": "fear_moods_header",
-            "value": "Apprehensive"
+            "value": "Aprensivo"
         },
         {
             "key": "fear_moods_body",
-            "value": "Expecting harm but not knowing how to avoid it. Perceiving threats when they are not there, or magnifying the seriousness of a threat."
+            "value": "Se espera un daño pero no se sabe cómo evitarlo. Se perciben amenazas cuando estas no existen, o se exagera la gravedad de una amenaza."
         }
     ],
     [
         {
             "key": "disgust_continent_header",
-            "value": "Disgust"
+            "value": "Disgusto"
         },
         {
             "key": "disgust_continent_header_mobile",
@@ -612,7 +612,7 @@
         },
         {
             "key": "disgust_continent_body",
-            "value": "We are facing something toxic or otherwise unpleasing."
+            "value": "Nos disgusta todo lo que es tóxico."
         },
         {
             "key": "disgust_continent_body_mobile",
@@ -620,91 +620,91 @@
         },
         {
             "key": "disgust_states_header_1",
-            "value": "Dislike"
+            "value": "Descontento"
         },
         {
             "key": "disgust_states_body_1",
-            "value": "The mildest form of disgust."
+            "value": "La forma más benigna de disgusto."
         },
         {
             "key": "disgust_states_header_2",
-            "value": "Aversion"
+            "value": "Aversión"
         },
         {
             "key": "disgust_states_body_2",
-            "value": "A desire to avoid something disgusting."
+            "value": "Deseo de evitar algo que nos disgusta."
         },
         {
             "key": "disgust_states_header_3",
-            "value": "Distaste"
+            "value": "Desagrado"
         },
         {
             "key": "disgust_states_body_3",
-            "value": "Response to a bad taste or smell; can also be metaphorical."
+            "value": "Respuesta a un mal sabor u olor; también puede ser metafórico."
         },
         {
             "key": "disgust_states_header_4",
-            "value": "Repugnance"
+            "value": "Repugnancia"
         },
         {
             "key": "disgust_states_body_4",
-            "value": "Repulsion to something literally or figuratively toxic."
+            "value": "Repulsión hacia algo figurada o literalmente tóxico."
         },
         {
             "key": "disgust_states_header_5",
-            "value": "Revulsion"
+            "value": "Asco"
         },
         {
             "key": "disgust_states_body_5",
-            "value": "Very intense disgust."
+            "value": "Disgusto muy intenso."
         },
         {
             "key": "disgust_states_header_6",
-            "value": "Abhorrence"
+            "value": "Aborrecimiento"
         },
         {
             "key": "disgust_states_body_6",
-            "value": "Extreme repulsion."
+            "value": "Repulsión extrema."
         },
         {
             "key": "disgust_states_header_7",
-            "value": "Loathing"
+            "value": "Abominación"
         },
         {
             "key": "disgust_states_body_7",
-            "value": "Intense disgust focused on a person."
+            "value": "Disgusto intenso enfocado en una persona."
         },
         {
             "key": "disgust_actions_header_1",
-            "value": "Withdraw"
+            "value": "Retirarse"
         },
         {
             "key": "disgust_actions_body_1",
-            "value": "Physically or mentally leave the scene of what is triggering the disgust."
+            "value": "Abandonar física o mentalmente el escenario de lo que está disparando el disgusto."
         },
         {
             "key": "disgust_actions_header_2",
-            "value": "Avoid"
+            "value": "Evitar"
         },
         {
             "key": "disgust_actions_body_2",
-            "value": "Either physically stay away from someone or something, or internally keep one’s mind away from what is triggering the disgust."
+            "value": "Físicamente mantenerse alejado de alguien o algo, o internamente mantener la mente alejada de lo que está disparando el disgusto."
         },
         {
             "key": "disgust_actions_header_3",
-            "value": "Vomit"
+            "value": "Vomitar"
         },
         {
             "key": "disgust_actions_body_3",
-            "value": "Expel material from the stomach via the mouth; metaphorically denotes very intense disgust."
+            "value": "Expulsar material desde el estómago por la boca; metafóricamente denota un disgusto muy intenso."
         },
         {
             "key": "disgust_actions_header_4",
-            "value": "Dehumanize"
+            "value": "Deshumanizar"
         },
         {
             "key": "disgust_actions_body_4",
-            "value": "Treat someone as though he or she is not a human being; deprive someone of human qualities, personality or spirit."
+            "value": "Tratar a alguien como si no fuera un ser humano; privar a alguien de cualidades, personalidad o espíritu humanos."
         },
         {
             "key": "disgust_triggers_universal_header_mobile",
@@ -724,37 +724,37 @@
         },
         {
             "key": "disgust_triggers_header_1",
-            "value": "Anything coming out of the body"
+            "value": "Cualquier cosa que sale del cuerpo"
         },
         {
             "key": "disgust_triggers_header_2",
-            "value": "Rotting or decay"
+            "value": "Pudrición o descomposición"
         },
         {
             "key": "disgust_triggers_header_3",
-            "value": "Fans of an opposing sports team"
+            "value": "Partidarios de un equipo deportivo contrincante"
         },
         {
             "key": "disgust_triggers_header_4",
-            "value": "Unfamiliar religious customs"
+            "value": "Costumbres religiosas poco familiares"
         },
         {
             "key": "disgust_triggers_header_5",
-            "value": "Eating insects or raw meat"
+            "value": "Comer insectos o carne cruda"
         },
         {
             "key": "disgust_moods_header",
-            "value": "Sour"
+            "value": "Agrio"
         },
         {
             "key": "disgust_moods_body",
-            "value": "Disgust can occur as a mood, a generalized feeling of repugnance."
+            "value": "El disgusto puede presentarse como un humor, un sentimiento generalizado de repugnancia."
         }
     ],
     [
         {
             "key": "sadness_continent_header",
-            "value": "Sadness"
+            "value": "Tristeza"
         },
         {
             "key": "sadness_continent_header_mobile",
@@ -762,7 +762,7 @@
         },
         {
             "key": "sadness_continent_body",
-            "value": "We are experiencing loss of something valuable."
+            "value": "Nos entristece la pérdida."
         },
         {
             "key": "sadness_continent_body_mobile",
@@ -770,139 +770,139 @@
         },
         {
             "key": "sadness_states_header_1",
-            "value": "Disappointment"
+            "value": "Decepción"
         },
         {
             "key": "sadness_states_body_1",
-            "value": "A feeling that expectations are not being met."
+            "value": "Sentimiento de que no se están cumpliendo las expectativas."
         },
         {
             "key": "sadness_states_header_2",
-            "value": "Resignation"
+            "value": "Resignación"
         },
         {
             "key": "sadness_states_body_2",
-            "value": "Acceptance that nothing can be done."
+            "value": "Aceptación de que nada se puede hacer."
         },
         {
             "key": "sadness_states_header_3",
-            "value": "Distraughtness"
+            "value": "Consternación"
         },
         {
             "key": "sadness_states_body_3",
-            "value": "Agitated sadness."
+            "value": "Tristeza con agitación."
         },
         {
             "key": "sadness_states_header_4",
-            "value": "Discouragement"
+            "value": "Desánimo"
         },
         {
             "key": "sadness_states_body_4",
-            "value": "A feeling that there is no way to cope."
+            "value": "Sentimiento de que no hay forma de hacer frente a la situación."
         },
         {
             "key": "sadness_states_header_5",
-            "value": "Helplessness"
+            "value": "Impotencia"
         },
         {
             "key": "sadness_states_body_5",
-            "value": "Realization of the inability to prevent or cope with loss."
+            "value": "Reconocimiento de la incapacidad para impedir o hacer frente a una pérdida."
         },
         {
             "key": "sadness_states_header_6",
-            "value": "Misery"
+            "value": "Tribulación"
         },
         {
             "key": "sadness_states_body_6",
-            "value": "Anguished sadness, usually prolonged."
+            "value": "Tristeza angustiosa, por lo común prolongada."
         },
         {
             "key": "sadness_states_header_7",
-            "value": "Hopelessness"
+            "value": "Desesperanza"
         },
         {
             "key": "sadness_states_body_7",
-            "value": "A feeling that nothing good is to come."
+            "value": "Sentimiento de que nada bueno está por venir."
         },
         {
             "key": "sadness_states_header_8",
-            "value": "Grief"
+            "value": "Congoja"
         },
         {
             "key": "sadness_states_body_8",
-            "value": "Anguished sadness over the loss of a loved one."
+            "value": "Tristeza angustiosa por la pérdida de un ser querido."
         },
         {
             "key": "sadness_states_header_9",
-            "value": "Despair"
+            "value": "Desaliento"
         },
         {
             "key": "sadness_states_body_9",
-            "value": "Resigned anguish."
+            "value": "Angustia con resignación."
         },
         {
             "key": "sadness_states_header_10",
-            "value": "Sorrow"
+            "value": "Pesar"
         },
         {
             "key": "sadness_states_body_10",
-            "value": "Sadness over a loss."
+            "value": "Tristeza por una pérdida."
         },
         {
             "key": "sadness_states_header_11",
-            "value": "Anguish"
+            "value": "Angustia"
         },
         {
             "key": "sadness_states_body_11",
-            "value": "Intense agitated sadness."
+            "value": "Tristeza intensa con agitación."
         },
         {
             "key": "sadness_actions_header_1",
-            "value": "Seek comfort"
+            "value": "Buscar consuelo"
         },
         {
             "key": "sadness_actions_body_1",
-            "value": "Seek help or support from others."
+            "value": "Buscar la ayuda o apoyo de otros."
         },
         {
             "key": "sadness_actions_header_2",
-            "value": "Withdraw"
+            "value": "Retirarse"
         },
         {
             "key": "sadness_actions_body_2",
-            "value": "Physically or mentally leave the scene of what is triggering the sadness."
+            "value": "Abandonar física o mentalmente el escenario de lo que está disparando la tristeza."
         },
         {
             "key": "sadness_actions_header_3",
-            "value": "Ruminate"
+            "value": "Rumiar"
         },
         {
             "key": "sadness_actions_body_3",
-            "value": "Repetitively think about the emotional experience."
+            "value": "Pensar repetitivamente acerca de la experiencia emocional."
         },
         {
             "key": "sadness_actions_header_4",
-            "value": "Mourn"
+            "value": "Lamentar"
         },
         {
             "key": "sadness_actions_body_4",
-            "value": "Focus on the loss."
+            "value": "Enfocarse en la pérdida."
         },
         {
             "key": "sadness_actions_header_5",
-            "value": "Protest"
+            "value": "Protestar"
         },
         {
             "key": "sadness_actions_body_5",
-            "value": "Complain about the loss, knowing that the complaint will not recover what was lost."
+            "value": "Quejarse acerca de la pérdida, sabiendo que la queja no conseguirá recuperar lo perdido."
         },
         {
             "key": "sadness_actions_header_6",
-            "value": "Feel ashamed"
+            "value": "Sentir vergüenza"
         },
         {
             "key": "sadness_actions_body_6",
-            "value": "Feel the need to hide how one feels about what or who is lost."
+            "value": "Sentir la necesidad de ocultar cómo se siente uno acerca de la cosa o persona que se ha perdido."
         },
         {
             "key": "sadness_triggers_universal_header_mobile",
@@ -922,31 +922,31 @@
         },
         {
             "key": "sadness_triggers_header_1",
-            "value": "Being rejected by someone important"
+            "value": "Ser rechazado por alguien importante"
         },
         {
             "key": "sadness_triggers_header_2",
-            "value": "Losing a loved one"
+            "value": "Perder un ser querido"
         },
         {
             "key": "sadness_triggers_header_3",
-            "value": "Perceiving a loss of status"
+            "value": "Percibir una pérdida de estatus"
         },
         {
             "key": "sadness_triggers_header_4",
-            "value": "Not being invited to a party"
+            "value": "No ser invitado a una fiesta"
         },
         {
             "key": "sadness_triggers_header_5",
-            "value": "Losing a treasured belonging"
+            "value": "Perder un bien que se atesora"
         },
         {
             "key": "sadness_moods_header",
-            "value": "Dysphoria (or feeling blue)"
+            "value": "Disforia (estado de ánimo depresivo)"
         },
         {
             "key": "sadness_moods_body",
-            "value": "Feelings of resignation, discouragement or disappointment that endure. Anguish does not transform into a mood."
+            "value": "Sentimientos de resignación, desaliento o decepción que persisten. La angustia no se transforma en un humor."
         }
     ],
     [
@@ -968,43 +968,43 @@
         },
         {
             "key": "enjoyment_states_header_1",
-            "value": "Sensory pleasure"
+            "value": "Placer sensorial"
         },
         {
             "key": "enjoyment_states_body_1",
-            "value": "Enjoyment derived through one of the five physical senses: sight, sound, touch, taste and smell."
+            "value": "Disfrute que se consigue a través de uno de los cinco sentidos físicos: vista, oído, tacto, gusto y olfato."
         },
         {
             "key": "enjoyment_states_header_2",
-            "value": "Rejoicing"
+            "value": "Regocijo"
         },
         {
             "key": "enjoyment_states_body_2",
-            "value": "A warm, uplifting feeling that people experience when they see acts of human goodness, kindness and compassion. Also called elevation."
+            "value": "Sentimiento cálido y enaltecedor que las personas experimentan cuando ven actos de bondad, amabilidad y compasión humanas. También se le llama elevación."
         },
         {
             "key": "enjoyment_states_header_3",
-            "value": "Amusement"
+            "value": "Diversión"
         },
         {
             "key": "enjoyment_states_body_3",
-            "value": "Light, playful feelings of enjoyment and good humor."
+            "value": "Sentimientos bulliciosos ligeros de gozo y buen humor."
         },
         {
             "key": "enjoyment_states_header_4",
-            "value": "Relief"
+            "value": "Alivio"
         },
         {
             "key": "enjoyment_states_body_4",
-            "value": "When something expected to be unpleasant, especially the threat of harm, is avoided or comes to an end."
+            "value": "Cuando se evita o llega a su fin algo que se esperaba fuese desagradable, en especial la amenaza de un daño."
         },
         {
             "key": "enjoyment_states_header_5",
-            "value": "Compassion/joy"
+            "value": "Compasión/alegría"
         },
         {
             "key": "enjoyment_states_body_5",
-            "value": "Enjoyment felt when you act to relieve another person’s suffering."
+            "value": "Gozo que se experimenta cuando uno actúa para aliviar el sufrimiento de otra persona."
         },
         {
             "key": "enjoyment_states_header_6",
@@ -1012,7 +1012,7 @@
         },
         {
             "key": "enjoyment_states_body_6",
-            "value": "Enjoyment of the misfortunes of another person, usually a rival."
+            "value": "Palabra tomada del alemás que se refiere al gozo por los infortunios de otra persona, por lo común un rival. Es regodearse del mal ajeno."
         },
         {
             "key": "enjoyment_states_header_7",
@@ -1020,7 +1020,7 @@
         },
         {
             "key": "enjoyment_states_body_7",
-            "value": "An Italian word that describes the enjoyment felt when you have met a challenge that stretched your capabilities."
+            "value": "Palabra italiana que describe el gozo que se experimenta cuando uno ha hecho frente a un desafío que expande sus capacidades."
         },
         {
             "key": "enjoyment_states_header_8",
@@ -1028,111 +1028,111 @@
         },
         {
             "key": "enjoyment_states_body_8",
-            "value": "A Yiddish word for feelings of pride in the accomplishments, or sometimes just the existence, of your actual offspring or mentored offspring. Crucial for motivating the nurture of infants and children."
+            "value": "Término yidis que se aplica a los sentimientos de orgullo por ver los logros, o a veces simplemente por la existencia, de los hijos, descendientes o alumnos. Es crucial para motivar la crianza de infantes y niños."
         },
         {
             "key": "enjoyment_states_header_9",
-            "value": "Pride"
+            "value": "Orgullo"
         },
         {
             "key": "enjoyment_states_body_9",
-            "value": "A desire for others to know the pleasure you feel in your own accomplishments or the accomplishments of someone you either nurtured directly or identify with."
+            "value": "Deseo de que los demás conozcan el placer que uno siente por los propios logros, o por los logros de alguien a quien uno educó o con quien uno se identifica."
         },
         {
             "key": "enjoyment_states_header_10",
-            "value": "Wonder"
+            "value": "Asombro"
         },
         {
             "key": "enjoyment_states_body_10",
-            "value": "An experience of something that is very surprising, beautiful, amazing or hard to believe."
+            "value": "Experiencia de algo que es muy sorprendente, hermoso, prodigioso o difícil de creer."
         },
         {
             "key": "enjoyment_states_header_11",
-            "value": "Peace"
+            "value": "Paz"
         },
         {
             "key": "enjoyment_states_body_11",
-            "value": "An experience of ease and contenment."
+            "value": "Experiencia de tranquilidad y contento."
         },
         {
             "key": "enjoyment_states_header_12",
-            "value": "Excitement"
+            "value": "Excitación"
         },
         {
             "key": "enjoyment_states_body_12",
-            "value": "Energy that, unlike other enjoyable emotions, is rarely felt slightly, but ranges from mid to high in intensity. May merge with any of the emotions, generating a very active form of that emotion."
+            "value": "Energía que, a diferencia de otras emociones agradables, rara vez se experimenta levemente, sino que su intensidad fluctúa entre mediana y elevada. Puede combinarse con cualquiera de las emociones para generar una forma muy activa de esa emoción."
         },
         {
             "key": "enjoyment_states_header_13",
-            "value": "Ecstasy"
+            "value": "Éxtasis"
         },
         {
             "key": "enjoyment_states_body_13",
-            "value": "Rapturous delight. A state of very great happiness, nearly overwhelming."
+            "value": "Deleite embelesado. Estado de felicidad muy grande, casi abrumadora."
         },
         {
             "key": "enjoyment_actions_header_1",
-            "value": "Withdraw"
+            "value": "Retirarse"
         },
         {
             "key": "enjoyment_actions_body_1",
-            "value": "Physically or mentally leave the scene of what is causing the enjoyment."
+            "value": "Abandonar física o mentalmente el escenario de lo que está ocasionando el disfrute."
         },
         {
             "key": "enjoyment_actions_header_2",
-            "value": "Seek more"
+            "value": "Buscar más"
         },
         {
             "key": "enjoyment_actions_body_2",
-            "value": "Attempt to increase the enjoyable feelings."
+            "value": "Intento por aumentar los sentimientos placenteros."
         },
         {
             "key": "enjoyment_actions_header_3",
-            "value": "Maintain"
+            "value": "Mantener"
         },
         {
             "key": "enjoyment_actions_body_3",
-            "value": "Continue to do what is necessary to continue the enjoyable feelings."
+            "value": "Continuar haciendo lo necesario para que los sentimientos placenteros continúen."
         },
         {
             "key": "enjoyment_actions_header_4",
-            "value": "Gloat"
+            "value": "Regodearse"
         },
         {
             "key": "enjoyment_actions_body_4",
-            "value": "Enjoy others’ envy of your state of enjoyment."
+            "value": "Gozar la envidia que otros sienten a causa del propio estado de disfrute."
         },
         {
             "key": "enjoyment_actions_header_5",
-            "value": "Exclaim"
+            "value": "Exclamar"
         },
         {
             "key": "enjoyment_actions_body_5",
-            "value": "Vocally express enjoyment to others."
+            "value": "Expresaar con la voz nuestro gozo."
         },
         {
             "key": "enjoyment_actions_header_6",
-            "value": "Engage/connect"
+            "value": "Entablar relación/conectar"
         },
         {
             "key": "enjoyment_actions_body_6",
-            "value": "Desire connection and engagement with others to share in feelings of enjoyment."
+            "value": "Desear establecer contacto y entablar relación con otros para compartir los sentimientos de placer."
         },
         {
             "key": "enjoyment_actions_header_7",
-            "value": "Savor"
+            "value": "Saborear"
         },
         {
             "key": "enjoyment_actions_body_7",
-            "value": "Relish the experience of good feelings about physical and psychological experiences."
+            "value": "Deleitarse con la experiencia de sentimientos agradables respecto a experiencias físicas y psicológicas."
         },
         {
             "key": "enjoyment_actions_header_8",
-            "value": "Indulge"
+            "value": "Complacencia"
         },
         {
             "key": "enjoyment_actions_body_8",
-            "value": "Excessively engage in the enjoyable feelings."
+            "value": "Entregarse en exceso a los sentimientos placenteros."
         },
         {
             "key": "enjoyment_triggers_universal_header_mobile",
@@ -1152,39 +1152,39 @@
         },
         {
             "key": "enjoyment_triggers_header_1",
-            "value": "Sensory experience of nature"
+            "value": "Experiencia sensorial de la naturaleza"
         },
         {
             "key": "enjoyment_triggers_header_2",
-            "value": "Helping others"
+            "value": "Ayudar a otros"
         },
         {
             "key": "enjoyment_triggers_header_3",
-            "value": "Social interaction"
+            "value": "Interacción social"
         },
         {
             "key": "enjoyment_triggers_header_4",
-            "value": "Playing badminton"
+            "value": "Jugar badminton"
         },
         {
             "key": "enjoyment_triggers_header_5",
-            "value": "Places associated with enjoyable memories"
+            "value": "Lugares asociados con recuerdos placenteros"
         },
         {
             "key": "enjoyment_triggers_header_6",
-            "value": "The taste of chocolate cake"
+            "value": "El sabor del pastel de chocolate"
         },
         {
             "key": "enjoyment_triggers_header_7",
-            "value": "Spending time with family"
+            "value": "Pasar tiempo con la familia"
         },
         {
             "key": "enjoyment_moods_header",
-            "value": "Elation"
+            "value": "Euforia"
         },
         {
             "key": "enjoyment_moods_body",
-            "value": "Generalized, non-specific, non-triggered good feeling, lasting hours."
+            "value": "Sentimiento jovial generalizado, no específico y no disparado que persiste varias horas."
         }
     ],
     [

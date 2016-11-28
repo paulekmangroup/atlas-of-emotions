@@ -287,8 +287,8 @@ export default {
 				'amusement': -20,
 				'rejoicing': -20,
 				'schadenfreude': 0,
-				'peace': -10,
 				'relief': 0,
+				'peace': -10,
 				'pride': 0,
 				'fiero': 0,
 				'naches': 0,
@@ -298,20 +298,30 @@ export default {
 			}
 		};
 
-		let leftAdjust = function(emotion, i, name) {
+		let leftAdjust = function (emotion, i, name) {
 			if (emotion == 'sadness' || emotion == 'enjoyment') {
-				return leftAdjustManual[emotion][name];
+				let val = leftAdjustManual[emotion][name];
+				if (isNaN(val)) {
+					// workaround for i18n
+					let index = statesData.findIndex(d => d.name === name);
+					val = leftAdjustManual[emotion][Object.keys(leftAdjustManual[emotion])[index]];
+				}
+				if (isNaN(val)) {
+					// fail gracefully
+					val = 0;
+				}
+				return val;
 			}
 			return leftAdjustConstants[emotion];
 		};
 
 		let positions = [];
-		statesData.forEach(function(states, i){
+		statesData.forEach(function(state, i){
 			let d = ranges[i];
 			positions.push({
-				'name': states.name,
+				'name': state.name,
 				'top': Math.round(yOffsets[emotion](stateSection.yScale(d[1].y), d)),
-				'left': Math.round(stateSection.xScale(d[1].x)) + leftAdjust(emotion, i, states.name),
+				'left': Math.round(stateSection.xScale(d[1].x)) + leftAdjust(emotion, i, state.name),
 			});
 		});
 		// order from bottom to top of screen
@@ -949,11 +959,25 @@ export default {
 
 		// use index instead of key-matching.
 		// workaround for i18n
-		getOffsetByIndex (keyedOffsets, i) {
+		getOffsets (states, keyedOffsets) {
 
-			let keys = Object.keys(keyedOffsets);
-			if (keys.length <= i) return null;
-			return keyedOffsets[keys[i]];
+			return states.map(s => s.name).map((name, i) => {
+				// get offset by key; used only for english
+				let offset = keyedOffsets[name];
+
+				if (!offset) {
+					// get offset by index; used by other langs
+					let keys = Object.keys(keyedOffsets);
+					if (i < keys.length) offset = keyedOffsets[keys[keys.length - i - 1]];
+				}
+
+				if (!offset) {
+					// fail gracefully
+					offset = [0, 0];
+				}
+
+				return offset;
+			});
 
 		},
 
@@ -962,66 +986,15 @@ export default {
 			let points = this.isosceles(states, strengthMod);
 
 			// manually offset each state
-			let keyedOffsets = {
-					'annoyance': [-0.5, 0],
-					'exasperation': [-0.5, 0],
-					'frustration': [-1.5, -0.5],
-					'argumentativeness': [0, 0],
-					'bitterness': [0.5, 0],
-					'vengefulness': [0.5, 0],
-					'fury': [0, 0]
-				},
-				offsets = states.map(s => s.name).map((name, i) => keyedOffsets[name] || this.getOffsetByIndex(keyedOffsets, states.length - i - 1) || [0, 0]);
-
-			this.offsetPoints(points, offsets, strengthMod);
-
-			return points;
-
-		},
-
-		disgust: function (states, strengthMod) {
-
-			let points = this.isosceles(states, strengthMod);
-
-			// manually offset each state
-			let keyedOffsets = {
-					'dislike': [0, 0],
-					'aversion': [-0.25, -0.15],
-					'distaste': [0.25, 0.15],
-					'repugnance': [0, 0],
-					'revulsion': [-0.25, -0.3],
-					'abhorrence': [0, 0],
-					'loathing': [0, 0]
-				},
-				offsets = states.map(s => s.name).map(name => keyedOffsets[name] || [0, 0]);
-
-			this.offsetPoints(points, offsets, strengthMod);
-
-			return points;
-
-		},
-
-		enjoyment: function (states, strengthMod) {
-
-			let points = this.isosceles(states, strengthMod);
-
-			// manually offset each state
-			let keyedOffsets = {
-					'sensory pleasures': [-1.5, 0],
-					'compassion/joy': [-1.3, 0.2],
-					'amusement': [-1, -.1],
-					'rejoicing': [-2.3, -.5],
-					'schadenfreude': [-1, -.5],
-					'peace': [-.25, -.25],
-					'relief': [-.75, -.5],
-					'pride': [-.45, -.5],
-					'fiero': [0, -.5],
-					'naches': [0.45, -.4],
-					'wonder': [.4, -.6],
-					'excitement': [.8, -.5],
-					'ecstasy': [0, 0]
-				},
-				offsets = states.map(s => s.name).map(name => keyedOffsets[name] || [0, 0]);
+			let offsets = this.getOffsets(states, {
+				'annoyance': [-0.5, 0],
+				'exasperation': [-0.5, 0],
+				'frustration': [-1.5, -0.5],
+				'argumentativeness': [0, 0],
+				'bitterness': [0.5, 0],
+				'vengefulness': [0.5, 0],
+				'fury': [0, 0]
+			});
 
 			this.offsetPoints(points, offsets, strengthMod);
 
@@ -1034,17 +1007,37 @@ export default {
 			let points = this.isosceles(states, strengthMod);
 
 			// manually offset each state
-			let keyedOffsets = {
-					'trepidation': [0, 0],
-					'nervousness': [-0.5, 0],
-					'anxiety': [0, 0],
-					'dread': [-0.5, -0.5],
-					'desperation': [-1.0, -1.0],
-					'panic': [-0.7, -0.8],
-					'horror': [-0.35, -0.4],
-					'terror': [0, 0]
-				},
-				offsets = states.map(s => s.name).map(name => keyedOffsets[name] || [0, 0]);
+			let offsets = this.getOffsets(states, {
+				'trepidation': [0, 0],
+				'nervousness': [-0.5, 0],
+				'anxiety': [0, 0],
+				'dread': [-0.5, -0.5],
+				'desperation': [-1.0, -1.0],
+				'panic': [-0.7, -0.8],
+				'horror': [-0.35, -0.4],
+				'terror': [0, 0]
+			});
+
+			this.offsetPoints(points, offsets, strengthMod);
+
+			return points;
+
+		},
+
+		disgust: function (states, strengthMod) {
+
+			let points = this.isosceles(states, strengthMod);
+
+			// manually offset each state
+			let offsets = this.getOffsets(states, {
+				'dislike': [0, 0],
+				'aversion': [-0.25, -0.15],
+				'distaste': [0.25, 0.15],
+				'repugnance': [0, 0],
+				'revulsion': [-0.25, -0.3],
+				'abhorrence': [0, 0],
+				'loathing': [0, 0]
+			});
 
 			this.offsetPoints(points, offsets, strengthMod);
 
@@ -1058,20 +1051,46 @@ export default {
 			let points = this.isosceles(states, strengthMod * 1.25);
 
 			// manually offset each state
-			let keyedOffsets = {
-					'disappointment': [-0.95, 0],
-					'discouragement': [-1.2, -0.25],
-					'distraughtness': [0.25, 0.25],
-					'resignation': [1.2, 0.5],
-					'helplessness': [-0.5, -0.5],
-					'hopelessness': [-0.5, -0.5],
-					'misery': [0, 0],
-					'despair': [-0.1, 0],
-					'grief': [0.3, 0.5],
-					'sorrow': [0.7, 1.0],
-					'anguish': [0, 0.5]
-				},
-				offsets = states.map(s => s.name).map(name => keyedOffsets[name] || [0, 0]);
+			let offsets = this.getOffsets(states, {
+				'disappointment': [-0.95, 0],
+				'discouragement': [-1.2, -0.25],
+				'distraughtness': [0.25, 0.25],
+				'resignation': [1.2, 0.5],
+				'helplessness': [-0.5, -0.5],
+				'hopelessness': [-0.5, -0.5],
+				'misery': [0, 0],
+				'despair': [-0.1, 0],
+				'grief': [0.3, 0.5],
+				'sorrow': [0.7, 1.0],
+				'anguish': [0, 0.5]
+			});
+
+			this.offsetPoints(points, offsets, strengthMod);
+
+			return points;
+
+		},
+
+		enjoyment: function (states, strengthMod) {
+
+			let points = this.isosceles(states, strengthMod);
+
+			// manually offset each state
+			let offsets = this.getOffsets(states, {
+				'sensory pleasures': [-1.5, 0],
+				'compassion/joy': [-1.3, 0.2],
+				'amusement': [-1, -.1],
+				'rejoicing': [-2.3, -.5],
+				'schadenfreude': [-1, -.5],
+				'relief': [-.75, -.5],
+				'peace': [-.25, -.25],
+				'pride': [-.45, -.5],
+				'fiero': [0, -.5],
+				'naches': [0.45, -.4],
+				'wonder': [.4, -.6],
+				'excitement': [.8, -.5],
+				'ecstasy': [0, 0]
+			});
 
 			this.offsetPoints(points, offsets, strengthMod);
 
