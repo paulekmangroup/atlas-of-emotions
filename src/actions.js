@@ -1172,8 +1172,12 @@ export default {
 
 		if (action) {
 
-			let secondaryData;
-			if (action.valence) {
+			// suppress valence popup for langs other than english,
+			// because conjugating/translating sentences is currently out of scope.
+			let displayValencePopup = action.valence && appStrings().lang() === 'en',
+				secondaryData;
+
+			if (displayValencePopup) {
 				secondaryData = {
 					body: action.valence && appStrings().getStr(`emotionsData.metadata.actions.qualities[${ action.valence - 1 }].body`),
 					classes: [
