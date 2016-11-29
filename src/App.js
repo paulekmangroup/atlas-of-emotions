@@ -794,13 +794,20 @@ export default function (...initArgs) {
 	function updateHeader (config) {
 
 		if (config.section || config.more) {
-			const title = config.section || dispatcher.getMorePageName(config.more);
+			let title;
+			if (config.section) {
+				title = appStrings().getStr(`derived.sections.${ config.section }`);
+			} else {
+				title = dispatcher.getMorePageName(config.more);
+			}
+			if (!title) title = config.section || config.more;
 			document.querySelector('#header h1').innerHTML = title.toUpperCase();
 		}
 
 		let dropdownTitle = document.querySelector('#header .dd-title');
 		if (config.emotion) {
-			dropdownTitle.innerHTML = config.emotion.toUpperCase();
+			let emotion = appStrings().getStr(`derived.emotions.${ config.emotion }`) || config.emotion;
+			dropdownTitle.innerHTML = emotion.toUpperCase();
 		} else if (config.emotion === null) {
 			dropdownTitle.innerHTML = 'CHOOSE AN EMOTION';
 		}

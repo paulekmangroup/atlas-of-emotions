@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import fetch from 'isomorphic-fetch';
+import dispatcher from './dispatcher.js';
 import emotionsData from '../static/emotionsData.json';
 import secondaryData from '../static/secondaryData.json';
 
@@ -16,12 +17,13 @@ let langs = [];
  * it's up to the application to call loadStrings() and safely request strings
  * only after the returned Promise is resolved.
  *
- * @param  {[type]} _lang                  Language code (ISO 639-1)
+ * @param  {[type]} _lang                  Two-character language code (ISO 639-1)
  * @param  {[type]} _screenIsSmall         Request mobile or desktop strings
  */
 function appStrings (_lang, _screenIsSmall, _stringsLoadedCallback) {
 
-	let strings = langs[_lang];
+	let strings = langs[_lang],
+		derivedStrings;
 
 	function getStr (key) {
 
@@ -30,6 +32,9 @@ function appStrings (_lang, _screenIsSmall, _stringsLoadedCallback) {
 
 		let path = key.split('.'),
 			source = path.splice(0, 1)[0];
+
+		if (source === 'derived') return _.get(derivedStrings, path.join('.'));
+
 		source =
 			source === 'emotionsData' ? emotionsData :
 			source === 'secondaryData' ? secondaryData :
@@ -135,16 +140,37 @@ function appStrings (_lang, _screenIsSmall, _stringsLoadedCallback) {
 				{ credentials: 'same-origin' }	// needed on studio to pass .htaccess login creds to same-origin requests
 			)
 				.then(response => response.json())
-				.then(json => strings = json
+				.then(json => {
+					strings = json
 						.reduce((acc, worksheet) => acc.concat(worksheet), [])
 						.reduce((acc, kv) => {
 							acc[kv.key] = kv.value;
 							return acc;
-						}, {}))
+						}, {});
+
+					cacheDerivedStrings();
+				})
 				.catch(() => {
 					throw new Error(`Language ${ _lang } not supported, or language file is malformed.`);
 				});
 		}
+
+	}
+
+	// This is all AoE-specific, for strings derived from the loaded+parsed content
+	// that don't have their own data structure within the content.
+	function cacheDerivedStrings () {
+
+		derivedStrings = {
+			emotions: _.values(dispatcher.EMOTIONS).reduce((acc, emotion) => {
+				acc[emotion] = strings[`${ emotion }_continent_header`];
+				return acc;
+			}, {}),
+			sections: _.values(dispatcher.SECTIONS).reduce((acc, section) => {
+				acc[section] = strings[`${ section }_section_name`];
+				return acc;
+			}, {})
+		};
 
 	}
 
