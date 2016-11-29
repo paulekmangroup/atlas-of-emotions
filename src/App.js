@@ -167,6 +167,10 @@ export default function (...initArgs) {
 			menu.appendChild(li);
 		});
 
+		// add translated title
+		let headerContent = document.querySelector('#header .header-content');
+		headerContent.querySelector('a').textContent = appStrings().getStr('emotionsData.metadata.site.header').toUpperCase();
+
 		dropdown.querySelector('.dropdown-toggle').addEventListener('click', onEmotionDropdownClick);
 
 		let mobileHeader = document.querySelector('#mobile-header');
@@ -181,7 +185,7 @@ export default function (...initArgs) {
 
 			let mobileTitle = document.createElement('div');
 			mobileTitle.classList.add('mobile-title');
-			mobileTitle.appendChild(document.querySelector('#header .header-content'));
+			mobileTitle.appendChild(headerContent);
 			mobileHeader.appendChild(mobileTitle);
 
 			initMobileHeaderNav();
@@ -203,8 +207,7 @@ export default function (...initArgs) {
 				li = document.createElement('li');
 
 			if (section === 'about' || section === 'emotrak') {
-				// TODO: implement
-				sectionName = appStrings().getStr(`secondaryData.${ section }.title`) || section;
+				sectionName = appStrings().getStr(`emotionsData.${ section }.sectionName`) || section;
 				li.setAttribute('data-page', section);
 			} else {
 				sectionName = appStrings().getStr(`emotionsData.metadata.${ section }.sectionName`) || section;
@@ -1503,9 +1506,8 @@ export default function (...initArgs) {
 					arrows[i].querySelector('img').style.display = 'none';
 				}
 
-				// TODO: translation
-				labelLeft.textContent = secondaryData.about.title.split(' ')[0] || 'about';
-				labelRight.textContent = secondaryData.emotrak.title.split(' ')[0] || 'emotrak';
+				labelLeft.textContent = appStrings().getStr(`emotionsData.about.sectionName`) || 'about';
+				labelRight.textContent = appStrings().getStr(`emotionsData.emotrak.sectionName`) || 'emotrak';
 				labelDown.textContent = 'start over';
 				labelDown.style.removeProperty('display');
 			} else {
@@ -1513,8 +1515,8 @@ export default function (...initArgs) {
 					arrows[i].querySelector('img').style.removeProperty('display');
 				}
 
-				labelLeft.textContent = leftEmotion;
-				labelRight.textContent = rightEmotion;
+				labelLeft.textContent = appStrings().getStr(`derived.emotions.${ leftEmotion }`);
+				labelRight.textContent = appStrings().getStr(`derived.emotions.${ rightEmotion }`);
 				labelDown.textContent = '';
 				labelDown.style.display = 'none';
 			}
@@ -1529,7 +1531,7 @@ export default function (...initArgs) {
 	function updateMobileUI () {
 
 		// show title mobile header and hide mobile footer when appropriate
-		let titleHeader = 
+		let titleHeader =
 			currentSection === sections[dispatcher.SECTIONS.CONTINENTS] ||
 			currentSection === sections[dispatcher.SECTIONS.MORE];
 		let titleFooter = currentSection === sections[dispatcher.SECTIONS.CONTINENTS] && !currentEmotion;
@@ -1641,7 +1643,7 @@ export default function (...initArgs) {
 		} else {
 			mobileCaption.style.removeProperty('display');
 		}
-		
+
 
 		updateMobileUI();
 

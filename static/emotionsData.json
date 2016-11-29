@@ -1949,6 +1949,13 @@
     }
   },
   "metadata": {
+    "site": {
+      "header": "site_header",
+      "body": "",
+      "header_mobile": "site_header",
+      "body_mobile": "",
+      "sectionName": ""
+    },
     "intro": {
       "header": "intro_header",
       "body": "",
@@ -2128,7 +2135,9 @@
     "title": "about_intro_title",
     "desc": "about_intro_body",
     "title_mobile": "about_intro_title_mobile",
-    "desc_mobile": "about_intro_body_mobile"
+    "desc_mobile": "about_intro_body_mobile",
+    "sectionName": "about_section_name",
+    "sectionName_mobile": "about_section_name"
   },
   "emotrak": {
     "subsections": [
@@ -2160,6 +2169,8 @@
     "title": "emotrak_title",
     "desc": "emotrak_intro",
     "header_mobile": "emotrak_header_mobile",
-    "body_mobile": "emotrak_body_mobile"
+    "body_mobile": "emotrak_body_mobile",
+    "sectionName": "emotrak_section_name",
+    "sectionName_mobile": "emotrak_section_name"
   }
 }

@@ -161,6 +161,8 @@ var metadataSectionParsers = (function () {
 
 	return {
 
+		site: standard,
+
 		intro: function (data) {
 			var obj = {
 				header: data[0][0],
@@ -688,6 +690,8 @@ var SECONDARY_PARSER_CONFIG = {
 					rsp.desc = row.introduction;
 					rsp.header_mobile = row['mobile alt header'];
 					rsp.body_mobile = row['mobile alt body'];
+					rsp.sectionName = row['section name'];
+					rsp.sectionName_mobile = row['section name'];
 				} else if (row.text) {
 					rsp.subsections.push({
                       title: row.subhead ? row.subhead : '',
@@ -716,6 +720,8 @@ var SECONDARY_PARSER_CONFIG = {
 					rsp.desc = row.introduction;
 					rsp.title_mobile = row['mobile alt header'];
 					rsp.desc_mobile = row['mobile alt body'];
+					rsp.sectionName = row['section name'];
+					rsp.sectionName_mobile = row['section name'];
 				} else if (row.subhead) {
 					rsp.subsections.push({
 						title: row.subhead,
