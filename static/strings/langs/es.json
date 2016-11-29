@@ -2,23 +2,23 @@
     [
         {
             "key": "site_header",
-            "value": "ñAtlas of Emotions"
+            "value": "Atlas de las Emociones"
         },
         {
             "key": "intro_header",
-            "value": "Welcome to the Atlas of Emotions"
+            "value": "Bienvenidos al Atlas de las Emociones"
         },
         {
             "key": "intro_body_mobile",
-            "value": "This atlas was inspired by a series of conversations between the Dalai Lama and Dr. Paul Ekman about the science of emotion.<br><br> The following collection of maps provide an opportunity to explore the landscape of emotions, where they come from and the effects they can have."
+            "value": "Bienvenidos al Atlas de las Emociones\n \n ¡Descubre lo que hay detrás de tu vida emocional! \n \n El primer paso para trabajar con tus emociones es identificar y describir lo que sientes."
         },
         {
             "key": "intro_secondary_header_1",
-            "value": "Welcome to the Atlas of Emotions"
+            "value": "Bienvenidos al Atlas de las Emociones"
         },
         {
             "key": "intro_secondary_copy_1",
-            "value": "This atlas was inspired by a series of conversations between the <a href=\"http://www.dalailama.com/\" target=\"_blank\">Dalai Lama</a> and <a href=\"http://www.paulekman.com/\" target=\"_blank\">Paul Ekman</a> about the science of emotions. With the help of <a href=\"http://www.stamen.com/\" target=\"_blank\">Stamen Design</a> and Paul’s daughter, Dr. Eve Ekman, this tool was created to be a visual journey through the world of emotions.<br><br> Learn more about the work of Paul Ekman at <a href=\"http://www.paulekman.com/\" target=\"_blank\">www.paulekman.com</a>."
+            "value": "Vemos el mundo a través de la lente de nuestras frustraciones, alegrías y desengaños. Las emociones influyen en nuestra realidad momento a momento. \n Muchas veces no elegimos qué sentir. Somos \"secuesrtrados\" por las emociones y actuamos sin pensar.\n Para tener más control hay que comenzar por entender nuestras emocioones. \n Este atlas es una herramienta visual para desarrollar el vocabulario emocional. Puedes practicar lo que aprenas indentificando y expresando en palabras lo que sientes. El objetivo de esto es ampliar nuestro rango de respuestas y elecciones emotivas. \n Para tomar un tour por el Atlas y aprender a usarlo sigue esta liga."
         },
         {
             "key": "intro_caption_1",
@@ -30,19 +30,19 @@
         },
         {
             "key": "intro_secondary_copy_2",
-            "value": "In June 2014, Paul Ekman sent a <a href=\"http://pps.sagepub.com/content/11/1/31.full.pdf?ijkey=AMIJzv8J9Tn0VF1&keytype=finite\" target=\"_blank\">survey</a> to 248 of the most active emotion researchers in the world to establish the consensus that provided <a href=\"#more:annex-scientific-basis\">the scientific basis for this atlas</a>."
+            "value": "En junio de 2014 Paul Ekman envió una <a href=\"http://pps.sagepub.com/content/11/1/31.full.pdf?ijkey=AMIJzv8J9Tn0VF1&keytype=finite\" target=\"_blank\">encuesta</a> a 248 de los más activos investigadores de las emociones en el mundo para establecer el consenso que proporcionó <a href=\"#more:annex-scientific-basis\">la base científica para este atlas</a>."
         },
         {
             "key": "intro_caption_2",
-            "value": "of those who responded agree that there are Universal Emotions: emotions that all humans, no matter where we live or how we were raised, have in common."
+            "value": "de quienes respondieron coinciden en que hay Emociones Universales: emociones que todos los seres humanos, no importa dónde vivamos o cómo hayamos sido criados, tenemos en común."
         },
         {
             "key": "intro_secondary_header_3",
-            "value": "How to navigate"
+            "value": "Cómo navegar"
         },
         {
             "key": "intro_secondary_copy_3",
-            "value": "This collection of maps is an opportunity for you to explore the landscape of emotions, where they come from, and the effects they can have. Click on shapes to learn about them. Use the arrows and scrollbar to navigate to other pages."
+            "value": "Este conjunto de mapas te brindan una oportunidad para explorar el panorama de las emociones, \nde dónde proceden y los efectos que pueden tener. \nDa clicksobre las figuras para saber más sobre ellas. \nUsa las flechas y la barra de desplazamiento para pasar a otras páginas."
         },
         {
             "key": "intro_section_name",
@@ -50,11 +50,11 @@
         },
         {
             "key": "continents_header",
-            "value": "Five Universal Emotions"
+            "value": "Los cinco continentes de la emoción"
         },
         {
             "key": "continents_body",
-            "value": "Most emotions researchers agree on these five Universal Emotions: emotions that all humans, no matter where or how we were raised, have in common. The movement of the shapes reflects how the emotions vary in strength and frequency in our lives. Select an emotion to learn more."
+            "value": "Estas son las emociones que la ciencia entiende en mayor medida. Vemos y experimentamos estas emociones a partir de los 9 meses de edad. Cada continente representa una familia entera de nuestros siempre cambiantes sentimientos y emociones. Nota que estos continentes de emoción están muy cerca unos de otros pero separados. El miedo no es enojo, el disgusto no es gozo, y así sucesivamente."
         },
         {
             "key": "continents_body_mobile",
@@ -62,15 +62,15 @@
         },
         {
             "key": "continents_section_name",
-            "value": "Universal Emotions"
+            "value": "Emociónes Universales"
         },
         {
             "key": "states_header",
-            "value": "States of LHAMO"
+            "value": "Estados de LHAMO"
         },
         {
             "key": "states_body",
-            "value": "LHAMO can be felt mildly, extremely, or somewhere in between. Select a shape to learn about a few of the states that we can experience."
+            "value": "Aquí exploramos cómo nos sentimos. Nota que cada una de las 5 emociones representa una gran familia de de semtimientos. Cada emoción de la familia se puede expresar con distinta intensidad."
         },
         {
             "key": "states_body_mobile",
@@ -78,15 +78,15 @@
         },
         {
             "key": "states_section_name",
-            "value": "States"
+            "value": "Estados"
         },
         {
             "key": "actions_header",
-            "value": "Actions of LHAMO"
+            "value": "Acciones de LHAMO"
         },
         {
             "key": "actions_body",
-            "value": "We respond to emotional states with our actions. Select a state to learn about the possible actions resulting from LHAMO. Then click on an action to learn more."
+            "value": "Respondemos a un estado emocional con acción. Las acciones pueden ser constructivas (dan lugar a colaboración) o destructivas (impiden la colaboración). Ciertas acciones pueden ser constructivas o destructivas, según la situación; esto significa que se trata de una acción ambigua. Da clicksobre un estado para explorarlo."
         },
         {
             "key": "actions_body_mobile",
@@ -94,39 +94,39 @@
         },
         {
             "key": "actions_secondary_header_1",
-            "value": "Constructive Actions"
+            "value": "Acciones constructivas"
         },
         {
             "key": "actions_secondary_copy_1",
-            "value": "In this state, this action is CONSTRUCTIVE. It enables collaboration."
+            "value": "En este estado, esta acción es CONSTRUCTIVA. Hace posible la colaboración."
         },
         {
             "key": "actions_secondary_header_2",
-            "value": "Ambiguous Actions"
+            "value": "Acciones ambiguas"
         },
         {
             "key": "actions_secondary_copy_2",
-            "value": "In this state, this action is AMBIGUOUS. It may either enable or inhibit collaboration."
+            "value": "En este estado, esta acción es AMBIGUA. Puede hacer posible o inhibir la colaboración."
         },
         {
             "key": "actions_secondary_header_3",
-            "value": "Destructive Actions"
+            "value": "Acciones destructivas"
         },
         {
             "key": "actions_secondary_copy_3",
-            "value": "In this state, this action is DESTRUCTIVE. It inhibits collaboration."
+            "value": "En este estado, esta acción es DESTRUCTIVA. Inhibe la colaboración."
         },
         {
             "key": "actions_section_name",
-            "value": "Actions"
+            "value": "Acciones"
         },
         {
             "key": "triggers_header",
-            "value": "Triggers of LHAMO"
+            "value": "Disparadores de LHAMO"
         },
         {
             "key": "triggers_body",
-            "value": "A trigger is something around us or in our own minds that causes us to feel an emotion. Select the labels to learn about triggering LHAMO."
+            "value": "Las emociones son disparadas por cosas que suceden en el mundo que nos rodea o en nuestros propios pensamientos que consideramos son importantes para nosotros. Los disparadores producen una respuesta emocional inmediata. No siempre nos damos cuenta de lo que dispara nuestras emociones. Nuestras emociones son breves, de menos de dos minutos, pero pueden percibirse como más prolongadas si las volvemos a disparar. <a id=\"annexLink\" href=\"#more:annex-episode-timeline\">process</a>"
         },
         {
             "key": "triggers_body_mobile",
@@ -134,55 +134,55 @@
         },
         {
             "key": "triggers_secondary_header_1",
-            "value": "Triggers"
+            "value": "Disparadores"
         },
         {
             "key": "triggers_secondary_body_1",
-            "value": "Some triggers are hardwired and universal for everyone, other triggers are learned from the world around us and our individual experience."
+            "value": "Ciertos disparadores están integrados y son universales para todos; otros disparadores son aprendidos del mundo que nos rodea y de nuestra experiencia individual."
         },
         {
             "key": "triggers_secondary_header_2",
-            "value": "Perception"
+            "value": "Percepción"
         },
         {
             "key": "triggers_secondary_body_2",
-            "value": "Past personal experience determines whether or not a learned trigger makes us feel emotional. Universal triggers break through regardless."
+            "value": "Podemos emocionarnos por cualquier cosa: el mundo en torno nuestro, tanto lo novedoso como lo ya conocido, y nuestras expectativas y recuerdos."
         },
         {
             "key": "triggers_secondary_header_3",
-            "value": "Response"
+            "value": "Respuesta"
         },
         {
             "key": "triggers_secondary_body_3",
-            "value": "Emotion is our automatic response to being triggered. The state of emotion we feel and the actions we take often happen without our realizing why."
+            "value": "Una vez que se nos dispara una emoción, automáticamente experimentamos un estado emocional que conduce a nuestro comportamiento/acción emocional."
         },
         {
             "key": "triggers_secondary_header_4",
-            "value": "Universal Triggers"
+            "value": "Disparadores universales"
         },
         {
             "key": "triggers_secondary_body_4",
-            "value": "This is an example of a universal trigger. Universal triggers are innate, common to everyone. They affect us more intensely than learned triggers."
+            "value": "Este es un ejemplo de un disparador universal. Los disparadores universales son innatos, comunes a todos. Nos afectan más intensamente que los disparadores aprendidos."
         },
         {
             "key": "triggers_secondary_header_5",
-            "value": "Learned Triggers"
+            "value": "Disparadores aprendidos"
         },
         {
             "key": "triggers_secondary_body_5",
-            "value": "This is an example of a learned trigger. Learned triggers can be informed by our culture, stemming from widely shared experiences and norms, or personal, created from important and impactful individual experiences."
+            "value": "Este es un ejemplo de un disparador aprendido. Los disparadores aprendidos pueden ser conformados por nuestra cultura, provenientes de experiencias y normas ampliamente compartidas, o bien personales, creados a partir de experiencias individuales importantes e impactantes."
         },
         {
             "key": "triggers_section_name",
-            "value": "Triggers"
+            "value": "Disparadores"
         },
         {
             "key": "moods_header",
-            "value": "A Mood of LHAMO"
+            "value": "Un Humor de LHAMO"
         },
         {
             "key": "moods_body",
-            "value": "Moods are longer-lasting cousins of an emotion that cause us to feel the related emotion repeatedly without any clear trigger. Select the shape to learn more."
+            "value": "Este es un ejemplo de un humor, un primo más duradero de la emoción.No se sabe bien qué origina los humores; a veces despertamos de cierto humor. También se generan humores después de una emoción intensa o si experimentamos una emoción muchas veces."
         },
         {
             "key": "moods_body_mobile",
@@ -190,15 +190,15 @@
         },
         {
             "key": "moods_section_name",
-            "value": "Moods"
+            "value": "Humores"
         },
         {
             "key": "calm_header",
-            "value": "Experiencing Calm"
+            "value": "La experiencia de Calma"
         },
         {
             "key": "calm_body",
-            "value": "A calm, balanced frame of mind helps us understand our changing emotions. We can reach calmness through developing an awareness of what triggers our emotions, how we experience our states of emotions and what actions are constructive. Calmness ideally is our baseline in which emotions arise when triggered and then recede."
+            "value": "Un estado de ánimo equilibrado y en calma nos ayuda a entender nuestras cambiantes emociones. Podemos alcanzar la calma adquiriendo conciencia de lo que dispara nuestras emociones, de cómo experimentamos nuestros estados emocionales y qué acciones son constructivas. La calma es idealmente nuestro estado basal del cual surgen las emociones cuando son disparadas y en el que luego se desvanecen."
         },
         {
             "key": "calm_body_mobile",
@@ -206,15 +206,15 @@
         },
         {
             "key": "calm_secondary_header",
-            "value": "Visit the Annex"
+            "value": "Visita el Anexo"
         },
         {
             "key": "calm_secondary_body",
-            "value": "To learn more about emotions, click on “More Information” in the bottom right corner."
+            "value": "Para saber más sobre las emociones, accione sobre \"Más información\" en la esquina inferior derecha."
         },
         {
             "key": "calm_section_name",
-            "value": "Calm"
+            "value": "Calma"
         }
     ],
     [
