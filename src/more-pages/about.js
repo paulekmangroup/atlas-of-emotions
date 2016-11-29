@@ -40,7 +40,10 @@ export default {
 		subBlocks.classList.add('sub-blocks');
 
 		this.data.subsections.forEach(section => {
-			subBlocks.appendChild(utils.makeBlock(section.title, section.desc));
+			// only append valid subsections; there are empty spaces in the data.
+			if (!~section.title.indexOf('about_header')) {
+				subBlocks.appendChild(utils.makeBlock(section.title, section.desc));
+			}
 		});
 
 		subRow.appendChild(subBlocks);

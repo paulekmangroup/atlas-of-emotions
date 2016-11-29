@@ -163,7 +163,7 @@ export default function (...initArgs) {
 			let li = document.createElement('li');
 			li.setAttribute('role', 'menuitem');
 			li.setAttribute('data-emotion', emotionName);
-			li.innerHTML = emotionName.toUpperCase();
+			li.innerHTML = appStrings().getStr(`derived.emotions.${ emotionName }`).toUpperCase();
 			menu.appendChild(li);
 		});
 
@@ -345,10 +345,11 @@ export default function (...initArgs) {
 		title.innerHTML = '<h4>' + dispatcher.MORE_INFO.title + '</h4>';
 
 		dispatcher.MORE_INFO.items.forEach((item) => {
-			let li = document.createElement('li');
+			let label = appStrings().getStr(`emotionsData.${ item.page }.sectionName`, true) || item.label,
+				li = document.createElement('li');
 			li.setAttribute('role', 'menuitem');
 			li.setAttribute('data-page', item.page);
-			li.innerHTML = '<h4>' + item.label + '</h4>';
+			li.innerHTML = '<h4>' + label + '</h4>';
 			menu.appendChild(li);
 		});
 

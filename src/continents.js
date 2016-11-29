@@ -284,9 +284,9 @@ const continentsSection = {
 			.each(positionLabelsVertically);
 
 		labelsEnter.append('a')
-			.attr('href', d => `#continents:${d.id}`)
+			.attr('href', d => `#continents:${ d.id }`)
 			.append('h3')
-				.text(d => d.name.toUpperCase());
+				.text(d => d.i18nName.toUpperCase());
 
 	},
 

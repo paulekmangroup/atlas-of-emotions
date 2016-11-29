@@ -6,6 +6,7 @@ import TWEEN from 'tween.js';
 import Circle from './Circle.js';
 import emotionsData from '../static/emotionsData.json';
 import sassVars from '../scss/variables.json';
+import appStrings from './appStrings.js';
 
 const FRAMERATE = 60;
 const MAX_NUM_CIRCLES = 15;
@@ -183,6 +184,7 @@ export default class Continent {
 
 		this.id = emotion,
 		this.name = emotion.toUpperCase(),
+		this.i18nName = appStrings().getStr(`derived.emotions.${ emotion }`);
 		this.colorPalette = Continent.configsByEmotion[emotion].colorPalette.concat();
 
 		this.spawnConfig = {

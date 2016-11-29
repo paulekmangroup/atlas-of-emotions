@@ -25,7 +25,7 @@ function appStrings (_lang, _screenIsSmall, _stringsLoadedCallback) {
 	let strings = langs[_lang],
 		derivedStrings;
 
-	function getStr (key) {
+	function getStr (key, failQuietly) {
 
 		// Strings not yet loaded; fail silently
 		if (!strings) return '';
@@ -102,7 +102,11 @@ function appStrings (_lang, _screenIsSmall, _stringsLoadedCallback) {
 					parsedValue = parsedKey;
 				}
 			} else {
-				throw new Error(`Key not found at ${ key }`);
+				if (failQuietly) {
+					return '';
+				} else {
+					throw new Error(`Key not found at ${ key }`);
+				}
 			}
 		}
 
