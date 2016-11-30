@@ -26,7 +26,7 @@
         },
         {
             "key": "intro_caption_1",
-            "value": "His Holiness the Dalai Lama, Dr. Paul Ekman and Dr. Eve Ekman"
+            "value": "ñHis Holiness the Dalai Lama, Dr. Paul Ekman and Dr. Eve Ekman"
         },
         {
             "key": "intro_secondary_header_2",
@@ -75,6 +75,10 @@
         {
             "key": "states_body",
             "value": "Aquí exploramos cómo nos sentimos. Nota que cada una de las 5 emociones representa una gran familia de de semtimientos. Cada emoción de la familia se puede expresar con distinta intensidad."
+        },
+        {
+            "key": "states_axis_labels",
+            "value": "ñLeast intense, ñMost intense"
         },
         {
             "key": "states_body_mobile",
@@ -582,7 +586,7 @@
         },
         {
             "key": "fear_triggers_learned_body_mobile",
-            "value": "ñSome triggers can be learned from personal or shared cultural experiences. Public speaking, thunder, and the threat of losing one’s job are examples."
+            "value": "nnSome triggers can be learned from personal or shared cultural experiences. Public speaking, thunder, and the threat of losing one’s job are examples."
         },
         {
             "key": "fear_triggers_header_1",
@@ -1278,7 +1282,7 @@
     [
         {
             "key": "emotrak_title",
-            "value": "ñEmoTrak"
+            "value": "EmoTrak"
         },
         {
             "key": "emotrak_intro",
@@ -1286,7 +1290,7 @@
         },
         {
             "key": "emotrak_header_mobile",
-            "value": "ñEmoTrak"
+            "value": "EmoTrak"
         },
         {
             "key": "emotrak_body_mobile",
@@ -1294,7 +1298,7 @@
         },
         {
             "key": "emotrak_section_name",
-            "value": "ñEmoTrak"
+            "value": "EmoTrak"
         },
         {
             "key": "emotrak_section_1",
@@ -1302,7 +1306,7 @@
         },
         {
             "key": "emotrak_section_2",
-            "value": "ñtrue in mail column indicates that it will include hardcoded subscribe link"
+            "value": "true in mail column indicates that it will include hardcoded subscribe link"
         },
         {
             "key": "emotrak_section_3",

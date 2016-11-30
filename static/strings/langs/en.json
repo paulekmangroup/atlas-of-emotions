@@ -77,6 +77,10 @@
             "value": "LHAMO can be felt mildly, extremely, or somewhere in between. Select a shape to learn about a few of the states that we can experience."
         },
         {
+            "key": "states_axis_labels",
+            "value": "Least intense, most intense"
+        },
+        {
             "key": "states_body_mobile",
             "value": "LHAMO can be felt mildly, extremely, or somewhere in between. Tap on the shapes above to learn about a few of the states that we can experience."
         },

@@ -1952,7 +1952,9 @@
     "site": {
       "header": "site_header",
       "body": "",
-      "caption": "site_dropdown_label",
+      "caption": [
+        "site_dropdown_label"
+      ],
       "header_mobile": "site_header",
       "body_mobile": "",
       "sectionName": ""
@@ -1998,7 +2000,7 @@
     "states": {
       "header": "states_header",
       "body": "states_body",
-      "caption": "",
+      "caption": "states_axis_labels",
       "header_mobile": "states_header",
       "body_mobile": "states_body_mobile",
       "sectionName": "states_section_name"

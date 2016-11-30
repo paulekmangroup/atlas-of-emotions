@@ -135,8 +135,11 @@ export default {
 			.tickFormat(d => '')
 			.tickSize(this.screenIsSmall ? 5 : 10);
 
+		let axisLabels = appStrings().getStr('emotionsData.metadata.states.caption').split(',');
+		if (axisLabels.length !== 2) axisLabels = [ 'Least intense', 'Most intense' ];
+		axisLabels = axisLabels.map(l => l.toUpperCase());
 		let labelsXScale = d3.scale.ordinal()
-			.domain(['LEAST INTENSE', 'MOST INTENSE'])
+			.domain(axisLabels)
 			.range(this.xScale.range());
 		let xAxisLabels = d3.svg.axis()
 			.scale(labelsXScale)
