@@ -72,7 +72,7 @@ export default {
 		let startAgain = d3.select(this.sectionContainer).append('div')
 			.classed('start-again', true);
 		startAgain.append('h4')
-			.text('START AGAIN');	// TODO: translation
+			.text(appStrings().getStr(`emotionsData.metadata.calm.caption`) || 'START OVER');
 		startAgain.on('click', event => {
 			dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS, null);
 		});
@@ -110,7 +110,7 @@ export default {
 			labelsEnter.append('a')
 				.attr('href', d => `#continents:${d.id}`)
 				.append('h3')
-					.text('START AGAIN');
+					.text(appStrings().getStr(`emotionsData.metadata.calm.caption`) || 'START OVER');
 		});
 	},
 

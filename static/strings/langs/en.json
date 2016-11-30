@@ -213,6 +213,10 @@
             "value": "To learn more about emotions, click on “More Information” in the bottom right corner."
         },
         {
+            "key": "calm_button_label",
+            "value": "Start over"
+        },
+        {
             "key": "calm_section_name",
             "value": "Calm"
         }

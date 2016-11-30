@@ -2076,6 +2076,7 @@
     "calm": {
       "header": "calm_header",
       "body": "calm_body",
+      "caption": "calm_button_label",
       "header_mobile": "calm_header",
       "body_mobile": "calm_body_mobile",
       "sectionName": "calm_section_name",

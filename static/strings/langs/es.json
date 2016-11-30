@@ -213,6 +213,10 @@
             "value": "Para saber más sobre las emociones, accione sobre \"Más información\" en la esquina inferior derecha."
         },
         {
+            "key": "calm_button_label",
+            "value": "ñStart over"
+        },
+        {
             "key": "calm_section_name",
             "value": "Calma"
         }
@@ -1210,7 +1214,7 @@
         },
         {
             "key": "about_section_name",
-            "value": "ñAbout"
+            "value": "About"
         },
         {
             "key": "about_header_1",
@@ -1278,7 +1282,7 @@
         },
         {
             "key": "emotrak_section_name",
-            "value": "ñEmoTrak"
+            "value": "EmoTrak"
         },
         {
             "key": "emotrak_section_1",

@@ -1467,7 +1467,7 @@ export default function (...initArgs) {
 				document.querySelector('#left-arrow').classList.remove('immediate');
 				document.querySelector('#right-arrow').classList.remove('immediate');
 			}
-		} else if (sectionName == 'calm' || sectionName == 'more'){
+		} else if (sectionName == 'calm' || sectionName == 'more') {
 			// arrow not visible
 			document.querySelector('.downArrow').classList.remove('visible');
 			document.querySelector('.leftArrow').classList.remove('visible');
@@ -1509,7 +1509,7 @@ export default function (...initArgs) {
 
 				labelLeft.textContent = appStrings().getStr(`emotionsData.about.sectionName`) || 'about';
 				labelRight.textContent = appStrings().getStr(`emotionsData.emotrak.sectionName`) || 'emotrak';
-				labelDown.textContent = 'start over';
+				labelDown.textContent = appStrings().getStr(`emotionsData.metadata.calm.caption`) || 'start over';
 				labelDown.style.removeProperty('display');
 			} else {
 				for (i=0; i<arrows.length; i++) {
@@ -1535,9 +1535,10 @@ export default function (...initArgs) {
 		let titleHeader =
 			currentSection === sections[dispatcher.SECTIONS.CONTINENTS] ||
 			currentSection === sections[dispatcher.SECTIONS.MORE];
-		let titleFooter = currentSection === sections[dispatcher.SECTIONS.CONTINENTS] && !currentEmotion;
+		let hideFooterNav = (currentSection === sections[dispatcher.SECTIONS.CONTINENTS] && !currentEmotion) ||
+				currentSection === sections[dispatcher.SECTIONS.MORE];
 
-		updateArrowVisibility(null, !titleFooter);
+		updateArrowVisibility(null, !hideFooterNav);
 
 		if (titleHeader) {
 			document.querySelector('#mobile-header .nav-button').style.display = 'none';

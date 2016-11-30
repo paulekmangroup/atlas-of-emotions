@@ -234,6 +234,7 @@ var metadataSectionParsers = (function () {
 			return {
 				header: data[0][0],
 				body: data[0][1],
+				caption: data[0][4],
 				header_mobile: data[0][5] || data[0][0],
 				body_mobile: data[0][6] || data[0][1],
 				sectionName: data[0][7],
