@@ -1172,12 +1172,9 @@ export default {
 
 		if (action) {
 
-			// suppress valence popup for langs other than english,
-			// because conjugating/translating sentences is currently out of scope.
-			let displayValencePopup = action.valence && appStrings().lang() === 'en',
-				secondaryData;
+			let secondaryData;
 
-			if (displayValencePopup) {
+			if (action.valence) {
 				secondaryData = {
 					body: action.valence && appStrings().getStr(`emotionsData.metadata.actions.qualities[${ action.valence - 1 }].body`),
 					classes: [
@@ -1185,8 +1182,8 @@ export default {
 						_.findKey(VALENCES, (val) => val === action.valence).toLowerCase()
 					]
 				};
-				secondaryData.body = secondaryData.body.replace(/In this state/, 'In a state of ' + action.state.toLowerCase());
-				secondaryData.body = secondaryData.body.replace(/this action/, GRAMMAR_TRANSLATE[action.name.toLowerCase()]);
+				// secondaryData.body = secondaryData.body.replace(/In this state/, 'In a state of ' + action.state.toLowerCase());
+				// secondaryData.body = secondaryData.body.replace(/this action/, GRAMMAR_TRANSLATE[action.name.toLowerCase()]);
 			}
 
 			dispatcher.popupChange('actions', action.name, action.desc, secondaryData);
@@ -1312,7 +1309,7 @@ export default {
 			// touch is not on an action arrow;
 			// see if there is a nearby arrow
 			this.touchedShape = null;
-			
+
 			const angThreshold = Math.min(10, 180 / (1.5 * this.actionsData[this.currentEmotion].allActions.length)),	// detect touches within angle determined by total number of arrows,
 																														// but no more than 10 degrees from an arrow
 				radThreshold = 0.4;
