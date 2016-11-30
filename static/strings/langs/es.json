@@ -1096,66 +1096,58 @@
         },
         {
             "key": "enjoyment_actions_header_1",
-            "value": "Retirarse"
-        },
-        {
-            "key": "enjoyment_actions_body_1",
-            "value": "Abandonar física o mentalmente el escenario de lo que está ocasionando el disfrute."
-        },
-        {
-            "key": "enjoyment_actions_header_2",
             "value": "Buscar más"
         },
         {
-            "key": "enjoyment_actions_body_2",
+            "key": "enjoyment_actions_body_1",
             "value": "Intento por aumentar los sentimientos placenteros."
         },
         {
-            "key": "enjoyment_actions_header_3",
+            "key": "enjoyment_actions_header_2",
             "value": "Mantener"
         },
         {
-            "key": "enjoyment_actions_body_3",
+            "key": "enjoyment_actions_body_2",
             "value": "Continuar haciendo lo necesario para que los sentimientos placenteros continúen."
         },
         {
-            "key": "enjoyment_actions_header_4",
+            "key": "enjoyment_actions_header_3",
             "value": "Regodearse"
         },
         {
-            "key": "enjoyment_actions_body_4",
+            "key": "enjoyment_actions_body_3",
             "value": "Gozar la envidia que otros sienten a causa del propio estado de disfrute."
         },
         {
-            "key": "enjoyment_actions_header_5",
+            "key": "enjoyment_actions_header_4",
             "value": "Exclamar"
         },
         {
-            "key": "enjoyment_actions_body_5",
+            "key": "enjoyment_actions_body_4",
             "value": "Expresaar con la voz nuestro gozo."
         },
         {
-            "key": "enjoyment_actions_header_6",
+            "key": "enjoyment_actions_header_5",
             "value": "Entablar relación/conectar"
         },
         {
-            "key": "enjoyment_actions_body_6",
+            "key": "enjoyment_actions_body_5",
             "value": "Desear establecer contacto y entablar relación con otros para compartir los sentimientos de placer."
         },
         {
-            "key": "enjoyment_actions_header_7",
+            "key": "enjoyment_actions_header_6",
             "value": "Saborear"
         },
         {
-            "key": "enjoyment_actions_body_7",
+            "key": "enjoyment_actions_body_6",
             "value": "Deleitarse con la experiencia de sentimientos agradables respecto a experiencias físicas y psicológicas."
         },
         {
-            "key": "enjoyment_actions_header_8",
+            "key": "enjoyment_actions_header_7",
             "value": "Complacencia"
         },
         {
-            "key": "enjoyment_actions_body_8",
+            "key": "enjoyment_actions_body_7",
             "value": "Entregarse en exceso a los sentimientos placenteros."
         },
         {

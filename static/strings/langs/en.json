@@ -1096,66 +1096,58 @@
         },
         {
             "key": "enjoyment_actions_header_1",
-            "value": "Withdraw"
-        },
-        {
-            "key": "enjoyment_actions_body_1",
-            "value": "Physically or mentally leave the scene of what is causing the enjoyment."
-        },
-        {
-            "key": "enjoyment_actions_header_2",
             "value": "Seek more"
         },
         {
-            "key": "enjoyment_actions_body_2",
+            "key": "enjoyment_actions_body_1",
             "value": "Attempt to increase the enjoyable feelings."
         },
         {
-            "key": "enjoyment_actions_header_3",
+            "key": "enjoyment_actions_header_2",
             "value": "Maintain"
         },
         {
-            "key": "enjoyment_actions_body_3",
+            "key": "enjoyment_actions_body_2",
             "value": "Continue to do what is necessary to continue the enjoyable feelings."
         },
         {
-            "key": "enjoyment_actions_header_4",
+            "key": "enjoyment_actions_header_3",
             "value": "Gloat"
         },
         {
-            "key": "enjoyment_actions_body_4",
+            "key": "enjoyment_actions_body_3",
             "value": "Enjoy others’ envy of your state of enjoyment."
         },
         {
-            "key": "enjoyment_actions_header_5",
+            "key": "enjoyment_actions_header_4",
             "value": "Exclaim"
         },
         {
-            "key": "enjoyment_actions_body_5",
+            "key": "enjoyment_actions_body_4",
             "value": "Vocally express enjoyment to others."
         },
         {
-            "key": "enjoyment_actions_header_6",
+            "key": "enjoyment_actions_header_5",
             "value": "Engage/connect"
         },
         {
-            "key": "enjoyment_actions_body_6",
+            "key": "enjoyment_actions_body_5",
             "value": "Share one's feelings of enjoyment with others without a desire to cause jealousy."
         },
         {
-            "key": "enjoyment_actions_header_7",
+            "key": "enjoyment_actions_header_6",
             "value": "Savor"
         },
         {
-            "key": "enjoyment_actions_body_7",
+            "key": "enjoyment_actions_body_6",
             "value": "Appreciate the good feelings around an experience completely, especially by dwelling on them."
         },
         {
-            "key": "enjoyment_actions_header_8",
+            "key": "enjoyment_actions_header_7",
             "value": "Indulge"
         },
         {
-            "key": "enjoyment_actions_body_8",
+            "key": "enjoyment_actions_body_7",
             "value": "Allow oneself to fully experience the pleasure of good feelings. "
         },
         {
