@@ -340,9 +340,10 @@ export default function (...initArgs) {
 
 		let dropdown = document.querySelector('#more-info .dropup'),
 			title = dropdown.querySelector('.dup-title'),
-			menu = dropdown.querySelector('ul');
+			menu = dropdown.querySelector('ul'),
+			dropdownLabel = appStrings().getStr('emotionsData.metadata.more.sectionName') || dispatcher.MORE_INFO.title;
 
-		title.innerHTML = '<h4>' + dispatcher.MORE_INFO.title + '</h4>';
+		title.innerHTML = '<h4>' + dropdownLabel + '</h4>';
 
 		dispatcher.MORE_INFO.items.forEach((item) => {
 			let label = appStrings().getStr(`emotionsData.${ item.page }.sectionName`, true) || item.label,
@@ -813,7 +814,7 @@ export default function (...initArgs) {
 			let emotion = appStrings().getStr(`derived.emotions.${ config.emotion }`) || config.emotion;
 			dropdownTitle.innerHTML = emotion.toUpperCase();
 		} else if (config.emotion === null) {
-			dropdownTitle.innerHTML = 'CHOOSE AN EMOTION';
+			dropdownTitle.innerHTML = (appStrings().getStr('emotionsData.metadata.site.caption') || 'CHOOSE AN EMOTION').toUpperCase();
 		}
 	}
 

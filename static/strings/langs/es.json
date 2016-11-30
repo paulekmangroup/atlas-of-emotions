@@ -30,7 +30,7 @@
         },
         {
             "key": "intro_secondary_header_2",
-            "value": "What it’s based on"
+            "value": "ñWhat it’s based on"
         },
         {
             "key": "intro_secondary_copy_2",
@@ -50,7 +50,7 @@
         },
         {
             "key": "intro_section_name",
-            "value": "Introduction"
+            "value": "ñIntroduction"
         },
         {
             "key": "continents_header",
@@ -62,7 +62,7 @@
         },
         {
             "key": "continents_body_mobile",
-            "value": "Most emotions researchers agree on these five Universal Emotions: emotions that all humans, no matter where or how we were raised, have in common. Tap on an emotion to start exploring."
+            "value": "ñMost emotions researchers agree on these five Universal Emotions: emotions that all humans, no matter where or how we were raised, have in common. Tap on an emotion to start exploring."
         },
         {
             "key": "continents_section_name",
@@ -78,7 +78,7 @@
         },
         {
             "key": "states_body_mobile",
-            "value": "LHAMO can be felt mildly, extremely, or somewhere in between. Tap on the shapes above to learn about a few of the states that we can experience."
+            "value": "ñLHAMO can be felt mildly, extremely, or somewhere in between. Tap on the shapes above to learn about a few of the states that we can experience."
         },
         {
             "key": "states_section_name",
@@ -94,7 +94,7 @@
         },
         {
             "key": "actions_body_mobile",
-            "value": "We respond to emotional states with our actions. Tap on the shapes to learn about the possible actions resulting from LHAMO."
+            "value": "ñWe respond to emotional states with our actions. Tap on the shapes to learn about the possible actions resulting from LHAMO."
         },
         {
             "key": "actions_secondary_header_1",
@@ -134,7 +134,7 @@
         },
         {
             "key": "triggers_body_mobile",
-            "value": "A trigger is something around us or in our own minds that causes us to feel an emotion. Tap on the labels to learn about triggering LHAMO."
+            "value": "ñA trigger is something around us or in our own minds that causes us to feel an emotion. Tap on the labels to learn about triggering LHAMO."
         },
         {
             "key": "triggers_secondary_header_1",
@@ -190,7 +190,7 @@
         },
         {
             "key": "moods_body_mobile",
-            "value": "Moods are longer-lasting cousins of an emotion that cause us to feel the related emotion repeatedly without any clear trigger. Tap on the shape to learn more."
+            "value": "ñMoods are longer-lasting cousins of an emotion that cause us to feel the related emotion repeatedly without any clear trigger. Tap on the shape to learn more."
         },
         {
             "key": "moods_section_name",
@@ -206,7 +206,7 @@
         },
         {
             "key": "calm_body_mobile",
-            "value": "A calm, balanced frame of mind helps us understand our changing emotions. We can reach calmness through developing an awareness of the triggers, states and constuctive actions possible. Calmness ideally is our baseline in which emotions arise when triggered and then recede."
+            "value": "ñA calm, balanced frame of mind helps us understand our changing emotions. We can reach calmness through developing an awareness of the triggers, states and constuctive actions possible. Calmness ideally is our baseline in which emotions arise when triggered and then recede."
         },
         {
             "key": "calm_secondary_header",
@@ -218,7 +218,7 @@
         },
         {
             "key": "calm_button_label",
-            "value": "Start over"
+            "value": "ñStart over"
         },
         {
             "key": "calm_section_name",
@@ -226,7 +226,7 @@
         },
         {
             "key": "more_button_label",
-            "value": "Back to Atlas"
+            "value": "ñBack to Atlas"
         },
         {
             "key": "more_section_name",
@@ -240,7 +240,7 @@
         },
         {
             "key": "anger_continent_header_mobile",
-            "value": "The Continent of Anger"
+            "value": "ñThe Continent of Anger"
         },
         {
             "key": "anger_continent_body",
@@ -248,7 +248,7 @@
         },
         {
             "key": "anger_continent_body_mobile",
-            "value": "We feel anger when we are mentally or physically blocked. Anger varies in strength and frequency in our lives."
+            "value": "ñWe feel anger when we are mentally or physically blocked. Anger varies in strength and frequency in our lives."
         },
         {
             "key": "anger_states_header_1",
@@ -380,19 +380,19 @@
         },
         {
             "key": "anger_triggers_universal_header_mobile",
-            "value": "Universal Triggers of Anger"
+            "value": "ñUniversal Triggers of Anger"
         },
         {
             "key": "anger_triggers_universal_body_mobile",
-            "value": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Interference with action or locomotion are examples."
+            "value": "ñUniversal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Interference with action or locomotion are examples."
         },
         {
             "key": "anger_triggers_learned_header_mobile",
-            "value": "Learned Triggers of Anger"
+            "value": "ñLearned Triggers of Anger"
         },
         {
             "key": "anger_triggers_learned_body_mobile",
-            "value": "Some triggers can be learned from personal or shared cultural experiences. Being wrongfully accused or put down by an authority figure are examples."
+            "value": "ñSome triggers can be learned from personal or shared cultural experiences. Being wrongfully accused or put down by an authority figure are examples."
         },
         {
             "key": "anger_triggers_header_1",
@@ -438,7 +438,7 @@
         },
         {
             "key": "fear_continent_header_mobile",
-            "value": "Fear"
+            "value": "ñFear"
         },
         {
             "key": "fear_continent_body",
@@ -446,7 +446,7 @@
         },
         {
             "key": "fear_continent_body_mobile",
-            "value": "We feel fear when our safety or wellbeing is threatened. Fear varies in strength and frequency in our lives."
+            "value": "ñWe feel fear when our safety or wellbeing is threatened. Fear varies in strength and frequency in our lives."
         },
         {
             "key": "fear_states_header_1",
@@ -570,19 +570,19 @@
         },
         {
             "key": "fear_triggers_universal_header_mobile",
-            "value": "Universal Triggers of Fear"
+            "value": "ñUniversal Triggers of Fear"
         },
         {
             "key": "fear_triggers_universal_body_mobile",
-            "value": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Snake-like shapes and sudden loss of gravity are examples."
+            "value": "ñUniversal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Snake-like shapes and sudden loss of gravity are examples."
         },
         {
             "key": "fear_triggers_learned_header_mobile",
-            "value": "Learned Triggers of Fear"
+            "value": "ñLearned Triggers of Fear"
         },
         {
             "key": "fear_triggers_learned_body_mobile",
-            "value": "Some triggers can be learned from personal or shared cultural experiences. Public speaking, thunder, and the threat of losing one’s job are examples."
+            "value": "ñSome triggers can be learned from personal or shared cultural experiences. Public speaking, thunder, and the threat of losing one’s job are examples."
         },
         {
             "key": "fear_triggers_header_1",
@@ -628,7 +628,7 @@
         },
         {
             "key": "disgust_continent_header_mobile",
-            "value": "Disgust"
+            "value": "ñDisgust"
         },
         {
             "key": "disgust_continent_body",
@@ -636,7 +636,7 @@
         },
         {
             "key": "disgust_continent_body_mobile",
-            "value": "We feel disgust when faced with something toxic or unpleasant. Disgust varies in strength and frequency in our lives."
+            "value": "ñWe feel disgust when faced with something toxic or unpleasant. Disgust varies in strength and frequency in our lives."
         },
         {
             "key": "disgust_states_header_1",
@@ -728,19 +728,19 @@
         },
         {
             "key": "disgust_triggers_universal_header_mobile",
-            "value": "Universal Triggers of Disgust"
+            "value": "ñUniversal Triggers of Disgust"
         },
         {
             "key": "disgust_triggers_universal_body_mobile",
-            "value": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Anything in decay or coming out of the body are examples."
+            "value": "ñUniversal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Anything in decay or coming out of the body are examples."
         },
         {
             "key": "disgust_triggers_learned_header_mobile",
-            "value": "Learned Triggers of Disgust"
+            "value": "ñLearned Triggers of Disgust"
         },
         {
             "key": "disgust_triggers_learned_body_mobile",
-            "value": "Some triggers can be learned from personal or shared cultural experiences. Unfamiliar religious customs and eating insects or raw meat are examples."
+            "value": "ñSome triggers can be learned from personal or shared cultural experiences. Unfamiliar religious customs and eating insects or raw meat are examples."
         },
         {
             "key": "disgust_triggers_header_1",
@@ -778,7 +778,7 @@
         },
         {
             "key": "sadness_continent_header_mobile",
-            "value": "Sadness"
+            "value": "ñSadness"
         },
         {
             "key": "sadness_continent_body",
@@ -786,7 +786,7 @@
         },
         {
             "key": "sadness_continent_body_mobile",
-            "value": "We feel sadness when we lose something valuable. Sadness varies in strength and frequency in our lives."
+            "value": "ñWe feel sadness when we lose something valuable. Sadness varies in strength and frequency in our lives."
         },
         {
             "key": "sadness_states_header_1",
@@ -926,19 +926,19 @@
         },
         {
             "key": "sadness_triggers_universal_header_mobile",
-            "value": "Universal Triggers of Sadness"
+            "value": "ñUniversal Triggers of Sadness"
         },
         {
             "key": "sadness_triggers_universal_body_mobile",
-            "value": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Losing or being rejected by a loved one are examples."
+            "value": "ñUniversal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Losing or being rejected by a loved one are examples."
         },
         {
             "key": "sadness_triggers_learned_header_mobile",
-            "value": "Learned Triggers of Sadness"
+            "value": "ñLearned Triggers of Sadness"
         },
         {
             "key": "sadness_triggers_learned_body_mobile",
-            "value": "Some triggers can be learned from personal or shared cultural experiences. Feeling left out or experiencing a perceived loss of status are examples."
+            "value": "ñSome triggers can be learned from personal or shared cultural experiences. Feeling left out or experiencing a perceived loss of status are examples."
         },
         {
             "key": "sadness_triggers_header_1",
@@ -972,19 +972,19 @@
     [
         {
             "key": "enjoyment_continent_header",
-            "value": "Enjoyment"
+            "value": "ñEnjoyment"
         },
         {
             "key": "enjoyment_continent_header_mobile",
-            "value": "The Continent of Enjoyment"
+            "value": "ñThe Continent of Enjoyment"
         },
         {
             "key": "enjoyment_continent_body",
-            "value": "We are pleased with our experience."
+            "value": "ñWe are pleased with our experience."
         },
         {
             "key": "enjoyment_continent_body_mobile",
-            "value": "We feel enjoyment when we experience novelty or comfort. Enjoyment varies in strength and frequency in our lives."
+            "value": "ñWe feel enjoyment when we experience novelty or comfort. Enjoyment varies in strength and frequency in our lives."
         },
         {
             "key": "enjoyment_states_header_1",
@@ -1156,19 +1156,19 @@
         },
         {
             "key": "enjoyment_triggers_universal_header_mobile",
-            "value": "Universal Triggers of Enjoyment"
+            "value": "ñUniversal Triggers of Enjoyment"
         },
         {
             "key": "enjoyment_triggers_universal_body_mobile",
-            "value": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Social interaction and experiencing nature are examples."
+            "value": "ñUniversal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Social interaction and experiencing nature are examples."
         },
         {
             "key": "enjoyment_triggers_learned_header_mobile",
-            "value": "Learned Triggers of Enjoyment"
+            "value": "ñLearned Triggers of Enjoyment"
         },
         {
             "key": "enjoyment_triggers_learned_body_mobile",
-            "value": "Some triggers can be learned from personal or shared cultural experiences. Spending time with family or visiting places from one’s youth are examples."
+            "value": "ñSome triggers can be learned from personal or shared cultural experiences. Spending time with family or visiting places from one’s youth are examples."
         },
         {
             "key": "enjoyment_triggers_header_1",
@@ -1210,39 +1210,39 @@
     [
         {
             "key": "about_intro_title",
-            "value": "About This Atlas"
+            "value": "ñAbout This Atlas"
         },
         {
             "key": "about_intro_body",
-            "value": "The Atlas of Emotions is an interactive tool designed to build emotional awareness. The site invites you to visualize, identify and explore five primary emotions (and their related feeling states, actions, triggers and moods) in order to gain a better understanding of how they influence our lives. Although we can’t always choose what emotions to feel or when to feel them, by building emotional awareness, it may be possible to choose how we respond to what we’re feeling. \n\nThe Atlas began when the Dalai Lama asked prominent emotion researcher Paul Ekman to create a map of the emotions that could help people learn to have more constructive emotional experiences. Ekman, an expert in the field, had previously consulted on a wide range of emotion-related projects, including the popular Pixar film Inside Out. With his daughter, scholar Eve Ekman, he created the Atlas of Emotions in response to the Dalai Lama’s request."
+            "value": "ñThe Atlas of Emotions is an interactive tool designed to build emotional awareness. The site invites you to visualize, identify and explore five primary emotions (and their related feeling states, actions, triggers and moods) in order to gain a better understanding of how they influence our lives. Although we can’t always choose what emotions to feel or when to feel them, by building emotional awareness, it may be possible to choose how we respond to what we’re feeling. \n\nThe Atlas began when the Dalai Lama asked prominent emotion researcher Paul Ekman to create a map of the emotions that could help people learn to have more constructive emotional experiences. Ekman, an expert in the field, had previously consulted on a wide range of emotion-related projects, including the popular Pixar film Inside Out. With his daughter, scholar Eve Ekman, he created the Atlas of Emotions in response to the Dalai Lama’s request."
         },
         {
             "key": "about_intro_title_mobile",
-            "value": "About This Atlas"
+            "value": "ñAbout This Atlas"
         },
         {
             "key": "about_intro_body_mobile",
-            "value": "The Atlas of Emotions is an interactive tool designed to build emotional awareness. The site invites you to visualize, identify and explore five primary emotions (and their related feeling states, actions, triggers and moods) in order to gain a better understanding of how they influence our lives. Although we can’t always choose what emotions to feel or when to feel them, by building emotional awareness, it may be possible to choose how we respond to what we’re feeling. \n\nThe Atlas began when the Dalai Lama asked prominent emotion researcher Paul Ekman to create a map of the emotions that could help people learn to have more constructive emotional experiences. Ekman, an expert in the field, had previously consulted on a wide range of emotion-related projects, including the popular Pixar film Inside Out. With his daughter, scholar Eve Ekman, he created the Atlas of Emotions in response to the Dalai Lama’s request."
+            "value": "ñThe Atlas of Emotions is an interactive tool designed to build emotional awareness. The site invites you to visualize, identify and explore five primary emotions (and their related feeling states, actions, triggers and moods) in order to gain a better understanding of how they influence our lives. Although we can’t always choose what emotions to feel or when to feel them, by building emotional awareness, it may be possible to choose how we respond to what we’re feeling. \n\nThe Atlas began when the Dalai Lama asked prominent emotion researcher Paul Ekman to create a map of the emotions that could help people learn to have more constructive emotional experiences. Ekman, an expert in the field, had previously consulted on a wide range of emotion-related projects, including the popular Pixar film Inside Out. With his daughter, scholar Eve Ekman, he created the Atlas of Emotions in response to the Dalai Lama’s request."
         },
         {
             "key": "about_section_name",
-            "value": "About"
+            "value": "ñAbout"
         },
         {
             "key": "about_header_1",
-            "value": "About the Ekmans"
+            "value": "ñAbout the Ekmans"
         },
         {
             "key": "about_body_1",
-            "value": "Paul Ekman is a renowned American psychologist who pioneered the field of emotion research. After teaching at UCSF for 40 years and collaborating with partners as diverse as law enforcement agencies and the Dalai Lama, he now runs a private training company. \n \nEve Ekman is a post-doctoral scholar at UCSF’s Osher Center for Integrative Medicine. As a teacher trainer for Cultivating Emotional Balance (CEB), an emotion-regulation and meditation intervention, Eve adapts CEB to train care providers in various fields."
+            "value": "ñPaul Ekman is a renowned American psychologist who pioneered the field of emotion research. After teaching at UCSF for 40 years and collaborating with partners as diverse as law enforcement agencies and the Dalai Lama, he now runs a private training company. \n \nEve Ekman is a post-doctoral scholar at UCSF’s Osher Center for Integrative Medicine. As a teacher trainer for Cultivating Emotional Balance (CEB), an emotion-regulation and meditation intervention, Eve adapts CEB to train care providers in various fields."
         },
         {
             "key": "about_header_2",
-            "value": "About Stamen Design"
+            "value": "ñAbout Stamen Design"
         },
         {
             "key": "about_body_2",
-            "value": "<a href=\"http://www.stamen.com/\">Stamen Design</a> was founded by Eric Rodenbeck in 2001. Since then, the studio has grown to a staff of 12 and established a reputation for its expertise in creating compelling interactive design and data visualization projects. Stamen is neither a research and development lab nor a traditional design firm, but something in between: a place where collaboration is valued, good ideas can come from anywhere and results are paramount. "
+            "value": "ñ<a href=\"http://www.stamen.com/\">Stamen Design</a> was founded by Eric Rodenbeck in 2001. Since then, the studio has grown to a staff of 12 and established a reputation for its expertise in creating compelling interactive design and data visualization projects. Stamen is neither a research and development lab nor a traditional design firm, but something in between: a place where collaboration is valued, good ideas can come from anywhere and results are paramount. "
         },
         {
             "key": "about_header_3"
@@ -1278,35 +1278,35 @@
     [
         {
             "key": "emotrak_title",
-            "value": "EmoTrak"
+            "value": "ñEmoTrak"
         },
         {
             "key": "emotrak_intro",
-            "value": "Improve your well being with daily emotional balance training."
+            "value": "ñImprove your well being with daily emotional balance training."
         },
         {
             "key": "emotrak_header_mobile",
-            "value": "EmoTrak"
+            "value": "ñEmoTrak"
         },
         {
             "key": "emotrak_body_mobile",
-            "value": "Improve your well being with daily emotional balance training.<br> \"<!-- Begin MailChimp Signup Form -->\n<link href=\"\"//cdn-images.mailchimp.com/embedcode/slim-10_7.css\"\" rel=\"\"stylesheet\"\" type=\"\"text/css\"\">\n<style type=\"\"text/css\"\">\n        #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }\n        /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.\n           We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */\n</style>\n<div id=\"\"mc_embed_signup\"\">\n<form action=\"\"//eveekman.us12.list-manage.com/subscribe/post?u=a8f41488aed929208e96dcf44&amp;id=76c8861d7d\"\" method=\"\"post\"\" id=\"\"mc-embedded-subscribe-form\"\" name=\"\"mc-embedded-subscribe-form\"\" class=\"\"validate\"\" target=\"\"_blank\"\" novalidate>\n    <div id=\"\"mc_embed_signup_scroll\"\">\n        <label for=\"\"mce-EMAIL\"\">Subscribe for EmoTrak Release Updates</label>\n        <input type=\"\"email\"\" value=\"\"\"\" name=\"\"EMAIL\"\" class=\"\"email\"\" id=\"\"mce-EMAIL\"\" placeholder=\"\"email address\"\" required>\n    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->\n    <div style=\"\"position: absolute; left: -5000px;\"\" aria-hidden=\"\"true\"\"><input type=\"\"text\"\" name=\"\"b_a8f41488aed929208e96dcf44_76c8861d7d\"\" tabindex=\"\"-1\"\" value=\"\"\"\"></div>\n    <div class=\"\"clear\"\"><input type=\"\"submit\"\" value=\"\"Subscribe\"\" name=\"\"subscribe\"\" id=\"\"mc-embedded-subscribe\"\" class=\"\"button\"\"></div>\n    </div>\n</form>\n</div>\n\n<!--End mc_embed_signup-->\""
+            "value": "ñImprove your well being with daily emotional balance training.<br> \"<!-- Begin MailChimp Signup Form -->\n<link href=\"\"//cdn-images.mailchimp.com/embedcode/slim-10_7.css\"\" rel=\"\"stylesheet\"\" type=\"\"text/css\"\">\n<style type=\"\"text/css\"\">\n        #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }\n        /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.\n           We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */\n</style>\n<div id=\"\"mc_embed_signup\"\">\n<form action=\"\"//eveekman.us12.list-manage.com/subscribe/post?u=a8f41488aed929208e96dcf44&amp;id=76c8861d7d\"\" method=\"\"post\"\" id=\"\"mc-embedded-subscribe-form\"\" name=\"\"mc-embedded-subscribe-form\"\" class=\"\"validate\"\" target=\"\"_blank\"\" novalidate>\n    <div id=\"\"mc_embed_signup_scroll\"\">\n        <label for=\"\"mce-EMAIL\"\">Subscribe for EmoTrak Release Updates</label>\n        <input type=\"\"email\"\" value=\"\"\"\" name=\"\"EMAIL\"\" class=\"\"email\"\" id=\"\"mce-EMAIL\"\" placeholder=\"\"email address\"\" required>\n    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->\n    <div style=\"\"position: absolute; left: -5000px;\"\" aria-hidden=\"\"true\"\"><input type=\"\"text\"\" name=\"\"b_a8f41488aed929208e96dcf44_76c8861d7d\"\" tabindex=\"\"-1\"\" value=\"\"\"\"></div>\n    <div class=\"\"clear\"\"><input type=\"\"submit\"\" value=\"\"Subscribe\"\" name=\"\"subscribe\"\" id=\"\"mc-embedded-subscribe\"\" class=\"\"button\"\"></div>\n    </div>\n</form>\n</div>\n\n<!--End mc_embed_signup-->\""
         },
         {
             "key": "emotrak_section_name",
-            "value": "EmoTrak"
+            "value": "ñEmoTrak"
         },
         {
             "key": "emotrak_section_1",
-            "value": "A brand new app, EmoTrak, is under development by Dr. Eve Ekman and collaborators. Sign up below to be the first to find out about the release of this science based emotional training app."
+            "value": "ñA brand new app, EmoTrak, is under development by Dr. Eve Ekman and collaborators. Sign up below to be the first to find out about the release of this science based emotional training app."
         },
         {
             "key": "emotrak_section_2",
-            "value": "true in mail column indicates that it will include hardcoded subscribe link"
+            "value": "ñtrue in mail column indicates that it will include hardcoded subscribe link"
         },
         {
             "key": "emotrak_section_3",
-            "value": "Dr. Eve Ekman is a University of California San Francisco postdoctoral fellow studying burnout and emotional well being. Dr. Ekman has been developing and evaluating EmoTrak to support health care providers. The app is a self assessment tool to investigate emotion triggers, experiences and responses. It also provides brief emotion focused meditations and feedback on your emotional profile."
+            "value": "ñDr. Eve Ekman is a University of California San Francisco postdoctoral fellow studying burnout and emotional well being. Dr. Ekman has been developing and evaluating EmoTrak to support health care providers. The app is a self assessment tool to investigate emotion triggers, experiences and responses. It also provides brief emotion focused meditations and feedback on your emotional profile."
         }
     ]
 ]
