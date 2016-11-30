@@ -214,11 +214,15 @@
         },
         {
             "key": "calm_button_label",
-            "value": "ñStart over"
+            "value": "Start over"
         },
         {
             "key": "calm_section_name",
             "value": "Calma"
+        },
+        {
+            "key": "more_button_label",
+            "value": "ñBack to Atlas"
         }
     ],
     [

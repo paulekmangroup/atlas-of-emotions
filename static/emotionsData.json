@@ -2086,6 +2086,9 @@
         "header_mobile": "calm_secondary_header",
         "body_mobile": "calm_body_mobile"
       }
+    },
+    "more": {
+      "caption": "more_button_label"
     }
   },
   "about": {

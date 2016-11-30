@@ -219,6 +219,10 @@
         {
             "key": "calm_section_name",
             "value": "Calm"
+        },
+        {
+            "key": "more_button_label",
+            "value": "Back to Atlas"
         }
     ],
     [

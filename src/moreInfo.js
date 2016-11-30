@@ -84,7 +84,7 @@ export default {
 		this.toggleMoreClass(true);
 
 		// any section-wide opening animations not specific to a particular page go here.
-		
+
 		if (this.screenIsSmall) {
 			// no mobile caption on More pages
 			dispatcher.changeCallout();
@@ -109,7 +109,7 @@ export default {
 	onResize: function (screenIsSmall) {
 
 		this.screenIsSmall = screenIsSmall;
-		
+
 		if (!this.currentPage) return;
 
 		if (typeof this.pages[this.currentPage].onResize === 'function') {
@@ -149,7 +149,7 @@ export default {
 
 	setBackButton: function(element) {
 		const backToAtlas = document.createElement('div');
-		backToAtlas.innerHTML = "<h4>BACK TO ATLAS</h4>";
+		backToAtlas.innerHTML = `<h4>${ appStrings().getStr('emotionsData.metadata.more.caption').toUpperCase() }</h4>`;
 		backToAtlas.classList.add('back-to-atlas');
 		backToAtlas.addEventListener('click', this.onCloseButtonClicked.bind(this));
 		element.appendChild(backToAtlas);

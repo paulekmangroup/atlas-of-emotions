@@ -245,6 +245,12 @@ var metadataSectionParsers = (function () {
 					body_mobile: data[0][6] || data[0][3]
 				}
 			};
+		},
+
+		more: function (data) {
+			return {
+				caption: data[0][4]
+			};
 		}
 
 	};
