@@ -5,6 +5,10 @@
             "value": "Atlas de las Emociones"
         },
         {
+            "key": "site_dropdown_label",
+            "value": "ñChoose an emotion"
+        },
+        {
             "key": "intro_header",
             "value": "Bienvenidos al Atlas de las Emociones"
         },
@@ -222,7 +226,11 @@
         },
         {
             "key": "more_button_label",
-            "value": "ñBack to Atlas"
+            "value": "Back to Atlas"
+        },
+        {
+            "key": "more_section_name",
+            "value": "ñMore Information"
         }
     ],
     [
