@@ -1952,9 +1952,7 @@
     "site": {
       "header": "site_header",
       "body": "",
-      "caption": [
-        "site_dropdown_label"
-      ],
+      "caption": "site_dropdown_label",
       "header_mobile": "site_header",
       "body_mobile": "",
       "sectionName": ""
