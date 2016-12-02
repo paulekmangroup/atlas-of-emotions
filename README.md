@@ -1,5 +1,10 @@
 # The Atlas of Emotions
 
+## Technical overview
+
+The codebase is written in ES6, transpiled with [Babel](https://babeljs.io/). It's largely vanilla JS, with a healthy does of [D3](https://d3js.org/) for States, Actions, and Triggers charts. Build pipline is [Gulp](http://gulpjs.com/) and [Browserify](http://browserify.org/).
+
+
 ## Running
 
 Clone the project.
@@ -42,7 +47,8 @@ scp -prq ./dist/. studio.stamen.com:www/emotionmap/show/v2/latest/ (or `/yyyy-mm
 ## Updating text content
 
 TL;DR:
-`npm run strings`
+1. Edit strings in [`en.json`](./static/strings/langs/es.json), [`es.json`](./static/strings/langs/es.json), etc.
+2. `npm run strings` and rebuild / redeploy.
 
 Text content is arranged as follows:
 
