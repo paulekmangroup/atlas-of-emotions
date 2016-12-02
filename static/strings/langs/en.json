@@ -248,7 +248,7 @@
         },
         {
             "key": "anger_continent_body",
-            "value": "We are blocked in our progress or goal."
+            "value": "We get angry when something blocks us or when we think we're being treated unfairly."
         },
         {
             "key": "anger_continent_body_mobile",
@@ -446,7 +446,7 @@
         },
         {
             "key": "fear_continent_body",
-            "value": "We are threatened to our safety or wellbeing."
+            "value": "Our fear of danger lets us anticipate threats to our safety."
         },
         {
             "key": "fear_continent_body_mobile",
@@ -636,7 +636,7 @@
         },
         {
             "key": "disgust_continent_body",
-            "value": "We are facing something toxic or otherwise unpleasing."
+            "value": "Feeling disgusted by what is toxic helps us to avoid being poisoned, physically or socially."
         },
         {
             "key": "disgust_continent_body_mobile",
@@ -786,7 +786,7 @@
         },
         {
             "key": "sadness_continent_body",
-            "value": "We are experiencing loss of something valuable."
+            "value": "Sadness is a response to loss, and feeling sad allows us to take a timeout and show others that we need support."
         },
         {
             "key": "sadness_continent_body_mobile",
@@ -814,7 +814,7 @@
         },
         {
             "key": "sadness_states_body_3",
-            "value": "Sadness that makes it hard to think clearly. [or: A mixture of sadness and agitation.]"
+            "value": "Sadness that makes it hard to think clearly."
         },
         {
             "key": "sadness_states_header_4",
@@ -984,7 +984,7 @@
         },
         {
             "key": "enjoyment_continent_body",
-            "value": "We are pleased with our experience."
+            "value": "Enjoyment describes the many good feelings that arise from experiences both novel and familiar."
         },
         {
             "key": "enjoyment_continent_body_mobile",
