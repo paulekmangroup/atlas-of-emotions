@@ -1193,7 +1193,11 @@ export default function (...initArgs) {
 		document.querySelector('#mobile-header .dropdown').classList.remove('open');
 
 		if (event.target.dataset.section) {
-			dispatcher.navigate(event.target.dataset.section);
+			if (event.target.dataset.section === 'intro') {
+				dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS);
+			} else {
+				dispatcher.navigate(event.target.dataset.section);
+			}
 		} else if (event.target.dataset.page) {
 			dispatcher.navigate(dispatcher.SECTIONS.MORE, null, event.target.dataset.page);
 		} else if (event.target.dataset.lang) {
@@ -1804,10 +1808,13 @@ export default function (...initArgs) {
 
 		// screens that have lower pixel ratios or larger (than iPad's 1024x768) resolutions are probably desktops,
 		// so don't go to mobile mode in this case.
-		const probablyDesktop = (window.devicePixelRatio < 1.5 || !window.devicePixelRatio) || window.screen.width > 1024;
-		console.info("probablyDesktop:", probablyDesktop);
+		// const probablyDesktop = (window.devicePixelRatio < 1.5 || !window.devicePixelRatio) || window.screen.width > 1024;
+		// console.info("probablyDesktop:", probablyDesktop);
+		// commented out because small viewports, whether on desktop or mobile devices, work better in mobile mode,
+		// and failing to detect correctly risks serving the wrong content on the wrong devices.
+		// IOW, leave well enough alone.
 
-		if (bypassedWarning || probablyDesktop || (window.innerWidth >= MIN_ALLOWED_WIDTH && window.innerHeight >= MIN_ALLOWED_HEIGHT)) {
+		if (bypassedWarning || /*probablyDesktop || */(window.innerWidth >= MIN_ALLOWED_WIDTH && window.innerHeight >= MIN_ALLOWED_HEIGHT)) {
 
 			if (MOBILE_ENABLED) {
 
