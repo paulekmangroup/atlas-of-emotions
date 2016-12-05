@@ -1802,10 +1802,10 @@ export default function (...initArgs) {
 	 */
 	function adjustForScreenSize () {
 
-		// screens that have lower pixel ratios and larger (than iPad's 1024x768) resolutions are probably desktops,
+		// screens that have lower pixel ratios or larger (than iPad's 1024x768) resolutions are probably desktops,
 		// so don't go to mobile mode in this case.
-		const probablyDesktop = (window.devicePixelRatio < 1.5 || !window.devicePixelRatio) && window.screen.width > 1024;
-		console.log("probablyDesktop:", probablyDesktop);
+		const probablyDesktop = (window.devicePixelRatio < 1.5 || !window.devicePixelRatio) || window.screen.width > 1024;
+		console.info("probablyDesktop:", probablyDesktop);
 
 		if (bypassedWarning || probablyDesktop || (window.innerWidth >= MIN_ALLOWED_WIDTH && window.innerHeight >= MIN_ALLOWED_HEIGHT)) {
 
