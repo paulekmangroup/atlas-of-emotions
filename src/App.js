@@ -1194,7 +1194,9 @@ export default function (...initArgs) {
 
 		if (event.target.dataset.section) {
 			if (event.target.dataset.section === 'intro') {
-				dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS);
+				dispatcher.navigate(dispatcher.HOME);
+				// simplest way to ensure intro modal reopens: refresh page at home URL
+				window.location.reload();
 			} else {
 				dispatcher.navigate(event.target.dataset.section);
 			}
@@ -1207,9 +1209,7 @@ export default function (...initArgs) {
 	}
 
 	function onMobileNavCurtainClick (event) {
-
 		onMobileNavClick();
-
 	}
 
 	/**
@@ -1567,7 +1567,7 @@ export default function (...initArgs) {
 
 	function getIntroModalOpenState () {
 
-		return !window.location.hash || !localStorage.modalSeen;
+		return !window.location.hash || localStorage.modalSeen !== 'true';
 
 	}
 
