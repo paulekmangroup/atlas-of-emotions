@@ -520,7 +520,7 @@ export default function (...initArgs) {
 
 	function markModalAsSeen () {
 
-		if (!localStorage.modalSeen) {
+		if (localStorage.modalSeen !== 'true') {
 			localStorage.setItem("modalSeen", true);
 		}
 
@@ -728,7 +728,8 @@ export default function (...initArgs) {
 					containers[sectionName].removeAttribute('style');
 					section.open({
 						sectionName: sectionName,
-						inBackground: false
+						inBackground: false,
+						introModalIsOpen: screenIsSmall ? getIntroModalOpenState() : false
 					});
 
 					setSectionEmotion(section, previousEmotion, previousMorePage);
@@ -1194,7 +1195,8 @@ export default function (...initArgs) {
 
 		if (event.target.dataset.section) {
 			if (event.target.dataset.section === 'intro') {
-				dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS);
+				localStorage.modalSeen = false;
+				dispatcher.navigate(dispatcher.HOME);
 			} else {
 				dispatcher.navigate(event.target.dataset.section);
 			}
@@ -1377,6 +1379,8 @@ export default function (...initArgs) {
 
 	function setModalVisibility (val) {
 
+		console.log("setModalVisibility:", val);
+
 		let modal = document.querySelector('#modal'),
 			modalOverlay = document.querySelector('#modal-overlay'),
 			homeLink;
@@ -1388,7 +1392,10 @@ export default function (...initArgs) {
 			currentSection.setContinentIntroPositions(false);
 		}
 
-		if (screenIsSmall) return;
+		if (screenIsSmall) {
+			if (!val) markModalAsSeen();
+			return;
+		}
 
 		if (val) {
 
@@ -1567,7 +1574,7 @@ export default function (...initArgs) {
 
 	function getIntroModalOpenState () {
 
-		return !window.location.hash || !localStorage.modalSeen;
+		return !window.location.hash || localStorage.modalSeen !== 'true';
 
 	}
 
@@ -1632,6 +1639,9 @@ export default function (...initArgs) {
 	}
 
 	function setMobileCaption (title, body) {
+
+		console.log("mobile title, body:", title, body);
+		console.log("modal seen:", localStorage.modalSeen);
 
 		let mobileCaption = document.querySelector('#mobile-caption');
 		if (currentSection === sections[dispatcher.SECTIONS.CALM]) {
