@@ -1209,7 +1209,9 @@ export default function (...initArgs) {
 	}
 
 	function onMobileNavCurtainClick (event) {
+
 		onMobileNavClick();
+
 	}
 
 	/**
