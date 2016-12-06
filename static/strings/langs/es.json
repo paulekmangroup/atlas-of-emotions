@@ -14,7 +14,7 @@
         },
         {
             "key": "intro_body_mobile",
-            "value": "Bienvenidos al Atlas de las Emociones\n \n ¡Descubre lo que hay detrás de tu vida emocional! \n \n El primer paso para trabajar con tus emociones es identificar y describir lo que sientes."
+            "value": "Bienvenidos al Atlas de las Emociones <br>\n \n ¡Descubre lo que hay detrás de tu vida emocional! <br>\n \n El primer paso para trabajar con tus emociones es identificar y describir lo que sientes. "
         },
         {
             "key": "intro_secondary_header_1",
@@ -22,35 +22,90 @@
         },
         {
             "key": "intro_secondary_copy_1",
-            "value": "Vemos el mundo a través de la lente de nuestras frustraciones, alegrías y desengaños. Las emociones influyen en nuestra realidad momento a momento. \n Muchas veces no elegimos qué sentir. Somos \"secuesrtrados\" por las emociones y actuamos sin pensar.\n Para tener más control hay que comenzar por entender nuestras emocioones. \n Este atlas es una herramienta visual para desarrollar el vocabulario emocional. Puedes practicar lo que aprenas indentificando y expresando en palabras lo que sientes. El objetivo de esto es ampliar nuestro rango de respuestas y elecciones emotivas. \n Para tomar un tour por el Atlas y aprender a usarlo sigue esta liga."
+            "value": "El primer paso para trabajar con tus emociones es identificar y describir lo que sientes."
         },
         {
             "key": "intro_caption_1",
-            "value": "ñHis Holiness the Dalai Lama, Dr. Paul Ekman and Dr. Eve Ekman"
+            "value": "Este atlas es una herramienta visual para desarrollar el vocabulario emocional. Para tener más control hay que comenzar por entender nuestras emocioones."
         },
         {
             "key": "intro_secondary_header_2",
-            "value": "ñWhat it’s based on"
-        },
-        {
-            "key": "intro_secondary_copy_2",
-            "value": "En junio de 2014 Paul Ekman envió una <a href=\"http://pps.sagepub.com/content/11/1/31.full.pdf?ijkey=AMIJzv8J9Tn0VF1&keytype=finite\" target=\"_blank\">encuesta</a> a 248 de los más activos investigadores de las emociones en el mundo para establecer el consenso que proporcionó <a href=\"#more:annex-scientific-basis\">la base científica para este atlas</a>."
-        },
-        {
-            "key": "intro_caption_2",
-            "value": "de quienes respondieron coinciden en que hay Emociones Universales: emociones que todos los seres humanos, no importa dónde vivamos o cómo hayamos sido criados, tenemos en común."
-        },
-        {
-            "key": "intro_secondary_header_3",
             "value": "Cómo navegar"
         },
         {
+            "key": "intro_secondary_copy_2",
+            "value": "ñThere are 5 emotions to explore. Discover more about each emotion as you interact with the shapes. Navigate by clicking down, left and right.<br><br>\nConsider each emotion and reflect on how they relate to your lived experience."
+        },
+        {
+            "key": "intro_caption_2"
+        },
+        {
+            "key": "intro_secondary_header_3",
+            "value": "ñThe atlas: a new kind of map"
+        },
+        {
             "key": "intro_secondary_copy_3",
-            "value": "Este conjunto de mapas te brindan una oportunidad para explorar el panorama de las emociones, \nde dónde proceden y los efectos que pueden tener. \nDa clicksobre las figuras para saber más sobre ellas. \nUsa las flechas y la barra de desplazamiento para pasar a otras páginas."
+            "value": "ñThe Atlas was commissioned by the Dalai Lama to create a scientifically-based road map to emotional self-awareness. Dr. Paul Ekman and his daughter, Eve Ekman, based the Atlas on a <a href=\"http://pps.sagepub.com/content/11/1/31.full.pdf?ijkey=AMIJzv8J9Tn0VF1&keytype=finite\" target=\"_blank\">study</a> they conducted.<br><br>\nThe scientists surveyed in the study agreed that these five emotions are the most universally felt:"
+        },
+        {
+            "key": "intro_caption_3",
+            "value": "ñPick any emotion and start exploring."
         },
         {
             "key": "intro_section_name",
             "value": "ñIntroduction"
+        },
+        {
+            "key": "intro_button_goto",
+            "value": "ñgo to atlas"
+        },
+        {
+            "key": "intro_button_start",
+            "value": "ñTake a tour"
+        },
+        {
+            "key": "intro_button_back",
+            "value": "ñback"
+        },
+        {
+            "key": "intro_button_why",
+            "value": "ñwhy an atlas?"
+        },
+        {
+            "key": "intro_button_start",
+            "value": "ñget started"
+        },
+        {
+            "key": "intro_gfx_left",
+            "value": "ñleft"
+        },
+        {
+            "key": "intro_gfx_right",
+            "value": "ñright"
+        },
+        {
+            "key": "intro_gfx_down",
+            "value": "ñdown"
+        },
+        {
+            "key": "intro_gfx_chart_anger",
+            "value": "ñanger is universal"
+        },
+        {
+            "key": "intro_gfx_chart_fear",
+            "value": "ñfear is universal"
+        },
+        {
+            "key": "intro_gfx_chart_disgust",
+            "value": "ñdisgust is universal"
+        },
+        {
+            "key": "intro_gfx_chart_sadness",
+            "value": "ñsadness is universal"
+        },
+        {
+            "key": "intro_gfx_chart_enjoyment",
+            "value": "ñenjoyment is universal"
         },
         {
             "key": "continents_header",
@@ -62,7 +117,8 @@
         },
         {
             "key": "continents_body_mobile",
-            "value": "ñMost emotions researchers agree on these five Universal Emotions: emotions that all humans, no matter where or how we were raised, have in common. Tap on an emotion to start exploring."
+            "value": "ñMost emotions researchers agree on these five Universal Emotions: emotions that all humans, no matter where or how we were raised, have in common. Tap on an emotion to start exploring.",
+            "mobileCharacterCount": "200 max (max 5 lines, 40 characters per line)"
         },
         {
             "key": "continents_section_name",
@@ -82,7 +138,8 @@
         },
         {
             "key": "states_body_mobile",
-            "value": "ñLHAMO can be felt mildly, extremely, or somewhere in between. Tap on the shapes above to learn about a few of the states that we can experience."
+            "value": "ñLHAMO can be felt mildly, extremely, or somewhere in between. Tap on the shapes above to learn about a few of the states that we can experience.",
+            "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
             "key": "states_section_name",
@@ -98,7 +155,8 @@
         },
         {
             "key": "actions_body_mobile",
-            "value": "ñWe respond to emotional states with our actions. Tap on the shapes to learn about the possible actions resulting from LHAMO."
+            "value": "ñWe respond to emotional states with our actions. Tap on the shapes to learn about the possible actions resulting from LHAMO.",
+            "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
             "key": "actions_secondary_header_1",
@@ -138,7 +196,8 @@
         },
         {
             "key": "triggers_body_mobile",
-            "value": "ñA trigger is something around us or in our own minds that causes us to feel an emotion. Tap on the labels to learn about triggering LHAMO."
+            "value": "ñA trigger is something around us or in our own minds that causes us to feel an emotion. Tap on the labels to learn about triggering LHAMO.",
+            "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
             "key": "triggers_secondary_header_1",
@@ -194,7 +253,8 @@
         },
         {
             "key": "moods_body_mobile",
-            "value": "ñMoods are longer-lasting cousins of an emotion that cause us to feel the related emotion repeatedly without any clear trigger. Tap on the shape to learn more."
+            "value": "ñMoods are longer-lasting cousins of an emotion that cause us to feel the related emotion repeatedly without any clear trigger. Tap on the shape to learn more.",
+            "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
             "key": "moods_section_name",
@@ -210,7 +270,8 @@
         },
         {
             "key": "calm_body_mobile",
-            "value": "ñA calm, balanced frame of mind helps us understand our changing emotions. We can reach calmness through developing an awareness of the triggers, states and constuctive actions possible. Calmness ideally is our baseline in which emotions arise when triggered and then recede."
+            "value": "ñA calm, balanced frame of mind helps us understand our changing emotions. We can reach calmness through developing an awareness of the triggers, states and constuctive actions possible. Calmness ideally is our baseline in which emotions arise when triggered and then recede.",
+            "mobileCharacterCount": "320 max (max 8 lines, 40 characters per line)"
         },
         {
             "key": "calm_secondary_header",
@@ -244,15 +305,16 @@
         },
         {
             "key": "anger_continent_header_mobile",
-            "value": "ñThe Continent of Anger"
+            "value": "Enojo"
         },
         {
             "key": "anger_continent_body",
-            "value": "Nos enoja la interferencia"
+            "value": "ñWe get angry when something blocks us or when we think we're being treated unfairly."
         },
         {
             "key": "anger_continent_body_mobile",
-            "value": "ñWe feel anger when we are mentally or physically blocked. Anger varies in strength and frequency in our lives."
+            "value": "ñWe feel anger when we are mentally or physically blocked. Anger varies in strength and frequency in our lives.",
+            "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
             "key": "anger_states_header_1",
@@ -388,7 +450,8 @@
         },
         {
             "key": "anger_triggers_universal_body_mobile",
-            "value": "ñUniversal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Interference with action or locomotion are examples."
+            "value": "ñUniversal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Interference with action or locomotion are examples.",
+            "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
             "key": "anger_triggers_learned_header_mobile",
@@ -396,7 +459,8 @@
         },
         {
             "key": "anger_triggers_learned_body_mobile",
-            "value": "ñSome triggers can be learned from personal or shared cultural experiences. Being wrongfully accused or put down by an authority figure are examples."
+            "value": "ñSome triggers can be learned from personal or shared cultural experiences. Being wrongfully accused or put down by an authority figure are examples.",
+            "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
             "key": "anger_triggers_header_1",
@@ -442,15 +506,16 @@
         },
         {
             "key": "fear_continent_header_mobile",
-            "value": "ñFear"
+            "value": "Miedo"
         },
         {
             "key": "fear_continent_body",
-            "value": "Tenemos miedo al peligro"
+            "value": "ñOur fear of danger lets us anticipate threats to our safety."
         },
         {
             "key": "fear_continent_body_mobile",
-            "value": "ñWe feel fear when our safety or wellbeing is threatened. Fear varies in strength and frequency in our lives."
+            "value": "ñWe feel fear when our safety or wellbeing is threatened. Fear varies in strength and frequency in our lives.",
+            "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
             "key": "fear_states_header_1",
@@ -578,7 +643,8 @@
         },
         {
             "key": "fear_triggers_universal_body_mobile",
-            "value": "ñUniversal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Snake-like shapes and sudden loss of gravity are examples."
+            "value": "ñUniversal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Snake-like shapes and sudden loss of gravity are examples.",
+            "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
             "key": "fear_triggers_learned_header_mobile",
@@ -586,7 +652,8 @@
         },
         {
             "key": "fear_triggers_learned_body_mobile",
-            "value": "nnSome triggers can be learned from personal or shared cultural experiences. Public speaking, thunder, and the threat of losing one’s job are examples."
+            "value": "nnSome triggers can be learned from personal or shared cultural experiences. Public speaking, thunder, and the threat of losing one’s job are examples.",
+            "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
             "key": "fear_triggers_header_1",
@@ -632,15 +699,16 @@
         },
         {
             "key": "disgust_continent_header_mobile",
-            "value": "ñDisgust"
+            "value": "Disgusto"
         },
         {
             "key": "disgust_continent_body",
-            "value": "Nos disgusta todo lo que es tóxico."
+            "value": "ñFeeling disgusted by what is toxic helps us to avoid being poisoned, physically or socially."
         },
         {
             "key": "disgust_continent_body_mobile",
-            "value": "ñWe feel disgust when faced with something toxic or unpleasant. Disgust varies in strength and frequency in our lives."
+            "value": "ñWe feel disgust when faced with something toxic or unpleasant. Disgust varies in strength and frequency in our lives.",
+            "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
             "key": "disgust_states_header_1",
@@ -736,7 +804,8 @@
         },
         {
             "key": "disgust_triggers_universal_body_mobile",
-            "value": "ñUniversal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Anything in decay or coming out of the body are examples."
+            "value": "ñUniversal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Anything in decay or coming out of the body are examples.",
+            "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
             "key": "disgust_triggers_learned_header_mobile",
@@ -744,7 +813,8 @@
         },
         {
             "key": "disgust_triggers_learned_body_mobile",
-            "value": "ñSome triggers can be learned from personal or shared cultural experiences. Unfamiliar religious customs and eating insects or raw meat are examples."
+            "value": "ñSome triggers can be learned from personal or shared cultural experiences. Unfamiliar religious customs and eating insects or raw meat are examples.",
+            "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
             "key": "disgust_triggers_header_1",
@@ -782,15 +852,16 @@
         },
         {
             "key": "sadness_continent_header_mobile",
-            "value": "ñSadness"
+            "value": "Tristeza"
         },
         {
             "key": "sadness_continent_body",
-            "value": "Nos entristece la pérdida."
+            "value": "ñSadness is a response to loss, and feeling sad allows us to take a timeout and show others that we need support."
         },
         {
             "key": "sadness_continent_body_mobile",
-            "value": "ñWe feel sadness when we lose something valuable. Sadness varies in strength and frequency in our lives."
+            "value": "ñWe feel sadness when we lose something valuable. Sadness varies in strength and frequency in our lives.",
+            "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
             "key": "sadness_states_header_1",
@@ -934,7 +1005,8 @@
         },
         {
             "key": "sadness_triggers_universal_body_mobile",
-            "value": "ñUniversal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Losing or being rejected by a loved one are examples."
+            "value": "ñUniversal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Losing or being rejected by a loved one are examples.",
+            "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
             "key": "sadness_triggers_learned_header_mobile",
@@ -942,7 +1014,8 @@
         },
         {
             "key": "sadness_triggers_learned_body_mobile",
-            "value": "ñSome triggers can be learned from personal or shared cultural experiences. Feeling left out or experiencing a perceived loss of status are examples."
+            "value": "ñSome triggers can be learned from personal or shared cultural experiences. Feeling left out or experiencing a perceived loss of status are examples.",
+            "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
             "key": "sadness_triggers_header_1",
@@ -980,15 +1053,16 @@
         },
         {
             "key": "enjoyment_continent_header_mobile",
-            "value": "ñThe Continent of Enjoyment"
+            "value": "ñEnjoyment"
         },
         {
             "key": "enjoyment_continent_body",
-            "value": "ñWe are pleased with our experience."
+            "value": "ñEnjoyment describes the many good feelings that arise from experiences both novel and familiar."
         },
         {
             "key": "enjoyment_continent_body_mobile",
-            "value": "ñWe feel enjoyment when we experience novelty or comfort. Enjoyment varies in strength and frequency in our lives."
+            "value": "ñWe feel enjoyment when we experience novelty or comfort. Enjoyment varies in strength and frequency in our lives.",
+            "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
             "key": "enjoyment_states_header_1",
@@ -1156,7 +1230,8 @@
         },
         {
             "key": "enjoyment_triggers_universal_body_mobile",
-            "value": "ñUniversal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Social interaction and experiencing nature are examples."
+            "value": "ñUniversal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Social interaction and experiencing nature are examples.",
+            "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
             "key": "enjoyment_triggers_learned_header_mobile",
@@ -1164,7 +1239,8 @@
         },
         {
             "key": "enjoyment_triggers_learned_body_mobile",
-            "value": "ñSome triggers can be learned from personal or shared cultural experiences. Spending time with family or visiting places from one’s youth are examples."
+            "value": "ñSome triggers can be learned from personal or shared cultural experiences. Spending time with family or visiting places from one’s youth are examples.",
+            "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
             "key": "enjoyment_triggers_header_1",

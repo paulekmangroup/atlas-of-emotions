@@ -22,35 +22,90 @@
         },
         {
             "key": "intro_secondary_copy_1",
-            "value": "This Atlas was inspired by a series of conversations about the science of emotion between the Dalai Lama and Dr. Paul Ekman. Created in collaboration with Stamen Design and Paul’s daughter, Dr. Eve Ekman, the Atlas of Emotions is an interactive visual journey through the world of emotions."
+            "value": "The first step to managing your emotions is learning to identify and describe what you are feeling."
         },
         {
             "key": "intro_caption_1",
-            "value": "His Holiness the Dalai Lama, Dr. Paul Ekman and Dr. Eve Ekman"
+            "value": "This Atlas is a visual tool to build your emotion vocabulary. The goal is to increase choice in what we become emotional about and how we respond."
         },
         {
             "key": "intro_secondary_header_2",
-            "value": "BASED ON EMOTION RESEARCH"
+            "value": "Navigating the Atlas"
         },
         {
             "key": "intro_secondary_copy_2",
-            "value": "In 2014, Paul Ekman sent a survey to 248 of the world’s most active emotion researchers. Their replies provided the scientific basis for this Atlas. \t"
+            "value": "There are 5 emotions to explore. Discover more about each emotion as you interact with the shapes. Navigate by clicking down, left and right.<br><br>\nConsider each emotion and reflect on how it relates to your lived experience."
         },
         {
-            "key": "intro_caption_2",
-            "value": "of those who responded agree that there are Universal Emotions: emotions that all humans, no matter where we live or how we were raised, have in common."
+            "key": "intro_caption_2"
         },
         {
             "key": "intro_secondary_header_3",
-            "value": "NAVIGATING THE ATLAS"
+            "value": "The atlas: a new kind of map"
         },
         {
             "key": "intro_secondary_copy_3",
-            "value": "You're invited to explore the landscape of emotions, learning about their origins and the effects they can have. Click on shapes to read about them. Use the arrows and scrollbar to navigate to other pages."
+            "value": "The Atlas was commissioned by the Dalai Lama to create a scientifically-based road map to emotional self-awareness. Dr. Paul Ekman and his daughter, Eve Ekman, based the Atlas on a <a href=\"http://pps.sagepub.com/content/11/1/31.full.pdf?ijkey=AMIJzv8J9Tn0VF1&keytype=finite\" target=\"_blank\">study</a> they conducted.<br><br>\nThe scientists surveyed in the study agreed that these five emotions are the most universally felt:"
+        },
+        {
+            "key": "intro_caption_3",
+            "value": "Pick any emotion and start exploring."
         },
         {
             "key": "intro_section_name",
             "value": "Introduction"
+        },
+        {
+            "key": "intro_button_goto",
+            "value": "go to atlas"
+        },
+        {
+            "key": "intro_button_start",
+            "value": "Take a tour"
+        },
+        {
+            "key": "intro_button_back",
+            "value": "back"
+        },
+        {
+            "key": "intro_button_why",
+            "value": "why an atlas?"
+        },
+        {
+            "key": "intro_button_start",
+            "value": "get started"
+        },
+        {
+            "key": "intro_gfx_left",
+            "value": "left"
+        },
+        {
+            "key": "intro_gfx_right",
+            "value": "right"
+        },
+        {
+            "key": "intro_gfx_down",
+            "value": "down"
+        },
+        {
+            "key": "intro_gfx_chart_anger",
+            "value": "anger is universal"
+        },
+        {
+            "key": "intro_gfx_chart_fear",
+            "value": "fear is universal"
+        },
+        {
+            "key": "intro_gfx_chart_disgust",
+            "value": "disgust is universal"
+        },
+        {
+            "key": "intro_gfx_chart_sadness",
+            "value": "sadness is universal"
+        },
+        {
+            "key": "intro_gfx_chart_enjoyment",
+            "value": "enjoyment is universal"
         },
         {
             "key": "continents_header",
@@ -244,7 +299,7 @@
         },
         {
             "key": "anger_continent_header_mobile",
-            "value": "The Continent of Anger"
+            "value": "Anger"
         },
         {
             "key": "anger_continent_body",

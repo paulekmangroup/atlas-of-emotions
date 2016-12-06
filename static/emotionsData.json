@@ -1977,6 +1977,97 @@
           "body": "intro_secondary_copy_3",
           "header_mobile": "intro_secondary_header_3",
           "body_mobile": "intro_secondary_copy_3",
+          "caption": "intro_caption_3"
+        },
+        {
+          "header": "intro_button_goto",
+          "body": "",
+          "header_mobile": "intro_button_goto",
+          "body_mobile": "",
+          "caption": ""
+        },
+        {
+          "header": "intro_button_start",
+          "body": "",
+          "header_mobile": "intro_button_start",
+          "body_mobile": "",
+          "caption": ""
+        },
+        {
+          "header": "intro_button_back",
+          "body": "",
+          "header_mobile": "intro_button_back",
+          "body_mobile": "",
+          "caption": ""
+        },
+        {
+          "header": "intro_button_why",
+          "body": "",
+          "header_mobile": "intro_button_why",
+          "body_mobile": "",
+          "caption": ""
+        },
+        {
+          "header": "intro_button_start",
+          "body": "",
+          "header_mobile": "intro_button_start",
+          "body_mobile": "",
+          "caption": ""
+        },
+        {
+          "header": "intro_gfx_left",
+          "body": "",
+          "header_mobile": "intro_gfx_left",
+          "body_mobile": "",
+          "caption": ""
+        },
+        {
+          "header": "intro_gfx_right",
+          "body": "",
+          "header_mobile": "intro_gfx_right",
+          "body_mobile": "",
+          "caption": ""
+        },
+        {
+          "header": "intro_gfx_down",
+          "body": "",
+          "header_mobile": "intro_gfx_down",
+          "body_mobile": "",
+          "caption": ""
+        },
+        {
+          "header": "intro_gfx_chart_anger",
+          "body": "",
+          "header_mobile": "intro_gfx_chart_anger",
+          "body_mobile": "",
+          "caption": ""
+        },
+        {
+          "header": "intro_gfx_chart_fear",
+          "body": "",
+          "header_mobile": "intro_gfx_chart_fear",
+          "body_mobile": "",
+          "caption": ""
+        },
+        {
+          "header": "intro_gfx_chart_disgust",
+          "body": "",
+          "header_mobile": "intro_gfx_chart_disgust",
+          "body_mobile": "",
+          "caption": ""
+        },
+        {
+          "header": "intro_gfx_chart_sadness",
+          "body": "",
+          "header_mobile": "intro_gfx_chart_sadness",
+          "body_mobile": "",
+          "caption": ""
+        },
+        {
+          "header": "intro_gfx_chart_enjoyment",
+          "body": "",
+          "header_mobile": "intro_gfx_chart_enjoyment",
+          "body_mobile": "",
           "caption": ""
         }
       ]

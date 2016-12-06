@@ -849,8 +849,8 @@ $lower-left-logo-width: 100px;
 
 #modal {
 	$modal-width: 40em;
-	$modal-height-cover: 36em;
-	$modal-height-pages: 32em;
+	$modal-height-cover: 24em;
+	$modal-height-pages: 38em;
 
 	position: absolute;
 	width: $modal-width;
@@ -859,13 +859,13 @@ $lower-left-logo-width: 100px;
 	margin-left: -0.5 * $modal-width;
 	top: 50%;
 	margin-top: -0.5 * $modal-height-cover;
-	padding: 2.5em 4em;
+	padding: 2.5em 7em;
 	z-index: $depth-4000;
 
 	&.pages {
 		height: $modal-height-pages;
 		margin-top: -0.5 * $modal-height-pages;
-		padding: 4.5em 6em 5.5em 6em;
+		padding: 3em 7em;
 	}
 
 	text-align: center;
@@ -942,6 +942,48 @@ $lower-left-logo-width: 100px;
 			text-align: center;
 			font-size: 0.8em;
 		}
+
+		.two {
+			margin: 0 6rem;
+		}
+
+		h2 {
+			width: 12em;
+			margin: 0;
+		}
+	}
+
+	.navigation {
+		img {
+			margin: 3.5rem 0;
+		}
+	}
+	.nav-diagram-labels {
+		position: absolute;
+		width: 100%;
+		height: 240px;
+		bottom: 8rem;
+
+		.nav-label {
+			position: absolute;
+			width: 10rem;
+			text-align: center;
+			text-transform: uppercase;
+			user-select: none;
+		}
+		.left {
+			left: -0.5rem;
+			top: 11rem;
+		}
+		.right {
+			right: -0.5rem;
+			top: 11rem;
+		}
+		.down {
+			left: 50%;
+			bottom: -1rem;
+			transform: translate(-50%, -50%);
+		}
 	}
 
 	.research {
@@ -983,6 +1025,7 @@ $lower-left-logo-width: 100px;
 			}
 
 			.bar {
+				position: relative;
 				margin: 0 0.2em;
 				@include emotion-background-color;
 			}
@@ -997,6 +1040,10 @@ $lower-left-logo-width: 100px;
 				margin-top: 0;
 				font-size: 1.8em;
 			}
+		}
+
+		.two {
+			width: 100%;
 		}
 	}
 
@@ -1018,8 +1065,8 @@ $lower-left-logo-width: 100px;
 
 	h2 {
 		text-align: center;
-		width: 12em;
-		margin: 0;
+		width: 20em;
+		margin: 0 0 2rem 0;
 		text-transform: uppercase;
 	}
 
@@ -1053,7 +1100,7 @@ $lower-left-logo-width: 100px;
 			outline-width: 2px;
 		}
 	}
-
+	/*
 	.button.pagination {
 		width: 1.6em;
 		height: 1.6em;
@@ -1088,6 +1135,7 @@ $lower-left-logo-width: 100px;
 			background-color: $text-overlay-color;
 		}
 	}
+	*/
 }
 
 #mobile-caption {
