@@ -1,0 +1,1363 @@
+[
+    [
+        {
+            "key": "site_header",
+            "value": "Atlas of Emotions"
+        },
+        {
+            "key": "site_dropdown_label",
+            "value": "Choose an emotion"
+        },
+        {
+            "key": "intro_header",
+            "value": "Welcome to the Atlas of Emotions"
+        },
+        {
+            "key": "intro_body_mobile",
+            "value": "This Atlas was inspired by a series of conversations about the science of emotion between the Dalai Lama and Dr. Paul Ekman. Created in collaboration with Stamen Design and Paul’s daughter, Dr. Eve Ekman, the Atlas of Emotions is an interactive visual journey through the world of emotions."
+        },
+        {
+            "key": "intro_secondary_header_1",
+            "value": "Welcome to the Atlas of Emotions"
+        },
+        {
+            "key": "intro_secondary_copy_1",
+            "value": "The first step to managing your emotions is learning to identify and describe what you are feeling."
+        },
+        {
+            "key": "intro_caption_1",
+            "value": "This Atlas is a visual tool to build your emotion vocabulary. The goal is to increase choice in what we become emotional about and how we respond."
+        },
+        {
+            "key": "intro_secondary_header_2",
+            "value": "Navigating the Atlas"
+        },
+        {
+            "key": "intro_secondary_copy_2",
+            "value": "There are 5 emotions to explore. Discover more about each emotion as you interact with the shapes. Navigate by clicking down, left and right.<br><br>\nConsider each emotion and reflect on how it relates to your lived experience."
+        },
+        {
+            "key": "intro_caption_2"
+        },
+        {
+            "key": "intro_secondary_header_3",
+            "value": "The atlas: a new kind of map"
+        },
+        {
+            "key": "intro_secondary_copy_3",
+            "value": "The Atlas was commissioned by the Dalai Lama to create a scientifically-based road map to emotional self-awareness. Dr. Paul Ekman and his daughter, Eve Ekman, based the Atlas on a <a href=\"http://pps.sagepub.com/content/11/1/31.full.pdf?ijkey=AMIJzv8J9Tn0VF1&keytype=finite\" target=\"_blank\">study</a> they conducted.<br><br>\nThe scientists surveyed in the study agreed that these five emotions are the most universally felt:"
+        },
+        {
+            "key": "intro_caption_3",
+            "value": "Pick any emotion and start exploring."
+        },
+        {
+            "key": "intro_section_name",
+            "value": "Introduction"
+        },
+        {
+            "key": "intro_button_goto",
+            "value": "go to atlas"
+        },
+        {
+            "key": "intro_button_start",
+            "value": "Take a tour"
+        },
+        {
+            "key": "intro_button_back",
+            "value": "back"
+        },
+        {
+            "key": "intro_button_why",
+            "value": "why an atlas?"
+        },
+        {
+            "key": "intro_button_start",
+            "value": "get started"
+        },
+        {
+            "key": "intro_gfx_left",
+            "value": "left"
+        },
+        {
+            "key": "intro_gfx_right",
+            "value": "right"
+        },
+        {
+            "key": "intro_gfx_down",
+            "value": "down"
+        },
+        {
+            "key": "intro_gfx_chart_anger",
+            "value": "anger is universal"
+        },
+        {
+            "key": "intro_gfx_chart_fear",
+            "value": "fear is universal"
+        },
+        {
+            "key": "intro_gfx_chart_disgust",
+            "value": "disgust is universal"
+        },
+        {
+            "key": "intro_gfx_chart_sadness",
+            "value": "sadness is universal"
+        },
+        {
+            "key": "intro_gfx_chart_enjoyment",
+            "value": "enjoyment is universal"
+        },
+        {
+            "key": "continents_header",
+            "value": "Five Universal Emotions"
+        },
+        {
+            "key": "continents_body",
+            "value": "Most emotions researchers agree on these five Universal Emotions: emotions that all humans, no matter where or how we were raised, have in common. The movement of the shapes reflects the fluid nature of emotions – the way their strength and frequency varies from moment to moment. Select an emotion to learn more."
+        },
+        {
+            "key": "continents_body_mobile",
+            "value": "Most emotions researchers agree on these five Universal Emotions: emotions that all humans, no matter where or how we were raised, have in common. Tap on an emotion to start exploring."
+        },
+        {
+            "key": "continents_section_name",
+            "value": "Universal Emotions"
+        },
+        {
+            "key": "states_header",
+            "value": "States of LHAMO"
+        },
+        {
+            "key": "states_body",
+            "value": "LHAMO can be felt mildly, extremely, or somewhere in between. Select a shape to learn about a few of the states that we can experience."
+        },
+        {
+            "key": "states_axis_labels",
+            "value": "Least intense, most intense"
+        },
+        {
+            "key": "states_body_mobile",
+            "value": "LHAMO can be felt mildly, extremely, or somewhere in between. Tap on the shapes above to learn about a few of the states that we can experience."
+        },
+        {
+            "key": "states_section_name",
+            "value": "States"
+        },
+        {
+            "key": "actions_header",
+            "value": "Actions of LHAMO"
+        },
+        {
+            "key": "actions_body",
+            "value": "We respond to emotional states with our actions. Select a state to learn about the possible actions resulting from LHAMO. Then click on an action to learn more."
+        },
+        {
+            "key": "actions_body_mobile",
+            "value": "We respond to emotional states with our actions. Tap on the shapes to learn about the possible actions resulting from LHAMO."
+        },
+        {
+            "key": "actions_secondary_header_1",
+            "value": "Constructive Actions"
+        },
+        {
+            "key": "actions_secondary_copy_1",
+            "value": "In this state, this action is CONSTRUCTIVE. It’s a useful response to the emotion."
+        },
+        {
+            "key": "actions_secondary_header_2",
+            "value": "Ambiguous Actions"
+        },
+        {
+            "key": "actions_secondary_copy_2",
+            "value": "In this state, this action is AMBIGUOUS. It could either be a useful response to the emotion or it could cause harm."
+        },
+        {
+            "key": "actions_secondary_header_3",
+            "value": "Destructive Actions"
+        },
+        {
+            "key": "actions_secondary_copy_3",
+            "value": "In this state, this action is DESTRUCTIVE. It could cause harm."
+        },
+        {
+            "key": "actions_section_name",
+            "value": "Actions"
+        },
+        {
+            "key": "triggers_header",
+            "value": "Triggers of LHAMO"
+        },
+        {
+            "key": "triggers_body",
+            "value": "A trigger is something around us or in our own minds that causes us to feel an emotion. Select the labels to learn about triggering LHAMO."
+        },
+        {
+            "key": "triggers_body_mobile",
+            "value": "A trigger is something around us or in our own minds that causes us to feel an emotion. Tap on the labels to learn about triggering LHAMO."
+        },
+        {
+            "key": "triggers_secondary_header_1",
+            "value": "Triggers"
+        },
+        {
+            "key": "triggers_secondary_body_1",
+            "value": "Some triggers are hardwired and universal for everyone, other triggers are learned from the world around us and our individual experience."
+        },
+        {
+            "key": "triggers_secondary_header_2",
+            "value": "Perception"
+        },
+        {
+            "key": "triggers_secondary_body_2",
+            "value": "Past personal experience determines whether or not a learned trigger makes us feel emotional. Universal triggers break through regardless."
+        },
+        {
+            "key": "triggers_secondary_header_3",
+            "value": "Response"
+        },
+        {
+            "key": "triggers_secondary_body_3",
+            "value": "Emotion is our automatic response to being triggered. The state of emotion we feel and the actions we take often happen without our realizing why."
+        },
+        {
+            "key": "triggers_secondary_header_4",
+            "value": "Universal Triggers"
+        },
+        {
+            "key": "triggers_secondary_body_4",
+            "value": "This is an example of a universal trigger. Everyone has the same universal triggers – we're born with them. They affect us more intensely than learned triggers.\r\r"
+        },
+        {
+            "key": "triggers_secondary_header_5",
+            "value": "Learned Triggers"
+        },
+        {
+            "key": "triggers_secondary_body_5",
+            "value": "This is an example of a learned trigger. Some learned triggers are shared across a culture, while others are highly personal and created by individual experiences. \r"
+        },
+        {
+            "key": "triggers_section_name",
+            "value": "Triggers"
+        },
+        {
+            "key": "moods_header",
+            "value": "A Mood of LHAMO"
+        },
+        {
+            "key": "moods_body",
+            "value": "Moods are longer-lasting cousins of an emotion that cause us to feel the related emotion repeatedly without any clear trigger. Select the shape to learn more."
+        },
+        {
+            "key": "moods_body_mobile",
+            "value": "Moods are longer-lasting cousins of an emotion that cause us to feel the related emotion repeatedly without any clear trigger. Tap on the shape to learn more."
+        },
+        {
+            "key": "moods_section_name",
+            "value": "Moods"
+        },
+        {
+            "key": "calm_header",
+            "value": "Experiencing Calm"
+        },
+        {
+            "key": "calm_body",
+            "value": "A calm, balanced frame of mind helps us understand our changing emotions. We can reach calmness through developing an awareness of our emotions: what triggers them, how we experience them and how we can respond constructively.  \r \r"
+        },
+        {
+            "key": "calm_body_mobile",
+            "value": "A calm, balanced frame of mind helps us understand our changing emotions. We can reach calmness through developing an awareness of the triggers, states and constuctive actions possible. Calmness ideally is our baseline in which emotions arise when triggered and then recede."
+        },
+        {
+            "key": "calm_secondary_header",
+            "value": "Visit the Annex"
+        },
+        {
+            "key": "calm_secondary_body",
+            "value": "To learn more about emotions, click on “More Information” in the bottom right corner."
+        },
+        {
+            "key": "calm_button_label",
+            "value": "Start over"
+        },
+        {
+            "key": "calm_section_name",
+            "value": "Calm"
+        },
+        {
+            "key": "more_button_label",
+            "value": "Back to Atlas"
+        },
+        {
+            "key": "more_section_name",
+            "value": "More Information"
+        }
+    ],
+    [
+        {
+            "key": "anger_continent_header",
+            "value": "Anger"
+        },
+        {
+            "key": "anger_continent_header_mobile",
+            "value": "Anger"
+        },
+        {
+            "key": "anger_continent_body",
+            "value": "We get angry when something blocks us or when we think we're being treated unfairly."
+        },
+        {
+            "key": "anger_continent_body_mobile",
+            "value": "We feel anger when we are mentally or physically blocked. Anger varies in strength and frequency in our lives."
+        },
+        {
+            "key": "anger_states_header_1",
+            "value": "Annoyance"
+        },
+        {
+            "key": "anger_states_body_1",
+            "value": "Very mild anger caused by a nuisance or inconvenience. "
+        },
+        {
+            "key": "anger_states_header_2",
+            "value": "Frustration"
+        },
+        {
+            "key": "anger_states_body_2",
+            "value": "A response to repeated failures to overcome an obstacle."
+        },
+        {
+            "key": "anger_states_header_3",
+            "value": "Argumentativeness"
+        },
+        {
+            "key": "anger_states_body_3",
+            "value": "A tendency to engage in disagreements."
+        },
+        {
+            "key": "anger_states_header_4",
+            "value": "Bitterness"
+        },
+        {
+            "key": "anger_states_body_4",
+            "value": "Anger after unfair treatment. "
+        },
+        {
+            "key": "anger_states_header_5",
+            "value": "Exasperation"
+        },
+        {
+            "key": "anger_states_body_5",
+            "value": "Anger caused by a repeated or strong nuisance. "
+        },
+        {
+            "key": "anger_states_header_6",
+            "value": "Vengefulness"
+        },
+        {
+            "key": "anger_states_body_6",
+            "value": "Desire to retaliate after one is hurt. "
+        },
+        {
+            "key": "anger_states_header_7",
+            "value": "Fury"
+        },
+        {
+            "key": "anger_states_body_7",
+            "value": "Uncontrolled and often violent anger."
+        },
+        {
+            "key": "anger_actions_header_1",
+            "value": "Quarrel"
+        },
+        {
+            "key": "anger_actions_body_1",
+            "value": "Verbally oppose in a manner intended to escalate the disagreement."
+        },
+        {
+            "key": "anger_actions_header_2",
+            "value": "Insult"
+        },
+        {
+            "key": "anger_actions_body_2",
+            "value": "Disparage the other person in an offensive or hurtful way that is likely to escalate the conflict rather than resolve it."
+        },
+        {
+            "key": "anger_actions_header_3",
+            "value": "Undermine"
+        },
+        {
+            "key": "anger_actions_body_3",
+            "value": "Take action to make someone or something weaker or less effective, usually in a secret or gradual way."
+        },
+        {
+            "key": "anger_actions_header_4",
+            "value": "Dispute"
+        },
+        {
+            "key": "anger_actions_body_4",
+            "value": "Disagree in a manner that may escalate the conflict."
+        },
+        {
+            "key": "anger_actions_header_5",
+            "value": "Scream/yell"
+        },
+        {
+            "key": "anger_actions_body_5",
+            "value": "Lose control of one's speech; speak loudly and possibly at a higher pitch."
+        },
+        {
+            "key": "anger_actions_header_6",
+            "value": "Use physical force"
+        },
+        {
+            "key": "anger_actions_body_6",
+            "value": "Harm or trap someone."
+        },
+        {
+            "key": "anger_actions_header_7",
+            "value": "Suppress"
+        },
+        {
+            "key": "anger_actions_body_7",
+            "value": "Try to avoid feeling or acting upon the emotion that is being experienced."
+        },
+        {
+            "key": "anger_actions_header_8",
+            "value": "Simmer/brood"
+        },
+        {
+            "key": "anger_actions_body_8",
+            "value": "Express anger by sulking."
+        },
+        {
+            "key": "anger_actions_header_9",
+            "value": "Be passive-aggressive"
+        },
+        {
+            "key": "anger_actions_body_9",
+            "value": "Take indirect actions that have an angry undercurrent."
+        },
+        {
+            "key": "anger_triggers_universal_header_mobile",
+            "value": "Universal Triggers of Anger"
+        },
+        {
+            "key": "anger_triggers_universal_body_mobile",
+            "value": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Interference with action or locomotion are examples."
+        },
+        {
+            "key": "anger_triggers_learned_header_mobile",
+            "value": "Learned Triggers of Anger"
+        },
+        {
+            "key": "anger_triggers_learned_body_mobile",
+            "value": "Some triggers can be learned from personal or shared cultural experiences. Being wrongfully accused or put down by an authority figure are examples."
+        },
+        {
+            "key": "anger_triggers_header_1",
+            "value": "Interference with locomotion"
+        },
+        {
+            "key": "anger_triggers_header_2",
+            "value": "Interference with action"
+        },
+        {
+            "key": "anger_triggers_header_3",
+            "value": "Rejection by a loved one"
+        },
+        {
+            "key": "anger_triggers_header_4",
+            "value": "Inefficiency or bureaucracy"
+        },
+        {
+            "key": "anger_triggers_header_5",
+            "value": "Being put down by an authority figure"
+        },
+        {
+            "key": "anger_triggers_header_6",
+            "value": "Encountering offensive beliefs"
+        },
+        {
+            "key": "anger_triggers_header_7",
+            "value": "Being wrongfully accused"
+        },
+        {
+            "key": "anger_moods_header",
+            "value": "Irritable"
+        },
+        {
+            "key": "anger_moods_body",
+            "value": "Predisposed to becoming angry, easily provoked. "
+        }
+    ],
+    [
+        {
+            "key": "fear_continent_header",
+            "value": "Fear"
+        },
+        {
+            "key": "fear_continent_header_mobile",
+            "value": "Fear"
+        },
+        {
+            "key": "fear_continent_body",
+            "value": "Our fear of danger lets us anticipate threats to our safety."
+        },
+        {
+            "key": "fear_continent_body_mobile",
+            "value": "We feel fear when our safety or wellbeing is threatened. Fear varies in strength and frequency in our lives."
+        },
+        {
+            "key": "fear_states_header_1",
+            "value": "Trepidation"
+        },
+        {
+            "key": "fear_states_body_1",
+            "value": "Anticipation of the possibility of danger."
+        },
+        {
+            "key": "fear_states_header_2",
+            "value": "Anxiety"
+        },
+        {
+            "key": "fear_states_body_2",
+            "value": "Fear of an anticipated or actual threat and uncertainty about one's ability to cope with it. "
+        },
+        {
+            "key": "fear_states_header_3",
+            "value": "Nervousness"
+        },
+        {
+            "key": "fear_states_body_3",
+            "value": "Uncertainty as to whether there is a danger."
+        },
+        {
+            "key": "fear_states_header_4",
+            "value": "Dread"
+        },
+        {
+            "key": "fear_states_body_4",
+            "value": "Anticipation of severe danger."
+        },
+        {
+            "key": "fear_states_header_5",
+            "value": "Desperation"
+        },
+        {
+            "key": "fear_states_body_5",
+            "value": "A response to the inability to reduce danger."
+        },
+        {
+            "key": "fear_states_header_6",
+            "value": "Panic"
+        },
+        {
+            "key": "fear_states_body_6",
+            "value": "Sudden uncontrollable fear."
+        },
+        {
+            "key": "fear_states_header_7",
+            "value": "Horror"
+        },
+        {
+            "key": "fear_states_body_7",
+            "value": "A mixture of fear, disgust, and shock."
+        },
+        {
+            "key": "fear_states_header_8",
+            "value": "Terror"
+        },
+        {
+            "key": "fear_states_body_8",
+            "value": "Intense, overpowering fear."
+        },
+        {
+            "key": "fear_actions_header_1",
+            "value": "Withdraw"
+        },
+        {
+            "key": "fear_actions_body_1",
+            "value": "Physically or mentally leave the scene of the threat."
+        },
+        {
+            "key": "fear_actions_header_2",
+            "value": "Avoid"
+        },
+        {
+            "key": "fear_actions_body_2",
+            "value": "Either physically stay away from the threat or keep oneself from thinking about it."
+        },
+        {
+            "key": "fear_actions_header_3",
+            "value": "Hesitate"
+        },
+        {
+            "key": "fear_actions_body_3",
+            "value": "Hold back in doubt or indecision, often momentarily."
+        },
+        {
+            "key": "fear_actions_header_4",
+            "value": "Freeze"
+        },
+        {
+            "key": "fear_actions_body_4",
+            "value": "Become incapable of acting or speaking."
+        },
+        {
+            "key": "fear_actions_header_5",
+            "value": "Scream/yell"
+        },
+        {
+            "key": "fear_actions_body_5",
+            "value": "Lose control of one's speech; cry out in a loud and high voice."
+        },
+        {
+            "key": "fear_actions_header_6",
+            "value": "Ruminate"
+        },
+        {
+            "key": "fear_actions_body_6",
+            "value": "Obsessively think about a past emotional experience. "
+        },
+        {
+            "key": "fear_actions_header_7",
+            "value": "Worry"
+        },
+        {
+            "key": "fear_actions_body_7",
+            "value": "Anticipate the possibility of harm."
+        },
+        {
+            "key": "fear_triggers_universal_header_mobile",
+            "value": "Universal Triggers of Fear"
+        },
+        {
+            "key": "fear_triggers_universal_body_mobile",
+            "value": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Snake-like shapes and sudden loss of gravity are examples."
+        },
+        {
+            "key": "fear_triggers_learned_header_mobile",
+            "value": "Learned Triggers of Fear"
+        },
+        {
+            "key": "fear_triggers_learned_body_mobile",
+            "value": "Some triggers can be learned from personal or shared cultural experiences. Public speaking, thunder, and the threat of losing one’s job are examples."
+        },
+        {
+            "key": "fear_triggers_header_1",
+            "value": "Imminent bodily impact"
+        },
+        {
+            "key": "fear_triggers_header_2",
+            "value": "Sudden loss of gravity"
+        },
+        {
+            "key": "fear_triggers_header_3",
+            "value": "Threat to safety"
+        },
+        {
+            "key": "fear_triggers_header_4",
+            "value": "Snake-like shapes"
+        },
+        {
+            "key": "fear_triggers_header_5",
+            "value": "Threat of losing job"
+        },
+        {
+            "key": "fear_triggers_header_6",
+            "value": "Thunder"
+        },
+        {
+            "key": "fear_triggers_header_7",
+            "value": "Public speaking"
+        },
+        {
+            "key": "fear_moods_header",
+            "value": "Apprehensive"
+        },
+        {
+            "key": "fear_moods_body",
+            "value": "Anxious that something bad will happen, on edge."
+        }
+    ],
+    [
+        {
+            "key": "disgust_continent_header",
+            "value": "Disgust"
+        },
+        {
+            "key": "disgust_continent_header_mobile",
+            "value": "Disgust"
+        },
+        {
+            "key": "disgust_continent_body",
+            "value": "Feeling disgusted by what is toxic helps us to avoid being poisoned, physically or socially."
+        },
+        {
+            "key": "disgust_continent_body_mobile",
+            "value": "We feel disgust when faced with something toxic or unpleasant. Disgust varies in strength and frequency in our lives."
+        },
+        {
+            "key": "disgust_states_header_1",
+            "value": "Dislike"
+        },
+        {
+            "key": "disgust_states_body_1",
+            "value": "A preference against something."
+        },
+        {
+            "key": "disgust_states_header_2",
+            "value": "Aversion"
+        },
+        {
+            "key": "disgust_states_body_2",
+            "value": "An impulse to avoid something disgusting."
+        },
+        {
+            "key": "disgust_states_header_3",
+            "value": "Distaste"
+        },
+        {
+            "key": "disgust_states_body_3",
+            "value": "Reaction to a bad taste, smell, thing or idea. Can be literal or metaphorical."
+        },
+        {
+            "key": "disgust_states_header_4",
+            "value": "Repugnance"
+        },
+        {
+            "key": "disgust_states_body_4",
+            "value": "Strong distaste for something, often a concept or idea."
+        },
+        {
+            "key": "disgust_states_header_5",
+            "value": "Revulsion"
+        },
+        {
+            "key": "disgust_states_body_5",
+            "value": "A mixture of disgust and loathing. "
+        },
+        {
+            "key": "disgust_states_header_6",
+            "value": "Abhorrence"
+        },
+        {
+            "key": "disgust_states_body_6",
+            "value": "A mixture of intense disgust and hatred."
+        },
+        {
+            "key": "disgust_states_header_7",
+            "value": "Loathing"
+        },
+        {
+            "key": "disgust_states_body_7",
+            "value": "Intense disgust focused on a person. Intense disgust focused on oneself is called self-loathing. "
+        },
+        {
+            "key": "disgust_actions_header_1",
+            "value": "Withdraw"
+        },
+        {
+            "key": "disgust_actions_body_1",
+            "value": "Physically or mentally leave the scene of what is triggering the disgust."
+        },
+        {
+            "key": "disgust_actions_header_2",
+            "value": "Avoid"
+        },
+        {
+            "key": "disgust_actions_body_2",
+            "value": "Either physically stay away from whatever is triggering the disgust or keep oneself from thinking about it."
+        },
+        {
+            "key": "disgust_actions_header_3",
+            "value": "Vomit"
+        },
+        {
+            "key": "disgust_actions_body_3",
+            "value": "Respond to feelings of disgust by throwing up. "
+        },
+        {
+            "key": "disgust_actions_header_4",
+            "value": "Dehumanize"
+        },
+        {
+            "key": "disgust_actions_body_4",
+            "value": "Treat someone as though he or she is not a human being; deprive someone of human qualities, personality or spirit."
+        },
+        {
+            "key": "disgust_triggers_universal_header_mobile",
+            "value": "Universal Triggers of Disgust"
+        },
+        {
+            "key": "disgust_triggers_universal_body_mobile",
+            "value": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Anything in decay or coming out of the body are examples."
+        },
+        {
+            "key": "disgust_triggers_learned_header_mobile",
+            "value": "Learned Triggers of Disgust"
+        },
+        {
+            "key": "disgust_triggers_learned_body_mobile",
+            "value": "Some triggers can be learned from personal or shared cultural experiences. Unfamiliar religious customs and eating insects or raw meat are examples."
+        },
+        {
+            "key": "disgust_triggers_header_1",
+            "value": "Anything coming out of the body"
+        },
+        {
+            "key": "disgust_triggers_header_2",
+            "value": "Rotting or decay"
+        },
+        {
+            "key": "disgust_triggers_header_3",
+            "value": "Fans of an opposing sports team"
+        },
+        {
+            "key": "disgust_triggers_header_4",
+            "value": "Unfamiliar religious customs"
+        },
+        {
+            "key": "disgust_triggers_header_5",
+            "value": "Eating insects or raw meat"
+        },
+        {
+            "key": "disgust_moods_header",
+            "value": "Sour"
+        },
+        {
+            "key": "disgust_moods_body",
+            "value": "Generally repulsed."
+        }
+    ],
+    [
+        {
+            "key": "sadness_continent_header",
+            "value": "Sadness"
+        },
+        {
+            "key": "sadness_continent_header_mobile",
+            "value": "Sadness"
+        },
+        {
+            "key": "sadness_continent_body",
+            "value": "Sadness is a response to loss, and feeling sad allows us to take a timeout and show others that we need support."
+        },
+        {
+            "key": "sadness_continent_body_mobile",
+            "value": "We feel sadness when we lose something valuable. Sadness varies in strength and frequency in our lives."
+        },
+        {
+            "key": "sadness_states_header_1",
+            "value": "Disappointment"
+        },
+        {
+            "key": "sadness_states_body_1",
+            "value": "A feeling that expectations are not being met."
+        },
+        {
+            "key": "sadness_states_header_2",
+            "value": "Resignation"
+        },
+        {
+            "key": "sadness_states_body_2",
+            "value": "The belief that nothing can be done. "
+        },
+        {
+            "key": "sadness_states_header_3",
+            "value": "Distraughtness"
+        },
+        {
+            "key": "sadness_states_body_3",
+            "value": "Sadness that makes it hard to think clearly."
+        },
+        {
+            "key": "sadness_states_header_4",
+            "value": "Discouragement"
+        },
+        {
+            "key": "sadness_states_body_4",
+            "value": "A response to repeated failures to accomplish something: the belief that it can't be done."
+        },
+        {
+            "key": "sadness_states_header_5",
+            "value": "Helplessness"
+        },
+        {
+            "key": "sadness_states_body_5",
+            "value": "The realization that one cannot make a situation better or easier."
+        },
+        {
+            "key": "sadness_states_header_6",
+            "value": "Misery"
+        },
+        {
+            "key": "sadness_states_body_6",
+            "value": "Strong suffering or unhappiness."
+        },
+        {
+            "key": "sadness_states_header_7",
+            "value": "Hopelessness"
+        },
+        {
+            "key": "sadness_states_body_7",
+            "value": "The belief that nothing good will happen."
+        },
+        {
+            "key": "sadness_states_header_8",
+            "value": "Grief"
+        },
+        {
+            "key": "sadness_states_body_8",
+            "value": "Sadness over a deep loss. "
+        },
+        {
+            "key": "sadness_states_header_9",
+            "value": "Despair"
+        },
+        {
+            "key": "sadness_states_body_9",
+            "value": "The loss of hope that a bad situation will improve or change."
+        },
+        {
+            "key": "sadness_states_header_10",
+            "value": "Sorrow"
+        },
+        {
+            "key": "sadness_states_body_10",
+            "value": "A feeling of distress and sadness, often caused by a loss."
+        },
+        {
+            "key": "sadness_states_header_11",
+            "value": "Anguish"
+        },
+        {
+            "key": "sadness_states_body_11",
+            "value": "Intense sadness or suffering."
+        },
+        {
+            "key": "sadness_actions_header_1",
+            "value": "Seek comfort"
+        },
+        {
+            "key": "sadness_actions_body_1",
+            "value": "Seek help or support from others."
+        },
+        {
+            "key": "sadness_actions_header_2",
+            "value": "Withdraw"
+        },
+        {
+            "key": "sadness_actions_body_2",
+            "value": "Either physically stay away from what is triggering the sadness or keep oneself from thinking about it."
+        },
+        {
+            "key": "sadness_actions_header_3",
+            "value": "Ruminate"
+        },
+        {
+            "key": "sadness_actions_body_3",
+            "value": "Obsessively think about the emotional experience. "
+        },
+        {
+            "key": "sadness_actions_header_4",
+            "value": "Mourn"
+        },
+        {
+            "key": "sadness_actions_body_4",
+            "value": "Express grief for one's loss through actions, dress and speech."
+        },
+        {
+            "key": "sadness_actions_header_5",
+            "value": "Protest"
+        },
+        {
+            "key": "sadness_actions_body_5",
+            "value": "Object to the loss."
+        },
+        {
+            "key": "sadness_actions_header_6",
+            "value": "Feel ashamed"
+        },
+        {
+            "key": "sadness_actions_body_6",
+            "value": "Feel embarrassed by one's feelings about the loss."
+        },
+        {
+            "key": "sadness_triggers_universal_header_mobile",
+            "value": "Universal Triggers of Sadness"
+        },
+        {
+            "key": "sadness_triggers_universal_body_mobile",
+            "value": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Losing or being rejected by a loved one are examples."
+        },
+        {
+            "key": "sadness_triggers_learned_header_mobile",
+            "value": "Learned Triggers of Sadness"
+        },
+        {
+            "key": "sadness_triggers_learned_body_mobile",
+            "value": "Some triggers can be learned from personal or shared cultural experiences. Feeling left out or experiencing a perceived loss of status are examples."
+        },
+        {
+            "key": "sadness_triggers_header_1",
+            "value": "Being rejected by someone important"
+        },
+        {
+            "key": "sadness_triggers_header_2",
+            "value": "Losing a loved one"
+        },
+        {
+            "key": "sadness_triggers_header_3",
+            "value": "Perceiving a loss of status"
+        },
+        {
+            "key": "sadness_triggers_header_4",
+            "value": "Not being invited to a party"
+        },
+        {
+            "key": "sadness_triggers_header_5",
+            "value": "Losing a treasured belonging"
+        },
+        {
+            "key": "sadness_moods_header",
+            "value": "Dysphoric (or feeling blue)"
+        },
+        {
+            "key": "sadness_moods_body",
+            "value": "An enduring feeling of discouragement or disappointment."
+        }
+    ],
+    [
+        {
+            "key": "enjoyment_continent_header",
+            "value": "Enjoyment"
+        },
+        {
+            "key": "enjoyment_continent_header_mobile",
+            "value": "The Continent of Enjoyment"
+        },
+        {
+            "key": "enjoyment_continent_body",
+            "value": "Enjoyment describes the many good feelings that arise from experiences both novel and familiar."
+        },
+        {
+            "key": "enjoyment_continent_body_mobile",
+            "value": "We feel enjoyment when we experience novelty or comfort. Enjoyment varies in strength and frequency in our lives."
+        },
+        {
+            "key": "enjoyment_states_header_1",
+            "value": "Sensory pleasure"
+        },
+        {
+            "key": "enjoyment_states_body_1",
+            "value": "Enjoyment derived through one of the five physical senses: sight, sound, touch, taste and smell."
+        },
+        {
+            "key": "enjoyment_states_header_2",
+            "value": "Rejoicing"
+        },
+        {
+            "key": "enjoyment_states_body_2",
+            "value": "A warm, uplifting feeling that people experience when they see acts of human goodness, kindness and compassion. Also called elevation."
+        },
+        {
+            "key": "enjoyment_states_header_3",
+            "value": "Amusement"
+        },
+        {
+            "key": "enjoyment_states_body_3",
+            "value": "Light, playful feelings of enjoyment and good humor."
+        },
+        {
+            "key": "enjoyment_states_header_4",
+            "value": "Relief"
+        },
+        {
+            "key": "enjoyment_states_body_4",
+            "value": "When something expected to be unpleasant, especially the threat of harm, is avoided or comes to an end."
+        },
+        {
+            "key": "enjoyment_states_header_5",
+            "value": "Compassion/joy"
+        },
+        {
+            "key": "enjoyment_states_body_5",
+            "value": "Enjoyment of helping to relieve another person's suffering."
+        },
+        {
+            "key": "enjoyment_states_header_6",
+            "value": "Schadenfreude"
+        },
+        {
+            "key": "enjoyment_states_body_6",
+            "value": "Enjoyment of the misfortunes of another person, usually a rival."
+        },
+        {
+            "key": "enjoyment_states_header_7",
+            "value": "Fiero"
+        },
+        {
+            "key": "enjoyment_states_body_7",
+            "value": "Enjoyment of meeting a difficult challenge (an Italian word). "
+        },
+        {
+            "key": "enjoyment_states_header_8",
+            "value": "Naches"
+        },
+        {
+            "key": "enjoyment_states_body_8",
+            "value": "Joyful pride in the accomplishments of one's children or mentees (a Yiddish word)."
+        },
+        {
+            "key": "enjoyment_states_header_9",
+            "value": "Pride"
+        },
+        {
+            "key": "enjoyment_states_body_9",
+            "value": "Deep pleasure and satisfaction derived from one's own achievements or the achievements of an associate."
+        },
+        {
+            "key": "enjoyment_states_header_10",
+            "value": "Wonder"
+        },
+        {
+            "key": "enjoyment_states_body_10",
+            "value": "An experience of something that is very surprising, beautiful, amazing or hard to believe."
+        },
+        {
+            "key": "enjoyment_states_header_11",
+            "value": "Peace"
+        },
+        {
+            "key": "enjoyment_states_body_11",
+            "value": "An experience of ease and contenment."
+        },
+        {
+            "key": "enjoyment_states_header_12",
+            "value": "Excitement"
+        },
+        {
+            "key": "enjoyment_states_body_12",
+            "value": "A powerful enthusiasm. "
+        },
+        {
+            "key": "enjoyment_states_header_13",
+            "value": "Ecstasy"
+        },
+        {
+            "key": "enjoyment_states_body_13",
+            "value": "Rapturous delight. A state of very great happiness, nearly overwhelming."
+        },
+        {
+            "key": "enjoyment_actions_header_1",
+            "value": "Seek more"
+        },
+        {
+            "key": "enjoyment_actions_body_1",
+            "value": "Attempt to increase the enjoyable feelings."
+        },
+        {
+            "key": "enjoyment_actions_header_2",
+            "value": "Maintain"
+        },
+        {
+            "key": "enjoyment_actions_body_2",
+            "value": "Continue to do what is necessary to continue the enjoyable feelings."
+        },
+        {
+            "key": "enjoyment_actions_header_3",
+            "value": "Gloat"
+        },
+        {
+            "key": "enjoyment_actions_body_3",
+            "value": "Enjoy others’ envy of your state of enjoyment."
+        },
+        {
+            "key": "enjoyment_actions_header_4",
+            "value": "Exclaim"
+        },
+        {
+            "key": "enjoyment_actions_body_4",
+            "value": "Vocally express enjoyment to others."
+        },
+        {
+            "key": "enjoyment_actions_header_5",
+            "value": "Engage/connect"
+        },
+        {
+            "key": "enjoyment_actions_body_5",
+            "value": "Share one's feelings of enjoyment with others without a desire to cause jealousy."
+        },
+        {
+            "key": "enjoyment_actions_header_6",
+            "value": "Savor"
+        },
+        {
+            "key": "enjoyment_actions_body_6",
+            "value": "Appreciate the good feelings around an experience completely, especially by dwelling on them."
+        },
+        {
+            "key": "enjoyment_actions_header_7",
+            "value": "Indulge"
+        },
+        {
+            "key": "enjoyment_actions_body_7",
+            "value": "Allow oneself to fully experience the pleasure of good feelings. "
+        },
+        {
+            "key": "enjoyment_triggers_universal_header_mobile",
+            "value": "Universal Triggers of Enjoyment"
+        },
+        {
+            "key": "enjoyment_triggers_universal_body_mobile",
+            "value": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Social interaction and experiencing nature are examples."
+        },
+        {
+            "key": "enjoyment_triggers_learned_header_mobile",
+            "value": "Learned Triggers of Enjoyment"
+        },
+        {
+            "key": "enjoyment_triggers_learned_body_mobile",
+            "value": "Some triggers can be learned from personal or shared cultural experiences. Spending time with family or visiting places from one’s youth are examples."
+        },
+        {
+            "key": "enjoyment_triggers_header_1",
+            "value": "Sensory experience of nature"
+        },
+        {
+            "key": "enjoyment_triggers_header_2",
+            "value": "Helping others"
+        },
+        {
+            "key": "enjoyment_triggers_header_3",
+            "value": "Social interaction"
+        },
+        {
+            "key": "enjoyment_triggers_header_4",
+            "value": "Playing badminton"
+        },
+        {
+            "key": "enjoyment_triggers_header_5",
+            "value": "Places associated with enjoyable memories"
+        },
+        {
+            "key": "enjoyment_triggers_header_6",
+            "value": "The taste of chocolate cake"
+        },
+        {
+            "key": "enjoyment_triggers_header_7",
+            "value": "Spending time with family"
+        },
+        {
+            "key": "enjoyment_moods_header",
+            "value": "Elated"
+        },
+        {
+            "key": "enjoyment_moods_body",
+            "value": "A long-lasting, generalized good feeling. "
+        }
+    ],
+    [
+        {
+            "key": "about_intro_title",
+            "value": "About This Atlas"
+        },
+        {
+            "key": "about_intro_body",
+            "value": "The Atlas of Emotions is an interactive tool designed to build emotional awareness. The site invites you to visualize, identify and explore five primary emotions (and their related feeling states, actions, triggers and moods) in order to gain a better understanding of how they influence our lives. Although we can’t always choose what emotions to feel or when to feel them, by building emotional awareness, it may be possible to choose how we respond to what we’re feeling. \n\nThe Atlas began when the Dalai Lama asked prominent emotion researcher Paul Ekman to create a map of the emotions that could help people learn to have more constructive emotional experiences. Ekman, an expert in the field, had previously consulted on a wide range of emotion-related projects, including the popular Pixar film Inside Out. With his daughter, scholar Eve Ekman, he created the Atlas of Emotions in response to the Dalai Lama’s request."
+        },
+        {
+            "key": "about_intro_title_mobile",
+            "value": "About This Atlas"
+        },
+        {
+            "key": "about_intro_body_mobile",
+            "value": "The Atlas of Emotions is an interactive tool designed to build emotional awareness. The site invites you to visualize, identify and explore five primary emotions (and their related feeling states, actions, triggers and moods) in order to gain a better understanding of how they influence our lives. Although we can’t always choose what emotions to feel or when to feel them, by building emotional awareness, it may be possible to choose how we respond to what we’re feeling. \n\nThe Atlas began when the Dalai Lama asked prominent emotion researcher Paul Ekman to create a map of the emotions that could help people learn to have more constructive emotional experiences. Ekman, an expert in the field, had previously consulted on a wide range of emotion-related projects, including the popular Pixar film Inside Out. With his daughter, scholar Eve Ekman, he created the Atlas of Emotions in response to the Dalai Lama’s request."
+        },
+        {
+            "key": "about_section_name",
+            "value": "About"
+        },
+        {
+            "key": "about_header_1",
+            "value": "About the Ekmans"
+        },
+        {
+            "key": "about_body_1",
+            "value": "Paul Ekman is a renowned American psychologist who pioneered the field of emotion research. After teaching at UCSF for 40 years and collaborating with partners as diverse as law enforcement agencies and the Dalai Lama, he now runs a private training company. \n \nEve Ekman is a post-doctoral scholar at UCSF’s Osher Center for Integrative Medicine. As a teacher trainer for Cultivating Emotional Balance (CEB), an emotion-regulation and meditation intervention, Eve adapts CEB to train care providers in various fields."
+        },
+        {
+            "key": "about_header_2",
+            "value": "About Stamen Design"
+        },
+        {
+            "key": "about_body_2",
+            "value": "<a href=\"http://www.stamen.com/\">Stamen Design</a> was founded by Eric Rodenbeck in 2001. Since then, the studio has grown to a staff of 12 and established a reputation for its expertise in creating compelling interactive design and data visualization projects. Stamen is neither a research and development lab nor a traditional design firm, but something in between: a place where collaboration is valued, good ideas can come from anywhere and results are paramount. "
+        },
+        {
+            "key": "about_header_3"
+        },
+        {
+            "key": "about_body_3"
+        },
+        {
+            "key": "about_header_4"
+        },
+        {
+            "key": "about_body_4"
+        },
+        {
+            "key": "about_header_5"
+        },
+        {
+            "key": "about_body_5"
+        },
+        {
+            "key": "about_header_6"
+        },
+        {
+            "key": "about_body_6"
+        },
+        {
+            "key": "about_header_7"
+        },
+        {
+            "key": "about_body_7"
+        }
+    ],
+    [
+        {
+            "key": "emotrak_title",
+            "value": "EmoTrak"
+        },
+        {
+            "key": "emotrak_intro",
+            "value": "Improve your well being with daily emotional balance training."
+        },
+        {
+            "key": "emotrak_header_mobile",
+            "value": "EmoTrak"
+        },
+        {
+            "key": "emotrak_body_mobile",
+            "value": "Improve your well being with daily emotional balance training.<br> \"<!-- Begin MailChimp Signup Form -->\n<link href=\"\"//cdn-images.mailchimp.com/embedcode/slim-10_7.css\"\" rel=\"\"stylesheet\"\" type=\"\"text/css\"\">\n<style type=\"\"text/css\"\">\n        #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }\n        /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.\n           We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */\n</style>\n<div id=\"\"mc_embed_signup\"\">\n<form action=\"\"//eveekman.us12.list-manage.com/subscribe/post?u=a8f41488aed929208e96dcf44&amp;id=76c8861d7d\"\" method=\"\"post\"\" id=\"\"mc-embedded-subscribe-form\"\" name=\"\"mc-embedded-subscribe-form\"\" class=\"\"validate\"\" target=\"\"_blank\"\" novalidate>\n    <div id=\"\"mc_embed_signup_scroll\"\">\n        <label for=\"\"mce-EMAIL\"\">Subscribe for EmoTrak Release Updates</label>\n        <input type=\"\"email\"\" value=\"\"\"\" name=\"\"EMAIL\"\" class=\"\"email\"\" id=\"\"mce-EMAIL\"\" placeholder=\"\"email address\"\" required>\n    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->\n    <div style=\"\"position: absolute; left: -5000px;\"\" aria-hidden=\"\"true\"\"><input type=\"\"text\"\" name=\"\"b_a8f41488aed929208e96dcf44_76c8861d7d\"\" tabindex=\"\"-1\"\" value=\"\"\"\"></div>\n    <div class=\"\"clear\"\"><input type=\"\"submit\"\" value=\"\"Subscribe\"\" name=\"\"subscribe\"\" id=\"\"mc-embedded-subscribe\"\" class=\"\"button\"\"></div>\n    </div>\n</form>\n</div>\n\n<!--End mc_embed_signup-->\""
+        },
+        {
+            "key": "emotrak_section_name",
+            "value": "EmoTrak"
+        },
+        {
+            "key": "emotrak_section_1",
+            "value": "A brand new app, EmoTrak, is under development by Dr. Eve Ekman and collaborators. Sign up below to be the first to find out about the release of this science based emotional training app."
+        },
+        {
+            "key": "emotrak_section_2",
+            "value": "true in mail column indicates that it will include hardcoded subscribe link"
+        },
+        {
+            "key": "emotrak_section_3",
+            "value": "Dr. Eve Ekman is a University of California San Francisco postdoctoral fellow studying burnout and emotional well being. Dr. Ekman has been developing and evaluating EmoTrak to support health care providers. The app is a self assessment tool to investigate emotion triggers, experiences and responses. It also provides brief emotion focused meditations and feedback on your emotional profile."
+        }
+    ]
+]

@@ -96,7 +96,9 @@
 				text-align: left;
 			}
 			.placeholder #header .dropdown,
-			.placeholder #more-info {
+			.placeholder #lang-selector,
+			.placeholder #more-info,
+			.placeholder #lower-left-logo {
 				display: none;
 			}
 		</style>
@@ -119,9 +121,19 @@
 					<button class="btn btn-default dropdown-toggle" type="button" id="emotion-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="dd-title"></span><span class="caret"></span></button>
 					<ul class="dropdown-menu" aria-labelledby="emotion-dropdown"></ul>
 				</div>
+
 				<div id="more-close" class="close-button show-on-more"></div>
 			</div>
-			<div id="mobile-header" style="display: none"></div>
+			<div id="mobile-header" style="display: none">
+				<div class="dropdown-curtain"></div>
+				<div class="dropdown">
+					<div class="dropdown-bkgd"></div>
+					<button class="btn btn-default dropdown-toggle" type="button" id="mobile-nav-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+					<ul class="dropdown-menu" aria-labelledby="mobile-nav-toggle">
+						<li>&times;</li>
+					</ul>
+				</div>
+			</div>
 			<div id="main">
 				<!-- This content is all replaced at runtime. -->
 				<div id="continents" class="placeholder">
@@ -180,12 +192,20 @@
 			<div id="down-arrow"></div>
 			<div id="right-arrow"></div>
 			<div id="lower-left-logo"></div>
+			<div id="lang-selector">
+				<div class="dropup emotion-menu">
+					<button class="btn btn-default dropdown-toggle" type="button" id="lang-selector-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<span class="dup-title"></span><span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" aria-labelledby="lang-selector-toggle"></ul>
+				</div>
+			</div>
 			<div id="more-info">
 				<div class="dropup emotion-menu">
-				  <button class="btn btn-default dropdown-toggle" type="button" id="emotion-more-info" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				  	<span class="dup-title"></span><span class="caret"></span>
-				  </button>
-				  <ul class="dropdown-menu" aria-labelledby="emotion-more-info"></ul>
+					<button class="btn btn-default dropdown-toggle" type="button" id="emotion-more-info" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<span class="dup-title"></span><span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" aria-labelledby="emotion-more-info"></ul>
 				</div>
 			</div>
 			<div id="mobile-caption" style="display: none"></div>
@@ -197,6 +217,7 @@
 	<script>
 		// clear out existing content, hardcoded for bots,
 		// in preparation for main script to repopulate.
+		document.querySelector('body').style.visibility = 'hidden';
 		document.querySelector('body').classList.remove('placeholder');
 		document.querySelector('#main').innerHTML = '';
 	</script>
