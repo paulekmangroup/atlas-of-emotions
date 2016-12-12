@@ -100,9 +100,10 @@ $horiz-padding: 20px;
 		}
 
 		.body {
-			// limit to 3 lines
-			max-height: calc(#{$body-line-height} * 3);
+			// limit to 4 lines
+			max-height: calc(#{$body-line-height} * 4);
 			overflow: hidden;
+			margin: 0;
 		}
 	}
 }
