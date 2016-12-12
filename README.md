@@ -52,6 +52,16 @@ TL;DR:
 
 Text content is arranged as follows:
 
+#### Languages configuration
+
+[`stringsConfig.json`](./static/strings/stringsConfig.json) is the entry point for bringing translated strings into the application. It has a configuration block for each language to be supported by the application; each block contains:
+- `"lang"`: two-character ([ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1)) language code
+- `"name"`: human-readable language name, as it appears in language selection UI
+- `"fileId"`: The end of the Google Sheets URL of the corresponding language's strings spreadsheet (see Localized Strings below)
+- `"enabled"`: An on/off (`true`/`false`) switch for the language
+
+Note that each language must be set to `"enabled": true` for it to be available in the compiled application. If only one language is enabled, the application's language selection UI will be suppressed.
+
 #### Localized strings
 
 Text content source for the application is in a single Google Sheet per language, e.g. [AoE - English](https://docs.google.com/spreadsheets/d/1mZH66DoV1F3f1k2cP1jo5t7ApcaSIzl5Xycw_oUSPNo/edit#gid=0). These files are manually edited, with the keys pulled from the content keys files (see below), and the values provided by writers / translators.
