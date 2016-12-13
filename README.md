@@ -2,7 +2,7 @@
 
 ## Technical overview
 
-The codebase is written in ES6, transpiled with [Babel](https://babeljs.io/). It's largely vanilla JS, with a healthy does of [D3](https://d3js.org/) for States, Actions, and Triggers charts. Build pipline is [Gulp](http://gulpjs.com/) and [Browserify](http://browserify.org/).
+The codebase is written in ES6, transpiled with [Babel](https://babeljs.io/). It's largely vanilla JS, with a healthy dose of [D3](https://d3js.org/) for States, Actions, and Triggers charts. Build pipline is [Gulp](http://gulpjs.com/) and [Browserify](http://browserify.org/).
 
 
 ## Running
