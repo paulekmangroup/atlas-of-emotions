@@ -11,13 +11,13 @@ Clone the project.
 `npm install`
 `npm start`
 
-## Deploying to paulekman.com ~~GitHub pages~~ (production)
+## Deploying to GitHub pages ~~paulekman.com~~ (production)
 
-~~`npm run gh-deploy`~~
+`npm run gh-deploy`
 
-`npm run dist`
+~~`npm run dist`~~
 
-SFTP (credentials in Stamen 1Pass) the contents of the generated `dist/` folder to PEG's site, in the `atlas-of-emotions/` folder (overwrite what's there). Also copy the `dist/` folder into a dated folder within `atlas-of-emotions/`, e.g. `atlas-of-emotions/2016-07-06/`.
+~~SFTP (credentials in Stamen 1Pass) the contents of the generated `dist/` folder to PEG's site, in the `atlas-of-emotions/` folder (overwrite what's there). Also copy the `dist/` folder into a dated folder within `atlas-of-emotions/`, e.g. `atlas-of-emotions/2016-07-06/`.~~
 
 
 ### GitHub Pages setup
