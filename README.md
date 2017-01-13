@@ -8,9 +8,10 @@ The codebase is written in ES6, transpiled with [Babel](https://babeljs.io/). It
 ## Running
 
 Clone the project.
-`nvm use` (switch to the correct version of Node.js using [nvm](https://github.com/creationix/nvm))
-`npm install`
-`npm start`
+
+- `nvm use` (switch to the correct version of Node.js using [nvm](https://github.com/creationix/nvm))
+- `npm install`
+- `npm start`
 
 ## Deploying to GitHub pages ~~paulekman.com~~ (production)
 
