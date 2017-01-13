@@ -8,6 +8,7 @@ The codebase is written in ES6, transpiled with [Babel](https://babeljs.io/). It
 ## Running
 
 Clone the project.
+`nvm use` (switch to the correct version of Node.js using [nvm](https://github.com/creationix/nvm))
 `npm install`
 `npm start`
 
@@ -69,8 +70,10 @@ Text content source for the application is in a single Google Sheet per language
 Local text content for the application lives in a single strings file per language: [`en.json`](./static/strings/langs/es.json), [`es.json`](./static/strings/langs/es.json), etc. These files are loaded on request at runtime when the application loads or the language is changed. In order to prevent accidentally breaking the app, these strings files do not update automatically; call `npm run strings` to pull down the latest content from Google Sheets that contain the strings. They are committed with the rest of the source, however; this means that strings don't have to be pulled down when the repo is checked out, only when the source changes and an update is required.
 
 #### Content keys
-Primary content keys live in a [spreadsheet on Drive](https://docs.google.com/spreadsheets/d/1d9_u-7heRc1VHHOJQpvLqXOMXfSgmNBT9olpWk2cdvE/edit#gid=0), and in the project, in [`emotionsData.json`](https://github.com/stamen/atlas-of-emotions/blob/master/static/strings/emotionsData.json).
+All localized string keys live in the ["AoE String Keys" spreadsheet on Drive](https://docs.google.com/spreadsheets/d/18rr302KT37L_DVOVA54CyoSEC-aQqwjWk8E7iByscyA/). To import them into the codebase, click the "Export to JSON" button in the menu at the top of the spreadsheet, select "Export all sheets to JSON", and copy+paste the resulting JSON into [`emotionsData.json`](https://github.com/stamen/atlas-of-emotions/blob/master/static/strings/emotionsData.json). These keys map to the translated strings described above in **Localized Strings**.
 
-Secondary content keys live in a [spreadsheet on Drive](https://docs.google.com/a/stamen.com/spreadsheets/d/1eNeWj8q3geMb8HZsSR9ZT7vmFzXSR7nzd9nKNrvE1Ko/edit?usp=drive_web), and in the project in [`secondaryData.json`](https://github.com/stamen/atlas-of-emotions/blob/master/static/strings/secondaryData.json).
+~~Primary content keys live in a [spreadsheet on Drive](https://docs.google.com/spreadsheets/d/1d9_u-7heRc1VHHOJQpvLqXOMXfSgmNBT9olpWk2cdvE/edit#gid=0), and in the project, in [`emotionsData.json`](https://github.com/stamen/atlas-of-emotions/blob/master/static/strings/emotionsData.json).~~
+
+Secondary content keys live in the ["Secondary Content" spreadsheet on Drive](https://docs.google.com/a/stamen.com/spreadsheets/d/1eNeWj8q3geMb8HZsSR9ZT7vmFzXSR7nzd9nKNrvE1Ko/edit?usp=drive_web), and in the project in [`secondaryData.json`](https://github.com/stamen/atlas-of-emotions/blob/master/static/strings/secondaryData.json). As of this writing (Jan 2017), this is primarily the content in the "More Information" button at lower-right on the desktop app, and it's not planned to be translated. The exceptions are the "About" and "EmoTrak" tabs of that spreadsheet, which _are_ translated and have keys in the "AoE String Keys" spreadsheet; those tabs in the "Secondary Content" spreadsheet are effectively obsolete.
 
 To update either, click the "Export to JSON" button in the top menu on the google sheet, cut+paste into the corresponding json file, run `npm run strings`.
