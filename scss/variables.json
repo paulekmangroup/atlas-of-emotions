@@ -152,7 +152,10 @@
 				"open": 0.5,
 				"close": 0.5,
 				"border-open": 0.25
-			}
+			},
+			"expansion-amount": 100,
+			"min-width": 150,
+			"max-width": 200
 		}
 	}
 }
