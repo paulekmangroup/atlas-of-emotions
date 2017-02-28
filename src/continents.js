@@ -831,7 +831,7 @@ const continentsSection = {
 			clearTimeout(this.mouseLeaveTimeout);
 		}
 
-		dispatcher.navigate(dispatcher.HOME);
+		dispatcher.navigate(dispatcher.SECTIONS.CONTINENTS);
 
 	},
 
