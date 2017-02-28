@@ -22,7 +22,7 @@ export default function (...initArgs) {
 		MOBILE_ENABLED = true,		// feature flag for mobile
 
 		NAVIGATION_DEFAULTS = {
-			section: dispatcher.SECTIONS.CONTINENTS,
+			section: dispatcher.SECTIONS.CALM,
 			emotion: null
 		},
 
