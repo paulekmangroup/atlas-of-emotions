@@ -12,3 +12,4 @@ dist
 
 # OSX, pleeze.
 .DS_Store
+.idea
