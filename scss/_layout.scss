@@ -29,12 +29,14 @@ body {
 			opacity: 0;
 		}
 	}
+	//mute the calm graphics in the intro and reading sections
 	&[class*=fp-viewing-introduction],
 	&[class*=fp-viewing-reading] {
 		.original-content {
 			opacity: 0.65;
 		}
 	}
+
 }
 
 %button-link {
