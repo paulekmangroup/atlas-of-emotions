@@ -34,8 +34,9 @@ class PopupManager {
 		this.popups[props.id] = props;
 
 		// refer from target instead of clone, and before appending clone to target
-		let w = props.target.offsetWidth + 100;
-		w = Math.max(w, 250);
+		let w = props.target.offsetWidth + sassVars.ui.popups['expansion-amount'];
+		w = Math.max(w, sassVars.ui.popups['min-width']);
+		w = Math.min(w, sassVars.ui.popups['max-width']);
 		//let w = 250;
 
 		props.target.appendChild(clone);
