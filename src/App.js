@@ -1712,7 +1712,7 @@ export default function (...initArgs) {
 		if (section) parts.push(section);
 		if (emotion) parts.push(emotion);
 
-		document.location.hash = parts.join(':');
+		document.location.hash = parts.join(dispatcher.HASH_DELIMITER);
 
 	}
 
@@ -1793,7 +1793,7 @@ export default function (...initArgs) {
 	function parseHash (hash) {
 
 		if (!hash) { hash = ''; }
-		let hashValues = hash.split(':');
+		let hashValues = hash.split(dispatcher.HASH_DELIMITER);
 		return {
 			section: hashValues[0],
 			emotion: hashValues[1]

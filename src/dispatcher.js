@@ -2,6 +2,8 @@ import { EventEmitter } from 'events';
 
 const dispatcher = {
 
+	HASH_DELIMITER: '/',
+
 	EVENTS: {
 		NAVIGATE: 'navigate',
 		NAVIGATE_COMPLETE: 'navigateComplete',
@@ -86,79 +88,79 @@ const dispatcher = {
 	 * @param  {[String]} emotion Emotion navigating to
 	 * @param  {[String]} morePage Secondary page (within More Information) navigating to
 	 */
-	navigate: function (section, emotion, morePage) {
+	navigate: function ( section, emotion, morePage ) {
 		let subsection = emotion || morePage;
 
-		if (section && !this.validateSection(section) && section !== this.HOME) {
-			throw new Error('Invalid section "' + section + '".');
+		if ( section && !this.validateSection( section ) && section !== this.HOME ) {
+			throw new Error( 'Invalid section "' + section + '".' );
 		}
 
-		if (emotion && !this.validateEmotion(emotion)) {
-			throw new Error('Invalid emotion "' + emotion + '".');
+		if ( emotion && !this.validateEmotion( emotion ) ) {
+			throw new Error( 'Invalid emotion "' + emotion + '".' );
 		}
 
-		this.emit(this.EVENTS.NAVIGATE, section, subsection);
+		this.emit( this.EVENTS.NAVIGATE, section, subsection );
 
 	},
 
-	changeCallout: function (emotion, title, body) {
+	changeCallout: function ( emotion, title, body ) {
 
-		this.emit(this.EVENTS.CHANGE_CALLOUT, emotion, title, body);
-
-	},
-
-	popupChange: function (section, emotion, desc, secondaryData) {
-
-		this.emit(this.EVENTS.POPUP_CHANGE, section, emotion, desc, secondaryData);
+		this.emit( this.EVENTS.CHANGE_CALLOUT, emotion, title, body );
 
 	},
 
-	popupCloseButtonClicked: function(section, name) {
+	popupChange: function ( section, emotion, desc, secondaryData ) {
 
-		this.emit(this.EVENTS.POPUP_CLOSE_BUTTON_CLICKED, section, name);
-
-	},
-
-	setEmotionState: function (state, selected) {
-
-		this.emit(this.EVENTS.CHANGE_EMOTION_STATE, state, selected);
+		this.emit( this.EVENTS.POPUP_CHANGE, section, emotion, desc, secondaryData );
 
 	},
 
-	validateSection: function (section) {
+	popupCloseButtonClicked: function ( section, name ) {
 
-		return Object.keys(this.SECTIONS).some(key => this.SECTIONS[key] === section);
-
-	},
-
-	validateEmotion: function (emotion) {
-
-		return Object.keys(this.EMOTIONS).some(key => this.EMOTIONS[key] === emotion);
+		this.emit( this.EVENTS.POPUP_CLOSE_BUTTON_CLICKED, section, name );
 
 	},
 
-	validateMorePage: function(page) {
-		if (!page) return false;
+	setEmotionState: function ( state, selected ) {
 
-		return this.MORE_INFO.items.some(item => {
-			if (item.page === page) return true;
-			if (page.indexOf('annex') === 0 && this.ANNEX_SECTIONS.indexOf(page) > -1) return true;
+		this.emit( this.EVENTS.CHANGE_EMOTION_STATE, state, selected );
+
+	},
+
+	validateSection: function ( section ) {
+
+		return Object.keys( this.SECTIONS ).some( key => this.SECTIONS[ key ] === section );
+
+	},
+
+	validateEmotion: function ( emotion ) {
+
+		return Object.keys( this.EMOTIONS ).some( key => this.EMOTIONS[ key ] === emotion );
+
+	},
+
+	validateMorePage: function ( page ) {
+		if ( !page ) return false;
+
+		return this.MORE_INFO.items.some( item => {
+			if ( item.page === page ) return true;
+			if ( page.indexOf( 'annex' ) === 0 && this.ANNEX_SECTIONS.indexOf( page ) > -1 ) return true;
 			return false;
-		});
+		} );
 	},
 
-	getMorePageName: function (page) {
-		if (page.indexOf('annex') === 0 && this.ANNEX_SECTIONS.indexOf(page) > -1) return 'Annex';
+	getMorePageName: function ( page ) {
+		if ( page.indexOf( 'annex' ) === 0 && this.ANNEX_SECTIONS.indexOf( page ) > -1 ) return 'Annex';
 
-		const pageObject = this.MORE_INFO.items.filter((item) => item.page === page);
-		if (!pageObject.length) return '';
+		const pageObject = this.MORE_INFO.items.filter( ( item ) => item.page === page );
+		if ( !pageObject.length ) return '';
 
-		return pageObject[0].pageName || pageObject[0].label;
+		return pageObject[ 0 ].pageName || pageObject[ 0 ].label;
 	}
 
 };
 
 // Mixin EventEmitter functionality
-Object.assign(dispatcher, EventEmitter.prototype);
+Object.assign( dispatcher, EventEmitter.prototype );
 
 export default dispatcher;
