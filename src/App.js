@@ -88,7 +88,7 @@ export default function (...initArgs) {
 			initCallout();
 			initMobileCaption();
 
-			initModal();
+			//initModal();
 
 			// mobile setup
 			nonMobileElements.push(document.querySelector('#header'));
@@ -910,21 +910,21 @@ export default function (...initArgs) {
 			// hasn't ever been viewed yet in this browser,
 			// and the screen is big enough to render the site below it,
 			// open the intro modal (and the scrollbar along with it)
-			if (getIntroModalOpenState()) {
-
-				// set a class on body so other sections can react
-				document.body.classList.remove('intro-closing', 'intro-open');
-				document.body.classList.add('intro-opening');
-
-				setTimeout(() => {
-					setModalVisibility(true);
-				}, sassVars.ui.intro.delay * 1000);
-
-				setTimeout(() => {
-					setScrollbarFractionalOpen(1.0);
-				}, sassVars.ui.scrollbar.introOpenDelay * 1000);
-
-			}
+			//if (getIntroModalOpenState()) {
+            //
+			//	// set a class on body so other sections can react
+			//	document.body.classList.remove('intro-closing', 'intro-open');
+			//	document.body.classList.add('intro-opening');
+            //
+			//	setTimeout(() => {
+			//		setModalVisibility(true);
+			//	}, sassVars.ui.intro.delay * 1000);
+            //
+			//	setTimeout(() => {
+			//		setScrollbarFractionalOpen(1.0);
+			//	}, sassVars.ui.scrollbar.introOpenDelay * 1000);
+            //
+			//}
 
 		}
 
@@ -1677,7 +1677,7 @@ export default function (...initArgs) {
 			document.location.hash = '';
 			if (!document.location.hash) {
 				// If already at root, ensure modal is closed.
-				setModalVisibility(false);
+				//setModalVisibility(false);
 			}
 
 			return;
@@ -1743,11 +1743,11 @@ export default function (...initArgs) {
 
 	function onHashChange (event, defaults=NAVIGATION_DEFAULTS) {
 
-		if (currentSection) {
-			// if a section has already been selected this session, close the intro modal
-			setModalVisibility(false);
-		}
-
+		//if (currentSection) {
+		//	// if a section has already been selected this session, close the intro modal
+		//	setModalVisibility(false);
+		//}
+		
 		let hash = document.location.hash.replace(/^#/, '');
 		hash = parseHash(hash);
 
