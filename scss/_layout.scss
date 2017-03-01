@@ -182,9 +182,13 @@ ul.emotion-nav {
 
 	.slide {
 		font-size: 30px;
+		text-align: center;
 		.slide-content {
 			width: 578px;
 			margin: 0 auto;
+			pointer-events: auto;
+			cursor: pointer;
+			user-select: none;
 		}
 	}
 

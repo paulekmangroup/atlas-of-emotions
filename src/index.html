@@ -270,23 +270,18 @@
 				The Atlas project is supported by the <b>Dalai Lama</b> <a class="about-link">learn more</a>
 			</div>
 			<div class="slide active">
-				<div class="slide-content">
+				<div class="slide-content" data-anchor="">
 					This Atlas is a visual tool that builds your vocabulary of emotions and shines light
 					on your inner emotional world.
 				</div>
 			</div>
-			<div class="cta">
-				<a href="#timeline">
-					BEGIN
-				</a>
-			</div>
 			<div class="slide">
-				<div class="slide-content">
-					The goal is to have more influence over what triggers our emotions and how we
+				<div class="slide-content" data-anchor="">
+					The goal is to have greater influence over what triggers your emotions, as well as how you
 					respond.
 				</div>
 			</div>
-			<div class="slide">
+			<div class="slide" data-anchor="">
 				<div class="slide-content">
 					Learning to identify and describe what you are feeling, and why, is the first step
 					towards emotional awareness.
@@ -301,6 +296,11 @@
 				represents what is known from the psychological study of emotion to date.
 			</div>
 
+			<div class="cta">
+				<a href="#timeline">
+					BEGIN
+				</a>
+			</div>
 		</div>
 
 
@@ -311,8 +311,8 @@
 			<div class="section-text">
 				<h3>The Timeline</h3>
 				Lorem ipso facto weirdo que passo. Lorem ipso facto weirdo que passo robles dulce vita. Lorem ipso facto
-				weirdo que passo. Lorem ipso facto weirdo que passo robles dulce vita. Lorem ipso facto weirdo que
-				passo. Lorem ipso facto weirdo que passo robles dulce vita.
+					weirdo que passo. Lorem ipso facto weirdo que passo robles dulce vita. Lorem ipso facto weirdo que
+					passo. Lorem ipso facto weirdo que passo robles dulce vita.
 			</div>
 		</div>
 
@@ -403,41 +403,39 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/TweenMax.min.js" language="javascript"></script>
 
 <script>
+
 	//FIXME this is in dispatcher.js too
-	var HASH_DELIMITER = '/';
+	var HASH_DELIMITER = '/',
+		SLIDE_INTERVAL_DELAY = 7000;
+
 
 	var headerHeight = 55;
-	var $sections = $( '.section' );
-	//$sections.attr( 'data-percentage', 80 );
-	//$sections.attr( 'data-centered', true );
-
-	$( '#introduction' ).attr( 'data-centered', true );
-
-	var anchors = $sections.map( function () {
-		return this.id.split( '-' )[ 0 ];
-	} ).get();
 
 	var slideInterval = null;
 
 	var selectedEmotionState = '';
 
+	var introTimeline;
+
+	var $sections = $( '.section' );
+
+	var anchors = $sections.map( function () {
+		return this.id.split( '-' )[ 0 ];
+	} ).get();
+
 	function hasEmotionState( anchor ) {
 		var section = $( '#' + anchor + '-section' );
 		return section.attr( 'data-has-emotion-state' );
 	}
+	function advanceSlide() {
+		$.fn.fullpage.moveSlideRight();
+	}
+	function initSlideInterval() {
+		clearInterval( slideInterval );
+		slideInterval = setInterval( advanceSlide, SLIDE_INTERVAL_DELAY );
+	}
 
-	window.addEventListener( 'hashchange', function ( e ) {
-//		var oldHash = e.oldURL.split( '#' ).slice( -1 )[ 0 ];
-//		var tail = oldHash.indexOf( HASH_DELIMITER ) > 0 ?
-//			oldHash.split( HASH_DELIMITER ).slice( -1 ) : [];
-//		if ( tail.length ) {
-//			selectedEmotionState = tail[ 0 ];
-//		}
-//		console.log( selectedEmotionState );
-	} );
-
-	//prepare hero animations
-	var introTimeline;
+	$( '#introduction' ).attr( 'data-centered', true );
 
 	$( '.page-body' ).fullpage( {
 		anchors: anchors,
@@ -480,9 +478,11 @@
 			var sectionId = loadedSection[ 0 ].id;
 
 			if ( !introTimeline ) {
+
+				//init animations for intro section
 				introTimeline = new TimelineMax( {} );
 				var $intro = $( '#introduction-section' );
-				console.log( $intro.find( '.fp-slides' ) );
+				$.fn.fullpage.moveTo( 'introduction', 0 );
 				introTimeline
 					.add( 'start' )
 					.fromTo( $intro.find( '.intro-heading' ), 2, {
@@ -497,21 +497,28 @@
 						autoAlpha: 0,
 						ease: Power1.easeOut
 					}, { autoAlpha: 1 } )
+					.addCallback( function () {
+						initSlideInterval();
+					} )
 					.add( 'end' );
+
+				//make slide interface clickable right away
+				$( '.fp-slidesNav a' ).click( function ( e ) {
+					initSlideInterval();
+					$( '.fp-slidesNav a' ).removeClass( 'active' );
+					$( this ).addClass( 'active' );
+				} );
+				$( '.slide-content' ).click( function ( e ) {
+					advanceSlide();
+					initSlideInterval();
+				} );
+
 			}
 
 			//if section has emotion state, set it so the original content can pick it up
 			if ( selectedEmotionState != '' && hasEmotionState( anchorLink ) ) {
 				window.location.hash = anchorLink + HASH_DELIMITER + selectedEmotionState;
 			}
-
-
-//			$( 'body' ).addClass( sectionId + '-active' );
-
-
-			slideInterval = slideInterval ? slideInterval : setInterval( function () {
-				$.fn.fullpage.moveSlideRight();
-			}, 5000 );
 
 			//using anchorLink
 			if ( anchorLink == 'introduction' ) {

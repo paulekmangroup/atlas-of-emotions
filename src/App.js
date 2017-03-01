@@ -1747,7 +1747,7 @@ export default function (...initArgs) {
 		//	// if a section has already been selected this session, close the intro modal
 		//	setModalVisibility(false);
 		//}
-		
+
 		let hash = document.location.hash.replace(/^#/, '');
 		hash = parseHash(hash);
 
