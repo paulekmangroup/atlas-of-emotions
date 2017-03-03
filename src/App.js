@@ -1610,6 +1610,8 @@ export default function (...initArgs) {
 			return;
 		}
 
+
+
 		callout.removeAttribute('class');
 		callout.classList.add('visible');
 
@@ -1622,15 +1624,25 @@ export default function (...initArgs) {
 		// only replace the innerHTML if the content is different - this is to enable fading on the links in the actions section
 		if(callout.querySelector('.body').innerHTML != body){
 			callout.querySelector('.body').innerHTML = body;
-		};
+		}
 
 		if (emotion) {
 			callout.classList.add(emotion);
 			// update class names on link if link exists
 			if (document.getElementById("annexLink")) {
 				document.getElementById("annexLink").className = emotion;
-			};
+			}
 		}
+
+		// update scroller content
+		// TODO decide if these should be maintained in parallel or merged somehow.
+		var activeScrollerSectionText = $('.section.active .section-text')[0];
+		activeScrollerSectionText.querySelector('.headline').innerHTML = title;
+		// only replace the innerHTML if the content is different - this is to enable fading on the links in the actions section
+		if(activeScrollerSectionText.querySelector('.body').innerHTML != body){
+			activeScrollerSectionText.querySelector('.body').innerHTML = body;
+		}
+
 	}
 
 	function setMobileCaption (title, body) {
@@ -1668,7 +1680,6 @@ export default function (...initArgs) {
 		} else {
 			sections.actions.setHighlightedState(state);
 		}
-
 	}
 
 	function onNavigate (section, emotion) {
