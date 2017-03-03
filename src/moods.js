@@ -210,7 +210,7 @@ export default {
 		const label = this.labelContainer.select('.emotion-label');
 		label
 			.attr('class', `emotion-label label ${this.currentEmotion} visible default-interactive-helper`)
-			.attr('data-popuptarget', `moods:${this.currentEmotion}`);
+			.attr('data-popuptarget', `moods${dispatcher.HASH_DELIMITER}${this.currentEmotion}`);
 
 		label.select('h3').text(moodName.toUpperCase());
 

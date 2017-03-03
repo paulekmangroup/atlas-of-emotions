@@ -355,7 +355,7 @@ export default {
 			labels
 				.classed(`${emotion} label emotion-label`, true)
 				.classed('default-interactive-helper', (d, i) => i === randomLabelIndex)
-				.attr('data-popuptarget', (d,i) => `states:${statesData[i].name}`)
+				.attr('data-popuptarget', (d,i) => `states${dispatcher.HASH_DELIMITER}${statesData[i].name}`)
 				.html((d, i) => '<h3>' + statesData[i].name.toUpperCase() + '</h3>')
 				.style({
 					left: function(d,i){return positionsLookup[statesData[i].name].left + 'px';},

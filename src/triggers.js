@@ -133,7 +133,7 @@ export default {
 			let sign = angleFactors[emotion][i] < 0 ? -1 : 1;
 			ang = sign * Math.pow(Math.abs(angleFactors[emotion][i]), 0.75) * 1.5 * multiplier;
 		}
-		
+
 		return (ang - 1) * Math.PI / 2;
 
 	},
@@ -527,7 +527,7 @@ export default {
 				learnedTransform = this.getUniversalLearnedTransform('learned', haloRadius);
 			universalLearnedLabelContainer.append('div')
 				.attr('class', `emotion-label ${TRIGGER_TYPES.UNIVERSAL} ${emotion}`)
-				.attr('data-popuptarget', `triggers:${emotion}-${TRIGGER_TYPES.UNIVERSAL}`)
+				.attr('data-popuptarget', `triggers${dispatcher.HASH_DELIMITER}${emotion}-${TRIGGER_TYPES.UNIVERSAL}`)
 				.style('transform', universalTransform)
 				.style('-webkit-transform', universalTransform)
 			.append('h3')
@@ -535,7 +535,7 @@ export default {
 				.text(appStrings().getStr('emotionsData.metadata.triggers.steps[3].header').toUpperCase());
 			universalLearnedLabelContainer.append('div')
 				.attr('class', `emotion-label ${TRIGGER_TYPES.LEARNED} ${emotion}`)
-				.attr('data-popuptarget', `triggers:${emotion}-${TRIGGER_TYPES.LEARNED}`)
+				.attr('data-popuptarget', `triggers${dispatcher.HASH_DELIMITER}${emotion}-${TRIGGER_TYPES.LEARNED}`)
 				.style('transform', learnedTransform)
 				.style('-webkit-transform', learnedTransform)
 			.append('h3')
@@ -554,7 +554,7 @@ export default {
 			let labelsEnter = labels.enter()
 				.append('div')
 				.attr('class', `emotion-label ${emotion}`)
-				.attr('data-popuptarget', d => `triggers:${emotion}-${d.header.toLowerCase()}`)
+				.attr('data-popuptarget', d => `triggers${dispatcher.HASH_DELIMITER}${emotion}-${d.header.toLowerCase()}`)
 				.style('display', (d, i) => (this.screenIsSmall && i === 0) ? 'none' : null)	// hide 'TRIGGERS' on small screens
 				.style('top', (d, i) => {
 					switch (i) {
@@ -810,7 +810,7 @@ export default {
 		// enter
 		labelSelection.enter().append('div')
 			.classed('label ' + emotion, true)
-			.attr('data-popuptarget', (d,i) => 'triggers:' + d.name)
+			.attr('data-popuptarget', (d,i) => 'triggers' + dispatcher.HASH_DELIMITER + d.name)
 			.classed('filtered-by-database', d => d.isFilteredByDatabasePhase)
 			// .style('opacity', 1.0)
 		.append('h4')

@@ -975,7 +975,7 @@ export default {
 			// enter
 			let labelEnterSelection = labelSelection.enter().append('div')
 				.attr('class', `${this.currentEmotion} label emotion-label`)
-				.attr('data-popuptarget', (d,i) => `actions:${d.name}`)
+				.attr('data-popuptarget', (d,i) => `actions${dispatcher.HASH_DELIMITER}${d.name}`)
 				.style('opacity', 0.0);
 
 			labelEnterSelection.append('div')
