@@ -43,6 +43,12 @@ body {
 			filter: blur(10px);
 		}
 	}
+	&[class*=fp-viewing-experience],
+	&[class*=fp-viewing-response] {
+		.emotion-nav {
+			display: block;
+		}
+	}
 
 }
 
@@ -148,6 +154,7 @@ body {
 }
 
 .emotion-nav {
+	display: none;
 	position: fixed;
 	bottom: 0;
 	left: $section-text-width;
