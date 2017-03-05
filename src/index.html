@@ -404,7 +404,7 @@
 			</div>
 		</div>
 
-		<div class="section" id="continents-section" data-has-emotion-state="true">
+		<div class="section" id="experience-section" data-has-emotion-state="true">
 			<div class="section-graphics">
 				<!--<img src="img/prototype_slides/experience.jpg"-->
 				<!--onclick="this.src='img/prototype_slides/experience_emotion.jpg'">-->
@@ -506,7 +506,7 @@
 			</div>
 		</div>
 
-		<div class="section" id="actions-section" data-has-emotion-state="true">
+		<div class="section" id="response-section" data-has-emotion-state="true">
 			<div class="section-graphics">
 				<!--<img src="img/prototype_slides/response.jpg">-->
 			</div>
@@ -538,16 +538,15 @@
 		</div>
 		<div class="menu">
 			<ul id="menu-list">
-				<li><a data-menuanchor='introduction' href="#introduction" id="introduction-menu-link">Introduction</a>
+				<li><a href="#introduction" id="introduction-menu-link">Introduction</a>
 				</li>
-				<li><a data-menuanchor='timeline' href="#timeline" id="timeline-menu-link">Timeline</a>
+				<li><a href="#timeline" id="timeline-menu-link">Timeline</a>
 				</li>
-				<li><a data-menuanchor='continents' href="#continents" id="continents-menu-link">Experience</a>
+				<li><a href="#continents" id="experience-menu-link">Experience</a>
 				</li>
-				<li><a data-menuanchor='actions' href="#actions" id="actions-menu-link">Response</a>
+				<li><a href="#actions" id="response-menu-link">Response</a>
 				</li>
-				<li><a data-menuanchor='reading' href="#reading"
-					   id="further-reading-menu-link">Further reading</a></li>
+				<li><a href="#reading" id="reading-menu-link">Further reading</a></li>
 			</ul>
 		</div>
 	</div>
@@ -589,7 +588,22 @@
 
 	//FIXME this is in dispatcher.js too
 	var HASH_DELIMITER = '/',
-		SLIDE_INTERVAL_DELAY = 7000;
+		SLIDE_INTERVAL_DELAY = 7000,
+		ATLAS_TO_FULLPAGE_SECTIONS = {
+			'introduction': 'introduction',
+			'timeline': 'timeline', //FIXME fake atlas section prompts default
+			'actions': 'response',
+			'continents': 'experience',
+			'states': 'experience',
+			'triggers': 'timeline',
+		},
+		FULLPAGE_TO_ATLAS_SECTIONS = {
+			'introduction': 'introduction', //FIXME fake atlas section prompts default
+			'timeline': 'timeline', //FIXME fake atlas section prompts default
+			'experience': 'continents',
+			'response': 'actions',
+			'reading': 'reading' //FIXME fake atlas section prompts default
+		};
 
 
 	var headerHeight = 55;
@@ -601,6 +615,8 @@
 	var introTimeline;
 
 	var $sections = $( '.section' );
+	var $topNav = $( '.top-nav' );
+	var $topNavLinks = $topNav.find( 'a' );
 
 	var anchors = $sections.map( function () {
 		return this.id.split( '-' )[ 0 ];
@@ -628,7 +644,7 @@
 
 	$( '.page-body' ).fullpage( {
 		anchors: anchors,
-		lockAnchors: false,
+		lockAnchors: true,
 		menu: "#menu-list",
 		autoScrolling: true,
 		offsetSections: false,
@@ -643,6 +659,7 @@
 
 			var loadedSection = $( this );
 			var sectionId = loadedSection[ 0 ].id;
+			var anchorLink = anchors[ nextIndex - 1 ];
 
 			//hide the about text if leaving the intro
 			if ( sectionId == 'introduction-section' ) {
@@ -653,14 +670,15 @@
 			var oldHash = window.location.hash;
 			var tail = oldHash.indexOf( HASH_DELIMITER ) > 0 ?
 				oldHash.split( HASH_DELIMITER ).slice( -1 ) : [];
-			if ( tail.length ) {
+			if ( hasEmotionState( anchorLink ) && tail.length ) {
 				selectedEmotionState = tail[ 0 ];
 			}
 
 			//hide the more-content areas in all sections
 			hideAllMoreContent();
 
-			console.log( selectedEmotionState );
+			//if section has emotion state, set it so the original content can pick it up
+			window.location.hash = FULLPAGE_TO_ATLAS_SECTIONS[ anchorLink ] + HASH_DELIMITER + selectedEmotionState;
 
 		},
 
@@ -669,7 +687,7 @@
 			var loadedSection = $( this );
 			var sectionId = loadedSection[ 0 ].id;
 
-			if ( !introTimeline ) {
+			if ( sectionId == 'introduction-section' && !introTimeline ) {
 
 				//init animations for intro section
 				introTimeline = new TimelineMax( {} );
@@ -707,20 +725,26 @@
 
 			}
 
-			//if section has emotion state, set it so the original content can pick it up
-			if ( selectedEmotionState != '' && hasEmotionState( anchorLink ) ) {
-				window.location.hash = anchorLink + HASH_DELIMITER + selectedEmotionState;
-			}
-
 			//using anchorLink
 			if ( anchorLink == 'introduction' ) {
-				$( '.top-nav' ).removeClass( 'visible' );
+				$topNav.removeClass( 'visible' );
 				introTimeline.play();
 			} else {
-				$( '.top-nav' ).addClass( 'visible' );
+				$topNav.addClass( 'visible' );
 				introTimeline.pause();
 				introTimeline.seek( 'end' );
 			}
+
+			//update topnav
+			$topNavLinks.each( function ( index, element ) {
+				$element = $( element );
+				var id = $element.attr( 'id' );
+				if ( id.indexOf( anchorLink ) >= 0 ) {
+					$element.addClass( 'active' );
+				} else {
+					$element.removeClass( 'active' );
+				}
+			} );
 
 		}
 
@@ -733,7 +757,7 @@
 		//todo integrate this properly with app js and use d3
 		let hash = document.location.hash.replace( /^#/, '' ).split( HASH_DELIMITER );
 
-		if ( hash[ 0 ] && hash[ 0 ].match( /(states)|(actions)/ ) != null ) {
+		if ( hash[ 0 ] && hash[ 0 ].match( /(experience)|(response)/ ) != null ) {
 			$( '.emotion-nav' ).addClass( 'visible' );
 			var $links = $( '.emotion-nav a[href!="#continents"]' );
 			$links.each( function ( index, element ) {
@@ -744,6 +768,10 @@
 		} else {
 			$( '.emotion-nav' ).removeClass( 'visible' );
 		}
+
+		//update scroller
+		$.fn.fullpage.moveTo( ATLAS_TO_FULLPAGE_SECTIONS[ hash[ 0 ] ], hash[ 1 ] ? hash[ 1 ] : null );
+
 
 	} );
 
