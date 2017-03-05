@@ -667,19 +667,23 @@
 			}
 
 			//save the emotion state before leaving
-			var oldHash = window.location.hash;
-			var tail = oldHash.indexOf( HASH_DELIMITER ) > 0 ?
-				oldHash.split( HASH_DELIMITER ).slice( -1 ) : [];
-			if ( hasEmotionState( anchorLink ) && tail.length ) {
-				selectedEmotionState = tail[ 0 ];
+			var hash = window.location.hash.replace( /^#/, '' ).split( HASH_DELIMITER );
+			var atlasSection = hash[ 0 ];
+			var emotion = hash[ 1 ];
+			if ( hasEmotionState( anchorLink ) && emotion ) {
+				selectedEmotionState = emotion;
 			}
 
 			//hide the more-content areas in all sections
 			hideAllMoreContent();
 
-			//if section has emotion state, set it so the original content can pick it up
-			window.location.hash = FULLPAGE_TO_ATLAS_SECTIONS[ anchorLink ] + HASH_DELIMITER + selectedEmotionState;
-
+			//if the hash is not correct for the next section, change the hash
+			var hashSection = hash[0]
+			if ( ATLAS_TO_FULLPAGE_SECTIONS[ atlasSection ] != anchorLink ) {
+				//if section has emotion state, set it so the original content can pick it up
+				hashSection = FULLPAGE_TO_ATLAS_SECTIONS[ anchorLink ];
+			}
+			window.location.hash = hashSection + HASH_DELIMITER + selectedEmotionState;
 		},
 
 		afterLoad: function ( anchorLink, index ) {
@@ -751,13 +755,12 @@
 	} );
 
 	var hash = [];
-	// show state navigation when the hash changes to states
-	window.addEventListener( 'hashchange', function () {
+	function hashChange() {
 
 		//todo integrate this properly with app js and use d3
 		let hash = document.location.hash.replace( /^#/, '' ).split( HASH_DELIMITER );
 
-		if ( hash[ 0 ] && hash[ 0 ].match( /(experience)|(response)/ ) != null ) {
+		if ( hash[ 0 ] && hash[ 0 ].match( /(states)|(actions)/ ) != null ) {
 			$( '.emotion-nav' ).addClass( 'visible' );
 			var $links = $( '.emotion-nav a[href!="#continents"]' );
 			$links.each( function ( index, element ) {
@@ -772,8 +775,12 @@
 		//update scroller
 		$.fn.fullpage.moveTo( ATLAS_TO_FULLPAGE_SECTIONS[ hash[ 0 ] ], hash[ 1 ] ? hash[ 1 ] : null );
 
+	}
+	// show state navigation when the hash changes to states
+	window.addEventListener( 'hashchange', hashChange );
 
-	} );
+	//call hashChange on load to update fullpage section
+	hashChange();
 
 
 	// add click for about the atlas, in the intro
