@@ -1658,10 +1658,16 @@ export default function ( ...initArgs ) {
 		// update scroller content
 		// TODO decide if these should be maintained in parallel or merged somehow.
 		var activeScrollerSectionText = $( '.section.active .section-text' )[ 0 ];
-		activeScrollerSectionText.querySelector('.headline').innerHTML = title;
+		if ( activeScrollerSectionText ) {
+			var calloutHeadlineElement = activeScrollerSectionText.querySelector( '.headline' );
+			var calloutBodyElement = activeScrollerSectionText.querySelector( '.body' );
+			if ( calloutHeadlineElement ) {
+				calloutHeadlineElement.innerHTML = title;
+			}
 			// only replace the innerHTML if the content is different - this is to enable fading on the links in the actions section
-		if(activeScrollerSectionText.querySelector('.body').innerHTML != body){
-			activeScrollerSectionText.querySelector('.body').innerHTML = body;
+			if ( calloutBodyElement && calloutBodyElement.innerHTML != body ) {
+				calloutBodyElement.innerHTML = body;
+			}
 		}
 
 	}
