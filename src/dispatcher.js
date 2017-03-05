@@ -23,6 +23,7 @@ const dispatcher = {
 		CALM: 'calm',
 		MORE: 'more'
 	},
+
 	HOME: 'home',
 
 	EMOTIONS: {
