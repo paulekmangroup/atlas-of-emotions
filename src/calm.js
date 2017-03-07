@@ -108,7 +108,7 @@ export default {
 				.style('top', d => Math.round(centerY + d.y - 17) + 'px');
 
 			labelsEnter.append('a')
-				.attr('href', d => `#continents:${d.id}`)
+				.attr('href', d => `#continents${dispatcher.HASH_DELIMITER}${d.id}`)
 				.append('h3')
 					.text(appStrings().getStr(`emotionsData.metadata.calm.caption`) || 'START OVER');
 		});
