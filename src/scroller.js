@@ -33,39 +33,41 @@ const scroller = {
 	$topNavLinks: null,
 	anchors: [],
 
-	hasEmotionState: ( anchor ) => {
+	hasEmotionState: function ( anchor ) {
 		var section = $( '#' + anchor + '-section' );
 		return section.attr( 'data-has-emotion-state' );
 	},
 
-	advanceSlide: () => {
+	advanceSlide: function () {
 		$.fn.fullpage.moveSlideRight();
 	},
 
-	initSlideInterval: () => {
+	initSlideInterval: function () {
 		clearInterval( this.slideInterval );
 		this.slideInterval = setInterval( this.advanceSlide, this.SLIDE_INTERVAL_DELAY );
 	},
 
-	hideAllMoreContent: () => {
+	hideAllMoreContent: function () {
 		//var $sections = $( '.section' );
 		this.$sections.removeClass( 'more-visible' );
 		$( 'body' ).removeClass( 'more-visible' );
 		$.fn.fullpage.setAllowScrolling( true );
 	},
 
-	hashChange: () => {
+	hashChange: function () {
 
-		//todo integrate this properly with App.js and use d3
+		//TODO integrate this properly with App.js and use d3
 		let hash = document.location.hash.replace( /^#/, '' ).split( dispatcher.HASH_DELIMITER );
 
 		if ( hash[ 0 ] && hash[ 0 ].match( /(states)|(actions)/ ) != null ) {
 			$( '.emotion-nav' ).addClass( 'visible' );
 			var $links = $( '.emotion-nav a[href!="#continents"]' );
+			var emotion = hash[ 1 ] != '' ? hash[ 1 ] : dispatcher.DEFAULT_EMOTION;
 			$links.each( function ( index, element ) {
-				var newHash = $( element ).attr( 'href' ).replace( /^#.+\//, '#' + hash[ 0 ] + '/' );
-				$( element ).attr( 'href', newHash );
-				$( element ).toggleClass( 'active', $( element ).attr( 'href' ).indexOf( hash[ 1 ] ) >= 0 );
+				var $element = $( element );
+				var newHash = $element.attr( 'href' ).replace( /^#.+\//, '#' + hash[0] + '/' );
+				$element.attr( 'href', newHash );
+				$element.toggleClass( 'active', $element.attr( 'href' ).indexOf( emotion ) >= 0 );
 			} );
 		} else {
 			$( '.emotion-nav' ).removeClass( 'visible' );
@@ -77,18 +79,18 @@ const scroller = {
 	},
 
 
-	topOverscroll: ( e ) => {
+	topOverscroll: function ( e ) {
 		var distanceFromTop = e.currentTarget.scrollTop;
 		return (distanceFromTop == 0 && e.deltaY > 0);
 	},
 
-	bottomOverscroll: ( e ) => {
+	bottomOverscroll: function ( e ) {
 		var distanceFromBottom =
 			(e.currentTarget.scrollHeight - e.currentTarget.scrollTop) - e.currentTarget.offsetHeight;
 		return (distanceFromBottom == 0 && e.deltaY < 0);
 	},
 
-	getBounceCallback: ( overscrollFunction ) => {
+	getBounceCallback: function ( overscrollFunction ) {
 
 		var scrollingEnded = true;
 		var pulseActive = false;
@@ -132,12 +134,16 @@ const scroller = {
 		};
 	},
 
-	onSectionLeave: ( index, nextIndex, direction ) => {
+	getLoadedSection: function ( anchorLink ) {
+		return $( '#' + anchorLink + '-section' );
+	},
+
+	onSectionLeave: function ( index, nextIndex, direction ) {
 
 		var _self = this; //callback must be bound to the scroller class
 
 		var anchorLink = this.anchors[ nextIndex - 1 ];
-		var loadedSection = $( anchorLink + '-section' );
+		var loadedSection = this.getLoadedSection( anchorLink );
 		var sectionId = loadedSection[ 0 ].id;
 
 		//hide the about text if leaving the intro
@@ -167,14 +173,14 @@ const scroller = {
 		window.location.hash = hashSection + dispatcher.HASH_DELIMITER + this.selectedEmotionState;
 	},
 
-	afterSectionLoad: ( anchorLink, index ) => {
+	afterSectionLoad: function ( anchorLink, index ) {
 
 		var _self = this; //callback must be bound to the scroller class
 
-		var loadedSection = $( anchorLink + '-section' );
+		var loadedSection = this.getLoadedSection( anchorLink );
 		var sectionId = loadedSection[ 0 ].id;
 
-		if ( sectionId == 'introduction-section' && !introTimeline ) {
+		if ( sectionId == 'introduction-section' && !this.introTimeline ) {
 
 			//init animations for intro section
 			var $intro = $( '#introduction-section' );
@@ -226,7 +232,7 @@ const scroller = {
 
 		//update topnav
 		this.$topNavLinks.each( function ( index, element ) {
-			$element = $( element );
+			var $element = $( element );
 			var id = $element.attr( 'id' );
 			if ( id.indexOf( anchorLink ) >= 0 ) {
 				$element.addClass( 'active' );
@@ -237,7 +243,7 @@ const scroller = {
 
 	},
 
-	init: ()=> {
+	init: function () {
 
 		$( '#introduction' ).attr( 'data-centered', true );
 

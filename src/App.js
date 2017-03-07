@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import scroller from './scroller.js';
 import dispatcher from './dispatcher.js';
 import continents from './continents.js';
 import states from './states.js';
@@ -54,6 +55,8 @@ export default function ( ...initArgs ) {
 		nonMobileElements = [],
 		mobileElements = [],
 
+	// FIXME remove this old scrolling code
+
 		scrollbarSegments = {},
 		scrollbarCloseTimeout = null,
 		highlightedScrollbarSection = null,
@@ -87,6 +90,7 @@ export default function ( ...initArgs ) {
 				initLanguageSelector();
 				initCallout();
 				initMobileCaption();
+				initScroller();
 
 				//initModal();
 
@@ -121,6 +125,10 @@ export default function ( ...initArgs ) {
 
 			} );
 
+	}
+
+	function initScroller() {
+		scroller.init.bind( scroller )();
 	}
 
 	function initContainers() {
@@ -722,7 +730,8 @@ export default function ( ...initArgs ) {
 								containers[ key ].style.display = 'none';
 							}
 						}
-					};
+					}
+					;
 
 					// reveal the new section's container,
 					// open the new section, and set its emotion
@@ -1816,7 +1825,7 @@ export default function ( ...initArgs ) {
 		}
 
 		setSection( section, previousEmotion, previousMorePage );
-		
+
 		// Track hash changes in Google Analytics as virtual pageviews
 		// https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications#tracking_virtual_pageviews
 		window.ga( 'set', 'page', document.location.pathname + document.location.search + document.location.hash );
