@@ -949,7 +949,7 @@ export default function ( ...initArgs ) {
 		document.getElementById( 'main' ).style.height = (window.innerHeight - headerHeight) + 'px';
 
 		// update scrollbar values
-		scrollbarBounds.left = scrollbar.getBoundingClientRect().left;
+		// scrollbarBounds.left = scrollbar.getBoundingClientRect().left;
 
 		// update all sections
 		let section,
