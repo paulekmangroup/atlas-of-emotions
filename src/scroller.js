@@ -9,7 +9,7 @@ const scroller = {
 
 	ATLAS_TO_FULLPAGE_SECTIONS: {
 		'introduction': 'introduction',
-		'timeline': 'timeline', //FIXME fake atlas section prompts default
+		//'timeline': 'timeline', //FIXME fake atlas section prompts default
 		'actions': 'response',
 		'continents': 'experience',
 		'states': 'experience',
@@ -18,7 +18,7 @@ const scroller = {
 
 	FULLPAGE_TO_ATLAS_SECTIONS: {
 		'introduction': 'introduction', //FIXME fake atlas section prompts default
-		'timeline': 'timeline', //FIXME fake atlas section prompts default
+		'timeline': 'triggers', //FIXME fake atlas section prompts default
 		'experience': 'continents',
 		'response': 'actions',
 		'reading': 'reading' //FIXME fake atlas section prompts default
