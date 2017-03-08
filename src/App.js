@@ -154,7 +154,7 @@ export default function ( ...initArgs ) {
 		sections.continents = continents;
 		sections.states = states;
 		sections.actions = actions;
-		sections.triggers = triggers;
+		sections.triggers = timeline; //TODO finalize swap
 		sections.moods = moods;
 		sections.calm = calm;
 		sections.more = moreInfo;
