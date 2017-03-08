@@ -83,7 +83,7 @@ export default function ( ...initArgs ) {
 				initContainers();
 				initSections();
 				initHeader();
-				initSectionNavigation();
+				//initSectionNavigation();
 				initNavArrows();
 				initMoreInfoDropdown();
 				initPegLogo();
