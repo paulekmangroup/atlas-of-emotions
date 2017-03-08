@@ -1,10 +1,11 @@
 import _ from 'lodash';
 import scroller from './scroller.js';
+import timeline from './timeline/timeline.js';
 import dispatcher from './dispatcher.js';
 import continents from './continents.js';
 import states from './states.js';
 import actions from './actions.js';
-import triggers from './triggers.js';
+//import triggers from './triggers.js';
 import moods from './moods.js';
 import calm from './calm.js';
 import moreInfo from './moreInfo.js';
@@ -145,7 +146,7 @@ export default function ( ...initArgs ) {
 
 		// position actions in front of triggers
 		// so that triggers horizon element appears behind actions rays
-		mainEl.insertBefore( containers[ dispatcher.SECTIONS.TRIGGERS ], containers[ dispatcher.SECTIONS.ACTIONS ] );
+		//mainEl.insertBefore( containers[ dispatcher.SECTIONS.TRIGGERS ], containers[ dispatcher.SECTIONS.ACTIONS ] );
 
 	}
 
@@ -370,7 +371,7 @@ export default function ( ...initArgs ) {
 
 		initNavbar();
 		// initScrollNavigation();
-		initKeyboardNavigation();
+		// initKeyboardNavigation();
 
 	}
 
@@ -1819,9 +1820,9 @@ export default function ( ...initArgs ) {
 		} else {
 			setEmotion( emotion );
 
-			if ( section === dispatcher.SECTIONS.CONTINENTS ) {
-				setScrollbarOpen( !!emotion );
-			}
+			//if ( section === dispatcher.SECTIONS.CONTINENTS ) {
+			//	setScrollbarOpen( !!emotion );
+			//}
 		}
 
 		setSection( section, previousEmotion, previousMorePage );
