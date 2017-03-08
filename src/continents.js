@@ -284,7 +284,7 @@ const continentsSection = {
 			.each( positionLabelsVertically );
 
 		labelsEnter.append( 'a' )
-			.attr( 'href', d => `#continents${dispatcher.HASH_DELIMITER}${ d.id }` )
+			.attr( 'href', d => `#states${dispatcher.HASH_DELIMITER}${ d.id }` )
 			.append( 'h3' )
 			.text( d => d.i18nName.toUpperCase() );
 
@@ -488,7 +488,7 @@ const continentsSection = {
 			continent.d3Selection
 				.on( 'mouseenter', val ? section.onContinentMouseEnter : null )
 				.on( 'mouseleave', val ? section.onContinentMouseLeave : null )
-				.on( 'click', val ? section.onContinentClick : null, true);
+				.on( 'click', val ? section.onContinentClick : null, true );
 		} );
 
 		this.labelContainer.selectAll( '.emotion-label' )
