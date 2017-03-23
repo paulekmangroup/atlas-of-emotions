@@ -18,6 +18,12 @@ html {
 	font-family: 'Raleway', sans-serif;
 	color: $text-color;
 	font-size: 18px;
+
+}
+
+* {
+	//FIXME replace modes in the styles rather than overriding them with !important
+	mix-blend-mode: normal !important;
 }
 
 body {
