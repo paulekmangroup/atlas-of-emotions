@@ -39,9 +39,9 @@ export default class EpisodeAddAwareness {
 			//blocks
 			var blockDiagram = new BlockDiagram( timeline.select( '#blocks', parent ), parent );
 
-			blockDiagram.onComplete = function () {
-				var refractoryPeriod = RefractoryPeriod( parent, blocks );
-			};
+			//blockDiagram.onComplete = function () {
+				//var refractoryPeriod = RefractoryPeriod( parent, blocks );
+			//};
 
 
 			var content = timeline.episodeContent;
@@ -562,56 +562,56 @@ function BlockDiagram( element, parent ) {
 }
 
 
-function RefractoryPeriod( parent, blocks ) {
-
-	var NS = "http://www.w3.org/2000/svg";
-	var line = timeline.select( '#perceptual-database-line-group', parent );
-	var lineChildren = timeline.getChildren( line );
-	var lineBox = line.getBBox();
-
-	var otherTriggerBlocks = timeline.selectAll( '#precondition-block, #event-block', parent );
-	var otherTriggerLines = timeline.selectAll( '#precondition-line, #event-line, #precondition-line-decoration-1, #event-line-decoration-1', parent );
-	var otherResponseLines = timeline.selectAll( '#response-line-1, #response-line-3, #response-line-1-decoration-1, #response-line-3-decoration-1', parent );
-	var otherBlocks = timeline.selectAll( '#mental-changes-block, #physical-changes-block, #constructive-response-block, #ambiguous-response-block', parent );
-	var perceptualDatabaseBlock = timeline.select( '#perceptual-database-block', parent );
-	var eventBlock = timeline.select( '#event-block', parent );
-	var trigger = timeline.select( '#trigger', parent );
-
-	var tryAgainButton = timeline.select( '#try-again', parent );
-
-	TweenMax.to( tryAgainButton, 1, { autoAlpha: 1 } );
-	tryAgainButton.addEventListener( 'click', function () {
-
-		var initializationTimeline = new TimelineMax( {} );
-		initializationTimeline
-			.add( 'start' )
-			.to( trigger, 1, { autoAlpha: 0 }, 'start' )
-			.to( otherTriggerBlocks, 0.5, { autoAlpha: 0 }, 'start+=0.5' )
-			.to( otherBlocks, 0.5, { autoAlpha: 0 }, 'start+=0.5' )
-			.to( otherTriggerLines, 0.5, { autoAlpha: 0 }, 'start+=0.5' )
-			.to( otherResponseLines, 0.5, { autoAlpha: 0 }, 'start+=0.5' )
-			.to( perceptualDatabaseBlock, 0.5, { autoAlpha: 1 }, 'start+=0.5' )
-
-			.add( 'move' )
-			.to( timeline.selectAll( 'rect, tspan', perceptualDatabaseBlock ), 1, {
-				attr: { y: '-=60' },
-				ease: Power1.easeOut
-			}, 'move' )
-			.to( lineChildren, 1, {
-				rotation: 18,
-				y: '-=35',
-				svgOrigin: (lineBox.x + lineBox.width) + ' ' + lineBox.y,
-				ease: Power1.easeOut
-			}, 'move' )
-			.to( lineChildren, 1, {
-				rotation: 18,
-				y: '-=35',
-				svgOrigin: (lineBox.x + lineBox.width) + ' ' + lineBox.y,
-				ease: Power1.easeOut
-			}, 'move' );
-
-	} );
-}
+//function RefractoryPeriod( parent, blocks ) {
+//
+//	var NS = "http://www.w3.org/2000/svg";
+//	var line = timeline.select( '#perceptual-database-line-group', parent );
+//	var lineChildren = timeline.getChildren( line );
+//	var lineBox = line.getBBox();
+//
+//	var otherTriggerBlocks = timeline.selectAll( '#precondition-block, #event-block', parent );
+//	var otherTriggerLines = timeline.selectAll( '#precondition-line, #event-line, #precondition-line-decoration-1, #event-line-decoration-1', parent );
+//	var otherResponseLines = timeline.selectAll( '#response-line-1, #response-line-3, #response-line-1-decoration-1, #response-line-3-decoration-1', parent );
+//	var otherBlocks = timeline.selectAll( '#mental-changes-block, #physical-changes-block, #constructive-response-block, #ambiguous-response-block', parent );
+//	var perceptualDatabaseBlock = timeline.select( '#perceptual-database-block', parent );
+//	var eventBlock = timeline.select( '#event-block', parent );
+//	var trigger = timeline.select( '#trigger', parent );
+//
+//	var tryAgainButton = timeline.select( '#try-again', parent );
+//
+//	TweenMax.to( tryAgainButton, 1, { autoAlpha: 1 } );
+//	tryAgainButton.addEventListener( 'click', function () {
+//
+//		var initializationTimeline = new TimelineMax( {} );
+//		initializationTimeline
+//			.add( 'start' )
+//			.to( trigger, 1, { autoAlpha: 0 }, 'start' )
+//			.to( otherTriggerBlocks, 0.5, { autoAlpha: 0 }, 'start+=0.5' )
+//			.to( otherBlocks, 0.5, { autoAlpha: 0 }, 'start+=0.5' )
+//			.to( otherTriggerLines, 0.5, { autoAlpha: 0 }, 'start+=0.5' )
+//			.to( otherResponseLines, 0.5, { autoAlpha: 0 }, 'start+=0.5' )
+//			.to( perceptualDatabaseBlock, 0.5, { autoAlpha: 1 }, 'start+=0.5' )
+//
+//			.add( 'move' )
+//			.to( timeline.selectAll( 'rect, tspan', perceptualDatabaseBlock ), 1, {
+//				attr: { y: '-=60' },
+//				ease: Power1.easeOut
+//			}, 'move' )
+//			.to( lineChildren, 1, {
+//				rotation: 18,
+//				y: '-=35',
+//				svgOrigin: (lineBox.x + lineBox.width) + ' ' + lineBox.y,
+//				ease: Power1.easeOut
+//			}, 'move' )
+//			.to( lineChildren, 1, {
+//				rotation: 18,
+//				y: '-=35',
+//				svgOrigin: (lineBox.x + lineBox.width) + ' ' + lineBox.y,
+//				ease: Power1.easeOut
+//			}, 'move' );
+//
+//	} );
+//}
 
 
 function initializeIllumination( illuminationBlock, svg ) {
