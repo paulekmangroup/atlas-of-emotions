@@ -8,6 +8,7 @@ const dispatcher = {
 		NAVIGATE: 'navigate',
 		NAVIGATE_COMPLETE: 'navigateComplete',
 		CHANGE_EMOTION_STATE: 'changeEmotionState',
+		CHANGE_EMOTION: 'changeEmotion',
 		CHANGE_CALLOUT: 'changeCallout',
 		MODAL_CHANGE: 'modalChange',
 		POPUP_CHANGE: 'popupChange',
@@ -125,6 +126,12 @@ const dispatcher = {
 	setEmotionState: function ( state, selected ) {
 
 		this.emit( this.EVENTS.CHANGE_EMOTION_STATE, state, selected );
+
+	},
+
+	setEmotion: function ( emotion ) {
+
+		this.emit( this.EVENTS.CHANGE_EMOTION, emotion );
 
 	},
 

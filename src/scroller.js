@@ -54,30 +54,56 @@ const scroller = {
 		$.fn.fullpage.setAllowScrolling( true );
 	},
 
+	toggleEmotionNav: function ( visible ) {
+		$( '.emotion-nav' ).toggleClass( 'visible', visible );
+	},
+
+	emotionNavVisible: function () {
+		return $( '.emotion-nav' ).hasClass( 'visible' );
+	},
+
+	pulseEmotionNav: function () {
+		var $links = $( '.emotion-nav li' );
+		var pulseTimeline = new TimelineMax();
+		pulseTimeline
+			.add( 'start' )
+			.staggerTo( $links, 0.1, { css: { 'transform': 'scale(1.1)' } }, 0.1 )
+			.staggerTo( $links, 0.1, { css: { 'transform': 'scale(1)' } }, 0.1, 'start+=0.2' );
+	},
+
+	initEmotionNav: function () {
+		let links = [].slice.call( $( '.emotion-nav a[href!="#continents"]' ) );
+		for ( let element of links ) {
+			element.addEventListener( 'click', ( e )=> {
+				e.preventDefault();
+				let emotion = e.currentTarget.getAttribute( 'data-emotion' );
+				dispatcher.setEmotion( emotion );
+			} );
+		}
+	},
+
 	hashChange: function () {
 
-		//TODO integrate this properly with App.js and use d3
 		let hash = document.location.hash.replace( /^#/, '' ).split( dispatcher.HASH_DELIMITER );
-
-		if ( hash[ 0 ] && hash[ 0 ].match( /(states)|(actions)/ ) != null ) {
-			$( '.emotion-nav' ).addClass( 'visible' );
-			var $links = $( '.emotion-nav a[href!="#continents"]' );
+		let section = hash[ 0 ];
 			var emotion = hash[ 1 ] != '' ? hash[ 1 ] : dispatcher.DEFAULT_EMOTION;
-			$links.each( function ( index, element ) {
-				var $element = $( element );
-				var newHash = $element.attr( 'href' ).replace( /^#.+\//, '#' + hash[0] + '/' );
-				$element.attr( 'href', newHash );
-				$element.toggleClass( 'active', $element.attr( 'href' ).indexOf( emotion ) >= 0 );
-			} );
+
+		if ( section && section.match( /(states)|(actions)|(triggers)/ ) != null ) {
+			this.toggleEmotionNav( true );
 		} else {
-			$( '.emotion-nav' ).removeClass( 'visible' );
+			this.toggleEmotionNav( false );
 		}
 
 		//update scroller
-		$.fn.fullpage.moveTo( this.ATLAS_TO_FULLPAGE_SECTIONS[ hash[ 0 ] ], hash[ 1 ] ? hash[ 1 ] : null );
+		$.fn.fullpage.moveTo( this.ATLAS_TO_FULLPAGE_SECTIONS[ section ], hash[ 1 ] ? hash[ 1 ] : null );
+
+		//update emotion nav active states
+		let links = [].slice.call( $( '.emotion-nav a[href!="#continents"]' ) );
+		for ( let element of links ) {
+			element.classList.toggle( 'active', element.getAttribute( 'data-emotion' ) == emotion );
+		}
 
 	},
-
 
 	topOverscroll: function ( e ) {
 		var distanceFromTop = e.currentTarget.scrollTop;

@@ -115,6 +115,7 @@ export default function ( ...initArgs ) {
 				// navigation events
 				dispatcher.addListener( dispatcher.EVENTS.NAVIGATE, onNavigate );
 				dispatcher.addListener( dispatcher.EVENTS.CHANGE_EMOTION_STATE, onEmotionStateChange );
+				dispatcher.addListener( dispatcher.EVENTS.CHANGE_EMOTION, onEmotionChange );
 				dispatcher.addListener( dispatcher.EVENTS.CHANGE_CALLOUT, onCalloutChange );
 				dispatcher.addListener( dispatcher.EVENTS.POPUP_CHANGE, onPopupChange );
 				dispatcher.addListener( dispatcher.EVENTS.OPEN_MORE_INFO_MENU, onMoreInfoMenuClick );
@@ -1722,6 +1723,12 @@ export default function ( ...initArgs ) {
 			sections.states.setBackgroundedState( state );
 		} else {
 			sections.actions.setHighlightedState( state );
+		}
+	}
+
+	function onEmotionChange( emotion ){
+		if(!isNavigating){
+			dispatcher.navigate( null, emotion );
 		}
 	}
 
