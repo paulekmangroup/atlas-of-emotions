@@ -39,14 +39,32 @@ body {
 		}
 	}
 	&.more-visible {
-		.original-content {
+		.original-content,
+		#timeline-section .section-graphics {
 			filter: blur(10px);
 		}
-	}
-	&[class*=fp-viewing-experience],
-	&[class*=fp-viewing-response] {
 		.emotion-nav {
-			display: block;
+			opacity: 0;
+			pointer-events: none;
+		}
+	}
+	&[class*=fp-viewing-timeline] {
+		.emotion-nav {
+			a {
+				color: #aaa;
+			}
+			a.active, a:hover {
+				color: #aaa;
+			}
+			ul {
+				li {
+					width: 18%;
+					&.all {
+						width: 0;
+						opacity: 0;
+					}
+				}
+			}
 		}
 	}
 
@@ -69,6 +87,43 @@ svg {
 	&.active {
 		font-weight: bold;
 		text-decoration: none;
+	}
+	cursor: pointer;
+	user-select: none;
+}
+
+#illumination-block {
+	$edge-width: 200px;
+	position: absolute;
+	width: 0;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	background-color: transparent;
+	overflow: hidden;
+	&:before {
+		content: ' ';
+		display: block;
+		position: absolute;
+		left: 0;
+		right: -3+$edge-width;
+		top: 0;
+		bottom: 0;
+		background-color: #fff;
+	}
+	&:after {
+		content: ' ';
+		display: block;
+		position: absolute;
+		right: -2px;
+		top: 0;
+		bottom: 0;
+		width: $edge-width;
+		background-color: transparent;
+		background-image: url('./img/glowEdge.png');
+		background-position: right;
+		background-repeat: repeat-y;
+		background-size: $edge-width;
 	}
 }
 
@@ -158,17 +213,18 @@ svg {
 }
 
 .emotion-nav {
-	display: none;
 	position: fixed;
 	bottom: 0;
 	left: $section-text-width;
 	right: 0;
 	height: auto;
 	opacity: 0;
-	transition: opacity 1s ease;
+	pointer-events: none;
+	transition: opacity 0.7s ease, color 0.7s ease;
 
 	&.visible {
 		opacity: 1;
+		pointer-events: auto;
 	}
 	ul {
 		@extend %menus;
@@ -183,7 +239,7 @@ svg {
 			padding: 20px 0;
 			text-indent: 0;
 			display: inline-block;
-			pointer-events: all;
+			transition: width 0.7s ease;
 		}
 	}
 }
@@ -337,11 +393,10 @@ svg {
 	//@include emotion-background-color(0.5);
 
 	h2 {
-		border-bottom: 1px solid #999;
 		margin-top: 0;
 		padding-bottom: 17px;
 		text-transform: none;
-		margin-bottom: 20px;
+		margin-bottom: 15px;
 		border-bottom: 1px solid #000;
 		line-height: 1;
 	}
@@ -350,6 +405,54 @@ svg {
 		margin-top: 0;
 		margin-bottom: 5px;
 		text-transform: uppercase;
+	}
+
+	div.body-awareness {
+		overflow: hidden;
+		position: relative;
+		padding: 15px 0;
+		border-top: 1px solid #777;
+		&:first-of-type {
+			border: none;
+			margin-top: -15px;
+		}
+		//&:last-of-type {
+		//	border-bottom: 1px solid #777;
+		//}
+		h3 {
+			position: relative;
+			margin-bottom: 5px;
+			pointer-events: auto;
+			cursor: pointer;
+			&:after {
+				content: '-';
+				display: block;
+				position: absolute;
+				right: 0;
+				top: -5px;
+				font-size: 30px;
+				height: 30px;
+				line-height: 1;
+				font-weight: normal;
+			}
+		}
+		p, ul {
+			transition: all 0.3s;
+		}
+		ul {
+			margin: -10px 0;
+			line-height: 1.2;
+		}
+		&.closed {
+			height: 53px;
+			h3:after {
+				content: '+';
+			}
+			p, ul {
+				opacity: 0;
+				transition: all 0s;
+			}
+		}
 	}
 
 	p {
@@ -366,12 +469,26 @@ svg {
 		@include emotion-color;
 	}
 
+	button {
+		pointer-events: auto;
+	}
+
 	.more-on & {
 		display: none;
 	}
 
 	h3 {
 		margin-top: 0;
+	}
+
+	li {
+		margin-bottom: 10px;
+	}
+
+	button {
+		display: block;
+		width: 100%;
+		margin: 0 auto;
 	}
 }
 
@@ -421,7 +538,6 @@ svg {
 	}
 }
 
-.more-link,
 .about-link {
 	@extend %button-link;
 	cursor: pointer;
@@ -480,6 +596,26 @@ svg {
 	img {
 		width: 100%;
 		height: auto;
+	}
+	svg {
+		pointer-events: auto;
+	}
+}
+
+.diagram-caption {
+	opacity: 0;
+	color: #000;
+	position: absolute;
+	top: 50%;
+	left: 0;
+	right: 0;
+	padding-top: 250px;
+	pointer-events: none;
+	transition: opacity 0.3s ease;
+	text-align: center;
+	font-size: 1.2em;
+	&.active {
+		opacity: 1;
 	}
 }
 
