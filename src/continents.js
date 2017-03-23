@@ -475,8 +475,16 @@ const continentsSection = {
 
 	setActive: function ( val ) {
 
-		let section = this;
 		this.isActive = val;
+
+		this.labelContainer.selectAll( '.emotion-label' )
+			.classed( 'visible', val );
+
+	},
+
+	setInteractive: function ( val ) {
+
+		let section = this;
 
 		//continents.forEach(function (continent, i) {
 		//	continent.d3Selection
@@ -492,15 +500,11 @@ const continentsSection = {
 		} );
 
 		this.labelContainer.selectAll( '.emotion-label' )
-			.classed( 'visible', val )
 			.on( {
 				mouseenter: val ? section.onContinentMouseEnter : null,
 				mouseleave: val ? section.onContinentMouseLeave : null
 			} );
 
-	},
-
-	setInteractive: function ( val ) {
 
 		// handle background click for deselection
 		d3.select( '#main' ).on( 'click', val ? this.onBackgroundClick : null, false );
@@ -691,9 +695,7 @@ const continentsSection = {
 					funcY = TWEEN.Easing.Quadratic.Out;
 			}
 
-			this.addTween( targetCenter, {
-					'x': targetX
-				}, durationX, funcX )
+			this.addTween( targetCenter, { 'x': targetX }, durationX, funcX )
 				.onUpdate( function () {
 					continents.forEach( continent => {
 						continent.centerX = this.x;
@@ -701,9 +703,7 @@ const continentsSection = {
 				} )
 				.start();
 
-			this.addTween( targetCenter, {
-					'y': targetY
-				}, durationY, funcY )
+			this.addTween( targetCenter, { 'y': targetY }, durationY, funcY )
 				.onUpdate( function () {
 					continents.forEach( continent => {
 						continent.centerY = this.y;
@@ -836,6 +836,7 @@ const continentsSection = {
 			clearTimeout( this.mouseLeaveTimeout );
 		}
 
+		this.setInteractive( false );
 		dispatcher.navigate( dispatcher.SECTIONS.STATES, continent.id );
 
 	},
