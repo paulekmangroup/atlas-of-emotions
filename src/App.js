@@ -19,8 +19,10 @@ import sassVars from '../scss/variables.json';
 
 export default function ( ...initArgs ) {
 
-	const MIN_ALLOWED_WIDTH = 950,
+	const
+		MIN_ALLOWED_WIDTH = 950,
 		MIN_ALLOWED_HEIGHT = 600,
+		MODAL_ENABLED = false,
 		MOBILE_ENABLED = true,		// feature flag for mobile
 
 		NAVIGATION_DEFAULTS = {
@@ -93,7 +95,9 @@ export default function ( ...initArgs ) {
 				initMobileCaption();
 				initScroller();
 
-				//initModal();
+				if ( MODAL_ENABLED ) {
+					initModal();
+				}
 
 				// mobile setup
 				nonMobileElements.push( document.querySelector( '#header' ) );
@@ -520,11 +524,10 @@ export default function ( ...initArgs ) {
 		if ( document.querySelector( '#infoButton' ) ) {
 			document.querySelector( '#infoButton' )
 				.addEventListener( 'click', ( event ) => {
-						event.stopImmediatePropagation();
-						// this works for removal also, since a click outside closes the modal
-						setModalVisibility( true );
-					}
-				);
+					event.stopImmediatePropagation();
+					// this works for removal also, since a click outside closes the modal
+					setModalVisibility( true );
+				} );
 		}
 
 	}
@@ -927,21 +930,21 @@ export default function ( ...initArgs ) {
 			// hasn't ever been viewed yet in this browser,
 			// and the screen is big enough to render the site below it,
 			// open the intro modal (and the scrollbar along with it)
-			//if (getIntroModalOpenState()) {
-			//
-			//	// set a class on body so other sections can react
-			//	document.body.classList.remove('intro-closing', 'intro-open');
-			//	document.body.classList.add('intro-opening');
-			//
-			//	setTimeout(() => {
-			//		setModalVisibility(true);
-			//	}, sassVars.ui.intro.delay * 1000);
-			//
-			//	setTimeout(() => {
-			//		setScrollbarFractionalOpen(1.0);
-			//	}, sassVars.ui.scrollbar.introOpenDelay * 1000);
-			//
-			//}
+			if ( getIntroModalOpenState() ) {
+				if ( MODAL_ENABLED ) {
+					// set a class on body so other sections can react
+					document.body.classList.remove( 'intro-closing', 'intro-open' );
+					document.body.classList.add( 'intro-opening' );
+
+					setTimeout( () => {
+						setModalVisibility( true );
+					}, sassVars.ui.intro.delay * 1000 );
+
+					setTimeout( () => {
+						setScrollbarFractionalOpen( 1.0 );
+					}, sassVars.ui.scrollbar.introOpenDelay * 1000 );
+				}
+			}
 
 		}
 
@@ -1600,8 +1603,11 @@ export default function ( ...initArgs ) {
 	}
 
 	function getIntroModalOpenState() {
-
-		return !window.location.hash || localStorage.modalSeen !== 'true';
+		if ( MODAL_ENABLED ) {
+			return !window.location.hash || localStorage.modalSeen !== 'true';
+		} else {
+			return false; //never open modal
+		}
 
 	}
 
@@ -1725,7 +1731,9 @@ export default function ( ...initArgs ) {
 			document.location.hash = '';
 			if ( !document.location.hash ) {
 				// If already at root, ensure modal is closed.
-				//setModalVisibility(false);
+				if ( MODAL_ENABLED ) {
+					setModalVisibility( false );
+				}
 			}
 
 			return;
@@ -1791,10 +1799,12 @@ export default function ( ...initArgs ) {
 
 	function onHashChange( event, defaults = NAVIGATION_DEFAULTS ) {
 
-		//if (currentSection) {
-		//	// if a section has already been selected this session, close the intro modal
-		//	setModalVisibility(false);
-		//}
+		if ( currentSection ) {
+			// if a section has already been selected this session, close the intro modal
+			if ( MODAL_ENABLED ) {
+				setModalVisibility( false );
+			}
+		}
 
 		let hash = document.location.hash.replace( /^#/, '' );
 		hash = parseHash( hash );
