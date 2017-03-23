@@ -86,7 +86,7 @@ const scroller = {
 
 		let hash = document.location.hash.replace( /^#/, '' ).split( dispatcher.HASH_DELIMITER );
 		let section = hash[ 0 ];
-			var emotion = hash[ 1 ] != '' ? hash[ 1 ] : dispatcher.DEFAULT_EMOTION;
+		var emotion = hash[ 1 ] != '' ? hash[ 1 ] : dispatcher.DEFAULT_EMOTION;
 
 		if ( section && section.match( /(states)|(actions)|(triggers)/ ) != null ) {
 			this.toggleEmotionNav( true );
@@ -269,13 +269,34 @@ const scroller = {
 
 	},
 
-	init: function () {
+	initMoreContentLinks: function () {
+		var _self = this;
+		// show additional content in the sections
+		$( '.more-link, .close-button' ).click( function ( e ) {
+			e.preventDefault();
+			var $section = $( this ).parents( '.section' );
+			$section.toggleClass( 'more-visible' );
+			$( 'body' ).toggleClass( 'more-visible' );
+			var moreVisible = $section.hasClass( 'more-visible' );
+			$.fn.fullpage.setAllowScrolling( !moreVisible );
+			//TODO properly hide emotion nav and bring back if section has it
+			//_self.toggleEmotionNav( !moreVisible );
+		} );
+		// pulse close button on 'more' when scrolled past end of more content
+		var $scroller = $( '.scroller' );
+		$scroller.mousewheel( this.getBounceCallback( this.bottomOverscroll ) );
+		$scroller.mousewheel( this.getBounceCallback( this.topOverscroll ) );
+	},
 
-		$( '#introduction' ).attr( 'data-centered', true );
+	initAboutLInk: function () {
+		// add click for about the atlas, in the intro
+		$( '.about-link' ).click( function ( e ) {
+			e.preventDefault();
+			$( '.introduction-hero' ).toggleClass( 'about-visible' );
+		} );
+	},
 
-		this.$topNav = $( '.top-nav' );
-		this.$topNavLinks = this.$topNav.find( 'a' );
-
+	initFullpageSections: function () {
 		this.$sections = $( '.section' );
 
 		this.anchors = this.$sections.map( function () {
@@ -292,6 +313,7 @@ const scroller = {
 			controlArrows: false,
 			slidesNavigation: true,
 			slidesNavPosition: 'top',
+			//touchSensitivity: 20,
 
 			//offsetSectionsKey: 'YXRsYXNvZmVtb3Rpb25zLm9yZ181VUdiMlptYzJWMFUyVmpkR2x2Ym5NPVV6Vw==',
 
@@ -300,34 +322,25 @@ const scroller = {
 			afterLoad: this.afterSectionLoad.bind( this )
 
 		} );
+	},
 
-		// show state navigation when the hash changes to states
+	initTopNav: function () {
+		this.$topNav = $( '.top-nav' );
+		this.$topNavLinks = this.$topNav.find( 'a' );
+	},
+
+	init: function () {
+		//$( '#introduction' ).attr( 'data-centered', true );
+		this.initTopNav();
+		this.initEmotionNav();
+		this.initFullpageSections();
+
+		// respond to hash changes, call hashChange on load to update fullpage section
 		window.addEventListener( 'hashchange', this.hashChange.bind( this ) );
-
-		//call hashChange on load to update fullpage section
 		this.hashChange();
 
-		// add click for about the atlas, in the intro
-		$( '.about-link' ).click( function ( e ) {
-			e.preventDefault();
-			$( '.introduction-hero' ).toggleClass( 'about-visible' );
-		} );
-
-		// show additional content in the sections
-		$( '.more-link, .close-button' ).click( function ( e ) {
-			e.preventDefault();
-			var $section = $( this ).parents( '.section' );
-			$section.toggleClass( 'more-visible' );
-			$( 'body' ).toggleClass( 'more-visible' );
-			$.fn.fullpage.setAllowScrolling( !$section.hasClass( 'more-visible' ) );
-		} );
-
-
-		// pulse close button on 'more' when scrolled past end of more content
-		var $scroller = $( '.scroller' );
-		$scroller.mousewheel( this.getBounceCallback( this.bottomOverscroll ) );
-		$scroller.mousewheel( this.getBounceCallback( this.topOverscroll ) );
-
+		this.initAboutLInk();
+		this.initMoreContentLinks();
 	}
 
 };
