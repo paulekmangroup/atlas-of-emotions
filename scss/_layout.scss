@@ -52,6 +52,10 @@ body {
 
 }
 
+svg {
+	-moz-osx-font-smoothing: grayscale;
+}
+
 %button-link {
 	color: #000;
 	&:hover {
