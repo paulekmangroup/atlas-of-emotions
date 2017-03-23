@@ -502,7 +502,7 @@ svg {
 #states .graph-container .area,
 #actions .graph-container .area,
 .action-arrow path {
-	mix-blend-mode: normal !important;
+	mix-blend-mode: multiply;
 	cursor: pointer;
 	opacity: 1.0;
 	-webkit-transition: opacity 0.2s ease-out;
