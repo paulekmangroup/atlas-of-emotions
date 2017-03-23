@@ -1,12 +1,25 @@
+import _ from 'lodash';
 import Continent from '../Continent.js';
-import timeline from './timeline.js'
+import timeline from './timeline.js';
+import scroller from '../scroller.js';
+import dispatcher from '../dispatcher.js';
 import { TweenMax, TimelineMax } from "gsap";
 
 export default class Episode {
 
-	constructor( svg, container ) {
+	rewindActive = false;
+	isActive = false;
+
+	setActive = function ( val ) {
+
+		this.isActive = val;
+
+	};
+
+	constructor( svg, container, emotion ) {
 
 		var configsByEmotion = Continent.configsByEmotion;
+		this.currentEmotion = emotion && emotion != '' ? emotion : dispatcher.DEFAULT_EMOTION;
 
 		if ( svg && !svg._initializedEpisode ) {
 
@@ -17,11 +30,9 @@ export default class Episode {
 
 			var parent = timeline.extractDocument( svg, container );
 
-			var content = [
-				{ event: 'a stranger shouts at you', state: 'fear', response: 'you run away' },
-				{ event: 'a stranger shouts at you', state: 'anger', response: 'you shout back' },
-				{ event: 'a stranger shouts at you', state: 'enjoyment', response: 'you laugh!' }
-			];
+			var content = _.mapValues( timeline.episodeContent, function ( e ) {
+				return _.mapValues( e, ( e )=>e[ Object.keys( e )[ 1 ] ] );
+			} );
 
 
 			TweenMax.allTo( timeline.getChildren( timeline.select( '#state', parent ) ), 0, { visibility: 'hidden' } );
@@ -59,17 +70,24 @@ export default class Episode {
 			tryAgainButton.style.pointerEvents = 'all';
 			var tryAgainLabel = timeline.select( '#try-again-label tspan', tryAgainButton );
 			var tryAgainRectangle = timeline.select( '#try-again-rectangle', tryAgainButton );
+			//FIXME remove try again button from the svg and the code for good
+			tryAgainButton.remove();
 
 			var tl = new TimelineMax( {} );
 
-			var contentIndex = 0;
+			var playFromStart = true;
 
-			var replaceContent = function ( contentIndex ) {
+
+			this.getParentElement = function () {
+				return parent;
+			};
+
+			var replaceContent = function ( emotion ) {
 
 				var colors;
-				stateLabelChildren[ 1 ].textContent = content[ contentIndex ].state;
-				responseChildren[ 0 ].textContent = content[ contentIndex ].response;
-				colors = configsByEmotion[ content[ contentIndex ].state ].colorPalette;
+				stateLabelChildren[ 1 ].textContent = content[ emotion ].state;
+				responseChildren[ 0 ].textContent = content[ emotion ].response;
+				colors = configsByEmotion[ content[ emotion ].state ].colorPalette;
 
 				var color1 = colors[ 0 ];
 				var color2 = colors[ Math.round( (colors.length - 1) / 3 ) ];
@@ -80,43 +98,63 @@ export default class Episode {
 
 			};
 
-			var reset = function () {
+			this.rewind = function ( onComplete ) {
+
+				this.rewindActive = true;
 
 				tl.timeScale( 3 );
-
 				tl.pause();
-				tl.seek( 'end' );
-
+				if ( tl.getLabelTime( 'end' ) < tl.time() ) {
+					tl.seek( 'end' );
+				}
 				tl.tweenTo( 'event-lines', {
 					onComplete: function () {
-
-						contentIndex++;
-						if ( contentIndex >= content.length ) {
-							contentIndex = 0;
-						}
-
-						//replace content
-						replaceContent( contentIndex );
-
-						//run animation
-						tl.timeScale( 1 );
-						tl.pause();
-						tl.seek( 'event-pulse' );
-
-						TweenMax.delayedCall( 0.5, function () {
-							tl.play();
-						} );
-
-					}, ease: Power2.easeOut
+						this.rewindActive = false;
+						onComplete();
+					}.bind( this ),
+					ease: Power2.easeOut
 				} );
 
 			};
 
-			//make sure event pulsates from center
-			event.style.transformOrigin = "50% 50%";
+			this.start = function () {
 
-			//start the timeline
+				//go to start
+				tl.timeScale( 1 );
+				tl.pause();
+				tl.seek( 'event-pulse' );
 
+				//replace content
+				replaceContent( this.currentEmotion );
+
+				TweenMax.delayedCall( 0.5, function () {
+					tl.play();
+				} );
+
+			};
+
+			this.reset = function () {
+				playFromStart = true;
+				tl.timeScale( 1 );
+				tl.pause();
+				tl.seek( 'event' );
+			};
+
+			this.setEmotion = function ( emotion ) {
+
+				this.currentEmotion = emotion && emotion != '' ? emotion : dispatcher.DEFAULT_EMOTION;
+
+				if ( playFromStart ) {
+					playFromStart = false;
+					TweenMax.delayedCall( 1.5, this.start.bind( this ) );
+				} else {
+					this.rewind( this.start.bind( this ) );
+				}
+
+			};
+
+
+			//set up the timeline
 
 			tl
 			//show event
@@ -124,8 +162,16 @@ export default class Episode {
 				.from( event, 0.5, { autoAlpha: 0, ease: Power1.easeOut } )
 
 				.add( 'event-pulse' )
-				.to( event, 0.1, { scale: 1.1, ease: Power1.easeOut } )
-				.to( event, 0.2, { scale: 1, ease: Power1.easeOut } )
+				.to( event, 0.1, {
+					scale: 1.1,
+					transformOrigin: '50% 50%',
+					ease: Power1.easeOut
+				} )
+				.to( event, 0.2, {
+					scale: 1,
+					transformOrigin: '50% 50%',
+					ease: Power1.easeOut
+				} )
 				.add( 'event-lines' )
 				.from( eventLines, 0.5, { autoAlpha: 0, ease: Power1.easeOut }, 'event-lines' )
 
@@ -145,7 +191,12 @@ export default class Episode {
 				.from( responses, 1, { autoAlpha: 0, ease: Power1.easeOut } )
 
 				.add( 'try-again' )
-				.from( tryAgainButton, 0.5, { autoAlpha: 0, ease: Power1.easeOut } )
+				//.from( tryAgainButton, 0.5, { autoAlpha: 0, ease: Power1.easeOut } )
+				.addCallback( function () {
+					if ( !this.rewindActive && this.isActive ) {
+						scroller.pulseEmotionNav();
+					}
+				}.bind( this ) )
 
 				.add( 'end' )
 
@@ -172,18 +223,23 @@ export default class Episode {
 					ease: Power1.easeInOut
 				}, 'pulsate' );
 
+			tl.pause();
 
-			tryAgainButton.onclick = function () {
-				reset();
-			};
+			//tryAgainButton.onclick = function () {
+			//	var emotions = Object.values( dispatcher.EMOTIONS );
+			//	var nextEmotion = emotions[ (emotions.indexOf( this.currentEmotion ) + 1) % emotions.length ];
+			//	dispatcher.navigate( 'triggers', nextEmotion );
+			//}.bind( this );
 
 			TweenMax.set( state, { visibility: 'visible' } );
 
-			replaceContent( contentIndex );
+			replaceContent( this.currentEmotion );
 
 			TweenMax.set( parent, { visibility: 'visible' } );
 
 			svg._initializedEpisode = true;
+
+			this.isActive = true;
 
 		}
 	}
