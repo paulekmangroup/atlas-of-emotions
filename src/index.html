@@ -135,6 +135,8 @@
 
 <div id="app-container">
 
+	<div id="illumination-block"></div>
+
 	<div class="original-content">
 
 		<div id="header">
@@ -297,32 +299,107 @@
 			</div>
 
 			<div class="cta">
-				<a href="#timeline">
+				<a href="#triggers">
 					BEGIN
 				</a>
 			</div>
 		</div>
 
 
-		<div class="section" id="timeline-section">
+		<div class="section" id="timeline-section" data-has-emotion-state="true">
 			<div class="section-graphics" style="padding-left:345px;">
 				<div id="timeline-graphics">
-				</div>
-				<!--<div class="timeline">-->
+					<!--<div class="timeline">-->
 					<!--<object class="episode-parent" id="episode-object&#45;&#45;add-awareness"-->
-							<!--data="assets/episode&#45;&#45;add-awareness.svg" type="image/svg+xml"></object>-->
-				<!--</div>-->
+					<!--data="assets/episode&#45;&#45;add-awareness.svg" type="image/svg+xml"></object>-->
+					<!--</div>-->
+					<div class="diagram-caption" id="constructive-response-caption">
+						A response that helps you in your goals
+					</div>
+					<div class="diagram-caption" id="destructive-response-caption">
+						A response that gets in the way of your goals
+					</div>
+					<div class="diagram-caption" id="ambiguous-response-caption">
+						Sometimes we don’t know
+					</div>
+					<div class="diagram-caption" id="physical-changes-caption">
+						Our automatic bodily sensations of our emotion
+					</div>
+					<div class="diagram-caption" id="state-caption">
+						Our combined physical and mental changes
+					</div>
+					<div class="diagram-caption" id="mental-changes-caption">
+						The immediate felt experience of our emotion
+					</div>
+					<div class="diagram-caption" id="precondition-caption">
+						The context, which may influence the way we enter the emotion
+					</div>
+					<div class="diagram-caption" id="event-caption">
+						An event that happens in the outside world or in our own mind.
+					</div>
+					<div class="diagram-caption" id="perceptual-database-caption">
+						How we see the world, as a result of our personal history
+					</div>
+				</div>
 			</div>
 			<div class="section-text">
-				<h2>The Timeline</h2>
-				<p>
-					Lorem ipso facto weirdo que passo. Lorem ipso facto weirdo que passo robles dulce vita. Lorem
-					ipso
-					facto
-					weirdo que passo. Lorem ipso facto weirdo que passo robles dulce vita. Lorem ipso facto weirdo
-					que
-					passo. Lorem ipso facto weirdo que passo robles dulce vita.
+				<h2 class="section-heading">The Timeline</h2>
+
+				<!--intro-->
+				<p class="body-intro">
+					Our emotions unfold on a time-line. They begin with a trigger and lead to an experience, which then
+					results in a response.
 				</p>
+				<p class="body-intro">
+					Try choosing different emotions from the list below.
+				</p>
+				<p class="body-intro">
+					Notice how the same trigger can lead to a different response,
+					depending on the emotion we feel.
+				</p>
+				<p class="body-intro">
+					<button id="begin-awareness">How does this happen?</button>
+				</p>
+
+
+				<!--event-->
+				<div class="body-awareness" data-stage="event">
+					<h3>TRIGGER</h3>
+					<p>
+						The trigger is made up of:
+					</p>
+					<ul>
+						<li>The state of our mind and body before the event</li>
+						<li>The event</li>
+						<li>The way we see the world as a result of our personal history</li>
+					</ul>
+				</div>
+				<button id="state-add-awareness" class="body-awareness">+ add awareness</button>
+
+
+				<!--state-->
+				<div class="body-awareness" data-stage="state">
+					<h3>EXPERIENCE</h3>
+					<p>
+						Our experience includes the feelings and physical sensations of our emotion. This filters our
+						perception of a situation.
+					</p>
+				</div>
+				<button id="response-add-awareness" class="body-awareness">+ add awareness</button>
+
+				<!--response-->
+				<div class="body-awareness" data-stage="response">
+					<h3>RESPONSE</h3>
+					<p>
+						We have a variety of choices in how we respond. Some are more helpful than others.
+					</p>
+				</div>
+				<p class="body-awareness" data-stage="response">
+				You can investigate each piece of the timeline and see how researchers make sense of an emotional
+				episode.
+				</p>
+
+
 				<a class="more-link">learn more</a>
 			</div>
 			<div class="more-content">
@@ -562,7 +639,7 @@
 			<ul id="menu-list">
 				<li><a href="#introduction" id="introduction-menu-link">Introduction</a>
 				</li>
-				<li><a href="#timeline" id="timeline-menu-link">Timeline</a>
+				<li><a href="#triggers" id="timeline-menu-link">Timeline</a>
 				</li>
 				<li><a href="#continents" id="experience-menu-link">Experience</a>
 				</li>
@@ -575,12 +652,12 @@
 
 	<div class="emotion-nav">
 		<ul>
-			<li><a href="#continents">All</a></li>
-			<li><a href="#states/anger">Anger</a></li>
-			<li><a href="#states/fear">Fear</a></li>
-			<li><a href="#states/disgust">Disgust</a></li>
-			<li><a href="#states/sadness">Sadness</a></li>
-			<li><a href="#states/enjoyment">Enjoyment</a></li>
+			<li class="all"><a href="#continents">All</a></li>
+			<li><a href="#" data-emotion="anger">Anger</a></li>
+			<li><a href="#" data-emotion="fear">Fear</a></li>
+			<li><a href="#" data-emotion="disgust">Disgust</a></li>
+			<li><a href="#" data-emotion="sadness">Sadness</a></li>
+			<li><a href="#" data-emotion="enjoyment">Enjoyment</a></li>
 		</ul>
 	</div>
 
@@ -596,14 +673,13 @@
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
-<script src="vendors.js"></script>
-<script src="main.js"></script>
-<!--<script src="fullpage.offsetSections.min.js"></script>-->
-<script src="https://cdn.jsdelivr.net/jquery.fullpage/2.9.2/jquery.fullpage.extensions.min.js"
-		type="text/javascript"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js" language="javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/plugins/ScrollToPlugin.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.fullpage/2.9.2/jquery.fullpage.extensions.min.js"
+		type="text/javascript"></script>
+
+<script src="vendors.js"></script>
+<script src="main.js"></script>
 
 </html>
