@@ -3,11 +3,6 @@ $section-text-padding: 1.5em;
 $more-text-padding: 3em;
 $section-text-background-color: #eee;
 
-div[style="z-index:9999999;position:fixed; top: 20px; left:20px; background:red; padding: 7px 15px; font-size: 14px; font-family: arial; color: #fff; display: inline-block;"] {
-	opacity: 0;
-	visibility: hidden;
-	height: 0;
-}
 
 body,
 html {
