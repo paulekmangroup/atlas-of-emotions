@@ -429,7 +429,7 @@ svg {
 				display: block;
 				position: absolute;
 				right: 0;
-				top: -5px;
+				top: -2px;
 				font-size: 30px;
 				height: 30px;
 				line-height: 1;
@@ -447,6 +447,7 @@ svg {
 			height: 53px;
 			h3:after {
 				content: '+';
+				top: -5px;
 			}
 			p, ul {
 				opacity: 0;
