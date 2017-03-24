@@ -62,7 +62,7 @@ const scroller = {
 		return $( '.emotion-nav' ).hasClass( 'visible' );
 	},
 
-	pulseEmotionNav: function () {
+	pulseEmotionNav: function () { //TODO should this have an event in the dispatcher?
 		var $links = $( '.emotion-nav li' );
 		var pulseTimeline = new TimelineMax();
 		pulseTimeline
