@@ -1,4 +1,5 @@
 import Continent from '../Continent.js';
+import scroller from '../scroller.js';
 import timeline from './timeline.js';
 import dispatcher from '../dispatcher.js';
 import { TweenMax, TimelineMax } from "gsap";
@@ -8,17 +9,17 @@ import BlockDiagram from './BlockDiagram';
 
 export default class EpisodeAddAwareness {
 
-	isActive = false;
-
-	setActive = function ( val ) {
-
+	setActive( val ) {
 		this.isActive = val;
-
-	};
+	}
 
 	constructor( svg, container, emotion ) {
 
 		var configsByEmotion = Continent.configsByEmotion;
+
+		this.rewindActive = false;
+		this.isActive = false;
+		this.refractoryPeriodEnabled = false;
 		this.currentEmotion = emotion && emotion != '' ? emotion : dispatcher.DEFAULT_EMOTION;
 
 
@@ -40,8 +41,9 @@ export default class EpisodeAddAwareness {
 			//blocks
 			var blockDiagram = new BlockDiagram( timeline.select( '#blocks', parent ), parent );
 
+
 			//blockDiagram.onComplete = function () {
-				//var refractoryPeriod = RefractoryPeriod( parent, blocks );
+			//var refractoryPeriod = RefractoryPeriod( parent, blocks );
 			//};
 
 
@@ -117,7 +119,7 @@ export default class EpisodeAddAwareness {
 			d3.selectAll( stateText )
 				.attr( 'text-anchor', 'middle' )
 				.attr( 'x', function () {
-					return parseFloat( this.getComputedTextLength() )/2 + parseFloat( this.getAttribute( 'x' ) );
+					return parseFloat( this.getComputedTextLength() ) / 2 + parseFloat( this.getAttribute( 'x' ) );
 				} );
 
 
@@ -128,14 +130,13 @@ export default class EpisodeAddAwareness {
 			//add awareness buttons
 
 			var addAwarenessButtonState = timeline.select( '#state-add-awareness', document );
-			//addAwarenessButtonState.style.cursor = 'pointer';
-			//addAwarenessButtonState.style.pointerEvents = 'all';
 			addAwarenessButtonState.style.visibility = 'hidden'; //TODO should these be handled in css? what's typical in this app?
 
 			var addAwarenessButtonResponse = timeline.select( '#response-add-awareness', document );
-			//addAwarenessButtonResponse.style.cursor = 'pointer';
-			//addAwarenessButtonResponse.style.pointerEvents = 'all';
 			addAwarenessButtonResponse.style.visibility = 'hidden';
+
+			var refractoryPeriodButton = timeline.select( '#begin-refractory-period', document );
+			refractoryPeriodButton.style.visibility = 'hidden';
 
 			//try again button
 
@@ -145,9 +146,10 @@ export default class EpisodeAddAwareness {
 			tryAgainButton.style.visibility = 'hidden';
 
 
-			var tl = new TimelineMax( {} );
+			var episodeTimeline = new TimelineMax( {} );
+			var illuminationTimeline = new TimelineMax( {} );
 
-			var contentIndex = 0;
+			var playFromStart = true; //TODO shared code with Episode
 
 			var addResponseLineAwareness = function () {
 				if ( awarenessStage == 'state' ) {
@@ -192,48 +194,65 @@ export default class EpisodeAddAwareness {
 			};
 
 
-			//TODO connect these up, share code w/ Episode if possible
-			this.reset = function () {
-			};
-			this.setEmotion = function ( emotion ) {
+			this.setEmotion = function ( emotion ) { //TODO shared with Episode
+
 				this.currentEmotion = emotion && emotion != '' ? emotion : dispatcher.DEFAULT_EMOTION;
-				replaceContent( emotion );
+
+				if ( playFromStart ) {
+					playFromStart = false;
+					TweenMax.delayedCall( 1.5, this.start.bind( this ) );
+				} else {
+					this.rewind( this.start.bind( this ) );
+				}
+
 			};
 
-			var reset = function ( callback ) {
+			//TODO connect these up, share code w/ Episode if possible
+			this.rewind = function ( onComplete ) {
 
-				tl.timeScale( 3 );
+				this.rewindActive = true;
 
-				tl.pause();
-				tl.seek( 'end' );
-
-				tl.tweenTo( 'event-lines', {
+				episodeTimeline.timeScale( 3 );
+				episodeTimeline.pause();
+				if ( episodeTimeline.getLabelTime( 'end' ) < episodeTimeline.time() ) {
+					episodeTimeline.seek( 'end', true );
+				}
+				episodeTimeline.tweenTo( 'event-lines', {
 					onComplete: function () {
-
-						contentIndex++;
-						if ( contentIndex >= content.length ) {
-							contentIndex = 0;
-						}
-
-						callback();
-
-						//run animation
-						tl.timeScale( 1 );
-						tl.pause();
-						tl.seek( 'event-pulse' );
-
-						TweenMax.delayedCall( 0.5, function () {
-							tl.tweenTo( 'end' );
-						} );
-
-					}, ease: Power2.easeOut
+						this.rewindActive = false;
+						onComplete();
+					}.bind( this ),
+					ease: Power2.easeOut
 				} );
 
 			};
 
+			this.start = function () {
+
+				//go to start
+				episodeTimeline.timeScale( 1 );
+				episodeTimeline.pause( 'event-pulse', true );
+
+				//replace content
+				replaceContent( this.currentEmotion );
+
+				TweenMax.delayedCall( 0.5, function () {
+					episodeTimeline.play();
+				} );
+
+			};
+
+			this.reset = function () {
+				playFromStart = true;
+				episodeTimeline.timeScale( 1 );
+				episodeTimeline.pause();
+				episodeTimeline.seek( 'event' );
+			};
+
+
 			var awarenessStage = 'event';
 
-			var advance = function () {
+			var advance = function () { //TODO should this be a member?
 
 				if ( awarenessStage == 'event' ) {
 
@@ -253,18 +272,27 @@ export default class EpisodeAddAwareness {
 						.to( illuminationBlock, 4, { css: { width: '+=400' }, ease: Power2.easeIn }, 'start' )
 						//.to( illuminationGlow, 4, { attr: { x: '+=400' }, ease: Power2.easeIn }, 'start' )
 						.add( 'finished' )
-						.addCallback( enableBlockDiagram )
+						//.addCallback( enableBlockDiagram )
+						.addCallback( ()=> {
+							TweenMax.to( refractoryPeriodButton, 1, { autoAlpha: 1, ease: Power2.easeOut } );
+						} )
 						.to( illuminationBlock, 10, { css: { width: '+=3000' }, ease: Power0.easeIn }, 'finished' )
 						//.to( illuminationGlow, 10, { attr: { x: '+=3000' }, ease: Power0.easeIn }, 'finished' )
 						.add( 'end' );
 
 					awarenessStage = 'response';
 
+				} else if ( awarenessStage == 'response' ) {
+
+					scroller.pulseEmotionNav();
+					awarenessStage = 'refractory';
+
 				}
 
 				timeline.showAwarenessCopy( awarenessStage );
 
 			};
+
 
 			var enableBlockDiagram = function () {
 				var clickableElements = [
@@ -339,27 +367,36 @@ export default class EpisodeAddAwareness {
 					TweenMax.to( addAwarenessButtonResponse, 1, { autoAlpha: 1, ease: Power2.easeOut } );
 				}
 			};
-			//start the timeline
 
-			tl
-			//fade in illumination
+			this.triggerRefractoryEffects = function () {
+				if ( !this.rewindActive && this.refractoryPeriodEnabled ) {
+					TweenMax.fromTo( illuminationBlock, 15,
+						{ autoAlpha: 0, ease: Power3.easeInOut },
+						{ autoAlpha: 1, ease: Power3.easeInOut }
+					);
+				}
+			};
+
+			//start the illumination
+			illuminationTimeline
 				.add( 'illuminate' )
 				.to( illuminationBlock, 2, { autoAlpha: 1, ease: Power1.easeInOut } )
 				.to( illuminationBlock, 3, {
 					css: { width: '+=380' },
 					ease: Power1.easeOut,
-					onComplete: pulsateIllumination
+					onComplete: ()=> {
+						pulsateIllumination();
+						console.log( 'pulsate illumination' )
+					}
 				}, 'illuminate' )
-				//.from( glow, 3, {
-				//	attr: { x: '-=400' },
-				//	ease: Power1.easeOut,
-				//	onComplete: pulsateIllumination
-				//}, 'illuminate' )
-				.add( 'pulsate-illumination' )
+				.add( 'pulsate-illumination' );
 
-				//show event
-				.add( 'event' )
 
+			//start the timeline
+
+			episodeTimeline
+			//show event
+				.add( 'event', '+=3' )
 				.add( 'event-pulse' )
 				.to( timeline.select( '#event-text', timelineWithExamples ), 0.1, {
 					scale: 1.1,
@@ -390,6 +427,7 @@ export default class EpisodeAddAwareness {
 				.from( c2, 2, { attr: { r: 20 }, autoAlpha: 0, ease: Bounce.easeOut }, 'state' )
 				.from( c3, 2, { attr: { r: 50 }, autoAlpha: 0, ease: Bounce.easeOut }, 'state' )
 				.addCallback( addStateAwareness, 'state' )
+				.addCallback( this.triggerRefractoryEffects.bind( this ), 'state' )
 				.from( changes, 2, { autoAlpha: 0, ease: Power1.easeOut }, 'state' )
 				.from( stateLabel, 2, { autoAlpha: 0, ease: Power1.easeOut, onComplete: pulsateState }, 'state' )
 				.add( 'pulsate' )
@@ -408,9 +446,8 @@ export default class EpisodeAddAwareness {
 				.add( 'add-awareness-button' )
 				.addCallback( showAddAwarenessButton );
 
-			var delayedReset = function () {
-				// hide button
-				var button = this;
+
+			var hideButton = function ( button ) {
 				TweenMax.to( button, 1, {
 					autoAlpha: 0,
 					ease: Power2.easeOut,
@@ -418,24 +455,33 @@ export default class EpisodeAddAwareness {
 						button.style.display = 'none';
 					}
 				} );
-				//timeline.hideAwarenessCopy( awarenessStage );
-				//reset and and advance at start
-				reset( function () {
-					TweenMax.delayedCall( 1.5, function () {
+			};
+			var awarenessClickCallback = function ( e ) {
+				hideButton( e.currentTarget );
+				//reset and advance at start
+				this.rewind( () => {
+					TweenMax.delayedCall( 1.5, () => {
 						advance();
+						this.start();
 					} );
 				} );
 			};
+			var refractoryPeriodClickCallback = function ( e ) {
+				this.refractoryPeriodEnabled = true;
+				awarenessClickCallback.bind( this )( e );
+			};
 
-			addAwarenessButtonState.onclick = delayedReset;
-			addAwarenessButtonResponse.onclick = delayedReset;
+
+			addAwarenessButtonState.onclick = awarenessClickCallback.bind( this );
+			addAwarenessButtonResponse.onclick = awarenessClickCallback.bind( this );
+			refractoryPeriodButton.onclick = refractoryPeriodClickCallback.bind( this );
 
 			TweenMax.set( state, { visibility: 'visible' } );
 
 			replaceContent( this.currentEmotion );
 
 			TweenMax.set( parent, { visibility: 'visible' } );
-			tl.tweenTo( 'end' );
+			episodeTimeline.tweenTo( 'end' );
 
 			svg._initializedEpisode = true;
 
