@@ -7,9 +7,6 @@ import { TweenMax, TimelineMax } from "gsap";
 
 export default class Episode {
 
-	rewindActive = false;
-	isActive = false;
-
 	setActive = function ( val ) {
 
 		this.isActive = val;
@@ -17,6 +14,9 @@ export default class Episode {
 	};
 
 	constructor( svg, container, emotion ) {
+
+		this.rewindActive = false;
+		this.isActive = false;
 
 		var configsByEmotion = Continent.configsByEmotion;
 		this.currentEmotion = emotion && emotion != '' ? emotion : dispatcher.DEFAULT_EMOTION;
