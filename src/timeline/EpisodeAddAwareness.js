@@ -16,6 +16,7 @@ export default class EpisodeAddAwareness {
 	constructor( svg, container, emotion ) {
 
 		var configsByEmotion = Continent.configsByEmotion;
+		var refractoryPeriodTime = 15;
 
 		this.rewindActive = false;
 		this.isActive = false;
@@ -77,10 +78,21 @@ export default class EpisodeAddAwareness {
 			mentalChanges.style.visibility = 'hidden';
 
 			//lines
-			var eventLines = timeline.select( '#event-lines', timelineWithExamples ),
+			var eventLineGroup = timeline.select( '#event-lines', timelineWithExamples ),
+				eventLines = [
+					timeline.select( "path#precondition-line", eventLineGroup ),
+					timeline.select( "path#event-line", eventLineGroup ),
+					timeline.select( "path#perceptual-database-line", eventLineGroup )
+				],
+				eventLineDecorations = [
+					timeline.select( "path#precondition-line-decoration-1", eventLineGroup ),
+					timeline.select( "path#event-line-decoration-1", eventLineGroup ),
+					timeline.select( "path#perceptual-database-line-decoration-1", eventLineGroup )
+				],
 				responseLineGroup = timeline.select( '#response-lines', timelineWithExamples ),
 				responseLines = timeline.selectAll( "path:not([id*='decoration'])", responseLineGroup ),
 				responseLineDecorations = timeline.selectAll( "[id*='decoration']", responseLineGroup );
+
 			//hide first and third lines and arrowheads
 			TweenMax.allTo( timeline.selectAll( '[id*="response-line-1"]', timelineWithExamples ), 0, { autoAlpha: 0 } );
 			TweenMax.allTo( timeline.selectAll( '[id*="response-line-3"]', timelineWithExamples ), 0, { autoAlpha: 0 } );
@@ -148,24 +160,92 @@ export default class EpisodeAddAwareness {
 
 			var episodeTimeline = new TimelineMax( {} );
 			var illuminationTimeline = new TimelineMax( {} );
+			var refractoryPeriodTimeline = new TimelineMax( {} );
 
 			var playFromStart = true; //TODO shared code with Episode
+
+			var lineUnawareColor = timeline.select( '#response-line-2', timelineWithExamples ).getAttribute( 'stroke' );
+			var lineAwareColor = timeline.select( '#response-line-1', timelineWithExamples ).getAttribute( 'stroke' );
+			var textUnawareColor = '#fff';
+			var responseTextUnawareColor = textUnawareColor;
+			var textAwareColor = timeline.select( '#constructive-response', timelineWithExamples ).getAttribute( 'fill' );
+
+			var refractoryIlluminationTween = null;
+			var refractoryColorsTween = null;
+
+			var setLineColor = function ( line, decoration, color, time = 0 ) {
+				TweenMax.to( line, time, { attr: { stroke: color } } );
+				TweenMax.to( decoration, time, { attr: { fill: color } } );
+				TweenMax.to( decoration, time, { attr: { stroke: color } } );
+			};
+
+			var setResponseLineColor = function ( lineIndex, aware, time = 0 ) {
+				var color = aware ? lineAwareColor : lineUnawareColor;
+				setLineColor( responseLines[ lineIndex ], responseLineDecorations[ lineIndex ], color, time );
+			};
+
+			var setEventLineColor = function ( lineIndex, aware, time = 0 ) {
+				var color = aware ? lineAwareColor : lineUnawareColor;
+				setLineColor( eventLines[ lineIndex ], eventLineDecorations[ lineIndex ], color, time );
+			};
+
+			var setTextColor = function ( textElement, aware, time = 0 ) {
+				var color = aware ? textAwareColor : textUnawareColor;
+				TweenMax.to( textElement, time, { attr: { fill: color } } );
+			};
+
+			var setResponseTextColor = function ( textElement, aware, time = 0 ) {
+				var color = aware ? textAwareColor : responseTextUnawareColor;
+				TweenMax.to( textElement, time, { attr: { fill: color } } );
+			};
+
+			var setResponseLineStyle = function ( lineIndex, aware ) {
+				//solid if unaware
+				if ( aware ) {
+					responseLines[ lineIndex ].setAttribute( 'stroke-dasharray', '3,8' );
+				} else {
+					responseLines[ lineIndex ].removeAttribute( 'stroke-dasharray' );
+				}
+			};
 
 			var addResponseLineAwareness = function () {
 				if ( awarenessStage == 'state' ) {
 					//reset center line color
-					timeline.select( '#response-line-2', timelineWithExamples ).setAttribute( 'stroke', timeline.select( '#response-line-1', timelineWithExamples ).getAttribute( 'stroke' ) );
-					timeline.select( '#response-line-2-decoration-1', timelineWithExamples ).setAttribute( 'fill', timeline.select( '#response-line-1', timelineWithExamples ).getAttribute( 'stroke' ) );
-					timeline.select( '#response-line-2-decoration-1', timelineWithExamples ).setAttribute( 'stroke', timeline.select( '#response-line-1', timelineWithExamples ).getAttribute( 'stroke' ) );
+					setResponseLineColor( 1, true );
 				}
 				if ( awarenessStage == 'response' ) {
 					for ( var i = 0; i < responseLines.length; i++ ) {
-						responseLines[ i ].setAttribute( 'stroke-dasharray', '3,8' );
-						responseLineDecorations[ i ].setAttribute( 'fill', timeline.select( '#response-line-1', timelineWithExamples ).getAttribute( 'stroke' ) );
+						setResponseLineStyle( i, true );
+						setResponseLineStyle( i, true );
+						setResponseLineColor( i, true );
 					}
 					//show all lines and arrowheads
 					TweenMax.allTo( timeline.selectAll( '[id*="response-line-"]', timelineWithExamples ), 0, { autoAlpha: 1 } );
 				}
+			};
+
+			var addStateAwareness = function () {
+				if ( awarenessStage == 'state' ) {
+					physicalChanges.style.visibility = 'visible';
+					mentalChanges.style.visibility = 'visible';
+				}
+			};
+
+			var addResponseAwareness = function () {
+				if ( awarenessStage == 'response' ) {
+					setTextColor( destructiveResponse, true );
+				}
+			};
+
+			var toggleEventAndResponseAwareness = function ( aware, time = 0 ) {
+
+				setResponseLineColor( 1, aware, time );
+				setResponseLineStyle( 1, aware, time );
+				setEventLineColor( 1, aware, time );
+
+				setTextColor( event, aware, time );
+				setResponseTextColor( destructiveResponse, aware, time );
+
 			};
 
 			var replaceContent = function ( emotion ) {
@@ -179,6 +259,12 @@ export default class EpisodeAddAwareness {
 				c1.setAttribute( 'fill', 'rgb(' + color1[ 0 ] + ',' + color1[ 1 ] + ',' + color1[ 2 ] + ')' );
 				c2.setAttribute( 'fill', 'rgb(' + color2[ 0 ] + ',' + color2[ 1 ] + ',' + color2[ 2 ] + ')' );
 				c3.setAttribute( 'fill', 'rgb(' + color3[ 0 ] + ',' + color3[ 1 ] + ',' + color3[ 2 ] + ')' );
+
+				responseTextUnawareColor =
+					'rgba(' + Math.min( color1[ 0 ] + 50, 255 )
+					+ ',' + Math.min( color1[ 1 ] + 50, 255 )
+					+ ',' + Math.min( color1[ 2 ] + 50, 255 )
+					+ ', 0.9)';
 
 				var replace = function ( key ) {
 					return ( child, i )=> {
@@ -204,6 +290,7 @@ export default class EpisodeAddAwareness {
 				} else {
 					this.rewind( this.start.bind( this ) );
 				}
+
 
 			};
 
@@ -345,20 +432,6 @@ export default class EpisodeAddAwareness {
 				}, 'pulsate-illumination' );
 			};
 
-			var addStateAwareness = function () {
-				if ( awarenessStage == 'state' ) {
-					physicalChanges.style.visibility = 'visible';
-					mentalChanges.style.visibility = 'visible';
-				}
-			};
-
-			var addResponseAwareness = function () {
-				if ( awarenessStage == 'response' ) {
-					//set the color of the second choice to match the first
-					timeline.select( '#destructive-response', timelineWithExamples ).setAttribute( 'fill', timeline.select( '#constructive-response', timelineWithExamples ).getAttribute( 'fill' ) );
-				}
-			};
-
 			var showAddAwarenessButton = function () {
 				if ( awarenessStage == 'event' && addAwarenessButtonState.style.visibility == 'hidden' ) {
 					TweenMax.to( addAwarenessButtonState, 1, { autoAlpha: 1, ease: Power2.easeOut } );
@@ -369,11 +442,51 @@ export default class EpisodeAddAwareness {
 			};
 
 			this.triggerRefractoryEffects = function () {
+
+				var darkenTime = 0.25;
+
 				if ( !this.rewindActive && this.refractoryPeriodEnabled ) {
-					TweenMax.fromTo( illuminationBlock, 15,
-						{ autoAlpha: 0, ease: Power3.easeInOut },
-						{ autoAlpha: 1, ease: Power3.easeInOut }
-					);
+
+					// prevent awaiting changes from happening
+					// now that we are resetting the tween
+					if ( refractoryColorsTween ) {
+						refractoryColorsTween.kill();
+					}
+					if ( refractoryIlluminationTween ) {
+						refractoryIlluminationTween.kill();
+					}
+
+					toggleEventAndResponseAwareness( false, darkenTime );
+
+					//prepare the refractory period
+					refractoryIlluminationTween =
+						TweenMax.to(
+							illuminationBlock,
+							darkenTime,
+							{
+								autoAlpha: 0,
+								ease: Power3.easeInOut,
+
+								onComplete: ()=> {
+									TweenMax.to(
+										illuminationBlock,
+										refractoryPeriodTime,
+										{
+											autoAlpha: 1,
+											ease: Power3.easeInOut
+										} )
+								}
+
+							} );
+
+					//change the text colors mid way through the illumination change
+					refractoryColorsTween =
+						TweenMax.delayedCall(
+							refractoryPeriodTime / 2,
+							()=> {
+								toggleEventAndResponseAwareness( true );
+							} );
+
 				}
 			};
 
@@ -386,14 +499,12 @@ export default class EpisodeAddAwareness {
 					ease: Power1.easeOut,
 					onComplete: ()=> {
 						pulsateIllumination();
-						console.log( 'pulsate illumination' )
 					}
 				}, 'illuminate' )
 				.add( 'pulsate-illumination' );
 
 
 			//start the timeline
-
 			episodeTimeline
 			//show event
 				.add( 'event', '+=3' )
@@ -419,7 +530,7 @@ export default class EpisodeAddAwareness {
 					ease: Power1.easeOut
 				} )
 				.add( 'event-lines' )
-				.from( eventLines, 0.5, { autoAlpha: 0, ease: Power1.easeOut }, 'event-lines' )
+				.from( eventLineGroup, 0.5, { autoAlpha: 0, ease: Power1.easeOut }, 'event-lines' )
 
 				// show emo state
 				.add( 'state' )
