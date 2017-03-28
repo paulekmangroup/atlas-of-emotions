@@ -65,6 +65,13 @@ export default class Episode {
 
 	}
 
+	replaceTextContentForKey( key, emotion ) {
+		return function ( child, i ) {
+			var text = this.content[ emotion ][ key ];
+			child.textContent = text[ Object.keys( text )[ i ] ];
+		}.bind( this );
+	}
+
 	replaceContent( emotion ) {
 
 		var colors = this.configsByEmotion[ emotion ].colorPalette;
@@ -76,16 +83,8 @@ export default class Episode {
 		this.c2.setAttribute( 'fill', 'rgb(' + color2[ 0 ] + ',' + color2[ 1 ] + ',' + color2[ 2 ] + ')' );
 		this.c3.setAttribute( 'fill', 'rgb(' + color3[ 0 ] + ',' + color3[ 1 ] + ',' + color3[ 2 ] + ')' );
 
-		var replace = ( key ) => {
-			return ( child, i ) => {
-				var text = this.content[ emotion ][ key ];
-				child.textContent = text[ Object.keys( text )[ i ] ];
-			};
-		};
-
-		this.stateText.forEach( replace( 'state' ) );
-		this.responseText.forEach( replace( 'response' ) );
-
+		this.stateText.forEach( this.replaceTextContentForKey( 'state', emotion ) );
+		this.responseText.forEach( this.replaceTextContentForKey( 'response', emotion ) );
 
 	}
 
@@ -93,8 +92,11 @@ export default class Episode {
 		return this.parent;
 	}
 
-
 	constructor( svg, container, emotion ) {
+		this.initialize( svg, container, emotion );
+	}
+
+	initialize( svg, container, emotion ) {
 
 		this.rewindActive = false;
 		this.isActive = false;

@@ -1,3 +1,4 @@
+import Episode from './Episode.js';
 import Continent from '../Continent.js';
 import scroller from '../scroller.js';
 import timeline from './timeline.js';
@@ -7,102 +8,26 @@ import d3 from 'd3';
 import BlockDiagram from './BlockDiagram';
 
 
-export default class EpisodeAddAwareness {
+export default class EpisodeAddAwareness extends Episode {
 
-	setActive( val ) {
-		this.isActive = val;
-	}
-
-	rewind( onComplete ) {
-
-		this.rewindActive = true;
-
-		this.episodeTimeline.timeScale( 3 );
-		this.episodeTimeline.pause();
-		if ( this.episodeTimeline.getLabelTime( 'end' ) < this.episodeTimeline.time() ) {
-			this.episodeTimeline.seek( 'end', true );
-		}
-		this.episodeTimeline.tweenTo( 'event-lines', {
-			onComplete: () => {
-				this.rewindActive = false;
-				onComplete();
-			},
-			ease: Power2.easeOut
-		} );
-
-	}
-
-	start() {
-
-		//go to start
-		this.episodeTimeline.timeScale( 1 );
-		this.episodeTimeline.pause( 'event-pulse', true );
-
-		//replace content
-		this.replaceContent( this.currentEmotion );
-
-		TweenMax.delayedCall( 0.5, () => {
-			this.episodeTimeline.play();
-		} );
-
-	}
-
-	reset() {
-		this.playFromStart = true;
-		this.episodeTimeline.timeScale( 1 );
-		this.episodeTimeline.pause();
-		this.episodeTimeline.seek( 'event' );
-	}
-
-	setEmotion( emotion ) {
-
-		this.currentEmotion = emotion && emotion != '' ? emotion : dispatcher.DEFAULT_EMOTION;
-
-		if ( this.playFromStart ) {
-			this.playFromStart = false;
-			TweenMax.delayedCall( 1.5, this.start.bind( this ) );
-		} else {
-			this.rewind( this.start.bind( this ) );
-		}
-
-	}
-
+	//overload with additional content changes
 	replaceContent( emotion ) {
 
-		var colors = this.configsByEmotion[ emotion ].colorPalette;
-		var color1 = colors[ 0 ];
-		var color2 = colors[ Math.round( (colors.length - 1) / 3 ) ];
-		var color3 = colors[ colors.length - 1 ];
+		super.replaceContent( emotion );
 
-		this.c1.setAttribute( 'fill', 'rgb(' + color1[ 0 ] + ',' + color1[ 1 ] + ',' + color1[ 2 ] + ')' );
-		this.c2.setAttribute( 'fill', 'rgb(' + color2[ 0 ] + ',' + color2[ 1 ] + ',' + color2[ 2 ] + ')' );
-		this.c3.setAttribute( 'fill', 'rgb(' + color3[ 0 ] + ',' + color3[ 1 ] + ',' + color3[ 2 ] + ')' );
+		this.triggerText.forEach( this.replaceTextContentForKey( 'trigger', emotion ) );
 
-		var replace = ( key ) => {
-			return ( child, i ) => {
-				var text = this.content[ emotion ][ key ];
-				child.textContent = text[ Object.keys( text )[ i ] ];
-			};
-		};
+		var textColor = this.configsByEmotion[ emotion ].colorPalette[0];
 
-		this.stateText.forEach( replace( 'state' ) );
-		this.responseText.forEach( replace( 'response' ) );
-
-		this.triggerText.forEach( replace( 'trigger' ) );
 		this.responseTextUnawareColor =
-			'rgba(' + Math.min( color1[ 0 ] + 50, 255 )
-			+ ',' + Math.min( color1[ 1 ] + 50, 255 )
-			+ ',' + Math.min( color1[ 2 ] + 50, 255 )
+			'rgba(' + Math.min( textColor[ 0 ] + 50, 255 )
+			+ ',' + Math.min( textColor[ 1 ] + 50, 255 )
+			+ ',' + Math.min( textColor[ 2 ] + 50, 255 )
 			+ ', 0.9)';
 
-
 	}
 
-	getParentElement() {
-		return this.parent;
-	}
-
-	pulsateState() {
+	pulsateState() { //FIXME this technique makes it jump
 		//pulsate state
 		TweenMax.to( this.c1, 1, {
 			attr: { r: '-=5' },
@@ -127,8 +52,11 @@ export default class EpisodeAddAwareness {
 		} );
 	}
 
-
 	constructor( svg, container, emotion ) {
+		super( svg, container, emotion );
+	}
+
+	initialize( svg, container, emotion ) {
 
 		this.configsByEmotion = Continent.configsByEmotion;
 		var refractoryPeriodTime = 15;
