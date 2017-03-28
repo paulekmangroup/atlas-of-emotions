@@ -2,7 +2,7 @@ import Continent from '../Continent.js';
 import scroller from '../scroller.js';
 import timeline from './timeline.js';
 import dispatcher from '../dispatcher.js';
-import { TweenMax, TimelineMax } from "gsap";
+import { TweenMax, TimelineMax, Power2, Power1, Bounce } from "gsap";
 import d3 from 'd3';
 import BlockDiagram from './BlockDiagram';
 
@@ -13,9 +13,124 @@ export default class EpisodeAddAwareness {
 		this.isActive = val;
 	}
 
+	rewind( onComplete ) {
+
+		this.rewindActive = true;
+
+		this.episodeTimeline.timeScale( 3 );
+		this.episodeTimeline.pause();
+		if ( this.episodeTimeline.getLabelTime( 'end' ) < this.episodeTimeline.time() ) {
+			this.episodeTimeline.seek( 'end', true );
+		}
+		this.episodeTimeline.tweenTo( 'event-lines', {
+			onComplete: () => {
+				this.rewindActive = false;
+				onComplete();
+			},
+			ease: Power2.easeOut
+		} );
+
+	}
+
+	start() {
+
+		//go to start
+		this.episodeTimeline.timeScale( 1 );
+		this.episodeTimeline.pause( 'event-pulse', true );
+
+		//replace content
+		this.replaceContent( this.currentEmotion );
+
+		TweenMax.delayedCall( 0.5, () => {
+			this.episodeTimeline.play();
+		} );
+
+	}
+
+	reset() {
+		this.playFromStart = true;
+		this.episodeTimeline.timeScale( 1 );
+		this.episodeTimeline.pause();
+		this.episodeTimeline.seek( 'event' );
+	}
+
+	setEmotion( emotion ) {
+
+		this.currentEmotion = emotion && emotion != '' ? emotion : dispatcher.DEFAULT_EMOTION;
+
+		if ( this.playFromStart ) {
+			this.playFromStart = false;
+			TweenMax.delayedCall( 1.5, this.start.bind( this ) );
+		} else {
+			this.rewind( this.start.bind( this ) );
+		}
+
+	}
+
+	replaceContent( emotion ) {
+
+		var colors = this.configsByEmotion[ emotion ].colorPalette;
+		var color1 = colors[ 0 ];
+		var color2 = colors[ Math.round( (colors.length - 1) / 3 ) ];
+		var color3 = colors[ colors.length - 1 ];
+
+		this.c1.setAttribute( 'fill', 'rgb(' + color1[ 0 ] + ',' + color1[ 1 ] + ',' + color1[ 2 ] + ')' );
+		this.c2.setAttribute( 'fill', 'rgb(' + color2[ 0 ] + ',' + color2[ 1 ] + ',' + color2[ 2 ] + ')' );
+		this.c3.setAttribute( 'fill', 'rgb(' + color3[ 0 ] + ',' + color3[ 1 ] + ',' + color3[ 2 ] + ')' );
+
+		var replace = ( key ) => {
+			return ( child, i ) => {
+				var text = this.content[ emotion ][ key ];
+				child.textContent = text[ Object.keys( text )[ i ] ];
+			};
+		};
+
+		this.stateText.forEach( replace( 'state' ) );
+		this.responseText.forEach( replace( 'response' ) );
+
+		this.triggerText.forEach( replace( 'trigger' ) );
+		this.responseTextUnawareColor =
+			'rgba(' + Math.min( color1[ 0 ] + 50, 255 )
+			+ ',' + Math.min( color1[ 1 ] + 50, 255 )
+			+ ',' + Math.min( color1[ 2 ] + 50, 255 )
+			+ ', 0.9)';
+
+
+	}
+
+	getParentElement() {
+		return this.parent;
+	}
+
+	pulsateState() {
+		//pulsate state
+		TweenMax.to( this.c1, 1, {
+			attr: { r: '-=5' },
+			repeat: -1,
+			yoyo: true,
+			repeatDelay: 0,
+			ease: Power1.easeInOut
+		} );
+		TweenMax.to( this.c2, 0.8, {
+			attr: { r: '-=3' },
+			repeat: -1,
+			yoyo: true,
+			repeatDelay: 0,
+			ease: Power1.easeInOut
+		} );
+		TweenMax.to( this.c3, 1, {
+			attr: { r: '-=2' },
+			repeat: -1,
+			yoyo: true,
+			repeatDelay: 0,
+			ease: Power1.easeInOut
+		} );
+	}
+
+
 	constructor( svg, container, emotion ) {
 
-		var configsByEmotion = Continent.configsByEmotion;
+		this.configsByEmotion = Continent.configsByEmotion;
 		var refractoryPeriodTime = 15;
 
 		this.rewindActive = false;
@@ -29,7 +144,7 @@ export default class EpisodeAddAwareness {
 			//fonts need to be added for them to work in svg
 			timeline.addFonts( svg );
 
-			var parent = timeline.extractDocument( svg, container );
+			this.parent = timeline.extractDocument( svg, container );
 
 			// illumination
 			var illuminationBlock = timeline.select( '#illumination-block', document );
@@ -37,18 +152,18 @@ export default class EpisodeAddAwareness {
 			initializeIllumination( illuminationBlock, svg );
 
 			//timeline with examples
-			var timelineWithExamples = timeline.select( '#timeline-with-examples', parent );
+			var timelineWithExamples = timeline.select( '#timeline-with-examples', this.parent );
 
 			//blocks
-			var blockDiagram = new BlockDiagram( timeline.select( '#blocks', parent ), parent );
+			var blockDiagram = new BlockDiagram( timeline.select( '#blocks', this.parent ), this.parent );
 
 
 			//blockDiagram.onComplete = function () {
-			//var refractoryPeriod = RefractoryPeriod( parent, blocks );
+			//var refractoryPeriod = RefractoryPeriod( this.parent, blocks );
 			//};
 
 
-			var content = timeline.episodeContent;
+			this.content = timeline.episodeContent;
 
 
 			// hide elements and prepare for animation
@@ -66,9 +181,9 @@ export default class EpisodeAddAwareness {
 			}
 
 			//circles
-			var c1 = timeline.select( '#c1', timelineWithExamples ),
-				c2 = timeline.select( '#c2', timelineWithExamples ),
-				c3 = timeline.select( '#c3', timelineWithExamples );
+			this.c1 = timeline.select( '#c1', timelineWithExamples );
+			this.c2 = timeline.select( '#c2', timelineWithExamples );
+			this.c3 = timeline.select( '#c3', timelineWithExamples );
 
 			//changes
 			var physicalChanges = timeline.select( '#physical-changes', timelineWithExamples ),
@@ -98,37 +213,38 @@ export default class EpisodeAddAwareness {
 			TweenMax.allTo( timeline.selectAll( '[id*="response-line-3"]', timelineWithExamples ), 0, { autoAlpha: 0 } );
 
 
-			//text
 			var event = timeline.select( '#event', timelineWithExamples ),
 				precondition = timeline.select( '#precondition', timelineWithExamples ),
 				perceptualDatabase = timeline.select( '#perceptual-database', timelineWithExamples ),
-				triggerText = [
-					timeline.select( 'tspan', precondition ),
-					timeline.select( 'tspan', event ),
-					timeline.select( 'tspan', perceptualDatabase )
-				],
-				stateText = [
-					timeline.select( 'tspan', physicalChanges ),
-					stateLabelChildren[ 1 ],
-					timeline.select( 'tspan', mentalChanges )
-				],
 				constructiveResponse = timeline.select( '#constructive-response', timelineWithExamples ),
 				destructiveResponse = timeline.select( '#destructive-response', timelineWithExamples ),
 				ambiguousResponse = timeline.select( '#ambiguous-response', timelineWithExamples ),
-				responses = timeline.select( '#responses', timelineWithExamples ),
-				responseText = [
-					timeline.select( 'tspan', constructiveResponse ),
-					timeline.select( 'tspan', destructiveResponse ),
-					timeline.select( 'tspan', ambiguousResponse )
-				];
+				responses = timeline.select( '#responses', timelineWithExamples );
+
+			//text
+			this.triggerText = [
+				timeline.select( 'tspan', precondition ),
+				timeline.select( 'tspan', event ),
+				timeline.select( 'tspan', perceptualDatabase )
+			];
+			this.stateText = [
+				timeline.select( 'tspan', physicalChanges ),
+				stateLabelChildren[ 1 ],
+				timeline.select( 'tspan', mentalChanges )
+			];
+			this.responseText = [
+				timeline.select( 'tspan', constructiveResponse ),
+				timeline.select( 'tspan', destructiveResponse ),
+				timeline.select( 'tspan', ambiguousResponse )
+			];
 
 
-			d3.selectAll( triggerText )
+			d3.selectAll( this.triggerText )
 				.attr( 'text-anchor', 'end' )
 				.attr( 'x', function () {
 					return parseFloat( this.getComputedTextLength() ) + parseFloat( this.getAttribute( 'x' ) );
 				} );
-			d3.selectAll( stateText )
+			d3.selectAll( this.stateText )
 				.attr( 'text-anchor', 'middle' )
 				.attr( 'x', function () {
 					return parseFloat( this.getComputedTextLength() ) / 2 + parseFloat( this.getAttribute( 'x' ) );
@@ -158,16 +274,16 @@ export default class EpisodeAddAwareness {
 			tryAgainButton.style.visibility = 'hidden';
 
 
-			var episodeTimeline = new TimelineMax( {} );
+			this.episodeTimeline = new TimelineMax( {} );
 			var illuminationTimeline = new TimelineMax( {} );
-			var refractoryPeriodTimeline = new TimelineMax( {} );
+			//var refractoryPeriodTimeline = new TimelineMax( {} );
 
-			var playFromStart = true; //TODO shared code with Episode
+			this.playFromStart = true; //TODO shared code with Episode
 
 			var lineUnawareColor = timeline.select( '#response-line-2', timelineWithExamples ).getAttribute( 'stroke' );
 			var lineAwareColor = timeline.select( '#response-line-1', timelineWithExamples ).getAttribute( 'stroke' );
 			var textUnawareColor = '#fff';
-			var responseTextUnawareColor = textUnawareColor;
+			this.responseTextUnawareColor = textUnawareColor;
 			var textAwareColor = timeline.select( '#constructive-response', timelineWithExamples ).getAttribute( 'fill' );
 
 			var refractoryIlluminationTween = null;
@@ -195,9 +311,9 @@ export default class EpisodeAddAwareness {
 			};
 
 			var setResponseTextColor = function ( textElement, aware, time = 0 ) {
-				var color = aware ? textAwareColor : responseTextUnawareColor;
+				var color = aware ? textAwareColor : this.responseTextUnawareColor;
 				TweenMax.to( textElement, time, { attr: { fill: color } } );
-			};
+			}.bind( this );
 
 			var setResponseLineStyle = function ( lineIndex, aware ) {
 				//solid if unaware
@@ -246,94 +362,6 @@ export default class EpisodeAddAwareness {
 				setTextColor( event, aware, time );
 				setResponseTextColor( destructiveResponse, aware, time );
 
-			};
-
-			var replaceContent = function ( emotion ) {
-
-				var colors = configsByEmotion[ emotion ].colorPalette;
-
-				var color1 = colors[ 0 ];
-				var color2 = colors[ Math.round( (colors.length - 1) / 3 ) ];
-				var color3 = colors[ colors.length - 1 ];
-
-				c1.setAttribute( 'fill', 'rgb(' + color1[ 0 ] + ',' + color1[ 1 ] + ',' + color1[ 2 ] + ')' );
-				c2.setAttribute( 'fill', 'rgb(' + color2[ 0 ] + ',' + color2[ 1 ] + ',' + color2[ 2 ] + ')' );
-				c3.setAttribute( 'fill', 'rgb(' + color3[ 0 ] + ',' + color3[ 1 ] + ',' + color3[ 2 ] + ')' );
-
-				responseTextUnawareColor =
-					'rgba(' + Math.min( color1[ 0 ] + 50, 255 )
-					+ ',' + Math.min( color1[ 1 ] + 50, 255 )
-					+ ',' + Math.min( color1[ 2 ] + 50, 255 )
-					+ ', 0.9)';
-
-				var replace = function ( key ) {
-					return ( child, i )=> {
-						var text = content[ emotion ][ key ];
-						child.textContent = text[ Object.keys( text )[ i ] ];
-					};
-				};
-
-				responseText.forEach( replace( 'response' ) );
-				stateText.forEach( replace( 'state' ) );
-				triggerText.forEach( replace( 'trigger' ) );
-
-			};
-
-
-			this.setEmotion = function ( emotion ) { //TODO shared with Episode
-
-				this.currentEmotion = emotion && emotion != '' ? emotion : dispatcher.DEFAULT_EMOTION;
-
-				if ( playFromStart ) {
-					playFromStart = false;
-					TweenMax.delayedCall( 1.5, this.start.bind( this ) );
-				} else {
-					this.rewind( this.start.bind( this ) );
-				}
-
-
-			};
-
-			//TODO connect these up, share code w/ Episode if possible
-			this.rewind = function ( onComplete ) {
-
-				this.rewindActive = true;
-
-				episodeTimeline.timeScale( 3 );
-				episodeTimeline.pause();
-				if ( episodeTimeline.getLabelTime( 'end' ) < episodeTimeline.time() ) {
-					episodeTimeline.seek( 'end', true );
-				}
-				episodeTimeline.tweenTo( 'event-lines', {
-					onComplete: function () {
-						this.rewindActive = false;
-						onComplete();
-					}.bind( this ),
-					ease: Power2.easeOut
-				} );
-
-			};
-
-			this.start = function () {
-
-				//go to start
-				episodeTimeline.timeScale( 1 );
-				episodeTimeline.pause( 'event-pulse', true );
-
-				//replace content
-				replaceContent( this.currentEmotion );
-
-				TweenMax.delayedCall( 0.5, function () {
-					episodeTimeline.play();
-				} );
-
-			};
-
-			this.reset = function () {
-				playFromStart = true;
-				episodeTimeline.timeScale( 1 );
-				episodeTimeline.pause();
-				episodeTimeline.seek( 'event' );
 			};
 
 
@@ -396,31 +424,6 @@ export default class EpisodeAddAwareness {
 				blockDiagram.addMouseHandlers( clickableElements );
 			};
 
-			var pulsateState = function () {
-				//pulsate state
-				TweenMax.to( c1, 1, {
-					attr: { r: '-=5' },
-					repeat: -1,
-					yoyo: true,
-					repeatDelay: 0,
-					ease: Power1.easeInOut
-				} );
-				TweenMax.to( c2, 0.8, {
-					attr: { r: '-=3' },
-					repeat: -1,
-					yoyo: true,
-					repeatDelay: 0,
-					ease: Power1.easeInOut
-				} );
-				TweenMax.to( c3, 1, {
-					attr: { r: '-=2' },
-					repeat: -1,
-					yoyo: true,
-					repeatDelay: 0,
-					ease: Power1.easeInOut
-				} );
-			};
-
 			//pulsate illumination
 			var pulsateIllumination = function () {
 				TweenMax.allTo( [ illuminationBlock /*, glow */ ], 1.9, {
@@ -474,7 +477,7 @@ export default class EpisodeAddAwareness {
 										{
 											autoAlpha: 1,
 											ease: Power3.easeInOut
-										} )
+										} );
 								}
 
 							} );
@@ -484,7 +487,7 @@ export default class EpisodeAddAwareness {
 						TweenMax.delayedCall(
 							refractoryPeriodTime / 2,
 							()=> {
-								toggleEventAndResponseAwareness( true );
+								toggleEventAndResponseAwareness.bind( this )( true );
 							} );
 
 				}
@@ -505,8 +508,8 @@ export default class EpisodeAddAwareness {
 
 
 			//start the timeline
-			episodeTimeline
-			//show event
+			this.episodeTimeline
+				//show event
 				.add( 'event', '+=3' )
 				.add( 'event-pulse' )
 				.to( timeline.select( '#event-text', timelineWithExamples ), 0.1, {
@@ -534,13 +537,17 @@ export default class EpisodeAddAwareness {
 
 				// show emo state
 				.add( 'state' )
-				.from( c1, 2, { attr: { r: 0 }, autoAlpha: 0, ease: Bounce.easeOut } )
-				.from( c2, 2, { attr: { r: 20 }, autoAlpha: 0, ease: Bounce.easeOut }, 'state' )
-				.from( c3, 2, { attr: { r: 50 }, autoAlpha: 0, ease: Bounce.easeOut }, 'state' )
+				.from( this.c1, 2, { attr: { r: 0 }, autoAlpha: 0, ease: Bounce.easeOut } )
+				.from( this.c2, 2, { attr: { r: 20 }, autoAlpha: 0, ease: Bounce.easeOut }, 'state' )
+				.from( this.c3, 2, { attr: { r: 50 }, autoAlpha: 0, ease: Bounce.easeOut }, 'state' )
 				.addCallback( addStateAwareness, 'state' )
 				.addCallback( this.triggerRefractoryEffects.bind( this ), 'state' )
 				.from( changes, 2, { autoAlpha: 0, ease: Power1.easeOut }, 'state' )
-				.from( stateLabel, 2, { autoAlpha: 0, ease: Power1.easeOut, onComplete: pulsateState }, 'state' )
+				.from( stateLabel, 2, {
+					autoAlpha: 0,
+					ease: Power1.easeOut,
+					onComplete: this.pulsateState.bind( this )
+				}, 'state' )
 				.add( 'pulsate' )
 
 				//show response
@@ -589,10 +596,10 @@ export default class EpisodeAddAwareness {
 
 			TweenMax.set( state, { visibility: 'visible' } );
 
-			replaceContent( this.currentEmotion );
+			this.replaceContent( this.currentEmotion );
 
-			TweenMax.set( parent, { visibility: 'visible' } );
-			episodeTimeline.tweenTo( 'end' );
+			TweenMax.set( this.parent, { visibility: 'visible' } );
+			this.episodeTimeline.tweenTo( 'end' );
 
 			svg._initializedEpisode = true;
 
