@@ -11,13 +11,17 @@ import BlockDiagram from './BlockDiagram';
 export default class EpisodeAddAwareness extends Episode {
 
 	//overload with additional content changes
-	replaceContent( emotion ) {
+	replaceContent( emotion, animate = false ) {
 
-		super.replaceContent( emotion );
+		super.replaceContent( emotion, animate );
 
-		this.triggerText.forEach( this.replaceTextContentForKey( 'trigger', emotion ) );
+		this.triggerText.forEach( ( child, i )=> {
+			let animateText = animate && (child.parentNode.id != 'event-text');
+			let replace = this.replaceTextContentForKey( 'trigger', emotion, animateText );
+			replace( child, i );
+		} );
 
-		var textColor = this.configsByEmotion[ emotion ].colorPalette[0];
+		var textColor = this.configsByEmotion[ emotion ].colorPalette[ 0 ];
 
 		this.responseTextUnawareColor =
 			'rgba(' + Math.min( textColor[ 0 ] + 50, 255 )
@@ -25,31 +29,6 @@ export default class EpisodeAddAwareness extends Episode {
 			+ ',' + Math.min( textColor[ 2 ] + 50, 255 )
 			+ ', 0.9)';
 
-	}
-
-	pulsateState() { //FIXME this technique makes it jump
-		//pulsate state
-		TweenMax.to( this.c1, 1, {
-			attr: { r: '-=5' },
-			repeat: -1,
-			yoyo: true,
-			repeatDelay: 0,
-			ease: Power1.easeInOut
-		} );
-		TweenMax.to( this.c2, 0.8, {
-			attr: { r: '-=3' },
-			repeat: -1,
-			yoyo: true,
-			repeatDelay: 0,
-			ease: Power1.easeInOut
-		} );
-		TweenMax.to( this.c3, 1, {
-			attr: { r: '-=2' },
-			repeat: -1,
-			yoyo: true,
-			repeatDelay: 0,
-			ease: Power1.easeInOut
-		} );
 	}
 
 	constructor( svg, container, emotion ) {
@@ -64,8 +43,9 @@ export default class EpisodeAddAwareness extends Episode {
 		this.rewindActive = false;
 		this.isActive = false;
 		this.refractoryPeriodEnabled = false;
+		this.blockDiagramEnabled = false;
 		this.currentEmotion = emotion && emotion != '' ? emotion : dispatcher.DEFAULT_EMOTION;
-
+		this.refractoryBlocks = [];
 
 		if ( svg && !svg._initializedEpisode ) {
 
@@ -108,10 +88,7 @@ export default class EpisodeAddAwareness extends Episode {
 				}
 			}
 
-			//circles
-			this.c1 = timeline.select( '#c1', timelineWithExamples );
-			this.c2 = timeline.select( '#c2', timelineWithExamples );
-			this.c3 = timeline.select( '#c3', timelineWithExamples );
+			this.initStateCircles();
 
 			//changes
 			var physicalChanges = timeline.select( '#physical-changes', timelineWithExamples ),
@@ -141,7 +118,8 @@ export default class EpisodeAddAwareness extends Episode {
 			TweenMax.allTo( timeline.selectAll( '[id*="response-line-3"]', timelineWithExamples ), 0, { autoAlpha: 0 } );
 
 
-			var event = timeline.select( '#event', timelineWithExamples ),
+			var trigger = timeline.select( '#trigger', timelineWithExamples ),
+				event = timeline.select( '#event', timelineWithExamples ),
 				precondition = timeline.select( '#precondition', timelineWithExamples ),
 				perceptualDatabase = timeline.select( '#perceptual-database', timelineWithExamples ),
 				constructiveResponse = timeline.select( '#constructive-response', timelineWithExamples ),
@@ -180,8 +158,8 @@ export default class EpisodeAddAwareness extends Episode {
 
 
 			//TODO remove the awareness and try-again buttons from svg
-			timeline.select( '#add-awareness-state', timelineWithExamples ).remove();
-			timeline.select( '#add-awareness-response', timelineWithExamples ).remove();
+			//timeline.select( '#add-awareness-state', timelineWithExamples ).remove();
+			//timeline.select( '#add-awareness-response', timelineWithExamples ).remove();
 
 			//add awareness buttons
 
@@ -194,17 +172,11 @@ export default class EpisodeAddAwareness extends Episode {
 			var refractoryPeriodButton = timeline.select( '#begin-refractory-period', document );
 			refractoryPeriodButton.style.visibility = 'hidden';
 
-			//try again button
-
-			var tryAgainButton = timeline.select( '#try-again', timelineWithExamples );
-			tryAgainButton.style.cursor = 'pointer';
-			tryAgainButton.style.pointerEvents = 'all';
-			tryAgainButton.style.visibility = 'hidden';
-
+			var blockDiagramButton = timeline.select( '#begin-block-diagram', document );
+			blockDiagramButton.style.visibility = 'hidden';
 
 			this.episodeTimeline = new TimelineMax( {} );
 			var illuminationTimeline = new TimelineMax( {} );
-			//var refractoryPeriodTimeline = new TimelineMax( {} );
 
 			this.playFromStart = true; //TODO shared code with Episode
 
@@ -219,7 +191,7 @@ export default class EpisodeAddAwareness extends Episode {
 
 			var setLineColor = function ( line, decoration, color, time = 0 ) {
 				TweenMax.to( line, time, { attr: { stroke: color } } );
-				TweenMax.to( decoration, time, { attr: { fill: color } } );
+				//TweenMax.to( decoration, time, { attr: { fill: color } } );
 				TweenMax.to( decoration, time, { attr: { stroke: color } } );
 			};
 
@@ -315,7 +287,6 @@ export default class EpisodeAddAwareness extends Episode {
 						.to( illuminationBlock, 4, { css: { width: '+=400' }, ease: Power2.easeIn }, 'start' )
 						//.to( illuminationGlow, 4, { attr: { x: '+=400' }, ease: Power2.easeIn }, 'start' )
 						.add( 'finished' )
-						//.addCallback( enableBlockDiagram )
 						.addCallback( ()=> {
 							TweenMax.to( refractoryPeriodButton, 1, { autoAlpha: 1, ease: Power2.easeOut } );
 						} )
@@ -329,6 +300,10 @@ export default class EpisodeAddAwareness extends Episode {
 
 					scroller.pulseEmotionNav();
 					awarenessStage = 'refractory';
+
+				} else if ( awarenessStage == 'refractory' ) {
+
+					awarenessStage = 'blocks';
 
 				}
 
@@ -350,6 +325,8 @@ export default class EpisodeAddAwareness extends Episode {
 					ambiguousResponse
 				];
 				blockDiagram.addMouseHandlers( clickableElements );
+				this.refractoryBlocks = blockDiagram.getRefractoryBlocks();
+				this.blockDiagramEnabled = true;
 			};
 
 			//pulsate illumination
@@ -370,6 +347,9 @@ export default class EpisodeAddAwareness extends Episode {
 				if ( awarenessStage == 'state' && addAwarenessButtonResponse.style.visibility == 'hidden' ) {
 					TweenMax.to( addAwarenessButtonResponse, 1, { autoAlpha: 1, ease: Power2.easeOut } );
 				}
+				if ( awarenessStage == 'refractory' && blockDiagramButton.style.visibility == 'hidden' ) {
+					TweenMax.to( blockDiagramButton, 1, { autoAlpha: 1, ease: Power2.easeOut } );
+				}
 			};
 
 			this.triggerRefractoryEffects = function () {
@@ -386,13 +366,16 @@ export default class EpisodeAddAwareness extends Episode {
 					if ( refractoryIlluminationTween ) {
 						refractoryIlluminationTween.kill();
 					}
-
+					//if ( refractoryBlocksTween ) {
+					//	refractoryBlocksTween.kill();
+					//}
+					//
 					toggleEventAndResponseAwareness( false, darkenTime );
 
 					//prepare the refractory period
 					refractoryIlluminationTween =
 						TweenMax.to(
-							illuminationBlock,
+							[ illuminationBlock ].concat( this.refractoryBlocks ),
 							darkenTime,
 							{
 								autoAlpha: 0,
@@ -400,11 +383,16 @@ export default class EpisodeAddAwareness extends Episode {
 
 								onComplete: ()=> {
 									TweenMax.to(
-										illuminationBlock,
+										[ illuminationBlock ].concat( this.refractoryBlocks ),
 										refractoryPeriodTime,
 										{
 											autoAlpha: 1,
-											ease: Power3.easeInOut
+											ease: Power3.easeInOut,
+
+											onComplete: () => {
+												scroller.pulseEmotionNav();
+											}
+
 										} );
 								}
 
@@ -415,7 +403,7 @@ export default class EpisodeAddAwareness extends Episode {
 						TweenMax.delayedCall(
 							refractoryPeriodTime / 2,
 							()=> {
-								toggleEventAndResponseAwareness.bind( this )( true );
+								toggleEventAndResponseAwareness.bind( this )( true, darkenTime );
 							} );
 
 				}
@@ -438,7 +426,9 @@ export default class EpisodeAddAwareness extends Episode {
 			//start the timeline
 			this.episodeTimeline
 				//show event
-				.add( 'event', '+=3' )
+				.add( 'event' )
+				.from( trigger, 0.5, { autoAlpha: 0, ease: Power1.easeOut } )
+
 				.add( 'event-pulse' )
 				.to( timeline.select( '#event-text', timelineWithExamples ), 0.1, {
 					scale: 1.1,
@@ -464,20 +454,19 @@ export default class EpisodeAddAwareness extends Episode {
 				.from( eventLineGroup, 0.5, { autoAlpha: 0, ease: Power1.easeOut }, 'event-lines' )
 
 				// show emo state
-				.add( 'state' )
-				.from( this.c1, 2, { attr: { r: 0 }, autoAlpha: 0, ease: Bounce.easeOut } )
-				.from( this.c2, 2, { attr: { r: 20 }, autoAlpha: 0, ease: Bounce.easeOut }, 'state' )
-				.from( this.c3, 2, { attr: { r: 50 }, autoAlpha: 0, ease: Bounce.easeOut }, 'state' )
+				.add( 'state' );
+
+			this.addStateEmergence();
+
+			this.episodeTimeline
 				.addCallback( addStateAwareness, 'state' )
 				.addCallback( this.triggerRefractoryEffects.bind( this ), 'state' )
 				.from( changes, 2, { autoAlpha: 0, ease: Power1.easeOut }, 'state' )
 				.from( stateLabel, 2, {
 					autoAlpha: 0,
 					ease: Power1.easeOut,
-					onComplete: this.pulsateState.bind( this )
 				}, 'state' )
 				.add( 'pulsate' )
-
 				//show response
 				.add( 'response-lines', '-=0.5' )
 				.addCallback( addResponseLineAwareness, 'response-lines' )
@@ -487,11 +476,13 @@ export default class EpisodeAddAwareness extends Episode {
 				.addCallback( addResponseAwareness )
 				.from( responses, 1, { autoAlpha: 0, ease: Power1.easeOut } )
 
-				.add( 'end' )
+				.add( 'end' );
 
+			this.episodeTimeline
 				.add( 'add-awareness-button' )
 				.addCallback( showAddAwarenessButton );
 
+			this.addStatePulsation();
 
 			var hideButton = function ( button ) {
 				TweenMax.to( button, 1, {
@@ -516,15 +507,21 @@ export default class EpisodeAddAwareness extends Episode {
 				this.refractoryPeriodEnabled = true;
 				awarenessClickCallback.bind( this )( e );
 			};
+			var blockDiagramClickCallback = function ( e ) {
+				hideButton( e.currentTarget );
+				advance();
+				enableBlockDiagram.bind( this )();
+			};
 
 
 			addAwarenessButtonState.onclick = awarenessClickCallback.bind( this );
 			addAwarenessButtonResponse.onclick = awarenessClickCallback.bind( this );
 			refractoryPeriodButton.onclick = refractoryPeriodClickCallback.bind( this );
+			blockDiagramButton.onclick = blockDiagramClickCallback.bind( this );
 
 			TweenMax.set( state, { visibility: 'visible' } );
 
-			this.replaceContent( this.currentEmotion );
+			this.replaceContent( this.currentEmotion, false );
 
 			TweenMax.set( this.parent, { visibility: 'visible' } );
 			this.episodeTimeline.tweenTo( 'end' );
@@ -539,59 +536,6 @@ export default class EpisodeAddAwareness extends Episode {
 
 }
 
-
-//function RefractoryPeriod( parent, blocks ) {
-//
-//	var NS = "http://www.w3.org/2000/svg";
-//	var line = timeline.select( '#perceptual-database-line-group', parent );
-//	var lineChildren = timeline.getChildren( line );
-//	var lineBox = line.getBBox();
-//
-//	var otherTriggerBlocks = timeline.selectAll( '#precondition-block, #event-block', parent );
-//	var otherTriggerLines = timeline.selectAll( '#precondition-line, #event-line, #precondition-line-decoration-1, #event-line-decoration-1', parent );
-//	var otherResponseLines = timeline.selectAll( '#response-line-1, #response-line-3, #response-line-1-decoration-1, #response-line-3-decoration-1', parent );
-//	var otherBlocks = timeline.selectAll( '#mental-changes-block, #physical-changes-block, #constructive-response-block, #ambiguous-response-block', parent );
-//	var perceptualDatabaseBlock = timeline.select( '#perceptual-database-block', parent );
-//	var eventBlock = timeline.select( '#event-block', parent );
-//	var trigger = timeline.select( '#trigger', parent );
-//
-//	var tryAgainButton = timeline.select( '#try-again', parent );
-//
-//	TweenMax.to( tryAgainButton, 1, { autoAlpha: 1 } );
-//	tryAgainButton.addEventListener( 'click', function () {
-//
-//		var initializationTimeline = new TimelineMax( {} );
-//		initializationTimeline
-//			.add( 'start' )
-//			.to( trigger, 1, { autoAlpha: 0 }, 'start' )
-//			.to( otherTriggerBlocks, 0.5, { autoAlpha: 0 }, 'start+=0.5' )
-//			.to( otherBlocks, 0.5, { autoAlpha: 0 }, 'start+=0.5' )
-//			.to( otherTriggerLines, 0.5, { autoAlpha: 0 }, 'start+=0.5' )
-//			.to( otherResponseLines, 0.5, { autoAlpha: 0 }, 'start+=0.5' )
-//			.to( perceptualDatabaseBlock, 0.5, { autoAlpha: 1 }, 'start+=0.5' )
-//
-//			.add( 'move' )
-//			.to( timeline.selectAll( 'rect, tspan', perceptualDatabaseBlock ), 1, {
-//				attr: { y: '-=60' },
-//				ease: Power1.easeOut
-//			}, 'move' )
-//			.to( lineChildren, 1, {
-//				rotation: 18,
-//				y: '-=35',
-//				svgOrigin: (lineBox.x + lineBox.width) + ' ' + lineBox.y,
-//				ease: Power1.easeOut
-//			}, 'move' )
-//			.to( lineChildren, 1, {
-//				rotation: 18,
-//				y: '-=35',
-//				svgOrigin: (lineBox.x + lineBox.width) + ' ' + lineBox.y,
-//				ease: Power1.easeOut
-//			}, 'move' );
-//
-//	} );
-//}
-
-
 function initializeIllumination( illuminationBlock, svg ) {
 
 	//TODO remove for real from art file
@@ -604,13 +548,5 @@ function initializeIllumination( illuminationBlock, svg ) {
 	TweenMax.set( illuminationBlock, {
 		css: { width: eventRect.left, autoAlpha: 0 }
 	} );
-	//var illumination = svg.getElementById( 'illumination' );
-	//var scaleRatio = timeline.select( ".fullpage-wrapper", document ).clientHeight / 300;
-	//var transform = illumination.getAttribute( 'transform' ).match( /[-+]?\d+(\.\d+)?/g );
-	//var block = timeline.select( '#block', illumination );
-	//var glow = timeline.select( '#glow', illumination );
-	//var glowShift = (scaleRatio - 1) * (glow.getAttribute( 'height' ) / 2);
-	//var blockShift = (scaleRatio - 1) * (block.getAttribute( 'height' ) / 2);
-	//TweenMax.set( block, { height: scaleRatio * block.getAttribute( 'height' ), y: '-=' + blockShift } );
-	//TweenMax.set( glow, { height: scaleRatio * glow.getAttribute( 'height' ), y: '-=' + glowShift } );
+
 }

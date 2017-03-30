@@ -3,7 +3,7 @@ import Continent from '../Continent.js';
 import timeline from './timeline.js';
 import scroller from '../scroller.js';
 import dispatcher from '../dispatcher.js';
-import { TweenMax, TimelineMax, Power2, Power1, Bounce } from "gsap";
+import { TweenMax, TimelineMax, Power2, Power1, Elastic, Bounce, Back } from "gsap";
 
 export default class Episode {
 
@@ -30,14 +30,21 @@ export default class Episode {
 
 	}
 
-	start() {
+	start( animateReplaceContent = false ) {
 
 		//go to start
 		this.episodeTimeline.timeScale( 1 );
-		this.episodeTimeline.pause( 'event-pulse', true );
+
+		if ( this.playFromStart ) {
+			this.playFromStart = false;
+			this.episodeTimeline.pause( 'event', true );
+		} else {
+			this.episodeTimeline.pause( 'event-pulse', true );
+		}
+
 
 		//replace content
-		this.replaceContent( this.currentEmotion );
+		this.replaceContent( this.currentEmotion, animateReplaceContent );
 
 		TweenMax.delayedCall( 0.5, () => {
 			this.episodeTimeline.play();
@@ -48,44 +55,101 @@ export default class Episode {
 	reset() {
 		this.playFromStart = true;
 		this.episodeTimeline.timeScale( 1 );
-		this.episodeTimeline.pause();
-		this.episodeTimeline.seek( 'event' );
+		this.episodeTimeline.pause( 'event', true );
 	}
 
 	setEmotion( emotion ) {
 
+		let animateReplaceContent = (this.currentEmotion != emotion) && !this.playFromStart;
+
 		this.currentEmotion = emotion && emotion != '' ? emotion : dispatcher.DEFAULT_EMOTION;
 
 		if ( this.playFromStart ) {
-			this.playFromStart = false;
-			TweenMax.delayedCall( 1.5, this.start.bind( this ) );
+			TweenMax.delayedCall( 1.5, this.start.bind( this ), [ animateReplaceContent ] );
 		} else {
-			this.rewind( this.start.bind( this ) );
+			this.rewind( ()=> {
+				this.start( animateReplaceContent );
+			} );
 		}
 
 	}
 
-	replaceTextContentForKey( key, emotion ) {
+	replaceTextContentForKey( key, emotion, animate ) {
 		return function ( child, i ) {
 			var text = this.content[ emotion ][ key ];
-			child.textContent = text[ Object.keys( text )[ i ] ];
+			if ( animate ) {
+				TweenMax.to( child.parentNode, 0.25, {
+					autoAlpha: 0, onComplete: () => {
+						child.textContent = text[ Object.keys( text )[ i ] ];
+						TweenMax.to( child.parentNode, 0.25, { autoAlpha: 1 } );
+					}
+				} );
+			} else {
+				child.textContent = text[ Object.keys( text )[ i ] ];
+			}
 		}.bind( this );
 	}
 
-	replaceContent( emotion ) {
+	replaceContent( emotion, animate = false ) {
 
 		var colors = this.configsByEmotion[ emotion ].colorPalette;
-		var color1 = colors[ 0 ];
-		var color2 = colors[ Math.round( (colors.length - 1) / 3 ) ];
-		var color3 = colors[ colors.length - 1 ];
+		this.stateCircles.forEach( ( circle, i )=> {
+			var color = colors[ Math.round( i * (colors.length - 1) / (this.stateCircles.length - 1) ) ];
+			circle.setAttribute( 'fill', 'rgb(' + color[ 0 ] + ',' + color[ 1 ] + ',' + color[ 2 ] + ')' );
+		} );
 
-		this.c1.setAttribute( 'fill', 'rgb(' + color1[ 0 ] + ',' + color1[ 1 ] + ',' + color1[ 2 ] + ')' );
-		this.c2.setAttribute( 'fill', 'rgb(' + color2[ 0 ] + ',' + color2[ 1 ] + ',' + color2[ 2 ] + ')' );
-		this.c3.setAttribute( 'fill', 'rgb(' + color3[ 0 ] + ',' + color3[ 1 ] + ',' + color3[ 2 ] + ')' );
+		this.stateText.forEach( this.replaceTextContentForKey( 'state', emotion, false ) );
+		this.responseText.forEach( this.replaceTextContentForKey( 'response', emotion, false ) );
 
-		this.stateText.forEach( this.replaceTextContentForKey( 'state', emotion ) );
-		this.responseText.forEach( this.replaceTextContentForKey( 'response', emotion ) );
+	}
 
+	initStateCircles() {
+		this.stateCircles = [
+			timeline.select( '#c1', this.parent ),
+			timeline.select( '#c2', this.parent ),
+			timeline.select( '#c3', this.parent ),
+			timeline.select( '#c4', this.parent ),
+			timeline.select( '#c5', this.parent ),
+			timeline.select( '#c6', this.parent )
+		];
+	}
+
+	addStatePulsation() {
+		//pulsate state
+		this.stateCircles.forEach( ( circle, i )=> {
+			// make the circles overlap as they change size
+			let radiusDelta = (this.stateCircles.length - Math.round( i + this.stateCircles.length / 2 ) % this.stateCircles.length) * 4;
+			// reduce the effect for the large ones
+			radiusDelta *= 1 - ( i / (this.stateCircles.length - 1) );
+			// don't pass in a float
+			radiusDelta = Math.round( radiusDelta );
+			//debugger;
+			this.episodeTimeline
+				.to( circle, 6 - (3 * i / (this.stateCircles.length - 1)), {
+					attr: {
+						rx: '-=' + radiusDelta,
+						ry: '-=' + radiusDelta
+					},
+					repeat: -1,
+					yoyo: true,
+					repeatDelay: 0,
+					ease: Power1.easeInOut
+				}, 'pulsate' );
+		} );
+	}
+
+	addStateEmergence() {
+		var minStartingRadius = 0;
+		var maxStartingRadius = 20;
+		this.stateCircles.forEach( ( circle, i )=> {
+			var startingRadius = minStartingRadius + (maxStartingRadius - minStartingRadius) * i / (this.stateCircles.length - 1);
+			this.episodeTimeline
+				.from( circle, 2, {
+					attr: { rx: startingRadius, ry: startingRadius },
+					autoAlpha: 0,
+					ease: Back.easeOut
+				}, 'state' );
+		} );
 	}
 
 	getParentElement() {
@@ -133,10 +197,7 @@ export default class Episode {
 				}
 			}
 
-			//circles
-			this.c1 = timeline.select( '#c1', this.parent );
-			this.c2 = timeline.select( '#c2', this.parent );
-			this.c3 = timeline.select( '#c3', this.parent );
+			this.initStateCircles();
 
 			//lines
 			var eventLines = timeline.select( '#event-lines', this.parent ),
@@ -153,15 +214,6 @@ export default class Episode {
 			this.responseText = [
 				responseChildren[ 0 ]
 			];
-
-			//try again button
-			var tryAgainButton = timeline.select( '#try-again', this.parent );
-			//tryAgainButton.style.cursor = 'pointer';
-			//tryAgainButton.style.pointerEvents = 'all';
-			//var tryAgainLabel = timeline.select( '#try-again-label tspan', tryAgainButton );
-			//var tryAgainRectangle = timeline.select( '#try-again-rectangle', tryAgainButton );
-			//FIXME remove try again button from the svg and the code for good
-			tryAgainButton.remove();
 
 			this.episodeTimeline = new TimelineMax( {} );
 
@@ -190,13 +242,13 @@ export default class Episode {
 				.from( eventLines, 0.5, { autoAlpha: 0, ease: Power1.easeOut }, 'event-lines' )
 
 				// show emo state
-				.add( 'state' )
-				.from( this.c1, 2, { attr: { r: 0 }, autoAlpha: 0, ease: Bounce.easeOut } )
-				.from( this.c2, 2, { attr: { r: 20 }, autoAlpha: 0, ease: Bounce.easeOut }, 'state' )
-				.from( this.c3, 2, { attr: { r: 50 }, autoAlpha: 0, ease: Bounce.easeOut }, 'state' )
+				.add( 'state' );
+
+			this.addStateEmergence();
+
+			this.episodeTimeline
 				.from( stateLabel, 2, { autoAlpha: 0, ease: Power1.easeOut }, 'state' )
 				.add( 'pulsate' )
-
 				//show response
 				.add( 'response-line', '-=1' )
 				.from( responseLines, 0.5, { autoAlpha: 0, ease: Power1.easeOut }, 'response-line' )
@@ -212,30 +264,10 @@ export default class Episode {
 					}
 				}.bind( this ) )
 
-				.add( 'end' )
+				.add( 'end' );
 
-				//pulsate state
-				.to( this.c1, 1, {
-					attr: { r: '-=5' },
-					repeat: -1,
-					yoyo: true,
-					repeatDelay: 0,
-					ease: Power1.easeInOut
-				}, 'pulsate' )
-				.to( this.c2, 0.8, {
-					attr: { r: '-=3' },
-					repeat: -1,
-					yoyo: true,
-					repeatDelay: 0,
-					ease: Power1.easeInOut
-				}, 'pulsate' )
-				.to( this.c3, 1, {
-					attr: { r: '-=2' },
-					repeat: -1,
-					yoyo: true,
-					repeatDelay: 0,
-					ease: Power1.easeInOut
-				}, 'pulsate' );
+
+			this.addStatePulsation();
 
 			this.episodeTimeline.pause();
 
@@ -247,7 +279,7 @@ export default class Episode {
 
 			TweenMax.set( state, { visibility: 'visible' } );
 
-			this.replaceContent( this.currentEmotion );
+			this.replaceContent( this.currentEmotion, false );
 
 			TweenMax.set( this.parent, { visibility: 'visible' } );
 
@@ -257,5 +289,6 @@ export default class Episode {
 
 		}
 	}
+
 
 }

@@ -17,12 +17,24 @@ export default function BlockDiagram( element, parent ) {
 
 	this.blocks = timeline.getChildren( element );
 
-	this.onComplete = function () {
-	};
-
 	for ( var i = 0; i < this.blocks.length; i++ ) {
 		this.blocks[ i ].style.visibility = 'hidden';
 	}
+
+	this.getRefractoryBlocks = function () {
+		return [
+			this.getBlockByName('precondition'),
+			this.getBlockByName('perceptual-database'),
+			this.getBlockByName('mental-changes'),
+			this.getBlockByName('physical-changes'),
+			this.getBlockByName('constructive-response'),
+			this.getBlockByName('ambiguous-response')
+		];
+	};
+
+	this.getBlockByName = function ( name ) {
+		return timeline.select( '#' + name + '-block', this.element );
+	};
 
 	this.getBlockForElement = function ( element ) {
 		return timeline.select( '#' + element.getAttribute( 'id' ) + '-block', this.element );
@@ -96,7 +108,7 @@ export default function BlockDiagram( element, parent ) {
 			}
 		}
 		if ( complete ) {
-			this.onComplete();
+			this.onComplete && this.onComplete();
 		}
 	};
 

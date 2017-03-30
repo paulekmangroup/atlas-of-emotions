@@ -197,10 +197,6 @@ const timeline = {
 		return this.sectionTextBodyAwareness.filter( e=>e.getAttribute( 'data-stage' ) == stage );
 	},
 
-	getHiddenParagraphs: function ( stage ) {
-		return this.sectionTextBodyAwareness.filter( e=>e.getAttribute( 'data-stage' ) != stage );
-	},
-
 	showAwarenessCopy: function ( stage ) {
 		var show = this.getVisibleParagraphs( stage );
 		let stages = [].slice.call( document.querySelectorAll( 'div.body-awareness' ) );
@@ -211,15 +207,6 @@ const timeline = {
 
 		TweenMax.set( show, { css: { clearProps: 'display' } } );
 		TweenMax.to( show, 1, { autoAlpha: 1 } );
-	},
-
-	hideAwarenessCopy: function ( stage ) {
-		var hide = this.getVisibleParagraphs( stage );
-		TweenMax.to( hide, 1, {
-			autoAlpha: 0, onComplete: ()=> {
-				TweenMax.set( hide, { css: { display: 'none' } } );
-			}
-		} );
 	},
 
 	hideIntroCopy: function ( onComplete ) {

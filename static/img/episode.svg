@@ -1,27 +1,30 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <svg width="900px" height="300px" viewBox="0 0 900 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background: #454545;">
     <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
     <title>episode</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Interactive-Timeline" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    <g id="---" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="episode">
-            <g id="state" transform="translate(367.000000, 67.000000)">
-                <circle id="c3" fill-opacity="0.495442708" fill="#4B4747" cx="83.5" cy="83.5" r="82.986834"></circle>
-                <circle id="c2" fill-opacity="0.495442708" fill="#4B4747" cx="83.5" cy="83.5" r="62.243417"></circle>
-                <circle id="c1" fill-opacity="0.495442708" fill="#4B4747" cx="83.5" cy="83.5" r="37.743417"></circle>
-                <text id="state-label" font-family="Raleway-Bold, Raleway" font-size="24" font-weight="bold" fill="#FFFFFF">
-                    <tspan x="36.7257085" y="76">you feel </tspan>
-                    <tspan x="53.3337085" y="105">FEAR</tspan>
+            <g id="state" transform="translate(369.000000, 70.000000)">
+                <ellipse id="c6" fill-opacity="0.399999976" fill="#4B4747" cx="81.1301357" cy="81.1301357" rx="80.5582319" ry="80.5582319"></ellipse>
+                <ellipse id="c5" fill-opacity="0.249999985" fill="#4B4747" cx="81.1301357" cy="81.1301357" rx="69.5722656" ry="69.5722656"></ellipse>
+                <ellipse id="c4" fill-opacity="0.249999985" fill="#4B4747" cx="81.8826852" cy="80.8382396" rx="60.4218691" ry="60.4218691"></ellipse>
+                <ellipse id="c3" fill-opacity="0.249999985" fill="#4B4747" cx="81.7800578" cy="80.8780463" rx="52.1819587" ry="52.1819587"></ellipse>
+                <ellipse id="c2" fill-opacity="0.249999985" fill="#4B4747" cx="81.0774789" cy="81.0774789" rx="41.8581692" ry="41.8581692"></ellipse>
+                <ellipse id="c1" fill-opacity="0.249999985" fill="#4B4747" cx="81.0846599" cy="81.0846599" rx="31.6423089" ry="31.6423089"></ellipse>
+                <text id="state-label" font-family="Raleway" font-size="24" font-weight="normal" fill="#FFFFFF">
+                    <tspan x="36.3817085" y="73">you feel </tspan>
+                    <tspan x="51.1777085" y="102">FEAR</tspan>
                 </text>
             </g>
-            <g id="event-lines" transform="translate(249.000000, 149.000000)" stroke="#808080" stroke-width="3" stroke-linecap="square">
-                <path d="M0.5,1.5 L89,1.5" id="event-line"></path>
-                <path id="event-line-decoration-1" d="M89,1.5 L78.2,-1.5 L78.2,4.5 L89,1.5 Z"></path>
+            <g id="event-lines" transform="translate(249.000000, 149.000000)" stroke="#808080" stroke-width="2" stroke-linecap="square">
+                <path d="M0.5,1 L89,1" id="event-line"></path>
+                <path id="event-line-decoration-1" d="M78.2,4 L89,1 L78.2,-2"></path>
             </g>
-            <g id="response-lines" transform="translate(562.000000, 150.000000)" stroke="#808080" stroke-width="3" stroke-linecap="square">
+            <g id="response-lines" transform="translate(562.000000, 150.000000)" stroke="#808080" stroke-width="2" stroke-linecap="square">
                 <path d="M0.905378422,0 L85.5,0" id="response-line"></path>
-                <path id="response-line-decoration-1" d="M85.5,0 L74.7,-3 L74.7,3 L85.5,0 Z"></path>
+                <path id="response-line-decoration-1" d="M74.7,3 L85.5,0 L74.7,-3"></path>
             </g>
             <text id="event" font-family="Raleway" font-size="24" font-weight="normal" fill="#FFFFFF">
                 <tspan x="94.14" y="143">a stranger </tspan>
@@ -31,12 +34,6 @@
                 <text id="response">
                     <tspan x="0.36" y="23">you run away</tspan>
                 </text>
-            </g>
-            <g id="try-again" transform="translate(99.000000, 204.000000)">
-                <text id="try-again-label" font-family="Raleway" font-size="18" font-weight="normal" fill="#FFFFFF">
-                    <tspan x="12.004" y="21">try again…</tspan>
-                </text>
-                <rect id="Rectangle" stroke="#FFFFFF" x="0" y="0" width="103" height="30"></rect>
             </g>
         </g>
     </g>
