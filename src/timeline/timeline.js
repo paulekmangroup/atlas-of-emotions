@@ -20,48 +20,48 @@ const timeline = {
 	sectionTextBodyAwareness: Array.prototype.slice.call( document.querySelectorAll( '#timeline-section [class*="body-awareness"]' ) ),
 	episodeContent: {
 		anger: {
-			trigger: [ 'you are low on sleep', 'a stranger shouts at you', 'he seems like a bully' ],
+			trigger: [ 'you are low on sleep', 'a friend gets angry with you', 'you\'re reminded of a bully' ],
 			state: [ 'your body becomes tense', 'anger', 'you feel attacked' ],
 			response: {
-				'constructive-response': 'walk away',
-				'destructive-response': 'shout back',
-				'ambiguous-response': 'something else...'
+				'constructive-response': 'take a time out',
+				'destructive-response': 'argue',
+				'ambiguous-response': 'avoid them'
 			}
 		},
 		fear: {
-			trigger: [ 'you step into the street', 'a stranger shouts at you', 'you may be in danger' ],
-			state: [ 'your heart pounds', 'fear', 'you feel threatened' ],
+			trigger: [ 'reading scary news', 'a friend gets angry with you', 'reminds you of abandonment' ],
+			state: [ 'your heart pounds', 'fear', 'you expect them to leave' ],
 			response: {
-				'constructive-response': 'stop and look around',
-				'destructive-response': 'imagine an accident',
+				'constructive-response': 'recall why you\'re friends',
+				'destructive-response': 'imagine them leaving',
 				'ambiguous-response': 'something else...'
 			}
 		},
 		disgust: {
-			trigger: [ 'you\'re at the library', 'a stranger shouts at you', 'his voice is unbearable' ],
-			state: [ 'you shudder', 'disgust', 'you feel repulsed' ],
+			trigger: [ 'you\'re grieving', 'a friend gets angry with you', 'reminds you of insensitivity' ],
+			state: [ 'you recoil', 'disgust', 'you feel sickened' ],
 			response: {
-				'constructive-response': 'walk away',
-				'destructive-response': 'call him an idiot',
-				'ambiguous-response': 'something else...'
+				'constructive-response': 'ask why they\'re angry',
+				'destructive-response': 'belittle them',
+				'ambiguous-response': 'avoid them'
 			}
 		},
 		sadness: {
-			trigger: [ 'you lost a game', 'a stranger shouts at you', 'it seems like rejection' ],
+			trigger: [ 'listening to sad music', 'a friend gets angry with you', 'it reminds you of rejection' ],
 			state: [ 'your body weakens', 'sadness', 'you feel empty' ],
 			response: {
-				'constructive-response': 'call a friend',
+				'constructive-response': 'call a loved one',
 				'destructive-response': 'be ashamed',
-				'ambiguous-response': 'something else...'
+				'ambiguous-response': 'ignore the feeling'
 			}
 		},
 		enjoyment: {
-			trigger: [ 'you scored a touchdown', 'a stranger shouts at you', 'seems like you can\'t lose' ],
-			state: [ 'your body tingles', 'enjoyment', 'you feel proud' ],
+			trigger: [ 'you scored a touchdown', 'a friend gets angry with you', 'seems like a sore loser' ],
+			state: [ 'adrenaline rush', 'enjoyment', 'you feel righteous' ],
 			response: {
-				'constructive-response': 'smile to yourself',
+				'constructive-response': 'play on',
 				'destructive-response': 'gloat',
-				'ambiguous-response': 'something else...'
+				'ambiguous-response': 'celebrate'
 			}
 		}
 

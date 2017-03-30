@@ -1,9 +1,11 @@
 import _ from 'lodash';
+import d3 from 'd3';
+import { TweenMax, TimelineMax, Power2, Power1, Elastic, Bounce, Back } from "gsap";
+
 import Continent from '../Continent.js';
 import timeline from './timeline.js';
 import scroller from '../scroller.js';
 import dispatcher from '../dispatcher.js';
-import { TweenMax, TimelineMax, Power2, Power1, Elastic, Bounce, Back } from "gsap";
 
 export default class Episode {
 
@@ -100,6 +102,12 @@ export default class Episode {
 
 		this.stateText.forEach( this.replaceTextContentForKey( 'state', emotion, false ) );
 		this.responseText.forEach( this.replaceTextContentForKey( 'response', emotion, false ) );
+		this.triggerText.forEach( ( child, i )=> {
+			let animateText = animate && (child.parentNode.id != 'event-text');
+			let replace = this.replaceTextContentForKey( 'trigger', emotion, animateText );
+			replace( child, i );
+		} );
+
 
 	}
 
@@ -204,9 +212,21 @@ export default class Episode {
 				responseLines = timeline.select( '#response-lines', this.parent );
 
 			//text
-			var event = timeline.select( '#event', this.parent ),
+			var event = timeline.select( '#event-text', this.parent ),
 				responses = timeline.select( '#responses', this.parent ),
 				responseChildren = timeline.selectAll( 'tspan', responses );
+			var trigger = timeline.select( '#trigger', this.parent );
+			this.triggerText = [
+				timeline.select( 'tspan', event ),
+			];
+
+			d3.selectAll( this.triggerText )
+				.attr( 'text-anchor', 'middle' )
+				.attr( 'x', function () {
+					return parseFloat( this.getComputedTextLength() ) / 2 + parseFloat( this.getAttribute( 'x' ) );
+				} );
+
+
 
 			this.stateText = [
 				stateLabelChildren[ 1 ]
@@ -270,12 +290,6 @@ export default class Episode {
 			this.addStatePulsation();
 
 			this.episodeTimeline.pause();
-
-			//tryAgainButton.onclick = function () {
-			//	var emotions = Object.values( dispatcher.EMOTIONS );
-			//	var nextEmotion = emotions[ (emotions.indexOf( this.currentEmotion ) + 1) % emotions.length ];
-			//	dispatcher.navigate( 'triggers', nextEmotion );
-			//}.bind( this );
 
 			TweenMax.set( state, { visibility: 'visible' } );
 

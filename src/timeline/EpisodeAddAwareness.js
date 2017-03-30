@@ -1,10 +1,11 @@
+import d3 from 'd3';
+import { TweenMax, TimelineMax, Power2, Power1, Bounce } from "gsap";
+
 import Episode from './Episode.js';
 import Continent from '../Continent.js';
 import scroller from '../scroller.js';
 import timeline from './timeline.js';
 import dispatcher from '../dispatcher.js';
-import { TweenMax, TimelineMax, Power2, Power1, Bounce } from "gsap";
-import d3 from 'd3';
 import BlockDiagram from './BlockDiagram';
 
 
@@ -15,18 +16,12 @@ export default class EpisodeAddAwareness extends Episode {
 
 		super.replaceContent( emotion, animate );
 
-		this.triggerText.forEach( ( child, i )=> {
-			let animateText = animate && (child.parentNode.id != 'event-text');
-			let replace = this.replaceTextContentForKey( 'trigger', emotion, animateText );
-			replace( child, i );
-		} );
-
 		var textColor = this.configsByEmotion[ emotion ].colorPalette[ 0 ];
 
 		this.responseTextUnawareColor =
-			'rgba(' + Math.min( textColor[ 0 ] + 50, 255 )
-			+ ',' + Math.min( textColor[ 1 ] + 50, 255 )
-			+ ',' + Math.min( textColor[ 2 ] + 50, 255 )
+			'rgba(' + Math.min( textColor[ 0 ] + 80, 255 )
+			+ ',' + Math.min( textColor[ 1 ] + 80, 255 )
+			+ ',' + Math.min( textColor[ 2 ] + 80, 255 )
 			+ ', 0.9)';
 
 	}
@@ -100,14 +95,14 @@ export default class EpisodeAddAwareness extends Episode {
 			//lines
 			var eventLineGroup = timeline.select( '#event-lines', timelineWithExamples ),
 				eventLines = [
-					timeline.select( "path#precondition-line", eventLineGroup ),
+					//timeline.select( "path#precondition-line", eventLineGroup ),
 					timeline.select( "path#event-line", eventLineGroup ),
-					timeline.select( "path#perceptual-database-line", eventLineGroup )
+					//timeline.select( "path#perceptual-database-line", eventLineGroup )
 				],
 				eventLineDecorations = [
-					timeline.select( "path#precondition-line-decoration-1", eventLineGroup ),
+					//timeline.select( "path#precondition-line-decoration-1", eventLineGroup ),
 					timeline.select( "path#event-line-decoration-1", eventLineGroup ),
-					timeline.select( "path#perceptual-database-line-decoration-1", eventLineGroup )
+					//timeline.select( "path#perceptual-database-line-decoration-1", eventLineGroup )
 				],
 				responseLineGroup = timeline.select( '#response-lines', timelineWithExamples ),
 				responseLines = timeline.selectAll( "path:not([id*='decoration'])", responseLineGroup ),
@@ -146,9 +141,9 @@ export default class EpisodeAddAwareness extends Episode {
 
 
 			d3.selectAll( this.triggerText )
-				.attr( 'text-anchor', 'end' )
+				.attr( 'text-anchor', 'middle' )
 				.attr( 'x', function () {
-					return parseFloat( this.getComputedTextLength() ) + parseFloat( this.getAttribute( 'x' ) );
+					return parseFloat( this.getComputedTextLength() ) / 2 + parseFloat( this.getAttribute( 'x' ) );
 				} );
 			d3.selectAll( this.stateText )
 				.attr( 'text-anchor', 'middle' )
@@ -257,7 +252,7 @@ export default class EpisodeAddAwareness extends Episode {
 
 				setResponseLineColor( 1, aware, time );
 				setResponseLineStyle( 1, aware, time );
-				setEventLineColor( 1, aware, time );
+				setEventLineColor( 0, aware, time );
 
 				setTextColor( event, aware, time );
 				setResponseTextColor( destructiveResponse, aware, time );
@@ -327,6 +322,7 @@ export default class EpisodeAddAwareness extends Episode {
 				blockDiagram.addMouseHandlers( clickableElements );
 				this.refractoryBlocks = blockDiagram.getRefractoryBlocks();
 				this.blockDiagramEnabled = true;
+				this.refractoryPeriodEnabled = false;
 			};
 
 			//pulsate illumination

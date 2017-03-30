@@ -19,8 +19,8 @@
                 <rect id="glow" fill="url(#radialGradient-1)" x="9300" y="0" width="900" height="900"></rect>
                 <rect id="block" fill="#FFFFFF" x="0" y="300" width="10000" height="300"></rect>
             </g>
-            <g id="timeline-with-examples" transform="translate(-18.000000, 16.000000)">
-                <g id="changes" transform="translate(347.000000, 0.000000)" font-size="20" font-family="Raleway" fill="#454545" font-weight="normal">
+            <g id="timeline-with-examples" transform="translate(3.000000, 16.000000)">
+                <g id="changes" transform="translate(326.000000, 0.000000)" font-size="20" font-family="Raleway" fill="#454545" font-weight="normal">
                     <text id="physical-changes">
                         <tspan x="0.14" y="19">your body becomes tense</tspan>
                     </text>
@@ -28,7 +28,7 @@
                         <tspan x="15.23" y="261">your mind starts racing</tspan>
                     </text>
                 </g>
-                <g id="state" transform="translate(387.000000, 54.000000)">
+                <g id="state" transform="translate(366.000000, 54.000000)">
                     <ellipse id="c6" fill-opacity="0.399999976" fill="#4B4747" cx="81.1301357" cy="81.1301357" rx="80.5582319" ry="80.5582319"></ellipse>
                     <ellipse id="c5" fill-opacity="0.249999985" fill="#4B4747" cx="81.1301357" cy="81.1301357" rx="69.5722656" ry="69.5722656"></ellipse>
                     <ellipse id="c4" fill-opacity="0.249999985" fill="#4B4747" cx="81.8826852" cy="80.8382396" rx="60.4218691" ry="60.4218691"></ellipse>
@@ -40,34 +40,34 @@
                         <tspan x="51.1777085" y="102">FEAR</tspan>
                     </text>
                 </g>
-                <g id="event-lines" transform="translate(287.000000, 78.000000)" stroke="#454545" stroke-width="2" stroke-linecap="square">
-                    <path d="M0,56 L60,56" id="event-line"></path>
-                    <path id="event-line-decoration-1" d="M49.2,59 L60,56 L49.2,53"></path>
-                    <path d="M3.57017273,0.404755575 L60.9484581,17.9470579" id="precondition-line"></path>
-                    <path id="precondition-line-decoration-1" d="M49.7432516,17.6583577 L60.9484581,17.9470579 L51.4974818,11.9205292"></path>
-                    <g id="perceptual-database-line-group" transform="translate(3.000000, 94.000000)">
-                        <path d="M0.553971742,19.1097954 L57.6173627,0.568775699" id="perceptual-database-line"></path>
-                        <path id="perceptual-database-line-decoration-1" d="M48.2730033,6.75932879 L57.6173627,0.568775699 L46.4189014,1.05298969"></path>
-                    </g>
+                <g id="event-lines" transform="translate(279.000000, 133.000000)" stroke="#454545" stroke-width="2" stroke-linecap="square">
+                    <path d="M0,1 L60,1" id="event-line"></path>
+                    <path id="event-line-decoration-1" d="M49.2,4 L60,1 L49.2,-2"></path>
                 </g>
-                <g id="trigger" transform="translate(0.000000, 61.000000)" font-size="20" font-family="Raleway" fill="#454545" font-weight="normal">
-                    <g id="event" transform="translate(35.000000, 60.000000)">
+                <g id="trigger" transform="translate(0.000000, 61.000000)" font-weight="normal" font-family="Raleway" fill="#454545">
+                    <g id="event" transform="translate(0.000000, 60.000000)" font-size="20">
                         <text id="event-text">
-                            <tspan x="4.17783418" y="19">a stranger shouts at you</tspan>
+                            <tspan x="4.44" y="19">a friend gets angry with you</tspan>
                         </text>
                     </g>
-                    <g id="precondition" transform="translate(35.000000, 0.000000)">
+                    <g id="precondition" transform="translate(20.000000, 0.000000)" font-size="20">
                         <text id="precondition-text">
-                            <tspan x="45.8778342" y="19">you’re low on sleep</tspan>
+                            <tspan x="22.9389171" y="19">you’re low on sleep</tspan>
                         </text>
                     </g>
-                    <g id="perceptual-database" transform="translate(0.000000, 120.000000)">
+                    <g id="perceptual-database" transform="translate(3.000000, 120.000000)" font-size="20">
                         <text id="perceptual-database-text">
-                            <tspan x="27.0029687" y="19">he reminds you of a bully</tspan>
+                            <tspan x="13.5014844" y="19">he reminds you of a bully</tspan>
                         </text>
                     </g>
+                    <text id="+" opacity="0.527796649" font-size="36">
+                        <tspan x="127.13144" y="115">+</tspan>
+                    </text>
+                    <text id="+" opacity="0.527796649" font-size="36">
+                        <tspan x="127.13144" y="56">+</tspan>
+                    </text>
                 </g>
-                <g id="responses" transform="translate(679.000000, 63.000000)" font-size="20" font-family="Raleway" font-weight="normal">
+                <g id="responses" transform="translate(643.000000, 63.000000)" font-size="20" font-family="Raleway" font-weight="normal">
                     <text id="ambiguous-response" fill="#454545">
                         <tspan x="0" y="136">something else…</tspan>
                     </text>
@@ -78,17 +78,17 @@
                         <tspan x="0" y="19">walk away</tspan>
                     </text>
                 </g>
-                <g id="response-lines" transform="translate(586.000000, 82.000000)" stroke-width="2" stroke-linecap="square">
+                <g id="response-lines" transform="translate(552.000000, 82.000000)" stroke-width="2" stroke-linecap="square">
                     <path d="M0,93 L58.7500091,107.689702" id="response-line-3" stroke="#454545"></path>
                     <path id="response-line-3-decoration-1" d="M47.544853,107.98035 L58.7500091,107.689702 L49.0002719,102.159546" stroke="#454545"></path>
-                    <path d="M1.34367727,53 L61,53" id="response-line-2" stroke="#808080"></path>
-                    <path id="response-line-2-decoration-1" d="M50.2,56 L61,53 L50.2,50" stroke="#808080"></path>
+                    <path d="M4.34367727,53 L64,53" id="response-line-2" stroke="#808080"></path>
+                    <path id="response-line-2-decoration-1" d="M53.2,56 L64,53 L53.2,50" stroke="#808080"></path>
                     <path d="M0,14.6897019 L58.7500091,0" id="response-line-1" stroke="#454545"></path>
                     <path id="response-line-1-decoration-1" d="M49.0002719,5.53015581 L58.7500091,0 L47.544853,-0.290647912" stroke="#454545"></path>
                 </g>
             </g>
-            <g id="blocks" transform="translate(9.000000, 15.000000)">
-                <g id="state-block" transform="translate(358.000000, 52.000000)">
+            <g id="blocks" transform="translate(8.000000, 15.000000)">
+                <g id="state-block" transform="translate(359.000000, 52.000000)">
                     <circle id="c3" stroke="#454545" fill="#FFFFFF" cx="83.5" cy="83.5" r="82.986834"></circle>
                     <circle id="c2" stroke="#E3E3E3" fill="#FFFFFF" cx="83.5" cy="83.5" r="62.243417"></circle>
                     <circle id="c1" stroke="#E3E3E3" fill="#FFFFFF" cx="83.5" cy="83.5" r="37.743417"></circle>
@@ -97,52 +97,52 @@
                         <tspan x="54.2217085" y="105">state</tspan>
                     </text>
                 </g>
-                <g id="physical-changes-block" transform="translate(321.000000, 0.000000)">
-                    <rect id="Rectangle-2" stroke="#454545" fill="#FFFFFF" x="0" y="0" width="240" height="30"></rect>
+                <g id="physical-changes-block" transform="translate(313.000000, 0.000000)">
+                    <rect id="Rectangle-2" stroke="#454545" fill="#FFFFFF" x="0.849609375" y="0" width="256.300781" height="30"></rect>
                     <text id="physical-changes" font-family="Raleway" font-size="20" font-weight="normal" fill="#454545">
-                        <tspan x="40.49" y="21">physical changes</tspan>
+                        <tspan x="49.49" y="21">physical changes</tspan>
                     </text>
                 </g>
-                <g id="mental-changes-block" transform="translate(321.000000, 239.000000)">
-                    <rect id="Rectangle-2" stroke="#454545" fill="#FFFFFF" x="0" y="0" width="240" height="30"></rect>
+                <g id="mental-changes-block" transform="translate(313.000000, 239.000000)">
+                    <rect id="Rectangle-2" stroke="#454545" fill="#FFFFFF" x="0.849609375" y="0" width="256.300781" height="30"></rect>
                     <text id="mental-changes" font-family="Raleway" font-size="20" font-weight="normal" fill="#454545">
-                        <tspan x="46.22" y="21">mental changes</tspan>
+                        <tspan x="55.22" y="21">mental changes</tspan>
                     </text>
                 </g>
-                <g id="event-block" transform="translate(1.000000, 120.000000)">
-                    <rect id="Rectangle-2-Copy" stroke="#454545" fill="#FFFFFF" x="0" y="0" width="240" height="30"></rect>
+                <g id="event-block" transform="translate(0.000000, 120.000000)">
+                    <rect id="Rectangle-2-Copy" stroke="#454545" fill="#FFFFFF" x="0.66015625" y="0" width="255.705129" height="30"></rect>
                     <text id="event" font-family="Raleway" font-size="20" font-weight="normal" fill="#454545">
-                        <tspan x="94.215285" y="21">event</tspan>
+                        <tspan x="104.215285" y="21">event</tspan>
                     </text>
                 </g>
-                <g id="destructive-response-block" transform="translate(637.000000, 120.000000)">
-                    <rect id="Rectangle-2-Copy" stroke="#454545" fill="#FFFFFF" x="0.42746114" y="0" width="240" height="30"></rect>
+                <g id="destructive-response-block" transform="translate(634.000000, 120.000000)">
+                    <rect id="Rectangle-2-Copy" stroke="#454545" fill="#FFFFFF" x="0.45759796" y="0" width="247.939726" height="30"></rect>
                     <text id="destructive-response" font-family="Raleway" font-size="20" font-weight="normal" fill="#454545">
-                        <tspan x="24.3765285" y="22">destructive response</tspan>
+                        <tspan x="28.3765285" y="22">destructive response</tspan>
                     </text>
                 </g>
-                <g id="constructive-response-block" transform="translate(637.000000, 60.000000)">
-                    <rect id="Rectangle-2-Copy" stroke="#808080" fill="#FFFFFF" x="0.42746114" y="0" width="240" height="30"></rect>
+                <g id="constructive-response-block" transform="translate(634.000000, 60.000000)">
+                    <rect id="Rectangle-2-Copy" stroke="#808080" fill="#FFFFFF" x="0.45759796" y="0" width="247.939726" height="30"></rect>
                     <text id="constructive-respons" font-family="Raleway" font-size="20" font-weight="normal" fill="#454545">
-                        <tspan x="18.05" y="21">constructive response</tspan>
+                        <tspan x="22.05" y="21">constructive response</tspan>
                     </text>
                 </g>
-                <g id="ambiguous-response-block" transform="translate(637.000000, 180.000000)">
-                    <rect id="Rectangle-2-Copy" stroke="#808080" fill="#FFFFFF" x="0.42746114" y="0" width="240" height="30"></rect>
+                <g id="ambiguous-response-block" transform="translate(634.000000, 180.000000)">
+                    <rect id="Rectangle-2-Copy" stroke="#808080" fill="#FFFFFF" x="0.45759796" y="0" width="247.939726" height="30"></rect>
                     <text id="ambiguous-response" font-family="Raleway" font-size="20" font-weight="normal" fill="#454545">
-                        <tspan x="23.26" y="21">ambiguous response</tspan>
+                        <tspan x="27.26" y="21">ambiguous response</tspan>
                     </text>
                 </g>
-                <g id="precondition-block" transform="translate(1.000000, 60.000000)">
-                    <rect id="Rectangle-2" stroke="#454545" fill="#FFFFFF" x="0" y="0" width="240" height="30"></rect>
+                <g id="precondition-block" transform="translate(0.000000, 60.000000)">
+                    <rect id="Rectangle-2" stroke="#454545" fill="#FFFFFF" x="0.66015625" y="0" width="255.705129" height="30"></rect>
                     <text id="precondition" font-family="Raleway" font-size="20" font-weight="normal" fill="#454545">
-                        <tspan x="61.3154404" y="21">precondition</tspan>
+                        <tspan x="71.3154404" y="21">precondition</tspan>
                     </text>
                 </g>
                 <g id="perceptual-database-block" transform="translate(0.000000, 180.000000)">
-                    <rect id="Rectangle-2-Copy-2" stroke="#454545" fill="#FFFFFF" x="1" y="0" width="240" height="30"></rect>
+                    <rect id="Rectangle-2-Copy-2" stroke="#454545" fill="#FFFFFF" x="0.66015625" y="0" width="255.705129" height="30"></rect>
                     <text id="perceptual-database" font-family="Raleway" font-size="20" font-weight="normal" fill="#454545">
-                        <tspan x="24.9904663" y="21">perceptual database</tspan>
+                        <tspan x="33.9904663" y="21">perceptual database</tspan>
                     </text>
                 </g>
             </g>

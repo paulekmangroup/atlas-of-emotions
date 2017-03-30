@@ -18,21 +18,24 @@
                     <tspan x="51.1777085" y="102">FEAR</tspan>
                 </text>
             </g>
-            <g id="event-lines" transform="translate(249.000000, 149.000000)" stroke="#808080" stroke-width="2" stroke-linecap="square">
-                <path d="M0.5,1 L89,1" id="event-line"></path>
-                <path id="event-line-decoration-1" d="M78.2,4 L89,1 L78.2,-2"></path>
+            <g id="event-lines" transform="translate(282.000000, 149.000000)" stroke="#808080" stroke-width="2" stroke-linecap="square">
+                <path d="M0.353932584,1 L63,1" id="event-line"></path>
+                <path id="event-line-decoration-1" d="M52.2,4 L63,1 L52.2,-2"></path>
             </g>
-            <g id="response-lines" transform="translate(562.000000, 150.000000)" stroke="#808080" stroke-width="2" stroke-linecap="square">
-                <path d="M0.905378422,0 L85.5,0" id="response-line"></path>
-                <path id="response-line-decoration-1" d="M74.7,3 L85.5,0 L74.7,-3"></path>
+            <g id="response-lines" transform="translate(557.000000, 151.000000)" stroke="#808080" stroke-width="2" stroke-linecap="square">
+                <path d="M0.6948253,0 L65.6162791,0" id="response-line"></path>
+                <path id="response-line-decoration-1" d="M54.8162791,3 L65.6162791,0 L54.8162791,-3"></path>
             </g>
-            <text id="event" font-family="Raleway" font-size="24" font-weight="normal" fill="#FFFFFF">
-                <tspan x="94.14" y="143">a stranger </tspan>
-                <tspan x="75.636" y="172">shouts at you</tspan>
-            </text>
-            <g id="responses" transform="translate(676.000000, 134.000000)" font-size="24" font-family="Raleway" fill="#FFFFFF" font-weight="normal">
+            <g id="trigger" transform="translate(0.000000, 138.000000)" font-size="20" font-family="Raleway" fill="#FFFFFF" font-weight="normal">
+                <g id="event">
+                    <text id="event-text">
+                        <tspan x="5.94" y="19">a friend gets angry with you</tspan>
+                    </text>
+                </g>
+            </g>
+            <g id="responses" transform="translate(647.000000, 138.000000)" font-size="20" font-family="Raleway" fill="#FFFFFF" font-weight="normal">
                 <text id="response">
-                    <tspan x="0.36" y="23">you run away</tspan>
+                    <tspan x="0.8" y="19">you run away</tspan>
                 </text>
             </g>
         </g>

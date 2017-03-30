@@ -595,8 +595,10 @@ svg {
 		width: 100%;
 		height: auto;
 	}
-	svg {
+	.episode-parent svg {
 		pointer-events: auto;
+		overflow: visible;
+		-webkit-font-smoothing: antialiased;
 	}
 }
 
@@ -624,7 +626,7 @@ svg {
 
 #timeline-section{
 	svg tspan {
-		font-weight: 300;
+		font-weight: 400;
 	}
 }
 
