@@ -416,9 +416,6 @@ svg {
 			border: none;
 			margin-top: -15px;
 		}
-		//&:last-of-type {
-		//	border-bottom: 1px solid #777;
-		//}
 		h3 {
 			position: relative;
 			margin-bottom: 5px;
@@ -429,7 +426,7 @@ svg {
 				display: block;
 				position: absolute;
 				right: 0;
-				top: -2px;
+				top: -6px;
 				font-size: 30px;
 				height: 30px;
 				line-height: 1;
@@ -437,7 +434,7 @@ svg {
 			}
 		}
 		p, ul {
-			transition: all 0.3s;
+			transition: opacity 0.3s;
 		}
 		ul {
 			margin: -10px 0;
@@ -451,7 +448,7 @@ svg {
 			}
 			p, ul {
 				opacity: 0;
-				transition: all 0s;
+				transition: opacity 0s;
 			}
 		}
 	}
@@ -623,6 +620,12 @@ svg {
 #introduction,
 #timeline {
 	pointer-events: all;
+}
+
+#timeline-section{
+	svg tspan {
+		font-weight: 300;
+	}
 }
 
 #calm {
