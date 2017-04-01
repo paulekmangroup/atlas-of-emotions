@@ -6,6 +6,7 @@ import { TweenMax, TimelineMax } from "gsap";
 const scroller = {
 
 	SLIDE_INTERVAL_DELAY: 7000,
+	ABOUT_IMAGE_INTERVAL_DELAY: 7,
 
 	ATLAS_TO_FULLPAGE_SECTIONS: {
 		'introduction': 'introduction',
@@ -32,6 +33,7 @@ const scroller = {
 	$topNav: null,
 	$topNavLinks: null,
 	anchors: [],
+	fadeImages: false,
 
 	hasEmotionState: function ( anchor ) {
 		var section = $( '#' + anchor + '-section' );
@@ -56,10 +58,6 @@ const scroller = {
 
 	toggleEmotionNav: function ( visible ) {
 		$( '.emotion-nav' ).toggleClass( 'visible', visible );
-	},
-
-	emotionNavVisible: function () {
-		return $( '.emotion-nav' ).hasClass( 'visible' );
 	},
 
 	pulseEmotionNav: function () { //TODO should this have an event in the dispatcher?
@@ -288,12 +286,38 @@ const scroller = {
 		$scroller.mousewheel( this.getBounceCallback( this.topOverscroll ) );
 	},
 
-	initAboutLInk: function () {
+	initAboutLink: function () {
 		// add click for about the atlas, in the intro
-		$( '.about-link' ).click( function ( e ) {
+		$( '.about-link' ).click( ( e ) => {
 			e.preventDefault();
-			$( '.introduction-hero' ).toggleClass( 'about-visible' );
+			let $hero = $( '.introduction-hero' );
+			$hero.toggleClass( 'about-visible' );
+			if ( $hero.hasClass( 'about-visible' ) ) {
+				this.fadeAboutImage( 0 );
+			} else {
+				this.fadeImages = false;
+				this.fadeTweens.forEach( ( tween )=>tween.kill() );
+			}
 		} );
+	},
+
+	fadeAboutImage: function ( i ) {
+		let nextIndex = (i + 1) % (this.aboutImages.length);
+		if ( !this.fadeImages ) {
+			TweenMax.set( this.aboutImages[ i ], { autoAlpha: 1 } );
+			TweenMax.set( this.aboutImages[ nextIndex ], { autoAlpha: 0 } );
+		}
+		this.fadeImages = true;
+		this.fadeTweens[ 0 ] = TweenMax.delayedCall( this.ABOUT_IMAGE_INTERVAL_DELAY, ()=> {
+			this.fadeTweens[ 1 ] = TweenMax.fromTo( this.aboutImages[ i ], this.ABOUT_IMAGE_INTERVAL_DELAY / 2, { autoAlpha: 1 }, { autoAlpha: 0 } );
+			this.fadeTweens[ 2 ] = TweenMax.fromTo( this.aboutImages[ nextIndex ], this.ABOUT_IMAGE_INTERVAL_DELAY / 2, { autoAlpha: 0 }, { autoAlpha: 1 } );
+			this.fadeAboutImage( nextIndex );
+		} );
+	},
+
+	initImageFades: function () {
+		this.aboutImages = [].slice.call( $( 'img.fade' ) );
+		this.fadeTweens = [];
 	},
 
 	initFullpageSections: function () {
@@ -334,12 +358,13 @@ const scroller = {
 		this.initTopNav();
 		this.initEmotionNav();
 		this.initFullpageSections();
+		this.initImageFades();
 
 		// respond to hash changes, call hashChange on load to update fullpage section
 		window.addEventListener( 'hashchange', this.hashChange.bind( this ) );
 		this.hashChange();
 
-		this.initAboutLInk();
+		this.initAboutLink();
 		this.initMoreContentLinks();
 	}
 
