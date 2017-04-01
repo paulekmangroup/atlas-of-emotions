@@ -158,8 +158,8 @@ export default class EpisodeAddAwareness extends Episode {
 
 			//add awareness buttons
 
-			var addAwarenessButtonState = timeline.select( '#state-add-awareness', document );
-			addAwarenessButtonState.style.visibility = 'hidden'; //TODO should these be handled in css? what's typical in this app?
+			var addAwarenessButtonExperience = timeline.select( '#experience-add-awareness', document );
+			addAwarenessButtonExperience.style.visibility = 'hidden'; //TODO should these be handled in css? what's typical in this app?
 
 			var addAwarenessButtonResponse = timeline.select( '#response-add-awareness', document );
 			addAwarenessButtonResponse.style.visibility = 'hidden';
@@ -220,7 +220,7 @@ export default class EpisodeAddAwareness extends Episode {
 			};
 
 			var addResponseLineAwareness = function () {
-				if ( awarenessStage == 'state' ) {
+				if ( awarenessStage == 'experience' ) {
 					//reset center line color
 					setResponseLineColor( 1, true );
 				}
@@ -236,7 +236,7 @@ export default class EpisodeAddAwareness extends Episode {
 			};
 
 			var addStateAwareness = function () {
-				if ( awarenessStage == 'state' ) {
+				if ( awarenessStage == 'experience' ) {
 					physicalChanges.style.visibility = 'visible';
 					mentalChanges.style.visibility = 'visible';
 				}
@@ -269,9 +269,9 @@ export default class EpisodeAddAwareness extends Episode {
 					TweenMax.to( illuminationBlock, 4, { css: { width: '+=300' }, ease: Power2.easeInOut } );
 					//TweenMax.to( illuminationGlow, 4, { attr: { x: '+=300' }, ease: Power2.easeInOut } );
 
-					awarenessStage = 'state';
+					awarenessStage = 'experience';
 
-				} else if ( awarenessStage == 'state' ) {
+				} else if ( awarenessStage == 'experience' ) {
 
 					var illuminationTimeline = new TimelineMax( {} );
 
@@ -337,10 +337,10 @@ export default class EpisodeAddAwareness extends Episode {
 			};
 
 			var showAddAwarenessButton = function () {
-				if ( awarenessStage == 'event' && addAwarenessButtonState.style.visibility == 'hidden' ) {
-					TweenMax.to( addAwarenessButtonState, 1, { autoAlpha: 1, ease: Power2.easeOut } );
+				if ( awarenessStage == 'event' && addAwarenessButtonExperience.style.visibility == 'hidden' ) {
+					TweenMax.to( addAwarenessButtonExperience, 1, { autoAlpha: 1, ease: Power2.easeOut } );
 				}
-				if ( awarenessStage == 'state' && addAwarenessButtonResponse.style.visibility == 'hidden' ) {
+				if ( awarenessStage == 'experience' && addAwarenessButtonResponse.style.visibility == 'hidden' ) {
 					TweenMax.to( addAwarenessButtonResponse, 1, { autoAlpha: 1, ease: Power2.easeOut } );
 				}
 				if ( awarenessStage == 'refractory' && blockDiagramButton.style.visibility == 'hidden' ) {
@@ -450,18 +450,18 @@ export default class EpisodeAddAwareness extends Episode {
 				.from( eventLineGroup, 0.5, { autoAlpha: 0, ease: Power1.easeOut }, 'event-lines' )
 
 				// show emo state
-				.add( 'state' );
+				.add( 'experience' );
 
 			this.addStateEmergence();
 
 			this.episodeTimeline
-				.addCallback( addStateAwareness, 'state' )
-				.addCallback( this.triggerRefractoryEffects.bind( this ), 'state' )
-				.from( changes, 2, { autoAlpha: 0, ease: Power1.easeOut }, 'state' )
+				.addCallback( addStateAwareness, 'experience' )
+				.addCallback( this.triggerRefractoryEffects.bind( this ), 'experience' )
+				.from( changes, 2, { autoAlpha: 0, ease: Power1.easeOut }, 'experience' )
 				.from( stateLabel, 2, {
 					autoAlpha: 0,
 					ease: Power1.easeOut,
-				}, 'state' )
+				}, 'experience' )
 				.add( 'pulsate' )
 				//show response
 				.add( 'response-lines', '-=0.5' )
@@ -510,7 +510,7 @@ export default class EpisodeAddAwareness extends Episode {
 			};
 
 
-			addAwarenessButtonState.onclick = awarenessClickCallback.bind( this );
+			addAwarenessButtonExperience.onclick = awarenessClickCallback.bind( this );
 			addAwarenessButtonResponse.onclick = awarenessClickCallback.bind( this );
 			refractoryPeriodButton.onclick = refractoryPeriodClickCallback.bind( this );
 			blockDiagramButton.onclick = blockDiagramClickCallback.bind( this );
