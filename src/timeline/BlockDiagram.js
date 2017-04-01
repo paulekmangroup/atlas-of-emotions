@@ -1,6 +1,7 @@
-import timeline from './timeline.js';
+import d3 from 'd3';
 import { TweenMax, TimelineMax } from "gsap";
 
+import timeline from './timeline.js';
 
 /**
  * Represents the Block Diagram aspect of the visualization
@@ -19,16 +20,25 @@ export default function BlockDiagram( element, parent ) {
 
 	for ( var i = 0; i < this.blocks.length; i++ ) {
 		this.blocks[ i ].style.visibility = 'hidden';
+		if ( this.blocks[ i ].id != 'state-block' ) {
+			d3.select( this.blocks[ i ] )
+				.selectAll( 'tspan' )
+				.attr( 'text-anchor', 'middle' )
+				.attr( 'x', function () {
+					return parseFloat( this.getComputedTextLength() ) / 2 + parseFloat( this.getAttribute( 'x' ) );
+				} );
+			this.blocks[i ].style.textTransform = 'uppercase';
+		}
 	}
 
 	this.getRefractoryBlocks = function () {
 		return [
-			this.getBlockByName('precondition'),
-			this.getBlockByName('perceptual-database'),
-			this.getBlockByName('mental-changes'),
-			this.getBlockByName('physical-changes'),
-			this.getBlockByName('constructive-response'),
-			this.getBlockByName('ambiguous-response')
+			this.getBlockByName( 'precondition' ),
+			this.getBlockByName( 'perceptual-database' ),
+			this.getBlockByName( 'mental-changes' ),
+			this.getBlockByName( 'physical-changes' ),
+			this.getBlockByName( 'constructive-response' ),
+			this.getBlockByName( 'ambiguous-response' )
 		];
 	};
 
