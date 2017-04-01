@@ -3,7 +3,6 @@ $section-text-padding: 1.5em;
 $more-text-padding: 3em;
 $section-text-background-color: #eee;
 
-
 body,
 html {
 	width: 100%;
@@ -580,6 +579,20 @@ svg {
 	top: 0;
 	padding-top: 50px;
 	left: -1*$section-text-width;
+	overflow-y: auto;
+	.fade-images {
+		position: relative;
+		width: 100%;
+	}
+	img.fade {
+		width: 100%;
+		height: auto;
+		margin-bottom: 1em;
+		&:nth-child(2){
+			position: absolute;
+			top: 0;
+		}
+	}
 }
 
 .section-graphics {
@@ -624,7 +637,7 @@ svg {
 	pointer-events: all;
 }
 
-#timeline-section{
+#timeline-section {
 	svg tspan {
 		font-weight: 400;
 	}
