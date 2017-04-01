@@ -92,57 +92,57 @@
                     <circle id="c3" stroke="#454545" fill="#FFFFFF" cx="83.5" cy="83.5" r="82.986834"></circle>
                     <circle id="c2" stroke="#E3E3E3" fill="#FFFFFF" cx="83.5" cy="83.5" r="62.243417"></circle>
                     <circle id="c1" stroke="#E3E3E3" fill="#FFFFFF" cx="83.5" cy="83.5" r="37.743417"></circle>
-                    <text id="state-label" font-family="Raleway-Bold, Raleway" font-size="24" font-weight="bold" fill="#454545">
-                        <tspan x="25.1697085" y="76">emotional </tspan>
-                        <tspan x="54.2217085" y="105">state</tspan>
+                    <text id="state-label" font-family="Raleway-SemiBold, Raleway" font-size="24" font-weight="500" fill="#454545">
+                        <tspan x="27.0817085" y="78">Emotional </tspan>
+                        <tspan x="54.5737085" y="107">State</tspan>
                     </text>
                 </g>
                 <g id="physical-changes-block" transform="translate(313.000000, 0.000000)">
                     <rect id="Rectangle-2" stroke="#454545" fill="#FFFFFF" x="0.849609375" y="0" width="256.300781" height="30"></rect>
-                    <text id="physical-changes" font-family="Raleway" font-size="20" font-weight="normal" fill="#454545">
-                        <tspan x="49.49" y="21">physical changes</tspan>
+                    <text id="physical-changes" font-family="Raleway-SemiBold, Raleway" font-size="14.3999996" font-weight="500" fill="#454545">
+                        <tspan x="70.4024016" y="20">physical changes</tspan>
                     </text>
                 </g>
                 <g id="mental-changes-block" transform="translate(313.000000, 239.000000)">
                     <rect id="Rectangle-2" stroke="#454545" fill="#FFFFFF" x="0.849609375" y="0" width="256.300781" height="30"></rect>
-                    <text id="mental-changes" font-family="Raleway" font-size="20" font-weight="normal" fill="#454545">
-                        <tspan x="55.22" y="21">mental changes</tspan>
+                    <text id="mental-changes" font-family="Raleway-SemiBold, Raleway" font-size="14.3999996" font-weight="500" fill="#454545">
+                        <tspan x="74.6144015" y="21">mental changes</tspan>
                     </text>
                 </g>
                 <g id="event-block" transform="translate(0.000000, 120.000000)">
                     <rect id="Rectangle-2-Copy" stroke="#454545" fill="#FFFFFF" x="0.66015625" y="0" width="255.705129" height="30"></rect>
-                    <text id="event" font-family="Raleway" font-size="20" font-weight="normal" fill="#454545">
-                        <tspan x="104.215285" y="21">event</tspan>
+                    <text id="event" font-family="Raleway-SemiBold, Raleway" font-size="14.3999996" font-weight="500" fill="#454545">
+                        <tspan x="111.018885" y="21">event</tspan>
                     </text>
                 </g>
                 <g id="destructive-response-block" transform="translate(634.000000, 120.000000)">
                     <rect id="Rectangle-2-Copy" stroke="#454545" fill="#FFFFFF" x="0.45759796" y="0" width="247.939726" height="30"></rect>
-                    <text id="destructive-response" font-family="Raleway" font-size="20" font-weight="normal" fill="#454545">
-                        <tspan x="28.3765285" y="22">destructive response</tspan>
+                    <text id="destructive-response" font-family="Raleway-SemiBold, Raleway" font-size="14.3999996" font-weight="500" fill="#454545">
+                        <tspan x="53.6073304" y="21">destructive response</tspan>
                     </text>
                 </g>
                 <g id="constructive-response-block" transform="translate(634.000000, 60.000000)">
                     <rect id="Rectangle-2-Copy" stroke="#808080" fill="#FFFFFF" x="0.45759796" y="0" width="247.939726" height="30"></rect>
-                    <text id="constructive-respons" font-family="Raleway" font-size="20" font-weight="normal" fill="#454545">
-                        <tspan x="22.05" y="21">constructive response</tspan>
+                    <text id="constructive-respons" font-family="Raleway-SemiBold, Raleway" font-size="14.3999996" font-weight="500" fill="#454545">
+                        <tspan x="48.684002" y="21">constructive response</tspan>
                     </text>
                 </g>
                 <g id="ambiguous-response-block" transform="translate(634.000000, 180.000000)">
                     <rect id="Rectangle-2-Copy" stroke="#808080" fill="#FFFFFF" x="0.45759796" y="0" width="247.939726" height="30"></rect>
-                    <text id="ambiguous-response" font-family="Raleway" font-size="20" font-weight="normal" fill="#454545">
-                        <tspan x="27.26" y="21">ambiguous response</tspan>
+                    <text id="ambiguous-response" font-family="Raleway-SemiBold, Raleway" font-size="14.3999996" font-weight="500" fill="#454545">
+                        <tspan x="52.9392019" y="21">ambiguous response</tspan>
                     </text>
                 </g>
                 <g id="precondition-block" transform="translate(0.000000, 60.000000)">
                     <rect id="Rectangle-2" stroke="#454545" fill="#FFFFFF" x="0.66015625" y="0" width="255.705129" height="30"></rect>
-                    <text id="precondition" font-family="Raleway" font-size="20" font-weight="normal" fill="#454545">
-                        <tspan x="71.3154404" y="21">precondition</tspan>
+                    <text id="precondition" font-family="Raleway-SemiBold, Raleway" font-size="14.3999996" font-weight="500" fill="#454545">
+                        <tspan x="86.2682416" y="21">precondition</tspan>
                     </text>
                 </g>
                 <g id="perceptual-database-block" transform="translate(0.000000, 180.000000)">
                     <rect id="Rectangle-2-Copy-2" stroke="#454545" fill="#FFFFFF" x="0.66015625" y="0" width="255.705129" height="30"></rect>
-                    <text id="perceptual-database" font-family="Raleway" font-size="20" font-weight="normal" fill="#454545">
-                        <tspan x="33.9904663" y="21">perceptual database</tspan>
+                    <text id="perceptual-database" font-family="Raleway-SemiBold, Raleway" font-size="14.3999996" font-weight="500" fill="#454545">
+                        <tspan x="58.6768682" y="21">perceptual database</tspan>
                     </text>
                 </g>
             </g>
