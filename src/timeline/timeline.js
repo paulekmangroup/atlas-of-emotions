@@ -19,52 +19,91 @@ const timeline = {
 	sectionTextBodyIntro: Array.prototype.slice.call( document.querySelectorAll( '#timeline-section .body-intro' ) ),
 	sectionTextBodyAwareness: Array.prototype.slice.call( document.querySelectorAll( '#timeline-section [class*="body-awareness"]' ) ),
 	episodeContent: {
-		anger: {
-			trigger: [ 'you are low on sleep', 'a friend gets angry with you', 'you\'re reminded of a bully' ],
-			state: [ 'your body becomes tense', 'anger', 'you feel attacked' ],
-			response: {
-				'constructive-response': 'take a time out',
-				'destructive-response': 'argue',
-				'ambiguous-response': 'avoid them'
+		"anger": {
+			"trigger": {
+				"precondition": "you are low on sleep",
+				"event": "a friend gets angry with you",
+				"perceptual-database": "you're reminded of a bully"
+			},
+			"state": {
+				"physical-changes": "your body becomes tense",
+				"emotion": "anger",
+				"mental-changes": "you feel attacked"
+			},
+			"response": {
+				"constructive-response": "take a time out",
+				"destructive-response": "argue",
+				"ambiguous-response": "avoid them"
 			}
 		},
-		fear: {
-			trigger: [ 'reading scary news', 'a friend gets angry with you', 'reminds you of abandonment' ],
-			state: [ 'your heart pounds', 'fear', 'you expect them to leave' ],
-			response: {
-				'constructive-response': 'recall why you\'re friends',
-				'destructive-response': 'imagine them leaving',
-				'ambiguous-response': 'something else...'
+		"fear": {
+			"trigger": {
+				"precondition": "reading scary news",
+				"event": "a friend gets angry with you",
+				"perceptual-database": "reminds you of abandonment"
+			},
+			"state": {
+				"physical-changes": "your heart pounds",
+				"emotion": "fear",
+				"mental-changes": "you expect them to leave"
+			},
+			"response": {
+				"constructive-response": "recall why you're friends",
+				"destructive-response": "imagine them leaving",
+				"ambiguous-response": "something else..."
 			}
 		},
-		disgust: {
-			trigger: [ 'you\'re grieving', 'a friend gets angry with you', 'reminds you of insensitivity' ],
-			state: [ 'you recoil', 'disgust', 'you feel sickened' ],
-			response: {
-				'constructive-response': 'ask why they\'re angry',
-				'destructive-response': 'belittle them',
-				'ambiguous-response': 'avoid them'
+		"disgust": {
+			"trigger": {
+				"precondition": "you're grieving",
+				"event": "a friend gets angry with you",
+				"perceptual-database": "reminds you of insensitivity"
+			},
+			"state": {
+				"physical-changes": "you recoil",
+				"emotion": "disgust",
+				"mental-changes": "you feel sickened"
+			},
+			"response": {
+				"constructive-response": "ask why they're angry",
+				"destructive-response": "belittle them",
+				"ambiguous-response": "avoid them"
 			}
 		},
-		sadness: {
-			trigger: [ 'listening to sad music', 'a friend gets angry with you', 'it reminds you of rejection' ],
-			state: [ 'your body weakens', 'sadness', 'you feel empty' ],
-			response: {
-				'constructive-response': 'call a loved one',
-				'destructive-response': 'be ashamed',
-				'ambiguous-response': 'ignore the feeling'
+		"sadness": {
+			"trigger": {
+				"precondition": "listening to sad music",
+				"event": "a friend gets angry with you",
+				"perceptual-database": "it reminds you of rejection"
+			},
+			"state": {
+				"physical-changes": "your body weakens",
+				"emotion": "sadness",
+				"mental-changes": "you feel empty"
+			},
+			"response": {
+				"constructive-response": "call a loved one",
+				"destructive-response": "be ashamed",
+				"ambiguous-response": "ignore the feeling"
 			}
 		},
-		enjoyment: {
-			trigger: [ 'you scored a touchdown', 'a friend gets angry with you', 'seems like a sore loser' ],
-			state: [ 'adrenaline rush', 'enjoyment', 'you feel righteous' ],
-			response: {
-				'constructive-response': 'play on',
-				'destructive-response': 'gloat',
-				'ambiguous-response': 'celebrate'
+		"enjoyment": {
+			"trigger": {
+				"precondition": "you scored a touchdown",
+				"event": "a friend gets angry with you",
+				"perceptual-database": "seems like a sore loser"
+			},
+			"state": {
+				"physical-changes": "adrenaline rush",
+				"emotion": "enjoyment",
+				"mental-changes": "you feel righteous"
+			},
+			"response": {
+				"constructive-response": "play on",
+				"destructive-response": "gloat",
+				"ambiguous-response": "celebrate"
 			}
 		}
-
 	},
 
 	//work around safari missing children property in svg nodes
@@ -317,3 +356,4 @@ const timeline = {
 };
 
 export default timeline;
+
