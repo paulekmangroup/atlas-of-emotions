@@ -281,7 +281,7 @@ const scroller = {
 			//_self.toggleEmotionNav( !moreVisible );
 		} );
 		// pulse close button on 'more' when scrolled past end of more content
-		var $scroller = $( '.scroller' );
+		var $scroller = $( '.more-content-scroller' );
 		$scroller.mousewheel( this.getBounceCallback( this.bottomOverscroll ) );
 		$scroller.mousewheel( this.getBounceCallback( this.topOverscroll ) );
 	},
