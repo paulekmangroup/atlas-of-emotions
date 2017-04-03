@@ -369,7 +369,7 @@ svg {
 
 .section-text {
 	position: absolute;
-	z-index: 2;
+	//z-index: 2;
 	top: $section-padding-top;
 	width: $section-text-width;
 	bottom: 0;
@@ -514,7 +514,7 @@ svg {
 		left: 0;
 		right: 0;
 		padding: $more-text-padding;
-		padding-left: $more-text-padding + $section-text-width;
+		//padding-left: $more-text-padding + $section-text-width;
 		overflow-y: auto;
 		text-align: center;
 		.close-button {
@@ -532,9 +532,13 @@ svg {
 	}
 	.wrapper {
 		position: relative;
-		max-width: 35em;
+		max-width: 50em;
 		margin: 0 auto;
 		text-align: left;
+		img {
+			width: 100%;
+			height: auto;
+		}
 	}
 }
 
