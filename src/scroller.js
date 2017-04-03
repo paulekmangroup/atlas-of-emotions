@@ -172,7 +172,7 @@ const scroller = {
 
 		//hide the about text if leaving the intro
 		if ( sectionId == 'introduction-section' ) {
-				this.toggleAboutSection( false );
+			this.toggleAboutSection( false );
 		}
 
 		//save the emotion state before leaving
@@ -286,30 +286,28 @@ const scroller = {
 		$scroller.mousewheel( this.getBounceCallback( this.topOverscroll ) );
 	},
 
-		toggleAboutSection: function ( visibility ) {
-			let $hero = $( '.introduction-hero' );
-			if ( visibility != null ) {
-				$hero.toggleClass( 'about-visible', visibility );
-			} else {
+	toggleAboutSection: function ( visibility ) {
+		let $hero = $( '.introduction-hero' );
+		if ( visibility != null ) {
+			$hero.toggleClass( 'about-visible', visibility );
+		} else {
 			$hero.toggleClass( 'about-visible' );
-			}
-			if ( $hero.hasClass( 'about-visible' ) ) {
-				this.fadeAboutImage( 0 );
-			} else {
-				this.fadeImages = false;
-				this.fadeTweens.forEach( ( tween )=>tween.kill() );
-			}
 		}
-		,
+		if ( $hero.hasClass( 'about-visible' ) ) {
+			this.fadeAboutImage( 0 );
+		} else {
+			this.fadeImages = false;
+			this.fadeTweens.forEach( ( tween )=>tween.kill() );
+		}
+	},
 
-		initAboutLink: function () {
-			// add click for about the atlas, in the intro
-			$( '.about-link' ).click( ( e ) => {
-				e.preventDefault();
-				this.toggleAboutSection();
+	initAboutLink: function () {
+		// add click for about the atlas, in the intro
+		$( '.about-link' ).click( ( e ) => {
+			e.preventDefault();
+			this.toggleAboutSection();
 		} );
-		}
-		,
+	},
 
 	fadeAboutImage: function ( i ) {
 		let nextIndex = (i + 1) % (this.aboutImages.length);
