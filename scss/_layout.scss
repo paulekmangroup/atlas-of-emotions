@@ -245,8 +245,11 @@ svg {
 
 .section.introduction-hero {
 
-	transition: margin-left 1s ease, opacity 1s ease;
 	color: #000;
+
+	&.fp-completely {
+		transition: margin-left 1s ease, opacity 1s ease;
+	}
 
 	&.about-visible {
 		margin-left: $section-text-width;
