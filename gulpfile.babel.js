@@ -259,12 +259,6 @@ gulp.task( 'default', () => {
 			watchfiles: './static/**'
 		} );
 
-// Copy static assets
-		copyTask( {
-			src: './vendor/**',
-			dest: dest
-		} );
-
 // Lint and bundle and watch for changes
 		browserifyTask( {
 			development,
