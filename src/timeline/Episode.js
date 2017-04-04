@@ -164,6 +164,19 @@ export default class Episode {
 		return this.parent;
 	}
 
+	hide( onComplete ) {
+		TweenMax.to( this.parent, 1, { autoAlpha: 0, onComplete: onComplete } );
+	}
+
+	destroy() {
+		this.episodeTimeline.kill();
+		TweenMax.killAll();
+		//TweenMax.killChildTweensOf( this.parent );
+		scroller.resetEmotionNav();
+		this.parent.remove();
+		this.episodeTimeline = null;
+	}
+
 	constructor( svg, container, emotion ) {
 		this.initialize( svg, container, emotion );
 	}
@@ -225,7 +238,6 @@ export default class Episode {
 				.attr( 'x', function () {
 					return parseFloat( this.getComputedTextLength() ) / 2 + parseFloat( this.getAttribute( 'x' ) );
 				} );
-
 
 
 			this.stateText = [

@@ -26,8 +26,40 @@ export default class EpisodeAddAwareness extends Episode {
 
 	}
 
+	destroy() {
+		super.destroy();
+		//TweenMax.killDelayedCallsTo( this.toggleEventAndResponseAwareness );
+		//TweenMax.killDelayedCallsTo( this.advanceAndStart );
+		//TweenMax.killTweensOf( this.illuminationBlock );
+		this.illuminationBlock.style = null;
+	}
+
 	constructor( svg, container, emotion ) {
 		super( svg, container, emotion );
+	}
+
+	initializeIllumination( svg ) {
+
+		//TODO remove for real from art file
+		var illumination = svg.getElementById( 'illumination' );
+		illumination.remove();
+
+		var event = timeline.select( '#event', svg );
+		var eventRect = event.getBoundingClientRect();
+
+		TweenMax.set( this.illuminationBlock, {
+			css: { width: eventRect.left, autoAlpha: 0 }
+		} );
+
+	}
+
+	hide( onComplete ) {
+		super.hide( onComplete );
+		this.hideIllumination();
+	}
+
+	hideIllumination( onComplete ) {
+		TweenMax.to( this.illuminationBlock, 1, { autoAlpha: 0, onComplete: onComplete } );
 	}
 
 	initialize( svg, container, emotion ) {
@@ -50,9 +82,9 @@ export default class EpisodeAddAwareness extends Episode {
 			this.parent = timeline.extractDocument( svg, container );
 
 			// illumination
-			var illuminationBlock = timeline.select( '#illumination-block', document );
+			this.illuminationBlock = timeline.select( '#illumination-block', document );
 			//var illuminationGlow = timeline.select( '#glow', document );
-			initializeIllumination( illuminationBlock, svg );
+			this.initializeIllumination( svg );
 
 			//timeline with examples
 			var timelineWithExamples = timeline.select( '#timeline-with-examples', this.parent );
@@ -159,15 +191,19 @@ export default class EpisodeAddAwareness extends Episode {
 			//add awareness buttons
 
 			var addAwarenessButtonExperience = timeline.select( '#experience-add-awareness', document );
+			addAwarenessButtonExperience.style.display = ''; //TODO should these be handled in css? what's typical in this app?
 			addAwarenessButtonExperience.style.visibility = 'hidden'; //TODO should these be handled in css? what's typical in this app?
 
 			var addAwarenessButtonResponse = timeline.select( '#response-add-awareness', document );
+			addAwarenessButtonResponse.style.display = '';
 			addAwarenessButtonResponse.style.visibility = 'hidden';
 
 			var refractoryPeriodButton = timeline.select( '#begin-refractory-period', document );
+			refractoryPeriodButton.style.display = '';
 			refractoryPeriodButton.style.visibility = 'hidden';
 
 			var blockDiagramButton = timeline.select( '#begin-block-diagram', document );
+			blockDiagramButton.style.display = '';
 			blockDiagramButton.style.visibility = 'hidden';
 
 			this.episodeTimeline = new TimelineMax( {} );
@@ -248,7 +284,7 @@ export default class EpisodeAddAwareness extends Episode {
 				}
 			};
 
-			var toggleEventAndResponseAwareness = function ( aware, time = 0 ) {
+			this.toggleEventAndResponseAwareness = function ( aware, time = 0 ) {
 
 				setResponseLineColor( 1, aware, time );
 				setResponseLineStyle( 1, aware, time );
@@ -262,11 +298,11 @@ export default class EpisodeAddAwareness extends Episode {
 
 			var awarenessStage = 'event';
 
-			var advance = function () { //TODO should this be a member?
+			this.advance = function () {
 
 				if ( awarenessStage == 'event' ) {
 
-					TweenMax.to( illuminationBlock, 4, { css: { width: '+=300' }, ease: Power2.easeInOut } );
+					TweenMax.to( this.illuminationBlock, 4, { css: { width: '+=300' }, ease: Power2.easeInOut } );
 					//TweenMax.to( illuminationGlow, 4, { attr: { x: '+=300' }, ease: Power2.easeInOut } );
 
 					awarenessStage = 'experience';
@@ -279,13 +315,13 @@ export default class EpisodeAddAwareness extends Episode {
 					// once it is finished illuminating the entire timeline, the block interactions are enabled
 					illuminationTimeline
 						.add( 'start' )
-						.to( illuminationBlock, 4, { css: { width: '+=400' }, ease: Power2.easeIn }, 'start' )
+						.to( this.illuminationBlock, 4, { css: { width: '+=400' }, ease: Power2.easeIn }, 'start' )
 						//.to( illuminationGlow, 4, { attr: { x: '+=400' }, ease: Power2.easeIn }, 'start' )
 						.add( 'finished' )
 						.addCallback( ()=> {
 							TweenMax.to( refractoryPeriodButton, 1, { autoAlpha: 1, ease: Power2.easeOut } );
 						} )
-						.to( illuminationBlock, 10, { css: { width: '+=3000' }, ease: Power0.easeIn }, 'finished' )
+						.to( this.illuminationBlock, 10, { css: { width: '+=3000' }, ease: Power0.easeIn }, 'finished' )
 						//.to( illuminationGlow, 10, { attr: { x: '+=3000' }, ease: Power0.easeIn }, 'finished' )
 						.add( 'end' );
 
@@ -304,6 +340,11 @@ export default class EpisodeAddAwareness extends Episode {
 
 				timeline.showAwarenessCopy( awarenessStage );
 
+			};
+
+			this.advanceAndStart = function () {
+				this.advance();
+				this.start();
 			};
 
 
@@ -327,7 +368,7 @@ export default class EpisodeAddAwareness extends Episode {
 
 			//pulsate illumination
 			var pulsateIllumination = function () {
-				TweenMax.allTo( [ illuminationBlock /*, glow */ ], 1.9, {
+				TweenMax.allTo( [ this.illuminationBlock /*, glow */ ], 1.9, {
 					css: { transform: 'translateX(-5px)' },
 					repeat: -1,
 					yoyo: true,
@@ -366,12 +407,12 @@ export default class EpisodeAddAwareness extends Episode {
 					//	refractoryBlocksTween.kill();
 					//}
 					//
-					toggleEventAndResponseAwareness( false, darkenTime );
+					this.toggleEventAndResponseAwareness( false, darkenTime );
 
 					//prepare the refractory period
 					refractoryIlluminationTween =
 						TweenMax.to(
-							[ illuminationBlock ].concat( this.refractoryBlocks ),
+							this.illuminationBlock,
 							darkenTime,
 							{
 								autoAlpha: 0,
@@ -379,7 +420,7 @@ export default class EpisodeAddAwareness extends Episode {
 
 								onComplete: ()=> {
 									TweenMax.to(
-										[ illuminationBlock ].concat( this.refractoryBlocks ),
+										this.illuminationBlock,
 										refractoryPeriodTime,
 										{
 											autoAlpha: 1,
@@ -398,9 +439,9 @@ export default class EpisodeAddAwareness extends Episode {
 					refractoryColorsTween =
 						TweenMax.delayedCall(
 							refractoryPeriodTime / 2,
-							()=> {
-								toggleEventAndResponseAwareness.bind( this )( true, darkenTime );
-							} );
+							this.toggleEventAndResponseAwareness.bind( this ),
+							[ true, darkenTime ]
+						);
 
 				}
 			};
@@ -408,12 +449,12 @@ export default class EpisodeAddAwareness extends Episode {
 			//start the illumination
 			illuminationTimeline
 				.add( 'illuminate' )
-				.to( illuminationBlock, 2, { autoAlpha: 1, ease: Power1.easeInOut } )
-				.to( illuminationBlock, 3, {
+				.to( this.illuminationBlock, 2, { autoAlpha: 1, ease: Power1.easeInOut } )
+				.to( this.illuminationBlock, 3, {
 					css: { width: '+=380' },
 					ease: Power1.easeOut,
 					onComplete: ()=> {
-						pulsateIllumination();
+						pulsateIllumination.bind( this )();
 					}
 				}, 'illuminate' )
 				.add( 'pulsate-illumination' );
@@ -494,8 +535,7 @@ export default class EpisodeAddAwareness extends Episode {
 				//reset and advance at start
 				this.rewind( () => {
 					TweenMax.delayedCall( 1.5, () => {
-						advance();
-						this.start();
+						this.advanceAndStart();
 					} );
 				} );
 			};
@@ -505,7 +545,7 @@ export default class EpisodeAddAwareness extends Episode {
 			};
 			var blockDiagramClickCallback = function ( e ) {
 				hideButton( e.currentTarget );
-				advance();
+				this.advance();
 				enableBlockDiagram.bind( this )();
 			};
 
@@ -529,20 +569,5 @@ export default class EpisodeAddAwareness extends Episode {
 		}
 
 	}
-
-}
-
-function initializeIllumination( illuminationBlock, svg ) {
-
-	//TODO remove for real from art file
-	var illumination = svg.getElementById( 'illumination' );
-	illumination.remove();
-
-	var event = timeline.select( '#event', svg );
-	var eventRect = event.getBoundingClientRect();
-
-	TweenMax.set( illuminationBlock, {
-		css: { width: eventRect.left, autoAlpha: 0 }
-	} );
 
 }

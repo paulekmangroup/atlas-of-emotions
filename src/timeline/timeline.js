@@ -252,6 +252,11 @@ const timeline = {
 		TweenMax.to( this.sectionTextBodyIntro, 1, { autoAlpha: 0, onComplete: onComplete } );
 	},
 
+	showIntroCopy: function ( onComplete ) {
+		TweenMax.to( this.sectionTextBodyIntro, 1, { autoAlpha: 1, onComplete: onComplete } );
+		TweenMax.set( this.sectionTextBodyIntro, { css: { display: '' } } );
+	},
+
 	addAwareness: function () {
 		if ( !this.episodeAddAwareness ) {
 			this.showAwarenessEpisode();
@@ -259,6 +264,12 @@ const timeline = {
 				TweenMax.set( this.sectionTextBodyIntro, { css: { display: 'none' } } );
 				this.showAwarenessCopy( 'event' );
 			}.bind( this ) );
+		}
+	},
+
+	hideAwarenessCopy: function () {
+		for ( let paragraph of this.sectionTextBodyAwareness ) {
+			TweenMax.set( paragraph, { autoAlpha: 0 } );
 		}
 	},
 
@@ -278,12 +289,31 @@ const timeline = {
 			} );
 		} );
 
-		for ( let paragraph of this.sectionTextBodyAwareness ) {
-			TweenMax.set( paragraph, { autoAlpha: 0 } );
-		}
+		this.hideAwarenessCopy();
 
 		this.beginAwarenessButton.onclick = this.addAwareness.bind( this );
 
+	},
+
+	fullRestart: function () {
+		let restart = ()=> {
+			this.episode && this.episode.destroy();
+			this.episodeAddAwareness && this.episodeAddAwareness.destroy();
+			this.episode = null;
+			this.episodeAddAwareness = null;
+			this.loadEpisode();
+			this.hideAwarenessCopy();
+			this.showIntroCopy();
+		};
+		if ( this.episodeAddAwareness ) {
+			this.episodeAddAwareness.hide( restart.bind( this ) );
+		} else {
+			restart();
+		}
+	},
+
+	initRestartButton: function () {
+		$( '.restart-button' ).click( this.fullRestart.bind( this ) );
 	},
 
 	init: function ( containerNode, screenIsSmall ) {
@@ -295,6 +325,8 @@ const timeline = {
 		this.loadEpisode();
 
 		this.initAddAwarenessCopy();
+
+		this.initRestartButton();
 
 		this.isInited = true;
 

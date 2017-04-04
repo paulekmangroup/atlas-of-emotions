@@ -2,7 +2,6 @@ import dispatcher from './dispatcher.js';
 //TODO do we really need max or just lite? Shoud we replace tween.js in other files?
 import { TweenMax, TimelineMax } from "gsap";
 
-
 const scroller = {
 
 	SLIDE_INTERVAL_DELAY: 7000,
@@ -67,6 +66,11 @@ const scroller = {
 			.add( 'start' )
 			.staggerTo( $links, 0.1, { css: { 'transform': 'scale(1.1)' } }, 0.1 )
 			.staggerTo( $links, 0.1, { css: { 'transform': 'scale(1)' } }, 0.1, 'start+=0.2' );
+	},
+
+	resetEmotionNav: function(){
+		var $links = $( '.emotion-nav li' );
+		$links.removeAttr('style');
 	},
 
 	initEmotionNav: function () {
