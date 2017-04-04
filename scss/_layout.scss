@@ -37,9 +37,11 @@ body {
 			opacity: 0.65;
 		}
 	}
+
 	&.more-visible {
 		.original-content,
-		#timeline-section .section-graphics {
+		#timeline-section .section-graphics,
+		.section-text {
 			filter: blur(10px);
 		}
 		.emotion-nav {
@@ -47,6 +49,7 @@ body {
 			pointer-events: none;
 		}
 	}
+
 	&[class*=fp-viewing-timeline] {
 		.emotion-nav {
 			a {
@@ -410,9 +413,11 @@ svg {
 	}
 
 	div.body-awareness {
+		$arrow-size: 0.3em;
 		overflow: hidden;
 		position: relative;
 		padding: 15px 0;
+		padding-bottom: 0;
 		border-top: 1px solid #777;
 		&:first-of-type {
 			border: none;
@@ -421,32 +426,50 @@ svg {
 		h3 {
 			position: relative;
 			margin-bottom: 5px;
+			padding-left: 1em;
 			pointer-events: auto;
 			cursor: pointer;
-			&:after {
-				content: '-';
-				display: block;
+			&:before {
 				position: absolute;
-				right: 0;
-				top: -6px;
-				font-size: 30px;
-				height: 30px;
-				line-height: 1;
-				font-weight: normal;
+				content: '';
+				display: inline-block;
+				opacity: 0.3;
+				width: 0;
+				height: 0;
+
+				left: 0;
+				top: 10px;
+				border-top: $arrow-size solid #000;
+				border-right: $arrow-size solid transparent;
+				border-bottom: none;
+				border-left: $arrow-size solid transparent;
 			}
+			&:hover {
+				&:before {
+					opacity: 1;
+				}
+			}
+		}
+		p {
+			margin-left: 1em;
+		}
+		ul {
+			margin: -10px 0 0 0;
+			line-height: 1.2;
 		}
 		p, ul {
 			transition: opacity 0.3s;
-		}
-		ul {
-			margin: -10px 0;
-			line-height: 1.2;
+			margin-bottom: 1em;
 		}
 		&.closed {
 			height: 53px;
-			h3:after {
-				content: '+';
-				top: -5px;
+			h3:before {
+				left: 0.2em;
+				top: 7px;
+				border-top: $arrow-size solid transparent;
+				border-right: none;
+				border-bottom: $arrow-size solid transparent;
+				border-left: $arrow-size solid #000;
 			}
 			p, ul {
 				opacity: 0;
@@ -469,10 +492,6 @@ svg {
 		@include emotion-color;
 	}
 
-	button {
-		pointer-events: auto;
-	}
-
 	.more-on & {
 		display: none;
 	}
@@ -486,14 +505,54 @@ svg {
 	}
 
 	button {
+		pointer-events: auto;
 		display: block;
 		width: 100%;
 		margin: 0 auto;
 	}
+
+	.restart-button {
+		@extend %button-link;
+		font-size: 0.8em;
+		position: absolute;
+		right: $section-text-padding;
+		top: $section-text-padding*0.85;
+		span{
+			opacity: 0.3;
+		}
+		img {
+			display: inline-block;
+			width: 0.9em;
+			height: auto;
+			margin-left: 0.25em;
+			opacity: 0.4;
+		}
+		&:hover {
+			span{
+				opacity: 1;
+			}
+			img {
+				opacity: 1;
+			}
+		}
+		* {
+			transition: opacity 0.25s;
+		}
+	}
 }
 
 .more-content {
-	@extend .section-text;
+	position: absolute;
+	top: $section-padding-top;
+	bottom: 0;
+	background-color: $section-text-background-color;
+
+	padding: $section-text-padding;
+	padding-top: $section-text-padding*0.75;
+	@extend %raleway-light;
+	color: #000; //$text-overlay-color;
+	text-align: left;
+
 	z-index: 1;
 	width: 100%;
 	transform: translateX(-100%);
@@ -595,7 +654,7 @@ svg {
 		width: 100%;
 		height: auto;
 		margin-bottom: 1em;
-		&:nth-child(2){
+		&:nth-child(2) {
 			position: absolute;
 			top: 0;
 		}
