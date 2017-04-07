@@ -253,6 +253,12 @@
 			],
 			"actions": [
 				{
+					"name": "",
+					"desc": "anger_actions_body",
+					"name_mobile": "",
+					"desc_mobile": "anger_actions_body"
+				},
+				{
 					"name": "anger_actions_header_1",
 					"desc": "anger_actions_body_1",
 					"name_mobile": "anger_actions_header_1",
@@ -646,6 +652,12 @@
 			],
 			"actions": [
 				{
+					"name": "",
+					"desc": "fear_actions_body",
+					"name_mobile": "",
+					"desc_mobile": "fear_actions_body"
+				},
+				{
 					"name": "fear_actions_header_1",
 					"desc": "fear_actions_body_1",
 					"name_mobile": "fear_actions_header_1",
@@ -957,6 +969,12 @@
 				}
 			],
 			"actions": [
+				{
+					"name": "",
+					"desc": "disgust_actions_body",
+					"name_mobile": "",
+					"desc_mobile": "disgust_actions_body"
+				},
 				{
 					"name": "disgust_actions_header_1",
 					"desc": "disgust_actions_body_1",
@@ -1414,6 +1432,12 @@
 				}
 			],
 			"actions": [
+				{
+					"name": "",
+					"desc": "sadness_actions_body",
+					"name_mobile": "",
+					"desc_mobile": "sadness_actions_body"
+				},
 				{
 					"name": "sadness_actions_header_1",
 					"desc": "sadness_actions_body_1",
@@ -1930,6 +1954,12 @@
 			],
 			"actions": [
 				{
+					"name": "",
+					"desc": "enjoyment_actions_body",
+					"name_mobile": "",
+					"desc_mobile": "enjoyment_actions_body"
+				},
+				{
 					"name": "enjoyment_actions_header_1",
 					"desc": "enjoyment_actions_body_1",
 					"name_mobile": "enjoyment_actions_header_1",
@@ -2054,7 +2084,9 @@
 			"caption": "site_dropdown_label",
 			"header_mobile": "site_header",
 			"body_mobile": "",
-			"sectionName": ""
+			"sectionName": "",
+			"interaction_prompt": "",
+			"learn_more_button": "site_learn_more_button"
 		},
 		"intro": {
 			"header": "intro_header",
@@ -2202,7 +2234,8 @@
 			"caption": "",
 			"header_mobile": "continents_header",
 			"body_mobile": "continents_body_mobile",
-			"sectionName": "continents_section_name"
+			"sectionName": "continents_section_name",
+			"interaction_prompt": ""
 		},
 		"states": {
 			"header": "states_header",
@@ -2210,7 +2243,8 @@
 			"caption": "states_axis_labels",
 			"header_mobile": "states_header",
 			"body_mobile": "states_body_mobile",
-			"sectionName": "states_section_name"
+			"sectionName": "states_section_name",
+			"interaction_prompt": "states_interaction_prompt"
 		},
 		"actions": {
 			"header": "actions_header",
@@ -2284,7 +2318,8 @@
 			"caption": "",
 			"header_mobile": "moods_header",
 			"body_mobile": "moods_body_mobile",
-			"sectionName": "moods_section_name"
+			"sectionName": "moods_section_name",
+			"interaction_prompt": ""
 		},
 		"calm": {
 			"header": "calm_header",
@@ -2306,7 +2341,8 @@
 			"caption": "more_button_label",
 			"header_mobile": "",
 			"body_mobile": "",
-			"sectionName": "more_section_name"
+			"sectionName": "more_section_name",
+			"interaction_prompt": ""
 		},
 		"timeline": {
 			"header": "timeline_header",

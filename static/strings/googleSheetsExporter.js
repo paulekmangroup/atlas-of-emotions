@@ -158,13 +158,18 @@ var metadataSectionParsers = (function () {
 			caption: data[ 0 ][ 4 ],
 			header_mobile: data[ 0 ][ 5 ] || data[ 0 ][ 0 ],
 			body_mobile: data[ 0 ][ 6 ] || data[ 0 ][ 1 ],
-			sectionName: data[ 0 ][ 7 ]
+			sectionName: data[ 0 ][ 7 ], //this should not be camelcase.
+			interaction_prompt: data[ 0 ][ 8 ]
 		};
 	};
 
 	return {
 
-		site: standard,
+		site: function ( data ) {
+			var obj = standard( data );
+			obj.learn_more_button = data[ 0 ][ 2 ];
+			return obj;
+		},
 
 		intro: function ( data ) {
 			var obj = {
