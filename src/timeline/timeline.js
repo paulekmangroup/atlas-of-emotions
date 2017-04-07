@@ -262,7 +262,7 @@ const timeline = {
 			this.showAwarenessEpisode();
 			this.hideIntroCopy( function () {
 				TweenMax.set( this.sectionTextBodyIntro, { css: { display: 'none' } } );
-				this.showAwarenessCopy( 'event' );
+				this.showAwarenessCopy( 'trigger' );
 			}.bind( this ) );
 		}
 	},

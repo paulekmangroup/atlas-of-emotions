@@ -28,7 +28,7 @@ export default class EpisodeAddAwareness extends Episode {
 
 	destroy() {
 		super.destroy();
-		//TweenMax.killDelayedCallsTo( this.toggleEventAndResponseAwareness );
+		//TweenMax.killDelayedCallsTo( this.toggleTriggerAndResponseAwareness );
 		//TweenMax.killDelayedCallsTo( this.advanceAndStart );
 		//TweenMax.killTweensOf( this.illuminationBlock );
 		this.illuminationBlock.style = null;
@@ -284,7 +284,7 @@ export default class EpisodeAddAwareness extends Episode {
 				}
 			};
 
-			this.toggleEventAndResponseAwareness = function ( aware, time = 0 ) {
+			this.toggleTriggerAndResponseAwareness = function ( aware, time = 0 ) {
 
 				setResponseLineColor( 1, aware, time );
 				setResponseLineStyle( 1, aware, time );
@@ -296,11 +296,11 @@ export default class EpisodeAddAwareness extends Episode {
 			};
 
 
-			var awarenessStage = 'event';
+			var awarenessStage = 'trigger';
 
 			this.advance = function () {
 
-				if ( awarenessStage == 'event' ) {
+				if ( awarenessStage == 'trigger' ) {
 
 					TweenMax.to( this.illuminationBlock, 4, { css: { width: '+=300' }, ease: Power2.easeInOut } );
 					//TweenMax.to( illuminationGlow, 4, { attr: { x: '+=300' }, ease: Power2.easeInOut } );
@@ -378,7 +378,7 @@ export default class EpisodeAddAwareness extends Episode {
 			};
 
 			var showAddAwarenessButton = function () {
-				if ( awarenessStage == 'event' && addAwarenessButtonExperience.style.visibility == 'hidden' ) {
+				if ( awarenessStage == 'trigger' && addAwarenessButtonExperience.style.visibility == 'hidden' ) {
 					TweenMax.to( addAwarenessButtonExperience, 1, { autoAlpha: 1, ease: Power2.easeOut } );
 				}
 				if ( awarenessStage == 'experience' && addAwarenessButtonResponse.style.visibility == 'hidden' ) {
@@ -407,7 +407,7 @@ export default class EpisodeAddAwareness extends Episode {
 					//	refractoryBlocksTween.kill();
 					//}
 					//
-					this.toggleEventAndResponseAwareness( false, darkenTime );
+					this.toggleTriggerAndResponseAwareness( false, darkenTime );
 
 					//prepare the refractory period
 					refractoryIlluminationTween =
@@ -439,7 +439,7 @@ export default class EpisodeAddAwareness extends Episode {
 					refractoryColorsTween =
 						TweenMax.delayedCall(
 							refractoryPeriodTime / 2,
-							this.toggleEventAndResponseAwareness.bind( this ),
+							this.toggleTriggerAndResponseAwareness.bind( this ),
 							[ true, darkenTime ]
 						);
 
