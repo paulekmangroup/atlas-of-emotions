@@ -102,13 +102,13 @@ export default {
 			let labelsEnter = labels.enter()
 				.append('div')
 				.attr('class', d => `emotion-label label show-only no-body ${d.id}`)
-				.attr('data-popuptarget', d => `calm:${d.id}`)
+				.attr('data-popuptarget', d => `calm${dispatcher.HASH_DELIMITER}${d.id}`)
 				.attr('data-clip', '1')
 				.style('left', d => Math.round(centerX + d.x - d.size) + 'px')
 				.style('top', d => Math.round(centerY + d.y - 17) + 'px');
 
 			labelsEnter.append('a')
-				.attr('href', d => `#continents:${d.id}`)
+				.attr('href', d => `#continents${dispatcher.HASH_DELIMITER}${d.id}`)
 				.append('h3')
 					.text(appStrings().getStr(`emotionsData.metadata.calm.caption`) || 'START OVER');
 		});

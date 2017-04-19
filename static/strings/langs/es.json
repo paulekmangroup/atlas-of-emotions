@@ -6,7 +6,7 @@
         },
         {
             "key": "site_dropdown_label",
-            "value": "ñChoose an emotion"
+            "value": "Elige una emoción"
         },
         {
             "key": "intro_header",
@@ -34,78 +34,78 @@
         },
         {
             "key": "intro_secondary_copy_2",
-            "value": "ñThere are 5 emotions to explore. Discover more about each emotion as you interact with the shapes. Navigate by clicking down, left and right.<br><br>\nConsider each emotion and reflect on how they relate to your lived experience."
+            "value": "Son 5 las emociones que puedes explorar. Descubre más acerca de cada emoción interactuando con las formas. Desplázate accionando hacia abajo, a la izquierda y a la derecha.<br><br>\nConsidera cada emoción y reflexiona en su relación con las experiencias que has vivido."
         },
         {
             "key": "intro_caption_2"
         },
         {
             "key": "intro_secondary_header_3",
-            "value": "ñThe atlas: a new kind of map"
+            "value": "El atlas: un mapa novedoso"
         },
         {
             "key": "intro_secondary_copy_3",
-            "value": "ñThe Atlas was commissioned by the Dalai Lama to create a scientifically-based road map to emotional self-awareness. Dr. Paul Ekman and his daughter, Eve Ekman, based the Atlas on a <a href=\"http://pps.sagepub.com/content/11/1/31.full.pdf?ijkey=AMIJzv8J9Tn0VF1&keytype=finite\" target=\"_blank\">study</a> they conducted.<br><br>\nThe scientists surveyed in the study agreed that these five emotions are the most universally felt:"
+            "value": "El Atlas fue encargado por el Dalai Lama a fin de crear un mapa de caminos hacia la autoconciencia emocional con fundamento científico. El Dr. Paul Ekman y su hija, Eve Ekman, basaron el Atlas en un <a href=\"http://pps.sagepub.com/content/11/1/31.full.pdf?ijkey=AMIJzv8J9Tn0VF1&keytype=finite\" target=\"_blank\">estudio</a> realizado por ellos.<br><br>\nLos científicos encuestados en el estudio coincidieron en que estas cinco emociones son las que se experimentan de modo más universal:"
         },
         {
             "key": "intro_caption_3",
-            "value": "ñPick any emotion and start exploring."
+            "value": "Elige una emoción y comienza a explorar."
         },
         {
             "key": "intro_section_name",
-            "value": "ñIntroduction"
+            "value": "Introducción"
         },
         {
             "key": "intro_button_goto",
-            "value": "ñgo to atlas"
+            "value": "ir al atlas"
         },
         {
             "key": "intro_button_start",
-            "value": "ñTake a tour"
+            "value": "Haz un recorrido del atlas"
         },
         {
             "key": "intro_button_back",
-            "value": "ñback"
+            "value": "regresar\n"
         },
         {
             "key": "intro_button_why",
-            "value": "ñwhy an atlas?"
+            "value": "¿por qué un atlas?"
         },
         {
             "key": "intro_button_start",
-            "value": "ñget started"
+            "value": "para comenzar"
         },
         {
             "key": "intro_gfx_left",
-            "value": "ñleft"
+            "value": "izquierda"
         },
         {
             "key": "intro_gfx_right",
-            "value": "ñright"
+            "value": "derecha"
         },
         {
             "key": "intro_gfx_down",
-            "value": "ñdown"
+            "value": "abajo"
         },
         {
             "key": "intro_gfx_chart_anger",
-            "value": "ñanger is universal"
+            "value": "el enojo es universal"
         },
         {
             "key": "intro_gfx_chart_fear",
-            "value": "ñfear is universal"
+            "value": "el miedo es universal"
         },
         {
             "key": "intro_gfx_chart_disgust",
-            "value": "ñdisgust is universal"
+            "value": "el disgusto es universal"
         },
         {
             "key": "intro_gfx_chart_sadness",
-            "value": "ñsadness is universal"
+            "value": "la tristeza es universal"
         },
         {
             "key": "intro_gfx_chart_enjoyment",
-            "value": "ñenjoyment is universal"
+            "value": "el gozo es universal"
         },
         {
             "key": "continents_header",
@@ -117,7 +117,7 @@
         },
         {
             "key": "continents_body_mobile",
-            "value": "ñMost emotions researchers agree on these five Universal Emotions: emotions that all humans, no matter where or how we were raised, have in common. Tap on an emotion to start exploring.",
+            "value": "Quienes investigan las emociones coinciden casi todos en estas 5 Emociones Universales que los seres humanos comparten, no importa dónde o cómo se hayan criado. Toca en una emoción para explorarla",
             "mobileCharacterCount": "200 max (max 5 lines, 40 characters per line)"
         },
         {
@@ -134,11 +134,11 @@
         },
         {
             "key": "states_axis_labels",
-            "value": "ñLeast intense, ñMost intense"
+            "value": "Menos intensa, Más intensa"
         },
         {
             "key": "states_body_mobile",
-            "value": "ñLHAMO can be felt mildly, extremely, or somewhere in between. Tap on the shapes above to learn about a few of the states that we can experience.",
+            "value": "LHAMO pueden sentirse levemente, de modo extremo o en grados intermedios. Toca las formas de más arriba para saber sobre los estados que podemos experimentar.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
@@ -151,11 +151,11 @@
         },
         {
             "key": "actions_body",
-            "value": "Respondemos a un estado emocional con acción. Las acciones pueden ser constructivas (dan lugar a colaboración) o destructivas (impiden la colaboración). Ciertas acciones pueden ser constructivas o destructivas, según la situación; esto significa que se trata de una acción ambigua. Da clicksobre un estado para explorarlo."
+            "value": "Respondemos a un estado emocional con acción. Las acciones pueden ser constructivas (dan lugar a colaboración) o destructivas (impiden la colaboración). Ciertas acciones pueden ser constructivas o destructivas, según la situación; esto significa que se trata de una acción ambigua. Da click sobre un estado para explorarlo."
         },
         {
             "key": "actions_body_mobile",
-            "value": "ñWe respond to emotional states with our actions. Tap on the shapes to learn about the possible actions resulting from LHAMO.",
+            "value": "Respondemos a los estados emocionales con nuestras acciones. Toca sobre las formas para conocer las posibles acciones que son resultado de LHAMO.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
@@ -196,7 +196,7 @@
         },
         {
             "key": "triggers_body_mobile",
-            "value": "ñA trigger is something around us or in our own minds that causes us to feel an emotion. Tap on the labels to learn about triggering LHAMO.",
+            "value": "Un disparador es algo en nuestro entorno o en nuestra mente que nos hace sentir una emoción. Toca en los rótulos para saber cómo se dispara LHAMO.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
@@ -253,7 +253,7 @@
         },
         {
             "key": "moods_body_mobile",
-            "value": "ñMoods are longer-lasting cousins of an emotion that cause us to feel the related emotion repeatedly without any clear trigger. Tap on the shape to learn more.",
+            "value": "Los humores son primos más duraderos de una emoción que nos hacen sentir esta una y otra vez sin ningún disparador definido. Toca en la forma para saber más.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
@@ -270,7 +270,7 @@
         },
         {
             "key": "calm_body_mobile",
-            "value": "ñA calm, balanced frame of mind helps us understand our changing emotions. We can reach calmness through developing an awareness of the triggers, states and constuctive actions possible. Calmness ideally is our baseline in which emotions arise when triggered and then recede.",
+            "value": "Con un estado de ánimo equilibrado y en calma podemos entender nuestras cambiantes emociones. Este se alcanza adquiriendo conciencia de los disparadores, estados y acciones constructivas posibles. La calma es idealmente el estado basal del que surgen nuestras emociones al ser disparadas y donde luego se desvanecen.",
             "mobileCharacterCount": "320 max (max 8 lines, 40 characters per line)"
         },
         {
@@ -283,7 +283,7 @@
         },
         {
             "key": "calm_button_label",
-            "value": "ñStart over"
+            "value": "Comenzar de nuevo"
         },
         {
             "key": "calm_section_name",
@@ -291,11 +291,11 @@
         },
         {
             "key": "more_button_label",
-            "value": "ñBack to Atlas"
+            "value": "Regresar al Atlas"
         },
         {
             "key": "more_section_name",
-            "value": "ñMore Information"
+            "value": "Más información"
         }
     ],
     [
@@ -309,11 +309,11 @@
         },
         {
             "key": "anger_continent_body",
-            "value": "ñWe get angry when something blocks us or when we think we're being treated unfairly."
+            "value": "Nos enojamos cuando algo nos impide el paso o cuando pensamos que estamos recibiendo un trato injusto."
         },
         {
             "key": "anger_continent_body_mobile",
-            "value": "ñWe feel anger when we are mentally or physically blocked. Anger varies in strength and frequency in our lives.",
+            "value": "Sentimos enojo cuando experimentamos un bloqueo físico o mental. La intensidad y frecuencia del enojo varían a lo largo de la vida.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
@@ -446,20 +446,20 @@
         },
         {
             "key": "anger_triggers_universal_header_mobile",
-            "value": "ñUniversal Triggers of Anger"
+            "value": "Disparadores universales del enojo"
         },
         {
             "key": "anger_triggers_universal_body_mobile",
-            "value": "ñUniversal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Interference with action or locomotion are examples.",
+            "value": "Los disparadores universales son innatos en todos y nos afectan más que los aprendidos. Son ejemplos la interferencia con la acción o con la locomoción.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
             "key": "anger_triggers_learned_header_mobile",
-            "value": "ñLearned Triggers of Anger"
+            "value": "Disparadores aprendidos del enojo"
         },
         {
             "key": "anger_triggers_learned_body_mobile",
-            "value": "ñSome triggers can be learned from personal or shared cultural experiences. Being wrongfully accused or put down by an authority figure are examples.",
+            "value": "Ciertos disparadores se aprenden de experiencias culturales personales o comunes. Ejemplos: una acusación injusta o el menosprecio por una figura de autoridad.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
@@ -510,11 +510,11 @@
         },
         {
             "key": "fear_continent_body",
-            "value": "ñOur fear of danger lets us anticipate threats to our safety."
+            "value": "El miedo al peligro nos permite prever amenazas a nuestra seguridad."
         },
         {
             "key": "fear_continent_body_mobile",
-            "value": "ñWe feel fear when our safety or wellbeing is threatened. Fear varies in strength and frequency in our lives.",
+            "value": "Sentimos miedo cuando nuestra seguridad o bienestar se ven amenazados. La intensidad y frecuencia del miedo varían a lo largo de la vida.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
@@ -639,20 +639,20 @@
         },
         {
             "key": "fear_triggers_universal_header_mobile",
-            "value": "ñUniversal Triggers of Fear"
+            "value": "Disparadores universales del miedo"
         },
         {
             "key": "fear_triggers_universal_body_mobile",
-            "value": "ñUniversal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Snake-like shapes and sudden loss of gravity are examples.",
+            "value": "Los disparadores universales son innatos en todos y afectan más que los aprendidos. Ejemplos: formas que parecen serpientes y la pérdida súbita del equilibrio.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
             "key": "fear_triggers_learned_header_mobile",
-            "value": "ñLearned Triggers of Fear"
+            "value": "Disparadores aprendidos del miedo"
         },
         {
             "key": "fear_triggers_learned_body_mobile",
-            "value": "nnSome triggers can be learned from personal or shared cultural experiences. Public speaking, thunder, and the threat of losing one’s job are examples.",
+            "value": "Ciertos disparadores se aprenden de experiencias culturales personales o compartidas. Ejemplos: hablar en público o la amenaza de perder el empleo.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
@@ -703,11 +703,11 @@
         },
         {
             "key": "disgust_continent_body",
-            "value": "ñFeeling disgusted by what is toxic helps us to avoid being poisoned, physically or socially."
+            "value": "Sentir disgusto por lo que es tóxico nos ayuda a evitar ser envenenados, ya sea física o socialmente."
         },
         {
             "key": "disgust_continent_body_mobile",
-            "value": "ñWe feel disgust when faced with something toxic or unpleasant. Disgust varies in strength and frequency in our lives.",
+            "value": "Sentimos disgusto cuando percibimos algo tóxico o desagradable. La intensidad y la frecuencia del disgusto varían a lo largo de la vida.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
@@ -800,20 +800,20 @@
         },
         {
             "key": "disgust_triggers_universal_header_mobile",
-            "value": "ñUniversal Triggers of Disgust"
+            "value": "Disparadores universales del disgusto"
         },
         {
             "key": "disgust_triggers_universal_body_mobile",
-            "value": "ñUniversal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Anything in decay or coming out of the body are examples.",
+            "value": "Los disparadores universales son innatos en todos y afectan más intensamente que los aprendidos. Ejemplos: cosas en descomposición o lo que sale del cuerpo.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
             "key": "disgust_triggers_learned_header_mobile",
-            "value": "ñLearned Triggers of Disgust"
+            "value": "Disparadores aprendidos del disgusto"
         },
         {
             "key": "disgust_triggers_learned_body_mobile",
-            "value": "ñSome triggers can be learned from personal or shared cultural experiences. Unfamiliar religious customs and eating insects or raw meat are examples.",
+            "value": "Ciertos disparadores se aprenden de experiencias culturales personales o compartidas. Ejemplos: costumbres religiosas extrañas y comer insectos o carne cruda.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
@@ -856,11 +856,11 @@
         },
         {
             "key": "sadness_continent_body",
-            "value": "ñSadness is a response to loss, and feeling sad allows us to take a timeout and show others that we need support."
+            "value": "La tristeza es una respuesta ante la pérdida, y sentirnos tristes nos permite hacer una pausa y mostrar a otros que necesitamos apoyo."
         },
         {
             "key": "sadness_continent_body_mobile",
-            "value": "ñWe feel sadness when we lose something valuable. Sadness varies in strength and frequency in our lives.",
+            "value": "Sentimos tristeza cuando perdemos algo valioso. La intensidad y frecuencia de la tristeza varían a lo largo de nuestra vida.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
@@ -1001,20 +1001,20 @@
         },
         {
             "key": "sadness_triggers_universal_header_mobile",
-            "value": "ñUniversal Triggers of Sadness"
+            "value": "Disparadores universales de la tristeza"
         },
         {
             "key": "sadness_triggers_universal_body_mobile",
-            "value": "ñUniversal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Losing or being rejected by a loved one are examples.",
+            "value": "Los disparadores universales son innatos en todos y afectan más que los aprendidos. Ejemplos de ellos son perder a un ser querido o ser rechazado por él.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
             "key": "sadness_triggers_learned_header_mobile",
-            "value": "ñLearned Triggers of Sadness"
+            "value": "Disparadores aprendidos de la tristeza"
         },
         {
             "key": "sadness_triggers_learned_body_mobile",
-            "value": "ñSome triggers can be learned from personal or shared cultural experiences. Feeling left out or experiencing a perceived loss of status are examples.",
+            "value": "Ciertos disparadores se aprenden de experiencias culturales personales o compartidas. Ejemplos de ellos son sentirse excluido o percibir una pérdida de estatus.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
@@ -1049,19 +1049,19 @@
     [
         {
             "key": "enjoyment_continent_header",
-            "value": "ñEnjoyment"
+            "value": "Gozo"
         },
         {
             "key": "enjoyment_continent_header_mobile",
-            "value": "ñEnjoyment"
+            "value": "Gozo\n"
         },
         {
             "key": "enjoyment_continent_body",
-            "value": "ñEnjoyment describes the many good feelings that arise from experiences both novel and familiar."
+            "value": "El gozo describe los múltiples buenos sentimientos que surgen de experiencias tanto novedosas como ya conocidas."
         },
         {
             "key": "enjoyment_continent_body_mobile",
-            "value": "ñWe feel enjoyment when we experience novelty or comfort. Enjoyment varies in strength and frequency in our lives.",
+            "value": "Sentimos gozo cuando experimentamos algo novedoso o comodidad. La intensidad y frecuencia del gozo varían a lo largo de la vida.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
@@ -1226,20 +1226,20 @@
         },
         {
             "key": "enjoyment_triggers_universal_header_mobile",
-            "value": "ñUniversal Triggers of Enjoyment"
+            "value": "Disparadores universales del gozo"
         },
         {
             "key": "enjoyment_triggers_universal_body_mobile",
-            "value": "ñUniversal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Social interaction and experiencing nature are examples.",
+            "value": "Los disparadores universales son innatos en todos y afectan más que los aprendidos. Ejemplos: la interacción social y la experiencia de la naturaleza.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
             "key": "enjoyment_triggers_learned_header_mobile",
-            "value": "ñLearned Triggers of Enjoyment"
+            "value": "Disparadors aprendidos del gozo"
         },
         {
             "key": "enjoyment_triggers_learned_body_mobile",
-            "value": "ñSome triggers can be learned from personal or shared cultural experiences. Spending time with family or visiting places from one’s youth are examples.",
+            "value": "Ciertos disparadores se aprenden de experiencias culturales personales o comunes. Ejemplos: pasar tiempo con la familia o visitar lugares de nuestra juventud.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)"
         },
         {
@@ -1282,19 +1282,19 @@
     [
         {
             "key": "about_intro_title",
-            "value": "ñAbout This Atlas"
+            "value": "Acerca de este Atlas"
         },
         {
             "key": "about_intro_body",
-            "value": "ñThe Atlas of Emotions is an interactive tool designed to build emotional awareness. The site invites you to visualize, identify and explore five primary emotions (and their related feeling states, actions, triggers and moods) in order to gain a better understanding of how they influence our lives. Although we can’t always choose what emotions to feel or when to feel them, by building emotional awareness, it may be possible to choose how we respond to what we’re feeling. \n\nThe Atlas began when the Dalai Lama asked prominent emotion researcher Paul Ekman to create a map of the emotions that could help people learn to have more constructive emotional experiences. Ekman, an expert in the field, had previously consulted on a wide range of emotion-related projects, including the popular Pixar film Inside Out. With his daughter, scholar Eve Ekman, he created the Atlas of Emotions in response to the Dalai Lama’s request."
+            "value": "El Atlas de las Emociones es una herramienta interactiva cuyo propósito es cultivar la conciencia de las emociones. El sitio le invita a visualizar, identificar y explorar cinco emociones primarias (así como sus estados de sentimiento, acciones, disparadores y humores afines) a fin de alcanzar una mejor comprensión de cómo influyen en nuestra vida. Si bien no siempre podemos elegir qué emociones sentir y cuándo sentirlas, mediante el cultivo de la conciencia emocional puede ser posible elegir el modo como respondemos a lo que estamos sintiendo. \n\nEl Atlas nació cuando el Dalai Lama pidió al prominente investigador de las emociones Paul Ekman crear un mapa de las emociones que pudiese ayudar a las personas a aprender a tener experiencias emocionales más constructivas. Ekman, experto en ese campo, en el pasado ya había fungido como asesor en una extensa variedad de proyectos relacionados con las emociones, entre ellos la popular película de Pixar Inside Out (Intensa-Mente o Del revés). Conjuntamente con su hija, la académica Eve Ekman, creó el Atlas de las Emociones en respuesta a la petición del Dalai Lama."
         },
         {
             "key": "about_intro_title_mobile",
-            "value": "ñAbout This Atlas"
+            "value": "Acerca de este Atlas"
         },
         {
             "key": "about_intro_body_mobile",
-            "value": "ñThe Atlas of Emotions is an interactive tool designed to build emotional awareness. The site invites you to visualize, identify and explore five primary emotions (and their related feeling states, actions, triggers and moods) in order to gain a better understanding of how they influence our lives. Although we can’t always choose what emotions to feel or when to feel them, by building emotional awareness, it may be possible to choose how we respond to what we’re feeling. \n\nThe Atlas began when the Dalai Lama asked prominent emotion researcher Paul Ekman to create a map of the emotions that could help people learn to have more constructive emotional experiences. Ekman, an expert in the field, had previously consulted on a wide range of emotion-related projects, including the popular Pixar film Inside Out. With his daughter, scholar Eve Ekman, he created the Atlas of Emotions in response to the Dalai Lama’s request."
+            "value": "El Atlas de las Emociones es una herramienta interactiva cuyo propósito es cultivar la conciencia de las emociones. El sitio le invita a visualizar, identificar y explorar cinco emociones primarias (así como sus estados de sentimiento, acciones, disparadores y humores afines) a fin de alcanzar una mejor comprensión de cómo influyen en nuestra vida. Si bien no siempre podemos elegir qué emociones sentir y cuándo sentirlas, mediante el cultivo de la conciencia emocional puede ser posible elegir el modo como respondemos a lo que estamos sintiendo.\n\nEl Atlas nació cuando el Dalai Lama pidió al prominente investigador de las emociones Paul Ekman crear un mapa de las emociones que pudiese ayudar a las personas a aprender a tener experiencias emocionales más constructivas. Ekman, experto en ese campo, en el pasado ya había fungido como asesor en una extensa variedad de proyectos relacionados con las emociones, entre ellos la popular película de Pixar Inside Out (Intensa-Mente o Del revés). Conjuntamente con su hija, la académica Eve Ekman, creó el Atlas de las Emociones en respuesta a la petición del Dalai Lama."
         },
         {
             "key": "about_section_name",
@@ -1302,19 +1302,19 @@
         },
         {
             "key": "about_header_1",
-            "value": "ñAbout the Ekmans"
+            "value": "Acerca de los Ekman"
         },
         {
             "key": "about_body_1",
-            "value": "ñPaul Ekman is a renowned American psychologist who pioneered the field of emotion research. After teaching at UCSF for 40 years and collaborating with partners as diverse as law enforcement agencies and the Dalai Lama, he now runs a private training company. \n \nEve Ekman is a post-doctoral scholar at UCSF’s Osher Center for Integrative Medicine. As a teacher trainer for Cultivating Emotional Balance (CEB), an emotion-regulation and meditation intervention, Eve adapts CEB to train care providers in various fields."
+            "value": "Paul Ekman es un renombrado psicólogo estadounidense, pionero en el campo de la investigación de las emociones. Luego de impartir enseñanzas en la UCSF durante 40 años y de colaborar con asociados tan diversos como organismos encargados de vigilar el cumplimiento de la ley y el Dalai Lama, actualmente dirige una compañía privada de capacitación. \n \nEve Ekman es académica posdoctoral en el Osher Center for Integrative Medicine de la UCSF. Como capacitadora de maestros para el Cultivo del Equilibrio Emocional (CEB, por sus siglas en inglés), una intervención de regulación de las emociones y meditación, Eve adapta el CEB para capacitar a proveedores de cuidados en diversos campos."
         },
         {
             "key": "about_header_2",
-            "value": "ñAbout Stamen Design"
+            "value": "Acerca de Design"
         },
         {
             "key": "about_body_2",
-            "value": "ñ<a href=\"http://www.stamen.com/\">Stamen Design</a> was founded by Eric Rodenbeck in 2001. Since then, the studio has grown to a staff of 12 and established a reputation for its expertise in creating compelling interactive design and data visualization projects. Stamen is neither a research and development lab nor a traditional design firm, but something in between: a place where collaboration is valued, good ideas can come from anywhere and results are paramount. "
+            "value": "ñ<a href=\"http://www.stamen.com/\">Stamen Design</a> fue fundada por Eric Rodenbeck en 2001. De entonces a la fecha el estudio ha crecido hasta contar con un personal de 12 individuos, y ha establecido su reputación como experta en la creación de convincentes proyectos de diseño interactivo y visualización de datos. Stamen no es ni un laboratorio de investigación ni una firma tradicional de diseño, sino algo intermedio: un lugar donde se valora la colaboración, las buenas ideas pueden venir de cualquier parte y los resultados tienen un lugar preponderante. "
         },
         {
             "key": "about_header_3"
@@ -1354,7 +1354,7 @@
         },
         {
             "key": "emotrak_intro",
-            "value": "ñImprove your well being with daily emotional balance training."
+            "value": "Mejore su bienestar con el entrenamiento diario en el equilibrio emocional."
         },
         {
             "key": "emotrak_header_mobile",
@@ -1362,7 +1362,7 @@
         },
         {
             "key": "emotrak_body_mobile",
-            "value": "ñImprove your well being with daily emotional balance training.<br> \"<!-- Begin MailChimp Signup Form -->\n<link href=\"\"//cdn-images.mailchimp.com/embedcode/slim-10_7.css\"\" rel=\"\"stylesheet\"\" type=\"\"text/css\"\">\n<style type=\"\"text/css\"\">\n        #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }\n        /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.\n           We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */\n</style>\n<div id=\"\"mc_embed_signup\"\">\n<form action=\"\"//eveekman.us12.list-manage.com/subscribe/post?u=a8f41488aed929208e96dcf44&amp;id=76c8861d7d\"\" method=\"\"post\"\" id=\"\"mc-embedded-subscribe-form\"\" name=\"\"mc-embedded-subscribe-form\"\" class=\"\"validate\"\" target=\"\"_blank\"\" novalidate>\n    <div id=\"\"mc_embed_signup_scroll\"\">\n        <label for=\"\"mce-EMAIL\"\">Subscribe for EmoTrak Release Updates</label>\n        <input type=\"\"email\"\" value=\"\"\"\" name=\"\"EMAIL\"\" class=\"\"email\"\" id=\"\"mce-EMAIL\"\" placeholder=\"\"email address\"\" required>\n    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->\n    <div style=\"\"position: absolute; left: -5000px;\"\" aria-hidden=\"\"true\"\"><input type=\"\"text\"\" name=\"\"b_a8f41488aed929208e96dcf44_76c8861d7d\"\" tabindex=\"\"-1\"\" value=\"\"\"\"></div>\n    <div class=\"\"clear\"\"><input type=\"\"submit\"\" value=\"\"Subscribe\"\" name=\"\"subscribe\"\" id=\"\"mc-embedded-subscribe\"\" class=\"\"button\"\"></div>\n    </div>\n</form>\n</div>\n\n<!--End mc_embed_signup-->\""
+            "value": "Mejore su bienestar con el entrenamiento diario en el equilibrio emocional.<br> \"<!-- Begin MailChimp Signup Form -->\n<link href=\"\"//cdn-images.mailchimp.com/embedcode/slim-10_7.css\"\" rel=\"\"stylesheet\"\" type=\"\"text/css\"\">\n<style type=\"\"text/css\"\">\n        #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }\n        /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.\n           We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */\n</style>\n<div id=\"\"mc_embed_signup\"\">\n<form action=\"\"//eveekman.us12.list-manage.com/subscribe/post?u=a8f41488aed929208e96dcf44&amp;id=76c8861d7d\"\" method=\"\"post\"\" id=\"\"mc-embedded-subscribe-form\"\" name=\"\"mc-embedded-subscribe-form\"\" class=\"\"validate\"\" target=\"\"_blank\"\" novalidate>\n    <div id=\"\"mc_embed_signup_scroll\"\">\n        <label for=\"\"mce-EMAIL\"\">Subscribe for EmoTrak Release Updates</label>\n        <input type=\"\"email\"\" value=\"\"\"\" name=\"\"EMAIL\"\" class=\"\"email\"\" id=\"\"mce-EMAIL\"\" placeholder=\"\"email address\"\" required>\n    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->\n    <div style=\"\"position: absolute; left: -5000px;\"\" aria-hidden=\"\"true\"\"><input type=\"\"text\"\" name=\"\"b_a8f41488aed929208e96dcf44_76c8861d7d\"\" tabindex=\"\"-1\"\" value=\"\"\"\"></div>\n    <div class=\"\"clear\"\"><input type=\"\"submit\"\" value=\"\"Subscribe\"\" name=\"\"subscribe\"\" id=\"\"mc-embedded-subscribe\"\" class=\"\"button\"\"></div>\n    </div>\n</form>\n</div>\n\n<!--End mc_embed_signup-->\""
         },
         {
             "key": "emotrak_section_name",
@@ -1370,7 +1370,7 @@
         },
         {
             "key": "emotrak_section_1",
-            "value": "ñA brand new app, EmoTrak, is under development by Dr. Eve Ekman and collaborators. Sign up below to be the first to find out about the release of this science based emotional training app."
+            "value": "La Dra. Eve Ekman y colaboradores están desarrollando una novedosa app, EmoTrak. Inscríbase en seguida para ser el primero o primera en enterarse de la liberación de esta app de entrenamiento emocional con bases científicas."
         },
         {
             "key": "emotrak_section_2",
@@ -1378,7 +1378,7 @@
         },
         {
             "key": "emotrak_section_3",
-            "value": "ñDr. Eve Ekman is a University of California San Francisco postdoctoral fellow studying burnout and emotional well being. Dr. Ekman has been developing and evaluating EmoTrak to support health care providers. The app is a self assessment tool to investigate emotion triggers, experiences and responses. It also provides brief emotion focused meditations and feedback on your emotional profile."
+            "value": "La Dra. Eve Ekman es una académica posdoctoral de la University of California San Francisco que estudia el agotamiento y el bienestar emocional. La Dra. Ekman se ha dedicado a desarrollar y evaluar EmoTrak para apoyar a los proveedores de cuidados de salud. La app es una herramienta de autoevaluación para investigar los disparadores de emociones y las experiencias y respuestas emocionales, que provee asimismo breves meditaciones enfocadas en las emociones, así como retroalimentación sobre el perfil emocional del usuario."
         }
     ]
 ]
