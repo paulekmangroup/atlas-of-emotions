@@ -14,10 +14,10 @@ const timeline = {
 	episode: null,
 	episodeAddAwareness: null,
 	activeEpisode: null,
-	container: document.getElementById( 'timeline-graphics' ),
-	beginAwarenessButton: document.getElementById( 'begin-awareness' ),
-	sectionTextBodyIntro: Array.prototype.slice.call( document.querySelectorAll( '#timeline-section .body-intro' ) ),
-	sectionTextBodyAwareness: Array.prototype.slice.call( document.querySelectorAll( '#timeline-section [class*="body-awareness"]' ) ),
+	container: null,
+	beginAwarenessButton: null,
+	sectionTextBodyIntro: null,
+	sectionTextBodyAwareness: null,
 	episodeContent: {
 		"anger": {
 			"trigger": {
@@ -319,8 +319,12 @@ const timeline = {
 	init: function ( containerNode, screenIsSmall ) {
 
 		this.sectionContainer = containerNode;
-
 		this.screenIsSmall = screenIsSmall;
+
+		this.container = document.getElementById( 'timeline-graphics' );
+		this.beginAwarenessButton = document.getElementById( 'begin-awareness' );
+		this.sectionTextBodyIntro = Array.prototype.slice.call( document.querySelectorAll( '#timeline-section .body-intro' ) );
+		this.sectionTextBodyAwareness = Array.prototype.slice.call( document.querySelectorAll( '#timeline-section [class*="body-awareness"]' ) );
 
 		this.loadEpisode();
 

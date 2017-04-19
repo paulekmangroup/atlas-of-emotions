@@ -7,31 +7,15 @@
 		right:0;
 	}
 	.episode-parent {
-		position: relative;
+		position: absolute;
 		top: 50%;
 		height: 300px;
+		width: 100%;
 		margin: 0 auto;
 		visibility:hidden;
 		transform: translateY(-50%);
 		cursor:pointer;
 	}
-	//.fullscreen-element,
-	//.episode-parent {
-	//	position: absolute;
-	//	top: 0;
-	//	left: 0;
-	//	bottom: 0;
-	//	right: 0;
-	//	width: 100%;
-	//	height: 100%;
-	//}
-	//.section{
-	//	overflow: hidden;
-	//	position: relative;
-	//}
-	//.timeline {
-	//	background: #454545;
-	//}
 	svg * {
 		cursor: default;
 	}
@@ -39,5 +23,7 @@
 		cursor: pointer;
 		text-decoration: underline;
 	}
+
+
 }
 

@@ -24,17 +24,21 @@ body {
 	@extend %raleway-regular;
 
 	transition: background-color 1s ease;
-	&[class*=fp-viewing-timeline] {
-		background-color: #454545;
+
+	&[class*=fp-viewing-experience],
+	&[class*=fp-viewing-response] {
+		// allows interaction by default, js passes swipes to scroller
+		// other sections drop this back behind the scroller content
 		.original-content {
-			opacity: 0;
+			z-index: 100;
 		}
 	}
-	//mute the calm graphics in the intro and reading sections
 	&[class*=fp-viewing-introduction],
 	&[class*=fp-viewing-reading] {
+		//mute the calm graphics in the intro and reading sections
 		.original-content {
 			opacity: 0.65;
+			z-index: 0;
 		}
 	}
 
@@ -46,11 +50,16 @@ body {
 		}
 		.emotion-nav {
 			opacity: 0;
-			pointer-events: none;
+			//pointer-events: none;
 		}
 	}
 
 	&[class*=fp-viewing-timeline] {
+		background-color: #454545;
+		.original-content {
+			opacity: 0;
+			z-index: 0;
+		}
 		.emotion-nav {
 			a {
 				color: #aaa;
@@ -156,7 +165,7 @@ svg {
 
 .page-body {
 	position: relative;
-	pointer-events: none;
+	//pointer-events: none;
 }
 
 %menus {
@@ -190,10 +199,10 @@ svg {
 	background-color: rgba(255, 255, 255, 0.8);
 	opacity: 0;
 	transition: opacity 1s ease;
-	pointer-events: none;
+	//pointer-events: none;
 	&.visible {
 		opacity: 1;
-		pointer-events: all;
+		pointer-events: auto;
 	}
 	.site-name {
 		left: 1.5em;
@@ -259,7 +268,7 @@ svg {
 	}
 
 	a {
-		pointer-events: all !important;
+		pointer-events: auto !important;
 		cursor: pointer;
 	}
 
@@ -276,6 +285,10 @@ svg {
 
 	.section-text {
 		background-color: rgba($section-text-background-color, 0.5);
+	}
+
+	.fp-slides {
+		pointer-events: none;
 	}
 
 	.slide {
@@ -370,6 +383,16 @@ svg {
 
 }
 
+//.more-content-overlay {
+//	position: absolute;
+//	top:300px;
+//	bottom:300px;
+//	width: 100%;
+//	background-color: #fff;
+//	overflow-y: scroll;
+//	-webkit-overflow-scrolling: touch;
+//}
+
 .section-text {
 	position: absolute;
 	//z-index: 2;
@@ -383,7 +406,7 @@ svg {
 	@extend %raleway-light;
 	color: #000; //$text-overlay-color;
 	text-align: left;
-	pointer-events: none;
+	//pointer-events: none;
 
 	transition-property: opacity, background-color;
 	transition-duration: #{$ui-overlays-duration-out}s;
@@ -517,7 +540,7 @@ svg {
 		position: absolute;
 		right: $section-text-padding;
 		top: $section-text-padding*0.85;
-		span{
+		span {
 			opacity: 0.3;
 		}
 		img {
@@ -528,7 +551,7 @@ svg {
 			opacity: 0.4;
 		}
 		&:hover {
-			span{
+			span {
 				opacity: 1;
 			}
 			img {
@@ -560,6 +583,17 @@ svg {
 	transition: transform 700ms ease;
 	pointer-events: auto;
 
+    //
+	///* ----------- Phones ----------- */
+	//@media screen and (max-width: 750px) {
+	//	-webkit-overflow-scrolling: touch;
+	//}
+    //
+	///* ----------- Tablets ----------- */
+	//@media screen and (min-width: 750px) {
+	//	-webkit-overflow-scrolling: touch;
+	//}
+
 	.close-button {
 		position: absolute;
 		top: $more-text-padding/3;
@@ -574,13 +608,18 @@ svg {
 		right: 0;
 		padding: $more-text-padding;
 		//padding-left: $more-text-padding + $section-text-width;
-		overflow-y: auto;
 		text-align: center;
+		pointer-events: auto;
+		overflow-y: scroll;
+		-webkit-overflow-scrolling: touch;
+
+
 		.close-button {
 			position: static;
 			display: inline-block;
 			font-size: 1em;
 			margin-top: 1em;
+			text-transform: uppercase;
 			&:before {
 				vertical-align: text-top;
 				font-size: 2.2em;
@@ -588,11 +627,31 @@ svg {
 				margin-top: -0.03em;
 			}
 		}
+
+		///* ----------- Phones ----------- */
+		//@media screen and (max-width: 750px) {
+		//	overflow-y: scroll; /* has to be scroll, not auto */
+		//	-webkit-overflow-scrolling: touch;
+		//}
+        //
+		///* ----------- Tablets ----------- */
+		//@media screen and (min-width: 750px) {
+		//	overflow-y: scroll; /* has to be scroll, not auto */
+		//	-webkit-overflow-scrolling: touch;
+		//}
+		//
+		///* ----------- Desktop Screens ----------- */
+		//
+		//@media screen
+		//and (min-width: 1600px) {
+		//}
+
 	}
 	.wrapper {
 		position: relative;
 		max-width: 50em;
 		margin: 0 auto;
+		margin-bottom: 3em;
 		text-align: left;
 		img {
 			width: 100%;
@@ -657,6 +716,7 @@ svg {
 		&:nth-child(2) {
 			position: absolute;
 			top: 0;
+			left: 0;
 		}
 	}
 }
@@ -689,7 +749,7 @@ svg {
 	left: 0;
 	right: 0;
 	padding-top: 250px;
-	pointer-events: none;
+	//pointer-events: none;
 	transition: opacity 0.3s ease;
 	text-align: center;
 	font-size: 1.2em;

@@ -719,6 +719,8 @@ export default {
 
 	setActive: function ( val ) {
 
+		//console.log( this.currentEmotion + " active state: " + val );
+
 		if ( this.currentEmotion ) {
 
 			// clear out any existing handlers
@@ -726,6 +728,7 @@ export default {
 				this.graphContainers[ this.currentEmotion ]
 					.on( 'touchstart', null );
 			} else {
+
 				this.graphContainers[ this.currentEmotion ].selectAll( 'path.area' )
 					.on( 'mouseover', null )
 					.on( 'mouseout', null )
@@ -851,6 +854,8 @@ export default {
 				name: state.name.toLowerCase()
 			} );
 		} );
+
+		//console.log( states );
 
 		// filter out states with invalid ranges
 		states = states.filter( state => {
@@ -1560,6 +1565,10 @@ export default {
 
 	onStateMouseOver: function ( d, i ) {
 
+		//console.log( '--------------------------' );
+		//console.log( arguments );
+		//console.log( this.currentEmotion );
+
 		let statesData = this.emotionStates[ this.currentEmotion ].data[ i ];
 		if ( !statesData ) {
 			throw new Error( 'statesData not found for onStateMouseOver at index ' + i );
@@ -1821,7 +1830,13 @@ export default {
 
 	resetCallout: function () {
 		dispatcher.popupChange();
-		dispatcher.changeCallout( this.currentEmotion, appStrings().getStr( 'emotionsData.metadata.states.header' ), appStrings().getStr( 'emotionsData.metadata.states.body' ) );
+		dispatcher.changeCallout(
+			this.currentEmotion,
+			appStrings().getStr( 'emotionsData.metadata.states.header' ),
+			appStrings().getStr( `emotionsData.emotions.${this.currentEmotion}.states[0].secondary` ) +
+			'<br/>&nbsp;<br/>' +
+			appStrings().getStr( 'emotionsData.metadata.states.interaction_prompt' )
+		);
 	}
 
 };

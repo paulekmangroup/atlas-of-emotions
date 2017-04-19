@@ -266,28 +266,21 @@
 
 	<div class="page-body">
 
-		<div class="section introduction-hero" id="introduction-section">
+		<div class="section introduction-hero" id="introduction-section" data-template="metadata.hero">
+
+			{{# slides.forEach( function(slide, i){ }}
+
+			<div class="slide {{# if(i==0) { }} active {{# } }}">
+				<div class="slide-content" data-anchor="">
+					{{ slide }}
+				</div>
+			</div>
+
+			{{# }); }}
+
 			<div class="intro-heading">
-				<h1>Welcome to the Atlas of Emotions</h1>
-				The Atlas project is supported by the <b>Dalai Lama</b> <a class="about-link">learn more</a>
-			</div>
-			<div class="slide active">
-				<div class="slide-content" data-anchor="">
-					This Atlas is a visual tool that builds your vocabulary of emotions and shines light
-					on your inner emotional world.
-				</div>
-			</div>
-			<div class="slide">
-				<div class="slide-content" data-anchor="">
-					The goal is to have greater influence over what triggers your emotions, as well as how you
-					respond.
-				</div>
-			</div>
-			<div class="slide" data-anchor="">
-				<div class="slide-content">
-					Learning to identify and describe what you are feeling, and why, is the first step
-					towards emotional awareness.
-				</div>
+				<h1>{{ header }}</h1>
+				{{ sub_header }} <a class="about-link">{{ learn_more_link }}</a>
 			</div>
 
 			<div class="section-text section-text--about">
@@ -295,265 +288,135 @@
 					<img src="img/hhAndPaul.jpg" class="fade">
 					<img src="img/hhAndEve.jpg" class="fade">
 				</div>
-				<h3>ABOUT THE ATLAS</h3>
-				The Dalia Lama requested "A map of our emotions to develop a calm mind". He made this request of his
-				long time friend and renowned emotion scientist, Dr. Paul Ekman. Ekman took on the creation of the Atlas
-				alongside his daughter, Eve Ekman a second generation emotion researcher and trainer. The Atlas
-				represents what is known from the psychological study of emotion to date.
+				<h3>{{ about.header }}</h3>
+				{{ about.body }}
 			</div>
 
 			<div class="cta">
 				<a href="#triggers">
-					BEGIN
+					{{ cta }}
 				</a>
 			</div>
 		</div>
 
 
 		<div class="section" id="timeline-section" data-has-emotion-state="true">
-			<div class="section-graphics" style="padding-left:345px;">
-				<div id="timeline-graphics">
-					<!--<div class="timeline">-->
-					<!--<object class="episode-parent" id="episode-object&#45;&#45;add-awareness"-->
-					<!--data="assets/episode&#45;&#45;add-awareness.svg" type="image/svg+xml"></object>-->
-					<!--</div>-->
+			<div class="section-graphics">
+				<div id="timeline-graphics" data-template="metadata.timeline.secondary.blocks.captions">
 					<div class="diagram-caption" id="constructive-response-caption">
-						A response that helps you in your goals
+						{{ constructive_response }}
 					</div>
 					<div class="diagram-caption" id="destructive-response-caption">
-						A response that gets in the way of your goals
+						{{ destructive_response }}
 					</div>
 					<div class="diagram-caption" id="ambiguous-response-caption">
-						Sometimes we don’t know
+						{{ ambiguous_response }}
 					</div>
 					<div class="diagram-caption" id="physical-changes-caption">
-						Our automatic bodily sensations of our emotion
+						{{ physical_changes }}
 					</div>
 					<div class="diagram-caption" id="state-caption">
-						Our combined physical and mental changes
+						{{ emotional_state }}
 					</div>
 					<div class="diagram-caption" id="mental-changes-caption">
-						The immediate felt experience of our emotion
+						{{ mental_changes }}
 					</div>
 					<div class="diagram-caption" id="precondition-caption">
-						The context, which may influence the way we enter the emotion
+						{{ precondition }}
 					</div>
 					<div class="diagram-caption" id="event-caption">
-						An event that happens in the outside world or in our own mind.
+						{{ event }}
 					</div>
 					<div class="diagram-caption" id="perceptual-database-caption">
-						How we see the world, as a result of our personal history
+						{{ perceptual_database }}
 					</div>
 				</div>
 			</div>
 			<div class="section-text">
-				<h2 class="section-heading">The Timeline <a class="restart-button"><span>restart</span><img src="./img/reset.svg"></a></h2>
 
+				<div data-template="metadata.timeline">
+					<h2 class="section-heading">
+						{{ header }}
+						<a class="restart-button">
+							<span>{{ restart_button }}</span><img src="./img/reset.svg">
+						</a>
+					</h2>
 
-				<!--intro-->
-				<p class="body-intro">
-					Our emotions unfold on a timeline. They begin with a trigger and lead to an experience, which then
-					results in a response.
-				</p>
-				<p class="body-intro">
-					Try choosing different emotions from the list below the timeline.
-				</p>
-				<p class="body-intro">
-					Notice how the same trigger can lead to a different response,
-					depending on the emotion we feel.
-				</p>
-				<p class="body-intro">
-					<button id="begin-awareness">How does this happen?</button>
-				</p>
-
-
-				<!--event-->
-				<div class="body-awareness" data-stage="trigger">
-					<h3>TRIGGER</h3>
-					<p>
-						The trigger is made up of:
+					<!--intro-->
+					{{# body.forEach( function(paragraph){ }}
+					<p class="body-intro">
+						{{ paragraph }}
 					</p>
-					<ul>
-						<li>The state of our mind and body before the event</li>
-						<li>The event</li>
-						<li>The way we see the world as a result of our personal history</li>
-					</ul>
-				</div>
-				<button id="experience-add-awareness" class="body-awareness">+ add awareness</button>
-
-
-				<!--state-->
-				<div class="body-awareness" data-stage="experience">
-					<h3>EXPERIENCE</h3>
-					<p>
-						Our experience includes the feelings and physical sensations of our emotion. This filters our
-						perception of a situation.
-					</p>
-				</div>
-				<button id="response-add-awareness" class="body-awareness">+ add awareness</button>
-
-				<!--response-->
-				<div class="body-awareness" data-stage="response">
-					<h3>RESPONSE</h3>
-					<p>
-						We have a variety of choices in how we respond. Some are more helpful than others.
-					</p>
-				</div>
-				<button id="begin-refractory-period" class="body-awareness">Why is it hard to stay aware?</button>
-
-
-				<!--When we are triggered into a new emotion, it filters our ability to be aware of our experience and choose a response.-->
-				<!--But as time passes, we regain some clarity. So if we pause before we act, we often find it easier to choose a response.-->
-				<!--refractory period-->
-				<div class="body-awareness" data-stage="refractory">
-					<h3>EMOTIONAL SATURATION</h3>
-					<p>
-						When we are triggered into a new emotion, it limits our awareness and our ability to choose a
-						response.
-					</p>
-					<p>
-						But as time passes, we regain some clarity.
-					</p>
-					<p>
-						So if we pause before we act, we often find it easier to choose a response that serves our
-						goals.
-					</p>
-				</div>
-				<button id="begin-block-diagram" class="body-awareness">See the big picture</button>
-
-				<!--blocks-->
-				<div class="body-awareness" data-stage="blocks">
-					<h3>BIG PICTURE</h3>
-					<p>
-						You can investigate each piece of the timeline and see how researchers make sense of an
-						emotional episode. Then scroll down to learn about how they have mapped our emotional
-						experiences.
+					{{# }) }}
+					<p class="body-intro">
+						<button id="begin-awareness">{{ intro_button }}</button>
 					</p>
 				</div>
 
+				<div data-template="metadata.timeline.secondary">
 
-				<a class="more-link">learn more</a>
+					<!--event-->
+					<div class="body-awareness" data-stage="trigger">
+						<h3>{{ trigger.header }}</h3>
+						<p>
+							{{ trigger.body[0] }}
+						</p>
+						<ul>
+							{{# trigger.body[1].forEach( function(item,i){ }}
+							<li>{{ item }}</li>
+							{{# }) }}
+						</ul>
+					</div>
+					<button id="experience-add-awareness" class="body-awareness">{{ trigger.button }}</button>
+
+
+					<!--state-->
+					<div class="body-awareness" data-stage="experience">
+						<h3>{{ experience.header }}</h3>
+						<p>
+							{{ experience.body[0] }}
+						</p>
+					</div>
+					<button id="response-add-awareness" class="body-awareness">+ add awareness</button>
+
+					<!--response-->
+					<div class="body-awareness" data-stage="response">
+						<h3>{{ response.header }}</h3>
+						<p>
+							{{ response.body[0] }}
+						</p>
+					</div>
+					<button id="begin-refractory-period" class="body-awareness">Why is it hard to stay aware?</button>
+
+
+					<!--When we are triggered into a new emotion, it filters our ability to be aware of our experience and choose a response.-->
+					<!--But as time passes, we regain some clarity. So if we pause before we act, we often find it easier to choose a response.-->
+					<!--refractory period-->
+					<div class="body-awareness" data-stage="refractory">
+						<h3>{{ refractory.header }}</h3>
+						{{# refractory.body.forEach( function(paragraph){ }}
+						<p>
+							{{ paragraph }}
+						</p>
+						{{# }) }}
+					</div>
+					<button id="begin-block-diagram" class="body-awareness">See the big picture</button>
+
+					<!--blocks-->
+					<div class="body-awareness" data-stage="blocks">
+						<h3>{{ blocks.header }}</h3>
+						<p>
+							{{ blocks.body[0] }}
+						</p>
+					</div>
+
+				</div>
+
+
+				<a class="more-link" data-template="metadata.site">{{ learn_more_button }}</a>
 			</div>
 			<div class="more-content">
 				<div class="more-content-scroller">
-					<div class="wrapper">
-						<img src="./img/episodeTimeline.png">
-						<div class="annex-table-wrapper">
-							<table class="annex-table">
-								<tr class="content">
-									<td class="upper">pre-condition</td>
-									<td>This describes the context or situations which may influence the way we enter
-										the emotion. For example our pre-condition could be physiological: being hungry,
-										tired or emotional: having had a very enjoyable or stressful day or coming out
-										of a prior emotional episode.
-									</td>
-								</tr>
-								<tr class="content">
-									<td class="upper">event</td>
-									<td>This describes a person, place, situation, image, thought, memory, smell, sound,
-										taste or idea that we encounter from the outside world or from our own mind. We
-										are constantly, automatically appraising, or assessing our inner and outer
-										world. For example, when we hear a new song, we are instantly overlaying our
-										knowledge of instruments and categories of music as we listen without even
-										thinking, this is automatic appraisal.
-									</td>
-								</tr>
-								<tr class="content">
-									<td class="upper">trigger</td>
-									<td>This describes the combination of the automatic appraisal matching to some
-										universal/hardwired or acquired script in our database.
-									</td>
-								</tr>
-								<tr class="content">
-									<td class="upper">perception database</td>
-									<td>This describes our universal/hardwired responses and our individually acquired
-										emotional memories. For example, if the event is a smell and in the database is
-										the stored memory of the shampoo our mother used in our childhood, and we are
-										triggered to experience an emotion of warm nostalgia of a happy childhood. When
-										the appraised event resembles something in our database, it may be a highly
-										accurate or could create a distorted perception of the trigger. For example if
-										we had an intimidating experience with a police officer when we were young and
-										we are pulled over as an adult we could misperceive the situation with a
-										distorted sense of fear.
-									</td>
-								</tr>
-								<tr class="content">
-									<td class="upper">physical changes</td>
-									<td>This describes the autonomic changes in our body which occur as our emotion
-										arises. We can experience these changes as sensations in our body, feeling heat
-										in our face, tightness in our jaw or shoulders, etc.
-									</td>
-								</tr>
-								<tr class="content">
-									<td class="upper">state</td>
-									<td>This describes the emotion itself, inclusive of physical and psychological
-										changes.
-									</td>
-								</tr>
-								<tr class="content">
-									<td class="upper">psychological changes</td>
-									<td>This describes the qualitative experience of the emotion, how sadness feels sad,
-										or anger feels angry.
-									</td>
-								</tr>
-								<tr class="content">
-									<td class="upper">action</td>
-									<td>This describes our emotional responses. This could be an external behavior such
-										as yelling in anger, or could be internal, such as suppressing anger. Each
-										emotion in the atlas shows a range of immediate actions, as well as intrinsic or
-										intention actions. The action can be either constructive or destructive. Leading
-										to further collaboration with others or to difficulty in collaborating.
-									</td>
-								</tr>
-								<tr class="content">
-									<td class="upper">post-condition</td>
-									<td>This describes the result or impact of our emotional actions. This could be
-										external: if we have yelled at someone they may then yell back; or internal: if
-										we have suppressed we could be feeling some ongoing irritation. The post
-										condition could lead to our next episode of emotion, if someone is yelling back
-										at us we are triggered once again to either anger, fear or sadness/ regret for
-										our actions. Our post condition is an opportunity for us to build emotional
-										awareness through reflection on our emotion, to understand the trigger, identify
-										the felt experience and consider its impact it has had.
-									</td>
-								</tr>
-								<tr class="content">
-									<td class="upper">selective filter period</td>
-									<td>The Selective Filtering Period is initiated with the onset of actions and
-										signals — perception is narrowed and distorted, filtering and interpreting
-										information relevant to and consistent with the prevailing emotion. For example,
-										when fear is aroused, there is a heightened sensitivity to real and imagined
-										threats.
-									</td>
-								</tr>
-							</table>
-						</div>
-						<div class="annex-table-wrapper">
-							<table class="annex-table">
-								<tr class="title">
-									<td colspan="2">Learned display rules (to regulate signals) and learned feeling
-										rules (to modify, amplify or suppress subjective feelings) arise. We don’t know
-										how quickly these occur. Do they occur before signals and actions, or
-										immediately during the onset of signals and actions? Impulses are translated
-										into actions and signals.
-									</td>
-								</tr>
-							</table>
-						</div>
-						<div class="annex-table-wrapper">
-							<table class="annex-table">
-								<tr class="title">
-									<td colspan="2">The gap between Step 2 (impulses) and Step 4 (actions/signals) is
-										variable, depending on the individual characteristics of each person and the
-										person’s emotional profile, the intensity of the appraised trigger, and the
-										momentary psychological state of the individual when the trigger is appraised
-										(how much sleep the person had last night; what, if any, emotion the person last
-										experienced or is currently experiencing, etc.).
-									</td>
-								</tr>
-							</table>
-						</div>
-					</div>
 					<div class="close-button">CLOSE</div>
 				</div>
 				<div class="close-button"></div>
@@ -570,100 +433,10 @@
 				<h3 class="headline"></h3>
 				<p class="body">
 				</p>
-				<a class="more-link">learn more</a>
+				<a class="more-link" data-template="metadata.site">{{ learn_more_button }}</a>
 			</div>
 			<div class="more-content">
 				<div class="more-content-scroller">
-					<div class="wrapper">
-						<div class="annex-table-wrapper">
-							<table class="annex-table">
-								<tr class="title">
-									<td colspan="2">Half or less than half of emotion scientists believe there is
-										convincing
-										evidence that each of the following is an emotion.
-									</td>
-								</tr>
-								<tr class="content">
-									<td class="upper">Love</td>
-									<td>A strong attachment to another person, typically parent toward child and
-										child
-										toward parent, but also between those romantically committed. Within loving
-										relationships, anger, fear, sadness, disgust and enjoyment can all be
-										experienced.
-									</td>
-								</tr>
-								<tr class="content">
-									<td class="upper">Surprise</td>
-									<td>The briefest emotion, surprise is triggered by the sudden occurrence of an
-										unexpected event. It is often a way station that leads, after more
-										appraisal, to
-										any
-										of the other emotions.
-									</td>
-								</tr>
-								<tr class="content">
-									<td class="upper">Jealousy</td>
-									<td>An emotional storyline involving three people: the desired person, the
-										person
-										afraid
-										of losing the commitment of the desired person, and the rival. During
-										jealousy,
-										anger, fear, disgust, sadness or surprise may be felt by any of the three
-										people.
-									</td>
-								</tr>
-								<tr class="content">
-									<td class="upper">Envy</td>
-									<td>Although often misused as a synonym for jealousy, envy involves resenting
-										and
-										wanting what another person possesses. When a person feels envy, anger,
-										contempt
-										or
-										sadness may also be felt.
-									</td>
-								</tr>
-								<tr class="content">
-									<td class="upper">Hate</td>
-									<td>Enduring anger focused on a particular person or group of persons. Over time
-										hatred
-										may generate the personality trait of hostility.
-									</td>
-								</tr>
-								<tr class="content">
-									<td class="upper">Embarrassment</td>
-									<td>Self-conscious distress or awkwardness. Often activated by praise from
-										another,
-										or
-										by a faux pas. It has no vocal signal, but may cause a blush that is visible
-										only in
-										light-skinned people.
-									</td>
-								</tr>
-								<tr class="content">
-									<td class="upper">Shame</td>
-									<td>An expectation that others would be disgusted if they knew what the person
-										was
-										thinking of or had done. It motivates a strong wish to prevent others from
-										learning
-										what the person has done or thought.
-									</td>
-								</tr>
-								<tr class="content">
-									<td class="upper">Contempt</td>
-									<td>The last emotion to appear in child development, it is a feeling of moral
-										superiority to the target. Often mixed with enjoyment.
-									</td>
-								</tr>
-								<tr class="content">
-									<td class="upper">Guilt</td>
-									<td>Regret about a past action, which motivates the wish to confess the wrongful
-										action,
-										hoping for forgiveness.
-									</td>
-								</tr>
-							</table>
-						</div>
-					</div>
 					<div class="close-button">CLOSE</div>
 				</div>
 				<div class="close-button"></div>
@@ -679,6 +452,13 @@
 				<h3 class="headline"></h3>
 				<p class="body">
 				</p>
+				<a class="more-link" data-template="metadata.site">{{ learn_more_button }}</a>
+			</div>
+			<div class="more-content">
+				<div class="more-content-scroller">
+					<div class="close-button" data-template="metadata.site">{{ close_button }}</div>
+				</div>
+				<div class="close-button"></div>
 			</div>
 		</div>
 

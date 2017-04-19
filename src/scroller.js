@@ -1,6 +1,9 @@
-import dispatcher from './dispatcher.js';
-//TODO do we really need max or just lite? Shoud we replace tween.js in other files?
 import { TweenMax, TimelineMax } from "gsap";
+
+import dispatcher from './dispatcher.js';
+import moreInfo from './moreInfo.js';
+
+//TODO do we really need max or just lite? Should we replace tween.js in other files?
 
 const scroller = {
 
@@ -14,6 +17,7 @@ const scroller = {
 		'continents': 'experience',
 		'states': 'experience',
 		'triggers': 'timeline',
+		'reading': 'reading' //FIXME fake atlas section prompts default
 	},
 
 	FULLPAGE_TO_ATLAS_SECTIONS: {
@@ -68,9 +72,9 @@ const scroller = {
 			.staggerTo( $links, 0.1, { css: { 'transform': 'scale(1)' } }, 0.1, 'start+=0.2' );
 	},
 
-	resetEmotionNav: function(){
+	resetEmotionNav: function () {
 		var $links = $( '.emotion-nav li' );
-		$links.removeAttr('style');
+		$links.removeAttr( 'style' );
 	},
 
 	initEmotionNav: function () {
@@ -137,8 +141,7 @@ const scroller = {
 
 				if ( !pulseActive && scrollingEnded ) {
 					pulseActive = true;
-					TweenMax.to( $(
-						'.more-content>.close-button' ),
+					TweenMax.to( $( '.more-content>.close-button' ),
 						growTime,
 						{
 							scale: 1.5,
@@ -285,9 +288,36 @@ const scroller = {
 			//_self.toggleEmotionNav( !moreVisible );
 		} );
 		// pulse close button on 'more' when scrolled past end of more content
-		var $scroller = $( '.more-content-scroller' );
-		$scroller.mousewheel( this.getBounceCallback( this.bottomOverscroll ) );
-		$scroller.mousewheel( this.getBounceCallback( this.topOverscroll ) );
+		var $moreContentScrollers = $( '.more-content-scroller' );
+		$moreContentScrollers.mousewheel( this.getBounceCallback( this.bottomOverscroll ) );
+		$moreContentScrollers.mousewheel( this.getBounceCallback( this.topOverscroll ) );
+
+		var moreInfoElements = {};
+		var morePageNames = [
+			'annex-episode-timeline',
+			'annex-partially-charted',
+			'annex-traits',
+			'annex-signals',
+			'annex-psychopathologies',
+			'annex-scientific-basis',
+			//'annex-impediment-antidote',
+			//'annex-intrinsic-remedial'
+		];
+
+		morePageNames.forEach( item => {
+			moreInfoElements[ item ] = moreInfo.getPageElement( item ).querySelector( '.wrapper' ).cloneNode( true );
+			let title = moreInfo.getPageTitle( item );
+			$( moreInfoElements[ item ] ).prepend( $( `<h2>${ title }</h2>` ) );
+		} );
+
+		$( '#timeline-section' ).find( '.more-content-scroller' ).prepend( moreInfoElements[ 'annex-episode-timeline' ] );
+		$( '#experience-section' ).find( '.more-content-scroller' ).prepend( moreInfoElements[ 'annex-signals' ] );
+		$( '#experience-section' ).find( '.more-content-scroller' ).prepend( moreInfoElements[ 'annex-partially-charted' ] );
+		$( '#experience-section' ).find( '.more-content-scroller' ).prepend( moreInfoElements[ 'annex-scientific-basis' ] );
+		$( '#response-section' ).find( '.more-content-scroller' ).prepend( moreInfoElements[ 'annex-psychopathologies' ] );
+		$( '#response-section' ).find( '.more-content-scroller' ).prepend( moreInfoElements[ 'annex-traits' ] );
+
+
 	},
 
 	toggleAboutSection: function ( visibility ) {
@@ -333,13 +363,18 @@ const scroller = {
 	},
 
 	initFullpageSections: function () {
+
+		let touchSensitivity = 15;
+
 		this.$sections = $( '.section' );
 
 		this.anchors = this.$sections.map( function () {
 			return this.id.split( '-' )[ 0 ]; //'this' refers to element scope
 		} ).get();
 
-		$( '.page-body' ).fullpage( {
+		let $pageBody = $( '.page-body' );
+
+		$pageBody.fullpage( {
 			anchors: this.anchors,
 			lockAnchors: true,
 			menu: "#menu-list",
@@ -355,9 +390,63 @@ const scroller = {
 
 			onLeave: this.onSectionLeave.bind( this ),
 
-			afterLoad: this.afterSectionLoad.bind( this )
+			afterLoad: this.afterSectionLoad.bind( this ),
+
+			touchSensitivity: touchSensitivity,
+
+			normalScrollElementTouchThreshold: 10,
+
+			normalScrollElements: '.more-content-scroller, .more-content-overlay'
 
 		} );
+
+
+		//make swipes on original content change the section
+		let swipeStart = 0;
+		let swipeComplete = false;
+		let $originalContent = $( '.original-content' );
+
+		let addTouchEffects = function ( $elements ) {
+
+			let returnTranslation = function ( element ) {
+				TweenMax.to( element, 0.7, { y: 0 } );
+			};
+			$elements.on( 'touchstart', function ( e ) {
+				swipeStart = e.originalEvent.touches[ 0 ].pageY;
+				swipeComplete = false;
+			} );
+			$elements.on( 'touchend', function ( e ) {
+				var $sectionText = $( '.section.active .section-text' );
+				returnTranslation( $sectionText[ 0 ] );
+			} );
+			$elements.on( 'touchmove', function ( e ) {
+
+				let distance = e.originalEvent.touches[ 0 ].pageY - swipeStart;
+				let height = $( '.section.active' ).height();
+				let thresh = 0.01 * touchSensitivity * height;
+
+				if ( !swipeComplete ) {
+					var $sectionText = $( '.section.active .section-text' );
+					TweenMax.set( $sectionText[ 0 ], { y: distance } );
+					if ( Math.abs( distance ) > thresh ) {
+						returnTranslation( $sectionText[ 0 ] );
+						if ( e.currentTarget == $originalContent[ 0 ] ) {
+							if ( distance > 0 ) {
+								$.fn.fullpage.moveSectionUp();
+							} else {
+								$.fn.fullpage.moveSectionDown();
+							}
+						}
+						swipeComplete = true;
+					}
+				}
+
+			} );
+		};
+
+		addTouchEffects( $originalContent );
+		addTouchEffects( this.$sections );
+
 	},
 
 	initTopNav: function () {

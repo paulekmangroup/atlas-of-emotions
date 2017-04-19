@@ -70,7 +70,7 @@ export default {
 	randomLabelPositions: {},
 
 
-	init: function (containerNode, screenIsSmall) {
+	init: function ( containerNode, screenIsSmall ) {
 
 		this.sectionHitArea = containerNode;
 
@@ -78,20 +78,20 @@ export default {
 
 		this.actionsData = this.parseActions();
 
-		this.initContainers(containerNode);
+		this.initContainers( containerNode );
 
-		this.initLabels(containerNode);
+		this.initLabels( containerNode );
 
-		this.setUpGraphs(containerNode);
+		this.setUpGraphs( containerNode );
 
-		this.scaledLineGenerator = this.scaledLineGenerator.bind(this);
-		this.arcTween = this.arcTween.bind(this);
-		this.onActionMouseOver = this.onActionMouseOver.bind(this);
-		this.onActionMouseOut = this.onActionMouseOut.bind(this);
-		this.onActionMouseClick = this.onActionMouseClick.bind(this);
-		this.onContainerTouchStart = this.onContainerTouchStart.bind(this);
-		this.onContainerTouchMove = this.onContainerTouchMove.bind(this);
-		this.onContainerTouchEnd = this.onContainerTouchEnd.bind(this);
+		this.scaledLineGenerator = this.scaledLineGenerator.bind( this );
+		this.arcTween = this.arcTween.bind( this );
+		this.onActionMouseOver = this.onActionMouseOver.bind( this );
+		this.onActionMouseOut = this.onActionMouseOut.bind( this );
+		this.onActionMouseClick = this.onActionMouseClick.bind( this );
+		this.onContainerTouchStart = this.onContainerTouchStart.bind( this );
+		this.onContainerTouchMove = this.onContainerTouchMove.bind( this );
+		this.onContainerTouchEnd = this.onContainerTouchEnd.bind( this );
 		// this.onValenceMouseOver = this.onValenceMouseOver.bind(this);
 		// this.onValenceMouseOut = this.onValenceMouseOut.bind(this);
 		// this.onValenceMouseClick = this.onValenceMouseClick.bind(this);
@@ -102,40 +102,40 @@ export default {
 
 	},
 
-	initContainers: function (containerNode) {
+	initContainers: function ( containerNode ) {
 
-		_.values(dispatcher.EMOTIONS).forEach(emotion => {
+		_.values( dispatcher.EMOTIONS ).forEach( emotion => {
 
-			let actionsContainer = document.createElement('div');
-			actionsContainer.classList.add('actions-container');
-			actionsContainer.classList.add(emotion);
+			let actionsContainer = document.createElement( 'div' );
+			actionsContainer.classList.add( 'actions-container' );
+			actionsContainer.classList.add( emotion );
 
-			let graphContainer = document.createElement('div');
-			graphContainer.classList.add('graph-container');
-			actionsContainer.appendChild(graphContainer);
+			let graphContainer = document.createElement( 'div' );
+			graphContainer.classList.add( 'graph-container' );
+			actionsContainer.appendChild( graphContainer );
 
-			containerNode.appendChild(actionsContainer);
+			containerNode.appendChild( actionsContainer );
 
-		});
+		} );
 
 	},
 
-	initLabels: function (containerNode) {
+	initLabels: function ( containerNode ) {
 
 		this.labelContainers = {};
-		_.values(dispatcher.EMOTIONS).forEach(emotion => {
+		_.values( dispatcher.EMOTIONS ).forEach( emotion => {
 
-			let container = d3.select('.' + emotion + '.actions-container'),
-				labelContainer = container.append('div')
-					.classed('label-container', true);
+			let container = d3.select( '.' + emotion + '.actions-container' ),
+				labelContainer = container.append( 'div' )
+					.classed( 'label-container', true );
 
-			this.labelContainers[emotion] = labelContainer;
+			this.labelContainers[ emotion ] = labelContainer;
 
-		});
+		} );
 
 	},
 
-	setUpGraphs: function (containerNode) {
+	setUpGraphs: function ( containerNode ) {
 
 		//
 		// d3 conventional margins
@@ -148,9 +148,9 @@ export default {
 		};
 
 		// All the same size, just grab the first one
-		let graphContainer = containerNode.querySelector('.graph-container'),
+		let graphContainer = containerNode.querySelector( '.graph-container' ),
 			innerWidth = graphContainer.offsetWidth - margin.left - margin.right,
-			h = Math.max(graphContainer.offsetHeight, 0.5 * graphContainer.offsetWidth),
+			h = Math.max( graphContainer.offsetHeight, 0.5 * graphContainer.offsetWidth ),
 			innerHeight = h - margin.top - margin.bottom;
 
 
@@ -158,204 +158,206 @@ export default {
 		// d3/svg setup
 		//
 		let section = this,
-			transformedHeight = Math.sqrt(3) / 2 * innerHeight,	// from rotateX(60deg) applied to #action-graph-container
+			transformedHeight = Math.sqrt( 3 ) / 2 * innerHeight,	// from rotateX(60deg) applied to #action-graph-container
 			radius = this.screenIsSmall ?
 				innerWidth :
-				Math.min(0.5 * innerWidth, transformedHeight * 0.75);	// TODO: revisit this magic number munging to keep everything on-screen
+				Math.min( 0.5 * innerWidth, transformedHeight * 0.75 );	// TODO: revisit this magic number munging to keep everything on-screen
 
 		this.lineGenerator = d3.svg.line.radial()
-			.radius(d => d.x * radius)
-			.angle(d => 2*Math.PI * (1 - d.y))
-			.interpolate('cardinal');
+			.radius( d => d.x * radius )
+			.angle( d => 2 * Math.PI * (1 - d.y) )
+			.interpolate( 'cardinal' );
 
 		this.pieLayout = d3.layout.pie()
-			.sort(null)
-			.value(d => d.size)
-			.startAngle(0.5 * Math.PI)
-			.endAngle(1.5 * Math.PI);
+			.sort( null )
+			.value( d => d.size )
+			.startAngle( 0.5 * Math.PI )
+			.endAngle( 1.5 * Math.PI );
 
 		this.arcGenerator = d3.svg.arc()
-			.innerRadius(0)
-			.outerRadius(radius);
+			.innerRadius( 0 )
+			.outerRadius( radius );
 
 		//
 		// Set up each graph,
 		// or update if already set up (on resize)
 		//
-		if (!this.graphContainers) {
+		if ( !this.graphContainers ) {
 
 			this.graphContainers = {};
 			this.valenceTextures = {};
-			_.values(dispatcher.EMOTIONS).forEach((emotion, i) => {
+			_.values( dispatcher.EMOTIONS ).forEach( ( emotion, i ) => {
 
-				let graphContainer = document.querySelector('#actions .' + emotion + ' .graph-container');
+				let graphContainer = document.querySelector( '#actions .' + emotion + ' .graph-container' );
 
-				let svg = d3.select(graphContainer).append('svg')
-					.attr('width', graphContainer.offsetWidth)
-					.attr('height', h);
+				let svg = d3.select( graphContainer ).append( 'svg' )
+					.attr( 'width', graphContainer.offsetWidth )
+					.attr( 'height', h );
 
-				let graph = svg.append('g')
-					.attr('transform', 'translate(' + (margin.left + 0.5 * innerWidth) + ',' + margin.top + ')');
+				let graph = svg.append( 'g' )
+					.attr( 'transform', 'translate(' + (margin.left + 0.5 * innerWidth) + ',' + margin.top + ')' );
 
 				// TODO: remove if we end up not using textures
 				let valenceTextures = {};
 				/*
-				valenceTextures[VALENCES.CONSTRUCTIVE] = textures.circles()
-					.complement()
-					.heavier(0.85)
-					.stroke('black');
-				valenceTextures[VALENCES.BOTH] = textures.circles()
-					.complement()
-					.stroke('black');
-				valenceTextures[VALENCES.DESTRUCTIVE] = textures.circles()
-					.complement()
-					.lighter(0.85)
-					.stroke('black');
-				*/
-				valenceTextures[VALENCES.CONSTRUCTIVE] = textures.lines()
-					.thinner(0.85)
-					.orientation('6/8')
-					.stroke('black');
-				valenceTextures[VALENCES.BOTH] = textures.lines()
-					.orientation('4/8')
-					.stroke('black');
-				valenceTextures[VALENCES.DESTRUCTIVE] = textures.lines()
-					.thicker(0.85)
-					.orientation('2/8')
-					.stroke('black');
+				 valenceTextures[VALENCES.CONSTRUCTIVE] = textures.circles()
+				 .complement()
+				 .heavier(0.85)
+				 .stroke('black');
+				 valenceTextures[VALENCES.BOTH] = textures.circles()
+				 .complement()
+				 .stroke('black');
+				 valenceTextures[VALENCES.DESTRUCTIVE] = textures.circles()
+				 .complement()
+				 .lighter(0.85)
+				 .stroke('black');
+				 */
+				valenceTextures[ VALENCES.CONSTRUCTIVE ] = textures.lines()
+					.thinner( 0.85 )
+					.orientation( '6/8' )
+					.stroke( 'black' );
+				valenceTextures[ VALENCES.BOTH ] = textures.lines()
+					.orientation( '4/8' )
+					.stroke( 'black' );
+				valenceTextures[ VALENCES.DESTRUCTIVE ] = textures.lines()
+					.thicker( 0.85 )
+					.orientation( '2/8' )
+					.stroke( 'black' );
 
-				_.values(valenceTextures).forEach(t => {
-					svg.call(t);
-				});
-
-				/*
-				graph.append('g')
-					.classed('valences', true);
-				*/
+				_.values( valenceTextures ).forEach( t => {
+					svg.call( t );
+				} );
 
 				/*
-				if (this.screenIsSmall) {
-					graph.append('g')
-						.classed('actions-hit-area', true)
-					.append('path')
-						.datum({
-							startAngle: 0.5 * Math.PI,
-							endAngle: 1.5 * Math.PI
-						})
-						.style('fill', 'rgba(255, 255, 255, 0)')
-						.attr('d', d3.svg.arc()
-							.innerRadius(0)
-							.outerRadius(radius * 1.1)
-						);
-				}
-				*/
+				 graph.append('g')
+				 .classed('valences', true);
+				 */
 
-				this.valenceTextures[emotion] = valenceTextures;
+				/*
+				 if (this.screenIsSmall) {
+				 graph.append('g')
+				 .classed('actions-hit-area', true)
+				 .append('path')
+				 .datum({
+				 startAngle: 0.5 * Math.PI,
+				 endAngle: 1.5 * Math.PI
+				 })
+				 .style('fill', 'rgba(255, 255, 255, 0)')
+				 .attr('d', d3.svg.arc()
+				 .innerRadius(0)
+				 .outerRadius(radius * 1.1)
+				 );
+				 }
+				 */
 
-				this.graphContainers[emotion] = graph;
+				this.valenceTextures[ emotion ] = valenceTextures;
 
-			});
+				this.graphContainers[ emotion ] = graph;
+
+			} );
 
 			// create an <svg> solely for <defs> shared across all emotions via xlink:href
-			let defsSvg = d3.select(containerNode).append('svg')
-				.classed('actions-defs', true);
-			this.setUpDefs(defsSvg.append('defs'), radius);
+			let defsSvg = d3.select( containerNode ).append( 'svg' )
+				.classed( 'actions-defs', true );
+			this.setUpDefs( defsSvg.append( 'defs' ), radius );
 
 		} else {
 
-			_.values(dispatcher.EMOTIONS).forEach((emotion, i) => {
+			_.values( dispatcher.EMOTIONS ).forEach( ( emotion, i ) => {
 
-				let graphContainer = document.querySelector('#actions .' + emotion + ' .graph-container');
+				let graphContainer = document.querySelector( '#actions .' + emotion + ' .graph-container' );
 
-				let svg = d3.select(graphContainer).select('svg')
-					.attr('width', graphContainer.offsetWidth)
-					.attr('height', h);
+				let svg = d3.select( graphContainer ).select( 'svg' )
+					.attr( 'width', graphContainer.offsetWidth )
+					.attr( 'height', h );
 
-				let graph = svg.select('g')
-					.attr('transform', 'translate(' + (margin.left + 0.5*innerWidth) + ',' + margin.top + ')');
+				let graph = svg.select( 'g' )
+					.attr( 'transform', 'translate(' + (margin.left + 0.5 * innerWidth) + ',' + margin.top + ')' );
 
-			});
+			} );
 
 		}
 
 	},
 
-	scaledLineGenerator: function (selection, scale) {
+	scaledLineGenerator: function ( selection, scale ) {
 
-		return selection.attr('d', d =>
-			this.lineGenerator(d.paths.map(path =>
+		return selection.attr( 'd', d =>
+			this.lineGenerator( d.paths.map( path =>
 				({
 					x: path.x * scale,
 					y: path.y * scale
 				})
-			))
+			) )
 		);
 
 	},
 
 	// from: http://bl.ocks.org/mbostock/1346410
-	arcTween: function (selection) {
+	arcTween: function ( selection ) {
 		let arc = this.arcGenerator;
-		selection.attrTween('d', function (a) {
-			let i = d3.interpolate(this._current, a);
-			this._current = i(0);
-			return function (t) {
-				return arc(i(t));
+		selection.attrTween( 'd', function ( a ) {
+			let i = d3.interpolate( this._current, a );
+			this._current = i( 0 );
+			return function ( t ) {
+				return arc( i( t ) );
 			};
-		});
+		} );
 	},
 
 	parseActions: function () {
 
-		let lowercase = str => { return str.toLowerCase(); };
+		let lowercase = str => {
+			return str.toLowerCase();
+		};
 
-		let actionsData = Object.keys(dispatcher.EMOTIONS).reduce((actionsOutput, emotionKey) => {
+		let actionsData = Object.keys( dispatcher.EMOTIONS ).reduce( ( actionsOutput, emotionKey ) => {
 
-			let emotionName = dispatcher.EMOTIONS[emotionKey],
-				statesData = appStrings().getStr(`emotionsData.emotions.${ emotionName }.states`);
+			let emotionName = dispatcher.EMOTIONS[ emotionKey ],
+				statesData = appStrings().getStr( `emotionsData.emotions.${ emotionName }.states` );
 
 			// copy list of all actions for emotion with lowercased names, and alpha sort
-			let allActionsForEmotionRaw = appStrings().getStr(`emotionsData.emotions.${ emotionName }.actions`).map(action => {
-				return Object.assign({}, action, {
+			let allActionsForEmotionRaw = appStrings().getStr( `emotionsData.emotions.${ emotionName }.actions` ).map( action => {
+				return Object.assign( {}, action, {
 					name: action.name.toLowerCase()
-				});
-			});
-			let allActionsForEmotion = allActionsForEmotionRaw.concat().sort((a, b) => {
-				if (a.name < b.name) return -1;
-				else if (a.name > b.name) return 1;
+				} );
+			} );
+			let allActionsForEmotion = allActionsForEmotionRaw.concat().sort( ( a, b ) => {
+				if ( a.name < b.name ) return -1;
+				else if ( a.name > b.name ) return 1;
 				else return 0;
-			});
+			} );
 
-			if (emotionName === dispatcher.EMOTIONS.ANGER) {
+			if ( emotionName === dispatcher.EMOTIONS.ANGER ) {
 				// move first and last actions out of pole position
 				// because they're too long to fit there comfortably
-				allActionsForEmotion.splice(1, 0, allActionsForEmotion.shift());
-				allActionsForEmotion.splice(-1, 0, allActionsForEmotion.pop());
-			} else if (emotionName === dispatcher.EMOTIONS.ENJOYMENT) {
+				allActionsForEmotion.splice( 1, 0, allActionsForEmotion.shift() );
+				allActionsForEmotion.splice( -1, 0, allActionsForEmotion.pop() );
+			} else if ( emotionName === dispatcher.EMOTIONS.ENJOYMENT ) {
 				// move first action out of pole position
 				// because it's too long to fit there comfortably
-				allActionsForEmotion.splice(1, 0, allActionsForEmotion.shift());
+				allActionsForEmotion.splice( 1, 0, allActionsForEmotion.shift() );
 			}
 
 			// add additional data for each of allActionsForEmotion,
 			// and compile hash keyed by name for lookup below
 			let allActionsForEmotionByName = {},
 				numAllActions = allActionsForEmotion.length;
-			allActionsForEmotion.forEach((action, i) => {
-				action.paths = ARROW_SHAPE.map(pt => ({
+			allActionsForEmotion.forEach( ( action, i ) => {
+				action.paths = ARROW_SHAPE.map( pt => ({
 					x: pt.x,
 					y: pt.y
-				}));
+				}) );
 				action.states = [];
 
 				// arrange actions between 10° and 170°
-				action.rotation = (100 + (numAllActions-i-1) * 160/(numAllActions-1));
+				action.rotation = (100 + (numAllActions - i - 1) * 160 / (numAllActions - 1));
 
-				allActionsForEmotionByName[action.name] = action;
-			});
+				allActionsForEmotionByName[ action.name ] = action;
+			} );
 
 			// iterate over states for each emotion and compile actions for each state.
-			let actionsByState = statesData.reduce((statesOutput, state) => {
+			let actionsByState = statesData.reduce( ( statesOutput, state ) => {
 
 				let stateName = state.name.toLowerCase();
 
@@ -363,65 +365,63 @@ export default {
 				// dedupe across valences and filter out any that do not have prototypical definitions,
 				// map numeric keys to action names (for localization),
 				// alpha sort within valence
-				let actionsBoth = state.actions.both.map(lowercase).filter(action => {
+				let actionsBoth = state.actions.both.map( lowercase ).filter( action => {
 						let actionName = action;
-						if (!isNaN(parseInt(action))) actionName = allActionsForEmotionRaw[+action - 1].name;
-						return !!allActionsForEmotionByName[actionName];
-					})
-					.map(action => isNaN(parseInt(action)) ? action : allActionsForEmotionRaw[+action - 1].name)
+						if ( !isNaN( parseInt( action ) ) ) actionName = allActionsForEmotionRaw[ +action - 1 ].name;
+						return !!allActionsForEmotionByName[ actionName ];
+					} )
+					.map( action => isNaN( parseInt( action ) ) ? action : allActionsForEmotionRaw[ +action - 1 ].name )
 					.sort(),
-					actionsCon = state.actions.con.map(lowercase).filter(action => {
-						let actionName = action;
-						if (!isNaN(parseInt(action))) actionName = allActionsForEmotionRaw[+action - 1].name;
-						return !!allActionsForEmotionByName[actionName] &&
-							!~state.actions.both.indexOf(action);
-					})
-					.map(action => isNaN(parseInt(action)) ? action : allActionsForEmotionRaw[+action - 1].name)
-					.sort(),
-					actionsDes = state.actions.des.map(lowercase).filter(action => {
-						let actionName = action;
-						if (!isNaN(parseInt(action))) actionName = allActionsForEmotionRaw[+action - 1].name;
-						return !!allActionsForEmotionByName[actionName] &&
-							!~state.actions.both.indexOf(action);
-					})
-					.map(action => isNaN(parseInt(action)) ? action : allActionsForEmotionRaw[+action - 1].name)
-					.sort(),
+					actionsCon = state.actions.con.map( lowercase ).filter( action => {
+							let actionName = action;
+							if ( !isNaN( parseInt( action ) ) ) actionName = allActionsForEmotionRaw[ +action - 1 ].name;
+							return !!allActionsForEmotionByName[ actionName ] && !~state.actions.both.indexOf( action );
+						} )
+						.map( action => isNaN( parseInt( action ) ) ? action : allActionsForEmotionRaw[ +action - 1 ].name )
+						.sort(),
+					actionsDes = state.actions.des.map( lowercase ).filter( action => {
+							let actionName = action;
+							if ( !isNaN( parseInt( action ) ) ) actionName = allActionsForEmotionRaw[ +action - 1 ].name;
+							return !!allActionsForEmotionByName[ actionName ] && !~state.actions.both.indexOf( action );
+						} )
+						.map( action => isNaN( parseInt( action ) ) ? action : allActionsForEmotionRaw[ +action - 1 ].name )
+						.sort(),
 
-					// count number of actions within each valence
+				// count number of actions within each valence
 					numActionsCon = actionsCon.length,
 					numActionsBoth = actionsBoth.length,
 					numActionsDes = actionsDes.length,
 
-					// concatenate deduped and sorted actions into a single list
-					// (in order of left-to-right display on-screen)
-					allActionsForState = actionsCon.concat(actionsBoth).concat(actionsDes),
+				// concatenate deduped and sorted actions into a single list
+				// (in order of left-to-right display on-screen)
+					allActionsForState = actionsCon.concat( actionsBoth ).concat( actionsDes ),
 					numAllActionsForState = allActionsForState.length;
 
 				let actionByName,
 					action;
-				allActionsForState = allActionsForState.map((actionName, i) => {
+				allActionsForState = allActionsForState.map( ( actionName, i ) => {
 
 					// copy prototypical action name/description
-					actionByName = allActionsForEmotionByName[actionName];
+					actionByName = allActionsForEmotionByName[ actionName ];
 					action = {
 						name: actionByName.name,
 						desc: actionByName.desc
 					};
 
 					// calculate paths and rotation
-					action.paths = ARROW_SHAPE.map(pt => ({
+					action.paths = ARROW_SHAPE.map( pt => ({
 						x: pt.x,
 						y: pt.y
-					}));
+					}) );
 					// arrange actions between 10° and 170°
-					action.rotation = (100 + (numAllActionsForState-i-1) * 160/(numAllActionsForState-1));
+					action.rotation = (100 + (numAllActionsForState - i - 1) * 160 / (numAllActionsForState - 1));
 
 					// determine valence based on earlier sorting
-					if (i < numActionsCon) {
+					if ( i < numActionsCon ) {
 						action.valence = VALENCES.CONSTRUCTIVE;
-					} else if (i < numActionsCon + numActionsBoth) {
+					} else if ( i < numActionsCon + numActionsBoth ) {
 						action.valence = VALENCES.BOTH;
-					} else if (i < numActionsCon + numActionsBoth + numActionsDes) {
+					} else if ( i < numActionsCon + numActionsBoth + numActionsDes ) {
 						action.valence = VALENCES.DESTRUCTIVE;
 					}
 
@@ -429,59 +429,59 @@ export default {
 					action.state = state.name;
 
 					// cross-reference states to action
-					if (!~actionByName.states.indexOf(stateName)) {
-						actionByName.states.push(stateName);
+					if ( !~actionByName.states.indexOf( stateName ) ) {
+						actionByName.states.push( stateName );
 					}
 
 					return action;
 
-				});
+				} );
 
 				// calculate weight for each valence for this state's action
-				let valenceWeights = Object.keys(VALENCES).map(valenceName => ({
+				let valenceWeights = Object.keys( VALENCES ).map( valenceName => ({
 					name: valenceName,
 					size: valenceName === 'CONSTRUCTIVE' ? numActionsCon :
-							valenceName === 'BOTH' ? numActionsBoth :
+						valenceName === 'BOTH' ? numActionsBoth :
 							valenceName === 'DESTRUCTIVE' ? numActionsDes : 0
-				})).reverse();
+				}) ).reverse();
 				// subtract 0.5 from the first and last size,
 				// to place the drawn boundary halfway between adjacent action arrows
 				let firstNonEmptyWeight,
 					lastNonEmptyWeight;
-				valenceWeights.forEach(weight => {
-					if (weight.size) {
-						if (!firstNonEmptyWeight) {
+				valenceWeights.forEach( weight => {
+					if ( weight.size ) {
+						if ( !firstNonEmptyWeight ) {
 							firstNonEmptyWeight = weight;
 						} else {
 							lastNonEmptyWeight = weight;
 						}
 					}
-				});
-				if (firstNonEmptyWeight) {
+				} );
+				if ( firstNonEmptyWeight ) {
 					firstNonEmptyWeight.size -= 0.5;
 				}
-				if (lastNonEmptyWeight) {
+				if ( lastNonEmptyWeight ) {
 					lastNonEmptyWeight.size -= 0.5;
 				}
 
-				statesOutput[state.name.toLowerCase()] = {
+				statesOutput[ state.name.toLowerCase() ] = {
 					actions: allActionsForState,
 					valenceWeights: valenceWeights
 				};
 
 				return statesOutput;
 
-			}, {});
+			}, {} );
 
 
-			actionsOutput[emotionName] = {
+			actionsOutput[ emotionName ] = {
 				allActions: allActionsForEmotion,
 				actions: actionsByState
 			};
 
 			return actionsOutput;
 
-		}, {});
+		}, {} );
 
 		return actionsData;
 
@@ -489,91 +489,91 @@ export default {
 
 	// TODO: DRY this out, copied almost exactly from states.js
 	// set up global gradients and xlink:href to them from here and states.js
-	setUpDefs: function (defs, radius) {
+	setUpDefs: function ( defs, radius ) {
 
 		// base gradient
-		defs.append('linearGradient')
-			.attr('id', 'actions-gradient')
-			.attr('gradientUnits', 'userSpaceOnUse')
-			.attr('x1', 0)
-			.attr('x2', 0)
-			.attr('y1', 0)
-			.attr('y2', -radius);
+		defs.append( 'linearGradient' )
+			.attr( 'id', 'actions-gradient' )
+			.attr( 'gradientUnits', 'userSpaceOnUse' )
+			.attr( 'x1', 0 )
+			.attr( 'x2', 0 )
+			.attr( 'y1', 0 )
+			.attr( 'y2', -radius );
 
 		// anger
-		defs.append('linearGradient')
-			.attr('id', 'actions-anger-gradient')
-			.attr('xlink:href', '#actions-gradient')
-		.selectAll('stop')
-			.data([
+		defs.append( 'linearGradient' )
+			.attr( 'id', 'actions-anger-gradient' )
+			.attr( 'xlink:href', '#actions-gradient' )
+			.selectAll( 'stop' )
+			.data( [
 				{ offset: '20%', color: 'rgba(228, 135, 102, 0.2)' },
 				{ offset: '100%', color: 'rgba(204, 28, 43, 1.0)' }
-			])
-		.enter().append('stop')
-			.attr('offset', d => d.offset)
-			.attr('stop-color', d => d.color);
+			] )
+			.enter().append( 'stop' )
+			.attr( 'offset', d => d.offset )
+			.attr( 'stop-color', d => d.color );
 
 		// disgust
-		defs.append('linearGradient')
-			.attr('id', 'actions-disgust-gradient')
-			.attr('xlink:href', '#actions-gradient')
-		.selectAll('stop')
-			.data([
+		defs.append( 'linearGradient' )
+			.attr( 'id', 'actions-disgust-gradient' )
+			.attr( 'xlink:href', '#actions-gradient' )
+			.selectAll( 'stop' )
+			.data( [
 				{ offset: '20%', color: 'rgba(0, 142, 69, 0.3)' },
 				{ offset: '66%', color: 'rgba(0, 122, 61, 0.8)' },
 				{ offset: '100%', color: 'rgba(0, 104, 55, 1.0)' }
-			])
-		.enter().append('stop')
-			.attr('offset', d => d.offset)
-			.attr('stop-color', d => d.color);
+			] )
+			.enter().append( 'stop' )
+			.attr( 'offset', d => d.offset )
+			.attr( 'stop-color', d => d.color );
 
 		// enjoyment
-		defs.append('linearGradient')
-			.attr('id', 'actions-enjoyment-gradient')
-			.attr('xlink:href', '#actions-gradient')
-		.selectAll('stop')
-			.data([
+		defs.append( 'linearGradient' )
+			.attr( 'id', 'actions-enjoyment-gradient' )
+			.attr( 'xlink:href', '#actions-gradient' )
+			.selectAll( 'stop' )
+			.data( [
 				{ offset: '20%', color: 'rgba(241, 196, 83, 0.8)' },
 				{ offset: '100%', color: 'rgba(248, 136, 29, 1.0)' }
-			])
-		.enter().append('stop')
-			.attr('offset', d => d.offset)
-			.attr('stop-color', d => d.color);
+			] )
+			.enter().append( 'stop' )
+			.attr( 'offset', d => d.offset )
+			.attr( 'stop-color', d => d.color );
 
 		// fear
-		defs.append('linearGradient')
-			.attr('id', 'actions-fear-gradient')
-			.attr('xlink:href', '#actions-gradient')
-		.selectAll('stop')
-			.data([
+		defs.append( 'linearGradient' )
+			.attr( 'id', 'actions-fear-gradient' )
+			.attr( 'xlink:href', '#actions-gradient' )
+			.selectAll( 'stop' )
+			.data( [
 				{ offset: '20%', color: 'rgba(248, 58, 248, 0.1)' },
 				{ offset: '100%', color: 'rgba(143, 39, 139, 1.0)' }
-			])
-		.enter().append('stop')
-			.attr('offset', d => d.offset)
-			.attr('stop-color', d => d.color);
+			] )
+			.enter().append( 'stop' )
+			.attr( 'offset', d => d.offset )
+			.attr( 'stop-color', d => d.color );
 
 		// sadness
-		defs.append('linearGradient')
-			.attr('id', 'actions-sadness-gradient')
-			.attr('xlink:href', '#actions-gradient')
-		.selectAll('stop')
-			.data([
+		defs.append( 'linearGradient' )
+			.attr( 'id', 'actions-sadness-gradient' )
+			.attr( 'xlink:href', '#actions-gradient' )
+			.selectAll( 'stop' )
+			.data( [
 				{ offset: '20%', color: 'rgba(200, 220, 240, 1.0)' },
 				{ offset: '66%', color: 'rgba(30, 152, 211, 1.0)' },
 				{ offset: '100%', color: 'rgba(64, 70, 164, 1.0)' }
-			])
-		.enter().append('stop')
-			.attr('offset', d => d.offset)
-			.attr('stop-color', d => d.color);
+			] )
+			.enter().append( 'stop' )
+			.attr( 'offset', d => d.offset )
+			.attr( 'stop-color', d => d.color );
 
 	},
 
-	setEmotion: function (emotion) {
+	setEmotion: function ( emotion ) {
 
-		return new Promise((resolve, reject) => {
+		return new Promise( ( resolve, reject ) => {
 
-			if (!~_.values(dispatcher.EMOTIONS).indexOf(emotion)) {
+			if ( !~_.values( dispatcher.EMOTIONS ).indexOf( emotion ) ) {
 				emotion = 'anger';
 			}
 			let previousEmotion = this.currentEmotion;
@@ -582,95 +582,95 @@ export default {
 			// deselect anything selected.
 			// currently only happens on mobile, but might also want to happen on desktop...
 			// TODO: evaluate ^^.
-			if (this.screenIsSmall) {
-				this.setHighlightedAction(null);
+			if ( this.screenIsSmall ) {
+				this.setHighlightedAction( null );
 			}
 
 			// transition graphs and labels
 			let dx = 0;
-			if (previousEmotion) {
-				let previousContainer = d3.select('.actions-container.' + previousEmotion);
-				previousContainer.classed('active', false);
-				previousContainer.on('transitionend', event => {
-					previousContainer.on('transitionend', null);
-					previousContainer.style('transform', null);
-					previousContainer.style('-webkit-transform', null);
-					previousContainer.classed('transitioning', false);
-				});
+			if ( previousEmotion ) {
+				let previousContainer = d3.select( '.actions-container.' + previousEmotion );
+				previousContainer.classed( 'active', false );
+				previousContainer.on( 'transitionend', event => {
+					previousContainer.on( 'transitionend', null );
+					previousContainer.style( 'transform', null );
+					previousContainer.style( '-webkit-transform', null );
+					previousContainer.classed( 'transitioning', false );
+				} );
 
-				let containerWidth = document.querySelector('#actions .graph-container').offsetWidth,
-					emotions = _.values(dispatcher.EMOTIONS);
+				let containerWidth = document.querySelector( '#actions .graph-container' ).offsetWidth,
+					emotions = _.values( dispatcher.EMOTIONS );
 
 				// just place left or right one viewport, instead of adhering to column positions,
 				// to avoid animations that are unnecessarily fast'n'flashy.
 				dx = 1.25 * containerWidth;
-				if (emotions.indexOf(emotion) < emotions.indexOf(previousEmotion)) {
+				if ( emotions.indexOf( emotion ) < emotions.indexOf( previousEmotion ) ) {
 					dx *= -1;
 				}
 				// switch for going from enjoyment to anger, and back
-				if (Math.abs(emotions.indexOf(emotion) - emotions.indexOf(previousEmotion)) == emotions.length - 1){
+				if ( Math.abs( emotions.indexOf( emotion ) - emotions.indexOf( previousEmotion ) ) == emotions.length - 1 ) {
 					dx *= -1;
 				}
 
 				// delay to allow a little time for opacity to come up before translating
-				setTimeout(() => {
-					previousContainer.style('transform', 'translateX(' + -dx + 'px)');
-					previousContainer.style('-webkit-transform', 'translateX(' + -dx + 'px)');
-				}, sassVars.emotions.panX.delay * 1000);
+				setTimeout( () => {
+					previousContainer.style( 'transform', 'translateX(' + -dx + 'px)' );
+					previousContainer.style( '-webkit-transform', 'translateX(' + -dx + 'px)' );
+				}, sassVars.emotions.panX.delay * 1000 );
 			}
 
-			let currentContainer = d3.select('.actions-container.' + emotion);
-			if (currentContainer.classed('transitioning')) {
+			let currentContainer = d3.select( '.actions-container.' + emotion );
+			if ( currentContainer.classed( 'transitioning' ) ) {
 				// if new emotion is still transitioning, remove transitionend handler
-				currentContainer.on('transitionend', null);
+				currentContainer.on( 'transitionend', null );
 			} else {
 				// else, move into position immediately to prepare for transition
-				currentContainer.classed('transitioning', false);
-				currentContainer.style('transform', 'translateX(' + dx + 'px)');
-				currentContainer.style('-webkit-transform', 'translateX(' + dx + 'px)');
+				currentContainer.classed( 'transitioning', false );
+				currentContainer.style( 'transform', 'translateX(' + dx + 'px)' );
+				currentContainer.style( '-webkit-transform', 'translateX(' + dx + 'px)' );
 			}
 
 			// delay to allow a little time for opacity to come up before translating
-			setTimeout(() => {
-				currentContainer.classed('transitioning active', true);
-				currentContainer.style('transform', 'translateX(0)');
-				currentContainer.style('-webkit-transform', 'translateX(0)');
-			}, sassVars.emotions.panX.delay * 1000);
+			setTimeout( () => {
+				currentContainer.classed( 'transitioning active', true );
+				currentContainer.style( 'transform', 'translateX(0)' );
+				currentContainer.style( '-webkit-transform', 'translateX(0)' );
+			}, sassVars.emotions.panX.delay * 1000 );
 
-			if (!this.isBackgrounded) {
+			if ( !this.isBackgrounded ) {
 				// activate states if not backgrounded, and on desktop
-				if (!this.screenIsSmall) states.setActive(true);
+				if ( !this.screenIsSmall ) states.setActive( true );
 			} else {
 				// remove labels if backgrounded
-				this.renderLabels(null, true);
+				this.renderLabels( null, true );
 			}
 
 			let openDelay = 1500;
-			this.setStateTimeout = setTimeout(() => {
-				dispatcher.setEmotionState(states.selectedState, true);
-			}, this.isBackgrounded ? 0 : openDelay);
+			this.setStateTimeout = setTimeout( () => {
+				dispatcher.setEmotionState( states.selectedState, true );
+			}, this.isBackgrounded ? 0 : openDelay );
 
 			// resolve on completion of primary transitions
 			let resolveDelay;
-			if (previousEmotion) {
+			if ( previousEmotion ) {
 				// resolve after horizontal transition completes
 				resolveDelay = (sassVars.emotions.panX.delay + sassVars.emotions.panX.duration) * 1000;
 			} else {
 				// resolve after backgrounded elements complete their transitions
 				resolveDelay = sassVars.states.backgrounded.duration.in;
 			}
-			setTimeout(() => {
+			setTimeout( () => {
 				resolve();
-			}, resolveDelay);
+			}, resolveDelay );
 
-		});
+		} );
 
 	},
 
-	setState: function (state) {
+	setState: function ( state ) {
 
-		if (!this.isBackgrounded) {
-			this.setHighlightedAction(null);
+		if ( !this.isBackgrounded ) {
+			this.setHighlightedAction( null );
 		}
 
 		// remove this since now might keep state from actions
@@ -680,201 +680,203 @@ export default {
 
 		this.currentState = state;
 
-		if (!this.currentEmotion) return;
+		if ( !this.currentEmotion ) return;
 
 		let stateActionsData,
 			currentActionsData;
 
-		if (state) {
+		if ( state ) {
 
-			stateActionsData = this.actionsData[this.currentEmotion].actions[this.currentState];
-			if (!stateActionsData) {
-				console.warn('No actions found for state "' + this.currentState + '" in emotion "' + this.currentEmotion + '".');
+			stateActionsData = this.actionsData[ this.currentEmotion ].actions[ this.currentState ];
+			if ( !stateActionsData ) {
+				console.warn( 'No actions found for state "' + this.currentState + '" in emotion "' + this.currentEmotion + '".' );
 				return;
 			}
 			currentActionsData = stateActionsData.actions;
 
 		} else {
 
-			currentActionsData = this.actionsData[this.currentEmotion].allActions;
+			currentActionsData = this.actionsData[ this.currentEmotion ].allActions;
 
 		}
 
 		let emotionGradientName = 'actions-' + this.currentEmotion + '-gradient',
-			valenceTextureSet = this.valenceTextures[this.currentEmotion],
-			graphContainer = this.graphContainers[this.currentEmotion];
+			valenceTextureSet = this.valenceTextures[ this.currentEmotion ],
+			graphContainer = this.graphContainers[ this.currentEmotion ];
 
-		let arrowSelection = graphContainer.selectAll('g.action-arrow')
-			.data(currentActionsData, d => d.name);
+		let arrowSelection = graphContainer.selectAll( 'g.action-arrow' )
+			.data( currentActionsData, d => d.name );
 
 		// update
 		arrowSelection
-			.classed({
+			.classed( {
 				'constructive': d => d.valence === VALENCES.CONSTRUCTIVE,
 				'both': d => d.valence === VALENCES.BOTH,
 				'destructive': d => d.valence === VALENCES.DESTRUCTIVE
-			});
+			} );
 		/*
-		.select('path.texture-fill')
-			.attr('opacity', d => d.valence ? 0.10 : 0.0)
-			.attr('fill', d => d.valence ? valenceTextureSet[d.valence].url() : null);
-		*/
+		 .select('path.texture-fill')
+		 .attr('opacity', d => d.valence ? 0.10 : 0.0)
+		 .attr('fill', d => d.valence ? valenceTextureSet[d.valence].url() : null);
+		 */
 		arrowSelection.transition()
-			.duration(sassVars.actions.update.time)
-			.attr('transform', d => 'rotate(' + d.rotation + ')');
+			.duration( sassVars.actions.update.time )
+			.attr( 'transform', d => 'rotate(' + d.rotation + ')' );
 
 		// enter
-		let arrowEnterSelection = arrowSelection.enter().append('g')
-			.attr('class', 'action-arrow')
-			.classed({
+		let arrowEnterSelection = arrowSelection.enter().append( 'g' )
+			.attr( 'class', 'action-arrow' )
+			.classed( {
 				'constructive': d => d.valence === VALENCES.CONSTRUCTIVE,
 				'both': d => d.valence === VALENCES.BOTH,
 				'destructive': d => d.valence === VALENCES.DESTRUCTIVE
-			})
-			.attr('transform', d => 'rotate(' + d.rotation + ')');
-		if (!this.isBackgrounded) {
-			if (this.screenIsSmall) {
-				d3.select(`#actions .${ this.currentEmotion } .graph-container`)
-					.on('touchstart', this.onContainerTouchStart);
+			} )
+			.attr( 'transform', d => 'rotate(' + d.rotation + ')' );
+		if ( !this.isBackgrounded ) {
+			if ( this.screenIsSmall ) {
+				d3.select( `#actions .${ this.currentEmotion } .graph-container` )
+					.on( 'touchstart', this.onContainerTouchStart );
 			} else {
 				arrowEnterSelection
-					.on('mouseover', this.onActionMouseOver)
-					.on('mouseout', this.onActionMouseOut)
-					.on('click', this.onActionMouseClick);
+					.on( 'mouseover', this.onActionMouseOver )
+					.on( 'mouseout', this.onActionMouseOut )
+					.on( 'click', this.onActionMouseClick );
 			}
 		}
-		arrowEnterSelection.append('path')
-			.classed('gradient-fill', true)
-			.attr('fill', (d, i) => 'url(#' + emotionGradientName + ')')
-			.call(this.scaledLineGenerator, 0.0);
+		arrowEnterSelection.append( 'path' )
+			.classed( 'gradient-fill', true )
+			.attr( 'fill', ( d, i ) => 'url(#' + emotionGradientName + ')' )
+			.call( this.scaledLineGenerator, 0.0 );
 
 		// `mix-blend-mode: multiply` does not work correctly with gradients in Firefox/Gecko.
-		if (window.navigator.userAgent && ~window.navigator.userAgent.toLowerCase().indexOf('gecko') && ~window.navigator.userAgent.toLowerCase().indexOf('firefox')) {
-			arrowEnterSelection.selectAll('path').style('mix-blend-mode', 'normal');
+		if ( window.navigator.userAgent && ~window.navigator.userAgent.toLowerCase().indexOf( 'gecko' ) && ~window.navigator.userAgent.toLowerCase().indexOf( 'firefox' ) ) {
+			arrowEnterSelection.selectAll( 'path' ).style( 'mix-blend-mode', 'normal' );
 		}
 
 		/*
-		arrowEnterSelection.append('path')
-			.classed('texture-fill', true)
-			.attr('opacity', d => d.valence ? 0.5 : 0.0)
-			.attr('fill', d => d.valence ? valenceTextureSet[d.valence].url() : null)
-			.call(this.scaledLineGenerator, 0.0);
-		*/
+		 arrowEnterSelection.append('path')
+		 .classed('texture-fill', true)
+		 .attr('opacity', d => d.valence ? 0.5 : 0.0)
+		 .attr('fill', d => d.valence ? valenceTextureSet[d.valence].url() : null)
+		 .call(this.scaledLineGenerator, 0.0);
+		 */
 
 		arrowEnterSelection.transition()
-			.duration(this.isBackgrounded ? 0 : sassVars.actions.add.time)
-			.delay(this.isBackgrounded ? 0 : function (d, i) { return i * 50; })
-		.selectAll('path')
-			.call(this.scaledLineGenerator, 1.0);
+			.duration( this.isBackgrounded ? 0 : sassVars.actions.add.time )
+			.delay( this.isBackgrounded ? 0 : function ( d, i ) {
+				return i * 50;
+			} )
+			.selectAll( 'path' )
+			.call( this.scaledLineGenerator, 1.0 );
 
 		// exit
 		arrowSelection.exit().transition()
-			.duration(sassVars.actions.remove.time)
+			.duration( sassVars.actions.remove.time )
 			.remove()
-		.selectAll('path')
-			.call(this.scaledLineGenerator, 0.0);
+			.selectAll( 'path' )
+			.call( this.scaledLineGenerator, 0.0 );
 
 
-		if (!this.isBackgrounded) {
+		if ( !this.isBackgrounded ) {
 
-			this.renderLabels(currentActionsData);
+			this.renderLabels( currentActionsData );
 
-			if (state) {
+			if ( state ) {
 
 				/*
-				// valences underlay
-				let valenceSelection = graphContainer.select('g.valences').selectAll('path.valence')
-					.data(this.pieLayout(stateActionsData.valenceWeights), d => d.data.name);
+				 // valences underlay
+				 let valenceSelection = graphContainer.select('g.valences').selectAll('path.valence')
+				 .data(this.pieLayout(stateActionsData.valenceWeights), d => d.data.name);
 
-				// update
-				valenceSelection.transition()
-					.duration(sassVars.actions.update.time)
-					.call(this.arcTween);
+				 // update
+				 valenceSelection.transition()
+				 .duration(sassVars.actions.update.time)
+				 .call(this.arcTween);
 
-				// enter
-				valenceSelection.enter().append('path')
-					.attr('class', d => 'valence ' + d.data.name.toLowerCase())
-					.attr('d', this.arcGenerator)
-					.each(function(d) { this._current = d; }) // store the initial angles for arcTween
-					.style('opacity', 0.0)
-					.on('mouseover', this.onValenceMouseOver)
-					.on('mouseout', this.onValenceMouseOut)
-					.on('click', this.onValenceMouseClick)
-				.transition()
-					.duration(sassVars.actions.add.time)
-					.delay(500)
-					.style('opacity', 1.0);
-				*/
+				 // enter
+				 valenceSelection.enter().append('path')
+				 .attr('class', d => 'valence ' + d.data.name.toLowerCase())
+				 .attr('d', this.arcGenerator)
+				 .each(function(d) { this._current = d; }) // store the initial angles for arcTween
+				 .style('opacity', 0.0)
+				 .on('mouseover', this.onValenceMouseOver)
+				 .on('mouseout', this.onValenceMouseOut)
+				 .on('click', this.onValenceMouseClick)
+				 .transition()
+				 .duration(sassVars.actions.add.time)
+				 .delay(500)
+				 .style('opacity', 1.0);
+				 */
 
 			} else {
 
 				this.resetCallout();
 				/*
-				graphContainer.select('g.valences').selectAll('path.valence')
-				.transition()
-					.duration(sassVars.actions.remove.time)
-					.style('opacity', 0.0)
-					.remove();
-				*/
+				 graphContainer.select('g.valences').selectAll('path.valence')
+				 .transition()
+				 .duration(sassVars.actions.remove.time)
+				 .style('opacity', 0.0)
+				 .remove();
+				 */
 			}
 
 		}
 
 	},
 
-	clearStates: function (duration) {
+	clearStates: function ( duration ) {
 
-		if (this.currentEmotion) {
-			let graphContainer = this.graphContainers[this.currentEmotion];
-			if (this.screenIsSmall) {
-				d3.select(`#actions .${ this.currentEmotion } .graph-container`)
-					.on('touchstart', null);
+		if ( this.currentEmotion ) {
+			let graphContainer = this.graphContainers[ this.currentEmotion ];
+			if ( this.screenIsSmall ) {
+				d3.select( `#actions .${ this.currentEmotion } .graph-container` )
+					.on( 'touchstart', null );
 			} else {
-				graphContainer.selectAll('g.action-arrow')
-					.on('mouseover', null)
-					.on('mouseout', null);
+				graphContainer.selectAll( 'g.action-arrow' )
+					.on( 'mouseover', null )
+					.on( 'mouseout', null );
 			}
 
-			graphContainer.selectAll('g.action-arrow')
-			.data([]).exit().transition()
-				.duration(duration)
+			graphContainer.selectAll( 'g.action-arrow' )
+				.data( [] ).exit().transition()
+				.duration( duration )
 				.remove()
-			.selectAll('path')
-				.call(this.scaledLineGenerator, 0.0);
+				.selectAll( 'path' )
+				.call( this.scaledLineGenerator, 0.0 );
 		}
 
-		this.renderLabels(null);
+		this.renderLabels( null );
 
 		/*
-		if (this.currentEmotion) {
-			this.graphContainers[this.currentEmotion].select('g.valences').selectAll('path.valence')
-			.transition()
-				.duration(duration)
-				.style('opacity', 0.0)
-				.remove();
-		}
-		*/
+		 if (this.currentEmotion) {
+		 this.graphContainers[this.currentEmotion].select('g.valences').selectAll('path.valence')
+		 .transition()
+		 .duration(duration)
+		 .style('opacity', 0.0)
+		 .remove();
+		 }
+		 */
 
 	},
 
-	setHighlightedState: function (state) {
+	setHighlightedState: function ( state ) {
 
-		if (!state) {
+		if ( !state ) {
 
-			this.displayHighlightedAction(null);
+			this.displayHighlightedAction( null );
 
 		} else {
 
-			let allActions = this.actionsData[this.currentEmotion].allActions,
-				stateActions = this.actionsData[this.currentEmotion].actions[state].actions.map(action => action.name),
-				otherActions = allActions.filter(action => !~stateActions.indexOf(action.name)).map(action => action.name),
-				graphContainer = this.graphContainers[this.currentEmotion],
-				labelContainer = this.labelContainers[this.currentEmotion];
+			let allActions = this.actionsData[ this.currentEmotion ].allActions,
+				stateActions = this.actionsData[ this.currentEmotion ].actions[ state ].actions.map( action => action.name ),
+				otherActions = allActions.filter( action => !~stateActions.indexOf( action.name ) ).map( action => action.name ),
+				graphContainer = this.graphContainers[ this.currentEmotion ],
+				labelContainer = this.labelContainers[ this.currentEmotion ];
 
-			graphContainer.selectAll('g.action-arrow')
-				.classed('muted', (data, index) => !~stateActions.indexOf(data.name));
+			graphContainer.selectAll( 'g.action-arrow' )
+				.classed( 'muted', ( data, index ) => !~stateActions.indexOf( data.name ) );
 
-			this.setLabelStates(labelContainer, [], otherActions);
+			this.setLabelStates( labelContainer, [], otherActions );
 		}
 
 	},
@@ -885,214 +887,214 @@ export default {
 	 * 2 - 'selected'
 	 * 3 - 'muted'
 	 */
-	setLabelStates: function(labelContainer, highlighted, muted=[]) {
+	setLabelStates: function ( labelContainer, highlighted, muted = [] ) {
 
-		if (!labelContainer) return;
+		if ( !labelContainer ) return;
 
-		const labels = labelContainer.selectAll('.label');
+		const labels = labelContainer.selectAll( '.label' );
 		labels
-			.classed('highlighted', false)
-			.classed('muted', false)
-			.classed('selected', false);
+			.classed( 'highlighted', false )
+			.classed( 'muted', false )
+			.classed( 'selected', false );
 
 		const selected = this.highlightedAction ? this.highlightedAction.name : null;
 
-		if (selected || highlighted.length){
+		if ( selected || highlighted.length ) {
 			labels
-				.classed({
-					'muted': d => (highlighted.indexOf(d.name) < 0 && d.name !== selected) || ~muted.indexOf(d.name),
-					'highlighted': d => highlighted.indexOf(d.name) > -1,
+				.classed( {
+					'muted': d => (highlighted.indexOf( d.name ) < 0 && d.name !== selected) || ~muted.indexOf( d.name ),
+					'highlighted': d => highlighted.indexOf( d.name ) > -1,
 					'selected': d => d.name === selected
-				});
+				} );
 
 			// remove default-interactive-helper once user highlights something
-			labelContainer.select('.default-interactive-helper')
-				.classed('default-interactive-helper', false);
+			labelContainer.select( '.default-interactive-helper' )
+				.classed( 'default-interactive-helper', false );
 		}
 
 	},
 
-	renderLabels: function (actionsData, immediate) {
+	renderLabels: function ( actionsData, immediate ) {
 
-		if (!this.currentEmotion) return;
-		if (this.screenIsSmall) return;
+		if ( !this.currentEmotion ) return;
+		if ( this.screenIsSmall ) return;
 
 		let labelText = d => {
 			/*
-			let prefix = '';
-			switch (d.valence) {
-				case VALENCES.CONSTRUCTIVE:
-					prefix = '<span class="label-valence plus">+</span> ';
-					break;
-				case VALENCES.BOTH:
-					prefix = '<span class="label-valence">+<span class="short-slash">/</span>-</span>';
-					break;
-				case VALENCES.DESTRUCTIVE:
-					prefix = '<span class="label-valence minus">-</span> ';
-					break;
-			}
-			return prefix + '<span class="label-name">' + d.name.toUpperCase() + '</span>';
-			*/
+			 let prefix = '';
+			 switch (d.valence) {
+			 case VALENCES.CONSTRUCTIVE:
+			 prefix = '<span class="label-valence plus">+</span> ';
+			 break;
+			 case VALENCES.BOTH:
+			 prefix = '<span class="label-valence">+<span class="short-slash">/</span>-</span>';
+			 break;
+			 case VALENCES.DESTRUCTIVE:
+			 prefix = '<span class="label-valence minus">-</span> ';
+			 break;
+			 }
+			 return prefix + '<span class="label-name">' + d.name.toUpperCase() + '</span>';
+			 */
 			return '<span class="label-name">' + d.name.toUpperCase() + '</span>';
 		};
 
-		let labelContainer = this.labelContainers[this.currentEmotion];
-		if (actionsData) {
-			const sqrt3 = Math.sqrt(3);
-			let labelSize = this.lineGenerator.radius()({x:1}) + 10,
-				labelSelection = labelContainer.selectAll('div.label')
-					.data(actionsData, d => d.name);
+		let labelContainer = this.labelContainers[ this.currentEmotion ];
+		if ( actionsData ) {
+			const sqrt3 = Math.sqrt( 3 );
+			let labelSize = this.lineGenerator.radius()( { x: 1 } ) + 10,
+				labelSelection = labelContainer.selectAll( 'div.label' )
+					.data( actionsData, d => d.name );
 
 			// update
 			labelSelection.transition()
-				.duration(sassVars.actions.update.time)
-				.styleTween('transform', (() => function (d, i, a) {
+				.duration( sassVars.actions.update.time )
+				.styleTween( 'transform', (() => function ( d, i, a ) {
 
-					let previousTransform = a === 'none' ? null : d3.transform(a),
-						previousTranslate = previousTransform ? previousTransform.translate : [0, 0],
+					let previousTransform = a === 'none' ? null : d3.transform( a ),
+						previousTranslate = previousTransform ? previousTransform.translate : [ 0, 0 ],
 						verticalOffset = (i === 0 || i === labelSelection.size() - 1) ? 20 : 0,
-						// critical to fully invert function that translates from rotation to x/y translation
-						previousRotation = Math.atan2((previousTranslate[1] - verticalOffset) * sqrt3, (previousTranslate[0] + .5 * this.offsetWidth)),
-						targetRotation = Math.PI * (d.rotation-90) / 180,
+					// critical to fully invert function that translates from rotation to x/y translation
+						previousRotation = Math.atan2( (previousTranslate[ 1 ] - verticalOffset) * sqrt3, (previousTranslate[ 0 ] + .5 * this.offsetWidth) ),
+						targetRotation = Math.PI * (d.rotation - 90) / 180,
 						rot;
 
-					return (t) => {
+					return ( t ) => {
 						rot = previousRotation + t * (targetRotation - previousRotation);
 						return 'translate(' +
-							Math.round((labelSize * Math.cos(rot)) - 0.5*this.offsetWidth) + 'px,' +	// center on label width
-							Math.round(labelSize / sqrt3 * Math.sin(rot) + verticalOffset) + 'px)';		// bump down the first and last label
+							Math.round( (labelSize * Math.cos( rot )) - 0.5 * this.offsetWidth ) + 'px,' +	// center on label width
+							Math.round( labelSize / sqrt3 * Math.sin( rot ) + verticalOffset ) + 'px)';		// bump down the first and last label
 					};
 
-				})());
-			labelSelection.select('h4')
-				.html(labelText);
+				})() );
+			labelSelection.select( 'h4' )
+				.html( labelText );
 
 			// get a random label to set a box around it
-			if (!this.randomLabelPositions.hasOwnProperty(this.currentEmotion)) {
-				this.randomLabelPositions[this.currentEmotion] = actionsData[Math.floor(Math.random() * actionsData.length)];
+			if ( !this.randomLabelPositions.hasOwnProperty( this.currentEmotion ) ) {
+				this.randomLabelPositions[ this.currentEmotion ] = actionsData[ Math.floor( Math.random() * actionsData.length ) ];
 			}
 
 			// enter
-			let labelEnterSelection = labelSelection.enter().append('div')
-				.attr('class', `${this.currentEmotion} label emotion-label`)
-				.attr('data-popuptarget', (d,i) => `actions${dispatcher.HASH_DELIMITER}${d.name}`)
-				.style('opacity', 0.0);
+			let labelEnterSelection = labelSelection.enter().append( 'div' )
+				.attr( 'class', `${this.currentEmotion} label emotion-label` )
+				.attr( 'data-popuptarget', ( d, i ) => `actions${dispatcher.HASH_DELIMITER}${d.name}` )
+				.style( 'opacity', 0.0 );
 
-			labelEnterSelection.append('div')
-				.attr('class', 'label-text-wrapper')
-				.append('h4')
-				.html(labelText)
-				.on('mouseover', this.onActionMouseOver)
-				.on('mouseout', this.onActionMouseOut)
-				.on('click', this.onActionMouseClick);
+			labelEnterSelection.append( 'div' )
+				.attr( 'class', 'label-text-wrapper' )
+				.append( 'h4' )
+				.html( labelText )
+				.on( 'mouseover', this.onActionMouseOver )
+				.on( 'mouseout', this.onActionMouseOut )
+				.on( 'click', this.onActionMouseClick );
 
 			// do this last, so that width (determined by text) can be calculated and used
-			let t = function (d, i) {
+			let t = function ( d, i ) {
 				let verticalOffset = (i === 0 || i === labelEnterSelection.size() - 1) ? 20 : 0;
 				return 'translate(' +
-					Math.round(labelSize * Math.cos(Math.PI*(d.rotation-90)/180) - 0.5*this.offsetWidth) + 'px,' +		// center on label width
-					Math.round(labelSize * Math.sin(Math.PI*(d.rotation-90)/180) / sqrt3 + verticalOffset) + 'px)';		// bump down the first and last label
+					Math.round( labelSize * Math.cos( Math.PI * (d.rotation - 90) / 180 ) - 0.5 * this.offsetWidth ) + 'px,' +		// center on label width
+					Math.round( labelSize * Math.sin( Math.PI * (d.rotation - 90) / 180 ) / sqrt3 + verticalOffset ) + 'px)';		// bump down the first and last label
 			};
-			labelEnterSelection.style('transform', t);
-			labelEnterSelection.style('-webkit-transform', t);
+			labelEnterSelection.style( 'transform', t );
+			labelEnterSelection.style( '-webkit-transform', t );
 
 			labelEnterSelection.transition()
-				.duration(sassVars.actions.add.time)
-				.delay(sassVars.actions.add.delay)
-				.style('opacity', 1.0)
-				.each('end', function () {
-					d3.select(this).style('opacity', null);
-				});
+				.duration( sassVars.actions.add.time )
+				.delay( sassVars.actions.add.delay )
+				.style( 'opacity', 1.0 )
+				.each( 'end', function () {
+					d3.select( this ).style( 'opacity', null );
+				} );
 
 			// exit
 			labelSelection
-				.classed('default-interactive-helper', (d, i) => d.name === this.randomLabelPositions[this.currentEmotion].name);
+				.classed( 'default-interactive-helper', ( d, i ) => d.name === this.randomLabelPositions[ this.currentEmotion ].name );
 
 			labelSelection.exit().transition()
-				.duration(sassVars.actions.remove.time)
-				.style('opacity', 0.0)
+				.duration( sassVars.actions.remove.time )
+				.style( 'opacity', 0.0 )
 				.remove();
 
 		} else {
 
-			labelContainer.selectAll('div.label')
-				.on('mouseover', null)
-				.on('mouseout', null)
-			.transition()
-				.duration(immediate ? 0 : sassVars.actions.remove.time)
-				.style('opacity', 0.0)
+			labelContainer.selectAll( 'div.label' )
+				.on( 'mouseover', null )
+				.on( 'mouseout', null )
+				.transition()
+				.duration( immediate ? 0 : sassVars.actions.remove.time )
+				.style( 'opacity', 0.0 )
 				.remove();
 
 		}
 
 	},
 
-	open: function (options) {
+	open: function ( options ) {
 
-		this.setBackgrounded(options && options.inBackground, options);
+		this.setBackgrounded( options && options.inBackground, options );
 
 		// clear selected state to display all actions for emotion,
 		// after a delay (transition time from _states.scss::#states)
 		let openDelay = 1500;
 
-		this.openTimeout = setTimeout(() => {
-			if (!options || !options.inBackground) {
+		this.openTimeout = setTimeout( () => {
+			if ( !options || !options.inBackground ) {
 				this.resetCallout();
 			}
-		}, openDelay);
+		}, openDelay );
 
 	},
 
 	close: function () {
 		dispatcher.popupChange();
 
-		return new Promise((resolve, reject) => {
+		return new Promise( ( resolve, reject ) => {
 
-			clearTimeout(this.openTimeout);
-			clearTimeout(this.setStateTimeout);
+			clearTimeout( this.openTimeout );
+			clearTimeout( this.setStateTimeout );
 
-			this.clearStates(sassVars.actions.remove.time);
+			this.clearStates( sassVars.actions.remove.time );
 
-			setTimeout(() => {
+			setTimeout( () => {
 				resolve();
-			}, sassVars.actions.remove.time);
+			}, sassVars.actions.remove.time );
 
-		});
+		} );
 
 	},
 
-	onResize: function (screenIsSmall) {
+	onResize: function ( screenIsSmall ) {
 
 		this.screenIsSmall = screenIsSmall;
 
 		// recalculate containers, scales, etc
-		this.setUpGraphs(this.sectionHitArea);
+		this.setUpGraphs( this.sectionHitArea );
 
-		for (let emotion in this.graphContainers) {
+		for ( let emotion in this.graphContainers ) {
 
-			let graphContainer = this.graphContainers[emotion],
-				arrowSelection = graphContainer.selectAll('g.action-arrow');
+			let graphContainer = this.graphContainers[ emotion ],
+				arrowSelection = graphContainer.selectAll( 'g.action-arrow' );
 
 			// update all action rays and labels that have already been rendered
-			if (arrowSelection.size()) {
-				arrowSelection.selectAll('path')
-					.call(this.scaledLineGenerator, 1.0);
+			if ( arrowSelection.size() ) {
+				arrowSelection.selectAll( 'path' )
+					.call( this.scaledLineGenerator, 1.0 );
 
-				if (!this.isBackgrounded) {
+				if ( !this.isBackgrounded ) {
 					let currentActionsData;
 
-					if (this.currentState) {
-						let stateActionsData = this.actionsData[this.currentEmotion].actions[this.currentState];
-						if (!stateActionsData) {
-							console.warn('No actions found for state "' + this.currentState + '" in emotion "' + this.currentEmotion + '".');
+					if ( this.currentState ) {
+						let stateActionsData = this.actionsData[ this.currentEmotion ].actions[ this.currentState ];
+						if ( !stateActionsData ) {
+							console.warn( 'No actions found for state "' + this.currentState + '" in emotion "' + this.currentEmotion + '".' );
 							continue;
 						}
 						currentActionsData = stateActionsData.actions;
 					} else {
-						currentActionsData = this.actionsData[this.currentEmotion].allActions;
+						currentActionsData = this.actionsData[ this.currentEmotion ].allActions;
 					}
 
-					this.renderLabels(currentActionsData);
+					this.renderLabels( currentActionsData );
 				}
 			}
 
@@ -1104,36 +1106,36 @@ export default {
 	 * Actions section stays open in triggers and moods, with limited interactivity.
 	 * `setBackgrounded()` toggles this state.
 	 */
-	setBackgrounded: function (val, options) {
-		return new Promise((resolve, reject) => {
+	setBackgrounded: function ( val, options ) {
+		return new Promise( ( resolve, reject ) => {
 
 			this.isBackgrounded = val;
 
-			this.sectionHitArea.classList[(val ? 'add' : 'remove')]('backgrounded');
-			this.sectionHitArea.classList[(options && (options.sectionName === dispatcher.SECTIONS.TRIGGERS) ? 'add' : 'remove')]('triggers');
-			this.sectionHitArea.classList[(options && (options.sectionName === dispatcher.SECTIONS.MOODS) ? 'add' : 'remove')]('moods');
+			this.sectionHitArea.classList[ (val ? 'add' : 'remove') ]( 'backgrounded' );
+			this.sectionHitArea.classList[ (options && (options.sectionName === dispatcher.SECTIONS.TRIGGERS) ? 'add' : 'remove') ]( 'triggers' );
+			this.sectionHitArea.classList[ (options && (options.sectionName === dispatcher.SECTIONS.MOODS) ? 'add' : 'remove') ]( 'moods' );
 
 			// deselect anything selected.
 			// currently only happens on mobile, but might also want to happen on desktop...
 			// TODO: evaluate ^^.
-			if (val && this.screenIsSmall) {
-				this.setHighlightedAction(null);
+			if ( val && this.screenIsSmall ) {
+				this.setHighlightedAction( null );
 			}
 
 			// this.hideChrome();
 			// this.setActive(!val);
 
-			this.renderLabels(null);
+			this.renderLabels( null );
 
 			// reset actions state
-			if(val) {
-				this.setState(null);
+			if ( val ) {
+				this.setState( null );
 			}
 
 			// TODO: resolve on completion of animation
 			resolve();
 
-		});
+		} );
 	},
 
 	shouldDisplayPaginationUI: function () {
@@ -1143,145 +1145,145 @@ export default {
 
 	},
 
-	applyEventListenersToEmotion: function (emotion, handlersByEvent) {
+	applyEventListenersToEmotion: function ( emotion, handlersByEvent ) {
 
-		let graphContainer = this.graphContainers[emotion];
-		Object.keys(handlersByEvent).forEach(event => {
-			graphContainer.on(event, handlersByEvent[event]);
-		});
+		let graphContainer = this.graphContainers[ emotion ];
+		Object.keys( handlersByEvent ).forEach( event => {
+			graphContainer.on( event, handlersByEvent[ event ] );
+		} );
 
 	},
 
-	paginateElement: function (dir) {
+	paginateElement: function ( dir ) {
 
 		let nextIndex = 0,
-			actionsData = this.actionsData[this.currentEmotion].allActions;
+			actionsData = this.actionsData[ this.currentEmotion ].allActions;
 
-		if (this.highlightedAction) {
-			nextIndex = actionsData.findIndex(s => s.name === this.highlightedAction.name) + dir;
+		if ( this.highlightedAction ) {
+			nextIndex = actionsData.findIndex( s => s.name === this.highlightedAction.name ) + dir;
 			nextIndex = nextIndex >= actionsData.length ? 0 : nextIndex < 0 ? actionsData.length - 1 : nextIndex;
 		}
 
-		this.setHighlightedAction(actionsData[nextIndex]);
+		this.setHighlightedAction( actionsData[ nextIndex ] );
 
 	},
 
-	setHighlightedAction: function (action) {
+	setHighlightedAction: function ( action ) {
 
 		this.highlightedAction = action;
 
-		if (action) {
+		if ( action ) {
 
 			let secondaryData;
 
-			if (action.valence) {
+			if ( action.valence ) {
 				secondaryData = {
-					body: action.valence && appStrings().getStr(`emotionsData.metadata.actions.qualities[${ action.valence - 1 }].body`),
+					body: action.valence && appStrings().getStr( `emotionsData.metadata.actions.qualities[${ action.valence - 1 }].body` ),
 					classes: [
 						this.currentEmotion,
-						_.findKey(VALENCES, (val) => val === action.valence).toLowerCase()
+						_.findKey( VALENCES, ( val ) => val === action.valence ).toLowerCase()
 					]
 				};
 				// secondaryData.body = secondaryData.body.replace(/In this state/, 'In a state of ' + action.state.toLowerCase());
 				// secondaryData.body = secondaryData.body.replace(/this action/, GRAMMAR_TRANSLATE[action.name.toLowerCase()]);
 			}
 
-			dispatcher.popupChange('actions', action.name, action.desc, secondaryData);
+			dispatcher.popupChange( 'actions', action.name, action.desc, secondaryData );
 
 		} else {
 
-			if (!this.isBackgrounded) this.resetCallout();
+			if ( !this.isBackgrounded ) this.resetCallout();
 
 		}
 
-		this.displayHighlightedAction(action);
+		this.displayHighlightedAction( action );
 
 	},
 
-	displayHighlightedAction: function (action, valence) {
+	displayHighlightedAction: function ( action, valence ) {
 
-		if (!this.graphContainers[this.currentEmotion]) return;
+		if ( !this.graphContainers[ this.currentEmotion ] ) return;
 
 		let highlightedAction = action || this.highlightedAction || null,
-			arrowSelection = this.graphContainers[this.currentEmotion].selectAll('g.action-arrow'),
-			labelSelection = this.labelContainers[this.currentEmotion].selectAll('div.label');
+			arrowSelection = this.graphContainers[ this.currentEmotion ].selectAll( 'g.action-arrow' ),
+			labelSelection = this.labelContainers[ this.currentEmotion ].selectAll( 'div.label' );
 
-		if (highlightedAction) {
+		if ( highlightedAction ) {
 
-			if (valence) {
+			if ( valence ) {
 
 				// if valence specified, highlight all actions of that valence
 				arrowSelection
-					.classed('muted', d => {
-						if (valence) {
+					.classed( 'muted', d => {
+						if ( valence ) {
 							return d.valence !== valence;
 						} else {
 							return false;
 						}
-					});
+					} );
 
 			} else {
 
 				// if no valence specified, highlight only the specified action
 				arrowSelection
-					.classed('muted', (data, index) => data.name !== highlightedAction.name);
+					.classed( 'muted', ( data, index ) => data.name !== highlightedAction.name );
 
 			}
 
-			this.setLabelStates(this.labelContainers[this.currentEmotion], [highlightedAction.name]);
+			this.setLabelStates( this.labelContainers[ this.currentEmotion ], [ highlightedAction.name ] );
 		} else {
 
 			arrowSelection
-				.classed('muted', false);
+				.classed( 'muted', false );
 
-			this.setLabelStates(this.labelContainers[this.currentEmotion], []);
+			this.setLabelStates( this.labelContainers[ this.currentEmotion ], [] );
 		}
 
 		/*
-		if (!action && this.highlightedValence) {
-			this.displayHighlightedValence();
+		 if (!action && this.highlightedValence) {
+		 this.displayHighlightedValence();
+		 }
+		 */
+
+	},
+
+	onActionMouseOver: function ( d, i ) {
+
+		if ( this.mouseOutTimeout ) {
+			clearTimeout( this.mouseOutTimeout );
 		}
-		*/
+		this.displayHighlightedAction( d, d.valence );
 
 	},
 
-	onActionMouseOver: function (d, i) {
+	onActionMouseOut: function ( d, i ) {
 
-		if (this.mouseOutTimeout) {
-			clearTimeout(this.mouseOutTimeout);
-		}
-		this.displayHighlightedAction(d, d.valence);
-
-	},
-
-	onActionMouseOut: function (d, i) {
-
-		this.mouseOutTimeout = setTimeout(() => {
-			this.displayHighlightedAction(null);
-		}, 350);
+		this.mouseOutTimeout = setTimeout( () => {
+			this.displayHighlightedAction( null );
+		}, 350 );
 
 	},
 
-	onActionMouseClick: function (d, i) {
+	onActionMouseClick: function ( d, i ) {
 
-		if (d3.event) {
+		if ( d3.event ) {
 			d3.event.stopImmediatePropagation();
 		}
 
-		if (this.mouseOutTimeout) {
-			clearTimeout(this.mouseOutTimeout);
+		if ( this.mouseOutTimeout ) {
+			clearTimeout( this.mouseOutTimeout );
 		}
-		this.setHighlightedAction(d);
+		this.setHighlightedAction( d );
 
 	},
 
 	onContainerTouchStart: function () {
 
 		this.touchedShape = null;
-		d3.select(`#actions .${ this.currentEmotion } .graph-container`)
-			.on('touchmove', this.onContainerTouchMove)
-			.on('touchend', this.onContainerTouchEnd)
-			.on('touchcancel', this.onContainerTouchEnd);
+		d3.select( `#actions .${ this.currentEmotion } .graph-container` )
+			.on( 'touchmove', this.onContainerTouchMove )
+			.on( 'touchend', this.onContainerTouchEnd )
+			.on( 'touchcancel', this.onContainerTouchEnd );
 
 		this.onContainerTouchMove();
 
@@ -1290,186 +1292,192 @@ export default {
 	onContainerTouchMove: function () {
 
 		let { event } = d3;
-		if (!event) return;
+		if ( !event ) return;
 
-		let touchedShape = document.elementFromPoint(event.touches[0].clientX, event.touches[0].clientY),
+		let touchedShape = document.elementFromPoint( event.touches[ 0 ].clientX, event.touches[ 0 ].clientY ),
 			_actions = this;
 
-		if (touchedShape.nodeName === 'path') {
+		if ( touchedShape.nodeName === 'path' ) {
 			// touch is on an action arrow
-			if (touchedShape !== this.touchedShape) {
+			if ( touchedShape !== this.touchedShape ) {
 				// moving into a shape
 				this.touchedShape = touchedShape;
-				this.graphContainers[this.currentEmotion].selectAll('path')
-				.each(function (d, i) {
-					if (this === touchedShape) _actions.onActionMouseClick(d, i);
-				});
+				this.graphContainers[ this.currentEmotion ].selectAll( 'path' )
+					.each( function ( d, i ) {
+						if ( this === touchedShape ) _actions.onActionMouseClick( d, i );
+					} );
 			}
 		} else {
 			// touch is not on an action arrow;
 			// see if there is a nearby arrow
 			this.touchedShape = null;
 
-			const angThreshold = Math.min(10, 180 / (1.5 * this.actionsData[this.currentEmotion].allActions.length)),	// detect touches within angle determined by total number of arrows,
-																														// but no more than 10 degrees from an arrow
+			const angThreshold = Math.min( 10, 180 / (1.5 * this.actionsData[ this.currentEmotion ].allActions.length) ),	// detect touches within angle determined by total number of arrows,
+			// but no more than 10 degrees from an arrow
 				radThreshold = 0.4;
 
-			let container = this.graphContainers[this.currentEmotion].node(),
-				m = d3.mouse(container),
-				ang = 180 * Math.atan2(2 * m[1], m[0]) / Math.PI + 90,	// normalize to same scale used by action.rotation
-				rad = Math.sqrt(m[0] * m[0] + m[1] * m[1]),
+			let container = this.graphContainers[ this.currentEmotion ].node(),
+				m = d3.mouse( container ),
+				ang = 180 * Math.atan2( 2 * m[ 1 ], m[ 0 ] ) / Math.PI + 90,	// normalize to same scale used by action.rotation
+				rad = Math.sqrt( m[ 0 ] * m[ 0 ] + m[ 1 ] * m[ 1 ] ),
 				closestIndex = -1,
 				closestAngDelta = Number.POSITIVE_INFINITY,
 				dAng;
 
 			// only check for nearest action arrow if we're far enough away from the middle
 			// that there won't be lots of noise with overlapping actions
-			if (rad / container.getBoundingClientRect().height > 0.5) {
-				this.graphContainers[this.currentEmotion].selectAll('path')
-					.each((d, i) => {
-						dAng = Math.abs(d.rotation - ang);
-						if (dAng < closestAngDelta && dAng <= angThreshold) {
+			if ( rad / container.getBoundingClientRect().height > 0.5 ) {
+				this.graphContainers[ this.currentEmotion ].selectAll( 'path' )
+					.each( ( d, i ) => {
+						dAng = Math.abs( d.rotation - ang );
+						if ( dAng < closestAngDelta && dAng <= angThreshold ) {
 							closestAngDelta = dAng;
 							closestIndex = i;
 						}
-					});
+					} );
 			}
 
 			// gymnastics going back and forth between DOM element and data associated with it >.<
-			if (closestIndex !== -1) {
-				this.graphContainers[this.currentEmotion].selectAll('path')
-				.each(function (d, i) {
-					if (i === closestIndex) {
-						_actions.touchedShape = this;
-						_actions.onActionMouseClick(d, i);
-					}
-				});
+			if ( closestIndex !== -1 ) {
+				this.graphContainers[ this.currentEmotion ].selectAll( 'path' )
+					.each( function ( d, i ) {
+						if ( i === closestIndex ) {
+							_actions.touchedShape = this;
+							_actions.onActionMouseClick( d, i );
+						}
+					} );
 			}
 		}
 
 		// if a shape was just touched,
 		// kill the event before it can trigger onBackgroundClick
-		if (this.touchedShape) {
+		if ( this.touchedShape ) {
 			d3.event.stopImmediatePropagation();
 			d3.event.preventDefault();
 		}
 
 	},
 
-	onContainerTouchEnd: function (event) {
+	onContainerTouchEnd: function ( event ) {
 
-		d3.select(`#actions .${ this.currentEmotion } .graph-container`)
-			.on('touchmove', null)
-			.on('touchend', null)
-			.on('touchcancel', null);
+		d3.select( `#actions .${ this.currentEmotion } .graph-container` )
+			.on( 'touchmove', null )
+			.on( 'touchend', null )
+			.on( 'touchcancel', null );
 
 	},
 
 	resetCallout: function () {
 		dispatcher.popupChange();
-		dispatcher.changeCallout(this.currentEmotion, appStrings().getStr('emotionsData.metadata.actions.header'), appStrings().getStr('emotionsData.metadata.actions.body'));
+		dispatcher.changeCallout(
+			this.currentEmotion,
+			appStrings().getStr( 'emotionsData.metadata.actions.header' ),
+			appStrings().getStr( `emotionsData.emotions.${this.currentEmotion}.actions[0].secondary` ) +
+			'<br/>&nbsp;<br/>' +
+			appStrings().getStr( 'emotionsData.metadata.actions.interaction_prompt' )
+		);
 	}
 
 	/*
-	setHighlightedValence: function (valence, preventRecursion) {
+	 setHighlightedValence: function (valence, preventRecursion) {
 
-		this.highlightedValence = valence;
+	 this.highlightedValence = valence;
 
-		if (!preventRecursion) {
-			this.setHighlightedAction(null, true);
-		}
+	 if (!preventRecursion) {
+	 this.setHighlightedAction(null, true);
+	 }
 
-		if (valence) {
-			let valenceKey;
-			switch (valence) {
-				case VALENCES.CONSTRUCTIVE:
-					valenceKey = 0;
-					break;
-				case VALENCES.BOTH:
-					valenceKey = 2;
-					break;
-				case VALENCES.DESTRUCTIVE:
-					valenceKey = 1;
-					break;
-			}
-			dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.actions.qualities[valenceKey].header, emotionsData.metadata.actions.qualities[valenceKey].body);
-		} else {
-			this.resetCallout();
-		}
+	 if (valence) {
+	 let valenceKey;
+	 switch (valence) {
+	 case VALENCES.CONSTRUCTIVE:
+	 valenceKey = 0;
+	 break;
+	 case VALENCES.BOTH:
+	 valenceKey = 2;
+	 break;
+	 case VALENCES.DESTRUCTIVE:
+	 valenceKey = 1;
+	 break;
+	 }
+	 dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.actions.qualities[valenceKey].header, emotionsData.metadata.actions.qualities[valenceKey].body);
+	 } else {
+	 this.resetCallout();
+	 }
 
-		this.displayHighlightedValence(valence);
+	 this.displayHighlightedValence(valence);
 
-	},
+	 },
 
-	displayHighlightedValence: function (valence) {
+	 displayHighlightedValence: function (valence) {
 
-		if (!this.currentEmotion) { return; }
+	 if (!this.currentEmotion) { return; }
 
-		valence = valence || this.highlightedValence || null;
+	 valence = valence || this.highlightedValence || null;
 
-		let valenceClass = Object.keys(VALENCES).find(key => VALENCES[key] === valence);
-		if (valenceClass) {
-			valenceClass = valenceClass.toLowerCase();
-		}
+	 let valenceClass = Object.keys(VALENCES).find(key => VALENCES[key] === valence);
+	 if (valenceClass) {
+	 valenceClass = valenceClass.toLowerCase();
+	 }
 
-		let graphContainer = this.graphContainers[this.currentEmotion];
-		graphContainer.selectAll('path.valence')
-			.style('opacity', function () {
-				if (valenceClass) {
-					return this.classList.contains(valenceClass) ? 1.0 : 0.5;
-				} else {
-					return null;
-				}
-			})
-			.classed('highlighted', function () {
-				if (valenceClass) {
-					return this.classList.contains(valenceClass);
-				} else {
-					return null;
-				}
-			});
+	 let graphContainer = this.graphContainers[this.currentEmotion];
+	 graphContainer.selectAll('path.valence')
+	 .style('opacity', function () {
+	 if (valenceClass) {
+	 return this.classList.contains(valenceClass) ? 1.0 : 0.5;
+	 } else {
+	 return null;
+	 }
+	 })
+	 .classed('highlighted', function () {
+	 if (valenceClass) {
+	 return this.classList.contains(valenceClass);
+	 } else {
+	 return null;
+	 }
+	 });
 
-		graphContainer.selectAll('g.action-arrow')
-			.classed('muted', d => {
-				if (valence) {
-					return d.valence !== valence;
-				} else {
-					return false;
-				}
-			});
+	 graphContainer.selectAll('g.action-arrow')
+	 .classed('muted', d => {
+	 if (valence) {
+	 return d.valence !== valence;
+	 } else {
+	 return false;
+	 }
+	 });
 
-	},
+	 },
 
-	onValenceMouseOver: function (d, i) {
+	 onValenceMouseOver: function (d, i) {
 
-		let valence = VALENCES[d.data.name];
-		if (valence) {
-			this.displayHighlightedValence(valence);
-		}
+	 let valence = VALENCES[d.data.name];
+	 if (valence) {
+	 this.displayHighlightedValence(valence);
+	 }
 
-	},
+	 },
 
-	onValenceMouseOut: function (d, i) {
+	 onValenceMouseOut: function (d, i) {
 
-		let valence = VALENCES[d.data.name];
-		if (valence) {
-			this.displayHighlightedValence(null);
-		}
+	 let valence = VALENCES[d.data.name];
+	 if (valence) {
+	 this.displayHighlightedValence(null);
+	 }
 
-	},
+	 },
 
-	onValenceMouseClick: function (d, i) {
+	 onValenceMouseClick: function (d, i) {
 
-		if (d3.event) {
-			d3.event.stopImmediatePropagation();
-		}
+	 if (d3.event) {
+	 d3.event.stopImmediatePropagation();
+	 }
 
-		let valence = VALENCES[d.data.name];
-		if (valence) {
-			this.setHighlightedValence(valence);
-		}
+	 let valence = VALENCES[d.data.name];
+	 if (valence) {
+	 this.setHighlightedValence(valence);
+	 }
 
-	},
-	*/
+	 },
+	 */
 
 };

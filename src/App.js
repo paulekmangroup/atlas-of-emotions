@@ -83,10 +83,13 @@ export default function ( ...initArgs ) {
 		appStrings().loadStrings()
 			.then( () => {
 
+				initTemplate();
 				initContainers();
 				initSections();
 				initHeader();
-				//initSectionNavigation();
+				if ( screenIsSmall ) {
+					initSectionNavigation();
+				}
 				initNavArrows();
 				initMoreInfoDropdown();
 				initPegLogo();
@@ -134,7 +137,26 @@ export default function ( ...initArgs ) {
 	}
 
 	function initScroller() {
+		initSection(moreInfo);
 		scroller.init.bind( scroller )();
+	}
+
+	function initTemplate() {
+
+		_.templateSettings = {
+			evaluate: /\{\{#([\s\S]+?)\}\}/g,            // {{# console.log("blah") }}
+			interpolate: /\{\{[^#\{]([\s\S]+?)[^\}]\}\}/g,  // {{ title }}
+			escape: /\{\{\{([\s\S]+?)\}\}\}/g,         // {{{ title }}}
+		};
+
+		var templateElements = document.querySelectorAll( '[data-template]' );
+
+		templateElements.forEach( function ( element ) {
+			var data = appStrings().getStr( 'emotionsData.' + element.dataset.template );
+			var compiled = _.template( element.innerHTML );
+			element.innerHTML = compiled( data );
+		} );
+
 	}
 
 	function initContainers() {
@@ -1726,8 +1748,8 @@ export default function ( ...initArgs ) {
 		}
 	}
 
-	function onEmotionChange( emotion ){
-		if(!isNavigating){
+	function onEmotionChange( emotion ) {
+		if ( !isNavigating ) {
 			dispatcher.navigate( null, emotion );
 		}
 	}

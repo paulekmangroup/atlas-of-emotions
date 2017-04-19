@@ -31,7 +31,7 @@ export default class EpisodeAddAwareness extends Episode {
 		//TweenMax.killDelayedCallsTo( this.toggleTriggerAndResponseAwareness );
 		//TweenMax.killDelayedCallsTo( this.advanceAndStart );
 		//TweenMax.killTweensOf( this.illuminationBlock );
-		this.illuminationBlock.style = null;
+		this.illuminationBlock.setAttribute( 'style', null );
 	}
 
 	constructor( svg, container, emotion ) {
