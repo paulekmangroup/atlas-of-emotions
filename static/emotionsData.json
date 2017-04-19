@@ -5,7 +5,8 @@
 				"name": "anger_continent_header",
 				"desc": "anger_continent_body",
 				"name_mobile": "anger_continent_header_mobile",
-				"desc_mobile": "anger_continent_body_mobile"
+				"desc_mobile": "anger_continent_body_mobile",
+				"secondary": ""
 			},
 			"states": [
 				{
@@ -13,6 +14,7 @@
 					"desc": "anger_states_body_1",
 					"name_mobile": "anger_states_header_1",
 					"desc_mobile": "anger_states_body_1",
+					"secondary": "anger_states_body",
 					"range": {
 						"min": 1,
 						"max": 2
@@ -41,6 +43,7 @@
 					"desc": "anger_states_body_2",
 					"name_mobile": "anger_states_header_2",
 					"desc_mobile": "anger_states_body_2",
+					"secondary": "",
 					"range": {
 						"min": 1,
 						"max": 10
@@ -77,6 +80,7 @@
 					"desc": "anger_states_body_3",
 					"name_mobile": "anger_states_header_3",
 					"desc_mobile": "anger_states_body_3",
+					"secondary": "",
 					"range": {
 						"min": 2,
 						"max": 10
@@ -109,6 +113,7 @@
 					"desc": "anger_states_body_4",
 					"name_mobile": "anger_states_header_4",
 					"desc_mobile": "anger_states_body_4",
+					"secondary": "",
 					"range": {
 						"min": 3,
 						"max": 10
@@ -145,6 +150,7 @@
 					"desc": "anger_states_body_5",
 					"name_mobile": "anger_states_header_5",
 					"desc_mobile": "anger_states_body_5",
+					"secondary": "",
 					"range": {
 						"min": 4,
 						"max": 7
@@ -183,6 +189,7 @@
 					"desc": "anger_states_body_6",
 					"name_mobile": "anger_states_header_6",
 					"desc_mobile": "anger_states_body_6",
+					"secondary": "",
 					"range": {
 						"min": 5,
 						"max": 10
@@ -220,6 +227,7 @@
 					"desc": "anger_states_body_7",
 					"name_mobile": "anger_states_header_7",
 					"desc_mobile": "anger_states_body_7",
+					"secondary": "",
 					"range": {
 						"min": 10,
 						"max": 10
@@ -253,84 +261,87 @@
 			],
 			"actions": [
 				{
-					"name": "",
-					"desc": "anger_actions_body",
-					"name_mobile": "",
-					"desc_mobile": "anger_actions_body"
-				},
-				{
 					"name": "anger_actions_header_1",
 					"desc": "anger_actions_body_1",
 					"name_mobile": "anger_actions_header_1",
-					"desc_mobile": "anger_actions_body_1"
+					"desc_mobile": "anger_actions_body_1",
+					"secondary": "anger_actions_body"
 				},
 				{
 					"name": "anger_actions_header_2",
 					"desc": "anger_actions_body_2",
 					"name_mobile": "anger_actions_header_2",
-					"desc_mobile": "anger_actions_body_2"
+					"desc_mobile": "anger_actions_body_2",
+					"secondary": ""
 				},
 				{
 					"name": "anger_actions_header_3",
 					"desc": "anger_actions_body_3",
 					"name_mobile": "anger_actions_header_3",
-					"desc_mobile": "anger_actions_body_3"
+					"desc_mobile": "anger_actions_body_3",
+					"secondary": ""
 				},
 				{
 					"name": "anger_actions_header_4",
 					"desc": "anger_actions_body_4",
 					"name_mobile": "anger_actions_header_4",
-					"desc_mobile": "anger_actions_body_4"
+					"desc_mobile": "anger_actions_body_4",
+					"secondary": ""
 				},
 				{
 					"name": "anger_actions_header_5",
 					"desc": "anger_actions_body_5",
 					"name_mobile": "anger_actions_header_5",
-					"desc_mobile": "anger_actions_body_5"
+					"desc_mobile": "anger_actions_body_5",
+					"secondary": ""
 				},
 				{
 					"name": "anger_actions_header_6",
 					"desc": "anger_actions_body_6",
 					"name_mobile": "anger_actions_header_6",
-					"desc_mobile": "anger_actions_body_6"
+					"desc_mobile": "anger_actions_body_6",
+					"secondary": ""
 				},
 				{
 					"name": "anger_actions_header_7",
 					"desc": "anger_actions_body_7",
 					"name_mobile": "anger_actions_header_7",
-					"desc_mobile": "anger_actions_body_7"
+					"desc_mobile": "anger_actions_body_7",
+					"secondary": ""
 				},
 				{
 					"name": "anger_actions_header_8",
 					"desc": "anger_actions_body_8",
 					"name_mobile": "anger_actions_header_8",
-					"desc_mobile": "anger_actions_body_8"
+					"desc_mobile": "anger_actions_body_8",
+					"secondary": ""
 				},
 				{
 					"name": "anger_actions_header_9",
 					"desc": "anger_actions_body_9",
 					"name_mobile": "anger_actions_header_9",
-					"desc_mobile": "anger_actions_body_9"
+					"desc_mobile": "anger_actions_body_9",
+					"secondary": ""
 				}
 			],
 			"triggers": [
 				{
 					"name": "anger_triggers_header_1",
 					"type": "Universal",
-					"name_mobile": "anger_triggers_universal_header_mobile",
-					"desc_mobile": "anger_triggers_universal_body_mobile"
+					"name_mobile": "anger_triggers_header_1",
+					"desc_mobile": "Universal"
 				},
 				{
 					"name": "anger_triggers_header_2",
 					"type": "Universal",
-					"name_mobile": "anger_triggers_learned_header_mobile",
-					"desc_mobile": "anger_triggers_learned_body_mobile"
+					"name_mobile": "anger_triggers_universal_header_mobile",
+					"desc_mobile": "anger_triggers_universal_body_mobile"
 				},
 				{
 					"name": "anger_triggers_header_3",
 					"type": "Universal",
-					"name_mobile": "anger_triggers_header_3",
-					"desc_mobile": "Universal"
+					"name_mobile": "anger_triggers_learned_header_mobile",
+					"desc_mobile": "anger_triggers_learned_body_mobile"
 				},
 				{
 					"name": "anger_triggers_header_4",
@@ -362,27 +373,26 @@
 					"name": "anger_moods_header",
 					"desc": "anger_moods_body",
 					"name_mobile": "anger_moods_header",
-					"desc_mobile": "anger_moods_body"
+					"desc_mobile": "anger_moods_body",
+					"secondary": ""
 				}
 			],
 			"timeline": [
 				{
-					"timeline": {
-						"trigger": {
-							"precondition": "anger_timeline_trigger_precondition",
-							"event": "anger_timeline_trigger_event",
-							"perceptual_database": "anger_timeline_trigger_perceptual_database"
-						},
-						"state": {
-							"physical_changes": "anger_timeline_state_physical_changes",
-							"emotion": "anger_timeline_state_emotion",
-							"mental_changes": "anger_timeline_state_mental_changes"
-						},
-						"response": {
-							"constructive_response": "anger_timeline_response_constructive_response",
-							"destructive_response": "anger_timeline_response_destructive_response",
-							"ambiguous_response": "anger_timeline_response_ambiguous_response"
-						}
+					"trigger": {
+						"precondition": "anger_timeline_trigger_precondition",
+						"event": "anger_timeline_trigger_event",
+						"perceptual_database": "anger_timeline_trigger_perceptual_database"
+					},
+					"state": {
+						"physical_changes": "anger_timeline_state_physical_changes",
+						"emotion": "anger_timeline_state_emotion",
+						"mental_changes": "anger_timeline_state_mental_changes"
+					},
+					"response": {
+						"constructive_response": "anger_timeline_response_constructive_response",
+						"destructive_response": "anger_timeline_response_destructive_response",
+						"ambiguous_response": "anger_timeline_response_ambiguous_response"
 					}
 				}
 			]
@@ -392,7 +402,8 @@
 				"name": "fear_continent_header",
 				"desc": "fear_continent_body",
 				"name_mobile": "fear_continent_header_mobile",
-				"desc_mobile": "fear_continent_body_mobile"
+				"desc_mobile": "fear_continent_body_mobile",
+				"secondary": ""
 			},
 			"states": [
 				{
@@ -400,6 +411,7 @@
 					"desc": "fear_states_body_1",
 					"name_mobile": "fear_states_header_1",
 					"desc_mobile": "fear_states_body_1",
+					"secondary": "fear_states_body",
 					"range": {
 						"min": 1,
 						"max": 3
@@ -425,6 +437,7 @@
 					"desc": "fear_states_body_2",
 					"name_mobile": "fear_states_header_2",
 					"desc_mobile": "fear_states_body_2",
+					"secondary": "",
 					"range": {
 						"min": 1,
 						"max": 10
@@ -459,6 +472,7 @@
 					"desc": "fear_states_body_3",
 					"name_mobile": "fear_states_header_3",
 					"desc_mobile": "fear_states_body_3",
+					"secondary": "",
 					"range": {
 						"min": 2,
 						"max": 7
@@ -484,6 +498,7 @@
 					"desc": "fear_states_body_4",
 					"name_mobile": "fear_states_header_4",
 					"desc_mobile": "fear_states_body_4",
+					"secondary": "",
 					"range": {
 						"min": 6,
 						"max": 10
@@ -518,6 +533,7 @@
 					"desc": "fear_states_body_5",
 					"name_mobile": "fear_states_header_5",
 					"desc_mobile": "fear_states_body_5",
+					"secondary": "",
 					"range": {
 						"min": 9,
 						"max": 10
@@ -554,6 +570,7 @@
 					"desc": "fear_states_body_6",
 					"name_mobile": "fear_states_header_6",
 					"desc_mobile": "fear_states_body_6",
+					"secondary": "",
 					"range": {
 						"min": 10,
 						"max": 10
@@ -590,6 +607,7 @@
 					"desc": "fear_states_body_7",
 					"name_mobile": "fear_states_header_7",
 					"desc_mobile": "fear_states_body_7",
+					"secondary": "",
 					"range": {
 						"min": 10,
 						"max": 10
@@ -622,6 +640,7 @@
 					"desc": "fear_states_body_8",
 					"name_mobile": "fear_states_header_8",
 					"desc_mobile": "fear_states_body_8",
+					"secondary": "",
 					"range": {
 						"min": 10,
 						"max": 10
@@ -652,52 +671,53 @@
 			],
 			"actions": [
 				{
-					"name": "",
-					"desc": "fear_actions_body",
-					"name_mobile": "",
-					"desc_mobile": "fear_actions_body"
-				},
-				{
 					"name": "fear_actions_header_1",
 					"desc": "fear_actions_body_1",
 					"name_mobile": "fear_actions_header_1",
-					"desc_mobile": "fear_actions_body_1"
+					"desc_mobile": "fear_actions_body_1",
+					"secondary": "fear_actions_body"
 				},
 				{
 					"name": "fear_actions_header_2",
 					"desc": "fear_actions_body_2",
 					"name_mobile": "fear_actions_header_2",
-					"desc_mobile": "fear_actions_body_2"
+					"desc_mobile": "fear_actions_body_2",
+					"secondary": ""
 				},
 				{
 					"name": "fear_actions_header_3",
 					"desc": "fear_actions_body_3",
 					"name_mobile": "fear_actions_header_3",
-					"desc_mobile": "fear_actions_body_3"
+					"desc_mobile": "fear_actions_body_3",
+					"secondary": ""
 				},
 				{
 					"name": "fear_actions_header_4",
 					"desc": "fear_actions_body_4",
 					"name_mobile": "fear_actions_header_4",
-					"desc_mobile": "fear_actions_body_4"
+					"desc_mobile": "fear_actions_body_4",
+					"secondary": ""
 				},
 				{
 					"name": "fear_actions_header_5",
 					"desc": "fear_actions_body_5",
 					"name_mobile": "fear_actions_header_5",
-					"desc_mobile": "fear_actions_body_5"
+					"desc_mobile": "fear_actions_body_5",
+					"secondary": ""
 				},
 				{
 					"name": "fear_actions_header_6",
 					"desc": "fear_actions_body_6",
 					"name_mobile": "fear_actions_header_6",
-					"desc_mobile": "fear_actions_body_6"
+					"desc_mobile": "fear_actions_body_6",
+					"secondary": ""
 				},
 				{
 					"name": "fear_actions_header_7",
 					"desc": "fear_actions_body_7",
 					"name_mobile": "fear_actions_header_7",
-					"desc_mobile": "fear_actions_body_7"
+					"desc_mobile": "fear_actions_body_7",
+					"secondary": ""
 				}
 			],
 			"triggers": [
@@ -749,27 +769,26 @@
 					"name": "fear_moods_header",
 					"desc": "fear_moods_body",
 					"name_mobile": "fear_moods_header",
-					"desc_mobile": "fear_moods_body"
+					"desc_mobile": "fear_moods_body",
+					"secondary": ""
 				}
 			],
 			"timeline": [
 				{
-					"timeline": {
-						"trigger": {
-							"precondition": "fear_timeline_trigger_precondition",
-							"event": "fear_timeline_trigger_event",
-							"perceptual_database": "fear_timeline_trigger_perceptual_database"
-						},
-						"state": {
-							"physical_changes": "fear_timeline_state_physical_changes",
-							"emotion": "fear_timeline_state_emotion",
-							"mental_changes": "fear_timeline_state_mental_changes"
-						},
-						"response": {
-							"constructive_response": "fear_timeline_response_constructive_response",
-							"destructive_response": "fear_timeline_response_destructive_response",
-							"ambiguous_response": "fear_timeline_response_ambiguous_response"
-						}
+					"trigger": {
+						"precondition": "fear_timeline_trigger_precondition",
+						"event": "fear_timeline_trigger_event",
+						"perceptual_database": "fear_timeline_trigger_perceptual_database"
+					},
+					"state": {
+						"physical_changes": "fear_timeline_state_physical_changes",
+						"emotion": "fear_timeline_state_emotion",
+						"mental_changes": "fear_timeline_state_mental_changes"
+					},
+					"response": {
+						"constructive_response": "fear_timeline_response_constructive_response",
+						"destructive_response": "fear_timeline_response_destructive_response",
+						"ambiguous_response": "fear_timeline_response_ambiguous_response"
 					}
 				}
 			]
@@ -779,7 +798,8 @@
 				"name": "disgust_continent_header",
 				"desc": "disgust_continent_body",
 				"name_mobile": "disgust_continent_header_mobile",
-				"desc_mobile": "disgust_continent_body_mobile"
+				"desc_mobile": "disgust_continent_body_mobile",
+				"secondary": ""
 			},
 			"states": [
 				{
@@ -787,6 +807,7 @@
 					"desc": "disgust_states_body_1",
 					"name_mobile": "disgust_states_header_1",
 					"desc_mobile": "disgust_states_body_1",
+					"secondary": "disgust_states_body",
 					"range": {
 						"min": 1,
 						"max": 5
@@ -815,6 +836,7 @@
 					"desc": "disgust_states_body_2",
 					"name_mobile": "disgust_states_header_2",
 					"desc_mobile": "disgust_states_body_2",
+					"secondary": "",
 					"range": {
 						"min": 2,
 						"max": 7
@@ -840,6 +862,7 @@
 					"desc": "disgust_states_body_3",
 					"name_mobile": "disgust_states_header_3",
 					"desc_mobile": "disgust_states_body_3",
+					"secondary": "",
 					"range": {
 						"min": 2,
 						"max": 7
@@ -867,6 +890,7 @@
 					"desc": "disgust_states_body_4",
 					"name_mobile": "disgust_states_header_4",
 					"desc_mobile": "disgust_states_body_4",
+					"secondary": "",
 					"range": {
 						"min": 2,
 						"max": 9
@@ -895,6 +919,7 @@
 					"desc": "disgust_states_body_5",
 					"name_mobile": "disgust_states_header_5",
 					"desc_mobile": "disgust_states_body_5",
+					"secondary": "",
 					"range": {
 						"min": 8,
 						"max": 10
@@ -922,6 +947,7 @@
 					"desc": "disgust_states_body_6",
 					"name_mobile": "disgust_states_header_6",
 					"desc_mobile": "disgust_states_body_6",
+					"secondary": "",
 					"range": {
 						"min": 8,
 						"max": 10
@@ -947,6 +973,7 @@
 					"desc": "disgust_states_body_7",
 					"name_mobile": "disgust_states_header_7",
 					"desc_mobile": "disgust_states_body_7",
+					"secondary": "",
 					"range": {
 						"min": 9,
 						"max": 10
@@ -970,34 +997,32 @@
 			],
 			"actions": [
 				{
-					"name": "",
-					"desc": "disgust_actions_body",
-					"name_mobile": "",
-					"desc_mobile": "disgust_actions_body"
-				},
-				{
 					"name": "disgust_actions_header_1",
 					"desc": "disgust_actions_body_1",
 					"name_mobile": "disgust_actions_header_1",
-					"desc_mobile": "disgust_actions_body_1"
+					"desc_mobile": "disgust_actions_body_1",
+					"secondary": "disgust_actions_body"
 				},
 				{
 					"name": "disgust_actions_header_2",
 					"desc": "disgust_actions_body_2",
 					"name_mobile": "disgust_actions_header_2",
-					"desc_mobile": "disgust_actions_body_2"
+					"desc_mobile": "disgust_actions_body_2",
+					"secondary": ""
 				},
 				{
 					"name": "disgust_actions_header_3",
 					"desc": "disgust_actions_body_3",
 					"name_mobile": "disgust_actions_header_3",
-					"desc_mobile": "disgust_actions_body_3"
+					"desc_mobile": "disgust_actions_body_3",
+					"secondary": ""
 				},
 				{
 					"name": "disgust_actions_header_4",
 					"desc": "disgust_actions_body_4",
 					"name_mobile": "disgust_actions_header_4",
-					"desc_mobile": "disgust_actions_body_4"
+					"desc_mobile": "disgust_actions_body_4",
+					"secondary": ""
 				}
 			],
 			"triggers": [
@@ -1037,27 +1062,26 @@
 					"name": "disgust_moods_header",
 					"desc": "disgust_moods_body",
 					"name_mobile": "disgust_moods_header",
-					"desc_mobile": "disgust_moods_body"
+					"desc_mobile": "disgust_moods_body",
+					"secondary": ""
 				}
 			],
 			"timeline": [
 				{
-					"timeline": {
-						"trigger": {
-							"precondition": "disgust_timeline_trigger_precondition",
-							"event": "disgust_timeline_trigger_event",
-							"perceptual_database": "disgust_timeline_trigger_perceptual_database"
-						},
-						"state": {
-							"physical_changes": "disgust_timeline_state_physical_changes",
-							"emotion": "disgust_timeline_state_emotion",
-							"mental_changes": "disgust_timeline_state_mental_changes"
-						},
-						"response": {
-							"constructive_response": "disgust_timeline_response_constructive_response",
-							"destructive_response": "disgust_timeline_response_destructive_response",
-							"ambiguous_response": "disgust_timeline_response_ambiguous_response"
-						}
+					"trigger": {
+						"precondition": "disgust_timeline_trigger_precondition",
+						"event": "disgust_timeline_trigger_event",
+						"perceptual_database": "disgust_timeline_trigger_perceptual_database"
+					},
+					"state": {
+						"physical_changes": "disgust_timeline_state_physical_changes",
+						"emotion": "disgust_timeline_state_emotion",
+						"mental_changes": "disgust_timeline_state_mental_changes"
+					},
+					"response": {
+						"constructive_response": "disgust_timeline_response_constructive_response",
+						"destructive_response": "disgust_timeline_response_destructive_response",
+						"ambiguous_response": "disgust_timeline_response_ambiguous_response"
 					}
 				}
 			]
@@ -1067,7 +1091,8 @@
 				"name": "sadness_continent_header",
 				"desc": "sadness_continent_body",
 				"name_mobile": "sadness_continent_header_mobile",
-				"desc_mobile": "sadness_continent_body_mobile"
+				"desc_mobile": "sadness_continent_body_mobile",
+				"secondary": ""
 			},
 			"states": [
 				{
@@ -1075,6 +1100,7 @@
 					"desc": "sadness_states_body_1",
 					"name_mobile": "sadness_states_header_1",
 					"desc_mobile": "sadness_states_body_1",
+					"secondary": "sadness_states_body",
 					"range": {
 						"min": 1,
 						"max": 5
@@ -1107,6 +1133,7 @@
 					"desc": "sadness_states_body_2",
 					"name_mobile": "sadness_states_header_2",
 					"desc_mobile": "sadness_states_body_2",
+					"secondary": "",
 					"range": {
 						"min": 1,
 						"max": 10
@@ -1143,6 +1170,7 @@
 					"desc": "sadness_states_body_3",
 					"name_mobile": "sadness_states_header_3",
 					"desc_mobile": "sadness_states_body_3",
+					"secondary": "",
 					"range": {
 						"min": 2,
 						"max": 8
@@ -1173,6 +1201,7 @@
 					"desc": "sadness_states_body_4",
 					"name_mobile": "sadness_states_header_4",
 					"desc_mobile": "sadness_states_body_4",
+					"secondary": "",
 					"range": {
 						"min": 2,
 						"max": 8
@@ -1205,6 +1234,7 @@
 					"desc": "sadness_states_body_5",
 					"name_mobile": "sadness_states_header_5",
 					"desc_mobile": "sadness_states_body_5",
+					"secondary": "",
 					"range": {
 						"min": 5,
 						"max": 10
@@ -1237,6 +1267,7 @@
 					"desc": "sadness_states_body_6",
 					"name_mobile": "sadness_states_header_6",
 					"desc_mobile": "sadness_states_body_6",
+					"secondary": "",
 					"range": {
 						"min": 6,
 						"max": 10
@@ -1271,6 +1302,7 @@
 					"desc": "sadness_states_body_7",
 					"name_mobile": "sadness_states_header_7",
 					"desc_mobile": "sadness_states_body_7",
+					"secondary": "",
 					"range": {
 						"min": 6,
 						"max": 10
@@ -1303,6 +1335,7 @@
 					"desc": "sadness_states_body_8",
 					"name_mobile": "sadness_states_header_8",
 					"desc_mobile": "sadness_states_body_8",
+					"secondary": "",
 					"range": {
 						"min": 7,
 						"max": 10
@@ -1339,6 +1372,7 @@
 					"desc": "sadness_states_body_9",
 					"name_mobile": "sadness_states_header_9",
 					"desc_mobile": "sadness_states_body_9",
+					"secondary": "",
 					"range": {
 						"min": 7,
 						"max": 10
@@ -1369,6 +1403,7 @@
 					"desc": "sadness_states_body_10",
 					"name_mobile": "sadness_states_header_10",
 					"desc_mobile": "sadness_states_body_10",
+					"secondary": "",
 					"range": {
 						"min": 7,
 						"max": 10
@@ -1401,6 +1436,7 @@
 					"desc": "sadness_states_body_11",
 					"name_mobile": "sadness_states_header_11",
 					"desc_mobile": "sadness_states_body_11",
+					"secondary": "",
 					"range": {
 						"min": 10,
 						"max": 10
@@ -1433,46 +1469,46 @@
 			],
 			"actions": [
 				{
-					"name": "",
-					"desc": "sadness_actions_body",
-					"name_mobile": "",
-					"desc_mobile": "sadness_actions_body"
-				},
-				{
 					"name": "sadness_actions_header_1",
 					"desc": "sadness_actions_body_1",
 					"name_mobile": "sadness_actions_header_1",
-					"desc_mobile": "sadness_actions_body_1"
+					"desc_mobile": "sadness_actions_body_1",
+					"secondary": "sadness_actions_body"
 				},
 				{
 					"name": "sadness_actions_header_2",
 					"desc": "sadness_actions_body_2",
 					"name_mobile": "sadness_actions_header_2",
-					"desc_mobile": "sadness_actions_body_2"
+					"desc_mobile": "sadness_actions_body_2",
+					"secondary": ""
 				},
 				{
 					"name": "sadness_actions_header_3",
 					"desc": "sadness_actions_body_3",
 					"name_mobile": "sadness_actions_header_3",
-					"desc_mobile": "sadness_actions_body_3"
+					"desc_mobile": "sadness_actions_body_3",
+					"secondary": ""
 				},
 				{
 					"name": "sadness_actions_header_4",
 					"desc": "sadness_actions_body_4",
 					"name_mobile": "sadness_actions_header_4",
-					"desc_mobile": "sadness_actions_body_4"
+					"desc_mobile": "sadness_actions_body_4",
+					"secondary": ""
 				},
 				{
 					"name": "sadness_actions_header_5",
 					"desc": "sadness_actions_body_5",
 					"name_mobile": "sadness_actions_header_5",
-					"desc_mobile": "sadness_actions_body_5"
+					"desc_mobile": "sadness_actions_body_5",
+					"secondary": ""
 				},
 				{
 					"name": "sadness_actions_header_6",
 					"desc": "sadness_actions_body_6",
 					"name_mobile": "sadness_actions_header_6",
-					"desc_mobile": "sadness_actions_body_6"
+					"desc_mobile": "sadness_actions_body_6",
+					"secondary": ""
 				}
 			],
 			"triggers": [
@@ -1512,27 +1548,26 @@
 					"name": "sadness_moods_header",
 					"desc": "sadness_moods_body",
 					"name_mobile": "sadness_moods_header",
-					"desc_mobile": "sadness_moods_body"
+					"desc_mobile": "sadness_moods_body",
+					"secondary": ""
 				}
 			],
 			"timeline": [
 				{
-					"timeline": {
-						"trigger": {
-							"precondition": "sadness_timeline_trigger_precondition",
-							"event": "sadness_timeline_trigger_event",
-							"perceptual_database": "sadness_timeline_trigger_perceptual_database"
-						},
-						"state": {
-							"physical_changes": "sadness_timeline_state_physical_changes",
-							"emotion": "sadness_timeline_state_emotion",
-							"mental_changes": "sadness_timeline_state_mental_changes"
-						},
-						"response": {
-							"constructive_response": "sadness_timeline_response_constructive_response",
-							"destructive_response": "sadness_timeline_response_destructive_response",
-							"ambiguous_response": "sadness_timeline_response_ambiguous_response"
-						}
+					"trigger": {
+						"precondition": "sadness_timeline_trigger_precondition",
+						"event": "sadness_timeline_trigger_event",
+						"perceptual_database": "sadness_timeline_trigger_perceptual_database"
+					},
+					"state": {
+						"physical_changes": "sadness_timeline_state_physical_changes",
+						"emotion": "sadness_timeline_state_emotion",
+						"mental_changes": "sadness_timeline_state_mental_changes"
+					},
+					"response": {
+						"constructive_response": "sadness_timeline_response_constructive_response",
+						"destructive_response": "sadness_timeline_response_destructive_response",
+						"ambiguous_response": "sadness_timeline_response_ambiguous_response"
 					}
 				}
 			]
@@ -1542,7 +1577,8 @@
 				"name": "enjoyment_continent_header",
 				"desc": "enjoyment_continent_body",
 				"name_mobile": "enjoyment_continent_header_mobile",
-				"desc_mobile": "enjoyment_continent_body_mobile"
+				"desc_mobile": "enjoyment_continent_body_mobile",
+				"secondary": ""
 			},
 			"states": [
 				{
@@ -1550,6 +1586,7 @@
 					"desc": "enjoyment_states_body_1",
 					"name_mobile": "enjoyment_states_header_1",
 					"desc_mobile": "enjoyment_states_body_1",
+					"secondary": "enjoyment_states_body",
 					"range": {
 						"min": 1,
 						"max": 5
@@ -1575,6 +1612,7 @@
 					"desc": "enjoyment_states_body_2",
 					"name_mobile": "enjoyment_states_header_2",
 					"desc_mobile": "enjoyment_states_body_2",
+					"secondary": "",
 					"range": {
 						"min": 2,
 						"max": 8
@@ -1607,6 +1645,7 @@
 					"desc": "enjoyment_states_body_3",
 					"name_mobile": "enjoyment_states_header_3",
 					"desc_mobile": "enjoyment_states_body_3",
+					"secondary": "",
 					"range": {
 						"min": 2,
 						"max": 8
@@ -1639,6 +1678,7 @@
 					"desc": "enjoyment_states_body_4",
 					"name_mobile": "enjoyment_states_header_4",
 					"desc_mobile": "enjoyment_states_body_4",
+					"secondary": "",
 					"range": {
 						"min": 2,
 						"max": 10
@@ -1669,6 +1709,7 @@
 					"desc": "enjoyment_states_body_5",
 					"name_mobile": "enjoyment_states_header_5",
 					"desc_mobile": "enjoyment_states_body_5",
+					"secondary": "",
 					"range": {
 						"min": 3,
 						"max": 6
@@ -1698,6 +1739,7 @@
 					"desc": "enjoyment_states_body_6",
 					"name_mobile": "enjoyment_states_header_6",
 					"desc_mobile": "enjoyment_states_body_6",
+					"secondary": "",
 					"range": {
 						"min": 3,
 						"max": 8
@@ -1729,6 +1771,7 @@
 					"desc": "enjoyment_states_body_7",
 					"name_mobile": "enjoyment_states_header_7",
 					"desc_mobile": "enjoyment_states_body_7",
+					"secondary": "",
 					"range": {
 						"min": 3,
 						"max": 10
@@ -1767,6 +1810,7 @@
 					"desc": "enjoyment_states_body_8",
 					"name_mobile": "enjoyment_states_header_8",
 					"desc_mobile": "enjoyment_states_body_8",
+					"secondary": "",
 					"range": {
 						"min": 3,
 						"max": 10
@@ -1801,6 +1845,7 @@
 					"desc": "enjoyment_states_body_9",
 					"name_mobile": "enjoyment_states_header_9",
 					"desc_mobile": "enjoyment_states_body_9",
+					"secondary": "",
 					"range": {
 						"min": 4,
 						"max": 9
@@ -1839,6 +1884,7 @@
 					"desc": "enjoyment_states_body_10",
 					"name_mobile": "enjoyment_states_header_10",
 					"desc_mobile": "enjoyment_states_body_10",
+					"secondary": "",
 					"range": {
 						"min": 5,
 						"max": 10
@@ -1871,6 +1917,7 @@
 					"desc": "enjoyment_states_body_11",
 					"name_mobile": "enjoyment_states_header_11",
 					"desc_mobile": "enjoyment_states_body_11",
+					"secondary": "",
 					"range": {
 						"min": 2,
 						"max": 10
@@ -1896,6 +1943,7 @@
 					"desc": "enjoyment_states_body_12",
 					"name_mobile": "enjoyment_states_header_12",
 					"desc_mobile": "enjoyment_states_body_12",
+					"secondary": "",
 					"range": {
 						"min": 6,
 						"max": 10
@@ -1928,6 +1976,7 @@
 					"desc": "enjoyment_states_body_13",
 					"name_mobile": "enjoyment_states_header_13",
 					"desc_mobile": "enjoyment_states_body_13",
+					"secondary": "",
 					"range": {
 						"min": 9,
 						"max": 10
@@ -1954,52 +2003,53 @@
 			],
 			"actions": [
 				{
-					"name": "",
-					"desc": "enjoyment_actions_body",
-					"name_mobile": "",
-					"desc_mobile": "enjoyment_actions_body"
-				},
-				{
 					"name": "enjoyment_actions_header_1",
 					"desc": "enjoyment_actions_body_1",
 					"name_mobile": "enjoyment_actions_header_1",
-					"desc_mobile": "enjoyment_actions_body_1"
+					"desc_mobile": "enjoyment_actions_body_1",
+					"secondary": "enjoyment_actions_body"
 				},
 				{
 					"name": "enjoyment_actions_header_2",
 					"desc": "enjoyment_actions_body_2",
 					"name_mobile": "enjoyment_actions_header_2",
-					"desc_mobile": "enjoyment_actions_body_2"
+					"desc_mobile": "enjoyment_actions_body_2",
+					"secondary": ""
 				},
 				{
 					"name": "enjoyment_actions_header_3",
 					"desc": "enjoyment_actions_body_3",
 					"name_mobile": "enjoyment_actions_header_3",
-					"desc_mobile": "enjoyment_actions_body_3"
+					"desc_mobile": "enjoyment_actions_body_3",
+					"secondary": ""
 				},
 				{
 					"name": "enjoyment_actions_header_4",
 					"desc": "enjoyment_actions_body_4",
 					"name_mobile": "enjoyment_actions_header_4",
-					"desc_mobile": "enjoyment_actions_body_4"
+					"desc_mobile": "enjoyment_actions_body_4",
+					"secondary": ""
 				},
 				{
 					"name": "enjoyment_actions_header_5",
 					"desc": "enjoyment_actions_body_5",
 					"name_mobile": "enjoyment_actions_header_5",
-					"desc_mobile": "enjoyment_actions_body_5"
+					"desc_mobile": "enjoyment_actions_body_5",
+					"secondary": ""
 				},
 				{
 					"name": "enjoyment_actions_header_6",
 					"desc": "enjoyment_actions_body_6",
 					"name_mobile": "enjoyment_actions_header_6",
-					"desc_mobile": "enjoyment_actions_body_6"
+					"desc_mobile": "enjoyment_actions_body_6",
+					"secondary": ""
 				},
 				{
 					"name": "enjoyment_actions_header_7",
 					"desc": "enjoyment_actions_body_7",
 					"name_mobile": "enjoyment_actions_header_7",
-					"desc_mobile": "enjoyment_actions_body_7"
+					"desc_mobile": "enjoyment_actions_body_7",
+					"secondary": ""
 				}
 			],
 			"triggers": [
@@ -2051,27 +2101,26 @@
 					"name": "enjoyment_moods_header",
 					"desc": "enjoyment_moods_body",
 					"name_mobile": "enjoyment_moods_header",
-					"desc_mobile": "enjoyment_moods_body"
+					"desc_mobile": "enjoyment_moods_body",
+					"secondary": ""
 				}
 			],
 			"timeline": [
 				{
-					"timeline": {
-						"trigger": {
-							"precondition": "enjoyment_timeline_trigger_precondition",
-							"event": "enjoyment_timeline_trigger_event",
-							"perceptual_database": "enjoyment_timeline_trigger_perceptual_database"
-						},
-						"state": {
-							"physical_changes": "enjoyment_timeline_state_physical_changes",
-							"emotion": "enjoyment_timeline_state_emotion",
-							"mental_changes": "enjoyment_timeline_state_mental_changes"
-						},
-						"response": {
-							"constructive_response": "enjoyment_timeline_response_constructive_response",
-							"destructive_response": "enjoyment_timeline_response_destructive_response",
-							"ambiguous_response": "enjoyment_timeline_response_ambiguous_response"
-						}
+					"trigger": {
+						"precondition": "enjoyment_timeline_trigger_precondition",
+						"event": "enjoyment_timeline_trigger_event",
+						"perceptual_database": "enjoyment_timeline_trigger_perceptual_database"
+					},
+					"state": {
+						"physical_changes": "enjoyment_timeline_state_physical_changes",
+						"emotion": "enjoyment_timeline_state_emotion",
+						"mental_changes": "enjoyment_timeline_state_mental_changes"
+					},
+					"response": {
+						"constructive_response": "enjoyment_timeline_response_constructive_response",
+						"destructive_response": "enjoyment_timeline_response_destructive_response",
+						"ambiguous_response": "enjoyment_timeline_response_ambiguous_response"
 					}
 				}
 			]
@@ -2086,7 +2135,8 @@
 			"body_mobile": "",
 			"sectionName": "",
 			"interaction_prompt": "",
-			"learn_more_button": "site_learn_more_button"
+			"learn_more_button": "site_learn_more_button",
+			"close_button": "site_close_button"
 		},
 		"intro": {
 			"header": "intro_header",
@@ -2219,7 +2269,9 @@
 			"learn_more_link": "hero_sub_header_learn_more",
 			"about": {
 				"header": "hero_about_header",
-				"body": "hero_about_body_1"
+				"header_mobile": "hero_about_header",
+				"body": "hero_about_body_1",
+				"body_mobile": "hero_about_body_1"
 			},
 			"cta": "hero_call_to_action_button",
 			"slides": [
@@ -2252,6 +2304,7 @@
 			"header_mobile": "actions_header",
 			"body_mobile": "actions_body_mobile",
 			"sectionName": "actions_section_name",
+			"interaction_prompt": "actions_interaction_prompt",
 			"qualities": [
 				{
 					"header": "actions_secondary_header_1",
@@ -2346,12 +2399,19 @@
 		},
 		"timeline": {
 			"header": "timeline_header",
+			"header_mobile": "timeline_header",
 			"body": [
 				"timeline_intro_body_1",
 				"timeline_intro_body_2",
 				"timeline_intro_body_3"
 			],
-			"button": "timeline_begin_awareness_button",
+			"body_mobile": [
+				"timeline_intro_body_1",
+				"timeline_intro_body_2",
+				"timeline_intro_body_3"
+			],
+			"restart_button": "timeline_restart_button",
+			"intro_button": "timeline_begin_awareness_button",
 			"secondary": {
 				"trigger": {
 					"header": "timeline_trigger_header",
@@ -2363,21 +2423,38 @@
 							"timeline_trigger_body_2_list_item_3"
 						]
 					],
-					"button": "timeline_experience_add_awareness_button"
+					"button": "timeline_experience_add_awareness_button",
+					"body_mobile": [
+						"timeline_trigger_body_1",
+						[
+							"timeline_trigger_body_2_list_item_1",
+							"timeline_trigger_body_2_list_item_2",
+							"timeline_trigger_body_2_list_item_3"
+						]
+					],
+					"header_mobile": "timeline_trigger_header"
 				},
 				"experience": {
 					"header": "timeline_experience_header",
 					"body": [
 						"timeline_experience_body_1"
 					],
-					"button": "timeline_response_add_awareness_button"
+					"button": "timeline_response_add_awareness_button",
+					"body_mobile": [
+						"timeline_experience_body_1"
+					],
+					"header_mobile": "timeline_experience_header"
 				},
 				"response": {
 					"header": "timeline_response_header",
 					"body": [
 						"timeline_response_body_1"
 					],
-					"button": "timeline_begin_refractory_period_button"
+					"button": "timeline_begin_refractory_period_button",
+					"body_mobile": [
+						"timeline_response_body_1"
+					],
+					"header_mobile": "timeline_response_header"
 				},
 				"refractory": {
 					"header": "timeline_refractory_header",
@@ -2386,7 +2463,13 @@
 						"timeline_refractory_body_2",
 						"timeline_refractory_body_3"
 					],
-					"button": "timeline_begin_block_diagram_button"
+					"button": "timeline_begin_block_diagram_button",
+					"body_mobile": [
+						"timeline_refractory_body_1",
+						"timeline_refractory_body_2",
+						"timeline_refractory_body_3"
+					],
+					"header_mobile": "timeline_refractory_header"
 				},
 				"blocks": {
 					"header": "timeline_blocks_header",
@@ -2398,12 +2481,27 @@
 						"event": "timeline_blocks_label_event",
 						"perceptual_database": "timeline_blocks_label_perceptual_database",
 						"physical_changes": "timeline_blocks_label_physical_changes",
-						"emotional_state": "timeline_blocks_label_emotional_state",
+						"state": "timeline_blocks_label_state",
 						"mental_changes": "timeline_blocks_label_mental_changes",
 						"constructive_response": "timeline_blocks_label_constructive_response",
 						"destructive_response": "timeline_blocks_label_destructive_response",
 						"ambiguous_response": "timeline_blocks_label_ambiguous_response"
-					}
+					},
+					"captions": {
+						"precondition": "timeline_blocks_caption_precondition",
+						"event": "timeline_blocks_caption_event",
+						"perceptual_database": "timeline_blocks_caption_perceptual_database",
+						"physical_changes": "timeline_blocks_caption_physical_changes",
+						"emotional_state": "timeline_blocks_caption_emotional_state",
+						"mental_changes": "timeline_blocks_caption_mental_changes",
+						"constructive_response": "timeline_blocks_caption_constructive_response",
+						"destructive_response": "timeline_blocks_caption_destructive_response",
+						"ambiguous_response": "timeline_blocks_caption_ambiguous_response"
+					},
+					"body_mobile": [
+						"timeline_blocks_body_1"
+					],
+					"header_mobile": "timeline_blocks_header"
 				}
 			}
 		}

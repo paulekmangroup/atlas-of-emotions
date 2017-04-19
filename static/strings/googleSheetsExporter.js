@@ -140,7 +140,8 @@ function parseMetadataSheet( sheet ) {
 		// aggregate this row's data into sectionData
 		sectionData.push( sheet.getSheetValues( DATA_START_ROW + j, DATA_START_COL + 1, 1, -1 )[ 0 ] );
 
-	};
+	}
+	;
 
 	// parse everything left over
 	metadata[ currentLabel ] = metadataSectionParsers[ currentLabel ]( sectionData );
@@ -168,6 +169,7 @@ var metadataSectionParsers = (function () {
 		site: function ( data ) {
 			var obj = standard( data );
 			obj.learn_more_button = data[ 0 ][ 2 ];
+			obj.close_button = data[ 0 ][ 3 ];
 			return obj;
 		},
 
@@ -213,7 +215,9 @@ var metadataSectionParsers = (function () {
 				learn_more_link: data[ 0 ][ 3 ],
 				about: {
 					header: data[ 1 ][ 2 ],
-					body: data[ 1 ][ 3 ]
+					header_mobile: data[ 1 ][ 2 ],
+					body: data[ 1 ][ 3 ],
+					body_mobile: data[ 1 ][ 3 ]
 				},
 				cta: data[ 2 ][ 2 ],
 				slides: findMatchingStrings( 'slide' )
@@ -231,7 +235,8 @@ var metadataSectionParsers = (function () {
 				body: data[ 0 ][ 1 ],
 				header_mobile: data[ 0 ][ 5 ] || data[ 0 ][ 0 ],
 				body_mobile: data[ 0 ][ 6 ] || data[ 0 ][ 1 ],
-				sectionName: data[ 0 ][ 7 ]
+				sectionName: data[ 0 ][ 7 ],
+				interaction_prompt: data[ 0 ][ 8 ]
 			};
 			obj.qualities = data.map( function ( row ) {
 				return {
@@ -289,12 +294,19 @@ var metadataSectionParsers = (function () {
 		timeline: function ( data ) {
 			var parsed_data = {
 				header: data[ 0 ][ 0 ],
+				header_mobile: data[ 0 ][ 0 ],
 				body: [
 					data[ 0 ][ 3 ],
 					data[ 1 ][ 3 ],
 					data[ 2 ][ 3 ]
 				],
-				button: data[ 3 ][ 3 ],
+				body_mobile: [
+					data[ 0 ][ 3 ],
+					data[ 1 ][ 3 ],
+					data[ 2 ][ 3 ]
+				],
+				restart_button: data[ 0 ][ 4 ],
+				intro_button: data[ 3 ][ 3 ],
 				secondary: {
 					trigger: {},
 					experience: {},
@@ -314,7 +326,12 @@ var metadataSectionParsers = (function () {
 				// pull subsection name from header string if it is present
 				if ( header != '' ) {
 					var subsectionName = header.match( /timeline_(.+)_header/ )[ 1 ];
-					//add list before changing subsections if a list is in progress
+					// copy mobile data, and add list if a list is in progress,
+					// before changing subsections
+					if ( subsection ) {
+						subsection[ 'body_mobile' ] = subsection[ 'body' ];
+						subsection[ 'header_mobile' ] = subsection[ 'header' ];
+					}
 					if ( currentList ) {
 						subsection[ 'body' ].push( currentList );
 						currentList = null;
@@ -347,6 +364,11 @@ var metadataSectionParsers = (function () {
 							subsection[ 'labels' ] = {};
 						}
 						subsection[ 'labels' ][ body.match( /.+label_(.+)/ )[ 1 ] ] = body;
+					} else if ( body.match( /caption/ ) ) {
+						if ( !subsection[ 'captions' ] ) {
+							subsection[ 'captions' ] = {};
+						}
+						subsection[ 'captions' ][ body.match( /.+caption_(.+)/ )[ 1 ] ] = body;
 					} else {
 						subsection[ 'body' ].push( body );
 					}
@@ -357,7 +379,8 @@ var metadataSectionParsers = (function () {
 				subsection[ 'body' ].push( currentList );
 				currentList = null;
 			}
-
+			subsection[ 'body_mobile' ] = subsection[ 'body' ];
+			subsection[ 'header_mobile' ] = subsection[ 'header' ];
 			return parsed_data;
 		}
 
@@ -401,7 +424,8 @@ function parseEmotionSheet( sheet ) {
 		// aggregate this row's data into sectionData
 		sectionData.push( sheet.getSheetValues( DATA_START_ROW + j, DATA_START_COL + 1, 1, -1 )[ 0 ] );
 
-	};
+	}
+	;
 
 	// parse everything left over
 	emotionData[ currentLabel ] = emotionSectionParsers[ currentLabel ]( sectionData );
@@ -418,7 +442,8 @@ var emotionSectionParsers = (function () {
 				name: row[ 0 ],
 				desc: row[ 1 ],
 				name_mobile: row[ 5 ] || row[ 0 ],
-				desc_mobile: row[ 6 ] || row[ 1 ]
+				desc_mobile: row[ 6 ] || row[ 1 ],
+				secondary: row[ 7 ]
 			};
 		} );
 	};
@@ -457,6 +482,7 @@ var emotionSectionParsers = (function () {
 					desc: row[ 1 ],
 					name_mobile: row[ 5 ] || row[ 0 ],
 					desc_mobile: row[ 6 ] || row[ 1 ],
+					secondary: row[ 7 ],
 					range: {
 						min: parseInt( range[ 0 ] ),
 						max: parseInt( range[ 1 ] )
@@ -492,22 +518,20 @@ var emotionSectionParsers = (function () {
 
 		timeline: function ( data ) {
 			return [ {
-				timeline: {
-					trigger: {
-						precondition: data[ 0 ][ 1 ],
-						event: data[ 1 ][ 1 ],
-						perceptual_database: data[ 2 ][ 1 ]
-					},
-					state: {
-						physical_changes: data[ 3 ][ 1 ],
-						emotion: data[ 4 ][ 1 ],
-						mental_changes: data[ 5 ][ 1 ]
-					},
-					response: {
-						constructive_response: data[ 6 ][ 1 ],
-						destructive_response: data[ 7 ][ 1 ],
-						ambiguous_response: data[ 8 ][ 1 ]
-					}
+				trigger: {
+					precondition: data[ 0 ][ 1 ],
+					event: data[ 1 ][ 1 ],
+					perceptual_database: data[ 2 ][ 1 ]
+				},
+				state: {
+					physical_changes: data[ 3 ][ 1 ],
+					emotion: data[ 4 ][ 1 ],
+					mental_changes: data[ 5 ][ 1 ]
+				},
+				response: {
+					constructive_response: data[ 6 ][ 1 ],
+					destructive_response: data[ 7 ][ 1 ],
+					ambiguous_response: data[ 8 ][ 1 ]
 				}
 			} ];
 		},
@@ -879,7 +903,6 @@ var SECONDARY_PARSER_CONFIG = {
 		}
 	}
 };
-
 
 
 // ---------------------------------------------------------------------------- //
