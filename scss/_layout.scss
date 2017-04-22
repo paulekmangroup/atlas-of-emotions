@@ -1,7 +1,10 @@
 $section-padding-top: #{$ui-header-height}px;
 $section-text-padding: 1.5em;
+$section-text-padding-mobile: 0.75em;
 $more-text-padding: 3em;
 $section-text-background-color: #eee;
+$top-nav-background: rgba(255, 255, 255, 0.8);
+$top-nav-padding-top: 15px;
 
 body,
 html {
@@ -138,8 +141,12 @@ svg {
 	}
 }
 
-.app-container {
+#app-container {
+	position: relative;
 	background-color: transparent;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
 }
 
 .original-content {
@@ -188,28 +195,40 @@ svg {
 	}
 }
 
-.top-nav {
-	@extend %menus;
-	position: fixed;
-	top: 0;
-	height: #{$ui-header-height}px;
-	width: 100%;
-	padding-top: 15px;
-	//border-bottom: 1px #2e2e2e solid;
-	background-color: rgba(255, 255, 255, 0.8);
+.hidden-for-intro {
 	opacity: 0;
 	transition: opacity 1s ease;
-	//pointer-events: none;
+	pointer-events: none;
 	&.visible {
 		opacity: 1;
 		pointer-events: auto;
 	}
+}
+
+.site-header {
+	position: fixed;
+	top: 0;
+	height: #{$ui-header-height}px;
+	width: 100%;
+	background-color: $top-nav-background;
+	padding-top: $top-nav-padding-top;
 	.site-name {
 		left: 1.5em;
 		position: absolute;
 		height: 40px;
 		text-transform: uppercase;
 	}
+}
+
+.top-nav {
+	@extend %menus;
+	position: fixed;
+	top: 0;
+	height: #{$ui-header-height}px;
+	width: 100%;
+	padding-top: $top-nav-padding-top;
+	background-color: transparent;
+	z-index: 200;
 	.menu {
 		position: absolute;
 		right: 1.5em;
@@ -223,12 +242,18 @@ svg {
 	}
 }
 
+.menu-toggle {
+	z-index: 200;
+	display: none;
+}
+
 .emotion-nav {
 	position: fixed;
 	bottom: 0;
 	left: $section-text-width;
 	right: 0;
 	height: auto;
+	z-index: 200;
 	opacity: 0;
 	pointer-events: none;
 	transition: opacity 0.7s ease, color 0.7s ease;
@@ -251,6 +276,23 @@ svg {
 			text-indent: 0;
 			display: inline-block;
 			transition: width 0.7s ease;
+			//a{
+			//	&[data-emotion=anger] {
+			//		color: $color-anger;
+			//	}
+			//	&[data-emotion=fear] {
+			//		color: $color-fear;
+			//	}
+			//	&[data-emotion=sadness] {
+			//		color: $color-sadness;
+			//	}
+			//	&[data-emotion=disgust] {
+			//		color: $color-disgust;
+			//	}
+			//	&[data-emotion=enjoyment] {
+			//		color: $color-enjoyment;
+			//	}
+			//}
 		}
 	}
 }
@@ -417,8 +459,31 @@ svg {
 		opacity: 1.0;
 	}
 
-	//background-color: rgba($callout-background-color, 0.5);
-	//@include emotion-background-color(0.5);
+	button{
+		$button-color: 252;
+		pointer-events: auto;
+		display: block;
+		width: 100%;
+		margin: 0 auto;
+		border: 1px solid #999;
+		box-shadow: 1px 1px 1px #555;
+		text-transform: uppercase;
+		font-weight: 300;
+		font-size: 0.8em;
+		padding: 0.3em 0;
+		/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fefefe+0,fefefe+100&1+0,0+100 */
+		background: -moz-linear-gradient(top, rgba($button-color,$button-color,$button-color,1) 0%, rgba($button-color,$button-color,$button-color,0) 100%); /* FF3.6-15 */
+		background: -webkit-linear-gradient(top, rgba($button-color,$button-color,$button-color,1) 0%,rgba($button-color,$button-color,$button-color,0) 100%); /* Chrome10-25,Safari5.1-6 */
+		background: linear-gradient(to bottom, rgba($button-color,$button-color,$button-color,1) 0%,rgba($button-color,$button-color,$button-color,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#00fefefe',GradientType=0 ); /* IE6-9 */
+		&:hover {
+			font-weight: 400;
+		}
+		&:active, &:focus {
+			outline: none;
+			box-shadow: none;
+		}
+	}
 
 	h2 {
 		margin-top: 0;
@@ -435,71 +500,6 @@ svg {
 		text-transform: uppercase;
 	}
 
-	div.body-awareness {
-		$arrow-size: 0.3em;
-		overflow: hidden;
-		position: relative;
-		padding: 15px 0;
-		padding-bottom: 0;
-		border-top: 1px solid #777;
-		&:first-of-type {
-			border: none;
-			margin-top: -15px;
-		}
-		h3 {
-			position: relative;
-			margin-bottom: 5px;
-			padding-left: 1em;
-			pointer-events: auto;
-			cursor: pointer;
-			&:before {
-				position: absolute;
-				content: '';
-				display: inline-block;
-				opacity: 0.3;
-				width: 0;
-				height: 0;
-
-				left: 0;
-				top: 10px;
-				border-top: $arrow-size solid #000;
-				border-right: $arrow-size solid transparent;
-				border-bottom: none;
-				border-left: $arrow-size solid transparent;
-			}
-			&:hover {
-				&:before {
-					opacity: 1;
-				}
-			}
-		}
-		p {
-			margin-left: 1em;
-		}
-		ul {
-			margin: -10px 0 0 0;
-			line-height: 1.2;
-		}
-		p, ul {
-			transition: opacity 0.3s;
-			margin-bottom: 1em;
-		}
-		&.closed {
-			height: 53px;
-			h3:before {
-				left: 0.2em;
-				top: 7px;
-				border-top: $arrow-size solid transparent;
-				border-right: none;
-				border-bottom: $arrow-size solid transparent;
-				border-left: $arrow-size solid #000;
-			}
-			p, ul {
-				opacity: 0;
-				transition: opacity 0s;
-			}
-		}
-	}
 
 	p {
 		margin-top: 0;
@@ -525,13 +525,6 @@ svg {
 
 	li {
 		margin-bottom: 10px;
-	}
-
-	button {
-		pointer-events: auto;
-		display: block;
-		width: 100%;
-		margin: 0 auto;
 	}
 
 	.restart-button {
@@ -583,12 +576,12 @@ svg {
 	transition: transform 700ms ease;
 	pointer-events: auto;
 
-    //
+	//
 	///* ----------- Phones ----------- */
 	//@media screen and (max-width: 750px) {
 	//	-webkit-overflow-scrolling: touch;
 	//}
-    //
+	//
 	///* ----------- Tablets ----------- */
 	//@media screen and (min-width: 750px) {
 	//	-webkit-overflow-scrolling: touch;
@@ -613,7 +606,6 @@ svg {
 		overflow-y: scroll;
 		-webkit-overflow-scrolling: touch;
 
-
 		.close-button {
 			position: static;
 			display: inline-block;
@@ -633,7 +625,7 @@ svg {
 		//	overflow-y: scroll; /* has to be scroll, not auto */
 		//	-webkit-overflow-scrolling: touch;
 		//}
-        //
+		//
 		///* ----------- Tablets ----------- */
 		//@media screen and (min-width: 750px) {
 		//	overflow-y: scroll; /* has to be scroll, not auto */
@@ -680,7 +672,7 @@ svg {
 	padding: 15px;
 	text-align: center;
 	line-height: 1;
-	text-transform: uppercase;
+	text-transform: capitalize;
 	background-color: $section-text-background-color;
 	opacity: 0.6;
 	//text-decoration: underline;
@@ -788,6 +780,180 @@ svg {
 	opacity: 1.0;
 	-webkit-transition: opacity 0.2s ease-out;
 	transition: opacity 0.2s ease-out;
+}
+
+/* ----------- Phones ----------- */
+@media screen and (max-width: 750px) {
+	$menu-padding-top: 11;
+	$split-height: 300;
+	$split-point: #{$ui-header-mobile-nav-target-height+$split-height}px;
+	body, html {
+		overflow: hidden;
+		-webkit-overflow-scrolling: normal;
+	}
+	.original-content {
+		left: 0;
+		bottom: $split-point;
+	}
+	.site-header {
+		height: #{$ui-header-height-small}px;
+		padding-top: #{$menu-padding-top}px;
+		.site-name {
+			left: 0.75em;
+			font-size: 18px;
+		}
+	}
+	.top-nav {
+		height: 100%;
+		padding-top: #{$menu-padding-top}px;
+		background-color: transparent;
+		transition-duration: 0.4s;
+		&.hidden-for-intro.visible {
+			display: none;
+			opacity: 0;
+		}
+		&.hidden-for-intro.visible.open {
+			display: block;
+			opacity: 1;
+		}
+		.menu {
+			background-color: #fff;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			top: #{$ui-header-mobile-nav-target-height}px;
+			height: auto;
+			text-align: left;
+			ul {
+				background-color: transparent;
+				padding-left: 0;
+				margin-left: 0;
+				padding-top: 0.5em;
+				li {
+					padding-left: 0;
+					margin-left: 0;
+					display: block;
+					float: none;
+					a {
+						width: 100%;
+						padding: 0.5em 1.25em;
+						display: block;
+						font-size: 1.25em;
+					}
+				}
+			}
+		}
+	}
+	.menu-toggle {
+		display: block;
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: #{$ui-header-mobile-nav-target-width}px;
+		height: #{$ui-header-mobile-nav-target-height}px;
+		background-image: url('./img/hamburger.png');
+		background-size: #{$ui-header-mobile-nav-width}px;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+	.section-text {
+		top: $split-point;
+		width: 100%;
+		bottom: 0;
+		padding: 0.6em $section-text-padding-mobile 2em $section-text-padding-mobile;
+
+		button {
+			padding: 0.5em;
+			font-size: 0.9em;
+		}
+		h2 {
+			//position: absolute;
+			//top: $section-text-padding*0.75;
+			//left: $section-text-padding;
+			//right: $section-text-padding;
+			display: block;
+			background: $section-text-background-color;
+			padding-bottom: 0.3em;
+			margin-bottom: 0.3em;
+			a.restart-button {
+				top: 0.7em;
+			}
+		}
+		.section-text__content {
+			position: absolute;
+			top: 2.25em;
+			left: $section-text-padding-mobile;
+			right: $section-text-padding-mobile;
+			bottom: 0;
+			padding-top: 0.7em;
+			overflow-y: scroll;
+			-webkit-overflow-scrolling: touch;
+			*{
+				color: #000;
+				//font-size: 0.9em;
+				font-weight: 400;
+			}
+		}
+		.more-link {
+			position: relative;
+		}
+	}
+	.section-graphics {
+		top: #{$ui-header-mobile-nav-target-height}px;
+		height: #{$split-height}px;
+		bottom: auto;
+		right: 0;
+		left: 0;
+		margin: 0;
+		padding: 0;
+	}
+
+	body[class*=fp-viewing-timeline] .emotion-nav ul li.all {
+		display: none;
+	}
+
+	.emotion-nav,
+	body[class*=fp-viewing-timeline] .emotion-nav {
+		bottom: initial;
+		top: $split-point;
+		margin-top: -2em;
+		left: 0;
+		right: 0;
+		font-size: 12px;
+		ul {
+			position: absolute;
+			left: 1em;
+			right: 1em;
+			height: auto;
+
+			text-align: justify;
+			li {
+				padding: 0;
+				display: inline-block;
+				position: relative;
+				top: 1.2em;
+				text-align: center;
+				width: auto;
+				a{
+					display: inline-block;
+					padding: 0;
+				}
+			}
+
+			&:before {
+				content: '';
+				display: block;
+				width: 100%;
+				margin-bottom: -1.2em;
+			}
+
+			&:after {
+				content: '';
+				display: inline-block;
+				width: 100%;
+			}
+		}
+	}
 }
 
 //// fill the browser with our glorious website

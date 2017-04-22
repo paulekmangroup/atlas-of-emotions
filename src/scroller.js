@@ -35,8 +35,10 @@ const scroller = {
 	$sections: null,
 	$topNav: null,
 	$topNavLinks: null,
+	$hiddenForIntro: null,
 	anchors: [],
 	fadeImages: false,
+	screenIsSmall: false,
 
 	hasEmotionState: function ( anchor ) {
 		var section = $( '#' + anchor + '-section' );
@@ -56,7 +58,9 @@ const scroller = {
 		//var $sections = $( '.section' );
 		this.$sections.removeClass( 'more-visible' );
 		$( 'body' ).removeClass( 'more-visible' );
-		$.fn.fullpage.setAllowScrolling( true );
+		if ( !this.screenIsSmall ) {
+			$.fn.fullpage.setAllowScrolling( true );
+		}
 	},
 
 	toggleEmotionNav: function ( visible ) {
@@ -253,22 +257,25 @@ const scroller = {
 
 		//using anchorLink
 		if ( anchorLink == 'introduction' ) {
-			this.$topNav.removeClass( 'visible' );
+			this.$hiddenForIntro.removeClass( 'visible' );
 			this.introTimeline.play();
 		} else {
-			this.$topNav.addClass( 'visible' );
+			this.$hiddenForIntro.addClass( 'visible' );
 			this.introTimeline.pause();
 			this.introTimeline.seek( 'end' );
 		}
 
 		//update topnav
-		this.$topNavLinks.each( function ( index, element ) {
+		this.$topNavLinks.each( ( index, element ) => {
 			var $element = $( element );
 			var id = $element.attr( 'id' );
 			if ( id.indexOf( anchorLink ) >= 0 ) {
 				$element.addClass( 'active' );
 			} else {
 				$element.removeClass( 'active' );
+			}
+			if ( this.screenIsSmall ) {
+				this.$topNav.removeClass( 'open' );
 			}
 		} );
 
@@ -372,6 +379,11 @@ const scroller = {
 			return this.id.split( '-' )[ 0 ]; //'this' refers to element scope
 		} ).get();
 
+		let normalScrollElements = '.more-content-scroller, .more-content-overlay';
+		if ( this.screenIsSmall ) {
+			normalScrollElements += ', .episode-parent, .section-text';
+		}
+
 		let $pageBody = $( '.page-body' );
 
 		$pageBody.fullpage( {
@@ -394,39 +406,62 @@ const scroller = {
 
 			touchSensitivity: touchSensitivity,
 
-			normalScrollElementTouchThreshold: 10,
+			normalScrollElementTouchThreshold: 15,
 
-			normalScrollElements: '.more-content-scroller, .more-content-overlay'
+			normalScrollElements: normalScrollElements
 
 		} );
 
+		if ( this.screenIsSmall ) {
+			$.fn.fullpage.setAllowScrolling( false );
+			//$( 'body, html' ).on( 'scroll, wheel, touchstart, touchmove, touchend', ( e )=> {
+			//	console.log( e.currentTarget );
+			//	e.preventDefault();
+			//} );
+			//$( document ).on( 'scroll, wheel, touchstart, touchmove, touchend', ( e )=> {
+			//	console.log( e.currentTarget );
+			//	e.preventDefault();
+			//} );
+		}
 
-		//make swipes on original content change the section
-		let swipeStart = 0;
-		let swipeComplete = false;
 		let $originalContent = $( '.original-content' );
 
-		let addTouchEffects = function ( $elements ) {
+		// make swipes on original content change the section, and move section text with touches
+		let addTouchEffects = ( $elements ) => {
 
-			let returnTranslation = function ( element ) {
+			let swipeStart = 0;
+			let swipeComplete = false;
+			let distance = 0;
+			let height = 0;
+			let thresh = 0;
+
+			let returnTranslation = ( element ) => {
 				TweenMax.to( element, 0.7, { y: 0 } );
 			};
-			$elements.on( 'touchstart', function ( e ) {
+			$elements.on( 'touchstart', ( e ) => {
+				height = $( '.section.active' ).height();
+				thresh = 0.01 * touchSensitivity * height;
+
+				//if ( !this.screenIsSmall ) {
 				swipeStart = e.originalEvent.touches[ 0 ].pageY;
+				//} else {
+				//	swipeStart = e.originalEvent.touches[ 0 ].pageY - distance;
+				//}
+
 				swipeComplete = false;
 			} );
-			$elements.on( 'touchend', function ( e ) {
+			$elements.on( 'touchend', ( e ) => {
+				//if ( !this.screenIsSmall ) {
 				var $sectionText = $( '.section.active .section-text' );
 				returnTranslation( $sectionText[ 0 ] );
+				//}
 			} );
-			$elements.on( 'touchmove', function ( e ) {
-
-				let distance = e.originalEvent.touches[ 0 ].pageY - swipeStart;
-				let height = $( '.section.active' ).height();
-				let thresh = 0.01 * touchSensitivity * height;
-
+			$elements.on( 'touchmove', ( e ) => {
+				distance = e.originalEvent.touches[ 0 ].pageY - swipeStart;
 				if ( !swipeComplete ) {
 					var $sectionText = $( '.section.active .section-text' );
+					// on tablets, but not mobile, transition section when the user swipes
+					//if ( !this.screenIsSmall ) {
 					TweenMax.set( $sectionText[ 0 ], { y: distance } );
 					if ( Math.abs( distance ) > thresh ) {
 						returnTranslation( $sectionText[ 0 ] );
@@ -439,23 +474,39 @@ const scroller = {
 						}
 						swipeComplete = true;
 					}
+					//} else {
+					//	// on mobile, just scroll it and stop at bottom
+					//	if ( distance < 0 && $sectionText.height() - height / 2 > -1 * distance ) {
+					//		TweenMax.set( $sectionText[ 0 ], { y: distance } );
+					//	}
+					//}
 				}
 
 			} );
 		};
-
-		addTouchEffects( $originalContent );
-		addTouchEffects( this.$sections );
+		if ( !this.screenIsSmall ) {
+			addTouchEffects( $originalContent );
+			addTouchEffects( this.$sections );
+		}
 
 	},
 
 	initTopNav: function () {
 		this.$topNav = $( '.top-nav' );
 		this.$topNavLinks = this.$topNav.find( 'a' );
+		this.$hiddenForIntro = $( '.hidden-for-intro' );
+		if ( this.screenIsSmall ) {
+			$( '.menu-toggle' ).click( ()=> {
+				this.$topNav.toggleClass( 'open' )
+			} );
+		}
 	},
 
-	init: function () {
+	init: function ( container, screenIsSmall ) {
 		//$( '#introduction' ).attr( 'data-centered', true );
+
+		this.screenIsSmall = screenIsSmall;
+
 		this.initTopNav();
 		this.initEmotionNav();
 		this.initFullpageSections();

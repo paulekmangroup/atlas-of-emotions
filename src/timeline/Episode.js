@@ -29,6 +29,9 @@ export default class Episode {
 			},
 			ease: Power2.easeOut
 		} );
+		if ( this.screenIsSmall ) {
+			this.scrollParentToStage( 'trigger' );
+		}
 
 	}
 
@@ -168,6 +171,27 @@ export default class Episode {
 		TweenMax.to( this.parent, 1, { autoAlpha: 0, onComplete: onComplete } );
 	}
 
+	getStageDOMCenterPoint( stage ) {
+		if ( stage == 'trigger' ) {
+			let bounds = this.parent.querySelector( '#event' ).getBoundingClientRect();
+			return bounds.left + bounds.width / 2;
+		}
+		if ( stage == 'experience' ) {
+			let bounds = this.parent.querySelector( '#state' ).getBoundingClientRect();
+			return bounds.left + bounds.width / 2;
+		}
+		if ( stage == 'response' ) {
+			let bounds = this.parent.querySelector( '#responses' ).getBoundingClientRect();
+			return bounds.left + bounds.width / 2;
+		}
+		return null;
+	}
+
+	scrollParentToStage( stage ) {
+		let scrollCoord = $( this.parent ).scrollLeft() + this.getStageDOMCenterPoint( stage ) - this.parent.offsetWidth / 2;
+		TweenMax.to( this.parent, 0.7, { scrollTo: { x: scrollCoord } } );
+	}
+
 	destroy() {
 		this.episodeTimeline.kill();
 		TweenMax.killAll();
@@ -177,12 +201,13 @@ export default class Episode {
 		this.episodeTimeline = null;
 	}
 
-	constructor( svg, container, emotion ) {
-		this.initialize( svg, container, emotion );
+	constructor( svg, container, emotion, screenIsSmall ) {
+		this.initialize( svg, container, emotion, screenIsSmall );
 	}
 
-	initialize( svg, container, emotion ) {
+	initialize( svg, container, emotion, screenIsSmall ) {
 
+		this.screenIsSmall = screenIsSmall;
 		this.rewindActive = false;
 		this.isActive = false;
 
@@ -274,7 +299,12 @@ export default class Episode {
 				.from( eventLines, 0.5, { autoAlpha: 0, ease: Power1.easeOut }, 'event-lines' )
 
 				// show emo state
-				.add( 'state' );
+				.add( 'state' )
+				.addCallback( ()=> {
+					if ( !this.rewindActive && this.screenIsSmall ) {
+						this.scrollParentToStage( 'experience' );
+					}
+				} );
 
 			this.addStateEmergence();
 
@@ -286,10 +316,13 @@ export default class Episode {
 				.from( responseLines, 0.5, { autoAlpha: 0, ease: Power1.easeOut }, 'response-line' )
 
 				.add( 'responses', '-=0.5' )
+				.addCallback( ()=> {
+					if ( !this.rewindActive && this.screenIsSmall ) {
+						this.scrollParentToStage( 'response' );
+					}
+				} )
 				.from( responses, 1, { autoAlpha: 0, ease: Power1.easeOut } )
 
-				.add( 'try-again' )
-				//.from( tryAgainButton, 0.5, { autoAlpha: 0, ease: Power1.easeOut } )
 				.addCallback( function () {
 					if ( !this.rewindActive && this.isActive ) {
 						scroller.pulseEmotionNav();

@@ -341,79 +341,90 @@
 							<span>{{ restart_button }}</span><img src="./img/reset.svg">
 						</a>
 					</h2>
-
-					<!--intro-->
-					{{# body.forEach( function(paragraph){ }}
-					<p class="body-intro">
-						{{ paragraph }}
-					</p>
-					{{# }) }}
-					<p class="body-intro">
-						<button id="begin-awareness">{{ intro_button }}</button>
-					</p>
 				</div>
 
-				<div data-template="metadata.timeline.secondary">
+				<div class="section-text__content">
 
-					<!--event-->
-					<div class="body-awareness" data-stage="trigger">
-						<h3>{{ trigger.header }}</h3>
-						<p>
-							{{ trigger.body[0] }}
-						</p>
-						<ul>
-							{{# trigger.body[1].forEach( function(item,i){ }}
-							<li>{{ item }}</li>
-							{{# }) }}
-						</ul>
-					</div>
-					<button id="experience-add-awareness" class="body-awareness">{{ trigger.button }}</button>
-
-
-					<!--state-->
-					<div class="body-awareness" data-stage="experience">
-						<h3>{{ experience.header }}</h3>
-						<p>
-							{{ experience.body[0] }}
-						</p>
-					</div>
-					<button id="response-add-awareness" class="body-awareness">+ add awareness</button>
-
-					<!--response-->
-					<div class="body-awareness" data-stage="response">
-						<h3>{{ response.header }}</h3>
-						<p>
-							{{ response.body[0] }}
-						</p>
-					</div>
-					<button id="begin-refractory-period" class="body-awareness">Why is it hard to stay aware?</button>
-
-
-					<!--When we are triggered into a new emotion, it filters our ability to be aware of our experience and choose a response.-->
-					<!--But as time passes, we regain some clarity. So if we pause before we act, we often find it easier to choose a response.-->
-					<!--refractory period-->
-					<div class="body-awareness" data-stage="refractory">
-						<h3>{{ refractory.header }}</h3>
-						{{# refractory.body.forEach( function(paragraph){ }}
-						<p>
+					<div data-template="metadata.timeline">
+						<!--intro-->
+						{{# body.forEach( function(paragraph){ }}
+						<p class="body-intro">
 							{{ paragraph }}
 						</p>
 						{{# }) }}
-					</div>
-					<button id="begin-block-diagram" class="body-awareness">See the big picture</button>
-
-					<!--blocks-->
-					<div class="body-awareness" data-stage="blocks">
-						<h3>{{ blocks.header }}</h3>
-						<p>
-							{{ blocks.body[0] }}
-						</p>
+						<button id="begin-awareness" class="body-intro">{{ intro_button }}</button>
 					</div>
 
+					<div data-template="metadata.timeline.secondary">
+
+						<!--event-->
+						<div class="body-awareness" data-stage="trigger">
+							<h3>{{ trigger.header }}</h3>
+							<p>
+								{{ trigger.body[0] }}
+							</p>
+							<ul>
+								{{# trigger.body[1].forEach( function(item,i){ }}
+								<li>{{ item }}</li>
+								{{# }) }}
+							</ul>
+						</div>
+						<button id="experience-add-awareness" class="body-awareness" data-stage="trigger">
+							{{ trigger.button }}
+						</button>
+
+
+						<!--state-->
+						<div class="body-awareness" data-stage="experience">
+							<h3>{{ experience.header }}</h3>
+							<p>
+								{{ experience.body[0] }}
+							</p>
+						</div>
+						<button id="response-add-awareness" class="body-awareness" data-stage="experience">+ add
+							awareness
+						</button>
+
+						<!--response-->
+						<div class="body-awareness" data-stage="response">
+							<h3>{{ response.header }}</h3>
+							<p>
+								{{ response.body[0] }}
+							</p>
+						</div>
+						<button id="begin-refractory-period" class="body-awareness" data-stage="response">Why is it hard
+							to stay aware?
+						</button>
+
+
+						<!--When we are triggered into a new emotion, it filters our ability to be aware of our experience and choose a response.-->
+						<!--But as time passes, we regain some clarity. So if we pause before we act, we often find it easier to choose a response.-->
+						<!--refractory period-->
+						<div class="body-awareness" data-stage="refractory">
+							<h3>{{ refractory.header }}</h3>
+							{{# refractory.body.forEach( function(paragraph){ }}
+							<p>
+								{{ paragraph }}
+							</p>
+							{{# }) }}
+						</div>
+						<button id="begin-block-diagram" class="body-awareness" data-stage="refractory">See the big
+							picture
+						</button>
+
+						<!--blocks-->
+						<div class="body-awareness" data-stage="blocks">
+							<h3>{{ blocks.header }}</h3>
+							<p>
+								{{ blocks.body[0] }}
+							</p>
+						</div>
+
+					</div>
+
+
+					<a class="more-link" data-template="metadata.site">{{ learn_more_button }}</a>
 				</div>
-
-
-				<a class="more-link" data-template="metadata.site">{{ learn_more_button }}</a>
 			</div>
 			<div class="more-content">
 				<div class="more-content-scroller">
@@ -430,10 +441,12 @@
 			</div>
 			<div class="section-text">
 				<h2 class="section-heading">Our Experience</h2>
-				<h3 class="headline"></h3>
-				<p class="body">
-				</p>
-				<a class="more-link" data-template="metadata.site">{{ learn_more_button }}</a>
+				<div class="section-text__content">
+					<h3 class="headline"></h3>
+					<p class="body">
+					</p>
+					<a class="more-link" data-template="metadata.site">{{ learn_more_button }}</a>
+				</div>
 			</div>
 			<div class="more-content">
 				<div class="more-content-scroller">
@@ -449,10 +462,12 @@
 			</div>
 			<div class="section-text">
 				<h2 class="section-heading">Our Response</h2>
-				<h3 class="headline"></h3>
-				<p class="body">
-				</p>
-				<a class="more-link" data-template="metadata.site">{{ learn_more_button }}</a>
+				<div class="section-text__content">
+					<h3 class="headline"></h3>
+					<p class="body">
+					</p>
+					<a class="more-link" data-template="metadata.site">{{ learn_more_button }}</a>
+				</div>
 			</div>
 			<div class="more-content">
 				<div class="more-content-scroller">
@@ -468,19 +483,23 @@
 			</div>
 			<div class="section-text">
 				<h2>Further Reading</h2>
-				Lorem ipso facto weirdo que passo. Lorem ipso facto weirdo que passo robles dulce vita. Lorem ipso
-				facto
-				weirdo que passo. Lorem ipso facto weirdo que passo robles dulce vita. Lorem ipso facto weirdo que
-				passo. Lorem ipso facto weirdo que passo robles dulce vita.
+				<div class="section-text__content">
+					Lorem ipso facto weirdo que passo. Lorem ipso facto weirdo que passo robles dulce vita. Lorem ipso
+					facto
+					weirdo que passo. Lorem ipso facto weirdo que passo robles dulce vita. Lorem ipso facto weirdo que
+					passo. Lorem ipso facto weirdo que passo robles dulce vita.
+				</div>
 			</div>
 		</div>
 
 	</div>
 
-	<div class="top-nav">
+	<div class="site-header hidden-for-intro">
 		<div class="site-name">
 			Atlas of Emotions
 		</div>
+	</div>
+	<div class="top-nav hidden-for-intro">
 		<div class="menu">
 			<ul id="menu-list">
 				<li><a href="#introduction" id="introduction-menu-link">Introduction</a>
@@ -495,6 +514,7 @@
 			</ul>
 		</div>
 	</div>
+	<div class="menu-toggle"></div>
 
 	<div class="emotion-nav">
 		<ul>

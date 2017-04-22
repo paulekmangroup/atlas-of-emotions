@@ -34,10 +34,6 @@ export default class EpisodeAddAwareness extends Episode {
 		this.illuminationBlock.setAttribute( 'style', null );
 	}
 
-	constructor( svg, container, emotion ) {
-		super( svg, container, emotion );
-	}
-
 	initializeIllumination( svg ) {
 
 		//TODO remove for real from art file
@@ -47,6 +43,13 @@ export default class EpisodeAddAwareness extends Episode {
 		var event = timeline.select( '#event', svg );
 		var eventRect = event.getBoundingClientRect();
 
+		if ( this.screenIsSmall ) {
+			this.illuminationBlock.remove();
+			let container = document.createElement( "div" );
+			container.classList.add( 'illumination-container' );
+			container.appendChild( this.illuminationBlock );
+			this.parent.insertBefore( container, svg );
+		}
 		TweenMax.set( this.illuminationBlock, {
 			css: { width: eventRect.left, autoAlpha: 0 }
 		} );
@@ -62,11 +65,32 @@ export default class EpisodeAddAwareness extends Episode {
 		TweenMax.to( this.illuminationBlock, 1, { autoAlpha: 0, onComplete: onComplete } );
 	}
 
-	initialize( svg, container, emotion ) {
+	getStageIlluminationPoint( stage ) {
+		if ( stage == 'trigger' ) {
+			let bounds = this.parent.querySelector( '#state' ).getBoundingClientRect();
+			return 0.75 * bounds.left + 0.25 * bounds.right;
+		}
+		if ( stage == 'experience' ) {
+			let bounds = this.parent.querySelector( '#responses' ).getBoundingClientRect();
+			return 0.75 * bounds.left + 0.25 * bounds.right;
+		}
+		if ( stage == 'response' ) {
+			let wrapperSvg = this.parent.querySelector( 'svg' );
+			let bounds = wrapperSvg.getBoundingClientRect();
+			return bounds.right;
+		}
+		return null;
+	}
 
+	constructor( svg, container, emotion, screenIsSmall ) {
+		super( svg, container, emotion, screenIsSmall );
+	}
+
+	initialize( svg, container, emotion, screenIsSmall ) {
+
+		this.screenIsSmall = screenIsSmall;
 		this.configsByEmotion = Continent.configsByEmotion;
 		var refractoryPeriodTime = 15;
-
 		this.rewindActive = false;
 		this.isActive = false;
 		this.refractoryPeriodEnabled = false;
@@ -80,6 +104,7 @@ export default class EpisodeAddAwareness extends Episode {
 			timeline.addFonts( svg );
 
 			this.parent = timeline.extractDocument( svg, container );
+			this.svg = svg;
 
 			// illumination
 			this.illuminationBlock = timeline.select( '#illumination-block', document );
@@ -191,19 +216,15 @@ export default class EpisodeAddAwareness extends Episode {
 			//add awareness buttons
 
 			var addAwarenessButtonExperience = timeline.select( '#experience-add-awareness', document );
-			addAwarenessButtonExperience.style.display = ''; //TODO should these be handled in css? what's typical in this app?
 			addAwarenessButtonExperience.style.visibility = 'hidden'; //TODO should these be handled in css? what's typical in this app?
 
 			var addAwarenessButtonResponse = timeline.select( '#response-add-awareness', document );
-			addAwarenessButtonResponse.style.display = '';
 			addAwarenessButtonResponse.style.visibility = 'hidden';
 
 			var refractoryPeriodButton = timeline.select( '#begin-refractory-period', document );
-			refractoryPeriodButton.style.display = '';
 			refractoryPeriodButton.style.visibility = 'hidden';
 
 			var blockDiagramButton = timeline.select( '#begin-block-diagram', document );
-			blockDiagramButton.style.display = '';
 			blockDiagramButton.style.visibility = 'hidden';
 
 			this.episodeTimeline = new TimelineMax( {} );
@@ -302,28 +323,46 @@ export default class EpisodeAddAwareness extends Episode {
 
 				if ( awarenessStage == 'trigger' ) {
 
-					TweenMax.to( this.illuminationBlock, 4, { css: { width: '+=300' }, ease: Power2.easeInOut } );
+					let illuminationPoint = this.getStageIlluminationPoint( 'experience' );
+
+					TweenMax.to( this.illuminationBlock, 4, {
+						css: { width: illuminationPoint },
+						ease: Power2.easeInOut
+					} );
 					//TweenMax.to( illuminationGlow, 4, { attr: { x: '+=300' }, ease: Power2.easeInOut } );
 
 					awarenessStage = 'experience';
 
 				} else if ( awarenessStage == 'experience' ) {
 
-					var illuminationTimeline = new TimelineMax( {} );
+					let illuminationPoint = this.getStageIlluminationPoint( 'response' );
+					let illuminationTimeline = new TimelineMax( {} );
 
 					// move illumination all the way off screen, starting with a smooth but quick acceleration
 					// once it is finished illuminating the entire timeline, the block interactions are enabled
 					illuminationTimeline
 						.add( 'start' )
-						.to( this.illuminationBlock, 4, { css: { width: '+=400' }, ease: Power2.easeIn }, 'start' )
-						//.to( illuminationGlow, 4, { attr: { x: '+=400' }, ease: Power2.easeIn }, 'start' )
+						.to( this.illuminationBlock, 4, {
+							css: { width: illuminationPoint },
+							ease: Power2.easeIn
+						}, 'start' )
 						.add( 'finished' )
 						.addCallback( ()=> {
 							TweenMax.to( refractoryPeriodButton, 1, { autoAlpha: 1, ease: Power2.easeOut } );
-						} )
-						.to( this.illuminationBlock, 10, { css: { width: '+=3000' }, ease: Power0.easeIn }, 'finished' )
-						//.to( illuminationGlow, 10, { attr: { x: '+=3000' }, ease: Power0.easeIn }, 'finished' )
-						.add( 'end' );
+						} );
+					if ( this.screenIsSmall ) {
+						illuminationTimeline
+							.fromTo( this.illuminationBlock, 1,
+								{ css: { backgroundColor: 'rgba(255,255,255,0)' } },
+								{ css: { backgroundColor: 'rgba(255,255,255,1)' }, ease: Power0.easeIn }, 'finished' )
+					} else {
+						illuminationTimeline
+							.to( this.illuminationBlock, 10, {
+								css: { width: '+=3000' },
+								ease: Power0.easeIn
+							}, 'finished' )
+					}
+					illuminationTimeline.add( 'end' );
 
 					awarenessStage = 'response';
 
@@ -488,10 +527,16 @@ export default class EpisodeAddAwareness extends Episode {
 					ease: Power1.easeOut
 				} )
 				.add( 'event-lines' )
-				.from( eventLineGroup, 0.5, { autoAlpha: 0, ease: Power1.easeOut }, 'event-lines' )
+				.from( eventLineGroup, 0.5, { autoAlpha: 0, ease: Power1.easeOut },
+					this.screenIsSmall ? 'event-lines+=1.5' : 'event-lines' )
 
 				// show emo state
-				.add( 'experience' );
+				.add( 'experience' )
+				.addCallback( ()=> {
+					if ( !this.rewindActive && this.screenIsSmall ) {
+						this.scrollParentToStage( 'experience' );
+					}
+				} );
 
 			this.addStateEmergence();
 
@@ -510,6 +555,11 @@ export default class EpisodeAddAwareness extends Episode {
 				.from( responseLineGroup, 0.5, { autoAlpha: 0, ease: Power1.easeOut }, 'response-lines' )
 
 				.add( 'responses' )
+				.addCallback( ()=> {
+					if ( !this.rewindActive && this.screenIsSmall ) {
+						this.scrollParentToStage( 'response' );
+					}
+				} )
 				.addCallback( addResponseAwareness )
 				.from( responses, 1, { autoAlpha: 0, ease: Power1.easeOut } )
 
@@ -525,9 +575,9 @@ export default class EpisodeAddAwareness extends Episode {
 				TweenMax.to( button, 1, {
 					autoAlpha: 0,
 					ease: Power2.easeOut,
-					onComplete: function () {
-						button.style.display = 'none';
-					}
+					//onComplete: function () {
+					//	button.style.display = 'none';
+					//}
 				} );
 			};
 			var awarenessClickCallback = function ( e ) {

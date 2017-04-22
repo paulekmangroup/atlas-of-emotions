@@ -137,8 +137,8 @@ export default function ( ...initArgs ) {
 	}
 
 	function initScroller() {
-		initSection(moreInfo);
-		scroller.init.bind( scroller )();
+		initSection( moreInfo );
+		scroller.init.bind( scroller )( null, screenIsSmall );
 	}
 
 	function initTemplate() {

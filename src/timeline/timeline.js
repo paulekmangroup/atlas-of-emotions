@@ -154,8 +154,8 @@ const timeline = {
 		svgElement.setAttribute( 'overflow', 'visible' );
 		svgElement.setAttribute( 'width', '100%' );
 		svgElement.setAttribute( 'height', '100%' );
-		svgElement.removeAttribute( 'viewBox' );
-		svgElement.setAttribute( 'preserveAspectRatio', 'none' );
+		//svgElement.removeAttribute( 'viewBox' );
+		//svgElement.setAttribute( 'preserveAspectRatio', 'none' );
 		var svgChildrenGroup = svgElement.getElementsByTagName( 'g' )[ 0 ];
 
 		var wrapperSVG = document.createElementNS( NS, 'svg' );
@@ -163,7 +163,7 @@ const timeline = {
 		wrapperSVG.setAttribute( 'y', '50%' );
 		wrapperSVG.setAttribute( 'width', originalWidth );
 		wrapperSVG.setAttribute( 'height', originalHeight );
-		wrapperSVG.removeAttribute( 'viewBox' );
+		//wrapperSVG.setAttribute( 'viewBox', originalViewBox );
 		wrapperSVG.setAttribute( 'overflow', 'visible' );
 		wrapperSVG.appendChild( svgChildrenGroup );
 
@@ -187,14 +187,13 @@ const timeline = {
 	loadEpisode: function () {
 		// no awareness version
 		var ajax = new XMLHttpRequest();
-		var _self = this;
 		ajax.open( 'GET', './img/episode.svg', true );
 		ajax.send();
-		ajax.onload = function ( e ) {
-			_self.episode = new Episode( e.currentTarget.responseXML.documentElement, _self.container, _self.currentEmotion );
-			_self.activeEpisode = _self.episode;
-			if ( _self.isActive ) {
-				_self.episode.setEmotion( _self.currentEmotion );
+		ajax.onload = ( e ) => {
+			this.episode = new Episode( e.currentTarget.responseXML.documentElement, this.container, this.currentEmotion, this.screenIsSmall );
+			this.activeEpisode = this.episode;
+			if ( this.isActive ) {
+				this.episode.setEmotion( this.currentEmotion );
 			}
 		};
 	},
@@ -202,14 +201,13 @@ const timeline = {
 	loadEpisodeAddAwareness: function () {
 		// awareness version
 		var ajax = new XMLHttpRequest();
-		var _self = this;
 		ajax.open( 'GET', './img/episode--add-awareness.svg', true );
 		ajax.send();
-		ajax.onload = function ( e ) {
-			_self.episodeAddAwareness = new EpisodeAddAwareness( e.currentTarget.responseXML.documentElement, _self.container, _self.currentEmotion );
-			_self.activeEpisode = _self.episodeAddAwareness;
-			if ( _self.isActive ) {
-				_self.episodeAddAwareness.setEmotion( _self.currentEmotion );
+		ajax.onload = ( e ) => {
+			this.episodeAddAwareness = new EpisodeAddAwareness( e.currentTarget.responseXML.documentElement, this.container, this.currentEmotion, this.screenIsSmall );
+			this.activeEpisode = this.episodeAddAwareness;
+			if ( this.isActive ) {
+				this.episodeAddAwareness.setEmotion( this.currentEmotion );
 			}
 		};
 	},
@@ -236,16 +234,38 @@ const timeline = {
 		return this.sectionTextBodyAwareness.filter( e=>e.getAttribute( 'data-stage' ) == stage );
 	},
 
+	getVisibleButtons: function ( stage ) {
+		return document.querySelectorAll( 'button.body-awareness[data-stage=' + stage + ']' );
+	},
+
+	getHiddenButtons: function ( stage ) {
+		var visible = [].slice.call( this.getVisibleButtons( stage ) );
+		return [].slice.call( document.querySelectorAll( 'button.body-awareness' ) ).filter( ( e )=> {
+			return visible.indexOf( e ) == -1;
+		} );
+	},
+
 	showAwarenessCopy: function ( stage ) {
-		var show = this.getVisibleParagraphs( stage );
+		var showCopy = this.getVisibleParagraphs( stage );
+		var showButtons = this.getVisibleButtons( stage );
+		var hideButtons = this.getHiddenButtons( stage );
 		let stages = [].slice.call( document.querySelectorAll( 'div.body-awareness' ) );
+		let openStage = document.querySelector( 'div.body-awareness[data-stage=' + stage + ']' );
 		stages.forEach( function ( stage ) {
 			stage.classList.add( 'closed' );
 		} );
-		document.querySelector( 'div.body-awareness[data-stage=' + stage + ']' ).classList.remove( 'closed' );
+		openStage.classList.remove( 'closed' );
 
-		TweenMax.set( show, { css: { clearProps: 'display' } } );
-		TweenMax.to( show, 1, { autoAlpha: 1 } );
+		TweenMax.set( showButtons, { css: { display: 'block' } } );
+		TweenMax.set( hideButtons, { css: { display: 'none' } } );
+
+		TweenMax.set( showCopy, { css: { display: 'block' } } );
+		TweenMax.to( showCopy, 1, { autoAlpha: 1 } );
+
+		if ( this.screenIsSmall ) {
+			TweenMax.to( '.section-text__content', 0.7, { scrollTo: openStage.offsetTop } );
+		}
+
 	},
 
 	hideIntroCopy: function ( onComplete ) {
