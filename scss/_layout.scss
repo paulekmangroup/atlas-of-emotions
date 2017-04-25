@@ -51,6 +51,9 @@ body {
 		.section-text {
 			filter: blur(10px);
 		}
+		.original-content{
+			z-index: auto;
+		}
 		.emotion-nav {
 			opacity: 0;
 			//pointer-events: none;
