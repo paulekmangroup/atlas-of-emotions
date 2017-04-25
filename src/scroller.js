@@ -307,8 +307,8 @@ const scroller = {
 			'annex-signals',
 			'annex-psychopathologies',
 			'annex-scientific-basis',
-			//'annex-impediment-antidote',
-			//'annex-intrinsic-remedial'
+			'annex-intrinsic-remedial',
+			//'annex-impediment-antidote'
 		];
 
 		morePageNames.forEach( item => {
@@ -321,8 +321,10 @@ const scroller = {
 		$( '#experience-section' ).find( '.more-content-scroller' ).prepend( moreInfoElements[ 'annex-signals' ] );
 		$( '#experience-section' ).find( '.more-content-scroller' ).prepend( moreInfoElements[ 'annex-partially-charted' ] );
 		$( '#experience-section' ).find( '.more-content-scroller' ).prepend( moreInfoElements[ 'annex-scientific-basis' ] );
+		$( '#response-section' ).find( '.more-content-scroller' ).prepend( moreInfoElements[ 'annex-intrinsic-remedial' ] );
 		$( '#response-section' ).find( '.more-content-scroller' ).prepend( moreInfoElements[ 'annex-psychopathologies' ] );
 		$( '#response-section' ).find( '.more-content-scroller' ).prepend( moreInfoElements[ 'annex-traits' ] );
+		//$( '#further-reading' ).find( '.more-content-scroller' ).prepend( moreInfoElements[ 'annex-impediment-antidote' ] );
 
 
 	},
@@ -379,7 +381,7 @@ const scroller = {
 			return this.id.split( '-' )[ 0 ]; //'this' refers to element scope
 		} ).get();
 
-		let normalScrollElements = '.more-content-scroller, .more-content-overlay';
+		let normalScrollElements = '.more-content';
 		if ( this.screenIsSmall ) {
 			normalScrollElements += ', .episode-parent, .section-text';
 		}
@@ -426,8 +428,7 @@ const scroller = {
 
 		let $originalContent = $( '.original-content' );
 
-		// make swipes on original content change the section, and move section text with touches
-		let addTouchEffects = ( $elements ) => {
+		let addDesktopTabletTouchEffects = ( $elements ) => {
 
 			let swipeStart = 0;
 			let swipeComplete = false;
@@ -442,26 +443,18 @@ const scroller = {
 				height = $( '.section.active' ).height();
 				thresh = 0.01 * touchSensitivity * height;
 
-				//if ( !this.screenIsSmall ) {
 				swipeStart = e.originalEvent.touches[ 0 ].pageY;
-				//} else {
-				//	swipeStart = e.originalEvent.touches[ 0 ].pageY - distance;
-				//}
 
 				swipeComplete = false;
 			} );
 			$elements.on( 'touchend', ( e ) => {
-				//if ( !this.screenIsSmall ) {
 				var $sectionText = $( '.section.active .section-text' );
 				returnTranslation( $sectionText[ 0 ] );
-				//}
 			} );
 			$elements.on( 'touchmove', ( e ) => {
 				distance = e.originalEvent.touches[ 0 ].pageY - swipeStart;
 				if ( !swipeComplete ) {
 					var $sectionText = $( '.section.active .section-text' );
-					// on tablets, but not mobile, transition section when the user swipes
-					//if ( !this.screenIsSmall ) {
 					TweenMax.set( $sectionText[ 0 ], { y: distance } );
 					if ( Math.abs( distance ) > thresh ) {
 						returnTranslation( $sectionText[ 0 ] );
@@ -474,19 +467,107 @@ const scroller = {
 						}
 						swipeComplete = true;
 					}
-					//} else {
-					//	// on mobile, just scroll it and stop at bottom
-					//	if ( distance < 0 && $sectionText.height() - height / 2 > -1 * distance ) {
-					//		TweenMax.set( $sectionText[ 0 ], { y: distance } );
-					//	}
-					//}
 				}
 
 			} );
 		};
-		if ( !this.screenIsSmall ) {
-			addTouchEffects( $originalContent );
-			addTouchEffects( this.$sections );
+
+		let addMobileTouchEffects = ( $elements ) => {
+
+			let swipeStart = { x: 0, y: 0 };
+			let distance = 0;
+			let height = 0;
+			let thresh = 0;
+			let top = null;
+
+			let atMaximum = false;
+
+			let $sectionText = null;
+			let $sectionTextContent = null;
+
+			let maximumDistance = 0;
+
+			let returnTranslation = ( element ) => {
+				$sectionTextContent[ 0 ].scrollTop = 0;
+				$sectionTextContent[ 0 ].style.overflowY = 'hidden';
+				TweenMax.to( element, 0.5, {
+					top: top,
+					onComplete: ()=> {
+						distance = 0;
+						atMaximum = false;
+					}
+				} );
+			};
+			let maximizeTranslation = ( element ) => {
+				TweenMax.to( element, 0.5, {
+					top: top - maximumDistance,
+					onComplete: ()=> {
+						distance = maximumDistance;
+						atMaximum = true;
+						$sectionTextContent[ 0 ].style.overflowY = 'scroll';
+					}
+				} );
+			};
+			$elements.on( 'touchstart', ( e ) => {
+				$sectionText = $( '.section.active .section-text' );
+				$sectionTextContent = $( '.section.active .section-text__content' );
+				if ( !top ) {
+					top = $sectionText[ 0 ].offsetTop;
+				}
+				height = $( '.section.active' ).height();
+				maximumDistance = 0.33 * height;
+				thresh = 0.01 * touchSensitivity * height;
+				swipeStart.y = e.originalEvent.touches[ 0 ].pageY + distance;
+				swipestart.x = e.originalEvent.touches[ 0 ].pageX;
+			} );
+			$elements.on( 'touchend', ( e ) => {
+			} );
+			$elements.on( 'touchmove', ( e ) => {
+				if ( atMaximum ) {
+					let newDistance = e.originalEvent.touches[ 0 ].pageY - swipeStart.y;
+					if ( $sectionTextContent[ 0 ].scrollTop <= 0 && newDistance < distance ) {
+						atMaximum = false;
+					}
+					$sectionTextContent.on( 'scroll', ( e )=> {
+						if ( $sectionTextContent[ 0 ].scrollTop < 0 ) {
+							returnTranslation( $sectionText[ 0 ] );
+							$sectionTextContent.off( 'scroll' );
+						}
+					} );
+				} else {
+					let newDistance = swipeStart.y - e.originalEvent.touches[ 0 ].pageY;
+					let direction = newDistance - distance;
+					distance = newDistance;
+					$sectionTextContent.off( 'scroll' );
+					if ( direction > 0 ) {
+						maximizeTranslation( $sectionText[ 0 ] );
+					} else {
+						returnTranslation( $sectionText[ 0 ] );
+					}
+					//if ( distance > 0 ) {
+					//	if ( distance < maximumDistance ) {
+					//		// when panel is not at max distance
+					//		$sectionTextContent[ 0 ].style.overflowY = 'hidden';
+					//		TweenMax.set( $sectionText[ 0 ], { top: top - distance } );
+					//		e.preventDefault();
+					//	} else {
+					//		// when panel is at max distance
+					//		atMaximum = true;
+					//		$sectionTextContent[ 0 ].style.overflowY = 'scroll';
+					//		distance = maximumDistance;
+					//	}
+					//} else {
+					//	distance = 0;
+					//}
+				}
+			} );
+		};
+
+		if ( this.screenIsSmall ) {
+			addMobileTouchEffects( this.$sections );
+		} else {
+			addDesktopTabletTouchEffects( $originalContent );
+			addDesktopTabletTouchEffects( this.$sections );
 		}
 
 	},
