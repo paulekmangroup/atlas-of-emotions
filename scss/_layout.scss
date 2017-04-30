@@ -5,6 +5,9 @@ $more-text-padding: 3em;
 $section-text-background-color: #eee;
 $top-nav-background: rgba(255, 255, 255, 0.8);
 $top-nav-padding-top: 15px;
+$mobile-split-height: 300;
+$mobile-section-text-top: #{$ui-header-mobile-nav-target-height + $mobile-split-height}px;
+$mobile-section-graphics-height: #{$mobile-split-height - $ui-mobile-emotion-nav-height}px;
 
 body,
 html {
@@ -51,7 +54,7 @@ body {
 		.section-text {
 			filter: blur(10px);
 		}
-		.original-content{
+		.original-content {
 			z-index: auto;
 		}
 		.emotion-nav {
@@ -107,41 +110,6 @@ svg {
 	}
 	cursor: pointer;
 	user-select: none;
-}
-
-#illumination-block {
-	$edge-width: 200px;
-	position: absolute;
-	width: 0;
-	left: 0;
-	top: 0;
-	bottom: 0;
-	background-color: transparent;
-	overflow: hidden;
-	&:before {
-		content: ' ';
-		display: block;
-		position: absolute;
-		left: 0;
-		right: -3+$edge-width;
-		top: 0;
-		bottom: 0;
-		background-color: #fff;
-	}
-	&:after {
-		content: ' ';
-		display: block;
-		position: absolute;
-		right: -2px;
-		top: 0;
-		bottom: 0;
-		width: $edge-width;
-		background-color: transparent;
-		background-image: url('./img/glowEdge.png');
-		background-position: right;
-		background-repeat: repeat-y;
-		background-size: $edge-width;
-	}
 }
 
 #app-container {
@@ -462,7 +430,7 @@ svg {
 		opacity: 1.0;
 	}
 
-	button{
+	button {
 		$button-color: 252;
 		pointer-events: auto;
 		display: block;
@@ -475,10 +443,10 @@ svg {
 		font-size: 0.8em;
 		padding: 0.3em 0;
 		/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fefefe+0,fefefe+100&1+0,0+100 */
-		background: -moz-linear-gradient(top, rgba($button-color,$button-color,$button-color,1) 0%, rgba($button-color,$button-color,$button-color,0) 100%); /* FF3.6-15 */
-		background: -webkit-linear-gradient(top, rgba($button-color,$button-color,$button-color,1) 0%,rgba($button-color,$button-color,$button-color,0) 100%); /* Chrome10-25,Safari5.1-6 */
-		background: linear-gradient(to bottom, rgba($button-color,$button-color,$button-color,1) 0%,rgba($button-color,$button-color,$button-color,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#00fefefe',GradientType=0 ); /* IE6-9 */
+		background: -moz-linear-gradient(top, rgba($button-color, $button-color, $button-color, 1) 0%, rgba($button-color, $button-color, $button-color, 0) 100%); /* FF3.6-15 */
+		background: -webkit-linear-gradient(top, rgba($button-color, $button-color, $button-color, 1) 0%, rgba($button-color, $button-color, $button-color, 0) 100%); /* Chrome10-25,Safari5.1-6 */
+		background: linear-gradient(to bottom, rgba($button-color, $button-color, $button-color, 1) 0%, rgba($button-color, $button-color, $button-color, 0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fefefe', endColorstr='#00fefefe', GradientType=0); /* IE6-9 */
 		&:hover {
 			font-weight: 400;
 		}
@@ -502,7 +470,6 @@ svg {
 		margin-bottom: 5px;
 		text-transform: uppercase;
 	}
-
 
 	p {
 		margin-top: 0;
@@ -786,10 +753,9 @@ svg {
 }
 
 /* ----------- Phones ----------- */
-@media screen and (max-width: 750px) {
+.small-screen {
+	//@media screen and (max-width: 750px) {
 	$menu-padding-top: 11;
-	$split-height: 300;
-	$split-point: #{$ui-header-mobile-nav-target-height+$split-height}px;
 	body, html {
 		overflow: hidden;
 		margin: 0;
@@ -797,7 +763,7 @@ svg {
 	}
 	.original-content {
 		left: 0;
-		bottom: $split-point;
+		bottom: $mobile-section-graphics-height;
 	}
 	.site-header {
 		height: #{$ui-header-height-small}px;
@@ -861,7 +827,7 @@ svg {
 		background-repeat: no-repeat;
 	}
 	.section-text {
-		top: $split-point;
+		top: $mobile-section-text-top;
 		width: 100%;
 		bottom: 0;
 		padding: 0.6em $section-text-padding-mobile 2em $section-text-padding-mobile;
@@ -890,72 +856,76 @@ svg {
 			right: $section-text-padding-mobile;
 			bottom: 0;
 			padding-top: 0.7em;
-			overflow-y: hidden; //changed programtcly based on interactions
+			overflow-y: hidden; //changed programatically based on interactions
 			-webkit-overflow-scrolling: touch;
-			*{
+			* {
 				color: #000;
 				//font-size: 0.9em;
 				font-weight: 400;
 			}
 		}
 		.more-link {
-			position: relative;
+			position: absolute;
+			display: none;
+			&.allowed {
+				display: block;
+			}
 		}
 	}
 	.section-graphics {
 		top: #{$ui-header-mobile-nav-target-height}px;
-		height: #{$split-height}px;
+		height: #{$mobile-split-height}px;
 		bottom: auto;
 		right: 0;
 		left: 0;
 		margin: 0;
 		padding: 0;
 	}
+}
 
-	body[class*=fp-viewing-timeline] .emotion-nav ul li.all {
-		display: none;
-	}
+body[class*=fp-viewing-timeline].small-screen .emotion-nav ul li.all {
+	display: none;
+}
 
-	.emotion-nav,
-	body[class*=fp-viewing-timeline] .emotion-nav {
-		bottom: initial;
-		top: $split-point;
-		margin-top: -2em;
-		left: 0;
-		right: 0;
-		font-size: 12px;
-		ul {
-			position: absolute;
-			left: 1em;
-			right: 1em;
-			height: auto;
+.emotion-nav,
+body[class*=fp-viewing-timeline].small-screen .emotion-nav {
+	bottom: initial;
+	top: $mobile-section-text-top;
+	left: 0;
+	right: 0;
+	font-size: 12px;
+	margin-top: -#{$ui-mobile-emotion-nav-height}px;
+	ul {
+		position: absolute;
+		left: 1em;
+		right: 1em;
+		height: auto;
 
-			text-align: justify;
-			li {
+		text-align: justify;
+		li {
+			padding: 0;
+			display: inline-block;
+			position: relative;
+			top: 1.2em;
+			text-align: center;
+			width: auto;
+			a {
+				display: inline-block;
 				padding: 0;
-				display: inline-block;
-				position: relative;
-				top: 1.2em;
-				text-align: center;
-				width: auto;
-				a{
-					display: inline-block;
-					padding: 0;
-				}
 			}
+		}
 
-			&:before {
-				content: '';
-				display: block;
-				width: 100%;
-				margin-bottom: -1.2em;
-			}
+		&:before {
+			content: '';
+			display: block;
+			width: 100%;
+			margin-bottom: -1.2em;
+		}
 
-			&:after {
-				content: '';
-				display: inline-block;
-				width: 100%;
-			}
+		&:after {
+			content: '';
+			display: inline-block;
+			width: 100%;
 		}
 	}
 }

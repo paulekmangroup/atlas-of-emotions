@@ -13,6 +13,12 @@ const dispatcher = {
 		MODAL_CHANGE: 'modalChange',
 		POPUP_CHANGE: 'popupChange',
 		POPUP_CLOSE_BUTTON_CLICKED: 'popupCloseButtonClicked',
+		SECTION_GRAPHICS_RESIZE: 'sectionGraphicsResize',
+		SECTION_TEXT_MAXIMIZE_START: 'sectionTextMaximizeStart',
+		SECTION_TEXT_MAXIMIZE_COMPLETE: 'sectionTextMaximizeComplete',
+		SECTION_TEXT_MINIMIZE_START: 'sectionTextMinimizeStart',
+		SECTION_TEXT_MINIMIZE_COMPLETE: 'sectionTextMinimizeComplete',
+		ALLOW_MORE_CONTENT: 'allowMoreContent'
 	},
 
 	SECTIONS: {
@@ -120,6 +126,42 @@ const dispatcher = {
 	popupCloseButtonClicked: function ( section, name ) {
 
 		this.emit( this.EVENTS.POPUP_CLOSE_BUTTON_CLICKED, section, name );
+
+	},
+
+	sectionGraphicsResize: function () {
+
+		this.emit( this.EVENTS.SECTION_GRAPHICS_RESIZE );
+
+	},
+
+	sectionTextMaximizeStart: function ( duration ) {
+
+		this.emit( this.EVENTS.SECTION_TEXT_MAXIMIZE_START, duration );
+
+	},
+
+	sectionTextMaximizeComplete: function () {
+
+		this.emit( this.EVENTS.SECTION_TEXT_MAXIMIZE_COMPLETE );
+
+	},
+
+	sectionTextMinimizeStart: function ( duration ) {
+
+		this.emit( this.EVENTS.SECTION_TEXT_MINIMIZE_START, duration );
+
+	},
+
+	sectionTextMinimizeComplete: function () {
+
+		this.emit( this.EVENTS.SECTION_TEXT_MINIMIZE_COMPLETE );
+
+	},
+
+	allowMoreContent: function( allow, section ){
+
+		this.emit( this.EVENTS.ALLOW_MORE_CONTENT );
 
 	},
 

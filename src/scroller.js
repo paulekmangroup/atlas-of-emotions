@@ -1,7 +1,8 @@
 import { TweenMax, TimelineMax } from "gsap";
-
-import dispatcher from './dispatcher.js';
+import dispatcher from './dispatcher';
 import moreInfo from './moreInfo.js';
+import timeline from './timeline/timeline';
+import sassVars from '../scss/variables.json';
 
 //TODO do we really need max or just lite? Should we replace tween.js in other files?
 
@@ -43,6 +44,10 @@ const scroller = {
 	hasEmotionState: function ( anchor ) {
 		var section = $( '#' + anchor + '-section' );
 		return section.attr( 'data-has-emotion-state' );
+	},
+
+	getFullpageSectionId( section ){
+		return '#' + this.ATLAS_TO_FULLPAGE_SECTIONS[ section ] + '-section';
 	},
 
 	advanceSlide: function () {
@@ -281,6 +286,10 @@ const scroller = {
 
 	},
 
+	allowMoreContent: function ( allow, section ) {
+		$( this.getFullpageSectionId( section ) ).find( '.more-link' ).toggleClass( 'allowed', allow );
+	},
+
 	initMoreContentLinks: function () {
 		var _self = this;
 		// show additional content in the sections
@@ -472,99 +481,114 @@ const scroller = {
 			} );
 		};
 
-		let addMobileTouchEffects = ( $elements ) => {
+		let addMobileTextTouchEffects = ( $elements ) => {
 
-			let swipeStart = { x: 0, y: 0 };
-			let distance = 0;
-			let height = 0;
-			let thresh = 0;
-			let top = null;
+			var swipeStart = { x: 0, y: 0 },
+				yDistance = 0,
+				height = 0,
+				thresh = 20,
+				transitionDuration = 0.5,
+				minimumDistance = null,
+				maximized = false,
+				maximizing = false,
+				minimizing = false,
+				maximumDistance = 0,
+				$sectionText = null,
+				$sectionGraphics = null,
+				$sectionTextContent = null,
+				$emotionNav = $( '.emotion-nav' );
 
-			let atMaximum = false;
-
-			let $sectionText = null;
-			let $sectionTextContent = null;
-
-			let maximumDistance = 0;
-
-			let returnTranslation = ( element ) => {
+			let minimize = () => {
+				minimizing = true;
 				$sectionTextContent[ 0 ].scrollTop = 0;
 				$sectionTextContent[ 0 ].style.overflowY = 'hidden';
-				TweenMax.to( element, 0.5, {
-					top: top,
+				$sectionTextContent.off( 'scroll' );
+				TweenMax.to( [ $sectionText[ 0 ], $emotionNav[ 0 ] ], transitionDuration, {
+					top: minimumDistance,
+					onUpdate: ()=> {
+						dispatcher.sectionGraphicsResize();
+					},
 					onComplete: ()=> {
-						distance = 0;
-						atMaximum = false;
+						maximized = false;
+						minimizing = false;
+						dispatcher.sectionGraphicsResize();
+						dispatcher.sectionTextMinimizeComplete();
 					}
 				} );
+				TweenMax.to( $sectionGraphics[ 0 ], transitionDuration, { height: minimumDistance - $sectionGraphics[ 0 ].offsetTop } );
+				dispatcher.sectionTextMinimizeStart( transitionDuration );
 			};
-			let maximizeTranslation = ( element ) => {
-				TweenMax.to( element, 0.5, {
-					top: top - maximumDistance,
+			let maximize = () => {
+				maximizing = true;
+				TweenMax.to( [ $sectionText[ 0 ], $emotionNav[ 0 ] ], transitionDuration, {
+					top: maximumDistance,
+					onUpdate: ()=> {
+						dispatcher.sectionGraphicsResize();
+					},
 					onComplete: ()=> {
-						distance = maximumDistance;
-						atMaximum = true;
+						maximized = true;
+						maximizing = false;
 						$sectionTextContent[ 0 ].style.overflowY = 'scroll';
+						$sectionTextContent.on( 'scroll', ( e )=> {
+							if ( $sectionTextContent[ 0 ].scrollTop < 0 ) {
+								minimize();
+								$sectionTextContent.off( 'scroll' );
+							}
+						} );
+						dispatcher.sectionGraphicsResize();
+						dispatcher.sectionTextMaximizeComplete();
 					}
 				} );
+				TweenMax.to( $sectionGraphics[ 0 ], transitionDuration, { height: maximumDistance - sassVars[ 'ui' ][ 'mobile-emotion-nav' ][ 'height' ] - $sectionGraphics[ 0 ].offsetTop } );
+				dispatcher.sectionTextMaximizeStart( transitionDuration );
 			};
 			$elements.on( 'touchstart', ( e ) => {
 				$sectionText = $( '.section.active .section-text' );
+				$sectionGraphics = $( '.section.active .section-graphics' );
 				$sectionTextContent = $( '.section.active .section-text__content' );
-				if ( !top ) {
-					top = $sectionText[ 0 ].offsetTop;
+				if ( !minimumDistance ) {
+					minimumDistance = $sectionText[ 0 ].offsetTop;
 				}
 				height = $( '.section.active' ).height();
 				maximumDistance = 0.33 * height;
 				thresh = 0.01 * touchSensitivity * height;
-				swipeStart.y = e.originalEvent.touches[ 0 ].pageY + distance;
-				swipestart.x = e.originalEvent.touches[ 0 ].pageX;
+				swipeStart.y = e.originalEvent.touches[ 0 ].pageY;
+				swipeStart.x = e.originalEvent.touches[ 0 ].pageX;
 			} );
 			$elements.on( 'touchend', ( e ) => {
 			} );
 			$elements.on( 'touchmove', ( e ) => {
-				if ( atMaximum ) {
-					let newDistance = e.originalEvent.touches[ 0 ].pageY - swipeStart.y;
-					if ( $sectionTextContent[ 0 ].scrollTop <= 0 && newDistance < distance ) {
-						atMaximum = false;
+				let newYDistance = swipeStart.y - e.originalEvent.touches[ 0 ].pageY;
+				let newXDistance = swipeStart.x - e.originalEvent.touches[ 0 ].pageX;
+				if ( Math.abs( newXDistance ) > Math.abs( newYDistance )
+					|| Math.abs( newYDistance ) < thresh ) {
+					return;
+				}
+				let direction = newYDistance - yDistance;
+				yDistance = newYDistance;
+				if ( maximized ) {
+					if ( $sectionTextContent[ 0 ].scrollTop <= 0 && newYDistance < 0 && !minimizing ) {
+						swipeStart.y = e.originalEvent.touches[ 0 ].pageY;
+						minimize();
 					}
-					$sectionTextContent.on( 'scroll', ( e )=> {
-						if ( $sectionTextContent[ 0 ].scrollTop < 0 ) {
-							returnTranslation( $sectionText[ 0 ] );
-							$sectionTextContent.off( 'scroll' );
-						}
-					} );
 				} else {
-					let newDistance = swipeStart.y - e.originalEvent.touches[ 0 ].pageY;
-					let direction = newDistance - distance;
-					distance = newDistance;
-					$sectionTextContent.off( 'scroll' );
-					if ( direction > 0 ) {
-						maximizeTranslation( $sectionText[ 0 ] );
-					} else {
-						returnTranslation( $sectionText[ 0 ] );
+					if ( newYDistance > 0 && !maximizing ) {
+						swipeStart.y = e.originalEvent.touches[ 0 ].pageY;
+						maximize();
 					}
-					//if ( distance > 0 ) {
-					//	if ( distance < maximumDistance ) {
-					//		// when panel is not at max distance
-					//		$sectionTextContent[ 0 ].style.overflowY = 'hidden';
-					//		TweenMax.set( $sectionText[ 0 ], { top: top - distance } );
-					//		e.preventDefault();
-					//	} else {
-					//		// when panel is at max distance
-					//		atMaximum = true;
-					//		$sectionTextContent[ 0 ].style.overflowY = 'scroll';
-					//		distance = maximumDistance;
-					//	}
-					//} else {
-					//	distance = 0;
-					//}
 				}
 			} );
 		};
 
+		let addMobileTimelineGraphicsTouchEffects = ( $sectionGraphics ) => {
+			$sectionGraphics.on( 'touchmove', timeline.touchmove.bind( timeline ) );
+			$sectionGraphics.on( 'touchstart', timeline.touchstart.bind( timeline ) );
+			$sectionGraphics.on( 'touchend', timeline.touchend.bind( timeline ) );
+		};
+
 		if ( this.screenIsSmall ) {
-			addMobileTouchEffects( this.$sections );
+			addMobileTextTouchEffects( $( '.section-text' ) );
+			addMobileTimelineGraphicsTouchEffects( $( '#timeline-section .section-graphics' ) );
 		} else {
 			addDesktopTabletTouchEffects( $originalContent );
 			addDesktopTabletTouchEffects( this.$sections );

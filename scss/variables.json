@@ -160,6 +160,9 @@
 			"expansion-amount": 100,
 			"min-width": 150,
 			"max-width": 200
+		},
+		"mobile-emotion-nav": {
+			"height": 20
 		}
 	}
 }

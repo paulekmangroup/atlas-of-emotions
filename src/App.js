@@ -123,6 +123,14 @@ export default function ( ...initArgs ) {
 				dispatcher.addListener( dispatcher.EVENTS.POPUP_CHANGE, onPopupChange );
 				dispatcher.addListener( dispatcher.EVENTS.OPEN_MORE_INFO_MENU, onMoreInfoMenuClick );
 
+				// other events
+				dispatcher.addListener( dispatcher.EVENTS.SECTION_GRAPHICS_RESIZE, onSectionGraphicsResized );
+				dispatcher.addListener( dispatcher.EVENTS.SECTION_TEXT_MAXIMIZE_START, onSectionTextMaximizeStart );
+				dispatcher.addListener( dispatcher.EVENTS.SECTION_TEXT_MAXIMIZE_COMPLETE, onSectionTextMaximizeComplete );
+				dispatcher.addListener( dispatcher.EVENTS.SECTION_TEXT_MINIMIZE_START, onSectionTextMinimizeStart );
+				dispatcher.addListener( dispatcher.EVENTS.SECTION_TEXT_MINIMIZE_COMPLETE, onSectionTextMinimizeComplete );
+				dispatcher.addListener( dispatcher.EVENTS.ALLOW_MORE_CONTENT, onAllowMoreContent );
+
 				window.addEventListener( 'hashchange', onHashChange );
 
 				onResize();
@@ -1262,6 +1270,52 @@ export default function ( ...initArgs ) {
 	function onMobileNavCurtainClick( event ) {
 
 		onMobileNavClick();
+
+	}
+
+	function onSectionGraphicsResized() {
+
+		if ( currentSection == sections.triggers ) {
+			sections.triggers.onResize();
+		}
+
+	}
+
+	function onSectionTextMaximizeStart( duration ) {
+
+		if ( currentSection == sections.triggers ) {
+			sections.triggers.onSectionTextMaximizeStart( duration );
+		}
+
+	}
+
+	function onSectionTextMaximizeComplete() {
+
+		if ( currentSection == sections.triggers ) {
+			sections.triggers.onSectionTextMaximizeComplete();
+		}
+
+	}
+
+	function onSectionTextMinimizeStart( duration ) {
+
+		if ( currentSection == sections.triggers ) {
+			sections.triggers.onSectionTextMinimizeStart( duration );
+		}
+
+	}
+
+	function onSectionTextMinimizeComplete() {
+
+		if ( currentSection == sections.triggers ) {
+			sections.triggers.onSectionTextMinimizeComplete();
+		}
+
+	}
+
+	function onAllowMoreContent( allow, section ) {
+
+		scroller.allowMoreContent( allow, section );
 
 	}
 

@@ -1,9 +1,10 @@
 //TODO this file contains a bunch of low level stuff that probably belongs elsewhere or is in d3 etc
 //TODO should regular and add-awareness versions be running at the same time?
+import { TweenMax } from "gsap";
 
 import Episode from './Episode.js';
 import EpisodeAddAwareness from './EpisodeAddAwareness.js';
-import { TweenMax } from "gsap";
+import dispatcher from '../dispatcher';
 
 const timeline = {
 	isInited: false,
@@ -18,6 +19,7 @@ const timeline = {
 	beginAwarenessButton: null,
 	sectionTextBodyIntro: null,
 	sectionTextBodyAwareness: null,
+	swipeDistanceThreshold: 100,
 	episodeContent: {
 		"anger": {
 			"trigger": {
@@ -106,6 +108,54 @@ const timeline = {
 		}
 	},
 
+	touchmove: function ( e ) {
+		let currentSwipe = e.originalEvent.touches[ 0 ].pageX - this.swipeStart;
+		this.activeEpisode && this.activeEpisode.touchDeflect( currentSwipe );
+	},
+
+	touchstart: function ( e ) {
+		this.swipeStart = e.originalEvent.touches[ 0 ].pageX;
+		this.activeEpisode && this.activeEpisode.beginTouchDeflection();
+	},
+
+	touchend: function ( e ) {
+		let currentSwipe = e.originalEvent.changedTouches[ 0 ].pageX - this.swipeStart;
+		if ( Math.abs( currentSwipe ) > this.swipeDistanceThreshold ) {
+			let swipeDirection = currentSwipe > 0 ? 1 : -1;
+			this.activeEpisode && this.activeEpisode.scrollSvg( swipeDirection );
+		} else {
+			this.activeEpisode && this.activeEpisode.returnTouchDeflection();
+		}
+	},
+
+	onSectionTextMaximizeStart( duration ) {
+
+		this.activeEpisode && this.activeEpisode.minimizeStart( duration );
+
+	},
+
+	onSectionTextMaximizeComplete() {
+
+		this.activeEpisode && this.activeEpisode.minimizeComplete();
+
+	},
+
+	onSectionTextMinimizeStart( duration ) {
+
+		this.activeEpisode && this.activeEpisode.maximizeStart( duration );
+
+	},
+
+	onSectionTextMinimizeComplete() {
+
+		this.activeEpisode && this.activeEpisode.maximizeComplete();
+
+	},
+
+	allowMoreContent(){
+		dispatcher.allowMoreContent( true, dispatcher.SECTIONS.TRIGGERS );
+	},
+
 	//work around safari missing children property in svg nodes
 	getChildren: function ( element ) {
 		var svgChildren = element.children || element.childNodes;
@@ -140,50 +190,6 @@ const timeline = {
 		return parent.querySelectorAll( selector );
 	},
 
-
-	extractDocument: function ( svgElement, container ) {
-
-		var NS = "http://www.w3.org/2000/svg";
-
-		// pull svg element out of the document and make it self center so that
-		// illumination can be animated across it
-
-		var originalWidth = svgElement.getAttribute( "width" ),
-			originalHeight = svgElement.getAttribute( 'height' ),
-			originalViewBox = svgElement.getAttribute( 'viewBox' );
-		svgElement.setAttribute( 'overflow', 'visible' );
-		svgElement.setAttribute( 'width', '100%' );
-		svgElement.setAttribute( 'height', '100%' );
-		//svgElement.removeAttribute( 'viewBox' );
-		//svgElement.setAttribute( 'preserveAspectRatio', 'none' );
-		var svgChildrenGroup = svgElement.getElementsByTagName( 'g' )[ 0 ];
-
-		var wrapperSVG = document.createElementNS( NS, 'svg' );
-		wrapperSVG.setAttribute( 'x', '50%' );
-		wrapperSVG.setAttribute( 'y', '50%' );
-		wrapperSVG.setAttribute( 'width', originalWidth );
-		wrapperSVG.setAttribute( 'height', originalHeight );
-		//wrapperSVG.setAttribute( 'viewBox', originalViewBox );
-		wrapperSVG.setAttribute( 'overflow', 'visible' );
-		wrapperSVG.appendChild( svgChildrenGroup );
-
-		svgElement.style.backgroundColor = 'transparent';
-
-		var wrapperGroup = document.createElementNS( NS, 'g' );
-		wrapperGroup.setAttribute( 'transform', 'translate(' + (-0.5 * parseInt( originalWidth )) + ', ' + (-0.5 * parseInt( originalHeight )) + ')' );
-		wrapperGroup.appendChild( wrapperSVG );
-
-		svgElement.appendChild( wrapperGroup );
-
-		var newParentDiv = document.createElement( 'div' );
-		newParentDiv.classList.add( 'episode-parent' );
-		newParentDiv.appendChild( svgElement );
-		container.appendChild( newParentDiv );
-
-		return newParentDiv;
-
-	},
-
 	loadEpisode: function () {
 		// no awareness version
 		var ajax = new XMLHttpRequest();
@@ -213,17 +219,15 @@ const timeline = {
 	},
 
 	showAwarenessEpisode: function () {
-		var _self = this;
 		TweenMax.to(
 			this.container,
-			1,
-			{
+			1, {
 				autoAlpha: 0,
-				onComplete: function () {
-					_self.episode.getParentElement().style.display = 'none';
-					_self.episode.setActive( false );
-					_self.loadEpisodeAddAwareness();
-					TweenMax.set( _self.container, {
+				onComplete: ()=> {
+					this.episode.getParentElement().remove();
+					this.episode.setActive( false );
+					this.loadEpisodeAddAwareness();
+					TweenMax.set( this.container, {
 						autoAlpha: 1
 					} );
 				}
@@ -382,7 +386,10 @@ const timeline = {
 	},
 
 	onResize: function () {
-		//TODO implement this
+
+		this.episode && this.episode.onResize();
+		this.episodeAddAwareness && this.episodeAddAwareness.onResize();
+
 	},
 
 	open: function ( options ) {
