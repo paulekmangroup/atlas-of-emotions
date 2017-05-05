@@ -425,14 +425,6 @@ const scroller = {
 
 		if ( this.screenIsSmall ) {
 			$.fn.fullpage.setAllowScrolling( false );
-			//$( 'body, html' ).on( 'scroll, wheel, touchstart, touchmove, touchend', ( e )=> {
-			//	console.log( e.currentTarget );
-			//	e.preventDefault();
-			//} );
-			//$( document ).on( 'scroll, wheel, touchstart, touchmove, touchend', ( e )=> {
-			//	console.log( e.currentTarget );
-			//	e.preventDefault();
-			//} );
 		}
 
 		let $originalContent = $( '.original-content' );
@@ -487,19 +479,34 @@ const scroller = {
 				yDistance = 0,
 				height = 0,
 				thresh = 20,
-				transitionDuration = 0.5,
 				minimumDistance = null,
-				maximized = false,
-				maximizing = false,
-				minimizing = false,
 				maximumDistance = 0,
+				transitionDuration = 0.5,
+				sectionTextMaximized = false,
+				sectionTextMaximizing = false,
+				sectionTextMinimizing = false,
 				$sectionText = null,
 				$sectionGraphics = null,
 				$sectionTextContent = null,
 				$emotionNav = $( '.emotion-nav' );
 
-			let minimize = () => {
-				minimizing = true;
+			let onTapSectionGraphics = ( e ) => {
+				if ( sectionTextMaximized ) {
+					// minimize section text
+					timeline.scrollToCoordinates( e.pageX, e.pageY);
+					minimizeSectionText();
+					e.preventDefault();
+					e.stopPropagation();
+				}
+			};
+			$( '.section .section-graphics' ).on( 'click', onTapSectionGraphics );
+
+
+			let minimizeSectionText = () => {
+				if ( (!sectionTextMaximized && !sectionTextMaximizing) || sectionTextMinimizing ) {
+					return;
+				}
+				sectionTextMinimizing = true;
 				$sectionTextContent[ 0 ].scrollTop = 0;
 				$sectionTextContent[ 0 ].style.overflowY = 'hidden';
 				$sectionTextContent.off( 'scroll' );
@@ -509,29 +516,35 @@ const scroller = {
 						dispatcher.sectionGraphicsResize();
 					},
 					onComplete: ()=> {
-						maximized = false;
-						minimizing = false;
+						sectionTextMaximized = false;
+						sectionTextMinimizing = false;
 						dispatcher.sectionGraphicsResize();
 						dispatcher.sectionTextMinimizeComplete();
 					}
 				} );
-				TweenMax.to( $sectionGraphics[ 0 ], transitionDuration, { height: minimumDistance - $sectionGraphics[ 0 ].offsetTop } );
+				TweenMax.to( $sectionGraphics[ 0 ], transitionDuration, { height: minimumDistance - sassVars[ 'ui' ][ 'mobile-emotion-nav' ][ 'height' ] - $sectionGraphics[ 0 ].offsetTop } );
 				dispatcher.sectionTextMinimizeStart( transitionDuration );
 			};
-			let maximize = () => {
-				maximizing = true;
+
+			this.minimizeSectionText = minimizeSectionText;
+
+			let maximizeSectionText = () => {
+				if ( (sectionTextMaximized && !sectionTextMinimizing) || sectionTextMaximizing ) {
+					return;
+				}
+				sectionTextMaximizing = true;
 				TweenMax.to( [ $sectionText[ 0 ], $emotionNav[ 0 ] ], transitionDuration, {
 					top: maximumDistance,
 					onUpdate: ()=> {
 						dispatcher.sectionGraphicsResize();
 					},
 					onComplete: ()=> {
-						maximized = true;
-						maximizing = false;
+						sectionTextMaximized = true;
+						sectionTextMaximizing = false;
 						$sectionTextContent[ 0 ].style.overflowY = 'scroll';
 						$sectionTextContent.on( 'scroll', ( e )=> {
 							if ( $sectionTextContent[ 0 ].scrollTop < 0 ) {
-								minimize();
+								minimizeSectionText();
 								$sectionTextContent.off( 'scroll' );
 							}
 						} );
@@ -542,6 +555,9 @@ const scroller = {
 				TweenMax.to( $sectionGraphics[ 0 ], transitionDuration, { height: maximumDistance - sassVars[ 'ui' ][ 'mobile-emotion-nav' ][ 'height' ] - $sectionGraphics[ 0 ].offsetTop } );
 				dispatcher.sectionTextMaximizeStart( transitionDuration );
 			};
+
+			this.maximizeSectionText = maximizeSectionText;
+
 			$elements.on( 'touchstart', ( e ) => {
 				$sectionText = $( '.section.active .section-text' );
 				$sectionGraphics = $( '.section.active .section-graphics' );
@@ -566,18 +582,20 @@ const scroller = {
 				}
 				let direction = newYDistance - yDistance;
 				yDistance = newYDistance;
-				if ( maximized ) {
-					if ( $sectionTextContent[ 0 ].scrollTop <= 0 && newYDistance < 0 && !minimizing ) {
+				if ( sectionTextMaximized ) {
+					if ( $sectionTextContent[ 0 ].scrollTop <= 0 && newYDistance < 0 && !sectionTextMinimizing ) {
 						swipeStart.y = e.originalEvent.touches[ 0 ].pageY;
-						minimize();
+						minimizeSectionText();
 					}
 				} else {
-					if ( newYDistance > 0 && !maximizing ) {
+					if ( newYDistance > 0 && !sectionTextMaximizing ) {
 						swipeStart.y = e.originalEvent.touches[ 0 ].pageY;
-						maximize();
+						maximizeSectionText();
 					}
 				}
 			} );
+
+
 		};
 
 		let addMobileTimelineGraphicsTouchEffects = ( $sectionGraphics ) => {

@@ -874,12 +874,13 @@ svg {
 	}
 	.section-graphics {
 		top: #{$ui-header-mobile-nav-target-height}px;
-		height: #{$mobile-split-height}px;
+		height: $mobile-section-graphics-height;
 		bottom: auto;
 		right: 0;
 		left: 0;
 		margin: 0;
 		padding: 0;
+		overflow: visible;
 	}
 }
 

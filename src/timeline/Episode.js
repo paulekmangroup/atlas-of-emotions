@@ -51,7 +51,8 @@ export default class Episode {
 		//replace content
 		this.replaceContent( this.currentEmotion, animateReplaceContent );
 
-		TweenMax.delayedCall( 0.5, () => {
+		let delay = this.screenIsSmall ? 0 : 0.5;
+		TweenMax.delayedCall( delay, () => {
 			this.episodeTimeline.play();
 		} );
 
@@ -205,48 +206,67 @@ export default class Episode {
 		return this.svg;
 	}
 
+	getScrollElements() {
+		if ( !this.scrollElements ) {
+			this.scrollElements = [
+				this.parent.querySelector( 'svg' )
+			];
+		}
+		return this.scrollElements;
+	}
+
 	getSvgScrollPosition() {
 		return parseFloat( this.getSvg().style.left );
 	}
 
+	setInteractive( interactive ) {
+		this.parent.style.pointerEvents = interactive ? 'auto' : 'none';
+	}
+
+	getInteractive() {
+		return this.parent.style.pointerEvents != 'none';
+	}
+
 	beginTouchDeflection() {
-		if ( this.parent.style.pointerEvents == 'none' ) {
+		if ( !this.getInteractive() ) {
 			return
 		}
 		this.svgScrollPosition = this.getSvgScrollPosition();
 	}
 
 	touchDeflect( distance ) {
-		if ( this.parent.style.pointerEvents == 'none' ) {
+		if ( !this.getInteractive() ) {
 			return
 		}
 		this.touchDeflection = distance;
-		TweenMax.set( this.getSvg(), { css: { left: this.svgScrollPosition + this.touchDeflection } } );
+		TweenMax.set( this.getScrollElements(), { css: { left: this.svgScrollPosition + this.touchDeflection } } );
 	}
 
 	returnTouchDeflection() {
-		if ( this.parent.style.pointerEvents == 'none' ) {
+		if ( !this.getInteractive() ) {
 			return
 		}
-		TweenMax.to( this.getSvg(), 0.4, { css: { left: -1 * this.svgScrollPosition } } );
+		this.scrollTween = TweenMax.to( this.getScrollElements(), 0.4, { css: { left: this.svgScrollPosition } } );
 		this.touchDeflection = 0;
 	}
 
-	scrollSvg( direction ) {
-		if ( this.parent.style.pointerEvents == 'none' ) {
+	scrollSvgInDirection( direction ) {
+		if ( !this.getInteractive() ) {
 			return
 		}
 		var scrollStageIndex = this.scrollStageIndex - direction;
 		if ( scrollStageIndex >= 0 && scrollStageIndex < this.scrollStages.length ) {
 			this.scrollSvgToStage( this.scrollStages[ scrollStageIndex ], 0.4 );
 			this.touchDeflection = 0;
+		} else {
+			this.returnTouchDeflection();
 		}
 	}
 
-	computeScrollCoordinates() {
-		this.scrollCoordinates = {};
+	computeScrollPositions() {
+		this.scrollStagePositions = {};
 		this.scrollStages.forEach( ( stage )=> {
-			this.scrollCoordinates[ stage ] = this.getSvgScrollPosition() + this.getStageDOMCenterPoint( stage ) - this.parent.offsetWidth / 2;
+			this.scrollStagePositions[ stage ] = -1 * (this.getStageDOMCenterPoint( stage ) - this.parent.offsetWidth / 2);
 		} );
 	}
 
@@ -254,24 +274,39 @@ export default class Episode {
 		var scrollStageIndex = this.scrollStages.indexOf( stage );
 		if ( scrollStageIndex >= 0 && scrollStageIndex < this.scrollStages.length ) {
 			this.scrollStageIndex = scrollStageIndex;
-			let scrollCoord = this.scrollCoordinates[ stage ];
-			TweenMax.to( this.getSvg(), duration, { css: { left: -1 * scrollCoord } } );
+			if ( this.minimizing || !this.maximized ) {
+				// do nothing
+				return;
+			} else {
+				// scroll
+				this.scrollTween = TweenMax.to( this.getScrollElements(), duration, { css: { left: this.scrollStagePositions[ stage ] } } );
+			}
 		}
+	}
+
+	scrollToCoordinates( x, y ) {
+		let stageIndex = Math.trunc( 3 * x / this.getParentWidth() );
+		this.scrollSvgToStage( this.scrollStages[ stageIndex ] );
 	}
 
 	onResize() {
 	}
 
 	minimizeStart( duration ) {
-		this.maximizedScrollStageIndex = this.scrollStageIndex;
-		this.maximizedScrollPosition = this.getSvgScrollPosition();
+		this.minimizing = true;
+		//this.maximizedScrollStageIndex = this.scrollStageIndex;
+		//this.maximizedScrollPosition = this.getSvgScrollPosition();
 		if ( !this.svgMaximizedWidth ) {
 			this.svgMaximizedWidth = this.getSvgWidth();
 		}
-		TweenMax.fromTo( this.getSvg(), duration, {
+		this.parent.style.pointerEvents = 'none';
+		if ( this.scrollTween && this.scrollTween.totalProgress() < 1 ) { // cancel scroll if in progress
+			this.scrollTween.kill();
+		}
+		TweenMax.fromTo( this.getScrollElements(), duration, {
 			css: {
 				width: this.svgMaximizedWidth,
-				left: this.maximizedScrollPosition
+				left: this.scrollStagePositions[ this.scrollStages[ this.scrollStageIndex ] ]
 			}
 		}, {
 			css: {
@@ -282,12 +317,12 @@ export default class Episode {
 	}
 
 	minimizeComplete() {
-		this.parent.style.pointerEvents = 'none';
+		this.minimizing = false;
 		this.maximized = false;
 	}
 
 	maximizeStart( duration ) {
-		TweenMax.fromTo( this.getSvg(), duration, {
+		TweenMax.fromTo( this.getScrollElements(), duration, {
 			css: {
 				width: this.getParentWidth(),
 				left: 0
@@ -295,7 +330,7 @@ export default class Episode {
 		}, {
 			css: {
 				width: this.svgMaximizedWidth,
-				left: this.maximizedScrollPosition
+				left: this.scrollStagePositions[ this.scrollStages[ this.scrollStageIndex ] ]
 			}
 		} );
 	}
@@ -349,7 +384,8 @@ export default class Episode {
 
 		this.parent = newParentDiv;
 		this.getSvg().style.left = 0;
-		this.computeScrollCoordinates();
+		this.svgMaximizedWidth = this.getSvgWidth();
+		this.computeScrollPositions();
 
 		return newParentDiv;
 
@@ -357,8 +393,8 @@ export default class Episode {
 
 	destroy() {
 		this.episodeTimeline.kill();
-		TweenMax.killAll();
-		//TweenMax.killChildTweensOf( this.parent );
+		//TweenMax.killAll();
+		TweenMax.killChildTweensOf( this.parent );
 		scroller.resetEmotionNav();
 		this.parent.remove();
 		this.episodeTimeline = null;
@@ -378,6 +414,7 @@ export default class Episode {
 		this.scrollStageIndex = 0;
 		this.svg = null;
 		this.maximized = true;
+		this.minimizing = false;
 
 		//fonts need to be added for them to work in svg
 		timeline.addFonts( svg ); //TODO move this to timeline

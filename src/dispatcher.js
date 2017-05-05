@@ -18,6 +18,8 @@ const dispatcher = {
 		SECTION_TEXT_MAXIMIZE_COMPLETE: 'sectionTextMaximizeComplete',
 		SECTION_TEXT_MINIMIZE_START: 'sectionTextMinimizeStart',
 		SECTION_TEXT_MINIMIZE_COMPLETE: 'sectionTextMinimizeComplete',
+		MAXIMIZE_SECTION_TEXT: 'maximizeSectionText',
+		MINIMIZE_SECTION_TEXT: 'minimizeSectionText',
 		ALLOW_MORE_CONTENT: 'allowMoreContent'
 	},
 
@@ -159,7 +161,19 @@ const dispatcher = {
 
 	},
 
-	allowMoreContent: function( allow, section ){
+	maximizeSectionText: function () {
+
+		this.emit( this.EVENTS.MAXIMIZE_SECTION_TEXT );
+
+	},
+
+	minimizeSectionText: function () {
+
+		this.emit( this.EVENTS.MINIMIZE_SECTION_TEXT );
+
+	},
+
+	allowMoreContent: function ( allow, section ) {
 
 		this.emit( this.EVENTS.ALLOW_MORE_CONTENT );
 

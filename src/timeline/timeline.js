@@ -122,7 +122,7 @@ const timeline = {
 		let currentSwipe = e.originalEvent.changedTouches[ 0 ].pageX - this.swipeStart;
 		if ( Math.abs( currentSwipe ) > this.swipeDistanceThreshold ) {
 			let swipeDirection = currentSwipe > 0 ? 1 : -1;
-			this.activeEpisode && this.activeEpisode.scrollSvg( swipeDirection );
+			this.activeEpisode && this.activeEpisode.scrollSvgInDirection( swipeDirection );
 		} else {
 			this.activeEpisode && this.activeEpisode.returnTouchDeflection();
 		}
@@ -190,6 +190,10 @@ const timeline = {
 		return parent.querySelectorAll( selector );
 	},
 
+	scrollToCoordinates: function ( x, y ) {
+		this.activeEpisode.scrollToCoordinates( x, y );
+	},
+
 	loadEpisode: function () {
 		// no awareness version
 		var ajax = new XMLHttpRequest();
@@ -212,9 +216,14 @@ const timeline = {
 		ajax.onload = ( e ) => {
 			this.episodeAddAwareness = new EpisodeAddAwareness( e.currentTarget.responseXML.documentElement, this.container, this.currentEmotion, this.screenIsSmall );
 			this.activeEpisode = this.episodeAddAwareness;
+			this.episodeAddAwareness.maximized = this.episode.maximized;
+			this.episodeAddAwareness.minimizing = this.episode.minimizing;
+			this.episodeAddAwareness.setInteractive( this.episode.getInteractive() );
 			if ( this.isActive ) {
 				this.episodeAddAwareness.setEmotion( this.currentEmotion );
 			}
+			this.episode.destroy();
+			this.episode = null;
 		};
 	},
 
@@ -247,6 +256,11 @@ const timeline = {
 		return [].slice.call( document.querySelectorAll( 'button.body-awareness' ) ).filter( ( e )=> {
 			return visible.indexOf( e ) == -1;
 		} );
+	},
+
+	advanceAwarenessStage: function ( stage ) {
+		dispatcher.minimizeSectionText();
+		this.showAwarenessCopy( stage );
 	},
 
 	showAwarenessCopy: function ( stage ) {
@@ -283,11 +297,14 @@ const timeline = {
 
 	addAwareness: function () {
 		if ( !this.episodeAddAwareness ) {
-			this.showAwarenessEpisode();
-			this.hideIntroCopy( function () {
-				TweenMax.set( this.sectionTextBodyIntro, { css: { display: 'none' } } );
-				this.showAwarenessCopy( 'trigger' );
-			}.bind( this ) );
+			dispatcher.minimizeSectionText();
+			dispatcher.once( dispatcher.EVENTS.SECTION_TEXT_MINIMIZE_COMPLETE, ()=> {
+				this.showAwarenessEpisode();
+				this.hideIntroCopy( function () {
+					TweenMax.set( this.sectionTextBodyIntro, { css: { display: 'none' } } );
+					this.showAwarenessCopy( 'trigger' );
+				}.bind( this ) );
+			} );
 		}
 	},
 
@@ -322,8 +339,8 @@ const timeline = {
 	fullRestart: function () {
 		let restart = ()=> {
 			this.episode && this.episode.destroy();
-			this.episodeAddAwareness && this.episodeAddAwareness.destroy();
 			this.episode = null;
+			this.episodeAddAwareness && this.episodeAddAwareness.destroy();
 			this.episodeAddAwareness = null;
 			this.loadEpisode();
 			this.hideAwarenessCopy();

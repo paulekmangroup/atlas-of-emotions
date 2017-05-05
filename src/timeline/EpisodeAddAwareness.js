@@ -46,45 +46,40 @@ export default class EpisodeAddAwareness extends Episode {
 
 		var event = timeline.select( '#event', svg );
 		var eventRect = event.getBoundingClientRect();
-
+		this.illuminationBlock = document.createElement( "div" );
+		this.illuminationBlock.id = 'illumination-block';
 		if ( this.screenIsSmall ) {
-			this.illuminationBlock.remove();
 			let container = document.createElement( "div" );
 			container.classList.add( 'illumination-container' );
 			container.appendChild( this.illuminationBlock );
 			this.parent.insertBefore( container, svg );
 			this.resizeIllumination();
+		} else {
+			let container = $( '#app-container' )[ 0 ];
+			container.insertBefore( this.illuminationBlock, container.firstChild );
 		}
-		//TweenMax.set( this.illuminationBlock, {
-		//	css: { width: eventRect.left, autoAlpha: 0 }
-		//} );
 
 	}
 
 	onResize() {
 		super.onResize();
-		this.resizeIllumination();
+		//this.resizeIllumination();
 	}
 
 	resizeIllumination() {
-		let parentSvgWidth = $( this.parent.querySelector( 'svg' ) ).outerWidth();
-		let illuminationPoint = this.getStageIlluminationPercentage( this.awarenessStage ) + '%';
-		console.log( parentSvgWidth );
-		//if ( !this.timer ) {
-		//	this.timer = setInterval( ()=> {
-		//		console.log( 'ow: ' + $( this.parent.querySelector( 'svg' ) ).outerWidth() );
-		//	}, 500 );
-		//}
+		$( '.illumination-container' ).width( this.getSvgWidth() );
+		//let illuminationPosition = this.getStageIlluminationPercentage( this.awarenessStage );
+		//this.moveIllumination( illuminationPosition, 0 );
+	}
 
-		$( '.illumination-container' ).width( parentSvgWidth );
-
-		TweenMax.set(
-			this.illuminationBlock,
-			{
-				css: { x: illuminationPoint },
-				ease: Power2.easeInOut
-			}
-		);
+	getScrollElements() {
+		if ( !this.scrollElements ) {
+			this.scrollElements = [
+				this.parent.querySelector( 'svg' ),
+				this.parent.querySelector( '.illumination-container' )
+			];
+		}
+		return this.scrollElements;
 	}
 
 	hide( onComplete ) {
@@ -120,10 +115,20 @@ export default class EpisodeAddAwareness extends Episode {
 	}
 
 	getIlluminationContainerWidth() {
-		let container = $( '#illumination-block' ).parent()[ 0 ];
+		let container = this.illuminationBlock.parentNode;
 		let bounds = container.getBoundingClientRect();
 		return bounds.right - bounds.left;
 	}
+
+	moveIllumination( position, duration = 4 ) {
+		return TweenMax.to(
+			this.illuminationBlock,
+			duration, {
+				css: { right: (100 - position) + '%' },
+				ease: Power2.easeInOut
+			} );
+	};
+
 
 	constructor( svg, container, emotion, screenIsSmall ) {
 		super( svg, container, emotion, screenIsSmall );
@@ -324,7 +329,7 @@ export default class EpisodeAddAwareness extends Episode {
 				}
 			};
 
-			var addStateAwareness = function () {
+			var addExperienceAwareness = function () {
 				if ( this.awarenessStage == 'experience' ) {
 					physicalChanges.style.visibility = 'visible';
 					mentalChanges.style.visibility = 'visible';
@@ -348,36 +353,26 @@ export default class EpisodeAddAwareness extends Episode {
 
 			};
 
-
 			this.awarenessStage = 'trigger';
 
 			this.advance = function () {
 
 				if ( this.awarenessStage == 'trigger' ) {
 
-					let illuminationPoint = this.getStageIlluminationPercentage( 'experience' ) + '%';
-
-					TweenMax.to( this.illuminationBlock, 4, {
-						css: { x: illuminationPoint },
-						ease: Power2.easeInOut
-					} );
-					//TweenMax.to( illuminationGlow, 4, { attr: { x: '+=300' }, ease: Power2.easeInOut } );
-
+					let illuminationPosition = this.getStageIlluminationPercentage( 'experience' );
+					this.moveIllumination( illuminationPosition );
 					this.awarenessStage = 'experience';
 
 				} else if ( this.awarenessStage == 'experience' ) {
 
-					let illuminationPoint = '100%';//this.getStageIlluminationPercentage( 'response' )+'%';
+					let illuminationPosition = 125;
 					let illuminationTimeline = new TimelineMax( {} );
 
 					// move illumination all the way off screen, starting with a smooth but quick acceleration
 					// once it is finished illuminating the entire timeline, the block interactions are enabled
 					illuminationTimeline
 						.add( 'start' )
-						.to( this.illuminationBlock, 4, {
-							css: { x: illuminationPoint },
-							ease: Power2.easeIn
-						}, 'start' )
+						.add( this.moveIllumination( illuminationPosition ) )
 						.add( 'finished' )
 						.addCallback( ()=> {
 							TweenMax.to( refractoryPeriodButton, 1, { autoAlpha: 1, ease: Power2.easeOut } );
@@ -410,13 +405,15 @@ export default class EpisodeAddAwareness extends Episode {
 
 				}
 
-				timeline.showAwarenessCopy( this.awarenessStage );
+				timeline.advanceAwarenessStage( this.awarenessStage );
 
 			};
 
 			this.advanceAndStart = function () {
-				this.advance();
 				this.start();
+				TweenMax.delayedCall( 1, () => {
+					this.advance();
+				} );
 			};
 
 
@@ -522,10 +519,8 @@ export default class EpisodeAddAwareness extends Episode {
 			this.resizeIllumination();
 			illuminationTimeline
 				.add( 'illuminate' )
-				.to( this.illuminationBlock, 2, { autoAlpha: 1, ease: Power1.easeInOut } )
-				.to( this.illuminationBlock, 3, {
-					css: { x: this.getStageIlluminationPercentage( 'trigger' ) + '%' },
-					ease: Power1.easeOut,
+				.fromTo( this.illuminationBlock, 2, { autoAlpha: 0 }, { autoAlpha: 1, ease: Power1.easeInOut } )
+				.add( this.moveIllumination( this.getStageIlluminationPercentage( 'trigger' ) ), {
 					onComplete: ()=> {
 						pulsateIllumination.bind( this )();
 					}
@@ -575,7 +570,7 @@ export default class EpisodeAddAwareness extends Episode {
 			this.addStateEmergence();
 
 			this.episodeTimeline
-				.addCallback( addStateAwareness, 'experience' )
+				.addCallback( addExperienceAwareness.bind( this ), 'experience' )
 				.addCallback( this.triggerRefractoryEffects.bind( this ), 'experience' )
 				.from( changes, 2, { autoAlpha: 0, ease: Power1.easeOut }, 'experience' )
 				.from( stateLabel, 2, {
@@ -585,7 +580,7 @@ export default class EpisodeAddAwareness extends Episode {
 				.add( 'pulsate' )
 				//show response
 				.add( 'response-lines', '-=0.5' )
-				.addCallback( addResponseLineAwareness, 'response-lines' )
+				.addCallback( addResponseLineAwareness.bind( this ), 'response-lines' )
 				.from( responseLineGroup, 0.5, { autoAlpha: 0, ease: Power1.easeOut }, 'response-lines' )
 
 				.add( 'responses' )
@@ -594,7 +589,7 @@ export default class EpisodeAddAwareness extends Episode {
 						this.scrollSvgToStage( 'response' );
 					}
 				} )
-				.addCallback( addResponseAwareness )
+				.addCallback( addResponseAwareness.bind( this ) )
 				.from( responses, 1, { autoAlpha: 0, ease: Power1.easeOut } )
 
 				.add( 'end' );
@@ -618,7 +613,7 @@ export default class EpisodeAddAwareness extends Episode {
 				hideButton( e.currentTarget );
 				//reset and advance at start
 				this.rewind( () => {
-					TweenMax.delayedCall( 1.5, () => {
+					TweenMax.delayedCall( 0.5, () => {
 						this.advanceAndStart();
 					} );
 				} );

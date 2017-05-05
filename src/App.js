@@ -129,6 +129,8 @@ export default function ( ...initArgs ) {
 				dispatcher.addListener( dispatcher.EVENTS.SECTION_TEXT_MAXIMIZE_COMPLETE, onSectionTextMaximizeComplete );
 				dispatcher.addListener( dispatcher.EVENTS.SECTION_TEXT_MINIMIZE_START, onSectionTextMinimizeStart );
 				dispatcher.addListener( dispatcher.EVENTS.SECTION_TEXT_MINIMIZE_COMPLETE, onSectionTextMinimizeComplete );
+				dispatcher.addListener( dispatcher.EVENTS.MAXIMIZE_SECTION_TEXT, onMaximizeSectionText );
+				dispatcher.addListener( dispatcher.EVENTS.MINIMIZE_SECTION_TEXT, onMinimizeSectionText );
 				dispatcher.addListener( dispatcher.EVENTS.ALLOW_MORE_CONTENT, onAllowMoreContent );
 
 				window.addEventListener( 'hashchange', onHashChange );
@@ -1311,6 +1313,14 @@ export default function ( ...initArgs ) {
 			sections.triggers.onSectionTextMinimizeComplete();
 		}
 
+	}
+
+	function onMaximizeSectionText() {
+		scroller.maximizeSectionText();
+	}
+
+	function onMinimizeSectionText() {
+		scroller.minimizeSectionText();
 	}
 
 	function onAllowMoreContent( allow, section ) {

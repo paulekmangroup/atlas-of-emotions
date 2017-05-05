@@ -96,58 +96,6 @@
 	}
 }
 
-/* ----------- Phones ----------- */
-.small-screen {
-	//@media screen and (max-width: 750px) {
-	#timeline-section {
-		#timeline-graphics {
-			left: 0;
-			.episode-parent {
-				position: absolute;
-				top: 0;
-				bottom: 0;
-				width: 100%;
-				overflow-x: hidden;
-				//-webkit-overflow-scrolling: touch;
-				overflow-y: hidden;
-				height: auto;
-				text-align: center;
-				transform: translateZ(0);
-				& > svg {
-					position: relative;
-					left: 0;
-					//height: auto;
-					width: 930px;
-					padding-left: 30px;
-				}
-			}
-			//&:after {
-			//	-moz-box-shadow: inset 0 0 10em #454545;
-			//	-webkit-box-shadow: inset 0 0 10em #454545;
-			//	box-shadow: 0 0 10em #454545 inset;
-			//	position: absolute;
-			//	top: 0;
-			//	left: 0;
-			//	width: 100%;
-			//	height: 100%;
-			//	z-index: 2;
-			//	content: "";
-			//	pointer-events: none;
-			//}
-		}
-	}
-	.illumination-container {
-		position: absolute;
-		overflow: visible;
-		height: 300px;
-	}
-	.section-text {
-		p, ul {
-			margin-bottom: 0.5em;
-		}
-	}
-}
-
 #illumination-block {
 	$edge-width: 20%;
 	position: absolute;
@@ -184,3 +132,60 @@
 		background-size: 100%;
 	}
 }
+
+/* ----------- Phones ----------- */
+.small-screen {
+	//@media screen and (max-width: 750px) {
+	#timeline-section {
+		#timeline-graphics {
+			left: 0;
+			overflow-y: visible;
+			.episode-parent {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				width: 100%;
+				height: auto;
+				text-align: center;
+				transform: translateZ(0);
+				& > svg {
+					position: relative;
+					left: 0;
+					//height: auto;
+					width: 930px;
+					padding-left: 30px;
+				}
+			}
+			//&:after {
+			//	-moz-box-shadow: inset 0 0 10em #454545;
+			//	-webkit-box-shadow: inset 0 0 10em #454545;
+			//	box-shadow: 0 0 10em #454545 inset;
+			//	position: absolute;
+			//	top: 0;
+			//	left: 0;
+			//	width: 100%;
+			//	height: 100%;
+			//	z-index: 2;
+			//	content: "";
+			//	pointer-events: none;
+			//}
+		}
+	}
+	.illumination-container {
+		position: absolute;
+		overflow: visible;
+		height: 300px;
+	}
+	#illumination-block {
+		position: absolute;
+		width: 150%;
+		height: 300px;
+	}
+
+	.section-text {
+		p, ul {
+			margin-bottom: 0.5em;
+		}
+	}
+}
+
