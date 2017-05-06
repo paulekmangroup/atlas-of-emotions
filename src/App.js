@@ -139,7 +139,7 @@ export default function ( ...initArgs ) {
 				onHashChange();
 
 				// debounce after initial call
-				onResize = _.debounce( onResize, 250 );
+				//onResize = _.debounce( onResize, 250 );
 				window.addEventListener( 'resize', onResize );
 
 			} );
@@ -982,8 +982,10 @@ export default function ( ...initArgs ) {
 		}
 
 		// size main container to viewport
-		let headerHeight = screenIsSmall ? sassVars.ui.header[ 'height-small' ] : sassVars.ui.header.height;
-		document.getElementById( 'main' ).style.height = (window.innerHeight - headerHeight) + 'px';
+		if(!screenIsSmall){
+			let headerHeight = screenIsSmall ? sassVars.ui.header[ 'height-small' ] : sassVars.ui.header.height;
+			document.getElementById( 'main' ).style.height = (window.innerHeight - headerHeight) + 'px';
+		}
 
 		// update scrollbar values
 		// scrollbarBounds.left = scrollbar.getBoundingClientRect().left;

@@ -1100,6 +1100,8 @@ export default {
 
 		}
 
+		console.log('resize');
+
 	},
 
 	/**

@@ -284,6 +284,20 @@ const scroller = {
 			}
 		} );
 
+		if ( this.screenIsSmall && anchorLink == 'response' ) {
+			setTimeout(
+				()=> {
+					let rect = $( '#states .graph-container.active svg>g' )[ 0 ].getBoundingClientRect();
+					$( '#actions .actions-container .graph-container' ).css(
+						{
+							top: (rect.bottom - sassVars.ui.header[ 'mobile-nav' ].target.height) + 'px',
+							visibility: 'visible'
+						}
+					);
+				}, sassVars.states.backgrounded.duration.in * 1000
+			);
+		}
+
 	},
 
 	allowMoreContent: function ( allow, section ) {
@@ -326,13 +340,17 @@ const scroller = {
 			$( moreInfoElements[ item ] ).prepend( $( `<h2>${ title }</h2>` ) );
 		} );
 
-		$( '#timeline-section' ).find( '.more-content-scroller' ).prepend( moreInfoElements[ 'annex-episode-timeline' ] );
-		$( '#experience-section' ).find( '.more-content-scroller' ).prepend( moreInfoElements[ 'annex-signals' ] );
-		$( '#experience-section' ).find( '.more-content-scroller' ).prepend( moreInfoElements[ 'annex-partially-charted' ] );
-		$( '#experience-section' ).find( '.more-content-scroller' ).prepend( moreInfoElements[ 'annex-scientific-basis' ] );
-		$( '#response-section' ).find( '.more-content-scroller' ).prepend( moreInfoElements[ 'annex-intrinsic-remedial' ] );
-		$( '#response-section' ).find( '.more-content-scroller' ).prepend( moreInfoElements[ 'annex-psychopathologies' ] );
-		$( '#response-section' ).find( '.more-content-scroller' ).prepend( moreInfoElements[ 'annex-traits' ] );
+		let $timelineMoreContent = $( '#timeline-section' ).find( '.more-content-scroller' );
+		let $experienceMoreContent = $( '#experience-section' ).find( '.more-content-scroller' );
+		let $responseMoreContent = $( '#response-section' ).find( '.more-content-scroller' );
+
+		$timelineMoreContent.prepend( moreInfoElements[ 'annex-episode-timeline' ] );
+		$experienceMoreContent.prepend( moreInfoElements[ 'annex-signals' ] );
+		$experienceMoreContent.prepend( moreInfoElements[ 'annex-partially-charted' ] );
+		$experienceMoreContent.prepend( moreInfoElements[ 'annex-scientific-basis' ] );
+		$responseMoreContent.prepend( moreInfoElements[ 'annex-intrinsic-remedial' ] );
+		$responseMoreContent.prepend( moreInfoElements[ 'annex-psychopathologies' ] );
+		$responseMoreContent.prepend( moreInfoElements[ 'annex-traits' ] );
 		//$( '#further-reading' ).find( '.more-content-scroller' ).prepend( moreInfoElements[ 'annex-impediment-antidote' ] );
 
 
@@ -493,7 +511,7 @@ const scroller = {
 			let onTapSectionGraphics = ( e ) => {
 				if ( sectionTextMaximized ) {
 					// minimize section text
-					timeline.scrollToCoordinates( e.pageX, e.pageY);
+					timeline.scrollToCoordinates( e.pageX, e.pageY );
 					minimizeSectionText();
 					e.preventDefault();
 					e.stopPropagation();
@@ -620,7 +638,8 @@ const scroller = {
 		this.$hiddenForIntro = $( '.hidden-for-intro' );
 		if ( this.screenIsSmall ) {
 			$( '.menu-toggle' ).click( ()=> {
-				this.$topNav.toggleClass( 'open' )
+				this.$topNav.toggleClass( 'open' );
+				this.toggleEmotionNav( !this.$topNav.hasClass( 'open' ) );
 			} );
 		}
 	},

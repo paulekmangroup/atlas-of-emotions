@@ -831,6 +831,7 @@ svg {
 		width: 100%;
 		bottom: 0;
 		padding: 0.6em $section-text-padding-mobile 2em $section-text-padding-mobile;
+		z-index: 200;
 
 		button {
 			padding: 0.5em;
@@ -872,7 +873,8 @@ svg {
 			}
 		}
 	}
-	.section-graphics {
+	.section-graphics,
+	.original-content {
 		top: #{$ui-header-mobile-nav-target-height}px;
 		height: $mobile-section-graphics-height;
 		bottom: auto;
@@ -881,6 +883,29 @@ svg {
 		margin: 0;
 		padding: 0;
 		overflow: visible;
+		#main {
+			bottom: 0;
+			top: 0;
+			left: 0;
+			right: 0;
+			position: absolute;
+			.graph-container {
+				bottom: 0;
+			}
+			#actions .actions-container {
+				top: 0;
+				.graph-container {
+					visibility: hidden; //shown programatically
+					svg {
+						overflow: visible;
+					}
+				}
+			}
+		}
+
+	}
+	.more-content {
+		z-index: 300;
 	}
 }
 
