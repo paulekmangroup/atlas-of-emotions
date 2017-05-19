@@ -16,7 +16,7 @@ export default class EpisodeAddAwareness extends Episode {
 
 		super.replaceContent( emotion, animate );
 
-		var textColor = this.configsByEmotion[ emotion ].colorPalette[ 0 ];
+		let textColor = this.configsByEmotion[ emotion ].colorPalette[ 0 ];
 
 		this.responseTextUnawareColor =
 			'rgba(' + Math.min( textColor[ 0 ] + 80, 255 )
@@ -41,11 +41,11 @@ export default class EpisodeAddAwareness extends Episode {
 	initializeIllumination( svg ) {
 
 		//TODO remove for real from art file
-		var illumination = svg.getElementById( 'illumination' );
+		let illumination = svg.getElementById( 'illumination' );
 		timeline.remove( illumination );
 
-		var event = timeline.select( '#event', svg );
-		var eventRect = event.getBoundingClientRect();
+		let event = timeline.select( '#event', svg );
+		let eventRect = event.getBoundingClientRect();
 		this.illuminationBlock = document.createElement( "div" );
 		this.illuminationBlock.id = 'illumination-block';
 		if ( this.screenIsSmall ) {
@@ -136,7 +136,7 @@ export default class EpisodeAddAwareness extends Episode {
 
 	initialize( svg, container, emotion, screenIsSmall ) {
 
-		var refractoryPeriodTime = 15;
+		let refractoryPeriodTime = 15;
 		this.refractoryPeriodEnabled = false;
 		//this.refractoryBlocks = [];
 
@@ -144,18 +144,18 @@ export default class EpisodeAddAwareness extends Episode {
 
 			// illumination
 			this.illuminationBlock = timeline.select( '#illumination-block', document );
-			//var illuminationGlow = timeline.select( '#glow', document );
+			//let illuminationGlow = timeline.select( '#glow', document );
 			this.initializeIllumination( svg );
 
 			//timeline with examples
-			var timelineWithExamples = timeline.select( '#timeline-with-examples', this.parent );
+			let timelineWithExamples = timeline.select( '#timeline-with-examples', this.parent );
 
 			//blocks
-			var blockDiagram = new BlockDiagram( timeline.select( '#blocks', this.parent ), this.parent );
+			let blockDiagram = new BlockDiagram( timeline.select( '#blocks', this.parent ), this.parent );
 
 
 			//blockDiagram.onComplete = function () {
-			//var refractoryPeriod = RefractoryPeriod( this.parent, blocks );
+			//let refractoryPeriod = RefractoryPeriod( this.parent, blocks );
 			//};
 
 
@@ -167,10 +167,10 @@ export default class EpisodeAddAwareness extends Episode {
 
 
 			//state
-			var state = timeline.select( '#state', timelineWithExamples ),
+			let state = timeline.select( '#state', timelineWithExamples ),
 				stateLabel = timeline.select( '#state-label', timelineWithExamples );
-			var stateLabelChildren = timeline.getChildren( stateLabel );
-			for ( var i = 0; i < stateLabelChildren.length; i++ ) {
+			let stateLabelChildren = timeline.getChildren( stateLabel );
+			for ( let i = 0; i < stateLabelChildren.length; i++ ) {
 				if ( i == 1 ) {
 					stateLabelChildren[ i ].style.textTransform = 'uppercase';
 				}
@@ -179,14 +179,14 @@ export default class EpisodeAddAwareness extends Episode {
 			this.initStateCircles();
 
 			//changes
-			var physicalChanges = timeline.select( '#physical-changes', timelineWithExamples ),
+			let physicalChanges = timeline.select( '#physical-changes', timelineWithExamples ),
 				mentalChanges = timeline.select( '#mental-changes', timelineWithExamples ),
 				changes = timeline.select( '#changes', timelineWithExamples );
 			physicalChanges.style.visibility = 'hidden';
 			mentalChanges.style.visibility = 'hidden';
 
 			//lines
-			var eventLineGroup = timeline.select( '#event-lines', timelineWithExamples ),
+			let eventLineGroup = timeline.select( '#event-lines', timelineWithExamples ),
 				eventLines = [
 					//timeline.select( "path#precondition-line", eventLineGroup ),
 					timeline.select( "path#event-line", eventLineGroup ),
@@ -206,7 +206,7 @@ export default class EpisodeAddAwareness extends Episode {
 			TweenMax.allTo( timeline.selectAll( '[id*="response-line-3"]', timelineWithExamples ), 0, { autoAlpha: 0 } );
 
 
-			var trigger = timeline.select( '#trigger', timelineWithExamples ),
+			let trigger = timeline.select( '#trigger', timelineWithExamples ),
 				event = timeline.select( '#event', timelineWithExamples ),
 				precondition = timeline.select( '#precondition', timelineWithExamples ),
 				perceptualDatabase = timeline.select( '#perceptual-database', timelineWithExamples ),
@@ -246,59 +246,59 @@ export default class EpisodeAddAwareness extends Episode {
 
 			//add awareness buttons
 
-			var addAwarenessButtonExperience = timeline.select( '#experience-add-awareness', document );
+			let addAwarenessButtonExperience = timeline.select( '#experience-add-awareness', document );
 			addAwarenessButtonExperience.style.visibility = 'hidden'; //TODO should these be handled in css? what's typical in this app?
 
-			var addAwarenessButtonResponse = timeline.select( '#response-add-awareness', document );
+			let addAwarenessButtonResponse = timeline.select( '#response-add-awareness', document );
 			addAwarenessButtonResponse.style.visibility = 'hidden';
 
-			var refractoryPeriodButton = timeline.select( '#begin-refractory-period', document );
+			let refractoryPeriodButton = timeline.select( '#begin-refractory-period', document );
 			refractoryPeriodButton.style.visibility = 'hidden';
 
-			var blockDiagramButton = timeline.select( '#begin-block-diagram', document );
+			let blockDiagramButton = timeline.select( '#begin-block-diagram', document );
 			blockDiagramButton.style.visibility = 'hidden';
 
 			this.episodeTimeline = new TimelineMax( {} );
-			var illuminationTimeline = new TimelineMax( {} );
+			let illuminationTimeline = new TimelineMax( {} );
 
 			this.playFromStart = true; //TODO shared code with Episode
 
-			var lineUnawareColor = timeline.select( '#response-line-2', timelineWithExamples ).getAttribute( 'stroke' );
-			var lineAwareColor = timeline.select( '#response-line-1', timelineWithExamples ).getAttribute( 'stroke' );
-			var textUnawareColor = '#fff';
+			let lineUnawareColor = timeline.select( '#response-line-2', timelineWithExamples ).getAttribute( 'stroke' );
+			let lineAwareColor = timeline.select( '#response-line-1', timelineWithExamples ).getAttribute( 'stroke' );
+			let textUnawareColor = '#fff';
 			this.responseTextUnawareColor = textUnawareColor;
-			var textAwareColor = timeline.select( '#constructive-response', timelineWithExamples ).getAttribute( 'fill' );
+			let textAwareColor = timeline.select( '#constructive-response', timelineWithExamples ).getAttribute( 'fill' );
 
-			var refractoryIlluminationTween = null;
-			var refractoryColorsTween = null;
+			let refractoryIlluminationTween = null;
+			let refractoryColorsTween = null;
 
-			var setLineColor = function ( line, decoration, color, time = 0 ) {
+			let setLineColor = function ( line, decoration, color, time = 0 ) {
 				TweenMax.to( line, time, { attr: { stroke: color } } );
 				//TweenMax.to( decoration, time, { attr: { fill: color } } );
 				TweenMax.to( decoration, time, { attr: { stroke: color } } );
 			};
 
-			var setResponseLineColor = function ( lineIndex, aware, time = 0 ) {
-				var color = aware ? lineAwareColor : lineUnawareColor;
+			let setResponseLineColor = function ( lineIndex, aware, time = 0 ) {
+				let color = aware ? lineAwareColor : lineUnawareColor;
 				setLineColor( responseLines[ lineIndex ], responseLineDecorations[ lineIndex ], color, time );
 			};
 
-			var setEventLineColor = function ( lineIndex, aware, time = 0 ) {
-				var color = aware ? lineAwareColor : lineUnawareColor;
+			let setEventLineColor = function ( lineIndex, aware, time = 0 ) {
+				let color = aware ? lineAwareColor : lineUnawareColor;
 				setLineColor( eventLines[ lineIndex ], eventLineDecorations[ lineIndex ], color, time );
 			};
 
-			var setTextColor = function ( textElement, aware, time = 0 ) {
-				var color = aware ? textAwareColor : textUnawareColor;
+			let setTextColor = function ( textElement, aware, time = 0 ) {
+				let color = aware ? textAwareColor : textUnawareColor;
 				TweenMax.to( textElement, time, { attr: { fill: color } } );
 			};
 
-			var setResponseTextColor = function ( textElement, aware, time = 0 ) {
-				var color = aware ? textAwareColor : this.responseTextUnawareColor;
+			let setResponseTextColor = function ( textElement, aware, time = 0 ) {
+				let color = aware ? textAwareColor : this.responseTextUnawareColor;
 				TweenMax.to( textElement, time, { attr: { fill: color } } );
 			}.bind( this );
 
-			var setResponseLineStyle = function ( lineIndex, aware ) {
+			let setResponseLineStyle = function ( lineIndex, aware ) {
 				//solid if unaware
 				if ( aware ) {
 					responseLines[ lineIndex ].setAttribute( 'stroke-dasharray', '3,8' );
@@ -307,13 +307,13 @@ export default class EpisodeAddAwareness extends Episode {
 				}
 			};
 
-			var addResponseLineAwareness = function () {
+			let addResponseLineAwareness = function () {
 				if ( this.awarenessStage == 'experience' ) {
 					//reset center line color
 					setResponseLineColor( 1, true );
 				}
 				if ( this.awarenessStage == 'response' ) {
-					for ( var i = 0; i < responseLines.length; i++ ) {
+					for ( let i = 0; i < responseLines.length; i++ ) {
 						setResponseLineStyle( i, true );
 						setResponseLineStyle( i, true );
 						setResponseLineColor( i, true );
@@ -323,14 +323,14 @@ export default class EpisodeAddAwareness extends Episode {
 				}
 			};
 
-			var addExperienceAwareness = function () {
+			let addExperienceAwareness = function () {
 				if ( this.awarenessStage == 'experience' ) {
 					physicalChanges.style.visibility = 'visible';
 					mentalChanges.style.visibility = 'visible';
 				}
 			};
 
-			var addResponseAwareness = function () {
+			let addResponseAwareness = function () {
 				if ( this.awarenessStage == 'response' ) {
 					setTextColor( destructiveResponse, true );
 				}
@@ -411,8 +411,8 @@ export default class EpisodeAddAwareness extends Episode {
 			};
 
 
-			var enableBlockDiagram = function () {
-				var clickableElements = [
+			let enableBlockDiagram = function () {
+				let clickableElements = [
 					precondition,
 					event,
 					perceptualDatabase,
@@ -431,7 +431,7 @@ export default class EpisodeAddAwareness extends Episode {
 			};
 
 			//pulsate illumination
-			var pulsateIllumination = function () {
+			let pulsateIllumination = function () {
 				TweenMax.allTo( [ this.illuminationBlock /*, glow */ ], 1.9, {
 					css: { x: '-=5' },
 					repeat: -1,
@@ -441,7 +441,7 @@ export default class EpisodeAddAwareness extends Episode {
 				}, 'pulsate-illumination' );
 			};
 
-			var showAddAwarenessButton = function () {
+			let showAddAwarenessButton = function () {
 				if ( this.awarenessStage == 'trigger' && addAwarenessButtonExperience.style.visibility == 'hidden' ) {
 					TweenMax.to( addAwarenessButtonExperience, 1, { autoAlpha: 1, ease: Power2.easeOut } );
 				}
@@ -455,7 +455,7 @@ export default class EpisodeAddAwareness extends Episode {
 
 			this.triggerRefractoryEffects = function () {
 
-				var darkenTime = 0.25;
+				let darkenTime = 0.25;
 
 				if ( !this.rewindActive && this.refractoryPeriodEnabled ) {
 
@@ -595,7 +595,7 @@ export default class EpisodeAddAwareness extends Episode {
 
 			this.addStatePulsation();
 
-			var hideButton = function ( button ) {
+			let hideButton = function ( button ) {
 				TweenMax.to( button, 1, {
 					autoAlpha: 0,
 					ease: Power2.easeOut,
@@ -604,7 +604,7 @@ export default class EpisodeAddAwareness extends Episode {
 					//}
 				} );
 			};
-			var awarenessClickCallback = function ( e ) {
+			let awarenessClickCallback = function ( e ) {
 				hideButton( e.currentTarget );
 				//reset and advance at start
 				this.rewind( () => {
@@ -613,11 +613,11 @@ export default class EpisodeAddAwareness extends Episode {
 					} );
 				} );
 			};
-			var refractoryPeriodClickCallback = function ( e ) {
+			let refractoryPeriodClickCallback = function ( e ) {
 				this.refractoryPeriodEnabled = true;
 				awarenessClickCallback.bind( this )( e );
 			};
-			var blockDiagramClickCallback = function ( e ) {
+			let blockDiagramClickCallback = function ( e ) {
 				hideButton( e.currentTarget );
 				this.advance();
 				enableBlockDiagram.bind( this )();
