@@ -440,11 +440,11 @@ export default class Episode {
 			TweenMax.allTo( timeline.getChildren( timeline.select( '#state', this.parent ) ), 0, { visibility: 'hidden' } );
 
 			//state
-			var state = timeline.select( '#state', this.parent ),
+			let state = timeline.select( '#state', this.parent ),
 				stateLabel = timeline.select( '#state-label', this.parent );
-			var bBox = state.getBBox();
-			var stateLabelChildren = timeline.getChildren( stateLabel );
-			for ( var i = 0; i < stateLabelChildren.length; i++ ) {
+			let bBox = state.getBBox();
+			let stateLabelChildren = timeline.getChildren( stateLabel );
+			for ( let i = 0; i < stateLabelChildren.length; i++ ) {
 				stateLabelChildren[ i ].setAttribute( 'x', bBox.x + bBox.width / 2 );
 				stateLabelChildren[ i ].setAttribute( 'text-anchor', 'middle' );
 				if ( i == 1 ) {
@@ -455,14 +455,14 @@ export default class Episode {
 			this.initStateCircles();
 
 			//lines
-			var eventLines = timeline.select( '#event-lines', this.parent ),
+			let eventLines = timeline.select( '#event-lines', this.parent ),
 				responseLines = timeline.select( '#response-lines', this.parent );
 
 			//text
-			var event = timeline.select( '#event-text', this.parent ),
+			let event = timeline.select( '#event-text', this.parent ),
 				responses = timeline.select( '#responses', this.parent ),
 				responseChildren = timeline.selectAll( 'tspan', responses );
-			var trigger = timeline.select( '#trigger', this.parent );
+			let trigger = timeline.select( '#trigger', this.parent );
 			this.triggerText = [
 				timeline.select( 'tspan', event ),
 			];
