@@ -47,7 +47,6 @@ export default class Episode {
 			this.episodeTimeline.pause( 'event-pulse', true );
 		}
 
-
 		//replace content
 		this.replaceContent( this.currentEmotion, animateReplaceContent );
 
@@ -70,19 +69,24 @@ export default class Episode {
 
 		this.currentEmotion = emotion && emotion != '' ? emotion : dispatcher.DEFAULT_EMOTION;
 
-		if ( this.playFromStart ) {
-			TweenMax.delayedCall( 1.5, this.start.bind( this ), [ animateReplaceContent ] );
+		if ( this.replayEnabled ) {
+			if ( this.playFromStart ) {
+				TweenMax.delayedCall( 1.5, this.start.bind( this ), [ animateReplaceContent ] );
+			} else {
+				this.rewind( ()=> {
+					this.start( animateReplaceContent );
+				} );
+			}
 		} else {
-			this.rewind( ()=> {
-				this.start( animateReplaceContent );
-			} );
+			// do not replay animation
+			this.replaceContent( this.currentEmotion, false );
 		}
 
 	}
 
 	replaceTextContentForKey( key, emotion, animate ) {
 		return function ( child, i ) {
-			var text = this.content[ emotion ][ key ];
+			let text = this.content[ emotion ][ key ];
 			if ( animate ) {
 				TweenMax.to( child.parentNode, 0.25, {
 					autoAlpha: 0, onComplete: () => {
@@ -98,9 +102,9 @@ export default class Episode {
 
 	replaceContent( emotion, animate = false ) {
 
-		var colors = this.configsByEmotion[ emotion ].colorPalette;
+		let colors = this.configsByEmotion[ emotion ].colorPalette;
 		this.stateCircles.forEach( ( circle, i )=> {
-			var color = colors[ Math.round( i * (colors.length - 1) / (this.stateCircles.length - 1) ) ];
+			let color = colors[ Math.round( i * (colors.length - 1) / (this.stateCircles.length - 1) ) ];
 			circle.setAttribute( 'fill', 'rgb(' + color[ 0 ] + ',' + color[ 1 ] + ',' + color[ 2 ] + ')' );
 		} );
 
@@ -151,10 +155,10 @@ export default class Episode {
 	}
 
 	addStateEmergence() {
-		var minStartingRadius = 0;
-		var maxStartingRadius = 20;
+		let minStartingRadius = 0;
+		let maxStartingRadius = 20;
 		this.stateCircles.forEach( ( circle, i )=> {
-			var startingRadius = minStartingRadius + (maxStartingRadius - minStartingRadius) * i / (this.stateCircles.length - 1);
+			let startingRadius = minStartingRadius + (maxStartingRadius - minStartingRadius) * i / (this.stateCircles.length - 1);
 			this.episodeTimeline
 				.from( circle, 2, {
 					attr: { rx: startingRadius, ry: startingRadius },
@@ -254,7 +258,7 @@ export default class Episode {
 		if ( !this.getInteractive() ) {
 			return
 		}
-		var scrollStageIndex = this.scrollStageIndex - direction;
+		let scrollStageIndex = this.scrollStageIndex - direction;
 		if ( scrollStageIndex >= 0 && scrollStageIndex < this.scrollStages.length ) {
 			this.scrollSvgToStage( this.scrollStages[ scrollStageIndex ], 0.4 );
 			this.touchDeflection = 0;
@@ -271,7 +275,7 @@ export default class Episode {
 	}
 
 	scrollSvgToStage( stage, duration = 0.7 ) {
-		var scrollStageIndex = this.scrollStages.indexOf( stage );
+		let scrollStageIndex = this.scrollStages.indexOf( stage );
 		if ( scrollStageIndex >= 0 && scrollStageIndex < this.scrollStages.length ) {
 			this.scrollStageIndex = scrollStageIndex;
 			if ( this.minimizing || !this.maximized ) {
@@ -342,12 +346,12 @@ export default class Episode {
 
 	extractDocument( svgElement, container ) {
 
-		var NS = "http://www.w3.org/2000/svg";
+		let NS = "http://www.w3.org/2000/svg";
 
 		// pull svg element out of the document and make it self center so that
 		// illumination can be animated across it
 
-		var originalWidth = svgElement.getAttribute( "width" ),
+		let originalWidth = svgElement.getAttribute( "width" ),
 			originalHeight = svgElement.getAttribute( 'height' );
 		this.originalViewBox = svgElement.getAttribute( 'viewBox' ).split( '' );
 		svgElement.setAttribute( 'overflow', 'visible' );
@@ -355,9 +359,9 @@ export default class Episode {
 		svgElement.setAttribute( 'height', '100%' );
 		//svgElement.removeAttribute( 'viewBox' );
 		//svgElement.setAttribute( 'preserveAspectRatio', 'none' );
-		var svgChildrenGroup = svgElement.getElementsByTagName( 'g' )[ 0 ];
+		let svgChildrenGroup = svgElement.getElementsByTagName( 'g' )[ 0 ];
 
-		var wrapperSVG = document.createElementNS( NS, 'svg' );
+		let wrapperSVG = document.createElementNS( NS, 'svg' );
 		wrapperSVG.setAttribute( 'x', '50%' );
 		wrapperSVG.setAttribute( 'y', '50%' );
 		wrapperSVG.setAttribute( 'width', originalWidth );
@@ -368,13 +372,13 @@ export default class Episode {
 
 		svgElement.style.backgroundColor = 'transparent';
 
-		var wrapperGroup = document.createElementNS( NS, 'g' );
+		let wrapperGroup = document.createElementNS( NS, 'g' );
 		wrapperGroup.setAttribute( 'transform', 'translate(' + (-0.5 * parseInt( originalWidth )) + ', ' + (-0.5 * parseInt( originalHeight )) + ')' );
 		wrapperGroup.appendChild( wrapperSVG );
 
 		svgElement.appendChild( wrapperGroup );
 
-		var newParentDiv = document.createElement( 'div' );
+		let newParentDiv = document.createElement( 'div' );
 		newParentDiv.classList.add( 'episode-parent' );
 		newParentDiv.classList.add( 'no-inobounce' );
 		newParentDiv.appendChild( svgElement );
@@ -396,7 +400,7 @@ export default class Episode {
 		//TweenMax.killAll();
 		TweenMax.killChildTweensOf( this.parent );
 		scroller.resetEmotionNav();
-		this.parent.remove();
+		timeline.remove( this.parent );
 		this.episodeTimeline = null;
 	}
 
@@ -415,6 +419,7 @@ export default class Episode {
 		this.svg = null;
 		this.maximized = true;
 		this.minimizing = false;
+		this.replayEnabled = true;
 
 		//fonts need to be added for them to work in svg
 		timeline.addFonts( svg ); //TODO move this to timeline

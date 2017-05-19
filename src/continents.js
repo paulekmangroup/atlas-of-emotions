@@ -239,7 +239,7 @@ const continentsSection = {
 				} else {
 
 					// display all-continents callout if on non-mobile
-					if ( !this.screenIsSmall ) dispatcher.changeCallout( null, appStrings().getStr( 'emotionsData.metadata.continents.header' ), appStrings().getStr( 'emotionsData.metadata.continents.body' ) );
+					/*if ( !this.screenIsSmall )*/ dispatcher.changeCallout( null, appStrings().getStr( 'emotionsData.metadata.continents.header' ), appStrings().getStr( 'emotionsData.metadata.continents.body' ) );
 					resolve();
 
 				}

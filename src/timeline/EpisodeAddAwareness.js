@@ -42,7 +42,7 @@ export default class EpisodeAddAwareness extends Episode {
 
 		//TODO remove for real from art file
 		var illumination = svg.getElementById( 'illumination' );
-		illumination.remove();
+		timeline.remove( illumination );
 
 		var event = timeline.select( '#event', svg );
 		var eventRect = event.getBoundingClientRect();
@@ -138,7 +138,6 @@ export default class EpisodeAddAwareness extends Episode {
 
 		var refractoryPeriodTime = 15;
 		this.refractoryPeriodEnabled = false;
-		this.blockDiagramEnabled = false;
 		//this.refractoryBlocks = [];
 
 		if ( svg && !svg._initializedEpisode ) {
@@ -244,11 +243,6 @@ export default class EpisodeAddAwareness extends Episode {
 				.attr( 'x', function () {
 					return parseFloat( this.getComputedTextLength() ) / 2 + parseFloat( this.getAttribute( 'x' ) );
 				} );
-
-
-			//TODO remove the awareness and try-again buttons from svg
-			//timeline.select( '#add-awareness-state', timelineWithExamples ).remove();
-			//timeline.select( '#add-awareness-response', timelineWithExamples ).remove();
 
 			//add awareness buttons
 
@@ -431,8 +425,9 @@ export default class EpisodeAddAwareness extends Episode {
 				];
 				blockDiagram.addMouseHandlers( clickableElements );
 				this.refractoryBlocks = blockDiagram.getRefractoryBlocks();
-				this.blockDiagramEnabled = true;
+				this.replayEnabled = false;
 				this.refractoryPeriodEnabled = false;
+				//timeline.toggleEmotionNav( false );
 			};
 
 			//pulsate illumination

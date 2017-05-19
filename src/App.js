@@ -108,7 +108,7 @@ export default function ( ...initArgs ) {
 				nonMobileElements.push( document.querySelector( '#callout' ) );
 				nonMobileElements.push( document.querySelector( '#more-info' ) );
 				nonMobileElements.push( document.querySelector( '#lower-left-logo' ) );
-				nonMobileElements.push( document.querySelector( '#lang-selector' ) );
+				//nonMobileElements.push( document.querySelector( '#lang-selector' ) );
 				mobileElements.push( document.querySelector( '#mobile-header' ) );
 				mobileElements.push( document.querySelector( '#mobile-caption' ) );
 
@@ -159,7 +159,8 @@ export default function ( ...initArgs ) {
 			escape: /\{\{\{([\s\S]+?)\}\}\}/g,         // {{{ title }}}
 		};
 
-		var templateElements = document.querySelectorAll( '[data-template]' );
+		var templateElements = [].slice.call(document.querySelectorAll( '[data-template]' ));
+
 
 		templateElements.forEach( function ( element ) {
 			var data = appStrings().getStr( 'emotionsData.' + element.dataset.template );
@@ -173,7 +174,6 @@ export default function ( ...initArgs ) {
 
 		let mainEl = document.querySelector( '#main' ),
 			containerEl;
-
 		_.values( dispatcher.SECTIONS ).forEach( sectionName => {
 			containerEl = document.createElement( 'div' );
 			containerEl.id = sectionName;
@@ -350,7 +350,7 @@ export default function ( ...initArgs ) {
 
 		document.querySelector( '#lang-selector' ).classList.add( 'enabled' );
 
-		let dropdown = document.querySelector( '#lang-selector .dropup' ),
+		let dropdown = document.querySelector( '#lang-selector .dropdown' ),
 			title = dropdown.querySelector( '.dup-title' ),
 			menu = dropdown.querySelector( 'ul' ),
 			langFile = getActiveLanguages().find( f => f.lang === getLanguagePref() );
@@ -982,7 +982,7 @@ export default function ( ...initArgs ) {
 		}
 
 		// size main container to viewport
-		if(!screenIsSmall){
+		if ( !screenIsSmall ) {
 			let headerHeight = screenIsSmall ? sassVars.ui.header[ 'height-small' ] : sassVars.ui.header.height;
 			document.getElementById( 'main' ).style.height = (window.innerHeight - headerHeight) + 'px';
 		}
@@ -1150,7 +1150,7 @@ export default function ( ...initArgs ) {
 
 		if ( event ) event.stopPropagation();
 
-		let dropdown = document.querySelector( '#lang-selector .dropup' ),
+		let dropdown = document.querySelector( '#lang-selector .dropdown' ),
 			classList = dropdown.classList;
 
 		closeMenus( dropdown );
@@ -1174,7 +1174,7 @@ export default function ( ...initArgs ) {
 			return;
 		}
 
-		document.querySelector( '#lang-selector .dropup' ).classList.remove( 'open' );
+		document.querySelector( '#lang-selector .dropdown' ).classList.remove( 'open' );
 
 		let lang = event.target.dataset.lang;
 		if ( !lang ) return;
@@ -1279,9 +1279,9 @@ export default function ( ...initArgs ) {
 
 	function onSectionGraphicsResized() {
 
-		if ( currentSection == sections.triggers ) {
-			sections.triggers.onResize();
-		}
+		//if ( currentSection == sections.triggers ) {
+		currentSection.onResize( screenIsSmall );
+		//	}
 
 	}
 
@@ -1700,19 +1700,20 @@ export default function ( ...initArgs ) {
 
 	}
 
-	function onPopupChange( section, emotion, desc, secondaryData ) {
+	function onPopupChange( section, emotionState, desc, secondaryData ) {
 
-		if ( screenIsSmall && emotion ) {
-			setMobileCaption( emotion, desc );
+		if ( screenIsSmall && emotionState ) {
+			onCalloutChange( currentEmotion, emotionState, desc );
+			//setMobileCaption( emotion, desc );
 			return;
 		}
 
 		if ( !section ) {
 			popupManager.manage();
 		} else {
-			if ( emotion !== popupManager.currentName ||
-				(emotion && !popupManager.exists( section, emotion )) ) {
-				popupManager.manage( section, emotion, desc, secondaryData );
+			if ( emotionState !== popupManager.currentName ||
+				(emotionState && !popupManager.exists( section, emotionState )) ) {
+				popupManager.manage( section, emotionState, desc, secondaryData );
 			}
 		}
 	}
@@ -1732,10 +1733,10 @@ export default function ( ...initArgs ) {
 		title = title ? title.replace( /LHAMO/i, emotion ) : null;
 		body = body ? body.replace( /LHAMO/i, cappedEmotion ) : null;
 
-		if ( screenIsSmall ) {
-			setMobileCaption( title, body );
-			return;
-		}
+		//if ( screenIsSmall ) {
+		//	setMobileCaption( title, body );
+		//	return;
+		//}
 
 
 		callout.removeAttribute( 'class' );
@@ -1894,7 +1895,7 @@ export default function ( ...initArgs ) {
 
 	function onHashChange( event, defaults = NAVIGATION_DEFAULTS ) {
 
-		if ( currentSection ) {
+		if ( currentSection ) { //TODO REMOVE ALL OF THIS
 			// if a section has already been selected this session, close the intro modal
 			if ( MODAL_ENABLED ) {
 				setModalVisibility( false );

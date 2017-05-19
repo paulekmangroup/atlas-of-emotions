@@ -15,6 +15,9 @@
 		visibility: hidden;
 		transform: translateY(-50%);
 		cursor: pointer;
+		svg {
+			padding: 0 2em;
+		}
 	}
 	svg * {
 		cursor: default;
@@ -99,7 +102,7 @@
 #illumination-block {
 	$edge-width: 20%;
 	position: absolute;
-	width: 100%;
+	width: 150%;
 	top: 0;
 	bottom: 0;
 	right: 100%;
@@ -153,7 +156,7 @@
 					left: 0;
 					//height: auto;
 					width: 930px;
-					padding-left: 30px;
+					padding: 0 0 0 30px;
 				}
 			}
 			//&:after {
@@ -178,7 +181,6 @@
 	}
 	#illumination-block {
 		position: absolute;
-		width: 150%;
 		height: 300px;
 	}
 

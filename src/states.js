@@ -621,7 +621,9 @@ export default {
 
 		if ( options && (options.sectionName === dispatcher.SECTIONS.STATES || options.sectionName === dispatcher.SECTIONS.ACTIONS) ) {
 			// handle background click for deselection
-			d3.select( '#main' ).on( 'click', this.onBackgroundClick, false );
+			if ( !this.screenIsSmall ) {
+				d3.select( '#main' ).on( 'click', this.onBackgroundClick, false );
+			}
 		}
 
 	},

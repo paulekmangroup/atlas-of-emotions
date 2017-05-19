@@ -64,17 +64,17 @@ export default class BlockDiagram {
 		var caption = this.getCaptionForElement( element );
 		//show and hide captions
 		if ( activeCaption ) {
-			activeCaption.classList.remove( 'active' );
+			timeline.removeClass( activeCaption, 'active' );
 		}
 		if ( caption ) {
-			caption.classList.add( 'active' );
+			timeline.addClass( caption, 'active' );
 		}
 	}
 
 	mouseOutHandler( element ) {
 		var activeCaption = this.getActiveCaption();
 		if ( activeCaption ) {
-			activeCaption.classList.remove( 'active' );
+			timeline.removeClass( activeCaption, 'active' );
 		}
 	}
 
@@ -119,7 +119,7 @@ export default class BlockDiagram {
 		this.getBlockForElement( element ).addEventListener( 'click', function () {
 			this.toggleElement( element );
 		}.bind( this ) );
-		element.classList.add( 'clickable' );
+		timeline.addClass( element, 'clickable' );
 	}
 
 
@@ -154,7 +154,7 @@ export default class BlockDiagram {
 					return parseFloat( this.getComputedTextLength() ) / 2 + parseFloat( this.getAttribute( 'x' ) );
 				} )
 				.text( function ( d, i ) {
-					if ( tspans[0].length > 1 ) {
+					if ( tspans[ 0 ].length > 1 ) {
 						//heuristic for 'emotional state'
 						//split label into words and put each word in its corresponding tspan
 						let words = label.split( ' ' );

@@ -34,10 +34,12 @@ const scroller = {
 	slideInterval: null,
 	introTimeline: null,
 	$sections: null,
+	sectionTextAnimators: null,
 	$topNav: null,
 	$topNavLinks: null,
 	$hiddenForIntro: null,
 	anchors: [],
+	currentAnchor: 'introduction',
 	fadeImages: false,
 	screenIsSmall: false,
 
@@ -48,6 +50,10 @@ const scroller = {
 
 	getFullpageSectionId( section ){
 		return '#' + this.ATLAS_TO_FULLPAGE_SECTIONS[ section ] + '-section';
+	},
+
+	getFullpageAnchorLink( sectionId ){
+		return sectionId.match( /(.+)-section/ )[ 1 ];
 	},
 
 	advanceSlide: function () {
@@ -104,7 +110,8 @@ const scroller = {
 		var emotion = hash[ 1 ] != '' ? hash[ 1 ] : dispatcher.DEFAULT_EMOTION;
 
 		if ( section && section.match( /(states)|(actions)|(triggers)/ ) != null ) {
-			this.toggleEmotionNav( true );
+			let state = section.match( /(triggers)/ ) != null ? timeline.emotionNavVisible : true;
+			this.toggleEmotionNav( state );
 		} else {
 			this.toggleEmotionNav( false );
 		}
@@ -180,11 +187,13 @@ const scroller = {
 
 	onSectionLeave: function ( index, nextIndex, direction ) {
 
-		var _self = this; //callback must be bound to the scroller class
-
 		var anchorLink = this.anchors[ nextIndex - 1 ];
 		var loadedSection = this.getLoadedSection( anchorLink );
 		var sectionId = loadedSection[ 0 ].id;
+
+		if ( this.screenIsSmall ) {
+			this.minimizeSectionText();
+		}
 
 		//hide the about text if leaving the intro
 		if ( sectionId == 'introduction-section' ) {
@@ -219,6 +228,8 @@ const scroller = {
 
 		var loadedSection = this.getLoadedSection( anchorLink );
 		var sectionId = loadedSection[ 0 ].id;
+
+		this.currentAnchor = anchorLink;
 
 		if ( sectionId == 'introduction-section' && !this.introTimeline ) {
 
@@ -287,21 +298,36 @@ const scroller = {
 		if ( this.screenIsSmall && anchorLink == 'response' ) {
 			setTimeout(
 				()=> {
-					let rect = $( '#states .graph-container.active svg>g' )[ 0 ].getBoundingClientRect();
-					$( '#actions .actions-container .graph-container' ).css(
-						{
-							top: (rect.bottom - sassVars.ui.header[ 'mobile-nav' ].target.height) + 'px',
-							visibility: 'visible'
-						}
-					);
+					this.resizeActions();
 				}, sassVars.states.backgrounded.duration.in * 1000
 			);
 		}
 
 	},
 
+	sectionGraphicsResize( anchorLink ){
+		dispatcher.sectionGraphicsResize();
+		if ( this.screenIsSmall && anchorLink == 'response' ) {
+			this.resizeActions();
+		}
+	},
+
+	resizeActions(){
+		if ( this.screenIsSmall ) {
+			let rect = $( '#states .graph-container.active svg>g' )[ 0 ].getBoundingClientRect();
+			$( '#actions .actions-container .graph-container' ).css(
+				{
+					top: (rect.bottom - sassVars.ui.header[ 'mobile-nav' ].target.height) + 'px',
+					visibility: 'visible'
+				}
+			);
+		}
+	},
+
 	allowMoreContent: function ( allow, section ) {
-		$( this.getFullpageSectionId( section ) ).find( '.more-link' ).toggleClass( 'allowed', allow );
+		let $sectionElement = $( this.getFullpageSectionId( section ) );
+		let $link = $sectionElement.find( '.more-link' );
+		$link.toggleClass( 'allowed', allow );
 	},
 
 	initMoreContentLinks: function () {
@@ -318,7 +344,7 @@ const scroller = {
 			//_self.toggleEmotionNav( !moreVisible );
 		} );
 		// pulse close button on 'more' when scrolled past end of more content
-		var $moreContentScrollers = $( '.more-content-scroller' );
+		var $moreContentScrollers = $( '.more-content__scroller' );
 		$moreContentScrollers.mousewheel( this.getBounceCallback( this.bottomOverscroll ) );
 		$moreContentScrollers.mousewheel( this.getBounceCallback( this.topOverscroll ) );
 
@@ -340,9 +366,9 @@ const scroller = {
 			$( moreInfoElements[ item ] ).prepend( $( `<h2>${ title }</h2>` ) );
 		} );
 
-		let $timelineMoreContent = $( '#timeline-section' ).find( '.more-content-scroller' );
-		let $experienceMoreContent = $( '#experience-section' ).find( '.more-content-scroller' );
-		let $responseMoreContent = $( '#response-section' ).find( '.more-content-scroller' );
+		let $timelineMoreContent = $( '#timeline-section' ).find( '.more-content__scroller' );
+		let $experienceMoreContent = $( '#experience-section' ).find( '.more-content__scroller' );
+		let $responseMoreContent = $( '#response-section' ).find( '.more-content__scroller' );
 
 		$timelineMoreContent.prepend( moreInfoElements[ 'annex-episode-timeline' ] );
 		$experienceMoreContent.prepend( moreInfoElements[ 'annex-signals' ] );
@@ -351,23 +377,27 @@ const scroller = {
 		$responseMoreContent.prepend( moreInfoElements[ 'annex-intrinsic-remedial' ] );
 		$responseMoreContent.prepend( moreInfoElements[ 'annex-psychopathologies' ] );
 		$responseMoreContent.prepend( moreInfoElements[ 'annex-traits' ] );
-		//$( '#further-reading' ).find( '.more-content-scroller' ).prepend( moreInfoElements[ 'annex-impediment-antidote' ] );
+		//$( '#further-reading' ).find( '.more-content__scroller' ).prepend( moreInfoElements[ 'annex-impediment-antidote' ] );
 
+		this.allowMoreContent( true, 'actions' );
+		this.allowMoreContent( true, 'continents' );
 
 	},
 
 	toggleAboutSection: function ( visibility ) {
 		let $hero = $( '.introduction-hero' );
+		let body = $( 'body' );
 		if ( visibility != null ) {
-			$hero.toggleClass( 'about-visible', visibility );
+			$hero.toggleClass( 'more-visible', visibility );
+			body.toggleClass( 'more-visible', visibility );
 		} else {
-			$hero.toggleClass( 'about-visible' );
+			$hero.toggleClass( 'more-visible' );
+			body.toggleClass( 'more-visible' );
 		}
-		if ( $hero.hasClass( 'about-visible' ) ) {
+		if ( $hero.hasClass( 'more-visible' ) ) {
 			this.fadeAboutImage( 0 );
 		} else {
-			this.fadeImages = false;
-			this.fadeTweens.forEach( ( tween )=>tween.kill() );
+			this.stopAboutImageFades();
 		}
 	},
 
@@ -377,6 +407,11 @@ const scroller = {
 			e.preventDefault();
 			this.toggleAboutSection();
 		} );
+	},
+
+	stopAboutImageFades(){
+		this.fadeImages = false;
+		this.fadeTweens.forEach( ( tween )=>tween.kill() );
 	},
 
 	fadeAboutImage: function ( i ) {
@@ -404,13 +439,15 @@ const scroller = {
 
 		this.$sections = $( '.section' );
 
+		this.sectionTextAnimators = {};
+
 		this.anchors = this.$sections.map( function () {
 			return this.id.split( '-' )[ 0 ]; //'this' refers to element scope
 		} ).get();
 
-		let normalScrollElements = '.more-content';
+		let normalScrollElements = '.more-content, .section-text';
 		if ( this.screenIsSmall ) {
-			normalScrollElements += ', .episode-parent, .section-text';
+			normalScrollElements += ', .episode-parent';
 		}
 
 		let $pageBody = $( '.page-body' );
@@ -425,20 +462,11 @@ const scroller = {
 			controlArrows: false,
 			slidesNavigation: true,
 			slidesNavPosition: 'top',
-			//touchSensitivity: 20,
-
-			//offsetSectionsKey: 'YXRsYXNvZmVtb3Rpb25zLm9yZ181VUdiMlptYzJWMFUyVmpkR2x2Ym5NPVV6Vw==',
-
 			onLeave: this.onSectionLeave.bind( this ),
-
 			afterLoad: this.afterSectionLoad.bind( this ),
-
 			touchSensitivity: touchSensitivity,
-
 			normalScrollElementTouchThreshold: 15,
-
 			normalScrollElements: normalScrollElements
-
 		} );
 
 		if ( this.screenIsSmall ) {
@@ -491,7 +519,7 @@ const scroller = {
 			} );
 		};
 
-		let addMobileTextTouchEffects = ( $elements ) => {
+		let addMobileTextTouchEffects = ( $element ) => {
 
 			var swipeStart = { x: 0, y: 0 },
 				yDistance = 0,
@@ -506,7 +534,14 @@ const scroller = {
 				$sectionText = null,
 				$sectionGraphics = null,
 				$sectionTextContent = null,
-				$emotionNav = $( '.emotion-nav' );
+				$originalContent = $( '.original-content' ),
+				$emotionNav = $( '.emotion-nav' ),
+				id = $element.parents( '.section' )[ 0 ].id,
+				anchorLink = this.getFullpageAnchorLink( id ),
+				animator = new SectionTextAnimator();
+
+
+			this.sectionTextAnimators[ id ] = animator;
 
 			let onTapSectionGraphics = ( e ) => {
 				if ( sectionTextMaximized ) {
@@ -517,6 +552,7 @@ const scroller = {
 					e.stopPropagation();
 				}
 			};
+
 			$( '.section .section-graphics' ).on( 'click', onTapSectionGraphics );
 
 
@@ -531,30 +567,36 @@ const scroller = {
 				TweenMax.to( [ $sectionText[ 0 ], $emotionNav[ 0 ] ], transitionDuration, {
 					top: minimumDistance,
 					onUpdate: ()=> {
-						dispatcher.sectionGraphicsResize();
+						this.sectionGraphicsResize( anchorLink );
 					},
 					onComplete: ()=> {
 						sectionTextMaximized = false;
 						sectionTextMinimizing = false;
-						dispatcher.sectionGraphicsResize();
+						this.sectionGraphicsResize( anchorLink );
 						dispatcher.sectionTextMinimizeComplete();
 					}
 				} );
-				TweenMax.to( $sectionGraphics[ 0 ], transitionDuration, { height: minimumDistance - sassVars[ 'ui' ][ 'mobile-emotion-nav' ][ 'height' ] - $sectionGraphics[ 0 ].offsetTop } );
+				TweenMax.to( [ $originalContent[ 0 ], $sectionGraphics[ 0 ] ], transitionDuration, { height: minimumDistance - sassVars[ 'ui' ][ 'mobile-emotion-nav' ][ 'height' ] - $sectionGraphics[ 0 ].offsetTop } );
 				dispatcher.sectionTextMinimizeStart( transitionDuration );
 			};
 
-			this.minimizeSectionText = minimizeSectionText;
+			animator.minimizeSectionText = minimizeSectionText;
 
 			let maximizeSectionText = () => {
+				// avoid breaking an existing maximization
+				// or maximizing when already maximized
 				if ( (sectionTextMaximized && !sectionTextMinimizing) || sectionTextMaximizing ) {
+					return;
+				}
+				// not needed if content is no larger than scroll area when minimized
+				if ( $sectionTextContent[ 0 ].scrollHeight <= $sectionTextContent[ 0 ].clientHeight ) {
 					return;
 				}
 				sectionTextMaximizing = true;
 				TweenMax.to( [ $sectionText[ 0 ], $emotionNav[ 0 ] ], transitionDuration, {
 					top: maximumDistance,
 					onUpdate: ()=> {
-						dispatcher.sectionGraphicsResize();
+						this.sectionGraphicsResize( anchorLink );
 					},
 					onComplete: ()=> {
 						sectionTextMaximized = true;
@@ -566,20 +608,20 @@ const scroller = {
 								$sectionTextContent.off( 'scroll' );
 							}
 						} );
-						dispatcher.sectionGraphicsResize();
+						this.sectionGraphicsResize( anchorLink );
 						dispatcher.sectionTextMaximizeComplete();
 					}
 				} );
-				TweenMax.to( $sectionGraphics[ 0 ], transitionDuration, { height: maximumDistance - sassVars[ 'ui' ][ 'mobile-emotion-nav' ][ 'height' ] - $sectionGraphics[ 0 ].offsetTop } );
+				TweenMax.to( [ $originalContent[ 0 ], $sectionGraphics[ 0 ] ], transitionDuration, { height: maximumDistance - sassVars[ 'ui' ][ 'mobile-emotion-nav' ][ 'height' ] - $sectionGraphics[ 0 ].offsetTop } );
 				dispatcher.sectionTextMaximizeStart( transitionDuration );
 			};
 
-			this.maximizeSectionText = maximizeSectionText;
+			animator.maximizeSectionText = maximizeSectionText;
 
-			$elements.on( 'touchstart', ( e ) => {
+			$element.on( 'touchstart', ( e ) => {
 				$sectionText = $( '.section.active .section-text' );
 				$sectionGraphics = $( '.section.active .section-graphics' );
-				$sectionTextContent = $( '.section.active .section-text__content' );
+				$sectionTextContent = $( '.section.active .section-text__scroller' );
 				if ( !minimumDistance ) {
 					minimumDistance = $sectionText[ 0 ].offsetTop;
 				}
@@ -589,16 +631,15 @@ const scroller = {
 				swipeStart.y = e.originalEvent.touches[ 0 ].pageY;
 				swipeStart.x = e.originalEvent.touches[ 0 ].pageX;
 			} );
-			$elements.on( 'touchend', ( e ) => {
+			$element.on( 'touchend', ( e ) => {
 			} );
-			$elements.on( 'touchmove', ( e ) => {
+			$element.on( 'touchmove', ( e ) => {
 				let newYDistance = swipeStart.y - e.originalEvent.touches[ 0 ].pageY;
 				let newXDistance = swipeStart.x - e.originalEvent.touches[ 0 ].pageX;
 				if ( Math.abs( newXDistance ) > Math.abs( newYDistance )
 					|| Math.abs( newYDistance ) < thresh ) {
 					return;
 				}
-				let direction = newYDistance - yDistance;
 				yDistance = newYDistance;
 				if ( sectionTextMaximized ) {
 					if ( $sectionTextContent[ 0 ].scrollTop <= 0 && newYDistance < 0 && !sectionTextMinimizing ) {
@@ -623,7 +664,9 @@ const scroller = {
 		};
 
 		if ( this.screenIsSmall ) {
-			addMobileTextTouchEffects( $( '.section-text' ) );
+			$( '.section-text' ).each( ( e, element )=> {
+				addMobileTextTouchEffects( $( element ) );
+			} );
 			addMobileTimelineGraphicsTouchEffects( $( '#timeline-section .section-graphics' ) );
 		} else {
 			addDesktopTabletTouchEffects( $originalContent );
@@ -632,14 +675,33 @@ const scroller = {
 
 	},
 
+	maximizeSectionText: function () {
+		this.sectionTextAnimators[ this.currentAnchor + '-section' ].maximizeSectionText();
+	},
+
+	minimizeSectionText: function () {
+		if ( this.sectionTextAnimators &&
+			this.currentAnchor &&
+			this.sectionTextAnimators[ this.currentAnchor + '-section' ] ) {
+
+			this.sectionTextAnimators[ this.currentAnchor + '-section' ].minimizeSectionText();
+
+		}
+	},
+
 	initTopNav: function () {
 		this.$topNav = $( '.top-nav' );
-		this.$topNavLinks = this.$topNav.find( 'a' );
+		this.$topNavLinks = this.$topNav.find( '#menu-list>li>a' );
 		this.$hiddenForIntro = $( '.hidden-for-intro' );
 		if ( this.screenIsSmall ) {
+			this.$topNavLinks.click( ()=> {
+				this.$topNav.removeClass( 'open' );
+			} );
+			//this.$topNav.find( 'li h4' ).click( ()=> {
+			//	this.$topNav.removeClass( 'open' )
+			//} );
 			$( '.menu-toggle' ).click( ()=> {
 				this.$topNav.toggleClass( 'open' );
-				this.toggleEmotionNav( !this.$topNav.hasClass( 'open' ) );
 			} );
 		}
 	},
@@ -663,5 +725,13 @@ const scroller = {
 	}
 
 };
+
+class SectionTextAnimator {
+
+	constructor() {
+
+	}
+
+}
 
 export default scroller;

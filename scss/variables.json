@@ -3,7 +3,7 @@
 		"centerX": 0.48,
 		"centerY": 0.5,
 		"centerX-small": 0.5,
-		"centerY-small": 0.35,
+		"centerY-small": 0.5,
 		"panX": {
 			"duration": {
 				"in": 0.75,

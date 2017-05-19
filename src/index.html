@@ -14,7 +14,7 @@
 	<title>The Ekmans' Atlas of Emotions</title>
 	<link rel="icon" type="image/png" href="./img/atlas-favicon.png"/>
 
-	<!-— facebook open graph tags -->
+	<!-- facebook open graph tags -->
 	<meta property="og:type" content="website"/>
 	<meta property="og:url" content="http://atlasofemotions.org/"/>
 	<meta property="og:title" content="The Ekmans' Atlas of Emotion"/>
@@ -26,7 +26,7 @@
 	<meta property="og:image:width" content="739"/>
 	<meta property="og:image:height" content="388"/>
 
-	<!-— twitter card tags -->
+	<!--twitter card tags -->
 	<meta name="twitter:card" value="summary_large_image"/>
 	<meta name="twitter:site" content="@stamen">
 	<meta name="twitter:creator" content="@stamen">
@@ -42,7 +42,7 @@
 	<!-- for mailchimp link to emotrak -->
 	<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
 
-	<!--Fullpage-->
+	<!-- Fullpage -->
 	<link rel="stylesheet" type="text/css"
 		  href="https://cdn.jsdelivr.net/jquery.fullpage/2.9.2/jquery.fullpage.min.css">
 
@@ -241,15 +241,6 @@
 		<div id="down-arrow"></div>
 		<div id="right-arrow"></div>
 		<div id="lower-left-logo"></div>
-		<div id="lang-selector">
-			<div class="dropup emotion-menu">
-				<button class="btn btn-default dropdown-toggle" type="button" id="lang-selector-toggle"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					<span class="dup-title"></span><span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu" aria-labelledby="lang-selector-toggle"></ul>
-			</div>
-		</div>
 		<div id="more-info">
 			<div class="dropup emotion-menu">
 				<button class="btn btn-default dropdown-toggle" type="button" id="emotion-more-info"
@@ -280,20 +271,23 @@
 				<h1>{{ header }}</h1>
 				{{ sub_header }} <a class="about-link">{{ learn_more_link }}</a>
 			</div>
-
-			<div class="section-text section-text--about">
-				<div class="fade-images">
-					<img src="img/hhAndPaul.jpg" class="fade">
-					<img src="img/hhAndEve.jpg" class="fade">
-				</div>
-				<h3>{{ about.header }}</h3>
-				{{ about.body }}
-			</div>
-
 			<div class="cta">
 				<a href="#triggers">
 					{{ cta }}
 				</a>
+			</div>
+			<div class="more-content more-content--about">
+				<div class="more-content__scroller">
+					<div class="fade-images">
+						<img src="img/hhAndPaul.jpg" class="fade">
+						<img src="img/hhAndEve.jpg" class="fade">
+					</div>
+					<div>
+						<h3>{{ about.header }}</h3>
+						{{ about.body }}
+					</div>
+				</div>
+				<div class="close-button"><span class="mobile-label">Back</span></div>
 			</div>
 		</div>
 
@@ -341,94 +335,96 @@
 					</h2>
 				</div>
 
-				<div class="section-text__content">
-
-					<div data-template="metadata.timeline">
-						<!--intro-->
-						{{# body.forEach( function(paragraph){ }}
-						<p class="body-intro">
-							{{ paragraph }}
-						</p>
-						{{# }) }}
-						<button id="begin-awareness" class="body-intro">{{ intro_button }}</button>
-					</div>
-
-					<div data-template="metadata.timeline.secondary">
-
-						<!--event-->
-						<div class="body-awareness" data-stage="trigger">
-							<h3>{{ trigger.header }}</h3>
-							<p>
-								{{ trigger.body[0] }}
-							</p>
-							<ul>
-								{{# trigger.body[1].forEach( function(item,i){ }}
-								<li>{{ item }}</li>
-								{{# }) }}
-							</ul>
-						</div>
-						<button id="experience-add-awareness" class="body-awareness" data-stage="trigger">
-							{{ trigger.button }}
-						</button>
-
-
-						<!--state-->
-						<div class="body-awareness" data-stage="experience">
-							<h3>{{ experience.header }}</h3>
-							<p>
-								{{ experience.body[0] }}
-							</p>
-						</div>
-						<button id="response-add-awareness" class="body-awareness" data-stage="experience">+ add
-							awareness
-						</button>
-
-						<!--response-->
-						<div class="body-awareness" data-stage="response">
-							<h3>{{ response.header }}</h3>
-							<p>
-								{{ response.body[0] }}
-							</p>
-						</div>
-						<button id="begin-refractory-period" class="body-awareness" data-stage="response">Why is it hard
-							to stay aware?
-						</button>
-
-
-						<!--When we are triggered into a new emotion, it filters our ability to be aware of our experience and choose a response.-->
-						<!--But as time passes, we regain some clarity. So if we pause before we act, we often find it easier to choose a response.-->
-						<!--refractory period-->
-						<div class="body-awareness" data-stage="refractory">
-							<h3>{{ refractory.header }}</h3>
-							{{# refractory.body.forEach( function(paragraph){ }}
-							<p>
+				<div class="section-text__scroller">
+					<div>
+						<div data-template="metadata.timeline">
+							<!--intro-->
+							{{# body.forEach( function(paragraph){ }}
+							<p class="body-intro">
 								{{ paragraph }}
 							</p>
 							{{# }) }}
-						</div>
-						<button id="begin-block-diagram" class="body-awareness" data-stage="refractory">See the big
-							picture
-						</button>
-
-						<!--blocks-->
-						<div class="body-awareness" data-stage="blocks">
-							<h3>{{ blocks.header }}</h3>
-							<p>
-								{{ blocks.body[0] }}
-							</p>
+							<button id="begin-awareness" class="body-intro">{{ intro_button }}</button>
 						</div>
 
+						<div data-template="metadata.timeline.secondary">
+
+							<!--event-->
+							<div class="body-awareness" data-stage="trigger">
+								<h3>{{ trigger.header }}</h3>
+								<p>
+									{{ trigger.body[0] }}
+								</p>
+								<ul>
+									{{# trigger.body[1].forEach( function(item,i){ }}
+									<li>{{ item }}</li>
+									{{# }) }}
+								</ul>
+							</div>
+							<button id="experience-add-awareness" class="body-awareness" data-stage="trigger">
+								{{ trigger.button }}
+							</button>
+
+
+							<!--state-->
+							<div class="body-awareness" data-stage="experience">
+								<h3>{{ experience.header }}</h3>
+								<p>
+									{{ experience.body[0] }}
+								</p>
+							</div>
+							<button id="response-add-awareness" class="body-awareness" data-stage="experience">+ add
+								awareness
+							</button>
+
+							<!--response-->
+							<div class="body-awareness" data-stage="response">
+								<h3>{{ response.header }}</h3>
+								<p>
+									{{ response.body[0] }}
+								</p>
+							</div>
+							<button id="begin-refractory-period" class="body-awareness" data-stage="response">Why is it
+								hard
+								to stay aware?
+							</button>
+
+							<!--refractory period-->
+							<div class="body-awareness" data-stage="refractory">
+								<h3>{{ refractory.header }}</h3>
+								{{# refractory.body.forEach( function(paragraph){ }}
+								<p>
+									{{ paragraph }}
+								</p>
+								{{# }) }}
+							</div>
+							<button id="begin-block-diagram" class="body-awareness" data-stage="refractory">See the big
+								picture
+							</button>
+
+							<!--blocks-->
+							<div class="body-awareness" data-stage="blocks">
+								<h3>{{ blocks.header }}</h3>
+								<p>
+									{{ blocks.body[0] }}
+								</p>
+							</div>
+
+						</div>
+
+
+						<a class="more-link more-link__scrollable" data-template="metadata.site">
+							{{ learn_more_button }}
+						</a>
 					</div>
-
-
-					<a class="more-link" data-template="metadata.site">{{ learn_more_button }}</a>
 				</div>
+				<a class="more-link more-link__fixed" data-template="metadata.site">{{ learn_more_button }}</a>
 			</div>
 			<div class="more-content">
-				<div class="more-content-scroller">
+				<div class="more-content__scroller">
 					<div class="close-button">CLOSE</div>
 				</div>
-				<div class="close-button"></div>
+				<div class="close-button"><span class="mobile-label">Back</span></div>
 			</div>
 		</div>
 
@@ -439,54 +435,72 @@
 			</div>
 			<div class="section-text">
 				<h2 class="section-heading">Our Experience</h2>
-				<div class="section-text__content">
-					<h3 class="headline"></h3>
-					<p class="body">
-					</p>
-					<a class="more-link" data-template="metadata.site">{{ learn_more_button }}</a>
+				<div class="section-text__scroller">
+					<div>
+						<h3 class="headline"></h3>
+						<p class="body">
+						</p>
+						<a class="more-link more-link__scrollable" data-template="metadata.site">
+							{{ learn_more_button }}
+						</a>
+					</div>
 				</div>
+				<a class="more-link more-link__fixed" data-template="metadata.site">{{ learn_more_button }}</a>
 			</div>
 			<div class="more-content">
-				<div class="more-content-scroller">
+				<div class="more-content__scroller">
 					<div class="close-button">CLOSE</div>
 				</div>
-				<div class="close-button"></div>
+				<div class="close-button"><span class="mobile-label">Back</span></div>
 			</div>
 		</div>
 
 		<div class="section" id="response-section" data-has-emotion-state="true">
 			<div class="section-graphics">
-				<!--<img src="img/prototype_slides/response.jpg">-->
+				<!-- <img src="img/prototype_slides/response.jpg"> -->
 			</div>
 			<div class="section-text">
 				<h2 class="section-heading">Our Response</h2>
-				<div class="section-text__content">
-					<h3 class="headline"></h3>
-					<p class="body">
-					</p>
-					<a class="more-link" data-template="metadata.site">{{ learn_more_button }}</a>
+				<div class="section-text__scroller">
+					<div>
+						<h3 class="headline"></h3>
+						<p class="body">
+						</p>
+						<a class="more-link more-link__scrollable" data-template="metadata.site">
+							{{ learn_more_button }}
+						</a>
+					</div>
 				</div>
+				<a class="more-link more-link__fixed" data-template="metadata.site">{{ learn_more_button }}</a>
 			</div>
 			<div class="more-content">
-				<div class="more-content-scroller">
+				<div class="more-content__scroller">
 					<div class="close-button" data-template="metadata.site">{{ close_button }}</div>
 				</div>
-				<div class="close-button"></div>
+				<div class="close-button"><span class="mobile-label">Back</span></div>
 			</div>
 		</div>
 
 		<div class="section" id="reading-section">
 			<div class="section-graphics">
-				<!--<img src="img/prototype_slides/further_reading.jpg">-->
+				<!-- <img src="img/prototype_slides/further_reading.jpg"> -->
 			</div>
 			<div class="section-text">
-				<h2>Further Reading</h2>
-				<div class="section-text__content">
-					Lorem ipso facto weirdo que passo. Lorem ipso facto weirdo que passo robles dulce vita. Lorem ipso
-					facto
-					weirdo que passo. Lorem ipso facto weirdo que passo robles dulce vita. Lorem ipso facto weirdo que
-					passo. Lorem ipso facto weirdo que passo robles dulce vita.
+				<h2 class="section-heading">Further Reading</h2>
+				<div class="section-text__scroller">
+					<div>
+						Lorem ipso facto weirdo que passo. Lorem ipso facto weirdo que passo robles dulce vita. Lorem
+						ipso
+						facto
+						weirdo que passo. Lorem ipso facto weirdo que passo robles dulce vita. Lorem ipso facto weirdo
+						que
+						passo. Lorem ipso facto weirdo que passo robles dulce vita.
+						<a class="more-link more-link__scrollable" data-template="metadata.site">
+							{{ learn_more_button }}
+						</a>
+					</div>
 				</div>
+				<a class="more-link more-link__fixed" data-template="metadata.site">{{ learn_more_button }}</a>
 			</div>
 		</div>
 
@@ -497,22 +511,6 @@
 			Atlas of Emotions
 		</div>
 	</div>
-	<div class="top-nav hidden-for-intro">
-		<div class="menu">
-			<ul id="menu-list">
-				<li><a href="#introduction" id="introduction-menu-link">Introduction</a>
-				</li>
-				<li><a href="#triggers" id="timeline-menu-link">Timeline</a>
-				</li>
-				<li><a href="#continents" id="experience-menu-link">Experience</a>
-				</li>
-				<li><a href="#actions" id="response-menu-link">Response</a>
-				</li>
-				<li><a href="#reading" id="reading-menu-link">Further reading</a></li>
-			</ul>
-		</div>
-	</div>
-	<div class="menu-toggle"></div>
 
 	<div class="emotion-nav">
 		<ul>
@@ -525,8 +523,36 @@
 		</ul>
 	</div>
 
+	<div class="top-nav hidden-for-intro">
+		<div class="menu">
+			<ul id="menu-list">
+				<li><a href="#introduction/" id="introduction-menu-link">Introduction</a>
+				</li>
+				<li><a href="#triggers/" id="timeline-menu-link">Timeline</a>
+				</li>
+				<li><a href="#continents/" id="experience-menu-link">Experience</a>
+				</li>
+				<li><a href="#actions/" id="response-menu-link">Response</a>
+				</li>
+				<li><a href="#reading/" id="reading-menu-link">Further reading</a></li>
+				<li>
+					<div id="lang-selector">
+						<div class="dropdown emotion-menu">
+							<button class="btn btn-default dropdown-toggle" type="button" id="lang-selector-toggle"
+									data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<span class="dup-title"></span><span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu pull-right" aria-labelledby="lang-selector-toggle"></ul>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="menu-toggle hidden-for-intro"></div>
+
+
 </div>
-</body>
 
 <script>
 	// clear out existing content, hardcoded for bots,
@@ -541,11 +567,12 @@
 		type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"
 		type="text/javascript"></script>
-<script src="https://cdn.jsdelivr.net/jquery.fullpage/2.9.2/jquery.fullpage.extensions.min.js"
+<script src="https://cdn.jsdelivr.net/jquery.fullpage/2.9.4/jquery.fullpage.extensions.min.js"
 		type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll-lite.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll-lite.min.js"></script> -->
 
 <script src="vendors.js"></script>
 <script src="main.js"></script>
 
+</body>
 </html>

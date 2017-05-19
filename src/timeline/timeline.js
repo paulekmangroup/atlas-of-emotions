@@ -5,10 +5,12 @@ import { TweenMax } from "gsap";
 import Episode from './Episode.js';
 import EpisodeAddAwareness from './EpisodeAddAwareness.js';
 import dispatcher from '../dispatcher';
+import scroller from '../scroller';
 
 const timeline = {
 	isInited: false,
 	isActive: false,
+	emotionNavVisible: true,
 	screenIsSmall: false,
 	displayingIntro: false,
 	currentEmotion: null,
@@ -152,8 +154,17 @@ const timeline = {
 
 	},
 
+	toggleEmotionNav( state ){
+
+		scroller.toggleEmotionNav( state );
+		this.emotionNavVisible = state;
+
+	},
+
 	allowMoreContent(){
+
 		dispatcher.allowMoreContent( true, dispatcher.SECTIONS.TRIGGERS );
+
 	},
 
 	//work around safari missing children property in svg nodes
@@ -188,6 +199,31 @@ const timeline = {
 
 	selectAll: function ( selector, parent ) {
 		return parent.querySelectorAll( selector );
+	},
+
+	remove( element ){
+		if ( element.parentNode ) {
+			element.parentNode.removeChild( element );
+		}
+	},
+
+	addClass( element, newClass ){
+		let className = element.getAttribute( 'class' );
+		if ( className == null ) {
+			className = '';
+		}
+		if ( className.indexOf( newClass ) == -1 ) {
+			element.setAttribute( 'class', className + ' ' + newClass );
+		}
+	},
+
+	removeClass( element, oldClass ){
+		let className = element.getAttribute( 'class' );
+		if ( className == null ) {
+			className = '';
+		}
+		className = (' ' + className + ' ').replace( ' ' + oldClass + ' ', ' ' ).trim();
+		element.setAttribute( 'class', className );
 	},
 
 	scrollToCoordinates: function ( x, y ) {
@@ -233,7 +269,7 @@ const timeline = {
 			1, {
 				autoAlpha: 0,
 				onComplete: ()=> {
-					this.episode.getParentElement().remove();
+					this.remove( this.episode.getParentElement() );
 					this.episode.setActive( false );
 					this.loadEpisodeAddAwareness();
 					TweenMax.set( this.container, {
@@ -259,7 +295,9 @@ const timeline = {
 	},
 
 	advanceAwarenessStage: function ( stage ) {
-		dispatcher.minimizeSectionText();
+		if ( this.screenIsSmall ) {
+			dispatcher.minimizeSectionText();
+		}
 		this.showAwarenessCopy( stage );
 	},
 
@@ -281,7 +319,7 @@ const timeline = {
 		TweenMax.to( showCopy, 1, { autoAlpha: 1 } );
 
 		if ( this.screenIsSmall ) {
-			TweenMax.to( '.section-text__content', 0.7, { scrollTo: openStage.offsetTop } );
+			TweenMax.to( '.section-text__scroller', 0.7, { scrollTo: openStage.offsetTop } );
 		}
 
 	},
@@ -296,15 +334,22 @@ const timeline = {
 	},
 
 	addAwareness: function () {
+		let makeAwarenessChanges = ()=> {
+			this.showAwarenessEpisode();
+			this.hideIntroCopy( function () {
+				TweenMax.set( this.sectionTextBodyIntro, { css: { display: 'none' } } );
+				this.showAwarenessCopy( 'trigger' );
+			}.bind( this ) );
+		};
 		if ( !this.episodeAddAwareness ) {
-			dispatcher.minimizeSectionText();
-			dispatcher.once( dispatcher.EVENTS.SECTION_TEXT_MINIMIZE_COMPLETE, ()=> {
-				this.showAwarenessEpisode();
-				this.hideIntroCopy( function () {
-					TweenMax.set( this.sectionTextBodyIntro, { css: { display: 'none' } } );
-					this.showAwarenessCopy( 'trigger' );
-				}.bind( this ) );
-			} );
+			if ( this.screenIsSmall ) {
+				dispatcher.minimizeSectionText();
+				dispatcher.once( dispatcher.EVENTS.SECTION_TEXT_MINIMIZE_COMPLETE, ()=> {
+					makeAwarenessChanges();
+				} );
+			} else {
+				makeAwarenessChanges();
+			}
 		}
 	},
 
@@ -411,8 +456,9 @@ const timeline = {
 
 	open: function ( options ) {
 
-		this.episode && this.episode.reset();
-		this.episodeAddAwareness && this.episodeAddAwareness.reset();
+		if ( this.activeEpisode && this.activeEpisode.replayEnabled ) {
+			this.activeEpisode.reset();
+		}
 
 		this.setActive( true );
 		this.setInteractive( true );
@@ -423,8 +469,9 @@ const timeline = {
 
 		return new Promise( ( resolve, reject ) => {
 
-			this.episode && this.episode.reset();
-			this.episodeAddAwareness && this.episodeAddAwareness.reset();
+			if ( this.activeEpisode && this.activeEpisode.replayEnabled ) {
+				this.activeEpisode.reset();
+			}
 
 			this.setActive( false );
 			this.setInteractive( false );

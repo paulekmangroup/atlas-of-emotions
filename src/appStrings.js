@@ -21,9 +21,17 @@ let langs = [];
  * @param  {[type]} _screenIsSmall         Request mobile or desktop strings
  */
 function appStrings( _lang, _screenIsSmall, _stringsLoadedCallback ) {
-
-	let strings = langs[ _lang ],
+	let defaultLang = 'en',
+		strings = langs[ _lang ],
+		defaultStrings = langs[ defaultLang ],
 		derivedStrings;
+
+	function resolveString( key ) {
+		if ( !strings[ key ] && defaultStrings != strings ) {
+			return defaultStrings[ key ];
+		}
+		return strings[ key ];
+	}
 
 	function getStr( key, failQuietly ) {
 
@@ -77,13 +85,13 @@ function appStrings( _lang, _screenIsSmall, _stringsLoadedCallback ) {
 		// but until then, we leave secondaryData strings alone.
 		if ( source === emotionsData ) {
 			if ( typeof parsedKey === 'string' || typeof parsedKey === 'boolean' ) {
-				parsedValue = strings[ parsedKey ];
+				parsedValue = resolveString( parsedKey );
 			} else if ( Array.isArray( parsedKey ) ) {
 				parsedValue = parsedKey.map( ( k, i ) => {
 					let pathPrefix = `${ key }[${ i }]`;
 					if ( typeof k === 'string' ) {
 						if ( isNaN( k ) ) {
-							return strings[ k ];//getStr(pathPrefix + k); //FIXME why was it like this?
+							return resolveString( k );//getStr(pathPrefix + k); //FIXME why was it like this?
 						} else {
 							return k; // FIXME there are numbers stored as strings in the emotions data...
 						}
@@ -148,30 +156,66 @@ function appStrings( _lang, _screenIsSmall, _stringsLoadedCallback ) {
 		return val ? (_screenIsSmall = val) : _screenIsSmall;
 	}
 
+	//function loadStrings() {
+	//
+	//	if ( strings ) return Promise.resolve( instance );
+	//	else {
+	//		return fetch( `strings/langs/${ _lang }.json`,
+	//			{ credentials: 'same-origin' }	// needed on studio to pass .htaccess login creds to same-origin requests
+	//		)
+	//			.then( response => response.json() )
+	//			.then( json => {
+	//				strings = json
+	//					.reduce( ( acc, worksheet ) => acc.concat( worksheet ), [] )
+	//					.reduce( ( acc, kv ) => {
+	//						acc[ kv.key ] = kv.value;
+	//						return acc;
+	//					}, {} );
+	//
+	//				cacheDerivedStrings();
+	//			} )
+	//			.catch( () => {
+	//				throw new Error( `Language ${ _lang } not supported, or language file is malformed.` );
+	//			} );
+	//	}
+	//
+	//}
+
+	function processJSON( json ) {
+		return json
+			.reduce( ( acc, worksheet ) => acc.concat( worksheet ), [] )
+			.reduce( ( acc, kv ) => {
+				acc[ kv.key ] = kv.value;
+				return acc;
+			}, {} );
+	}
+
 	function loadStrings() {
 
 		if ( strings ) return Promise.resolve( instance );
 		else {
-			return fetch( `strings/langs/${ _lang }.json`,
-				{ credentials: 'same-origin' }	// needed on studio to pass .htaccess login creds to same-origin requests
-			)
-				.then( response => response.json() )
+			return fetch( `strings/langs/${ defaultLang }.json`, { credentials: 'same-origin' } )	// needed on studio to pass .htaccess login creds to same-origin requests
+				.then( response =>
+					Promise.all( [
+						response,
+						fetch( `strings/langs/${ _lang }.json`, { credentials: 'same-origin' } )	// needed on studio to pass .htaccess login creds to same-origin requests
+					] ) )
+				.then( responses => Promise.all( responses.map( r => r.json() ) ) )
 				.then( json => {
-					strings = json
-						.reduce( ( acc, worksheet ) => acc.concat( worksheet ), [] )
-						.reduce( ( acc, kv ) => {
-							acc[ kv.key ] = kv.value;
-							return acc;
-						}, {} );
+
+					defaultStrings = processJSON( json[ 0 ] );
+					strings = processJSON( json[ 1 ] );
 
 					cacheDerivedStrings();
 				} )
-				.catch( () => {
-					throw new Error( `Language ${ _lang } not supported, or language file is malformed.` );
+				.catch( ( e ) => {
+					console.log( e );
+					throw new Error( `Language ${ _lang } or ${ defaultLang }, not supported, or language file is malformed.` );
 				} );
 		}
 
 	}
+
 
 	// This is all AoE-specific, for strings derived from the loaded+parsed content
 	// that don't have their own data structure within the content.
@@ -179,11 +223,11 @@ function appStrings( _lang, _screenIsSmall, _stringsLoadedCallback ) {
 
 		derivedStrings = {
 			emotions: _.values( dispatcher.EMOTIONS ).reduce( ( acc, emotion ) => {
-				acc[ emotion ] = strings[ `${ emotion }_continent_header` ];
+				acc[ emotion ] = resolveString( `${ emotion }_continent_header` );
 				return acc;
 			}, {} ),
 			sections: _.values( dispatcher.SECTIONS ).reduce( ( acc, section ) => {
-				acc[ section ] = strings[ `${ section }_section_name` ];
+				acc[ section ] = resolveString( `${ section }_section_name` );
 				return acc;
 			}, {} )
 		};
