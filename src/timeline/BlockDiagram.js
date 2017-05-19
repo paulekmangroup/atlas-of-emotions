@@ -43,9 +43,9 @@ export default class BlockDiagram {
 
 	toggleElement( element ) {
 
-		var block = this.getBlockForElement( element );
+		let block = this.getBlockForElement( element );
 
-		var transitionTime = 1;
+		let transitionTime = 1;
 		if ( block.style.visibility == 'hidden' ) {
 			TweenMax.to( block, transitionTime, { autoAlpha: 1, ease: Power2.easeOut } );
 			TweenMax.to( element, transitionTime, { autoAlpha: 0, ease: Power2.easeOut } );
@@ -60,8 +60,8 @@ export default class BlockDiagram {
 	}
 
 	mouseOverHandler( element ) {
-		var activeCaption = this.getActiveCaption();
-		var caption = this.getCaptionForElement( element );
+		let activeCaption = this.getActiveCaption();
+		let caption = this.getCaptionForElement( element );
 		//show and hide captions
 		if ( activeCaption ) {
 			timeline.removeClass( activeCaption, 'active' );
@@ -72,7 +72,7 @@ export default class BlockDiagram {
 	}
 
 	mouseOutHandler( element ) {
-		var activeCaption = this.getActiveCaption();
+		let activeCaption = this.getActiveCaption();
 		if ( activeCaption ) {
 			timeline.removeClass( activeCaption, 'active' );
 		}
@@ -94,8 +94,8 @@ export default class BlockDiagram {
 	}
 
 	checkCompletion() {
-		var complete = true;
-		for ( var i = 0; i < this.blocks.length; i++ ) {
+		let complete = true;
+		for ( let i = 0; i < this.blocks.length; i++ ) {
 			if ( this.blocks[ i ].style.visibility == 'hidden' ) {
 				complete = false;
 			}
@@ -106,7 +106,7 @@ export default class BlockDiagram {
 	}
 
 	addMouseHandlers( elements ) {
-		for ( var i = 0; i < elements.length; i++ ) {
+		for ( let i = 0; i < elements.length; i++ ) {
 			this.addClickHandler( elements[ i ] );
 			this.addHoverHandler( elements[ i ] );
 		}
@@ -137,17 +137,17 @@ export default class BlockDiagram {
 
 		this.blocks = timeline.getChildren( element );
 
-		for ( var i = 0; i < this.blocks.length; i++ ) {
+		for ( let i = 0; i < this.blocks.length; i++ ) {
 
 			this.blocks[ i ].style.visibility = 'hidden';
 
 
-			var blockAppString = this.getBlockString( this.blocks[ i ] );
-			var label = appStrings().getStr( `emotionsData.metadata.timeline.secondary.blocks.labels.${ blockAppString }` );
-			var childNodes = [].slice.call( this.blocks[ i ].childNodes );
+			let blockAppString = this.getBlockString( this.blocks[ i ] );
+			let label = appStrings().getStr( `emotionsData.metadata.timeline.secondary.blocks.labels.${ blockAppString }` );
+			let childNodes = [].slice.call( this.blocks[ i ].childNodes );
 
 			// order is important here, because uppercase changes the computed text length
-			var tspans = d3.select( this.blocks[ i ] ).selectAll( 'tspan' );
+			let tspans = d3.select( this.blocks[ i ] ).selectAll( 'tspan' );
 			tspans
 				.attr( 'text-anchor', 'middle' )
 				.attr( 'x', function () {
