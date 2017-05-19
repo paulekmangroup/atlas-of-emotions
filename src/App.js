@@ -159,12 +159,12 @@ export default function ( ...initArgs ) {
 			escape: /\{\{\{([\s\S]+?)\}\}\}/g,         // {{{ title }}}
 		};
 
-		var templateElements = [].slice.call(document.querySelectorAll( '[data-template]' ));
+		let templateElements = [].slice.call(document.querySelectorAll( '[data-template]' ));
 
 
 		templateElements.forEach( function ( element ) {
-			var data = appStrings().getStr( 'emotionsData.' + element.dataset.template );
-			var compiled = _.template( element.innerHTML );
+			let data = appStrings().getStr( 'emotionsData.' + element.dataset.template );
+			let compiled = _.template( element.innerHTML );
 			element.innerHTML = compiled( data );
 		} );
 
@@ -1763,10 +1763,10 @@ export default function ( ...initArgs ) {
 
 		// update scroller content
 		// TODO decide if these should be maintained in parallel or merged somehow.
-		var activeScrollerSectionText = $( '.section.active .section-text' )[ 0 ];
+		let activeScrollerSectionText = $( '.section.active .section-text' )[ 0 ];
 		if ( activeScrollerSectionText ) {
-			var calloutHeadlineElement = activeScrollerSectionText.querySelector( '.headline' );
-			var calloutBodyElement = activeScrollerSectionText.querySelector( '.body' );
+			let calloutHeadlineElement = activeScrollerSectionText.querySelector( '.headline' );
+			let calloutBodyElement = activeScrollerSectionText.querySelector( '.body' );
 			if ( calloutHeadlineElement ) {
 				calloutHeadlineElement.innerHTML = title;
 			}
