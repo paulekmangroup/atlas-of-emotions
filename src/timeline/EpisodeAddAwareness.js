@@ -634,7 +634,11 @@ export default class EpisodeAddAwareness extends Episode {
 			this.replaceContent( this.currentEmotion, false );
 
 			TweenMax.set( this.parent, { visibility: 'visible' } );
-			this.episodeTimeline.tweenTo( 'end' );
+
+			this.episodeTimeline.pause();
+			TweenMax.delayedCall( 2, ()=> {
+				this.episodeTimeline.tweenTo( 'end' );
+			} );
 
 			svg._initializedEpisode = true;
 
