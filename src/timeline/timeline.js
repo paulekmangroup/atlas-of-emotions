@@ -169,9 +169,9 @@ const timeline = {
 
 	//work around safari missing children property in svg nodes
 	getChildren: function ( element ) {
-		var svgChildren = element.children || element.childNodes;
-		var children = [];
-		for ( var i = 0; i < svgChildren.length; i++ ) {
+		let svgChildren = element.children || element.childNodes;
+		let children = [];
+		for ( let i = 0; i < svgChildren.length; i++ ) {
 			if ( svgChildren[ i ].nodeType == Node.TEXT_NODE || svgChildren[ i ].nodeType == Node.COMMENT_NODE ) continue;
 			children.push( svgChildren[ i ] );
 		}
@@ -179,7 +179,7 @@ const timeline = {
 	},
 
 	addFonts: function ( svg ) {
-		var fontCss = "@import url('https://fonts.googleapis.com/css?family=Raleway');",
+		let fontCss = "@import url('https://fonts.googleapis.com/css?family=Raleway');",
 			style = document.createElement( 'style' );
 
 		style.type = 'text/css';
@@ -232,7 +232,7 @@ const timeline = {
 
 	loadEpisode: function () {
 		// no awareness version
-		var ajax = new XMLHttpRequest();
+		let ajax = new XMLHttpRequest();
 		ajax.open( 'GET', './img/episode.svg', true );
 		ajax.send();
 		ajax.onload = ( e ) => {
@@ -246,7 +246,7 @@ const timeline = {
 
 	loadEpisodeAddAwareness: function () {
 		// awareness version
-		var ajax = new XMLHttpRequest();
+		let ajax = new XMLHttpRequest();
 		ajax.open( 'GET', './img/episode--add-awareness.svg', true );
 		ajax.send();
 		ajax.onload = ( e ) => {
@@ -288,7 +288,7 @@ const timeline = {
 	},
 
 	getHiddenButtons: function ( stage ) {
-		var visible = [].slice.call( this.getVisibleButtons( stage ) );
+		let visible = [].slice.call( this.getVisibleButtons( stage ) );
 		return [].slice.call( document.querySelectorAll( 'button.body-awareness' ) ).filter( ( e )=> {
 			return visible.indexOf( e ) == -1;
 		} );
@@ -302,9 +302,9 @@ const timeline = {
 	},
 
 	showAwarenessCopy: function ( stage ) {
-		var showCopy = this.getVisibleParagraphs( stage );
-		var showButtons = this.getVisibleButtons( stage );
-		var hideButtons = this.getHiddenButtons( stage );
+		let showCopy = this.getVisibleParagraphs( stage );
+		let showButtons = this.getVisibleButtons( stage );
+		let hideButtons = this.getHiddenButtons( stage );
 		let stages = [].slice.call( document.querySelectorAll( 'div.body-awareness' ) );
 		let openStage = document.querySelector( 'div.body-awareness[data-stage=' + stage + ']' );
 		stages.forEach( function ( stage ) {
@@ -434,7 +434,7 @@ const timeline = {
 
 	setEmotion: function ( emotion, previousEmotion ) {
 
-		var _self = this;
+		let _self = this;
 
 		return new Promise( ( resolve, reject ) => {
 
