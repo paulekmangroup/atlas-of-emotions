@@ -44,7 +44,7 @@ const scroller = {
 	screenIsSmall: false,
 
 	hasEmotionState: function ( anchor ) {
-		var section = $( '#' + anchor + '-section' );
+		let section = $( '#' + anchor + '-section' );
 		return section.attr( 'data-has-emotion-state' );
 	},
 
@@ -66,7 +66,7 @@ const scroller = {
 	},
 
 	hideAllMoreContent: function () {
-		//var $sections = $( '.section' );
+		//let $sections = $( '.section' );
 		this.$sections.removeClass( 'more-visible' );
 		$( 'body' ).removeClass( 'more-visible' );
 		if ( !this.screenIsSmall ) {
@@ -79,8 +79,8 @@ const scroller = {
 	},
 
 	pulseEmotionNav: function () { //TODO should this have an event in the dispatcher?
-		var $links = $( '.emotion-nav li' );
-		var pulseTimeline = new TimelineMax();
+		let $links = $( '.emotion-nav li' );
+		let pulseTimeline = new TimelineMax();
 		pulseTimeline
 			.add( 'start' )
 			.staggerTo( $links, 0.1, { css: { 'transform': 'scale(1.1)' } }, 0.1 )
@@ -88,7 +88,7 @@ const scroller = {
 	},
 
 	resetEmotionNav: function () {
-		var $links = $( '.emotion-nav li' );
+		let $links = $( '.emotion-nav li' );
 		$links.removeAttr( 'style' );
 	},
 
@@ -107,7 +107,7 @@ const scroller = {
 
 		let hash = document.location.hash.replace( /^#/, '' ).split( dispatcher.HASH_DELIMITER );
 		let section = hash[ 0 ];
-		var emotion = hash[ 1 ] != '' ? hash[ 1 ] : dispatcher.DEFAULT_EMOTION;
+		let emotion = hash[ 1 ] != '' ? hash[ 1 ] : dispatcher.DEFAULT_EMOTION;
 
 		if ( section && section.match( /(states)|(actions)|(triggers)/ ) != null ) {
 			let state = section.match( /(triggers)/ ) != null ? timeline.emotionNavVisible : true;
@@ -128,31 +128,31 @@ const scroller = {
 	},
 
 	topOverscroll: function ( e ) {
-		var distanceFromTop = e.currentTarget.scrollTop;
+		let distanceFromTop = e.currentTarget.scrollTop;
 		return (distanceFromTop == 0 && e.deltaY > 0);
 	},
 
 	bottomOverscroll: function ( e ) {
-		var distanceFromBottom =
+		let distanceFromBottom =
 			(e.currentTarget.scrollHeight - e.currentTarget.scrollTop) - e.currentTarget.offsetHeight;
 		return (distanceFromBottom == 0 && e.deltaY < 0);
 	},
 
 	getBounceCallback: function ( overscrollFunction ) {
 
-		var scrollingEnded = true;
-		var pulseActive = false;
-		var lastOverscrollEventTime = 0;
-		var growTime = 0.1;
-		var returnTime = 0.5;
+		let scrollingEnded = true;
+		let pulseActive = false;
+		let lastOverscrollEventTime = 0;
+		let growTime = 0.1;
+		let returnTime = 0.5;
 
 		return function ( e ) {
 
-			var now = (new Date()).getTime();
-			var overScroll = overscrollFunction( e );
+			let now = (new Date()).getTime();
+			let overScroll = overscrollFunction( e );
 
 			if ( overScroll ) {
-				var timeElapsed = now - lastOverscrollEventTime;
+				let timeElapsed = now - lastOverscrollEventTime;
 				scrollingEnded = timeElapsed > 500;
 
 				if ( !pulseActive && scrollingEnded ) {
@@ -187,9 +187,9 @@ const scroller = {
 
 	onSectionLeave: function ( index, nextIndex, direction ) {
 
-		var anchorLink = this.anchors[ nextIndex - 1 ];
-		var loadedSection = this.getLoadedSection( anchorLink );
-		var sectionId = loadedSection[ 0 ].id;
+		let anchorLink = this.anchors[ nextIndex - 1 ];
+		let loadedSection = this.getLoadedSection( anchorLink );
+		let sectionId = loadedSection[ 0 ].id;
 
 		if ( this.screenIsSmall ) {
 			this.minimizeSectionText();
@@ -201,9 +201,9 @@ const scroller = {
 		}
 
 		//save the emotion state before leaving
-		var hash = window.location.hash.replace( /^#/, '' ).split( dispatcher.HASH_DELIMITER );
-		var atlasSection = hash[ 0 ];
-		var emotion = hash[ 1 ];
+		let hash = window.location.hash.replace( /^#/, '' ).split( dispatcher.HASH_DELIMITER );
+		let atlasSection = hash[ 0 ];
+		let emotion = hash[ 1 ];
 		if ( this.hasEmotionState( anchorLink ) && emotion ) {
 			this.selectedEmotionState = emotion;
 		}
@@ -212,7 +212,7 @@ const scroller = {
 		this.hideAllMoreContent();
 
 		//if the hash is not correct for the next section, change the hash
-		var hashSection = hash[ 0 ];
+		let hashSection = hash[ 0 ];
 		if ( this.ATLAS_TO_FULLPAGE_SECTIONS[ atlasSection ] != anchorLink ) {
 			//if section has emotion state, set it so the original content can pick it up
 			hashSection = this.FULLPAGE_TO_ATLAS_SECTIONS[ anchorLink ];
@@ -224,17 +224,17 @@ const scroller = {
 
 	afterSectionLoad: function ( anchorLink, index ) {
 
-		var _self = this; //callback must be bound to the scroller class
+		let _self = this; //callback must be bound to the scroller class
 
-		var loadedSection = this.getLoadedSection( anchorLink );
-		var sectionId = loadedSection[ 0 ].id;
+		let loadedSection = this.getLoadedSection( anchorLink );
+		let sectionId = loadedSection[ 0 ].id;
 
 		this.currentAnchor = anchorLink;
 
 		if ( sectionId == 'introduction-section' && !this.introTimeline ) {
 
 			//init animations for intro section
-			var $intro = $( '#introduction-section' );
+			let $intro = $( '#introduction-section' );
 			this.introTimeline = new TimelineMax( {} );
 
 			$.fn.fullpage.moveTo( 'introduction', 0 );
@@ -283,8 +283,8 @@ const scroller = {
 
 		//update topnav
 		this.$topNavLinks.each( ( index, element ) => {
-			var $element = $( element );
-			var id = $element.attr( 'id' );
+			let $element = $( element );
+			let id = $element.attr( 'id' );
 			if ( id.indexOf( anchorLink ) >= 0 ) {
 				$element.addClass( 'active' );
 			} else {
@@ -331,25 +331,25 @@ const scroller = {
 	},
 
 	initMoreContentLinks: function () {
-		var _self = this;
+		let _self = this;
 		// show additional content in the sections
 		$( '.more-link, .close-button' ).click( function ( e ) {
 			e.preventDefault();
-			var $section = $( this ).parents( '.section' );
+			let $section = $( this ).parents( '.section' );
 			$section.toggleClass( 'more-visible' );
 			$( 'body' ).toggleClass( 'more-visible' );
-			var moreVisible = $section.hasClass( 'more-visible' );
+			let moreVisible = $section.hasClass( 'more-visible' );
 			$.fn.fullpage.setAllowScrolling( !moreVisible );
 			//TODO properly hide emotion nav and bring back if section has it
 			//_self.toggleEmotionNav( !moreVisible );
 		} );
 		// pulse close button on 'more' when scrolled past end of more content
-		var $moreContentScrollers = $( '.more-content__scroller' );
+		let $moreContentScrollers = $( '.more-content__scroller' );
 		$moreContentScrollers.mousewheel( this.getBounceCallback( this.bottomOverscroll ) );
 		$moreContentScrollers.mousewheel( this.getBounceCallback( this.topOverscroll ) );
 
-		var moreInfoElements = {};
-		var morePageNames = [
+		let moreInfoElements = {};
+		let morePageNames = [
 			'annex-episode-timeline',
 			'annex-partially-charted',
 			'annex-traits',
@@ -495,13 +495,13 @@ const scroller = {
 				swipeComplete = false;
 			} );
 			$elements.on( 'touchend', ( e ) => {
-				var $sectionText = $( '.section.active .section-text' );
+				let $sectionText = $( '.section.active .section-text' );
 				returnTranslation( $sectionText[ 0 ] );
 			} );
 			$elements.on( 'touchmove', ( e ) => {
 				distance = e.originalEvent.touches[ 0 ].pageY - swipeStart;
 				if ( !swipeComplete ) {
-					var $sectionText = $( '.section.active .section-text' );
+					let $sectionText = $( '.section.active .section-text' );
 					TweenMax.set( $sectionText[ 0 ], { y: distance } );
 					if ( Math.abs( distance ) > thresh ) {
 						returnTranslation( $sectionText[ 0 ] );
@@ -521,7 +521,7 @@ const scroller = {
 
 		let addMobileTextTouchEffects = ( $element ) => {
 
-			var swipeStart = { x: 0, y: 0 },
+			let swipeStart = { x: 0, y: 0 },
 				yDistance = 0,
 				height = 0,
 				thresh = 20,
