@@ -231,6 +231,9 @@ const scroller = {
 
 		this.currentAnchor = anchorLink;
 
+		$( '.section-text__scroller' )[ 0 ].scrollTop = 0;
+		dispatcher.sectionGraphicsResize();
+
 		if ( sectionId == 'introduction-section' && !this.introTimeline ) {
 
 			//init animations for intro section
