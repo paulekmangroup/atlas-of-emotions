@@ -47,6 +47,10 @@ body {
 			opacity: 0.65;
 			z-index: 0;
 			top: 0;
+			overflow: visible;
+			svg {
+				overflow: visible;
+			}
 		}
 	}
 
@@ -1027,7 +1031,7 @@ svg {
 		top: $mobile-section-text-top;
 		width: 100%;
 		bottom: 0;
-		padding: 0.6em $section-text-padding-mobile 2em $section-text-padding-mobile;
+		padding: 0.8em $section-text-padding-mobile 2em $section-text-padding-mobile;
 		z-index: 200;
 
 		button {
@@ -1044,7 +1048,13 @@ svg {
 			padding-bottom: 0.3em;
 			margin-bottom: 0.3em;
 			a.restart-button {
-				top: 0.7em;
+				top: 0.95em;
+				font-size: 0.8em;
+				right: $section-text-padding-mobile;
+				color: #555;
+				img {
+					width: 0.8em;
+				}
 			}
 		}
 		.more-link__fixed {
@@ -1058,13 +1068,20 @@ svg {
 		}
 		.section-text__scroller {
 			position: absolute;
-			top: 2.25em;
+			top: 2.4em;
 			left: $section-text-padding-mobile;
 			right: $section-text-padding-mobile;
 			bottom: 0;
+			padding-bottom: 0;
 			padding-top: 0.7em;
 			overflow-y: hidden; //changed programatically based on interactions
 			-webkit-overflow-scrolling: touch;
+			&:after{
+				display: block;
+				content: '';
+				height: 60px;
+				width: 1px;
+			}
 			> div {
 				min-height: 100%;
 				padding-bottom: 50px;
@@ -1164,8 +1181,10 @@ body[class*=fp-viewing-timeline].small-screen .emotion-nav {
 	top: $mobile-section-text-top;
 	left: 0;
 	right: 0;
-	font-size: 12px;
+	height: 20px;
+	font-size: 11px;
 	margin-top: -#{$ui-mobile-emotion-nav-height}px;
+	background: rgb(255, 255, 255);
 	ul {
 		position: absolute;
 		left: 1em;
@@ -1177,12 +1196,16 @@ body[class*=fp-viewing-timeline].small-screen .emotion-nav {
 			padding: 0;
 			display: inline-block;
 			position: relative;
-			top: 1.2em;
+			top: 1.5em;
 			text-align: center;
 			width: auto;
 			a {
 				display: inline-block;
 				padding: 0;
+				color: #333;
+				&.active {
+					color: #000;
+				}
 			}
 		}
 

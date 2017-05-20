@@ -140,16 +140,17 @@ export default {
 		//
 		// d3 conventional margins
 		//
+		let graphContainer = containerNode.querySelector( '.graph-container' );
+console.log(sassVars.actions.margins['bottom-small']);
 		let margin = {
 			top: sassVars.actions.margins.top,		// actions graph is upside down, so 'top' means bottom of the screen
-			right: this.screenIsSmall ? 95 : 100,
-			bottom: sassVars.actions.margins.bottom,
-			left: this.screenIsSmall ? 95 : 100
+			right: this.screenIsSmall ? graphContainer.offsetWidth/3.7 : 100,
+			bottom: this.screenIsSmall ? sassVars.actions.margins['bottom-small']:  sassVars.actions.margins.bottom,
+			left: this.screenIsSmall ? graphContainer.offsetWidth/3.7 : 100
 		};
 
 		// All the same size, just grab the first one
-		let graphContainer = containerNode.querySelector( '.graph-container' ),
-			innerWidth = graphContainer.offsetWidth - margin.left - margin.right,
+		let innerWidth = graphContainer.offsetWidth - margin.left - margin.right,
 			h = Math.max( graphContainer.offsetHeight, 0.5 * graphContainer.offsetWidth ),
 			innerHeight = h - margin.top - margin.bottom;
 

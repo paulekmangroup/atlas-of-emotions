@@ -605,6 +605,9 @@ export default class EpisodeAddAwareness extends Episode {
 				} );
 			};
 			let awarenessClickCallback = function ( e ) {
+				//if ( this.screenIsSmall ) {
+				//	dispatcher.minimizeSectionText();
+				//}
 				hideButton( e.currentTarget );
 				//reset and advance at start
 				this.rewind( () => {
@@ -618,6 +621,9 @@ export default class EpisodeAddAwareness extends Episode {
 				awarenessClickCallback.bind( this )( e );
 			};
 			let blockDiagramClickCallback = function ( e ) {
+				//if ( this.screenIsSmall ) {
+				//	dispatcher.minimizeSectionText();
+				//}
 				hideButton( e.currentTarget );
 				this.advance();
 				enableBlockDiagram.bind( this )();

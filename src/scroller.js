@@ -277,8 +277,10 @@ const scroller = {
 			this.introTimeline.play();
 		} else {
 			this.$hiddenForIntro.addClass( 'visible' );
-			this.introTimeline.pause();
-			this.introTimeline.seek( 'end' );
+			if ( this.introTimeline ) {
+				this.introTimeline.pause();
+				this.introTimeline.seek( 'end' );
+			}
 		}
 
 		//update topnav
@@ -558,6 +560,7 @@ const scroller = {
 
 			let minimizeSectionText = () => {
 				if ( (!sectionTextMaximized && !sectionTextMaximizing) || sectionTextMinimizing ) {
+					dispatcher.sectionTextMinimizeComplete();
 					return;
 				}
 				sectionTextMinimizing = true;
@@ -586,10 +589,12 @@ const scroller = {
 				// avoid breaking an existing maximization
 				// or maximizing when already maximized
 				if ( (sectionTextMaximized && !sectionTextMinimizing) || sectionTextMaximizing ) {
+					dispatcher.sectionTextMaximizeComplete();
 					return;
 				}
 				// not needed if content is no larger than scroll area when minimized
 				if ( $sectionTextContent[ 0 ].scrollHeight <= $sectionTextContent[ 0 ].clientHeight ) {
+					dispatcher.sectionTextMaximizeComplete();
 					return;
 				}
 				sectionTextMaximizing = true;

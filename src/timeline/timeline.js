@@ -383,13 +383,16 @@ const timeline = {
 
 	fullRestart: function () {
 		let restart = ()=> {
-			this.episode && this.episode.destroy();
-			this.episode = null;
-			this.episodeAddAwareness && this.episodeAddAwareness.destroy();
-			this.episodeAddAwareness = null;
-			this.loadEpisode();
-			this.hideAwarenessCopy();
-			this.showIntroCopy();
+			dispatcher.minimizeSectionText();
+			dispatcher.once( dispatcher.EVENTS.SECTION_TEXT_MINIMIZE_COMPLETE, ()=> {
+				this.episode && this.episode.destroy();
+				this.episode = null;
+				this.episodeAddAwareness && this.episodeAddAwareness.destroy();
+				this.episodeAddAwareness = null;
+				this.loadEpisode();
+				this.hideAwarenessCopy();
+				this.showIntroCopy();
+			} );
 		};
 		if ( this.episodeAddAwareness ) {
 			this.episodeAddAwareness.hide( restart.bind( this ) );

@@ -75,7 +75,8 @@
 		},
 		"margins": {
 			"top": 25,
-			"bottom": 10
+			"bottom": 10,
+			"bottom-small": 30
 		},
 		"add": {
 			"time": 1000,
