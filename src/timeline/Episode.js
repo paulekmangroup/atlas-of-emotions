@@ -232,38 +232,34 @@ export default class Episode {
 	}
 
 	beginTouchDeflection() {
-		if ( !this.getInteractive() ) {
-			return
+		if ( this.getInteractive() ) {
+			this.svgScrollPosition = this.getSvgScrollPosition();
 		}
-		this.svgScrollPosition = this.getSvgScrollPosition();
 	}
 
 	touchDeflect( distance ) {
-		if ( !this.getInteractive() ) {
-			return
+		if ( this.getInteractive() ) {
+			this.touchDeflection = distance;
+			TweenMax.set( this.getScrollElements(), { css: { left: this.svgScrollPosition + this.touchDeflection } } );
 		}
-		this.touchDeflection = distance;
-		TweenMax.set( this.getScrollElements(), { css: { left: this.svgScrollPosition + this.touchDeflection } } );
 	}
 
 	returnTouchDeflection() {
-		if ( !this.getInteractive() ) {
-			return
+		if ( this.getInteractive() ) {
+			this.scrollTween = TweenMax.to( this.getScrollElements(), 0.4, { css: { left: this.svgScrollPosition } } );
+			this.touchDeflection = 0;
 		}
-		this.scrollTween = TweenMax.to( this.getScrollElements(), 0.4, { css: { left: this.svgScrollPosition } } );
-		this.touchDeflection = 0;
 	}
 
 	scrollSvgInDirection( direction ) {
-		if ( !this.getInteractive() ) {
-			return
-		}
-		let scrollStageIndex = this.scrollStageIndex - direction;
-		if ( scrollStageIndex >= 0 && scrollStageIndex < this.scrollStages.length ) {
-			this.scrollSvgToStage( this.scrollStages[ scrollStageIndex ], 0.4 );
-			this.touchDeflection = 0;
-		} else {
-			this.returnTouchDeflection();
+		if ( this.getInteractive() ) {
+			let scrollStageIndex = this.scrollStageIndex - direction;
+			if ( scrollStageIndex >= 0 && scrollStageIndex < this.scrollStages.length ) {
+				this.scrollSvgToStage( this.scrollStages[ scrollStageIndex ], 0.4 );
+				this.touchDeflection = 0;
+			} else {
+				this.returnTouchDeflection();
+			}
 		}
 	}
 
@@ -280,7 +276,6 @@ export default class Episode {
 			this.scrollStageIndex = scrollStageIndex;
 			if ( this.minimizing || !this.maximized ) {
 				// do nothing
-				return;
 			} else {
 				// scroll
 				this.scrollTween = TweenMax.to( this.getScrollElements(), duration, { css: { left: this.scrollStagePositions[ stage ] } } );

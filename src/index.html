@@ -260,7 +260,7 @@
 			{{# slides.forEach( function(slide, i){ }}
 
 			<div class="slide {{# if(i==0) { }} active {{# } }}">
-				<div class="slide-content" data-anchor="">
+				<div class="slide-content" data-anchor="" data-widow-fix="true">
 					{{ slide }}
 				</div>
 			</div>
@@ -326,11 +326,11 @@
 			</div>
 			<div class="section-text">
 
-				<div data-template="metadata.timeline">
+				<div data-template="metadata">
 					<h2 class="section-heading">
-						{{ header }}
+						{{ navigation.timeline.heading }}
 						<a class="restart-button">
-							<span>{{ restart_button }}</span><img src="./img/reset.svg">
+							<span>{{ timeline.restart_button }}</span><img src="./img/reset.svg">
 						</a>
 					</h2>
 				</div>
@@ -373,8 +373,9 @@
 									{{ experience.body[0] }}
 								</p>
 							</div>
-							<button id="response-add-awareness" class="body-awareness" data-stage="experience">+ add
-								awareness
+							<button id="response-add-awareness" class="body-awareness" data-stage="experience">
+								<!-- + add awareness -->
+								{{ experience.button }}
 							</button>
 
 							<!--response-->
@@ -384,9 +385,9 @@
 									{{ response.body[0] }}
 								</p>
 							</div>
-							<button id="begin-refractory-period" class="body-awareness" data-stage="response">Why is it
-								hard
-								to stay aware?
+							<button id="begin-refractory-period" class="body-awareness" data-stage="response">
+								<!--Why is it hard to stay aware?-->
+								{{ response.button }}
 							</button>
 
 							<!--refractory period-->
@@ -398,8 +399,9 @@
 								</p>
 								{{# }) }}
 							</div>
-							<button id="begin-block-diagram" class="body-awareness" data-stage="refractory">See the big
-								picture
+							<button id="begin-block-diagram" class="body-awareness" data-stage="refractory">
+								<!--See the big picture-->
+								{{ refractory.button }}
 							</button>
 
 							<!--blocks-->
@@ -424,20 +426,17 @@
 				<div class="more-content__scroller">
 					<div class="close-button">CLOSE</div>
 				</div>
-				<div class="close-button"><span class="mobile-label">Back</span></div>
+				<div class="close-button" data-template="metadata.site"><span class="mobile-label">{{ back_button }}</span></div>
 			</div>
 		</div>
 
 		<div class="section" id="experience-section" data-has-emotion-state="true">
 			<div class="section-graphics">
-				<!--<img src="img/prototype_slides/experience.jpg"-->
-				<!--onclick="this.src='img/prototype_slides/experience_emotion.jpg'">-->
 			</div>
 			<div class="section-text">
-				<h2 class="section-heading">Our Experience</h2>
+				<h2 class="section-heading" data-template="metadata.navigation">{{ experience.heading }}</h2>
 				<div class="section-text__scroller">
 					<div>
-						<h3 class="headline"></h3>
 						<p class="body">
 						</p>
 						<a class="more-link more-link__scrollable" data-template="metadata.site">
@@ -457,13 +456,11 @@
 
 		<div class="section" id="response-section" data-has-emotion-state="true">
 			<div class="section-graphics">
-				<!-- <img src="img/prototype_slides/response.jpg"> -->
 			</div>
 			<div class="section-text">
-				<h2 class="section-heading">Our Response</h2>
+				<h2 class="section-heading" data-template="metadata.navigation">{{ response.heading }}</h2>
 				<div class="section-text__scroller">
 					<div>
-						<h3 class="headline"></h3>
 						<p class="body">
 						</p>
 						<a class="more-link more-link__scrollable" data-template="metadata.site">
@@ -483,10 +480,9 @@
 
 		<div class="section" id="reading-section">
 			<div class="section-graphics">
-				<!-- <img src="img/prototype_slides/further_reading.jpg"> -->
 			</div>
 			<div class="section-text">
-				<h2 class="section-heading">Further Reading</h2>
+				<h2 class="section-heading" data-template="metadata.navigation">{{ strategies.heading }}</h2>
 				<div class="section-text__scroller">
 					<div>
 						Lorem ipso facto weirdo que passo. Lorem ipso facto weirdo que passo robles dulce vita. Lorem
@@ -512,29 +508,29 @@
 		</div>
 	</div>
 
-	<div class="emotion-nav" data-template="derived.emotions">
+	<div class="emotion-nav">
 		<ul>
-			<li class="all"><a href="#continents">All</a></li>
-			<li><a href="#" data-emotion="anger">{{ anger }}</a></li>
-			<li><a href="#" data-emotion="fear">{{ fear }}</a></li>
-			<li><a href="#" data-emotion="disgust">{{ disgust }}</a></li>
-			<li><a href="#" data-emotion="sadness">{{ sadness }}</a></li>
-			<li><a href="#" data-emotion="enjoyment">{{ enjoyment }}</a></li>
+			<li data-template="metadata.navigation.emotions" class="all"><a href="#continents">{{ all }}</a></li>
+			<li data-template="derived.emotions"><a href="#" data-emotion="anger">{{ anger }}</a></li>
+			<li data-template="derived.emotions"><a href="#" data-emotion="fear">{{ fear }}</a></li>
+			<li data-template="derived.emotions"><a href="#" data-emotion="disgust">{{ disgust }}</a></li>
+			<li data-template="derived.emotions"><a href="#" data-emotion="sadness">{{ sadness }}</a></li>
+			<li data-template="derived.emotions"><a href="#" data-emotion="enjoyment">{{ enjoyment }}</a></li>
 		</ul>
 	</div>
 
 	<div class="top-nav hidden-for-intro">
 		<div class="menu">
-			<ul id="menu-list">
-				<li><a href="#introduction/" id="introduction-menu-link">Introduction</a>
+			<ul id="menu-list" data-template="metadata.navigation">
+				<li><a href="#introduction/" id="introduction-menu-link">{{ introduction.menu }}</a>
 				</li>
-				<li><a href="#triggers/" id="timeline-menu-link">Timeline</a>
+				<li><a href="#triggers/" id="timeline-menu-link">{{ timeline.menu }}</a>
 				</li>
-				<li><a href="#continents/" id="experience-menu-link">Experience</a>
+				<li><a href="#continents/" id="experience-menu-link">{{ experience.menu }}</a>
 				</li>
-				<li><a href="#actions/" id="response-menu-link">Response</a>
+				<li><a href="#actions/" id="response-menu-link">{{ response.menu }}</a>
 				</li>
-				<li><a href="#reading/" id="reading-menu-link">Further reading</a></li>
+				<li><a href="#reading/" id="reading-menu-link">{{ strategies.menu }}</a></li>
 				<li>
 					<div id="lang-selector">
 						<div class="dropdown emotion-menu">

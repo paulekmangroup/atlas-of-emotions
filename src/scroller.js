@@ -103,6 +103,7 @@ const scroller = {
 		}
 	},
 
+	//TODO integrate with app.js properly
 	hashChange: function () {
 
 		let hash = document.location.hash.replace( /^#/, '' ).split( dispatcher.HASH_DELIMITER );
@@ -218,8 +219,9 @@ const scroller = {
 			hashSection = this.FULLPAGE_TO_ATLAS_SECTIONS[ anchorLink ];
 		}
 
-		//TODO replace with navigation call
-		window.location.hash = hashSection + dispatcher.HASH_DELIMITER + this.selectedEmotionState;
+		//TODO replace with navigation call, integrate with app.js properly
+		let nextEmotionState = hashSection == 'continents' ? '' : this.selectedEmotionState;
+		window.location.hash = hashSection + dispatcher.HASH_DELIMITER + nextEmotionState;
 	},
 
 	afterSectionLoad: function ( anchorLink, index ) {
@@ -349,9 +351,11 @@ const scroller = {
 			//_self.toggleEmotionNav( !moreVisible );
 		} );
 		// pulse close button on 'more' when scrolled past end of more content
-		let $moreContentScrollers = $( '.more-content__scroller' );
-		$moreContentScrollers.mousewheel( this.getBounceCallback( this.bottomOverscroll ) );
-		$moreContentScrollers.mousewheel( this.getBounceCallback( this.topOverscroll ) );
+		if ( !this.screenIsSmall ) {
+			let $moreContentScrollers = $( '.more-content__scroller' );
+			$moreContentScrollers.mousewheel( this.getBounceCallback( this.bottomOverscroll ) );
+			$moreContentScrollers.mousewheel( this.getBounceCallback( this.topOverscroll ) );
+		}
 
 		let moreInfoElements = {};
 		let morePageNames = [
@@ -382,7 +386,7 @@ const scroller = {
 		$responseMoreContent.prepend( moreInfoElements[ 'annex-intrinsic-remedial' ] );
 		$responseMoreContent.prepend( moreInfoElements[ 'annex-psychopathologies' ] );
 		$responseMoreContent.prepend( moreInfoElements[ 'annex-traits' ] );
-		//$( '#further-reading' ).find( '.more-content__scroller' ).prepend( moreInfoElements[ 'annex-impediment-antidote' ] );
+		//$( '#strategies' ).find( '.more-content__scroller' ).prepend( moreInfoElements[ 'annex-impediment-antidote' ] );
 
 		this.allowMoreContent( true, 'actions' );
 		this.allowMoreContent( true, 'continents' );
@@ -665,17 +669,24 @@ const scroller = {
 
 		};
 
-		let addMobileTimelineGraphicsTouchEffects = ( $sectionGraphics ) => {
+		let addMobileTimelineGraphicsTouchEffects = () => {
+			let $sectionGraphics = $( '#timeline-section .section-graphics' );
 			$sectionGraphics.on( 'touchmove', timeline.touchmove.bind( timeline ) );
 			$sectionGraphics.on( 'touchstart', timeline.touchstart.bind( timeline ) );
 			$sectionGraphics.on( 'touchend', timeline.touchend.bind( timeline ) );
+		};
+
+		let addMobileGraphicsTouchEffects = () => {
+			// todo fix this
+			//dispatcher.on( dispatcher.EVENTS.CHANGE_EMOTION_STATE, this.minimizeSectionText.bind( this ) );
 		};
 
 		if ( this.screenIsSmall ) {
 			$( '.section-text' ).each( ( e, element )=> {
 				addMobileTextTouchEffects( $( element ) );
 			} );
-			addMobileTimelineGraphicsTouchEffects( $( '#timeline-section .section-graphics' ) );
+			addMobileGraphicsTouchEffects();
+			addMobileTimelineGraphicsTouchEffects();
 		} else {
 			addDesktopTabletTouchEffects( $originalContent );
 			addDesktopTabletTouchEffects( this.$sections );

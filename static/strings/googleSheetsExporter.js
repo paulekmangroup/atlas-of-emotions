@@ -170,7 +170,36 @@ var metadataSectionParsers = (function () {
 			var obj = standard( data );
 			obj.learn_more_button = data[ 0 ][ 2 ];
 			obj.close_button = data[ 0 ][ 3 ];
+			obj.back_button = data[ 0 ][ 5 ];
 			return obj;
+		},
+
+		navigation: function ( data ) {
+			return {
+				introduction: {
+					menu: data[ 0 ][ 0 ],
+					heading: data[ 0 ][ 1 ]
+				},
+				timeline: {
+					menu: data[ 1 ][ 0 ],
+					heading: data[ 1 ][ 1 ]
+				},
+				experience: {
+					menu: data[ 2 ][ 0 ],
+					heading: data[ 2 ][ 1 ]
+				},
+				response: {
+					menu: data[ 3 ][ 0 ],
+					heading: data[ 3 ][ 1 ]
+				},
+				strategies: {
+					menu: data[ 4 ][ 0 ],
+					heading: data[ 4 ][ 1 ]
+				},
+				emotions: {
+					all: data[ 5 ][ 0 ]
+				}
+			};
 		},
 
 		intro: function ( data ) {

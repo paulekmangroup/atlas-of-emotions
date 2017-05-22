@@ -170,6 +170,17 @@ export default function ( ...initArgs ) {
 			element.innerHTML = compiled( data );
 		} );
 
+		let widowFixElements = [].slice.call( document.querySelectorAll( '[data-widow-fix]' ) );
+		widowFixElements.forEach( function ( element ) {
+			var words = element.innerHTML.trim().split( ' ' );
+			if ( words.length > 2 ) {
+				words[ words.length - 2 ] += "&nbsp;" + words[ words.length - 1 ];
+				words.pop();
+				element.innerHTML = words.join( ' ' );
+			}
+		} );
+
+
 	}
 
 	function initContainers() {
@@ -1728,12 +1739,10 @@ export default function ( ...initArgs ) {
 			return;
 		}
 
-		let cappedEmotion = emotion ?
-		emotion.charAt( 0 ).toUpperCase() + emotion.slice( 1 ) :
-			'The Emotion';
+		let cappedEmotion = emotion ? emotion.charAt( 0 ).toUpperCase() + emotion.slice( 1 ) : 'The Emotion';
 
-		title = title ? title.replace( /LHAMO/i, emotion ) : null;
-		body = body ? body.replace( /LHAMO/i, cappedEmotion ) : null;
+		title = title ? title.replace( /LHAMO/gi, emotion ) : null;
+		body = body ? body.replace( /LHAMO/gi, cappedEmotion ) : null;
 
 		//if ( screenIsSmall ) {
 		//	setMobileCaption( title, body );

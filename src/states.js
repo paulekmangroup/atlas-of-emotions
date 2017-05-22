@@ -1626,6 +1626,10 @@ export default {
 
 		this.onContainerTouchMove();
 
+		if ( this.screenIsSmall ) {
+			dispatcher.minimizeSectionText();
+		}
+
 	},
 
 	onContainerTouchMove: function () {
@@ -1835,6 +1839,9 @@ export default {
 		dispatcher.changeCallout(
 			this.currentEmotion,
 			appStrings().getStr( 'emotionsData.metadata.states.header' ),
+			appStrings().getStr( 'emotionsData.metadata.states.body' ) +
+			'<br/>&nbsp;<br/>' +
+			'<h3>' + appStrings().getStr( 'emotionsData.metadata.states.header' ) + '</h3>' +
 			appStrings().getStr( `emotionsData.emotions.${this.currentEmotion}.states[0].secondary` ) +
 			'<br/>&nbsp;<br/>' +
 			appStrings().getStr( 'emotionsData.metadata.states.interaction_prompt' )

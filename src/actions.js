@@ -141,12 +141,11 @@ export default {
 		// d3 conventional margins
 		//
 		let graphContainer = containerNode.querySelector( '.graph-container' );
-console.log(sassVars.actions.margins['bottom-small']);
 		let margin = {
 			top: sassVars.actions.margins.top,		// actions graph is upside down, so 'top' means bottom of the screen
-			right: this.screenIsSmall ? graphContainer.offsetWidth/3.7 : 100,
-			bottom: this.screenIsSmall ? sassVars.actions.margins['bottom-small']:  sassVars.actions.margins.bottom,
-			left: this.screenIsSmall ? graphContainer.offsetWidth/3.7 : 100
+			right: this.screenIsSmall ? graphContainer.offsetWidth / 3.7 : 100,
+			bottom: this.screenIsSmall ? sassVars.actions.margins[ 'bottom-small' ] : sassVars.actions.margins.bottom,
+			left: this.screenIsSmall ? graphContainer.offsetWidth / 3.7 : 100
 		};
 
 		// All the same size, just grab the first one
@@ -373,14 +372,16 @@ console.log(sassVars.actions.margins['bottom-small']);
 					} )
 					.map( action => isNaN( parseInt( action ) ) ? action : allActionsForEmotionRaw[ +action - 1 ].name )
 					.sort(),
-					actionsCon = state.actions.con.map( lowercase ).filter( action => {
+					actionsCon = state.actions.con.map( lowercase ).filter(
+						action => {
 							let actionName = action;
 							if ( !isNaN( parseInt( action ) ) ) actionName = allActionsForEmotionRaw[ +action - 1 ].name;
 							return !!allActionsForEmotionByName[ actionName ] && !~state.actions.both.indexOf( action );
 						} )
 						.map( action => isNaN( parseInt( action ) ) ? action : allActionsForEmotionRaw[ +action - 1 ].name )
 						.sort(),
-					actionsDes = state.actions.des.map( lowercase ).filter( action => {
+					actionsDes = state.actions.des.map( lowercase ).filter(
+						action => {
 							let actionName = action;
 							if ( !isNaN( parseInt( action ) ) ) actionName = allActionsForEmotionRaw[ +action - 1 ].name;
 							return !!allActionsForEmotionByName[ actionName ] && !~state.actions.both.indexOf( action );
@@ -1288,6 +1289,10 @@ console.log(sassVars.actions.margins['bottom-small']);
 
 		this.onContainerTouchMove();
 
+		if ( this.screenIsSmall ) {
+			dispatcher.minimizeSectionText();
+		}
+
 	},
 
 	onContainerTouchMove: function () {
@@ -1373,6 +1378,9 @@ console.log(sassVars.actions.margins['bottom-small']);
 		dispatcher.changeCallout(
 			this.currentEmotion,
 			appStrings().getStr( 'emotionsData.metadata.actions.header' ),
+			appStrings().getStr( 'emotionsData.metadata.actions.body' ) +
+			'<br/>&nbsp;<br/>' +
+			'<h3>' + appStrings().getStr( 'emotionsData.metadata.actions.header' ) + '</h3>' +
 			appStrings().getStr( `emotionsData.emotions.${this.currentEmotion}.actions[0].secondary` ) +
 			'<br/>&nbsp;<br/>' +
 			appStrings().getStr( 'emotionsData.metadata.actions.interaction_prompt' )

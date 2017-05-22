@@ -2131,12 +2131,38 @@
 			"header": "site_header",
 			"body": "",
 			"caption": "site_dropdown_label",
-			"header_mobile": "site_header",
+			"header_mobile": "site_back_button",
 			"body_mobile": "",
 			"sectionName": "",
 			"interaction_prompt": "",
 			"learn_more_button": "site_learn_more_button",
-			"close_button": "site_close_button"
+			"close_button": "site_close_button",
+			"back_button": "site_back_button"
+		},
+		"navigation": {
+			"introduction": {
+				"menu": "navigation_introduction_menu_item",
+				"heading": "navigation_introduction_section_header"
+			},
+			"timeline": {
+				"menu": "navigation_timeline_menu_item",
+				"heading": "navigation_timeline_section_header"
+			},
+			"experience": {
+				"menu": "navigation_experience_menu_item",
+				"heading": "navigation_experience_section_header"
+			},
+			"response": {
+				"menu": "navigation_response_menu_item",
+				"heading": "navigation_response_section_header"
+			},
+			"strategies": {
+				"menu": "navigation_strategies_menu_item",
+				"heading": "navigation_strategies_section_header"
+			},
+			"emotions": {
+				"all": "navigation_all_menu_item"
+			}
 		},
 		"intro": {
 			"header": "intro_header",
