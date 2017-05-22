@@ -124,6 +124,11 @@ svg {
 	overflow: hidden;
 	width: 100%;
 	height: 100%;
+	opacity: 0;
+	&.visible {
+		opacity: 1;
+		transition: opacity 1s 0.5s;
+	}
 }
 
 .original-content {
@@ -918,7 +923,7 @@ svg {
 				position: relative;
 				overflow: visible;
 				@extend %right-arrow;
-				&:after{
+				&:after {
 					width: 30px;
 					right: -20px;
 					background-size: contain;
@@ -937,7 +942,7 @@ svg {
 		}
 		.fp-slidesNav.top {
 			margin-top: 2em;
-			span{
+			span {
 				opacity: 0.5;
 			}
 			.active {

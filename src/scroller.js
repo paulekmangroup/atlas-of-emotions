@@ -725,6 +725,10 @@ const scroller = {
 		}
 	},
 
+	showApp(){
+		$( '#app-container' ).addClass( 'visible' );
+	},
+
 	init: function ( container, screenIsSmall ) {
 		//$( '#introduction' ).attr( 'data-centered', true );
 
@@ -741,6 +745,7 @@ const scroller = {
 
 		this.initAboutLink();
 		this.initMoreContentLinks();
+		this.showApp();
 	}
 
 };
