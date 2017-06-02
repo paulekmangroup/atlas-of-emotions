@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import d3 from 'd3';
-import d3Transform from 'd3-transform';
+import { transform } from 'd3-transform';
 import TWEEN from 'tween.js';
 
 import Circle from './Circle.js';
@@ -286,7 +286,7 @@ export default class Continent {
 		// work around occasional bug in tween math
 		if ( !isNaN( this.scaleX ) ) {
 			this.d3Selection
-				.attr( 'transform', d3Transform()
+				.attr( 'transform', transform()
 					.translate(
 						transX,
 						transY
@@ -319,20 +319,20 @@ export default class Continent {
 	onResize( continentGeom, screenIsSmall ) {
 
 		// scale base transforms per continentGeom
-		let transform = _.cloneDeep( this.baseTransforms );
-		transform.x *= continentGeom.w;
-		transform.label.x *= continentGeom.w;
-		transform.y *= continentGeom.h;
-		transform.label.y *= continentGeom.h;
+		let transformClone = _.cloneDeep( this.baseTransforms );
+		transformClone.x *= continentGeom.w;
+		transformClone.label.x *= continentGeom.w;
+		transformClone.y *= continentGeom.h;
+		transformClone.label.y *= continentGeom.h;
 
 		if ( this.screenIsSmall ) {
-			transform.size *= continentGeom.h * 2;
+			transformClone.size *= continentGeom.h * 2;
 		} else {
-			transform.size *= continentGeom.h;
+			transformClone.size *= continentGeom.h;
 		}
 
 		// and copy onto this Continent instance
-		Object.assign( this, transform );
+		Object.assign( this, transformClone );
 
 		this.introSpreadAng = Math.atan2( this.y, this.x );
 		this.centerX = continentGeom.centerX;
@@ -348,7 +348,7 @@ export default class Continent {
 				.style( 'fill-opacity', 0.0 )
 				.attr( 'cx', 0 )
 				.attr( 'cy', 0 )
-				.attr( 'r', transform.size );
+				.attr( 'r', transformClone.size );
 		}
 
 	}
