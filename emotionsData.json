@@ -1,2274 +1,2621 @@
 {
-  "emotions": {
-    "anger": {
-      "continent": {
-        "name": "anger_continent_header",
-        "desc": "anger_continent_body",
-        "name_mobile": "anger_continent_header_mobile",
-        "desc_mobile": "anger_continent_body_mobile"
-      },
-      "states": [
-        {
-          "name": "anger_states_header_1",
-          "desc": "anger_states_body_1",
-          "name_mobile": "anger_states_header_1",
-          "desc_mobile": "anger_states_body_1",
-          "range": {
-            "min": 1,
-            "max": 2
-          },
-          "actions": {
-            "all": [
-              "7",
-              "9",
-              "8"
-            ],
-            "con": [
-              "7"
-            ],
-            "des": [
-              "7",
-              "9",
-              "8"
-            ],
-            "both": [
-              "7"
-            ]
-          }
-        },
-        {
-          "name": "anger_states_header_2",
-          "desc": "anger_states_body_2",
-          "name_mobile": "anger_states_header_2",
-          "desc_mobile": "anger_states_body_2",
-          "range": {
-            "min": 1,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "7",
-              "1",
-              "2",
-              "3",
-              "5",
-              "8",
-              "9"
-            ],
-            "con": [
-              "7"
-            ],
-            "des": [
-              "1",
-              "2",
-              "3",
-              "5",
-              "7",
-              "8",
-              "9"
-            ],
-            "both": [
-              "7"
-            ]
-          }
-        },
-        {
-          "name": "anger_states_header_3",
-          "desc": "anger_states_body_3",
-          "name_mobile": "anger_states_header_3",
-          "desc_mobile": "anger_states_body_3",
-          "range": {
-            "min": 2,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "7",
-              "1",
-              "2",
-              "3",
-              "8"
-            ],
-            "con": [
-              "7"
-            ],
-            "des": [
-              "1",
-              "2",
-              "3",
-              "7",
-              "8"
-            ],
-            "both": [
-              "7"
-            ]
-          }
-        },
-        {
-          "name": "anger_states_header_4",
-          "desc": "anger_states_body_4",
-          "name_mobile": "anger_states_header_4",
-          "desc_mobile": "anger_states_body_4",
-          "range": {
-            "min": 3,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "7",
-              "2",
-              "3",
-              "4",
-              "5",
-              "8",
-              "9"
-            ],
-            "con": [
-              "7"
-            ],
-            "des": [
-              "2",
-              "3",
-              "4",
-              "5",
-              "7",
-              "8",
-              "9"
-            ],
-            "both": [
-              "7"
-            ]
-          }
-        },
-        {
-          "name": "anger_states_header_5",
-          "desc": "anger_states_body_5",
-          "name_mobile": "anger_states_header_5",
-          "desc_mobile": "anger_states_body_5",
-          "range": {
-            "min": 4,
-            "max": 7
-          },
-          "actions": {
-            "all": [
-              "7",
-              "1",
-              "2",
-              "3",
-              "9",
-              "4",
-              "5",
-              "8"
-            ],
-            "con": [
-              "7"
-            ],
-            "des": [
-              "1",
-              "2",
-              "3",
-              "7",
-              "9",
-              "4",
-              "5",
-              "8"
-            ],
-            "both": [
-              "7"
-            ]
-          }
-        },
-        {
-          "name": "anger_states_header_6",
-          "desc": "anger_states_body_6",
-          "name_mobile": "anger_states_header_6",
-          "desc_mobile": "anger_states_body_6",
-          "range": {
-            "min": 5,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "",
-              "1",
-              "2",
-              "3",
-              "4",
-              "5",
-              "6",
-              "7",
-              "8"
-            ],
-            "con": [
-              ""
-            ],
-            "des": [
-              "1",
-              "2",
-              "3",
-              "4",
-              "5",
-              "6",
-              "7",
-              "8"
-            ],
-            "both": []
-          }
-        },
-        {
-          "name": "anger_states_header_7",
-          "desc": "anger_states_body_7",
-          "name_mobile": "anger_states_header_7",
-          "desc_mobile": "anger_states_body_7",
-          "range": {
-            "min": 10,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "",
-              "1",
-              "2",
-              "3",
-              "5",
-              "6",
-              "7",
-              "8"
-            ],
-            "con": [
-              ""
-            ],
-            "des": [
-              "1",
-              "2",
-              "3",
-              "5",
-              "6",
-              "7",
-              "8"
-            ],
-            "both": []
-          }
-        }
-      ],
-      "actions": [
-        {
-          "name": "anger_actions_header_1",
-          "desc": "anger_actions_body_1",
-          "name_mobile": "anger_actions_header_1",
-          "desc_mobile": "anger_actions_body_1"
-        },
-        {
-          "name": "anger_actions_header_2",
-          "desc": "anger_actions_body_2",
-          "name_mobile": "anger_actions_header_2",
-          "desc_mobile": "anger_actions_body_2"
-        },
-        {
-          "name": "anger_actions_header_3",
-          "desc": "anger_actions_body_3",
-          "name_mobile": "anger_actions_header_3",
-          "desc_mobile": "anger_actions_body_3"
-        },
-        {
-          "name": "anger_actions_header_4",
-          "desc": "anger_actions_body_4",
-          "name_mobile": "anger_actions_header_4",
-          "desc_mobile": "anger_actions_body_4"
-        },
-        {
-          "name": "anger_actions_header_5",
-          "desc": "anger_actions_body_5",
-          "name_mobile": "anger_actions_header_5",
-          "desc_mobile": "anger_actions_body_5"
-        },
-        {
-          "name": "anger_actions_header_6",
-          "desc": "anger_actions_body_6",
-          "name_mobile": "anger_actions_header_6",
-          "desc_mobile": "anger_actions_body_6"
-        },
-        {
-          "name": "anger_actions_header_7",
-          "desc": "anger_actions_body_7",
-          "name_mobile": "anger_actions_header_7",
-          "desc_mobile": "anger_actions_body_7"
-        },
-        {
-          "name": "anger_actions_header_8",
-          "desc": "anger_actions_body_8",
-          "name_mobile": "anger_actions_header_8",
-          "desc_mobile": "anger_actions_body_8"
-        },
-        {
-          "name": "anger_actions_header_9",
-          "desc": "anger_actions_body_9",
-          "name_mobile": "anger_actions_header_9",
-          "desc_mobile": "anger_actions_body_9"
-        }
-      ],
-      "triggers": [
-        {
-          "name": "anger_triggers_header_1",
-          "type": "Universal",
-          "name_mobile": "anger_triggers_universal_header_mobile",
-          "desc_mobile": "anger_triggers_universal_body_mobile"
-        },
-        {
-          "name": "anger_triggers_header_2",
-          "type": "Universal",
-          "name_mobile": "anger_triggers_learned_header_mobile",
-          "desc_mobile": "anger_triggers_learned_body_mobile"
-        },
-        {
-          "name": "anger_triggers_header_3",
-          "type": "Universal",
-          "name_mobile": "anger_triggers_header_3",
-          "desc_mobile": "Universal"
-        },
-        {
-          "name": "anger_triggers_header_4",
-          "type": "Learned",
-          "name_mobile": "anger_triggers_header_4",
-          "desc_mobile": "Learned"
-        },
-        {
-          "name": "anger_triggers_header_5",
-          "type": "Learned",
-          "name_mobile": "anger_triggers_header_5",
-          "desc_mobile": "Learned"
-        },
-        {
-          "name": "anger_triggers_header_6",
-          "type": "Learned",
-          "name_mobile": "anger_triggers_header_6",
-          "desc_mobile": "Learned"
-        },
-        {
-          "name": "anger_triggers_header_7",
-          "type": "Learned",
-          "name_mobile": "anger_triggers_header_7",
-          "desc_mobile": "Learned"
-        }
-      ],
-      "moods": [
-        {
-          "name": "anger_moods_header",
-          "desc": "anger_moods_body",
-          "name_mobile": "anger_moods_header",
-          "desc_mobile": "anger_moods_body"
-        }
-      ]
-    },
-    "fear": {
-      "continent": {
-        "name": "fear_continent_header",
-        "desc": "fear_continent_body",
-        "name_mobile": "fear_continent_header_mobile",
-        "desc_mobile": "fear_continent_body_mobile"
-      },
-      "states": [
-        {
-          "name": "fear_states_header_1",
-          "desc": "fear_states_body_1",
-          "name_mobile": "fear_states_header_1",
-          "desc_mobile": "fear_states_body_1",
-          "range": {
-            "min": 1,
-            "max": 3
-          },
-          "actions": {
-            "all": [
-              "3",
-              "6",
-              "7"
-            ],
-            "con": [
-              "3"
-            ],
-            "des": [
-              "6",
-              "7"
-            ],
-            "both": []
-          }
-        },
-        {
-          "name": "fear_states_header_2",
-          "desc": "fear_states_body_2",
-          "name_mobile": "fear_states_header_2",
-          "desc_mobile": "fear_states_body_2",
-          "range": {
-            "min": 1,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "3",
-              "1",
-              "4",
-              "6",
-              "7"
-            ],
-            "con": [
-              "3",
-              "1",
-              "4"
-            ],
-            "des": [
-              "1",
-              "4",
-              "6",
-              "7"
-            ],
-            "both": [
-              "1",
-              "4"
-            ]
-          }
-        },
-        {
-          "name": "fear_states_header_3",
-          "desc": "fear_states_body_3",
-          "name_mobile": "fear_states_header_3",
-          "desc_mobile": "fear_states_body_3",
-          "range": {
-            "min": 2,
-            "max": 7
-          },
-          "actions": {
-            "all": [
-              "3",
-              "6",
-              "7"
-            ],
-            "con": [
-              "3"
-            ],
-            "des": [
-              "6",
-              "7"
-            ],
-            "both": []
-          }
-        },
-        {
-          "name": "fear_states_header_4",
-          "desc": "fear_states_body_4",
-          "name_mobile": "fear_states_header_4",
-          "desc_mobile": "fear_states_body_4",
-          "range": {
-            "min": 6,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "1",
-              "4",
-              "5",
-              "6",
-              "7"
-            ],
-            "con": [
-              "1",
-              "4"
-            ],
-            "des": [
-              "1",
-              "4",
-              "5",
-              "6",
-              "7"
-            ],
-            "both": [
-              "1",
-              "4"
-            ]
-          }
-        },
-        {
-          "name": "fear_states_header_5",
-          "desc": "fear_states_body_5",
-          "name_mobile": "fear_states_header_5",
-          "desc_mobile": "fear_states_body_5",
-          "range": {
-            "min": 9,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "2",
-              "3",
-              "4",
-              "5",
-              "6"
-            ],
-            "con": [
-              "2",
-              "3",
-              "4"
-            ],
-            "des": [
-              "2",
-              "3",
-              "4",
-              "5",
-              "6"
-            ],
-            "both": [
-              "2",
-              "3",
-              "4"
-            ]
-          }
-        },
-        {
-          "name": "fear_states_header_6",
-          "desc": "fear_states_body_6",
-          "name_mobile": "fear_states_header_6",
-          "desc_mobile": "fear_states_body_6",
-          "range": {
-            "min": 10,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "1",
-              "4",
-              "5",
-              "6",
-              "7"
-            ],
-            "con": [
-              "1",
-              "4",
-              "5"
-            ],
-            "des": [
-              "1",
-              "4",
-              "5",
-              "6",
-              "7"
-            ],
-            "both": [
-              "1",
-              "4",
-              "5"
-            ]
-          }
-        },
-        {
-          "name": "fear_states_header_7",
-          "desc": "fear_states_body_7",
-          "name_mobile": "fear_states_header_7",
-          "desc_mobile": "fear_states_body_7",
-          "range": {
-            "min": 10,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "1",
-              "4",
-              "5"
-            ],
-            "con": [
-              "1",
-              "4",
-              "5"
-            ],
-            "des": [
-              "1",
-              "4",
-              "5"
-            ],
-            "both": [
-              "1",
-              "4",
-              "5"
-            ]
-          }
-        },
-        {
-          "name": "fear_states_header_8",
-          "desc": "fear_states_body_8",
-          "name_mobile": "fear_states_header_8",
-          "desc_mobile": "fear_states_body_8",
-          "range": {
-            "min": 10,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "1",
-              "4",
-              "5"
-            ],
-            "con": [
-              "1",
-              "4",
-              "5"
-            ],
-            "des": [
-              "1",
-              "4",
-              "5"
-            ],
-            "both": [
-              "1",
-              "4",
-              "5"
-            ]
-          }
-        }
-      ],
-      "actions": [
-        {
-          "name": "fear_actions_header_1",
-          "desc": "fear_actions_body_1",
-          "name_mobile": "fear_actions_header_1",
-          "desc_mobile": "fear_actions_body_1"
-        },
-        {
-          "name": "fear_actions_header_2",
-          "desc": "fear_actions_body_2",
-          "name_mobile": "fear_actions_header_2",
-          "desc_mobile": "fear_actions_body_2"
-        },
-        {
-          "name": "fear_actions_header_3",
-          "desc": "fear_actions_body_3",
-          "name_mobile": "fear_actions_header_3",
-          "desc_mobile": "fear_actions_body_3"
-        },
-        {
-          "name": "fear_actions_header_4",
-          "desc": "fear_actions_body_4",
-          "name_mobile": "fear_actions_header_4",
-          "desc_mobile": "fear_actions_body_4"
-        },
-        {
-          "name": "fear_actions_header_5",
-          "desc": "fear_actions_body_5",
-          "name_mobile": "fear_actions_header_5",
-          "desc_mobile": "fear_actions_body_5"
-        },
-        {
-          "name": "fear_actions_header_6",
-          "desc": "fear_actions_body_6",
-          "name_mobile": "fear_actions_header_6",
-          "desc_mobile": "fear_actions_body_6"
-        },
-        {
-          "name": "fear_actions_header_7",
-          "desc": "fear_actions_body_7",
-          "name_mobile": "fear_actions_header_7",
-          "desc_mobile": "fear_actions_body_7"
-        }
-      ],
-      "triggers": [
-        {
-          "name": "fear_triggers_header_1",
-          "type": "Universal",
-          "name_mobile": "fear_triggers_universal_header_mobile",
-          "desc_mobile": "fear_triggers_universal_body_mobile"
-        },
-        {
-          "name": "fear_triggers_header_2",
-          "type": "Universal",
-          "name_mobile": "fear_triggers_learned_header_mobile",
-          "desc_mobile": "fear_triggers_learned_body_mobile"
-        },
-        {
-          "name": "fear_triggers_header_3",
-          "type": "Universal",
-          "name_mobile": "fear_triggers_header_3",
-          "desc_mobile": "Universal"
-        },
-        {
-          "name": "fear_triggers_header_4",
-          "type": "Universal",
-          "name_mobile": "fear_triggers_header_4",
-          "desc_mobile": "Universal"
-        },
-        {
-          "name": "fear_triggers_header_5",
-          "type": "Learned",
-          "name_mobile": "fear_triggers_header_5",
-          "desc_mobile": "Learned"
-        },
-        {
-          "name": "fear_triggers_header_6",
-          "type": "Learned",
-          "name_mobile": "fear_triggers_header_6",
-          "desc_mobile": "Learned"
-        },
-        {
-          "name": "fear_triggers_header_7",
-          "type": "Learned",
-          "name_mobile": "fear_triggers_header_7",
-          "desc_mobile": "Learned"
-        }
-      ],
-      "moods": [
-        {
-          "name": "fear_moods_header",
-          "desc": "fear_moods_body",
-          "name_mobile": "fear_moods_header",
-          "desc_mobile": "fear_moods_body"
-        }
-      ]
-    },
-    "disgust": {
-      "continent": {
-        "name": "disgust_continent_header",
-        "desc": "disgust_continent_body",
-        "name_mobile": "disgust_continent_header_mobile",
-        "desc_mobile": "disgust_continent_body_mobile"
-      },
-      "states": [
-        {
-          "name": "disgust_states_header_1",
-          "desc": "disgust_states_body_1",
-          "name_mobile": "disgust_states_header_1",
-          "desc_mobile": "disgust_states_body_1",
-          "range": {
-            "min": 1,
-            "max": 5
-          },
-          "actions": {
-            "all": [
-              "1",
-              "2",
-              "4"
-            ],
-            "con": [
-              "1",
-              "2"
-            ],
-            "des": [
-              "2",
-              "4"
-            ],
-            "both": [
-              "2"
-            ]
-          }
-        },
-        {
-          "name": "disgust_states_header_2",
-          "desc": "disgust_states_body_2",
-          "name_mobile": "disgust_states_header_2",
-          "desc_mobile": "disgust_states_body_2",
-          "range": {
-            "min": 2,
-            "max": 7
-          },
-          "actions": {
-            "all": [
-              "1",
-              "2",
-              "4"
-            ],
-            "con": [
-              "1",
-              "2"
-            ],
-            "des": [
-              "4"
-            ],
-            "both": []
-          }
-        },
-        {
-          "name": "disgust_states_header_3",
-          "desc": "disgust_states_body_3",
-          "name_mobile": "disgust_states_header_3",
-          "desc_mobile": "disgust_states_body_3",
-          "range": {
-            "min": 2,
-            "max": 7
-          },
-          "actions": {
-            "all": [
-              "1",
-              "2",
-              "3",
-              ""
-            ],
-            "con": [
-              "1",
-              "2",
-              "3"
-            ],
-            "des": [
-              ""
-            ],
-            "both": []
-          }
-        },
-        {
-          "name": "disgust_states_header_4",
-          "desc": "disgust_states_body_4",
-          "name_mobile": "disgust_states_header_4",
-          "desc_mobile": "disgust_states_body_4",
-          "range": {
-            "min": 2,
-            "max": 9
-          },
-          "actions": {
-            "all": [
-              "1",
-              "2",
-              "4"
-            ],
-            "con": [
-              "1",
-              "2"
-            ],
-            "des": [
-              "2",
-              "4"
-            ],
-            "both": [
-              "2"
-            ]
-          }
-        },
-        {
-          "name": "disgust_states_header_5",
-          "desc": "disgust_states_body_5",
-          "name_mobile": "disgust_states_header_5",
-          "desc_mobile": "disgust_states_body_5",
-          "range": {
-            "min": 8,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "1",
-              "2",
-              "3",
-              "4"
-            ],
-            "con": [
-              "1",
-              "2",
-              "3"
-            ],
-            "des": [
-              "4"
-            ],
-            "both": []
-          }
-        },
-        {
-          "name": "disgust_states_header_6",
-          "desc": "disgust_states_body_6",
-          "name_mobile": "disgust_states_header_6",
-          "desc_mobile": "disgust_states_body_6",
-          "range": {
-            "min": 8,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "1",
-              "2",
-              "4"
-            ],
-            "con": [
-              "1",
-              "2"
-            ],
-            "des": [
-              "4"
-            ],
-            "both": []
-          }
-        },
-        {
-          "name": "disgust_states_header_7",
-          "desc": "disgust_states_body_7",
-          "name_mobile": "disgust_states_header_7",
-          "desc_mobile": "disgust_states_body_7",
-          "range": {
-            "min": 9,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "1",
-              "2",
-              "4"
-            ],
-            "con": [
-              "1"
-            ],
-            "des": [
-              "2",
-              "4"
-            ],
-            "both": []
-          }
-        }
-      ],
-      "actions": [
-        {
-          "name": "disgust_actions_header_1",
-          "desc": "disgust_actions_body_1",
-          "name_mobile": "disgust_actions_header_1",
-          "desc_mobile": "disgust_actions_body_1"
-        },
-        {
-          "name": "disgust_actions_header_2",
-          "desc": "disgust_actions_body_2",
-          "name_mobile": "disgust_actions_header_2",
-          "desc_mobile": "disgust_actions_body_2"
-        },
-        {
-          "name": "disgust_actions_header_3",
-          "desc": "disgust_actions_body_3",
-          "name_mobile": "disgust_actions_header_3",
-          "desc_mobile": "disgust_actions_body_3"
-        },
-        {
-          "name": "disgust_actions_header_4",
-          "desc": "disgust_actions_body_4",
-          "name_mobile": "disgust_actions_header_4",
-          "desc_mobile": "disgust_actions_body_4"
-        }
-      ],
-      "triggers": [
-        {
-          "name": "disgust_triggers_header_1",
-          "type": "Universal",
-          "name_mobile": "disgust_triggers_universal_header_mobile",
-          "desc_mobile": "disgust_triggers_universal_body_mobile"
-        },
-        {
-          "name": "disgust_triggers_header_2",
-          "type": "Universal",
-          "name_mobile": "disgust_triggers_learned_header_mobile",
-          "desc_mobile": "disgust_triggers_learned_body_mobile"
-        },
-        {
-          "name": "disgust_triggers_header_3",
-          "type": "Learned",
-          "name_mobile": "disgust_triggers_header_3",
-          "desc_mobile": "Learned"
-        },
-        {
-          "name": "disgust_triggers_header_4",
-          "type": "Learned",
-          "name_mobile": "disgust_triggers_header_4",
-          "desc_mobile": "Learned"
-        },
-        {
-          "name": "disgust_triggers_header_5",
-          "type": "Learned",
-          "name_mobile": "disgust_triggers_header_5",
-          "desc_mobile": "Learned"
-        }
-      ],
-      "moods": [
-        {
-          "name": "disgust_moods_header",
-          "desc": "disgust_moods_body",
-          "name_mobile": "disgust_moods_header",
-          "desc_mobile": "disgust_moods_body"
-        }
-      ]
-    },
-    "sadness": {
-      "continent": {
-        "name": "sadness_continent_header",
-        "desc": "sadness_continent_body",
-        "name_mobile": "sadness_continent_header_mobile",
-        "desc_mobile": "sadness_continent_body_mobile"
-      },
-      "states": [
-        {
-          "name": "sadness_states_header_1",
-          "desc": "sadness_states_body_1",
-          "name_mobile": "sadness_states_header_1",
-          "desc_mobile": "sadness_states_body_1",
-          "range": {
-            "min": 1,
-            "max": 5
-          },
-          "actions": {
-            "all": [
-              "1",
-              "4",
-              "2",
-              "3",
-              "6"
-            ],
-            "con": [
-              "1",
-              "4"
-            ],
-            "des": [
-              "2",
-              "3",
-              "4",
-              "6"
-            ],
-            "both": [
-              "4"
-            ]
-          }
-        },
-        {
-          "name": "sadness_states_header_2",
-          "desc": "sadness_states_body_2",
-          "name_mobile": "sadness_states_header_2",
-          "desc_mobile": "sadness_states_body_2",
-          "range": {
-            "min": 1,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "1",
-              "2",
-              "5",
-              "3",
-              "4",
-              "6"
-            ],
-            "con": [
-              "1",
-              "2",
-              "5"
-            ],
-            "des": [
-              "2",
-              "3",
-              "4",
-              "5",
-              "6"
-            ],
-            "both": [
-              "2",
-              "5"
-            ]
-          }
-        },
-        {
-          "name": "sadness_states_header_3",
-          "desc": "sadness_states_body_3",
-          "name_mobile": "sadness_states_header_3",
-          "desc_mobile": "sadness_states_body_3",
-          "range": {
-            "min": 2,
-            "max": 8
-          },
-          "actions": {
-            "all": [
-              "1",
-              "5",
-              "2",
-              "6"
-            ],
-            "con": [
-              "1",
-              "5"
-            ],
-            "des": [
-              "2",
-              "5",
-              "6"
-            ],
-            "both": [
-              "5"
-            ]
-          }
-        },
-        {
-          "name": "sadness_states_header_4",
-          "desc": "sadness_states_body_4",
-          "name_mobile": "sadness_states_header_4",
-          "desc_mobile": "sadness_states_body_4",
-          "range": {
-            "min": 2,
-            "max": 8
-          },
-          "actions": {
-            "all": [
-              "1",
-              "4",
-              "5",
-              "2",
-              "3"
-            ],
-            "con": [
-              "1",
-              "4",
-              "5"
-            ],
-            "des": [
-              "2",
-              "3",
-              "4"
-            ],
-            "both": [
-              "4"
-            ]
-          }
-        },
-        {
-          "name": "sadness_states_header_5",
-          "desc": "sadness_states_body_5",
-          "name_mobile": "sadness_states_header_5",
-          "desc_mobile": "sadness_states_body_5",
-          "range": {
-            "min": 5,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "1",
-              "5",
-              "2",
-              "3",
-              "6"
-            ],
-            "con": [
-              "1",
-              "5"
-            ],
-            "des": [
-              "2",
-              "3",
-              "5",
-              "6"
-            ],
-            "both": [
-              "5"
-            ]
-          }
-        },
-        {
-          "name": "sadness_states_header_6",
-          "desc": "sadness_states_body_6",
-          "name_mobile": "sadness_states_header_6",
-          "desc_mobile": "sadness_states_body_6",
-          "range": {
-            "min": 6,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "1",
-              "4",
-              "5",
-              "2",
-              "3"
-            ],
-            "con": [
-              "1",
-              "4",
-              "5"
-            ],
-            "des": [
-              "2",
-              "3",
-              "4",
-              "5"
-            ],
-            "both": [
-              "4",
-              "5"
-            ]
-          }
-        },
-        {
-          "name": "sadness_states_header_7",
-          "desc": "sadness_states_body_7",
-          "name_mobile": "sadness_states_header_7",
-          "desc_mobile": "sadness_states_body_7",
-          "range": {
-            "min": 6,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "1",
-              "4",
-              "2",
-              "3",
-              "6"
-            ],
-            "con": [
-              "1",
-              "4"
-            ],
-            "des": [
-              "2",
-              "3",
-              "4",
-              "6"
-            ],
-            "both": [
-              "4"
-            ]
-          }
-        },
-        {
-          "name": "sadness_states_header_8",
-          "desc": "sadness_states_body_8",
-          "name_mobile": "sadness_states_header_8",
-          "desc_mobile": "sadness_states_body_8",
-          "range": {
-            "min": 7,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "1",
-              "4",
-              "5",
-              "2",
-              "3",
-              "6"
-            ],
-            "con": [
-              "1",
-              "4",
-              "5"
-            ],
-            "des": [
-              "2",
-              "3",
-              "4",
-              "5",
-              "6"
-            ],
-            "both": [
-              "4",
-              "5"
-            ]
-          }
-        },
-        {
-          "name": "sadness_states_header_9",
-          "desc": "sadness_states_body_9",
-          "name_mobile": "sadness_states_header_9",
-          "desc_mobile": "sadness_states_body_9",
-          "range": {
-            "min": 7,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "1",
-              "4",
-              "2",
-              "3"
-            ],
-            "con": [
-              "1",
-              "4"
-            ],
-            "des": [
-              "2",
-              "3",
-              "4"
-            ],
-            "both": [
-              "4"
-            ]
-          }
-        },
-        {
-          "name": "sadness_states_header_10",
-          "desc": "sadness_states_body_10",
-          "name_mobile": "sadness_states_header_10",
-          "desc_mobile": "sadness_states_body_10",
-          "range": {
-            "min": 7,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "1",
-              "4",
-              "2",
-              "3",
-              "6"
-            ],
-            "con": [
-              "1",
-              "4"
-            ],
-            "des": [
-              "2",
-              "3",
-              "4",
-              "6"
-            ],
-            "both": [
-              "4"
-            ]
-          }
-        },
-        {
-          "name": "sadness_states_header_11",
-          "desc": "sadness_states_body_11",
-          "name_mobile": "sadness_states_header_11",
-          "desc_mobile": "sadness_states_body_11",
-          "range": {
-            "min": 10,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "1",
-              "4",
-              "5",
-              "2",
-              "3"
-            ],
-            "con": [
-              "1",
-              "4",
-              "5"
-            ],
-            "des": [
-              "2",
-              "3",
-              "4",
-              "5"
-            ],
-            "both": [
-              "4",
-              "5"
-            ]
-          }
-        }
-      ],
-      "actions": [
-        {
-          "name": "sadness_actions_header_1",
-          "desc": "sadness_actions_body_1",
-          "name_mobile": "sadness_actions_header_1",
-          "desc_mobile": "sadness_actions_body_1"
-        },
-        {
-          "name": "sadness_actions_header_2",
-          "desc": "sadness_actions_body_2",
-          "name_mobile": "sadness_actions_header_2",
-          "desc_mobile": "sadness_actions_body_2"
-        },
-        {
-          "name": "sadness_actions_header_3",
-          "desc": "sadness_actions_body_3",
-          "name_mobile": "sadness_actions_header_3",
-          "desc_mobile": "sadness_actions_body_3"
-        },
-        {
-          "name": "sadness_actions_header_4",
-          "desc": "sadness_actions_body_4",
-          "name_mobile": "sadness_actions_header_4",
-          "desc_mobile": "sadness_actions_body_4"
-        },
-        {
-          "name": "sadness_actions_header_5",
-          "desc": "sadness_actions_body_5",
-          "name_mobile": "sadness_actions_header_5",
-          "desc_mobile": "sadness_actions_body_5"
-        },
-        {
-          "name": "sadness_actions_header_6",
-          "desc": "sadness_actions_body_6",
-          "name_mobile": "sadness_actions_header_6",
-          "desc_mobile": "sadness_actions_body_6"
-        }
-      ],
-      "triggers": [
-        {
-          "name": "sadness_triggers_header_1",
-          "type": "Universal",
-          "name_mobile": "sadness_triggers_universal_header_mobile",
-          "desc_mobile": "sadness_triggers_universal_body_mobile"
-        },
-        {
-          "name": "sadness_triggers_header_2",
-          "type": "Universal",
-          "name_mobile": "sadness_triggers_learned_header_mobile",
-          "desc_mobile": "sadness_triggers_learned_body_mobile"
-        },
-        {
-          "name": "sadness_triggers_header_3",
-          "type": "Learned",
-          "name_mobile": "sadness_triggers_header_3",
-          "desc_mobile": "Learned"
-        },
-        {
-          "name": "sadness_triggers_header_4",
-          "type": "Learned",
-          "name_mobile": "sadness_triggers_header_4",
-          "desc_mobile": "Learned"
-        },
-        {
-          "name": "sadness_triggers_header_5",
-          "type": "Learned",
-          "name_mobile": "sadness_triggers_header_5",
-          "desc_mobile": "Learned"
-        }
-      ],
-      "moods": [
-        {
-          "name": "sadness_moods_header",
-          "desc": "sadness_moods_body",
-          "name_mobile": "sadness_moods_header",
-          "desc_mobile": "sadness_moods_body"
-        }
-      ]
-    },
-    "enjoyment": {
-      "continent": {
-        "name": "enjoyment_continent_header",
-        "desc": "enjoyment_continent_body",
-        "name_mobile": "enjoyment_continent_header_mobile",
-        "desc_mobile": "enjoyment_continent_body_mobile"
-      },
-      "states": [
-        {
-          "name": "enjoyment_states_header_1",
-          "desc": "enjoyment_states_body_1",
-          "name_mobile": "enjoyment_states_header_1",
-          "desc_mobile": "enjoyment_states_body_1",
-          "range": {
-            "min": 1,
-            "max": 5
-          },
-          "actions": {
-            "all": [
-              "1",
-              "6",
-              ""
-            ],
-            "con": [
-              "1",
-              "6"
-            ],
-            "des": [
-              ""
-            ],
-            "both": []
-          }
-        },
-        {
-          "name": "enjoyment_states_header_2",
-          "desc": "enjoyment_states_body_2",
-          "name_mobile": "enjoyment_states_header_2",
-          "desc_mobile": "enjoyment_states_body_2",
-          "range": {
-            "min": 2,
-            "max": 8
-          },
-          "actions": {
-            "all": [
-              "1",
-              "4",
-              "5",
-              "6",
-              "7"
-            ],
-            "con": [
-              "1",
-              "4",
-              "5",
-              "6",
-              "7"
-            ],
-            "des": [
-              "7"
-            ],
-            "both": [
-              "7"
-            ]
-          }
-        },
-        {
-          "name": "enjoyment_states_header_3",
-          "desc": "enjoyment_states_body_3",
-          "name_mobile": "enjoyment_states_header_3",
-          "desc_mobile": "enjoyment_states_body_3",
-          "range": {
-            "min": 2,
-            "max": 8
-          },
-          "actions": {
-            "all": [
-              "1",
-              "2",
-              "4",
-              "5",
-              "7"
-            ],
-            "con": [
-              "1",
-              "2",
-              "4",
-              "5",
-              "7"
-            ],
-            "des": [
-              "7"
-            ],
-            "both": [
-              "7"
-            ]
-          }
-        },
-        {
-          "name": "enjoyment_states_header_4",
-          "desc": "enjoyment_states_body_4",
-          "name_mobile": "enjoyment_states_header_4",
-          "desc_mobile": "enjoyment_states_body_4",
-          "range": {
-            "min": 2,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "4",
-              "5",
-              "6",
-              "7"
-            ],
-            "con": [
-              "4",
-              "5",
-              "6",
-              "7"
-            ],
-            "des": [
-              "7"
-            ],
-            "both": [
-              "7"
-            ]
-          }
-        },
-        {
-          "name": "enjoyment_states_header_5",
-          "desc": "enjoyment_states_body_5",
-          "name_mobile": "enjoyment_states_header_5",
-          "desc_mobile": "enjoyment_states_body_5",
-          "range": {
-            "min": 3,
-            "max": 6
-          },
-          "actions": {
-            "all": [
-              "1",
-              "4",
-              "5",
-              "6",
-              ""
-            ],
-            "con": [
-              "1",
-              "4",
-              "5",
-              "6"
-            ],
-            "des": [
-              ""
-            ],
-            "both": []
-          }
-        },
-        {
-          "name": "enjoyment_states_header_6",
-          "desc": "enjoyment_states_body_6",
-          "name_mobile": "enjoyment_states_header_6",
-          "desc_mobile": "enjoyment_states_body_6",
-          "range": {
-            "min": 3,
-            "max": 8
-          },
-          "actions": {
-            "all": [
-              "",
-              "1",
-              "2",
-              "3",
-              "4",
-              "5"
-            ],
-            "con": [
-              ""
-            ],
-            "des": [
-              "1",
-              "2",
-              "3",
-              "4",
-              "5"
-            ],
-            "both": []
-          }
-        },
-        {
-          "name": "enjoyment_states_header_7",
-          "desc": "enjoyment_states_body_7",
-          "name_mobile": "enjoyment_states_header_7",
-          "desc_mobile": "enjoyment_states_body_7",
-          "range": {
-            "min": 3,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "1",
-              "2",
-              "5",
-              "6",
-              "7",
-              "3"
-            ],
-            "con": [
-              "1",
-              "2",
-              "5",
-              "6",
-              "7"
-            ],
-            "des": [
-              "3",
-              "5",
-              "6",
-              "7"
-            ],
-            "both": [
-              "5",
-              "6",
-              "7"
-            ]
-          }
-        },
-        {
-          "name": "enjoyment_states_header_8",
-          "desc": "enjoyment_states_body_8",
-          "name_mobile": "enjoyment_states_header_8",
-          "desc_mobile": "enjoyment_states_body_8",
-          "range": {
-            "min": 3,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "4",
-              "5",
-              "6",
-              "3"
-            ],
-            "con": [
-              "4",
-              "5",
-              "6"
-            ],
-            "des": [
-              "3",
-              "4",
-              "5",
-              "6"
-            ],
-            "both": [
-              "4",
-              "5",
-              "6"
-            ]
-          }
-        },
-        {
-          "name": "enjoyment_states_header_9",
-          "desc": "enjoyment_states_body_9",
-          "name_mobile": "enjoyment_states_header_9",
-          "desc_mobile": "enjoyment_states_body_9",
-          "range": {
-            "min": 4,
-            "max": 9
-          },
-          "actions": {
-            "all": [
-              "1",
-              "4",
-              "5",
-              "6",
-              "7"
-            ],
-            "con": [
-              "1",
-              "4",
-              "5",
-              "6",
-              "7"
-            ],
-            "des": [
-              "4",
-              "5",
-              "6",
-              "7"
-            ],
-            "both": [
-              "4",
-              "5",
-              "6",
-              "7"
-            ]
-          }
-        },
-        {
-          "name": "enjoyment_states_header_10",
-          "desc": "enjoyment_states_body_10",
-          "name_mobile": "enjoyment_states_header_10",
-          "desc_mobile": "enjoyment_states_body_10",
-          "range": {
-            "min": 5,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "1",
-              "4",
-              "5",
-              "6",
-              "7"
-            ],
-            "con": [
-              "1",
-              "4",
-              "5",
-              "6",
-              "7"
-            ],
-            "des": [
-              "7"
-            ],
-            "both": [
-              "7"
-            ]
-          }
-        },
-        {
-          "name": "enjoyment_states_header_11",
-          "desc": "enjoyment_states_body_11",
-          "name_mobile": "enjoyment_states_header_11",
-          "desc_mobile": "enjoyment_states_body_11",
-          "range": {
-            "min": 2,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "2",
-              "5",
-              ""
-            ],
-            "con": [
-              "2",
-              "5"
-            ],
-            "des": [
-              ""
-            ],
-            "both": []
-          }
-        },
-        {
-          "name": "enjoyment_states_header_12",
-          "desc": "enjoyment_states_body_12",
-          "name_mobile": "enjoyment_states_header_12",
-          "desc_mobile": "enjoyment_states_body_12",
-          "range": {
-            "min": 6,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "1",
-              "2",
-              "4",
-              "5",
-              "7"
-            ],
-            "con": [
-              "1",
-              "2",
-              "4",
-              "5",
-              "7"
-            ],
-            "des": [
-              "7"
-            ],
-            "both": [
-              "7"
-            ]
-          }
-        },
-        {
-          "name": "enjoyment_states_header_13",
-          "desc": "enjoyment_states_body_13",
-          "name_mobile": "enjoyment_states_header_13",
-          "desc_mobile": "enjoyment_states_body_13",
-          "range": {
-            "min": 9,
-            "max": 10
-          },
-          "actions": {
-            "all": [
-              "2",
-              "6",
-              "7"
-            ],
-            "con": [
-              "2",
-              "6",
-              "7"
-            ],
-            "des": [
-              "7"
-            ],
-            "both": [
-              "7"
-            ]
-          }
-        }
-      ],
-      "actions": [
-        {
-          "name": "enjoyment_actions_header_1",
-          "desc": "enjoyment_actions_body_1",
-          "name_mobile": "enjoyment_actions_header_1",
-          "desc_mobile": "enjoyment_actions_body_1"
-        },
-        {
-          "name": "enjoyment_actions_header_2",
-          "desc": "enjoyment_actions_body_2",
-          "name_mobile": "enjoyment_actions_header_2",
-          "desc_mobile": "enjoyment_actions_body_2"
-        },
-        {
-          "name": "enjoyment_actions_header_3",
-          "desc": "enjoyment_actions_body_3",
-          "name_mobile": "enjoyment_actions_header_3",
-          "desc_mobile": "enjoyment_actions_body_3"
-        },
-        {
-          "name": "enjoyment_actions_header_4",
-          "desc": "enjoyment_actions_body_4",
-          "name_mobile": "enjoyment_actions_header_4",
-          "desc_mobile": "enjoyment_actions_body_4"
-        },
-        {
-          "name": "enjoyment_actions_header_5",
-          "desc": "enjoyment_actions_body_5",
-          "name_mobile": "enjoyment_actions_header_5",
-          "desc_mobile": "enjoyment_actions_body_5"
-        },
-        {
-          "name": "enjoyment_actions_header_6",
-          "desc": "enjoyment_actions_body_6",
-          "name_mobile": "enjoyment_actions_header_6",
-          "desc_mobile": "enjoyment_actions_body_6"
-        },
-        {
-          "name": "enjoyment_actions_header_7",
-          "desc": "enjoyment_actions_body_7",
-          "name_mobile": "enjoyment_actions_header_7",
-          "desc_mobile": "enjoyment_actions_body_7"
-        }
-      ],
-      "triggers": [
-        {
-          "name": "enjoyment_triggers_header_1",
-          "type": "Universal",
-          "name_mobile": "enjoyment_triggers_universal_header_mobile",
-          "desc_mobile": "enjoyment_triggers_universal_body_mobile"
-        },
-        {
-          "name": "enjoyment_triggers_header_2",
-          "type": "Universal",
-          "name_mobile": "enjoyment_triggers_learned_header_mobile",
-          "desc_mobile": "enjoyment_triggers_learned_body_mobile"
-        },
-        {
-          "name": "enjoyment_triggers_header_3",
-          "type": "Universal",
-          "name_mobile": "enjoyment_triggers_header_3",
-          "desc_mobile": "Universal"
-        },
-        {
-          "name": "enjoyment_triggers_header_4",
-          "type": "Learned",
-          "name_mobile": "enjoyment_triggers_header_4",
-          "desc_mobile": "Learned"
-        },
-        {
-          "name": "enjoyment_triggers_header_5",
-          "type": "Learned",
-          "name_mobile": "enjoyment_triggers_header_5",
-          "desc_mobile": "Learned"
-        },
-        {
-          "name": "enjoyment_triggers_header_6",
-          "type": "Learned",
-          "name_mobile": "enjoyment_triggers_header_6",
-          "desc_mobile": "Learned"
-        },
-        {
-          "name": "enjoyment_triggers_header_7",
-          "type": "Learned",
-          "name_mobile": "enjoyment_triggers_header_7",
-          "desc_mobile": "Learned"
-        }
-      ],
-      "moods": [
-        {
-          "name": "enjoyment_moods_header",
-          "desc": "enjoyment_moods_body",
-          "name_mobile": "enjoyment_moods_header",
-          "desc_mobile": "enjoyment_moods_body"
-        }
-      ]
-    }
-  },
-  "metadata": {
-    "site": {
-      "header": "site_header",
-      "body": "",
-      "caption": "site_dropdown_label",
-      "header_mobile": "site_header",
-      "body_mobile": "",
-      "sectionName": ""
-    },
-    "intro": {
-      "header": "intro_header",
-      "body": "",
-      "header_mobile": "intro_header",
-      "body_mobile": "intro_body_mobile",
-      "sectionName": "intro_section_name",
-      "steps": [
-        {
-          "header": "intro_secondary_header_1",
-          "body": "intro_secondary_copy_1",
-          "header_mobile": "intro_secondary_header_1",
-          "body_mobile": "intro_secondary_copy_1",
-          "caption": "intro_caption_1"
-        },
-        {
-          "header": "intro_secondary_header_2",
-          "body": "intro_secondary_copy_2",
-          "header_mobile": "intro_secondary_header_2",
-          "body_mobile": "intro_secondary_copy_2",
-          "caption": "intro_caption_2"
-        },
-        {
-          "header": "intro_secondary_header_3",
-          "body": "intro_secondary_copy_3",
-          "header_mobile": "intro_secondary_header_3",
-          "body_mobile": "intro_secondary_copy_3",
-          "caption": "intro_caption_3"
-        },
-        {
-          "header": "intro_button_goto",
-          "body": "",
-          "header_mobile": "intro_button_goto",
-          "body_mobile": "",
-          "caption": ""
-        },
-        {
-          "header": "intro_button_start",
-          "body": "",
-          "header_mobile": "intro_button_start",
-          "body_mobile": "",
-          "caption": ""
-        },
-        {
-          "header": "intro_button_back",
-          "body": "",
-          "header_mobile": "intro_button_back",
-          "body_mobile": "",
-          "caption": ""
-        },
-        {
-          "header": "intro_button_why",
-          "body": "",
-          "header_mobile": "intro_button_why",
-          "body_mobile": "",
-          "caption": ""
-        },
-        {
-          "header": "intro_button_start",
-          "body": "",
-          "header_mobile": "intro_button_start",
-          "body_mobile": "",
-          "caption": ""
-        },
-        {
-          "header": "intro_gfx_left",
-          "body": "",
-          "header_mobile": "intro_gfx_left",
-          "body_mobile": "",
-          "caption": ""
-        },
-        {
-          "header": "intro_gfx_right",
-          "body": "",
-          "header_mobile": "intro_gfx_right",
-          "body_mobile": "",
-          "caption": ""
-        },
-        {
-          "header": "intro_gfx_down",
-          "body": "",
-          "header_mobile": "intro_gfx_down",
-          "body_mobile": "",
-          "caption": ""
-        },
-        {
-          "header": "intro_gfx_chart_anger",
-          "body": "",
-          "header_mobile": "intro_gfx_chart_anger",
-          "body_mobile": "",
-          "caption": ""
-        },
-        {
-          "header": "intro_gfx_chart_fear",
-          "body": "",
-          "header_mobile": "intro_gfx_chart_fear",
-          "body_mobile": "",
-          "caption": ""
-        },
-        {
-          "header": "intro_gfx_chart_disgust",
-          "body": "",
-          "header_mobile": "intro_gfx_chart_disgust",
-          "body_mobile": "",
-          "caption": ""
-        },
-        {
-          "header": "intro_gfx_chart_sadness",
-          "body": "",
-          "header_mobile": "intro_gfx_chart_sadness",
-          "body_mobile": "",
-          "caption": ""
-        },
-        {
-          "header": "intro_gfx_chart_enjoyment",
-          "body": "",
-          "header_mobile": "intro_gfx_chart_enjoyment",
-          "body_mobile": "",
-          "caption": ""
-        }
-      ]
-    },
-    "continents": {
-      "header": "continents_header",
-      "body": "continents_body",
-      "caption": "",
-      "header_mobile": "continents_header",
-      "body_mobile": "continents_body_mobile",
-      "sectionName": "continents_section_name"
-    },
-    "states": {
-      "header": "states_header",
-      "body": "states_body",
-      "caption": "states_axis_labels",
-      "header_mobile": "states_header",
-      "body_mobile": "states_body_mobile",
-      "sectionName": "states_section_name"
-    },
-    "actions": {
-      "header": "actions_header",
-      "body": "actions_body",
-      "header_mobile": "actions_header",
-      "body_mobile": "actions_body_mobile",
-      "sectionName": "actions_section_name",
-      "qualities": [
-        {
-          "header": "actions_secondary_header_1",
-          "body": "actions_secondary_copy_1",
-          "header_mobile": "actions_secondary_header_1",
-          "body_mobile": "actions_body_mobile"
-        },
-        {
-          "header": "actions_secondary_header_2",
-          "body": "actions_secondary_copy_2",
-          "header_mobile": "actions_secondary_header_2",
-          "body_mobile": "actions_secondary_copy_2"
-        },
-        {
-          "header": "actions_secondary_header_3",
-          "body": "actions_secondary_copy_3",
-          "header_mobile": "actions_secondary_header_3",
-          "body_mobile": "actions_secondary_copy_3"
-        }
-      ]
-    },
-    "triggers": {
-      "header": "triggers_header",
-      "body": "triggers_body",
-      "header_mobile": "triggers_header",
-      "body_mobile": "triggers_body_mobile",
-      "sectionName": "triggers_section_name",
-      "steps": [
-        {
-          "header": "triggers_secondary_header_1",
-          "body": "triggers_secondary_body_1",
-          "header_mobile": "triggers_secondary_header_1",
-          "body_mobile": "triggers_body_mobile"
-        },
-        {
-          "header": "triggers_secondary_header_2",
-          "body": "triggers_secondary_body_2",
-          "header_mobile": "triggers_secondary_header_2",
-          "body_mobile": "triggers_secondary_body_2"
-        },
-        {
-          "header": "triggers_secondary_header_3",
-          "body": "triggers_secondary_body_3",
-          "header_mobile": "triggers_secondary_header_3",
-          "body_mobile": "triggers_secondary_body_3"
-        },
-        {
-          "header": "triggers_secondary_header_4",
-          "body": "triggers_secondary_body_4",
-          "header_mobile": "triggers_secondary_header_4",
-          "body_mobile": "triggers_secondary_body_4"
-        },
-        {
-          "header": "triggers_secondary_header_5",
-          "body": "triggers_secondary_body_5",
-          "header_mobile": "triggers_secondary_header_5",
-          "body_mobile": "triggers_secondary_body_5"
-        }
-      ]
-    },
-    "moods": {
-      "header": "moods_header",
-      "body": "moods_body",
-      "caption": "",
-      "header_mobile": "moods_header",
-      "body_mobile": "moods_body_mobile",
-      "sectionName": "moods_section_name"
-    },
-    "calm": {
-      "header": "calm_header",
-      "body": "calm_body",
-      "caption": "calm_button_label",
-      "header_mobile": "calm_header",
-      "body_mobile": "calm_body_mobile",
-      "sectionName": "calm_section_name",
-      "secondary": {
-        "header": "calm_secondary_header",
-        "body": "calm_secondary_body",
-        "header_mobile": "calm_secondary_header",
-        "body_mobile": "calm_body_mobile"
-      }
-    },
-    "more": {
-      "header": "",
-      "body": "",
-      "caption": "more_button_label",
-      "header_mobile": "",
-      "body_mobile": "",
-      "sectionName": "more_section_name"
-    }
-  },
-  "about": {
-    "subsections": [
-      {
-        "title": "about_header_1",
-        "desc": "about_body_1",
-        "title_mobile": "about_header_1",
-        "desc_mobile": "about_body_1"
-      },
-      {
-        "title": "about_header_2",
-        "desc": "about_body_2",
-        "title_mobile": "about_header_2",
-        "desc_mobile": "about_body_2"
-      },
-      {
-        "title": "about_header_3",
-        "desc": "about_body_3",
-        "title_mobile": "about_header_3",
-        "desc_mobile": "about_body_3"
-      },
-      {
-        "title": "about_header_4",
-        "desc": "about_body_4",
-        "title_mobile": "about_header_4",
-        "desc_mobile": "about_body_4"
-      },
-      {
-        "title": "about_header_5",
-        "desc": "about_body_5",
-        "title_mobile": "about_header_5",
-        "desc_mobile": "about_body_5"
-      },
-      {
-        "title": "about_header_6",
-        "desc": "about_body_6",
-        "title_mobile": "about_header_6",
-        "desc_mobile": "about_body_6"
-      },
-      {
-        "title": "about_header_7",
-        "desc": "about_body_7",
-        "title_mobile": "about_header_7",
-        "desc_mobile": "about_body_7"
-      }
-    ],
-    "title": "about_intro_title",
-    "desc": "about_intro_body",
-    "title_mobile": "about_intro_title_mobile",
-    "desc_mobile": "about_intro_body_mobile",
-    "sectionName": "about_section_name",
-    "sectionName_mobile": "about_section_name"
-  },
-  "emotrak": {
-    "subsections": [
-      {
-        "title": "",
-        "desc": "emotrak_section_1",
-        "title_mobile": "",
-        "desc_mobile": "emotrak_section_1",
-        "image": "emotrak",
-        "mail": null
-      },
-      {
-        "title": "",
-        "desc": "emotrak_section_2",
-        "title_mobile": "",
-        "desc_mobile": "emotrak_section_2",
-        "image": null,
-        "mail": true
-      },
-      {
-        "title": "",
-        "desc": "emotrak_section_3",
-        "title_mobile": "",
-        "desc_mobile": "emotrak_section_3",
-        "image": null,
-        "mail": null
-      }
-    ],
-    "title": "emotrak_title",
-    "desc": "emotrak_intro",
-    "header_mobile": "emotrak_header_mobile",
-    "body_mobile": "emotrak_body_mobile",
-    "sectionName": "emotrak_section_name",
-    "sectionName_mobile": "emotrak_section_name"
-  }
+	"emotions": {
+		"anger": {
+			"continent": {
+				"name": "anger_continent_header",
+				"desc": "anger_continent_body",
+				"name_mobile": "anger_continent_header_mobile",
+				"desc_mobile": "anger_continent_body_mobile",
+				"secondary": ""
+			},
+			"states": [
+				{
+					"name": "anger_states_header_1",
+					"desc": "anger_states_body_1",
+					"name_mobile": "anger_states_header_1",
+					"desc_mobile": "anger_states_body_1",
+					"secondary": "anger_states_body",
+					"range": {
+						"min": 1,
+						"max": 2
+					},
+					"actions": {
+						"all": [
+							"7",
+							"9",
+							"8"
+						],
+						"con": [
+							"7"
+						],
+						"des": [
+							"7",
+							"9",
+							"8"
+						],
+						"both": [
+							"7"
+						]
+					}
+				},
+				{
+					"name": "anger_states_header_2",
+					"desc": "anger_states_body_2",
+					"name_mobile": "anger_states_header_2",
+					"desc_mobile": "anger_states_body_2",
+					"secondary": "",
+					"range": {
+						"min": 1,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"7",
+							"1",
+							"2",
+							"3",
+							"5",
+							"8",
+							"9"
+						],
+						"con": [
+							"7"
+						],
+						"des": [
+							"1",
+							"2",
+							"3",
+							"5",
+							"7",
+							"8",
+							"9"
+						],
+						"both": [
+							"7"
+						]
+					}
+				},
+				{
+					"name": "anger_states_header_3",
+					"desc": "anger_states_body_3",
+					"name_mobile": "anger_states_header_3",
+					"desc_mobile": "anger_states_body_3",
+					"secondary": "",
+					"range": {
+						"min": 2,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"7",
+							"1",
+							"2",
+							"3",
+							"8"
+						],
+						"con": [
+							"7"
+						],
+						"des": [
+							"1",
+							"2",
+							"3",
+							"7",
+							"8"
+						],
+						"both": [
+							"7"
+						]
+					}
+				},
+				{
+					"name": "anger_states_header_4",
+					"desc": "anger_states_body_4",
+					"name_mobile": "anger_states_header_4",
+					"desc_mobile": "anger_states_body_4",
+					"secondary": "",
+					"range": {
+						"min": 3,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"7",
+							"2",
+							"3",
+							"4",
+							"5",
+							"8",
+							"9"
+						],
+						"con": [
+							"7"
+						],
+						"des": [
+							"2",
+							"3",
+							"4",
+							"5",
+							"7",
+							"8",
+							"9"
+						],
+						"both": [
+							"7"
+						]
+					}
+				},
+				{
+					"name": "anger_states_header_5",
+					"desc": "anger_states_body_5",
+					"name_mobile": "anger_states_header_5",
+					"desc_mobile": "anger_states_body_5",
+					"secondary": "",
+					"range": {
+						"min": 4,
+						"max": 7
+					},
+					"actions": {
+						"all": [
+							"7",
+							"1",
+							"2",
+							"3",
+							"9",
+							"4",
+							"5",
+							"8"
+						],
+						"con": [
+							"7"
+						],
+						"des": [
+							"1",
+							"2",
+							"3",
+							"7",
+							"9",
+							"4",
+							"5",
+							"8"
+						],
+						"both": [
+							"7"
+						]
+					}
+				},
+				{
+					"name": "anger_states_header_6",
+					"desc": "anger_states_body_6",
+					"name_mobile": "anger_states_header_6",
+					"desc_mobile": "anger_states_body_6",
+					"secondary": "",
+					"range": {
+						"min": 5,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"",
+							"1",
+							"2",
+							"3",
+							"4",
+							"5",
+							"6",
+							"7",
+							"8"
+						],
+						"con": [
+							""
+						],
+						"des": [
+							"1",
+							"2",
+							"3",
+							"4",
+							"5",
+							"6",
+							"7",
+							"8"
+						],
+						"both": []
+					}
+				},
+				{
+					"name": "anger_states_header_7",
+					"desc": "anger_states_body_7",
+					"name_mobile": "anger_states_header_7",
+					"desc_mobile": "anger_states_body_7",
+					"secondary": "",
+					"range": {
+						"min": 10,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"",
+							"1",
+							"2",
+							"3",
+							"5",
+							"6",
+							"7",
+							"8"
+						],
+						"con": [
+							""
+						],
+						"des": [
+							"1",
+							"2",
+							"3",
+							"5",
+							"6",
+							"7",
+							"8"
+						],
+						"both": []
+					}
+				}
+			],
+			"actions": [
+				{
+					"name": "anger_actions_header_1",
+					"desc": "anger_actions_body_1",
+					"name_mobile": "anger_actions_header_1",
+					"desc_mobile": "anger_actions_body_1",
+					"secondary": "anger_actions_body"
+				},
+				{
+					"name": "anger_actions_header_2",
+					"desc": "anger_actions_body_2",
+					"name_mobile": "anger_actions_header_2",
+					"desc_mobile": "anger_actions_body_2",
+					"secondary": ""
+				},
+				{
+					"name": "anger_actions_header_3",
+					"desc": "anger_actions_body_3",
+					"name_mobile": "anger_actions_header_3",
+					"desc_mobile": "anger_actions_body_3",
+					"secondary": ""
+				},
+				{
+					"name": "anger_actions_header_4",
+					"desc": "anger_actions_body_4",
+					"name_mobile": "anger_actions_header_4",
+					"desc_mobile": "anger_actions_body_4",
+					"secondary": ""
+				},
+				{
+					"name": "anger_actions_header_5",
+					"desc": "anger_actions_body_5",
+					"name_mobile": "anger_actions_header_5",
+					"desc_mobile": "anger_actions_body_5",
+					"secondary": ""
+				},
+				{
+					"name": "anger_actions_header_6",
+					"desc": "anger_actions_body_6",
+					"name_mobile": "anger_actions_header_6",
+					"desc_mobile": "anger_actions_body_6",
+					"secondary": ""
+				},
+				{
+					"name": "anger_actions_header_7",
+					"desc": "anger_actions_body_7",
+					"name_mobile": "anger_actions_header_7",
+					"desc_mobile": "anger_actions_body_7",
+					"secondary": ""
+				},
+				{
+					"name": "anger_actions_header_8",
+					"desc": "anger_actions_body_8",
+					"name_mobile": "anger_actions_header_8",
+					"desc_mobile": "anger_actions_body_8",
+					"secondary": ""
+				},
+				{
+					"name": "anger_actions_header_9",
+					"desc": "anger_actions_body_9",
+					"name_mobile": "anger_actions_header_9",
+					"desc_mobile": "anger_actions_body_9",
+					"secondary": ""
+				}
+			],
+			"triggers": [
+				{
+					"name": "anger_triggers_header_1",
+					"type": "Universal",
+					"name_mobile": "anger_triggers_header_1",
+					"desc_mobile": "Universal"
+				},
+				{
+					"name": "anger_triggers_header_2",
+					"type": "Universal",
+					"name_mobile": "anger_triggers_universal_header_mobile",
+					"desc_mobile": "anger_triggers_universal_body_mobile"
+				},
+				{
+					"name": "anger_triggers_header_3",
+					"type": "Universal",
+					"name_mobile": "anger_triggers_learned_header_mobile",
+					"desc_mobile": "anger_triggers_learned_body_mobile"
+				},
+				{
+					"name": "anger_triggers_header_4",
+					"type": "Learned",
+					"name_mobile": "anger_triggers_header_4",
+					"desc_mobile": "Learned"
+				},
+				{
+					"name": "anger_triggers_header_5",
+					"type": "Learned",
+					"name_mobile": "anger_triggers_header_5",
+					"desc_mobile": "Learned"
+				},
+				{
+					"name": "anger_triggers_header_6",
+					"type": "Learned",
+					"name_mobile": "anger_triggers_header_6",
+					"desc_mobile": "Learned"
+				},
+				{
+					"name": "anger_triggers_header_7",
+					"type": "Learned",
+					"name_mobile": "anger_triggers_header_7",
+					"desc_mobile": "Learned"
+				}
+			],
+			"moods": [
+				{
+					"name": "anger_moods_header",
+					"desc": "anger_moods_body",
+					"name_mobile": "anger_moods_header",
+					"desc_mobile": "anger_moods_body",
+					"secondary": ""
+				}
+			],
+			"timeline": [
+				{
+					"trigger": {
+						"precondition": "anger_timeline_trigger_precondition",
+						"event": "anger_timeline_trigger_event",
+						"perceptual_database": "anger_timeline_trigger_perceptual_database"
+					},
+					"state": {
+						"physical_changes": "anger_timeline_state_physical_changes",
+						"emotion": "anger_timeline_state_emotion",
+						"mental_changes": "anger_timeline_state_mental_changes"
+					},
+					"response": {
+						"constructive_response": "anger_timeline_response_constructive_response",
+						"destructive_response": "anger_timeline_response_destructive_response",
+						"ambiguous_response": "anger_timeline_response_ambiguous_response"
+					}
+				}
+			]
+		},
+		"fear": {
+			"continent": {
+				"name": "fear_continent_header",
+				"desc": "fear_continent_body",
+				"name_mobile": "fear_continent_header_mobile",
+				"desc_mobile": "fear_continent_body_mobile",
+				"secondary": ""
+			},
+			"states": [
+				{
+					"name": "fear_states_header_1",
+					"desc": "fear_states_body_1",
+					"name_mobile": "fear_states_header_1",
+					"desc_mobile": "fear_states_body_1",
+					"secondary": "fear_states_body",
+					"range": {
+						"min": 1,
+						"max": 3
+					},
+					"actions": {
+						"all": [
+							"3",
+							"6",
+							"7"
+						],
+						"con": [
+							"3"
+						],
+						"des": [
+							"6",
+							"7"
+						],
+						"both": []
+					}
+				},
+				{
+					"name": "fear_states_header_2",
+					"desc": "fear_states_body_2",
+					"name_mobile": "fear_states_header_2",
+					"desc_mobile": "fear_states_body_2",
+					"secondary": "",
+					"range": {
+						"min": 1,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"3",
+							"1",
+							"4",
+							"6",
+							"7"
+						],
+						"con": [
+							"3",
+							"1",
+							"4"
+						],
+						"des": [
+							"1",
+							"4",
+							"6",
+							"7"
+						],
+						"both": [
+							"1",
+							"4"
+						]
+					}
+				},
+				{
+					"name": "fear_states_header_3",
+					"desc": "fear_states_body_3",
+					"name_mobile": "fear_states_header_3",
+					"desc_mobile": "fear_states_body_3",
+					"secondary": "",
+					"range": {
+						"min": 2,
+						"max": 7
+					},
+					"actions": {
+						"all": [
+							"3",
+							"6",
+							"7"
+						],
+						"con": [
+							"3"
+						],
+						"des": [
+							"6",
+							"7"
+						],
+						"both": []
+					}
+				},
+				{
+					"name": "fear_states_header_4",
+					"desc": "fear_states_body_4",
+					"name_mobile": "fear_states_header_4",
+					"desc_mobile": "fear_states_body_4",
+					"secondary": "",
+					"range": {
+						"min": 6,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"1",
+							"4",
+							"5",
+							"6",
+							"7"
+						],
+						"con": [
+							"1",
+							"4"
+						],
+						"des": [
+							"1",
+							"4",
+							"5",
+							"6",
+							"7"
+						],
+						"both": [
+							"1",
+							"4"
+						]
+					}
+				},
+				{
+					"name": "fear_states_header_5",
+					"desc": "fear_states_body_5",
+					"name_mobile": "fear_states_header_5",
+					"desc_mobile": "fear_states_body_5",
+					"secondary": "",
+					"range": {
+						"min": 9,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"2",
+							"3",
+							"4",
+							"5",
+							"6"
+						],
+						"con": [
+							"2",
+							"3",
+							"4"
+						],
+						"des": [
+							"2",
+							"3",
+							"4",
+							"5",
+							"6"
+						],
+						"both": [
+							"2",
+							"3",
+							"4"
+						]
+					}
+				},
+				{
+					"name": "fear_states_header_6",
+					"desc": "fear_states_body_6",
+					"name_mobile": "fear_states_header_6",
+					"desc_mobile": "fear_states_body_6",
+					"secondary": "",
+					"range": {
+						"min": 10,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"1",
+							"4",
+							"5",
+							"6",
+							"7"
+						],
+						"con": [
+							"1",
+							"4",
+							"5"
+						],
+						"des": [
+							"1",
+							"4",
+							"5",
+							"6",
+							"7"
+						],
+						"both": [
+							"1",
+							"4",
+							"5"
+						]
+					}
+				},
+				{
+					"name": "fear_states_header_7",
+					"desc": "fear_states_body_7",
+					"name_mobile": "fear_states_header_7",
+					"desc_mobile": "fear_states_body_7",
+					"secondary": "",
+					"range": {
+						"min": 10,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"1",
+							"4",
+							"5"
+						],
+						"con": [
+							"1",
+							"4",
+							"5"
+						],
+						"des": [
+							"1",
+							"4",
+							"5"
+						],
+						"both": [
+							"1",
+							"4",
+							"5"
+						]
+					}
+				},
+				{
+					"name": "fear_states_header_8",
+					"desc": "fear_states_body_8",
+					"name_mobile": "fear_states_header_8",
+					"desc_mobile": "fear_states_body_8",
+					"secondary": "",
+					"range": {
+						"min": 10,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"1",
+							"4",
+							"5"
+						],
+						"con": [
+							"1",
+							"4",
+							"5"
+						],
+						"des": [
+							"1",
+							"4",
+							"5"
+						],
+						"both": [
+							"1",
+							"4",
+							"5"
+						]
+					}
+				}
+			],
+			"actions": [
+				{
+					"name": "fear_actions_header_1",
+					"desc": "fear_actions_body_1",
+					"name_mobile": "fear_actions_header_1",
+					"desc_mobile": "fear_actions_body_1",
+					"secondary": "fear_actions_body"
+				},
+				{
+					"name": "fear_actions_header_2",
+					"desc": "fear_actions_body_2",
+					"name_mobile": "fear_actions_header_2",
+					"desc_mobile": "fear_actions_body_2",
+					"secondary": ""
+				},
+				{
+					"name": "fear_actions_header_3",
+					"desc": "fear_actions_body_3",
+					"name_mobile": "fear_actions_header_3",
+					"desc_mobile": "fear_actions_body_3",
+					"secondary": ""
+				},
+				{
+					"name": "fear_actions_header_4",
+					"desc": "fear_actions_body_4",
+					"name_mobile": "fear_actions_header_4",
+					"desc_mobile": "fear_actions_body_4",
+					"secondary": ""
+				},
+				{
+					"name": "fear_actions_header_5",
+					"desc": "fear_actions_body_5",
+					"name_mobile": "fear_actions_header_5",
+					"desc_mobile": "fear_actions_body_5",
+					"secondary": ""
+				},
+				{
+					"name": "fear_actions_header_6",
+					"desc": "fear_actions_body_6",
+					"name_mobile": "fear_actions_header_6",
+					"desc_mobile": "fear_actions_body_6",
+					"secondary": ""
+				},
+				{
+					"name": "fear_actions_header_7",
+					"desc": "fear_actions_body_7",
+					"name_mobile": "fear_actions_header_7",
+					"desc_mobile": "fear_actions_body_7",
+					"secondary": ""
+				}
+			],
+			"triggers": [
+				{
+					"name": "fear_triggers_header_1",
+					"type": "Universal",
+					"name_mobile": "fear_triggers_universal_header_mobile",
+					"desc_mobile": "fear_triggers_universal_body_mobile"
+				},
+				{
+					"name": "fear_triggers_header_2",
+					"type": "Universal",
+					"name_mobile": "fear_triggers_learned_header_mobile",
+					"desc_mobile": "fear_triggers_learned_body_mobile"
+				},
+				{
+					"name": "fear_triggers_header_3",
+					"type": "Universal",
+					"name_mobile": "fear_triggers_header_3",
+					"desc_mobile": "Universal"
+				},
+				{
+					"name": "fear_triggers_header_4",
+					"type": "Universal",
+					"name_mobile": "fear_triggers_header_4",
+					"desc_mobile": "Universal"
+				},
+				{
+					"name": "fear_triggers_header_5",
+					"type": "Learned",
+					"name_mobile": "fear_triggers_header_5",
+					"desc_mobile": "Learned"
+				},
+				{
+					"name": "fear_triggers_header_6",
+					"type": "Learned",
+					"name_mobile": "fear_triggers_header_6",
+					"desc_mobile": "Learned"
+				},
+				{
+					"name": "fear_triggers_header_7",
+					"type": "Learned",
+					"name_mobile": "fear_triggers_header_7",
+					"desc_mobile": "Learned"
+				}
+			],
+			"moods": [
+				{
+					"name": "fear_moods_header",
+					"desc": "fear_moods_body",
+					"name_mobile": "fear_moods_header",
+					"desc_mobile": "fear_moods_body",
+					"secondary": ""
+				}
+			],
+			"timeline": [
+				{
+					"trigger": {
+						"precondition": "fear_timeline_trigger_precondition",
+						"event": "fear_timeline_trigger_event",
+						"perceptual_database": "fear_timeline_trigger_perceptual_database"
+					},
+					"state": {
+						"physical_changes": "fear_timeline_state_physical_changes",
+						"emotion": "fear_timeline_state_emotion",
+						"mental_changes": "fear_timeline_state_mental_changes"
+					},
+					"response": {
+						"constructive_response": "fear_timeline_response_constructive_response",
+						"destructive_response": "fear_timeline_response_destructive_response",
+						"ambiguous_response": "fear_timeline_response_ambiguous_response"
+					}
+				}
+			]
+		},
+		"disgust": {
+			"continent": {
+				"name": "disgust_continent_header",
+				"desc": "disgust_continent_body",
+				"name_mobile": "disgust_continent_header_mobile",
+				"desc_mobile": "disgust_continent_body_mobile",
+				"secondary": ""
+			},
+			"states": [
+				{
+					"name": "disgust_states_header_1",
+					"desc": "disgust_states_body_1",
+					"name_mobile": "disgust_states_header_1",
+					"desc_mobile": "disgust_states_body_1",
+					"secondary": "disgust_states_body",
+					"range": {
+						"min": 1,
+						"max": 5
+					},
+					"actions": {
+						"all": [
+							"1",
+							"2",
+							"4"
+						],
+						"con": [
+							"1",
+							"2"
+						],
+						"des": [
+							"2",
+							"4"
+						],
+						"both": [
+							"2"
+						]
+					}
+				},
+				{
+					"name": "disgust_states_header_2",
+					"desc": "disgust_states_body_2",
+					"name_mobile": "disgust_states_header_2",
+					"desc_mobile": "disgust_states_body_2",
+					"secondary": "",
+					"range": {
+						"min": 2,
+						"max": 7
+					},
+					"actions": {
+						"all": [
+							"1",
+							"2",
+							"4"
+						],
+						"con": [
+							"1",
+							"2"
+						],
+						"des": [
+							"4"
+						],
+						"both": []
+					}
+				},
+				{
+					"name": "disgust_states_header_3",
+					"desc": "disgust_states_body_3",
+					"name_mobile": "disgust_states_header_3",
+					"desc_mobile": "disgust_states_body_3",
+					"secondary": "",
+					"range": {
+						"min": 2,
+						"max": 7
+					},
+					"actions": {
+						"all": [
+							"1",
+							"2",
+							"3",
+							""
+						],
+						"con": [
+							"1",
+							"2",
+							"3"
+						],
+						"des": [
+							""
+						],
+						"both": []
+					}
+				},
+				{
+					"name": "disgust_states_header_4",
+					"desc": "disgust_states_body_4",
+					"name_mobile": "disgust_states_header_4",
+					"desc_mobile": "disgust_states_body_4",
+					"secondary": "",
+					"range": {
+						"min": 2,
+						"max": 9
+					},
+					"actions": {
+						"all": [
+							"1",
+							"2",
+							"4"
+						],
+						"con": [
+							"1",
+							"2"
+						],
+						"des": [
+							"2",
+							"4"
+						],
+						"both": [
+							"2"
+						]
+					}
+				},
+				{
+					"name": "disgust_states_header_5",
+					"desc": "disgust_states_body_5",
+					"name_mobile": "disgust_states_header_5",
+					"desc_mobile": "disgust_states_body_5",
+					"secondary": "",
+					"range": {
+						"min": 8,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"1",
+							"2",
+							"3",
+							"4"
+						],
+						"con": [
+							"1",
+							"2",
+							"3"
+						],
+						"des": [
+							"4"
+						],
+						"both": []
+					}
+				},
+				{
+					"name": "disgust_states_header_6",
+					"desc": "disgust_states_body_6",
+					"name_mobile": "disgust_states_header_6",
+					"desc_mobile": "disgust_states_body_6",
+					"secondary": "",
+					"range": {
+						"min": 8,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"1",
+							"2",
+							"4"
+						],
+						"con": [
+							"1",
+							"2"
+						],
+						"des": [
+							"4"
+						],
+						"both": []
+					}
+				},
+				{
+					"name": "disgust_states_header_7",
+					"desc": "disgust_states_body_7",
+					"name_mobile": "disgust_states_header_7",
+					"desc_mobile": "disgust_states_body_7",
+					"secondary": "",
+					"range": {
+						"min": 9,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"1",
+							"2",
+							"4"
+						],
+						"con": [
+							"1"
+						],
+						"des": [
+							"2",
+							"4"
+						],
+						"both": []
+					}
+				}
+			],
+			"actions": [
+				{
+					"name": "disgust_actions_header_1",
+					"desc": "disgust_actions_body_1",
+					"name_mobile": "disgust_actions_header_1",
+					"desc_mobile": "disgust_actions_body_1",
+					"secondary": "disgust_actions_body"
+				},
+				{
+					"name": "disgust_actions_header_2",
+					"desc": "disgust_actions_body_2",
+					"name_mobile": "disgust_actions_header_2",
+					"desc_mobile": "disgust_actions_body_2",
+					"secondary": ""
+				},
+				{
+					"name": "disgust_actions_header_3",
+					"desc": "disgust_actions_body_3",
+					"name_mobile": "disgust_actions_header_3",
+					"desc_mobile": "disgust_actions_body_3",
+					"secondary": ""
+				},
+				{
+					"name": "disgust_actions_header_4",
+					"desc": "disgust_actions_body_4",
+					"name_mobile": "disgust_actions_header_4",
+					"desc_mobile": "disgust_actions_body_4",
+					"secondary": ""
+				}
+			],
+			"triggers": [
+				{
+					"name": "disgust_triggers_header_1",
+					"type": "Universal",
+					"name_mobile": "disgust_triggers_universal_header_mobile",
+					"desc_mobile": "disgust_triggers_universal_body_mobile"
+				},
+				{
+					"name": "disgust_triggers_header_2",
+					"type": "Universal",
+					"name_mobile": "disgust_triggers_learned_header_mobile",
+					"desc_mobile": "disgust_triggers_learned_body_mobile"
+				},
+				{
+					"name": "disgust_triggers_header_3",
+					"type": "Learned",
+					"name_mobile": "disgust_triggers_header_3",
+					"desc_mobile": "Learned"
+				},
+				{
+					"name": "disgust_triggers_header_4",
+					"type": "Learned",
+					"name_mobile": "disgust_triggers_header_4",
+					"desc_mobile": "Learned"
+				},
+				{
+					"name": "disgust_triggers_header_5",
+					"type": "Learned",
+					"name_mobile": "disgust_triggers_header_5",
+					"desc_mobile": "Learned"
+				}
+			],
+			"moods": [
+				{
+					"name": "disgust_moods_header",
+					"desc": "disgust_moods_body",
+					"name_mobile": "disgust_moods_header",
+					"desc_mobile": "disgust_moods_body",
+					"secondary": ""
+				}
+			],
+			"timeline": [
+				{
+					"trigger": {
+						"precondition": "disgust_timeline_trigger_precondition",
+						"event": "disgust_timeline_trigger_event",
+						"perceptual_database": "disgust_timeline_trigger_perceptual_database"
+					},
+					"state": {
+						"physical_changes": "disgust_timeline_state_physical_changes",
+						"emotion": "disgust_timeline_state_emotion",
+						"mental_changes": "disgust_timeline_state_mental_changes"
+					},
+					"response": {
+						"constructive_response": "disgust_timeline_response_constructive_response",
+						"destructive_response": "disgust_timeline_response_destructive_response",
+						"ambiguous_response": "disgust_timeline_response_ambiguous_response"
+					}
+				}
+			]
+		},
+		"sadness": {
+			"continent": {
+				"name": "sadness_continent_header",
+				"desc": "sadness_continent_body",
+				"name_mobile": "sadness_continent_header_mobile",
+				"desc_mobile": "sadness_continent_body_mobile",
+				"secondary": ""
+			},
+			"states": [
+				{
+					"name": "sadness_states_header_1",
+					"desc": "sadness_states_body_1",
+					"name_mobile": "sadness_states_header_1",
+					"desc_mobile": "sadness_states_body_1",
+					"secondary": "sadness_states_body",
+					"range": {
+						"min": 1,
+						"max": 5
+					},
+					"actions": {
+						"all": [
+							"1",
+							"4",
+							"2",
+							"3",
+							"6"
+						],
+						"con": [
+							"1",
+							"4"
+						],
+						"des": [
+							"2",
+							"3",
+							"4",
+							"6"
+						],
+						"both": [
+							"4"
+						]
+					}
+				},
+				{
+					"name": "sadness_states_header_2",
+					"desc": "sadness_states_body_2",
+					"name_mobile": "sadness_states_header_2",
+					"desc_mobile": "sadness_states_body_2",
+					"secondary": "",
+					"range": {
+						"min": 1,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"1",
+							"2",
+							"5",
+							"3",
+							"4",
+							"6"
+						],
+						"con": [
+							"1",
+							"2",
+							"5"
+						],
+						"des": [
+							"2",
+							"3",
+							"4",
+							"5",
+							"6"
+						],
+						"both": [
+							"2",
+							"5"
+						]
+					}
+				},
+				{
+					"name": "sadness_states_header_3",
+					"desc": "sadness_states_body_3",
+					"name_mobile": "sadness_states_header_3",
+					"desc_mobile": "sadness_states_body_3",
+					"secondary": "",
+					"range": {
+						"min": 2,
+						"max": 8
+					},
+					"actions": {
+						"all": [
+							"1",
+							"5",
+							"2",
+							"6"
+						],
+						"con": [
+							"1",
+							"5"
+						],
+						"des": [
+							"2",
+							"5",
+							"6"
+						],
+						"both": [
+							"5"
+						]
+					}
+				},
+				{
+					"name": "sadness_states_header_4",
+					"desc": "sadness_states_body_4",
+					"name_mobile": "sadness_states_header_4",
+					"desc_mobile": "sadness_states_body_4",
+					"secondary": "",
+					"range": {
+						"min": 2,
+						"max": 8
+					},
+					"actions": {
+						"all": [
+							"1",
+							"4",
+							"5",
+							"2",
+							"3"
+						],
+						"con": [
+							"1",
+							"4",
+							"5"
+						],
+						"des": [
+							"2",
+							"3",
+							"4"
+						],
+						"both": [
+							"4"
+						]
+					}
+				},
+				{
+					"name": "sadness_states_header_5",
+					"desc": "sadness_states_body_5",
+					"name_mobile": "sadness_states_header_5",
+					"desc_mobile": "sadness_states_body_5",
+					"secondary": "",
+					"range": {
+						"min": 5,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"1",
+							"5",
+							"2",
+							"3",
+							"6"
+						],
+						"con": [
+							"1",
+							"5"
+						],
+						"des": [
+							"2",
+							"3",
+							"5",
+							"6"
+						],
+						"both": [
+							"5"
+						]
+					}
+				},
+				{
+					"name": "sadness_states_header_6",
+					"desc": "sadness_states_body_6",
+					"name_mobile": "sadness_states_header_6",
+					"desc_mobile": "sadness_states_body_6",
+					"secondary": "",
+					"range": {
+						"min": 6,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"1",
+							"4",
+							"5",
+							"2",
+							"3"
+						],
+						"con": [
+							"1",
+							"4",
+							"5"
+						],
+						"des": [
+							"2",
+							"3",
+							"4",
+							"5"
+						],
+						"both": [
+							"4",
+							"5"
+						]
+					}
+				},
+				{
+					"name": "sadness_states_header_7",
+					"desc": "sadness_states_body_7",
+					"name_mobile": "sadness_states_header_7",
+					"desc_mobile": "sadness_states_body_7",
+					"secondary": "",
+					"range": {
+						"min": 6,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"1",
+							"4",
+							"2",
+							"3",
+							"6"
+						],
+						"con": [
+							"1",
+							"4"
+						],
+						"des": [
+							"2",
+							"3",
+							"4",
+							"6"
+						],
+						"both": [
+							"4"
+						]
+					}
+				},
+				{
+					"name": "sadness_states_header_8",
+					"desc": "sadness_states_body_8",
+					"name_mobile": "sadness_states_header_8",
+					"desc_mobile": "sadness_states_body_8",
+					"secondary": "",
+					"range": {
+						"min": 7,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"1",
+							"4",
+							"5",
+							"2",
+							"3",
+							"6"
+						],
+						"con": [
+							"1",
+							"4",
+							"5"
+						],
+						"des": [
+							"2",
+							"3",
+							"4",
+							"5",
+							"6"
+						],
+						"both": [
+							"4",
+							"5"
+						]
+					}
+				},
+				{
+					"name": "sadness_states_header_9",
+					"desc": "sadness_states_body_9",
+					"name_mobile": "sadness_states_header_9",
+					"desc_mobile": "sadness_states_body_9",
+					"secondary": "",
+					"range": {
+						"min": 7,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"1",
+							"4",
+							"2",
+							"3"
+						],
+						"con": [
+							"1",
+							"4"
+						],
+						"des": [
+							"2",
+							"3",
+							"4"
+						],
+						"both": [
+							"4"
+						]
+					}
+				},
+				{
+					"name": "sadness_states_header_10",
+					"desc": "sadness_states_body_10",
+					"name_mobile": "sadness_states_header_10",
+					"desc_mobile": "sadness_states_body_10",
+					"secondary": "",
+					"range": {
+						"min": 7,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"1",
+							"4",
+							"2",
+							"3",
+							"6"
+						],
+						"con": [
+							"1",
+							"4"
+						],
+						"des": [
+							"2",
+							"3",
+							"4",
+							"6"
+						],
+						"both": [
+							"4"
+						]
+					}
+				},
+				{
+					"name": "sadness_states_header_11",
+					"desc": "sadness_states_body_11",
+					"name_mobile": "sadness_states_header_11",
+					"desc_mobile": "sadness_states_body_11",
+					"secondary": "",
+					"range": {
+						"min": 10,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"1",
+							"4",
+							"5",
+							"2",
+							"3"
+						],
+						"con": [
+							"1",
+							"4",
+							"5"
+						],
+						"des": [
+							"2",
+							"3",
+							"4",
+							"5"
+						],
+						"both": [
+							"4",
+							"5"
+						]
+					}
+				}
+			],
+			"actions": [
+				{
+					"name": "sadness_actions_header_1",
+					"desc": "sadness_actions_body_1",
+					"name_mobile": "sadness_actions_header_1",
+					"desc_mobile": "sadness_actions_body_1",
+					"secondary": "sadness_actions_body"
+				},
+				{
+					"name": "sadness_actions_header_2",
+					"desc": "sadness_actions_body_2",
+					"name_mobile": "sadness_actions_header_2",
+					"desc_mobile": "sadness_actions_body_2",
+					"secondary": ""
+				},
+				{
+					"name": "sadness_actions_header_3",
+					"desc": "sadness_actions_body_3",
+					"name_mobile": "sadness_actions_header_3",
+					"desc_mobile": "sadness_actions_body_3",
+					"secondary": ""
+				},
+				{
+					"name": "sadness_actions_header_4",
+					"desc": "sadness_actions_body_4",
+					"name_mobile": "sadness_actions_header_4",
+					"desc_mobile": "sadness_actions_body_4",
+					"secondary": ""
+				},
+				{
+					"name": "sadness_actions_header_5",
+					"desc": "sadness_actions_body_5",
+					"name_mobile": "sadness_actions_header_5",
+					"desc_mobile": "sadness_actions_body_5",
+					"secondary": ""
+				},
+				{
+					"name": "sadness_actions_header_6",
+					"desc": "sadness_actions_body_6",
+					"name_mobile": "sadness_actions_header_6",
+					"desc_mobile": "sadness_actions_body_6",
+					"secondary": ""
+				}
+			],
+			"triggers": [
+				{
+					"name": "sadness_triggers_header_1",
+					"type": "Universal",
+					"name_mobile": "sadness_triggers_universal_header_mobile",
+					"desc_mobile": "sadness_triggers_universal_body_mobile"
+				},
+				{
+					"name": "sadness_triggers_header_2",
+					"type": "Universal",
+					"name_mobile": "sadness_triggers_learned_header_mobile",
+					"desc_mobile": "sadness_triggers_learned_body_mobile"
+				},
+				{
+					"name": "sadness_triggers_header_3",
+					"type": "Learned",
+					"name_mobile": "sadness_triggers_header_3",
+					"desc_mobile": "Learned"
+				},
+				{
+					"name": "sadness_triggers_header_4",
+					"type": "Learned",
+					"name_mobile": "sadness_triggers_header_4",
+					"desc_mobile": "Learned"
+				},
+				{
+					"name": "sadness_triggers_header_5",
+					"type": "Learned",
+					"name_mobile": "sadness_triggers_header_5",
+					"desc_mobile": "Learned"
+				}
+			],
+			"moods": [
+				{
+					"name": "sadness_moods_header",
+					"desc": "sadness_moods_body",
+					"name_mobile": "sadness_moods_header",
+					"desc_mobile": "sadness_moods_body",
+					"secondary": ""
+				}
+			],
+			"timeline": [
+				{
+					"trigger": {
+						"precondition": "sadness_timeline_trigger_precondition",
+						"event": "sadness_timeline_trigger_event",
+						"perceptual_database": "sadness_timeline_trigger_perceptual_database"
+					},
+					"state": {
+						"physical_changes": "sadness_timeline_state_physical_changes",
+						"emotion": "sadness_timeline_state_emotion",
+						"mental_changes": "sadness_timeline_state_mental_changes"
+					},
+					"response": {
+						"constructive_response": "sadness_timeline_response_constructive_response",
+						"destructive_response": "sadness_timeline_response_destructive_response",
+						"ambiguous_response": "sadness_timeline_response_ambiguous_response"
+					}
+				}
+			]
+		},
+		"enjoyment": {
+			"continent": {
+				"name": "enjoyment_continent_header",
+				"desc": "enjoyment_continent_body",
+				"name_mobile": "enjoyment_continent_header_mobile",
+				"desc_mobile": "enjoyment_continent_body_mobile",
+				"secondary": ""
+			},
+			"states": [
+				{
+					"name": "enjoyment_states_header_1",
+					"desc": "enjoyment_states_body_1",
+					"name_mobile": "enjoyment_states_header_1",
+					"desc_mobile": "enjoyment_states_body_1",
+					"secondary": "enjoyment_states_body",
+					"range": {
+						"min": 1,
+						"max": 5
+					},
+					"actions": {
+						"all": [
+							"1",
+							"6",
+							""
+						],
+						"con": [
+							"1",
+							"6"
+						],
+						"des": [
+							""
+						],
+						"both": []
+					}
+				},
+				{
+					"name": "enjoyment_states_header_2",
+					"desc": "enjoyment_states_body_2",
+					"name_mobile": "enjoyment_states_header_2",
+					"desc_mobile": "enjoyment_states_body_2",
+					"secondary": "",
+					"range": {
+						"min": 2,
+						"max": 8
+					},
+					"actions": {
+						"all": [
+							"1",
+							"4",
+							"5",
+							"6",
+							"7"
+						],
+						"con": [
+							"1",
+							"4",
+							"5",
+							"6",
+							"7"
+						],
+						"des": [
+							"7"
+						],
+						"both": [
+							"7"
+						]
+					}
+				},
+				{
+					"name": "enjoyment_states_header_3",
+					"desc": "enjoyment_states_body_3",
+					"name_mobile": "enjoyment_states_header_3",
+					"desc_mobile": "enjoyment_states_body_3",
+					"secondary": "",
+					"range": {
+						"min": 2,
+						"max": 8
+					},
+					"actions": {
+						"all": [
+							"1",
+							"2",
+							"4",
+							"5",
+							"7"
+						],
+						"con": [
+							"1",
+							"2",
+							"4",
+							"5",
+							"7"
+						],
+						"des": [
+							"7"
+						],
+						"both": [
+							"7"
+						]
+					}
+				},
+				{
+					"name": "enjoyment_states_header_4",
+					"desc": "enjoyment_states_body_4",
+					"name_mobile": "enjoyment_states_header_4",
+					"desc_mobile": "enjoyment_states_body_4",
+					"secondary": "",
+					"range": {
+						"min": 2,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"4",
+							"5",
+							"6",
+							"7"
+						],
+						"con": [
+							"4",
+							"5",
+							"6",
+							"7"
+						],
+						"des": [
+							"7"
+						],
+						"both": [
+							"7"
+						]
+					}
+				},
+				{
+					"name": "enjoyment_states_header_5",
+					"desc": "enjoyment_states_body_5",
+					"name_mobile": "enjoyment_states_header_5",
+					"desc_mobile": "enjoyment_states_body_5",
+					"secondary": "",
+					"range": {
+						"min": 3,
+						"max": 6
+					},
+					"actions": {
+						"all": [
+							"1",
+							"4",
+							"5",
+							"6",
+							""
+						],
+						"con": [
+							"1",
+							"4",
+							"5",
+							"6"
+						],
+						"des": [
+							""
+						],
+						"both": []
+					}
+				},
+				{
+					"name": "enjoyment_states_header_6",
+					"desc": "enjoyment_states_body_6",
+					"name_mobile": "enjoyment_states_header_6",
+					"desc_mobile": "enjoyment_states_body_6",
+					"secondary": "",
+					"range": {
+						"min": 3,
+						"max": 8
+					},
+					"actions": {
+						"all": [
+							"",
+							"1",
+							"2",
+							"3",
+							"4",
+							"5"
+						],
+						"con": [
+							""
+						],
+						"des": [
+							"1",
+							"2",
+							"3",
+							"4",
+							"5"
+						],
+						"both": []
+					}
+				},
+				{
+					"name": "enjoyment_states_header_7",
+					"desc": "enjoyment_states_body_7",
+					"name_mobile": "enjoyment_states_header_7",
+					"desc_mobile": "enjoyment_states_body_7",
+					"secondary": "",
+					"range": {
+						"min": 3,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"1",
+							"2",
+							"5",
+							"6",
+							"7",
+							"3"
+						],
+						"con": [
+							"1",
+							"2",
+							"5",
+							"6",
+							"7"
+						],
+						"des": [
+							"3",
+							"5",
+							"6",
+							"7"
+						],
+						"both": [
+							"5",
+							"6",
+							"7"
+						]
+					}
+				},
+				{
+					"name": "enjoyment_states_header_8",
+					"desc": "enjoyment_states_body_8",
+					"name_mobile": "enjoyment_states_header_8",
+					"desc_mobile": "enjoyment_states_body_8",
+					"secondary": "",
+					"range": {
+						"min": 3,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"4",
+							"5",
+							"6",
+							"3"
+						],
+						"con": [
+							"4",
+							"5",
+							"6"
+						],
+						"des": [
+							"3",
+							"4",
+							"5",
+							"6"
+						],
+						"both": [
+							"4",
+							"5",
+							"6"
+						]
+					}
+				},
+				{
+					"name": "enjoyment_states_header_9",
+					"desc": "enjoyment_states_body_9",
+					"name_mobile": "enjoyment_states_header_9",
+					"desc_mobile": "enjoyment_states_body_9",
+					"secondary": "",
+					"range": {
+						"min": 4,
+						"max": 9
+					},
+					"actions": {
+						"all": [
+							"1",
+							"4",
+							"5",
+							"6",
+							"7"
+						],
+						"con": [
+							"1",
+							"4",
+							"5",
+							"6",
+							"7"
+						],
+						"des": [
+							"4",
+							"5",
+							"6",
+							"7"
+						],
+						"both": [
+							"4",
+							"5",
+							"6",
+							"7"
+						]
+					}
+				},
+				{
+					"name": "enjoyment_states_header_10",
+					"desc": "enjoyment_states_body_10",
+					"name_mobile": "enjoyment_states_header_10",
+					"desc_mobile": "enjoyment_states_body_10",
+					"secondary": "",
+					"range": {
+						"min": 5,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"1",
+							"4",
+							"5",
+							"6",
+							"7"
+						],
+						"con": [
+							"1",
+							"4",
+							"5",
+							"6",
+							"7"
+						],
+						"des": [
+							"7"
+						],
+						"both": [
+							"7"
+						]
+					}
+				},
+				{
+					"name": "enjoyment_states_header_11",
+					"desc": "enjoyment_states_body_11",
+					"name_mobile": "enjoyment_states_header_11",
+					"desc_mobile": "enjoyment_states_body_11",
+					"secondary": "",
+					"range": {
+						"min": 2,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"2",
+							"5",
+							""
+						],
+						"con": [
+							"2",
+							"5"
+						],
+						"des": [
+							""
+						],
+						"both": []
+					}
+				},
+				{
+					"name": "enjoyment_states_header_12",
+					"desc": "enjoyment_states_body_12",
+					"name_mobile": "enjoyment_states_header_12",
+					"desc_mobile": "enjoyment_states_body_12",
+					"secondary": "",
+					"range": {
+						"min": 6,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"1",
+							"2",
+							"4",
+							"5",
+							"7"
+						],
+						"con": [
+							"1",
+							"2",
+							"4",
+							"5",
+							"7"
+						],
+						"des": [
+							"7"
+						],
+						"both": [
+							"7"
+						]
+					}
+				},
+				{
+					"name": "enjoyment_states_header_13",
+					"desc": "enjoyment_states_body_13",
+					"name_mobile": "enjoyment_states_header_13",
+					"desc_mobile": "enjoyment_states_body_13",
+					"secondary": "",
+					"range": {
+						"min": 9,
+						"max": 10
+					},
+					"actions": {
+						"all": [
+							"2",
+							"6",
+							"7"
+						],
+						"con": [
+							"2",
+							"6",
+							"7"
+						],
+						"des": [
+							"7"
+						],
+						"both": [
+							"7"
+						]
+					}
+				}
+			],
+			"actions": [
+				{
+					"name": "enjoyment_actions_header_1",
+					"desc": "enjoyment_actions_body_1",
+					"name_mobile": "enjoyment_actions_header_1",
+					"desc_mobile": "enjoyment_actions_body_1",
+					"secondary": "enjoyment_actions_body"
+				},
+				{
+					"name": "enjoyment_actions_header_2",
+					"desc": "enjoyment_actions_body_2",
+					"name_mobile": "enjoyment_actions_header_2",
+					"desc_mobile": "enjoyment_actions_body_2",
+					"secondary": ""
+				},
+				{
+					"name": "enjoyment_actions_header_3",
+					"desc": "enjoyment_actions_body_3",
+					"name_mobile": "enjoyment_actions_header_3",
+					"desc_mobile": "enjoyment_actions_body_3",
+					"secondary": ""
+				},
+				{
+					"name": "enjoyment_actions_header_4",
+					"desc": "enjoyment_actions_body_4",
+					"name_mobile": "enjoyment_actions_header_4",
+					"desc_mobile": "enjoyment_actions_body_4",
+					"secondary": ""
+				},
+				{
+					"name": "enjoyment_actions_header_5",
+					"desc": "enjoyment_actions_body_5",
+					"name_mobile": "enjoyment_actions_header_5",
+					"desc_mobile": "enjoyment_actions_body_5",
+					"secondary": ""
+				},
+				{
+					"name": "enjoyment_actions_header_6",
+					"desc": "enjoyment_actions_body_6",
+					"name_mobile": "enjoyment_actions_header_6",
+					"desc_mobile": "enjoyment_actions_body_6",
+					"secondary": ""
+				},
+				{
+					"name": "enjoyment_actions_header_7",
+					"desc": "enjoyment_actions_body_7",
+					"name_mobile": "enjoyment_actions_header_7",
+					"desc_mobile": "enjoyment_actions_body_7",
+					"secondary": ""
+				}
+			],
+			"triggers": [
+				{
+					"name": "enjoyment_triggers_header_1",
+					"type": "Universal",
+					"name_mobile": "enjoyment_triggers_universal_header_mobile",
+					"desc_mobile": "enjoyment_triggers_universal_body_mobile"
+				},
+				{
+					"name": "enjoyment_triggers_header_2",
+					"type": "Universal",
+					"name_mobile": "enjoyment_triggers_learned_header_mobile",
+					"desc_mobile": "enjoyment_triggers_learned_body_mobile"
+				},
+				{
+					"name": "enjoyment_triggers_header_3",
+					"type": "Universal",
+					"name_mobile": "enjoyment_triggers_header_3",
+					"desc_mobile": "Universal"
+				},
+				{
+					"name": "enjoyment_triggers_header_4",
+					"type": "Learned",
+					"name_mobile": "enjoyment_triggers_header_4",
+					"desc_mobile": "Learned"
+				},
+				{
+					"name": "enjoyment_triggers_header_5",
+					"type": "Learned",
+					"name_mobile": "enjoyment_triggers_header_5",
+					"desc_mobile": "Learned"
+				},
+				{
+					"name": "enjoyment_triggers_header_6",
+					"type": "Learned",
+					"name_mobile": "enjoyment_triggers_header_6",
+					"desc_mobile": "Learned"
+				},
+				{
+					"name": "enjoyment_triggers_header_7",
+					"type": "Learned",
+					"name_mobile": "enjoyment_triggers_header_7",
+					"desc_mobile": "Learned"
+				}
+			],
+			"moods": [
+				{
+					"name": "enjoyment_moods_header",
+					"desc": "enjoyment_moods_body",
+					"name_mobile": "enjoyment_moods_header",
+					"desc_mobile": "enjoyment_moods_body",
+					"secondary": ""
+				}
+			],
+			"timeline": [
+				{
+					"trigger": {
+						"precondition": "enjoyment_timeline_trigger_precondition",
+						"event": "enjoyment_timeline_trigger_event",
+						"perceptual_database": "enjoyment_timeline_trigger_perceptual_database"
+					},
+					"state": {
+						"physical_changes": "enjoyment_timeline_state_physical_changes",
+						"emotion": "enjoyment_timeline_state_emotion",
+						"mental_changes": "enjoyment_timeline_state_mental_changes"
+					},
+					"response": {
+						"constructive_response": "enjoyment_timeline_response_constructive_response",
+						"destructive_response": "enjoyment_timeline_response_destructive_response",
+						"ambiguous_response": "enjoyment_timeline_response_ambiguous_response"
+					}
+				}
+			]
+		}
+	},
+	"metadata": {
+		"site": {
+			"header": "site_header",
+			"body": "",
+			"caption": "site_dropdown_label",
+			"header_mobile": "site_back_button",
+			"body_mobile": "",
+			"sectionName": "",
+			"interaction_prompt": "",
+			"learn_more_button": "site_learn_more_button",
+			"close_button": "site_close_button",
+			"back_button": "site_back_button"
+		},
+		"navigation": {
+			"introduction": {
+				"menu": "navigation_introduction_menu_item",
+				"heading": "navigation_introduction_section_header"
+			},
+			"timeline": {
+				"menu": "navigation_timeline_menu_item",
+				"heading": "navigation_timeline_section_header"
+			},
+			"experience": {
+				"menu": "navigation_experience_menu_item",
+				"heading": "navigation_experience_section_header"
+			},
+			"response": {
+				"menu": "navigation_response_menu_item",
+				"heading": "navigation_response_section_header"
+			},
+			"strategies": {
+				"menu": "navigation_strategies_menu_item",
+				"heading": "navigation_strategies_section_header"
+			},
+			"emotions": {
+				"all": "navigation_all_menu_item"
+			}
+		},
+		"intro": {
+			"header": "intro_header",
+			"body": "",
+			"header_mobile": "intro_header",
+			"body_mobile": "intro_body_mobile",
+			"sectionName": "intro_section_name",
+			"steps": [
+				{
+					"header": "intro_secondary_header_1",
+					"body": "intro_secondary_copy_1",
+					"header_mobile": "intro_secondary_header_1",
+					"body_mobile": "intro_secondary_copy_1",
+					"caption": "intro_caption_1"
+				},
+				{
+					"header": "intro_secondary_header_2",
+					"body": "intro_secondary_copy_2",
+					"header_mobile": "intro_secondary_header_2",
+					"body_mobile": "intro_secondary_copy_2",
+					"caption": "intro_caption_2"
+				},
+				{
+					"header": "intro_secondary_header_3",
+					"body": "intro_secondary_copy_3",
+					"header_mobile": "intro_secondary_header_3",
+					"body_mobile": "intro_secondary_copy_3",
+					"caption": "intro_caption_3"
+				},
+				{
+					"header": "intro_button_goto",
+					"body": "",
+					"header_mobile": "intro_button_goto",
+					"body_mobile": "",
+					"caption": ""
+				},
+				{
+					"header": "intro_button_start",
+					"body": "",
+					"header_mobile": "intro_button_start",
+					"body_mobile": "",
+					"caption": ""
+				},
+				{
+					"header": "intro_button_back",
+					"body": "",
+					"header_mobile": "intro_button_back",
+					"body_mobile": "",
+					"caption": ""
+				},
+				{
+					"header": "intro_button_why",
+					"body": "",
+					"header_mobile": "intro_button_why",
+					"body_mobile": "",
+					"caption": ""
+				},
+				{
+					"header": "intro_button_start",
+					"body": "",
+					"header_mobile": "intro_button_start",
+					"body_mobile": "",
+					"caption": ""
+				},
+				{
+					"header": "intro_gfx_left",
+					"body": "",
+					"header_mobile": "intro_gfx_left",
+					"body_mobile": "",
+					"caption": ""
+				},
+				{
+					"header": "intro_gfx_right",
+					"body": "",
+					"header_mobile": "intro_gfx_right",
+					"body_mobile": "",
+					"caption": ""
+				},
+				{
+					"header": "intro_gfx_down",
+					"body": "",
+					"header_mobile": "intro_gfx_down",
+					"body_mobile": "",
+					"caption": ""
+				},
+				{
+					"header": "intro_gfx_chart_anger",
+					"body": "",
+					"header_mobile": "intro_gfx_chart_anger",
+					"body_mobile": "",
+					"caption": ""
+				},
+				{
+					"header": "intro_gfx_chart_fear",
+					"body": "",
+					"header_mobile": "intro_gfx_chart_fear",
+					"body_mobile": "",
+					"caption": ""
+				},
+				{
+					"header": "intro_gfx_chart_disgust",
+					"body": "",
+					"header_mobile": "intro_gfx_chart_disgust",
+					"body_mobile": "",
+					"caption": ""
+				},
+				{
+					"header": "intro_gfx_chart_sadness",
+					"body": "",
+					"header_mobile": "intro_gfx_chart_sadness",
+					"body_mobile": "",
+					"caption": ""
+				},
+				{
+					"header": "intro_gfx_chart_enjoyment",
+					"body": "",
+					"header_mobile": "intro_gfx_chart_enjoyment",
+					"body_mobile": "",
+					"caption": ""
+				}
+			]
+		},
+		"hero": {
+			"header": "hero_header",
+			"body": "",
+			"header_mobile": "hero_header",
+			"body_mobile": "",
+			"sectionName": "hero_section_name",
+			"sub_header": "hero_sub_header",
+			"learn_more_link": "hero_sub_header_learn_more",
+			"about": {
+				"header": "hero_about_header",
+				"header_mobile": "hero_about_header",
+				"body": "hero_about_body_1",
+				"body_mobile": "hero_about_body_1"
+			},
+			"cta": "hero_call_to_action_button",
+			"slides": [
+				"hero_slide_1",
+				"hero_slide_2",
+				"hero_slide_3"
+			]
+		},
+		"continents": {
+			"header": "continents_header",
+			"body": "continents_body",
+			"caption": "",
+			"header_mobile": "continents_header",
+			"body_mobile": "continents_body_mobile",
+			"sectionName": "continents_section_name",
+			"interaction_prompt": ""
+		},
+		"states": {
+			"header": "states_header",
+			"body": "states_body",
+			"caption": "states_axis_labels",
+			"header_mobile": "states_header",
+			"body_mobile": "states_body_mobile",
+			"sectionName": "states_section_name",
+			"interaction_prompt": "states_interaction_prompt"
+		},
+		"actions": {
+			"header": "actions_header",
+			"body": "actions_body",
+			"header_mobile": "actions_header",
+			"body_mobile": "actions_body_mobile",
+			"sectionName": "actions_section_name",
+			"interaction_prompt": "actions_interaction_prompt",
+			"qualities": [
+				{
+					"header": "actions_secondary_header_1",
+					"body": "actions_secondary_copy_1",
+					"header_mobile": "actions_secondary_header_1",
+					"body_mobile": "actions_body_mobile"
+				},
+				{
+					"header": "actions_secondary_header_2",
+					"body": "actions_secondary_copy_2",
+					"header_mobile": "actions_secondary_header_2",
+					"body_mobile": "actions_secondary_copy_2"
+				},
+				{
+					"header": "actions_secondary_header_3",
+					"body": "actions_secondary_copy_3",
+					"header_mobile": "actions_secondary_header_3",
+					"body_mobile": "actions_secondary_copy_3"
+				}
+			]
+		},
+		"triggers": {
+			"header": "triggers_header",
+			"body": "triggers_body",
+			"header_mobile": "triggers_header",
+			"body_mobile": "triggers_body_mobile",
+			"sectionName": "triggers_section_name",
+			"steps": [
+				{
+					"header": "triggers_secondary_header_1",
+					"body": "triggers_secondary_body_1",
+					"header_mobile": "triggers_secondary_header_1",
+					"body_mobile": "triggers_body_mobile"
+				},
+				{
+					"header": "triggers_secondary_header_2",
+					"body": "triggers_secondary_body_2",
+					"header_mobile": "triggers_secondary_header_2",
+					"body_mobile": "triggers_secondary_body_2"
+				},
+				{
+					"header": "triggers_secondary_header_3",
+					"body": "triggers_secondary_body_3",
+					"header_mobile": "triggers_secondary_header_3",
+					"body_mobile": "triggers_secondary_body_3"
+				},
+				{
+					"header": "triggers_secondary_header_4",
+					"body": "triggers_secondary_body_4",
+					"header_mobile": "triggers_secondary_header_4",
+					"body_mobile": "triggers_secondary_body_4"
+				},
+				{
+					"header": "triggers_secondary_header_5",
+					"body": "triggers_secondary_body_5",
+					"header_mobile": "triggers_secondary_header_5",
+					"body_mobile": "triggers_secondary_body_5"
+				}
+			]
+		},
+		"moods": {
+			"header": "moods_header",
+			"body": "moods_body",
+			"caption": "",
+			"header_mobile": "moods_header",
+			"body_mobile": "moods_body_mobile",
+			"sectionName": "moods_section_name",
+			"interaction_prompt": ""
+		},
+		"calm": {
+			"header": "calm_header",
+			"body": "calm_body",
+			"caption": "calm_button_label",
+			"header_mobile": "calm_header",
+			"body_mobile": "calm_body_mobile",
+			"sectionName": "calm_section_name",
+			"secondary": {
+				"header": "calm_secondary_header",
+				"body": "calm_secondary_body",
+				"header_mobile": "calm_secondary_header",
+				"body_mobile": "calm_body_mobile"
+			}
+		},
+		"more": {
+			"header": "",
+			"body": "",
+			"caption": "more_button_label",
+			"header_mobile": "",
+			"body_mobile": "",
+			"sectionName": "more_section_name",
+			"interaction_prompt": ""
+		},
+		"timeline": {
+			"header": "timeline_header",
+			"header_mobile": "timeline_header",
+			"body": [
+				"timeline_intro_body_1",
+				"timeline_intro_body_2",
+				"timeline_intro_body_3"
+			],
+			"body_mobile": [
+				"timeline_intro_body_1",
+				"timeline_intro_body_2",
+				"timeline_intro_body_3"
+			],
+			"restart_button": "timeline_restart_button",
+			"intro_button": "timeline_begin_awareness_button",
+			"secondary": {
+				"trigger": {
+					"header": "timeline_trigger_header",
+					"body": [
+						"timeline_trigger_body_1",
+						[
+							"timeline_trigger_body_2_list_item_1",
+							"timeline_trigger_body_2_list_item_2",
+							"timeline_trigger_body_2_list_item_3"
+						]
+					],
+					"button": "timeline_experience_add_awareness_button",
+					"body_mobile": [
+						"timeline_trigger_body_1",
+						[
+							"timeline_trigger_body_2_list_item_1",
+							"timeline_trigger_body_2_list_item_2",
+							"timeline_trigger_body_2_list_item_3"
+						]
+					],
+					"header_mobile": "timeline_trigger_header"
+				},
+				"experience": {
+					"header": "timeline_experience_header",
+					"body": [
+						"timeline_experience_body_1"
+					],
+					"button": "timeline_response_add_awareness_button",
+					"body_mobile": [
+						"timeline_experience_body_1"
+					],
+					"header_mobile": "timeline_experience_header"
+				},
+				"response": {
+					"header": "timeline_response_header",
+					"body": [
+						"timeline_response_body_1"
+					],
+					"button": "timeline_begin_refractory_period_button",
+					"body_mobile": [
+						"timeline_response_body_1"
+					],
+					"header_mobile": "timeline_response_header"
+				},
+				"refractory": {
+					"header": "timeline_refractory_header",
+					"body": [
+						"timeline_refractory_body_1",
+						"timeline_refractory_body_2",
+						"timeline_refractory_body_3"
+					],
+					"button": "timeline_begin_block_diagram_button",
+					"body_mobile": [
+						"timeline_refractory_body_1",
+						"timeline_refractory_body_2",
+						"timeline_refractory_body_3"
+					],
+					"header_mobile": "timeline_refractory_header"
+				},
+				"blocks": {
+					"header": "timeline_blocks_header",
+					"body": [
+						"timeline_blocks_body_1"
+					],
+					"labels": {
+						"precondition": "timeline_blocks_label_precondition",
+						"event": "timeline_blocks_label_event",
+						"perceptual_database": "timeline_blocks_label_perceptual_database",
+						"physical_changes": "timeline_blocks_label_physical_changes",
+						"state": "timeline_blocks_label_state",
+						"mental_changes": "timeline_blocks_label_mental_changes",
+						"constructive_response": "timeline_blocks_label_constructive_response",
+						"destructive_response": "timeline_blocks_label_destructive_response",
+						"ambiguous_response": "timeline_blocks_label_ambiguous_response"
+					},
+					"captions": {
+						"precondition": "timeline_blocks_caption_precondition",
+						"event": "timeline_blocks_caption_event",
+						"perceptual_database": "timeline_blocks_caption_perceptual_database",
+						"physical_changes": "timeline_blocks_caption_physical_changes",
+						"emotional_state": "timeline_blocks_caption_emotional_state",
+						"mental_changes": "timeline_blocks_caption_mental_changes",
+						"constructive_response": "timeline_blocks_caption_constructive_response",
+						"destructive_response": "timeline_blocks_caption_destructive_response",
+						"ambiguous_response": "timeline_blocks_caption_ambiguous_response"
+					},
+					"body_mobile": [
+						"timeline_blocks_body_1"
+					],
+					"header_mobile": "timeline_blocks_header"
+				}
+			}
+		}
+	},
+	"about": {
+		"subsections": [
+			{
+				"title": "about_header_1",
+				"desc": "about_body_1",
+				"title_mobile": "about_header_1",
+				"desc_mobile": "about_body_1"
+			},
+			{
+				"title": "about_header_2",
+				"desc": "about_body_2",
+				"title_mobile": "about_header_2",
+				"desc_mobile": "about_body_2"
+			},
+			{
+				"title": "about_header_3",
+				"desc": "about_body_3",
+				"title_mobile": "about_header_3",
+				"desc_mobile": "about_body_3"
+			},
+			{
+				"title": "about_header_4",
+				"desc": "about_body_4",
+				"title_mobile": "about_header_4",
+				"desc_mobile": "about_body_4"
+			},
+			{
+				"title": "about_header_5",
+				"desc": "about_body_5",
+				"title_mobile": "about_header_5",
+				"desc_mobile": "about_body_5"
+			},
+			{
+				"title": "about_header_6",
+				"desc": "about_body_6",
+				"title_mobile": "about_header_6",
+				"desc_mobile": "about_body_6"
+			},
+			{
+				"title": "about_header_7",
+				"desc": "about_body_7",
+				"title_mobile": "about_header_7",
+				"desc_mobile": "about_body_7"
+			}
+		],
+		"title": "about_intro_title",
+		"desc": "about_intro_body",
+		"title_mobile": "about_intro_title_mobile",
+		"desc_mobile": "about_intro_body_mobile",
+		"sectionName": "about_section_name",
+		"sectionName_mobile": "about_section_name"
+	},
+	"emotrak": {
+		"subsections": [
+			{
+				"title": "",
+				"desc": "emotrak_section_1",
+				"title_mobile": "",
+				"desc_mobile": "emotrak_section_1",
+				"image": "emotrak",
+				"mail": null
+			},
+			{
+				"title": "",
+				"desc": "emotrak_section_2",
+				"title_mobile": "",
+				"desc_mobile": "emotrak_section_2",
+				"image": null,
+				"mail": true
+			},
+			{
+				"title": "",
+				"desc": "emotrak_section_3",
+				"title_mobile": "",
+				"desc_mobile": "emotrak_section_3",
+				"image": null,
+				"mail": null
+			}
+		],
+		"title": "emotrak_title",
+		"desc": "emotrak_intro",
+		"header_mobile": "emotrak_header_mobile",
+		"body_mobile": "emotrak_body_mobile",
+		"sectionName": "emotrak_section_name",
+		"sectionName_mobile": "emotrak_section_name"
+	}
 }
