@@ -382,20 +382,28 @@ const timeline = {
 	},
 
 	fullRestart: function () {
-		let restart = ()=> {
+
+		let defaultRestart = ()=> {
+			this.episode && this.episode.destroy();
+			this.episode = null;
+			this.episodeAddAwareness && this.episodeAddAwareness.destroy();
+			this.episodeAddAwareness = null;
+			this.loadEpisode();
+			this.hideAwarenessCopy();
+			this.showIntroCopy();
+		};
+
+		let minimizeAndRestart = () =>{
 			dispatcher.minimizeSectionText();
 			dispatcher.once( dispatcher.EVENTS.SECTION_TEXT_MINIMIZE_COMPLETE, ()=> {
-				this.episode && this.episode.destroy();
-				this.episode = null;
-				this.episodeAddAwareness && this.episodeAddAwareness.destroy();
-				this.episodeAddAwareness = null;
-				this.loadEpisode();
-				this.hideAwarenessCopy();
-				this.showIntroCopy();
+				defaultRestart();
 			} );
 		};
+		
+		let restart = this.screenIsSmall? minimizeAndRestart: defaultRestart;
+
 		if ( this.episodeAddAwareness ) {
-			this.episodeAddAwareness.hide( restart.bind( this ) );
+			this.episodeAddAwareness.hide( restart );
 		} else {
 			restart();
 		}
