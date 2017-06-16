@@ -75,6 +75,7 @@ const dispatcher = {
 		'annex-episode-timeline',
 		'annex-partially-charted',
 		'annex-traits',
+		'annex-moods',
 		'annex-signals',
 		'annex-psychopathologies',
 		'annex-scientific-basis',
@@ -85,6 +86,7 @@ const dispatcher = {
 	ANNEX_DATA_2_PAGE: {
 		'psychopathology': 'annex-psychopathologies',
 		'personality-trait': 'annex-traits',
+		'moods': 'annex-moods',
 		'signals': 'annex-signals',
 		'partially-charted': 'annex-partially-charted',
 		'scientific-basis': 'annex-scientific-basis',

@@ -19,6 +19,7 @@ import AnnexPsychopathologies from './more-pages/annex-psychopathologies.js';
 import AnnexScientificBasis from './more-pages/annex-scientific-basis.js';
 import AnnexSignals from './more-pages/annex-signals.js';
 import AnnexTraits from './more-pages/annex-traits.js';
+import AnnexMoods from './more-pages/annex-moods.js';
 
 export default {
 
@@ -191,6 +192,7 @@ export default {
 		this.pages[ 'annex-episode-timeline' ] = AnnexEpisodeTimeline;
 		this.pages[ 'annex-partially-charted' ] = AnnexPartiallyCharted;
 		this.pages[ 'annex-traits' ] = AnnexTraits;
+		this.pages[ 'annex-moods' ] = AnnexMoods;
 		this.pages[ 'annex-signals' ] = AnnexSignals;
 		this.pages[ 'annex-psychopathologies' ] = AnnexPsychopathologies;
 		this.pages[ 'annex-scientific-basis' ] = AnnexScientificBasis;
@@ -211,6 +213,8 @@ export default {
 				return 'annex-intrinsic-or-intentional';
 			case 'annex-traits':
 				return 'annex-personality-trait';
+			case 'annex-moods':
+				return 'annex-moods';
 			case 'further':
 				return 'further-reading';
 			default:

@@ -362,6 +362,7 @@ const scroller = {
 			'annex-episode-timeline',
 			'annex-partially-charted',
 			'annex-traits',
+			'annex-moods',
 			'annex-signals',
 			'annex-psychopathologies',
 			'annex-scientific-basis',
@@ -386,6 +387,7 @@ const scroller = {
 		$responseMoreContent.prepend( moreInfoElements[ 'annex-intrinsic-remedial' ] );
 		$responseMoreContent.prepend( moreInfoElements[ 'annex-psychopathologies' ] );
 		$responseMoreContent.prepend( moreInfoElements[ 'annex-traits' ] );
+		$responseMoreContent.prepend( moreInfoElements[ 'annex-moods' ] );
 		//$( '#strategies' ).find( '.more-content__scroller' ).prepend( moreInfoElements[ 'annex-impediment-antidote' ] );
 
 		this.allowMoreContent( true, 'actions' );

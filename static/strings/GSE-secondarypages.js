@@ -14,6 +14,7 @@ var ANNEX_SECTIONS = [
 	'signals',
 	'psychopathology',
 	'personality trait',
+	'moods',
 	'partially charted',
 	'triggers timeline',
 	//'impediment-antidote',
@@ -251,6 +252,28 @@ var PARSER_CONFIG = {
 	},
 
 	'personality trait': {
+		start: [[1, 3], [1, 6]], // col, row
+		parse: function(data) {
+			var rsp = {};
+			rsp.emotions = [];
+
+			data.forEach(function(row) {
+				if (row.title && row.introduction) {
+					rsp.title = row.title;
+					rsp.desc = row.introduction;
+				} else if (row.name && row.description) {
+					rsp.emotions.push({
+						name: row.name,
+						desc: row.description
+					})
+				}
+			});
+
+			return rsp;
+		}
+	},
+
+	'moods': {
 		start: [[1, 3], [1, 6]], // col, row
 		parse: function(data) {
 			var rsp = {};
