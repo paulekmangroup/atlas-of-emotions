@@ -17,7 +17,7 @@ var ANNEX_SECTIONS = [
 	'moods',
 	'partially charted',
 	'triggers timeline',
-	//'impediment-antidote',
+	'impediment-antidote',
 	'intrinsic or intentional',
 ];
 

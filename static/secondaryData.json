@@ -469,6 +469,222 @@
 			],
 			"title": "Signal and Message",
 			"desc": "The signal of an emotion describes the universal ways that emotion is displayed in the face and/or voice. There can also be other vocal tone changes and body language indicators, but these are not included here because they are often culturally informed and learned as opposed to universal.<br><br>The message is what the emotion is telling us. All emotions have a message that is a response to the world around us."
+		},
+		"impediment-antidote": {
+			"emotions": [
+				{
+					"name": "Anger Antidotes",
+					"children": [
+						{
+							"name": "Annoyance",
+							"desc": "Patience, open-mindedness, concern for others."
+						},
+						{
+							"name": "Frustration",
+							"desc": "Letting go, letting go of grasping, putting things in a larger perspective."
+						},
+						{
+							"name": "Argumentativeness",
+							"desc": "Making effort to understand the other’s perspective, cognitive empathy, benevolence, wishing to solve the problem through a mutually agreeable solution."
+						},
+						{
+							"name": "Exasperation",
+							"desc": "Letting go of grasping. Patience, inner calm. Trying to understand the causes and conditions that brought about the undesirable situation."
+						},
+						{
+							"name": "Vengefulness",
+							"desc": "Contemplating the negative effects of taking revenge, in the short and long term; forgiveness not as condoning harmful behavior but as breaking the cycle of resentment and hatred."
+						},
+						{
+							"name": "Fury",
+							"desc": "Taking a break, physically and mentally, from the circumstances that brought fury about. Looking at fury itself with the eye of awareness as if gazing at a raging fire and slowly letting it calm down."
+						}
+					]
+				},
+				{
+					"name": "Anger Impediments",
+					"children": []
+				},
+				{
+					"name": "Fear Antidotes",
+					"children": [
+						{
+							"name": "Trepidation",
+							"desc": "Trying to ponder what can be done. Calming the mind gives the best chance to find the appropriate solution to what caused the trepidation in the first place."
+						},
+						{
+							"name": "Nervousness",
+							"desc": "Trying to ponder what can be done. Calming the mind gives the best chance to find the appropriate solution to what caused the nervousness in the first place."
+						},
+						{
+							"name": "Anxiety",
+							"desc": "Making a special effort of letting go of ruminations about the past and anticipations of the future."
+						},
+						{
+							"name": "Dread",
+							"desc": "Remaining as calm as as possible. Seeing what can be done for yourself and for others as well."
+						},
+						{
+							"name": "Panic",
+							"desc": "Making an effort to see if anything can act as a mitigating factor (depending on the causes involved). "
+						},
+						{
+							"name": "Horror",
+							"desc": "Trying to see if anything can be done immediately. If that is not the case, creating distance to see if something can be done from afar. Responding with firmness and compassion, never with hatred. "
+						},
+						{
+							"name": "Terror",
+							"desc": "Instilling some calmness in the mind in order to take most appropriate decision."
+						}
+					]
+				},
+				{
+					"name": "Fear Impediments",
+					"children": []
+				},
+				{
+					"name": "Disgust Antidotes",
+					"children": [
+						{
+							"name": "Aversion",
+							"desc": "Evaluating impartially the degree of harmfulness, taking appropriate measures, and then letting aversion dissolve in a space of mindful awareness."
+						},
+						{
+							"name": "Dislike",
+							"desc": "While evaluating impartially the ethical issues, generating compassion so as to find the best way to remedy the causes and conditions that triggered dislike."
+						},
+						{
+							"name": "Distaste",
+							"desc": "Evaluating impartially the degree of harmfulness, taking appropriate measures, and then letting distaste dissolve in a space of mindful awareness."
+						},
+						{
+							"name": "Repugnance",
+							"desc": "Evaluating impartially the degree of harmfulness, taking appropriate measures, and then letting repugnance dissolve in a space of mindful awareness."
+						},
+						{
+							"name": "Loathing—Self",
+							"desc": "Using healthy regret to generate the determination to improve oneself; whenever possible, repairing the harm caused to others. Not falling into pessimistic guilt, thinking that one is fundamentally bad and that that is the way one is bound to remain. Not underestimating the potential for change."
+						},
+						{
+							"name": "Loathing—Others",
+							"desc": "Adopting the outlook of a caring physician, who might deeply disapprove certain behaviors but will focus on doing all that is possible to cure a person of their afflictions."
+						},
+						{
+							"name": "Revulsion",
+							"desc": "Adopting the outlook of a caring physician, who might deeply disapprove certain behaviors but will focus on doing all that is possible to cure a person of their afflictions."
+						},
+						{
+							"name": "Abhorrence",
+							"desc": "In the case of toxic substances or situations, doing the best one can to calmly avoid them. In the case of actions, adopting the outlook of a caring physician, who might deeply disapprove certain behaviors but will focus on doing all that is possible to cure a person of their afflictions."
+						}
+					]
+				},
+				{
+					"name": "Disgust Impediments",
+					"children": []
+				},
+				{
+					"name": "Sadness Antidotes",
+					"children": [
+						{
+							"name": "Disappointment",
+							"desc": "Understanding that sadness is natural in appropriate circumstances, but also that experiencing loss is part of life and that one should not let oneself be overwhelmed. Trying to find a place of peace within oneself and thinking of constructive things that could be done instead."
+						},
+						{
+							"name": "Distraughtness",
+							"desc": "Understanding that a permanent state of sadness will not bring any real benefit. In the case of mourning someone, falling into long-term sadness and despair should not be seen as an homage paid to that person. It is better to pay homage by doing meaningful and altruistic acts."
+						},
+						{
+							"name": "Discouragement",
+							"desc": "Understanding that a permanent state of sadness will not bring any real benefit. In the case of mourning someone, falling into long-term sadness and despair should not be seen as an homage paid to that person. It is better to pay homage by doing meaningful and altruistic acts."
+						},
+						{
+							"name": "Helplessness",
+							"desc": "Understanding that a permanent state of sadness will not bring any real benefit. In the case of mourning someone, falling into long-term sadness and despair should not be seen as an homage paid to that person. It is better to pay homage by doing meaningful and altruistic acts."
+						},
+						{
+							"name": "Misery",
+							"desc": "Understanding that a permanent state of sadness will not bring any real benefit. In the case of mourning someone, falling into long-term sadness and despair should not be seen as an homage paid to that person. It is better to pay homage by doing meaningful and altruistic acts."
+						},
+						{
+							"name": "Grief",
+							"desc": "Understanding that a permanent state of sadness will not bring any real benefit. In the case of mourning someone, falling into long-term sadness and despair should not be seen as an homage paid to that person. It is better to pay homage by doing meaningful and altruistic acts."
+						},
+						{
+							"name": "Despair",
+							"desc": "Understanding that a permanent state of sadness will not bring any real benefit. In the case of mourning someone, falling into long-term sadness and despair should not be seen as an homage paid to that person. It is better to pay homage by doing meaningful and altruistic acts."
+						},
+						{
+							"name": "Anguish",
+							"desc": "Realizing that things and people are impermanent by nature. Revolting against this cannot lead to a fulfilled life."
+						}
+					]
+				},
+				{
+					"name": "Sadness Impediments",
+					"children": []
+				},
+				{
+					"name": "Enjoyment Antidotes",
+					"children": [
+						{
+							"name": "Schadenfreude",
+							"desc": "Perceiving the destructive aspect of it and trying to generate benevolence toward the person."
+						},
+						{
+							"name": "Pride",
+							"desc": "Humility. Putting things into perspective and realizing that there are many other people with similar or even better qualities than one’s own. Understanding that one could do something not just because one is so special, but because of many interdependent causes and conditions in which others have taken part."
+						}
+					]
+				},
+				{
+					"name": "Enjoyment Impediments",
+					"children": [
+						{
+							"name": "Sensory Pleasures",
+							"desc": "Being unable to appreciate the quality of the present moment."
+						},
+						{
+							"name": "Relief",
+							"desc": "Persisting in worrying unnecessarily."
+						},
+						{
+							"name": "Amusement",
+							"desc": "Tending to see things in negative ways."
+						},
+						{
+							"name": "Excitement",
+							"desc": "Feeling pessimism."
+						},
+						{
+							"name": "Ecstasy",
+							"desc": "Grasping, attachment and any other afflictive mental state (animosity, envy, arrogance, etc.)."
+						},
+						{
+							"name": "Fiero",
+							"desc": "Vanity, narcissism, failing to acknowledge with gratitude all those who contributed to make an achievement possible."
+						},
+						{
+							"name": "Naches",
+							"desc": "Pride mixed with arrogance and with partiality that makes one feel contemptuous about others’ achievements."
+						},
+						{
+							"name": "Wonder",
+							"desc": "Grasping. Unease."
+						},
+						{
+							"name": "Rejoicing",
+							"desc": "Envy, jealousy, pride."
+						},
+						{
+							"name": "Compassion/Joy",
+							"desc": "Regret at having done something good at the cost of some personal efforts. Narrow-mindedness when caring only for a limited number of people who are close."
+						}
+					]
+				}
+			],
+			"title": "Impediments and Antidotes",
+			"desc": "Here are some ways to counteract emotional states. Impediments involve blocking a positive emotion; antidotes involve reversing negative ones."
 		}
 	},
 	"about": {
@@ -503,223 +719,7 @@
 			}
 		],
 		"title": "About This Atlas",
-    "desc": "This Atlas was created to increase understanding of how emotions influence our lives, giving us choice, (at least some of the time) about which emotion we are experiencing, and how our emotions influence what we say and do. While emotions are central to our lives – providing the joy, alerting us to threats, a force for change, a warning against what is toxic, and calling to others for help – we don’t choose what to feel or when to feel it. The Atlas of Emotions was created to give us more awareness of our emotions, and sometimes even some choice about what we are feeling, through better understanding of how emotions work."
-	},
-	"impediment-antidote": {
-		"emotions": [
-			{
-				"name": "Anger Antidotes",
-				"children": [
-					{
-						"name": "Annoyance",
-						"desc": "Patience, open-mindedness, concern for others."
-					},
-					{
-						"name": "Frustration",
-						"desc": "Letting go, letting go of grasping, putting things in a larger perspective."
-					},
-					{
-						"name": "Argumentativeness",
-						"desc": "Making effort to understand the other’s perspective, cognitive empathy, benevolence, wishing to solve the problem through a mutually agreeable solution."
-					},
-					{
-						"name": "Exasperation",
-						"desc": "Letting go of grasping. Patience, inner calm. Trying to understand the causes and conditions that brought about the undesirable situation."
-					},
-					{
-						"name": "Vengefulness",
-						"desc": "Contemplating the negative effects of taking revenge, in the short and long term; forgiveness not as condoning harmful behavior but as breaking the cycle of resentment and hatred."
-					},
-					{
-						"name": "Fury",
-						"desc": "Taking a break, physically and mentally, from the circumstances that brought fury about. Looking at fury itself with the eye of awareness as if gazing at a raging fire and slowly letting it calm down."
-					}
-				]
-			},
-			{
-				"name": "Anger Impediments",
-				"children": []
-			},
-			{
-				"name": "Fear Antidotes",
-				"children": [
-					{
-						"name": "Trepidation",
-						"desc": "Trying to ponder what can be done. Calming the mind gives the best chance to find the appropriate solution to what caused the trepidation in the first place."
-					},
-					{
-						"name": "Nervousness",
-						"desc": "Trying to ponder what can be done. Calming the mind gives the best chance to find the appropriate solution to what caused the nervousness in the first place."
-					},
-					{
-						"name": "Anxiety",
-						"desc": "Making a special effort of letting go of ruminations about the past and anticipations of the future."
-					},
-					{
-						"name": "Dread",
-						"desc": "Remaining as calm as as possible. Seeing what can be done for yourself and for others as well."
-					},
-					{
-						"name": "Panic",
-						"desc": "Making an effort to see if anything can act as a mitigating factor (depending on the causes involved). "
-					},
-					{
-						"name": "Horror",
-						"desc": "Trying to see if anything can be done immediately. If that is not the case, creating distance to see if something can be done from afar. Responding with firmness and compassion, never with hatred. "
-					},
-					{
-						"name": "Terror",
-						"desc": "Instilling some calmness in the mind in order to take most appropriate decision."
-					}
-				]
-			},
-			{
-				"name": "Fear Impediments",
-				"children": []
-			},
-			{
-				"name": "Disgust Antidotes",
-				"children": [
-					{
-						"name": "Aversion",
-						"desc": "Evaluating impartially the degree of harmfulness, taking appropriate measures, and then letting aversion dissolve in a space of mindful awareness."
-					},
-					{
-						"name": "Dislike",
-						"desc": "While evaluating impartially the ethical issues, generating compassion so as to find the best way to remedy the causes and conditions that triggered dislike."
-					},
-					{
-						"name": "Distaste",
-						"desc": "Evaluating impartially the degree of harmfulness, taking appropriate measures, and then letting distaste dissolve in a space of mindful awareness."
-					},
-					{
-						"name": "Repugnance",
-						"desc": "Evaluating impartially the degree of harmfulness, taking appropriate measures, and then letting repugnance dissolve in a space of mindful awareness."
-					},
-					{
-						"name": "Loathing—Self",
-						"desc": "Using healthy regret to generate the determination to improve oneself; whenever possible, repairing the harm caused to others. Not falling into pessimistic guilt, thinking that one is fundamentally bad and that that is the way one is bound to remain. Not underestimating the potential for change."
-					},
-					{
-						"name": "Loathing—Others",
-						"desc": "Adopting the outlook of a caring physician, who might deeply disapprove certain behaviors but will focus on doing all that is possible to cure a person of their afflictions."
-					},
-					{
-						"name": "Revulsion",
-						"desc": "Adopting the outlook of a caring physician, who might deeply disapprove certain behaviors but will focus on doing all that is possible to cure a person of their afflictions."
-					},
-					{
-						"name": "Abhorrence",
-						"desc": "In the case of toxic substances or situations, doing the best one can to calmly avoid them. In the case of actions, adopting the outlook of a caring physician, who might deeply disapprove certain behaviors but will focus on doing all that is possible to cure a person of their afflictions."
-					}
-				]
-			},
-			{
-				"name": "Disgust Impediments",
-				"children": []
-			},
-			{
-				"name": "Sadness Antidotes",
-				"children": [
-					{
-						"name": "Disappointment",
-						"desc": "Understanding that sadness is natural in appropriate circumstances, but also that experiencing loss is part of life and that one should not let oneself be overwhelmed. Trying to find a place of peace within oneself and thinking of constructive things that could be done instead."
-					},
-					{
-						"name": "Distraughtness",
-						"desc": "Understanding that a permanent state of sadness will not bring any real benefit. In the case of mourning someone, falling into long-term sadness and despair should not be seen as an homage paid to that person. It is better to pay homage by doing meaningful and altruistic acts."
-					},
-					{
-						"name": "Discouragement",
-						"desc": "Understanding that a permanent state of sadness will not bring any real benefit. In the case of mourning someone, falling into long-term sadness and despair should not be seen as an homage paid to that person. It is better to pay homage by doing meaningful and altruistic acts."
-					},
-					{
-						"name": "Helplessness",
-						"desc": "Understanding that a permanent state of sadness will not bring any real benefit. In the case of mourning someone, falling into long-term sadness and despair should not be seen as an homage paid to that person. It is better to pay homage by doing meaningful and altruistic acts."
-					},
-					{
-						"name": "Misery",
-						"desc": "Understanding that a permanent state of sadness will not bring any real benefit. In the case of mourning someone, falling into long-term sadness and despair should not be seen as an homage paid to that person. It is better to pay homage by doing meaningful and altruistic acts."
-					},
-					{
-						"name": "Grief",
-						"desc": "Understanding that a permanent state of sadness will not bring any real benefit. In the case of mourning someone, falling into long-term sadness and despair should not be seen as an homage paid to that person. It is better to pay homage by doing meaningful and altruistic acts."
-					},
-					{
-						"name": "Despair",
-						"desc": "Understanding that a permanent state of sadness will not bring any real benefit. In the case of mourning someone, falling into long-term sadness and despair should not be seen as an homage paid to that person. It is better to pay homage by doing meaningful and altruistic acts."
-					},
-					{
-						"name": "Anguish",
-						"desc": "Realizing that things and people are impermanent by nature. Revolting against this cannot lead to a fulfilled life."
-					}
-				]
-			},
-			{
-				"name": "Sadness Impediments",
-				"children": []
-			},
-			{
-				"name": "Enjoyment Antidotes",
-				"children": [
-					{
-						"name": "Schadenfreude",
-						"desc": "Perceiving the destructive aspect of it and trying to generate benevolence toward the person."
-					},
-					{
-						"name": "Pride",
-						"desc": "Humility. Putting things into perspective and realizing that there are many other people with similar or even better qualities than one’s own. Understanding that one could do something not just because one is so special, but because of many interdependent causes and conditions in which others have taken part."
-					}
-				]
-			},
-			{
-				"name": "Enjoyment Impediments",
-				"children": [
-					{
-						"name": "Sensory Pleasures",
-						"desc": "Being unable to appreciate the quality of the present moment."
-					},
-					{
-						"name": "Relief",
-						"desc": "Persisting in worrying unnecessarily."
-					},
-					{
-						"name": "Amusement",
-						"desc": "Tending to see things in negative ways."
-					},
-					{
-						"name": "Excitement",
-						"desc": "Feeling pessimism."
-					},
-					{
-						"name": "Ecstasy",
-						"desc": "Grasping, attachment and any other afflictive mental state (animosity, envy, arrogance, etc.)."
-					},
-					{
-						"name": "Fiero",
-						"desc": "Vanity, narcissism, failing to acknowledge with gratitude all those who contributed to make an achievement possible."
-					},
-					{
-						"name": "Naches",
-						"desc": "Pride mixed with arrogance and with partiality that makes one feel contemptuous about others’ achievements."
-					},
-					{
-						"name": "Wonder",
-						"desc": "Grasping. Unease."
-					},
-					{
-						"name": "Rejoicing",
-						"desc": "Envy, jealousy, pride."
-					},
-					{
-						"name": "Compassion/Joy",
-						"desc": "Regret at having done something good at the cost of some personal efforts. Narrow-mindedness when caring only for a limited number of people who are close."
-					}
-				]
-			}
-		],
-		"title": "Impediments and Antidotes",
-		"desc": "Here are some ways to counteract emotional states. Impediments involve blocking a positive emotion; antidotes involve reversing negative ones."
+		"desc": "The goal of this Atlas is provide a visual tool to explore and identify some of our primary emotions. The site invites your exploration in to the continents of 5 basic emotions and their related states of feelings, how we respond with actions to these emotions, what triggers our emotions and the experience of moods. While emotions are central to our lives – providing the joy, alerting us to threats, a force for change, a warning against what is toxic, and calling to others for help – we don’t choose what to feel or when to feel it. The Atlas of Emotions was created to build emotional awareness and sometimes even some choice about how we respond to what we are feeling, through better understanding of how emotions work.\n"
 	},
 	"donate": {
 		"title": "Support Our Cause",

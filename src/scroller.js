@@ -18,7 +18,7 @@ const scroller = {
 		'continents': 'experience',
 		'states': 'experience',
 		'triggers': 'timeline',
-		'reading': 'reading' //FIXME fake atlas section prompts default
+		'strategies': 'strategies' //FIXME fake atlas section prompts default
 	},
 
 	FULLPAGE_TO_ATLAS_SECTIONS: {
@@ -26,7 +26,7 @@ const scroller = {
 		'timeline': 'triggers', //FIXME fake atlas section prompts default
 		'experience': 'continents',
 		'response': 'actions',
-		'reading': 'reading' //FIXME fake atlas section prompts default
+		'strategies': 'strategies' //FIXME fake atlas section prompts default
 	},
 
 	headerHeight: 55,
@@ -367,7 +367,7 @@ const scroller = {
 			'annex-psychopathologies',
 			'annex-scientific-basis',
 			'annex-intrinsic-remedial',
-			//'annex-impediment-antidote'
+			'annex-impediment-antidote'
 		];
 
 		morePageNames.forEach( item => {
@@ -388,7 +388,7 @@ const scroller = {
 		$responseMoreContent.prepend( moreInfoElements[ 'annex-psychopathologies' ] );
 		$responseMoreContent.prepend( moreInfoElements[ 'annex-traits' ] );
 		$responseMoreContent.prepend( moreInfoElements[ 'annex-moods' ] );
-		//$( '#strategies' ).find( '.more-content__scroller' ).prepend( moreInfoElements[ 'annex-impediment-antidote' ] );
+		$( '#strategies-section' ).find( '.more-content__scroller' ).prepend( moreInfoElements[ 'annex-impediment-antidote' ] );
 
 		this.allowMoreContent( true, 'actions' );
 		this.allowMoreContent( true, 'continents' );
