@@ -14,7 +14,6 @@
 		margin: 0 auto;
 		visibility: hidden;
 		transform: translateY(-50%);
-		cursor: pointer;
 		svg {
 			padding: 0 2em;
 		}
@@ -96,6 +95,24 @@
 			}
 		}
 
+	}
+	.diagram-caption {
+		opacity: 0;
+		color: #444;
+		position: absolute;
+		top: 50%;
+		left: 0;
+		right: 0;
+		padding-top: 200px;
+		padding-left: 3em;
+		padding-right: 3em;
+		//pointer-events: none;
+		transition: opacity 0.3s ease;
+		text-align: center;
+		font-size: 1em;
+		&.active {
+			opacity: 1;
+		}
 	}
 }
 

@@ -31,6 +31,7 @@ export default class EpisodeAddAwareness extends Episode {
 		//TweenMax.killDelayedCallsTo( this.toggleTriggerAndResponseAwareness );
 		//TweenMax.killDelayedCallsTo( this.advanceAndStart );
 		//TweenMax.killTweensOf( this.illuminationBlock );
+		this.hideAddAwarenessButtons();
 		this.illuminationBlock.setAttribute( 'style', null );
 	}
 
@@ -152,11 +153,6 @@ export default class EpisodeAddAwareness extends Episode {
 
 			//blocks
 			let blockDiagram = new BlockDiagram( timeline.select( '#blocks', this.parent ), this.parent );
-
-
-			//blockDiagram.onComplete = function () {
-			//let refractoryPeriod = RefractoryPeriod( this.parent, blocks );
-			//};
 
 
 			this.content = timeline.episodeContent;
@@ -442,6 +438,7 @@ export default class EpisodeAddAwareness extends Episode {
 			};
 
 			let showAddAwarenessButton = function () {
+
 				if ( this.awarenessStage == 'trigger' && addAwarenessButtonExperience.style.visibility == 'hidden' ) {
 					TweenMax.to( addAwarenessButtonExperience, 1, { autoAlpha: 1, ease: Power2.easeOut } );
 				}
@@ -451,6 +448,20 @@ export default class EpisodeAddAwareness extends Episode {
 				if ( this.awarenessStage == 'refractory' && blockDiagramButton.style.visibility == 'hidden' ) {
 					TweenMax.to( blockDiagramButton, 1, { autoAlpha: 1, ease: Power2.easeOut } );
 				}
+			};
+
+			this.hideAddAwarenessButtons = function () {
+
+				let buttons = [
+					addAwarenessButtonExperience,
+					addAwarenessButtonResponse,
+					blockDiagramButton
+				];
+				buttons.forEach( ( b )=> {
+					b.style.visibility = 'hidden';
+					b.style.opacity = 0;
+				} );
+
 			};
 
 			this.triggerRefractoryEffects = function () {

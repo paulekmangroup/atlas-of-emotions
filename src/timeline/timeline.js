@@ -399,7 +399,7 @@ const timeline = {
 				defaultRestart();
 			} );
 		};
-		
+
 		let restart = this.screenIsSmall? minimizeAndRestart: defaultRestart;
 
 		if ( this.episodeAddAwareness ) {
