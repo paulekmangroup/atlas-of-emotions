@@ -173,7 +173,8 @@ export default class Episode {
 	}
 
 	hide( onComplete ) {
-		TweenMax.to( this.parent, 1, { autoAlpha: 0, onComplete: onComplete } );
+		TweenMax.to( this.parent, 1, { autoAlpha: 0 } );
+		setTimeout( onComplete, 1000 );
 	}
 
 	getStageDOMCenterPoint( stage ) {
@@ -425,7 +426,7 @@ export default class Episode {
 
 	initialize( svg, container, emotion, screenIsSmall ) {
 
-		if ( svg && !svg._initializedEpisode ) {
+		if ( svg ) {
 
 			this.content = _.mapValues( timeline.episodeContent, function ( e ) {
 				return _.mapValues( e, ( e )=>[ e[ Object.keys( e )[ 1 ] ] ] );
@@ -545,8 +546,6 @@ export default class Episode {
 			this.replaceContent( this.currentEmotion, false );
 
 			TweenMax.set( this.parent, { visibility: 'visible' } );
-
-			svg._initializedEpisode = true;
 
 			this.isActive = true;
 
