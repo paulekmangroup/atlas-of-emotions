@@ -568,8 +568,11 @@ const scroller = {
 
 
 			let minimizeSectionText = () => {
-				if ( (!sectionTextMaximized && !sectionTextMaximizing) || sectionTextMinimizing ) {
+				let minimized = (!sectionTextMaximized && !sectionTextMaximizing);
+				if ( minimized ) {
 					dispatcher.sectionTextMinimizeComplete();
+				}
+				if ( minimized || sectionTextMinimizing ) {
 					return;
 				}
 				sectionTextMinimizing = true;

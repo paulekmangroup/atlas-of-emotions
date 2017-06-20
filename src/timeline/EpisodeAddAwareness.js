@@ -31,6 +31,11 @@ export default class EpisodeAddAwareness extends Episode {
 		//TweenMax.killDelayedCallsTo( this.toggleTriggerAndResponseAwareness );
 		//TweenMax.killDelayedCallsTo( this.advanceAndStart );
 		//TweenMax.killTweensOf( this.illuminationBlock );
+		this.addAwarenessButtonExperience.onclick = null;
+		this.addAwarenessButtonResponse.onclick = null;
+		this.refractoryPeriodButton.onclick = null;
+		this.blockDiagramButton.onclick = null;
+
 		this.hideAddAwarenessButtons();
 		this.illuminationBlock.setAttribute( 'style', null );
 	}
@@ -84,8 +89,8 @@ export default class EpisodeAddAwareness extends Episode {
 	}
 
 	hide( onComplete ) {
-		super.hide( onComplete );
 		this.hideIllumination();
+		super.hide( onComplete );
 	}
 
 	hideIllumination( onComplete ) {
@@ -141,7 +146,7 @@ export default class EpisodeAddAwareness extends Episode {
 		this.refractoryPeriodEnabled = false;
 		//this.refractoryBlocks = [];
 
-		if ( svg && !svg._initializedEpisode ) {
+		if ( svg  ) {
 
 			// illumination
 			this.illuminationBlock = timeline.select( '#illumination-block', document );
@@ -242,17 +247,17 @@ export default class EpisodeAddAwareness extends Episode {
 
 			//add awareness buttons
 
-			let addAwarenessButtonExperience = timeline.select( '#experience-add-awareness', document );
-			addAwarenessButtonExperience.style.visibility = 'hidden'; //TODO should these be handled in css? what's typical in this app?
+			this.addAwarenessButtonExperience = timeline.select( '#experience-add-awareness', document );
+			this.addAwarenessButtonExperience.style.visibility = 'hidden'; //TODO should these be handled in css? what's typical in this app?
 
-			let addAwarenessButtonResponse = timeline.select( '#response-add-awareness', document );
-			addAwarenessButtonResponse.style.visibility = 'hidden';
+			this.addAwarenessButtonResponse = timeline.select( '#response-add-awareness', document );
+			this.addAwarenessButtonResponse.style.visibility = 'hidden';
 
-			let refractoryPeriodButton = timeline.select( '#begin-refractory-period', document );
-			refractoryPeriodButton.style.visibility = 'hidden';
+			this.refractoryPeriodButton = timeline.select( '#begin-refractory-period', document );
+			this.refractoryPeriodButton.style.visibility = 'hidden';
 
-			let blockDiagramButton = timeline.select( '#begin-block-diagram', document );
-			blockDiagramButton.style.visibility = 'hidden';
+			this.blockDiagramButton = timeline.select( '#begin-block-diagram', document );
+			this.blockDiagramButton.style.visibility = 'hidden';
 
 			this.episodeTimeline = new TimelineMax( {} );
 			let illuminationTimeline = new TimelineMax( {} );
@@ -365,7 +370,7 @@ export default class EpisodeAddAwareness extends Episode {
 						.add( this.moveIllumination( illuminationPosition ) )
 						.add( 'finished' )
 						.addCallback( ()=> {
-							TweenMax.to( refractoryPeriodButton, 1, { autoAlpha: 1, ease: Power2.easeOut } );
+							TweenMax.to( this.refractoryPeriodButton, 1, { autoAlpha: 1, ease: Power2.easeOut } );
 						} );
 					//if ( this.screenIsSmall ) {
 					illuminationTimeline
@@ -439,23 +444,23 @@ export default class EpisodeAddAwareness extends Episode {
 
 			let showAddAwarenessButton = function () {
 
-				if ( this.awarenessStage == 'trigger' && addAwarenessButtonExperience.style.visibility == 'hidden' ) {
-					TweenMax.to( addAwarenessButtonExperience, 1, { autoAlpha: 1, ease: Power2.easeOut } );
+				if ( this.awarenessStage == 'trigger' && this.addAwarenessButtonExperience.style.visibility == 'hidden' ) {
+					TweenMax.to( this.addAwarenessButtonExperience, 1, { autoAlpha: 1, ease: Power2.easeOut } );
 				}
-				if ( this.awarenessStage == 'experience' && addAwarenessButtonResponse.style.visibility == 'hidden' ) {
-					TweenMax.to( addAwarenessButtonResponse, 1, { autoAlpha: 1, ease: Power2.easeOut } );
+				if ( this.awarenessStage == 'experience' && this.addAwarenessButtonResponse.style.visibility == 'hidden' ) {
+					TweenMax.to( this.addAwarenessButtonResponse, 1, { autoAlpha: 1, ease: Power2.easeOut } );
 				}
-				if ( this.awarenessStage == 'refractory' && blockDiagramButton.style.visibility == 'hidden' ) {
-					TweenMax.to( blockDiagramButton, 1, { autoAlpha: 1, ease: Power2.easeOut } );
+				if ( this.awarenessStage == 'refractory' && this.blockDiagramButton.style.visibility == 'hidden' ) {
+					TweenMax.to( this.blockDiagramButton, 1, { autoAlpha: 1, ease: Power2.easeOut } );
 				}
 			};
 
 			this.hideAddAwarenessButtons = function () {
 
 				let buttons = [
-					addAwarenessButtonExperience,
-					addAwarenessButtonResponse,
-					blockDiagramButton
+					this.addAwarenessButtonExperience,
+					this.addAwarenessButtonResponse,
+					this.blockDiagramButton
 				];
 				buttons.forEach( ( b )=> {
 					b.style.visibility = 'hidden';
@@ -641,10 +646,10 @@ export default class EpisodeAddAwareness extends Episode {
 			};
 
 
-			addAwarenessButtonExperience.onclick = awarenessClickCallback.bind( this );
-			addAwarenessButtonResponse.onclick = awarenessClickCallback.bind( this );
-			refractoryPeriodButton.onclick = refractoryPeriodClickCallback.bind( this );
-			blockDiagramButton.onclick = blockDiagramClickCallback.bind( this );
+			this.addAwarenessButtonExperience.onclick = awarenessClickCallback.bind( this );
+			this.addAwarenessButtonResponse.onclick = awarenessClickCallback.bind( this );
+			this.refractoryPeriodButton.onclick = refractoryPeriodClickCallback.bind( this );
+			this.blockDiagramButton.onclick = blockDiagramClickCallback.bind( this );
 
 			TweenMax.set( state, { visibility: 'visible' } );
 
@@ -656,8 +661,6 @@ export default class EpisodeAddAwareness extends Episode {
 			TweenMax.delayedCall( 2, ()=> {
 				this.episodeTimeline.tweenTo( 'end' );
 			} );
-
-			svg._initializedEpisode = true;
 
 			this.isActive = true;
 

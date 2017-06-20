@@ -394,10 +394,11 @@ const timeline = {
 		};
 
 		let minimizeAndRestart = () =>{
-			dispatcher.minimizeSectionText();
 			dispatcher.once( dispatcher.EVENTS.SECTION_TEXT_MINIMIZE_COMPLETE, ()=> {
+				console.log('restart now');
 				defaultRestart();
 			} );
+			dispatcher.minimizeSectionText();
 		};
 
 		let restart = this.screenIsSmall? minimizeAndRestart: defaultRestart;
