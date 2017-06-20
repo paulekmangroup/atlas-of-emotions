@@ -1234,7 +1234,7 @@ export default {
 			dispatcher.popupChange('triggers', emotion, stepBody);
 		} else {
 			dispatcher.popupChange();
-			dispatcher.changeCallout(this.currentEmotion, appStrings().getStr('emotionsData.metadata.triggers.header'), appStrings().getStr('emotionsData.metadata.triggers.body'));
+			dispatcher.changeSectionText(this.currentEmotion, appStrings().getStr('emotionsData.metadata.triggers.header'), appStrings().getStr('emotionsData.metadata.triggers.body'));
 
 			// this should technically be in a popup closed handler,
 			// but popupManager only dispatches events for popup close button clicks.

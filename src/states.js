@@ -505,7 +505,7 @@ export default {
 						.classed( 'visible', true );
 				}, 1 );
 
-				this.resetCallout();
+				this.resetSectionText();
 
 			} else {
 
@@ -840,7 +840,7 @@ export default {
 		}
 
 		// remove main callout
-		dispatcher.changeCallout();
+		dispatcher.changeSectionText();
 
 	},
 
@@ -1611,7 +1611,7 @@ export default {
 			dispatcher.setEmotionState( statesData.name, true );
 		} else {
 			dispatcher.popupChange( 'states', statesData.name, statesData.desc );
-			// dispatcher.changeCallout(this.currentEmotion, statesData.name, statesData.desc);
+			// dispatcher.changeSectionText(this.currentEmotion, statesData.name, statesData.desc);
 		}
 
 	},
@@ -1688,7 +1688,7 @@ export default {
 				dispatcher.popupChange();
 			}
 		} else {
-			this.resetCallout();
+			this.resetSectionText();
 		}
 
 	},
@@ -1834,9 +1834,9 @@ export default {
 		}
 	},
 
-	resetCallout: function () {
+	resetSectionText: function () {
 		dispatcher.popupChange();
-		dispatcher.changeCallout(
+		dispatcher.changeSectionText(
 			this.currentEmotion,
 			appStrings().getStr( 'emotionsData.metadata.states.header' ),
 			appStrings().getStr( 'emotionsData.metadata.states.body' ) +

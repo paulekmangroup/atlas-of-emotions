@@ -9,7 +9,7 @@ const dispatcher = {
 		NAVIGATE_COMPLETE: 'navigateComplete',
 		CHANGE_EMOTION_STATE: 'changeEmotionState',
 		CHANGE_EMOTION: 'changeEmotion',
-		CHANGE_CALLOUT: 'changeCallout',
+		CHANGE_SECTION_TEXT: 'changeSectionText',
 		MODAL_CHANGE: 'modalChange',
 		POPUP_CHANGE: 'popupChange',
 		POPUP_CLOSE_BUTTON_CLICKED: 'popupCloseButtonClicked',
@@ -115,9 +115,9 @@ const dispatcher = {
 
 	},
 
-	changeCallout: function ( emotion, title, body ) {
+	changeSectionText: function ( emotion, title, body ) {
 
-		this.emit( this.EVENTS.CHANGE_CALLOUT, emotion, title, body );
+		this.emit( this.EVENTS.CHANGE_SECTION_TEXT, emotion, title, body );
 
 	},
 
@@ -203,25 +203,6 @@ const dispatcher = {
 
 		return Object.keys( this.EMOTIONS ).some( key => this.EMOTIONS[ key ] === emotion );
 
-	},
-
-	validateMorePage: function ( page ) {
-		if ( !page ) return false;
-
-		return this.MORE_INFO.items.some( item => {
-			if ( item.page === page ) return true;
-			if ( page.indexOf( 'annex' ) === 0 && this.ANNEX_SECTIONS.indexOf( page ) > -1 ) return true;
-			return false;
-		} );
-	},
-
-	getMorePageName: function ( page ) {
-		if ( page.indexOf( 'annex' ) === 0 && this.ANNEX_SECTIONS.indexOf( page ) > -1 ) return 'Annex';
-
-		const pageObject = this.MORE_INFO.items.filter( ( item ) => item.page === page );
-		if ( !pageObject.length ) return '';
-
-		return pageObject[ 0 ].pageName || pageObject[ 0 ].label;
 	}
 
 };

@@ -93,7 +93,7 @@ export default {
 
 		if ( this.screenIsSmall ) {
 			// no mobile caption on More pages
-			dispatcher.changeCallout();
+			dispatcher.changeSectionText();
 		}
 
 	},

@@ -355,7 +355,7 @@ export default {
 			this.setBackgroundListener(true);
 		} else {
 			dispatcher.popupChange();
-			dispatcher.changeCallout(this.currentEmotion, appStrings().getStr('emotionsData.metadata.moods.header'), appStrings().getStr('emotionsData.metadata.moods.body'));
+			dispatcher.changeSectionText(this.currentEmotion, appStrings().getStr('emotionsData.metadata.moods.header'), appStrings().getStr('emotionsData.metadata.moods.body'));
 			this.setBackgroundListener(false);
 		}
 
