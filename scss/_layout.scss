@@ -1,3 +1,4 @@
+/* variables used only in this file */
 $section-padding-top: #{$ui-header-height}px;
 $section-text-padding: 1.5em;
 $section-text-padding-mobile: 0.75em;
@@ -474,16 +475,6 @@ svg {
 
 }
 
-//.more-content-overlay {
-//	position: absolute;
-//	top:300px;
-//	bottom:300px;
-//	width: 100%;
-//	background-color: #fff;
-//	overflow-y: scroll;
-//	-webkit-overflow-scrolling: touch;
-//}
-
 .section-text {
 	position: absolute;
 	//z-index: 2;
@@ -872,7 +863,7 @@ svg {
 	mix-blend-mode: multiply;
 	cursor: pointer;
 	opacity: 1.0;
-	-webkit-transition: opacity 0.2s ease-out;
+	//-webkit-transition: opacity 0.2s ease-out;
 	transition: opacity 0.2s ease-out;
 }
 

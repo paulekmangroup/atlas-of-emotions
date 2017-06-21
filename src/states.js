@@ -765,7 +765,7 @@ export default {
 
 	/**
 	 * States section stays open, with limited interactivity,
-	 * in actions, triggers, and moods. `setBackgrounded()` toggles this state.
+	 * in actions. `setBackgrounded()` toggles this state.
 	 */
 	setBackgrounded: function ( val, options ) {
 
@@ -789,8 +789,6 @@ export default {
 
 			this.sectionContainer.classList[ (val ? 'add' : 'remove') ]( 'backgrounded' );
 			this.sectionContainer.classList[ (options && (options.sectionName === dispatcher.SECTIONS.ACTIONS) ? 'add' : 'remove') ]( 'actions' );
-			this.sectionContainer.classList[ (options && (options.sectionName === dispatcher.SECTIONS.TRIGGERS) ? 'add' : 'remove') ]( 'triggers' );
-			this.sectionContainer.classList[ (options && (options.sectionName === dispatcher.SECTIONS.MOODS) ? 'add' : 'remove') ]( 'moods' );
 
 			this.hideChrome();
 			this.setActive( !val );

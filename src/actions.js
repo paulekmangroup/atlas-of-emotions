@@ -1114,8 +1114,6 @@ export default {
 			this.isBackgrounded = val;
 
 			this.sectionHitArea.classList[ (val ? 'add' : 'remove') ]( 'backgrounded' );
-			this.sectionHitArea.classList[ (options && (options.sectionName === dispatcher.SECTIONS.TRIGGERS) ? 'add' : 'remove') ]( 'triggers' );
-			this.sectionHitArea.classList[ (options && (options.sectionName === dispatcher.SECTIONS.MOODS) ? 'add' : 'remove') ]( 'moods' );
 
 			// deselect anything selected.
 			// currently only happens on mobile, but might also want to happen on desktop...

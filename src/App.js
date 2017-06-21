@@ -2,14 +2,11 @@ import _ from 'lodash';
 import scroller from './scroller.js';
 import timeline from './timeline/timeline.js';
 import dispatcher from './dispatcher.js';
+import moreInfo from './moreInfo.js';
 import continents from './continents.js';
 import states from './states.js';
 import actions from './actions.js';
-//import triggers from './triggers.js';
-import moods from './moods.js';
 import calm from './calm.js';
-import moreInfo from './moreInfo.js';
-import introModal from './introModal.js';
 import popupManager from './popupManager.js';
 import emotionsData from '../static/emotionsData.json';
 import secondaryData from '../static/secondaryData.json';
@@ -60,6 +57,7 @@ export default function ( ...initArgs ) {
 				initLanguageSelector();
 				initScroller();
 
+
 				// unhide content rendered for bots
 				document.querySelector( 'body' ).style.removeProperty( 'visibility' );
 
@@ -69,7 +67,6 @@ export default function ( ...initArgs ) {
 				dispatcher.addListener( dispatcher.EVENTS.CHANGE_EMOTION, onEmotionChange );
 				dispatcher.addListener( dispatcher.EVENTS.CHANGE_SECTION_TEXT, onSectionTextChange );
 				dispatcher.addListener( dispatcher.EVENTS.POPUP_CHANGE, onPopupChange );
-				//dispatcher.addListener( dispatcher.EVENTS.OPEN_MORE_INFO_MENU, onMoreInfoMenuClick );
 
 				// other events
 				dispatcher.addListener( dispatcher.EVENTS.SECTION_GRAPHICS_RESIZE, onSectionGraphicsResized );
@@ -95,7 +92,6 @@ export default function ( ...initArgs ) {
 	}
 
 	function initScroller() {
-		initSection( moreInfo );
 		scroller.init.bind( scroller )( null, screenIsSmall );
 	}
 
@@ -136,15 +132,15 @@ export default function ( ...initArgs ) {
 		let mainEl = document.querySelector( '#main' ),
 			containerEl;
 		_.values( dispatcher.SECTIONS ).forEach( sectionName => {
-			containerEl = document.createElement( 'div' );
-			containerEl.id = sectionName;
-			mainEl.appendChild( containerEl );
-			containers[ sectionName ] = containerEl;
+			if ( sectionName == 'timeline' ) { //FIXME do this better?
+				containers[ sectionName ] = document.getElementById( 'timeline-graphics' );
+			} else {
+				containerEl = document.createElement( 'div' );
+				containerEl.id = sectionName;
+				mainEl.appendChild( containerEl );
+				containers[ sectionName ] = containerEl;
+			}
 		} );
-
-		// position actions in front of triggers
-		// so that triggers horizon element appears behind actions rays
-		//mainEl.insertBefore( containers[ dispatcher.SECTIONS.TRIGGERS ], containers[ dispatcher.SECTIONS.ACTIONS ] );
 
 	}
 
@@ -153,10 +149,12 @@ export default function ( ...initArgs ) {
 		sections.continents = continents;
 		sections.states = states;
 		sections.actions = actions;
-		sections.triggers = timeline; //TODO finalize swap
-		sections.moods = moods;
+		sections.timeline = timeline;
 		sections.calm = calm;
-		sections.more = moreInfo;
+
+		// use this without a container, so the info
+		// can be spread out across sections
+		moreInfo.init( null, screenIsSmall );
 
 	}
 
@@ -212,6 +210,7 @@ export default function ( ...initArgs ) {
 	}
 
 	function setSection( sectionName, previousEmotion, previousMorePage ) {
+
 		let section = sections[ sectionName ],
 			previousSection = currentSection,
 			previousContainer;
@@ -235,12 +234,6 @@ export default function ( ...initArgs ) {
 
 			// init current section
 			initSection( section );
-		}
-
-		// if navigating into 'more' section, store current section
-		// for navigating back to when leaving 'more' section
-		if ( sectionName === 'more' && section.setPreviousSection ) {
-			section.setPreviousSection( previousNonSecondaryHash.section );
 		}
 
 		let backgroundSections = section.backgroundSections || [];
@@ -414,15 +407,16 @@ export default function ( ...initArgs ) {
 			}
 		}
 
-		// turn on display so width/height can be calculated
-		let currentDisplay = containers[ sectionName ].style.display;
-		containers[ sectionName ].removeAttribute( 'style' );
+		if ( containers[ sectionName ] ) {
+			// turn on display so width/height can be calculated
+			let currentDisplay = containers[ sectionName ].style.display;
+			containers[ sectionName ].removeAttribute( 'style' );
+			section.init( containers[ sectionName ], screenIsSmall );
 
-		section.init( containers[ sectionName ], screenIsSmall );
-
-		// set display back to where it was
-		if ( currentDisplay ) {
-			containers[ sectionName ].style.display = currentDisplay;
+			// set display back to where it was
+			if ( currentDisplay ) {
+				containers[ sectionName ].style.display = currentDisplay;
+			}
 		}
 
 	}
@@ -514,7 +508,7 @@ export default function ( ...initArgs ) {
 
 	function onSectionGraphicsResized() {
 
-		//if ( currentSection == sections.triggers ) {
+		//if ( currentSection == sections.timeline ) {
 		currentSection.onResize( screenIsSmall );
 		//	}
 
@@ -522,32 +516,32 @@ export default function ( ...initArgs ) {
 
 	function onSectionTextMaximizeStart( duration ) {
 
-		if ( currentSection == sections.triggers ) {
-			sections.triggers.onSectionTextMaximizeStart( duration );
+		if ( currentSection == sections.timeline ) {
+			sections.timeline.onSectionTextMaximizeStart( duration );
 		}
 
 	}
 
 	function onSectionTextMaximizeComplete() {
 
-		if ( currentSection == sections.triggers ) {
-			sections.triggers.onSectionTextMaximizeComplete();
+		if ( currentSection == sections.timeline ) {
+			sections.timeline.onSectionTextMaximizeComplete();
 		}
 
 	}
 
 	function onSectionTextMinimizeStart( duration ) {
 
-		if ( currentSection == sections.triggers ) {
-			sections.triggers.onSectionTextMinimizeStart( duration );
+		if ( currentSection == sections.timeline ) {
+			sections.timeline.onSectionTextMinimizeStart( duration );
 		}
 
 	}
 
 	function onSectionTextMinimizeComplete() {
 
-		if ( currentSection == sections.triggers ) {
-			sections.triggers.onSectionTextMinimizeComplete();
+		if ( currentSection == sections.timeline ) {
+			sections.timeline.onSectionTextMinimizeComplete();
 		}
 
 	}
@@ -655,8 +649,7 @@ export default function ( ...initArgs ) {
 			if ( !emotion && (
 					section === dispatcher.SECTIONS.STATES ||
 					section === dispatcher.SECTIONS.ACTIONS ||
-					section === dispatcher.SECTIONS.TRIGGERS ||
-					section === dispatcher.SECTIONS.MOODS
+					section === dispatcher.SECTIONS.TIMELINE
 				) ) {
 				emotion = dispatcher.DEFAULT_EMOTION;
 			}
