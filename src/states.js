@@ -505,7 +505,7 @@ export default {
 						.classed( 'visible', true );
 				}, 1 );
 
-				this.resetCallout();
+				this.resetSectionText();
 
 			} else {
 
@@ -765,7 +765,7 @@ export default {
 
 	/**
 	 * States section stays open, with limited interactivity,
-	 * in actions, triggers, and moods. `setBackgrounded()` toggles this state.
+	 * in actions. `setBackgrounded()` toggles this state.
 	 */
 	setBackgrounded: function ( val, options ) {
 
@@ -787,10 +787,12 @@ export default {
 				this.sectionContainer.classList.remove( 'states-in-out' );
 			}
 
+
+			//console.log('set background: '+val); // being called twice
+
+
 			this.sectionContainer.classList[ (val ? 'add' : 'remove') ]( 'backgrounded' );
 			this.sectionContainer.classList[ (options && (options.sectionName === dispatcher.SECTIONS.ACTIONS) ? 'add' : 'remove') ]( 'actions' );
-			this.sectionContainer.classList[ (options && (options.sectionName === dispatcher.SECTIONS.TRIGGERS) ? 'add' : 'remove') ]( 'triggers' );
-			this.sectionContainer.classList[ (options && (options.sectionName === dispatcher.SECTIONS.MOODS) ? 'add' : 'remove') ]( 'moods' );
 
 			this.hideChrome();
 			this.setActive( !val );
@@ -840,7 +842,7 @@ export default {
 		}
 
 		// remove main callout
-		dispatcher.changeCallout();
+		dispatcher.changeSectionText();
 
 	},
 
@@ -1611,7 +1613,7 @@ export default {
 			dispatcher.setEmotionState( statesData.name, true );
 		} else {
 			dispatcher.popupChange( 'states', statesData.name, statesData.desc );
-			// dispatcher.changeCallout(this.currentEmotion, statesData.name, statesData.desc);
+			// dispatcher.changeSectionText(this.currentEmotion, statesData.name, statesData.desc);
 		}
 
 	},
@@ -1688,7 +1690,7 @@ export default {
 				dispatcher.popupChange();
 			}
 		} else {
-			this.resetCallout();
+			this.resetSectionText();
 		}
 
 	},
@@ -1834,9 +1836,9 @@ export default {
 		}
 	},
 
-	resetCallout: function () {
+	resetSectionText: function () {
 		dispatcher.popupChange();
-		dispatcher.changeCallout(
+		dispatcher.changeSectionText(
 			this.currentEmotion,
 			appStrings().getStr( 'emotionsData.metadata.states.header' ),
 			appStrings().getStr( 'emotionsData.metadata.states.body' ) +

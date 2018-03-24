@@ -126,7 +126,7 @@ const continentsSection = {
 							this.transitions.panToContinent( null, currentEmotion );
 
 							// display all-continents callout
-							dispatcher.changeCallout( null, appStrings().getStr( 'emotionsData.metadata.continents.header' ), appStrings().getStr( 'emotionsData.metadata.continents.body' ) );
+							dispatcher.changeSectionText( null, appStrings().getStr( 'emotionsData.metadata.continents.header' ), appStrings().getStr( 'emotionsData.metadata.continents.body' ) );
 
 							resolve();
 
@@ -139,7 +139,7 @@ const continentsSection = {
 
 						let continent = continents.find( c => c.id === emotion );
 						this.setContinentHighlight( continent, Continent.HIGHLIGHT_LEVELS.SELECTED );
-						dispatcher.changeCallout( null, appStrings().getStr( 'emotionsData.metadata.continents.header' ), appStrings().getStr( 'emotionsData.metadata.continents.body' ) );
+						dispatcher.changeSectionText( null, appStrings().getStr( 'emotionsData.metadata.continents.header' ), appStrings().getStr( 'emotionsData.metadata.continents.body' ) );
 
 						resolve();
 
@@ -152,7 +152,7 @@ const continentsSection = {
 					this.setContinentHighlight( null, Continent.HIGHLIGHT_LEVELS.NONE );
 
 					// display all-continents callout
-					dispatcher.changeCallout( null, appStrings().getStr( 'emotionsData.metadata.continents.header' ), appStrings().getStr( 'emotionsData.metadata.continents.body' ) );
+					dispatcher.changeSectionText( null, appStrings().getStr( 'emotionsData.metadata.continents.header' ), appStrings().getStr( 'emotionsData.metadata.continents.body' ) );
 
 					if ( this.zoomedInContinent ) {
 
@@ -217,7 +217,7 @@ const continentsSection = {
 							this.transitions.panToContinent( null, previousEmotion );
 
 							// display all-continents callout
-							dispatcher.changeCallout( null, appStrings().getStr( 'emotionsData.metadata.continents.header' ), appStrings().getStr( 'emotionsData.metadata.continents.body' ) );
+							dispatcher.changeSectionText( null, appStrings().getStr( 'emotionsData.metadata.continents.header' ), appStrings().getStr( 'emotionsData.metadata.continents.body' ) );
 
 							resolve();
 
@@ -230,7 +230,7 @@ const continentsSection = {
 						this.setContinentHighlight( continent, Continent.HIGHLIGHT_LEVELS.SELECTED );
 
 						// display all-continents callout
-						dispatcher.changeCallout( null, appStrings().getStr( 'emotionsData.metadata.continents.header' ), appStrings().getStr( 'emotionsData.metadata.continents.body' ) );
+						dispatcher.changeSectionText( null, appStrings().getStr( 'emotionsData.metadata.continents.header' ), appStrings().getStr( 'emotionsData.metadata.continents.body' ) );
 
 						resolve();
 
@@ -239,7 +239,7 @@ const continentsSection = {
 				} else {
 
 					// display all-continents callout if on non-mobile
-					/*if ( !this.screenIsSmall )*/ dispatcher.changeCallout( null, appStrings().getStr( 'emotionsData.metadata.continents.header' ), appStrings().getStr( 'emotionsData.metadata.continents.body' ) );
+					/*if ( !this.screenIsSmall )*/ dispatcher.changeSectionText( null, appStrings().getStr( 'emotionsData.metadata.continents.header' ), appStrings().getStr( 'emotionsData.metadata.continents.body' ) );
 					resolve();
 
 				}
@@ -551,7 +551,7 @@ const continentsSection = {
 		if ( val ) {
 
 			// no mobile caption when continents are spread
-			if ( this.screenIsSmall ) dispatcher.changeCallout();
+			if ( this.screenIsSmall ) dispatcher.changeSectionText();
 
 		} else {
 			// NOTE: this code is specific to displaying/activating continents for the first time in the session
@@ -560,7 +560,7 @@ const continentsSection = {
 			// So, this code should probably belong elsewhere, but for now, here it stays.
 
 			// display the default continents callout and continent labels.
-			dispatcher.changeCallout( null, appStrings().getStr( 'emotionsData.metadata.continents.header' ), appStrings().getStr( 'emotionsData.metadata.continents.body' ) );
+			dispatcher.changeSectionText( null, appStrings().getStr( 'emotionsData.metadata.continents.header' ), appStrings().getStr( 'emotionsData.metadata.continents.body' ) );
 			// this.setLabelVisibility(true);
 		}
 

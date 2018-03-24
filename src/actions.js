@@ -812,7 +812,7 @@ export default {
 
 			} else {
 
-				this.resetCallout();
+				this.resetSectionText();
 				/*
 				 graphContainer.select('g.valences').selectAll('path.valence')
 				 .transition()
@@ -1041,7 +1041,7 @@ export default {
 
 		this.openTimeout = setTimeout( () => {
 			if ( !options || !options.inBackground ) {
-				this.resetCallout();
+				this.resetSectionText();
 			}
 		}, openDelay );
 
@@ -1114,8 +1114,6 @@ export default {
 			this.isBackgrounded = val;
 
 			this.sectionHitArea.classList[ (val ? 'add' : 'remove') ]( 'backgrounded' );
-			this.sectionHitArea.classList[ (options && (options.sectionName === dispatcher.SECTIONS.TRIGGERS) ? 'add' : 'remove') ]( 'triggers' );
-			this.sectionHitArea.classList[ (options && (options.sectionName === dispatcher.SECTIONS.MOODS) ? 'add' : 'remove') ]( 'moods' );
 
 			// deselect anything selected.
 			// currently only happens on mobile, but might also want to happen on desktop...
@@ -1194,7 +1192,7 @@ export default {
 
 		} else {
 
-			if ( !this.isBackgrounded ) this.resetCallout();
+			if ( !this.isBackgrounded ) this.resetSectionText();
 
 		}
 
@@ -1373,9 +1371,9 @@ export default {
 
 	},
 
-	resetCallout: function () {
+	resetSectionText: function () {
 		dispatcher.popupChange();
-		dispatcher.changeCallout(
+		dispatcher.changeSectionText(
 			this.currentEmotion,
 			appStrings().getStr( 'emotionsData.metadata.actions.header' ),
 			appStrings().getStr( 'emotionsData.metadata.actions.body' ) +
@@ -1409,9 +1407,9 @@ export default {
 	 valenceKey = 1;
 	 break;
 	 }
-	 dispatcher.changeCallout(this.currentEmotion, emotionsData.metadata.actions.qualities[valenceKey].header, emotionsData.metadata.actions.qualities[valenceKey].body);
+	 dispatcher.changeSectionText(this.currentEmotion, emotionsData.metadata.actions.qualities[valenceKey].header, emotionsData.metadata.actions.qualities[valenceKey].body);
 	 } else {
-	 this.resetCallout();
+	 this.resetSectionText();
 	 }
 
 	 this.displayHighlightedValence(valence);

@@ -34,11 +34,11 @@ export default class BlockDiagram {
 	}
 
 	getCaptionForElement( element ) {
-		return timeline.select( '#' + element.getAttribute( 'id' ) + '-caption', timeline.container );
+		return timeline.select( '#' + element.getAttribute( 'id' ) + '-caption', timeline.sectionContainer );
 	}
 
 	getActiveCaption() {
-		return timeline.select( '.diagram-caption.active', timeline.container );
+		return timeline.select( '.diagram-caption.active', timeline.sectionContainer );
 	}
 
 	toggleElement( element ) {

@@ -17,7 +17,7 @@ const timeline = {
 	episode: null,
 	episodeAddAwareness: null,
 	activeEpisode: null,
-	container: null,
+	sectionContainer: null,
 	beginAwarenessButton: null,
 	sectionTextBodyIntro: null,
 	sectionTextBodyAwareness: null,
@@ -163,7 +163,7 @@ const timeline = {
 
 	allowMoreContent(){
 
-		dispatcher.allowMoreContent( true, dispatcher.SECTIONS.TRIGGERS );
+		dispatcher.allowMoreContent( true, dispatcher.SECTIONS.TIMELINE );
 
 	},
 
@@ -236,7 +236,7 @@ const timeline = {
 		ajax.open( 'GET', './img/episode.svg', true );
 		ajax.send();
 		ajax.onload = ( e ) => {
-			this.episode = new Episode( e.currentTarget.responseXML.documentElement, this.container, this.currentEmotion, this.screenIsSmall );
+			this.episode = new Episode( e.currentTarget.responseXML.documentElement, this.sectionContainer, this.currentEmotion, this.screenIsSmall );
 			this.activeEpisode = this.episode;
 			if ( this.isActive ) {
 				this.episode.setEmotion( this.currentEmotion );
@@ -250,7 +250,7 @@ const timeline = {
 		ajax.open( 'GET', './img/episode--add-awareness.svg', true );
 		ajax.send();
 		ajax.onload = ( e ) => {
-			this.episodeAddAwareness = new EpisodeAddAwareness( e.currentTarget.responseXML.documentElement, this.container, this.currentEmotion, this.screenIsSmall );
+			this.episodeAddAwareness = new EpisodeAddAwareness( e.currentTarget.responseXML.documentElement, this.sectionContainer, this.currentEmotion, this.screenIsSmall );
 			this.activeEpisode = this.episodeAddAwareness;
 			this.episodeAddAwareness.maximized = this.episode.maximized;
 			this.episodeAddAwareness.minimizing = this.episode.minimizing;
@@ -265,14 +265,14 @@ const timeline = {
 
 	showAwarenessEpisode: function () {
 		TweenMax.to(
-			this.container,
+			this.sectionContainer,
 			1, {
 				autoAlpha: 0,
 				onComplete: ()=> {
 					this.remove( this.episode.getParentElement() );
 					this.episode.setActive( false );
 					this.loadEpisodeAddAwareness();
-					TweenMax.set( this.container, {
+					TweenMax.set( this.sectionContainer, {
 						autoAlpha: 1
 					} );
 				}
@@ -416,10 +416,9 @@ const timeline = {
 
 	init: function ( containerNode, screenIsSmall ) {
 
-		this.sectionContainer = containerNode;
 		this.screenIsSmall = screenIsSmall;
 
-		this.container = document.getElementById( 'timeline-graphics' );
+		this.sectionContainer = containerNode;
 		this.beginAwarenessButton = document.getElementById( 'begin-awareness' );
 		this.sectionTextBodyIntro = Array.prototype.slice.call( document.querySelectorAll( '#timeline-section .body-intro' ) );
 		this.sectionTextBodyAwareness = Array.prototype.slice.call( document.querySelectorAll( '#timeline-section [class*="body-awareness"]' ) );

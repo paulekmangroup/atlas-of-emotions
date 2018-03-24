@@ -93,7 +93,7 @@ export default {
 
 		if ( this.screenIsSmall ) {
 			// no mobile caption on More pages
-			dispatcher.changeCallout();
+			dispatcher.changeSectionText();
 		}
 
 	},
@@ -167,7 +167,9 @@ export default {
 		dispatcher.MORE_INFO.items.forEach( item => {
 			containerEl = this.createContainer( `more-${item.page}` );
 
-			this.sectionContainer.appendChild( containerEl );
+			if ( this.sectionContainer ) {
+				this.sectionContainer.appendChild( containerEl );
+			}
 			this.containers[ item.page ] = containerEl;
 		} );
 
@@ -178,7 +180,9 @@ export default {
 				containerEl.classList.add( 'annex-subpage' );
 			}
 
-			this.sectionContainer.appendChild( containerEl );
+			if ( this.sectionContainer ) {
+				this.sectionContainer.appendChild( containerEl );
+			}
 			this.containers[ item ] = containerEl;
 		} );
 	},
