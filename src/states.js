@@ -787,6 +787,10 @@ export default {
 				this.sectionContainer.classList.remove( 'states-in-out' );
 			}
 
+
+			//console.log('set background: '+val); // being called twice
+
+
 			this.sectionContainer.classList[ (val ? 'add' : 'remove') ]( 'backgrounded' );
 			this.sectionContainer.classList[ (options && (options.sectionName === dispatcher.SECTIONS.ACTIONS) ? 'add' : 'remove') ]( 'actions' );
 
