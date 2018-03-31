@@ -16,811 +16,815 @@ import sassVars from '../scss/variables.json';
 
 export default function ( ...initArgs ) {
 
-	const
-		MIN_ALLOWED_WIDTH = 950,
-		MIN_ALLOWED_HEIGHT = 600,
+    const
+        MIN_ALLOWED_WIDTH = 950,
+        MIN_ALLOWED_HEIGHT = 600,
 
-		NAVIGATION_DEFAULTS = {
-			section: dispatcher.SECTIONS.CALM,
-			emotion: null
-		};
+        NAVIGATION_DEFAULTS = {
+            section: dispatcher.SECTIONS.CALM,
+            emotion: null
+        };
 
 
-	let containers = {},
-		sections = {},
+    let containers = {},
+        sections = {},
 
-		currentSection = null,
-		currentEmotion = null,
-		currentMorePage = null,
-		previousNonSecondaryHash = {
-			section: 'continents',
-			emotion: null
-		},
+        currentSection = null,
+        currentEmotion = null,
+        currentMorePage = null,
+        previousNonSecondaryHash = {
+            section: 'continents',
+            emotion: NAVIGATION_DEFAULTS.emotion
+        },
 
-		screenIsSmall = false,
+        screenIsSmall = false,
 
-		isNavigating = false,				// currently navigating between emotions or sections
-		bypassedWarning = false;			// user has bypassed small screen warning
-
+        isNavigating = false,				// currently navigating between emotions or sections
+        bypassedWarning = false;			// user has bypassed small screen warning
+
 
-	function init( containerNode ) {
+    function init( containerNode ) {
 
-		adjustForScreenSize();
+        adjustForScreenSize();
 
-		// wait for strings to load before continuing init
-		appStrings().loadStrings()
-			.then( () => {
+        // wait for strings to load before continuing init
+        appStrings().loadStrings()
+            .then( () => {
 
-				initTemplate();
-				initContainers();
-				initSections();
-				initLanguageSelector();
-				initScroller();
+                initTemplate();
+                initContainers();
+                initSections();
+                initLanguageSelector();
+                initScroller();
 
 
-				// unhide content rendered for bots
-				document.querySelector( 'body' ).style.removeProperty( 'visibility' );
+                // unhide content rendered for bots
+                document.querySelector( 'body' ).style.removeProperty( 'visibility' );
 
-				// navigation events
-				dispatcher.addListener( dispatcher.EVENTS.NAVIGATE, onNavigate );
-				dispatcher.addListener( dispatcher.EVENTS.CHANGE_EMOTION_STATE, onEmotionStateChange );
-				dispatcher.addListener( dispatcher.EVENTS.CHANGE_EMOTION, onEmotionChange );
-				dispatcher.addListener( dispatcher.EVENTS.CHANGE_SECTION_TEXT, onSectionTextChange );
-				dispatcher.addListener( dispatcher.EVENTS.POPUP_CHANGE, onPopupChange );
+                // navigation events
+                dispatcher.addListener( dispatcher.EVENTS.NAVIGATE, onNavigate );
+                dispatcher.addListener( dispatcher.EVENTS.CHANGE_EMOTION_STATE, onEmotionStateChange );
+                dispatcher.addListener( dispatcher.EVENTS.CHANGE_EMOTION, onEmotionChange );
+                dispatcher.addListener( dispatcher.EVENTS.CHANGE_SECTION_TEXT, onSectionTextChange );
+                dispatcher.addListener( dispatcher.EVENTS.POPUP_CHANGE, onPopupChange );
 
-				// other events
-				dispatcher.addListener( dispatcher.EVENTS.SECTION_GRAPHICS_RESIZE, onSectionGraphicsResized );
-				dispatcher.addListener( dispatcher.EVENTS.SECTION_TEXT_MAXIMIZE_START, onSectionTextMaximizeStart );
-				dispatcher.addListener( dispatcher.EVENTS.SECTION_TEXT_MAXIMIZE_COMPLETE, onSectionTextMaximizeComplete );
-				dispatcher.addListener( dispatcher.EVENTS.SECTION_TEXT_MINIMIZE_START, onSectionTextMinimizeStart );
-				dispatcher.addListener( dispatcher.EVENTS.SECTION_TEXT_MINIMIZE_COMPLETE, onSectionTextMinimizeComplete );
-				dispatcher.addListener( dispatcher.EVENTS.MAXIMIZE_SECTION_TEXT, onMaximizeSectionText );
-				dispatcher.addListener( dispatcher.EVENTS.MINIMIZE_SECTION_TEXT, onMinimizeSectionText );
-				dispatcher.addListener( dispatcher.EVENTS.ALLOW_MORE_CONTENT, onAllowMoreContent );
+                // other events
+                dispatcher.addListener( dispatcher.EVENTS.SECTION_GRAPHICS_RESIZE, onSectionGraphicsResized );
+                dispatcher.addListener( dispatcher.EVENTS.SECTION_TEXT_MAXIMIZE_START, onSectionTextMaximizeStart );
+                dispatcher.addListener( dispatcher.EVENTS.SECTION_TEXT_MAXIMIZE_COMPLETE, onSectionTextMaximizeComplete );
+                dispatcher.addListener( dispatcher.EVENTS.SECTION_TEXT_MINIMIZE_START, onSectionTextMinimizeStart );
+                dispatcher.addListener( dispatcher.EVENTS.SECTION_TEXT_MINIMIZE_COMPLETE, onSectionTextMinimizeComplete );
+                dispatcher.addListener( dispatcher.EVENTS.MAXIMIZE_SECTION_TEXT, onMaximizeSectionText );
+                dispatcher.addListener( dispatcher.EVENTS.MINIMIZE_SECTION_TEXT, onMinimizeSectionText );
+                dispatcher.addListener( dispatcher.EVENTS.ALLOW_MORE_CONTENT, onAllowMoreContent );
 
-				window.addEventListener( 'hashchange', onHashChange );
+                window.addEventListener( 'hashchange', onHashChange );
 
-				onResize();
-				onHashChange();
+                onResize();
+                onHashChange();
 
-				// debounce after initial call
-				//onResize = _.debounce( onResize, 250 );
-				window.addEventListener( 'resize', onResize );
+                // debounce after initial call
+                //onResize = _.debounce( onResize, 250 );
+                window.addEventListener( 'resize', onResize );
 
-			} );
+            } );
 
-	}
+    }
 
-	function initScroller() {
-		scroller.init.bind( scroller )( null, screenIsSmall );
-	}
+    function initScroller() {
+        scroller.init.bind( scroller )( null, screenIsSmall );
+    }
 
-	function initTemplate() {
+    function initTemplate() {
 
-		_.templateSettings = {
-			evaluate: /\{\{#([\s\S]+?)\}\}/g,            // {{# console.log("blah") }}
-			interpolate: /\{\{[^#\{]([\s\S]+?)[^\}]\}\}/g,  // {{ title }}
-			escape: /\{\{\{([\s\S]+?)\}\}\}/g,         // {{{ title }}}
-		};
+        _.templateSettings = {
+            evaluate: /\{\{#([\s\S]+?)\}\}/g,            // {{# console.log("blah") }}
+            interpolate: /\{\{[^#\{]([\s\S]+?)[^\}]\}\}/g,  // {{ title }}
+            escape: /\{\{\{([\s\S]+?)\}\}\}/g,         // {{{ title }}}
+        };
 
-		let templateElements = [].slice.call( document.querySelectorAll( '[data-template]' ) );
+        let templateElements = [].slice.call( document.querySelectorAll( '[data-template]' ) );
 
 
-		templateElements.forEach( function ( element ) {
-			let isDerived = element.dataset.template.match( /(derived)/ ) != null,
-				prefix = isDerived ? '' : 'emotionsData.',
-				data = appStrings().getStr( prefix + element.dataset.template ),
-				compiled = _.template( element.innerHTML );
-			element.innerHTML = compiled( data );
-		} );
+        templateElements.forEach( function ( element ) {
+            let isDerived = element.dataset.template.match( /(derived)/ ) != null,
+                prefix = isDerived ? '' : 'emotionsData.',
+                data = appStrings().getStr( prefix + element.dataset.template ),
+                compiled = _.template( element.innerHTML );
+            element.innerHTML = compiled( data );
+        } );
 
-		let widowFixElements = [].slice.call( document.querySelectorAll( '[data-widow-fix]' ) );
-		widowFixElements.forEach( function ( element ) {
-			var words = element.innerHTML.trim().split( ' ' );
-			if ( words.length > 2 ) {
-				words[ words.length - 2 ] += "&nbsp;" + words[ words.length - 1 ];
-				words.pop();
-				element.innerHTML = words.join( ' ' );
-			}
-		} );
+        let widowFixElements = [].slice.call( document.querySelectorAll( '[data-widow-fix]' ) );
+        widowFixElements.forEach( function ( element ) {
+            var words = element.innerHTML.trim().split( ' ' );
+            if ( words.length > 2 ) {
+                words[ words.length - 2 ] += "&nbsp;" + words[ words.length - 1 ];
+                words.pop();
+                element.innerHTML = words.join( ' ' );
+            }
+        } );
 
 
-	}
+    }
 
-	function initContainers() {
+    function initContainers() {
 
-		let mainEl = document.querySelector( '#main' ),
-			containerEl;
-		_.values( dispatcher.SECTIONS ).forEach( sectionName => {
-			if ( sectionName == 'timeline' ) { //FIXME do this better?
-				containers[ sectionName ] = document.getElementById( 'timeline-graphics' );
-			} else {
-				containerEl = document.createElement( 'div' );
-				containerEl.id = sectionName;
-				mainEl.appendChild( containerEl );
-				containers[ sectionName ] = containerEl;
-			}
-		} );
+        let mainEl = document.querySelector( '#main' ),
+            containerEl;
+        _.values( dispatcher.SECTIONS ).forEach( sectionName => {
+            if ( sectionName == 'timeline' ) { //FIXME do this better?
+                containers[ sectionName ] = document.getElementById( 'timeline-graphics' );
+            } else {
+                containerEl = document.createElement( 'div' );
+                containerEl.id = sectionName;
+                mainEl.appendChild( containerEl );
+                containers[ sectionName ] = containerEl;
+            }
+        } );
 
-	}
+    }
 
-	function initSections() {
+    function initSections() {
 
-		sections.continents = continents;
-		sections.states = states;
-		sections.actions = actions;
-		sections.timeline = timeline;
-		sections.calm = calm;
+        sections.continents = continents;
+        sections.states = states;
+        sections.actions = actions;
+        sections.timeline = timeline;
+        sections.calm = calm;
 
-		// use this without a container, so the info
-		// can be spread out across sections
-		moreInfo.init( null, screenIsSmall );
+        // use this without a container, so the info
+        // can be spread out across sections
+        moreInfo.init( null, screenIsSmall );
 
-	}
+    }
 
-	function initLanguageSelector() {
+    function initLanguageSelector() {
 
-		if ( !languageSelectorIsEnabled() ) return;
+        if ( !languageSelectorIsEnabled() ) return;
 
-		document.querySelector( '#lang-selector' ).classList.add( 'enabled' );
+        document.querySelector( '#lang-selector' ).classList.add( 'enabled' );
 
-		let dropdown = document.querySelector( '#lang-selector .dropdown' ),
-			title = dropdown.querySelector( '.dup-title' ),
-			menu = dropdown.querySelector( 'ul' ),
-			langFile = getActiveLanguages().find( f => f.lang === getLanguagePref() );
+        let dropdown = document.querySelector( '#lang-selector .dropdown' ),
+            title = dropdown.querySelector( '.dup-title' ),
+            menu = dropdown.querySelector( 'ul' ),
+            langFile = getActiveLanguages().find( f => f.lang === getLanguagePref() );
 
-		title.innerHTML = '<h4>' + langFile.name + '</h4>';
-		populateLanguageSelector( menu );
+        title.innerHTML = '<h4>' + langFile.name + '</h4>';
+        populateLanguageSelector( menu );
 
-		dropdown.querySelector( '.dropdown-toggle' ).addEventListener( 'click', onLangMenuClick );
+        dropdown.querySelector( '.dropdown-toggle' ).addEventListener( 'click', onLangMenuClick );
 
-	}
+    }
 
-	function getActiveLanguages() {
-		return stringsConfig.stringsFiles.filter( f => f.enabled );
-	}
+    function getActiveLanguages() {
+        return stringsConfig.stringsFiles.filter( f => f.enabled );
+    }
 
-	function languageSelectorIsEnabled() {
-		return getActiveLanguages().length > 1;
-	}
+    function languageSelectorIsEnabled() {
+        return getActiveLanguages().length > 1;
+    }
 
-	function populateLanguageSelector( container ) {
+    function populateLanguageSelector( container ) {
 
-		getActiveLanguages().forEach( f => {
-			let li = document.createElement( 'li' );
-			li.setAttribute( 'role', 'menuitem' );
-			li.setAttribute( 'data-lang', f.lang );
-			li.innerHTML = '<h4>' + f.name + '</h4>';
-			container.appendChild( li );
-		} );
+        getActiveLanguages().forEach( f => {
+            let li = document.createElement( 'li' );
+            li.setAttribute( 'role', 'menuitem' );
+            li.setAttribute( 'data-lang', f.lang );
+            li.innerHTML = '<h4>' + f.name + '</h4>';
+            container.appendChild( li );
+        } );
 
-	}
+    }
 
-	function setSectionEmotion( section, previousEmotion, previousMorePage ) {
+    function setSectionEmotion( section, previousEmotion, previousMorePage ) {
 
 
-		let promise = section.setEmotion( currentEmotion, previousEmotion, currentMorePage, previousMorePage );
-		//updateArrowLabels();
+        let promise = section.setEmotion( currentEmotion, previousEmotion, currentMorePage, previousMorePage );
+        //updateArrowLabels();
 
-		promise.then( () => {
-			isNavigating = false;
-			//updateArrowLabels();
-		} );
+        promise.then( () => {
+            isNavigating = false;
+            //updateArrowLabels();
+        } );
 
-	}
+    }
 
-	function setSection( sectionName, previousEmotion, previousMorePage ) {
+    function setSection( sectionName, previousEmotion, previousMorePage ) {
 
-		let section = sections[ sectionName ],
-			previousSection = currentSection,
-			previousContainer;
+        let section = sections[ sectionName ],
+            previousSection = currentSection,
+            previousContainer;
 
-		for ( let key in sections ) {
-			if ( sections[ key ] === previousSection ) {
-				previousContainer = containers[ key ];
-				break;
-			}
-		}
-
-		if ( !section.isInited ) {
-			// init any uninited background sections
-			if ( section.backgroundSections ) {
-				section.backgroundSections.forEach( backgroundSection => {
-					if ( !backgroundSection.isInited ) {
-						initSection( backgroundSection );
-					}
-				} );
-			}
-
-			// init current section
-			initSection( section );
-		}
-
-		let backgroundSections = section.backgroundSections || [];
-
-		if ( !previousSection ) {
-
-			// this is the first section opened in this session
-
-			// update down arrow
-			//fadeArrowOutAndIn( sectionName );
-
-			// hide all but the current section and any background sections
-			for ( let key in containers ) {
-				if ( key !== sectionName && !~backgroundSections.indexOf( sections[ key ] ) ) {
-					containers[ key ].style.display = 'none';
-				}
-			}
-
-			// open and background all backgroundSections for the current section
-			backgroundSections.forEach( backgroundSection => {
-				backgroundSection.open( {
-					sectionName: sectionName,
-					inBackground: true
-				} );
-				backgroundSection.setEmotion( currentEmotion, previousEmotion );
-			} );
-
-			section.open( {
-				sectionName: sectionName,
-				inBackground: false,
-				introModalIsOpen: false //getIntroModalOpenState()
-			} );
-
-			setSectionEmotion( section, previousEmotion, previousMorePage );
-
-		} else {
-
-			// some section is already open; perform transition
-
-			if ( previousSection === section ) {
-
-				// change emotion for all background sections
-				backgroundSections.forEach( backgroundSection => {
-					backgroundSection.setEmotion( currentEmotion, previousEmotion );
-				} );
-
-				// and within current section
-				setSectionEmotion( section, previousEmotion, previousMorePage );
-
-			} else {
-
-				// navigate between sections
-				//
-				// sections can have background sections.
-				// when a section is opened, all its background sections must be opened and backgrounded.
-				// when a section is closed, for all of its background sections:
-				// 	if the section to which we're navigating is a background section, unbackground it;
-				// 	else close the background section.
-				//
-
-				// remove any popups
-				onPopupChange();
-
-				// update down arrow
-				//fadeArrowOutAndIn( sectionName );
-
-				// open and background all backgroundSections for the current section
-				let previousSectionBackgrounded = false,
-					promises = backgroundSections.map( backgroundSection => {
-						// display all background sections
-						for ( let key in sections ) {
-							if ( ~backgroundSections.indexOf( sections[ key ] ) ) {
-								containers[ key ].removeAttribute( 'style' );
-							}
-						}
-
-						if ( previousSection === backgroundSection ) {
-							// already open; just background it
-							previousSectionBackgrounded = true;
-							return backgroundSection.setBackgrounded( true, {
-								sectionName: sectionName
-							} );
-						} else {
-							// open it in the background
-							let openPromise = backgroundSection.open( {
-								sectionName: sectionName,
-								inBackground: true
-							} );
-							backgroundSection.setEmotion( currentEmotion, previousEmotion );
-							return openPromise;
-						}
-					} );
-
-				let previousBackgroundSections = previousSection.backgroundSections || [];
-				if ( !previousSectionBackgrounded ) {
-					// don't mess with current backgroundSections or the current section
-					previousBackgroundSections = previousBackgroundSections.filter( prevBkgdSection => {
-						return prevBkgdSection !== section && !~backgroundSections.indexOf( prevBkgdSection );
-					} );
-					if ( previousBackgroundSections.length ) {
-						// close previous background sections not needed for the current section
-						previousBackgroundSections.forEach( prevBkgdSection => {
-							prevBkgdSection.setBackgrounded( false );
-							prevBkgdSection.close( sectionName );
-						} );
-					}
-
-					// close the previous section
-					promises.push( previousSection.close( sectionName ) );
-				}
-
-				Promise.all( promises ).then( values => {
-
-					if ( !previousSectionBackgrounded ) {
-						// hide the previous section's container if not backgrounded,
-						// after a delay if specified
-						if ( previousContainer ) {
-							setTimeout( () => {
-								previousContainer.style.display = 'none';
-							}, previousSection.closeDelay || 0 );
-						}
-					}
-
-					// hide the container of any closed previous background section
-					// that is not a background section for this section
-					if ( previousBackgroundSections.length ) {
-						for ( let key in sections ) {
-							if ( ~previousBackgroundSections.indexOf( sections[ key ] ) &&
-								(!section.backgroundSections || !~section.backgroundSections.indexOf( sections[ key ] )) ) {
-								containers[ key ].style.display = 'none';
-							}
-						}
-					}
-					;
-
-					// reveal the new section's container,
-					// open the new section, and set its emotion
-					containers[ sectionName ].removeAttribute( 'style' );
-					section.open( {
-						sectionName: sectionName,
-						inBackground: false
-					} );
-
-					setSectionEmotion( section, previousEmotion, previousMorePage );
-
-				} );
-
-			}
-
-		}
-
-		currentSection = section;
-
-	}
-
-	function setEmotion( emotion ) {
-
-		// setSection cues up emotion changes,
-		// leaving this function very simple.
-		currentEmotion = emotion;
-
-	}
-
-	function initSection( section ) {
-
-		let sectionName;
-		for ( let key in sections ) {
-			if ( sections[ key ] === section ) {
-				sectionName = key;
-				break;
-			}
-		}
+        for ( let key in sections ) {
+            if ( sections[ key ] === previousSection ) {
+                previousContainer = containers[ key ];
+                break;
+            }
+        }
+
+        if ( !section.isInited ) {
+            // init any uninited background sections
+            if ( section.backgroundSections ) {
+                section.backgroundSections.forEach( backgroundSection => {
+                    if ( !backgroundSection.isInited ) {
+                        initSection( backgroundSection );
+                    }
+                } );
+            }
+
+            // init current section
+            initSection( section );
+        }
+
+        let backgroundSections = section.backgroundSections || [];
+
+        if ( !previousSection ) {
+
+            // this is the first section opened in this session
+
+            // update down arrow
+            //fadeArrowOutAndIn( sectionName );
+
+            // hide all but the current section and any background sections
+            for ( let key in containers ) {
+                if ( key !== sectionName && !~backgroundSections.indexOf( sections[ key ] ) ) {
+                    containers[ key ].style.display = 'none';
+                }
+            }
+
+            // open and background all backgroundSections for the current section
+            backgroundSections.forEach( backgroundSection => {
+                backgroundSection.open( {
+                    sectionName: sectionName,
+                    inBackground: true
+                } );
+                backgroundSection.setEmotion( currentEmotion, previousEmotion );
+            } );
+
+            section.open( {
+                sectionName: sectionName,
+                inBackground: false,
+                introModalIsOpen: false //getIntroModalOpenState()
+            } );
+
+            setSectionEmotion( section, previousEmotion, previousMorePage );
+
+        } else {
+
+            // some section is already open; perform transition
+
+            if ( previousSection === section ) {
+
+                // change emotion for all background sections
+                backgroundSections.forEach( backgroundSection => {
+                    backgroundSection.setEmotion( currentEmotion, previousEmotion );
+                } );
+
+                // and within current section
+                setSectionEmotion( section, previousEmotion, previousMorePage );
+
+            } else {
+
+                // navigate between sections
+                //
+                // sections can have background sections.
+                // when a section is opened, all its background sections must be opened and backgrounded.
+                // when a section is closed, for all of its background sections:
+                // 	if the section to which we're navigating is a background section, unbackground it;
+                // 	else close the background section.
+                //
+
+                // remove any popups
+                onPopupChange();
+
+                // update down arrow
+                //fadeArrowOutAndIn( sectionName );
+
+                // open and background all backgroundSections for the current section
+                let previousSectionBackgrounded = false,
+                    promises = backgroundSections.map( backgroundSection => {
+                        // display all background sections
+                        for ( let key in sections ) {
+                            if ( ~backgroundSections.indexOf( sections[ key ] ) ) {
+                                containers[ key ].removeAttribute( 'style' );
+                            }
+                        }
+
+                        if ( previousSection === backgroundSection ) {
+                            // already open; just background it
+                            previousSectionBackgrounded = true;
+                            return backgroundSection.setBackgrounded( true, {
+                                sectionName: sectionName
+                            } );
+                        } else {
+                            // open it in the background
+                            let openPromise = backgroundSection.open( {
+                                sectionName: sectionName,
+                                inBackground: true
+                            } );
+                            backgroundSection.setEmotion( currentEmotion, previousEmotion );
+                            return openPromise;
+                        }
+                    } );
+
+                let previousBackgroundSections = previousSection.backgroundSections || [];
+                if ( !previousSectionBackgrounded ) {
+                    // don't mess with current backgroundSections or the current section
+                    previousBackgroundSections = previousBackgroundSections.filter( prevBkgdSection => {
+                        return prevBkgdSection !== section && !~backgroundSections.indexOf( prevBkgdSection );
+                    } );
+                    if ( previousBackgroundSections.length ) {
+                        // close previous background sections not needed for the current section
+                        previousBackgroundSections.forEach( prevBkgdSection => {
+                            prevBkgdSection.setBackgrounded( false );
+                            prevBkgdSection.close( sectionName );
+                        } );
+                    }
+
+                    // close the previous section
+                    promises.push( previousSection.close( sectionName ) );
+                }
+
+                Promise.all( promises ).then( values => {
+
+                    if ( !previousSectionBackgrounded ) {
+                        // hide the previous section's container if not backgrounded,
+                        // after a delay if specified
+                        if ( previousContainer ) {
+                            setTimeout( () => {
+                                previousContainer.style.display = 'none';
+                            }, previousSection.closeDelay || 0 );
+                        }
+                    }
+
+                    // hide the container of any closed previous background section
+                    // that is not a background section for this section
+                    if ( previousBackgroundSections.length ) {
+                        for ( let key in sections ) {
+                            if ( ~previousBackgroundSections.indexOf( sections[ key ] ) &&
+                                (!section.backgroundSections || !~section.backgroundSections.indexOf( sections[ key ] )) ) {
+                                containers[ key ].style.display = 'none';
+                            }
+                        }
+                    }
+                    ;
+
+                    // reveal the new section's container,
+                    // open the new section, and set its emotion
+                    containers[ sectionName ].removeAttribute( 'style' );
+                    section.open( {
+                        sectionName: sectionName,
+                        inBackground: false
+                    } );
+
+                    setSectionEmotion( section, previousEmotion, previousMorePage );
+
+                } );
+
+            }
+
+        }
+
+        currentSection = section;
+
+    }
+
+    function setEmotion( emotion ) {
+
+        // setSection cues up emotion changes,
+        // leaving this function very simple.
+        currentEmotion = emotion;
+
+    }
+
+    function initSection( section ) {
+
+        let sectionName;
+        for ( let key in sections ) {
+            if ( sections[ key ] === section ) {
+                sectionName = key;
+                break;
+            }
+        }
 
-		if ( containers[ sectionName ] ) {
-			// turn on display so width/height can be calculated
-			let currentDisplay = containers[ sectionName ].style.display;
-			containers[ sectionName ].removeAttribute( 'style' );
-			section.init( containers[ sectionName ], screenIsSmall );
+        if ( containers[ sectionName ] ) {
+            // turn on display so width/height can be calculated
+            let currentDisplay = containers[ sectionName ].style.display;
+            containers[ sectionName ].removeAttribute( 'style' );
+            section.init( containers[ sectionName ], screenIsSmall );
 
-			// set display back to where it was
-			if ( currentDisplay ) {
-				containers[ sectionName ].style.display = currentDisplay;
-			}
-		}
+            // set display back to where it was
+            if ( currentDisplay ) {
+                containers[ sectionName ].style.display = currentDisplay;
+            }
+        }
 
-	}
+    }
 
 
-	function paginateSelectedElement( dir ) {
+    function paginateSelectedElement( dir ) {
 
-		if ( currentSection.paginateElement ) currentSection.paginateElement( dir );
+        if ( currentSection.paginateElement ) currentSection.paginateElement( dir );
 
-	}
+    }
 
-	/**
-	 * Note: this function is _.debounce()d in init().
-	 */
-	function onResize() {
+    /**
+     * Note: this function is _.debounce()d in init().
+     */
+    function onResize() {
 
-		adjustForScreenSize();
+        adjustForScreenSize();
 
-		// size main container to viewport
-		if ( !screenIsSmall ) {
-			let headerHeight = screenIsSmall ? sassVars.ui.header[ 'height-small' ] : sassVars.ui.header.height;
-			document.getElementById( 'main' ).style.height = (window.innerHeight - headerHeight) + 'px';
-		}
+        // size main container to viewport
+        if ( !screenIsSmall ) {
+            let headerHeight = screenIsSmall ? sassVars.ui.header[ 'height-small' ] : sassVars.ui.header.height;
+            document.getElementById( 'main' ).style.height = (window.innerHeight - headerHeight) + 'px';
+        }
 
-		// update all sections
-		let section,
-			sectionContainer,
-			containerIsHidden;
-		for ( let sectionKey in sections ) {
-			section = sections[ sectionKey ];
-			if ( section.isInited ) {
+        // update all sections
+        let section,
+            sectionContainer,
+            containerIsHidden;
+        for ( let sectionKey in sections ) {
+            section = sections[ sectionKey ];
+            if ( section.isInited ) {
 
-				// un-hide section container as necessary
-				// to get accurate measurements for resize
-				sectionContainer = containers[ sectionKey ];
-				containerIsHidden = sectionContainer.style.display === 'none';
-				if ( containerIsHidden ) {
-					sectionContainer.style.display = 'block';
-				}
+                // un-hide section container as necessary
+                // to get accurate measurements for resize
+                sectionContainer = containers[ sectionKey ];
+                containerIsHidden = sectionContainer.style.display === 'none';
+                if ( containerIsHidden ) {
+                    sectionContainer.style.display = 'block';
+                }
 
-				section.onResize( screenIsSmall );
+                section.onResize( screenIsSmall );
 
-				if ( containerIsHidden ) {
-					sectionContainer.style.display = 'none';
-				}
+                if ( containerIsHidden ) {
+                    sectionContainer.style.display = 'none';
+                }
 
-			}
-		}
+            }
+        }
 
-	}
+    }
 
-	function onLangMenuClick( event ) {
+    function onLangMenuClick( event ) {
 
-		if ( event ) event.stopPropagation();
+        if ( event ) event.stopPropagation();
 
-		let dropdown = document.querySelector( '#lang-selector .dropdown' ),
-			classList = dropdown.classList;
+        let dropdown = document.querySelector( '#lang-selector .dropdown' ),
+            classList = dropdown.classList;
 
-		//closeMenus( dropdown );
-		classList.toggle( 'open' );
+        //closeMenus( dropdown );
+        classList.toggle( 'open' );
 
-		if ( classList.contains( 'open' ) ) {
-			dropdown.addEventListener( 'click', onLangMenuItemClick );
-		} else {
-			dropdown.removeEventListener( 'click', onLangMenuItemClick );
-		}
+        if ( classList.contains( 'open' ) ) {
+            dropdown.addEventListener( 'click', onLangMenuItemClick );
+        } else {
+            dropdown.removeEventListener( 'click', onLangMenuItemClick );
+        }
 
-		//menuBackgroundClick();
+        //menuBackgroundClick();
 
-	}
+    }
 
-	function onLangMenuItemClick( event ) {
+    function onLangMenuItemClick( event ) {
 
-		event.stopImmediatePropagation();
+        event.stopImmediatePropagation();
 
-		if ( !event.target || event.target.nodeName.toLowerCase() !== 'li' ) {
-			return;
-		}
+        if ( !event.target || event.target.nodeName.toLowerCase() !== 'li' ) {
+            return;
+        }
 
-		document.querySelector( '#lang-selector .dropdown' ).classList.remove( 'open' );
+        document.querySelector( '#lang-selector .dropdown' ).classList.remove( 'open' );
 
-		let lang = event.target.dataset.lang;
-		if ( !lang ) return;
+        let lang = event.target.dataset.lang;
+        if ( !lang ) return;
 
-		setLanguage( lang );
+        setLanguage( lang );
 
-	}
+    }
 
 
-	function onSectionGraphicsResized() {
+    function onSectionGraphicsResized() {
 
-		//if ( currentSection == sections.timeline ) {
-		currentSection.onResize( screenIsSmall );
-		//	}
+        //if ( currentSection == sections.timeline ) {
+        currentSection.onResize( screenIsSmall );
+        //	}
 
-	}
+    }
 
-	function onSectionTextMaximizeStart( duration ) {
+    function onSectionTextMaximizeStart( duration ) {
 
-		if ( currentSection == sections.timeline ) {
-			sections.timeline.onSectionTextMaximizeStart( duration );
-		}
+        if ( currentSection == sections.timeline ) {
+            sections.timeline.onSectionTextMaximizeStart( duration );
+        }
 
-	}
+    }
 
-	function onSectionTextMaximizeComplete() {
+    function onSectionTextMaximizeComplete() {
 
-		if ( currentSection == sections.timeline ) {
-			sections.timeline.onSectionTextMaximizeComplete();
-		}
+        if ( currentSection == sections.timeline ) {
+            sections.timeline.onSectionTextMaximizeComplete();
+        }
 
-	}
+    }
 
-	function onSectionTextMinimizeStart( duration ) {
+    function onSectionTextMinimizeStart( duration ) {
 
-		if ( currentSection == sections.timeline ) {
-			sections.timeline.onSectionTextMinimizeStart( duration );
-		}
+        if ( currentSection == sections.timeline ) {
+            sections.timeline.onSectionTextMinimizeStart( duration );
+        }
 
-	}
+    }
 
-	function onSectionTextMinimizeComplete() {
+    function onSectionTextMinimizeComplete() {
 
-		if ( currentSection == sections.timeline ) {
-			sections.timeline.onSectionTextMinimizeComplete();
-		}
+        if ( currentSection == sections.timeline ) {
+            sections.timeline.onSectionTextMinimizeComplete();
+        }
 
-	}
+    }
 
-	function onMaximizeSectionText() {
-		scroller.maximizeSectionText();
-	}
+    function onMaximizeSectionText() {
+        scroller.maximizeSectionText();
+    }
 
-	function onMinimizeSectionText() {
-		scroller.minimizeSectionText();
-	}
+    function onMinimizeSectionText() {
+        scroller.minimizeSectionText();
+    }
 
-	function onAllowMoreContent( allow, section ) {
+    function onAllowMoreContent( allow, section ) {
 
-		scroller.allowMoreContent( allow, section );
+        scroller.allowMoreContent( allow, section );
 
-	}
+    }
 
-	function onPopupChange( section, emotionState, desc, secondaryData ) {
+    function onPopupChange( section, emotionState, desc, secondaryData ) {
 
-		if ( screenIsSmall && emotionState ) {
-			onSectionTextChange( currentEmotion, emotionState, desc );
-			return;
-		}
+        if ( screenIsSmall && emotionState ) {
+            onSectionTextChange( currentEmotion, emotionState, desc );
+            return;
+        }
 
-		if ( !section ) {
-			popupManager.manage();
-		} else {
-			if ( emotionState !== popupManager.currentName ||
-				(emotionState && !popupManager.exists( section, emotionState )) ) {
-				popupManager.manage( section, emotionState, desc, secondaryData );
-			}
-		}
-	}
+        if ( !section ) {
+            popupManager.manage();
+        } else {
+            if ( emotionState !== popupManager.currentName ||
+                (emotionState && !popupManager.exists( section, emotionState )) ) {
+                popupManager.manage( section, emotionState, desc, secondaryData );
+            }
+        }
+    }
 
-	function onSectionTextChange( emotion, title, body ) {
+    function onSectionTextChange( emotion, title, body ) {
 
-		// on non-mobile, if no title passed just hide callout and bail
-		if ( !screenIsSmall && !title ) {
-			//callout.classList.remove( 'visible' );
-			return;
-		}
+        // on non-mobile, if no title passed just hide callout and bail
+        if ( !screenIsSmall && !title ) {
+            //callout.classList.remove( 'visible' );
+            return;
+        }
 
-		let cappedEmotion = emotion ? emotion.charAt( 0 ).toUpperCase() + emotion.slice( 1 ) : 'The Emotion';
+        let cappedEmotion = emotion ? emotion.charAt( 0 ).toUpperCase() + emotion.slice( 1 ) : 'The Emotion';
 
-		title = title ? title.replace( /LHAMO/gi, emotion ) : null;
-		body = body ? body.replace( /LHAMO/gi, cappedEmotion ) : null;
+        title = title ? title.replace( /LHAMO/gi, emotion ) : null;
+        body = body ? body.replace( /LHAMO/gi, cappedEmotion ) : null;
 
 
-		// update scroller content
-		let activeScrollerSectionText = $( '.section.active .section-text' )[ 0 ];
-		if ( activeScrollerSectionText ) {
-			let sectionHeadlineElement = activeScrollerSectionText.querySelector( '.headline' );
-			let sectionBodyElement = activeScrollerSectionText.querySelector( '.body' );
-			if ( sectionHeadlineElement ) {
-				sectionHeadlineElement.innerHTML = title;
-			}
-			// only replace the innerHTML if the content is different - this is to enable fading on the links in the actions section
-			if ( sectionBodyElement && sectionBodyElement.innerHTML != body ) {
-				sectionBodyElement.innerHTML = body;
-			}
-		}
+        // update scroller content
+        let activeScrollerSectionText = $( '.section.active .section-text' )[ 0 ];
+        if ( activeScrollerSectionText ) {
+            let sectionHeadlineElement = activeScrollerSectionText.querySelector( '.headline' );
+            let sectionBodyElement = activeScrollerSectionText.querySelector( '.body' );
+            if ( sectionHeadlineElement ) {
+                sectionHeadlineElement.innerHTML = title;
+            }
+            // only replace the innerHTML if the content is different - this is to enable fading on the links in the actions section
+            if ( sectionBodyElement && sectionBodyElement.innerHTML != body ) {
+                sectionBodyElement.innerHTML = body;
+            }
+        }
 
-	}
+    }
 
-	function onEmotionStateChange( state, selected ) {
-		if ( selected ) {
-			sections.actions.setState( state );
-			sections.states.setBackgroundedState( state );
-		} else {
-			sections.actions.setHighlightedState( state );
-		}
-	}
+    function onEmotionStateChange( state, selected ) {
+        if ( selected ) {
+            sections.actions.setState( state );
+            sections.states.setBackgroundedState( state );
+        } else {
+            sections.actions.setHighlightedState( state );
+        }
+    }
 
-	function onEmotionChange( emotion ) {
-		if ( !isNavigating ) {
-			dispatcher.navigate( null, emotion );
-		}
-	}
+    function onEmotionChange( emotion ) {
+        if ( !isNavigating ) {
+            dispatcher.navigate( null, emotion );
+        }
+    }
 
-	function onNavigate( section, emotion ) {
+    function onNavigate( section, emotion ) {
 
-		if ( section === dispatcher.HOME ) {
-			document.location.hash = '';
+        if ( section === dispatcher.HOME ) {
+            document.location.hash = '';
 
-			return;
-		}
+            return;
+        }
 
-		let parts = [];
+        let parts = [];
 
-		if ( !section ) {
-			for ( let key in sections ) {
-				if ( sections[ key ] === currentSection ) {
-					section = key;
-					break;
-				}
-			}
-		}
+        if ( !section ) {
+            for ( let key in sections ) {
+                if ( sections[ key ] === currentSection ) {
+                    section = key;
+                    break;
+                }
+            }
+        }
 
-		if ( !emotion ) {
-			// default to the currently-selected emotion
-			emotion = currentEmotion;
+        if ( !emotion ) {
+            // default to the currently-selected emotion
+            emotion = currentEmotion;
 
-			// fallback to ANGER for sections that require a selected emotion
-			if ( !emotion && (
-					section === dispatcher.SECTIONS.STATES ||
-					section === dispatcher.SECTIONS.ACTIONS ||
-					section === dispatcher.SECTIONS.TIMELINE
-				) ) {
-				emotion = dispatcher.DEFAULT_EMOTION;
-			}
-		}
+            // fallback to ANGER for sections that require a selected emotion
+            if ( !emotion && (
+                    section === dispatcher.SECTIONS.STATES ||
+                    section === dispatcher.SECTIONS.ACTIONS ||
+                    section === dispatcher.SECTIONS.TIMELINE
+                ) ) {
+                emotion = dispatcher.DEFAULT_EMOTION;
+            }
+        }
 
-		if ( section ) parts.push( section );
-		if ( emotion ) parts.push( emotion );
+        if ( section ) parts.push( section );
+        if ( emotion ) parts.push( emotion );
 
-		document.location.hash = parts.join( dispatcher.HASH_DELIMITER );
+        document.location.hash = parts.join( dispatcher.HASH_DELIMITER );
 
-	}
+    }
 
-	function coerceEmotionFromHash( hash, defaults = NAVIGATION_DEFAULTS ) {
-		if ( dispatcher.validateEmotion( hash.emotion ) ) {
-			return hash.emotion;
-		} else if ( defaults && defaults.emotion ) {
-			return defaults.emotion;
-		}
+    function coerceEmotionFromHash( hash, defaults = NAVIGATION_DEFAULTS ) {
+        if ( dispatcher.validateEmotion( hash.emotion ) ) {
+            return hash.emotion;
+        } else if ( defaults && defaults.emotion ) {
+            return defaults.emotion;
+        }
 
-		// continents section supports an utter lack of emotion.
-		return null;
-	}
+        // continents section supports an utter lack of emotion.
+        return null;
+    }
 
-	function coerceSectionFromHash( hash, defaults = NAVIGATION_DEFAULTS ) {
-		if ( dispatcher.validateSection( hash.section ) ) {
-			return hash.section;
-		} else if ( defaults && defaults.section ) {
-			return defaults.section;
-		}
+    function coerceSectionFromHash( hash, defaults = NAVIGATION_DEFAULTS ) {
+        if ( dispatcher.validateSection( hash.section ) ) {
+            return hash.section;
+        } else if ( defaults && defaults.section ) {
+            return defaults.section;
+        }
 
-		return null;
-	}
+        return null;
+    }
 
-	function onHashChange( event, defaults = NAVIGATION_DEFAULTS ) {
+    function onHashChange( event, defaults = NAVIGATION_DEFAULTS ) {
 
-		let hash = document.location.hash.replace( /^#/, '' );
-		hash = parseHash( hash );
+        let hash = document.location.hash.replace( /^#/, '' );
+        hash = parseHash( hash );
 
-		const section = coerceSectionFromHash( hash );
+        const section = coerceSectionFromHash( hash );
 
-		const emotion = coerceEmotionFromHash( hash );
+        let emotion = coerceEmotionFromHash( hash );
 
-		previousNonSecondaryHash = { section, emotion };
+        emotion = !emotion ? previousNonSecondaryHash.emotion : emotion;
 
-		// set flag after setting modal visibility,
-		// prior to setting emotion and section
-		isNavigating = true;
+        previousNonSecondaryHash = { section, emotion };
 
-		let previousEmotion = currentEmotion;
+        // set flag after setting modal visibility,
+        // prior to setting emotion and section
+        isNavigating = true;
 
-		setEmotion( emotion );
+        let previousEmotion = currentEmotion;
 
-		setSection( section, previousEmotion, null );
+        setEmotion( emotion );
 
-		// Track hash changes in Google Analytics as virtual pageviews
-		// https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications#tracking_virtual_pageviews
-		window.ga( 'set', 'page', document.location.pathname + document.location.search + document.location.hash );
-		window.ga( 'send', 'pageview' );
-		/*
-		 window.ga('send', 'pageview', {
-		 'page': location.pathname + location.search  + location.hash
-		 });
-		 */
-	}
+        setSection( section, previousEmotion, null );
 
-	function parseHash( hash ) {
+        scroller.hashChange( hash.section, emotion );
 
-		if ( !hash ) {
-			hash = '';
-		}
-		let hashValues = hash.split( dispatcher.HASH_DELIMITER );
-		return {
-			section: hashValues[ 0 ],
-			emotion: hashValues[ 1 ]
-		};
+        // Track hash changes in Google Analytics as virtual pageviews
+        // https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications#tracking_virtual_pageviews
+        window.ga( 'set', 'page', document.location.pathname + document.location.search + document.location.hash );
+        window.ga( 'send', 'pageview' );
+        /*
+         window.ga('send', 'pageview', {
+         'page': location.pathname + location.search  + location.hash
+         });
+         */
+    }
 
-	}
+    function parseHash( hash ) {
 
-	/**
-	 * If viewport is below minimum screen size,
-	 * render small screen warning and return true.
-	 * TODO: pull in this text from elsewhere instead of hardcoding.
-	 */
-	function adjustForScreenSize() {
+        if ( !hash ) {
+            hash = '';
+        }
+        let hashValues = hash.split( dispatcher.HASH_DELIMITER );
+        return {
+            section: hashValues[ 0 ],
+            emotion: hashValues[ 1 ]
+        };
 
-		// screens that have lower pixel ratios or larger (than iPad's 1024x768) resolutions are probably desktops,
-		// so don't go to mobile mode in this case.
-		// const probablyDesktop = (window.devicePixelRatio < 1.5 || !window.devicePixelRatio) || window.screen.width > 1024;
-		// console.info("probablyDesktop:", probablyDesktop);
-		// commented out because small viewports, whether on desktop or mobile devices, work better in mobile mode,
-		// and failing to detect correctly risks serving the wrong content on the wrong devices.
-		// IOW, leave well enough alone.
+    }
 
-		if ( bypassedWarning || /*probablyDesktop || */(window.innerWidth >= MIN_ALLOWED_WIDTH && window.innerHeight >= MIN_ALLOWED_HEIGHT) ) {
+    /**
+     * If viewport is below minimum screen size,
+     * render small screen warning and return true.
+     * TODO: pull in this text from elsewhere instead of hardcoding.
+     */
+    function adjustForScreenSize() {
 
-			//if ( MOBILE_ENABLED ) {
+        // screens that have lower pixel ratios or larger (than iPad's 1024x768) resolutions are probably desktops,
+        // so don't go to mobile mode in this case.
+        // const probablyDesktop = (window.devicePixelRatio < 1.5 || !window.devicePixelRatio) || window.screen.width > 1024;
+        // console.info("probablyDesktop:", probablyDesktop);
+        // commented out because small viewports, whether on desktop or mobile devices, work better in mobile mode,
+        // and failing to detect correctly risks serving the wrong content on the wrong devices.
+        // IOW, leave well enough alone.
 
-			//nonMobileElements.forEach( el => el.style.removeProperty( 'display' ) );
-			//mobileElements.forEach( el => el.style.display = 'none' );
-			document.querySelector( 'body' ).classList.remove( 'small-screen' );
+        if ( bypassedWarning || /*probablyDesktop || */(window.innerWidth >= MIN_ALLOWED_WIDTH && window.innerHeight >= MIN_ALLOWED_HEIGHT) ) {
 
-			//} else {
-			//
-			//	document.querySelector( 'body' ).classList.remove( 'small-screen-warning' );
-			//	document.querySelector( '#warning' ).innerHTML = '';
-			//	document.querySelector( '#app-container' ).classList.remove( "hidden" );
-			//
-			//}
+            //if ( MOBILE_ENABLED ) {
 
-			// allow resetting this flag regardless of targeting mobile or desktop
-			screenIsSmall = false;
+            //nonMobileElements.forEach( el => el.style.removeProperty( 'display' ) );
+            //mobileElements.forEach( el => el.style.display = 'none' );
+            document.querySelector( 'body' ).classList.remove( 'small-screen' );
 
-		} else {
+            //} else {
+            //
+            //	document.querySelector( 'body' ).classList.remove( 'small-screen-warning' );
+            //	document.querySelector( '#warning' ).innerHTML = '';
+            //	document.querySelector( '#app-container' ).classList.remove( "hidden" );
+            //
+            //}
 
-			document.querySelector( 'body' ).classList.add( 'small-screen' );
+            // allow resetting this flag regardless of targeting mobile or desktop
+            screenIsSmall = false;
 
-			// only ever set this flag when targeting mobile
-			screenIsSmall = true;
+        } else {
 
-		}
+            document.querySelector( 'body' ).classList.add( 'small-screen' );
 
-		// set up appStrings
-		appStrings( getLanguagePref(), screenIsSmall );
+            // only ever set this flag when targeting mobile
+            screenIsSmall = true;
 
-		return screenIsSmall;
+        }
 
-	}
+        // set up appStrings
+        appStrings( getLanguagePref(), screenIsSmall );
 
-	/**
-	 * Get language preference for viewer.
-	 * This does not necessarily return the same value as appStrings().lang(),
-	 * which returns the language currently being displayed.
-	 *
-	 * Checks `localStorage`, then NavigatorLanguage.
-	 * If no lang found, or lang is not implemented by the application
-	 * (as keyed in stringsConfig.json), falls back to default of 'en'.
-	 */
-	function getLanguagePref() {
+        return screenIsSmall;
 
-		// check localStorage for previously-set pref
-		let lang = localStorage.lang;
+    }
 
-		// check window.navigator
-		if ( !lang ) lang = navigator.languages ?
-			navigator.languages[ 0 ] : (navigator.language || navigator.userLanguage);
+    /**
+     * Get language preference for viewer.
+     * This does not necessarily return the same value as appStrings().lang(),
+     * which returns the language currently being displayed.
+     *
+     * Checks `localStorage`, then NavigatorLanguage.
+     * If no lang found, or lang is not implemented by the application
+     * (as keyed in stringsConfig.json), falls back to default of 'en'.
+     */
+    function getLanguagePref() {
 
-		// if lang not present in stringsConfig.json, skip it
-		if ( lang && !getActiveLanguages().find( f => f.lang === lang ) ) lang = null;
+        // check localStorage for previously-set pref
+        let lang = localStorage.lang;
 
-		// default to 'en'
-		if ( !lang ) lang = 'en';
+        // check window.navigator
+        if ( !lang ) lang = navigator.languages ?
+            navigator.languages[ 0 ] : (navigator.language || navigator.userLanguage);
 
-		// only support major languages
-		lang = lang.slice( 0, 2 );
+        // if lang not present in stringsConfig.json, skip it
+        if ( lang && !getActiveLanguages().find( f => f.lang === lang ) ) lang = null;
 
-		return lang;
+        // default to 'en'
+        if ( !lang ) lang = 'en';
 
-	}
+        // only support major languages
+        lang = lang.slice( 0, 2 );
 
-	/**
-	 * Set language pref for viewer to localStorage,
-	 * and refresh the page with the new language.
-	 */
-	function setLanguage( lang ) {
+        return lang;
 
-		// set lang in localStorage, refresh
-		localStorage.setItem( 'lang', lang );
-		document.location.reload();
+    }
 
-	}
+    /**
+     * Set language pref for viewer to localStorage,
+     * and refresh the page with the new language.
+     */
+    function setLanguage( lang ) {
 
-	init( ...initArgs );
+        // set lang in localStorage, refresh
+        localStorage.setItem( 'lang', lang );
+        document.location.reload();
+
+    }
+
+    init( ...initArgs );
 
 };
