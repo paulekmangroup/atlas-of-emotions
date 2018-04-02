@@ -341,7 +341,8 @@ var metadataSectionParsers = (function () {
 					experience: {},
 					response: {},
 					refractory: {},
-					blocks: {}
+					blocks: {},
+					phrase: {}
 				}
 			};
 			var rowIndex = 4;
