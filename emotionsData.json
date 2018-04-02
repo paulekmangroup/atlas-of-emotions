@@ -2528,6 +2528,9 @@
 						"timeline_blocks_body_1"
 					],
 					"header_mobile": "timeline_blocks_header"
+				},
+				"diagram_common": {
+					"phrases": { "you_feel": "timeline_phrase_you_feel" }
 				}
 			}
 		}
