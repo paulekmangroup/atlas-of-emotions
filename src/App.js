@@ -162,17 +162,21 @@ export default function ( ...initArgs ) {
 
         if ( !languageSelectorIsEnabled() ) return;
 
-        document.querySelector( '#lang-selector' ).classList.add( 'enabled' );
+        var selectors = ['#lang-selector','#intro-lang-selector'];
 
-        let dropdown = document.querySelector( '#lang-selector .dropdown' ),
-            title = dropdown.querySelector( '.dup-title' ),
-            menu = dropdown.querySelector( 'ul' ),
-            langFile = getActiveLanguages().find( f => f.lang === getLanguagePref() );
+        for(let selector of selectors) {
+            document.querySelector( selector ).classList.add( 'enabled' );
 
-        title.innerHTML = '<h4>' + langFile.name + '</h4>';
-        populateLanguageSelector( menu );
+            let dropdown = document.querySelector( selector+' .dropdown' ),
+                title = dropdown.querySelector( '.dup-title' ),
+                menu = dropdown.querySelector( 'ul' ),
+                langFile = getActiveLanguages().find( f => f.lang === getLanguagePref() );
 
-        dropdown.querySelector( '.dropdown-toggle' ).addEventListener( 'click', onLangMenuClick );
+            title.innerHTML = '<h4>' + langFile.name + '</h4>';
+            populateLanguageSelector( menu );
+
+            dropdown.querySelector( '.dropdown-toggle' ).addEventListener( 'click', onLangMenuClick );
+        }
 
     }
 
@@ -472,7 +476,7 @@ export default function ( ...initArgs ) {
 
         if ( event ) event.stopPropagation();
 
-        let dropdown = document.querySelector( '#lang-selector .dropdown' ),
+        let dropdown = event.currentTarget.parentElement, //document.querySelector( '#lang-selector .dropdown' ),
             classList = dropdown.classList;
 
         //closeMenus( dropdown );
