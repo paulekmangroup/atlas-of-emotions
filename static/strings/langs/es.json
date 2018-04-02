@@ -712,6 +712,11 @@
             "key": "timeline_blocks_caption_ambiguous_response",
             "value": "Una respuesta que podría ser útil o inútil — a veces no estamos seguros",
             "englishValue": " A response that could be helpful or unhelpful — sometimes we aren't sure"
+        },
+        {
+            "key": "timeline_phrase_you_feel",
+            "value": "sientes",
+            "englishValue": "you feel"
         }
     ],
     [

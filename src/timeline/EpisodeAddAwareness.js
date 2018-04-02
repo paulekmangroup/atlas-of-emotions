@@ -222,7 +222,10 @@ export default class EpisodeAddAwareness extends Episode {
 				timeline.select( 'tspan', event ),
 				timeline.select( 'tspan', perceptualDatabase )
 			];
-			this.stateText = [
+			this.statePhraseText = [
+				stateLabelChildren[ 0 ]
+			];
+			this.stateNameText = [
 				timeline.select( 'tspan', physicalChanges ),
 				stateLabelChildren[ 1 ],
 				timeline.select( 'tspan', mentalChanges )
@@ -239,7 +242,7 @@ export default class EpisodeAddAwareness extends Episode {
 				.attr( 'x', function () {
 					return parseFloat( this.getComputedTextLength() ) / 2 + parseFloat( this.getAttribute( 'x' ) );
 				} );
-			d3.selectAll( this.stateText )
+			d3.selectAll( this.stateNameText )
 				.attr( 'text-anchor', 'middle' )
 				.attr( 'x', function () {
 					return parseFloat( this.getComputedTextLength() ) / 2 + parseFloat( this.getAttribute( 'x' ) );
