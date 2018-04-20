@@ -27,7 +27,7 @@ const dispatcher = {
 		CONTINENTS: 'continents',
 		STATES: 'states',
 		ACTIONS: 'actions',
-		TIMELINE: 'timeline',
+		TIMELINE: 'triggers',
 		CALM: 'calm'
 	},
 

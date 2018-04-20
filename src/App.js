@@ -132,7 +132,7 @@ export default function ( ...initArgs ) {
         let mainEl = document.querySelector( '#main' ),
             containerEl;
         _.values( dispatcher.SECTIONS ).forEach( sectionName => {
-            if ( sectionName == 'timeline' ) { //FIXME do this better?
+            if ( sectionName == 'triggers' ) { //FIXME do this better?
                 containers[ sectionName ] = document.getElementById( 'timeline-graphics' );
             } else {
                 containerEl = document.createElement( 'div' );
@@ -149,7 +149,7 @@ export default function ( ...initArgs ) {
         sections.continents = continents;
         sections.states = states;
         sections.actions = actions;
-        sections.timeline = timeline;
+        sections.triggers = timeline;
         sections.calm = calm;
 
         // use this without a container, so the info
@@ -520,32 +520,32 @@ export default function ( ...initArgs ) {
 
     function onSectionTextMaximizeStart( duration ) {
 
-        if ( currentSection == sections.timeline ) {
-            sections.timeline.onSectionTextMaximizeStart( duration );
+        if ( currentSection == sections.triggers ) {
+            sections.triggers.onSectionTextMaximizeStart( duration );
         }
 
     }
 
     function onSectionTextMaximizeComplete() {
 
-        if ( currentSection == sections.timeline ) {
-            sections.timeline.onSectionTextMaximizeComplete();
+        if ( currentSection == sections.triggers ) {
+            sections.triggers.onSectionTextMaximizeComplete();
         }
 
     }
 
     function onSectionTextMinimizeStart( duration ) {
 
-        if ( currentSection == sections.timeline ) {
-            sections.timeline.onSectionTextMinimizeStart( duration );
+        if ( currentSection == sections.triggers ) {
+            sections.triggers.onSectionTextMinimizeStart( duration );
         }
 
     }
 
     function onSectionTextMinimizeComplete() {
 
-        if ( currentSection == sections.timeline ) {
-            sections.timeline.onSectionTextMinimizeComplete();
+        if ( currentSection == sections.triggers ) {
+            sections.triggers.onSectionTextMinimizeComplete();
         }
 
     }
