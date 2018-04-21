@@ -9,7 +9,7 @@
 	<meta name="keywords"
 		  content="emotion,anger,fear,disgust,sadness,enjoyment,trigger,triggers,moods,calm,Paul Ekman,Eve Ekman,Dalai Lama">
 	<meta name="author" content="Stamen Design">
-	<meta name="thumbnail" content="http://www.paulekman.com/atlas-of-emotions/img/atlasOfEmotionsThumb.jpg"/>
+	<meta name="thumbnail" content="http://atlasofemotions.org/img/atlasOfEmotionsThumb.jpg"/>
 
 	<title>The Ekmans' Atlas of Emotions</title>
 	<link rel="icon" type="image/png" href="./img/atlas-favicon.png"/>
@@ -130,17 +130,17 @@
 		ga( 'send', 'pageview' );
 	</script>
 	<script async src='https://www.google-analytics.com/analytics.js'></script>
-	
+  
 	<!-- Hotjar Tracking Code for http://atlasofemotions.org/ -->
 	<script>
-	    (function(h,o,t,j,a,r){
-		h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-		h._hjSettings={hjid:825603,hjsv:6};
-		a=o.getElementsByTagName('head')[0];
-		r=o.createElement('script');r.async=1;
-		r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-		a.appendChild(r);
-	    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+		(function(h,o,t,j,a,r){
+			h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+			h._hjSettings={hjid:825603,hjsv:6};
+			a=o.getElementsByTagName('head')[0];
+			r=o.createElement('script');r.async=1;
+			r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+			a.appendChild(r);
+		})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
 	</script>
 	
 </head>
@@ -213,7 +213,7 @@
 					department of San Francisco General Hospital coupled with her training in the applied emotion
 					regulation and mindfulness intervention: Cultivating Emotional Balance, CEB.</p>
 				<h3>Donate</h3>
-				<p>This project was generously supported by the Dalia Lama Trust. To give back, and to help bring more
+				<p>This project was generously supported by the Dalai Lama Trust. To give back, and to help bring more
 					emotion awareness to the world, consider donating <a href="http://www.dalailamatrust.org/donate">here</a>.
 				</p>
 				<h3>Additional Resources</h3>
@@ -292,8 +292,8 @@
 			<div class="more-content more-content--about">
 				<div class="more-content__scroller">
 					<div class="fade-images">
-						<img src="img/hhAndPaul.jpg" class="fade">
 						<img src="img/hhAndEve.jpg" class="fade">
+						<img src="img/hhAndPaul.jpg" class="fade">
 					</div>
 					<div>
 						<h3>{{ about.header }}</h3>
@@ -302,6 +302,17 @@
 				</div>
 				<div class="close-button"><span class="mobile-label">Back</span></div>
 			</div>
+
+			<div id="intro-lang-selector">
+				<div class="dropdown emotion-menu">
+					<button class="btn btn-default dropdown-toggle" type="button" id="lang-selector-toggle"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<span class="dup-title"></span><span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu pull-right" aria-labelledby="lang-selector-toggle"></ul>
+				</div>
+			</div>
+
 		</div>
 
 
