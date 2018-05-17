@@ -17,7 +17,7 @@ import sassVars from '../scss/variables.json';
 export default function ( ...initArgs ) {
 
     const
-        MIN_ALLOWED_WIDTH = 950,
+        MIN_ALLOWED_WIDTH = 1200,
         MIN_ALLOWED_HEIGHT = 600,
 
         NAVIGATION_DEFAULTS = {
