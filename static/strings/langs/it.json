@@ -87,7 +87,7 @@
         },
         {
             "key": "intro_body_mobile",
-            "value": "Questo Atlante nasce dai confronti tra il Dalai Lama e il Dott. Paul Ekman sulla Scienza delle Emozioni. Creato in collaborazione con Statemen Design e la Dott.ssa Eve Ekman (figlia di Paul), l’Atlante è un viaggio interattivo nel mondo delle emozioni.",
+            "value": "Questo Atlante rappresenta il frutto di una serie di conversazioni tra il Dalai Lama e il Dott. Paul Ekman sul tema della scienza delle emozioni. Creato in collaborazione con Statemen Design e la Dott.ssa Eve Ekman (figlia di Paul), l’Atlante è un viaggio interattivo nel mondo delle emozioni.",
             "english": "This Atlas was inspired by a series of conversations about the science of emotion between the Dalai Lama and Dr. Paul Ekman. Created in collaboration with Stamen Design and Paul’s daughter, Dr. Eve Ekman, the Atlas of Emotions is an interactive visual journey through the world of emotions."
         },
         {
@@ -102,7 +102,7 @@
         },
         {
             "key": "intro_caption_1",
-            "value": "Questo Atlante è uno strumento interattivo che ti aiuterà a costruire il tuo vocabolario emozionale. L’obiettivo è incrementare la varietà di esperienze in cui proviamo emozioni e imparare a gestirle.",
+            "value": "Questo Atlante è uno strumento interattivo che ti aiuterà a costruire il tuo vocabolario delle emozioni. L’obiettivo è incrementare la capacità di attribuire un nome e un significato alle diverse esperienze emotive e imparare come gestirle.",
             "english": "This Atlas is a visual tool to build your emotion vocabulary. The goal is to increase choice in what we become emotional about and how we respond."
         },
         {
@@ -225,12 +225,12 @@
         },
         {
             "key": "hero_slide_1",
-            "value": "L’Atlante è uno strumento interattivo che ti aiuterà a costruire un vocabolario emozionale e illuminerà il mondo delle tue emozioni.",
+            "value": "L’Atlante è uno strumento interattivo che ti aiuterà a costruire un vocabolario delle emozioni e ti aiuterà a far chiarezza sulla tua sfera emotiva",
             "english": "The Atlas is an interactive tool that builds your vocabulary of emotions and illuminates your emotional world. "
         },
         {
             "key": "hero_slide_2",
-            "value": "L'obiettivo è ottenere un maggiore controllo su ciò che scatena le tue emozioni e su come reagisci.",
+            "value": "L'obiettivo è ottenere un maggiore controllo su ciò che scatena le tue emozioni e sulle tue reazioni.",
             "english": "The goal is to gain greater control over what triggers your emotions and how you respond. "
         },
         {
@@ -245,7 +245,7 @@
         },
         {
             "key": "hero_about_body_1",
-            "value": "Il Dalai Lama ha immaginato \"una mappa delle nostre emozioni per sviluppare una mente calma\". Per realizzare la sua idea si è rivolto al Dr. Paul Ekman, suo amico di lunga data e famoso scienziato delle emozioni. Ekman si è occupato dello sviluppo di questo progetto insieme a sua figlia Eve, ricercatrice ed esperta formatrice nel campo delle emozioni. L'Atlante condensa i risultati delle più aggiornate ricerche psicologico-scientifiche sulle emozioni.",
+            "value": "Il Dalai Lama ha immaginato \"una mappa delle nostre emozioni per sviluppare una mente calma\". Per realizzare la sua idea si è rivolto al Dr. Paul Ekman, suo amico di lunga data e famoso scienziato delle emozioni. Ekman si è occupato dello sviluppo di questo progetto insieme a sua figlia Eve, anche lei ricercatrice ed esperta formatrice nel campo delle emozioni. Infatti, l'Atlante condensa i risultati delle più aggiornate ricerche psicologico-scientifiche realizzate su questo tema.     \n\nGrazie al nostro partner I&G Management per il supporto fornito nel realizzare la versione italiana dell'Atlante delle Emozioni e la collaborazione a diffonderlo in Italia.                              ",
             "english": "The Dalai Lama imagined \"a map of our emotions to develop a calm mind.\" He asked his longtime friend and renowned emotion scientist Dr. Paul Ekman to realize his idea. Ekman took on the creation of the Atlas alongside his daughter, Eve Ekman, a second-generation emotion researcher and trainer. The Atlas represents what researchers have learned from the psychological study of emotion. "
         },
         {
@@ -260,12 +260,12 @@
         },
         {
             "key": "continents_body",
-            "value": "La maggior parte dei ricercatori nel campo delle emozioni concordano sull'Universalità di queste cinque Emozioni: emozioni che tutti gli esseri umani hanno in comune, indipendentemente da dove o come siano cresciuti. Il movimento delle figure riflette la natura fluida delle emozioni, il modo in cui la loro forza e la loro frequenza variano di momento in momento. Seleziona un'emozione per approfondire.",
+            "value": "La maggior parte dei ricercatori nel campo delle emozioni concorda nel ritenere universali queste cinque emozioni: si tratta di emozioni che tutti gli esseri umani hanno in comune, indipendentemente da dove o come siano cresciuti. Il movimento delle forme riflette la natura fluida delle emozioni, il modo in cui variano in ogni istante la loro forza e frequenza. Seleziona un'emozione per approfondire.",
             "english": "Most emotions researchers agree on these five Universal Emotions: emotions that all humans, no matter where or how we were raised, have in common. The movement of the shapes reflects the fluid nature of emotions – the way their strength and frequency varies from moment to moment. Select an emotion to learn more."
         },
         {
             "key": "continents_body_mobile",
-            "value": "La maggior parte dei ricercatori nel campo delle emozioni concordano sull'Universalità di queste cinque Emozioni: emozioni che tutti gli esseri umani hanno in comune, indipendentemente da dove o come siano cresciuti. Clicca su un'emozione per iniziare il tuo percorso.",
+            "value": "La maggior parte dei ricercatori nel campo delle emozioni concorda nel ritenere universali queste cinque emozioni: si tratta di emozioni che tutti gli esseri umani hanno in comune, indipendentemente da dove o come siano cresciuti. Clicca su un'emozione per iniziare il tuo percorso.",
             "english": "Most emotions researchers agree on these five Universal Emotions: emotions that all humans, no matter where or how we were raised, have in common. Tap on an emotion to start exploring."
         },
         {
@@ -505,72 +505,72 @@
         },
         {
             "key": "timeline_intro_body_1",
-            "value": "Le nostre emozioni si sviluppano lungo una linea temporale. La sequenza inizia con uno stimolo che attiva un'esperienza emotiva e alla fine si traduce in una risposta comportamentale.",
+            "value": "Le nostre emozioni si sviluppano lungo una linea temporale. La sequenza inizia con uno stimolo che attiva un'esperienza emotiva e alla fine si conclude con una risposta comportamentale.",
             "english": "Our emotions unfold on a timeline. The timeline begins with a trigger that initiates an emotional experience and ultimately results in a response. "
         },
         {
             "key": "timeline_intro_body_2",
-            "value": "Scegli fra le diverse emozioni che trovi nella lista sotto la sequenza temporale.",
+            "value": "Fai una prova, scegliendo fra le diverse emozioni che trovi nella lista a fondo pagina, sotto la timeline.",
             "english": "Try choosing different emotions from the list below the timeline."
         },
         {
             "key": "timeline_intro_body_3",
-            "value": "Nota come lo stesso trigger può provocare una risposta diversa, a seconda dell'emozione che stiamo provando.",
+            "value": "Nota come lo stesso stimolo possa provocare una risposta diversa, a seconda dell'emozione che suscita in noi.",
             "english": "Notice how the same trigger can lead to a different response, depending on the emotion we feel."
         },
         {
             "key": "timeline_begin_awareness_button",
-            "value": "Per quale ragione accade?",
+            "value": "Come funziona?",
             "english": "How does this happen?"
         },
         {
             "key": "timeline_trigger_header",
-            "value": "Trigger",
+            "value": "Trigger - Stimolo scatenante",
             "english": "Trigger"
         },
         {
             "key": "timeline_trigger_body_1",
-            "value": "I trigger - o fattori scatenanti - si manifestano all’interno di un contesto:",
+            "value": "Per comprendere l'effetto di un trigger - o stimolo scatenante - dobbiamo tenere in considerazione altri elementi del contesto quali:",
             "english": "The trigger occurs in a context:"
         },
         {
             "key": "timeline_trigger_body_2_list_item_1",
-            "value": "Circostanze attuali e sentimenti",
+            "value": "la situazione attuale e lo stato d'animo del momento",
             "english": "Current circumstances and feelings"
         },
         {
             "key": "timeline_trigger_body_2_list_item_2",
-            "value": "L’evento",
+            "value": "un evento che si verifica",
             "english": "The event"
         },
         {
             "key": "timeline_trigger_body_2_list_item_3",
-            "value": "La nostra visione del mondo è influenzata dalle nostre precedenti esperienze, dalla storia personale e dagli script comportamentali universalmente condivisi ",
+            "value": "La nostra visione del mondo che è influenzata dalle esperienze che abbiamo vissuto in precedenza, dalla nostra storia personale e da script comportamentali universalmente condivisi",
             "english": "Our worldview, which is influenced by our prior experiences, personal history and inherited universal scripts about important events"
         },
         {
             "key": "timeline_experience_add_awareness_button",
-            "value": "Aumentare la consapevolezza",
+            "value": "Migliora la tua consapevolezza",
             "english": "add awareness"
         },
         {
             "key": "timeline_experience_header",
-            "value": "Esperienza",
+            "value": "Esperienza emotiva",
             "english": "Experience"
         },
         {
             "key": "timeline_experience_body_1",
-            "value": "L'esperienza emotiva che si genera include sentimenti soggettivi e sensazioni fisiche che colorano il modo in cui percepiamo una situazione.",
+            "value": "L'esperienza emotiva generata da uno stimolo scatenante è caratterizzata da stati d'animo soggettivi e sensazioni fisiche. Questi elementi influenzano il modo in cui percepiamo una situazione.",
             "english": "The emotional experience that is triggered includes subjective feelings and physical sensations. These color our perception of a situation."
         },
         {
             "key": "timeline_response_add_awareness_button",
-            "value": "Aumentare la consapevolezza",
+            "value": "Migliora la tua consapevolezza",
             "english": "add awareness"
         },
         {
             "key": "timeline_response_header",
-            "value": "Reazione",
+            "value": "Risposta comportamentale",
             "english": "Response"
         },
         {
@@ -580,7 +580,7 @@
         },
         {
             "key": "timeline_begin_refractory_period_button",
-            "value": "Perchè è difficile rimanere consapevoli?",
+            "value": "Perché è difficile mantenere il controllo?",
             "english": "Why is it hard to stay aware?"
         },
         {
@@ -590,22 +590,22 @@
         },
         {
             "key": "timeline_refractory_body_1",
-            "value": "Quando un'emozione si innesca, siamo in balia di essa, e ciò limita la nostra capacità di ragionare in maniera lucida e di scegliere come reagire.",
+            "value": "Quando siamo in balìa di un'emozione, è limitata la nostra capacità di ragionare in maniera lucida e di scegliere come reagire.",
             "english": "When an emotion is triggered we are in the grip of that emotion, which limits our ability to think clearly and choose how we respond."
         },
         {
             "key": "timeline_refractory_body_2",
-            "value": "Col trascorrere del tempo, ritroviamo la lucidità e la capacità di fare una scelta ponderata.",
+            "value": "Mano a mano che l'emozione perde intensità, ritroviamo gradualmente la lucidità e la capacità di compiere una scelta ponderata.",
             "english": "As time passes, we gain some clarity and the ability to make a thoughtful choice."
         },
         {
             "key": "timeline_refractory_body_3",
-            "value": "Grazie alla consapevolezza possiamo fermarci prima di reagire e scegliere una risposta che si adatti meglio ai nostri obiettivi.",
+            "value": "Grazie alla consapevolezza possiamo fermarci prima di reagire e scegliere la risposta più efficace per il raggiungimento dei nostri obiettivi.",
             "english": "With awareness we can pause before we respond and choose a response that best serves our goals."
         },
         {
             "key": "timeline_begin_block_diagram_button",
-            "value": "Guarda il quadro generale",
+            "value": "Osserva il quadro generale",
             "english": "See the big picture"
         },
         {
@@ -615,7 +615,7 @@
         },
         {
             "key": "timeline_blocks_body_1",
-            "value": "Seleziona una fase qualsiasi della linea temporale per conoscere il significato che i ricercatori attribuiscono a un episodio emotivo. In seguito, visita la sezione <a href=\"#continents/\"> Esperienza </a> per scoprire come mappano le nostre esperienze emotive.",
+            "value": "Seleziona una fase qualsiasi della linea temporale per conoscere il significato che i ricercatori attribuiscono alle singole componenti dell'esperienza emotiva. In seguito, visita la sezione <a href=\"#continents/\"> Esperienza </a> per approfondire la mappa delle emozioni.",
             "english": "You can select each piece of the timeline and learn how researchers make sense of an emotional episode. Then, continue to the <a href=\"#continents/\">Experience</a> section to see how they map our emotional experiences. "
         },
         {
@@ -710,7 +710,7 @@
         },
         {
             "key": "timeline_phrase_you_feel",
-            "value": "ti senti",
+            "value": "provi",
             "english": "you feel"
         }
     ],
@@ -727,17 +727,17 @@
         },
         {
             "key": "anger_continent_body",
-            "value": "Ci arrabbiamo quando qualcosa ci ostacola o quando pensiamo di essere trattati male ingiustamente.",
+            "value": "Ci arrabbiamo quando qualcosa ci ostacola o quando pensiamo di essere stati trattati male ingiustamente.",
             "english": "We get angry when something blocks us or when we think we're being treated unfairly."
         },
         {
             "key": "anger_continent_body_mobile",
-            "value": "Proviamo rabbia quando siamo bloccati mentalmente o fisicamente. La rabbia può variare d'intensità e frequenza nel corso della vita.",
+            "value": "Proviamo rabbia quando siamo ostacolati nel raggiungimento dei nostri obiettivi, mentalmente o fisicamente. La rabbia può variare d'intensità e frequenza nel corso della vita.",
             "english": "We feel anger when we are mentally or physically blocked. Anger varies in strength and frequency in our lives."
         },
         {
             "key": "anger_states_body",
-            "value": "La rabbia può andare dal leggero fastidio alla furia. L'intensità di questi stati varia: possiamo sentire un fastidio lieve o forte, ma possiamo anche provare una furia intensa. Tutti gli stati della rabbia sono innescati dalla sensazione di essere ostacolati nel raggiungere un obiettivo.",
+            "value": "La rabbia può andare dal leggero fastidio alla furia. È l'intensità di questi stati che varia: se proviamo fastidio, questo potrà essere lieve oppure intenso. Se invece proviamo furia, la sua intensità sarà esclusivamente elevata. Tutti gli stati della rabbia sono innescati dalla sensazione di essere ostacolati nel raggiungere un obiettivo.",
             "english": "Anger contains both annoyance and fury. The intensity of these states varies: We can feel mild or strong annoyance, but we can only feel intense fury. All states of anger are triggered by a feeling of being blocked in our progress."
         },
         {
@@ -812,7 +812,7 @@
         },
         {
             "key": "anger_actions_body",
-            "value": "Ad esempio, potremmo sopprimere i nostri sentimenti di frustrazione sul luogo di lavoro, ma urlare e strillare se si trattasse di un nostro familiare. Controllarli può essere costruttivo al fine di evitare litigi, ma distruttivo se ci sentiamo feriti per non riuscire ad esprimerci.",
+            "value": "Ad esempio, potremmo sopprimere i nostri sentimenti di frustrazione nei confronti di un collega di lavoro, ma urlare e strillare se si trattasse di un nostro familiare. Controllare queste reazioni può essere costruttivo al fine di evitare litigi, ma distruttivo qualora ci sentissimo feriti per non riuscire ad esprimerci come vorremmo.",
             "english": "For example, we might suppress our feelings of frustration at work, but scream and yell to express our frustration with a family member. Suppressing our frustration can be constructive in cases where it helps us avoid arguments, but destructive if we are being hurt by not speaking up for ourselves. "
         },
         {
@@ -832,17 +832,17 @@
         },
         {
             "key": "anger_actions_body_2",
-            "value": "Denigrare un’altra persona in maniera sgradevole e offensiva serve a fomentare il conflitto anziché appianarlo. ",
+            "value": "Denigrare un’altra persona in maniera sgradevole e offensiva serve a fomentare il conflitto e non ad appianarlo. ",
             "english": "Disparage the other person in an offensive or hurtful way that is likely to escalate the conflict rather than resolve it."
         },
         {
             "key": "anger_actions_header_3",
-            "value": "Indebolire",
+            "value": "Ostacolare",
             "english": "Undermine"
         },
         {
             "key": "anger_actions_body_3",
-            "value": "Agire per rendere qualcuno o qualcosa più debole o meno efficace, di solito in modo segreto o graduale.",
+            "value": "Agire per indebolire qualcuno o sabotare qualcosa, di solito di nascosto o gradualmente.",
             "english": "Take action to make someone or something weaker or less effective, usually in a secret or gradual way."
         },
         {
@@ -862,7 +862,7 @@
         },
         {
             "key": "anger_actions_body_5",
-            "value": "Perdere il controllo sul piano verbale; parlare con un volume alto e una frequenza più alta.",
+            "value": "Perdere il controllo sul piano verbale; parlare con veemenza, alzando il volume e la frequenza della voce ",
             "english": "Lose control of one's speech; speak loudly and possibly at a higher pitch."
         },
         {
@@ -872,7 +872,7 @@
         },
         {
             "key": "anger_actions_body_6",
-            "value": "Colpire, danneggiare o intrappolare qualcuno.",
+            "value": "Colpire, danneggiare o bloccare fisicamente qualcuno.",
             "english": "Harm or trap someone."
         },
         {
@@ -902,7 +902,7 @@
         },
         {
             "key": "anger_actions_body_9",
-            "value": "Agire in maniera indiretta, con un sottofondo di malumore.",
+            "value": "Mettere in atto azioni indirette che celano una rabbia latente",
             "english": "Take indirect actions that have an angry undercurrent."
         },
         {
@@ -912,7 +912,7 @@
         },
         {
             "key": "anger_triggers_universal_body_mobile",
-            "value": "I trigger universali sono innati, comuni a tutti gli esseri umani e ci influenzano più intensamente di quelli appresi. L'interferenza con l'azione o la locomozione sono alcuni esempi.",
+            "value": "I trigger universali sono innati, comuni a tutti gli esseri umani e ci influenzano più intensamente di quelli appresi. Ad esempio qualcosa o qualcuno che inteferisce con i nostri movimenti o azioni.",
             "english": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Interference with action or locomotion are examples."
         },
         {
@@ -982,7 +982,7 @@
         },
         {
             "key": "anger_timeline_trigger_perceptual_database",
-            "value": "Ti ricorda un prepotente",
+            "value": "Pensi che sia un prepotente",
             "english": "you're reminded of a bully"
         },
         {
@@ -992,7 +992,7 @@
         },
         {
             "key": "anger_timeline_state_emotion",
-            "value": "Provi rabbia",
+            "value": "arrabbiato/a",
             "english": "anger"
         },
         {
@@ -1029,17 +1029,17 @@
         },
         {
             "key": "fear_continent_body",
-            "value": "La nostra paura del pericolo anticipa le minacce alla nostra sicurezza.",
+            "value": "La nostra paura del pericolo ci consente di anticipare le minacce alla nostra sicurezza.",
             "english": "Our fear of danger lets us anticipate threats to our safety."
         },
         {
             "key": "fear_continent_body_mobile",
-            "value": "Proviamo paura quando la nostra sicurezza o il nostro benessere sono minacciati. La paura varia d'intensità e frequenza nel corso della vita.",
+            "value": "Proviamo paura quando percepiamo una minaccia alla nostra sicurezza o al nostro benessere. La paura varia d'intensità e frequenza nel corso della vita.",
             "english": "We feel fear when our safety or wellbeing is threatened. Fear varies in strength and frequency in our lives."
         },
         {
             "key": "fear_states_body",
-            "value": "La paura può andare dall'ansia al terrore. L'intensità di questi stati varia: possiamo provare un'ansia lieve o forte, ma anche solamente un terrore intenso. Tutti gli stati di paura sono innescati dal sentirsi minacciati.",
+            "value": "La paura può andare dall'ansia al terrore. È l'intensità di questi stati che varia: se proviamo ansia, questa potrà essere lieve oppure intensa. Se invece proviamo terrore, la sua intensità sarà esclusivamente elevata. Tutti gli stati di paura sono innescati dal sentirsi minacciati.",
             "english": "Fear contains both anxiety and terror. The intensity of these states varies: We can feel mild or strong anxiety, but we can only feel intense terror. All states of fear are triggered by feeling a threat of harm."
         },
         {
@@ -1059,7 +1059,7 @@
         },
         {
             "key": "fear_states_body_2",
-            "value": "Paura di una minaccia reale o preannunciata e dell'incertezza di essere in grado di affrontarla.",
+            "value": "Paura di una minaccia reale o preannunciata e dell'incertezza sulla capacità di saperla affrontare.",
             "english": "Fear of an anticipated or actual threat and uncertainty about one's ability to cope with it. "
         },
         {
@@ -1069,7 +1069,7 @@
         },
         {
             "key": "fear_states_body_3",
-            "value": "Incertezza sul fatto che ci sia un pericolo",
+            "value": "Incertezza sul fatto che ci sia un pericolo.",
             "english": "Uncertainty as to whether there is a danger."
         },
         {
@@ -1079,7 +1079,7 @@
         },
         {
             "key": "fear_states_body_4",
-            "value": "Previsione di un pericolo grande.",
+            "value": "Previsione di un grave pericolo. ",
             "english": "Anticipation of severe danger."
         },
         {
@@ -1124,7 +1124,7 @@
         },
         {
             "key": "fear_actions_body",
-            "value": "Ad esempio, potremmo evitare di provare ansia al lavoro, ma rimuginare sulla nostra ansia a casa. Evitare l'ansia può essere costruttivo se ci aiuta a parlare in pubblico, ma distruttiva se ci impedisce di affrontare la difficile relazione con il nostro capo.",
+            "value": "Ad esempio, potremmo evitare di provare ansia al lavoro, ma rimuginarci una volta a casa. Evitare di sentirci in questo stato può essere costruttivo se ci aiutasse per esempio a parlare in pubblico, ma distruttiva qualora ci impedisse di affrontare la difficile relazione con il nostro capo.",
             "english": "For example, we might avoid feeling anxiety at work, but ruminate on our anxiety at home. Avoiding anxiety can be constructive if it helps us give a presentation to a room full of colleagues, but destructive if it prevents us from confronting our difficult relationship with our boss."
         },
         {
@@ -1139,7 +1139,7 @@
         },
         {
             "key": "fear_actions_header_2",
-            "value": "Evitamento",
+            "value": "Evitare",
             "english": "Avoid"
         },
         {
@@ -1154,7 +1154,7 @@
         },
         {
             "key": "fear_actions_body_3",
-            "value": "Rimanere fermi nel dubbio o indecisione, spesso momentaneamente.",
+            "value": "Rimanere fermi nel dubbio o indecisione. Spesso l'esitazione è momentanea.",
             "english": "Hold back in doubt or indecision, often momentarily."
         },
         {
@@ -1194,7 +1194,7 @@
         },
         {
             "key": "fear_actions_body_7",
-            "value": "Anticipare la possibiltà di un pericolo",
+            "value": "Anticipare la possibiltà di un pericolo.",
             "english": "Anticipate the possibility of harm."
         },
         {
@@ -1214,7 +1214,7 @@
         },
         {
             "key": "fear_triggers_learned_body_mobile",
-            "value": "Alcuni trigger possono essere appresi da esperienze  personali o culturalmente condivise. Parlare in pubblico, il tuono e il rischio di perdere il lavoro sono alcuni esempi.",
+            "value": "Alcuni trigger possono essere appresi da esperienze  personali o culturalmente condivise. Alcuni esempi sono: parlare in pubblico, un tuono, il rischio di perdere il lavoro.",
             "english": "Some triggers can be learned from personal or shared cultural experiences. Public speaking, thunder, and the threat of losing one’s job are examples."
         },
         {
@@ -1264,7 +1264,7 @@
         },
         {
             "key": "fear_timeline_trigger_precondition",
-            "value": "Stai leggendo delle notizie terrificanti",
+            "value": "Stai leggendo delle notizie allarmanti",
             "english": "reading scary news"
         },
         {
@@ -1274,22 +1274,22 @@
         },
         {
             "key": "fear_timeline_trigger_perceptual_database",
-            "value": "Ti ricorda il senso di abbandono",
+            "value": "Pensi possa rompersi il vostro legame",
             "english": "reminds you of abandonment"
         },
         {
             "key": "fear_timeline_state_physical_changes",
-            "value": "Il tuo cuore batte",
+            "value": "Il tuo cuore inizia a battere più velocemente",
             "english": "your heart pounds"
         },
         {
             "key": "fear_timeline_state_emotion",
-            "value": "Provi paura",
+            "value": "impaurito/a",
             "english": "fear"
         },
         {
             "key": "fear_timeline_state_mental_changes",
-            "value": "Speri che passi",
+            "value": "Speri che passi presto",
             "english": "you expect them to leave"
         },
         {
@@ -1321,7 +1321,7 @@
         },
         {
             "key": "disgust_continent_body",
-            "value": "Sentirsi disgustati da ciò che è fonte di contaminazione aiuta a evitare il contagio, fisicamente o socialmente.",
+            "value": "Sentirsi disgustati da ciò che è nocivo e sgradevole aiuta a evitare il contagio fisico o sociale. ",
             "english": "Feeling disgusted by what is toxic helps us to avoid being poisoned, physically or socially."
         },
         {
@@ -1331,17 +1331,17 @@
         },
         {
             "key": "disgust_states_body",
-            "value": "Il disgusto può andare dall'antipatia al ribrezzo. L'intensità di questi stati varia: possiamo provare un’antipatia leggera o forte, ma anche solamente profondo ribrezzo. Tutti gli stati di disgusto sono innescati dalla sensazione che qualcosa sia tossico.",
+            "value": "Il disgusto può andare dall'antipatia al ribrezzo. È l'intensità di questi stati che varia: se proviamo antipatia, questa potrà essere leggera oppure forte. Se invece proviamo ribrezzo, la sua intensità sarà esclusivamente elevata. Tutti gli stati di disgusto sono innescati dalla percezione di qualcosa come tossico.",
             "english": "Disgust contains both dislike and loathing. The intensity of these states varies: We can feel mild or strong dislike, but we can only feel intense loathing. All states of disgust are triggered by the feeling that something is toxic."
         },
         {
             "key": "disgust_states_header_1",
-            "value": "Antipatia",
+            "value": "Senso di spiacevolezza",
             "english": "Dislike"
         },
         {
             "key": "disgust_states_body_1",
-            "value": "Una preferenza contro qualcosa.",
+            "value": "Un'atteggiamento costante di riluttanza nei confronti di qualcosa.",
             "english": "A preference against something."
         },
         {
@@ -1351,12 +1351,12 @@
         },
         {
             "key": "disgust_states_body_2",
-            "value": "Impulso che porta ad evitare qualcosa di disgustoso",
+            "value": "Impulso che porta ad evitare qualcosa di disgustoso.",
             "english": "An impulse to avoid something disgusting."
         },
         {
             "key": "disgust_states_header_3",
-            "value": "Dispiacere",
+            "value": "Senso di sgradevolezza",
             "english": "Distaste"
         },
         {
@@ -1406,12 +1406,12 @@
         },
         {
             "key": "disgust_actions_body",
-            "value": "Ad esempio, potremmo evitare di provare avversione verso i colleghi sul posto di lavoro, ma sentirla nei confronti di individui di cui leggiamo notizie sui giornali. Evitare l'avversione può essere costruttivo nel superare i pregiudizi, ma può essere distruttivo se ci porta ad avere a che fare con una persona pericolosa.",
+            "value": "Ad esempio, potremmo evitare di provare avversione verso i colleghi sul posto di lavoro, ma sentirla nei confronti di individui di cui leggiamo notizie sui giornali. Evitare l'avversione può essere costruttivo nel superare i pregiudizi, ma distruttivo se avessimo a che fare con una persona pericolosa.",
             "english": "For example, we might avoid feeling aversion towards others at work, but find ourselves feeling aversion towards individuals we read about in the news. Avoiding aversion can be constructive in overcoming bias, but can be destructive if it leads us to get involved with a harmful person."
         },
         {
             "key": "disgust_actions_header_1",
-            "value": "Ritirata",
+            "value": "Ritrarsi",
             "english": "Withdraw"
         },
         {
@@ -1421,7 +1421,7 @@
         },
         {
             "key": "disgust_actions_header_2",
-            "value": "Evitamento",
+            "value": "Evitare",
             "english": "Avoid"
         },
         {
@@ -1456,7 +1456,7 @@
         },
         {
             "key": "disgust_triggers_universal_body_mobile",
-            "value": "I trigger universali sono innati, comuni a tutti e ci influenzano più intensamente di quelli appresi. Materiale organico in decomposizione o che fuoriesce dal corpo sono alcuni esempi.",
+            "value": "I trigger universali sono innati, comuni a tutti e ci influenzano più intensamente di quelli appresi. Un esempio è rappresentato da materiale organico in decomposizione o che fuoriesce dal corpo.",
             "english": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Anything in decay or coming out of the body are examples."
         },
         {
@@ -1526,17 +1526,17 @@
         },
         {
             "key": "disgust_timeline_state_emotion",
-            "value": "Provi disgusto ",
+            "value": "disgustato/a",
             "english": "disgust"
         },
         {
             "key": "disgust_timeline_state_mental_changes",
-            "value": "Ti senti oltraggiato",
+            "value": "Ti senti offeso",
             "english": "you feel sickened"
         },
         {
             "key": "disgust_timeline_response_constructive_response",
-            "value": "Chiedi perché è arrabbiato",
+            "value": "Chiedi perché sia arrabbiato",
             "english": "ask why they're angry"
         },
         {
@@ -1563,7 +1563,7 @@
         },
         {
             "key": "sadness_continent_body",
-            "value": "La tristezza è una risposta alla perdita, e sentirsi tristi ci permette di prendere una pausa e mostrare agli altri che abbiamo bisogno di supporto.",
+            "value": "La tristezza è una risposta alla perdita. Sentirsi tristi ci permette di prendere una pausa e mostrare agli altri che abbiamo bisogno di supporto.",
             "english": "Sadness is a response to loss, and feeling sad allows us to take a timeout and show others that we need support."
         },
         {
@@ -1573,7 +1573,7 @@
         },
         {
             "key": "sadness_states_body",
-            "value": "La tristezza può andare dalla delusione all'estrema disperazione. L'intensità di questi stati varia: possiamo sentire una delusione lieve o forte, ma anche solamente un'estrema disperazione. Tutti gli stati di tristezza sono innescati da una sensazione di perdita.",
+            "value": "La tristezza può andare dalla delusione all'estrema disperazione. È l'intensità di questi stati che varia: se proviamo delusione, questa potrà essere lieve oppure forte. Se invece proviamo disperazione, la sua intensità sarà esclusivamente elevata. Tutti gli stati di tristezza sono innescati da una sensazione di perdita.",
             "english": "Sadness contains both disappointment and despair. The intensity of these states varies: We can feel mild or strong disappointment, but we can only feel intense despair. All states of sadness are triggered by a feeling of loss."
         },
         {
@@ -1583,7 +1583,7 @@
         },
         {
             "key": "sadness_states_body_1",
-            "value": "Sensazione che le aspettative non saranno soddisfatte.",
+            "value": "Rendersi conto che le cose non stanno andando come sperato.",
             "english": "A feeling that expectations are not being met."
         },
         {
@@ -1593,12 +1593,12 @@
         },
         {
             "key": "sadness_states_body_2",
-            "value": "La convinzione che nulla può essere fatto.",
+            "value": "La convinzione che non c'è più nulla da fare.",
             "english": "The belief that nothing can be done. "
         },
         {
             "key": "sadness_states_header_3",
-            "value": "Essere Sconvolti",
+            "value": "Turbamento",
             "english": "Distraughtness"
         },
         {
@@ -1613,7 +1613,7 @@
         },
         {
             "key": "sadness_states_body_4",
-            "value": "Una risposta ai ripetuti fallimenti nel realizzare qualcosa: la convinzione che non si può fare.",
+            "value": "Una risposta ai ripetuti fallimenti nel realizzare qualcosa: la convinzione che non si possa fare.",
             "english": "A response to repeated failures to accomplish something: the belief that it can't be done."
         },
         {
@@ -1623,7 +1623,7 @@
         },
         {
             "key": "sadness_states_body_5",
-            "value": "La consapevolezza che non si può rendere una situazione migliore o più facile.",
+            "value": "La consapevolezza di non poter rendere una situazione migliore o più facile.",
             "english": "The realization that one cannot make a situation better or easier."
         },
         {
@@ -1668,7 +1668,7 @@
         },
         {
             "key": "sadness_states_header_10",
-            "value": "Dolore (emotivo)",
+            "value": "Dolore ",
             "english": "Sorrow"
         },
         {
@@ -1683,12 +1683,12 @@
         },
         {
             "key": "sadness_states_body_11",
-            "value": "Intensa tristezza o sofferenza.",
+            "value": "Intensa e persistente tristezza o sofferenza.",
             "english": "Intense sadness or suffering."
         },
         {
             "key": "sadness_actions_body",
-            "value": "Ad esempio, potremmo evitare di sentirci impotenti in pubblico, ma cercare conforto a casa. Evitare di sentirsi impotenti può essere costruttivo per superare il dolore di un lutto, ma distruttivo se non ci porta a cercare sostegno in caso di bisogno.",
+            "value": "Ad esempio, potremmo evitare di mostrarci indefesi in pubblico, ma cercare conforto a casa. Evitare di mostrarsi indifesi può essere costruttivo per superare il dolore di un lutto, ma distruttivo se non ci porta a cercare sostegno in caso di bisogno.",
             "english": "For example, we might withdraw from feeling helpless in public, but seek comfort at home. Withdrawing from feeling helpless can be constructive to overcoming intense grief, but destructive if we don't seek support when we need it."
         },
         {
@@ -1703,7 +1703,7 @@
         },
         {
             "key": "sadness_actions_header_2",
-            "value": "Evitamento",
+            "value": "Ritirarsi o rimuovere",
             "english": "Withdraw"
         },
         {
@@ -1733,12 +1733,12 @@
         },
         {
             "key": "sadness_actions_header_5",
-            "value": "Protestare",
+            "value": "Lamentarsi",
             "english": "Protest"
         },
         {
             "key": "sadness_actions_body_5",
-            "value": "Oggetto della perdita.",
+            "value": "Esprimere continuamente la propria scontentezza per la perdita.",
             "english": "Object to the loss."
         },
         {
@@ -1748,7 +1748,7 @@
         },
         {
             "key": "sadness_actions_body_6",
-            "value": "Provare imbarazzo per ciò che si sente quando si perde qualcuno o qualcosa. ",
+            "value": "Provare imbarazzo per ciò che si sente in seguito a una perdita.",
             "english": "Feel embarrassed by one's feelings about the loss."
         },
         {
@@ -1768,7 +1768,7 @@
         },
         {
             "key": "sadness_triggers_learned_body_mobile",
-            "value": "Alcuni trigger possono essere appresi da esperienze personali o culturalmente condivise. Sentirsi esclusi o provare una perdita percepita di status sono esempi.",
+            "value": "Alcuni trigger possono essere appresi da esperienze personali o culturalmente condivise. Sentirsi esclusi o sentire di aver perso il proprio status sono esempi.",
             "english": "Some triggers can be learned from personal or shared cultural experiences. Feeling left out or experiencing a perceived loss of status are examples."
         },
         {
@@ -1808,7 +1808,7 @@
         },
         {
             "key": "sadness_timeline_trigger_precondition",
-            "value": "Ascolti una canzone triste",
+            "value": "Stai ascoltando una canzone che ti suscita malinconia",
             "english": "listening to sad music"
         },
         {
@@ -1818,7 +1818,7 @@
         },
         {
             "key": "sadness_timeline_trigger_perceptual_database",
-            "value": "Ti ricorda un episodio di rifiuto",
+            "value": "Ti senti rifiutato",
             "english": "it reminds you of rejection"
         },
         {
@@ -1828,7 +1828,7 @@
         },
         {
             "key": "sadness_timeline_state_emotion",
-            "value": "Provi tristezza",
+            "value": "triste",
             "english": "sadness"
         },
         {
@@ -1865,17 +1865,17 @@
         },
         {
             "key": "enjoyment_continent_body",
-            "value": "La felicità descrive i molti buoni sentimenti che derivano da esperienze sia nuove che familiari.",
+            "value": "La felicità descrive le sensazioni piacevoli e positive che derivano da esperienze nuove o già vissute.",
             "english": "Enjoyment describes the many good feelings that arise from experiences both novel and familiar."
         },
         {
             "key": "enjoyment_continent_body_mobile",
-            "value": "Proviamo felicità quando sperimentiamo novità o conforto. La felicità varia d'intensità e frequenza nel corso della vita.",
+            "value": "Proviamo felicità quando sperimentiamo meraviglia o benessere. La felicità varia d'intensità e frequenza nel corso della vita.",
             "english": "We feel enjoyment when we experience novelty or comfort. Enjoyment varies in strength and frequency in our lives."
         },
         {
             "key": "enjoyment_states_body",
-            "value": "La felicità può andare dal piacere all'estasi. L'intensità di questi stati varia: possiamo sentire una serenità mite o forte, ma anche solamente un'estasi intensa. Tutti gli stati di felicità sono innescati dalla sensazione di connessione e/o piacere sensoriale. ",
+            "value": "La felicità può andare dal piacere all'estasi. È l'intensità di questi stati che varia: se proviamo piacere, questo potrà essere lieve oppure intenso. Se invece proviamo estasi, la sua intensità sarà esclusivamente elevata.Tutti gli stati di felicità sono innescati dal piacere sensoriale e/o dal provare un legame con qualcuno.  ",
             "english": "Enjoyment contains both peace and ecstasy. The intensity of these states varies: We can feel mild or strong peacefulness, but we can only feel intense ecstasy. All states of enjoyment are triggered by feeling connection and/or sensory pleasure."
         },
         {
@@ -1885,12 +1885,12 @@
         },
         {
             "key": "enjoyment_states_body_1",
-            "value": "Piacere derivato da uno dei cinque sensi: vista, suono, tatto, gusto e olfatto.",
+            "value": "Piacere derivato da uno dei cinque sensi: vista, udito, tatto, gusto e olfatto.",
             "english": "Enjoyment derived through one of the five physical senses: sight, sound, touch, taste and smell."
         },
         {
             "key": "enjoyment_states_header_2",
-            "value": "Elevazione",
+            "value": "Rallegramento ",
             "english": "Rejoicing"
         },
         {
@@ -1900,12 +1900,12 @@
         },
         {
             "key": "enjoyment_states_header_3",
-            "value": "Gioia",
+            "value": "Divertimento",
             "english": "Amusement"
         },
         {
             "key": "enjoyment_states_body_3",
-            "value": "Sensazioni leggere e divertenti di felicità e di buon umore.",
+            "value": "Sensazione leggera di felicità e di buon umore.",
             "english": "Light, playful feelings of enjoyment and good humor."
         },
         {
@@ -1920,7 +1920,7 @@
         },
         {
             "key": "enjoyment_states_header_5",
-            "value": "Compassione",
+            "value": "Compassione/gioia",
             "english": "Compassion/joy"
         },
         {
@@ -1930,12 +1930,12 @@
         },
         {
             "key": "enjoyment_states_header_6",
-            "value": "Piacere nella disgrazia altrui",
+            "value": "Schadenfreude",
             "english": "Schadenfreude"
         },
         {
             "key": "enjoyment_states_body_6",
-            "value": "Godere delle disgrazie di un'altra persona, solitamente un rivale. ",
+            "value": "Gioire delle disgrazie di un'altra persona, solitamente un rivale. ",
             "english": "Enjoyment of the misfortunes of another person, usually a rival."
         },
         {
@@ -1960,12 +1960,12 @@
         },
         {
             "key": "enjoyment_states_header_9",
-            "value": " Orgoglio ",
+            "value": "Orgoglio ",
             "english": "Pride"
         },
         {
             "key": "enjoyment_states_body_9",
-            "value": "Profondo piacere e soddisfazione derivati dalle proprie conquiste o dai risultati di un socio.",
+            "value": "Profondo piacere e soddisfazione derivati dalle proprie conquiste o dai risultati di un collega.",
             "english": "Deep pleasure and satisfaction derived from one's own achievements or the achievements of an associate."
         },
         {
@@ -1975,7 +1975,7 @@
         },
         {
             "key": "enjoyment_states_body_10",
-            "value": "Un'esperienza di qualcosa che è molto sorprendente, bella, straordinaria o incredibile.",
+            "value": "Sperimentare qualcosa di sorprendente, bella, straordinario o incredibile.",
             "english": "An experience of something that is very surprising, beautiful, amazing or hard to believe."
         },
         {
@@ -1985,7 +1985,7 @@
         },
         {
             "key": "enjoyment_states_body_11",
-            "value": "Un'esperienza di agio e contentezza.",
+            "value": "Un'esperienza di rilassatezza e contentezza.",
             "english": "An experience of ease and contentment."
         },
         {
@@ -2005,7 +2005,7 @@
         },
         {
             "key": "enjoyment_states_body_13",
-            "value": "Stato euforico, di grandissimo piacere, quasi travolgente.",
+            "value": "Essere rapiti dal piacere, provare una felicità travolgente e irrefrenabile.",
             "english": "Rapturous delight. A state of very great happiness, nearly overwhelming."
         },
         {
@@ -2015,7 +2015,7 @@
         },
         {
             "key": "enjoyment_actions_header_1",
-            "value": "Volerne di più",
+            "value": "Desiderare di più",
             "english": "Seek more"
         },
         {
@@ -2040,7 +2040,7 @@
         },
         {
             "key": "enjoyment_actions_body_3",
-            "value": "Godere dell'invidia altrui del tuo stato di appagamento.",
+            "value": "Godere dell'invidia altrui nei confronti della tua gioia.",
             "english": "Enjoy others’ envy of your state of enjoyment."
         },
         {
@@ -2075,12 +2075,12 @@
         },
         {
             "key": "enjoyment_actions_header_7",
-            "value": "Concedersi",
+            "value": "Essere indulgenti con se stessi",
             "english": "Indulge"
         },
         {
             "key": "enjoyment_actions_body_7",
-            "value": "Permettersi di provare pienamente il piacere di sensazioni benefiche.",
+            "value": "Permettersi di provare pienamente il piacere di sensazioni positive.",
             "english": "Allow oneself to fully experience the pleasure of good feelings. "
         },
         {
@@ -2090,7 +2090,7 @@
         },
         {
             "key": "enjoyment_triggers_universal_body_mobile",
-            "value": "I trigger universali sono innati, comuni a tutti e ci influenzano più intensamente di quelli appresi. L'interazione sociale e l'esperienza a contatto con la natura sono alcuni esempi.",
+            "value": "I trigger universali sono innati, comuni a tutti e ci influenzano più intensamente di quelli appresi. Socializzare e stare a contatto con la natura sono alcuni esempi.",
             "english": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Social interaction and experiencing nature are examples."
         },
         {
@@ -2100,7 +2100,7 @@
         },
         {
             "key": "enjoyment_triggers_learned_body_mobile",
-            "value": "Alcuni trigger possono essere appresi da esperienze personali o culturalmente condivise. Passare del tempo con la famiglia o visitare luoghi della gioventù sono alcuni esempi.",
+            "value": "Alcuni trigger possono essere appresi da esperienze personali o culturalmente condivise. Passare del tempo con la famiglia o visitare luoghi della giovinezza sono alcuni esempi.",
             "english": "Some triggers can be learned from personal or shared cultural experiences. Spending time with family or visiting places from one’s youth are examples."
         },
         {
@@ -2120,7 +2120,7 @@
         },
         {
             "key": "enjoyment_triggers_header_4",
-            "value": "Giocare a badminton",
+            "value": "Giocare a calcio",
             "english": "Playing badminton"
         },
         {
@@ -2140,7 +2140,7 @@
         },
         {
             "key": "enjoyment_moods_header",
-            "value": "Euforia",
+            "value": "Euforico",
             "english": "Elated"
         },
         {
@@ -2160,7 +2160,7 @@
         },
         {
             "key": "enjoyment_timeline_trigger_perceptual_database",
-            "value": "Ti ricorda un perdente ferito",
+            "value": "Pensi che sia una persona incapace di accettare la sconfitta",
             "english": "seems like a sore loser"
         },
         {
@@ -2170,7 +2170,7 @@
         },
         {
             "key": "enjoyment_timeline_state_emotion",
-            "value": "Provi felicità",
+            "value": "felice",
             "english": "enjoyment"
         },
         {
@@ -2202,7 +2202,7 @@
         },
         {
             "key": "about_intro_body",
-            "value": "L'Atlante delle emozioni è uno strumento interattivo progettato per costruire consapevolezza emotiva. Il sito ti invita a visualizzare, identificare ed esplorare cinque emozioni primarie (e relativi stati emotivi, azioni, stimoli scatenanti e stati d'animo) al fine di ottenere una migliore comprensione di come influenzano le nostre vite. Sebbene non possiamo sempre scegliere quali emozioni provare o quando provarle, costruendo consapevolezza emotiva può essere possibile scegliere come rispondere a ciò che proviamo.\n\nIl progetto dell'Atlante è iniziato quando il Dalai Lama ha chiesto al ricercatore di spicco Paul Ekman di creare una mappa delle emozioni che potesse aiutare le persone a imparare ad avere esperienze emozionali più costruttive. Ekman, esperto nel settore, aveva precedentemente prestato consulenza per una vasta gamma di progetti legati alle emozioni, tra cui il famoso film Pixar Inside Out. Con sua figlia, la studiosa Eve Ekman, ha creato l'Atlante delle Emozioni in risposta alla richiesta del Dalai Lama.",
+            "value": "L'Atlante delle emozioni è uno strumento interattivo utile a migliorare la consapevolezza emotiva. Il sito invita a visualizzare, identificare ed esplorare cinque emozioni primarie (e relativi stati emotivi, azioni, stimoli scatenanti e stati d'animo) al fine di ottenere una migliore comprensione di come le emozioni influenzino le nostre vite. Sebbene non possiamo scegliere quali emozioni provare o quando provarle, migliorando la nostra consapevolezza emotiva possiamo imparare a scegliere come rispondere a ciò che stiamo provando.\nIl progetto dell'Atlante nasce dalla richiesta del Dalai Lama all'insigne studioso Paul Ekman di creare una mappa delle emozioni che potesse aiutare le persone a imparare ad avere esperienze emotive più costruttive. Ekman, esperto nel settore, aveva precedentemente prestato consulenza per una vasta gamma di progetti legati alle emozioni, tra cui il famoso film Pixar Inside Out. Con sua figlia, la studiosa Eve Ekman, ha creato l'Atlante delle Emozioni in risposta alla richiesta del Dalai Lama.",
             "english": "The Atlas of Emotions is an interactive tool designed to build emotional awareness. The site invites you to visualize, identify and explore five primary emotions (and their related feeling states, actions, triggers and moods) in order to gain a better understanding of how they influence our lives. Although we can’t always choose what emotions to feel or when to feel them, by building emotional awareness, it may be possible to choose how we respond to what we’re feeling. \n\nThe Atlas began when the Dalai Lama asked prominent emotion researcher Paul Ekman to create a map of the emotions that could help people learn to have more constructive emotional experiences. Ekman, an expert in the field, had previously consulted on a wide range of emotion-related projects, including the popular Pixar film Inside Out. With his daughter, scholar Eve Ekman, he created the Atlas of Emotions in response to the Dalai Lama’s request."
         },
         {
@@ -2212,7 +2212,7 @@
         },
         {
             "key": "about_intro_body_mobile",
-            "value": "L'Atlante delle emozioni è uno strumento interattivo progettato per costruire consapevolezza emotiva. Il sito ti invita a visualizzare, identificare ed esplorare cinque emozioni primarie (e relativi stati emotivi, azioni, stimoli scatenanti e stati d'animo) al fine di ottenere una migliore comprensione di come influenzano le nostre vite. Sebbene non possiamo sempre scegliere quali emozioni provare o quando sentirle, costruendo consapevolezza emotiva, può essere possibile scegliere come rispondere a ciò che proviamo.\n\nL'Atlante è iniziato quando il Dalai Lama ha chiesto al ricercatore di spicco Paul Ekman di creare una mappa delle emozioni che potesse aiutare le persone a imparare ad avere esperienze emozionali più costruttive. Ekman, esperto nel settore, aveva precedentemente prestato consulenza per una vasta gamma di progetti legati alle emozioni, tra cui il famoso film Pixar Inside Out. Con sua figlia, la studiosa Eve Ekman, ha creato l'Atlante delle Emozioni in risposta alla richiesta del Dalai Lama.",
+            "value": "L'Atlante delle emozioni è uno strumento interattivo utile a migliorare la consapevolezza emotiva. Il sito invita a visualizzare, identificare ed esplorare cinque emozioni primarie (e relativi stati emotivi, azioni, stimoli scatenanti e stati d'animo) al fine di ottenere una migliore comprensione di come le emozioni influenzino le nostre vite. Sebbene non possiamo scegliere quali emozioni provare o quando provarle, migliorando la nostra consapevolezza emotiva possiamo imparare a scegliere come rispondere a ciò che stiamo provando.\nIl progetto dell'Atlante nasce dalla richiesta del Dalai Lama all'insigne studioso Paul Ekman di creare una mappa delle emozioni che potesse aiutare le persone a imparare ad avere esperienze emotive più costruttive. Ekman, esperto nel settore, aveva precedentemente prestato consulenza per una vasta gamma di progetti legati alle emozioni, tra cui il famoso film Pixar Inside Out. Con sua figlia, la studiosa Eve Ekman, ha creato l'Atlante delle Emozioni in risposta alla richiesta del Dalai Lama.",
             "english": "The Atlas of Emotions is an interactive tool designed to build emotional awareness. The site invites you to visualize, identify and explore five primary emotions (and their related feeling states, actions, triggers and moods) in order to gain a better understanding of how they influence our lives. Although we can’t always choose what emotions to feel or when to feel them, by building emotional awareness, it may be possible to choose how we respond to what we’re feeling. \n\nThe Atlas began when the Dalai Lama asked prominent emotion researcher Paul Ekman to create a map of the emotions that could help people learn to have more constructive emotional experiences. Ekman, an expert in the field, had previously consulted on a wide range of emotion-related projects, including the popular Pixar film Inside Out. With his daughter, scholar Eve Ekman, he created the Atlas of Emotions in response to the Dalai Lama’s request."
         },
         {
@@ -2222,12 +2222,12 @@
         },
         {
             "key": "about_header_1",
-            "value": "Informazioni su gli Ekman",
+            "value": "Paul e Eve Ekman",
             "english": "About the Ekmans"
         },
         {
             "key": "about_body_1",
-            "value": "Paul Ekman è un rinomato psicologo americano che è stato pioniere nel campo della ricerca sulle emozioni. Dopo aver insegnato all'UCSF per 40 anni e aver collaborato con partner diversi come le forze dell'ordine e il Dalai Lama, ora dirige una società di formazione privata.\n \nEve Ekman ha conseguito un Dottorato di Ricerca presso l'Osher Center for Integrative Medicine di UCSF. Come formatrice di insegnanti per il Cultivating Emotional Balance (CEB), un intervento di regolazione delle emozioni e di meditazione, Eve adatta il CEB per addestrare gli operatori sanitari in vari campi.",
+            "value": "Paul Ekman è un rinomato psicologo americano che è stato pioniere nel campo della ricerca sulle emozioni. Dopo aver insegnato all'UCSF per 40 anni e aver collaborato con partner diversi come le forze dell'ordine e il Dalai Lama, ora dirige una società di formazione privata.\n \nEve Ekman ha conseguito un Dottorato di Ricerca presso l'Osher Center for Integrative Medicine di UCSF. In qualità di formatrice di insegnanti per il Cultivating Emotional Balance (CEB), un intervento di regolazione delle emozioni e di meditazione, Eve adatta il CEB per addestrare gli operatori sanitari in vari campi.",
             "english": "Paul Ekman is a renowned American psychologist who pioneered the field of emotion research. After teaching at UCSF for 40 years and collaborating with partners as diverse as law enforcement agencies and the Dalai Lama, he now runs a private training company. \n \nEve Ekman is a post-doctoral scholar at UCSF’s Osher Center for Integrative Medicine. As a teacher trainer for Cultivating Emotional Balance (CEB), an emotion-regulation and meditation intervention, Eve adapts CEB to train care providers in various fields."
         },
         {
