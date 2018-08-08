@@ -709,9 +709,14 @@
             "english": " A response that could be helpful or unhelpful — sometimes we aren't sure"
         },
         {
-            "key": "timeline_phrase_you_feel",
-            "value": "provi",
+            "key": "timeline_common_phrase_you_feel",
+            "value": "Provi",
             "english": "you feel"
+        },
+        {
+            "key": "strategies_crowdfunding",
+            "value": "Stiamo lavorando per introdurre l’Atlas quale strumento educativo per i bambini. Se desideri supportarci in questo progetto puoi dare il tuo contributo visitando il sito alla pagina: <a target=\"_newWin\" href=\"https://www.indiegogo.com/projects/help-create-an-atlas-of-emotions-for-children#/\"><img src=\"img/Indiegogo-Logo.png\" alt=\"indie gogo\"></a>.",
+            "english": "We are making an atlas for children! If you would like to support this project, please visit our page on <a target=\"_newWin\" href=\"https://www.indiegogo.com/projects/help-create-an-atlas-of-emotions-for-children#/\"><img src=\"img/Indiegogo-Logo.png\" alt=\"indie gogo\"></a>"
         }
     ],
     [
@@ -992,7 +997,7 @@
         },
         {
             "key": "anger_timeline_state_emotion",
-            "value": "arrabbiato/a",
+            "value": "rabbia",
             "english": "anger"
         },
         {
@@ -1284,7 +1289,7 @@
         },
         {
             "key": "fear_timeline_state_emotion",
-            "value": "impaurito/a",
+            "value": "paura",
             "english": "fear"
         },
         {
@@ -1526,7 +1531,7 @@
         },
         {
             "key": "disgust_timeline_state_emotion",
-            "value": "disgustato/a",
+            "value": "disgusto",
             "english": "disgust"
         },
         {
@@ -1828,7 +1833,7 @@
         },
         {
             "key": "sadness_timeline_state_emotion",
-            "value": "triste",
+            "value": "tristezza",
             "english": "sadness"
         },
         {
@@ -1855,7 +1860,7 @@
     [
         {
             "key": "enjoyment_continent_header",
-            "value": "Felicità ",
+            "value": "Felicità",
             "english": "Enjoyment"
         },
         {
@@ -2170,7 +2175,7 @@
         },
         {
             "key": "enjoyment_timeline_state_emotion",
-            "value": "felice",
+            "value": "felicità",
             "english": "enjoyment"
         },
         {
