@@ -2412,7 +2412,8 @@
 				"body": "calm_secondary_body",
 				"header_mobile": "calm_secondary_header",
 				"body_mobile": "calm_body_mobile"
-			}
+			},
+			"crowdfunding": "strategies_crowdfunding"
 		},
 		"more": {
 			"header": "",
@@ -2529,8 +2530,14 @@
 					],
 					"header_mobile": "timeline_blocks_header"
 				},
-				"diagram_common": {
-					"phrases": { "you_feel": "timeline_phrase_you_feel" }
+				"common": {
+					"header": "timeline_common_header",
+					"body": [],
+					"phrases": {
+						"you_feel": "timeline_common_phrase_you_feel"
+					},
+					"body_mobile": [],
+					"header_mobile": "timeline_common_header"
 				}
 			}
 		}

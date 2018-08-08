@@ -568,8 +568,12 @@
             "value": " A response that could be helpful or unhelpful — sometimes we aren't sure"
         },
         {
-            "key": "timeline_phrase_you_feel",
+            "key": "timeline_common_phrase_you_feel",
             "value": "you feel"
+        },
+        {
+            "key": "strategies_crowdfunding",
+            "value": "We are making an atlas for children! If you would like to support this project, please visit our page on <a target=\"_newWin\" href=\"https://www.indiegogo.com/projects/help-create-an-atlas-of-emotions-for-children#/\"><img src=\"img/Indiegogo-Logo.png\" alt=\"indie gogo\"></a>"
         }
     ],
     [
