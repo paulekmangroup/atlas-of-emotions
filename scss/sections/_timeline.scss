@@ -42,6 +42,7 @@
 				margin-top: -15px;
 			}
 			h3 {
+				font-size: 0.9em;
 				position: relative;
 				margin-bottom: 5px;
 				padding-left: 1em;
@@ -79,7 +80,13 @@
 				margin-bottom: 1em;
 			}
 			&.closed {
-				height: 53px;
+				min-height: 53px;
+				& > * {
+					display: none;
+				}
+				& > h3 {
+					display: block;
+				}
 				h3:before {
 					left: 0.2em;
 					top: .4em;

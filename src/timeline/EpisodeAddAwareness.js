@@ -170,8 +170,12 @@ export default class EpisodeAddAwareness extends Episode {
 			//state
 			let state = timeline.select( '#state', timelineWithExamples ),
 				stateLabel = timeline.select( '#state-label', timelineWithExamples );
+			let bBox = state.getBBox();
+			let center = bBox.x + bBox.width / 2;
 			let stateLabelChildren = timeline.getChildren( stateLabel );
 			for ( let i = 0; i < stateLabelChildren.length; i++ ) {
+				stateLabelChildren[ i ].setAttribute( 'x', center );
+				stateLabelChildren[ i ].setAttribute( 'text-anchor', 'middle' );
 				if ( i == 1 ) {
 					stateLabelChildren[ i ].style.textTransform = 'uppercase';
 				}
@@ -237,17 +241,17 @@ export default class EpisodeAddAwareness extends Episode {
 			];
 
 
-			d3.selectAll( this.triggerText )
-				.attr( 'text-anchor', 'middle' )
-				.attr( 'x', function () {
-					return parseFloat( this.getComputedTextLength() ) / 2 + parseFloat( this.getAttribute( 'x' ) );
-				} );
-			d3.selectAll( this.stateNameText )
-				.attr( 'text-anchor', 'middle' )
-				.attr( 'x', function () {
-					return parseFloat( this.getComputedTextLength() ) / 2 + parseFloat( this.getAttribute( 'x' ) );
-				} );
-
+			//d3.selectAll( this.triggerText )
+			//	.attr( 'text-anchor', 'middle' )
+			//	.attr( 'x', function () {
+			//		return parseFloat( this.getComputedTextLength() ) / 2 + parseFloat( this.getAttribute( 'x' ) );
+			//	} );
+			//d3.selectAll( this.stateNameText )
+			//	.attr( 'text-anchor', 'middle' )
+			//	.attr( 'x', function () {
+			//		return parseFloat( this.getComputedTextLength() ) / 2 + parseFloat( this.getAttribute( 'x' ) );
+			//	} );
+            //
 			//add awareness buttons
 
 			this.addAwarenessButtonExperience = timeline.select( '#experience-add-awareness', document );

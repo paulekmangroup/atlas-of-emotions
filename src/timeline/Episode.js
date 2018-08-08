@@ -444,9 +444,10 @@ export default class Episode {
             let state = timeline.select( '#state', this.parent ),
                 stateLabel = timeline.select( '#state-label', this.parent );
             let bBox = state.getBBox();
+            let center = bBox.x + bBox.width / 2;
             let stateLabelChildren = timeline.getChildren( stateLabel );
             for ( let i = 0; i < stateLabelChildren.length; i++ ) {
-                stateLabelChildren[ i ].setAttribute( 'x', bBox.x + bBox.width / 2 );
+                stateLabelChildren[ i ].setAttribute( 'x', center );
                 stateLabelChildren[ i ].setAttribute( 'text-anchor', 'middle' );
                 if ( i == 1 ) {
                     stateLabelChildren[ i ].style.textTransform = 'uppercase';
