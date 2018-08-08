@@ -12,6 +12,12 @@
 			"name": "Español",
 			"fileId": "1hAUdEMZ-Hddx7BFKtpcp6gqSSH-owFrqYGbBBtYYTdQ",
 			"enabled": true
+		},
+		{
+			"lang": "it",
+			"name": "Italiano",
+			"fileId": "1cyzAGH-onmF6nvR5Ud7EWW__2GbcWbbm0i-FoWNM1Fw",
+			"enabled": true
 		}
 	]
 }

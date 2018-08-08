@@ -20,14 +20,14 @@
  */
 function onOpen() {
 
-	var ss = SpreadsheetApp.getActiveSpreadsheet();
-	var menuEntries = [
-		{
-			name: "Export all sheets to JSON",
-			functionName: "exportAll"
-		}
-	];
-	ss.addMenu( "Export to JSON", menuEntries );
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var menuEntries = [
+        {
+            name: "Export all sheets to JSON",
+            functionName: "exportAll"
+        }
+    ];
+    ss.addMenu( "Export to JSON", menuEntries );
 
 }
 
@@ -37,66 +37,66 @@ function onOpen() {
  */
 function exportAll( e ) {
 
-	var emotionsDataSheets = [
-		'anger',
-		'fear',
-		'sadness',
-		'disgust',
-		'enjoyment'
-	];
+    var emotionsDataSheets = [
+        'anger',
+        'fear',
+        'sadness',
+        'disgust',
+        'enjoyment'
+    ];
 
-	var ss = SpreadsheetApp.getActiveSpreadsheet(),
-		sheetName,
-		parsedSheets = ss.getSheets().reduce( function ( acc, sheet ) {
-			sheetName = sheet.getName().toLowerCase().trim();
-			if ( sheetName === 'metadata' ) {
-				acc.metadata = parseMetadataSheet( sheet );
-			} else if ( ~emotionsDataSheets.indexOf( sheetName ) ) {
-				acc.emotions[ sheetName ] = parseEmotionSheet( sheet );
-			} else if ( SECONDARY_PARSER_CONFIG[ sheetName ] ) {
-				var parsedObj = parseSecondary( sheetName, sheet );
-				if ( ANNEX_SECTIONS.indexOf( sheetName ) > -1 ) {
-					acc.annex[ slugify( sheetName ) ] = parsedObj;
-				} else {
-					acc[ slugify( sheetName ) ] = parsedObj;
-				}
-			}
-			return acc;
-		}, {
-			emotions: {}
-		} );
+    var ss = SpreadsheetApp.getActiveSpreadsheet(),
+        sheetName,
+        parsedSheets = ss.getSheets().reduce( function ( acc, sheet ) {
+            sheetName = sheet.getName().toLowerCase().trim();
+            if ( sheetName === 'metadata' ) {
+                acc.metadata = parseMetadataSheet( sheet );
+            } else if ( ~emotionsDataSheets.indexOf( sheetName ) ) {
+                acc.emotions[ sheetName ] = parseEmotionSheet( sheet );
+            } else if ( SECONDARY_PARSER_CONFIG[ sheetName ] ) {
+                var parsedObj = parseSecondary( sheetName, sheet );
+                if ( ANNEX_SECTIONS.indexOf( sheetName ) > -1 ) {
+                    acc.annex[ slugify( sheetName ) ] = parsedObj;
+                } else {
+                    acc[ slugify( sheetName ) ] = parsedObj;
+                }
+            }
+            return acc;
+        }, {
+            emotions: {}
+        } );
 
-	var json = JSON.stringify( parsedSheets, null, 2 );
-	return outputExportedData( json );
+    var json = JSON.stringify( parsedSheets, null, 2 );
+    return outputExportedData( json );
 
 }
 
 function parseSecondary( name, sheet ) {
 
-	var config = SECONDARY_PARSER_CONFIG[ name ];
-	var rows = [];
-	var ranges = (config.start[ 0 ].length) ? config.start : [ config.start ];
-	ranges.forEach( function ( start, j ) {
-		var next = ranges[ j + 1 ];
-		var endRow = (next) ? next[ 1 ] - 1 : sheet.getLastRow();
-		var range = sheet.getRange( start[ 1 ], start[ 0 ], endRow - (start[ 1 ] - 1), sheet.getLastColumn() - (start[ 0 ] - 1) );
-		var values = range.getValues();
-		var headers = values[ 0 ];
-		var len = values.length;
+    var config = SECONDARY_PARSER_CONFIG[ name ];
+    var rows = [];
+    var ranges = (config.start[ 0 ].length) ? config.start : [ config.start ];
+    ranges.forEach( function ( start, j ) {
+        var next = ranges[ j + 1 ];
+        var endRow = (next) ? next[ 1 ] - 1 : sheet.getLastRow();
+        var range = sheet.getRange( start[ 1 ], start[ 0 ], endRow - (start[ 1 ] - 1), sheet.getLastColumn() - (start[ 0 ] - 1) );
+        var values = range.getValues();
+        var headers = values[ 0 ];
+        var len = values.length;
 
-		for ( var i = 1; i < len; i++ ) {
-			var row = values[ i ];
-			if ( !isEmptyRow( row ) ) {
-				var obj = {};
-				headers.forEach( function ( header, k ) {
-					obj[ header.toLowerCase() ] = row[ k ];
-				} );
-				rows.push( obj );
-			}
-		}
-	} );
+        for ( var i = 1; i < len; i++ ) {
+            var row = values[ i ];
+            if ( !isEmptyRow( row ) ) {
+                var obj = {};
+                headers.forEach( function ( header, k ) {
+                    obj[ header.toLowerCase() ] = row[ k ];
+                } );
+                rows.push( obj );
+            }
+        }
+    } );
 
-	return config.parse( rows );
+    return config.parse( rows );
 
 }
 
@@ -106,832 +106,838 @@ function parseSecondary( name, sheet ) {
 
 function parseMetadataSheet( sheet ) {
 
-	// top-left (1-indexed) of valid data in sheet
-	var DATA_START_COL = 2,
-		DATA_START_ROW = 3;
+    // top-left (1-indexed) of valid data in sheet
+    var DATA_START_COL = 2,
+        DATA_START_ROW = 3;
 
-	// walk down the section labels column,
-	// aggregate all rows in each section, and parse.
-	var labelsColumn = sheet.getSheetValues( DATA_START_ROW, DATA_START_COL, -1, 1 );
-	var labelValue,
-		currentLabel,
-		metadata = {},
-		sectionData = [];
+    // walk down the section labels column,
+    // aggregate all rows in each section, and parse.
+    var labelsColumn = sheet.getSheetValues( DATA_START_ROW, DATA_START_COL, -1, 1 );
+    var labelValue,
+        currentLabel,
+        metadata = {},
+        sectionData = [];
 
-	for ( var j = 0; j < labelsColumn.length; j++ ) {
+    for ( var j = 0; j < labelsColumn.length; j++ ) {
 
-		labelValue = labelsColumn[ j ][ 0 ];
-		if ( labelValue ) {
-			labelValue = labelValue.toLowerCase();
-		}
+        labelValue = labelsColumn[ j ][ 0 ];
+        if ( labelValue ) {
+            labelValue = labelValue.toLowerCase();
+        }
 
-		if ( labelValue && labelValue !== currentLabel ) {
-			if ( currentLabel ) {
-				// parse everything aggregated up to this next label,
-				// if a parser exists; else, discard aggregated data.
-				if ( metadataSectionParsers[ currentLabel ] ) {
-					metadata[ currentLabel ] = metadataSectionParsers[ currentLabel ]( sectionData );
-				}
-			}
-			currentLabel = labelValue;
-			sectionData = [];
-		}
+        if ( labelValue && labelValue !== currentLabel ) {
+            if ( currentLabel ) {
+                // parse everything aggregated up to this next label,
+                // if a parser exists; else, discard aggregated data.
+                if ( metadataSectionParsers[ currentLabel ] ) {
+                    metadata[ currentLabel ] = metadataSectionParsers[ currentLabel ]( sectionData );
+                }
+            }
+            currentLabel = labelValue;
+            sectionData = [];
+        }
 
-		// aggregate this row's data into sectionData
-		sectionData.push( sheet.getSheetValues( DATA_START_ROW + j, DATA_START_COL + 1, 1, -1 )[ 0 ] );
+        // aggregate this row's data into sectionData
+        sectionData.push( sheet.getSheetValues( DATA_START_ROW + j, DATA_START_COL + 1, 1, -1 )[ 0 ] );
 
-	}
-	;
+    }
+    ;
 
-	// parse everything left over
-	metadata[ currentLabel ] = metadataSectionParsers[ currentLabel ]( sectionData );
+    // parse everything left over
+    metadata[ currentLabel ] = metadataSectionParsers[ currentLabel ]( sectionData );
 
-	return metadata;
+    return metadata;
 
 }
 
 var metadataSectionParsers = (function () {
 
-	var standard = function ( data ) {
-		return {
-			header: data[ 0 ][ 0 ],
-			body: data[ 0 ][ 1 ],
-			caption: data[ 0 ][ 4 ],
-			header_mobile: data[ 0 ][ 5 ] || data[ 0 ][ 0 ],
-			body_mobile: data[ 0 ][ 6 ] || data[ 0 ][ 1 ],
-			sectionName: data[ 0 ][ 7 ], //this should not be camelcase.
-			interaction_prompt: data[ 0 ][ 8 ]
-		};
-	};
+    var standard = function ( data ) {
+        return {
+            header: data[ 0 ][ 0 ],
+            body: data[ 0 ][ 1 ],
+            caption: data[ 0 ][ 4 ],
+            header_mobile: data[ 0 ][ 5 ] || data[ 0 ][ 0 ],
+            body_mobile: data[ 0 ][ 6 ] || data[ 0 ][ 1 ],
+            sectionName: data[ 0 ][ 7 ], //this should not be camelcase.
+            interaction_prompt: data[ 0 ][ 8 ]
+        };
+    };
 
-	return {
+    return {
 
-		site: function ( data ) {
-			var obj = standard( data );
-			obj.learn_more_button = data[ 0 ][ 2 ];
-			obj.close_button = data[ 0 ][ 3 ];
-			obj.back_button = data[ 0 ][ 5 ];
-			return obj;
-		},
+        site: function ( data ) {
+            var obj = standard( data );
+            obj.learn_more_button = data[ 0 ][ 2 ];
+            obj.close_button = data[ 0 ][ 3 ];
+            obj.back_button = data[ 0 ][ 5 ];
+            return obj;
+        },
 
-		navigation: function ( data ) {
-			return {
-				introduction: {
-					menu: data[ 0 ][ 0 ],
-					heading: data[ 0 ][ 1 ]
-				},
-				timeline: {
-					menu: data[ 1 ][ 0 ],
-					heading: data[ 1 ][ 1 ]
-				},
-				experience: {
-					menu: data[ 2 ][ 0 ],
-					heading: data[ 2 ][ 1 ]
-				},
-				response: {
-					menu: data[ 3 ][ 0 ],
-					heading: data[ 3 ][ 1 ]
-				},
-				strategies: {
-					menu: data[ 4 ][ 0 ],
-					heading: data[ 4 ][ 1 ]
-				},
-				emotions: {
-					all: data[ 5 ][ 0 ]
-				}
-			};
-		},
+        navigation: function ( data ) {
+            return {
+                introduction: {
+                    menu: data[ 0 ][ 0 ],
+                    heading: data[ 0 ][ 1 ]
+                },
+                timeline: {
+                    menu: data[ 1 ][ 0 ],
+                    heading: data[ 1 ][ 1 ]
+                },
+                experience: {
+                    menu: data[ 2 ][ 0 ],
+                    heading: data[ 2 ][ 1 ]
+                },
+                response: {
+                    menu: data[ 3 ][ 0 ],
+                    heading: data[ 3 ][ 1 ]
+                },
+                strategies: {
+                    menu: data[ 4 ][ 0 ],
+                    heading: data[ 4 ][ 1 ]
+                },
+                emotions: {
+                    all: data[ 5 ][ 0 ]
+                }
+            };
+        },
 
-		intro: function ( data ) {
-			var obj = {
-				header: data[ 0 ][ 0 ],
-				body: data[ 0 ][ 1 ],
-				header_mobile: data[ 0 ][ 5 ] || data[ 0 ][ 0 ],
-				body_mobile: data[ 0 ][ 6 ] || data[ 0 ][ 1 ],
-				sectionName: data[ 0 ][ 7 ]
-			};
-			obj.steps = data.map( function ( row ) {
-				return {
-					header: row[ 2 ],
-					body: row[ 3 ],
-					header_mobile: row[ 2 ],
-					body_mobile: row[ 3 ],
-					caption: row[ 4 ]
-				};
-			} );
+        intro: function ( data ) {
+            var obj = {
+                header: data[ 0 ][ 0 ],
+                body: data[ 0 ][ 1 ],
+                header_mobile: data[ 0 ][ 5 ] || data[ 0 ][ 0 ],
+                body_mobile: data[ 0 ][ 6 ] || data[ 0 ][ 1 ],
+                sectionName: data[ 0 ][ 7 ]
+            };
+            obj.steps = data.map( function ( row ) {
+                return {
+                    header: row[ 2 ],
+                    body: row[ 3 ],
+                    header_mobile: row[ 2 ],
+                    body_mobile: row[ 3 ],
+                    caption: row[ 4 ]
+                };
+            } );
 
-			return obj;
-		},
+            return obj;
+        },
 
-		hero: function ( data ) {
+        hero: function ( data ) {
 
-			var stringsColumn = 2;
-			var findMatchingStrings = function ( string ) {
-				return data.filter( function ( row ) {
-					return row[ stringsColumn ].match( string );
-				} ).map( function ( row ) {
-					return row[ stringsColumn ];
-				} );
-			};
+            var stringsColumn = 2;
+            var findMatchingStrings = function ( string ) {
+                return data.filter( function ( row ) {
+                    return row[ stringsColumn ].match( string );
+                } ).map( function ( row ) {
+                    return row[ stringsColumn ];
+                } );
+            };
 
-			return {
-				header: data[ 0 ][ 0 ],
-				body: data[ 0 ][ 1 ],
-				header_mobile: data[ 0 ][ 5 ] || data[ 0 ][ 0 ],
-				body_mobile: data[ 0 ][ 6 ] || data[ 0 ][ 1 ],
-				sectionName: data[ 0 ][ 7 ],
-				sub_header: data[ 0 ][ 2 ],
-				learn_more_link: data[ 0 ][ 3 ],
-				about: {
-					header: data[ 1 ][ 2 ],
-					header_mobile: data[ 1 ][ 2 ],
-					body: data[ 1 ][ 3 ],
-					body_mobile: data[ 1 ][ 3 ]
-				},
-				cta: data[ 2 ][ 2 ],
-				slides: findMatchingStrings( 'slide' )
-			};
+            return {
+                header: data[ 0 ][ 0 ],
+                body: data[ 0 ][ 1 ],
+                header_mobile: data[ 0 ][ 5 ] || data[ 0 ][ 0 ],
+                body_mobile: data[ 0 ][ 6 ] || data[ 0 ][ 1 ],
+                sectionName: data[ 0 ][ 7 ],
+                sub_header: data[ 0 ][ 2 ],
+                learn_more_link: data[ 0 ][ 3 ],
+                about: {
+                    header: data[ 1 ][ 2 ],
+                    header_mobile: data[ 1 ][ 2 ],
+                    body: data[ 1 ][ 3 ],
+                    body_mobile: data[ 1 ][ 3 ]
+                },
+                cta: data[ 2 ][ 2 ],
+                slides: findMatchingStrings( 'slide' )
+            };
 
-		},
+        },
 
-		continents: standard,
+        continents: standard,
 
-		states: standard,
+        states: standard,
 
-		actions: function ( data ) {
-			var obj = {
-				header: data[ 0 ][ 0 ],
-				body: data[ 0 ][ 1 ],
-				header_mobile: data[ 0 ][ 5 ] || data[ 0 ][ 0 ],
-				body_mobile: data[ 0 ][ 6 ] || data[ 0 ][ 1 ],
-				sectionName: data[ 0 ][ 7 ],
-				interaction_prompt: data[ 0 ][ 8 ]
-			};
-			obj.qualities = data.map( function ( row ) {
-				return {
-					header: row[ 2 ],
-					body: row[ 3 ],
-					header_mobile: row[ 5 ] || row[ 2 ],
-					body_mobile: row[ 6 ] || row[ 3 ]
-				};
-			} );
+        actions: function ( data ) {
+            var obj = {
+                header: data[ 0 ][ 0 ],
+                body: data[ 0 ][ 1 ],
+                header_mobile: data[ 0 ][ 5 ] || data[ 0 ][ 0 ],
+                body_mobile: data[ 0 ][ 6 ] || data[ 0 ][ 1 ],
+                sectionName: data[ 0 ][ 7 ],
+                interaction_prompt: data[ 0 ][ 8 ]
+            };
+            obj.qualities = data.map( function ( row ) {
+                return {
+                    header: row[ 2 ],
+                    body: row[ 3 ],
+                    header_mobile: row[ 5 ] || row[ 2 ],
+                    body_mobile: row[ 6 ] || row[ 3 ]
+                };
+            } );
 
-			return obj;
-		},
+            return obj;
+        },
 
-		triggers: function ( data ) {
-			var obj = {
-				header: data[ 0 ][ 0 ],
-				body: data[ 0 ][ 1 ],
-				header_mobile: data[ 0 ][ 5 ] || data[ 0 ][ 0 ],
-				body_mobile: data[ 0 ][ 6 ] || data[ 0 ][ 1 ],
-				sectionName: data[ 0 ][ 7 ]
-			};
-			obj.steps = data.map( function ( row ) {
-				return {
-					header: row[ 2 ],
-					body: row[ 3 ],
-					header_mobile: row[ 5 ] || row[ 2 ],
-					body_mobile: row[ 6 ] || row[ 3 ]
-				};
-			} );
+        triggers: function ( data ) {
+            var obj = {
+                header: data[ 0 ][ 0 ],
+                body: data[ 0 ][ 1 ],
+                header_mobile: data[ 0 ][ 5 ] || data[ 0 ][ 0 ],
+                body_mobile: data[ 0 ][ 6 ] || data[ 0 ][ 1 ],
+                sectionName: data[ 0 ][ 7 ]
+            };
+            obj.steps = data.map( function ( row ) {
+                return {
+                    header: row[ 2 ],
+                    body: row[ 3 ],
+                    header_mobile: row[ 5 ] || row[ 2 ],
+                    body_mobile: row[ 6 ] || row[ 3 ]
+                };
+            } );
 
-			return obj;
-		},
+            return obj;
+        },
 
-		moods: standard,
+        moods: standard,
 
-		calm: function ( data ) {
-			return {
-				header: data[ 0 ][ 0 ],
-				body: data[ 0 ][ 1 ],
-				caption: data[ 0 ][ 4 ],
-				header_mobile: data[ 0 ][ 5 ] || data[ 0 ][ 0 ],
-				body_mobile: data[ 0 ][ 6 ] || data[ 0 ][ 1 ],
-				sectionName: data[ 0 ][ 7 ],
-				secondary: {
-					header: data[ 0 ][ 2 ],
-					body: data[ 0 ][ 3 ],
-					header_mobile: data[ 0 ][ 5 ] || data[ 0 ][ 2 ],
-					body_mobile: data[ 0 ][ 6 ] || data[ 0 ][ 3 ]
-				}
-			};
-		},
+        calm: function ( data ) {
+            return {
+                header: data[ 0 ][ 0 ],
+                body: data[ 0 ][ 1 ],
+                caption: data[ 0 ][ 4 ],
+                header_mobile: data[ 0 ][ 5 ] || data[ 0 ][ 0 ],
+                body_mobile: data[ 0 ][ 6 ] || data[ 0 ][ 1 ],
+                sectionName: data[ 0 ][ 7 ],
+                secondary: {
+                    header: data[ 0 ][ 2 ],
+                    body: data[ 0 ][ 3 ],
+                    header_mobile: data[ 0 ][ 5 ] || data[ 0 ][ 2 ],
+                    body_mobile: data[ 0 ][ 6 ] || data[ 0 ][ 3 ]
+                },
+                crowdfunding: data[ 0 ][ 8 ]
+            };
+        },
 
-		more: standard,
+        more: standard,
 
-		timeline: function ( data ) {
-			var parsed_data = {
-				header: data[ 0 ][ 0 ],
-				header_mobile: data[ 0 ][ 0 ],
-				body: [
-					data[ 0 ][ 3 ],
-					data[ 1 ][ 3 ],
-					data[ 2 ][ 3 ]
-				],
-				body_mobile: [
-					data[ 0 ][ 3 ],
-					data[ 1 ][ 3 ],
-					data[ 2 ][ 3 ]
-				],
-				restart_button: data[ 0 ][ 4 ],
-				intro_button: data[ 3 ][ 3 ],
-				secondary: {
-					trigger: {},
-					experience: {},
-					response: {},
-					refractory: {},
-					blocks: {},
-					phrase: {}
-				}
-			};
-			var rowIndex = 4;
-			var headerColumnIndex = 2;
-			var bodyColumnIndex = 3;
-			var subsection = null;
-			var currentList = null;
-			for ( ; rowIndex < data.length; rowIndex++ ) {
-				var header = data[ rowIndex ][ headerColumnIndex ];
-				var body = data[ rowIndex ][ bodyColumnIndex ];
-				// pull subsection name from header string if it is present
-				if ( header != '' ) {
-					var subsectionName = header.match( /timeline_(.+)_header/ )[ 1 ];
-					// copy mobile data, and add list if a list is in progress,
-					// before changing subsections
-					if ( subsection ) {
-						subsection[ 'body_mobile' ] = subsection[ 'body' ];
-						subsection[ 'header_mobile' ] = subsection[ 'header' ];
-					}
-					if ( currentList ) {
-						subsection[ 'body' ].push( currentList );
-						currentList = null;
-					}
-					subsection = parsed_data.secondary[ subsectionName ];
-					subsection[ 'header' ] = header;
-					subsection[ 'body' ] = [];
-				}
-				// group any list items
-				if ( body.match( 'list_item' ) ) {
-					if ( !currentList ) {
-						//start grouping
-						currentList = [];
-					}
-					//add string to group
-					currentList.push( body );
-				} else {
-					if ( currentList ) {
-						// add list to body and stop grouping
-						subsection[ 'body' ].push( currentList );
-						currentList = null;
-					}
-					// add string to body or set the button
-					// or add to a label set
-					// depending on string contents
-					if ( body.match( /button/ ) ) {
-						subsection[ 'button' ] = body;
-					} else if ( body.match( /label/ ) ) {
-						if ( !subsection[ 'labels' ] ) {
-							subsection[ 'labels' ] = {};
-						}
-						subsection[ 'labels' ][ body.match( /.+label_(.+)/ )[ 1 ] ] = body;
-					} else if ( body.match( /caption/ ) ) {
-						if ( !subsection[ 'captions' ] ) {
-							subsection[ 'captions' ] = {};
-						}
-						subsection[ 'captions' ][ body.match( /.+caption_(.+)/ )[ 1 ] ] = body;
-					} else {
-						subsection[ 'body' ].push( body );
-					}
-				}
-			}
-			//add final list if a list is in progress
-			if ( currentList ) {
-				subsection[ 'body' ].push( currentList );
-				currentList = null;
-			}
-			subsection[ 'body_mobile' ] = subsection[ 'body' ];
-			subsection[ 'header_mobile' ] = subsection[ 'header' ];
-			return parsed_data;
-		}
+        timeline: function ( data ) {
+            var parsed_data = {
+                header: data[ 0 ][ 0 ],
+                header_mobile: data[ 0 ][ 0 ],
+                body: [
+                    data[ 0 ][ 3 ],
+                    data[ 1 ][ 3 ],
+                    data[ 2 ][ 3 ]
+                ],
+                body_mobile: [
+                    data[ 0 ][ 3 ],
+                    data[ 1 ][ 3 ],
+                    data[ 2 ][ 3 ]
+                ],
+                restart_button: data[ 0 ][ 4 ],
+                intro_button: data[ 3 ][ 3 ],
+                secondary: {
+                    trigger: {},
+                    experience: {},
+                    response: {},
+                    refractory: {},
+                    blocks: {},
+                    common: {}
+                }
+            };
+            var rowIndex = 4;
+            var headerColumnIndex = 2;
+            var bodyColumnIndex = 3;
+            var subsection = null;
+            var currentList = null;
+            for ( ; rowIndex < data.length; rowIndex++ ) {
+                var header = data[ rowIndex ][ headerColumnIndex ];
+                var body = data[ rowIndex ][ bodyColumnIndex ];
+                // pull subsection name from header string if it is present
+                if ( header != '' ) {
+                    var subsectionName = header.match( /timeline_(.+)_header/ )[ 1 ];
+                    // copy mobile data, and add list if a list is in progress,
+                    // before changing subsections
+                    if ( subsection ) {
+                        subsection[ 'body_mobile' ] = subsection[ 'body' ];
+                        subsection[ 'header_mobile' ] = subsection[ 'header' ];
+                    }
+                    if ( currentList ) {
+                        subsection[ 'body' ].push( currentList );
+                        currentList = null;
+                    }
+                    subsection = parsed_data.secondary[ subsectionName ];
+                    subsection[ 'header' ] = header;
+                    subsection[ 'body' ] = [];
+                }
+                // group any list items
+                if ( body.match( 'list_item' ) ) {
+                    if ( !currentList ) {
+                        //start grouping
+                        currentList = [];
+                    }
+                    //add string to group
+                    currentList.push( body );
+                } else {
+                    if ( currentList ) {
+                        // add list to body and stop grouping
+                        subsection[ 'body' ].push( currentList );
+                        currentList = null;
+                    }
+                    // add string to body or set the button
+                    // or add to a label set
+                    // depending on string contents
+                    if ( body.match( /button/ ) ) {
+                        subsection[ 'button' ] = body;
+                    } else if ( body.match( /label/ ) ) {
+                        if ( !subsection[ 'labels' ] ) {
+                            subsection[ 'labels' ] = {};
+                        }
+                        subsection[ 'labels' ][ body.match( /.+label_(.+)/ )[ 1 ] ] = body;
+                    } else if ( body.match( /caption/ ) ) {
+                        if ( !subsection[ 'captions' ] ) {
+                            subsection[ 'captions' ] = {};
+                        }
+                        subsection[ 'captions' ][ body.match( /.+caption_(.+)/ )[ 1 ] ] = body;
+                    } else if ( body.match( /phrase/ ) ) {
+                        if ( !subsection[ 'phrases' ] ) {
+                            subsection[ 'phrases' ] = {};
+                        }
+                        subsection[ 'phrases' ][ body.match( /.+phrase_(.+)/ )[ 1 ] ] = body;
+                    } else {
+                        subsection[ 'body' ].push( body );
+                    }
+                }
+            }
+            //add final list if a list is in progress
+            if ( currentList ) {
+                subsection[ 'body' ].push( currentList );
+                currentList = null;
+            }
+            subsection[ 'body_mobile' ] = subsection[ 'body' ];
+            subsection[ 'header_mobile' ] = subsection[ 'header' ];
+            return parsed_data;
+        }
 
-	};
+    };
 
 })();
 
 function parseEmotionSheet( sheet ) {
 
-	// top-left (1-indexed) of valid data in sheet
-	var DATA_START_COL = 2,
-		DATA_START_ROW = 3;
+    // top-left (1-indexed) of valid data in sheet
+    var DATA_START_COL = 2,
+        DATA_START_ROW = 3;
 
-	// walk down the emotion section labels column,
-	// aggregate all rows in each section, and parse.
-	var labelsColumn = sheet.getSheetValues( DATA_START_ROW, DATA_START_COL, -1, 1 );
-	var labelValue,
-		currentLabel,
-		emotionData = {},
-		sectionData = [];
+    // walk down the emotion section labels column,
+    // aggregate all rows in each section, and parse.
+    var labelsColumn = sheet.getSheetValues( DATA_START_ROW, DATA_START_COL, -1, 1 );
+    var labelValue,
+        currentLabel,
+        emotionData = {},
+        sectionData = [];
 
-	for ( var j = 0; j < labelsColumn.length; j++ ) {
+    for ( var j = 0; j < labelsColumn.length; j++ ) {
 
-		labelValue = labelsColumn[ j ][ 0 ];
-		if ( labelValue ) {
-			labelValue = labelValue.toLowerCase();
-		}
+        labelValue = labelsColumn[ j ][ 0 ];
+        if ( labelValue ) {
+            labelValue = labelValue.toLowerCase();
+        }
 
-		if ( labelValue && labelValue !== currentLabel ) {
-			if ( currentLabel ) {
-				// parse everything aggregated up to this next label,
-				// if a parser exists; else, discard aggregated data.
-				if ( emotionSectionParsers[ currentLabel ] ) {
-					emotionData[ currentLabel ] = emotionSectionParsers[ currentLabel ]( sectionData );
-				}
-			}
-			currentLabel = labelValue;
-			sectionData = [];
-		}
+        if ( labelValue && labelValue !== currentLabel ) {
+            if ( currentLabel ) {
+                // parse everything aggregated up to this next label,
+                // if a parser exists; else, discard aggregated data.
+                if ( emotionSectionParsers[ currentLabel ] ) {
+                    emotionData[ currentLabel ] = emotionSectionParsers[ currentLabel ]( sectionData );
+                }
+            }
+            currentLabel = labelValue;
+            sectionData = [];
+        }
 
-		// aggregate this row's data into sectionData
-		sectionData.push( sheet.getSheetValues( DATA_START_ROW + j, DATA_START_COL + 1, 1, -1 )[ 0 ] );
+        // aggregate this row's data into sectionData
+        sectionData.push( sheet.getSheetValues( DATA_START_ROW + j, DATA_START_COL + 1, 1, -1 )[ 0 ] );
 
-	}
-	;
+    }
+    ;
 
-	// parse everything left over
-	emotionData[ currentLabel ] = emotionSectionParsers[ currentLabel ]( sectionData );
+    // parse everything left over
+    emotionData[ currentLabel ] = emotionSectionParsers[ currentLabel ]( sectionData );
 
-	return emotionData;
+    return emotionData;
 
 }
 
 var emotionSectionParsers = (function () {
 
-	var standard = function ( data ) {
-		return data.map( function ( row ) {
-			return {
-				name: row[ 0 ],
-				desc: row[ 1 ],
-				name_mobile: row[ 5 ] || row[ 0 ],
-				desc_mobile: row[ 6 ] || row[ 1 ],
-				secondary: row[ 7 ]
-			};
-		} );
-	};
+    var standard = function ( data ) {
+        return data.map( function ( row ) {
+            return {
+                name: row[ 0 ],
+                desc: row[ 1 ],
+                name_mobile: row[ 5 ] || row[ 0 ],
+                desc_mobile: row[ 6 ] || row[ 1 ],
+                secondary: row[ 7 ]
+            };
+        } );
+    };
 
-	return {
+    return {
 
-		continent: function ( data ) {
-			return standard( data )[ 0 ];
-		},
+        continent: function ( data ) {
+            return standard( data )[ 0 ];
+        },
 
-		states: function ( data ) {
-			return data.filter( function ( row ) {
-				return !!row[ 0 ];
-			} ).map( function ( row ) {
-				// Logger.log("row len:" + row.length + "; row[0]:" + row[0]);
-				var con = (String( row[ 2 ] ).split( ',' ) || []).map( function ( val ) {
-						return val.trim().toLowerCase();
-					} ),
-					des = (String( row[ 3 ] ).split( ',' ) || []).map( function ( val ) {
-						return val.trim().toLowerCase();
-					} ),
-					both = [],
-					all = con.concat(),
-					range = String( row[ 4 ] ).replace( /\s+/g, '' ).split( '-' );
+        states: function ( data ) {
+            return data.filter( function ( row ) {
+                return !!row[ 0 ];
+            } ).map( function ( row ) {
+                // Logger.log("row len:" + row.length + "; row[0]:" + row[0]);
+                var con = (String( row[ 2 ] ).split( ',' ) || []).map( function ( val ) {
+                        return val.trim().toLowerCase();
+                    } ),
+                    des = (String( row[ 3 ] ).split( ',' ) || []).map( function ( val ) {
+                        return val.trim().toLowerCase();
+                    } ),
+                    both = [],
+                    all = con.concat(),
+                    range = String( row[ 4 ] ).replace( /\s+/g, '' ).split( '-' );
 
-				des.forEach( function ( val ) {
-					if ( ~all.indexOf( val ) ) {
-						both.push( val );
-					} else {
-						all.push( val );
-					}
-				} );
+                des.forEach( function ( val ) {
+                    if ( ~all.indexOf( val ) ) {
+                        both.push( val );
+                    } else {
+                        all.push( val );
+                    }
+                } );
 
-				return {
-					name: row[ 0 ],
-					desc: row[ 1 ],
-					name_mobile: row[ 5 ] || row[ 0 ],
-					desc_mobile: row[ 6 ] || row[ 1 ],
-					secondary: row[ 7 ],
-					range: {
-						min: parseInt( range[ 0 ] ),
-						max: parseInt( range[ 1 ] )
-					},
-					actions: {
-						all: all,
-						con: con,
-						des: des,
-						both: both
-					}
-				};
-			} );
-		},
+                return {
+                    name: row[ 0 ],
+                    desc: row[ 1 ],
+                    name_mobile: row[ 5 ] || row[ 0 ],
+                    desc_mobile: row[ 6 ] || row[ 1 ],
+                    secondary: row[ 7 ],
+                    range: {
+                        min: parseInt( range[ 0 ] ),
+                        max: parseInt( range[ 1 ] )
+                    },
+                    actions: {
+                        all: all,
+                        con: con,
+                        des: des,
+                        both: both
+                    }
+                };
+            } );
+        },
 
-		actions: standard,
+        actions: standard,
 
-		triggers: function ( data ) {
-			return data.map( function ( row ) {
-				return {
-					name: row[ 0 ],
-					type: row[ 1 ],
-					name_mobile: row[ 5 ] || row[ 0 ],
-					desc_mobile: row[ 6 ] || row[ 1 ]
-				};
-			} );
-		},
+        triggers: function ( data ) {
+            return data.map( function ( row ) {
+                return {
+                    name: row[ 0 ],
+                    type: row[ 1 ],
+                    name_mobile: row[ 5 ] || row[ 0 ],
+                    desc_mobile: row[ 6 ] || row[ 1 ]
+                };
+            } );
+        },
 
-		moods: function ( data ) {
-			// explicitly limit list length to allow adding notes at the bottom of the spreadsheet
-			var NUM_MOOD_DATA = 1;
-			return standard( data ).slice( 0, NUM_MOOD_DATA );
-		},
+        moods: function ( data ) {
+            // explicitly limit list length to allow adding notes at the bottom of the spreadsheet
+            var NUM_MOOD_DATA = 1;
+            return standard( data ).slice( 0, NUM_MOOD_DATA );
+        },
 
-		timeline: function ( data ) {
-			return [ {
-				trigger: {
-					precondition: data[ 0 ][ 1 ],
-					event: data[ 1 ][ 1 ],
-					perceptual_database: data[ 2 ][ 1 ]
-				},
-				state: {
-					physical_changes: data[ 3 ][ 1 ],
-					emotion: data[ 4 ][ 1 ],
-					mental_changes: data[ 5 ][ 1 ]
-				},
-				response: {
-					constructive_response: data[ 6 ][ 1 ],
-					destructive_response: data[ 7 ][ 1 ],
-					ambiguous_response: data[ 8 ][ 1 ]
-				}
-			} ];
-		},
+        timeline: function ( data ) {
+            return [ {
+                trigger: {
+                    precondition: data[ 0 ][ 1 ],
+                    event: data[ 1 ][ 1 ],
+                    perceptual_database: data[ 2 ][ 1 ]
+                },
+                state: {
+                    physical_changes: data[ 3 ][ 1 ],
+                    emotion: data[ 4 ][ 1 ],
+                    mental_changes: data[ 5 ][ 1 ]
+                },
+                response: {
+                    constructive_response: data[ 6 ][ 1 ],
+                    destructive_response: data[ 7 ][ 1 ],
+                    ambiguous_response: data[ 8 ][ 1 ]
+                }
+            } ];
+        },
 
-	};
+    };
 
 })();
 
 var ANNEX_SECTIONS = [
-	'scientific basis',
-	'signals',
-	'psychopathology',
-	'personality trait',
-	'partially charted',
-	'triggers timeline',
-	//'impediment-antidote',
-	'intrinsic or intentional',
+    'scientific basis',
+    'signals',
+    'psychopathology',
+    'personality trait',
+    'partially charted',
+    'triggers timeline',
+    //'impediment-antidote',
+    'intrinsic or intentional',
 ];
 
 var SECONDARY_PARSER_CONFIG = {
-	'scientific basis': {
-		start: [ [ 1, 3 ], [ 1, 6 ], [ 1, 9 ], [ 1, 26 ] ], // col, row
-		parse: function ( data ) {
-			if ( !data ) return {};
+    'scientific basis': {
+        start: [ [ 1, 3 ], [ 1, 6 ], [ 1, 9 ], [ 1, 26 ] ], // col, row
+        parse: function ( data ) {
+            if ( !data ) return {};
 
-			var scientific = {};
-			scientific.content = [];
-			scientific.footer = [];
+            var scientific = {};
+            scientific.content = [];
+            scientific.footer = [];
 
-			data.forEach( function ( row ) {
-				if ( row.title ) {
-					scientific.title = row.title;
-					scientific.desc = row.introduction || '';
-				} else if ( row.surveydata ) {
-					scientific.content.push( {
-						desc: row.surveyquestion,
-						name: row.surveydata.toString() || null,
-						formatting: row.formatting
-					} );
-				} else if ( row.survey ) {
-					scientific.contentIntro = row.survey;
-				} else if ( row.footer ) {
-					scientific.footer.push( row.footer )
-				}
-			} );
+            data.forEach( function ( row ) {
+                if ( row.title ) {
+                    scientific.title = row.title;
+                    scientific.desc = row.introduction || '';
+                } else if ( row.surveydata ) {
+                    scientific.content.push( {
+                        desc: row.surveyquestion,
+                        name: row.surveydata.toString() || null,
+                        formatting: row.formatting
+                    } );
+                } else if ( row.survey ) {
+                    scientific.contentIntro = row.survey;
+                } else if ( row.footer ) {
+                    scientific.footer.push( row.footer )
+                }
+            } );
 
-			return scientific;
-		}
-	},
+            return scientific;
+        }
+    },
 
-	'triggers timeline': {
-		start: [ [ 1, 3 ], [ 1, 6 ], [ 1, 29 ] ], // col, row
-		parse: function ( data ) {
-			var rsp = {};
-			rsp.content = [];
-			rsp.footer = [];
+    'triggers timeline': {
+        start: [ [ 1, 3 ], [ 1, 6 ], [ 1, 29 ] ], // col, row
+        parse: function ( data ) {
+            var rsp = {};
+            rsp.content = [];
+            rsp.footer = [];
 
-			data.forEach( function ( row ) {
-				if ( row.title ) {
-					rsp.title = row.title;
-					rsp.desc = row.introduction || '';
-				} else if ( row.text ) {
-					rsp.content.push( {
-						desc: row.text,
-						name: row.id || null
-					} );
-				} else if ( row.footer ) {
-					rsp.footer.push( row.footer )
-				}
-			} );
+            data.forEach( function ( row ) {
+                if ( row.title ) {
+                    rsp.title = row.title;
+                    rsp.desc = row.introduction || '';
+                } else if ( row.text ) {
+                    rsp.content.push( {
+                        desc: row.text,
+                        name: row.id || null
+                    } );
+                } else if ( row.footer ) {
+                    rsp.footer.push( row.footer )
+                }
+            } );
 
-			return rsp;
-		}
-	},
+            return rsp;
+        }
+    },
 
-	'impediment-antidote': {
-		start: [ [ 1, 3 ], [ 1, 6 ] ], // col, row
-		parse: function ( data ) {
-			var rsp = {};
-			rsp.emotions = [];
+    'impediment-antidote': {
+        start: [ [ 1, 3 ], [ 1, 6 ] ], // col, row
+        parse: function ( data ) {
+            var rsp = {};
+            rsp.emotions = [];
 
-			var currentEmotion, antidotes, impediments;
-			data.forEach( function ( row ) {
-				if ( row.title && row.introduction ) {
-					rsp.title = row.title;
-					rsp.desc = row.introduction;
+            var currentEmotion, antidotes, impediments;
+            data.forEach( function ( row ) {
+                if ( row.title && row.introduction ) {
+                    rsp.title = row.title;
+                    rsp.desc = row.introduction;
 
-				} else if ( row[ 'state name' ] ) {
-					if ( row.emotion && currentEmotion !== row.emotion ) {
-						currentEmotion = row.emotion;
-						antidotes = {};
-						impediments = {};
-						antidotes.name = row.emotion + ' Antidotes';
-						impediments.name = row.emotion + ' Impediments';
-						antidotes.children = [];
-						impediments.children = [];
-						rsp.emotions.push( antidotes );
-						rsp.emotions.push( impediments );
-					}
+                } else if ( row[ 'state name' ] ) {
+                    if ( row.emotion && currentEmotion !== row.emotion ) {
+                        currentEmotion = row.emotion;
+                        antidotes = {};
+                        impediments = {};
+                        antidotes.name = row.emotion + ' Antidotes';
+                        impediments.name = row.emotion + ' Impediments';
+                        antidotes.children = [];
+                        impediments.children = [];
+                        rsp.emotions.push( antidotes );
+                        rsp.emotions.push( impediments );
+                    }
 
-					if ( antidotes && row.antidote ) {
-						antidotes.children.push( {
-							name: row[ 'state name' ],
-							desc: row.antidote
-						} );
-					}
+                    if ( antidotes && row.antidote ) {
+                        antidotes.children.push( {
+                            name: row[ 'state name' ],
+                            desc: row.antidote
+                        } );
+                    }
 
-					if ( impediments && row.impediment ) {
-						impediments.children.push( {
-							name: row[ 'state name' ],
-							desc: row.impediment
-						} );
-					}
-				}
-			} );
+                    if ( impediments && row.impediment ) {
+                        impediments.children.push( {
+                            name: row[ 'state name' ],
+                            desc: row.impediment
+                        } );
+                    }
+                }
+            } );
 
-			return rsp;
-		}
-	},
+            return rsp;
+        }
+    },
 
-	'intrinsic or intentional': {
-		start: [ [ 1, 3 ], [ 1, 6 ] ], // col, row
-		parse: function ( data ) {
-			var rsp = {};
-			rsp.emotions = [];
+    'intrinsic or intentional': {
+        start: [ [ 1, 3 ], [ 1, 6 ] ], // col, row
+        parse: function ( data ) {
+            var rsp = {};
+            rsp.emotions = [];
 
-			var obj;
-			data.forEach( function ( row ) {
-				if ( row.title && row.introduction ) {
-					rsp.title = row.title;
-					rsp.desc = row.introduction;
-				} else if ( row.name ) {
-					obj = {}
-					obj.name = row.name;
-					obj.children = [];
+            var obj;
+            data.forEach( function ( row ) {
+                if ( row.title && row.introduction ) {
+                    rsp.title = row.title;
+                    rsp.desc = row.introduction;
+                } else if ( row.name ) {
+                    obj = {}
+                    obj.name = row.name;
+                    obj.children = [];
 
-					obj.children.push( {
-						name: 'Intrinsic',
-						desc: row.intrinsic
-					} );
+                    obj.children.push( {
+                        name: 'Intrinsic',
+                        desc: row.intrinsic
+                    } );
 
-					obj.children.push( {
-						name: 'Intentional',
-						desc: row.intentional
-					} );
+                    obj.children.push( {
+                        name: 'Intentional',
+                        desc: row.intentional
+                    } );
 
-					rsp.emotions.push( obj );
-				}
-			} );
+                    rsp.emotions.push( obj );
+                }
+            } );
 
-			return rsp;
-		}
-	},
+            return rsp;
+        }
+    },
 
 
-	'partially charted': {
-		start: [ [ 1, 3 ], [ 1, 6 ] ], // col, row
-		parse: function ( data ) {
-			var rsp = {};
-			rsp.emotions = [];
+    'partially charted': {
+        start: [ [ 1, 3 ], [ 1, 6 ] ], // col, row
+        parse: function ( data ) {
+            var rsp = {};
+            rsp.emotions = [];
 
-			data.forEach( function ( row ) {
-				if ( row.title && row.introduction ) {
-					rsp.title = row.title;
-					rsp.desc = row.introduction;
-				} else if ( row[ 'emotion name' ] && row.description ) {
-					rsp.emotions.push( {
-						name: row[ 'emotion name' ],
-						desc: row.description
-					} );
-				}
-			} );
+            data.forEach( function ( row ) {
+                if ( row.title && row.introduction ) {
+                    rsp.title = row.title;
+                    rsp.desc = row.introduction;
+                } else if ( row[ 'emotion name' ] && row.description ) {
+                    rsp.emotions.push( {
+                        name: row[ 'emotion name' ],
+                        desc: row.description
+                    } );
+                }
+            } );
 
-			return rsp;
-		}
-	},
+            return rsp;
+        }
+    },
 
-	'signals': {
-		start: [ [ 1, 3 ], [ 1, 6 ] ], // col, row
-		parse: function ( data ) {
-			var rsp = {};
-			rsp.emotions = [];
+    'signals': {
+        start: [ [ 1, 3 ], [ 1, 6 ] ], // col, row
+        parse: function ( data ) {
+            var rsp = {};
+            rsp.emotions = [];
 
-			var currentName, obj;
-			data.forEach( function ( row ) {
-				if ( row.title && row.introduction ) {
-					rsp.title = row.title;
-					rsp.desc = row.introduction;
-				} else if ( row.message && row.signal ) {
-					if ( row.name && (!currentName || currentName !== row.name) ) {
-						currentName = row.name;
-						obj = {};
-						obj.name = row.name;
-						obj.desc = null;
-						obj.children = [];
-						rsp.emotions.push( obj );
-					}
+            var currentName, obj;
+            data.forEach( function ( row ) {
+                if ( row.title && row.introduction ) {
+                    rsp.title = row.title;
+                    rsp.desc = row.introduction;
+                } else if ( row.message && row.signal ) {
+                    if ( row.name && (!currentName || currentName !== row.name) ) {
+                        currentName = row.name;
+                        obj = {};
+                        obj.name = row.name;
+                        obj.desc = null;
+                        obj.children = [];
+                        rsp.emotions.push( obj );
+                    }
 
-					if ( obj ) {
-						obj.children.push( {
-							name: 'Signal',
-							desc: row.signal
-						} );
+                    if ( obj ) {
+                        obj.children.push( {
+                            name: 'Signal',
+                            desc: row.signal
+                        } );
 
-						obj.children.push( {
-							name: 'Message',
-							desc: row.message
-						} );
-					}
-				}
-			} );
+                        obj.children.push( {
+                            name: 'Message',
+                            desc: row.message
+                        } );
+                    }
+                }
+            } );
 
-			return rsp;
-		}
-	},
+            return rsp;
+        }
+    },
 
-	'psychopathology': {
-		start: [ [ 1, 3 ], [ 1, 6 ] ], // col, row
-		parse: function ( data ) {
-			var rsp = {};
-			rsp.emotions = [];
+    'psychopathology': {
+        start: [ [ 1, 3 ], [ 1, 6 ] ], // col, row
+        parse: function ( data ) {
+            var rsp = {};
+            rsp.emotions = [];
 
-			var currentName, obj;
-			data.forEach( function ( row ) {
-				if ( row.title && row.introduction ) {
-					rsp.title = row.title;
-					rsp.desc = row.introduction;
-				} else if ( row[ 'associated diagnoses' ] && row[ 'description of diagnoses' ] ) {
-					if ( row.name && (!currentName || currentName !== row.name) ) {
-						currentName = row.name;
-						obj = {};
-						obj.name = row.name;
-						obj.desc = row.description;
-						obj.children = [];
-						rsp.emotions.push( obj );
-					}
-					if ( obj ) {
-						obj.children.push( {
-							name: row[ 'associated diagnoses' ],
-							desc: row[ 'description of diagnoses' ]
-						} );
-					}
-				}
-			} );
+            var currentName, obj;
+            data.forEach( function ( row ) {
+                if ( row.title && row.introduction ) {
+                    rsp.title = row.title;
+                    rsp.desc = row.introduction;
+                } else if ( row[ 'associated diagnoses' ] && row[ 'description of diagnoses' ] ) {
+                    if ( row.name && (!currentName || currentName !== row.name) ) {
+                        currentName = row.name;
+                        obj = {};
+                        obj.name = row.name;
+                        obj.desc = row.description;
+                        obj.children = [];
+                        rsp.emotions.push( obj );
+                    }
+                    if ( obj ) {
+                        obj.children.push( {
+                            name: row[ 'associated diagnoses' ],
+                            desc: row[ 'description of diagnoses' ]
+                        } );
+                    }
+                }
+            } );
 
-			return rsp;
-		}
-	},
+            return rsp;
+        }
+    },
 
-	'personality trait': {
-		start: [ [ 1, 3 ], [ 1, 6 ] ], // col, row
-		parse: function ( data ) {
-			var rsp = {};
-			rsp.emotions = [];
+    'personality trait': {
+        start: [ [ 1, 3 ], [ 1, 6 ] ], // col, row
+        parse: function ( data ) {
+            var rsp = {};
+            rsp.emotions = [];
 
-			data.forEach( function ( row ) {
-				if ( row.title && row.introduction ) {
-					rsp.title = row.title;
-					rsp.desc = row.introduction;
-				} else if ( row.name && row.description ) {
-					rsp.emotions.push( {
-						name: row.name,
-						desc: row.description
-					} )
-				}
-			} );
+            data.forEach( function ( row ) {
+                if ( row.title && row.introduction ) {
+                    rsp.title = row.title;
+                    rsp.desc = row.introduction;
+                } else if ( row.name && row.description ) {
+                    rsp.emotions.push( {
+                        name: row.name,
+                        desc: row.description
+                    } )
+                }
+            } );
 
-			return rsp;
-		}
-	},
+            return rsp;
+        }
+    },
 
-	'further reading': {
-		start: [ [ 1, 3 ], [ 1, 6 ] ], // col, row
-		parse: function ( data ) {
-			var rsp = {};
-			rsp.links = [];
+    'further reading': {
+        start: [ [ 1, 3 ], [ 1, 6 ] ], // col, row
+        parse: function ( data ) {
+            var rsp = {};
+            rsp.links = [];
 
-			data.forEach( function ( row ) {
-				if ( row.introduction ) {
-					rsp.title = row.title ? row.title : ' ';
-					rsp.desc = row.introduction;
-				} else if ( row.link && row[ 'link text' ] ) {
-					rsp.links.push( {
-						link: row.link,
-						desc: row[ 'link text' ]
-					} );
-				}
-			} );
+            data.forEach( function ( row ) {
+                if ( row.introduction ) {
+                    rsp.title = row.title ? row.title : ' ';
+                    rsp.desc = row.introduction;
+                } else if ( row.link && row[ 'link text' ] ) {
+                    rsp.links.push( {
+                        link: row.link,
+                        desc: row[ 'link text' ]
+                    } );
+                }
+            } );
 
-			return rsp;
-		}
-	},
+            return rsp;
+        }
+    },
 
-	donate: {
-		start: [ 1, 3 ], // col, row
-		parse: function ( data ) {
-			var rsp = {
-				title: data[ 0 ].title,
-				desc: data[ 0 ].text,
-				link: data[ 0 ].link,
-				imgs: []
-			};
+    donate: {
+        start: [ 1, 3 ], // col, row
+        parse: function ( data ) {
+            var rsp = {
+                title: data[ 0 ].title,
+                desc: data[ 0 ].text,
+                link: data[ 0 ].link,
+                imgs: []
+            };
 
-			data.forEach( function ( row ) {
-				if ( row.image ) {
-					rsp.imgs.push( row.image );
-				}
-			} );
+            data.forEach( function ( row ) {
+                if ( row.image ) {
+                    rsp.imgs.push( row.image );
+                }
+            } );
 
-			return rsp;
-		}
-	},
+            return rsp;
+        }
+    },
 
-	emotrak: {
-		start: [ [ 1, 2 ], [ 1, 5 ] ], // col, row
-		parse: function ( data ) {
-			var rsp = {};
-			rsp.subsections = [];
+    emotrak: {
+        start: [ [ 1, 2 ], [ 1, 5 ] ], // col, row
+        parse: function ( data ) {
+            var rsp = {};
+            rsp.subsections = [];
 
-			data.forEach( function ( row ) {
-				if ( row.introduction ) {
-					rsp.title = row.title ? row.title : '';
-					rsp.desc = row.introduction;
-					rsp.header_mobile = row[ 'mobile alt header' ];
-					rsp.body_mobile = row[ 'mobile alt body' ];
-					rsp.sectionName = row[ 'section name' ];
-					rsp.sectionName_mobile = row[ 'section name' ];
-				} else if ( row.text ) {
-					rsp.subsections.push( {
-						title: row.subhead ? row.subhead : '',
-						desc: row.text,
-						title_mobile: row.subhead ? row.subhead : '',
-						desc_mobile: row.text,
-						image: row.image ? row.image : null,
-						mail: row.mail ? row.mail : null
-					} );
-				}
-			} );
+            data.forEach( function ( row ) {
+                if ( row.introduction ) {
+                    rsp.title = row.title ? row.title : '';
+                    rsp.desc = row.introduction;
+                    rsp.header_mobile = row[ 'mobile alt header' ];
+                    rsp.body_mobile = row[ 'mobile alt body' ];
+                    rsp.sectionName = row[ 'section name' ];
+                    rsp.sectionName_mobile = row[ 'section name' ];
+                } else if ( row.text ) {
+                    rsp.subsections.push( {
+                        title: row.subhead ? row.subhead : '',
+                        desc: row.text,
+                        title_mobile: row.subhead ? row.subhead : '',
+                        desc_mobile: row.text,
+                        image: row.image ? row.image : null,
+                        mail: row.mail ? row.mail : null
+                    } );
+                }
+            } );
 
-			return rsp;
-		}
-	},
+            return rsp;
+        }
+    },
 
-	about: {
-		start: [ [ 1, 3 ], [ 1, 6 ] ], // col, row
-		parse: function ( data ) {
-			var rsp = {};
-			rsp.subsections = [];
+    about: {
+        start: [ [ 1, 3 ], [ 1, 6 ] ], // col, row
+        parse: function ( data ) {
+            var rsp = {};
+            rsp.subsections = [];
 
-			data.forEach( function ( row ) {
-				if ( row.title && row.introduction ) {
-					rsp.title = row.title;
-					rsp.desc = row.introduction;
-					rsp.title_mobile = row[ 'mobile alt header' ];
-					rsp.desc_mobile = row[ 'mobile alt body' ];
-					rsp.sectionName = row[ 'section name' ];
-					rsp.sectionName_mobile = row[ 'section name' ];
-				} else if ( row.subhead ) {
-					rsp.subsections.push( {
-						title: row.subhead,
-						desc: row.text,
-						title_mobile: row.subhead,
-						desc_mobile: row.text
-					} );
-				}
-			} );
+            data.forEach( function ( row ) {
+                if ( row.title && row.introduction ) {
+                    rsp.title = row.title;
+                    rsp.desc = row.introduction;
+                    rsp.title_mobile = row[ 'mobile alt header' ];
+                    rsp.desc_mobile = row[ 'mobile alt body' ];
+                    rsp.sectionName = row[ 'section name' ];
+                    rsp.sectionName_mobile = row[ 'section name' ];
+                } else if ( row.subhead ) {
+                    rsp.subsections.push( {
+                        title: row.subhead,
+                        desc: row.text,
+                        title_mobile: row.subhead,
+                        desc_mobile: row.text
+                    } );
+                }
+            } );
 
-			return rsp;
-		}
-	}
+            return rsp;
+        }
+    }
 };
 
 
@@ -940,19 +946,19 @@ var SECONDARY_PARSER_CONFIG = {
 // ---------------------------------------------------------------------------- //
 
 function slugify( text ) {
-	return text.toString()
-		.toLowerCase()
-		.trim()
-		.replace( /\s+/g, '-' )           // Replace spaces with -
-		.replace( /[^\w\-]+/g, '' )       // Remove all non-word chars
-		.replace( /\-\-+/g, '-' )         // Replace multiple - with single -
-		.replace( /^-+/, '' )             // Trim - from start of text
-		.replace( /-+$/, '' );            // Trim - from end of text
+    return text.toString()
+        .toLowerCase()
+        .trim()
+        .replace( /\s+/g, '-' )           // Replace spaces with -
+        .replace( /[^\w\-]+/g, '' )       // Remove all non-word chars
+        .replace( /\-\-+/g, '-' )         // Replace multiple - with single -
+        .replace( /^-+/, '' )             // Trim - from start of text
+        .replace( /-+$/, '' );            // Trim - from end of text
 }
 
 
 function isEmptyRow( row ) {
-	return (row.join( '' )).length < 1;
+    return (row.join( '' )).length < 1;
 }
 
 /**
@@ -960,8 +966,8 @@ function isEmptyRow( row ) {
  */
 function outputExportedData( data ) {
 
-	// TODO: save to file instead of displaying in text box
-	displayText( data );
+    // TODO: save to file instead of displaying in text box
+    displayText( data );
 
 }
 
@@ -970,13 +976,13 @@ function outputExportedData( data ) {
  */
 function displayText( text ) {
 
-	var app = UiApp.createApplication().setTitle( 'Exported JSON' );
-	app.add( makeTextBox( app, 'json' ) );
-	app.getElementById( 'json' ).setText( text );
+    var app = UiApp.createApplication().setTitle( 'Exported JSON' );
+    app.add( makeTextBox( app, 'json' ) );
+    app.getElementById( 'json' ).setText( text );
 
-	var ss = SpreadsheetApp.getActiveSpreadsheet();
-	ss.show( app );
-	return app;
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    ss.show( app );
+    return app;
 
 }
 
@@ -985,8 +991,8 @@ function displayText( text ) {
  */
 function makeTextBox( app, name ) {
 
-	// var textArea = app.createTextArea().setWidth('100%').setHeight('200px').setId(name).setName(name);
-	var textArea = app.createTextArea().setWidth( '100%' ).setHeight( '100%' ).setId( name ).setName( name );
-	return textArea;
+    // var textArea = app.createTextArea().setWidth('100%').setHeight('200px').setId(name).setName(name);
+    var textArea = app.createTextArea().setWidth( '100%' ).setHeight( '100%' ).setId( name ).setName( name );
+    return textArea;
 
 }
