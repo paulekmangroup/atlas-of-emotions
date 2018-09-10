@@ -18,6 +18,12 @@
 			"name": "Italiano",
 			"fileId": "1cyzAGH-onmF6nvR5Ud7EWW__2GbcWbbm0i-FoWNM1Fw",
 			"enabled": true
+		},
+		{
+			"lang": "de",
+			"name": "Deutsch",
+			"fileId": "1aNIITx0p-8TWcvsh4ZomX-tWZob1qC4Z1aLP5iJ-dfw",
+			"enabled": true
 		}
 	]
 }
