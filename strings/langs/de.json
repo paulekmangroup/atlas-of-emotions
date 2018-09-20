@@ -54,11 +54,11 @@
         },
         {
             "key": "navigation_experience_section_header",
-            "value": "unser Erleben"
+            "value": "Unser Erleben"
         },
         {
             "key": "navigation_response_section_header",
-            "value": "unsere Reaktion"
+            "value": "Unsere Reaktion"
         },
         {
             "key": "navigation_strategies_section_header",
@@ -82,7 +82,7 @@
         },
         {
             "key": "intro_caption_1",
-            "value": "Dieser Atlas ist ein visuelles Werkzeug um deinen Emotionswortschatz zu erweitern. Das Ziel ist es, den eigenen Handlungsspielraum zu erweitern: was löst Emotionen bei mir aus und wie reagiere ich darauf."
+            "value": "Dieser Atlas ist ein visuelles Tool, um deinen Emotionswortschatz zu erweitern. Das Ziel ist es, den eigenen Handlungsspielraum zu erweitern: was löst Emotionen bei mir aus und wie reagiere ich darauf."
         },
         {
             "key": "intro_secondary_header_2",
@@ -105,7 +105,7 @@
         },
         {
             "key": "intro_caption_3",
-            "value": "Wähle eine Emotion und beginne mit der Erkundung"
+            "value": "Wähle eine Emotion und beginne mit der Erkundung."
         },
         {
             "key": "intro_section_name",
@@ -177,11 +177,11 @@
         },
         {
             "key": "hero_sub_header_learn_more",
-            "value": "erfahre mehr"
+            "value": "Erfahre mehr"
         },
         {
             "key": "hero_slide_1",
-            "value": "Dieser Atlas ist ein interaktives Werkzeug, um deinen Emotionswortschatz zu erweitern und deine Welt der Emotionen zu erleuchten"
+            "value": "Dieser Atlas ist ein interaktives Tool, um deinen Emotionswortschatz zu erweitern und deine Welt der Emotionen zu erleuchten."
         },
         {
             "key": "hero_slide_2",
@@ -209,7 +209,7 @@
         },
         {
             "key": "continents_body",
-            "value": "Die meisten Emotionswissenschaftler stimmen hinsichtlich dieser fünf universellen Emotionen überein: Emotionen, die alle Menschen, ungeachtet ihrer Herkunft und Sozialisation, gemeinsam haben. Die Bewegung der Formen spiegelt die fließende Beschaffenheit von Emotionen wider -  die Art und Weise wie sich die Stärke und Häufigkeit der Emotionen von Moment zu Moment ändern können. Wähle eine Emotion, um mehr zu erfahren."
+            "value": "Die meisten Emotionswissenschaftler stimmen hinsichtlich dieser fünf universellen Emotionen überein: Emotionen, die alle Menschen, ungeachtet ihrer Herkunft und Sozialisation, gemeinsam haben. Die Bewegung der Formen spiegelt die fließende Beschaffenheit von Emotionen wider -  die Art und Weise wie sich Emotionen von Moment zu Moment ändern können. Wähle eine Emotion, um mehr zu erfahren."
         },
         {
             "key": "continents_body_mobile",
@@ -233,7 +233,7 @@
         },
         {
             "key": "states_body_mobile",
-            "value": "LHAMO kann sehr sanft oder extrem wahrgenommen werden - oder irgendwo dazwischen. Klicke auf die Formen oberhalb, um einige der Zustände kennenzulernen, die wir erleben können. "
+            "value": "LHAMO kann sehr sanft oder extrem wahrgenommen werden - oder irgendwo dazwischen. Klicke auf die Formen , um einige der Zustände kennenzulernen, die wir erleben können. "
         },
         {
             "key": "states_section_name",
@@ -241,7 +241,7 @@
         },
         {
             "key": "states_interaction_prompt",
-            "value": "Wähle eine Form, um mehr über die emotionalen Zustände von LHAMO zu erfahren"
+            "value": "Wähle eine Form, um mehr über die emotionalen Zustände von LHAMO zu erfahren."
         },
         {
             "key": "actions_header",
@@ -277,7 +277,7 @@
         },
         {
             "key": "actions_secondary_copy_3",
-            "value": "In diesem Zustand ist diese Handlung schädlich. Sie könnte Schaden anrichten"
+            "value": "In diesem Zustand ist diese Handlung schädlich. Sie könnte Schaden anrichten."
         },
         {
             "key": "actions_section_name",
@@ -285,7 +285,7 @@
         },
         {
             "key": "actions_interaction_prompt",
-            "value": "Wähle eine Form, um mehr über einige der möglichen emotionalen Zustände, die wir erleben können, zu erfahren. Wähle dann eine Handlung für weitere Informationen"
+            "value": "Wähle eine Form, um mehr über einige der möglichen emotionalen Zustände, die wir erleben können, zu erfahren. Wähle dann eine Handlung für weitere Informationen."
         },
         {
             "key": "triggers_header",
@@ -365,7 +365,7 @@
         },
         {
             "key": "calm_body",
-            "value": "Der Atlas der Emotionen wurde durch den Dalai Lama mit folgendem Zweck in Auftrag gegeben: Um die neue Welt  zu finden, benötigten wir eine Landkarte. Wenn wir einen Weg zu einem ruhigen Geist finden wollen, benötigen wir eine Landkarte unserer Emotionen. Das einfache, aber nicht triviale Ziel dieses Atlasses ist es, uns beim bewusst werden unserer Emotionen zu unterstützen. Sich seiner Emotionen gewahr zu sein bedeutet, zu verstehen, wie diese ausgelöst werden, wie sie sich anfühlen und wie wir auf sie reagieren. Diese Bewusstheit selbst ist eine Strategie, die uns dabei hilft Emotionserfahrungen zu verstehen. Wir wollen Emotionen nicht los werden, wir wollen Strategien, die uns bei hilfreichen und zielführenden Antworten untertützen."
+            "value": "Der Atlas der Emotionen wurde durch den Dalai Lama mit folgendem Zweck in Auftrag gegeben: Um Amerika zu entdecken brauchte Kolumbus Seekarten. Auch wir benötigen eine Landkarte, um zu einem ruhigen Geist finden: eine Landkarte unserer Emotionen. Das einfache, aber nicht triviale Ziel dieses Atlasses ist es, uns beim bewusst werden unserer Emotionen zu unterstützen. Sich seiner Emotionen gewahr zu sein bedeutet, zu verstehen, wie diese ausgelöst werden, wie sie sich anfühlen und wie wir auf sie reagieren. Diese Bewusstheit selbst ist eine Strategie, die uns dabei hilft Emotionserfahrungen zu verstehen. Wir wollen Emotionen nicht los werden, wir wollen Strategien, die uns bei hilfreichen und zielführenden Antworten untertützen."
         },
         {
             "key": "calm_body_mobile",
@@ -404,11 +404,11 @@
         },
         {
             "key": "timeline_intro_body_1",
-            "value": "Unsere Emotionen entfalten sich auf einem Zeitstrahl. Dieser Strahl beginnt mit einem Auslöser, der die emotionale Erfahrung initiiert und letztendlich zu einer Reaktion führt"
+            "value": "Unsere Emotionen entfalten sich auf einem Zeitstrahl. Dieser Strahl beginnt mit einem Auslöser, der die emotionale Erfahrung initiiert und letztlich zu einer Reaktion führt."
         },
         {
             "key": "timeline_intro_body_2",
-            "value": "Wähle aus der Liste unterhalb des Zeitstrahls die unterschiedlichen Emotionen aus"
+            "value": "Wähle aus der Liste unterhalb des Zeitstrahls die unterschiedlichen Emotionen aus."
         },
         {
             "key": "timeline_intro_body_3",
@@ -594,7 +594,7 @@
         },
         {
             "key": "anger_states_body",
-            "value": "Ärger reicht von Verstimmung bis Wut. Die Intensität der Zustände variiert: Wir können schache oder starke Verstimmung empfinden, aber wir können nur intensive Wut empfinden. Alle Zustände des Ärgers werden durch das Gefühl ausgelöst, dass wir an unserem Fortkommen gehindert werden. "
+            "value": "Ärger reicht von Verstimmung bis Wut. Die Intensität der Zustände variiert: Wir können schwache oder starke Verstimmung empfinden, aber wir können nur intensive Wut empfinden. Alle Zustände des Ärgers werden durch das Gefühl ausgelöst, dass wir an unserem Fortkommen gehindert werden. "
         },
         {
             "key": "anger_states_header_1",
@@ -810,7 +810,7 @@
         },
         {
             "key": "anger_timeline_response_destructive_response",
-            "value": "Miteinander streiten"
+            "value": "Du streitest dich"
         },
         {
             "key": "anger_timeline_response_ambiguous_response",
@@ -828,7 +828,7 @@
         },
         {
             "key": "fear_continent_body",
-            "value": "Unsere Angst vor Gefahr lässt uns zu unserer eigenen Sicherheit Bedrohungen antizipieren"
+            "value": "Unsere Angst vor Gefahr lässt uns zu unserer eigenen Sicherheit Bedrohungen antizipieren."
         },
         {
             "key": "fear_continent_body_mobile",
@@ -852,7 +852,7 @@
         },
         {
             "key": "fear_states_body_2",
-            "value": "Sorge vor einer möglichen oder tatsächlichen Bedrohung verbunden mit der Unsicherheit, wie man sie bewältigen kann."
+            "value": "Sorge vor einer möglichen oder tatsächlichen Bedrohung, verbunden mit der Unsicherheit, wie man sie bewältigen kann."
         },
         {
             "key": "fear_states_header_3",
@@ -876,7 +876,7 @@
         },
         {
             "key": "fear_states_body_5",
-            "value": "Eine Reaktion auf die Unfähigkeit eine Gefahr zu minimieren."
+            "value": "Eine Reaktion, auf die Unfähigkeit eine Gefahr zu minimieren."
         },
         {
             "key": "fear_states_header_6",
@@ -1024,7 +1024,7 @@
         },
         {
             "key": "fear_timeline_trigger_perceptual_database",
-            "value": "Erinnert dich an das Gefühl verlassenzuwerden "
+            "value": "Du erinnerst dich daran verlassen zu werden "
         },
         {
             "key": "fear_timeline_state_physical_changes",
@@ -1044,7 +1044,7 @@
         },
         {
             "key": "fear_timeline_response_destructive_response",
-            "value": "Stell dir vor sie würden gehen"
+            "value": "Du hast Angst verlassen zu werden "
         },
         {
             "key": "fear_timeline_response_ambiguous_response",
@@ -1070,7 +1070,7 @@
         },
         {
             "key": "disgust_states_body",
-            "value": "Ekel beinhaltet viele Facetten, von Ablehnung bis Abscheu.Die erlebte Intensität variiert: Wir können leichte oder starke Ablehnung spüren, aber Abscheu ist immer ein starkes Gefühl. Alle Facetten des Ekels werden ausgelöst durch das Gefühl, dass etwas physisch oder psychisch nicht gut für uns ist."
+            "value": "Ekel beinhaltet viele Facetten, von Ablehnung bis Abscheu. Die erlebte Intensität variiert: Wir können leichte oder starke Ablehnung spüren, aber Abscheu ist immer ein starkes Gefühl. Alle Facetten des Ekels werden ausgelöst durch das Gefühl, dass etwas physisch oder psychisch nicht gut für uns ist."
         },
         {
             "key": "disgust_states_header_1",
@@ -1078,7 +1078,7 @@
         },
         {
             "key": "disgust_states_body_1",
-            "value": "Etwas anderes bevorzugen"
+            "value": "Etwas anderes bevorzugen."
         },
         {
             "key": "disgust_states_header_2",
@@ -1154,7 +1154,7 @@
         },
         {
             "key": "disgust_actions_body_3",
-            "value": "Erbrechen als Reaktion auf Ekel"
+            "value": "Erbrechen als Reaktion auf Ekel."
         },
         {
             "key": "disgust_actions_header_4",
@@ -1218,7 +1218,7 @@
         },
         {
             "key": "disgust_timeline_trigger_perceptual_database",
-            "value": "Es erinnert Dich an einen Mangel an Sensibilität"
+            "value": "Du erinnerst dich an Unsensibilität"
         },
         {
             "key": "disgust_timeline_state_physical_changes",
@@ -1238,7 +1238,7 @@
         },
         {
             "key": "disgust_timeline_response_destructive_response",
-            "value": "Du verniedlichst es"
+            "value": "Du wertest ihn ab"
         },
         {
             "key": "disgust_timeline_response_ambiguous_response",
@@ -1312,7 +1312,7 @@
         },
         {
             "key": "sadness_states_body_6",
-            "value": "Starkes Leiden oder Unglück"
+            "value": "Starkes Leiden oder Unglück."
         },
         {
             "key": "sadness_states_header_7",
@@ -1396,7 +1396,7 @@
         },
         {
             "key": "sadness_actions_body_5",
-            "value": "Den Verlust nicht Wahrhaben wollen"
+            "value": "Den Verlust nicht Wahrhaben wollen."
         },
         {
             "key": "sadness_actions_header_6",
@@ -1404,7 +1404,7 @@
         },
         {
             "key": "sadness_actions_body_6",
-            "value": "Sich über die eigenen Gefühle in Bezug auf den Verlustes schämen"
+            "value": "Sich über die eigenen Gefühle in Bezug auf einen Verlust schämen."
         },
         {
             "key": "sadness_triggers_universal_header_mobile",
@@ -1460,7 +1460,7 @@
         },
         {
             "key": "sadness_timeline_trigger_perceptual_database",
-            "value": "Es erinnert dich an Zurückweisung"
+            "value": "Du erinnerst dich an Zurückweisung"
         },
         {
             "key": "sadness_timeline_state_physical_changes",
@@ -1506,7 +1506,7 @@
         },
         {
             "key": "enjoyment_states_body",
-            "value": "Freude beinhaltet Facetten von Zufriedenheit und Euphorie gleichermaßen. Die erlebte Intensität variiert: wird können leichte oder starke Zufriedenheit erleben, Euphorie hingegen ist immer intensiv. Alle Zustände der Freude sind ausgelöst durch ein Gefühl der Verbundenheit und/ oder ein sinnliches Vergnügen."
+            "value": "Freude beinhaltet Facetten von Zufriedenheit und Euphorie gleichermaßen. Die erlebte Intensität variiert. Wir können leichte oder starke Zufriedenheit erleben, Euphorie hingegen ist immer intensiv. Alle Zustände der Freude sind ausgelöst durch ein Gefühl der Verbundenheit und/ oder ein sinnliches Vergnügen."
         },
         {
             "key": "enjoyment_states_header_1",
@@ -1530,7 +1530,7 @@
         },
         {
             "key": "enjoyment_states_body_3",
-            "value": "Leichte, spielerische Gefühle der Freude und guten Humors."
+            "value": "Leichte, spielerische Gefühle der Freude und des guten Humors."
         },
         {
             "key": "enjoyment_states_header_4",
@@ -1546,7 +1546,7 @@
         },
         {
             "key": "enjoyment_states_body_5",
-            "value": "Freude daran Anderen zu helfen oder ihr Leid zu verringern."
+            "value": "Freude daran, Anderen zu helfen oder ihr Leid zu verringern."
         },
         {
             "key": "enjoyment_states_header_6",
@@ -1562,11 +1562,11 @@
         },
         {
             "key": "enjoyment_states_body_7",
-            "value": "Freude einer schwierigen Herausforderung zu begegnen."
+            "value": "Freude, einer schwierigen Herausforderung zu begegnen."
         },
         {
             "key": "enjoyment_states_header_8",
-            "value": "Vaterstolz"
+            "value": "Elternstolz"
         },
         {
             "key": "enjoyment_states_body_8",
@@ -1586,7 +1586,7 @@
         },
         {
             "key": "enjoyment_states_body_10",
-            "value": "Eine Erfahrung von etwas das sehr überraschend kommt, wunderschön, erstaunlich oder schwer zu glauben ist."
+            "value": "Eine Erfahrung von etwas, das sehr überraschend kommt, wunderschön, erstaunlich oder kaum zu glauben ist."
         },
         {
             "key": "enjoyment_states_header_11",
@@ -1618,7 +1618,7 @@
         },
         {
             "key": "enjoyment_actions_header_1",
-            "value": "Mehr von etwas machen."
+            "value": "Mehr von etwas machen"
         },
         {
             "key": "enjoyment_actions_body_1",
@@ -1626,7 +1626,7 @@
         },
         {
             "key": "enjoyment_actions_header_2",
-            "value": "Etwas beibehalten."
+            "value": "Etwas beibehalten"
         },
         {
             "key": "enjoyment_actions_body_2",
@@ -1654,7 +1654,7 @@
         },
         {
             "key": "enjoyment_actions_body_5",
-            "value": "Seine Freude mit Anderen teilen ohne den Wunsch Neid hervorzurufen."
+            "value": "Seine Freude mit Anderen teilen ohne den Wunsch nach Neid."
         },
         {
             "key": "enjoyment_actions_header_6",
@@ -1726,7 +1726,7 @@
         },
         {
             "key": "enjoyment_timeline_trigger_precondition",
-            "value": "Du hast einen Volltreffer erzielt"
+            "value": "Du hast ein Tor geschossen"
         },
         {
             "key": "enjoyment_timeline_trigger_event",
@@ -1734,7 +1734,7 @@
         },
         {
             "key": "enjoyment_timeline_trigger_perceptual_database",
-            "value": "Scheint ein schlechter Verlierer zu sein"
+            "value": "Er scheint ein schlechter Verlierer zu sein"
         },
         {
             "key": "enjoyment_timeline_state_physical_changes",
@@ -1754,7 +1754,7 @@
         },
         {
             "key": "enjoyment_timeline_response_destructive_response",
-            "value": "Häme"
+            "value": "Du lachst ihn hämisch aus"
         },
         {
             "key": "enjoyment_timeline_response_ambiguous_response",
