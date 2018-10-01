@@ -14,11 +14,11 @@
         },
         {
             "key": "site_close_button",
-            "value": "schließen"
+            "value": "Schließen"
         },
         {
             "key": "site_back_button",
-            "value": "zurück"
+            "value": "Zurück"
         },
         {
             "key": "navigation_introduction_menu_item",
@@ -42,7 +42,7 @@
         },
         {
             "key": "navigation_all_menu_item",
-            "value": "alles"
+            "value": "Alles"
         },
         {
             "key": "navigation_introduction_section_header",
@@ -50,7 +50,7 @@
         },
         {
             "key": "navigation_timeline_section_header",
-            "value": "der Zeitstrahl"
+            "value": "Der Zeitstrahl"
         },
         {
             "key": "navigation_experience_section_header",
@@ -113,7 +113,7 @@
         },
         {
             "key": "intro_button_goto",
-            "value": "gehe zum Atlas"
+            "value": "Gehe zum Atlas"
         },
         {
             "key": "intro_button_start",
@@ -121,27 +121,27 @@
         },
         {
             "key": "intro_button_back",
-            "value": "zurück"
+            "value": "Zurück"
         },
         {
             "key": "intro_button_why",
-            "value": "warum ein Atlas?"
+            "value": "Warum ein Atlas?"
         },
         {
             "key": "intro_button_start",
-            "value": "los geht’s"
+            "value": "Los geht’s"
         },
         {
             "key": "intro_gfx_left",
-            "value": "links"
+            "value": "Links"
         },
         {
             "key": "intro_gfx_right",
-            "value": "rechts"
+            "value": "Rechts"
         },
         {
             "key": "intro_gfx_down",
-            "value": "runter"
+            "value": "Runter"
         },
         {
             "key": "intro_gfx_chart_anger",
@@ -189,7 +189,7 @@
         },
         {
             "key": "hero_slide_3",
-            "value": "Der erste Schritt zu einer emotionalen Bewusstheit besteht darin, dass du lernst zu erkennen und zu beschreiben, wie du dich fühlst und warum du dich so fühlst. "
+            "value": "Der erste Schritt zu emotionaler Bewusstheit besteht darin, dass du lernst zu erkennen und zu beschreiben, wie du dich fühlst und warum du dich so fühlst."
         },
         {
             "key": "hero_about_header",
@@ -293,11 +293,11 @@
         },
         {
             "key": "triggers_body",
-            "value": "Ein Auslöser ist etwas in unserer Umwelt oder in unserer Gedankenwelt, dass eine Emotion in uns wachruft. Wähle einen Reiter um mehr über das Auslösen von LHAMO zu erfahren"
+            "value": "Ein Auslöser ist etwas in unserer Umwelt oder in unserer Gedankenwelt, dass eine Emotion in uns wachruft. Wähle einen Reiter, um mehr über das Auslösen von LHAMO zu erfahren"
         },
         {
             "key": "triggers_body_mobile",
-            "value": "Ein Auslöser ist etwas in unserer Umwelt oder in unserer Gedankenwelt, dass eine Emotion in uns wachruft. Wähle einen Reiter um mehr über das Auslösen von LHAMO zu erfahren"
+            "value": "Ein Auslöser ist etwas in unserer Umwelt oder in unserer Gedankenwelt, dass eine Emotion in uns wachruft. Wähle einen Reiter, um mehr über das Auslösen von LHAMO zu erfahren"
         },
         {
             "key": "triggers_secondary_header_1",
@@ -365,7 +365,7 @@
         },
         {
             "key": "calm_body",
-            "value": "Der Atlas der Emotionen wurde durch den Dalai Lama mit folgendem Zweck in Auftrag gegeben: Um Amerika zu entdecken brauchte Kolumbus Seekarten. Auch wir benötigen eine Landkarte, um zu einem ruhigen Geist finden: eine Landkarte unserer Emotionen. Das einfache, aber nicht triviale Ziel dieses Atlasses ist es, uns beim bewusst werden unserer Emotionen zu unterstützen. Sich seiner Emotionen gewahr zu sein bedeutet, zu verstehen, wie diese ausgelöst werden, wie sie sich anfühlen und wie wir auf sie reagieren. Diese Bewusstheit selbst ist eine Strategie, die uns dabei hilft Emotionserfahrungen zu verstehen. Wir wollen Emotionen nicht los werden, wir wollen Strategien, die uns bei hilfreichen und zielführenden Antworten untertützen."
+            "value": "Der Atlas der Emotionen wurde durch den Dalai Lama mit folgendem Zweck in Auftrag gegeben: Um Amerika zu entdecken brauchte Kolumbus Seekarten. Auch wir benötigen eine Landkarte, um zu einem ruhigen Geist finden: eine Landkarte unserer Emotionen. Das einfache, aber nicht triviale Ziel dieses Atlasses ist es, uns beim bewusst werden unserer Emotionen zu unterstützen. Sich seiner Emotionen gewahr zu sein bedeutet, zu verstehen, wie diese ausgelöst werden, wie sie sich anfühlen und wie wir auf sie reagieren. Diese Bewusstheit selbst ist eine Strategie, die uns dabei hilft Emotionserfahrungen zu verstehen. Wir wollen Emotionen nicht los werden, wir wollen Strategien, die uns bei hilfreichen und zielführenden Antworten unterstützen."
         },
         {
             "key": "calm_body_mobile",
@@ -492,7 +492,7 @@
         },
         {
             "key": "timeline_blocks_body_1",
-            "value": "Du kannst jedes Stück des Zeitstrahls auswählen und lernen, wie sich Wissenschaftler emotionale Verläufe erklären. Gehe dann zum <a href=\"#continents/\">Experience</a> Abschnitt um zu betrachten, wie emotionale Erfahrungen abgebildet werden."
+            "value": "Du kannst jedes Stück des Zeitstrahls auswählen und lernen, wie sich Wissenschaftler emotionale Verläufe erklären. Gehe dann zum <a href=\"#continents/\">Erleben</a> Abschnitt um zu betrachten, wie emotionale Erfahrungen abgebildet werden."
         },
         {
             "key": "timeline_blocks_label_precondition",
@@ -532,7 +532,7 @@
         },
         {
             "key": "timeline_blocks_caption_precondition",
-            "value": "Der Kontext, der uns beeinflusst, in welcher Art und Weise wir Gefühle wahrnehnem"
+            "value": "Der Kontext, der uns beeinflusst, in welcher Art und Weise wir Gefühle wahrnehmen."
         },
         {
             "key": "timeline_blocks_caption_event",
@@ -544,27 +544,27 @@
         },
         {
             "key": "timeline_blocks_caption_physical_changes",
-            "value": "Die automatische körperliche Empfindung unserer Emotion"
+            "value": "Die automatische körperliche Empfindung unserer Emotion."
         },
         {
             "key": "timeline_blocks_caption_emotional_state",
-            "value": "Unsere kombinierten körperlichen und geistigen Veränderungen"
+            "value": "Unsere kombinierten körperlichen und geistigen Veränderungen."
         },
         {
             "key": "timeline_blocks_caption_mental_changes",
-            "value": "Das unmittelbare Erleben unserer Emotion"
+            "value": "Das unmittelbare Erleben unserer Emotion."
         },
         {
             "key": "timeline_blocks_caption_constructive_response",
-            "value": "Eine Reaktion, die uns bei der Zielerreichung unterstützt"
+            "value": "Eine Reaktion, die uns bei der Zielerreichung unterstützt."
         },
         {
             "key": "timeline_blocks_caption_destructive_response",
-            "value": "Eine Reaktion, die unsere Zielerreichung verhindert"
+            "value": "Eine Reaktion, die unsere Zielerreichung verhindert."
         },
         {
             "key": "timeline_blocks_caption_ambiguous_response",
-            "value": "Eine Reaktion, die hilfreich oder nicht hilfreich sein kann - manchmal können wir uns nicht sicher sein"
+            "value": "Eine Reaktion, die hilfreich oder nicht hilfreich sein kann - manchmal können wir uns nicht sicher sein."
         },
         {
             "key": "timeline_common_phrase_you_feel",
@@ -794,7 +794,7 @@
         },
         {
             "key": "anger_timeline_state_physical_changes",
-            "value": "Dein Körper spannt sich an."
+            "value": "Dein Körper spannt sich an"
         },
         {
             "key": "anger_timeline_state_emotion",
@@ -814,7 +814,7 @@
         },
         {
             "key": "anger_timeline_response_ambiguous_response",
-            "value": "Vermeide "
+            "value": "Vermeide weiteren Kontakt"
         }
     ],
     [
@@ -1234,7 +1234,7 @@
         },
         {
             "key": "disgust_timeline_response_constructive_response",
-            "value": "Frage, warum sie wütend sind"
+            "value": "Frage, warum er wütend ist"
         },
         {
             "key": "disgust_timeline_response_destructive_response",
@@ -1242,7 +1242,7 @@
         },
         {
             "key": "disgust_timeline_response_ambiguous_response",
-            "value": "Vermeide sie"
+            "value": "Vermeide ihn"
         }
     ],
     [
@@ -1758,7 +1758,7 @@
         },
         {
             "key": "enjoyment_timeline_response_ambiguous_response",
-            "value": "Feier"
+            "value": "Feier deinen Erfolg"
         }
     ],
     [
