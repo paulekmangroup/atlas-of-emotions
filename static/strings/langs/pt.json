@@ -709,7 +709,7 @@
             "englishValue": " A response that could be helpful or unhelpful — sometimes we aren't sure"
         },
         {
-            "key": "timeline_phrase_you_feel",
+            "key": "timeline_common_phrase_you_feel",
             "value": " sente",
             "englishValue": "you feel"
         },
@@ -1065,7 +1065,7 @@
         {
             "key": "fear_actions_body",
             "value": "Falta o exemplo de medo ",
-            "englishValue": "For example, we might suppress our feelings of frustration at work, but scream and yell to express our frustration with a family member. Suppressing our frustration can be constructive in cases where it helps us avoid arguments, but destructive if we are being hurt by not speaking up for ourselves. "
+            "mobileCharacterCount": "For example, we might avoid feeling anxiety at work, but ruminate on our anxiety at home. Avoiding anxiety can be constructive if it helps us give a presentation to a room full of colleagues, but destructive if it prevents us from confronting our difficult relationship with our boss."
         },
         {
             "key": "fear_actions_header_1",
