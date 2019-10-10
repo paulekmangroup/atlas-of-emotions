@@ -17,7 +17,7 @@ import sassVars from '../scss/variables.json';
 export default function ( ...initArgs ) {
 
     const
-        MIN_ALLOWED_WIDTH = 950,
+        MIN_ALLOWED_WIDTH = 1200,
         MIN_ALLOWED_HEIGHT = 600,
 
         NAVIGATION_DEFAULTS = {
@@ -132,7 +132,7 @@ export default function ( ...initArgs ) {
         let mainEl = document.querySelector( '#main' ),
             containerEl;
         _.values( dispatcher.SECTIONS ).forEach( sectionName => {
-            if ( sectionName == 'timeline' ) { //FIXME do this better?
+            if ( sectionName == 'triggers' ) { //FIXME do this better?
                 containers[ sectionName ] = document.getElementById( 'timeline-graphics' );
             } else {
                 containerEl = document.createElement( 'div' );
@@ -149,7 +149,7 @@ export default function ( ...initArgs ) {
         sections.continents = continents;
         sections.states = states;
         sections.actions = actions;
-        sections.timeline = timeline;
+        sections.triggers = timeline;
         sections.calm = calm;
 
         // use this without a container, so the info
@@ -520,32 +520,32 @@ export default function ( ...initArgs ) {
 
     function onSectionTextMaximizeStart( duration ) {
 
-        if ( currentSection == sections.timeline ) {
-            sections.timeline.onSectionTextMaximizeStart( duration );
+        if ( currentSection == sections.triggers ) {
+            sections.triggers.onSectionTextMaximizeStart( duration );
         }
 
     }
 
     function onSectionTextMaximizeComplete() {
 
-        if ( currentSection == sections.timeline ) {
-            sections.timeline.onSectionTextMaximizeComplete();
+        if ( currentSection == sections.triggers ) {
+            sections.triggers.onSectionTextMaximizeComplete();
         }
 
     }
 
     function onSectionTextMinimizeStart( duration ) {
 
-        if ( currentSection == sections.timeline ) {
-            sections.timeline.onSectionTextMinimizeStart( duration );
+        if ( currentSection == sections.triggers ) {
+            sections.triggers.onSectionTextMinimizeStart( duration );
         }
 
     }
 
     function onSectionTextMinimizeComplete() {
 
-        if ( currentSection == sections.timeline ) {
-            sections.timeline.onSectionTextMinimizeComplete();
+        if ( currentSection == sections.triggers ) {
+            sections.triggers.onSectionTextMinimizeComplete();
         }
 
     }
@@ -589,11 +589,12 @@ export default function ( ...initArgs ) {
             return;
         }
 
-        let cappedEmotion = emotion ? emotion.charAt( 0 ).toUpperCase() + emotion.slice( 1 ) : 'The Emotion';
+		let localizedEmotion = emotion ? appStrings().getStr( `emotionsData.emotions.${emotion}.continent.name` ): emotion;
 
-        title = title ? title.replace( /LHAMO/gi, emotion ) : null;
-        body = body ? body.replace( /LHAMO/gi, cappedEmotion ) : null;
+		let cappedEmotion = localizedEmotion ? localizedEmotion.charAt( 0 ).toUpperCase() + localizedEmotion.slice( 1 ) : 'The Emotion';
 
+		title = title ? title.replace( /LHAMO/gi, localizedEmotion ) : null;
+		body = body ? body.replace( /LHAMO/gi, cappedEmotion ) : null;
 
         // update scroller content
         let activeScrollerSectionText = $( '.section.active .section-text' )[ 0 ];

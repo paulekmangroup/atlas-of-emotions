@@ -16,13 +16,13 @@ const scroller = {
         'actions': 'response',
         'continents': 'experience',
         'states': 'experience',
-        'timeline': 'timeline',
+        'triggers': 'timeline',
         'strategies': 'strategies' //FIXME fake atlas section prompts default
     },
 
     FULLPAGE_TO_ATLAS_SECTIONS: {
         'introduction': 'introduction', //FIXME fake atlas section prompts default
-        'timeline': 'timeline', //FIXME fake atlas section prompts default
+        'timeline': 'triggers', //FIXME fake atlas section prompts default
         'experience': 'continents',
         'response': 'actions',
         'strategies': 'strategies' //FIXME fake atlas section prompts default
@@ -108,8 +108,8 @@ const scroller = {
         //let section = hash[ 0 ];
         //let emotion = hash[ 1 ];// != '' ? hash[ 1 ] : dispatcher.DEFAULT_EMOTION;
 
-        if ( section && section.match( /(states)|(actions)|(timeline)/ ) != null ) {
-            let state = section.match( /(timeline)/ ) != null ? timeline.emotionNavVisible : true;
+        if ( section && section.match( /(states)|(actions)|(triggers)/ ) != null ) {
+            let state = section.match( /(triggers)/ ) != null ? timeline.emotionNavVisible : true;
             this.toggleEmotionNav( state );
         } else {
             this.toggleEmotionNav( false );
@@ -343,7 +343,7 @@ const scroller = {
     initMoreContentLinks: function () {
         let _self = this;
         // show additional content in the sections
-        $( '.more-link, .close-button' ).click( function ( e ) {
+        $( '.more-link, .more-content .close-button' ).click( function ( e ) {
             e.preventDefault();
             let $section = $( this ).parents( '.section' );
             $section.toggleClass( 'more-visible' );
@@ -421,6 +421,23 @@ const scroller = {
             e.preventDefault();
             this.toggleAboutSection();
         } );
+    },
+
+    initOptInModal: function () {
+        $( '.opt-in-modal__content .close-button' ).click( ( e ) => {
+            e.preventDefault();
+            this.toggleOptInModal();
+        } );
+        $( '.opt-in-button' ).click( ( e ) => {
+            e.preventDefault();
+            this.toggleOptInModal();
+        } );
+        $( '.opt-in-modal' ).css( 'display', 'none' );
+    },
+
+    toggleOptInModal: function () {
+        console.log('toggle modal');
+        $( '.opt-in-modal' ).fadeToggle( 400 );
     },
 
     stopAboutImageFades(){
@@ -753,6 +770,7 @@ const scroller = {
 
         this.initAboutLink();
         this.initMoreContentLinks();
+        this.initOptInModal();
         this.showApp();
     }
 

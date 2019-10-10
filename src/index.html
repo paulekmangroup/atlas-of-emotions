@@ -2,608 +2,673 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description"
-		  content="The Atlas of Emotion is a tool to help people better understand what emotions are, how they are triggered and what their effects are, and how to become aware of emotions before acting on them.">
-	<meta name="keywords"
-		  content="emotion,anger,fear,disgust,sadness,enjoyment,trigger,triggers,moods,calm,Paul Ekman,Eve Ekman,Dalai Lama">
-	<meta name="author" content="Stamen Design">
-	<meta name="thumbnail" content="http://atlasofemotions.org/img/atlasOfEmotionsThumb.jpg"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+          content="The Atlas of Emotion is a tool to help people better understand what emotions are, how they are triggered and what their effects are, and how to become aware of emotions before acting on them.">
+    <meta name="keywords"
+          content="emotion,anger,fear,disgust,sadness,enjoyment,trigger,triggers,moods,calm,Paul Ekman,Eve Ekman,Dalai Lama">
+    <meta name="author" content="Stamen Design">
+    <meta name="thumbnail" content="http://atlasofemotions.org/img/atlasOfEmotionsThumb.jpg"/>
 
-	<title>The Ekmans' Atlas of Emotions</title>
-	<link rel="icon" type="image/png" href="./img/atlas-favicon.png"/>
+    <title>The Ekmans' Atlas of Emotions</title>
+    <link rel="icon" type="image/png" href="./img/atlas-favicon.png"/>
 
-	<!-- facebook open graph tags -->
-	<meta property="og:type" content="website"/>
-	<meta property="og:url" content="http://atlasofemotions.org/"/>
-	<meta property="og:title" content="The Ekmans' Atlas of Emotion"/>
-	<meta property="og:description"
-		  content="The Atlas of Emotion is a tool to help people better understand what emotions are, how they are triggered and what their effects are, and how to become aware of emotions before acting on them."/>
-	<meta property="og:site_name" content="The Ekmans' Atlas of Emotions"/>
-	<meta property="og:image" content="http://atlasofemotions.org/img/atlasOfEmotionsCard.jpg"/>
-	<meta property="og:image:type" content="image/jpeg"/>
-	<meta property="og:image:width" content="739"/>
-	<meta property="og:image:height" content="388"/>
+    <!-- facebook open graph tags -->
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="http://atlasofemotions.org/"/>
+    <meta property="og:title" content="The Ekmans' Atlas of Emotion"/>
+    <meta property="og:description"
+          content="The Atlas of Emotion is a tool to help people better understand what emotions are, how they are triggered and what their effects are, and how to become aware of emotions before acting on them."/>
+    <meta property="og:site_name" content="The Ekmans' Atlas of Emotions"/>
+    <meta property="og:image" content="http://atlasofemotions.org/img/atlasOfEmotionsCard.jpg"/>
+    <meta property="og:image:type" content="image/jpeg"/>
+    <meta property="og:image:width" content="739"/>
+    <meta property="og:image:height" content="388"/>
 
-	<!--twitter card tags -->
-	<meta name="twitter:card" value="summary_large_image"/>
-	<meta name="twitter:site" content="@stamen">
-	<meta name="twitter:creator" content="@stamen">
-	<meta name="twitter:title" content="The Ekmans' Atlas of Emotion"/>
-	<meta name="twitter:url" content="http://atlasofemotions.org/"/>
-	<meta name="twitter:image" content="http://atlasofemotions.org/img/atlasOfEmotionsCard.jpg"/>
-	<meta name="twitter:description"
-		  content="The Atlas of Emotion is a tool to help people better understand what emotions are, how they are triggered and what their effects are, and how to become aware of emotions before acting on them."/>
+    <!--twitter card tags -->
+    <meta name="twitter:card" value="summary_large_image"/>
+    <meta name="twitter:site" content="@stamen">
+    <meta name="twitter:creator" content="@stamen">
+    <meta name="twitter:title" content="The Ekmans' Atlas of Emotion"/>
+    <meta name="twitter:url" content="http://atlasofemotions.org/"/>
+    <meta name="twitter:image" content="http://atlasofemotions.org/img/atlasOfEmotionsCard.jpg"/>
+    <meta name="twitter:description"
+          content="The Atlas of Emotion is a tool to help people better understand what emotions are, how they are triggered and what their effects are, and how to become aware of emotions before acting on them."/>
 
-	<link href="https://fonts.googleapis.com/css?family=Raleway:700,400,200" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" type="text/css" href="main.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:700,400,200" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="main.css?1234">
 
-	<!-- for mailchimp link to emotrak -->
-	<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+    <!-- for mailchimp link to emotrak -->
+    <link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
 
-	<!-- Fullpage -->
-	<link rel="stylesheet" type="text/css"
-		  href="https://cdn.jsdelivr.net/jquery.fullpage/2.9.2/jquery.fullpage.min.css">
+    <!-- Fullpage -->
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.jsdelivr.net/jquery.fullpage/2.9.2/jquery.fullpage.min.css">
 
-	<style>
-		html.placeholder,
-		body.placeholder {
-			overflow: auto;
-			padding: 1em;
-			box-sizing: border-box;
-		}
+    <style>
+        html.placeholder,
+        body.placeholder {
+            overflow: auto;
+            padding: 1em;
+            box-sizing: border-box;
+        }
 
-		#continents.placeholder {
-			position: relative;
-			height: auto;
-			min-height: auto;
-		}
+        #continents.placeholder {
+            position: relative;
+            height: auto;
+            min-height: auto;
+        }
 
-		#states.placeholder {
-			position: relative;
-			height: auto;
-			min-height: auto;
-		}
+        #states.placeholder {
+            position: relative;
+            height: auto;
+            min-height: auto;
+        }
 
-		#actions.placeholder {
-			position: relative;
-			height: auto;
-			min-height: auto;
-		}
+        #actions.placeholder {
+            position: relative;
+            height: auto;
+            min-height: auto;
+        }
 
-		#triggers.placeholder {
-			position: relative;
-			height: auto;
-			min-height: auto;
-		}
+        #triggers.placeholder {
+            position: relative;
+            height: auto;
+            min-height: auto;
+        }
 
-		#moods.placeholder {
-			position: relative;
-			height: auto;
-			min-height: auto;
-		}
+        #moods.placeholder {
+            position: relative;
+            height: auto;
+            min-height: auto;
+        }
 
-		#calm.placeholder {
-			position: relative;
-			height: auto;
-			min-height: auto;
-		}
+        #calm.placeholder {
+            position: relative;
+            height: auto;
+            min-height: auto;
+        }
 
-		#more.placeholder {
-			position: relative;
-			height: auto;
-			min-height: auto;
-			opacity: 1.0;
-		}
+        #more.placeholder {
+            position: relative;
+            height: auto;
+            min-height: auto;
+            opacity: 1.0;
+        }
 
-		.placeholder #header h3 {
-			position: relative;
-			left: 0;
-			font-size: 1.5em;
-		}
+        .placeholder #header h3 {
+            position: relative;
+            left: 0;
+            font-size: 1.5em;
+        }
 
-		.placeholder h3 {
-			font-size: 1.5em;
-			text-align: left;
-		}
+        .placeholder h3 {
+            font-size: 1.5em;
+            text-align: left;
+        }
 
-		.placeholder p {
-			font-size: 1em;
-			text-align: left;
-		}
+        .placeholder p {
+            font-size: 1em;
+            text-align: left;
+        }
 
-		.placeholder #header .dropdown,
-		.placeholder #lang-selector,
-		.placeholder #more-info,
-		.placeholder #lower-left-logo {
-			display: none;
-		}
-	</style>
+        .placeholder #header .dropdown,
+        .placeholder #lang-selector,
+        .placeholder #more-info,
+        .placeholder #lower-left-logo {
+            display: none;
+        }
+    </style>
 
-	<script>
-		window.ga = window.ga || function () {
-				(ga.q = ga.q || []).push( arguments )
-			};
-		ga.l = +new Date;
-		ga( 'create', 'UA-41566466-8', 'auto' );
-		ga( 'send', 'pageview' );
-	</script>
-	<script async src='https://www.google-analytics.com/analytics.js'></script>
+    <script>
+        window.ga = window.ga || function () {
+                    (ga.q = ga.q || []).push( arguments )
+                };
+        ga.l = +new Date;
+        ga( 'create', 'UA-41566466-8', 'auto' );
+        ga( 'send', 'pageview' );
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-	<!-- Hotjar Tracking Code for http://atlasofemotions.org/ -->
-	<script>
-		(function(h,o,t,j,a,r){
+    <!-- Hotjar Tracking Code for http://atlasofemotions.org/ -->
+    <script>
+        (function ( h, o, t, j, a, r ) {
 			h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-			h._hjSettings={hjid:825603,hjsv:6};
-			a=o.getElementsByTagName('head')[0];
+            h._hjSettings = { hjid: 825603, hjsv: 6 };
+            a = o.getElementsByTagName( 'head' )[ 0 ];
 			r=o.createElement('script');r.async=1;
-			r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-			a.appendChild(r);
-		})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-	</script>
-	
+            r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+            a.appendChild( r );
+        })( window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=' );
+    </script>
+
 </head>
 <body>
 
 <div id="app-container">
 
-	<div class="original-content">
+    <div class="original-content">
 
-		<div id="header">
-			<h3 class="header-content"><a href="#" id="title">ATLAS OF EMOTIONS</a><span id="infoButton"></span></h3>
-			<h1></h1>
-			<div class="dropdown emotion-menu hide-on-more">
-				<button class="btn btn-default dropdown-toggle" type="button" id="emotion-dropdown"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span
-					class="dd-title"></span><span class="caret"></span></button>
-				<ul class="dropdown-menu" aria-labelledby="emotion-dropdown"></ul>
-			</div>
+        <div id="header">
+            <h3 class="header-content"><a href="#" id="title">ATLAS OF EMOTIONS</a>
+                <span id="infoButton"></span>
+            </h3>
+            <h1></h1>
+            <div class="dropdown emotion-menu hide-on-more">
+                <button class="btn btn-default dropdown-toggle" type="button" id="emotion-dropdown"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span
+                        class="dd-title"></span><span class="caret"></span></button>
+                <ul class="dropdown-menu" aria-labelledby="emotion-dropdown"></ul>
+            </div>
 
-			<div id="more-close" class="close-button show-on-more"></div>
-		</div>
-		<div id="mobile-header" style="display: none">
-			<div class="dropdown-curtain"></div>
-			<div class="dropdown">
-				<div class="dropdown-bkgd"></div>
-				<button class="btn btn-default dropdown-toggle" type="button" id="mobile-nav-toggle"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-				<ul class="dropdown-menu" aria-labelledby="mobile-nav-toggle">
-					<li>&times;</li>
-				</ul>
-			</div>
-		</div>
-		<div id="main">
-			<!-- This content is all replaced at runtime. -->
-			<div id="continents" class="placeholder">
-				<h3>The Emotion Continents</h3>
-				<p>Each emotion is represented as a continent. The movement of the shapes reflects how our emotions vary
-					in strength and frequency in peoples lives.</p>
-			</div>
-			<div id="states" class="placeholder">
-				<h3>The States of an Emotion</h3>
-				<p>Each emotion names a number of related but different states. These states vary not only in their
-					nature, but in their intensity.</p>
-			</div>
-			<div id="triggers" class="placeholder">
-				<h3>The Triggers of an Emotion</h3>
-				<p>Triggers automatically bring forth an emotion without consideration.</p>
-			</div>
-			<div id="actions" class="placeholder">
-				<h3>The Actions of a State</h3>
-				<p>Each emotional state typically results in a number of actions. Click on a state to see the
-					constructive and destructive actions that can result.</p>
-			</div>
-			<div id="moods" class="placeholder">
-				<h3>The Mood of an Emotion</h3>
-				<p>Moods are longer-lasting cousins of an emotion that cause the related emotion to be felt more
-					frequently and intensely. It is not always apparent what triggers a mood.</p>
-			</div>
-			<div id="calm" class="placeholder">
-				<h3>Achieving Calm</h3>
-				<p>Calm is a state of mind that is actively engaged in using intelligence and wisdom to evaulate the
-					changing world.</p>
-			</div>
-			<div id="more" class="placeholder">
-				<h3>About</h3>
-				<p>Paul Ekman is an American psychologist who is a pioneer in the study of emotions and their relation
-					to facial expressions. He has gained a reputation as "the best human lie detector in the world". Eve
-					Ekman is currently a Post Doctoral Scholar at UCSF’s Osher Center for Integrative Medicine. Ekman’s
-					research interests were inspired by her experience as a medical social worker in the emergency
-					department of San Francisco General Hospital coupled with her training in the applied emotion
-					regulation and mindfulness intervention: Cultivating Emotional Balance, CEB.</p>
-				<h3>Donate</h3>
-				<p>This project was generously supported by the Dalai Lama Trust. To give back, and to help bring more
-					emotion awareness to the world, consider donating <a href="http://www.dalailamatrust.org/donate">here</a>.
-				</p>
-				<h3>Additional Resources</h3>
-				<p>Here are some of the publications that guided us, or that you might be interested in seeking out to
-					learn more.</p>
-				<div id="annex">
-					<h3>Personality Trait</h3>
-					<p>Each emotion has a corresponding personality trait that represents a longer term manifestation of
-						an emotion.</p>
-					<h3>Psychopathology</h3>
-					<p>Each emotion relates to distinct psychopathologies, which describe a persistent behavior that
-						interferes with one's ability to function.</p>
-					<h3>Signal and Message</h3>
-					<p>Description of what signals are</p>
-					<h3>Partially-Charted Emotions</h3>
-					<p>Half or less than half of emotion scientists believe there is convincing evidence that each of
-						the following is an emotion.</p>
-					<h3>The Scientific Basis For This Work</h3>
-					<p>The Emotions Atlas is based on the consensus among scientists (in the choice of the five emotion
-						continents and the relationship of emotions to moods, personality and psychopathology), the work
-						of a few scientists who focused on the naming of states within emotions, dictionary definitions
-						in the glossary, and theory or best guesses about the actions for each state and whether they
-						are constructive or destructive. For more information, see "What Emotion Scientists Agree
-						About", by Paul Ekman Perspectives in Psychological Science, in press.</p>
-					<h3>Emotional Episode Timeline</h3>
-					<p></p>
-					<h3>Impediments and Antidotes</h3>
-					<p>Here are some ways to counteract emotional states. Impediments apply to blocking a positive
-						emotion, antidotes apply to reversing negative ones.</p>
-					<h3>Intrinsic or Intentional?</h3>
-					<p>Actions can be intrinsic (take place without intent) or intentional (active attempt to enact
-						change) or both.</p>
-				</div>
-			</div>
-		</div>
-		<div id="scrollbar"></div>
-		<div id="left-arrow"></div>
-		<div id="down-arrow"></div>
-		<div id="right-arrow"></div>
-		<div id="lower-left-logo"></div>
-		<div id="more-info">
-			<div class="dropup emotion-menu">
-				<button class="btn btn-default dropdown-toggle" type="button" id="emotion-more-info"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					<span class="dup-title"></span><span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu" aria-labelledby="emotion-more-info"></ul>
-			</div>
-		</div>
-		<div id="mobile-caption" style="display: none"></div>
-	</div>
+            <div id="more-close" class="close-button show-on-more"></div>
+        </div>
+        <div id="mobile-header" style="display: none">
+            <div class="dropdown-curtain"></div>
+            <div class="dropdown">
+                <div class="dropdown-bkgd"></div>
+                <button class="btn btn-default dropdown-toggle" type="button" id="mobile-nav-toggle"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                <ul class="dropdown-menu" aria-labelledby="mobile-nav-toggle">
+                    <li>&times;</li>
+                </ul>
+            </div>
+        </div>
+        <div id="main">
+            <!-- This content is all replaced at runtime. -->
+            <div id="continents" class="placeholder">
+                <h3>The Emotion Continents</h3>
+                <p>Each emotion is represented as a continent. The movement of the shapes reflects how our emotions vary
+                    in strength and frequency in peoples lives.</p>
+            </div>
+            <div id="states" class="placeholder">
+                <h3>The States of an Emotion</h3>
+                <p>Each emotion names a number of related but different states. These states vary not only in their
+                    nature, but in their intensity.</p>
+            </div>
+            <div id="triggers" class="placeholder">
+                <h3>The Triggers of an Emotion</h3>
+                <p>Triggers automatically bring forth an emotion without consideration.</p>
+            </div>
+            <div id="actions" class="placeholder">
+                <h3>The Actions of a State</h3>
+                <p>Each emotional state typically results in a number of actions. Click on a state to see the
+                    constructive and destructive actions that can result.</p>
+            </div>
+            <div id="moods" class="placeholder">
+                <h3>The Mood of an Emotion</h3>
+                <p>Moods are longer-lasting cousins of an emotion that cause the related emotion to be felt more
+                    frequently and intensely. It is not always apparent what triggers a mood.</p>
+            </div>
+            <div id="calm" class="placeholder">
+                <h3>Achieving Calm</h3>
+                <p>Calm is a state of mind that is actively engaged in using intelligence and wisdom to evaulate the
+                    changing world.</p>
+            </div>
+            <div id="more" class="placeholder">
+                <h3>About</h3>
+                <p>Paul Ekman is an American psychologist who is a pioneer in the study of emotions and their relation
+                    to facial expressions. He has gained a reputation as "the best human lie detector in the world". Eve
+                    Ekman is currently a Post Doctoral Scholar at UCSF’s Osher Center for Integrative Medicine. Ekman’s
+                    research interests were inspired by her experience as a medical social worker in the emergency
+                    department of San Francisco General Hospital coupled with her training in the applied emotion
+                    regulation and mindfulness intervention: Cultivating Emotional Balance, CEB.</p>
+                <h3>Donate</h3>
+                <p>This project was generously supported by the Dalai Lama Trust. To give back, and to help bring more
+                    emotion awareness to the world, consider donating <a href="http://www.dalailamatrust.org/donate">here</a>.
+                </p>
+                <h3>Additional Resources</h3>
+                <p>Here are some of the publications that guided us, or that you might be interested in seeking out to
+                    learn more.</p>
+                <div id="annex">
+                    <h3>Personality Trait</h3>
+                    <p>Each emotion has a corresponding personality trait that represents a longer term manifestation of
+                        an emotion.</p>
+                    <h3>Psychopathology</h3>
+                    <p>Each emotion relates to distinct psychopathologies, which describe a persistent behavior that
+                        interferes with one's ability to function.</p>
+                    <h3>Signal and Message</h3>
+                    <p>Description of what signals are</p>
+                    <h3>Partially-Charted Emotions</h3>
+                    <p>Half or less than half of emotion scientists believe there is convincing evidence that each of
+                        the following is an emotion.</p>
+                    <h3>The Scientific Basis For This Work</h3>
+                    <p>The Emotions Atlas is based on the consensus among scientists (in the choice of the five emotion
+                        continents and the relationship of emotions to moods, personality and psychopathology), the work
+                        of a few scientists who focused on the naming of states within emotions, dictionary definitions
+                        in the glossary, and theory or best guesses about the actions for each state and whether they
+                        are constructive or destructive. For more information, see "What Emotion Scientists Agree
+                        About", by Paul Ekman Perspectives in Psychological Science, in press.</p>
+                    <h3>Emotional Episode Timeline</h3>
+                    <p></p>
+                    <h3>Impediments and Antidotes</h3>
+                    <p>Here are some ways to counteract emotional states. Impediments apply to blocking a positive
+                        emotion, antidotes apply to reversing negative ones.</p>
+                    <h3>Intrinsic or Intentional?</h3>
+                    <p>Actions can be intrinsic (take place without intent) or intentional (active attempt to enact
+                        change) or both.</p>
+                </div>
+            </div>
+        </div>
+        <div id="scrollbar"></div>
+        <div id="left-arrow"></div>
+        <div id="down-arrow"></div>
+        <div id="right-arrow"></div>
+        <div id="lower-left-logo"></div>
+        <div id="more-info">
+            <div class="dropup emotion-menu">
+                <button class="btn btn-default dropdown-toggle" type="button" id="emotion-more-info"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="dup-title"></span><span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="emotion-more-info"></ul>
+            </div>
+        </div>
+        <div id="mobile-caption" style="display: none"></div>
+    </div>
 
-	<div class="page-body">
+    <div class="page-body">
 
-		<div class="section introduction-hero" id="introduction-section" data-template="metadata.hero">
+        <div class="section introduction-hero" id="introduction-section" data-template="metadata.hero">
 
-			{{# slides.forEach( function(slide, i){ }}
+            {{# slides.forEach( function(slide, i){ }}
 
-			<div class="slide {{# if(i==0) { }} active {{# } }}">
-				<div class="slide-content" data-anchor="" data-widow-fix="true">
-					{{ slide }}
-				</div>
-			</div>
+            <div class="slide {{# if(i==0) { }} active {{# } }}">
+                <div class="slide-content" data-anchor="" data-widow-fix="true">
+                    {{ slide }}
+                </div>
+            </div>
 
-			{{# }); }}
+            {{# }); }}
 
-			<div class="intro-heading">
-				<h1>{{ header }}</h1>
-				{{ sub_header }} <a class="about-link">{{ learn_more_link }}</a>
-			</div>
-			<div class="cta">
-				<a href="#timeline">
-					{{ cta }}
-				</a>
-			</div>
-			<div class="more-content more-content--about">
-				<div class="more-content__scroller">
-					<div class="fade-images">
-						<img src="img/hhAndPaul.jpg" class="fade">
-						<img src="img/hhAndEve.jpg" class="fade">
-					</div>
-					<div>
-						<h3>{{ about.header }}</h3>
-						{{ about.body }}
-					</div>
-				</div>
-				<div class="close-button"><span class="mobile-label">Back</span></div>
-			</div>
+            <div class="intro-heading">
+                <h1>{{ header }}</h1>
+                {{ sub_header }} <a class="about-link">{{ learn_more_link }}</a>
+            </div>
+            <div class="cta">
+                <a href="#triggers">
+                    {{ cta }}
+                </a>
+            </div>
+            <div class="more-content more-content--about">
+                <div class="more-content__scroller">
+                    <div class="fade-images">
+                        <img src="img/hhAndEve.jpg" class="fade">
+                        <img src="img/hhAndPaul.jpg" class="fade">
+                    </div>
+                    <div>
+                        <h3>{{ about.header }}</h3>
+                        {{ about.body }}
+                    </div>
+                </div>
+                <div class="close-button"><span class="mobile-label">Back</span></div>
+            </div>
 
-			<div id="intro-lang-selector">
-				<div class="dropdown emotion-menu">
-					<button class="btn btn-default dropdown-toggle" type="button" id="lang-selector-toggle"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<span class="dup-title"></span><span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu pull-right" aria-labelledby="lang-selector-toggle"></ul>
-				</div>
-			</div>
+            <div id="intro-lang-selector">
 
-		</div>
+                <a id="intro-opt-in-link" class="opt-in-button">
+                    <img src="img/mail.svg">
+                </a>
 
+                <div class="dropdown emotion-menu">
 
-		<div class="section" id="timeline-section" data-has-emotion-state="true">
-			<div class="section-graphics">
-				<div id="timeline-graphics" data-template="metadata.timeline.secondary.blocks.captions">
-					<div class="diagram-caption" id="constructive-response-caption">
-						{{ constructive_response }}
-					</div>
-					<div class="diagram-caption" id="destructive-response-caption">
-						{{ destructive_response }}
-					</div>
-					<div class="diagram-caption" id="ambiguous-response-caption">
-						{{ ambiguous_response }}
-					</div>
-					<div class="diagram-caption" id="physical-changes-caption">
-						{{ physical_changes }}
-					</div>
-					<div class="diagram-caption" id="state-caption">
-						{{ emotional_state }}
-					</div>
-					<div class="diagram-caption" id="mental-changes-caption">
-						{{ mental_changes }}
-					</div>
-					<div class="diagram-caption" id="precondition-caption">
-						{{ precondition }}
-					</div>
-					<div class="diagram-caption" id="event-caption">
-						{{ event }}
-					</div>
-					<div class="diagram-caption" id="perceptual-database-caption">
-						{{ perceptual_database }}
-					</div>
-				</div>
-			</div>
-			<div class="section-text">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="lang-selector-toggle"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="dup-title"></span><span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu pull-right" aria-labelledby="lang-selector-toggle"></ul>
 
-				<div data-template="metadata">
-					<h2 class="section-heading">
-						{{ navigation.timeline.heading }}
-						<a class="restart-button">
-							<span>{{ timeline.restart_button }}</span><img src="./img/reset.svg">
-						</a>
-					</h2>
-				</div>
-
-				<div class="section-text__scroller">
-					<div>
-						<div data-template="metadata.timeline">
-							<!--intro-->
-							{{# body.forEach( function(paragraph){ }}
-							<p class="body-intro">
-								{{ paragraph }}
-							</p>
-							{{# }) }}
-							<button id="begin-awareness" class="body-intro">{{ intro_button }}</button>
-						</div>
-
-						<div data-template="metadata.timeline.secondary">
-
-							<!--event-->
-							<div class="body-awareness" data-stage="trigger">
-								<h3>{{ trigger.header }}</h3>
-								<p>
-									{{ trigger.body[0] }}
-								</p>
-								<ul>
-									{{# trigger.body[1].forEach( function(item,i){ }}
-									<li>{{ item }}</li>
-									{{# }) }}
-								</ul>
-							</div>
-							<button id="experience-add-awareness" class="body-awareness" data-stage="trigger">
-								{{ trigger.button }}
-							</button>
+                </div>
+            </div>
 
 
-							<!--state-->
-							<div class="body-awareness" data-stage="experience">
-								<h3>{{ experience.header }}</h3>
-								<p>
-									{{ experience.body[0] }}
-								</p>
-							</div>
-							<button id="response-add-awareness" class="body-awareness" data-stage="experience">
-								<!-- + add awareness -->
-								{{ experience.button }}
-							</button>
-
-							<!--response-->
-							<div class="body-awareness" data-stage="response">
-								<h3>{{ response.header }}</h3>
-								<p>
-									{{ response.body[0] }}
-								</p>
-							</div>
-							<button id="begin-refractory-period" class="body-awareness" data-stage="response">
-								<!--Why is it hard to stay aware?-->
-								{{ response.button }}
-							</button>
-
-							<!--refractory period-->
-							<div class="body-awareness" data-stage="refractory">
-								<h3>{{ refractory.header }}</h3>
-								{{# refractory.body.forEach( function(paragraph){ }}
-								<p>
-									{{ paragraph }}
-								</p>
-								{{# }) }}
-							</div>
-							<button id="begin-block-diagram" class="body-awareness" data-stage="refractory">
-								<!--See the big picture-->
-								{{ refractory.button }}
-							</button>
-
-							<!--blocks-->
-							<div class="body-awareness" data-stage="blocks">
-								<h3>{{ blocks.header }}</h3>
-								<p>
-									{{ blocks.body[0] }}
-								</p>
-							</div>
-
-						</div>
+        </div>
 
 
-						<a class="more-link more-link__scrollable" data-template="metadata.site">
-							{{ learn_more_button }}
-						</a>
-					</div>
-				</div>
-				<a class="more-link more-link__fixed" data-template="metadata.site">{{ learn_more_button }}</a>
-			</div>
-			<div class="more-content">
-				<div class="more-content__scroller">
-					<div class="close-button">CLOSE</div>
-				</div>
-				<div class="close-button" data-template="metadata.site"><span
-					class="mobile-label">{{ back_button }}</span></div>
-			</div>
-		</div>
+        <div class="section" id="timeline-section" data-has-emotion-state="true">
+            <div class="section-graphics">
+                <div id="timeline-graphics" data-template="metadata.timeline.secondary.blocks.captions">
+                    <div class="diagram-caption" id="constructive-response-caption">
+                        {{ constructive_response }}
+                    </div>
+                    <div class="diagram-caption" id="destructive-response-caption">
+                        {{ destructive_response }}
+                    </div>
+                    <div class="diagram-caption" id="ambiguous-response-caption">
+                        {{ ambiguous_response }}
+                    </div>
+                    <div class="diagram-caption" id="physical-changes-caption">
+                        {{ physical_changes }}
+                    </div>
+                    <div class="diagram-caption" id="state-caption">
+                        {{ emotional_state }}
+                    </div>
+                    <div class="diagram-caption" id="mental-changes-caption">
+                        {{ mental_changes }}
+                    </div>
+                    <div class="diagram-caption" id="precondition-caption">
+                        {{ precondition }}
+                    </div>
+                    <div class="diagram-caption" id="event-caption">
+                        {{ event }}
+                    </div>
+                    <div class="diagram-caption" id="perceptual-database-caption">
+                        {{ perceptual_database }}
+                    </div>
+                </div>
+            </div>
+            <div class="section-text">
 
-		<div class="section" id="experience-section" data-has-emotion-state="true">
-			<div class="section-graphics">
-			</div>
-			<div class="section-text">
-				<h2 class="section-heading" data-template="metadata.navigation">{{ experience.heading }}</h2>
-				<div class="section-text__scroller">
-					<div>
-						<p class="body">
-						</p>
-						<a class="more-link more-link__scrollable" data-template="metadata.site">
-							{{ learn_more_button }}
-						</a>
-					</div>
-				</div>
-				<a class="more-link more-link__fixed" data-template="metadata.site">{{ learn_more_button }}</a>
-			</div>
-			<div class="more-content">
-				<div class="more-content__scroller">
-					<div class="close-button">CLOSE</div>
-				</div>
-				<div class="close-button"><span class="mobile-label">Back</span></div>
-			</div>
-		</div>
+                <div data-template="metadata">
+                    <h2 class="section-heading">
+                        {{ navigation.timeline.heading }}
+                        <a class="restart-button">
+                            <span>{{ timeline.restart_button }}</span><img src="./img/reset.svg">
+                        </a>
+                    </h2>
+                </div>
 
-		<div class="section" id="response-section" data-has-emotion-state="true">
-			<div class="section-graphics">
-			</div>
-			<div class="section-text">
-				<h2 class="section-heading" data-template="metadata.navigation">{{ response.heading }}</h2>
-				<div class="section-text__scroller">
-					<div>
-						<p class="body">
-						</p>
-						<a class="more-link more-link__scrollable" data-template="metadata.site">
-							{{ learn_more_button }}
-						</a>
-					</div>
-				</div>
-				<a class="more-link more-link__fixed" data-template="metadata.site">{{ learn_more_button }}</a>
-			</div>
-			<div class="more-content">
-				<div class="more-content__scroller">
-					<div class="close-button" data-template="metadata.site">{{ close_button }}</div>
-				</div>
-				<div class="close-button"><span class="mobile-label">Back</span></div>
-			</div>
-		</div>
+                <div class="section-text__scroller">
+                    <div>
+                        <div data-template="metadata.timeline">
+                            <!--intro-->
+                            {{# body.forEach( function(paragraph){ }}
+                            <p class="body-intro">
+                                {{ paragraph }}
+                            </p>
+                            {{# }) }}
+                            <button id="begin-awareness" class="body-intro">{{ intro_button }}</button>
+                        </div>
 
-		<div class="section" id="strategies-section">
-			<div class="section-graphics">
-				<div class="embed-padding">
-					<div class="embed-container">
-						<iframe src="https://player.vimeo.com/video/110383723?title=0&byline=0&portrait=0"
-								frameborder="0"
-								webkitallowfullscreen mozallowfullscreen
-								allowfullscreen>
-						</iframe>
-					</div>
-				</div>
-			</div>
-			<div class="section-text">
-				<h2 class="section-heading" data-template="metadata.navigation">{{ strategies.heading }}</h2>
-				<div class="section-text__scroller">
-					<div>
-						<div data-template="metadata.calm">{{ body }}</div>
-						<a class="more-link more-link__scrollable" data-template="metadata.site">
-							{{ learn_more_button }}
-						</a>
-					</div>
-				</div>
- 				<a class="more-link more-link__fixed" data-template="metadata.site">{{ learn_more_button }}</a>
-			</div>
-			<div class="more-content">
-				<div class="more-content__scroller">
-					<div class="close-button" data-template="metadata.site">{{ close_button }}</div>
-				</div>
-				<div class="close-button"><span class="mobile-label">Back</span></div>
-			</div>
-		</div>
+                        <div data-template="metadata.timeline.secondary">
 
-	</div>
+                            <!--event-->
+                            <div class="body-awareness" data-stage="trigger">
+                                <h3>{{ trigger.header }}</h3>
+                                <p>
+                                    {{ trigger.body[0] }}
+                                </p>
+                                <ul>
+                                    {{# trigger.body[1].forEach( function(item,i){ }}
+                                    <li>{{ item }}</li>
+                                    {{# }) }}
+                                </ul>
+                            </div>
+                            <button id="experience-add-awareness" class="body-awareness" data-stage="trigger">
+                                {{ trigger.button }}
+                            </button>
 
-	<div class="site-header hidden-for-intro">
-		<div class="site-name">
-			Atlas of Emotions
-		</div>
-	</div>
 
-	<div class="emotion-nav">
-		<ul>
-			<li data-template="metadata.navigation.emotions" class="all"><a href="#continents">{{ all }}</a></li>
-			<li data-template="derived.emotions"><a href="#" data-emotion="anger">{{ anger }}</a></li>
-			<li data-template="derived.emotions"><a href="#" data-emotion="fear">{{ fear }}</a></li>
-			<li data-template="derived.emotions"><a href="#" data-emotion="disgust">{{ disgust }}</a></li>
-			<li data-template="derived.emotions"><a href="#" data-emotion="sadness">{{ sadness }}</a></li>
-			<li data-template="derived.emotions"><a href="#" data-emotion="enjoyment">{{ enjoyment }}</a></li>
-		</ul>
-	</div>
+                            <!--state-->
+                            <div class="body-awareness" data-stage="experience">
+                                <h3>{{ experience.header }}</h3>
+                                <p>
+                                    {{ experience.body[0] }}
+                                </p>
+                            </div>
+                            <button id="response-add-awareness" class="body-awareness" data-stage="experience">
+                                <!-- + add awareness -->
+                                {{ experience.button }}
+                            </button>
 
-	<div class="top-nav hidden-for-intro">
-		<div class="menu">
-			<ul id="menu-list" data-template="metadata.navigation">
-				<li><a href="#introduction/" id="introduction-menu-link">{{ introduction.menu }}</a>
-				</li>
-				<li><a href="#timeline/" id="timeline-menu-link">{{ timeline.menu }}</a>
-				</li>
-				<li><a href="#continents/" id="experience-menu-link">{{ experience.menu }}</a>
-				</li>
-				<li><a href="#actions/" id="response-menu-link">{{ response.menu }}</a>
-				</li>
-				<li><a href="#strategies/" id="strategies-menu-link">{{ strategies.menu }}</a></li>
-				<li>
-					<div id="lang-selector">
-						<div class="dropdown emotion-menu">
-							<button class="btn btn-default dropdown-toggle" type="button" id="lang-selector-toggle"
-									data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="dup-title"></span><span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu pull-right" aria-labelledby="lang-selector-toggle"></ul>
-						</div>
-					</div>
-				</li>
-			</ul>
-		</div>
-	</div>
-	<div class="menu-toggle hidden-for-intro"></div>
+                            <!--response-->
+                            <div class="body-awareness" data-stage="response">
+                                <h3>{{ response.header }}</h3>
+                                <p>
+                                    {{ response.body[0] }}
+                                </p>
+                            </div>
+                            <button id="begin-refractory-period" class="body-awareness" data-stage="response">
+                                <!--Why is it hard to stay aware?-->
+                                {{ response.button }}
+                            </button>
 
+                            <!--refractory period-->
+                            <div class="body-awareness" data-stage="refractory">
+                                <h3>{{ refractory.header }}</h3>
+                                {{# refractory.body.forEach( function(paragraph){ }}
+                                <p>
+                                    {{ paragraph }}
+                                </p>
+                                {{# }) }}
+                            </div>
+                            <button id="begin-block-diagram" class="body-awareness" data-stage="refractory">
+                                <!--See the big picture-->
+                                {{ refractory.button }}
+                            </button>
+
+                            <!--blocks-->
+                            <div class="body-awareness" data-stage="blocks">
+                                <h3>{{ blocks.header }}</h3>
+                                <p>
+                                    {{ blocks.body[0] }}
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        <a class="more-link more-link__scrollable" data-template="metadata.site">
+                            {{ learn_more_button }}
+                        </a>
+                    </div>
+                </div>
+                <a class="more-link more-link__fixed" data-template="metadata.site">{{ learn_more_button }}</a>
+            </div>
+            <div class="more-content">
+                <div class="more-content__scroller">
+                    <div class="close-button">CLOSE</div>
+                </div>
+                <div class="close-button" data-template="metadata.site"><span
+                        class="mobile-label">{{ back_button }}</span></div>
+            </div>
+        </div>
+
+        <div class="section" id="experience-section" data-has-emotion-state="true">
+            <div class="section-graphics">
+            </div>
+            <div class="section-text">
+                <h2 class="section-heading" data-template="metadata.navigation">{{ experience.heading }}</h2>
+                <div class="section-text__scroller">
+                    <div>
+                        <p class="body">
+                        </p>
+                        <a class="more-link more-link__scrollable" data-template="metadata.site">
+                            {{ learn_more_button }}
+                        </a>
+                    </div>
+                </div>
+                <a class="more-link more-link__fixed" data-template="metadata.site">{{ learn_more_button }}</a>
+            </div>
+            <div class="more-content">
+                <div class="more-content__scroller">
+                    <div class="close-button">CLOSE</div>
+                </div>
+                <div class="close-button"><span class="mobile-label">Back</span></div>
+            </div>
+        </div>
+
+        <div class="section" id="response-section" data-has-emotion-state="true">
+            <div class="section-graphics">
+            </div>
+            <div class="section-text">
+                <h2 class="section-heading" data-template="metadata.navigation">{{ response.heading }}</h2>
+                <div class="section-text__scroller">
+                    <div>
+                        <p class="body">
+                        </p>
+                        <a class="more-link more-link__scrollable" data-template="metadata.site">
+                            {{ learn_more_button }}
+                        </a>
+                    </div>
+                </div>
+                <a class="more-link more-link__fixed" data-template="metadata.site">{{ learn_more_button }}</a>
+            </div>
+            <div class="more-content">
+                <div class="more-content__scroller">
+                    <div class="close-button" data-template="metadata.site">{{ close_button }}</div>
+                </div>
+                <div class="close-button"><span class="mobile-label">Back</span></div>
+            </div>
+        </div>
+
+        <div class="section" id="strategies-section">
+            <div class="section-graphics">
+                <div class="embed-padding">
+                    <div class="embed-container">
+                        <iframe src="https://player.vimeo.com/video/110383723?title=0&byline=0&portrait=0"
+                                frameborder="0"
+                                webkitallowfullscreen mozallowfullscreen
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="section-text">
+                <h2 class="section-heading" data-template="metadata.navigation">{{ strategies.heading }}</h2>
+                <div class="section-text__scroller">
+                    <div>
+                        <div data-template="metadata.calm">{{ body }}</div>
+                        <div class="support-childrens-atlas" data-template="metadata.calm">
+                            <p>
+                                {{ crowdfunding }}
+                            </p>
+                        </div>
+
+                        <a class="more-link more-link__scrollable" data-template="metadata.site">
+                            {{ learn_more_button }}
+                        </a>
+                    </div>
+                </div>
+                <a class="more-link more-link__fixed" data-template="metadata.site">{{ learn_more_button }}</a>
+            </div>
+            <div class="more-content">
+                <div class="more-content__scroller">
+                    <div class="close-button" data-template="metadata.site">{{ close_button }}</div>
+                </div>
+                <div class="close-button"><span class="mobile-label">Back</span></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="site-header hidden-for-intro">
+        <div class="site-name">
+            Atlas of Emotions
+        </div>
+    </div>
+
+    <div class="emotion-nav">
+        <ul>
+            <li data-template="metadata.navigation.emotions" class="all"><a href="#continents">{{ all }}</a></li>
+            <li data-template="derived.emotions"><a href="#" data-emotion="anger">{{ anger }}</a></li>
+            <li data-template="derived.emotions"><a href="#" data-emotion="fear">{{ fear }}</a></li>
+            <li data-template="derived.emotions"><a href="#" data-emotion="disgust">{{ disgust }}</a></li>
+            <li data-template="derived.emotions"><a href="#" data-emotion="sadness">{{ sadness }}</a></li>
+            <li data-template="derived.emotions"><a href="#" data-emotion="enjoyment">{{ enjoyment }}</a></li>
+        </ul>
+    </div>
+
+    <div class="top-nav hidden-for-intro">
+        <div class="menu">
+            <ul id="menu-list" data-template="metadata.navigation">
+                <li><a href="#introduction/" id="introduction-menu-link">{{ introduction.menu }}</a>
+                </li>
+                <li><a href="#triggers/" id="timeline-menu-link">{{ timeline.menu }}</a>
+                </li>
+                <li><a href="#continents/" id="experience-menu-link">{{ experience.menu }}</a>
+                </li>
+                <li><a href="#actions/" id="response-menu-link">{{ response.menu }}</a>
+                </li>
+                <li><a href="#strategies/" id="strategies-menu-link">{{ strategies.menu }}</a></li>
+                <li>
+                    <a id="opt-in-link" class="opt-in-button">
+                        <img src="img/mail.svg">
+                    </a>
+                </li>
+                <li>
+                    <div id="lang-selector">
+                        <div class="dropdown emotion-menu">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="lang-selector-toggle"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="dup-title"></span><span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu pull-right" aria-labelledby="lang-selector-toggle"></ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="menu-toggle hidden-for-intro"></div>
+
+
+    <div class="opt-in-modal">
+        <div class="opt-in-modal__content">
+            <div id="opt-in-close" class="close-button"></div>
+            <!-- Begin MailChimp Signup Form -->
+            <div id="mc_embed_signup">
+                Please enter your email to join our mailing list for updates on related Ekman Group projects.
+                <form action="https://eveekman.us12.list-manage.com/subscribe/post?u=a8f41488aed929208e96dcf44&amp;id=9b5a43a93a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                    <div id="mc_embed_signup_scroll">
+                        <div class="mc-field-group">
+                            <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+                            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
+                        </div>
+                        <div id="mce-responses" class="clear">
+                            <div class="response" id="mce-error-response" style="display:none"></div>
+                            <div class="response" id="mce-success-response" style="display:none"></div>
+                        </div>
+                        <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                        <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                            <input type="text" name="b_a8f41488aed929208e96dcf44_9b5a43a93a" tabindex="-1" value="">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+            <script type='text/javascript'>(function ( $ ) {
+                window.fnames = new Array();
+                window.ftypes = new Array();
+                fnames[ 0 ] = 'EMAIL';
+                ftypes[ 0 ] = 'email';
+                fnames[ 1 ] = 'FNAME';
+                ftypes[ 1 ] = 'text';
+                fnames[ 2 ] = 'LNAME';
+                ftypes[ 2 ] = 'text';
+                fnames[ 3 ] = 'ADDRESS';
+                ftypes[ 3 ] = 'address';
+                fnames[ 4 ] = 'PHONE';
+                ftypes[ 4 ] = 'phone';
+            }( jQuery ));
+            var $mcj = jQuery.noConflict( true );</script>
+            <!--End mc_embed_signup-->
+        </div>
+    </div>
 
 </div>
 
 <script>
-	// clear out existing content, hardcoded for bots,
-	// in preparation for main script to repopulate.
-	document.querySelector( 'body' ).style.visibility = 'hidden';
-	document.querySelector( 'body' ).classList.remove( 'placeholder' );
-	document.querySelector( '#main' ).innerHTML = '';
+    // clear out existing content, hardcoded for bots,
+    // in preparation for main script to repopulate.
+    document.querySelector( 'body' ).style.visibility = 'hidden';
+    document.querySelector( 'body' ).classList.remove( 'placeholder' );
+    document.querySelector( '#main' ).innerHTML = '';
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/inobounce/0.1.4/inobounce.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/plugins/ScrollToPlugin.min.js"
-		type="text/javascript"></script>
+        type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"
-		type="text/javascript"></script>
+        type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/jquery.fullpage/2.9.4/jquery.fullpage.extensions.min.js"
-		type="text/javascript"></script>
+        type="text/javascript"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll-lite.min.js"></script> -->
 
-<script src="vendors.js"></script>
-<script src="main.js"></script>
+<script src="vendors.js?1234"></script>
+<script src="main.js?1234"></script>
 
 </body>
 </html>
+

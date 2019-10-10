@@ -1839,7 +1839,7 @@ export default {
 	resetSectionText: function () {
 		dispatcher.popupChange();
 		dispatcher.changeSectionText(
-			this.currentEmotion,
+			appStrings().getStr( `emotionsData.emotions.${this.currentEmotion}.continent.name` ),
 			appStrings().getStr( 'emotionsData.metadata.states.header' ),
 			appStrings().getStr( 'emotionsData.metadata.states.body' ) +
 			'<br/>&nbsp;<br/>' +

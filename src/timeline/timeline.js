@@ -23,93 +23,7 @@ const timeline = {
     sectionTextBodyIntro: null,
     sectionTextBodyAwareness: null,
     swipeDistanceThreshold: 100,
-    episodeContent: {
-        //"anger": {
-        //	"trigger": {
-        //		"precondition": "you are low on sleep",
-        //		"event": "a friend gets angry with you",
-        //		"perceptual-database": "you're reminded of a bully"
-        //	},
-        //	"state": {
-        //		"physical-changes": "your body becomes tense",
-        //		"emotion": "anger",
-        //		"mental-changes": "you feel attacked"
-        //	},
-        //	"response": {
-        //		"constructive-response": "take a time out",
-        //		"destructive-response": "argue",
-        //		"ambiguous-response": "avoid them"
-        //	}
-        //},
-        //"fear": {
-        //    "trigger": {
-        //        "precondition": "reading scary news",
-        //        "event": "a friend gets angry with you",
-        //        "perceptual-database": "reminds you of abandonment"
-        //    },
-        //    "state": {
-        //        "physical-changes": "your heart pounds",
-        //        "emotion": "fear",
-        //        "mental-changes": "you expect them to leave"
-        //    },
-        //    "response": {
-        //        "constructive-response": "recall why you're friends",
-        //        "destructive-response": "imagine them leaving",
-        //        "ambiguous-response": "something else..."
-        //    }
-        //},
-        //"disgust": {
-        //    "trigger": {
-        //        "precondition": "you're grieving",
-        //        "event": "a friend gets angry with you",
-        //        "perceptual-database": "reminds you of insensitivity"
-        //    },
-        //    "state": {
-        //        "physical-changes": "you recoil",
-        //        "emotion": "disgust",
-        //        "mental-changes": "you feel sickened"
-        //    },
-        //    "response": {
-        //        "constructive-response": "ask why they're angry",
-        //        "destructive-response": "belittle them",
-        //        "ambiguous-response": "avoid them"
-        //    }
-        //},
-        //"sadness": {
-        //    "trigger": {
-        //        "precondition": "listening to sad music",
-        //        "event": "a friend gets angry with you",
-        //        "perceptual-database": "it reminds you of rejection"
-        //    },
-        //    "state": {
-        //        "physical-changes": "your body weakens",
-        //        "emotion": "sadness",
-        //        "mental-changes": "you feel empty"
-        //    },
-        //    "response": {
-        //        "constructive-response": "call a loved one",
-        //        "destructive-response": "be ashamed",
-        //        "ambiguous-response": "ignore the feeling"
-        //    }
-        //},
-        //"enjoyment": {
-        //    "trigger": {
-        //        "precondition": "you scored a touchdown",
-        //        "event": "a friend gets angry with you",
-        //        "perceptual-database": "seems like a sore loser"
-        //    },
-        //    "state": {
-        //        "physical-changes": "adrenaline rush",
-        //        "emotion": "enjoyment",
-        //        "mental-changes": "you feel righteous"
-        //    },
-        //    "response": {
-        //        "constructive-response": "play on",
-        //        "destructive-response": "gloat",
-        //        "ambiguous-response": "celebrate"
-        //    }
-        //}
-    },
+    episodeContent: {},
 
     touchmove: function ( e ) {
         let currentSwipe = e.originalEvent.touches[ 0 ].pageX - this.swipeStart;
@@ -428,7 +342,7 @@ const timeline = {
         Object.values( dispatcher.EMOTIONS ).forEach( ( emotion )=> {
             this.episodeContent[ emotion ] = appStrings().getStr( `emotionsData.emotions.${emotion}.timeline` )[ 0 ];
         } );
-        this.episodeContent.common = appStrings().getStr( 'emotionsData.metadata.timeline.secondary.diagram_common' );
+        this.episodeContent.common = appStrings().getStr( 'emotionsData.metadata.timeline.secondary.common' );
 
         this.loadEpisode();
 
