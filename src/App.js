@@ -589,11 +589,12 @@ export default function ( ...initArgs ) {
             return;
         }
 
-        let cappedEmotion = emotion ? emotion.charAt( 0 ).toUpperCase() + emotion.slice( 1 ) : 'The Emotion';
+		let localizedEmotion = emotion ? appStrings().getStr( `emotionsData.emotions.${emotion}.continent.name` ): emotion;
 
-        title = title ? title.replace( /LHAMO/gi, emotion ) : null;
-        body = body ? body.replace( /LHAMO/gi, cappedEmotion ) : null;
+		let cappedEmotion = localizedEmotion ? localizedEmotion.charAt( 0 ).toUpperCase() + localizedEmotion.slice( 1 ) : 'The Emotion';
 
+		title = title ? title.replace( /LHAMO/gi, localizedEmotion ) : null;
+		body = body ? body.replace( /LHAMO/gi, cappedEmotion ) : null;
 
         // update scroller content
         let activeScrollerSectionText = $( '.section.active .section-text' )[ 0 ];
