@@ -589,11 +589,9 @@ export default function ( ...initArgs ) {
             return;
         }
 
-		let localizedEmotion = emotion ? appStrings().getStr( `emotionsData.emotions.${emotion}.continent.name` ): emotion;
+		let cappedEmotion = emotion ? emotion.charAt( 0 ).toUpperCase() + emotion.slice( 1 ) : 'The Emotion';
 
-		let cappedEmotion = localizedEmotion ? localizedEmotion.charAt( 0 ).toUpperCase() + localizedEmotion.slice( 1 ) : 'The Emotion';
-
-		title = title ? title.replace( /LHAMO/gi, localizedEmotion ) : null;
+		title = title ? title.replace( /LHAMO/gi, emotion ) : null;
 		body = body ? body.replace( /LHAMO/gi, cappedEmotion ) : null;
 
         // update scroller content
