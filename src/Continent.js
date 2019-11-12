@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import d3 from 'd3';
-import d3Transform from 'd3-transform';
+import { transform } from 'd3-transform';
 import TWEEN from 'tween.js';
 
 import Circle from './Circle.js';
@@ -97,95 +97,95 @@ export default class Continent {
 	static configsByEmotion = {
 		'anger': {
 			colorPalette: [
-				[204, 28, 23],
-				[208, 46, 53],
-				[212, 65, 63],
-				[216, 83, 73],
-				[220, 102, 83],
-				[224, 120, 92],
-				[228, 135, 102]
+				[ 204, 28, 23 ],
+				[ 208, 46, 53 ],
+				[ 212, 65, 63 ],
+				[ 216, 83, 73 ],
+				[ 220, 102, 83 ],
+				[ 224, 120, 92 ],
+				[ 228, 135, 102 ]
 			]
 		},
 		'disgust': {
 			colorPalette: [
-				[0, 104, 55],
-				[0, 110, 57],
-				[0, 116, 59],
-				[0, 122, 61],
-				[0, 128, 63],
-				[0, 130, 65],
-				[0, 136, 67],
-				[0, 142, 69]
+				[ 0, 104, 55 ],
+				[ 0, 110, 57 ],
+				[ 0, 116, 59 ],
+				[ 0, 122, 61 ],
+				[ 0, 128, 63 ],
+				[ 0, 130, 65 ],
+				[ 0, 136, 67 ],
+				[ 0, 142, 69 ]
 			]
 		},
 		'enjoyment': {
 			colorPalette: [
-				[248, 136, 29],
-				[243, 143, 30],
-				[243, 136, 33],
-				[244, 149, 36],
-				[244, 153, 40],
-				[245, 156, 43],
-				[245, 159, 46],
-				[246, 162, 49],
-				[247, 169, 56],
-				[246, 166, 53],
-				[247, 172, 59]
+				[ 248, 136, 29 ],
+				[ 243, 143, 30 ],
+				[ 243, 136, 33 ],
+				[ 244, 149, 36 ],
+				[ 244, 153, 40 ],
+				[ 245, 156, 43 ],
+				[ 245, 159, 46 ],
+				[ 246, 162, 49 ],
+				[ 247, 169, 56 ],
+				[ 246, 166, 53 ],
+				[ 247, 172, 59 ]
 			]
 		},
 		'fear': {
 			colorPalette: [
-				[143, 39, 139],
-				[156, 41, 153],
-				[196, 49, 194],
-				[209, 51, 207],
-				[223, 53, 221],
-				[235, 56, 234],
-				[248, 58, 248]
+				[ 143, 39, 139 ],
+				[ 156, 41, 153 ],
+				[ 196, 49, 194 ],
+				[ 209, 51, 207 ],
+				[ 223, 53, 221 ],
+				[ 235, 56, 234 ],
+				[ 248, 58, 248 ]
 			]
 		},
 		'sadness': {
 			colorPalette: [
-				[65, 74, 161],
-				[54, 104, 178],
-				[49, 124, 189],
-				[44, 139, 200],
-				[51, 158, 211],
-				[85, 172, 217],
-				[146, 198, 229],
-				[174, 209, 234],
-				[195, 218, 238]
+				[ 65, 74, 161 ],
+				[ 54, 104, 178 ],
+				[ 49, 124, 189 ],
+				[ 44, 139, 200 ],
+				[ 51, 158, 211 ],
+				[ 85, 172, 217 ],
+				[ 146, 198, 229 ],
+				[ 174, 209, 234 ],
+				[ 195, 218, 238 ]
 			]
 		}
 	};
 
 	static transforms;
 
-	constructor (emotion, container, continentGeom, transforms={}, screenIsSmall) {
+	constructor( emotion, container, continentGeom, transforms = {}, screenIsSmall ) {
 
-		if (!Continent.transforms) {
-			Continent.transforms = _.shuffle(Continent.BASE_TRANSFORMS);
+		if ( !Continent.transforms ) {
+			Continent.transforms = _.shuffle( Continent.BASE_TRANSFORMS );
 		}
 
 		this.screenIsSmall = screenIsSmall;
 
-		this.initInstanceProperties(emotion, container, transforms);
-		this.onResize(continentGeom, screenIsSmall);
+		this.initInstanceProperties( emotion, container, transforms );
+		this.onResize( continentGeom, screenIsSmall );
 		this.prepopulate();
 
 	}
 
-	initInstanceProperties (emotion, container, transforms) {
+	initInstanceProperties( emotion, container, transforms ) {
 
-		let emotionIndex = Object.keys(Continent.configsByEmotion).indexOf(emotion);
-		if (emotionIndex === -1) {
-			throw new Error('Invalid emotion "' + emotion + '" for continent.');
+		let emotionIndex = Object.keys( Continent.configsByEmotion ).indexOf( emotion );
+		if ( emotionIndex === -1 ) {
+			throw new Error( 'Invalid emotion "' + emotion + '" for continent.' );
 		}
 
 		this.id = emotion,
-		this.name = emotion.toUpperCase(),
-		this.i18nName = appStrings().getStr(`derived.emotions.${ emotion }`);
-		this.colorPalette = Continent.configsByEmotion[emotion].colorPalette.concat();
+			this.name = emotion.toUpperCase(),
+			this.i18nName = appStrings().getStr( `derived.emotions.${ emotion }` );
+		this.colorPalette = Continent.configsByEmotion[ emotion ].colorPalette.concat();
 
 		this.spawnConfig = {
 			lastSpawn: 0,
@@ -196,11 +196,11 @@ export default class Continent {
 		this.drift = {
 			x: 0,
 			y: 0,
-			sinCtr: Math.random() * 2*Math.PI,
-			cosCtr: Math.random() * 2*Math.PI
+			sinCtr: Math.random() * 2 * Math.PI,
+			cosCtr: Math.random() * 2 * Math.PI
 		};
 
-		this.baseTransforms = Object.assign({}, Continent.transforms[emotionIndex], transforms[emotionIndex]);
+		this.baseTransforms = Object.assign( {}, Continent.transforms[ emotionIndex ], transforms[ emotionIndex ] );
 
 		this.introSpreadRad = 0;
 		this.introSpreadSize = 0;
@@ -212,39 +212,39 @@ export default class Continent {
 		this.highlightLevel = Continent.HIGHLIGHT_LEVELS.NONE;
 		this.isFocused = false;
 
-		this.d3Selection = container.append('g')
-			.classed('continent ' + this.id, true)
-			.style('opacity', 0.0)
-			.datum(this);
+		this.d3Selection = container.append( 'g' )
+			.classed( 'continent ' + this.id, true )
+			.style( 'opacity', 0.0 )
+			.datum( this );
 		this.d3Selection.transition()
-			.duration(sassVars.ui.overlays.duration.in * 1000)	// match initial appearance of dialogs
-			.style('opacity', 1.0);
+			.duration( sassVars.ui.overlays.duration.in * 1000 )	// match initial appearance of dialogs
+			.style( 'opacity', 1.0 );
 
-		this.circleWrapper = this.d3Selection.append('g')
-			.classed('circle-wrapper', true);
+		this.circleWrapper = this.d3Selection.append( 'g' )
+			.classed( 'circle-wrapper', true );
 
 	}
 
-	prepopulate () {
+	prepopulate() {
 
-		let numCircles = 0.333 * this.maxNumCircles + Math.floor(Math.random() * 0.666 * this.maxNumCircles);
-		for (let i=0; i<numCircles; i++) {
-			let newCircle = Circle.spawn(this, 1, true);
+		let numCircles = 0.333 * this.maxNumCircles + Math.floor( Math.random() * 0.666 * this.maxNumCircles );
+		for ( let i = 0; i < numCircles; i++ ) {
+			let newCircle = Circle.spawn( this, 1, true );
 			newCircle.radius = 0.75 + (0.25 * Math.random()) * newCircle.size;
 			newCircle.update(
-				Continent.HIGHLIGHT_ALPHA_MODS[this.highlightLevel],
-				Continent.HIGHLIGHT_SPEED_MODS[this.highlightLevel]);
-			this.circles.push(newCircle);
+				Continent.HIGHLIGHT_ALPHA_MODS[ this.highlightLevel ],
+				Continent.HIGHLIGHT_SPEED_MODS[ this.highlightLevel ] );
+			this.circles.push( newCircle );
 		}
 
 	}
 
-	update (state, frameCount) {
+	update( state, frameCount ) {
 
-		if (this.tweens) {
-			_.values(this.tweens).forEach(tween => {
-				tween.update(state.time);
-			});
+		if ( this.tweens ) {
+			_.values( this.tweens ).forEach( tween => {
+				tween.update( state.time );
+			} );
 		}
 
 		let newCircle,
@@ -253,23 +253,23 @@ export default class Continent {
 			speedMod,
 			scale;
 
-		if (!this.isFocused) {
+		if ( !this.isFocused ) {
 
 			// probabilistically spawn new Circles
-			if (this.circles.length < this.maxNumCircles) {
-				newCircle = Circle.spawn(this, frameCount);
-				if (newCircle) {
-					this.circles.push(newCircle);
+			if ( this.circles.length < this.maxNumCircles ) {
+				newCircle = Circle.spawn( this, frameCount );
+				if ( newCircle ) {
+					this.circles.push( newCircle );
 				}
 			}
 
 			// set alpha and speed based on interaction
-			alphaMod = Continent.HIGHLIGHT_ALPHA_MODS[this.highlightLevel];
-			speedMod = Continent.HIGHLIGHT_SPEED_MODS[this.highlightLevel];
+			alphaMod = Continent.HIGHLIGHT_ALPHA_MODS[ this.highlightLevel ];
+			speedMod = Continent.HIGHLIGHT_SPEED_MODS[ this.highlightLevel ];
 
-			if (!this.screenIsSmall) {
+			if ( !this.screenIsSmall ) {
 				// apply drift
-				this.wander(this.drift, 3);
+				this.wander( this.drift, 3 );
 			}
 
 		}
@@ -278,15 +278,15 @@ export default class Continent {
 			transY = this.centerY + this.y + this.drift.y,
 			introSizeMod = 1 + (this.introSpreadSize || 0);
 
-		if (this.introSpreadRad) {
-			transX += this.introSpreadRad * Math.cos(this.introSpreadAng);
-			transY += this.introSpreadRad * Math.sin(this.introSpreadAng);
+		if ( this.introSpreadRad ) {
+			transX += this.introSpreadRad * Math.cos( this.introSpreadAng );
+			transY += this.introSpreadRad * Math.sin( this.introSpreadAng );
 		}
 
 		// work around occasional bug in tween math
-		if (!isNaN(this.scaleX)) {
+		if ( !isNaN( this.scaleX ) ) {
 			this.d3Selection
-				.attr('transform', d3Transform()
+				.attr( 'transform', transform()
 					.translate(
 						transX,
 						transY
@@ -298,37 +298,43 @@ export default class Continent {
 				);
 		}
 
-		if (!this.isFocused) {
+		if ( !this.isFocused ) {
 
 			// update circles
-			for (let i=this.circles.length-1; i>=0; i--) {
-				circle = this.circles[i];
-				if (circle.isAlive()) {
-					circle.update(alphaMod, speedMod);
+			for ( let i = this.circles.length - 1; i >= 0; i-- ) {
+				circle = this.circles[ i ];
+				if ( circle.isAlive() ) {
+					circle.update( alphaMod, speedMod );
 				} else {
-					this.circles.splice(i, 1);
+					this.circles.splice( i, 1 );
 					circle.d3Wrapper.remove();
 				}
-			};
+			}
+			;
 
 		}
 
 	}
 
-	onResize (continentGeom, screenIsSmall) {
+	onResize( continentGeom, screenIsSmall ) {
 
 		// scale base transforms per continentGeom
-		let transform = _.cloneDeep(this.baseTransforms);
-		transform.x *= continentGeom.w;
-		transform.y *= continentGeom.h;
-		transform.label.x *= continentGeom.w;
-		transform.label.y *= continentGeom.h;
-		transform.size *= continentGeom.h;
+		let transformClone = _.cloneDeep( this.baseTransforms );
+		transformClone.x *= continentGeom.w;
+		transformClone.label.x *= continentGeom.w;
+		transformClone.y *= continentGeom.h;
+		transformClone.label.y *= continentGeom.h;
+
+		if ( this.screenIsSmall ) {
+			transformClone.size *= continentGeom.h * 2;
+		} else {
+			transformClone.size *= continentGeom.h;
+		}
 
 		// and copy onto this Continent instance
-		Object.assign(this, transform);
+		Object.assign( this, transformClone );
 
-		this.introSpreadAng = Math.atan2(this.y, this.x);
+		this.introSpreadAng = Math.atan2( this.y, this.x );
 		this.centerX = continentGeom.centerX;
 		this.centerY = continentGeom.centerY;
 
@@ -336,49 +342,51 @@ export default class Continent {
 		this.maxNumCircles = this.screenIsSmall ? MAX_NUM_CIRCLES_SMALL : MAX_NUM_CIRCLES;
 
 
-		if (!this.circleHitArea && this.screenIsSmall) {
-			this.circleHitArea = this.d3Selection.insert('circle', ':first-child')
-				.style('fill', 'white')
-				.style('fill-opacity', 0.0)
-				.attr('cx', 0)
-				.attr('cy', 0)
-				.attr('r', transform.size);
+		if ( !this.circleHitArea && this.screenIsSmall ) {
+			this.circleHitArea = this.d3Selection.insert( 'circle', ':first-child' )
+				.style( 'fill', 'white' )
+				.style( 'fill-opacity', 0.0 )
+				.attr( 'cx', 0 )
+				.attr( 'cy', 0 )
+				.attr( 'r', transformClone.size );
 		}
 
 	}
 
-	addTween (props, time, delay, func=TWEEN.Easing.Linear.None) {
+	addTween( props, time, delay, func = TWEEN.Easing.Linear.None ) {
 
-		if (!time && !delay) {
-			for (let key in props) {
-				this[key] = props[key];
+		if ( !time && !delay ) {
+			for ( let key in props ) {
+				this[ key ] = props[ key ];
 			}
 			return;
 		}
 
-		if (!this.tweens) {
+		if ( !this.tweens ) {
 			this.tweens = {};
 		}
 
-		let key = Object.keys(props).sort().join('-');
-		if (this.tweens[key]) {
-			this.tweens[key].stop();
+		let key = Object.keys( props ).sort().join( '-' );
+		if ( this.tweens[ key ] ) {
+			this.tweens[ key ].stop();
 		}
 
-		this.tweens[key] = new TWEEN.Tween(this)
-			.to(props, time)
-			.delay(delay)
-			.onComplete(() => { delete this.tweens[key]; })
-			.easing(func)
+		this.tweens[ key ] = new TWEEN.Tween( this )
+			.to( props, time )
+			.delay( delay )
+			.onComplete( () => {
+				delete this.tweens[ key ];
+			} )
+			.easing( func )
 			.start();
 
 	}
 
 	/**
-	 * @param	container		SVG node containing all continents
-	 * @param	containerScale	Scale that will be applied to this Continent, from continents.focusZoomedOutContinent()
+	 * @param    container        SVG node containing all continents
+	 * @param    containerScale    Scale that will be applied to this Continent, from continents.focusZoomedOutContinent()
 	 */
-	spreadCircles (container, containerScale) {
+	spreadCircles( container, containerScale ) {
 
 		// TODO: DRY this out. Most of this math is copied from states.js.
 
@@ -390,98 +398,98 @@ export default class Continent {
 				right: sassVars.states.graph.margins.right,
 				left: sassVars.states.graph.margins.left
 			},
-			statesGraphWidth = parseFloat(sassVars.states.graph.width.replace('%', '')) / 100,
+			statesGraphWidth = parseFloat( sassVars.states.graph.width.replace( '%', '' ) ) / 100,
 			containerBounds = container.getBoundingClientRect(),
 			innerWidth = (statesGraphWidth * containerBounds.width - margin.left - margin.right) / containerScale,
 			centerOffset = (sassVars.continents.centerX - 0.5) * containerBounds.width / containerScale,
 			xScale = d3.scale.linear()
-				.domain([0, 10])
-				.range([-0.5 * innerWidth - centerOffset, 0.5 * innerWidth - centerOffset]),
+				.domain( [ 0, 10 ] )
+				.range( [ -0.5 * innerWidth - centerOffset, 0.5 * innerWidth - centerOffset ] ),
 			rScale = d3.scale.linear()
-				.domain([0, 10])
-				.range([0, innerWidth]);
+				.domain( [ 0, 10 ] )
+				.range( [ 0, innerWidth ] );
 
 		const growTime = sassVars.continents.spread.duration.in * 1000;
 
-		let ranges = this.transformRanges(emotionsData.emotions[this.id].states),
-			circles = this.circleWrapper.selectAll('circle')
-				.data(ranges, (d, i) => i);
+		let ranges = this.transformRanges( emotionsData.emotions[ this.id ].states ),
+			circles = this.circleWrapper.selectAll( 'circle' )
+				.data( ranges, ( d, i ) => i );
 
-		let calcStrokeColor = function (d, i) {
-			let colorPalette = Continent.configsByEmotion[continent.id].colorPalette,
-				color = colorPalette[Math.floor(Math.random() * colorPalette.length)].join(',');
+		let calcStrokeColor = function ( d, i ) {
+			let colorPalette = Continent.configsByEmotion[ continent.id ].colorPalette,
+				color = colorPalette[ Math.floor( Math.random() * colorPalette.length ) ].join( ',' );
 			return 'rgb(' + color + ')';
 		};
 
 		// Move existing circles to positions and sizes corresponding to states
 		circles.transition()
-			.duration(growTime)
-			.attr('cx', d => xScale(d.cx))
-			.attr('r', d => rScale(d.r))
-			.attr('stroke', calcStrokeColor)
-			.attr('stroke-opacity', Circle.BASE_ALPHA)
-			.attr('stroke-width', d => rScale(d.strokeWidth));
+			.duration( growTime )
+			.attr( 'cx', d => xScale( d.cx ) )
+			.attr( 'r', d => rScale( d.r ) )
+			.attr( 'stroke', calcStrokeColor )
+			.attr( 'stroke-opacity', Circle.BASE_ALPHA )
+			.attr( 'stroke-width', d => rScale( d.strokeWidth ) );
 
 		// Add new circles as needed, and fade/grow them in at positions and sizes corresponding to states
-		circles.enter().append('circle')
-			.attr('cx', 0)
-			.attr('cy', 0)
-			.attr('r', 0)
-			.attr('stroke', calcStrokeColor)
-			.attr('stroke-opacity', Circle.BASE_ALPHA)
-			.attr('stroke-width', d => rScale(d.strokeWidth))
-		.transition()
-			.duration(growTime)
-			.attr('cx', d => xScale(d.cx))
-			.attr('r', d => rScale(d.r));
+		circles.enter().append( 'circle' )
+			.attr( 'cx', 0 )
+			.attr( 'cy', 0 )
+			.attr( 'r', 0 )
+			.attr( 'stroke', calcStrokeColor )
+			.attr( 'stroke-opacity', Circle.BASE_ALPHA )
+			.attr( 'stroke-width', d => rScale( d.strokeWidth ) )
+			.transition()
+			.duration( growTime )
+			.attr( 'cx', d => xScale( d.cx ) )
+			.attr( 'r', d => rScale( d.r ) );
 
 		// flatten out the circles wrapper in preparation for
 		// displaying states (elevation/profile of continent)
-		this.circleWrapper.classed('flat', true);
+		this.circleWrapper.classed( 'flat', true );
 
 	}
 
-	gatherCircles (immediate) {
+	gatherCircles( immediate ) {
 
 		const growTime = immediate ? 0 : sassVars.continents.spread.duration.out * 1000;
 
-		let ranges = this.transformRanges(emotionsData.emotions[this.id].states);
+		let ranges = this.transformRanges( emotionsData.emotions[ this.id ].states );
 
 		let calledOnEnd = false,
-			circles = this.circleWrapper.selectAll('circle')
-				.data(this.circles);
+			circles = this.circleWrapper.selectAll( 'circle' )
+				.data( this.circles );
 
 		// transition circles that exist in this.circles back to their original settings
 		circles.transition()
-			.duration(growTime)
-			.attr('cx', 0)
-			.attr('cy', 0)
-			.attr('r', d => d.radius)
-			.attr('stroke', d => 'rgb(' + d.color + ')')
-			.attr('stroke-opacity', d => d.alpha)
-			.attr('stroke-width', d => d.calcStrokeWidth())
-			.each('end', (...args) => {
-				if (!calledOnEnd) {
+			.duration( growTime )
+			.attr( 'cx', 0 )
+			.attr( 'cy', 0 )
+			.attr( 'r', d => d.radius )
+			.attr( 'stroke', d => 'rgb(' + d.color + ')' )
+			.attr( 'stroke-opacity', d => d.alpha )
+			.attr( 'stroke-width', d => d.calcStrokeWidth() )
+			.each( 'end', ( ...args ) => {
+				if ( !calledOnEnd ) {
 					this.isFocused = false;
 					calledOnEnd = true;
 				}
-			});
+			} );
 
 		// remove all circles created within spreadCircles that are not present in this.circles
 		circles.exit().transition()
-			.duration(growTime)
-			.ease('quad-out')
-			.attr('cx', 0)
-			.attr('cy', 0)
-			.attr('r', 0)
-			.attr('stroke-opacity', 0)
+			.duration( growTime )
+			.ease( 'quad-out' )
+			.attr( 'cx', 0 )
+			.attr( 'cy', 0 )
+			.attr( 'r', 0 )
+			.attr( 'stroke-opacity', 0 )
 			.remove();
 
 		// unflatten the circles wrapper
 		// (after delay, to ensure they're visible so that transition will play correctly)
-		setTimeout(() => {
-			this.circleWrapper.classed('flat', false);
-		}, 1);
+		setTimeout( () => {
+			this.circleWrapper.classed( 'flat', false );
+		}, 1 );
 
 	}
 
@@ -489,41 +497,41 @@ export default class Continent {
 	 * Map emotion ranges into circles of varying stroke widths,
 	 * but with locations and sizes matching corresponding state graph.
 	 */
-	transformRanges (states, emotion, strengthMod=1.0) {
+	transformRanges( states, emotion, strengthMod = 1.0 ) {
 
 		// TODO: DRY this out. Copied from states.js.
 		// Should have a central place to parse emotion data, rather than
 		// pulling straight from json and manipulating everywhere it's used.
 
 		// filter out states with invalid ranges
-		states = states.filter(state => {
+		states = states.filter( state => {
 			return !!(state.range.min && state.range.max);
-		});
+		} );
 
 		// sort by state min value, then max value
-		states = states.sort((a, b) => {
-			if (a.range.min < b.range.min) {
+		states = states.sort( ( a, b ) => {
+			if ( a.range.min < b.range.min ) {
 				return -1;
-			} else if (a.range.min > b.range.min) {
+			} else if ( a.range.min > b.range.min ) {
 				return 1;
 			} else {
-				if (a.range.max < b.range.max) {
+				if ( a.range.max < b.range.max ) {
 					return -1;
-				} else if (a.range.max > b.range.max) {
+				} else if ( a.range.max > b.range.max ) {
 					return 1;
 				}
 			}
 			return 0;
-		});
+		} );
 
 		let numStates = states.length;
-		return states.map((state, i) => {
+		return states.map( ( state, i ) => {
 
 			let max = state.range.max,
 				min = state.range.min - 1,
 				halfWidth = 0.5 * (max - min),
 
-				// allow strokeWidth to vary from a half-full circle to a nearly-full circle
+			// allow strokeWidth to vary from a half-full circle to a nearly-full circle
 				strokeWidth = (0.4 + 0.5 * Math.random()) * halfWidth;
 
 			return {
@@ -535,39 +543,43 @@ export default class Continent {
 				r: halfWidth - 0.5 * strokeWidth
 			};
 
-		});
+		} );
 
 	}
 
 	// Randomized sinusoidal motion
-	wander (drift, maxDist) {
+	wander( drift, maxDist ) {
 
 		drift.sinCtr += 0.01 + Math.random() * 0.03;
 		drift.cosCtr += 0.01 + Math.random() * 0.03;
-		drift.x = Math.cos(drift.cosCtr) * maxDist;
-		drift.y = Math.sin(drift.sinCtr) * maxDist;
+		drift.x = Math.cos( drift.cosCtr ) * maxDist;
+		drift.y = Math.sin( drift.sinCtr ) * maxDist;
 
 	}
 
 	// Random walk
-	meander (drift, maxDist) {
+	meander( drift, maxDist ) {
 
 		let maxSpeed = 2 * 0.01 * maxDist;
 		let maxTurn = 2 * 0.002 * Math.PI;
-		let x = Math.cos(drift.ang) * drift.dist;
-		let y = Math.sin(drift.ang) * drift.dist;
-		let angToCenter = Math.atan2(y, x);
+		let x = Math.cos( drift.ang ) * drift.dist;
+		let y = Math.sin( drift.ang ) * drift.dist;
+		let angToCenter = Math.atan2( y, x );
 
 		drift.dist += (-0.5 + Math.random()) * maxSpeed;
-		drift.ang +=  (-0.5 + Math.random()) * maxTurn;
+		drift.ang += (-0.5 + Math.random()) * maxTurn;
 
 		// normalize angles
-		while (angToCenter < 0) { angToCenter += 2*Math.PI; }
-		while (drift.ang < 0) { drift.ang += 2*Math.PI; }
-		drift.ang %= 2*Math.PI;
+		while ( angToCenter < 0 ) {
+			angToCenter += 2 * Math.PI;
+		}
+		while ( drift.ang < 0 ) {
+			drift.ang += 2 * Math.PI;
+		}
+		drift.ang %= 2 * Math.PI;
 
 		// If getting too far away from center, turn back toward center
-		if (drift.dist > 0.5 * maxDist) {
+		if ( drift.dist > 0.5 * maxDist ) {
 			drift.ang += 0.1 * (angToCenter - drift.ang);
 		}
 

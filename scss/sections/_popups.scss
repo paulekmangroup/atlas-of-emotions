@@ -154,6 +154,7 @@ $horiz-padding: 20px;
 		user-select: none;
 		touch-action: manipulation;
 		-webkit-appearance: none;
+		cursor: pointer;
 
 		&:before {
 			content: '×';

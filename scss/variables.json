@@ -3,7 +3,7 @@
 		"centerX": 0.48,
 		"centerY": 0.5,
 		"centerX-small": 0.5,
-		"centerY-small": 0.35,
+		"centerY-small": 0.5,
 		"panX": {
 			"duration": {
 				"in": 0.75,
@@ -75,7 +75,8 @@
 		},
 		"margins": {
 			"top": 25,
-			"bottom": 10
+			"bottom": 10,
+			"bottom-small": 30
 		},
 		"add": {
 			"time": 1000,
@@ -89,11 +90,6 @@
 			"time": 600,
 			"delay": 0
 		}
-	},
-	"triggers": {
-		"bottom": "20%",
-		"bottom-small": "53%",
-		"bottom-height-small": "15%"
 	},
 	"emotions": {
 		"panX": {
@@ -111,6 +107,10 @@
 			"height": 55,
 			"height-small": 44,
 			"mobile-nav": {
+				"target": {
+					"width": 44,
+					"height": 44
+				},
 				"width": 28,
 				"height": 18,
 				"margin": 1
@@ -152,7 +152,13 @@
 				"open": 0.5,
 				"close": 0.5,
 				"border-open": 0.25
-			}
+			},
+			"expansion-amount": 100,
+			"min-width": 150,
+			"max-width": 200
+		},
+		"mobile-emotion-nav": {
+			"height": 20
 		}
 	}
 }
