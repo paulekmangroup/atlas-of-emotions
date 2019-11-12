@@ -1,10 +1,10 @@
 /* variables used only in this file */
-$section-padding-top: #{$ui-header-height}px;
+$section-padding-top: 131px;
 $section-text-padding: 1.5em;
 $section-text-padding-mobile: 0.75em;
 $more-text-padding: 3em;
 $section-text-background-color: #eee;
-$top-nav-background: rgba(255, 255, 255, 0.8);
+$top-nav-background: rgba(255, 255, 255, 0.9);
 $top-nav-padding-top: 15px;
 $mobile-split-height: 300;
 $mobile-section-text-top: #{$ui-header-mobile-nav-target-height + $mobile-split-height}px;
@@ -59,7 +59,9 @@ body {
 		.original-content,
 		#timeline-section .section-graphics,
 		.section-text {
-			filter: blur(10px);
+			& > * {
+				filter: blur(10px);
+			}
 		}
 		.original-content {
 			z-index: auto;
@@ -121,9 +123,9 @@ svg {
 
 %close-button {
 	position: absolute;
-	top: 0.5em;
+	top: 20px;
 	left: auto;
-	right: 0.5em;
+	right: 20px;
 	line-height: 1em;
 	cursor: pointer;
 
@@ -135,8 +137,8 @@ svg {
 		margin: 0;
 		padding: 0;
 
-		font-size: 3em;
-		font-weight: 200;
+		font-size: 65px;
+		font-weight: 300;
 		content: '×';
 	}
 }
@@ -201,20 +203,43 @@ svg {
 	opacity: 0;
 	transition: opacity 1s ease;
 	pointer-events: none;
-	&.visible {
-		opacity: 1;
-		pointer-events: auto;
+	visibility: hidden;
+}
+
+.hidden-for-intro.visible {
+	opacity: 1;
+	pointer-events: auto;
+	visibility: visible;
+}
+
+.logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: transparent;
+	padding: 25px;
+	width: 19em;
+}
+
+[class*=fp-viewing-introduction] {
+	.logo {
+		background-color: transparent;
+	}
+	.hidden-for-intro.visible {
+		visibility: hidden;
 	}
 }
 
 .site-header {
 	position: fixed;
 	top: 0;
+	left: $section-text-width;
+	right: 0;
 	height: #{$ui-header-height}px;
-	width: 100%;
 	background-color: $top-nav-background;
 	padding-top: $top-nav-padding-top;
 	.site-name {
+		display: none;
 		left: 1.5em;
 		position: absolute;
 		height: 40px;
@@ -296,10 +321,11 @@ svg {
 	position: fixed;
 	top: 0;
 	height: #{$ui-header-height}px;
-	width: 100%;
 	padding-top: $top-nav-padding-top;
 	background-color: transparent;
 	z-index: 200;
+	left: $section-text-width;
+	right: 0;
 	.menu {
 		position: absolute;
 		right: 1.5em;
@@ -479,10 +505,9 @@ svg {
 	}
 
 	.intro-heading {
-		position: absolute;
-		top: 40px;
-		left: 40px;
+		position: relative;
 		text-transform: uppercase;
+		padding-bottom: 30px;
 		h1 {
 			text-transform: none;
 		}
@@ -604,14 +629,14 @@ svg {
 
 .section-text {
 	position: absolute;
-	//z-index: 2;
-	top: $section-padding-top;
+	z-index: 10;
+	top: 0;
 	width: $section-text-width;
 	bottom: 0;
 	background-color: $section-text-background-color;
 
 	padding: $section-text-padding;
-	padding-top: $section-text-padding*0.75;
+	padding-top: $section-padding-top;
 	@extend %raleway-light;
 	color: #000; //$text-overlay-color;
 	text-align: left;
@@ -624,6 +649,10 @@ svg {
 	&.visible {
 		transition-duration: #{$ui-overlays-duration-in}s;
 		opacity: 1.0;
+	}
+
+	.section-heading {
+		position: relative;
 	}
 
 	button {
@@ -697,8 +726,8 @@ svg {
 		@extend %button-link;
 		font-size: 0.8em;
 		position: absolute;
-		right: $section-text-padding;
-		top: $section-text-padding*0.85;
+		right: 0;
+		top: 0;
 		span {
 			opacity: 0.3;
 		}
@@ -725,7 +754,7 @@ svg {
 	.section-text__scroller {
 		position: absolute;
 		bottom: 50px;
-		top: 70px;
+		top: 179px;
 		left: $section-text-padding;
 		right: $section-text-padding;
 		padding-bottom: 50px;
@@ -747,9 +776,8 @@ svg {
 
 .more-content {
 	position: absolute;
-	top: $section-padding-top;
+	top: #{$ui-header-height}px;
 	bottom: 0;
-	background-color: $section-text-background-color;
 
 	padding: $section-text-padding;
 	padding-top: $section-text-padding*0.75;
@@ -757,27 +785,44 @@ svg {
 	color: #000;
 	text-align: center; //for the close button at the bottom
 
-	z-index: 1;
+	z-index: 10;
 	width: 100%;
 	transform: translateX(-100%);
-	background-color: rgba(#f7f7f7, 0.84);
+	background-color:transparent;
 	transition: $more-content-transition;
 	pointer-events: auto;
+
+
+	&:after {
+		top: 0;
+		bottom: 0;
+		left: $section-text-width;
+		right: 0;
+		content: '';
+		display: block;
+		position: absolute;
+		border: 55px solid #000000;
+		border-image: url('./img/frame.png') 55 repeat;
+		pointer-events: none;
+	}
+
 
 	.close-button {
 		@extend %close-button;
 	}
 
 	.more-content__scroller {
-		position: absolute;
 		top: 0;
 		bottom: 0;
-		left: 0;
+		left: $section-text-width;
 		right: 0;
+		position: absolute;
 		padding: $more-text-padding;
+		padding-left: 0;
 		pointer-events: auto;
 		overflow-y: scroll;
 		-webkit-overflow-scrolling: touch;
+		background-color: rgba(255,255,255,0.8);
 
 		.close-button {
 			position: static;
@@ -827,8 +872,8 @@ svg {
 		display: none;
 	}
 	.more-content__scroller {
-		padding-left: 1.5em;
-		padding-right: 1.5em;
+		top: 130px;
+		padding: 1.5em;
 	}
 }
 
