@@ -351,8 +351,14 @@ svg {
 		height: 40px;
 		text-align: right;
 		ul {
+			margin-block-start: 0;
+			margin-block-end: 0;
+			padding-inline-start: 0;
 			li {
 				margin-left: 40px;
+			}
+			li:first-child {
+				margin: 0;
 			}
 		}
 	}
