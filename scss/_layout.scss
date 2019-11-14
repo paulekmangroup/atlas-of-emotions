@@ -33,6 +33,24 @@ body {
 
 	transition: background-color 1s ease;
 
+	&.rotated {
+		&:after {
+			content: ' ';
+			display: block;
+			background-image: url('./img/rotate.svg');
+			background-size: contain;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: #eeeeee;
+			z-index: 10000;
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+	}
+
 	&[class*=fp-viewing-experience],
 	&[class*=fp-viewing-response] {
 		// allows interaction by default, js passes swipes to scroller
@@ -219,6 +237,7 @@ svg {
 	background: transparent;
 	padding: 25px;
 	width: 19em;
+	pointer-events: none;
 }
 
 [class*=fp-viewing-introduction] {
@@ -855,6 +874,11 @@ svg {
 	top: 0;
 	width: $section-text-width;
 	text-align: left;
+
+	&:after{
+		display: none;
+	}
+
 	.fade-images {
 		position: relative;
 		width: 100%;
@@ -874,6 +898,7 @@ svg {
 	.more-content__scroller {
 		top: 130px;
 		padding: 1.5em;
+		left:0;
 	}
 }
 
@@ -1078,7 +1103,7 @@ svg {
 			text-align: center;
 			left: 0;
 			right: 0;
-			top: 70px;
+			top: 0;
 			h1 {
 				font-size: 2.9em;
 				width: 300px;
@@ -1139,9 +1164,11 @@ svg {
 	.site-header {
 		height: #{$ui-header-height-small}px;
 		padding-top: #{$menu-padding-top}px;
+		left: 0;
 		.site-name {
 			left: 0.75em;
 			font-size: 18px;
+			display: block;
 		}
 	}
 	.top-nav {
@@ -1152,6 +1179,7 @@ svg {
 		background-color: transparent;
 		font-size: 1.25em;
 		transition-duration: 0.4s;
+		left: 0;
 
 		&.hidden-for-intro.visible {
 			display: none;
@@ -1272,7 +1300,7 @@ svg {
 			padding-bottom: 0.3em;
 			margin-bottom: 0.3em;
 			a.restart-button {
-				top: 0.95em;
+				top: 0;
 				font-size: 0.8em;
 				right: $section-text-padding-mobile;
 				color: #555;
@@ -1363,10 +1391,14 @@ svg {
 		top: #{$ui-header-mobile-nav-target-height}px;
 		transform: translateX(100%);
 		text-align: left;
+		&:after {
+			display: none;
+		}
 		.more-content__scroller {
 			padding: 0 1em;
 			padding-bottom: 60px;
 			top: 55px;
+			left: 0;
 			h2 {
 				font-size: 1.1em;
 			}
@@ -1389,6 +1421,14 @@ svg {
 		width: 100%;
 		.more-content__scroller {
 			padding-top: #{$ui-header-mobile-nav-target-height}px;
+		}
+	}
+	.logo {
+		display: none;
+	}
+	&[class*=fp-viewing-introduction] {
+		.logo {
+			display: block;
 		}
 	}
 }
