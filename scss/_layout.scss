@@ -848,8 +848,7 @@ svg {
 		left: $section-text-width;
 		right: 0;
 		position: absolute;
-		padding: $more-text-padding;
-		padding-left: 0;
+		padding: $more-text-padding 0;
 		pointer-events: auto;
 		overflow-y: scroll;
 		-webkit-overflow-scrolling: touch;
