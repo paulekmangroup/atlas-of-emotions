@@ -680,19 +680,20 @@ svg {
 		display: block;
 		width: 100%;
 		margin: 0 auto;
-		border: 1px solid #999;
-		box-shadow: 1px 1px 1px #555;
+		border: 1px solid #000;
+		box-shadow: 1px 3px 5px 0px #555;
 		text-transform: uppercase;
-		font-weight: 300;
+		font-weight: 700;
 		font-size: 0.8em;
 		padding: 0.3em 0;
+		border-radius: 14px;
 		/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fefefe+0,fefefe+100&1+0,0+100 */
 		background: -moz-linear-gradient(top, rgba($button-color, $button-color, $button-color, 1) 0%, rgba($button-color, $button-color, $button-color, 0) 100%); /* FF3.6-15 */
 		background: -webkit-linear-gradient(top, rgba($button-color, $button-color, $button-color, 1) 0%, rgba($button-color, $button-color, $button-color, 0) 100%); /* Chrome10-25,Safari5.1-6 */
 		background: linear-gradient(to bottom, rgba($button-color, $button-color, $button-color, 1) 0%, rgba($button-color, $button-color, $button-color, 0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fefefe', endColorstr='#00fefefe', GradientType=0); /* IE6-9 */
 		&:hover {
-			font-weight: 400;
+			font-weight: 700;
 		}
 		&:active, &:focus {
 			outline: none;
@@ -790,6 +791,17 @@ svg {
 			padding-left: 10px;
 			padding-right: 10px;
 		}
+	}
+}
+
+[class*=fp-viewing-timeline] {
+	.section-text__scroller {
+		margin: 0 -10px;
+		// fix button shadow
+		& > div > div {
+			padding: 0 10px;
+		}
+
 	}
 }
 
