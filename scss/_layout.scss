@@ -34,6 +34,7 @@ body {
 	transition: background-color 1s ease;
 
 	&.rotated {
+		pointer-events: none;
 		&:after {
 			content: ' ';
 			display: block;
@@ -693,7 +694,7 @@ svg {
 		font-weight: 500;
 		font-size: 0.8em;
 		padding: 0.3em 0;
-		border-radius: 14px;
+		border-radius: 5px;
 		/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fefefe+0,fefefe+100&1+0,0+100 */
 		background: -moz-linear-gradient(top, rgba($button-color, $button-color, $button-color, 1) 0%, rgba($button-color, $button-color, $button-color, 0) 100%); /* FF3.6-15 */
 		background: -webkit-linear-gradient(top, rgba($button-color, $button-color, $button-color, 1) 0%, rgba($button-color, $button-color, $button-color, 0) 100%); /* Chrome10-25,Safari5.1-6 */
@@ -1438,10 +1439,13 @@ svg {
 		}
 	}
 	.more-content--about {
-		top: 0;
+		top: #{$section-padding-top};
 		width: 100%;
 		.more-content__scroller {
-			padding-top: #{$ui-header-mobile-nav-target-height}px;
+			padding-top: #{$ui-header-mobile-nav-target-height};
+		}
+		.close-button {
+			top: 0;
 		}
 	}
 	.logo {
