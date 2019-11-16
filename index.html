@@ -273,7 +273,7 @@
             <div class="slide {{# if(i==0) { }} active {{# } }}">
 				<div class="intro-heading">
 					<h1>{{ header }}</h1>
-					<strong>{{ sub_header }}</strong> <a class="about-link">{{ learn_more_link }}</a>
+					<strong>{{ sub_header }}</strong> <a href="#" class="about-link">{{ learn_more_link }}</a>
 				</div>
 				<div class="slide-content" data-anchor="" data-widow-fix="true">
                     {{ slide }}
@@ -522,11 +522,6 @@
                 <div class="section-text__scroller">
                     <div>
                         <div data-template="metadata.calm">{{ body }}</div>
-                        <div class="support-childrens-atlas" data-template="metadata.calm">
-                            <p>
-                                {{ crowdfunding }}
-                            </p>
-                        </div>
 
                         <a class="more-link more-link__scrollable" data-template="metadata.site">
                             {{ learn_more_button }}
