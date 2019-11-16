@@ -3,6 +3,7 @@ import dispatcher from './dispatcher';
 import moreInfo from './moreInfo.js';
 import timeline from './timeline/timeline';
 import sassVars from '../scss/variables.json';
+import d3 from 'd3';
 
 //TODO do we really need max or just lite? Should we replace tween.js in other files?
 
@@ -121,7 +122,8 @@ const scroller = {
         //update emotion nav active states
         let links = [].slice.call( $( '.emotion-nav a[href!="#continents"]' ) );
         for ( let element of links ) {
-            element.classList.toggle( 'active', element.getAttribute( 'data-emotion' ) == emotion );
+        	let emoAttr = element.getAttribute( 'data-emotion' );
+            d3.select(element).classed( 'active', emoAttr == emotion );
         }
 
     },
