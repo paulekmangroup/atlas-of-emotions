@@ -155,7 +155,7 @@ svg {
 		margin: 0;
 		padding: 0;
 
-		font-size: 65px;
+		font-size: 65px !important;
 		font-weight: 300;
 		content: '×';
 	}
@@ -533,6 +533,7 @@ svg {
 		position: relative;
 		text-transform: uppercase;
 		padding-bottom: 30px;
+		pointer-events: auto;
 		h1 {
 			text-transform: none;
 		}
