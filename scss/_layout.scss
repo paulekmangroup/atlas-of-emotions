@@ -53,6 +53,7 @@ body {
 	}
 
 	&[class*=fp-viewing-experience],
+	&[class*=fp-viewing-strategies],
 	&[class*=fp-viewing-response] {
 		// allows interaction by default, js passes swipes to scroller
 		// other sections drop this back behind the scroller content
@@ -60,9 +61,8 @@ body {
 			z-index: 100;
 		}
 	}
-	&[class*=fp-viewing-introduction],
-	&[class*=fp-viewing-strategies] {
-		//mute the calm graphics in the intro and reading sections
+	&[class*=fp-viewing-introduction] {
+		//mute the calm graphics in the intro
 		.original-content {
 			opacity: 0.65;
 			z-index: 0;

@@ -28,7 +28,8 @@ const dispatcher = {
 		STATES: 'states',
 		ACTIONS: 'actions',
 		TIMELINE: 'triggers',
-		CALM: 'calm'
+		CALM: 'calm',
+		LINKS: 'links'
 	},
 
 	HOME: 'home',

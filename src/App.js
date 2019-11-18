@@ -14,6 +14,7 @@ import appStrings from './appStrings.js';
 import stringsConfig from '../static/strings/stringsConfig.json';
 import sassVars from '../scss/variables.json';
 import d3 from 'd3';
+import links from './links';
 
 export default function ( ...initArgs ) {
 
@@ -155,7 +156,8 @@ export default function ( ...initArgs ) {
         sections.states = states;
         sections.actions = actions;
         sections.triggers = timeline;
-        sections.calm = calm;
+		sections.calm = calm;
+		sections.links = links;
 
         // use this without a container, so the info
         // can be spread out across sections

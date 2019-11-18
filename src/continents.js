@@ -278,16 +278,25 @@ const continentsSection = {
 		let labelsEnter = labels.enter()
 			.append( 'div' )
 			.attr( 'class', d => `emotion-label ${d.id}` )
-			.attr( 'data-popuptarget', d => `continents${dispatcher.HASH_DELIMITER}${d.id}` )
+			.attr( 'data-popuptarget', d => this.popupAccessor( d ) )
 			.classed( 'default-interactive-helper', d => d.name.toLowerCase() === this.defaultEmotionHelper.toLowerCase() )
 			.style( 'left', d => Math.round( centerX + d.x + d.label.x ) + 'px' )
 			.each( positionLabelsVertically );
 
 		labelsEnter.append( 'a' )
-			.attr( 'href', d => `#states${dispatcher.HASH_DELIMITER}${ d.id }` )
+			.attr( 'href', d => this.hrefAccessor( d ) )
 			.append( 'h3' )
 			.text( d => d.i18nName.toUpperCase() );
 
+	},
+
+	hrefAccessor: function ( d ) {
+		return `#states${dispatcher.HASH_DELIMITER}${d.id}`;
+	},
+
+	popupAccessor: function ( d ) {
+		debugger;
+		return `continents${dispatcher.HASH_DELIMITER}${d.id}`;
 	},
 
 	initMobileElements: function ( containerNode, labelContainer ) {
