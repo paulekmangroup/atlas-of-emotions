@@ -3,7 +3,7 @@ import scroller from './scroller.js';
 import timeline from './timeline/timeline.js';
 import dispatcher from './dispatcher.js';
 import moreInfo from './moreInfo.js';
-import continents from './continents.js';
+import ContinentsSection from './continents';
 import states from './states.js';
 import actions from './actions.js';
 import calm from './calm.js';
@@ -152,7 +152,7 @@ export default function ( ...initArgs ) {
 
     function initSections() {
 
-        sections.continents = continents;
+        sections.continents = new ContinentsSection();
         sections.states = states;
         sections.actions = actions;
         sections.triggers = timeline;
