@@ -49,6 +49,7 @@ export default class Circle {
 		this.size = size * Circle.SIZE_MOD;
 
 		this.radius = 0;
+		this.sw = 0;
 		this.rSpeed = Math.random() * 0.2;
 		this.initSpeed = this.rSpeed;
 		this.weight = Math.round(0.4*size + Math.random() * 1.2*size);
@@ -73,11 +74,11 @@ export default class Circle {
 	draw (alphaMod) {
 
 		// limit stroke to edge of circle
-		let sw = this.calcStrokeWidth();
+		this.sw = this.calcStrokeWidth();
 
 		this.d3Wrapper
 			.attr('r', this.radius)
-			.attr('stroke-width', sw)
+			.attr('stroke-width', this.sw)
 			.attr('stroke', 'rgb(' + this.color + ')')
 			.attr('stroke-opacity', this.alpha * alphaMod);
 
