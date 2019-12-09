@@ -248,13 +248,17 @@ export default class ContinentsSection {
 			}
 
 			const desc = emotion ? appStrings().getStr( `emotionsData.emotions.${ emotion }.continent.desc` ) : null;
-			dispatcher.popupChange( 'continents', emotion, desc );
+			this.changePopup( emotion, desc );
 
 			this.currentEmotion = emotion;
 			this.zoomedInContinent = null;
 
 		} );
 
+	}
+
+	changePopup( emotion, desc ) {
+		dispatcher.popupChange( 'continents', emotion, desc );
 	}
 
 	getDefaultEmotionHelper() {
@@ -299,7 +303,6 @@ export default class ContinentsSection {
 	}
 
 	popupAccessor( d ) {
-		console.log('cont pop acc');
 		return `continents${dispatcher.HASH_DELIMITER}${d.id}`;
 	}
 

@@ -93,6 +93,10 @@ class LinksSection extends ContinentsSection {
 		return `links${dispatcher.HASH_DELIMITER}${d.id}`;
 	};
 
+	changePopup( emotion, desc ) {
+		dispatcher.popupChange( 'links', emotion, desc );
+	}
+
 	onContinentClick( continent ) {
 
 		if ( d3.event ) {
@@ -121,6 +125,9 @@ class LinksSection extends ContinentsSection {
 		let labels = labelContainer.selectAll( '.emotion-label' )
 			.data( this.continents, d => d.id );
 
+		labelContainer.selectAll( '.emotion-label' )
+			.classed('links-emotion-label', true);
+
 		if ( this.screenIsSmall ) {
 			labels.style( 'display', 'none' );
 			return;
@@ -129,7 +136,7 @@ class LinksSection extends ContinentsSection {
 		const positionLabelsVertically = this.positionLabelsVertically.bind( this );
 		let labelsEnter = labels.enter()
 			.append( 'div' )
-			.attr( 'class', d => `emotion-label ${d.id}` )
+			.attr( 'class', d => `emotion-label links-emotion-label ${d.id}` )
 			.attr( 'data-popuptarget', d => this.popupAccessor( d ) )
 			.classed( 'default-interactive-helper', d => d.name.toLowerCase() === this.defaultEmotionHelper.toLowerCase() )
 			.style( 'left', d => Math.round( this.centerX + d.x + d.label.x ) + 'px' )
@@ -146,6 +153,7 @@ class LinksSection extends ContinentsSection {
 	};//linksSection.initLabels.bind(linksSection);
 	navigateToContinent( continent ) {
 		console.log( 'navigate to continent override' );
+		dispatcher.navigate( dispatcher.SECTIONS.LINKS, continent.id );
 	}
 }
 
