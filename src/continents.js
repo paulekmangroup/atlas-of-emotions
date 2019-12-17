@@ -247,7 +247,7 @@ export default class ContinentsSection {
 
 			}
 
-			const desc = emotion ? appStrings().getStr( `emotionsData.emotions.${ emotion }.continent.desc` ) : null;
+			const desc = this.getPopupDescription(emotion);
 			this.changePopup( emotion, desc );
 
 			this.currentEmotion = emotion;
@@ -255,6 +255,10 @@ export default class ContinentsSection {
 
 		} );
 
+	}
+
+	getPopupDescription(emotion){
+		return emotion ? appStrings().getStr( `emotionsData.emotions.${ emotion }.continent.desc` ) : null;
 	}
 
 	changePopup( emotion, desc ) {

@@ -1,14 +1,35 @@
 import ContinentsSection from './continents';
 import dispatcher from './dispatcher';
 import d3 from 'd3';
+import appStrings from './appStrings';
 
-// https://player.vimeo.com/video/110383723?title=0&byline=0&portrait=0
+// TODO port this to translated strings
 const labelLinks = {
-	anger: { href: 'https://player.vimeo.com/video/110383723?title=0&byline=0&portrait=0', text: 'His Holiness, the Dalai Lama' },
-	fear: { href: 'https://youtu.be/Nv-fs7Y3Zic', text: 'Meditation with Eve Ekman' },
-	sadness: { href: 'http://cultivating-emotional-balance.org/', text: 'Cultivating Emotional Balance' },
-	disgust: { href: 'https://youtu.be/qlBMqFxUu8A', text: 'Atlas at Google IO' },
-	enjoyment: { href: 'https://www.youtube.com/watch?v=AaDzUFL9CLE', text: 'Atlas talk at UCSF' }
+	anger: {
+		href: 'https://player.vimeo.com/video/110383723?title=0&byline=0&portrait=0',
+		text: 'Talk with the Dalai Lama',
+		description: 'His Holiness the Dalai Lama explains the benefits of a calm mind to Paul Ekman'
+	},
+	fear: {
+		href: 'https://youtu.be/Nv-fs7Y3Zic',
+		text: 'Meditation with Eve Ekman',
+		description: 'Eve Ekman leads a meditation'
+	},
+	sadness: {
+		href: 'http://cultivating-emotional-balance.org/',
+		text: 'Cultivating Emotional Balance',
+		description: 'A training program designed to increase happiness within yourself and in relationship to others'
+	},
+	disgust: {
+		href: 'https://youtu.be/qlBMqFxUu8A',
+		text: 'Atlas Sound Art',
+		description: 'Eve Ekman and William Russell discuss their sound art piece with Google AI'
+	},
+	enjoyment: {
+		href: 'https://www.youtube.com/watch?v=AaDzUFL9CLE',
+		text: 'Atlas talk at UCSF',
+		description: 'A presentation adn panel discussion with the creators of the Atlas of Emotions'
+	}
 };
 const imageUrls = [
 	'img/hhAndEve.jpg',
@@ -98,7 +119,6 @@ class LinksSection extends ContinentsSection {
 	}
 
 	onContinentClick( continent ) {
-
 		if ( d3.event ) {
 			d3.event.stopImmediatePropagation();
 		}
@@ -107,26 +127,25 @@ class LinksSection extends ContinentsSection {
 			clearTimeout( this.mouseLeaveTimeout );
 		}
 
-		window.open(labelLinks[continent.id].href,'_blank');
-
+		window.open( labelLinks[ continent.id ].href, '_blank' );
 	}
 
 	onBackgroundClick() {
-
 		if ( this.mouseLeaveTimeout ) {
 			clearTimeout( this.mouseLeaveTimeout );
 		}
-
 	}
 
+	getPopupDescription(emotion){
+		return emotion ? labelLinks[emotion].description : null;
+	}
 
 	initLabels( labelContainer ) {
-
 		let labels = labelContainer.selectAll( '.emotion-label' )
 			.data( this.continents, d => d.id );
 
 		labelContainer.selectAll( '.emotion-label' )
-			.classed('links-emotion-label', true);
+			.classed( 'links-emotion-label', true );
 
 		if ( this.screenIsSmall ) {
 			labels.style( 'display', 'none' );
@@ -146,7 +165,7 @@ class LinksSection extends ContinentsSection {
 
 		labelsEnter.append( 'a' )
 			.attr( 'href', d => labelLinks[ d.id ].href )
-			.attr('target', '_blank')
+			.attr( 'target', '_blank' )
 			.append( 'h3' )
 			.text( d => labelLinks[ d.id ].text );
 
