@@ -155,7 +155,7 @@
 			},
 			"expansion-amount": 100,
 			"min-width": 150,
-			"max-width": 200
+			"max-width": 280
 		},
 		"mobile-emotion-nav": {
 			"height": 20
