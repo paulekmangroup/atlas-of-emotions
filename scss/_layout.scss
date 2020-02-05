@@ -545,6 +545,11 @@ svg {
 				font-weight: bold;
 			}
 		}
+
+		.subheader {
+			font-size: 20px;
+			margin-top: 10px;
+		}
 	}
 	h1 {
 		font-size: 46px;
@@ -561,7 +566,7 @@ svg {
 	}
 
 	.slide {
-		font-size: 30px;
+		font-size: 24px;
 		text-align: center;
 		.slide-content {
 			width: 578px;
@@ -570,6 +575,7 @@ svg {
 			cursor: pointer;
 			user-select: none;
 			font-weight: 300;
+			min-height: 105px;
 		}
 	}
 
@@ -1138,6 +1144,10 @@ svg {
 					right: -20px;
 					background-size: contain;
 				}
+			}
+			.subheader {
+				font-size: inherit;
+				margin-top: 0;
 			}
 		}
 		.slide {
