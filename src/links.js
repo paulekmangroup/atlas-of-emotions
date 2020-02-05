@@ -32,7 +32,7 @@ const labelLinks = {
 	}
 };
 const imageUrls = [
-	'img/hhAndEve.jpg',
+	'img/hhAndEve-bw.jpg',
 	'img/eve-meditation.png',
 	'img/google-io.png',
 	'img/ceb-logo.png',
