@@ -7,27 +7,27 @@ import appStrings from './appStrings';
 const labelLinks = {
 	anger: {
 		href: 'https://player.vimeo.com/video/110383723?title=0&byline=0&portrait=0',
-		text: 'Talk with the Dalai Lama',
+		text: 'Paul Ekman and HHDL on Destructive Emotions',
 		description: 'His Holiness the Dalai Lama explains the benefits of a calm mind to Paul Ekman'
 	},
 	fear: {
 		href: 'https://youtu.be/Nv-fs7Y3Zic',
-		text: 'Meditation with Eve Ekman',
+		text: 'Transforming Emotion Meditation',
 		description: 'Eve Ekman leads a meditation'
 	},
 	sadness: {
 		href: 'http://cultivating-emotional-balance.org/',
-		text: 'Cultivating Emotional Balance',
+		text: 'Cultivate Emotional Balance',
 		description: 'A training program designed to increase happiness within yourself and in relationship to others'
 	},
 	disgust: {
 		href: 'https://youtu.be/qlBMqFxUu8A',
-		text: 'Atlas Sound Art',
+		text: 'InBodying the AOE',
 		description: 'Eve Ekman and William Russell discuss their sound art piece with Google AI'
 	},
 	enjoyment: {
 		href: 'https://www.youtube.com/watch?v=AaDzUFL9CLE',
-		text: 'Atlas talk at UCSF',
+		text: 'Science of the Atlas',
 		description: 'A presentation adn panel discussion with the creators of the Atlas of Emotions'
 	}
 };
