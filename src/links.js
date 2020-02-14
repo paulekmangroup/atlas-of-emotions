@@ -32,10 +32,10 @@ const labelLinks = {
 	}
 };
 const imageUrls = [
-	'img/hhAndEve-bw.jpg',
+	'img/hhAndPaul-bw.jpg',
 	'img/eve-meditation.png',
-	'img/google-io.png',
-	'img/ceb-logo.png',
+	'img/inbodiedv2.png',
+	'img/ceb-logo-480.png',
 	'img/UCSF-talk.png'
 ];
 
