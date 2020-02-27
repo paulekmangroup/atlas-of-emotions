@@ -6,37 +6,37 @@ import appStrings from './appStrings';
 // TODO port this to translated strings
 const labelLinks = {
 	anger: {
-		href: 'https://player.vimeo.com/video/110383723?title=0&byline=0&portrait=0',
-		text: 'Paul Ekman and HHDL on Destructive Emotions',
-		description: 'His Holiness the Dalai Lama explains the benefits of a calm mind to Paul Ekman'
+		href: 'https://www.youtube.com/watch?v=AaDzUFL9CLE',
+		text: 'Science of the Atlas',
+		description: 'A presentation at the University of California San Francisco on designing Emotional Awareness with Drs. Paul and Eve Ekman'
 	},
 	fear: {
 		href: 'https://youtu.be/Nv-fs7Y3Zic',
 		text: 'Transforming Emotion Meditation',
-		description: 'Eve Ekman leads a meditation'
+		description: 'Eve Ekman leading a meditation on Emotion Awareness'
 	},
 	sadness: {
 		href: 'http://cultivating-emotional-balance.org/',
 		text: 'Cultivate Emotional Balance',
-		description: 'A training program designed to increase happiness within yourself and in relationship to others'
+		description: 'Cultivating Emotional Balance, a training  requested by the Dalai Lama in 2000 and created by  Paul Ekman, Alan Wallace, and lead by Eve Ekman and Ryan Redman'
 	},
 	disgust: {
 		href: 'https://youtu.be/qlBMqFxUu8A',
 		text: 'InBodying the AOE',
-		description: 'Eve Ekman and William Russell discuss their sound art piece with Google AI'
+		description: 'An interview about the Atlas of Emotions Inbodied sound installation at Google IO'
 	},
 	enjoyment: {
-		href: 'https://www.youtube.com/watch?v=AaDzUFL9CLE',
-		text: 'Science of the Atlas',
-		description: 'A presentation adn panel discussion with the creators of the Atlas of Emotions'
+		href: 'https://player.vimeo.com/video/110383723?title=0&byline=0&portrait=0',
+		text: 'Paul Ekman and HHDL on Destructive Emotions',
+		description: 'A library of dialog between Paul Ekman and His Holiness the Dalai Lama on emotion awareness'
 	}
 };
 const imageUrls = [
-	'img/hhAndPaul-bw.jpg',
+	'img/UCSF-talk.png',
 	'img/eve-meditation.png',
 	'img/inbodiedv2.png',
 	'img/ceb-logo-480.png',
-	'img/UCSF-talk.png'
+	'img/hhAndPaul-bw.jpg',
 ];
 
 
