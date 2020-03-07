@@ -169,10 +169,10 @@ class LinksSection extends ContinentsSection {
 			.append( 'h3' )
 			.text( d => labelLinks[ d.id ].text );
 
-	};//linksSection.initLabels.bind(linksSection);
+	};
 	navigateToContinent( continent ) {
-		console.log( 'navigate to continent override' );
 		dispatcher.navigate( dispatcher.SECTIONS.LINKS, continent.id );
+		d3.select(continent.d3Selection[0][0].parentNode).append(()=>continent.d3Selection.remove().node());
 	}
 }
 
