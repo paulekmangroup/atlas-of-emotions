@@ -34,7 +34,7 @@ const labelLinks = {
 const imageUrls = [
 	'img/UCSF-talk.png',
 	'img/eve-meditation.png',
-	'img/inbodiedv2.png',
+	'img/inbodied.png',
 	'img/ceb-logo-480.png',
 	'img/hhAndPaul-bw.jpg',
 ];
