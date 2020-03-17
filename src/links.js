@@ -22,7 +22,7 @@ const labelLinks = {
 	},
 	disgust: {
 		href: 'https://youtu.be/qlBMqFxUu8A',
-		text: 'InBodying the AOE',
+		text: 'AOE In:bodied',
 		description: 'An interview about the Atlas of Emotions Inbodied sound installation at Google IO'
 	},
 	enjoyment: {
