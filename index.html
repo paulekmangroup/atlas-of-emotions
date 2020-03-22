@@ -273,7 +273,9 @@
             <div class="slide {{# if(i==0) { }} active {{# } }}">
 				<div class="intro-heading">
 					<h1>{{ header }}</h1>
-					<strong>{{ sub_header }}</strong> <a href="#" class="about-link">{{ learn_more_link }}</a>
+					<div class="subheader">
+						<strong>{{ sub_header }}</strong> <a href="#" class="about-link">{{ learn_more_link }}</a>
+					</div>
 				</div>
 				<div class="slide-content" data-anchor="" data-widow-fix="true">
                     {{ slide }}
@@ -507,21 +509,21 @@
 
         <div class="section" id="strategies-section">
             <div class="section-graphics">
-                <div class="embed-padding">
-                    <div class="embed-container">
-                        <iframe src="https://player.vimeo.com/video/110383723?title=0&byline=0&portrait=0"
-                                frameborder="0"
-                                webkitallowfullscreen mozallowfullscreen
-                                allowfullscreen>
-                        </iframe>
-                    </div>
-                </div>
+
             </div>
             <div class="section-text">
                 <h2 class="section-heading" data-template="metadata.navigation">{{ strategies.heading }}</h2>
                 <div class="section-text__scroller">
                     <div>
-                        <div data-template="metadata.calm">{{ body }}</div>
+                        <div data-template="metadata.calm">
+							{{ body }}
+							<br/>
+							<br/>
+							Here are a selection of resources that address the development of emotion awareness through contemplative practices, education, and embodiment.
+							<br/>
+							<ol id="links-sidebar">
+							</ol>
+						</div>
 
                         <a class="more-link more-link__scrollable" data-template="metadata.site">
                             {{ learn_more_button }}
@@ -568,7 +570,7 @@
                 </li>
                 <li><a href="#actions/" id="response-menu-link">{{ response.menu }}</a>
                 </li>
-                <li><a href="#strategies/" id="strategies-menu-link">{{ strategies.menu }}</a></li>
+                <li><a href="#links/" id="strategies-menu-link">{{ strategies.menu }}</a></li>
                 <li>
                     <a id="opt-in-link" class="opt-in-button">
                         <img src="img/mail.svg">
