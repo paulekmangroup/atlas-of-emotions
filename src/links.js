@@ -151,16 +151,16 @@ class LinksSection extends ContinentsSection {
 			labels.style( 'display', 'none' );
 			return;
 		}
-
 		const positionLabelsVertically = this.positionLabelsVertically.bind( this );
+		const positionLabelsHorizontally = this.positionLabelsHorizontally.bind( this );
 		let labelsEnter = labels.enter()
 			.append( 'div' )
 			.attr( 'class', d => `emotion-label links-emotion-label ${d.id}` )
 			.attr( 'data-popuptarget', d => this.popupAccessor( d ) )
 			.classed( 'default-interactive-helper', d => d.name.toLowerCase() === this.defaultEmotionHelper.toLowerCase() )
-			.style( 'left', d => Math.round( this.centerX + d.x + d.label.x ) + 'px' )
 			.each( function ( d, i ) {
 				positionLabelsVertically( d, i, this ); // function's this, not class
+				positionLabelsHorizontally( d, i, this );
 			} );
 
 		labelsEnter.append( 'a' )

@@ -290,7 +290,6 @@ export default class ContinentsSection {
 			.attr( 'class', d => `emotion-label ${d.id}` )
 			.attr( 'data-popuptarget', d => this.popupAccessor( d ) )
 			.classed( 'default-interactive-helper', d => d.name.toLowerCase() === this.defaultEmotionHelper.toLowerCase() )
-			.style( 'left', d => Math.round( this.centerX + d.x + d.label.x ) + 'px' )
 			.each( function ( d, i ) {
 				positionLabelsVertically( d, i, this ); // function's this, not class
 			} );
@@ -489,10 +488,11 @@ export default class ContinentsSection {
 
 		// we're not adding anything, so skip right to update
 		const positionLabelsVertically = this.positionLabelsVertically.bind(this);
+		const positionLabelsHorizontally = this.positionLabelsHorizontally.bind(this);
 		labels
-			.style( 'left', d => Math.round( this.centerX + d.x + d.label.x ) + 'px' )
 			.each( function ( d, i ) {
 				positionLabelsVertically( d, i, this ); // function's this, not class
+				positionLabelsHorizontally( d, i, this )
 			} );
 	}
 
@@ -979,6 +979,18 @@ export default class ContinentsSection {
 			target.style.bottom = null;
 		}
 
+	}
+
+	positionLabelsHorizontally( d, i, target ) {
+		let sectionTextRect = d3.select('.section-text').node().getBoundingClientRect();
+		let textRect = target.getBoundingClientRect();
+		let left = Math.max(
+			textRect.width/2,
+			Math.round( this.centerX + d.x + d.label.x ) );
+		if ( sectionTextRect.width + left + textRect.width / 2 > window.innerWidth ) {
+			left = window.innerWidth - textRect.width / 2 - sectionTextRect.width;
+		}
+		target.style.left = left + 'px';
 	}
 
 }
