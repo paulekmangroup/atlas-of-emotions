@@ -101,6 +101,12 @@ class LinksSection extends ContinentsSection {
 				};
 			})( c );
 		}
+		let linksSidebar = d3.select( '#links-sidebar' );
+		let html = '';
+		Object.keys(labelLinks).forEach( key => {
+			html += `<li><a href="${labelLinks[key].href}">${labelLinks[key].text}</a><br/> <span class="links-sidebar__description">${labelLinks[key].description}</span></li>`;
+		} );
+		linksSidebar.node().innerHTML = html;
 	}
 
 	initMobileElements( containerNode, labelContainer ) {
