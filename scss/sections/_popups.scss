@@ -169,6 +169,9 @@ $horiz-padding: 20px;
 	}
 }
 
+.muted .popup-template {
+	display: none;
+}
 .popup-template,
 .secondary {
 	.body {

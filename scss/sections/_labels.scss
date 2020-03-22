@@ -36,4 +36,11 @@
 		text-decoration: none;
 		color: inherit;
 	}
+
+	&.links-emotion-label {
+		background: #fff;
+		&.popped {
+			padding-right: 50px;
+		}
+	}
 }

@@ -3,7 +3,7 @@ import scroller from './scroller.js';
 import timeline from './timeline/timeline.js';
 import dispatcher from './dispatcher.js';
 import moreInfo from './moreInfo.js';
-import continents from './continents.js';
+import ContinentsSection from './continents';
 import states from './states.js';
 import actions from './actions.js';
 import calm from './calm.js';
@@ -14,6 +14,7 @@ import appStrings from './appStrings.js';
 import stringsConfig from '../static/strings/stringsConfig.json';
 import sassVars from '../scss/variables.json';
 import d3 from 'd3';
+import links from './links';
 
 export default function ( ...initArgs ) {
 
@@ -151,11 +152,12 @@ export default function ( ...initArgs ) {
 
     function initSections() {
 
-        sections.continents = continents;
+        sections.continents = new ContinentsSection();
         sections.states = states;
         sections.actions = actions;
         sections.triggers = timeline;
-        sections.calm = calm;
+		sections.calm = calm;
+		sections.links = links;
 
         // use this without a container, so the info
         // can be spread out across sections

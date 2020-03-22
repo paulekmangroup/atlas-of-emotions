@@ -18,7 +18,7 @@ const scroller = {
         'continents': 'experience',
         'states': 'experience',
         'triggers': 'timeline',
-        'strategies': 'strategies' //FIXME fake atlas section prompts default
+        'links': 'strategies'
     },
 
     FULLPAGE_TO_ATLAS_SECTIONS: {
@@ -26,7 +26,7 @@ const scroller = {
         'timeline': 'triggers', //FIXME fake atlas section prompts default
         'experience': 'continents',
         'response': 'actions',
-        'strategies': 'strategies' //FIXME fake atlas section prompts default
+        'strategies': 'links'
     },
 
     headerHeight: 55,

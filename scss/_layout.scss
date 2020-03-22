@@ -53,6 +53,7 @@ body {
 	}
 
 	&[class*=fp-viewing-experience],
+	&[class*=fp-viewing-strategies],
 	&[class*=fp-viewing-response] {
 		// allows interaction by default, js passes swipes to scroller
 		// other sections drop this back behind the scroller content
@@ -60,9 +61,8 @@ body {
 			z-index: 100;
 		}
 	}
-	&[class*=fp-viewing-introduction],
-	&[class*=fp-viewing-strategies] {
-		//mute the calm graphics in the intro and reading sections
+	&[class*=fp-viewing-introduction] {
+		//mute the calm graphics in the intro
 		.original-content {
 			opacity: 0.65;
 			z-index: 0;
@@ -545,6 +545,11 @@ svg {
 				font-weight: bold;
 			}
 		}
+
+		.subheader {
+			font-size: 20px;
+			margin-top: 10px;
+		}
 	}
 	h1 {
 		font-size: 46px;
@@ -561,7 +566,7 @@ svg {
 	}
 
 	.slide {
-		font-size: 30px;
+		font-size: 24px;
 		text-align: center;
 		.slide-content {
 			width: 578px;
@@ -570,6 +575,7 @@ svg {
 			cursor: pointer;
 			user-select: none;
 			font-weight: 300;
+			min-height: 105px;
 		}
 	}
 
@@ -799,6 +805,12 @@ svg {
 			padding-left: 10px;
 			padding-right: 10px;
 		}
+	}
+	.links-sidebar__description {
+		font-size: 0.9em;
+	}
+	#links-sidebar li {
+		margin-bottom: 1.5em;
 	}
 }
 
@@ -1138,6 +1150,10 @@ svg {
 					right: -20px;
 					background-size: contain;
 				}
+			}
+			.subheader {
+				font-size: inherit;
+				margin-top: 0;
 			}
 		}
 		.slide {
