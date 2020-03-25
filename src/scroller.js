@@ -613,7 +613,8 @@ const scroller = {
                         dispatcher.sectionTextMinimizeComplete();
                     }
                 } );
-                TweenMax.to( [ $originalContent[ 0 ], $sectionGraphics[ 0 ] ], transitionDuration, { height: minimumDistance - sassVars[ 'ui' ][ 'mobile-emotion-nav' ][ 'height' ] - $sectionGraphics[ 0 ].offsetTop } );
+                const emotionNavHeight = this.currentAnchor === 'strategies' ? 0 : sassVars[ 'ui' ][ 'mobile-emotion-nav' ][ 'height' ];
+                TweenMax.to( [ $originalContent[ 0 ], $sectionGraphics[ 0 ] ], transitionDuration, { height: minimumDistance - emotionNavHeight - $sectionGraphics[ 0 ].offsetTop } );
                 dispatcher.sectionTextMinimizeStart( transitionDuration );
             };
 
@@ -651,7 +652,8 @@ const scroller = {
                         dispatcher.sectionTextMaximizeComplete();
                     }
                 } );
-                TweenMax.to( [ $originalContent[ 0 ], $sectionGraphics[ 0 ] ], transitionDuration, { height: maximumDistance - sassVars[ 'ui' ][ 'mobile-emotion-nav' ][ 'height' ] - $sectionGraphics[ 0 ].offsetTop } );
+				const emotionNavHeight = this.currentAnchor === 'strategies' ? 0 : sassVars[ 'ui' ][ 'mobile-emotion-nav' ][ 'height' ];
+				TweenMax.to( [ $originalContent[ 0 ], $sectionGraphics[ 0 ] ], transitionDuration, { height: maximumDistance - emotionNavHeight - $sectionGraphics[ 0 ].offsetTop } );
                 dispatcher.sectionTextMaximizeStart( transitionDuration );
             };
 
@@ -666,7 +668,7 @@ const scroller = {
                 }
                 height = $( '.section.active' ).height();
                 maximumDistance = 0.33 * height;
-                thresh = 0.01 * touchSensitivity * height;
+                thresh = 0;
                 swipeStart.y = e.originalEvent.touches[ 0 ].pageY;
                 swipeStart.x = e.originalEvent.touches[ 0 ].pageX;
             } );

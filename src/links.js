@@ -1,7 +1,6 @@
 import ContinentsSection from './continents';
 import dispatcher from './dispatcher';
 import d3 from 'd3';
-import appStrings from './appStrings';
 
 // TODO port this to translated strings
 const labelLinks = {
