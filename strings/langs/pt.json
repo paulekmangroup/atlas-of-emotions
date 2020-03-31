@@ -936,7 +936,7 @@
         },
         {
             "key": "anger_timeline_trigger_event",
-            "value": "Um amigo se zanga com você",
+            "value": "Um amigo fica bravo com você",
             "englishValue": "a friend gets angry with you"
         },
         {
@@ -1184,7 +1184,7 @@
         },
         {
             "key": "fear_timeline_trigger_event",
-            "value": "Um amigo se zanga com você",
+            "value": "Um amigo fica bravo com você",
             "englishValue": "a friend gets angry with you"
         },
         {
@@ -1672,7 +1672,7 @@
         },
         {
             "key": "sadness_timeline_response_constructive_response",
-            "value": "Você telefona para um ente querido",
+            "value": "Você liga para alguém querido",
             "englishValue": "call a loved one"
         },
         {
@@ -1935,7 +1935,7 @@
         },
         {
             "key": "enjoyment_timeline_trigger_event",
-            "value": "Um amigo se zanga com você",
+            "value": "Um amigo fica bravo com você",
             "englishValue": "a friend gets angry with you"
         },
         {
