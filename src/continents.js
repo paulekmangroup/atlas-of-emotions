@@ -3,27 +3,28 @@ import d3 from 'd3';
 import TWEEN from 'tween.js';
 
 import dispatcher from './dispatcher.js';
-import Circle from './Circle.js';
 import Continent from './Continent.js';
 
 import appStrings from './appStrings.js';
 import sassVars from '../scss/variables.json';
 
-let continents,
-	continentContainer,
-	centerX, centerY,
-	frameCount = 0,
+
+export default class ContinentsSection {
+
+	continents;
+	continentContainer;
+	centerX; centerY;
+	frameCount = 0;
 	currentEmotion;
 
-const continentsSection = {
 
-	isInited: false,
-	isActive: false,
-	screenIsSmall: false,
-	displayingIntro: false,
-	closeDelay: sassVars.ui.labels.duration.in * 1000,
+	isInited = false;
+	isActive = false;
+	screenIsSmall = false;
+	displayingIntro = false;
+	closeDelay = sassVars.ui.labels.duration.in * 1000;
 
-	init: function ( containerNode, screenIsSmall ) {
+	init( containerNode, screenIsSmall ) {
 
 		this.sectionContainer = containerNode;
 
@@ -37,7 +38,7 @@ const continentsSection = {
 			.append( 'div' )
 			.attr( 'class', 'label-container' );
 
-		continentContainer = d3.select( containerNode ).append( 'svg' )
+		this.continentContainer = d3.select( containerNode ).append( 'svg' )
 			.attr( 'width', '100%' )
 			.attr( 'height', '100%' );
 
@@ -46,23 +47,23 @@ const continentsSection = {
 			continentGeom;
 
 		if ( this.screenIsSmall ) {
-			centerX = sassVars.continents[ 'centerX-small' ] * w;
-			centerY = sassVars.continents[ 'centerY-small' ] * h;
+			this.centerX = sassVars.continents[ 'centerX-small' ] * w;
+			this.centerY = sassVars.continents[ 'centerY-small' ] * h;
 		} else {
-			centerX = sassVars.continents.centerX * w;
-			centerY = sassVars.continents.centerY * h;
+			this.centerX = sassVars.continents.centerX * w;
+			this.centerY = sassVars.continents.centerY * h;
 		}
 		continentGeom = {
 			w: w,
 			h: h,
-			centerX: centerX,
-			centerY: centerY
+			centerX: this.centerX,
+			centerY: this.centerY
 		};
 
 		let continentTransforms = this.calculateContinentTransforms();
 
 		// map each emotion to a Continent instance
-		continents = _.values( dispatcher.EMOTIONS ).map( emotion => new Continent( emotion, continentContainer, continentGeom, continentTransforms, this.screenIsSmall ) );
+		this.continents = _.values( dispatcher.EMOTIONS ).map( emotion => new Continent( emotion, this.continentContainer, continentGeom, continentTransforms, this.screenIsSmall ) );
 
 		this.initLabels( this.labelContainer );
 
@@ -83,15 +84,15 @@ const continentsSection = {
 
 		this.isInited = true;
 
-	},
+	}
 
-	setEmotion: function ( emotion, previousEmotion ) {
+	setEmotion( emotion, previousEmotion ) {
 
 		return new Promise( ( resolve, reject ) => {
 
-			if ( currentEmotion ) {
+			if ( this.currentEmotion ) {
 
-				let currentContinent = continents.find( c => c.id === currentEmotion );
+				let currentContinent = this.continents.find( c => c.id === this.currentEmotion );
 
 				if ( emotion ) {
 
@@ -115,15 +116,15 @@ const continentsSection = {
 						}
 
 						// gather circles of zoomed-in continent
-						this.transitions.gatherContinent( currentEmotion );
+						this.transitions.gatherContinent( this.currentEmotion );
 
 						setTimeout( () => {
 
 							// scale all continents back up to full size
-							this.transitions.scaleContinents( continents.map( continent => continent.id ), 1.0 );
+							this.transitions.scaleContinents( this.continents.map( continent => continent.id ), 1.0 );
 
 							// pan to center
-							this.transitions.panToContinent( null, currentEmotion );
+							this.transitions.panToContinent( null, this.currentEmotion );
 
 							// display all-continents callout
 							dispatcher.changeSectionText( null, appStrings().getStr( 'emotionsData.metadata.continents.header' ), appStrings().getStr( 'emotionsData.metadata.continents.body' ) );
@@ -137,7 +138,7 @@ const continentsSection = {
 						// new continent selected with a continent previously selected
 						currentContinent.highlightLevel = Continent.HIGHLIGHT_LEVELS.UNSELECTED;
 
-						let continent = continents.find( c => c.id === emotion );
+						let continent = this.continents.find( c => c.id === emotion );
 						this.setContinentHighlight( continent, Continent.HIGHLIGHT_LEVELS.SELECTED );
 						dispatcher.changeSectionText( null, appStrings().getStr( 'emotionsData.metadata.continents.header' ), appStrings().getStr( 'emotionsData.metadata.continents.body' ) );
 
@@ -148,7 +149,7 @@ const continentsSection = {
 				} else {
 
 					// deselect all continents
-					continents.forEach( c => c.highlightLevel = Continent.HIGHLIGHT_LEVELS.NONE );
+					this.continents.forEach( c => c.highlightLevel = Continent.HIGHLIGHT_LEVELS.NONE );
 					this.setContinentHighlight( null, Continent.HIGHLIGHT_LEVELS.NONE );
 
 					// display all-continents callout
@@ -164,12 +165,12 @@ const continentsSection = {
 						this.transitions.gatherContinent( this.zoomedInContinent, true );
 
 						// pan to center immediately
-						this.transitions.panToContinent( null, currentEmotion, true );
+						this.transitions.panToContinent( null, this.currentEmotion, true );
 
 						// scale all continents to 0 immediately (after other transforms above),
 						// and then back up to full size
 						setTimeout( () => {
-							let allEmotions = continents.map( continent => continent.id );
+							let allEmotions = this.continents.map( continent => continent.id );
 							this.transitions.scaleContinents( allEmotions, 0.0, undefined, 0 )
 								.then( () => {
 									return this.transitions.scaleContinents( allEmotions, 1.0 );
@@ -211,7 +212,7 @@ const continentsSection = {
 						setTimeout( () => {
 
 							// scale all continents back up to full size
-							this.transitions.scaleContinents( continents.map( continent => continent.id ), 1.0 );
+							this.transitions.scaleContinents( this.continents.map( continent => continent.id ), 1.0 );
 
 							// pan to center
 							this.transitions.panToContinent( null, previousEmotion );
@@ -226,7 +227,7 @@ const continentsSection = {
 					} else {
 
 						// new continent selected with nothing previously selected
-						let continent = continents.find( c => c.id === emotion );
+						let continent = this.continents.find( c => c.id === emotion );
 						this.setContinentHighlight( continent, Continent.HIGHLIGHT_LEVELS.SELECTED );
 
 						// display all-continents callout
@@ -246,51 +247,69 @@ const continentsSection = {
 
 			}
 
-			const desc = emotion ? appStrings().getStr( `emotionsData.emotions.${ emotion }.continent.desc` ) : null;
-			dispatcher.popupChange( 'continents', emotion, desc );
+			const desc = this.getPopupDescription(emotion);
+			this.changePopup( emotion, desc );
 
-			currentEmotion = emotion;
+			this.currentEmotion = emotion;
 			this.zoomedInContinent = null;
 
 		} );
 
-	},
+	}
 
-	getDefaultEmotionHelper: function () {
+	getPopupDescription(emotion){
+		return emotion ? appStrings().getStr( `emotionsData.emotions.${ emotion }.continent.desc` ) : null;
+	}
+
+	changePopup( emotion, desc ) {
+		dispatcher.popupChange( 'continents', emotion, desc );
+	}
+
+	getDefaultEmotionHelper() {
 
 		const keys = Object.keys( dispatcher.EMOTIONS );
 		const randomeKey = keys[ Math.floor( Math.random() * keys.length ) ];
 
 		return dispatcher.EMOTIONS[ randomeKey ];
 
-	},
+	}
 
-	initLabels: function ( labelContainer ) {
+	initLabels( labelContainer ) {
 
 		let labels = labelContainer.selectAll( '.emotion-label' )
-			.data( continents, d => d.id );
+			.data( this.continents, d => d.id );
 
 		if ( this.screenIsSmall ) {
 			labels.style( 'display', 'none' );
 			return;
 		}
 
+		const positionLabelsVertically = this.positionLabelsVertically.bind(this);
 		let labelsEnter = labels.enter()
 			.append( 'div' )
 			.attr( 'class', d => `emotion-label ${d.id}` )
-			.attr( 'data-popuptarget', d => `continents${dispatcher.HASH_DELIMITER}${d.id}` )
+			.attr( 'data-popuptarget', d => this.popupAccessor( d ) )
 			.classed( 'default-interactive-helper', d => d.name.toLowerCase() === this.defaultEmotionHelper.toLowerCase() )
-			.style( 'left', d => Math.round( centerX + d.x + d.label.x ) + 'px' )
-			.each( positionLabelsVertically );
+			.each( function ( d, i ) {
+				positionLabelsVertically( d, i, this ); // function's this, not class
+			} );
 
 		labelsEnter.append( 'a' )
-			.attr( 'href', d => `#states${dispatcher.HASH_DELIMITER}${ d.id }` )
+			.attr( 'href', d => this.hrefAccessor( d ) )
 			.append( 'h3' )
 			.text( d => d.i18nName.toUpperCase() );
 
-	},
+	}
 
-	initMobileElements: function ( containerNode, labelContainer ) {
+	hrefAccessor( d ) {
+		return `#states${dispatcher.HASH_DELIMITER}${d.id}`;
+	}
+
+	popupAccessor( d ) {
+		return `continents${dispatcher.HASH_DELIMITER}${d.id}`;
+	}
+
+	initMobileElements( containerNode, labelContainer ) {
 
 		labelContainer.append( 'div' )
 			.classed( 'intro-element message', true )
@@ -301,9 +320,9 @@ const continentsSection = {
 			.classed( 'intro-element button', true )
 			.text( `Let's get started` );
 
-	},
+	}
 
-	calculateContinentTransforms: function () {
+	calculateContinentTransforms() {
 
 		if ( !this.screenIsSmall ) return undefined;
 
@@ -346,9 +365,9 @@ const continentsSection = {
 			}
 		];
 
-	},
+	}
 
-	open: function ( options ) {
+	open( options ) {
 
 		this.setActive( true );
 		this.setInteractive( true );
@@ -365,13 +384,13 @@ const continentsSection = {
 
 		this.update();
 
-	},
+	}
 
-	close: function ( nextSection ) {
+	close( nextSection ) {
 
 		return new Promise( ( resolve, reject ) => {
 
-			let continent = continents.find( c => c.id === currentEmotion );
+			let continent = this.continents.find( c => c.id === this.currentEmotion );
 			if ( nextSection === dispatcher.SECTIONS.STATES && continent && continent.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED ) {
 
 				// if there is a selected continent, and we're transitioning into States,
@@ -387,7 +406,7 @@ const continentsSection = {
 				this.setInteractive( false );
 
 				this.transitions.scaleContinents(
-					continents
+					this.continents
 						.filter( c => c !== continent )
 						.map( c => c.id ),
 					0.0
@@ -431,7 +450,7 @@ const continentsSection = {
 
 		} );
 
-	},
+	}
 
 	/**
 	 * Update continent sizes and positions.
@@ -439,7 +458,7 @@ const continentsSection = {
 	 * but Continent.onResize() does not update existing Circle sizes
 	 * so size changes take a bit of time to propagate.
 	 */
-	onResize: function ( screenIsSmall ) {
+	onResize( screenIsSmall ) {
 
 		this.screenIsSmall = screenIsSmall;
 
@@ -448,51 +467,49 @@ const continentsSection = {
 			continentGeom;
 
 		if ( this.screenIsSmall ) {
-			centerX = sassVars.continents[ 'centerX-small' ] * w;
-			centerY = sassVars.continents[ 'centerY-small' ] * h;
+			this.centerX = sassVars.continents[ 'centerX-small' ] * w;
+			this.centerY = sassVars.continents[ 'centerY-small' ] * h;
 		} else {
-			centerX = sassVars.continents.centerX * w;
-			centerY = sassVars.continents.centerY * h;
+			this.centerX = sassVars.continents.centerX * w;
+			this.centerY = sassVars.continents.centerY * h;
 		}
 		continentGeom = {
 			w: w,
 			h: h,
-			centerX: centerX,
-			centerY: centerY
+			centerX: this.centerX,
+			centerY: this.centerY
 		};
 
-		continents.forEach( c => c.onResize( continentGeom, this.screenIsSmall ) );
+		this.continents.forEach( c => c.onResize( continentGeom, this.screenIsSmall ) );
 
 		// update label positions
 		let labels = this.labelContainer.selectAll( '.emotion-label' )
-			.data( continents, d => d.id );
+			.data( this.continents, d => d.id );
 
 		// we're not adding anything, so skip right to update
+		const positionLabelsVertically = this.positionLabelsVertically.bind(this);
+		const positionLabelsHorizontally = this.positionLabelsHorizontally.bind(this);
 		labels
-			.style( 'left', d => Math.round( centerX + d.x + d.label.x ) + 'px' )
-			.each( positionLabelsVertically );
-	},
+			.each( function ( d, i ) {
+				positionLabelsVertically( d, i, this ); // function's this, not class
+				positionLabelsHorizontally( d, i, this )
+			} );
+	}
 
-	setActive: function ( val ) {
+	setActive( val ) {
 
 		this.isActive = val;
 
 		this.labelContainer.selectAll( '.emotion-label' )
 			.classed( 'visible', val );
 
-	},
+	}
 
-	setInteractive: function ( val ) {
+	setInteractive( val ) {
 
 		let section = this;
 
-		//continents.forEach(function (continent, i) {
-		//	continent.d3Selection
-		//		.on('mouseenter', val ? section.onContinentMouseEnter : null)
-		//		.on('mouseleave', val ? section.onContinentMouseLeave : null)
-		//		.on('click', val ? section.onContinentClick : null, true);
-		//});
-		continents.forEach( function ( continent, i ) {
+		this.continents.forEach( function ( continent, i ) {
 			continent.d3Selection
 				.on( 'mouseenter', val ? section.onContinentMouseEnter : null )
 				.on( 'mouseleave', val ? section.onContinentMouseLeave : null )
@@ -509,7 +526,7 @@ const continentsSection = {
 		// handle background click for deselection
 		d3.select( '#main' ).on( 'click', val ? this.onBackgroundClick : null, false );
 
-	},
+	}
 
 	/**
 	 * Position continents for site intro or to normal positioning.
@@ -524,7 +541,7 @@ const continentsSection = {
 			h = this.sectionContainer.offsetHeight,
 			diag = Math.sqrt( w * w + h * h ) / 2;
 
-		continents.forEach( continent => {
+		this.continents.forEach( continent => {
 			if ( val ) {
 				continent.addTween(
 					{
@@ -566,9 +583,9 @@ const continentsSection = {
 
 		if ( this.screenIsSmall ) this.setMobileIntroVisibility( val );
 
-	},
+	}
 
-	setMobileIntroVisibility: function ( val ) {
+	setMobileIntroVisibility( val ) {
 
 		this.labelContainer.select( '.intro-element.message' )
 			.classed( 'visible', val );
@@ -585,15 +602,15 @@ const continentsSection = {
 			dispatcher.navigate( dispatcher.HOME );
 		} : null );
 
-	},
+	}
 
-	setLabelVisibility: function ( val ) {
+	setLabelVisibility( val ) {
 		this.labelContainer
 			.selectAll( '.emotion-label' )
 			.classed( 'visible', val );
-	},
+	}
 
-	update: function ( time ) {
+	update( time ) {
 
 		if ( this.tweens ) {
 			_.values( this.tweens ).forEach( tween => {
@@ -603,33 +620,33 @@ const continentsSection = {
 
 		let updateState = {
 			time: time,
-			someContinentIsHighlighted: continents.some( function ( continent ) {
+			someContinentIsHighlighted: this.continents.some( function ( continent ) {
 				return continent.isHighlighted;
 			} )
 		};
 
-		continents.forEach( continent => continent.update( updateState, frameCount ) );
+		this.continents.forEach( continent => continent.update( updateState, this.frameCount ) );
 
-		frameCount++;
+		this.frameCount++;
 		if ( this.isActive ) {
 			window.requestAnimationFrame( this.update );
 		}
 
-	},
+	}
 
 	/**
 	 * Functions that perform transitions between continent views.
 	 * Bound to continents.js in init().
 	 */
-	transitions: {
+	transitions = {
 
 		// 2a. zoom in on focused continent and pan to center
 		// 2b. while zooming, remove/add enough circles to match number of states
 		// 2c. while 2a-b happens, tween colors of circles to match mocks? or leave them randomized?
 		focusZoomedOutContinent: function ( emotion ) {
 
-			let targetContinent = continents.find( continent => continent.id === emotion ),
-				targetScale = (0.45 * continentContainer.node().getBoundingClientRect().height) / targetContinent.size;
+			let targetContinent = this.continents.find( continent => continent.id === emotion ),
+				targetScale = (0.45 * this.continentContainer.node().getBoundingClientRect().height) / targetContinent.size;
 
 			targetContinent.addTween( {
 				'scaleX': targetScale,
@@ -655,16 +672,16 @@ const continentsSection = {
 
 			// calculate bottom of states graph
 			// TODO: 50 (graph margin) should be a var in variables.json
-			let statesBaselineOffset = centerY - (this.sectionContainer.offsetHeight * (parseInt( sassVars.states.containers.bottom.replace( '%', '' ) ) / 100) + 50);
+			let statesBaselineOffset = this.centerY - (this.sectionContainer.offsetHeight * (parseInt( sassVars.states.containers.bottom.replace( '%', '' ) ) / 100) + 50);
 
-			let targetContinent = continents.find( continent => continent.id === emotion ),
-				previousContinent = continents.find( continent => continent.id === previousEmotion ),
+			let targetContinent = this.continents.find( continent => continent.id === emotion ),
+				previousContinent = this.continents.find( continent => continent.id === previousEmotion ),
 				targetCenter = {
-					x: centerX - (previousContinent ? previousContinent.x : 0),
-					y: centerY - (previousContinent ? previousContinent.y - statesBaselineOffset : 0)
+					x: this.centerX - (previousContinent ? previousContinent.x : 0),
+					y: this.centerY - (previousContinent ? previousContinent.y - statesBaselineOffset : 0)
 				},
-				targetX = centerX,
-				targetY = centerY;
+				targetX = this.centerX,
+				targetY = this.centerY;
 
 			if ( targetContinent ) {
 				targetX -= targetContinent.x;
@@ -697,7 +714,7 @@ const continentsSection = {
 
 			this.addTween( targetCenter, { 'x': targetX }, durationX, funcX )
 				.onUpdate( function () {
-					continents.forEach( continent => {
+					this.continents.forEach( continent => {
 						continent.centerX = this.x;
 					} );
 				} )
@@ -705,7 +722,7 @@ const continentsSection = {
 
 			this.addTween( targetCenter, { 'y': targetY }, durationY, funcY )
 				.onUpdate( function () {
-					continents.forEach( continent => {
+					this.continents.forEach( continent => {
 						continent.centerY = this.y;
 					} );
 				} )
@@ -716,14 +733,14 @@ const continentsSection = {
 		// 2c. (later) allow circles to drift slightly along horizontal axis only. this motion can be reflected in the states view as well.
 		spreadFocusedContinent: function ( emotion, targetScale ) {
 
-			let targetContinent = continents.find( continent => continent.id === emotion );
-			targetContinent.spreadCircles( continentContainer.node(), targetScale );
+			let targetContinent = this.continents.find( continent => continent.id === emotion );
+			targetContinent.spreadCircles( this.continentContainer.node(), targetScale );
 
 		},
 
 		gatherContinent: function ( emotion, immediate ) {
 
-			let targetContinent = continents.find( continent => continent.id === emotion );
+			let targetContinent = this.continents.find( continent => continent.id === emotion );
 			targetContinent.gatherCircles( immediate );
 
 		},
@@ -742,7 +759,7 @@ const continentsSection = {
 
 			return new Promise( ( resolve, reject ) => {
 
-				let targetContinents = continents.filter( continent => ~emotions.indexOf( continent.id ) );
+				let targetContinents = this.continents.filter( continent => ~emotions.indexOf( continent.id ) );
 				targetContinents.forEach( continent => {
 
 					// toggle spawning
@@ -767,14 +784,14 @@ const continentsSection = {
 
 		},
 
-	},
+	}
 
 	/**
 	 * Add to currently-tweening queue.
 	 * Callers of this function are responsible for implementing onUpdate (if necessary)
 	 * and for `start()`ing the returned Tween.
 	 */
-	addTween: function ( obj, props, time, func = TWEEN.Easing.Linear.None ) {
+	addTween( obj, props, time, func = TWEEN.Easing.Linear.None ) {
 
 		if ( !this.tweens ) {
 			this.tweens = {};
@@ -794,9 +811,9 @@ const continentsSection = {
 
 		return this.tweens[ key ];
 
-	},
+	}
 
-	onContinentMouseEnter: function ( continent ) {
+	onContinentMouseEnter( continent ) {
 
 		// if already selected, leave as-is
 		if ( continent.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED ) {
@@ -804,7 +821,7 @@ const continentsSection = {
 		}
 
 		this.setContinentHighlight( continent, Continent.HIGHLIGHT_LEVELS.HIGHLIGHTED );
-		dispatcher.navigate( dispatcher.SECTIONS.CONTINENTS, continent.id );
+		this.navigateToContinent(continent);
 
 		// If mouseenter fires after mouseleave,
 		// prevent mouseleave behavior (maintain highlight)
@@ -812,9 +829,13 @@ const continentsSection = {
 			clearTimeout( this.mouseLeaveTimeout );
 		}
 
-	},
+	}
 
-	onContinentMouseLeave: function ( continent ) {
+	navigateToContinent(continent){
+		dispatcher.navigate( dispatcher.SECTIONS.CONTINENTS, continent.id );
+	}
+
+	onContinentMouseLeave( continent ) {
 
 		// enough time to smoothly roll across a gap from one continent
 		// to another without selections flashing on/off
@@ -824,9 +845,9 @@ const continentsSection = {
 			this.unsetContinentHighlight( continent );
 		}, mouseLeaveDelay );
 
-	},
+	}
 
-	onContinentClick: function ( continent ) {
+	onContinentClick( continent ) {
 
 		if ( d3.event ) {
 			d3.event.stopImmediatePropagation();
@@ -839,9 +860,9 @@ const continentsSection = {
 		this.setInteractive( false );
 		dispatcher.navigate( dispatcher.SECTIONS.STATES, continent.id );
 
-	},
+	}
 
-	onBackgroundClick: function () {
+	onBackgroundClick() {
 
 		if ( this.mouseLeaveTimeout ) {
 			clearTimeout( this.mouseLeaveTimeout );
@@ -849,14 +870,14 @@ const continentsSection = {
 
 		dispatcher.navigate( dispatcher.SECTIONS.CONTINENTS );
 
-	},
+	}
 
-	unsetContinentHighlight: function ( continent ) {
+	unsetContinentHighlight( continent ) {
 		let otherHighlightedContinent;
-		continents.some( (c => {
+		this.continents.some( (c => {
 			if ( c !== continent &&
 				(c.highlightLevel === Continent.HIGHLIGHT_LEVELS.HIGHLIGHTED ||
-				c.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED) ) {
+					c.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED) ) {
 				otherHighlightedContinent = c;
 				return true;
 			}
@@ -872,7 +893,7 @@ const continentsSection = {
 		} else {
 			// Else, turn off all highlights except selected.
 			let unhighlightLevel = continent.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED ? Continent.HIGHLIGHT_LEVELS.UNSELECTED : Continent.HIGHLIGHT_LEVELS.NONE;
-			continents.forEach( c => {
+			this.continents.forEach( c => {
 				if ( c.highlightLevel !== Continent.HIGHLIGHT_LEVELS.SELECTED ) {
 					c.highlightLevel = unhighlightLevel;
 				}
@@ -880,20 +901,20 @@ const continentsSection = {
 		}
 
 		this.setLabelStates();
-	},
+	}
 
-	setContinentHighlight: function ( continent, highlightLevel ) {
+	setContinentHighlight( continent, highlightLevel ) {
 
 		// Set unhighlightLevel based on if any continent highlighted
 		let unhighlightLevel;
-		if ( highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED || continents.some( c => c.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED ) ) {
+		if ( highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED || this.continents.some( c => c.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED ) ) {
 			unhighlightLevel = Continent.HIGHLIGHT_LEVELS.UNSELECTED;
 		} else {
 			unhighlightLevel = Continent.HIGHLIGHT_LEVELS.UNHIGHLIGHTED;
 		}
 
 		if ( continent ) {
-			continents.forEach( c => {
+			this.continents.forEach( c => {
 				if ( c === continent ) {
 					c.highlightLevel = highlightLevel;
 				} else {
@@ -906,7 +927,7 @@ const continentsSection = {
 		}
 
 		this.setLabelStates();
-	},
+	}
 
 	/**
 	 * labels can have one of three states:
@@ -914,14 +935,14 @@ const continentsSection = {
 	 * 2 - 'selected'
 	 * 3 - 'muted'
 	 */
-	setLabelStates: function () {
+	setLabelStates() {
 
 		if ( !this.labelContainer ) return;
 
-		const somethingSelected = continents
+		const somethingSelected = this.continents
 			.filter( c => c.highlightLevel === Continent.HIGHLIGHT_LEVELS.SELECTED );
 
-		const somethingHighlighted = continents.filter( c => c.highlightLevel === Continent.HIGHLIGHT_LEVELS.HIGHLIGHTED );
+		const somethingHighlighted = this.continents.filter( c => c.highlightLevel === Continent.HIGHLIGHT_LEVELS.HIGHLIGHTED );
 
 		const labels = this.labelContainer.selectAll( '.emotion-label' );
 
@@ -946,20 +967,31 @@ const continentsSection = {
 		}
 	}
 
-};
+	positionLabelsVertically( d, i, target ) {
+		const bottomness = (d.y + d.label.y + this.centerY) / this.centerY;
+		if ( bottomness > 1.5 ) {
+			// bottom align labels toward bottom of screen, so popups open upwards
+			target.style.top = null;
+			target.style.bottom = -Math.round( this.centerY + d.y + d.label.y ) + 'px';
+		} else {
+			// open other popups normally
+			target.style.top = Math.round( this.centerY + d.y + d.label.y ) + 'px';
+			target.style.bottom = null;
+		}
 
-function positionLabelsVertically( d, i ) {
-	const bottomness = (d.y + d.label.y + centerY) / centerY;
-	if ( bottomness > 1.5 ) {
-		// bottom align labels toward bottom of screen, so popups open upwards
-		this.style.top = null;
-		this.style.bottom = -Math.round( centerY + d.y + d.label.y ) + 'px';
-	} else {
-		// open other popups normally
-		this.style.top = Math.round( centerY + d.y + d.label.y ) + 'px';
-		this.style.bottom = null;
+	}
+
+	positionLabelsHorizontally( d, i, target ) {
+		let sectionTextRect = d3.select('.section-text').node().getBoundingClientRect();
+		let textRect = target.getBoundingClientRect();
+		let left = Math.max(
+			textRect.width/2,
+			Math.round( this.centerX + d.x + d.label.x ) );
+		if ( sectionTextRect.width + left + textRect.width / 2 > window.innerWidth ) {
+			left = window.innerWidth - textRect.width / 2 - sectionTextRect.width;
+		}
+		target.style.left = left + 'px';
 	}
 
 }
 
-export default continentsSection;

@@ -1,10 +1,10 @@
 /* variables used only in this file */
-$section-padding-top: #{$ui-header-height}px;
+$section-padding-top: 131px;
 $section-text-padding: 1.5em;
 $section-text-padding-mobile: 0.75em;
 $more-text-padding: 3em;
 $section-text-background-color: #eee;
-$top-nav-background: rgba(255, 255, 255, 0.8);
+$top-nav-background: rgba(255, 255, 255, 0.9);
 $top-nav-padding-top: 15px;
 $mobile-split-height: 300;
 $mobile-section-text-top: #{$ui-header-mobile-nav-target-height + $mobile-split-height}px;
@@ -33,7 +33,27 @@ body {
 
 	transition: background-color 1s ease;
 
+	&.rotated {
+		pointer-events: none;
+		&:after {
+			content: ' ';
+			display: block;
+			background-image: url('./img/rotate.svg');
+			background-size: contain;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: #eeeeee;
+			z-index: 10000;
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+	}
+
 	&[class*=fp-viewing-experience],
+	&[class*=fp-viewing-strategies],
 	&[class*=fp-viewing-response] {
 		// allows interaction by default, js passes swipes to scroller
 		// other sections drop this back behind the scroller content
@@ -41,9 +61,8 @@ body {
 			z-index: 100;
 		}
 	}
-	&[class*=fp-viewing-introduction],
-	&[class*=fp-viewing-strategies] {
-		//mute the calm graphics in the intro and reading sections
+	&[class*=fp-viewing-introduction] {
+		//mute the calm graphics in the intro
 		.original-content {
 			opacity: 0.65;
 			z-index: 0;
@@ -59,7 +78,9 @@ body {
 		.original-content,
 		#timeline-section .section-graphics,
 		.section-text {
-			filter: blur(10px);
+			& > * {
+				filter: blur(10px);
+			}
 		}
 		.original-content {
 			z-index: auto;
@@ -121,9 +142,9 @@ svg {
 
 %close-button {
 	position: absolute;
-	top: 0.5em;
+	top: 20px;
 	left: auto;
-	right: 0.5em;
+	right: 20px;
 	line-height: 1em;
 	cursor: pointer;
 
@@ -135,8 +156,8 @@ svg {
 		margin: 0;
 		padding: 0;
 
-		font-size: 3em;
-		font-weight: 200;
+		font-size: 65px !important;
+		font-weight: 300;
 		content: '×';
 	}
 }
@@ -201,20 +222,44 @@ svg {
 	opacity: 0;
 	transition: opacity 1s ease;
 	pointer-events: none;
-	&.visible {
-		opacity: 1;
-		pointer-events: auto;
+	visibility: hidden;
+}
+
+.hidden-for-intro.visible {
+	opacity: 1;
+	pointer-events: auto;
+	visibility: visible;
+}
+
+.logo {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: transparent;
+	padding: 25px;
+	width: 19em;
+	pointer-events: none;
+}
+
+[class*=fp-viewing-introduction] {
+	.logo {
+		background-color: transparent;
+	}
+	.hidden-for-intro.visible {
+		visibility: hidden;
 	}
 }
 
 .site-header {
 	position: fixed;
 	top: 0;
+	left: $section-text-width;
+	right: 0;
 	height: #{$ui-header-height}px;
-	width: 100%;
 	background-color: $top-nav-background;
 	padding-top: $top-nav-padding-top;
 	.site-name {
+		display: none;
 		left: 1.5em;
 		position: absolute;
 		height: 40px;
@@ -296,18 +341,25 @@ svg {
 	position: fixed;
 	top: 0;
 	height: #{$ui-header-height}px;
-	width: 100%;
 	padding-top: $top-nav-padding-top;
 	background-color: transparent;
 	z-index: 200;
+	left: $section-text-width;
+	right: 0;
 	.menu {
 		position: absolute;
 		right: 1.5em;
 		height: 40px;
 		text-align: right;
 		ul {
+			margin-block-start: 0;
+			margin-block-end: 0;
+			padding-inline-start: 0;
 			li {
 				margin-left: 40px;
+			}
+			li:first-child {
+				margin: 0;
 			}
 		}
 	}
@@ -479,10 +531,10 @@ svg {
 	}
 
 	.intro-heading {
-		position: absolute;
-		top: 40px;
-		left: 40px;
+		position: relative;
 		text-transform: uppercase;
+		padding-bottom: 30px;
+		pointer-events: auto;
 		h1 {
 			text-transform: none;
 		}
@@ -492,6 +544,11 @@ svg {
 			&:hover {
 				font-weight: bold;
 			}
+		}
+
+		.subheader {
+			font-size: 20px;
+			margin-top: 10px;
 		}
 	}
 	h1 {
@@ -509,7 +566,7 @@ svg {
 	}
 
 	.slide {
-		font-size: 30px;
+		font-size: 24px;
 		text-align: center;
 		.slide-content {
 			width: 578px;
@@ -518,6 +575,7 @@ svg {
 			cursor: pointer;
 			user-select: none;
 			font-weight: 300;
+			min-height: 105px;
 		}
 	}
 
@@ -604,14 +662,14 @@ svg {
 
 .section-text {
 	position: absolute;
-	//z-index: 2;
-	top: $section-padding-top;
+	z-index: 10;
+	top: 0;
 	width: $section-text-width;
 	bottom: 0;
 	background-color: $section-text-background-color;
 
 	padding: $section-text-padding;
-	padding-top: $section-text-padding*0.75;
+	padding-top: $section-padding-top;
 	@extend %raleway-light;
 	color: #000; //$text-overlay-color;
 	text-align: left;
@@ -626,25 +684,30 @@ svg {
 		opacity: 1.0;
 	}
 
+	.section-heading {
+		position: relative;
+	}
+
 	button {
 		$button-color: 252;
 		pointer-events: auto;
 		display: block;
 		width: 100%;
 		margin: 0 auto;
-		border: 1px solid #999;
-		box-shadow: 1px 1px 1px #555;
+		border: 1px solid #000;
+		box-shadow: 1px 3px 5px 0px #555;
 		text-transform: uppercase;
-		font-weight: 300;
+		font-weight: 500;
 		font-size: 0.8em;
 		padding: 0.3em 0;
+		border-radius: 5px;
 		/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fefefe+0,fefefe+100&1+0,0+100 */
 		background: -moz-linear-gradient(top, rgba($button-color, $button-color, $button-color, 1) 0%, rgba($button-color, $button-color, $button-color, 0) 100%); /* FF3.6-15 */
 		background: -webkit-linear-gradient(top, rgba($button-color, $button-color, $button-color, 1) 0%, rgba($button-color, $button-color, $button-color, 0) 100%); /* Chrome10-25,Safari5.1-6 */
 		background: linear-gradient(to bottom, rgba($button-color, $button-color, $button-color, 1) 0%, rgba($button-color, $button-color, $button-color, 0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fefefe', endColorstr='#00fefefe', GradientType=0); /* IE6-9 */
 		&:hover {
-			font-weight: 400;
+			font-weight: 700;
 		}
 		&:active, &:focus {
 			outline: none;
@@ -697,8 +760,8 @@ svg {
 		@extend %button-link;
 		font-size: 0.8em;
 		position: absolute;
-		right: $section-text-padding;
-		top: $section-text-padding*0.85;
+		right: 0;
+		top: 0.2em;
 		span {
 			opacity: 0.3;
 		}
@@ -725,7 +788,7 @@ svg {
 	.section-text__scroller {
 		position: absolute;
 		bottom: 50px;
-		top: 70px;
+		top: 179px;
 		left: $section-text-padding;
 		right: $section-text-padding;
 		padding-bottom: 50px;
@@ -743,13 +806,29 @@ svg {
 			padding-right: 10px;
 		}
 	}
+	.links-sidebar__description {
+		font-size: 0.9em;
+	}
+	#links-sidebar li {
+		margin-bottom: 1.5em;
+	}
+}
+
+[class*=fp-viewing-timeline] {
+	.section-text__scroller {
+		margin: 0 -10px;
+		// fix button shadow
+		& > div > div {
+			padding: 0 10px;
+		}
+
+	}
 }
 
 .more-content {
 	position: absolute;
-	top: $section-padding-top;
+	top: #{$ui-header-height}px;
 	bottom: 0;
-	background-color: $section-text-background-color;
 
 	padding: $section-text-padding;
 	padding-top: $section-text-padding*0.75;
@@ -757,27 +836,43 @@ svg {
 	color: #000;
 	text-align: center; //for the close button at the bottom
 
-	z-index: 1;
+	z-index: 10;
 	width: 100%;
 	transform: translateX(-100%);
-	background-color: rgba(#f7f7f7, 0.84);
+	background-color:transparent;
 	transition: $more-content-transition;
 	pointer-events: auto;
+
+
+	&:after {
+		top: 0;
+		bottom: 0;
+		left: $section-text-width;
+		right: 0;
+		content: '';
+		display: block;
+		position: absolute;
+		border: 55px solid #000000;
+		border-image: url('./img/frame.png') 55 repeat;
+		pointer-events: none;
+	}
+
 
 	.close-button {
 		@extend %close-button;
 	}
 
 	.more-content__scroller {
-		position: absolute;
 		top: 0;
 		bottom: 0;
-		left: 0;
+		left: $section-text-width;
 		right: 0;
-		padding: $more-text-padding;
+		position: absolute;
+		padding: $more-text-padding 0;
 		pointer-events: auto;
 		overflow-y: scroll;
 		-webkit-overflow-scrolling: touch;
+		background-color: rgba(255,255,255,0.8);
 
 		.close-button {
 			position: static;
@@ -810,6 +905,11 @@ svg {
 	top: 0;
 	width: $section-text-width;
 	text-align: left;
+
+	&:after{
+		display: none;
+	}
+
 	.fade-images {
 		position: relative;
 		width: 100%;
@@ -827,8 +927,9 @@ svg {
 		display: none;
 	}
 	.more-content__scroller {
-		padding-left: 1.5em;
-		padding-right: 1.5em;
+		top: 130px;
+		padding: 1.5em;
+		left:0;
 	}
 }
 
@@ -1033,7 +1134,7 @@ svg {
 			text-align: center;
 			left: 0;
 			right: 0;
-			top: 70px;
+			top: 0;
 			h1 {
 				font-size: 2.9em;
 				width: 300px;
@@ -1049,6 +1150,10 @@ svg {
 					right: -20px;
 					background-size: contain;
 				}
+			}
+			.subheader {
+				font-size: inherit;
+				margin-top: 0;
 			}
 		}
 		.slide {
@@ -1094,9 +1199,11 @@ svg {
 	.site-header {
 		height: #{$ui-header-height-small}px;
 		padding-top: #{$menu-padding-top}px;
+		left: 0;
 		.site-name {
 			left: 0.75em;
 			font-size: 18px;
+			display: block;
 		}
 	}
 	.top-nav {
@@ -1107,6 +1214,7 @@ svg {
 		background-color: transparent;
 		font-size: 1.25em;
 		transition-duration: 0.4s;
+		left: 0;
 
 		&.hidden-for-intro.visible {
 			display: none;
@@ -1227,7 +1335,7 @@ svg {
 			padding-bottom: 0.3em;
 			margin-bottom: 0.3em;
 			a.restart-button {
-				top: 0.95em;
+				top: 0;
 				font-size: 0.8em;
 				right: $section-text-padding-mobile;
 				color: #555;
@@ -1247,7 +1355,7 @@ svg {
 		}
 		.section-text__scroller {
 			position: absolute;
-			top: 2.4em;
+			top: 2.5em;
 			left: $section-text-padding-mobile;
 			right: $section-text-padding-mobile;
 			bottom: 0;
@@ -1263,6 +1371,9 @@ svg {
 					//color: #000;
 					//font-size: 0.9em;
 					font-weight: 400;
+				}
+				button {
+					font-weight: 500;
 				}
 				& > *:nth-last-child(2) {
 					margin-bottom: 30px;
@@ -1318,10 +1429,14 @@ svg {
 		top: #{$ui-header-mobile-nav-target-height}px;
 		transform: translateX(100%);
 		text-align: left;
+		&:after {
+			display: none;
+		}
 		.more-content__scroller {
 			padding: 0 1em;
 			padding-bottom: 60px;
 			top: 55px;
+			left: 0;
 			h2 {
 				font-size: 1.1em;
 			}
@@ -1340,10 +1455,21 @@ svg {
 		}
 	}
 	.more-content--about {
-		top: 0;
+		top: #{$section-padding-top};
 		width: 100%;
 		.more-content__scroller {
-			padding-top: #{$ui-header-mobile-nav-target-height}px;
+			padding-top: #{$ui-header-mobile-nav-target-height};
+		}
+		.close-button {
+			top: 0;
+		}
+	}
+	.logo {
+		display: none;
+	}
+	&[class*=fp-viewing-introduction] {
+		.logo {
+			display: block;
 		}
 	}
 }

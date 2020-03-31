@@ -3,6 +3,7 @@ import dispatcher from './dispatcher';
 import moreInfo from './moreInfo.js';
 import timeline from './timeline/timeline';
 import sassVars from '../scss/variables.json';
+import d3 from 'd3';
 
 //TODO do we really need max or just lite? Should we replace tween.js in other files?
 
@@ -17,7 +18,7 @@ const scroller = {
         'continents': 'experience',
         'states': 'experience',
         'triggers': 'timeline',
-        'strategies': 'strategies' //FIXME fake atlas section prompts default
+        'links': 'strategies'
     },
 
     FULLPAGE_TO_ATLAS_SECTIONS: {
@@ -25,7 +26,7 @@ const scroller = {
         'timeline': 'triggers', //FIXME fake atlas section prompts default
         'experience': 'continents',
         'response': 'actions',
-        'strategies': 'strategies' //FIXME fake atlas section prompts default
+        'strategies': 'links'
     },
 
     headerHeight: 55,
@@ -121,7 +122,8 @@ const scroller = {
         //update emotion nav active states
         let links = [].slice.call( $( '.emotion-nav a[href!="#continents"]' ) );
         for ( let element of links ) {
-            element.classList.toggle( 'active', element.getAttribute( 'data-emotion' ) == emotion );
+        	let emoAttr = element.getAttribute( 'data-emotion' );
+            d3.select(element).classed( 'active', emoAttr == emotion );
         }
 
     },
@@ -611,7 +613,8 @@ const scroller = {
                         dispatcher.sectionTextMinimizeComplete();
                     }
                 } );
-                TweenMax.to( [ $originalContent[ 0 ], $sectionGraphics[ 0 ] ], transitionDuration, { height: minimumDistance - sassVars[ 'ui' ][ 'mobile-emotion-nav' ][ 'height' ] - $sectionGraphics[ 0 ].offsetTop } );
+                const emotionNavHeight = this.currentAnchor === 'strategies' ? 0 : sassVars[ 'ui' ][ 'mobile-emotion-nav' ][ 'height' ];
+                TweenMax.to( [ $originalContent[ 0 ], $sectionGraphics[ 0 ] ], transitionDuration, { height: minimumDistance - emotionNavHeight - $sectionGraphics[ 0 ].offsetTop } );
                 dispatcher.sectionTextMinimizeStart( transitionDuration );
             };
 
@@ -649,7 +652,8 @@ const scroller = {
                         dispatcher.sectionTextMaximizeComplete();
                     }
                 } );
-                TweenMax.to( [ $originalContent[ 0 ], $sectionGraphics[ 0 ] ], transitionDuration, { height: maximumDistance - sassVars[ 'ui' ][ 'mobile-emotion-nav' ][ 'height' ] - $sectionGraphics[ 0 ].offsetTop } );
+				const emotionNavHeight = this.currentAnchor === 'strategies' ? 0 : sassVars[ 'ui' ][ 'mobile-emotion-nav' ][ 'height' ];
+				TweenMax.to( [ $originalContent[ 0 ], $sectionGraphics[ 0 ] ], transitionDuration, { height: maximumDistance - emotionNavHeight - $sectionGraphics[ 0 ].offsetTop } );
                 dispatcher.sectionTextMaximizeStart( transitionDuration );
             };
 
@@ -664,7 +668,7 @@ const scroller = {
                 }
                 height = $( '.section.active' ).height();
                 maximumDistance = 0.33 * height;
-                thresh = 0.01 * touchSensitivity * height;
+                thresh = 0;
                 swipeStart.y = e.originalEvent.touches[ 0 ].pageY;
                 swipeStart.x = e.originalEvent.touches[ 0 ].pageX;
             } );

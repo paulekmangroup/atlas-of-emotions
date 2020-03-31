@@ -36,7 +36,7 @@
     <meta name="twitter:description"
           content="The Atlas of Emotion is a tool to help people better understand what emotions are, how they are triggered and what their effects are, and how to become aware of emotions before acting on them."/>
 
-    <link href="https://fonts.googleapis.com/css?family=Raleway:700,400,200" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:700,500,400,200" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="main.css?1234">
 
     <!-- for mailchimp link to emotrak -->
@@ -151,10 +151,6 @@
     <div class="original-content">
 
         <div id="header">
-            <h3 class="header-content"><a href="#" id="title">ATLAS OF EMOTIONS</a>
-                <span id="infoButton"></span>
-            </h3>
-            <h1></h1>
             <div class="dropdown emotion-menu hide-on-more">
                 <button class="btn btn-default dropdown-toggle" type="button" id="emotion-dropdown"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span
@@ -275,17 +271,19 @@
             {{# slides.forEach( function(slide, i){ }}
 
             <div class="slide {{# if(i==0) { }} active {{# } }}">
-                <div class="slide-content" data-anchor="" data-widow-fix="true">
+				<div class="intro-heading">
+					<h1>{{ header }}</h1>
+					<div class="subheader">
+						<strong>{{ sub_header }}</strong> <a href="#" class="about-link">{{ learn_more_link }}</a>
+					</div>
+				</div>
+				<div class="slide-content" data-anchor="" data-widow-fix="true">
                     {{ slide }}
                 </div>
             </div>
 
             {{# }); }}
 
-            <div class="intro-heading">
-                <h1>{{ header }}</h1>
-                {{ sub_header }} <a class="about-link">{{ learn_more_link }}</a>
-            </div>
             <div class="cta">
                 <a href="#triggers">
                     {{ cta }}
@@ -306,10 +304,6 @@
             </div>
 
             <div id="intro-lang-selector">
-
-                <a id="intro-opt-in-link" class="opt-in-button">
-                    <img src="img/mail.svg">
-                </a>
 
                 <div class="dropdown emotion-menu">
 
@@ -515,26 +509,21 @@
 
         <div class="section" id="strategies-section">
             <div class="section-graphics">
-                <div class="embed-padding">
-                    <div class="embed-container">
-                        <iframe src="https://player.vimeo.com/video/110383723?title=0&byline=0&portrait=0"
-                                frameborder="0"
-                                webkitallowfullscreen mozallowfullscreen
-                                allowfullscreen>
-                        </iframe>
-                    </div>
-                </div>
+
             </div>
             <div class="section-text">
                 <h2 class="section-heading" data-template="metadata.navigation">{{ strategies.heading }}</h2>
                 <div class="section-text__scroller">
                     <div>
-                        <div data-template="metadata.calm">{{ body }}</div>
-                        <div class="support-childrens-atlas" data-template="metadata.calm">
-                            <p>
-                                {{ crowdfunding }}
-                            </p>
-                        </div>
+                        <div data-template="metadata.calm">
+							{{ body }}
+							<br/>
+							<br/>
+							Here are a selection of resources that address the development of emotion awareness through contemplative practices, education, and embodiment.
+							<br/>
+							<ol id="links-sidebar">
+							</ol>
+						</div>
 
                         <a class="more-link more-link__scrollable" data-template="metadata.site">
                             {{ learn_more_button }}
@@ -581,7 +570,7 @@
                 </li>
                 <li><a href="#actions/" id="response-menu-link">{{ response.menu }}</a>
                 </li>
-                <li><a href="#strategies/" id="strategies-menu-link">{{ strategies.menu }}</a></li>
+                <li><a href="#links/" id="strategies-menu-link">{{ strategies.menu }}</a></li>
                 <li>
                     <a id="opt-in-link" class="opt-in-button">
                         <img src="img/mail.svg">
@@ -603,6 +592,9 @@
     </div>
     <div class="menu-toggle hidden-for-intro"></div>
 
+	<div class="logo">
+		<img src="./img/atlas-logo.svg">
+	</div>
 
     <div class="opt-in-modal">
         <div class="opt-in-modal__content">

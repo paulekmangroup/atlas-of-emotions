@@ -3,7 +3,7 @@ import scroller from './scroller.js';
 import timeline from './timeline/timeline.js';
 import dispatcher from './dispatcher.js';
 import moreInfo from './moreInfo.js';
-import continents from './continents.js';
+import ContinentsSection from './continents';
 import states from './states.js';
 import actions from './actions.js';
 import calm from './calm.js';
@@ -13,6 +13,8 @@ import secondaryData from '../static/secondaryData.json';
 import appStrings from './appStrings.js';
 import stringsConfig from '../static/strings/stringsConfig.json';
 import sassVars from '../scss/variables.json';
+import d3 from 'd3';
+import links from './links';
 
 export default function ( ...initArgs ) {
 
@@ -82,12 +84,16 @@ export default function ( ...initArgs ) {
 
                 onResize();
                 onHashChange();
+                setTimeout(function() {
+					checkForLandscape();
+				},500);
 
                 // debounce after initial call
                 //onResize = _.debounce( onResize, 250 );
                 window.addEventListener( 'resize', onResize );
+				window.addEventListener( 'orientationchange', checkForLandscape, true );
 
-            } );
+			} );
 
     }
 
@@ -146,11 +152,12 @@ export default function ( ...initArgs ) {
 
     function initSections() {
 
-        sections.continents = continents;
+        sections.continents = new ContinentsSection();
         sections.states = states;
         sections.actions = actions;
         sections.triggers = timeline;
-        sections.calm = calm;
+		sections.calm = calm;
+		sections.links = links;
 
         // use this without a container, so the info
         // can be spread out across sections
@@ -470,7 +477,7 @@ export default function ( ...initArgs ) {
             }
         }
 
-    }
+	}
 
     function onLangMenuClick( event ) {
 
@@ -778,12 +785,31 @@ export default function ( ...initArgs ) {
 
         }
 
-        // set up appStrings
+        checkForLandscape();
+
+		// set up appStrings
         appStrings( getLanguagePref(), screenIsSmall );
 
         return screenIsSmall;
 
     }
+
+    function checkForLandscape() {
+		var devWidth, devHeight;
+		devWidth  = screen.width;
+		devHeight = screen.height;
+
+		if ( devWidth < 768 &&
+			(
+				(window.orientation && (window.orientation === 90 || window.orientation === -90)) ||
+				(screen.orientation && (screen.orientation.angle === 90 || screen.orientation.angle === -90))
+			)
+		) {
+			d3.select( 'body' ).classed( 'rotated', true );
+		} else {
+			d3.select( 'body' ).classed( 'rotated', false );
+		}
+	}
 
     /**
      * Get language preference for viewer.
