@@ -479,7 +479,7 @@
         },
         {
             "key": "calm_button_label",
-            "value": "Recommencer",
+            "value": "Rejouer",
             "englishValue": "Start over"
         },
         {
@@ -504,7 +504,7 @@
         },
         {
             "key": "timeline_restart_button",
-            "value": "Recommencer",
+            "value": "Rejouer",
             "englishValue": "restart"
         },
         {
