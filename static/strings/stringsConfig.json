@@ -30,6 +30,12 @@
 			"name": "Português",
 			"fileId": "1PxzvFaBaWgY4_rMsUYlgcG1yhMTAaSY9euQ07jP404Q",
 			"enabled": true
+		},
+		{
+			"lang": "fr",
+			"name": "Français",
+			"fileId": "1ChI1VtXsJo764t9rvC9wfmPaR6halxDc66pLwjEr5fk",
+			"enabled": true
 		}
 	]
 }
