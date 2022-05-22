@@ -46,7 +46,7 @@ function browserifyTask(options) {
 	// You might consider doing this for production also and load two javascript
 	// files (main.js and vendors.js), as vendors.js will probably not change and
 	// takes full advantage of caching
-	appBundler.external(options.development ? dependencies : []);
+	appBundler.external(dependencies);
 
 	// The bundling process
 	function createBundle() {
@@ -132,7 +132,7 @@ function browserifyTask(options) {
 				})
 			);
 	} else {
-		browserify({ require: "" })
+		browserify({ require: dependencies })
 			.bundle()
 			.pipe(source("vendors.js"))
 			.pipe(gulp.dest(options.dest));
@@ -163,9 +163,7 @@ function cssTask(options) {
 			console.log("Building CSS bundle");
 			gulp.src(options.src)
 				.pipe(sass.sync())
-				.pipe(
-					$.autoprefixer()
-				)
+				.pipe($.autoprefixer())
 				.pipe(gulp.dest(options.dest))
 				.pipe(gulpif(options.reload, connect.reload()))
 				.pipe(
@@ -184,9 +182,7 @@ function cssTask(options) {
 	} else {
 		gulp.src(options.src)
 			.pipe(sass.sync())
-			.pipe(
-				$.autoprefixer()
-			)
+			.pipe($.autoprefixer())
 			.pipe($.cssmin())
 			.pipe(gulp.dest(options.dest));
 	}
@@ -199,9 +195,7 @@ function copyTask(options) {
 			gulp.src(options.src).pipe().pipe(gulp.dest(options.dest));
 		});
 	}
-	return gulp
-		.src(options.src)
-		.pipe(gulp.dest(options.dest));
+	return gulp.src(options.src).pipe(gulp.dest(options.dest));
 }
 
 function lintTask(options) {
