@@ -206,18 +206,12 @@ function copyTask(options) {
 	console.log("Copying files: " + options.src);
 	if (options.watchfiles) {
 		gulp.watch(options.watchfiles, function () {
-			gulp.src(options.src).pipe(
-				$.copy(options.dest, {
-					prefix: options.pathDepth || 1,
-				})
-			);
+			gulp.src(options.src).pipe().pipe(gulp.dest(options.dest));
 		});
 	}
-	return gulp.src(options.src).pipe(
-		$.copy(options.dest, {
-			prefix: options.pathDepth || 1,
-		})
-	);
+	return gulp
+		.src(options.src)
+		.pipe(gulp.dest(options.dest));
 }
 
 function lintTask(options) {
@@ -244,7 +238,6 @@ function stringsTask(options) {
 	return gulp
 		.src(options.src)
 		.pipe($.shell([`mkdir ${options.src}static/strings/langs`]))
-		.pipe($.debug({ title: "strings pipe", minimal: false }))
 		.pipe(
 			through.obj(function (file, enc, cb) {
 				console.log("CALLBACK ", file, cb);
@@ -323,7 +316,6 @@ function stringsTask(options) {
 				});
 			})
 		)
-		.pipe($.debug({ title: "callback pipe", minimal: false }))
 		.pipe($.chmod(0o644))
 		.pipe(gulp.dest(options.dest));
 }
@@ -365,9 +357,9 @@ gulp.task("default", async () => {
 
 		// Copy static assets
 		copyTask({
-			src: "./static/**",
+			src: "./static/**/*",
 			dest: dest,
-			watchfiles: "./static/**",
+			watchfiles: "./static/**/*",
 		});
 
 		// Lint and bundle and watch for changes
