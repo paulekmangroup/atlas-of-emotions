@@ -1279,7 +1279,7 @@
         },
         {
             "key": "fear_timeline_trigger_event",
-            "value": "un ami est en colère contre nous",
+            "value": "un ami a été en colère contre toi",
             "englishValue": "reminds you of abandonment"
         },
         {
@@ -1523,7 +1523,7 @@
         },
         {
             "key": "disgust_timeline_trigger_event",
-            "value": "un ami est en colère contre toi",
+            "value": "un ami a été en colère contre toi",
             "englishValue": "a friend gets angry with you"
         },
         {
@@ -1828,7 +1828,7 @@
         },
         {
             "key": "sadness_timeline_trigger_event",
-            "value": "un ami est en colère contre nous",
+            "value": "un ami a été en colère contre toi",
             "englishValue": "a friend gets angry with you"
         },
         {
@@ -2172,7 +2172,7 @@
         },
         {
             "key": "enjoyment_timeline_trigger_event",
-            "value": "un ami se met en colère contre toi",
+            "value": "un ami a été en colère contre toi",
             "englishValue": "a friend gets angry with you"
         },
         {
