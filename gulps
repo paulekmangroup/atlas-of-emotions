@@ -1,9 +1,0 @@
-gulp-copy
-gulp-cssmin
-gulp-eslint
-gulp-json-sass
-gulp-notify
-gulp-shell
-gulp-uglify
-gulp-autoprefixer
-gulp-connect

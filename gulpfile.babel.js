@@ -1,6 +1,4 @@
 import gulp from "gulp";
-// import gulpSass from "gulp-sass";
-// import rawSass from "sass";
 import source from "vinyl-source-stream";
 import buffer from "vinyl-buffer";
 import browserify from "browserify";
@@ -10,14 +8,10 @@ import gulpLoadPlugins from "gulp-load-plugins";
 import rimraf from "rimraf";
 import connect from "gulp-connect";
 import gulpif from "gulp-if";
-import chmod from "gulp-chmod";
 import stringsConfig from "./static/strings/stringsConfig.json";
-import debug from "gulp-debug";
 import { extractSheets } from "spreadsheet-to-json";
 import through from "through2";
-import File from "vinyl";
 
-// const sass = require('gulp-sass')(require('sass'));
 const sass = require("gulp-sass")(require("sass"));
 // Automatically load any gulp plugins in your package.json
 const $ = gulpLoadPlugins();
@@ -170,9 +164,7 @@ function cssTask(options) {
 			gulp.src(options.src)
 				.pipe(sass.sync())
 				.pipe(
-					$.autoprefixer({
-						browsers: ["> 1%", "last 2 versions"],
-					})
+					$.autoprefixer()
 				)
 				.pipe(gulp.dest(options.dest))
 				.pipe(gulpif(options.reload, connect.reload()))
@@ -193,9 +185,7 @@ function cssTask(options) {
 		gulp.src(options.src)
 			.pipe(sass.sync())
 			.pipe(
-				$.autoprefixer({
-					browsers: ["> 1%", "last 2 versions"],
-				})
+				$.autoprefixer()
 			)
 			.pipe($.cssmin())
 			.pipe(gulp.dest(options.dest));
