@@ -87,7 +87,7 @@ $states-graph-width: 70%;
 	height: 60%;
 	bottom: 10%;
 	left: 50%;
-	margin-left: -$states-graph-width/2;
+	margin-left: -$states-graph-width*0.5;
 	min-height: 400px;
 
 	.axis {

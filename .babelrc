@@ -1,7 +1,15 @@
 {
 	"presets": [
-		"es2015",
-		"stage-0"
+		[
+			"@babel/preset-env",
+			// {
+			// 	"useBuiltIns": "entry",
+			// 	"corejs": "3.22",
+			// 	"targets": {
+			// 		"node": "current"
+			// 	}
+			// }
+		]
 	],
 	"plugins": [
 		"transform-object-assign"
