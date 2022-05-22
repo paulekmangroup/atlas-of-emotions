@@ -10,8 +10,12 @@ import gulpLoadPlugins from "gulp-load-plugins";
 import rimraf from "rimraf";
 import connect from "gulp-connect";
 import gulpif from "gulp-if";
+import chmod from "gulp-chmod";
 import stringsConfig from "./static/strings/stringsConfig.json";
 import debug from "gulp-debug";
+import { extractSheets } from "spreadsheet-to-json";
+import through from "through2";
+import File from "vinyl";
 
 // const sass = require('gulp-sass')(require('sass'));
 const sass = require("gulp-sass")(require("sass"));
@@ -48,7 +52,7 @@ function browserifyTask(options) {
 	// You might consider doing this for production also and load two javascript
 	// files (main.js and vendors.js), as vendors.js will probably not change and
 	// takes full advantage of caching
-	appBundler.external( options.development ? dependencies : [] );
+	appBundler.external(options.development ? dependencies : []);
 
 	// The bundling process
 	function createBundle() {
@@ -153,8 +157,8 @@ function sassVariablesTask(options) {
 	};
 	run();
 
-	if ( options.development && options.watchfiles ) {
-		gulp.watch( options.watchfiles, run );
+	if (options.development && options.watchfiles) {
+		gulp.watch(options.watchfiles, run);
 	}
 }
 
@@ -184,7 +188,7 @@ function cssTask(options) {
 				);
 		};
 		run();
-		gulp.watch( options.watchfiles, run );
+		gulp.watch(options.watchfiles, run);
 	} else {
 		gulp.src(options.src)
 			.pipe(sass.sync())
@@ -199,19 +203,21 @@ function cssTask(options) {
 }
 
 function copyTask(options) {
-	console.log( 'Copying files: ' + options.src );
-	if ( options.watchfiles ) {
-		gulp.watch( options.watchfiles, function () {
-			gulp.src( options.src )
-				.pipe( $.copy( options.dest, {
-					'prefix': options.pathDepth || 1
-				} ) );
-		} );
+	console.log("Copying files: " + options.src);
+	if (options.watchfiles) {
+		gulp.watch(options.watchfiles, function () {
+			gulp.src(options.src).pipe(
+				$.copy(options.dest, {
+					prefix: options.pathDepth || 1,
+				})
+			);
+		});
 	}
-	return gulp.src( options.src )
-		.pipe( $.copy( options.dest, {
-			'prefix': options.pathDepth || 1
-		} ) );
+	return gulp.src(options.src).pipe(
+		$.copy(options.dest, {
+			prefix: options.pathDepth || 1,
+		})
+	);
 }
 
 function lintTask(options) {
@@ -234,27 +240,92 @@ function lintTask(options) {
 }
 
 function stringsTask(options) {
-	let accessToken = options.token,
-		langs = stringsConfig.stringsFiles;
+	let langs = stringsConfig.stringsFiles;
+	return gulp
+		.src(options.src)
+		.pipe($.shell([`mkdir ${options.src}static/strings/langs`]))
+		.pipe($.debug({ title: "strings pipe", minimal: false }))
+		.pipe(
+			through.obj(function (file, enc, cb) {
+				console.log("CALLBACK ", file, cb);
+				const filterCells = ({ key, value }) => !!key;
+				const removeEmptyProperties = (c) =>
+					Object.fromEntries(
+						Object.entries(c).filter(([_, value]) => !!value)
+					);
+				const camelCaseProperties = (c) =>
+					Object.fromEntries(
+						Object.entries(c).map(([property, value]) => [
+							property
+								.split(" ")
+								.map((s, i) =>
+									i == 0
+										? s
+										: `${s[0].toUpperCase()}${s.slice(1)}`
+								)
+								.join(""),
+							value,
+						])
+					);
 
-	return (
-		gulp
-			.src(options.src)
-			.pipe($.shell([`mkdir ${options.src}static/strings/langs`]))
-			// NOTE: have to manually enumerate each worksheet tab...
-			.pipe(
-				$.shell(
-					langs.map(
-						(lang) =>
-							`gsjson ${lang.fileId} ${
-								options.dest + lang.lang
-							}.json -b -w 0 -w 1 -w 2 -w 3 -w 4 -w 5 -w 6 -w 7${
-								accessToken ? " -t " + accessToken : ""
-							}`
-					)
-				)
-			)
-	);
+				const files = langs.map((lang) =>
+					extractSheets({
+						// your google spreadhsheet key
+						spreadsheetKey: lang.fileId,
+						// your google oauth2 credentials or API_KEY
+						credentials: "AIzaSyDlkr3D63Ns1dd8FcC5DBp8aEVpq7haNrI",
+						// optional: names of the sheets you want to extract
+						sheetsToExtract: [
+							"metadata",
+							"anger",
+							"fear",
+							"disgust",
+							"sadness",
+							"enjoyment",
+							"about",
+							"emotrak",
+						],
+					})
+						.then((sheets) => ({
+							lang,
+							sheets: [
+								sheets["metadata"],
+								sheets["anger"],
+								sheets["fear"],
+								sheets["disgust"],
+								sheets["sadness"],
+								sheets["enjoyment"],
+								sheets["about"],
+								sheets["emotrak"],
+							].map((s) =>
+								s
+									.filter(filterCells)
+									.map(removeEmptyProperties)
+									.map(camelCaseProperties)
+							),
+						}))
+						.catch((e) => console.error(e))
+				);
+				Promise.all(files).then((fileResults) => {
+					fileResults.forEach((languageSheets) => {
+						const { lang, sheets } = languageSheets;
+						const path = `${lang.lang}.json`;
+						const contents = Buffer.from(
+							JSON.stringify(sheets, null, 4)
+						);
+						const newFile = file.clone();
+						newFile.path = path;
+						newFile.base = null;
+						newFile.contents = contents;
+						this.push(newFile);
+					});
+					cb();
+				});
+			})
+		)
+		.pipe($.debug({ title: "callback pipe", minimal: false }))
+		.pipe($.chmod(0o644))
+		.pipe(gulp.dest(options.dest));
 }
 
 function webserverTask(options) {
@@ -266,9 +337,9 @@ function webserverTask(options) {
 		port: port,
 	};
 
-	if ( options.reload ) opts.livereload = true;
+	if (options.reload) opts.livereload = true;
 
-	return connect.server( opts );
+	return connect.server(opts);
 }
 
 /**
@@ -285,23 +356,22 @@ gulp.task("default", async () => {
 		// const reload = true;
 
 		// Copy static html files
-			dest: dest,
-            
-		copyTask( {
-			src: './src/*.html',
-			dest: dest,
-			watchfiles: './src/*.html'
-		} );
+		dest: dest,
+			copyTask({
+				src: "./src/*.html",
+				dest: dest,
+				watchfiles: "./src/*.html",
+			});
 
-// Copy static assets
-		copyTask( {
-			src: './static/**',
+		// Copy static assets
+		copyTask({
+			src: "./static/**",
 			dest: dest,
-			watchfiles: './static/**'
-		} );
+			watchfiles: "./static/**",
+		});
 
-// Lint and bundle and watch for changes
-		browserifyTask( {
+		// Lint and bundle and watch for changes
+		browserifyTask({
 			development,
 			reload,
 			lintsrc: "./src/**/*.js*",
@@ -310,7 +380,7 @@ gulp.task("default", async () => {
 		});
 
 		// transpile variables.json into .scss
-		sassVariablesTask( {
+		sassVariablesTask({
 			development,
 			reload,
 			src: "./scss/*.json",
@@ -319,7 +389,7 @@ gulp.task("default", async () => {
 		});
 
 		// Compile Sass and watch for changes
-		cssTask( {
+		cssTask({
 			development,
 			reload,
 			src: "./scss/*.scss",
@@ -354,21 +424,21 @@ gulp.task("dist", async () => {
 		});
 
 		// Bundle
-		browserifyTask( {
+		browserifyTask({
 			development: false,
 			src: "./src/main.js",
 			dest: dest,
 		});
 
 		// transpile variables.json into .scss
-		sassVariablesTask( {
+		sassVariablesTask({
 			development: false,
 			src: "./scss/*.json",
 			dest: "./scss/",
 		});
 
 		// Compile Sass
-		cssTask( {
+		cssTask({
 			development: false,
 			src: "./scss/*.scss",
 			dest: dest,
@@ -380,9 +450,9 @@ gulp.task("dist", async () => {
  * Pull down strings from Google Sheets and save locally
  */
 gulp.task("strings", async () => {
-	rimraf("./static/strings/langs/**", () => {
+	return rimraf("./static/strings/langs/**", () => {
 		// Using a Google Sheets File > Publish to Web:
-		stringsTask({
+		return stringsTask({
 			src: "./",
 			dest: "./static/strings/langs/",
 		});
