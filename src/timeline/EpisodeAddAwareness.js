@@ -682,6 +682,7 @@ export default class EpisodeAddAwareness extends Episode {
 			TweenMax.set(state, {visibility: 'visible'});
 
 			this.replaceContent(this.currentEmotion, false);
+			this.fixEventLineOverlap(event, eventLines[0], timeline);
 
 			TweenMax.set(this.parent, {visibility: 'visible'});
 
