@@ -2041,35 +2041,39 @@
     ],
     [
         {
-            "emotrak_title": "emotrak_intro",
-            "emotrak": "Melhore seu bem-estar com o treinamento diário em equilíbrio emocional."
+            "key": "emotrak_title",
+            "value": "EmoTrak"
         },
         {
-            "emotrak_title": "emotrak_header_mobile",
-            "emotrak": "EmoTrak"
+            "key": "emotrak_intro",
+            "value": "Melhore seu bem-estar com o treinamento diário em equilíbrio emocional."
         },
         {
-            "emotrak_title": "emotrak_body_mobile",
-            "emotrak": "Melhore seu bem-estar com o treinamento diário em equilíbrio emocional."
+            "key": "emotrak_header_mobile",
+            "value": "EmoTrak"
         },
         {
-            "emotrak_title": "emotrak_section_name",
-            "emotrak": "EmoTrak"
+            "key": "emotrak_body_mobile",
+            "value": "Melhore seu bem-estar com o treinamento diário em equilíbrio emocional."
         },
         {
-            "emotrak_title": "emotrak_section_1",
-            "emotrak": " A Dra. Eve Ekman e colaboradores estão desenvolvendo um novo aplicativo, o EmoTrak. Inscreva-se imediatamente para ser o primeiro ou a primeira a aprender sobre o lançamento deste aplicativo de treinamento emocional com base científica.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+            "key": "emotrak_section_name",
+            "value": "EmoTrak"
         },
         {
-            "emotrak_title": "emotrak_section_2"
+            "key": "emotrak_section_1",
+            "value": " A Dra. Eve Ekman e colaboradores estão desenvolvendo um novo aplicativo, o EmoTrak. Inscreva-se imediatamente para ser o primeiro ou a primeira a aprender sobre o lançamento deste aplicativo de treinamento emocional com base científica.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
         },
         {
-            "emotrak_title": "emotrak_section_3",
-            "emotrak": "Dra. Eve Ekman é pós-doutoranda na Universidade da Califórnia, em São Francisco, que estuda o burnout e o bem-estar emocional. A Dra. Ekman dedicou-se a desenvolver e avaliar o EmoTrak para apoiar os prestadores de cuidados de saúde. O aplicativo é uma ferramenta de auto-avaliação para investigar os gatilhos de emoções e experiências emocionais e respostas, que também fornece breves meditações focadas em emoções, bem como feedback sobre o perfil emocional do usuário."
+            "key": "emotrak_section_2"
         },
         {
-            "emotrak_title": "emotrak_section_3",
-            "emotrak": "La Dra. Eve Ekman es una académica posdoctoral de la University of California San Francisco que estudia el agotamiento y el bienestar emocional. La Dra. Ekman se ha dedicado a desarrollar y evaluar EmoTrak para apoyar a los proveedores de cuidados de salud. La app es una herramienta de autoevaluación para investigar los disparadores de emociones y las experiencias y respuestas emocionales, que provee asimismo breves meditaciones enfocadas en las emociones, así como retroalimentación sobre el perfil emocional del usuario."
+            "key": "emotrak_section_3",
+            "value": "Dra. Eve Ekman é pós-doutoranda na Universidade da Califórnia, em São Francisco, que estuda o burnout e o bem-estar emocional. A Dra. Ekman dedicou-se a desenvolver e avaliar o EmoTrak para apoiar os prestadores de cuidados de saúde. O aplicativo é uma ferramenta de auto-avaliação para investigar os gatilhos de emoções e experiências emocionais e respostas, que também fornece breves meditações focadas em emoções, bem como feedback sobre o perfil emocional do usuário."
+        },
+        {
+            "key": "emotrak_section_3",
+            "value": "La Dra. Eve Ekman es una académica posdoctoral de la University of California San Francisco que estudia el agotamiento y el bienestar emocional. La Dra. Ekman se ha dedicado a desarrollar y evaluar EmoTrak para apoyar a los proveedores de cuidados de salud. La app es una herramienta de autoevaluación para investigar los disparadores de emociones y las experiencias y respuestas emocionales, que provee asimismo breves meditaciones enfocadas en las emociones, así como retroalimentación sobre el perfil emocional del usuario."
         }
     ]
 ]
