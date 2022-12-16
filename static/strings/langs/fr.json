@@ -102,7 +102,7 @@
         },
         {
             "key": "intro_caption_1",
-            "value": "Cet Atlas est un outil visuel destiné à créer notre vocabulaire émotionel. L'objectif est de nous permettre d'augmenter notre capacité de choix face à ce qui nous génère des émotions, ainsi que nos façons d'y réagir.",
+            "value": "Cet Atlas est un outil visuel destiné à créer notre vocabulaire émotionel. L'objectif est de nous permettre d'augmenter notre liberté de choisir nos réactions face à ce qui génère des émotions, ainsi que nos façons d'y réagir.",
             "englishValue": "This Atlas is a visual tool to build your emotion vocabulary. The goal is to increase choice in what we become emotional about and how we respond."
         },
         {
@@ -112,7 +112,7 @@
         },
         {
             "key": "intro_secondary_copy_2",
-            "value": "Il y a 5 émotions à explorer. Découvre plus sur chaque émotion en interagissant avec les formes. Navigue en cliquant vers le bas, la gauche ou la droite. Etudie chaque émotion et la façon dont cela fait écho avec ta propre expérience.",
+            "value": "Il y a 5 émotions à explorer. Découvrez plus sur chaque émotion en interagissant avec les formes. Naviguez en cliquant vers le bas, la gauche ou la droite. Étudiez chaque émotion et la façon dont cela fait écho avec votre propre expérience.",
             "englishValue": "There are 5 emotions to explore. Discover more about each emotion as you interact with the shapes. Navigate by clicking down, left and right.<br><br>\nConsider each emotion and reflect on how it relates to your lived experience."
         },
         {
@@ -125,7 +125,7 @@
         },
         {
             "key": "intro_secondary_copy_3",
-            "value": "Cet Atlas a été demandé par le Dalai Lama afin de créer une carte de la route de la prise de conscience des émotions basée sur des recherches scientifiques. Le docteur Paul Ekman et sa fille, Eve Ekman, ont créés cet Atlas à partir d'études qu'ils ont menés sur le sujet. Les scientifiques interrogés dans cette étude ont accordés que ces cinq émotions sont les plus universelement ressentis",
+            "value": "Cet Atlas a été commandité par le Dalaï Lama afin de créer une feuille de route scientifiquement fondée sur la conscience de soi et des émotions. Le docteur Paul Ekman et sa fille, Eve Ekman, ont créés cet Atlas à partir d'études qu'ils ont menés sur le sujet. Les scientifiques interrogés dans cette étude ont accordés que ces cinq émotions sont les plus universelement ressentis",
             "englishValue": "The Atlas was commissioned by the Dalai Lama to create a scientifically-based road map to emotional self-awareness. Dr. Paul Ekman and his daughter, Eve Ekman, based the Atlas on a <a href=\"http://pps.sagepub.com/content/11/1/31.full.pdf?ijkey=AMIJzv8J9Tn0VF1&keytype=finite\" target=\"_blank\">study</a> they conducted.<br><br>\nThe scientists surveyed in the study agreed that these five emotions are the most universally felt:"
         },
         {
@@ -240,7 +240,7 @@
         },
         {
             "key": "hero_about_header",
-            "value": "A propose de l'Atlas",
+            "value": "À propos de l'Atlas",
             "englishValue": "About the Atlas"
         },
         {
@@ -296,7 +296,7 @@
         },
         {
             "key": "states_section_name",
-            "value": "Etats",
+            "value": "États",
             "englishValue": "States"
         },
         {
@@ -332,7 +332,7 @@
         },
         {
             "key": "actions_secondary_header_2",
-            "value": "Actions ambigues",
+            "value": "Actions ambiguës",
             "englishValue": "Ambiguous Actions"
         },
         {
@@ -347,7 +347,7 @@
         },
         {
             "key": "actions_secondary_copy_3",
-            "value": "Dans cet état, l'action est destructive. Elle peut faire du mal.",
+            "value": "Dans cet état, l'action est destructive. Elle peut causer du tort.",
             "englishValue": "In this state, this action is DESTRUCTIVE. It could cause harm."
         },
         {
@@ -357,7 +357,7 @@
         },
         {
             "key": "actions_interaction_prompt",
-            "value": "Choisis une forme pour apprendre certains des états dont nous pouvons faire l'expérience. Ensuite, choisis une action pour en savoir plus.",
+            "value": "Choisir une forme pour apprendre au sujet de certains des états dont nous pouvons faire l'expérience. Ensuite, choisir une action pour en savoir plus.",
             "englishValue": "Select a shape to learn about some of the states we can experience. Then select an action to learn more. "
         },
         {
@@ -367,7 +367,7 @@
         },
         {
             "key": "triggers_body",
-            "value": "Un déclencheur est quelque chose autour de nous ou dans notre popre esprit qui nous fait ressentir une émotion. Choisis une étiquette pour en savoir plus au sujet du déclenchement de LHAMO",
+            "value": "Un déclencheur est quelque chose autour de nous ou dans notre popre esprit qui nous fait ressentir une émotion. Choisir une étiquette pour en savoir plus au sujet du déclenchement de LHAMO",
             "englishValue": "A trigger is something around us or in our own minds that causes us to feel an emotion. Select the labels to learn about triggering LHAMO."
         },
         {
@@ -393,7 +393,7 @@
         },
         {
             "key": "triggers_secondary_body_2",
-            "value": "Nos expérience personnelles passées déterminent si nos déclencheurs appris nous rendent émotionnels. Les déclencheurs universels nous traversent dans tous les cas.",
+            "value": "Nos expérience personnelles passées déterminent si nos déclencheurs appris nous rendent émotifs. Les déclencheurs universels nous activent dans tous les cas.",
             "englishValue": "Past personal experience determines whether or not a learned trigger makes us feel emotional. Universal triggers break through regardless."
         },
         {
@@ -403,7 +403,7 @@
         },
         {
             "key": "triggers_secondary_body_3",
-            "value": "Les émotions sont une réponse automatique lorsque un déclencheur nous atteind. Généralement, l'état émotionnel que nous ressentons ainsi que les actions que nous effectuons se déroulent sans qu'on sache pourquoi.",
+            "value": "Les émotions sont une réponse automatique lorsque un déclencheur nous atteint. Généralement, l'état émotionnel que nous ressentons ainsi que les actions que nous effectuons se déroulent sans que l'on sache pourquoi.",
             "englishValue": "Emotion is our automatic response to being triggered. The state of emotion we feel and the actions we take often happen without our realizing why."
         },
         {
@@ -414,7 +414,7 @@
         {
             "key": "triggers_secondary_body_4",
             "value": "Voici un exemple de déclencheur universel. Nous avons tous les mêmes déclencheurs universels, nous sommes nés avec. Ils nous affectent plus intensément que les déclencheurs que nous avons appris.",
-            "englishValue": "This is an example of a universal trigger. Everyone has the same universal triggers – we're born with them. They affect us more intensely than learned triggers.\r\r"
+            "englishValue": "This is an example of a universal trigger. Everyone has the same universal triggers – we're born with them. They affect us more intensely than learned triggers.\n\n"
         },
         {
             "key": "triggers_secondary_header_5",
@@ -424,7 +424,7 @@
         {
             "key": "triggers_secondary_body_5",
             "value": "Voici un exemple d'un déclenchent appris. Certains déclencheurs sont partagés au sein d'une culture, d'autres sont très personnels et créés par notre expérience individuelle.",
-            "englishValue": "This is an example of a learned trigger. Some learned triggers are shared across a culture, while others are highly personal and created by individual experiences. \r"
+            "englishValue": "This is an example of a learned trigger. Some learned triggers are shared across a culture, while others are highly personal and created by individual experiences. \n"
         },
         {
             "key": "triggers_section_name",
@@ -438,12 +438,12 @@
         },
         {
             "key": "moods_body",
-            "value": "Les humeurs sont les grands cousins des émotions qui nous font ressentir une certaine émotion sans aucun déclencheur précis. Choisis une forme pour en savoir plus.",
+            "value": "Les humeurs sont les grandes cousines des émotions qui nous font ressentir une émotion sans aucun déclencheur précis. Choisir une forme pour en savoir plus.",
             "englishValue": "Moods are longer-lasting cousins of an emotion that cause us to feel the related emotion repeatedly without any clear trigger. Select the shape to learn more."
         },
         {
             "key": "moods_body_mobile",
-            "value": "Les humeurs sont les grands cousins des émotions qui nous font ressentir une certaine émotion  sans aucun déclencheur précis. Choisis une forme pour en savoir plus.",
+            "value": "Les humeurs sont les grandes cousines des émotions qui nous font ressentir une certaine émotion  sans aucun déclencheur précis. Choisir une forme pour en savoir plus.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)",
             "englishValue": "Moods are longer-lasting cousins of an emotion that cause us to feel the related emotion repeatedly without any clear trigger. Tap on the shape to learn more."
         },
@@ -454,17 +454,17 @@
         },
         {
             "key": "calm_header",
-            "value": "L'expérience du clame",
+            "value": "L'expérience du calme",
             "englishValue": "Experiencing Calm"
         },
         {
             "key": "calm_body",
-            "value": "L'atlas des émotions a été dirigé par le Dalai Lama, son but est \"afin de découvrir le nouveau monde, nous avons eu besoin d'une carte, et afin de trouver un esprit calme en nous, nous avons besoin d'un carte de nos émotions\". Le but, simple mais difficile, de cet Atlas, est de nous aider à être conscient de nos émotions. Prendre conscience de nos émotions signifie comprendre comment elles sont declenchées et comment y répondre. La prise de conscience est déjà une stratégie, elle nous aide à comprendre l'expérience de nos émotions. Nous ne voulons pas nous débarasser de nos émotions, nous voulons des stratégies qui nous aident à y répondre d'une manière bénéfique et consctructive.",
+            "value": "L'atlas des émotions a été commandité par le Dalai Lama, son but est \"afin de découvrir le nouveau monde, nous avons eu besoin d'une carte, et afin de trouver un esprit calme en nous, nous avons besoin d'un carte de nos émotions\". Le but, simple mais difficile, de cet Atlas, est de nous aider à être conscient de nos émotions. Prendre conscience de nos émotions signifie comprendre comment elles sont declenchées et comment y répondre. La prise de conscience est déjà une stratégie, elle nous aide à comprendre l'expérience de nos émotions. Nous ne voulons pas nous débarasser de nos émotions, nous voulons des stratégies qui nous aident à y répondre d'une manière bénéfique et consctructive.",
             "englishValue": "The Atlas of Emotion was commissioned by the Dalia Lama, his purpose is “ In order to find the new world we needed a map, and in order for us to find a calm mind we need a map of our emotions”. The simple, but not easy, goal of this Atlas is to help us be aware of our emotions. Awareness of our emotions means understanding how they are triggered, what they feel like and how we respond. Awareness itself is a strategy, it helps us understand our emotion experiences. We do not want to get rid of our emotions, we want strategies that help us respond in helpful, constructive ways."
         },
         {
             "key": "calm_body_mobile",
-            "value": "L'atlas des émotions a été dirigé par le Dalai Lama, son but est \"afin de découvrir nous avons eu besoin d'une carte, et afin de trouver un esprit calme en nous, nous avons besoin d'un carte de nos émotions\". Le but, simple mais difficile, de cet Atlas, est de nous aider à être conscient de nos émotions. Prendre conscience de nos émotions signifie comprendre comment elles sont declenchées et comment y répondre. La prise de conscience est déjà une stratégie, elle nous aide à comprendre l'expérience de nos émotions. Nous ne voulons pas nous débarasser de nos émotions, nous voulons des stratégies qui nous aident à y répondre d'une manière bénéfique et consctructive.",
+            "value": "L'atlas des émotions a été commandité par le Dalai Lama, son but est \"afin de découvrir nous avons eu besoin d'une carte, et afin de trouver un esprit calme en nous, nous avons besoin d'un carte de nos émotions\". Le but, simple mais difficile, de cet Atlas, est de nous aider à être conscient de nos émotions. Prendre conscience de nos émotions signifie comprendre comment elles sont declenchées et comment y répondre. La prise de conscience est déjà une stratégie, elle nous aide à comprendre l'expérience de nos émotions. Nous ne voulons pas nous débarasser de nos émotions, nous voulons des stratégies qui nous aident à y répondre d'une manière bénéfique et consctructive.",
             "englishValue": "The Atlas of Emotion was commissioned by the Dalia Lama, his purpose is “ In order to find the new world we needed a map, and in order for us to find a calm mind we need a map of our emotions”. The simple, but not easy, goal of this Atlas is to help us be aware of our emotions. Awareness of our emotions means understanding how they are triggered, what they feel like and how we respond. Awareness itself is a strategy, it helps us understand our emotion experiences. We do not want to get rid of our emotions, we want strategies that help us respond in helpful, constructive ways."
         },
         {
@@ -474,7 +474,7 @@
         },
         {
             "key": "calm_secondary_body",
-            "value": "Pour en savoir plus au sujet de nos émotions, clique sur \"Plus d'informations\" dans le coin en bas à droite.",
+            "value": "Pour en savoir plus au sujet de nos émotions, cliquer sur \"Plus d'informations\" dans le coin en bas à droite.",
             "englishValue": "To learn more about emotions, click on “More Information” in the bottom right corner."
         },
         {
@@ -549,7 +549,7 @@
         },
         {
             "key": "timeline_trigger_body_2_list_item_3",
-            "value": "Notre vision du monde, influencée par nos expériences antérieures, nos histoires personnelle et notre héritage universel de scénarios liés à des des évènements importants.",
+            "value": "Notre vision du monde, influencée par nos expériences antérieures, nos histoires personnelles et notre héritage universel de scénarios liés à des des évènements importants.",
             "englishValue": "Our worldview, which is influenced by our prior experiences, personal history and inherited universal scripts about important events"
         },
         {
@@ -589,7 +589,7 @@
         },
         {
             "key": "timeline_refractory_header",
-            "value": "La saturation d'émotions",
+            "value": "La saturation émotive",
             "englishValue": "Emotion Saturation"
         },
         {
@@ -599,12 +599,12 @@
         },
         {
             "key": "timeline_refractory_body_2",
-            "value": "A mesure que le temps passe, nous gagnons en clarté et notre capacité à faire des choix reflechis augmente.",
+            "value": "À mesure que le temps passe, nous gagnons en clarté et notre capacité à faire des choix réfléchis augmente.",
             "englishValue": "As time passes, we gain some clarity and the ability to make a thoughtful choice."
         },
         {
             "key": "timeline_refractory_body_3",
-            "value": "Avec l'attention nous pouvons nous arrêter avant de répondre et choisir une réponse la plus bénéfique pour atteindre nos objectifs.",
+            "value": "Avec attention nous pouvons nous arrêter avant de répondre et choisir une réponse la plus bénéfique pour atteindre nos objectifs.",
             "englishValue": "With awareness we can pause before we respond and choose a response that best serves our goals."
         },
         {
@@ -619,7 +619,7 @@
         },
         {
             "key": "timeline_blocks_body_1",
-            "value": "Choisis un segment de la chronologie et apprends comment les chercheurs donnent un sens à nos épisodes émotionnels. Ensuite, poursuis dans la section pour voir comment ils peuvent cartographier nos expériences émotionelles.",
+            "value": "Choissez un segment de la chronologie et apprenez comment les chercheurs donnent un sens à nos épisodes émotionnels. Ensuite, poursuivez dans la section pour voir comment ils peuvent cartographier nos expériences émotionelles.",
             "englishValue": "You can select each piece of the timeline and learn how researchers make sense of an emotional episode. Then, continue to the <a href=\"#continents/\">Experience</a> section to see how they map our emotional experiences. "
         },
         {
@@ -629,12 +629,12 @@
         },
         {
             "key": "timeline_blocks_label_event",
-            "value": "Evènement",
+            "value": "Évènement",
             "englishValue": "Event"
         },
         {
             "key": "timeline_blocks_label_perceptual_database",
-            "value": "Base de donné percéptuelle",
+            "value": "Base de données percéptuelles",
             "englishValue": "Perceptual database"
         },
         {
@@ -644,7 +644,7 @@
         },
         {
             "key": "timeline_blocks_label_state",
-            "value": "Etat émotionnel",
+            "value": "État émotionnel",
             "englishValue": "Emotional state"
         },
         {
@@ -679,7 +679,7 @@
         },
         {
             "key": "timeline_blocks_caption_perceptual_database",
-            "value": "Notre vision du monde, qui est le résultat de notre histoire personnelle et des scénarios universels; ces scénarios sont les caractéristique essentielles d'expériences émotionelles répétées, certaines héritées, certaines acquises.",
+            "value": "Notre vision du monde est le résultat de notre histoire personnelle et des scénarios universels; ces scénarios sont les caractéristique essentielles d'expériences émotionelles répétées, certaines héritées, certaines acquises.",
             "englishValue": "How we see the world, which is a result of our personal history and universal scripts; these scripts are outlines of repeated emotional experiences, some inherited, some acquired."
         },
         {
@@ -709,7 +709,7 @@
         },
         {
             "key": "timeline_blocks_caption_ambiguous_response",
-            "value": "Une réponse qui peut être utile ou non - et parfois nous n'en sommes pas sur",
+            "value": "Une réponse qui peut être utile ou non - et parfois nous n'en sommes pas certain",
             "englishValue": " A response that could be helpful or unhelpful — sometimes we aren't sure"
         },
         {
@@ -736,17 +736,18 @@
         },
         {
             "key": "anger_continent_body",
-            "value": "Nous nous énervons lorsqu'on nous force à suivre ou quand nous pensons recevoir un traitement injuste. Nous ressentons de la colère quand nous expérimentons un bloquage physique ou menta. L'intensité et la fréquence de la colère varient au fil de la vie.",
+            "value": "Nous éprouvons de la colère lorsqu'on nous empêche d'atteindre nos objectifs ou quand nous pensons recevoir un traitement injuste.",
             "englishValue": "We get angry when something blocks us or when we think we're being treated unfairly."
         },
         {
             "key": "anger_continent_body_mobile",
+            "value": "Nous ressentons de la colère lorsque nous sommes bloqués mentalement ou physiquement. La colère varie en force et en fréquence dans nos vies.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)",
             "englishValue": "We feel anger when we are mentally or physically blocked. Anger varies in strength and frequency in our lives."
         },
         {
             "key": "anger_states_body",
-            "value": "La colère contient à la fois de la contrariété et de la rage. L'intensité de ces états peut varier : nous pouvons ressentir de la contrariété à forte ou à faible intensité, mais nous ne pouvons ressentir la rage qu'à forte intensité. Tout état de colère est declenché lorsque nous nous sentons bloqué dans notre avancement.",
+            "value": "La colère contient à la fois de la contrariété et de la rage. L'intensité de ces états peut varier : nous pouvons ressentir de la contrariété à forte ou à faible intensité, mais nous ne pouvons ressentir la rage qu'à forte intensité. Tous les états de colère sont déclenchés par le sentiment d'être entravé dans notre progression.",
             "englishValue": "Anger contains both annoyance and fury. The intensity of these states varies: We can feel mild or strong annoyance, but we can only feel intense fury. All states of anger are triggered by a feeling of being blocked in our progress."
         },
         {
@@ -756,7 +757,7 @@
         },
         {
             "key": "anger_states_body_1",
-            "value": "Colère douce",
+            "value": "Colère légère",
             "englishValue": "Very mild anger caused by a nuisance or inconvenience. "
         },
         {
@@ -766,17 +767,17 @@
         },
         {
             "key": "anger_states_body_2",
-            "value": "Réponse après ne pas avoir pu dépasser un obstacle malgré plusieurs essais",
+            "value": "Une réponse aux échecs répétés pour surmonter un obstacle.",
             "englishValue": "A response to repeated failures to overcome an obstacle."
         },
         {
             "key": "anger_states_header_3",
-            "value": "Capacité à discuter",
+            "value": "Tendance à argumenter",
             "englishValue": "Argumentativeness"
         },
         {
             "key": "anger_states_body_3",
-            "value": "Inclination à prolonger les désaccords",
+            "value": "Inclination à s'engager dans des désaccords",
             "englishValue": "A tendency to engage in disagreements."
         },
         {
@@ -786,7 +787,7 @@
         },
         {
             "key": "anger_states_body_4",
-            "value": "Déception lorsque personne n'a voulu résoudre un problème",
+            "value": "Déception après un traitement injuste",
             "englishValue": "Anger after unfair treatment. "
         },
         {
@@ -796,12 +797,12 @@
         },
         {
             "key": "anger_states_body_5",
-            "value": "Perte de patience devant des échecs répétés pour résoudre un problème",
+            "value": "Colère causée par une nuisance répétée ou forte. ",
             "englishValue": "Anger caused by a repeated or strong nuisance. "
         },
         {
             "key": "anger_states_header_6",
-            "value": "Vendetta",
+            "value": "Vengeance",
             "englishValue": "Vengefulness"
         },
         {
@@ -816,7 +817,7 @@
         },
         {
             "key": "anger_states_body_7",
-            "value": "Enèrvement intense",
+            "value": "Uncontrolled and often violent anger.",
             "englishValue": "Uncontrolled and often violent anger."
         },
         {
@@ -841,7 +842,7 @@
         },
         {
             "key": "anger_actions_body_2",
-            "value": "Déprécier l'autre personne de manière offensive qui intensifiera probablement le conflit au lieu de le résoudre",
+            "value": "Dénigrer l'autre personne d'une manière offensive ou blessante qui risque d'aggraver le conflit au lieu de le résoudre.",
             "englishValue": "Disparage the other person in an offensive or hurtful way that is likely to escalate the conflict rather than resolve it."
         },
         {
@@ -851,7 +852,7 @@
         },
         {
             "key": "anger_actions_body_3",
-            "value": "Agir dans le but que quelqu'un ou quelque chose se sente plus faible ou moins efficace, généralement de manière secrète ou graduelle",
+            "value": "Agir dans le but d'affaiblir ou de rendre moins efficace quelqu'un ou quelque chose, généralement de manière secrète ou graduelle",
             "englishValue": "Take action to make someone or something weaker or less effective, usually in a secret or gradual way."
         },
         {
@@ -861,12 +862,12 @@
         },
         {
             "key": "anger_actions_body_4",
-            "value": "Discuter de manière à ce que la dispute s'intensifie",
+            "value": "Discuter de manière à ce que le conflit s'intensifie",
             "englishValue": "Disagree in a manner that may escalate the conflict."
         },
         {
             "key": "anger_actions_header_5",
-            "value": "Crier / vociférer",
+            "value": "Crier / hurler",
             "englishValue": "Scream/yell"
         },
         {
@@ -876,12 +877,12 @@
         },
         {
             "key": "anger_actions_header_6",
-            "value": "User de la force",
+            "value": "Usage de la force",
             "englishValue": "Use physical force"
         },
         {
             "key": "anger_actions_body_6",
-            "value": "Blesser ou réagir avec quelqu'un, une action qui peut être choisie délibérément ou être le résultat d'une perte de contrôle sur notre actes.",
+            "value": "Blesser ou piéger quelqu'un.",
             "englishValue": "Harm or trap someone."
         },
         {
@@ -896,12 +897,12 @@
         },
         {
             "key": "anger_actions_header_8",
-            "value": "Fermenter/ruminer",
+            "value": "Mijoter/ruminer",
             "englishValue": "Simmer/brood"
         },
         {
             "key": "anger_actions_body_8",
-            "value": "Agir d'une manière que ",
+            "value": "Exprimer sa colère en boudant.",
             "englishValue": "Express anger by sulking."
         },
         {
@@ -911,7 +912,7 @@
         },
         {
             "key": "anger_actions_body_9",
-            "value": "Mettre au point des actions indirectes ",
+            "value": "Faites des actions indirectes qui ont un fond de colère.",
             "englishValue": "Take indirect actions that have an angry undercurrent."
         },
         {
@@ -921,7 +922,7 @@
         },
         {
             "key": "anger_triggers_universal_body_mobile",
-            "value": "Les déclencheurs universels sont innés et nous affectent plus que ceux que nous avons appris. Exemple : interférence dans notre action ou mouvement",
+            "value": "Les déclencheurs universels sont innés, communs à tous, et nous affectent plus intensément que les déclencheurs appris. L'interférence avec l'action ou la locomotion en sont des exemples.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)",
             "englishValue": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Interference with action or locomotion are examples."
         },
@@ -938,7 +939,7 @@
         },
         {
             "key": "anger_triggers_header_1",
-            "value": "Interférence dans notre mouvement",
+            "value": "Interférence dans notre locomotion",
             "englishValue": "Interference with locomotion"
         },
         {
@@ -953,7 +954,7 @@
         },
         {
             "key": "anger_triggers_header_4",
-            "value": "Inéficacité de la bureaucratie",
+            "value": "Inéficacité ou bureaucratie",
             "englishValue": "Inefficiency or bureaucracy"
         },
         {
@@ -963,7 +964,7 @@
         },
         {
             "key": "anger_triggers_header_6",
-            "value": "Être confronté à des croyances offensives",
+            "value": "Rencontrer des croyances offensantes",
             "englishValue": "Encountering offensive beliefs"
         },
         {
@@ -978,27 +979,27 @@
         },
         {
             "key": "anger_moods_body",
-            "value": "Une disposition à s'énerver, une nécessité de le faire. Filtrer les percéptions pour voir les provocations qu'une personne émet quand il n'est pas irrité",
+            "value": "Prédisposée à se mettre en colère, facilement provoquée. ",
             "englishValue": "Predisposed to becoming angry, easily provoked. "
         },
         {
             "key": "anger_timeline_trigger_precondition",
-            "value": "tu manque de sommeil",
+            "value": "vous manquez de sommeil",
             "englishValue": "you are low on sleep"
         },
         {
             "key": "anger_timeline_trigger_event",
-            "value": "un ami a été en colère contre toi",
+            "value": "un ami a été en colère contre vous",
             "englishValue": "a friend gets angry with you"
         },
         {
             "key": "anger_timeline_trigger_perceptual_database",
-            "value": "tu repenses à une personne brutale",
+            "value": "vous repensez à une personne intimidante",
             "englishValue": "you're reminded of a bully"
         },
         {
             "key": "anger_timeline_state_physical_changes",
-            "value": "ton corps devient tendu",
+            "value": "votre corps devient tendu",
             "englishValue": "your body becomes tense"
         },
         {
@@ -1008,22 +1009,22 @@
         },
         {
             "key": "anger_timeline_state_mental_changes",
-            "value": "tu te sens attaqué",
+            "value": "vous vous sentez attaqué",
             "englishValue": "you feel attacked"
         },
         {
             "key": "anger_timeline_response_constructive_response",
-            "value": "prends un temps pour toi",
+            "value": "prends un temps pour soi",
             "englishValue": "take a time out"
         },
         {
             "key": "anger_timeline_response_destructive_response",
-            "value": "discute",
+            "value": "discutez",
             "englishValue": "argue"
         },
         {
             "key": "anger_timeline_response_ambiguous_response",
-            "value": "évite-les",
+            "value": "évitez-les",
             "englishValue": "avoid them"
         }
     ],
@@ -1035,6 +1036,7 @@
         },
         {
             "key": "fear_continent_header_mobile",
+            "value": "Peur",
             "englishValue": "Fear"
         },
         {
@@ -1050,12 +1052,12 @@
         },
         {
             "key": "fear_states_body",
-            "value": "La peur contient à la fois de l'anxiété et de l'effroi. L'intentisté de ces états peut varier : nous pouvons ressentir une anxiété à faible ou à forte intensité, mais nous ne pouvons ressentir que d'intensent états d'effroi. Tout état de peur est declenché lorsque nous nous sentons menacé d'un préjudice",
+            "value": "La peur contient à la fois de l'anxiété et de l'effroi. L'intentisté de ces états peut varier : nous pouvons ressentir une anxiété à faible ou à forte intensité, mais nous ne pouvons ressentir que d'intensent états d'effroi. Tout état de peur est declenché lorsque nous nous sentons sos la menace d'un danger.",
             "englishValue": "Fear contains both anxiety and terror. The intensity of these states varies: We can feel mild or strong anxiety, but we can only feel intense terror. All states of fear are triggered by feeling a threat of harm."
         },
         {
             "key": "fear_states_header_1",
-            "value": "Inquiétude",
+            "value": "Trépidation",
             "englishValue": "Trepidation"
         },
         {
@@ -1070,7 +1072,7 @@
         },
         {
             "key": "fear_states_body_2",
-            "value": "Incapacité pour affronter une menace réelle ou imaginée.",
+            "value": "Peur d'une menace anticipée ou réelle et incertitude quant à sa capacité à y faire face.",
             "englishValue": "Fear of an anticipated or actual threat and uncertainty about one's ability to cope with it."
         },
         {
@@ -1085,7 +1087,7 @@
         },
         {
             "key": "fear_states_header_4",
-            "value": "Effroi",
+            "value": "Redouter",
             "englishValue": "Dread"
         },
         {
@@ -1110,7 +1112,7 @@
         },
         {
             "key": "fear_states_body_6",
-            "value": "Une conséquence du désespoir.",
+            "value": "Peur soudaine et incontrôlable",
             "englishValue": "Sudden uncontrollable fear."
         },
         {
@@ -1120,7 +1122,7 @@
         },
         {
             "key": "fear_states_body_7",
-            "value": "Mélange de peur et de répugnance.",
+            "value": "Mélange de peur, dégoût et un état de choc.",
             "englishValue": "A mixture of fear, disgust, and shock."
         },
         {
@@ -1130,187 +1132,190 @@
         },
         {
             "key": "fear_states_body_8",
-            "value": "Peur maximale",
+            "value": "Une peur intense, accablante.",
             "englishValue": "Intense, overpowering fear."
         },
         {
             "key": "fear_actions_body",
             "value": "Par exemple, nous pouvons supprimer le sentiment de frustration au travail, mais crier ou hurler pour exprimer notre frustration envers un membre de notre famille. Supprimer notre frustration peut être constructif dans le cas où cela permet d'éviter une dispute, mais destructif si nous nous sentons blessés du fait de ne pas exprimer ce que l'on ressent",
-            "englishValue": "Withdraw"
+            "englishValue": "For example, we might avoid feeling anxiety at work, but ruminate on our anxiety at home. Avoiding anxiety can be constructive if it helps us give a presentation to a room full of colleagues, but destructive if it prevents us from confronting our difficult relationship with our boss."
         },
         {
             "key": "fear_actions_header_1",
             "value": "Se retirer",
-            "englishValue": "Physically or mentally leave the scene of the threat."
+            "englishValue": "Withdraw"
         },
         {
             "key": "fear_actions_body_1",
             "value": "Abandonner physiquement ou mentallement le scénario de la menace.",
-            "englishValue": "Avoid"
+            "englishValue": "Physically or mentally leave the scene of the threat."
         },
         {
             "key": "fear_actions_header_2",
             "value": "Eviter",
-            "englishValue": "Either physically stay away from the threat or keep oneself from thinking about it."
+            "englishValue": "Avoid"
         },
         {
             "key": "fear_actions_body_2",
             "value": "Rester physiquement éloigné de quelqu'un ou de quelque chose, ou maintenir le mental éloignée de ce qui déclenche la peur.",
-            "englishValue": "Hesitate"
+            "englishValue": "Either physically stay away from the threat or keep oneself from thinking about it."
         },
         {
             "key": "fear_actions_header_3",
             "value": "Tituber",
-            "englishValue": "Hold back in doubt or indecision, often momentarily."
+            "englishValue": "Hesitate"
         },
         {
             "key": "fear_actions_body_3",
             "value": "Se contenir par doute ou indécision, au moins de manière momentannée.",
-            "englishValue": "Freeze"
+            "englishValue": "Hold back in doubt or indecision, often momentarily."
         },
         {
             "key": "fear_actions_header_4",
             "value": "Se paralyser",
-            "englishValue": "Become incapable of acting or speaking."
+            "englishValue": "Freeze"
         },
         {
             "key": "fear_actions_body_4",
             "value": "Devenir incapable d'agir ou de parler",
-            "englishValue": "Scream/yell"
+            "englishValue": "Become incapable of acting or speaking."
         },
         {
             "key": "fear_actions_header_5",
             "value": "Crier / vociférer",
-            "englishValue": "Lose control of one's speech; cry out in a loud and high voice."
+            "englishValue": "Scream/yell"
         },
         {
             "key": "fear_actions_body_5",
             "value": "Perdre le contrôle de nos paroles; parler avec une voix forte et crier d'un ton plus haut.",
-            "englishValue": "Ruminate"
+            "englishValue": "Lose control of one's speech; cry out in a loud and high voice."
         },
         {
             "key": "fear_actions_header_6",
             "value": "Ruminer",
-            "englishValue": "Obsessively think about a past emotional experience."
+            "englishValue": "Ruminate"
         },
         {
             "key": "fear_actions_body_6",
             "value": "Penser avec répétition au sujet de notre expérience émotionnelle",
-            "englishValue": "Worry"
+            "englishValue": "Obsessively think about a past emotional experience."
         },
         {
             "key": "fear_actions_header_7",
             "value": "S'inquiéter",
-            "englishValue": "Anticipate the possibility of harm."
+            "englishValue": "Worry"
         },
         {
             "key": "fear_actions_body_7",
-            "value": "Prédir la possibilité d'un dommage"
+            "value": "Prédir la possibilité d'un dommage",
+            "englishValue": "Anticipate the possibility of harm."
         },
         {
             "key": "fear_triggers_universal_header_mobile",
             "value": "Déclencheurs universels de la peur",
-            "englishValue": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Snake-like shapes and sudden loss of gravity are examples."
+            "englishValue": "Universal Triggers of Fear"
         },
         {
             "key": "fear_triggers_universal_body_mobile",
-            "value": "Les déclencheurs universels sont innés et nous affectent plus que ceux que nous avons appris. Exemple : des formes qui ressemblent à des serpents et nous font perdre l'équilibre",
+            "value": "Les déclencheurs universels sont innés et nous affectent plus que ceux que nous avons appris. Exemple : une forme ou une image de  serpents et une chute soudaine.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)",
-            "englishValue": "Learned Triggers of Fear"
+            "englishValue": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Snake-like shapes and sudden loss of gravity are examples."
         },
         {
             "key": "fear_triggers_learned_header_mobile",
             "value": "Déclencheurs appris de la peur",
-            "englishValue": "Some triggers can be learned from personal or shared cultural experiences. Public speaking, thunder, and the threat of losing one’s job are examples."
+            "englishValue": "Learned Triggers of Fear"
         },
         {
             "key": "fear_triggers_learned_body_mobile",
             "value": "Certains déclencheurs sont appris de nos expériences personnelles ou partagées. Exemple : parler en public ou la menace de perdre un emploi",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)",
-            "englishValue": "Imminent bodily impact"
+            "englishValue": "Some triggers can be learned from personal or shared cultural experiences. Public speaking, thunder, and the threat of losing one’s job are examples."
         },
         {
             "key": "fear_triggers_header_1",
             "value": "Impact physique iminent",
-            "englishValue": "Sudden loss of gravity"
+            "englishValue": "Imminent bodily impact"
         },
         {
             "key": "fear_triggers_header_2",
             "value": "Perte de l'équilibre",
-            "englishValue": "Threat to safety"
+            "englishValue": "Sudden loss of gravity"
         },
         {
             "key": "fear_triggers_header_3",
             "value": "Menace à la sécurité",
-            "englishValue": "Snake-like shapes"
+            "englishValue": "Threat to safety"
         },
         {
             "key": "fear_triggers_header_4",
-            "value": "Formes qui parraissent à des serpents",
-            "englishValue": "Threat of losing job"
+            "value": "Formes de serpents",
+            "englishValue": "Snake-like shapes"
         },
         {
             "key": "fear_triggers_header_5",
-            "value": "Menacede perdre un emploi",
-            "englishValue": "Thunder"
+            "value": "Menace de perdre un emploi",
+            "englishValue": "Threat of losing job"
         },
         {
             "key": "fear_triggers_header_6",
             "value": "Le tonnerre",
-            "englishValue": "Public speaking"
+            "englishValue": "Thunder"
         },
         {
             "key": "fear_triggers_header_7",
-            "value": "Parler en publique"
+            "value": "Parler en public",
+            "englishValue": "Public speaking"
         },
         {
             "key": "fear_moods_header",
             "value": "Craintif",
-            "englishValue": "Anxious that something bad will happen, on edge."
+            "englishValue": "Apprehensive"
         },
         {
             "key": "fear_moods_body",
-            "value": "On attend un dommage mais on ne sait pas comment l'éviter. On perçoit une menace qui n'exite pas, ou on éxagère la gravité d'une menace."
+            "value": "Anxiété à l'idée que quelque chose de mauvais va arriver, énervé.",
+            "englishValue": "Anxious that something bad will happen, on edge."
         },
         {
             "key": "fear_timeline_trigger_precondition",
-            "value": "lire des nouvelles effrayantes",
-            "englishValue": "a friend gets angry with you"
+            "value": "lire des nouvelles épeurantes",
+            "englishValue": "reading scary news"
         },
         {
             "key": "fear_timeline_trigger_event",
-            "value": "un ami a été en colère contre toi",
-            "englishValue": "reminds you of abandonment"
+            "value": "un ami a été en colère contre soi",
+            "englishValue": "a friend gets angry with you"
         },
         {
             "key": "fear_timeline_trigger_perceptual_database",
-            "value": "nous avons un souvenir d'abandon",
-            "englishValue": "your heart pounds"
+            "value": "un souvenir d'abandon",
+            "englishValue": "reminds you of abandonment"
         },
         {
             "key": "fear_timeline_state_physical_changes",
-            "value": "ton cœur bat fort",
-            "englishValue": "fear"
+            "value": "le coeur qui bat fort",
+            "englishValue": "your heart pounds"
         },
         {
             "key": "fear_timeline_state_emotion",
             "value": "peur",
-            "englishValue": "you expect them to leave"
+            "englishValue": "fear"
         },
         {
             "key": "fear_timeline_state_mental_changes",
-            "value": "tu souhaite qu'ils partent",
-            "englishValue": "recall why you're friends"
+            "value": "S'attendre à ce qu'ils partent",
+            "englishValue": "you expect them to leave"
         },
         {
             "key": "fear_timeline_response_constructive_response",
-            "value": "lui rappeler pourquoi vous ètes amis",
-            "englishValue": "imagine them leaving"
+            "value": "Se rappeler des raisons de l'amitié",
+            "englishValue": "recall why you're friends"
         },
         {
             "key": "fear_timeline_response_destructive_response",
-            "value": "imagine-les partir",
-            "englishValue": "something else..."
+            "value": "S'imaginer leur départ",
+            "englishValue": "imagine them leaving"
         },
         {
             "key": "fear_timeline_response_ambiguous_response",
@@ -1331,11 +1336,12 @@
         },
         {
             "key": "disgust_continent_body",
-            "value": "Sentir du dégout pour quelque chose qui est toxique nous aide à éviter d'être envenimé, que ce soit physiquement ou socialement. Nous ressentons le dégout quand nous percevons quelque chose de toxique ou désagréable. L'intensité et la fréquence du dégout varient au cours de la vie.",
+            "value": "Sentir du dégout pour quelque chose qui est toxique nous aide à éviter d'être empoisonné, que ce soit physiquement ou socialement. ",
             "englishValue": "Feeling disgusted by what is toxic helps us to avoid being poisoned, physically or socially."
         },
         {
             "key": "disgust_continent_body_mobile",
+            "value": "Nous ressentons le dégout quand nous percevons quelque chose de toxique ou désagréable. L'intensité et la fréquence du dégout varient au cours de la vie.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)",
             "englishValue": "We feel disgust when faced with something toxic or unpleasant. Disgust varies in strength and frequency in our lives."
         },
@@ -1346,12 +1352,12 @@
         },
         {
             "key": "disgust_states_header_1",
-            "value": "Mécontentement",
+            "value": "Ne pas aimer",
             "englishValue": "Dislike"
         },
         {
             "key": "disgust_states_body_1",
-            "value": "La plus simple forme de dégout",
+            "value": "Une préférence contre quelque chose.",
             "englishValue": "A preference against something."
         },
         {
@@ -1361,7 +1367,7 @@
         },
         {
             "key": "disgust_states_body_2",
-            "value": "Désir d'éviter quelque chose qui nous dégoute",
+            "value": "Désir d'éviter une chose qui nous dégoute",
             "englishValue": "An impulse to avoid something disgusting."
         },
         {
@@ -1381,22 +1387,22 @@
         },
         {
             "key": "disgust_states_body_4",
-            "value": "Répulsion envers quelque chose de fuguratif ou litéralement toxique",
+            "value": "Forte aversion pour quelque chose, souvent un concept ou une idée",
             "englishValue": "Strong distaste for something, often a concept or idea."
         },
         {
             "key": "disgust_states_header_5",
-            "value": "Dégoût",
+            "value": "Révulsion",
             "englishValue": "Revulsion"
         },
         {
             "key": "disgust_states_body_5",
-            "value": "Dégout très intense",
+            "value": "Un mélange de dégoût et de répugnance",
             "englishValue": "A mixture of disgust and loathing."
         },
         {
             "key": "disgust_states_header_6",
-            "value": "Horreur",
+            "value": "Abhorrence",
             "englishValue": "Abhorrence"
         },
         {
@@ -1406,37 +1412,37 @@
         },
         {
             "key": "disgust_states_header_7",
-            "value": "Abomination",
+            "value": "Répugnance",
             "englishValue": "Loathing"
         },
         {
             "key": "disgust_states_body_7",
-            "value": "Dégout intense focalisé sur une personne",
+            "value": "Dégoût intense concentré sur une personne. Le dégoût intense concentré sur soi-même est appelé dégoût de soi.",
             "englishValue": "Intense disgust focused on a person. Intense disgust focused on oneself is called self-loathing."
         },
         {
             "key": "disgust_actions_body",
-            "value": "Par exemple, nous pouvons éviter de ressentir de l'aversion au travail, mais nous retrouver à ressentir de l'aversion envers des personnes dont on lit des nouvelles dans un journal. Eviter l'aversion peut être constructif dans le cas où cela permet de dépasser un préjugé, mais destructif si cela nous fait nous rapprocher d'une personne nocive.",
+            "value": "Par exemple, nous pouvons éviter de ressentir de l'aversion envers autrui au travail, mais nous retrouver à ressentir de l'aversion envers des personnes  qui font les nouvelles dans un journal. Éviter l'aversion peut être constructif dans le cas où cela permet de dépasser un préjugé, mais destructif si cela nous fait nous rapprocher d'une personne nocive.",
             "englishValue": "For example, we might avoid feeling aversion towards others at work, but find ourselves feeling aversion towards individuals we read about in the news. Avoiding aversion can be constructive in overcoming bias, but can be destructive if it leads us to get involved with a harmful person."
         },
         {
             "key": "disgust_actions_header_1",
-            "value": "S'en aller",
+            "value": "Se retirer",
             "englishValue": "Withdraw"
         },
         {
             "key": "disgust_actions_body_1",
-            "value": "Abandonner physiquement ou mentallement le scénario de ce qui ?? Le dégout",
+            "value": "Abandonner physiquement ou mentallement le scénario de ce qui suscite le dégout",
             "englishValue": "Physically or mentally leave the scene of what is triggering the disgust."
         },
         {
             "key": "disgust_actions_header_2",
-            "value": "Eviter",
+            "value": "Éviter",
             "englishValue": "Avoid"
         },
         {
             "key": "disgust_actions_body_2",
-            "value": "Rester physiquement éloigné de quelqu'un ou quelque chose, ou garder l'esprit éloigné de ce qui provoque??le dégout",
+            "value": "Rester physiquement éloigné ou éviter de réfléchir de ce qui provoque le dégoût",
             "englishValue": "Either physically stay away from whatever is triggering the disgust or keep oneself from thinking about it."
         },
         {
@@ -1446,7 +1452,7 @@
         },
         {
             "key": "disgust_actions_body_3",
-            "value": "Expulser des éléments depuis l'estomac par la bouche; dénote métaphoriquement un dégout très intense",
+            "value": "Répondre au sentiment de dégoût en vomissant",
             "englishValue": "Respond to feelings of disgust by throwing up."
         },
         {
@@ -1456,7 +1462,7 @@
         },
         {
             "key": "disgust_actions_body_4",
-            "value": "Traiter quelqu'un comme s'il/elle n'était pas un être humain; priver cette personne de qualités, de personnalité ou d'esprit humain.",
+            "value": "Traiter quelqu'un comme s'il/elle n'était pas un être humain; priver cette personne de ses qualités, de sa personnalité ou de son seprit humain.",
             "englishValue": "Treat someone as though he or she is not a human being; deprive someone of human qualities, personality or spirit."
         },
         {
@@ -1466,7 +1472,7 @@
         },
         {
             "key": "disgust_triggers_universal_body_mobile",
-            "value": "Les déclencheurs universels son innés et nous affectent plus que ceux qui sont appris. Exemple : des choses en état de décomposition ou qui sortent du corps.",
+            "value": "Les déclencheurs universels son innés et nous affectent plus que ceux qui sont appris. Exemple : un objet en état de décomposition ou un fluide ou déchet coroprels.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)",
             "englishValue": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Anything in decay or coming out of the body are examples."
         },
@@ -1477,13 +1483,13 @@
         },
         {
             "key": "disgust_triggers_learned_body_mobile",
-            "value": "Certains déclencheurs sont appris de nos expérience personnelles ou partagées. Exemple : certaines habitudes religieusse étranges, manger des insectes ou de la viande crue.",
+            "value": "Certains déclencheurs sont appris de nos expérience personnelles ou partagées. Exemple : certaines habitudes religieusse inhabituelles, manger des insectes ou de la viande crue.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)",
             "englishValue": "Some triggers can be learned from personal or shared cultural experiences. Unfamiliar religious customs and eating insects or raw meat are examples."
         },
         {
             "key": "disgust_triggers_header_1",
-            "value": "Nimporte quelle chose qui sort du corps",
+            "value": "Fluides ou déchets corporels",
             "englishValue": "Anything coming out of the body"
         },
         {
@@ -1493,12 +1499,12 @@
         },
         {
             "key": "disgust_triggers_header_3",
-            "value": "Supporters d'une équipe de sport adversaire",
+            "value": "Supporters d'une équipe de sport opposée",
             "englishValue": "Fans of an opposing sports team"
         },
         {
             "key": "disgust_triggers_header_4",
-            "value": "Habitudes religieuses peu familières",
+            "value": "Habitudes religieuses inhabituelles",
             "englishValue": "Unfamiliar religious customs"
         },
         {
@@ -1513,27 +1519,27 @@
         },
         {
             "key": "disgust_moods_body",
-            "value": "Le dégout peut être une humeur, un sentiment généralisé de répugnance",
+            "value": "Généralement répugnant.",
             "englishValue": "Generally repulsed."
         },
         {
             "key": "disgust_timeline_trigger_precondition",
-            "value": "tu ressens du chagrin",
+            "value": "vous êtes en deuil",
             "englishValue": "you're grieving"
         },
         {
             "key": "disgust_timeline_trigger_event",
-            "value": "un ami a été en colère contre toi",
+            "value": "un ami a été en colère contre vous",
             "englishValue": "a friend gets angry with you"
         },
         {
             "key": "disgust_timeline_trigger_perceptual_database",
-            "value": "tu repenses à ton insensibilité",
+            "value": "vous repensez à votre insensibilité",
             "englishValue": "reminds you of insensitivity"
         },
         {
             "key": "disgust_timeline_state_physical_changes",
-            "value": "tu recule",
+            "value": "vous reculez",
             "englishValue": "you recoil"
         },
         {
@@ -1543,22 +1549,22 @@
         },
         {
             "key": "disgust_timeline_state_mental_changes",
-            "value": "tu te sens collé",
+            "value": "vous vous sentez malade",
             "englishValue": "you feel sickened"
         },
         {
             "key": "disgust_timeline_response_constructive_response",
-            "value": "demande pourquoi ils sont en colère",
+            "value": "demandez pourquoi ils sont en colère",
             "englishValue": "ask why they're angry"
         },
         {
             "key": "disgust_timeline_response_destructive_response",
-            "value": "rabaisses-les",
+            "value": "dénigrez-les",
             "englishValue": "belittle them"
         },
         {
             "key": "disgust_timeline_response_ambiguous_response",
-            "value": "évites-les",
+            "value": "évitez-les",
             "englishValue": "avoid them"
         }
     ],
@@ -1575,7 +1581,7 @@
         },
         {
             "key": "sadness_continent_body",
-            "value": "La tristesse est une réponse au sentiment de perte, et nous sentir triste nous permet de faire une pause et montrer aux autres que nous avons besoin de soutien.",
+            "value": "La tristesse est une réponse au sentiment de perte, et nous sentir tristes nous permet de faire une pause et montrer aux autres que nous avons besoin de soutien.",
             "englishValue": "Sadness is a response to loss, and feeling sad allows us to take a timeout and show others that we need support."
         },
         {
@@ -1606,12 +1612,12 @@
         },
         {
             "key": "sadness_states_body_2",
-            "value": "Acceptation que rien ne peut se faire.",
+            "value": "Acceptation que rien ne peut être fait.",
             "englishValue": "The belief that nothing can be done."
         },
         {
             "key": "sadness_states_header_3",
-            "value": "Consternation",
+            "value": "Désarroi",
             "englishValue": "Distraughtness"
         },
         {
@@ -1621,7 +1627,7 @@
         },
         {
             "key": "sadness_states_header_4",
-            "value": "Démotivation",
+            "value": "Découragement",
             "englishValue": "Discouragement"
         },
         {
@@ -1631,7 +1637,7 @@
         },
         {
             "key": "sadness_states_header_5",
-            "value": "Impotence",
+            "value": "Impuissance",
             "englishValue": "Helplessness"
         },
         {
@@ -1641,12 +1647,12 @@
         },
         {
             "key": "sadness_states_header_6",
-            "value": "Tribulation",
+            "value": "Misère",
             "englishValue": "Misery"
         },
         {
             "key": "sadness_states_body_6",
-            "value": "Tristesse agoissée, souvent prolongée.",
+            "value": "Forte souffrance ou malheur",
             "englishValue": "Strong suffering or unhappiness."
         },
         {
@@ -1661,32 +1667,32 @@
         },
         {
             "key": "sadness_states_header_8",
-            "value": "Détresse",
+            "value": "Deuil",
             "englishValue": "Grief"
         },
         {
             "key": "sadness_states_body_8",
-            "value": "Tristesse angoissée, pour la perte d'un être aimé.",
+            "value": "Tristesse pour la perte de quelque chose ou quelqu'un d'important",
             "englishValue": "Sadness over a deep loss."
         },
         {
             "key": "sadness_states_header_9",
-            "value": "Découragement",
+            "value": "Désespoir",
             "englishValue": "Despair"
         },
         {
             "key": "sadness_states_body_9",
-            "value": "Angoisse accompagnée de résignation",
+            "value": "La perte d'espoir qu'une mauvaise situation s'améliore ou change.",
             "englishValue": "The loss of hope that a bad situation will improve or change."
         },
         {
             "key": "sadness_states_header_10",
-            "value": "Regret",
+            "value": "Chagrin",
             "englishValue": "Sorrow"
         },
         {
             "key": "sadness_states_body_10",
-            "value": "Tristesse pour une perte",
+            "value": "Un sentiment de détresse et de tristesse, souvent causé par une perte.",
             "englishValue": "A feeling of distress and sadness, often caused by a loss."
         },
         {
@@ -1706,7 +1712,7 @@
         },
         {
             "key": "sadness_actions_header_1",
-            "value": "Chercher consolation.",
+            "value": "Chercher du réconfort",
             "englishValue": "Seek comfort"
         },
         {
@@ -1716,32 +1722,32 @@
         },
         {
             "key": "sadness_actions_header_2",
-            "value": "Se retirer.",
+            "value": "Se retirer",
             "englishValue": "Withdraw"
         },
         {
             "key": "sadness_actions_body_2",
-            "value": "Abandonner physiquement ou mentallement le scénario qui déclenche la tristesse.",
+            "value": "S'éloigner physiquement de ce qui déclenche la tristesse, ou s'empêcher d'y penser.",
             "englishValue": "Either physically stay away from what is triggering the sadness or keep oneself from thinking about it."
         },
         {
             "key": "sadness_actions_header_3",
-            "value": "Ruminer.",
+            "value": "Ruminer",
             "englishValue": "Ruminate"
         },
         {
             "key": "sadness_actions_body_3",
-            "value": "Penser en répétition sur le sujet de l'expérience émotionnelle.",
+            "value": "Penser de manière obsessive et répététive à l'expérience émotionnelle.",
             "englishValue": "Obsessively think about the emotional experience."
         },
         {
             "key": "sadness_actions_header_4",
-            "value": "Se lamenter",
+            "value": "Faire le deuil de...",
             "englishValue": "Mourn"
         },
         {
             "key": "sadness_actions_body_4",
-            "value": "Être centré sur la perte.",
+            "value": "Exprimer son chagrin pour la perte d'un être cher par des actions, des vêtements et des paroles",
             "englishValue": "Express grief for one's loss through actions, dress and speech."
         },
         {
@@ -1751,7 +1757,7 @@
         },
         {
             "key": "sadness_actions_body_5",
-            "value": "Se plaindre au sujet de la perte, en sachant que la painte ne pourra pas récupérer ce qui a été perdu.",
+            "value": "S'objecter à la perte",
             "englishValue": "Object to the loss."
         },
         {
@@ -1761,7 +1767,7 @@
         },
         {
             "key": "sadness_actions_body_6",
-            "value": "Sentir la nécessité d'éviter comment on se sent à propos de la chose ou la personne perdue",
+            "value": "Se sentir honteux des sentiments que l'on éprouve à l'égard de la perte",
             "englishValue": "Feel embarrassed by one's feelings about the loss."
         },
         {
@@ -1771,7 +1777,7 @@
         },
         {
             "key": "sadness_triggers_universal_body_mobile",
-            "value": "Les déclencheurs universels sont innés et nous affectent plus que ceux appris. Exemple : Perdre un être aimé ou être repoussé par cette personne.",
+            "value": "Les déclencheurs universels sont innés et nous affectent plus que ceux appris. Exemple : Perdre un être aimé ou être rejeté par cette personne.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)",
             "englishValue": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Losing or being rejected by a loved one are examples."
         },
@@ -1782,13 +1788,13 @@
         },
         {
             "key": "sadness_triggers_learned_body_mobile",
-            "value": "Certains déclencheurs s'apprennent lors de nos expérience personnelles ou partagées. Exemple : se sentir exclu ou percevoir une perte de statut.",
+            "value": "Certains déclencheurs sont appris lors de nos expérience personnelles ou partagées. Exemple : se sentir exclu ou percevoir une perte de statut.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)",
             "englishValue": "Some triggers can be learned from personal or shared cultural experiences. Feeling left out or experiencing a perceived loss of status are examples."
         },
         {
             "key": "sadness_triggers_header_1",
-            "value": "Être repoussé par quelqu'un d'important",
+            "value": "Être rejeté par quelqu'un d'important",
             "englishValue": "Being rejected by someone important"
         },
         {
@@ -1818,27 +1824,27 @@
         },
         {
             "key": "sadness_moods_body",
-            "value": "Sentiment de résignation, de découragement ou de déception persistant. L'angoisse ne se transforme pas en une humeur.",
+            "value": "Sentiment de résignation, de découragement ou de déception persistant. ",
             "englishValue": "An enduring feeling of discouragement or disappointment."
         },
         {
             "key": "sadness_timeline_trigger_precondition",
-            "value": "Ecouter de la musique triste",
+            "value": "Écouter de la musique triste",
             "englishValue": "listening to sad music"
         },
         {
             "key": "sadness_timeline_trigger_event",
-            "value": "un ami a été en colère contre toi",
+            "value": "un ami en colère contre soi",
             "englishValue": "a friend gets angry with you"
         },
         {
             "key": "sadness_timeline_trigger_perceptual_database",
-            "value": "cela nous fait sentir rejeté",
+            "value": "Un sentiment de rejet est généré ",
             "englishValue": "it reminds you of rejection"
         },
         {
             "key": "sadness_timeline_state_physical_changes",
-            "value": "ton corps s'affaiblit",
+            "value": "Le corps s'affaiblit",
             "englishValue": "your body weakens"
         },
         {
@@ -1848,22 +1854,22 @@
         },
         {
             "key": "sadness_timeline_state_mental_changes",
-            "value": "tu te sens vide",
+            "value": "Vous vous sentez vide",
             "englishValue": "you feel empty"
         },
         {
             "key": "sadness_timeline_response_constructive_response",
-            "value": "appelle une personne que tu aimes",
+            "value": "Appeler une personne aimée",
             "englishValue": "call a loved one"
         },
         {
             "key": "sadness_timeline_response_destructive_response",
-            "value": "ai honte de toi",
+            "value": "Avoir honte de soi",
             "englishValue": "be ashamed"
         },
         {
             "key": "sadness_timeline_response_ambiguous_response",
-            "value": "ignore le sentiment",
+            "value": "ignorer le sentiment",
             "englishValue": "ignore the feeling"
         }
     ],
@@ -1875,7 +1881,7 @@
         },
         {
             "key": "enjoyment_continent_header_mobile",
-            "value": "Joie",
+            "value": "Le continent de la joie",
             "englishValue": "The Continent of Enjoyment"
         },
         {
@@ -1885,7 +1891,7 @@
         },
         {
             "key": "enjoyment_continent_body_mobile",
-            "value": "Nous ressentons la joie lorsque nous expérimentonns quelque chose de nouveau ou de confortable. L'intensité et la fréquence de la joie varie au fil de nos vies.",
+            "value": "Nous ressentons la joie lorsque nous expérimentons quelque chose de nouveau ou de confortable. L'intensité et la fréquence de la joie varie au fil de nos vies.",
             "mobileCharacterCount": "160 max (max 4 lines, 40 characters per line)",
             "englishValue": "We feel enjoyment when we experience novelty or comfort. Enjoyment varies in strength and frequency in our lives."
         },
@@ -1916,7 +1922,7 @@
         },
         {
             "key": "enjoyment_states_header_3",
-            "value": "Diversion",
+            "value": "Amusement ",
             "englishValue": "Amusement"
         },
         {
@@ -1936,7 +1942,7 @@
         },
         {
             "key": "enjoyment_states_header_5",
-            "value": "Compasion",
+            "value": "Compassion ",
             "englishValue": "Compassion/joy"
         },
         {
@@ -1951,7 +1957,7 @@
         },
         {
             "key": "enjoyment_states_body_6",
-            "value": "Terme allemand qui se réfère à la joie pour les difficultés d'une autre personne, en particulier un rival. Nous nous réjouissons du mal d'un autre.",
+            "value": "Terme allemand qui se réfère à la joie pour les difficultés d'une autre personne, en particulier un rival. ",
             "englishValue": "Enjoyment of the misfortunes of another person, usually a rival."
         },
         {
@@ -1966,11 +1972,12 @@
         },
         {
             "key": "enjoyment_states_header_8",
+            "value": "Naches",
             "englishValue": "Naches"
         },
         {
             "key": "enjoyment_states_body_8",
-            "value": "Terme yidi qui décrit les sentiments d'orgueil à la vue de notre réussite, ou parfois simplement pour l'existence de notre descendance ou de nos élèves. Ce sentiment est crucial pour la motivation à élever des nourissons et des enfants.",
+            "value": "Fierté joyeuse des réalisations de ses enfants ou de ses apprentis (un mot yiddish).",
             "englishValue": "Joyful pride in the accomplishments of one's children or mentees (a Yiddish word)."
         },
         {
@@ -1980,7 +1987,7 @@
         },
         {
             "key": "enjoyment_states_body_9",
-            "value": "Désir que les autres connaissent le plaisir que nous ressentons pour notre propre réussite, ou pour les réussites de quelqu'un que l'on a éduqué ou avec qui l'on s'identifie.",
+            "value": "Plaisir et satisfaction profonde tirés de ses propres réalisations ou de celles d'un associé.",
             "englishValue": "Deep pleasure and satisfaction derived from one's own achievements or the achievements of an associate."
         },
         {
@@ -1990,7 +1997,7 @@
         },
         {
             "key": "enjoyment_states_body_10",
-            "value": "Expérience de quelque chose très surprenant, beau, prodigieux, ou difficler à créer.",
+            "value": "Expérience de quelque chose très surprenant, beau, prodigieux, ou difficler à croire.",
             "englishValue": "An experience of something that is very surprising, beautiful, amazing or hard to believe."
         },
         {
@@ -2010,7 +2017,7 @@
         },
         {
             "key": "enjoyment_states_body_12",
-            "value": "Energié qui, à la différence des émotions agréables, se vit rarement avec légèreté, mais avec une intensité entre moyenne et élevée. Elle peut se combiner avec toute autre émotion pour générer une forme très active de celle-ci.",
+            "value": "Un enthousiasme puissant",
             "englishValue": "A powerful enthusiasm."
         },
         {
@@ -2020,12 +2027,12 @@
         },
         {
             "key": "enjoyment_states_body_13",
-            "value": "Ravissement. Etat de félicité très fort, presque accablant.",
+            "value": "Ravissement. État de félicité très fort, presque accablant.",
             "englishValue": "Rapturous delight. A state of very great happiness, nearly overwhelming."
         },
         {
             "key": "enjoyment_actions_body",
-            "value": "Par exemple, nous pouvons être exité à exprimer notre amusement avec nos amis, mais ressentir notre amusement de manière calme lorsque nous sommes seuls.Exprimer notre amusement avec exitation peut être constructif pour partager sa joie, mais destructif si cela nous le faisons pour nous moquer de quelqu'un",
+            "value": "Par exemple, nous pouvons être exité à exprimer notre amusement avec nos amis, mais ressentir notre amusement de manière calme lorsque nous sommes seuls.Exprimer notre amusement avec exitation peut être constructif pour partager sa joie, mais destructif si en réponse à une moquerie visant une autre personne.",
             "englishValue": "For example, we might exclaim to express our feeling of amusement among friends, but experience our amusement quietly while alone. Expressing amusement by exclaiming can be constructive as means of sharing enjoyment, but destructive if it's in response to making fun of someone."
         },
         {
@@ -2045,17 +2052,17 @@
         },
         {
             "key": "enjoyment_actions_body_2",
-            "value": "Continuer de faire le nécessaire pour que nos sentiments agréables continuent.",
+            "value": "Continuer de faire le nécessaire pour que nos sentiments agréables persistent",
             "englishValue": "Continue to do what is necessary to continue the enjoyable feelings."
         },
         {
             "key": "enjoyment_actions_header_3",
-            "value": "Réjouissance",
+            "value": "Se vanter",
             "englishValue": "Gloat"
         },
         {
             "key": "enjoyment_actions_body_3",
-            "value": "Profiter l'envie que d'autres ressentent au sujet de l'état que l'on apprécie.",
+            "value": "Savourer l'envie que les autres ont de votre réussite",
             "englishValue": "Enjoy others’ envy of your state of enjoyment."
         },
         {
@@ -2070,12 +2077,12 @@
         },
         {
             "key": "enjoyment_actions_header_5",
-            "value": "Engager des relations / connecter",
+            "value": "S'engager / connecter",
             "englishValue": "Engage/connect"
         },
         {
             "key": "enjoyment_actions_body_5",
-            "value": "Vouloir établir un contact et engager une relation avec d'autres pour partager un sentiment de plaisir.",
+            "value": "Partager ses sentiments de plaisir avec les autres sans vouloir provoquer de jalousie.",
             "englishValue": "Share one's feelings of enjoyment with others without a desire to cause jealousy."
         },
         {
@@ -2085,17 +2092,17 @@
         },
         {
             "key": "enjoyment_actions_body_6",
-            "value": "Se ravir de l'expérience des sentiments agréables liés aux expériences physiques et psychologiques.",
+            "value": "Appréciez pleinement les bons sentiments qui entourent une expérience, notamment en vous y attardant.",
             "englishValue": "Appreciate the good feelings around an experience completely, especially by dwelling on them."
         },
         {
             "key": "enjoyment_actions_header_7",
-            "value": "Complaisance",
+            "value": "Se faire plaisir",
             "englishValue": "Indulge"
         },
         {
             "key": "enjoyment_actions_body_7",
-            "value": "Se donner en excès aux sentiments agréables.",
+            "value": "Se donner la permission de vivre de bon moments",
             "englishValue": "Allow oneself to fully experience the pleasure of good feelings."
         },
         {
@@ -2111,7 +2118,7 @@
         },
         {
             "key": "enjoyment_triggers_learned_header_mobile",
-            "value": "Déclencherus appris de la joie",
+            "value": "Déclencheurs appris de la joie",
             "englishValue": "Learned Triggers of Enjoyment"
         },
         {
@@ -2127,7 +2134,7 @@
         },
         {
             "key": "enjoyment_triggers_header_2",
-            "value": "Aider d'autres",
+            "value": "Aider autri",
             "englishValue": "Helping others"
         },
         {
@@ -2167,17 +2174,17 @@
         },
         {
             "key": "enjoyment_timeline_trigger_precondition",
-            "value": "tu mets un but",
+            "value": "vous faites un but",
             "englishValue": "you scored a touchdown"
         },
         {
             "key": "enjoyment_timeline_trigger_event",
-            "value": "un ami a été en colère contre toi",
+            "value": "un ami a été en colère contre vous",
             "englishValue": "a friend gets angry with you"
         },
         {
             "key": "enjoyment_timeline_trigger_perceptual_database",
-            "value": "tu sembles être un mauvais perdant",
+            "value": "vous semblez être un mauvais perdant",
             "englishValue": "seems like a sore loser"
         },
         {
@@ -2192,17 +2199,17 @@
         },
         {
             "key": "enjoyment_timeline_state_mental_changes",
-            "value": "tu te sens vertueux",
+            "value": "vous vous sentez vertueux",
             "englishValue": "you feel righteous"
         },
         {
             "key": "enjoyment_timeline_response_constructive_response",
-            "value": "jouer sur",
+            "value": "continuer à jouer",
             "englishValue": "play on"
         },
         {
             "key": "enjoyment_timeline_response_destructive_response",
-            "value": "exulter",
+            "value": "se vanter",
             "englishValue": "gloat"
         },
         {
