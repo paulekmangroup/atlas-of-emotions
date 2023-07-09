@@ -463,8 +463,7 @@ export default class Episode {
             //text
             let event = timeline.select( '#event-text', this.parent ),
                 responses = timeline.select( '#responses', this.parent ),
-                responseChildren = timeline.selectAll( 'tspan', responses );
-            let trigger = timeline.select( '#trigger', this.parent );
+                responseChildren = timeline.selectAll('tspan', responses);
             this.triggerText = [
                 timeline.select( 'tspan', event ),
             ];
@@ -551,9 +550,12 @@ export default class Episode {
 
             this.episodeTimeline.pause();
 
-            TweenMax.set( state, { visibility: 'visible' } );
+            TweenMax.set(state, { visibility: 'visible' });
 
-            this.replaceContent( this.currentEmotion, false );
+            this.replaceContent(this.currentEmotion, false);
+
+            const line = timeline.select('#event-line', eventLines);
+            this.fixEventLineOverlap(event, line, timeline);
 
             TweenMax.set( this.parent, { visibility: 'visible' } );
 
@@ -562,5 +564,15 @@ export default class Episode {
         }
     }
 
+    fixEventLineOverlap(event, eventLine, timeline) { 
+        const eventBox = event.getBoundingClientRect();
+        const eventLineBox = eventLine.getBoundingClientRect();
+        const textLineSpace = eventLineBox.x - (eventBox.x + eventBox.width);
+        const minGap = 20;
+        if (textLineSpace < minGap) {
+            const path = eventLine.getAttribute('d');
+            eventLine.setAttribute('d', path.replace(/M[^,]+,/,`M${minGap.toString()},`))
+        }
+    }
 
 }

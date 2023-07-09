@@ -20,7 +20,7 @@
 	transform: scale(1.0);
 	transition-property: transform, top, opacity, font-size;
 	transition-duration: #{$states-backgrounded-duration-in}s, #{$states-backgrounded-duration-in}s, 0.5s, .2s;
-	transition-delay: 0s, 0s, 0s, #{$states-backgrounded-duration-in / 2}s;
+	transition-delay: 0s, 0s, 0s, #{$states-backgrounded-duration-in * 0.5}s;
 	transition-timing-function: cubic-bezier(0.4, 0.4, 0.35, 1), cubic-bezier(.81,.34,.63,.85), ease, linear;
 
 	&.backgrounded {
@@ -64,7 +64,7 @@
 		position: absolute;
 		bottom: $states-containers-bottom;
 		left: 50%;
-		margin-left: -$states-graph-width/2;
+		margin-left: -$states-graph-width*0.5;
 		min-height: 400px;
 
 		opacity: 0.0;
@@ -91,7 +91,7 @@
 			width: $states-graph-width-small;
 			height: 50%;
 			bottom: calc(#{$ui-mobile-footer-height}px + #{$ui-mobile-caption-height});	// align within parent container, to account for mobile UI
-			margin-left: -$states-graph-width-small/2;
+			margin-left: -$states-graph-width-small*0.5;
 			min-height: 200px;
 		}
 
