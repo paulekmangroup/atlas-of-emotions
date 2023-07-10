@@ -2,25 +2,36 @@ import { EventEmitter } from 'events';
 
 const dispatcher = {
 
+	HASH_DELIMITER: '/',
+
 	EVENTS: {
 		NAVIGATE: 'navigate',
 		NAVIGATE_COMPLETE: 'navigateComplete',
 		CHANGE_EMOTION_STATE: 'changeEmotionState',
-		CHANGE_CALLOUT: 'changeCallout',
+		CHANGE_EMOTION: 'changeEmotion',
+		CHANGE_SECTION_TEXT: 'changeSectionText',
 		MODAL_CHANGE: 'modalChange',
 		POPUP_CHANGE: 'popupChange',
 		POPUP_CLOSE_BUTTON_CLICKED: 'popupCloseButtonClicked',
+		SECTION_GRAPHICS_RESIZE: 'sectionGraphicsResize',
+		SECTION_TEXT_MAXIMIZE_START: 'sectionTextMaximizeStart',
+		SECTION_TEXT_MAXIMIZE_COMPLETE: 'sectionTextMaximizeComplete',
+		SECTION_TEXT_MINIMIZE_START: 'sectionTextMinimizeStart',
+		SECTION_TEXT_MINIMIZE_COMPLETE: 'sectionTextMinimizeComplete',
+		MAXIMIZE_SECTION_TEXT: 'maximizeSectionText',
+		MINIMIZE_SECTION_TEXT: 'minimizeSectionText',
+		ALLOW_MORE_CONTENT: 'allowMoreContent'
 	},
 
 	SECTIONS: {
 		CONTINENTS: 'continents',
 		STATES: 'states',
 		ACTIONS: 'actions',
-		TRIGGERS: 'triggers',
-		MOODS: 'moods',
+		TIMELINE: 'triggers',
 		CALM: 'calm',
-		MORE: 'more'
+		LINKS: 'links'
 	},
+
 	HOME: 'home',
 
 	EMOTIONS: {
@@ -63,6 +74,7 @@ const dispatcher = {
 		'annex-episode-timeline',
 		'annex-partially-charted',
 		'annex-traits',
+		'annex-moods',
 		'annex-signals',
 		'annex-psychopathologies',
 		'annex-scientific-basis',
@@ -73,6 +85,7 @@ const dispatcher = {
 	ANNEX_DATA_2_PAGE: {
 		'psychopathology': 'annex-psychopathologies',
 		'personality-trait': 'annex-traits',
+		'moods': 'annex-moods',
 		'signals': 'annex-signals',
 		'partially-charted': 'annex-partially-charted',
 		'scientific-basis': 'annex-scientific-basis',
@@ -86,79 +99,114 @@ const dispatcher = {
 	 * @param  {[String]} emotion Emotion navigating to
 	 * @param  {[String]} morePage Secondary page (within More Information) navigating to
 	 */
-	navigate: function (section, emotion, morePage) {
+	navigate: function ( section, emotion, morePage ) {
 		let subsection = emotion || morePage;
 
-		if (section && !this.validateSection(section) && section !== this.HOME) {
-			throw new Error('Invalid section "' + section + '".');
+		if ( section && !this.validateSection( section ) && section !== this.HOME ) {
+			throw new Error( 'Invalid section "' + section + '".' );
 		}
 
-		if (emotion && !this.validateEmotion(emotion)) {
-			throw new Error('Invalid emotion "' + emotion + '".');
+		if ( emotion && !this.validateEmotion( emotion ) ) {
+			throw new Error( 'Invalid emotion "' + emotion + '".' );
 		}
 
-		this.emit(this.EVENTS.NAVIGATE, section, subsection);
+		this.emit( this.EVENTS.NAVIGATE, section, subsection );
 
 	},
 
-	changeCallout: function (emotion, title, body) {
+	changeSectionText: function ( emotion, title, body ) {
 
-		this.emit(this.EVENTS.CHANGE_CALLOUT, emotion, title, body);
-
-	},
-
-	popupChange: function (section, emotion, desc, secondaryData) {
-
-		this.emit(this.EVENTS.POPUP_CHANGE, section, emotion, desc, secondaryData);
+		this.emit( this.EVENTS.CHANGE_SECTION_TEXT, emotion, title, body );
 
 	},
 
-	popupCloseButtonClicked: function(section, name) {
+	popupChange: function ( section, emotion, desc, secondaryData ) {
 
-		this.emit(this.EVENTS.POPUP_CLOSE_BUTTON_CLICKED, section, name);
-
-	},
-
-	setEmotionState: function (state, selected) {
-
-		this.emit(this.EVENTS.CHANGE_EMOTION_STATE, state, selected);
+		this.emit( this.EVENTS.POPUP_CHANGE, section, emotion, desc, secondaryData );
 
 	},
 
-	validateSection: function (section) {
+	popupCloseButtonClicked: function ( section, name ) {
 
-		return Object.keys(this.SECTIONS).some(key => this.SECTIONS[key] === section);
-
-	},
-
-	validateEmotion: function (emotion) {
-
-		return Object.keys(this.EMOTIONS).some(key => this.EMOTIONS[key] === emotion);
+		this.emit( this.EVENTS.POPUP_CLOSE_BUTTON_CLICKED, section, name );
 
 	},
 
-	validateMorePage: function(page) {
-		if (!page) return false;
+	sectionGraphicsResize: function () {
 
-		return this.MORE_INFO.items.some(item => {
-			if (item.page === page) return true;
-			if (page.indexOf('annex') === 0 && this.ANNEX_SECTIONS.indexOf(page) > -1) return true;
-			return false;
-		});
+		this.emit( this.EVENTS.SECTION_GRAPHICS_RESIZE );
+
 	},
 
-	getMorePageName: function (page) {
-		if (page.indexOf('annex') === 0 && this.ANNEX_SECTIONS.indexOf(page) > -1) return 'Annex';
+	sectionTextMaximizeStart: function ( duration ) {
 
-		const pageObject = this.MORE_INFO.items.filter((item) => item.page === page);
-		if (!pageObject.length) return '';
+		this.emit( this.EVENTS.SECTION_TEXT_MAXIMIZE_START, duration );
 
-		return pageObject[0].pageName || pageObject[0].label;
+	},
+
+	sectionTextMaximizeComplete: function () {
+
+		this.emit( this.EVENTS.SECTION_TEXT_MAXIMIZE_COMPLETE );
+
+	},
+
+	sectionTextMinimizeStart: function ( duration ) {
+
+		this.emit( this.EVENTS.SECTION_TEXT_MINIMIZE_START, duration );
+
+	},
+
+	sectionTextMinimizeComplete: function () {
+
+		this.emit( this.EVENTS.SECTION_TEXT_MINIMIZE_COMPLETE );
+
+	},
+
+	maximizeSectionText: function () {
+
+		this.emit( this.EVENTS.MAXIMIZE_SECTION_TEXT );
+
+	},
+
+	minimizeSectionText: function () {
+
+		this.emit( this.EVENTS.MINIMIZE_SECTION_TEXT );
+
+	},
+
+	allowMoreContent: function ( allow, section ) {
+
+		this.emit( this.EVENTS.ALLOW_MORE_CONTENT );
+
+	},
+
+	setEmotionState: function ( state, selected ) {
+
+		this.emit( this.EVENTS.CHANGE_EMOTION_STATE, state, selected );
+
+	},
+
+	setEmotion: function ( emotion ) {
+
+		this.emit( this.EVENTS.CHANGE_EMOTION, emotion );
+
+	},
+
+	validateSection: function ( section ) {
+
+		return Object.keys( this.SECTIONS ).some( key => this.SECTIONS[ key ] === section );
+
+	},
+
+	validateEmotion: function ( emotion ) {
+
+		return Object.keys( this.EMOTIONS ).some( key => this.EMOTIONS[ key ] === emotion );
+
 	}
 
 };
 
 // Mixin EventEmitter functionality
-Object.assign(dispatcher, EventEmitter.prototype);
+Object.assign( dispatcher, EventEmitter.prototype );
 
 export default dispatcher;

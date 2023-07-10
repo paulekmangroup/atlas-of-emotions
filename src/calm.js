@@ -102,13 +102,13 @@ export default {
 			let labelsEnter = labels.enter()
 				.append('div')
 				.attr('class', d => `emotion-label label show-only no-body ${d.id}`)
-				.attr('data-popuptarget', d => `calm:${d.id}`)
+				.attr('data-popuptarget', d => `calm${dispatcher.HASH_DELIMITER}${d.id}`)
 				.attr('data-clip', '1')
 				.style('left', d => Math.round(centerX + d.x - d.size) + 'px')
 				.style('top', d => Math.round(centerY + d.y - 17) + 'px');
 
 			labelsEnter.append('a')
-				.attr('href', d => `#continents:${d.id}`)
+				.attr('href', d => `#continents${dispatcher.HASH_DELIMITER}${d.id}`)
 				.append('h3')
 					.text(appStrings().getStr(`emotionsData.metadata.calm.caption`) || 'START OVER');
 		});
@@ -119,7 +119,6 @@ export default {
 		return new Promise((resolve, reject) => {
 
 			// leave a bit of time for other transitions to happen
-			this.openCallout(300);
 
 			// TODO: resolve after any intro animations
 			setTimeout(() => {
@@ -215,7 +214,6 @@ export default {
 		this.setActive(true);
 
 		// transition time from _states.scss::#states
-		this.openCallout(1000);
 
 		this.update();
 
@@ -225,7 +223,7 @@ export default {
 
 		return new Promise((resolve, reject) => {
 
-			// tuen off updates
+			// turn off updates
 			this.setActive(false);
 
 			resolve();
@@ -387,23 +385,7 @@ export default {
 
 	onPopupCloseButtonClicked: function() {
 		this.onBackgroundClick();
-	},
-
-	openCallout: function (delay) {
-
-		if (!this.calloutTimeout) {
-			this.calloutTimeout = setTimeout(() => {
-				this.setCallout();
-				this.calloutTimeout = null;
-			}, delay);
-		}
-
-	},
-
-	setCallout: function () {
-
-		dispatcher.changeCallout(null, appStrings().getStr('emotionsData.metadata.calm.header'), appStrings().getStr('emotionsData.metadata.calm.body'));
-
 	}
+
 
 };

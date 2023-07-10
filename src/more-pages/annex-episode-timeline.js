@@ -6,63 +6,6 @@ import * as utils from './utils.js';
 import dispatcher from '../dispatcher.js';
 import sassVars from '../../scss/variables.json';
 
-const FAKE = [
-	{
-		header: 'Step 1',
-		name: 'Pre-Condition',
-		nodes: []
-	},
-	{
-		header: 'Step 2',
-		name: 'Trigger',
-		scrollTo: 'trigger',
-		nodes: [
-			{
-				name: 'Event',
-				outward: true,
-				above: true,
-				scrollTo: 'event'
-			},
-			{
-				name: 'Perception',
-				outward: true,
-				above: false,
-				scrollTo: 'perception'
-			}
-		]
-	},
-	{
-		header: 'Step 3',
-		name: 'State',
-		scrollTo: 'state',
-		nodes: [
-			{
-				name: 'Physical Changes',
-				outward: false,
-				above: true
-			},
-			{
-				name: 'Psychological Changes',
-				outward: false,
-				above: false
-			}
-		]
-	},
-	{
-		header: 'Step 4',
-		name: 'Action',
-		nodes: []
-	},
-	{
-		header: 'Step 5',
-		name: 'Post-Condition',
-		nodes: []
-	}
-];
-
-const brown = '#D4B49B';
-const grey = '#CBC2BB';
-const dkGrey = '#B4ABA4';
 
 export default {
 
@@ -83,6 +26,7 @@ export default {
 	},
 
 	setContent() {
+
 		if (!this.wrapper) return;
 		this.sectionContainer.appendChild(utils.makeAnnexBackNav(this.data.title));
 

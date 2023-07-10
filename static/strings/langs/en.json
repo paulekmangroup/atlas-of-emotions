@@ -9,6 +9,62 @@
             "value": "Choose an emotion"
         },
         {
+            "key": "site_learn_more_button",
+            "value": "learn more"
+        },
+        {
+            "key": "site_close_button",
+            "value": "close"
+        },
+        {
+            "key": "site_back_button",
+            "value": "Back"
+        },
+        {
+            "key": "navigation_introduction_menu_item",
+            "value": "Introduction"
+        },
+        {
+            "key": "navigation_timeline_menu_item",
+            "value": "Timeline"
+        },
+        {
+            "key": "navigation_experience_menu_item",
+            "value": "Experience"
+        },
+        {
+            "key": "navigation_response_menu_item",
+            "value": "Response"
+        },
+        {
+            "key": "navigation_strategies_menu_item",
+            "value": "Strategies"
+        },
+        {
+            "key": "navigation_all_menu_item",
+            "value": "all"
+        },
+        {
+            "key": "navigation_introduction_section_header",
+            "value": "Introduction"
+        },
+        {
+            "key": "navigation_timeline_section_header",
+            "value": "The Timeline"
+        },
+        {
+            "key": "navigation_experience_section_header",
+            "value": "Our Experience"
+        },
+        {
+            "key": "navigation_response_section_header",
+            "value": "Our Response"
+        },
+        {
+            "key": "navigation_strategies_section_header",
+            "value": "Strategies"
+        },
+        {
             "key": "intro_header",
             "value": "Welcome to the Atlas of Emotions"
         },
@@ -108,6 +164,46 @@
             "value": "enjoyment is universal"
         },
         {
+            "key": "hero_header",
+            "value": "Welcome to the Atlas of Emotions"
+        },
+        {
+            "key": "hero_section_name",
+            "value": "Introduction"
+        },
+        {
+            "key": "hero_sub_header",
+            "value": "Supported by the Dalai Lama"
+        },
+        {
+            "key": "hero_sub_header_learn_more",
+            "value": "learn more"
+        },
+        {
+            "key": "hero_slide_1",
+            "value": "The Atlas is an interactive tool that builds your vocabulary of emotions and illuminates your emotional world. "
+        },
+        {
+            "key": "hero_slide_2",
+            "value": "The goal is to gain greater control over what triggers your emotions and how you respond. "
+        },
+        {
+            "key": "hero_slide_3",
+            "value": "The first step towards emotional awareness is learning to identify and describe how you are feeling, and why."
+        },
+        {
+            "key": "hero_about_header",
+            "value": "About the Atlas"
+        },
+        {
+            "key": "hero_about_body_1",
+            "value": "The Dalai Lama imagined \"a map of our emotions to develop a calm mind.\" He asked his longtime friend and renowned emotion scientist Dr. Paul Ekman to realize his idea. Ekman took on the creation of the Atlas alongside his daughter, Eve Ekman, a second-generation emotion researcher and trainer. The Atlas represents what researchers have learned from the psychological study of emotion. "
+        },
+        {
+            "key": "hero_call_to_action_button",
+            "value": "Begin"
+        },
+        {
             "key": "continents_header",
             "value": "Five Universal Emotions"
         },
@@ -129,7 +225,7 @@
         },
         {
             "key": "states_body",
-            "value": "LHAMO can be felt mildly, extremely, or somewhere in between. Select a shape to learn about a few of the states that we can experience."
+            "value": "Here we explore different states and intensities within one emotion family. "
         },
         {
             "key": "states_axis_labels",
@@ -144,12 +240,16 @@
             "value": "States"
         },
         {
+            "key": "states_interaction_prompt",
+            "value": "Select a shape to learn about some of the states we can experience. "
+        },
+        {
             "key": "actions_header",
             "value": "Actions of LHAMO"
         },
         {
             "key": "actions_body",
-            "value": "We respond to emotional states with our actions. Select a state to learn about the possible actions resulting from LHAMO. Then click on an action to learn more."
+            "value": "We respond to emotional states with our actions. Our responses to the same emotion may differ depending on the circumstances."
         },
         {
             "key": "actions_body_mobile",
@@ -182,6 +282,10 @@
         {
             "key": "actions_section_name",
             "value": "Actions"
+        },
+        {
+            "key": "actions_interaction_prompt",
+            "value": "Select a shape to learn about some of the states we can experience. Then select an action to learn more. "
         },
         {
             "key": "triggers_header",
@@ -261,11 +365,11 @@
         },
         {
             "key": "calm_body",
-            "value": "A calm, balanced frame of mind helps us understand our changing emotions. We can reach calmness through developing an awareness of our emotions: what triggers them, how we experience them and how we can respond constructively.  \r \r"
+            "value": "The Atlas of Emotion was commissioned by the Dalai Lama, his purpose is “ In order to find the new world we needed a map, and in order for us to find a calm mind we need a map of our emotions”. The simple, but not easy, goal of this Atlas is to help us be aware of our emotions. Awareness of our emotions means understanding how they are triggered, what they feel like and how we respond. Awareness itself is a strategy, it helps us understand our emotion experiences. We do not want to get rid of our emotions, we want strategies that help us respond in helpful, constructive ways."
         },
         {
             "key": "calm_body_mobile",
-            "value": "A calm, balanced frame of mind helps us understand our changing emotions. We can reach calmness through developing an awareness of the triggers, states and constuctive actions possible. Calmness ideally is our baseline in which emotions arise when triggered and then recede."
+            "value": "The Atlas of Emotion was commissioned by the Dalai Lama, his purpose is “ In order to find the new world we needed a map, and in order for us to find a calm mind we need a map of our emotions”. The simple, but not easy, goal of this Atlas is to help us be aware of our emotions. Awareness of our emotions means understanding how they are triggered, what they feel like and how we respond. Awareness itself is a strategy, it helps us understand our emotion experiences. We do not want to get rid of our emotions, we want strategies that help us respond in helpful, constructive ways."
         },
         {
             "key": "calm_secondary_header",
@@ -290,6 +394,186 @@
         {
             "key": "more_section_name",
             "value": "More Information"
+        },
+        {
+            "key": "timeline_header",
+            "value": "The Timeline"
+        },
+        {
+            "key": "timeline_restart_button",
+            "value": "restart"
+        },
+        {
+            "key": "timeline_intro_body_1",
+            "value": "Our emotions unfold on a timeline. The timeline begins with a trigger that initiates an emotional experience and ultimately results in a response. "
+        },
+        {
+            "key": "timeline_intro_body_2",
+            "value": "Try choosing different emotions from the list below the timeline."
+        },
+        {
+            "key": "timeline_intro_body_3",
+            "value": "Notice how the same trigger can lead to a different response, depending on the emotion we feel."
+        },
+        {
+            "key": "timeline_begin_awareness_button",
+            "value": "How does this happen?"
+        },
+        {
+            "key": "timeline_trigger_header",
+            "value": "Trigger"
+        },
+        {
+            "key": "timeline_trigger_body_1",
+            "value": "The trigger occurs in a context:"
+        },
+        {
+            "key": "timeline_trigger_body_2_list_item_1",
+            "value": "Current circumstances and feelings"
+        },
+        {
+            "key": "timeline_trigger_body_2_list_item_2",
+            "value": "The event"
+        },
+        {
+            "key": "timeline_trigger_body_2_list_item_3",
+            "value": "Our worldview, which is influenced by our prior experiences, personal history and inherited universal scripts about important events"
+        },
+        {
+            "key": "timeline_experience_add_awareness_button",
+            "value": "add awareness"
+        },
+        {
+            "key": "timeline_experience_header",
+            "value": "Experience"
+        },
+        {
+            "key": "timeline_experience_body_1",
+            "value": "The emotional experience that is triggered includes subjective feelings and physical sensations. These color our perception of a situation."
+        },
+        {
+            "key": "timeline_response_add_awareness_button",
+            "value": "add awareness"
+        },
+        {
+            "key": "timeline_response_header",
+            "value": "Response"
+        },
+        {
+            "key": "timeline_response_body_1",
+            "value": "We have a choice in how we respond, although sometimes it's hard to feel in control of our responses. Some responses are more constructive than others. "
+        },
+        {
+            "key": "timeline_begin_refractory_period_button",
+            "value": "Why is it hard to stay aware?"
+        },
+        {
+            "key": "timeline_refractory_header",
+            "value": "Emotion Saturation"
+        },
+        {
+            "key": "timeline_refractory_body_1",
+            "value": "When an emotion is triggered we are in the grip of that emotion, which limits our ability to think clearly and choose how we respond."
+        },
+        {
+            "key": "timeline_refractory_body_2",
+            "value": "As time passes, we gain some clarity and the ability to make a thoughtful choice."
+        },
+        {
+            "key": "timeline_refractory_body_3",
+            "value": "With awareness we can pause before we respond and choose a response that best serves our goals."
+        },
+        {
+            "key": "timeline_begin_block_diagram_button",
+            "value": "See the big picture"
+        },
+        {
+            "key": "timeline_blocks_header",
+            "value": "Big Picture"
+        },
+        {
+            "key": "timeline_blocks_body_1",
+            "value": "You can select each piece of the timeline and learn how researchers make sense of an emotional episode. Then, continue to the <a href=\"#continents/\">Experience</a> section to see how they map our emotional experiences. "
+        },
+        {
+            "key": "timeline_blocks_label_precondition",
+            "value": "Precondition"
+        },
+        {
+            "key": "timeline_blocks_label_event",
+            "value": "Event"
+        },
+        {
+            "key": "timeline_blocks_label_perceptual_database",
+            "value": "Perceptual database"
+        },
+        {
+            "key": "timeline_blocks_label_physical_changes",
+            "value": "Physical changes"
+        },
+        {
+            "key": "timeline_blocks_label_state",
+            "value": "Emotional state"
+        },
+        {
+            "key": "timeline_blocks_label_mental_changes",
+            "value": "Mental changes"
+        },
+        {
+            "key": "timeline_blocks_label_constructive_response",
+            "value": "Constructive response"
+        },
+        {
+            "key": "timeline_blocks_label_destructive_response",
+            "value": "Destructive response"
+        },
+        {
+            "key": "timeline_blocks_label_ambiguous_response",
+            "value": "Ambiguous response"
+        },
+        {
+            "key": "timeline_blocks_caption_precondition",
+            "value": "The context, which influences the way we experience the emotion"
+        },
+        {
+            "key": "timeline_blocks_caption_event",
+            "value": "An event that happens in the world or in our own mind"
+        },
+        {
+            "key": "timeline_blocks_caption_perceptual_database",
+            "value": "How we see the world, which is a result of our personal history and universal scripts; these scripts are outlines of repeated emotional experiences, some inherited, some acquired."
+        },
+        {
+            "key": "timeline_blocks_caption_physical_changes",
+            "value": "The automatic bodily sensations of our emotion"
+        },
+        {
+            "key": "timeline_blocks_caption_emotional_state",
+            "value": "Our combined physical and mental changes"
+        },
+        {
+            "key": "timeline_blocks_caption_mental_changes",
+            "value": "The immediate felt experience of our emotion"
+        },
+        {
+            "key": "timeline_blocks_caption_constructive_response",
+            "value": "A response that helps you in your goals"
+        },
+        {
+            "key": "timeline_blocks_caption_destructive_response",
+            "value": "A response that gets in the way of your goals"
+        },
+        {
+            "key": "timeline_blocks_caption_ambiguous_response",
+            "value": " A response that could be helpful or unhelpful — sometimes we aren't sure"
+        },
+        {
+            "key": "timeline_common_phrase_you_feel",
+            "value": "you feel"
+        },
+        {
+            "key": "strategies_crowdfunding",
+            "value": "We are making an atlas for children! If you would like to support this project, please visit our page on <a target=\"_newWin\" href=\"https://www.indiegogo.com/projects/help-create-an-atlas-of-emotions-for-children#/\"><img src=\"img/Indiegogo-Logo.png\" alt=\"indie gogo\"></a>"
         }
     ],
     [
@@ -308,6 +592,10 @@
         {
             "key": "anger_continent_body_mobile",
             "value": "We feel anger when we are mentally or physically blocked. Anger varies in strength and frequency in our lives."
+        },
+        {
+            "key": "anger_states_body",
+            "value": "Anger contains both annoyance and fury. The intensity of these states varies: We can feel mild or strong annoyance, but we can only feel intense fury. All states of anger are triggered by a feeling of being blocked in our progress."
         },
         {
             "key": "anger_states_header_1",
@@ -364,6 +652,10 @@
         {
             "key": "anger_states_body_7",
             "value": "Uncontrolled and often violent anger."
+        },
+        {
+            "key": "anger_actions_body",
+            "value": "For example, we might suppress our feelings of frustration at work, but scream and yell to express our frustration with a family member. Suppressing our frustration can be constructive in cases where it helps us avoid arguments, but destructive if we are being hurt by not speaking up for ourselves. "
         },
         {
             "key": "anger_actions_header_1",
@@ -488,6 +780,42 @@
         {
             "key": "anger_moods_body",
             "value": "Predisposed to becoming angry, easily provoked. "
+        },
+        {
+            "key": "anger_timeline_trigger_precondition",
+            "value": "you are low on sleep"
+        },
+        {
+            "key": "anger_timeline_trigger_event",
+            "value": "a friend gets angry with you"
+        },
+        {
+            "key": "anger_timeline_trigger_perceptual_database",
+            "value": "you're reminded of a bully"
+        },
+        {
+            "key": "anger_timeline_state_physical_changes",
+            "value": "your body becomes tense"
+        },
+        {
+            "key": "anger_timeline_state_emotion",
+            "value": "anger"
+        },
+        {
+            "key": "anger_timeline_state_mental_changes",
+            "value": "you feel attacked"
+        },
+        {
+            "key": "anger_timeline_response_constructive_response",
+            "value": "take a time out"
+        },
+        {
+            "key": "anger_timeline_response_destructive_response",
+            "value": "argue"
+        },
+        {
+            "key": "anger_timeline_response_ambiguous_response",
+            "value": "avoid them"
         }
     ],
     [
@@ -506,6 +834,10 @@
         {
             "key": "fear_continent_body_mobile",
             "value": "We feel fear when our safety or wellbeing is threatened. Fear varies in strength and frequency in our lives."
+        },
+        {
+            "key": "fear_states_body",
+            "value": "Fear contains both anxiety and terror. The intensity of these states varies: We can feel mild or strong anxiety, but we can only feel intense terror. All states of fear are triggered by feeling a threat of harm."
         },
         {
             "key": "fear_states_header_1",
@@ -570,6 +902,10 @@
         {
             "key": "fear_states_body_8",
             "value": "Intense, overpowering fear."
+        },
+        {
+            "key": "fear_actions_body",
+            "value": "For example, we might avoid feeling anxiety at work, but ruminate on our anxiety at home. Avoiding anxiety can be constructive if it helps us give a presentation to a room full of colleagues, but destructive if it prevents us from confronting our difficult relationship with our boss."
         },
         {
             "key": "fear_actions_header_1",
@@ -678,6 +1014,42 @@
         {
             "key": "fear_moods_body",
             "value": "Anxious that something bad will happen, on edge."
+        },
+        {
+            "key": "fear_timeline_trigger_precondition",
+            "value": "reading scary news"
+        },
+        {
+            "key": "fear_timeline_trigger_event",
+            "value": "a friend gets angry with you"
+        },
+        {
+            "key": "fear_timeline_trigger_perceptual_database",
+            "value": "reminds you of abandonment"
+        },
+        {
+            "key": "fear_timeline_state_physical_changes",
+            "value": "your heart pounds"
+        },
+        {
+            "key": "fear_timeline_state_emotion",
+            "value": "fear"
+        },
+        {
+            "key": "fear_timeline_state_mental_changes",
+            "value": "you expect them to leave"
+        },
+        {
+            "key": "fear_timeline_response_constructive_response",
+            "value": "recall why you're friends"
+        },
+        {
+            "key": "fear_timeline_response_destructive_response",
+            "value": "imagine them leaving"
+        },
+        {
+            "key": "fear_timeline_response_ambiguous_response",
+            "value": "something else..."
         }
     ],
     [
@@ -696,6 +1068,10 @@
         {
             "key": "disgust_continent_body_mobile",
             "value": "We feel disgust when faced with something toxic or unpleasant. Disgust varies in strength and frequency in our lives."
+        },
+        {
+            "key": "disgust_states_body",
+            "value": "Disgust contains both dislike and loathing. The intensity of these states varies: We can feel mild or strong dislike, but we can only feel intense loathing. All states of disgust are triggered by the feeling that something is toxic."
         },
         {
             "key": "disgust_states_header_1",
@@ -752,6 +1128,10 @@
         {
             "key": "disgust_states_body_7",
             "value": "Intense disgust focused on a person. Intense disgust focused on oneself is called self-loathing. "
+        },
+        {
+            "key": "disgust_actions_body",
+            "value": "For example, we might avoid feeling aversion towards others at work, but find ourselves feeling aversion towards individuals we read about in the news. Avoiding aversion can be constructive in overcoming bias, but can be destructive if it leads us to get involved with a harmful person."
         },
         {
             "key": "disgust_actions_header_1",
@@ -828,6 +1208,42 @@
         {
             "key": "disgust_moods_body",
             "value": "Generally repulsed."
+        },
+        {
+            "key": "disgust_timeline_trigger_precondition",
+            "value": "you're grieving"
+        },
+        {
+            "key": "disgust_timeline_trigger_event",
+            "value": "a friend gets angry with you"
+        },
+        {
+            "key": "disgust_timeline_trigger_perceptual_database",
+            "value": "reminds you of insensitivity"
+        },
+        {
+            "key": "disgust_timeline_state_physical_changes",
+            "value": "you recoil"
+        },
+        {
+            "key": "disgust_timeline_state_emotion",
+            "value": "disgust"
+        },
+        {
+            "key": "disgust_timeline_state_mental_changes",
+            "value": "you feel sickened"
+        },
+        {
+            "key": "disgust_timeline_response_constructive_response",
+            "value": "ask why they're angry"
+        },
+        {
+            "key": "disgust_timeline_response_destructive_response",
+            "value": "belittle them"
+        },
+        {
+            "key": "disgust_timeline_response_ambiguous_response",
+            "value": "avoid them"
         }
     ],
     [
@@ -846,6 +1262,10 @@
         {
             "key": "sadness_continent_body_mobile",
             "value": "We feel sadness when we lose something valuable. Sadness varies in strength and frequency in our lives."
+        },
+        {
+            "key": "sadness_states_body",
+            "value": "Sadness contains both disappointment and despair. The intensity of these states varies: We can feel mild or strong disappointment, but we can only feel intense despair. All states of sadness are triggered by a feeling of loss."
         },
         {
             "key": "sadness_states_header_1",
@@ -934,6 +1354,10 @@
         {
             "key": "sadness_states_body_11",
             "value": "Intense sadness or suffering."
+        },
+        {
+            "key": "sadness_actions_body",
+            "value": "For example, we might withdraw from feeling helpless in public, but seek comfort at home. Withdrawing from feeling helpless can be constructive to overcoming intense grief, but destructive if we don't seek support when we need it."
         },
         {
             "key": "sadness_actions_header_1",
@@ -1026,6 +1450,42 @@
         {
             "key": "sadness_moods_body",
             "value": "An enduring feeling of discouragement or disappointment."
+        },
+        {
+            "key": "sadness_timeline_trigger_precondition",
+            "value": "listening to sad music"
+        },
+        {
+            "key": "sadness_timeline_trigger_event",
+            "value": "a friend gets angry with you"
+        },
+        {
+            "key": "sadness_timeline_trigger_perceptual_database",
+            "value": "it reminds you of rejection"
+        },
+        {
+            "key": "sadness_timeline_state_physical_changes",
+            "value": "your body weakens"
+        },
+        {
+            "key": "sadness_timeline_state_emotion",
+            "value": "sadness"
+        },
+        {
+            "key": "sadness_timeline_state_mental_changes",
+            "value": "you feel empty"
+        },
+        {
+            "key": "sadness_timeline_response_constructive_response",
+            "value": "call a loved one"
+        },
+        {
+            "key": "sadness_timeline_response_destructive_response",
+            "value": "be ashamed"
+        },
+        {
+            "key": "sadness_timeline_response_ambiguous_response",
+            "value": "ignore the feeling"
         }
     ],
     [
@@ -1044,6 +1504,10 @@
         {
             "key": "enjoyment_continent_body_mobile",
             "value": "We feel enjoyment when we experience novelty or comfort. Enjoyment varies in strength and frequency in our lives."
+        },
+        {
+            "key": "enjoyment_states_body",
+            "value": "Enjoyment contains both peace and ecstasy. The intensity of these states varies: We can feel mild or strong peacefulness, but we can only feel intense ecstasy. All states of enjoyment are triggered by feeling connection and/or sensory pleasure."
         },
         {
             "key": "enjoyment_states_header_1",
@@ -1131,7 +1595,7 @@
         },
         {
             "key": "enjoyment_states_body_11",
-            "value": "An experience of ease and contenment."
+            "value": "An experience of ease and contentment."
         },
         {
             "key": "enjoyment_states_header_12",
@@ -1148,6 +1612,10 @@
         {
             "key": "enjoyment_states_body_13",
             "value": "Rapturous delight. A state of very great happiness, nearly overwhelming."
+        },
+        {
+            "key": "enjoyment_actions_body",
+            "value": "For example, we might exclaim to express our feeling of amusement among friends, but experience our amusement quietly while alone. Expressing amusement by exclaiming can be constructive as means of sharing enjoyment, but destructive if it's in response to making fun of someone."
         },
         {
             "key": "enjoyment_actions_header_1",
@@ -1256,6 +1724,42 @@
         {
             "key": "enjoyment_moods_body",
             "value": "A long-lasting, generalized good feeling. "
+        },
+        {
+            "key": "enjoyment_timeline_trigger_precondition",
+            "value": "you scored a touchdown"
+        },
+        {
+            "key": "enjoyment_timeline_trigger_event",
+            "value": "a friend gets angry with you"
+        },
+        {
+            "key": "enjoyment_timeline_trigger_perceptual_database",
+            "value": "seems like a sore loser"
+        },
+        {
+            "key": "enjoyment_timeline_state_physical_changes",
+            "value": "adrenaline rush"
+        },
+        {
+            "key": "enjoyment_timeline_state_emotion",
+            "value": "enjoyment"
+        },
+        {
+            "key": "enjoyment_timeline_state_mental_changes",
+            "value": "you feel righteous"
+        },
+        {
+            "key": "enjoyment_timeline_response_constructive_response",
+            "value": "play on"
+        },
+        {
+            "key": "enjoyment_timeline_response_destructive_response",
+            "value": "gloat"
+        },
+        {
+            "key": "enjoyment_timeline_response_ambiguous_response",
+            "value": "celebrate"
         }
     ],
     [
