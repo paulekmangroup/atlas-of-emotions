@@ -25,29 +25,6 @@
 			transform: scale($actions-backgrounded-scale-small);
 		}
 
-		&.triggers {
-
-			// same math as in .actions-container below,
-			// but subtracted from total viewport height
-			// to push .actions-containers to bottom.
-			top: calc((100% - (
-					(100% + #{$states-backgrounded-top}) -
-					(100% * (1 - #{$states-backgrounded-scale}) / 2) -
-					#{$states-backgrounded-scale} * (#{$states-containers-bottom} + 50px/* + #{$actions-margins-bottom}px*/)
-				) - #{$triggers-bottom});
-
-			.small-screen & {
-				// same math as in `.small-screen .actions-container` below,
-				// but offset from triggers bottom and actions bottom margin
-				top: calc(#{$actions-backgrounded-scale-small} * (#{100% - $triggers-bottom-small} - 25px -
-					((100% * (1 - (1 - #{$states-backgrounded-actions-scale-small}) / 2)) +
-					#{$states-backgrounded-actions-top-small} -
-					#{$states-backgrounded-actions-scale-small} * (#{$ui-mobile-footer-height}px + #{$ui-mobile-caption-height} + 50px) -
-					(25px / 2))));
-
-			}
-		}
-
 		.actions-container.active {
 			pointer-events: none;
 		}
@@ -142,7 +119,7 @@
 	.graph-container {
 		width: $actions-graph-width;
 		height: 40%;
-		margin-left: -$actions-graph-width/2;
+		margin-left: -$actions-graph-width*0.5;
 		transform-origin: top;
 
 		// NOTE: overridden by .backgrounded rule above

@@ -154,6 +154,7 @@ $horiz-padding: 20px;
 		user-select: none;
 		touch-action: manipulation;
 		-webkit-appearance: none;
+		cursor: pointer;
 
 		&:before {
 			content: '×';
@@ -168,6 +169,9 @@ $horiz-padding: 20px;
 	}
 }
 
+.muted .popup-template {
+	display: none;
+}
 .popup-template,
 .secondary {
 	.body {
