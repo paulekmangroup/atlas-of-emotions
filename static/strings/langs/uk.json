@@ -1,0 +1,2274 @@
+[
+    [
+        {
+            "key": "site_header",
+            "value": "Атлас емоцій",
+            "English": "Atlas of Emotions"
+        },
+        {
+            "key": "site_dropdown_label",
+            "English": "Choose an emotion"
+        },
+        {
+            "key": "site_learn_more_button",
+            "value": "Дізнатися більше",
+            "English": "learn more"
+        },
+        {
+            "key": "site_close_button",
+            "value": "Закрити",
+            "English": "close"
+        },
+        {
+            "key": "site_back_button",
+            "value": "Повернутися",
+            "English": "Back"
+        },
+        {
+            "key": "navigation_introduction_menu_item",
+            "value": "Вступ",
+            "English": "Introduction"
+        },
+        {
+            "key": "navigation_timeline_menu_item",
+            "value": "Лінія часу",
+            "English": "Timeline"
+        },
+        {
+            "key": "navigation_experience_menu_item",
+            "value": "Досвід",
+            "English": "Experience"
+        },
+        {
+            "key": "navigation_response_menu_item",
+            "value": "Реакція",
+            "English": "Response"
+        },
+        {
+            "key": "navigation_strategies_menu_item",
+            "value": "Стратегії",
+            "English": "Strategies"
+        },
+        {
+            "key": "navigation_all_menu_item",
+            "value": "Всі",
+            "English": "all"
+        },
+        {
+            "key": "navigation_introduction_section_header",
+            "value": "Вступ",
+            "English": "Introduction"
+        },
+        {
+            "key": "navigation_timeline_section_header",
+            "value": "Лінія часу",
+            "English": "The Timeline"
+        },
+        {
+            "key": "navigation_experience_section_header",
+            "value": "Наш досвід",
+            "English": "Our Experience"
+        },
+        {
+            "key": "navigation_response_section_header",
+            "value": "Наша реакція",
+            "English": "Our Response"
+        },
+        {
+            "key": "navigation_strategies_section_header",
+            "value": "Стратегії",
+            "English": "Strategies"
+        },
+        {
+            "key": "intro_header",
+            "value": "Вітаємо в «Атласі емоцій»",
+            "English": "Welcome to the Atlas of Emotions"
+        },
+        {
+            "key": "intro_body_mobile",
+            "English": "This Atlas was inspired by a series of conversations about the science of emotion between the Dalai Lama and Dr. Paul Ekman. Created in collaboration with Stamen Design and Paul’s daughter, Dr. Eve Ekman, the Atlas of Emotions is an interactive visual journey through the world of emotions."
+        },
+        {
+            "key": "intro_secondary_header_1",
+            "English": "Welcome to the Atlas of Emotions"
+        },
+        {
+            "key": "intro_secondary_copy_1",
+            "English": "The first step to managing your emotions is learning to identify and describe what you are feeling."
+        },
+        {
+            "key": "intro_caption_1",
+            "English": "This Atlas is a visual tool to build your emotion vocabulary. The goal is to increase choice in what we become emotional about and how we respond."
+        },
+        {
+            "key": "intro_secondary_header_2",
+            "English": "Navigating the Atlas"
+        },
+        {
+            "key": "intro_secondary_copy_2",
+            "English": "There are 5 emotions to explore. Discover more about each emotion as you interact with the shapes. Navigate by clicking down, left and right.<br><br>\nConsider each emotion and reflect on how it relates to your lived experience."
+        },
+        {
+            "key": "intro_caption_2"
+        },
+        {
+            "key": "intro_secondary_header_3",
+            "English": "The atlas: a new kind of map"
+        },
+        {
+            "key": "intro_secondary_copy_3",
+            "English": "The Atlas was commissioned by the Dalai Lama to create a scientifically-based road map to emotional self-awareness. Dr. Paul Ekman and his daughter, Eve Ekman, based the Atlas on a <a href=\"http://pps.sagepub.com/content/11/1/31.full.pdf?ijkey=AMIJzv8J9Tn0VF1&keytype=finite\" target=\"_blank\">study</a> they conducted.<br><br>\nThe scientists surveyed in the study agreed that these five emotions are the most universally felt:"
+        },
+        {
+            "key": "intro_caption_3",
+            "English": "Pick any emotion and start exploring."
+        },
+        {
+            "key": "intro_section_name",
+            "English": "Introduction"
+        },
+        {
+            "key": "intro_button_goto",
+            "English": "go to atlas"
+        },
+        {
+            "key": "intro_button_start",
+            "English": "Take a tour"
+        },
+        {
+            "key": "intro_button_back",
+            "English": "back"
+        },
+        {
+            "key": "intro_button_why",
+            "English": "why an atlas?"
+        },
+        {
+            "key": "intro_button_start",
+            "English": "get started"
+        },
+        {
+            "key": "intro_gfx_left",
+            "English": "left"
+        },
+        {
+            "key": "intro_gfx_right",
+            "English": "right"
+        },
+        {
+            "key": "intro_gfx_down",
+            "English": "down"
+        },
+        {
+            "key": "intro_gfx_chart_anger",
+            "English": "anger is universal"
+        },
+        {
+            "key": "intro_gfx_chart_fear",
+            "English": "fear is universal"
+        },
+        {
+            "key": "intro_gfx_chart_disgust",
+            "English": "disgust is universal"
+        },
+        {
+            "key": "intro_gfx_chart_sadness",
+            "English": "sadness is universal"
+        },
+        {
+            "key": "intro_gfx_chart_enjoyment",
+            "English": "enjoyment is universal"
+        },
+        {
+            "key": "hero_header",
+            "value": "Вітаємо в «Атласі емоцій»",
+            "English": "Welcome to the Atlas of Emotions"
+        },
+        {
+            "key": "hero_section_name",
+            "value": "Вступ",
+            "English": "Introduction"
+        },
+        {
+            "key": "hero_sub_header",
+            "value": "За підтримки Далай-лами",
+            "English": "Supported by the Dalai Lama"
+        },
+        {
+            "key": "hero_sub_header_learn_more",
+            "value": "дізнатися більше",
+            "English": "learn more"
+        },
+        {
+            "key": "hero_slide_1",
+            "value": "«Атлас» — інтерактивний інструмент, який формує словник емоцій і прояснює емоційний світ.",
+            "English": "The Atlas is an interactive tool that builds your vocabulary of emotions and illuminates your emotional world. "
+        },
+        {
+            "key": "hero_slide_2",
+            "value": "Мета — навчитися краще контролювати те, що викликає у вас емоції, і те, як ви реагуєте.",
+            "English": "The goal is to gain greater control over what triggers your emotions and how you respond. "
+        },
+        {
+            "key": "hero_slide_3",
+            "value": "Перший крок до емоційного усвідомлення — навчитися визначати й описувати свої емоції та їхню причину.",
+            "English": "The first step towards emotional awareness is learning to identify and describe how you are feeling, and why."
+        },
+        {
+            "key": "hero_about_header",
+            "value": "Про «Атлас»",
+            "English": "About the Atlas"
+        },
+        {
+            "key": "hero_about_body_1",
+            "value": "Далай-лама уявив таку собі карту емоцій, яка допоможе розвинути спокійний розум. Він звернувся до свого давнього приятеля, відомого дослідника емоцій доктора Пола Екмана, щоб той допоміг втілити його ідею. Екман взявся за створення «Атласу» разом зі своєю донькою Ів Екман, теж дослідницею та викладачкою. Далай-лама попросив, щоб в «Атласі» були представлені знання, які науковці здобули в ході психологічного дослідження емоцій.",
+            "English": "The Dalai Lama imagined \"a map of our emotions to develop a calm mind.\" He asked his longtime friend and renowned emotion scientist Dr. Paul Ekman to realize his idea. Ekman took on the creation of the Atlas alongside his daughter, Eve Ekman, a second-generation emotion researcher and teacher. The Dalai Lama requested the Atlas represent the science of Emotions from what researchers have learned from the psychological study of emotion."
+        },
+        {
+            "key": "hero_call_to_action_button",
+            "value": "Почати",
+            "English": "Begin"
+        },
+        {
+            "key": "continents_header",
+            "value": "Пʼять універсальних емоцій",
+            "English": "Five Universal Emotions"
+        },
+        {
+            "key": "continents_body",
+            "value": "Більшість дослідників погоджуються, що ці пʼять емоцій універсальні, тобто притаманні всім людям, незалежно від того, в якій культурі вони зростали. Рух фігур відбиває мінливу природу емоцій — те, як їхня сила й частота щомиті змінюються. Оберіть емоцію, щоб дізнатися більше.",
+            "English": "Most emotions researchers agree on these five Universal Emotions: emotions that all humans, no matter where or how we were raised, have in common. The movement of the shapes reflects the fluid nature of emotions – the way their strength and frequency varies from moment to moment. Select an emotion to learn more."
+        },
+        {
+            "key": "continents_body_mobile",
+            "value": "Більшість дослідників погоджуються, що ці пʼять емоцій універсальні, тобто притаманні всім людям, незалежно від того, в якій культурі вони зростали. Торкніться емоції, щоб почати її досліджувати.",
+            "English": "Most emotions researchers agree on these five Universal Emotions: emotions that all humans, no matter where or how we were raised, have in common. Tap on an emotion to start exploring."
+        },
+        {
+            "key": "continents_section_name",
+            "value": "Універсальні емоції",
+            "English": "Universal Emotions"
+        },
+        {
+            "key": "states_header",
+            "value": "Стани LHAMO",
+            "English": "States of LHAMO"
+        },
+        {
+            "key": "states_body",
+            "value": "Тут ми досліджуємо різні стани та інтенсивність у межах однієї групи емоцій. ",
+            "English": "Here we explore different states and intensities within one emotion family. "
+        },
+        {
+            "key": "states_axis_labels",
+            "value": "Найменш інтенсивний, найбільш інтенсивний",
+            "English": "Least intense, most intense"
+        },
+        {
+            "key": "states_body_mobile",
+            "English": "LHAMO can be felt mildly, extremely, or somewhere in between. Tap on the shapes above to learn about a few of the states that we can experience."
+        },
+        {
+            "key": "states_section_name",
+            "value": "Стани",
+            "English": "States"
+        },
+        {
+            "key": "states_interaction_prompt",
+            "value": "Оберіть фігуру, щоб дізнатися, які стани ми можемо переживати. ",
+            "English": "Select a shape to learn about some of the states we can experience. "
+        },
+        {
+            "key": "actions_header",
+            "English": "Actions of LHAMO"
+        },
+        {
+            "key": "actions_body",
+            "value": "На емоційні стани ми реагуємо діями. Наша реакція на ту саму емоцію може відрізнятися залежно від обставин. Це може бути первинна, імпульсивна реакція або ж вторинна, більш обдумана реакція. Будь-яка реакція може бути конструктивною й корисною для нас, для інших, для ситуації або ж деструктивною й неефективною.",
+            "English": "We respond to emotional states with our actions. Our responses to the same emotion may differ depending on the circumstances. We may have a primary, more immediate response, and a secondary more thoughtful response. Any response can be constructive and helpful to ourselves, others and the situation, or destructive and not helpful."
+        },
+        {
+            "key": "actions_body_mobile",
+            "value": "На емоційні стани ми реагуємо діями. Торкніться фігури, щоб дізнатися про можливі дії, які є наслідком LHAMO.",
+            "English": "We respond to emotional states with our actions. Tap on the shapes to learn about the possible actions resulting from LHAMO."
+        },
+        {
+            "key": "actions_secondary_header_1",
+            "value": "Конструктивні дії",
+            "English": "Constructive Actions"
+        },
+        {
+            "key": "actions_secondary_copy_1",
+            "value": "У такому стані дія є КОНСТРУКТИВНОЮ. Це доречна реакція на емоцію.",
+            "English": "In this state, this action is CONSTRUCTIVE. It’s a useful response to the emotion."
+        },
+        {
+            "key": "actions_secondary_header_2",
+            "value": "Неоднозначні дії",
+            "English": "Ambiguous Actions"
+        },
+        {
+            "key": "actions_secondary_copy_2",
+            "value": "У такому стані дія є НЕОДНОЗНАЧНОЮ. Вона може бути або корисною реакцією на емоцію, або ж може завдати шкоди.",
+            "English": "In this state, this action is AMBIGUOUS. It could either be a useful response to the emotion or it could cause harm."
+        },
+        {
+            "key": "actions_secondary_header_3",
+            "value": "Деструктивні дії",
+            "English": "Destructive Actions"
+        },
+        {
+            "key": "actions_secondary_copy_3",
+            "value": "У такому стані дія є ДЕСТРУКТИВНОЮ. Вона може завдати шкоди.",
+            "English": "In this state, this action is DESTRUCTIVE. It could cause harm."
+        },
+        {
+            "key": "actions_section_name",
+            "value": "Дії",
+            "English": "Actions"
+        },
+        {
+            "key": "actions_interaction_prompt",
+            "value": "Оберіть фігуру, щоб дізнатися, які стани ми можемо переживати. Тоді оберіть дію, щоб дізнатися більше.",
+            "English": "Select a shape to learn about some of the states we can experience. Then select an action to learn more. "
+        },
+        {
+            "key": "triggers_header",
+            "English": "Triggers of LHAMO"
+        },
+        {
+            "key": "triggers_body",
+            "English": "A trigger is something around us or in our own minds that causes us to feel an emotion. Select the labels to learn about triggering LHAMO."
+        },
+        {
+            "key": "triggers_body_mobile",
+            "English": "A trigger is something around us or in our own minds that causes us to feel an emotion. Tap on the labels to learn about triggering LHAMO."
+        },
+        {
+            "key": "triggers_secondary_header_1",
+            "English": "Triggers"
+        },
+        {
+            "key": "triggers_secondary_body_1",
+            "English": "Some triggers are hardwired and universal for everyone, other triggers are learned from the world around us and our individual experience."
+        },
+        {
+            "key": "triggers_secondary_header_2",
+            "English": "Perception"
+        },
+        {
+            "key": "triggers_secondary_body_2",
+            "English": "Past personal experience determines whether or not a learned trigger makes us feel emotional. Universal triggers break through regardless."
+        },
+        {
+            "key": "triggers_secondary_header_3",
+            "English": "Response"
+        },
+        {
+            "key": "triggers_secondary_body_3",
+            "English": "Emotion is our automatic response to being triggered. The state of emotion we feel and the actions we take often happen without our realizing why."
+        },
+        {
+            "key": "triggers_secondary_header_4",
+            "English": "Universal Triggers"
+        },
+        {
+            "key": "triggers_secondary_body_4",
+            "English": "This is an example of a universal trigger. Everyone has the same universal triggers – we're born with them. They affect us more intensely than learned triggers.\r\r"
+        },
+        {
+            "key": "triggers_secondary_header_5",
+            "English": "Learned Triggers"
+        },
+        {
+            "key": "triggers_secondary_body_5",
+            "English": "This is an example of a learned trigger. Some learned triggers are shared across a culture, while others are highly personal and created by individual experiences. \r"
+        },
+        {
+            "key": "triggers_section_name",
+            "English": "Triggers"
+        },
+        {
+            "key": "moods_header",
+            "value": "Настрій LHAMO",
+            "English": "A Mood of LHAMO"
+        },
+        {
+            "key": "moods_body",
+            "value": "Настрої — це триваліші родичі емоцій, які змушують нас знову відчувати певну емоцію без жодного чіткого тригера. Оберіть фігуру, щоб дізнатися більше.",
+            "English": "Moods are longer-lasting cousins of an emotion that cause us to feel the related emotion repeatedly without any clear trigger. Select the shape to learn more."
+        },
+        {
+            "key": "moods_body_mobile",
+            "value": "Настрої — це триваліші родичі емоцій, які змушують нас знову відчувати певну емоцію без жодного чіткого тригера. Торкніться фігури, щоб дізнатися більше.",
+            "English": "Moods are longer-lasting cousins of an emotion that cause us to feel the related emotion repeatedly without any clear trigger. Tap on the shape to learn more."
+        },
+        {
+            "key": "moods_section_name",
+            "value": "Настрої",
+            "English": "Moods"
+        },
+        {
+            "key": "calm_header",
+            "value": "Відчуття спокою",
+            "English": "Experiencing Calm"
+        },
+        {
+            "key": "calm_body",
+            "value": "«Атлас емоцій» створений на замовлення Далай-лами: «У пошуках нового світу нам потрібна карта, а в пошуках спокійного розуму — карта наших емоцій».\nПросте й водночас нелегке завдання «Атласу» — допомогти нам усвідомити свої емоції. Зрозуміти, як вони виникають, як ми їх відчуваємо і реагуємо на них. Усвідомлення вже є стратегією, оскільки дає змогу краще зрозуміти наші емоційні переживання. Ми не прагнемо позбутися емоцій — ми шукаємо способи, які допомагають нам реагувати на них конструктивно.",
+            "English": "The Atlas of Emotion was commissioned by the Dalai Lama, his purpose is “ In order to find the new world we needed a map, and in order for us to find a calm mind we need a map of our emotions”. The simple, but not easy, goal of this Atlas is to help us be aware of our emotions. Awareness of our emotions means understanding how they are triggered, what they feel like and how we respond. Awareness itself is a strategy, it helps us understand our emotion experiences. We do not want to get rid of our emotions, we want strategies that help us respond in helpful, constructive ways."
+        },
+        {
+            "key": "calm_body_mobile",
+            "value": "«Атлас емоцій» створений на замовлення Далай-лами: «У пошуках нового світу нам потрібна карта, а в пошуках спокійного розуму — карта наших емоцій».\nПросте й водночас нелегке завдання «Атласу» — допомогти нам усвідомити свої емоції. Зрозуміти, як вони виникають, як ми їх відчуваємо і реагуємо на них. Усвідомлення вже є стратегією, оскільки дає змогу краще зрозуміти наші емоційні переживання. Ми не прагнемо позбутися емоцій — ми шукаємо способи, які допомагають нам реагувати на них конструктивно.",
+            "English": "The Atlas of Emotion was commissioned by the Dalai Lama, his purpose is “ In order to find the new world we needed a map, and in order for us to find a calm mind we need a map of our emotions”. The simple, but not easy, goal of this Atlas is to help us be aware of our emotions. Awareness of our emotions means understanding how they are triggered, what they feel like and how we respond. Awareness itself is a strategy, it helps us understand our emotion experiences. We do not want to get rid of our emotions, we want strategies that help us respond in helpful, constructive ways."
+        },
+        {
+            "key": "calm_secondary_header",
+            "English": "Visit the Annex"
+        },
+        {
+            "key": "calm_secondary_body",
+            "English": "To learn more about emotions, click on “More Information” in the bottom right corner."
+        },
+        {
+            "key": "calm_button_label",
+            "English": "Start over"
+        },
+        {
+            "key": "calm_section_name",
+            "value": "Спокій",
+            "English": "Calm"
+        },
+        {
+            "key": "more_button_label",
+            "English": "Back to Atlas"
+        },
+        {
+            "key": "more_section_name",
+            "English": "More Information"
+        },
+        {
+            "key": "timeline_header",
+            "value": "Лінія часу",
+            "English": "The Timeline"
+        },
+        {
+            "key": "timeline_restart_button",
+            "value": "Почати знову",
+            "English": "restart"
+        },
+        {
+            "key": "timeline_intro_body_1",
+            "value": "Наші емоції мають певну хронологію. Точкою відліку на лінії часу є тригер, який активізує емоційний досвід і в результаті спричиняє реакцію.",
+            "English": "Our emotions unfold on a timeline. The timeline begins with a trigger that initiates an emotional experience and ultimately results in a response. "
+        },
+        {
+            "key": "timeline_intro_body_2",
+            "value": "Спробуйте обрати різні емоції зі списку під лінією часу.",
+            "English": "Try choosing different emotions from the list below the timeline."
+        },
+        {
+            "key": "timeline_intro_body_3",
+            "value": "Зверніть увагу, як той самий тригер може спричиняти різну реакцію залежно від емоції, яку ми відчуваємо.",
+            "English": "Notice how the same trigger can lead to a different response, depending on the emotion we feel."
+        },
+        {
+            "key": "timeline_begin_awareness_button",
+            "value": "Як це відбувається?",
+            "English": "How does this happen?"
+        },
+        {
+            "key": "timeline_trigger_header",
+            "value": "Тригер",
+            "English": "Trigger"
+        },
+        {
+            "key": "timeline_trigger_body_1",
+            "value": "Тригер виникає в контексті:",
+            "English": "The trigger occurs in a context:"
+        },
+        {
+            "key": "timeline_trigger_body_2_list_item_1",
+            "value": "Поточні обставини та почуття",
+            "English": "Current circumstances and feelings"
+        },
+        {
+            "key": "timeline_trigger_body_2_list_item_2",
+            "value": "Подія",
+            "English": "The event"
+        },
+        {
+            "key": "timeline_trigger_body_2_list_item_3",
+            "value": "Наш світогляд, на який впливає попередній досвід, особиста історія та успадковані універсальні сценарії щодо важливих подій",
+            "English": "Our worldview, which is influenced by our prior experiences, personal history and inherited universal scripts about important events"
+        },
+        {
+            "key": "timeline_experience_add_awareness_button",
+            "value": "Плюс усвідомленість",
+            "English": "add awareness"
+        },
+        {
+            "key": "timeline_experience_header",
+            "value": "Досвід",
+            "English": "Experience"
+        },
+        {
+            "key": "timeline_experience_body_1",
+            "value": "Активований тригером емоційний досвід охоплює суб'єктивні почуття і фізичні відчуття. Вони забарвлюють наше сприйняття ситуації.",
+            "English": "The emotional experience that is triggered includes subjective feelings and physical sensations. These color our perception of a situation."
+        },
+        {
+            "key": "timeline_response_add_awareness_button",
+            "value": "Плюс усвідомленість",
+            "English": "add awareness"
+        },
+        {
+            "key": "timeline_response_header",
+            "value": "Реакція",
+            "English": "Response"
+        },
+        {
+            "key": "timeline_response_body_1",
+            "value": "Ми маємо вибір, хоч часом важко контролювати свої реакції. Деякі реакції конструктивніші за інші.",
+            "English": "We have a choice in how we respond, although sometimes it's hard to feel in control of our responses. Some responses are more constructive than others. "
+        },
+        {
+            "key": "timeline_begin_refractory_period_button",
+            "value": "Чому так важко залишатися усвідомленим?",
+            "English": "Why is it hard to stay aware?"
+        },
+        {
+            "key": "timeline_refractory_header",
+            "value": "Насиченість емоцій",
+            "English": "Emotion Saturation"
+        },
+        {
+            "key": "timeline_refractory_body_1",
+            "value": "Коли виникає емоція, ми опиняємося в її полоні, що обмежує нашу здатність ясно мислити й обирати, як реагувати.",
+            "English": "When an emotion is triggered we are in the grip of that emotion, which limits our ability to think clearly and choose how we respond."
+        },
+        {
+            "key": "timeline_refractory_body_2",
+            "value": "З часом розум прояснюється ― і ми знову можемо робити зважений вибір.",
+            "English": "As time passes, we gain some clarity and the ability to make a thoughtful choice."
+        },
+        {
+            "key": "timeline_refractory_body_3",
+            "value": "Залишаючись усвідомленими, ми можемо зробити паузу, перш ніж реагувати, і обрати ту реакцію, яка відповідає нашим цілям.",
+            "English": "With awareness we can pause before we respond and choose a response that best serves our goals."
+        },
+        {
+            "key": "timeline_begin_block_diagram_button",
+            "value": "Побачити загальну картину",
+            "English": "See the big picture"
+        },
+        {
+            "key": "timeline_blocks_header",
+            "value": "Загальна картина",
+            "English": "Big Picture"
+        },
+        {
+            "key": "timeline_blocks_body_1",
+            "value": "Ви можете обрати кожен пункт на лінії часу та дізнатися, як дослідники тлумачать емоційний епізод. Потім перейдіть до розділу <a href=\"#continents/\">Experience</a> , щоб побачити, як вони створюють мапу наших емоційних переживань.",
+            "English": "You can select each piece of the timeline and learn how researchers make sense of an emotional episode. Then, continue to the <a href=\"#continents/\">Experience</a> section to see how they map our emotional experiences. "
+        },
+        {
+            "key": "timeline_blocks_label_precondition",
+            "value": "Передумова",
+            "English": "Precondition"
+        },
+        {
+            "key": "timeline_blocks_label_event",
+            "value": "Подія",
+            "English": "Event"
+        },
+        {
+            "key": "timeline_blocks_label_perceptual_database",
+            "value": "База даних сприйняття",
+            "English": "Perceptual database"
+        },
+        {
+            "key": "timeline_blocks_label_physical_changes",
+            "value": "Фізичні зміни",
+            "English": "Physical changes"
+        },
+        {
+            "key": "timeline_blocks_label_state",
+            "value": "Емоційний стан",
+            "English": "Emotional state"
+        },
+        {
+            "key": "timeline_blocks_label_mental_changes",
+            "value": "Психічні зміни",
+            "English": "Mental changes"
+        },
+        {
+            "key": "timeline_blocks_label_constructive_response",
+            "value": "Конструктивна реакція",
+            "English": "Constructive response"
+        },
+        {
+            "key": "timeline_blocks_label_destructive_response",
+            "value": "Деструктивна реакція",
+            "English": "Destructive response"
+        },
+        {
+            "key": "timeline_blocks_label_ambiguous_response",
+            "value": "Неоднозначна реакція",
+            "English": "Ambiguous response"
+        },
+        {
+            "key": "timeline_blocks_caption_precondition",
+            "value": "Контекст, який впливає на те, як ми переживаємо емоцію",
+            "English": "The context, which influences the way we experience the emotion"
+        },
+        {
+            "key": "timeline_blocks_caption_event",
+            "value": "Подія, яка відбувається у світі або в нашій уяві",
+            "English": "An event that happens in the world or in our own mind"
+        },
+        {
+            "key": "timeline_blocks_caption_perceptual_database",
+            "value": "Те, як ми сприймаємо світ, є результатом нашої особистої історії та універсальних сценаріїв — шаблонів повторюваних емоційних переживань, частково успадкованих, частково набутих.",
+            "English": "How we see the world, which is a result of our personal history and universal scripts; these scripts are outlines of repeated emotional experiences, some inherited, some acquired."
+        },
+        {
+            "key": "timeline_blocks_caption_physical_changes",
+            "value": "Автоматичні тілесні відчуття емоцій",
+            "English": "The automatic bodily sensations of our emotion"
+        },
+        {
+            "key": "timeline_blocks_caption_emotional_state",
+            "value": "Комплексні фізичні та психічні зміни",
+            "English": "Our combined physical and mental changes"
+        },
+        {
+            "key": "timeline_blocks_caption_mental_changes",
+            "value": "Первинне відчуття емоції",
+            "English": "The immediate felt experience of our emotion"
+        },
+        {
+            "key": "timeline_blocks_caption_constructive_response",
+            "value": "Реакція, яка сприяє досягненню мети",
+            "English": "A response that helps you in your goals"
+        },
+        {
+            "key": "timeline_blocks_caption_destructive_response",
+            "value": "Реакція, яка заважає досягненню мети",
+            "English": "A response that gets in the way of your goals"
+        },
+        {
+            "key": "timeline_blocks_caption_ambiguous_response",
+            "value": "Реакція, яка може бути або сприятливою, або несприятливою",
+            "English": " A response that could be helpful or unhelpful — sometimes we aren't sure"
+        },
+        {
+            "key": "timeline_common_phrase_you_feel",
+            "value": "ви відчуваєте",
+            "English": "you feel"
+        },
+        {
+            "key": "strategies_crowdfunding",
+            "value": "Ми створюємо атлас для дітей! Якщо хочете підтримати цей проєкт, відвідайте нашу сторінку <a target=\"_newWin\" href=\"https://www.indiegogo.com/projects/help-create-an-atlas-of-emotions-for-children#/\"><img src=\"img/Indiegogo-Logo.png\" alt=\"indie gogo\"></a>",
+            "English": "We are making an atlas for children! If you would like to support this project, please visit our page on <a target=\"_newWin\" href=\"https://www.indiegogo.com/projects/help-create-an-atlas-of-emotions-for-children#/\"><img src=\"img/Indiegogo-Logo.png\" alt=\"indie gogo\"></a>"
+        }
+    ],
+    [
+        {
+            "key": "anger_continent_header",
+            "value": "Злість",
+            "english": "Anger",
+            "Переклад": " "
+        },
+        {
+            "key": "anger_continent_header_mobile",
+            "value": "Злість",
+            "english": "Anger",
+            "Переклад": "Гнів"
+        },
+        {
+            "key": "anger_continent_body",
+            "value": "Ми починаємо злитися, коли нам щось заважає або коли нам здається, що до нас ставляться несправедливо.",
+            "english": "We get angry when something blocks us or when we think we're being treated unfairly.",
+            "Переклад": "Ми сердимося, коли нам щось заважає або коли нам здається, що до нас ставляться несправедливо."
+        },
+        {
+            "key": "anger_continent_body_mobile",
+            "value": "Ми відчуваємо злість, коли наражаємося на перешкоди — фізичні або психологічні. Її сила та частота в нашому житті можуть варіюватися.",
+            "english": "We feel anger when we are mentally or physically blocked. Anger varies in strength and frequency in our lives.",
+            "Переклад": "Ми відчуваємо злість, коли стикаємось із перешкодами — фізичними або психологічними. Її сила та частота в нашому житті можуть варіюватися."
+        },
+        {
+            "key": "anger_states_body",
+            "value": "Гнів включає в себе як роздратування, так і лють. Інтенсивність цих станів буває різною: ми можемо відчувати як легке, так і сильне роздратування, натомість лють буває тільки дуже сильною. Усі прояви гніву виникають у відповідь на відчуття, що нашому руху щось заважає.",
+            "english": "Anger contains both annoyance and fury. The intensity of these states varies: We can feel mild or strong annoyance, but we can only feel intense fury. All states of anger are triggered by a feeling of being blocked in our progress.",
+            "Переклад": "Гнів включає в себе як роздратування, так і лють. Інтенсивність цих станів буває різною: ми можемо відчувати як легке, так і сильне роздратування, натомість лють буває тільки дуже сильною. Усі прояви гніву виникають у відповідь на відчуття, що нашому руху щось заважає."
+        },
+        {
+            "key": "anger_states_header_1",
+            "value": "Роздратування",
+            "english": "Annoyance",
+            "Переклад": "Роздратування"
+        },
+        {
+            "key": "anger_states_body_1",
+            "value": "Легка злість, викликана прикрістю чи незручністю. ",
+            "english": "Very mild anger caused by a nuisance or inconvenience. ",
+            "Переклад": "Дуже слабкий гнів, викликаний прикрістю або незручністю. "
+        },
+        {
+            "key": "anger_states_header_2",
+            "value": "Фрустрація",
+            "english": "Frustration",
+            "Переклад": "Фрустрація"
+        },
+        {
+            "key": "anger_states_body_2",
+            "value": "Реакція на численні невдачі в подоланні перешкоди.",
+            "english": "A response to repeated failures to overcome an obstacle."
+        },
+        {
+            "key": "anger_states_header_3",
+            "value": "Сварливість",
+            "english": "Argumentativeness",
+            "Переклад": "Реакція на численні невдачі в подоланні перешкоди."
+        },
+        {
+            "key": "anger_states_body_3",
+            "value": "Схильність до суперечок.",
+            "english": "A tendency to engage in disagreements.",
+            "Переклад": "Схильність до суперечок."
+        },
+        {
+            "key": "anger_states_header_4",
+            "value": "Образа",
+            "english": "Bitterness",
+            "Переклад": "Образа"
+        },
+        {
+            "key": "anger_states_body_4",
+            "value": "Злість у відповідь на несправедливість.",
+            "english": "Anger after unfair treatment. ",
+            "Переклад": "Гнів у відповідь на несправедливість."
+        },
+        {
+            "key": "anger_states_header_5",
+            "value": "Озлобленість",
+            "english": "Exasperation",
+            "Переклад": "Озлобленість"
+        },
+        {
+            "key": "anger_states_body_5",
+            "value": "Злість, спричинена повторюваною або сильною неприємністю.",
+            "english": "Anger caused by a repeated or strong nuisance. ",
+            "Переклад": "Гнів, викликаний повторюваною або сильною неприємністю. "
+        },
+        {
+            "key": "anger_states_header_6",
+            "value": "Мстивість",
+            "english": "Vengefulness",
+            "Переклад": "Мстивість"
+        },
+        {
+            "key": "anger_states_body_6",
+            "value": "Бажання помститися, коли вас образили.",
+            "english": "Desire to retaliate after one is hurt. ",
+            "Переклад": "Бажання помститися, коли вас образили."
+        },
+        {
+            "key": "anger_states_header_7",
+            "value": "Лють",
+            "english": "Fury",
+            "Переклад": "Лють"
+        },
+        {
+            "key": "anger_states_body_7",
+            "value": "Неконтрольований і часто жорстокий гнів.",
+            "english": "Uncontrolled and often violent anger.",
+            "Переклад": "Неконтрольований і часто жорстокий гнів."
+        },
+        {
+            "key": "anger_actions_body",
+            "value": "Наприклад, ми можемо притлумлювати роздратування на роботі, але вдома кричати й зриватися, виражаючи його в спілкуванні з близькою людиною. Стримування може бути конструктивним, якщо допомагає уникнути конфлікту, а може бути деструктивним, якщо нас ранить те, що ми не можемо відстояти себе.",
+            "english": "For example, we might suppress our feelings of frustration at work, but scream and yell to express our frustration with a family member. Suppressing our frustration can be constructive in cases where it helps us avoid arguments, but destructive if we are being hurt by not speaking up for ourselves. ",
+            "Переклад": "Наприклад, ми можемо стримувати роздратування на роботі, але вдома — кричати й зриватися, висловлюючи його в спілкуванні з близькою людиною. Стримування може бути конструктивним, якщо допомагає уникнути конфлікту, а може бути деструктивним — якщо нас ранить те, що ми не можемо відстояти себе."
+        },
+        {
+            "key": "anger_actions_header_1",
+            "value": "Сваритися",
+            "english": "Quarrel",
+            "Переклад": "Сваритися"
+        },
+        {
+            "key": "anger_actions_body_1",
+            "value": "Словесне протистояння, спрямоване на ескалацію конфлікту.",
+            "english": "Verbally oppose in a manner intended to escalate the disagreement.",
+            "Переклад": "Словесне протистояння, спрямоване на ескалацію конфлікту."
+        },
+        {
+            "key": "anger_actions_header_2",
+            "value": "Ображати",
+            "english": "Insult",
+            "Переклад": "Ображати"
+        },
+        {
+            "key": "anger_actions_body_2",
+            "value": "Образлива чи болісна зневага іншої людини, що, ймовірніше, роздмухає конфлікт, а не вирішить його.",
+            "english": "Disparage the other person in an offensive or hurtful way that is likely to escalate the conflict rather than resolve it.",
+            "Переклад": "Образлива чи болісна зневага іншої людини, що, швидше за все, роздмухає конфлікт, а не владнає його."
+        },
+        {
+            "key": "anger_actions_header_3",
+            "value": "Шкодити",
+            "english": "Undermine",
+            "Переклад": "Шкодити"
+        },
+        {
+            "key": "anger_actions_body_3",
+            "value": "Зробити щось, що послабить когось чи зробить менш ефективним, зазвичай крадькома або поступово. ",
+            "english": "Take action to make someone or something weaker or less effective, usually in a secret or gradual way.",
+            "Переклад": "Вжити дій, які послаблюють когось, або щось, зазвичай поступово або непомітно."
+        },
+        {
+            "key": "anger_actions_header_4",
+            "value": "Сперечатися",
+            "english": "Dispute",
+            "Переклад": "Сперечатися"
+        },
+        {
+            "key": "anger_actions_body_4",
+            "value": "Незгода у такий спосіб, що може призвести до загострення конфлікту.",
+            "english": "Disagree in a manner that may escalate the conflict.",
+            "Переклад": "Не погоджуватись у такий спосіб, що може призвести до ескалації конфлікту."
+        },
+        {
+            "key": "anger_actions_header_5",
+            "value": "Кричати / підвищувати голос",
+            "english": "Scream/yell",
+            "Переклад": "Кричати/підвищувати голос"
+        },
+        {
+            "key": "anger_actions_body_5",
+            "value": "Втрата контролю над своїм мовленням; говорити голосно та, ймовірно, на підвищених тонах. ",
+            "english": "Lose control of one's speech; speak loudly and possibly at a higher pitch.",
+            "Переклад": "Втрата контролю над своєю мовою; говорити голосно і, йомовірно, на підвищених тонах."
+        },
+        {
+            "key": "anger_actions_header_6",
+            "value": "Ужити фізичної сили",
+            "english": "Use physical force",
+            "Переклад": "Застосувати фізичну силу"
+        },
+        {
+            "key": "anger_actions_body_6",
+            "value": "Шкодити комусь або заганяти в пастку",
+            "english": "Harm or trap someone.",
+            "Переклад": "Завдання шкоди або знерухомлення когось"
+        },
+        {
+            "key": "anger_actions_header_7",
+            "value": "Стримуватися",
+            "english": "Suppress",
+            "Переклад": "Стримуватися"
+        },
+        {
+            "key": "anger_actions_body_7",
+            "value": "Спроби не відчувати або не реагувати на емоцію, яку ви проживаєте. ",
+            "english": "Try to avoid feeling or acting upon the emotion that is being experienced.",
+            "Переклад": "Намагання не відчувати і не реагувати на емоцію, яку ви проживаєте."
+        },
+        {
+            "key": "anger_actions_header_8",
+            "value": "Навісніти / супитися",
+            "english": "Simmer/brood",
+            "Переклад": "Закипати від злості/\"дутися\""
+        },
+        {
+            "key": "anger_actions_body_8",
+            "value": "Супитися ",
+            "english": "Express anger by sulking.",
+            "Переклад": "Виражати злість, надуваючи губи."
+        },
+        {
+            "key": "anger_actions_header_9",
+            "value": "Бути пасивно-агресивним",
+            "english": "Be passive-aggressive"
+        },
+        {
+            "key": "anger_actions_body_9",
+            "value": "Чинити непрямі дії, що мають гнівний підтекст.",
+            "english": "Take indirect actions that have an angry undercurrent.",
+            "Переклад": "Бути пасивно-агресивним"
+        },
+        {
+            "key": "anger_triggers_universal_header_mobile",
+            "value": "Універсальні тригери гніву",
+            "english": "Universal Triggers of Anger",
+            "Переклад": "Універсальні тригери гніву"
+        },
+        {
+            "key": "anger_triggers_universal_body_mobile",
+            "value": "Універсальні тригери є вродженими, спільними для всіх і впливають на нас сильніше, ніж набуті тригери. Прикладом можуть бути обмеження в діях або рухах.",
+            "english": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Interference with action or locomotion are examples.",
+            "Переклад": "Універсальні тригери є вродженими, спільними для всіх і впливають на нас сильніше, ніж набуті тригери. Прикладом можуть бути обмеження в діях або рухах."
+        },
+        {
+            "key": "anger_triggers_learned_header_mobile",
+            "value": "Набуті тригери гніву",
+            "english": "Learned Triggers of Anger",
+            "Переклад": "Набуті тригери гніву"
+        },
+        {
+            "key": "anger_triggers_learned_body_mobile",
+            "value": "Деякі тригери можуть бути набутими з особистого чи спільного культурного досвіду. Приклад – несправедливе звинувачення або приниження авторитетною особою.",
+            "english": "Some triggers can be learned from personal or shared cultural experiences. Being wrongfully accused or put down by an authority figure are examples.",
+            "Переклад": "Деякі тригери можуть бути набутими з особистого чи спільного культурного досвіду. Приклад – несправедливе звинувачення або приниження з боку авторитетної особи."
+        },
+        {
+            "key": "anger_triggers_header_1",
+            "value": "Перешкода пересуванню",
+            "english": "Interference with locomotion",
+            "Переклад": "Перешкоджання пересуванню"
+        },
+        {
+            "key": "anger_triggers_header_2",
+            "value": "Перешкода діям ",
+            "english": "Interference with action",
+            "Переклад": "Перешкоджання діям"
+        },
+        {
+            "key": "anger_triggers_header_3",
+            "value": "Відторгнення коханою людиною",
+            "english": "Rejection by a loved one",
+            "Переклад": "Відторгнення коханою людиною"
+        },
+        {
+            "key": "anger_triggers_header_4",
+            "value": "Неефективність або бюрократія",
+            "english": "Inefficiency or bureaucracy",
+            "Переклад": "Неефективність або бюрократія"
+        },
+        {
+            "key": "anger_triggers_header_5",
+            "value": "Приниження авторитетною особою",
+            "english": "Being put down by an authority figure",
+            "Переклад": "Бути приниженим авторитетною особою"
+        },
+        {
+            "key": "anger_triggers_header_6",
+            "value": "Зіткнення з образливими переконаннями",
+            "english": "Encountering offensive beliefs",
+            "Переклад": "Зіткнення з образливими переконаннями"
+        },
+        {
+            "key": "anger_triggers_header_7",
+            "value": "Несправедливе звинування",
+            "english": "Being wrongfully accused",
+            "Переклад": "Несправедливе звинувачення"
+        },
+        {
+            "key": "anger_moods_header",
+            "value": "Дратівливий",
+            "english": "Irritable",
+            "Переклад": "Дратівливий"
+        },
+        {
+            "key": "anger_moods_body",
+            "value": "Схильний до злості, легко провокований. ",
+            "english": "Predisposed to becoming angry, easily provoked. ",
+            "Переклад": "Схильний до гніву, легко провокується. "
+        },
+        {
+            "key": "anger_timeline_trigger_precondition",
+            "value": "ви втомлені",
+            "english": "you are tired",
+            "Переклад": "ви стомлені"
+        },
+        {
+            "key": "anger_timeline_trigger_event",
+            "value": "ваш друг на вас образився",
+            "english": "a friend gets upset with you",
+            "Переклад": "ваш друг на вас образився"
+        },
+        {
+            "key": "anger_timeline_trigger_perceptual_database",
+            "value": "вам нагадують про кривдника",
+            "english": "you're reminded of a bully",
+            "Переклад": "вам нагадують про кривдника"
+        },
+        {
+            "key": "anger_timeline_state_physical_changes",
+            "value": "ваша щелепа стиснута",
+            "english": "your jaw is clenched",
+            "Переклад": "ваша щелепа стиснута"
+        },
+        {
+            "key": "anger_timeline_state_emotion",
+            "value": "гнів",
+            "english": "anger",
+            "Переклад": "гнів"
+        },
+        {
+            "key": "anger_timeline_state_mental_changes",
+            "value": "ви відчуваєте, що на вас нападають",
+            "english": "you feel attacked",
+            "Переклад": "ви відчуваєте, що на вас нападають"
+        },
+        {
+            "key": "anger_timeline_response_constructive_response",
+            "value": "робите паузу",
+            "english": "take a time out",
+            "Переклад": "робите паузу"
+        },
+        {
+            "key": "anger_timeline_response_destructive_response",
+            "value": "сваритеся",
+            "english": "argue",
+            "Переклад": "сваритеся"
+        },
+        {
+            "key": "anger_timeline_response_ambiguous_response",
+            "value": "уникаєте цієї людини",
+            "english": "avoid them",
+            "Переклад": "уникаєте цю людину"
+        }
+    ],
+    [
+        {
+            "key": "fear_continent_header",
+            "value": "Страх",
+            "english": "Fear",
+            "Переклад": "Страх"
+        },
+        {
+            "key": "fear_continent_header_mobile",
+            "value": "Страх",
+            "english": "Fear",
+            "Переклад": "Страх"
+        },
+        {
+            "key": "fear_continent_body",
+            "value": "Страх перед небезпекою дозволяє нам передбачати загрози.",
+            "english": "Our fear of danger lets us anticipate threats to our safety.",
+            "Переклад": "Страх перед небезпекою дозволяє нам передбачати загрози."
+        },
+        {
+            "key": "fear_continent_body_mobile",
+            "value": "Ми відчуваємо страх, коли загрожені наша безпека чи добробут. Його сила та частота можуть варіюватися. ",
+            "english": "We feel fear when our safety or wellbeing is threatened. Fear varies in strength and frequency in our lives.",
+            "Переклад": "Ми відчуваємо страх, коли під загрозою наша безпека чи добробут. Його сила та частота можуть варіюватися."
+        },
+        {
+            "key": "fear_states_body",
+            "value": "Страх охоплює як тривогу, так і жах. Інтенсивність цих станів буває різною: ми можемо відчувати як легку, так і сильну тривогу, натомість жах буває лише сильний. Всі стани страху викликані відчуттям загрози.",
+            "english": "Fear contains both anxiety and terror. The intensity of these states varies: We can feel mild or strong anxiety, but we can only feel intense terror. All states of fear are triggered by feeling a threat of harm.",
+            "Переклад": "Страх охоплює як тривогу, так і відчутти жах. Інтенсивність цих станів буває різною: ми можемо відчувати як легку, так і сильну тривогу, натомість жах буває лише сильний. Всі стани страху викликані відчуттям загрози."
+        },
+        {
+            "key": "fear_states_header_1",
+            "value": "Занепокоєння",
+            "english": "Trepidation",
+            "Переклад": "Легке занепокоєння"
+        },
+        {
+            "key": "fear_states_body_1",
+            "value": "Передчуття можливої небезпеки.",
+            "english": "Anticipation of the possibility of danger.",
+            "Переклад": "Передчуття можливої небезпеки."
+        },
+        {
+            "key": "fear_states_header_2",
+            "value": "Тривога",
+            "english": "Anxiety",
+            "Переклад": "Тривога"
+        },
+        {
+            "key": "fear_states_body_2",
+            "value": "Страх перед очікуваною або реальною загрозою та невпевненість у власній здатності впоратися з нею. ",
+            "english": "Fear of an anticipated or actual threat and uncertainty about one's ability to cope with it. ",
+            "Переклад": "Страх перед очікуваною або реальною загрозою та невпевненість у власній здатності впоратися з нею. "
+        },
+        {
+            "key": "fear_states_header_3",
+            "value": "Хвилювання ",
+            "english": "Nervousness",
+            "Переклад": "Хвилювання "
+        },
+        {
+            "key": "fear_states_body_3",
+            "value": "Невпевненість у тому, чи існує небезпека.",
+            "english": "Uncertainty as to whether there is a danger.",
+            "Переклад": "Невпевненість у тому, чи існує небезпека."
+        },
+        {
+            "key": "fear_states_header_4",
+            "value": "Страх",
+            "english": "Dread",
+            "Переклад": "Страх"
+        },
+        {
+            "key": "fear_states_body_4",
+            "value": "Передчуття серйозної небезпеки.",
+            "english": "Anticipation of severe danger.",
+            "Переклад": "Передчуття серйозної небезпеки."
+        },
+        {
+            "key": "fear_states_header_5",
+            "value": "Відчай",
+            "english": "Desperation",
+            "Переклад": "Відчай"
+        },
+        {
+            "key": "fear_states_body_5",
+            "value": "Реакція на неспроможність зменшити рівень небезпеки.",
+            "english": "A response to the inability to reduce danger.",
+            "Переклад": "Реакція на неспроможність зменшити рівень небезпеки."
+        },
+        {
+            "key": "fear_states_header_6",
+            "value": "Паніка",
+            "english": "Panic",
+            "Переклад": "Паніка"
+        },
+        {
+            "key": "fear_states_body_6",
+            "value": "Раптовий неконтрольований страх.",
+            "english": "Sudden uncontrollable fear.",
+            "Переклад": "Раптовий неконтрольований страх."
+        },
+        {
+            "key": "fear_states_header_7",
+            "value": "Жах",
+            "english": "Horror",
+            "Переклад": "Жах"
+        },
+        {
+            "key": "fear_states_body_7",
+            "value": "Суміш страху, відрази та шоку.",
+            "english": "A mixture of fear, disgust, and shock.",
+            "Переклад": "Суміш страху, відрази та шоку."
+        },
+        {
+            "key": "fear_states_header_8",
+            "value": "Всеосяжний жах",
+            "english": "Terror",
+            "Переклад": "Всеохопний жах"
+        },
+        {
+            "key": "fear_states_body_8",
+            "value": "Інтенсивний непереборний страх.",
+            "english": "Intense, overpowering fear.",
+            "Переклад": "Інтенсивний, непереборний страх."
+        },
+        {
+            "key": "fear_actions_body",
+            "value": "Наприклад, ми можемо уникати відчуття тривоги на роботі, але прокручувати її по колу вдома. Уникнення тривоги може бути конструктивним, якщо воно допомагає провести презентацію для повної зали колег, але деструктивним, якщо воно заважає нам у проясненні складних стосунків з начальником.",
+            "english": "For example, we might avoid feeling anxiety at work, but ruminate on our anxiety at home. Avoiding anxiety can be constructive if it helps us give a presentation to a room full of colleagues, but destructive if it prevents us from confronting our difficult relationship with our boss.",
+            "Переклад": "Наприклад, ми можемо уникати відчуття тривоги на роботі, але обмірковувавти її вдома. Уникнення тривоги може бути конструктивним, якщо воно допомагає провести презентацію в залі, повному колег, але деструктивним, якщо воно заважає нам у проясненні складних стосунків з начальником."
+        },
+        {
+            "key": "fear_actions_header_1",
+            "value": "Йти",
+            "english": "Withdraw",
+            "Переклад": "Піти"
+        },
+        {
+            "key": "fear_actions_body_1",
+            "value": "Фізично або психологічно залишити місце загрози.",
+            "english": "Physically or mentally leave the scene of the threat.",
+            "Переклад": "Фізично або психологічно залишити місце загрози."
+        },
+        {
+            "key": "fear_actions_header_2",
+            "value": "Уникати",
+            "english": "Avoid",
+            "Переклад": "Уникати"
+        },
+        {
+            "key": "fear_actions_body_2",
+            "value": "Триматися якнайдалі від загрози фізично або не давати собі думати про неї.",
+            "english": "Either physically stay away from the threat or keep oneself from thinking about it.",
+            "Переклад": "Триматися подалі від загрози фізично, або не давати собі думати про неї."
+        },
+        {
+            "key": "fear_actions_header_3",
+            "value": "Вагатися",
+            "english": "Hesitate",
+            "Переклад": "Вагатися"
+        },
+        {
+            "key": "fear_actions_body_3",
+            "value": "Зупинитися в сумнівах чи нерішучості, часто лише на мить.",
+            "english": "Hold back in doubt or indecision, often momentarily.",
+            "Переклад": "Зупинитися в сумнівах чи нерішучості, часто лише на мить."
+        },
+        {
+            "key": "fear_actions_header_4",
+            "value": "Завмерти",
+            "english": "Freeze",
+            "Переклад": "Завмерти"
+        },
+        {
+            "key": "fear_actions_body_4",
+            "value": "Втратити здатність діяти або говорити.",
+            "english": "Become incapable of acting or speaking.",
+            "Переклад": "Втратити здатність діяти або говорити."
+        },
+        {
+            "key": "fear_actions_header_5",
+            "value": "Кричати",
+            "english": "Scream/yell",
+            "Переклад": "Кричати"
+        },
+        {
+            "key": "fear_actions_body_5",
+            "value": "Втрачати контроль над своїм мовленням; верещати. ",
+            "english": "Lose control of one's speech; cry out in a loud and high voice.",
+            "Переклад": "Втрата контролю над своєю мовою; кричати гучним і високим голосом."
+        },
+        {
+            "key": "fear_actions_header_6",
+            "value": "Румінувати",
+            "english": "Ruminate",
+            "Переклад": "Румінувати/обмірковувати"
+        },
+        {
+            "key": "fear_actions_body_6",
+            "value": "Одержимо обмірковувати минулий емоційний досвід. ",
+            "english": "Obsessively think about a past emotional experience. ",
+            "Переклад": "Надмірно думати про минулий емоційний досвід."
+        },
+        {
+            "key": "fear_actions_header_7",
+            "value": "Хвилюватися",
+            "english": "Worry",
+            "Переклад": "Хвилюватися"
+        },
+        {
+            "key": "fear_actions_body_7",
+            "value": "Передбачати ймовірну шкоду.",
+            "english": "Anticipate the possibility of harm.",
+            "Переклад": "Передбачати імовірну шкоду."
+        },
+        {
+            "key": "fear_triggers_universal_header_mobile",
+            "english": "Universal Triggers of Fear",
+            "Переклад": "Універсальні тригери страху"
+        },
+        {
+            "key": "fear_triggers_universal_body_mobile",
+            "value": "Універсальні тригери є вродженими, спільними для всіх і впливають на нас сильніше, ніж набуті. Наприклад, форми, схожі на змію, чи раптова втрата рівноваги.",
+            "english": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Snake-like shapes and sudden loss of gravity are examples.",
+            "Переклад": "Універсальні тригери є вродженими, спільними для всіх, і впливають на нас сильніше, ніж набуті. Наприклад, форми, схожі на змію чи раптова втрата гравітації (рівноваги?)"
+        },
+        {
+            "key": "fear_triggers_learned_header_mobile",
+            "value": "Набуті тригери страху",
+            "english": "Learned Triggers of Fear",
+            "Переклад": "Набуті тригери страху"
+        },
+        {
+            "key": "fear_triggers_learned_body_mobile",
+            "value": "Деякі тригери можуть бути набутими з особистого чи спільного культурного досвіду. Наприклад, публічний виступ, грім чи страх втратити роботу.",
+            "english": "Some triggers can be learned from personal or shared cultural experiences. Public speaking, thunder, and the threat of losing one’s job are examples.",
+            "Переклад": "Деякі тригери можуть бути набутими з особистого чи спільного культурного досвіду. Прикладом можуть бути публічний виступ, грім, чи страх втратити роботу."
+        },
+        {
+            "key": "fear_triggers_header_1",
+            "value": "Неминуча тілесна шкода",
+            "english": "Imminent bodily impact",
+            "Переклад": "Неминуче тілесне ушкодження"
+        },
+        {
+            "key": "fear_triggers_header_2",
+            "value": "Раптова втрата рівноваги",
+            "english": "Sudden loss of gravity",
+            "Переклад": "Раптова втрата гравітації (рівноваги?)"
+        },
+        {
+            "key": "fear_triggers_header_3",
+            "value": "Загроза безпеці",
+            "english": "Threat to safety",
+            "Переклад": "Загроза безпеці"
+        },
+        {
+            "key": "fear_triggers_header_4",
+            "value": "Форми, що нагадують змію",
+            "english": "Snake-like shapes",
+            "Переклад": "Форми, що нагадують змію"
+        },
+        {
+            "key": "fear_triggers_header_5",
+            "value": "Страх втратити роботу",
+            "english": "Threat of losing job",
+            "Переклад": "Страх втратити роботу"
+        },
+        {
+            "key": "fear_triggers_header_6",
+            "value": "Грім",
+            "english": "Thunder",
+            "Переклад": "Грім"
+        },
+        {
+            "key": "fear_triggers_header_7",
+            "value": "Публічний виступ",
+            "english": "Public speaking",
+            "Переклад": "Публічний виступ"
+        },
+        {
+            "key": "fear_moods_header",
+            "value": "Стурбований",
+            "english": "Apprehensive",
+            "Переклад": "Стурбований"
+        },
+        {
+            "key": "fear_moods_body",
+            "value": "Тривога, що трапиться щось погане, напруженість.",
+            "english": "Anxious that something bad will happen, on edge.",
+            "Переклад": "Тривога, що трапиться щось погане, напруженість."
+        },
+        {
+            "key": "fear_timeline_trigger_precondition",
+            "value": "ви читаєте тривожні новини",
+            "english": "reading distressing news",
+            "Переклад": "ви читаєте тривожні новини"
+        },
+        {
+            "key": "fear_timeline_trigger_event",
+            "value": "ваш друг на вас розізлився",
+            "english": "a friend gets angry with you",
+            "Переклад": "ваш друг на вас розізлився"
+        },
+        {
+            "key": "fear_timeline_trigger_perceptual_database",
+            "value": "це нагадує вам про покинутість",
+            "english": "reminds you of abandonment",
+            "Переклад": "це нагадує вам про покинутість"
+        },
+        {
+            "key": "fear_timeline_state_physical_changes",
+            "value": "ви скулюєтеся",
+            "english": "your shoulders become tight",
+            "Переклад": "ваші плечі напружуються"
+        },
+        {
+            "key": "fear_timeline_state_emotion",
+            "value": "страх",
+            "english": "fear",
+            "Переклад": "страх"
+        },
+        {
+            "key": "fear_timeline_state_mental_changes",
+            "value": "ви очікуєте, що вас кинуть",
+            "english": "you expect them to leave",
+            "Переклад": "ви очікуєте, що від вас підуть"
+        },
+        {
+            "key": "fear_timeline_response_constructive_response",
+            "value": "згадуєте чому ви дружите",
+            "english": "recall why you're friends",
+            "Переклад": "згадуєте чому ви дружите"
+        },
+        {
+            "key": "fear_timeline_response_destructive_response",
+            "value": "уникаєте зустрічі з цією людиною",
+            "english": "you avoid seeing them",
+            "Переклад": "уникаєте зустрічі з цією людиною"
+        },
+        {
+            "key": "fear_timeline_response_ambiguous_response",
+            "value": "йдете",
+            "english": "you withdraw",
+            "Переклад": "йдете"
+        }
+    ],
+    [
+        {
+            "key": "disgust_continent_header",
+            "value": "Огида",
+            "english": "Disgust"
+        },
+        {
+            "key": "disgust_continent_header_mobile",
+            "value": "Огида",
+            "english": "Disgust"
+        },
+        {
+            "key": "disgust_continent_body",
+            "value": "Відчуття відрази до токсичного допомагає нам уникнути отруєння, фізичного чи соціального.",
+            "english": "Feeling disgusted by what is toxic helps us to avoid being poisoned, physically or socially."
+        },
+        {
+            "key": "disgust_continent_body_mobile",
+            "value": "Ми відчуваємо огиду, коли натрапляємо на щось токсичне або неприємне. Її сила та частота в нашому житті може варіюватися.",
+            "english": "We feel disgust when faced with something toxic or unpleasant. Disgust varies in strength and frequency in our lives."
+        },
+        {
+            "key": "disgust_states_body",
+            "value": "Відраза охоплює як неприязнь, так і огиду. Інтенсивність цих станів буває різною: ми можемо відчувати як легку, так і сильну неприязнь, натомість огида буває лише сильною. Всі стани відрази викликані відчуттям, що щось може бути отруйним.",
+            "english": "Disgust contains both dislike and loathing. The intensity of these states varies: We can feel mild or strong dislike, but we can only feel intense loathing. All states of disgust are triggered by the feeling that something is toxic."
+        },
+        {
+            "key": "disgust_states_header_1",
+            "value": "Неприязнь",
+            "english": "Dislike"
+        },
+        {
+            "key": "disgust_states_body_1",
+            "value": "Неприязне ставлення до чогось",
+            "english": "A preference against something."
+        },
+        {
+            "key": "disgust_states_header_2",
+            "value": "Бридливість",
+            "english": "Aversion"
+        },
+        {
+            "key": "disgust_states_body_2",
+            "value": "Інстинктивне бажання уникнути чогось бридкого.",
+            "english": "An impulse to avoid something disgusting."
+        },
+        {
+            "key": "disgust_states_header_3",
+            "value": "Відраза",
+            "english": "Distaste"
+        },
+        {
+            "key": "disgust_states_body_3",
+            "value": "Реакція на неприємний смак, запах, річ або ідею. Може бути буквальною або образною.",
+            "english": "Reaction to a bad taste, smell, thing or idea. Can be literal or metaphorical."
+        },
+        {
+            "key": "disgust_states_header_4",
+            "value": "Огида",
+            "english": "Repugnance"
+        },
+        {
+            "key": "disgust_states_body_4",
+            "value": "Сильна відраза до чогось, часто до концепції чи ідеї.",
+            "english": "Strong distaste for something, often a concept or idea."
+        },
+        {
+            "key": "disgust_states_header_5",
+            "value": "Відторгнення",
+            "english": "Revulsion"
+        },
+        {
+            "key": "disgust_states_body_5",
+            "value": "Суміш огиди та глибокої антипатії. ",
+            "english": "A mixture of disgust and loathing. "
+        },
+        {
+            "key": "disgust_states_header_6",
+            "value": "Осоруга",
+            "english": "Abhorrence"
+        },
+        {
+            "key": "disgust_states_body_6",
+            "value": "Поєднання сильної огиди та ненависті.",
+            "english": "A mixture of intense disgust and hatred."
+        },
+        {
+            "key": "disgust_states_header_7",
+            "value": "Люта огида",
+            "english": "Loathing"
+        },
+        {
+            "key": "disgust_states_body_7",
+            "value": "Інтенсивна відраза, спрямована на людину. Сильна відраза, спрямована на себе, називається самоненавистю.",
+            "english": "Intense disgust focused on a person. Intense disgust focused on oneself is called self-loathing. "
+        },
+        {
+            "key": "disgust_actions_body",
+            "value": "Наприклад, ми можемо притлумлювати огиду до людей на роботі, але раптом відчувати відразу до тих, про кого читаємо в новинах. Уникання огиди може бути конструктивним, якщо допомагає долати упередження. Але воно може бути деструктивним, якщо змушує нас зблизитися зі шкідливою людиною.",
+            "english": "For example, we might avoid feeling aversion towards others at work, but find ourselves feeling aversion towards individuals we read about in the news. Avoiding aversion can be constructive in overcoming bias, but can be destructive if it leads us to get involved with a harmful person."
+        },
+        {
+            "key": "disgust_actions_header_1",
+            "value": "Йти",
+            "english": "Withdraw"
+        },
+        {
+            "key": "disgust_actions_body_1",
+            "value": "Фізично або психологічно залишити місце, яке викликає огиду.",
+            "english": "Physically or mentally leave the scene of what is triggering the disgust."
+        },
+        {
+            "key": "disgust_actions_header_2",
+            "value": "Уникати",
+            "english": "Avoid"
+        },
+        {
+            "key": "disgust_actions_body_2",
+            "value": "Триматися якнайдалі від того, що викликає огиду, фізично або не давати собі думати про це.",
+            "english": "Either physically stay away from whatever is triggering the disgust or keep oneself from thinking about it."
+        },
+        {
+            "key": "disgust_actions_header_3",
+            "value": "Блювати",
+            "english": "Vomit"
+        },
+        {
+            "key": "disgust_actions_body_3",
+            "value": "Реагувати на почуття огиди блюванням.",
+            "english": "Respond to feelings of disgust by throwing up. "
+        },
+        {
+            "key": "disgust_actions_header_4",
+            "value": "Дегуманізувати",
+            "english": "Dehumanize"
+        },
+        {
+            "key": "disgust_actions_body_4",
+            "value": "Ставитися до когось так, ніби він чи вона не є людиною; позбавляти його людських якостей, особистості.",
+            "english": "Treat someone as though he or she is not a human being; deprive someone of human qualities, personality or spirit."
+        },
+        {
+            "key": "disgust_triggers_universal_header_mobile",
+            "value": "Універсальні тригери огиди",
+            "english": "Universal Triggers of Disgust"
+        },
+        {
+            "key": "disgust_triggers_universal_body_mobile",
+            "value": "Універсальні тригери є вродженими, спільними для всіх і впливають на нас сильніше, ніж набуті. Наприклад, гниття, або все, що виводиться з організму.",
+            "english": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Anything in decay or coming out of the body are examples."
+        },
+        {
+            "key": "disgust_triggers_learned_header_mobile",
+            "value": "Набуті тригери огиди",
+            "english": "Learned Triggers of Disgust"
+        },
+        {
+            "key": "disgust_triggers_learned_body_mobile",
+            "value": "Деякі тригери можуть бути набутими з особистого чи спільного культурного досвіду. Наприклад, незвичні релігійні обряди, споживання комах або сирого м'яса.",
+            "english": "Some triggers can be learned from personal or shared cultural experiences. Unfamiliar religious customs and eating insects or raw meat are examples."
+        },
+        {
+            "key": "disgust_triggers_header_1",
+            "value": "Все, що виходить з тіла",
+            "english": "Anything coming out of the body"
+        },
+        {
+            "key": "disgust_triggers_header_2",
+            "value": "Гниття або розкладання",
+            "english": "Rotting or decay"
+        },
+        {
+            "key": "disgust_triggers_header_3",
+            "value": "Вболівальники спортивної команди-суперника",
+            "english": "Fans of an opposing sports team"
+        },
+        {
+            "key": "disgust_triggers_header_4",
+            "value": "Незвичні релігійні обряди",
+            "english": "Unfamiliar religious customs"
+        },
+        {
+            "key": "disgust_triggers_header_5",
+            "value": "Споживання комах або сирого м'яса",
+            "english": "Eating insects or raw meat"
+        },
+        {
+            "key": "disgust_moods_header",
+            "value": "Гидливий",
+            "english": "Sour"
+        },
+        {
+            "key": "disgust_moods_body",
+            "value": "Постійно відчуває огиду",
+            "english": "Generally repulsed."
+        },
+        {
+            "key": "disgust_timeline_trigger_precondition",
+            "value": "у вас видався важкий день",
+            "english": "you are having a hard day"
+        },
+        {
+            "key": "disgust_timeline_trigger_event",
+            "value": "ваш друг на вас розізлився",
+            "english": "a friend gets angry with you"
+        },
+        {
+            "key": "disgust_timeline_trigger_perceptual_database",
+            "value": "нагадує вам про нечутливість",
+            "english": "reminds you of insensitivity"
+        },
+        {
+            "key": "disgust_timeline_state_physical_changes",
+            "value": "ви відсахуєтесь",
+            "english": "you recoil"
+        },
+        {
+            "key": "disgust_timeline_state_emotion",
+            "value": "огида",
+            "english": "disgust"
+        },
+        {
+            "key": "disgust_timeline_state_mental_changes",
+            "value": "відчуття, що «скрутило» живіт",
+            "english": "your stomach feels knotted"
+        },
+        {
+            "key": "disgust_timeline_response_constructive_response",
+            "value": "запитуєте, чому він чи вона засмучений (-а)",
+            "english": "ask why they are upset"
+        },
+        {
+            "key": "disgust_timeline_response_destructive_response",
+            "value": "відчуваєте сором",
+            "english": "feel ashamed"
+        },
+        {
+            "key": "disgust_timeline_response_ambiguous_response",
+            "value": "\nуникаєте цієї людини",
+            "english": "avoid them"
+        }
+    ],
+    [
+        {
+            "key": "sadness_continent_header",
+            "value": "Смуток",
+            "english": "Sadness"
+        },
+        {
+            "key": "sadness_continent_header_mobile",
+            "value": "Смуток",
+            "english": "Sadness"
+        },
+        {
+            "key": "sadness_continent_body",
+            "value": "Смуток — це реакція на втрату, відчуття смутку дозволяє нам зробити паузу й показати іншим, що ми потребуємо підтримки.",
+            "english": "Sadness is a response to loss, and feeling sad allows us to take a timeout and show others that we need support."
+        },
+        {
+            "key": "sadness_continent_body_mobile",
+            "value": "Ми відчуваємо смуток, коли втрачаємо щось цінне. Його сила та частота в нашому житті може варіюватися.",
+            "english": "We feel sadness when we lose something valuable. Sadness varies in strength and frequency in our lives."
+        },
+        {
+            "key": "sadness_states_body",
+            "value": "Смуток охоплює як розчарування, так і відчай. Інтенсивність цих станів буває різною: ми можемо відчувати як легке, так і сильне розчарування, натомість відчай буває тільки сильним. Всі стани смутку викликані відчуттям втрати.",
+            "english": "Sadness contains both disappointment and despair. The intensity of these states varies: We can feel mild or strong disappointment, but we can only feel intense despair. All states of sadness are triggered by a feeling of loss."
+        },
+        {
+            "key": "sadness_states_header_1",
+            "value": "Розчарування",
+            "english": "Disappointment"
+        },
+        {
+            "key": "sadness_states_body_1",
+            "value": "Відчуття, що очікування не справдилися.",
+            "english": "A feeling that expectations are not being met."
+        },
+        {
+            "key": "sadness_states_header_2",
+            "value": "Покора",
+            "english": "Resignation"
+        },
+        {
+            "key": "sadness_states_body_2",
+            "value": "Переконання, що нічого не можна вдіяти.",
+            "english": "The belief that nothing can be done. "
+        },
+        {
+            "key": "sadness_states_header_3",
+            "value": "Розпач",
+            "english": "Distraughtness"
+        },
+        {
+            "key": "sadness_states_body_3",
+            "value": "Смуток настільки сильний, що заважає ясно мислити. ",
+            "english": "Sadness that makes it hard to think clearly."
+        },
+        {
+            "key": "sadness_states_header_4",
+            "value": "Зневіра",
+            "english": "Discouragement"
+        },
+        {
+            "key": "sadness_states_body_4",
+            "value": "Реакція на постійні поразки: переконання, що щось неможливо здійснити.",
+            "english": "A response to repeated failures to accomplish something: the belief that it can't be done."
+        },
+        {
+            "key": "sadness_states_header_5",
+            "value": "Безпорадність",
+            "english": "Helplessness"
+        },
+        {
+            "key": "sadness_states_body_5",
+            "value": "Усвідомлення, що ситуацію неможливо покращити.",
+            "english": "The realization that one cannot make a situation better or easier."
+        },
+        {
+            "key": "sadness_states_header_6",
+            "value": "Страждання",
+            "english": "Misery"
+        },
+        {
+            "key": "sadness_states_body_6",
+            "value": "Сильне страждання чи нещастя",
+            "english": "Strong suffering or unhappiness."
+        },
+        {
+            "key": "sadness_states_header_7",
+            "value": "Безнадія",
+            "english": "Hopelessness"
+        },
+        {
+            "key": "sadness_states_body_7",
+            "value": "Відчуття, що нічого доброго вже не трапиться.",
+            "english": "The belief that nothing good will happen."
+        },
+        {
+            "key": "sadness_states_header_8",
+            "value": "Горе",
+            "english": "Grief"
+        },
+        {
+            "key": "sadness_states_body_8",
+            "value": "Смуток від великої втрати.",
+            "english": "Sadness over a deep loss. "
+        },
+        {
+            "key": "sadness_states_header_9",
+            "value": "Відчай",
+            "english": "Despair"
+        },
+        {
+            "key": "sadness_states_body_9",
+            "value": "Втрата надії на покращення або зміну ситуації.",
+            "english": "The loss of hope that a bad situation will improve or change."
+        },
+        {
+            "key": "sadness_states_header_10",
+            "value": "Туга",
+            "english": "Sorrow"
+        },
+        {
+            "key": "sadness_states_body_10",
+            "value": "Почуття скорботи та смутку, часто викликане втратою.",
+            "english": "A feeling of distress and sadness, often caused by a loss."
+        },
+        {
+            "key": "sadness_states_header_11",
+            "value": "Муки",
+            "english": "Anguish"
+        },
+        {
+            "key": "sadness_states_body_11",
+            "value": "Інтенсивний смуток або страждання.",
+            "english": "Intense sadness or suffering."
+        },
+        {
+            "key": "sadness_actions_body",
+            "value": "Наприклад, ми можемо уникати почуття безпорадності на людях, але шукати розради вдома. Відхід від почуття безпорадності може бути конструктивним для подолання сильного горя, але деструктивним, якщо ми не звертаємося за підтримкою, коли вона потрібна.",
+            "english": "For example, we might withdraw from feeling helpless in public, but seek comfort at home. Withdrawing from feeling helpless can be constructive to overcoming intense grief, but destructive if we don't seek support when we need it."
+        },
+        {
+            "key": "sadness_actions_header_1",
+            "value": "Шукати розраду",
+            "english": "Seek comfort"
+        },
+        {
+            "key": "sadness_actions_body_1",
+            "value": "Звернутися по допомогу чи підтримку до інших.",
+            "english": "Seek help or support from others."
+        },
+        {
+            "key": "sadness_actions_header_2",
+            "value": "Йти",
+            "english": "Withdraw"
+        },
+        {
+            "key": "sadness_actions_body_2",
+            "value": "Фізично або психологічно триматися якнайдалі від того, що викликає смуток, або не давати собі про це думати.",
+            "english": "Either physically stay away from what is triggering the sadness or keep oneself from thinking about it."
+        },
+        {
+            "key": "sadness_actions_header_3",
+            "value": "Румінувати",
+            "english": "Ruminate"
+        },
+        {
+            "key": "sadness_actions_body_3",
+            "value": "Одержимо розмірковувати про минулий емоційний досвід. ",
+            "english": "Obsessively think about the emotional experience. "
+        },
+        {
+            "key": "sadness_actions_header_4",
+            "value": "Оплакувати",
+            "english": "Mourn"
+        },
+        {
+            "key": "sadness_actions_body_4",
+            "value": "Висловлювати скорботу за втратою через дії, одяг і слова.",
+            "english": "Express grief for one's loss through actions, dress and speech."
+        },
+        {
+            "key": "sadness_actions_header_5",
+            "value": "Протестувати",
+            "english": "Protest"
+        },
+        {
+            "key": "sadness_actions_body_5",
+            "value": "Заперечувати втрату.",
+            "english": "Object to the loss."
+        },
+        {
+            "key": "sadness_actions_header_6",
+            "value": "Соромитися",
+            "english": "Feel ashamed"
+        },
+        {
+            "key": "sadness_actions_body_6",
+            "value": "Знічуватися через свої почуття з приводу втрати.",
+            "english": "Feel embarrassed by one's feelings about the loss."
+        },
+        {
+            "key": "sadness_triggers_universal_header_mobile",
+            "value": "Універсальні тригери смутку",
+            "english": "Universal Triggers of Sadness"
+        },
+        {
+            "key": "sadness_triggers_universal_body_mobile",
+            "value": "Універсальні тригери є вродженими, спільними для всіх і впливають на нас сильніше, ніж набуті. Наприклад, втрата або відторгнення коханою людиною.",
+            "english": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Losing or being rejected by a loved one are examples."
+        },
+        {
+            "key": "sadness_triggers_learned_header_mobile",
+            "value": "Набуті тригери смутку",
+            "english": "Learned Triggers of Sadness"
+        },
+        {
+            "key": "sadness_triggers_learned_body_mobile",
+            "value": "Деякі тригери можуть бути набутими з особистого чи спільного культурного досвіду. Наприклад відчуття, що тебе відкидають, або відчуття втрати статусу.",
+            "english": "Some triggers can be learned from personal or shared cultural experiences. Feeling left out or experiencing a perceived loss of status are examples."
+        },
+        {
+            "key": "sadness_triggers_header_1",
+            "value": "Бути відкинутим кимось важливим",
+            "english": "Being rejected by someone important"
+        },
+        {
+            "key": "sadness_triggers_header_2",
+            "value": "Втата близької людини",
+            "english": "Losing a loved one"
+        },
+        {
+            "key": "sadness_triggers_header_3",
+            "value": "Відчуття втрати статусу",
+            "english": "Perceiving a loss of status"
+        },
+        {
+            "key": "sadness_triggers_header_4",
+            "value": "Не отримати запрошення на вечірку",
+            "english": "Not being invited to a party"
+        },
+        {
+            "key": "sadness_triggers_header_5",
+            "value": "Втрата цінної речі",
+            "english": "Losing a treasured belonging"
+        },
+        {
+            "key": "sadness_moods_header",
+            "value": "Пригнічений або меланхолійний",
+            "english": "Dysphoric (or feeling blue)"
+        },
+        {
+            "key": "sadness_moods_body",
+            "value": "Постійне відчуття знеохочення чи розчарування.",
+            "english": "An enduring feeling of discouragement or disappointment."
+        },
+        {
+            "key": "sadness_timeline_trigger_precondition",
+            "value": "ви слухаєте сумну музику",
+            "english": "listening to sad music"
+        },
+        {
+            "key": "sadness_timeline_trigger_event",
+            "value": "ваш друг на вас розізлився",
+            "english": "a friend gets angry with you"
+        },
+        {
+            "key": "sadness_timeline_trigger_perceptual_database",
+            "value": "це нагадує вам про відторгнення",
+            "english": "it reminds you of rejection"
+        },
+        {
+            "key": "sadness_timeline_state_physical_changes",
+            "value": "вам важко на серці",
+            "english": "your heart is heavy"
+        },
+        {
+            "key": "sadness_timeline_state_emotion",
+            "value": "смуток",
+            "english": "sadness"
+        },
+        {
+            "key": "sadness_timeline_state_mental_changes",
+            "value": "ви відчуваєте порожнечу",
+            "english": "you feel empty"
+        },
+        {
+            "key": "sadness_timeline_response_constructive_response",
+            "value": "ви телефонуєте близькій людині",
+            "english": "call a loved one"
+        },
+        {
+            "key": "sadness_timeline_response_destructive_response",
+            "value": "румінуєте",
+            "english": "ruminate"
+        },
+        {
+            "key": "sadness_timeline_response_ambiguous_response",
+            "value": "пригнічуєте почуття",
+            "english": "supress the feeling"
+        }
+    ],
+    [
+        {
+            "key": "enjoyment_continent_header",
+            "value": "Втіха ",
+            "english": "Enjoyment"
+        },
+        {
+            "key": "enjoyment_continent_header_mobile",
+            "value": "Континент втіхи",
+            "english": "The Continent of Enjoyment"
+        },
+        {
+            "key": "enjoyment_continent_body",
+            "value": "Втіха описує багато приємних почуттів, які виникають як від нового, так і знайомого досвіду.",
+            "english": "Enjoyment describes the many good feelings that arise from experiences both novel and familiar."
+        },
+        {
+            "key": "enjoyment_continent_body_mobile",
+            "value": "Ми почуваємося втішеними, коли переживаємо новизну або комфорт. Її сила та частота в нашому житті може варіюватися.",
+            "english": "We feel enjoyment when we experience novelty or comfort. Enjoyment varies in strength and frequency in our lives."
+        },
+        {
+            "key": "enjoyment_states_body",
+            "value": "Втіха охоплює як спокій, так і шалену радість. Інтенсивність цих станів буває різною: ми можемо відчувати як легке, так і сильне умиротворення, натомість екстаз буває тільки сильним. Всі стани втіхи викликані відчуттям звʼязку та / або сенсорної насолоди. ",
+            "english": "Enjoyment contains both peace and ecstasy. The intensity of these states varies: We can feel mild or strong peacefulness, but we can only feel intense ecstasy. All states of enjoyment are triggered by feeling connection and/or sensory pleasure."
+        },
+        {
+            "key": "enjoyment_states_header_1",
+            "value": "Сенсорна насолода",
+            "english": "Sensory pleasure"
+        },
+        {
+            "key": "enjoyment_states_body_1",
+            "value": "Насолода, яку ми дістаємо через один з п'яти фізичних чуттів: зір, слух, дотик, смак і запах. ",
+            "english": "Enjoyment derived through one of the five physical senses: sight, sound, touch, taste and smell."
+        },
+        {
+            "key": "enjoyment_states_header_2",
+            "value": "Радість",
+            "english": "Rejoicing"
+        },
+        {
+            "key": "enjoyment_states_body_2",
+            "value": "Тепле піднесене почуття, яке виникає, коли бачиш доброту, співчуття або добрі вчинки. Також називається «піднесенням».",
+            "english": "A warm, uplifting feeling that people experience when they see acts of human goodness, kindness and compassion. Also called elevation."
+        },
+        {
+            "key": "enjoyment_states_header_3",
+            "value": "Веселий настрій",
+            "english": "Amusement"
+        },
+        {
+            "key": "enjoyment_states_body_3",
+            "value": "Легке, грайливе відчуття втіхи та гарного настрою.",
+            "english": "Light, playful feelings of enjoyment and good humor."
+        },
+        {
+            "key": "enjoyment_states_header_4",
+            "value": "Полегшення",
+            "english": "Relief"
+        },
+        {
+            "key": "enjoyment_states_body_4",
+            "value": "Коли щось неприємне або загрозливе не трапилось або завершилось.",
+            "english": "When something expected to be unpleasant, especially the threat of harm, is avoided or comes to an end."
+        },
+        {
+            "key": "enjoyment_states_header_5",
+            "value": "Співчуття / радість",
+            "english": "Compassion/joy"
+        },
+        {
+            "key": "enjoyment_states_body_5",
+            "value": "Втіха, коли ви можете зарадити стражданням іншої людини. ",
+            "english": "Enjoyment of helping to relieve another person's suffering."
+        },
+        {
+            "key": "enjoyment_states_header_6",
+            "value": "Зловтіха",
+            "english": "Schadenfreude"
+        },
+        {
+            "key": "enjoyment_states_body_6",
+            "value": "Втіха від чужих невдач, зазвичай — суперника.",
+            "english": "Enjoyment of the misfortunes of another person, usually a rival."
+        },
+        {
+            "key": "enjoyment_states_header_7",
+            "value": "Тріумф",
+            "english": "Fiero"
+        },
+        {
+            "key": "enjoyment_states_body_7",
+            "value": "Втіха від подолання складного виклику.",
+            "english": "Enjoyment of meeting a difficult challenge (an Italian word). "
+        },
+        {
+            "key": "enjoyment_states_header_8",
+            "value": "Гордість за дітей / учнів",
+            "english": "Naches"
+        },
+        {
+            "key": "enjoyment_states_body_8",
+            "value": "Радісна гордість за досягнення дітей або учнів. ",
+            "english": "Joyful pride in the accomplishments of one's children or mentees (a Yiddish word)."
+        },
+        {
+            "key": "enjoyment_states_header_9",
+            "value": "Гордість ",
+            "english": "Pride"
+        },
+        {
+            "key": "enjoyment_states_body_9",
+            "value": "Втіха й насолода власними здобутками або здобутками близьких. ",
+            "english": "Deep pleasure and satisfaction derived from one's own achievements or the achievements of an associate."
+        },
+        {
+            "key": "enjoyment_states_header_10",
+            "value": "Зачудованість",
+            "english": "Wonder"
+        },
+        {
+            "key": "enjoyment_states_body_10",
+            "value": "Переживання чогось дуже неочікуваного, красивого, дивовижного або неймовірного. ",
+            "english": "An experience of something that is very surprising, beautiful, amazing or hard to believe."
+        },
+        {
+            "key": "enjoyment_states_header_11",
+            "value": "Внутрішня гармонія",
+            "english": "Peace"
+        },
+        {
+            "key": "enjoyment_states_body_11",
+            "value": "Відчуття легкості та втіхи. ",
+            "english": "An experience of ease and contentment."
+        },
+        {
+            "key": "enjoyment_states_header_12",
+            "value": "Захват",
+            "english": "Excitement"
+        },
+        {
+            "key": "enjoyment_states_body_12",
+            "value": "Сильний ентузіазм.",
+            "english": "A powerful enthusiasm. "
+        },
+        {
+            "key": "enjoyment_states_header_13",
+            "value": "Екстаз",
+            "english": "Ecstasy"
+        },
+        {
+            "key": "enjoyment_states_body_13",
+            "value": "Несамовитий захват. Стан надзвичайного щастя, що б'є через край. ",
+            "english": "Rapturous delight. A state of very great happiness, nearly overwhelming."
+        },
+        {
+            "key": "enjoyment_actions_body",
+            "value": "Наприклад, ми можемо вигуками передавати захват поміж друзів, але наодинці переживати його тихо. Вигук як спосіб виразити радість може бути конструктивним для спільних веселощів, але деструктивним, якщо це відповідь на кпини з когось. ",
+            "english": "For example, we might exclaim to express our feeling of amusement among friends, but experience our amusement quietly while alone. Expressing amusement by exclaiming can be constructive as means of sharing enjoyment, but destructive if it's in response to making fun of someone."
+        },
+        {
+            "key": "enjoyment_actions_header_1",
+            "value": "Прагнути більшого",
+            "english": "Seek more"
+        },
+        {
+            "key": "enjoyment_actions_body_1",
+            "value": "Спроба підсилити приємні відчуття.",
+            "english": "Attempt to increase the enjoyable feelings."
+        },
+        {
+            "key": "enjoyment_actions_header_2",
+            "value": "Підтримувати",
+            "english": "Maintain"
+        },
+        {
+            "key": "enjoyment_actions_body_2",
+            "value": "Продовжувати робити те, що необхідно для підтримки приємних відчуттів.",
+            "english": "Continue to do what is necessary to continue the enjoyable feelings."
+        },
+        {
+            "key": "enjoyment_actions_header_3",
+            "value": "Зловтішатися",
+            "english": "Gloat"
+        },
+        {
+            "key": "enjoyment_actions_body_3",
+            "value": "Насолоджуватися тим, що інші заздрять вашій насолоді. ",
+            "english": "Enjoy others’ envy of your state of enjoyment."
+        },
+        {
+            "key": "enjoyment_actions_header_4",
+            "value": "Вигукувати",
+            "english": "Exclaim"
+        },
+        {
+            "key": "enjoyment_actions_body_4",
+            "value": "Показувати іншим своє задоволення через вигуки. ",
+            "english": "Vocally express enjoyment to others."
+        },
+        {
+            "key": "enjoyment_actions_header_5",
+            "value": "Взаємодіяти / встановлювати зв'язок",
+            "english": "Engage/connect"
+        },
+        {
+            "key": "enjoyment_actions_body_5",
+            "value": "Ділитися своїм почуттям радості з іншими без бажання викликати заздрість. ",
+            "english": "Share one's feelings of enjoyment with others without a desire to cause jealousy."
+        },
+        {
+            "key": "enjoyment_actions_header_6",
+            "value": "Смакувати",
+            "english": "Savor"
+        },
+        {
+            "key": "enjoyment_actions_body_6",
+            "value": "Насолоджуватися приємними почуттями, пов'язаними з тим чи іншим досвідом, особливо зосереджуючись на них.",
+            "english": "Appreciate the good feelings around an experience completely, especially by dwelling on them."
+        },
+        {
+            "key": "enjoyment_actions_header_7",
+            "value": "Раювати",
+            "english": "Indulge"
+        },
+        {
+            "key": "enjoyment_actions_body_7",
+            "value": "Дозволити собі повною мірою відчути насолоду від приємних відчуттів. ",
+            "english": "Allow oneself to fully experience the pleasure of good feelings. "
+        },
+        {
+            "key": "enjoyment_triggers_universal_header_mobile",
+            "value": "Універсальні тригери втіхи",
+            "english": "Universal Triggers of Enjoyment"
+        },
+        {
+            "key": "enjoyment_triggers_universal_body_mobile",
+            "value": "Універсальні тригери є вродженими, спільними для всіх і впливають на нас сильніше, ніж набуті. Прикладами можуть бути соціальна взаємодія та пізнання природи.",
+            "english": "Universal triggers are innate, common to everyone, and affect us more intensely than learned triggers. Social interaction and experiencing nature are examples."
+        },
+        {
+            "key": "enjoyment_triggers_learned_header_mobile",
+            "value": "Набуті тригери втіхи",
+            "english": "Learned Triggers of Enjoyment"
+        },
+        {
+            "key": "enjoyment_triggers_learned_body_mobile",
+            "value": "Деякі тригери можуть бути набутими з особистого чи спільного культурного досвіду. Наприклад, дозвілля з сімʼєю або відвідування місць своєї юності.",
+            "english": "Some triggers can be learned from personal or shared cultural experiences. Spending time with family or visiting places from one’s youth are examples."
+        },
+        {
+            "key": "enjoyment_triggers_header_1",
+            "value": "Сенсорне пізнання природи",
+            "english": "Sensory experience of nature "
+        },
+        {
+            "key": "enjoyment_triggers_header_2",
+            "value": "Допомога іншим",
+            "english": "Helping others"
+        },
+        {
+            "key": "enjoyment_triggers_header_3",
+            "value": "Соціальна взаємодія",
+            "english": "Social interaction"
+        },
+        {
+            "key": "enjoyment_triggers_header_4",
+            "value": "Гра в бадмінтон",
+            "english": "Playing badminton"
+        },
+        {
+            "key": "enjoyment_triggers_header_5",
+            "value": "Місця, пов'язані з приємними спогадами",
+            "english": "Places associated with enjoyable memories"
+        },
+        {
+            "key": "enjoyment_triggers_header_6",
+            "value": "Смак шоколадного торта",
+            "english": "The taste of chocolate cake"
+        },
+        {
+            "key": "enjoyment_triggers_header_7",
+            "value": "Дозвілля з сімʼєю",
+            "english": "Spending time with family"
+        },
+        {
+            "key": "enjoyment_moods_header",
+            "value": "Піднесений",
+            "english": "Elated"
+        },
+        {
+            "key": "enjoyment_moods_body",
+            "value": "Загальне тривале гарне відчутя. ",
+            "english": "A long-lasting, generalized good feeling. "
+        },
+        {
+            "key": "enjoyment_timeline_trigger_precondition",
+            "value": "ви забили гол",
+            "english": "you scored a touchdown"
+        },
+        {
+            "key": "enjoyment_timeline_trigger_event",
+            "value": "ваш друг на вас розізлився",
+            "english": "a friend gets angry with you"
+        },
+        {
+            "key": "enjoyment_timeline_trigger_perceptual_database",
+            "value": "він виглядає як повний невдаха",
+            "english": "seems like a sore loser"
+        },
+        {
+            "key": "enjoyment_timeline_state_physical_changes",
+            "value": "сплеск адреналіну",
+            "english": "adrenaline rush"
+        },
+        {
+            "key": "enjoyment_timeline_state_emotion",
+            "value": "втіха",
+            "english": "enjoyment"
+        },
+        {
+            "key": "enjoyment_timeline_state_mental_changes",
+            "value": "ви відчуваєте моральну перевагу",
+            "english": "you feel righteous"
+        },
+        {
+            "key": "enjoyment_timeline_response_constructive_response",
+            "value": "грати далі",
+            "english": "play on"
+        },
+        {
+            "key": "enjoyment_timeline_response_destructive_response",
+            "value": "зловтішатися",
+            "english": "gloat"
+        },
+        {
+            "key": "enjoyment_timeline_response_ambiguous_response",
+            "value": "тріумфувати",
+            "english": "celebrate"
+        }
+    ],
+    [],
+    []
+]
