@@ -197,7 +197,7 @@
         },
         {
             "key": "hero_about_body_1",
-            "value": "The Dalai Lama imagined \"a map of our emotions to develop a calm mind.\" He asked his longtime friend and renowned emotion scientist Dr. Paul Ekman to realize his idea. Ekman took on the creation of the Atlas alongside his daughter, Eve Ekman, a second-generation emotion researcher and trainer. The Atlas represents what researchers have learned from the psychological study of emotion. "
+            "value": "The Dalai Lama imagined \"a map of our emotions to develop a calm mind.\" He asked his longtime friend and renowned emotion scientist Dr. Paul Ekman to realize his idea. Ekman took on the creation of the Atlas alongside his daughter, Eve Ekman, a second-generation emotion researcher and teacher. The Dalai Lama requested the Atlas represent the science of Emotions from what researchers have learned from the psychological study of emotion."
         },
         {
             "key": "hero_call_to_action_button",
@@ -249,7 +249,7 @@
         },
         {
             "key": "actions_body",
-            "value": "We respond to emotional states with our actions. Our responses to the same emotion may differ depending on the circumstances."
+            "value": "We respond to emotional states with our actions. Our responses to the same emotion may differ depending on the circumstances. We may have a primary, more immediate response, and a secondary more thoughtful response. Any response can be constructive and helpful to ourselves, others and the situation, or destructive and not helpful."
         },
         {
             "key": "actions_body_mobile",
@@ -783,11 +783,11 @@
         },
         {
             "key": "anger_timeline_trigger_precondition",
-            "value": "you are low on sleep"
+            "value": "you are tired"
         },
         {
             "key": "anger_timeline_trigger_event",
-            "value": "a friend gets angry with you"
+            "value": "a friend gets upset with you"
         },
         {
             "key": "anger_timeline_trigger_perceptual_database",
@@ -795,7 +795,7 @@
         },
         {
             "key": "anger_timeline_state_physical_changes",
-            "value": "your body becomes tense"
+            "value": "your jaw is clenched"
         },
         {
             "key": "anger_timeline_state_emotion",
@@ -1017,7 +1017,7 @@
         },
         {
             "key": "fear_timeline_trigger_precondition",
-            "value": "reading scary news"
+            "value": "reading distressing news"
         },
         {
             "key": "fear_timeline_trigger_event",
@@ -1029,7 +1029,7 @@
         },
         {
             "key": "fear_timeline_state_physical_changes",
-            "value": "your heart pounds"
+            "value": "your shoulders become tight"
         },
         {
             "key": "fear_timeline_state_emotion",
@@ -1045,11 +1045,11 @@
         },
         {
             "key": "fear_timeline_response_destructive_response",
-            "value": "imagine them leaving"
+            "value": "you avoid seeing them"
         },
         {
             "key": "fear_timeline_response_ambiguous_response",
-            "value": "something else..."
+            "value": "you withdraw"
         }
     ],
     [
@@ -1211,7 +1211,7 @@
         },
         {
             "key": "disgust_timeline_trigger_precondition",
-            "value": "you're grieving"
+            "value": "you are having a hard day"
         },
         {
             "key": "disgust_timeline_trigger_event",
@@ -1231,15 +1231,15 @@
         },
         {
             "key": "disgust_timeline_state_mental_changes",
-            "value": "you feel sickened"
+            "value": "your stomach feels knotted"
         },
         {
             "key": "disgust_timeline_response_constructive_response",
-            "value": "ask why they're angry"
+            "value": "ask why they are upset"
         },
         {
             "key": "disgust_timeline_response_destructive_response",
-            "value": "belittle them"
+            "value": "feel ashamed"
         },
         {
             "key": "disgust_timeline_response_ambiguous_response",
@@ -1465,7 +1465,7 @@
         },
         {
             "key": "sadness_timeline_state_physical_changes",
-            "value": "your body weakens"
+            "value": "your heart is heavy"
         },
         {
             "key": "sadness_timeline_state_emotion",
@@ -1481,11 +1481,11 @@
         },
         {
             "key": "sadness_timeline_response_destructive_response",
-            "value": "be ashamed"
+            "value": "ruminate"
         },
         {
             "key": "sadness_timeline_response_ambiguous_response",
-            "value": "ignore the feeling"
+            "value": "supress the feeling"
         }
     ],
     [
