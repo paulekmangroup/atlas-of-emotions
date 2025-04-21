@@ -280,6 +280,7 @@
         },
         {
             "key": "actions_header",
+            "value": "Дії LHAMO",
             "English": "Actions of LHAMO"
         },
         {
@@ -500,7 +501,7 @@
         },
         {
             "key": "timeline_trigger_body_2_list_item_3",
-            "value": "Наш світогляд, на який впливає попередній досвід, особиста історія та успадковані універсальні сценарії щодо важливих подій",
+            "value": "Наш світогляд, на який впливає попередній досвід, особиста історія та успадковані універсальні cценарії поведінки під час\nважливих подій",
             "English": "Our worldview, which is influenced by our prior experiences, personal history and inherited universal scripts about important events"
         },
         {
@@ -570,7 +571,7 @@
         },
         {
             "key": "timeline_blocks_body_1",
-            "value": "Ви можете обрати кожен пункт на лінії часу та дізнатися, як дослідники тлумачать емоційний епізод. Потім перейдіть до розділу <a href=\"#continents/\">Experience</a> , щоб побачити, як вони створюють мапу наших емоційних переживань.",
+            "value": "Ви можете обрати кожен пункт на лінії часу та дізнатися, як дослідники тлумачать емоційний епізод. Потім перейдіть до розділу <a href=\"#continents/\">Досвід</a> , щоб побачити, як вони створюють мапу наших емоційних переживань.",
             "English": "You can select each piece of the timeline and learn how researchers make sense of an emotional episode. Then, continue to the <a href=\"#continents/\">Experience</a> section to see how they map our emotional experiences. "
         },
         {
@@ -856,13 +857,13 @@
         },
         {
             "key": "anger_actions_header_6",
-            "value": "Ужити фізичної сили",
+            "value": "Уживати фізичної сили",
             "english": "Use physical force",
             "Переклад": "Застосувати фізичну силу"
         },
         {
             "key": "anger_actions_body_6",
-            "value": "Шкодити комусь або заганяти в пастку",
+            "value": "Шкодити комусь або заганяти в пастку.",
             "english": "Harm or trap someone.",
             "Переклад": "Завдання шкоди або знерухомлення когось"
         },
@@ -886,7 +887,7 @@
         },
         {
             "key": "anger_actions_body_8",
-            "value": "Супитися ",
+            "value": "Супитися.",
             "english": "Express anger by sulking.",
             "Переклад": "Виражати злість, надуваючи губи."
         },
@@ -1205,7 +1206,7 @@
         },
         {
             "key": "fear_actions_header_4",
-            "value": "Завмерти",
+            "value": "Завмирати",
             "english": "Freeze",
             "Переклад": "Завмерти"
         },
@@ -1386,7 +1387,7 @@
     [
         {
             "key": "disgust_continent_header",
-            "value": "Огида",
+            "value": "Огидy",
             "english": "Disgust"
         },
         {
@@ -1708,7 +1709,7 @@
         },
         {
             "key": "sadness_states_body_6",
-            "value": "Сильне страждання чи нещастя",
+            "value": "Сильне страждання чи нещастя.",
             "english": "Strong suffering or unhappiness."
         },
         {
@@ -1768,7 +1769,7 @@
         },
         {
             "key": "sadness_actions_header_1",
-            "value": "Шукати розраду",
+            "value": "Шукати розради",
             "english": "Seek comfort"
         },
         {
@@ -1913,7 +1914,7 @@
         },
         {
             "key": "sadness_timeline_response_constructive_response",
-            "value": "ви телефонуєте близькій людині",
+            "value": "телефонуєте близькій людині",
             "english": "call a loved one"
         },
         {
@@ -2255,17 +2256,17 @@
         },
         {
             "key": "enjoyment_timeline_response_constructive_response",
-            "value": "грати далі",
+            "value": "граєте далі",
             "english": "play on"
         },
         {
             "key": "enjoyment_timeline_response_destructive_response",
-            "value": "зловтішатися",
+            "value": "зловтішаєтеся",
             "english": "gloat"
         },
         {
             "key": "enjoyment_timeline_response_ambiguous_response",
-            "value": "тріумфувати",
+            "value": "тріумфуєте",
             "english": "celebrate"
         }
     ],
