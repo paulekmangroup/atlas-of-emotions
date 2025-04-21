@@ -276,6 +276,7 @@
         },
         {
             "key": "states_header",
+            "value": "États de LHAMO",
             "englishValue": "States of LHAMO"
         },
         {
@@ -817,8 +818,8 @@
         },
         {
             "key": "anger_states_body_7",
-            "value": "Uncontrolled and often violent anger.",
-            "englishValue": "Uncontrolled and often violent anger."
+            "value": "Colère incontrôlée et souvent violente",
+            "englishValue": "Uncontrolled and often violent anger"
         },
         {
             "key": "anger_actions_body",
@@ -1284,7 +1285,7 @@
         },
         {
             "key": "fear_timeline_trigger_event",
-            "value": "un ami a été en colère contre soi",
+            "value": "un ami a été en colère contre vous",
             "englishValue": "a friend gets angry with you"
         },
         {
