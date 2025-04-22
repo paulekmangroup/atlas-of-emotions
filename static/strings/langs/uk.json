@@ -251,7 +251,7 @@
         },
         {
             "key": "states_header",
-            "value": "Стани LHAMO",
+            "value": "Стани: LHAMO",
             "English": "States of LHAMO"
         },
         {
@@ -1006,7 +1006,7 @@
         },
         {
             "key": "anger_timeline_state_emotion",
-            "value": "гнів",
+            "value": "Злість",
             "english": "anger",
             "Переклад": "гнів"
         },
