@@ -665,7 +665,9 @@ export default class ContinentsSection {
 
 		// 1c. while 1a-b happens, pan toward continent location from current continent's location, according to all continents view layout.
 		panToContinent: function ( emotion, previousEmotion, immediate ) {
-
+			if (!this.continents) {
+				return;
+			}
 			if ( this.panTweenTimeout ) {
 				clearTimeout( this.panTweenTimeout );
 			}
