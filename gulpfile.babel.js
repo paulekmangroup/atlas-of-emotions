@@ -54,7 +54,7 @@ function browserifyTask(options) {
 		console.log("Building APP bundle");
 		if (options.development) {
 			// lintTask(options);
-			appBundler
+			return appBundler
 				.bundle()
 				.on("error", $.util.log)
 				.pipe(source("main.js"))
@@ -73,7 +73,7 @@ function browserifyTask(options) {
 					})
 				);
 		} else {
-			appBundler
+			return appBundler
 				.bundle()
 				.on("error", $.util.log)
 				.pipe(source("main.js"))
@@ -143,7 +143,8 @@ function sassVariablesTask(options) {
 	let run = function () {
 		let start = new Date();
 		console.log("Building Sass variables");
-		gulp.src(options.src)
+		return gulp
+			.src(options.src)
 			.pipe($.jsonSass())
 			.pipe($.concat("./variables-derived.scss"))
 			.pipe(gulp.dest(options.dest))
@@ -161,8 +162,13 @@ function cssTask(options) {
 		let run = function () {
 			let start = new Date();
 			console.log("Building CSS bundle");
-			gulp.src(options.src)
-				.pipe(sass.sync())
+			return gulp
+				.src(options.src)
+				.pipe(
+					sass.sync({
+						includePaths: ["node_modules"],
+					})
+				)
 				.pipe($.autoprefixer())
 				.pipe(gulp.dest(options.dest))
 				.pipe(gulpif(options.reload, connect.reload()))
@@ -177,11 +183,15 @@ function cssTask(options) {
 					})
 				);
 		};
-		run();
 		gulp.watch(options.watchfiles, run);
+		run();
 	} else {
 		gulp.src(options.src)
-			.pipe(sass.sync())
+			.pipe(
+				sass.sync({
+					includePaths: ["node_modules"],
+				})
+			)
 			.pipe($.autoprefixer())
 			.pipe($.cssmin())
 			.pipe(gulp.dest(options.dest));
@@ -192,7 +202,7 @@ function copyTask(options) {
 	console.log("Copying files: " + options.src);
 	if (options.watchfiles) {
 		gulp.watch(options.watchfiles, function () {
-			gulp.src(options.src).pipe().pipe(gulp.dest(options.dest));
+			return gulp.src(options.src).pipe(gulp.dest(options.dest));
 		});
 	}
 	return gulp.src(options.src).pipe(gulp.dest(options.dest));
@@ -311,6 +321,9 @@ function webserverTask(options) {
 	const opts = {
 		root: "./build/",
 		port: port,
+		// the loopback address was configured to this ip on my development machine
+		// if the server fails to listen, try removing the "host" property from these options
+		host: "192.168.1.88",
 	};
 
 	if (options.reload) opts.livereload = true;
@@ -332,12 +345,11 @@ gulp.task("default", async () => {
 		// const reload = true;
 
 		// Copy static html files
-		dest: dest,
-			copyTask({
-				src: "./src/*.html",
-				dest: dest,
-				watchfiles: "./src/*.html",
-			});
+		copyTask({
+			src: "./src/*.html",
+			dest: dest,
+			watchfiles: "./src/*.html",
+		});
 
 		// Copy static assets
 		copyTask({
@@ -401,7 +413,7 @@ gulp.task("dist", async () => {
 
 		// Bundle
 		browserifyTask({
-			development: false,
+			development: true,
 			src: "./src/main.js",
 			dest: dest,
 		});
