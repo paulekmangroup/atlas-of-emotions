@@ -280,7 +280,7 @@
         },
         {
             "key": "actions_header",
-            "value": "Дії LHAMO",
+            "value": "Дії: LHAMO",
             "English": "Actions of LHAMO"
         },
         {
@@ -887,7 +887,7 @@
         },
         {
             "key": "anger_actions_body_8",
-            "value": "Супитися.",
+            "value": "Виражати злість, надуваючи губи.",
             "english": "Express anger by sulking.",
             "Переклад": "Виражати злість, надуваючи губи."
         },
@@ -1387,7 +1387,7 @@
     [
         {
             "key": "disgust_continent_header",
-            "value": "Огидy",
+            "value": "Огида",
             "english": "Disgust"
         },
         {
@@ -1602,7 +1602,7 @@
         },
         {
             "key": "disgust_timeline_state_emotion",
-            "value": "огида",
+            "value": "огидy",
             "english": "disgust"
         },
         {
@@ -1936,7 +1936,7 @@
         },
         {
             "key": "enjoyment_continent_header_mobile",
-            "value": "Континент втіхи",
+            "value": "Втіха ",
             "english": "The Continent of Enjoyment"
         },
         {
@@ -2246,7 +2246,7 @@
         },
         {
             "key": "enjoyment_timeline_state_emotion",
-            "value": "втіха",
+            "value": "втіхy",
             "english": "enjoyment"
         },
         {
